@@ -55,6 +55,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_atomic_m2_confirmation.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_atomic_m2_product_checkpoint.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -364,6 +367,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_professor_fidelity_experiment.py": ("heldout_execution",),
+        "scripts/run_academic_factual_qa_atomic_m2_product_checkpoint.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/sample_multimodal_pdf_pages.py": ("dataset_generation",),
         "scripts/seal_course_tutor_anchor.py": ("dataset_generation",),
         "scripts/seal_course_tutor_splits.py": ("dataset_generation",),

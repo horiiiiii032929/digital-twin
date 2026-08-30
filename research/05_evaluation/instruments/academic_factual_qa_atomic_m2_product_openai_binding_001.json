@@ -1,0 +1,39 @@
+{
+  "authorization": {
+    "authorized_by_program": true,
+    "final_execution_authorized": false,
+    "paid_execution_authorized": true,
+    "provider_execution_authorized": true
+  },
+  "binding_id": "academic-factual-qa-atomic-m2-product-openai-binding-001",
+  "content_sha256": "308705d14f003c5632bcab76fe3a7f8e9a623ded4ed9c09679066b09192771d4",
+  "freshness_hours": 24,
+  "instrument_id": "academic-factual-qa-atomic-m2-product-checkpoint-001",
+  "official_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+    "https://developers.openai.com/api/reference/resources/responses/methods/create"
+  ],
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "providers": {
+    "high-volume-generator": {
+      "api_url": "https://api.openai.com/v1/responses",
+      "binding_id": "atomic-m2-product-openai-mini-v1",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "documented_revision": "gpt-5.4-mini-2026-03-17",
+      "first_party_endpoint": true,
+      "max_output_tokens": 600,
+      "maximum_transport_retries": 0,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5,
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "provider_model": "gpt-5.4-mini-2026-03-17",
+      "reasoning_effort": "low",
+      "request_store": false,
+      "service_tier": "default",
+      "timeout_seconds": 60
+    }
+  },
+  "schema_version": 1,
+  "verified_at": "2026-08-30T12:35:38+00:00"
+}

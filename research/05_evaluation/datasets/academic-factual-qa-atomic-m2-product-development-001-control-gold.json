@@ -1,0 +1,2149 @@
+{
+  "case_count": 100,
+  "content_sha256": "6a430d395c3d4fec49f4b8967ffb77595be2002f0e0b095900deb506afe438a9",
+  "dataset_id": "academic-factual-qa-atomic-m2-product-development-001-control",
+  "gold": [
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If the voltage is set to `+5V, record the reception of bit 1`.",
+      "case_id": "academic-atomic-m2-dev-0009-q1",
+      "claims": [
+        {
+          "answer_span": "If the voltage is set to `+5V, record the reception of bit 1`.",
+          "claim_id": "academic-atomic-m2-dev-0009-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5031,
+              "char_start": 4965,
+              "region_id": "source-region-febc4414e55fd1731f51c2b7b21f68698ca7e45e261ec1decc32fa77f08e9ff7",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This transmission scheme has been used in some early networks.",
+      "case_id": "academic-atomic-m2-dev-0009-q2",
+      "claims": [
+        {
+          "answer_span": "This transmission scheme has been used in some early networks.",
+          "claim_id": "academic-atomic-m2-dev-0009-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5172,
+              "char_start": 5110,
+              "region_id": "source-region-fe0889577636c237624c628cd289e11a8d5bab3dc8f2006b01fb2adb39f9dd64",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "We use it as a basis to understand how hosts communicate.",
+      "case_id": "academic-atomic-m2-dev-0009-q3",
+      "claims": [
+        {
+          "answer_span": "We use it as a basis to understand how hosts communicate.",
+          "claim_id": "academic-atomic-m2-dev-0009-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5230,
+              "char_start": 5173,
+              "region_id": "source-region-216ad0dec3471795d046f7f1d18a118ffda5bd2d52954ee71996e4380baa542a",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If the voltage is set to `+5V, record the reception of bit 1`. This transmission scheme has been used in some early networks.",
+      "case_id": "academic-atomic-m2-dev-0009-q4",
+      "claims": [
+        {
+          "answer_span": "If the voltage is set to `+5V, record the reception of bit 1`.",
+          "claim_id": "academic-atomic-m2-dev-0009-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5031,
+              "char_start": 4965,
+              "region_id": "source-region-febc4414e55fd1731f51c2b7b21f68698ca7e45e261ec1decc32fa77f08e9ff7",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "This transmission scheme has been used in some early networks.",
+          "claim_id": "academic-atomic-m2-dev-0009-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 5172,
+              "char_start": 5110,
+              "region_id": "source-region-fe0889577636c237624c628cd289e11a8d5bab3dc8f2006b01fb2adb39f9dd64",
+              "source_artifact_id": "computer-networking:principles/reliability.rst",
+              "source_sha256": "ed26279a2083635caf667d345d97e50b62f22d7edb2a71366b54e719bb5d3a5c",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0009-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A naive approach would be to rely on hash functions.",
+      "case_id": "academic-atomic-m2-dev-0010-q1",
+      "claims": [
+        {
+          "answer_span": "A naive approach would be to rely on hash functions.",
+          "claim_id": "academic-atomic-m2-dev-0010-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24809,
+              "char_start": 24757,
+              "region_id": "source-region-de7797650149410df653a76ddf98aa6d9ed5d35f8e2dd35a5523210e3e95566c",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Since hash functions are non-invertible, Alice and Bob could decide to use them to exchange Alice's password in a secure manner.",
+      "case_id": "academic-atomic-m2-dev-0010-q2",
+      "claims": [
+        {
+          "answer_span": "Since hash functions are non-invertible, Alice and Bob could decide to use them to exchange Alice's password in a secure manner.",
+          "claim_id": "academic-atomic-m2-dev-0010-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24938,
+              "char_start": 24810,
+              "region_id": "source-region-70a59c4f1d94820ecd8ffe4b77179158b29ca17bad7a0a42bde21375d3af46d8",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Then, Alice could be authenticated by using the following exchange.",
+      "case_id": "academic-atomic-m2-dev-0010-q3",
+      "claims": [
+        {
+          "answer_span": "Then, Alice could be authenticated by using the following exchange.",
+          "claim_id": "academic-atomic-m2-dev-0010-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 25006,
+              "char_start": 24939,
+              "region_id": "source-region-2152e810095bb527ce7b50f2e36c1e932029c5c929aa488039fcb31ded375883",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A naive approach would be to rely on hash functions. Since hash functions are non-invertible, Alice and Bob could decide to use them to exchange Alice's password in a secure manner.",
+      "case_id": "academic-atomic-m2-dev-0010-q4",
+      "claims": [
+        {
+          "answer_span": "A naive approach would be to rely on hash functions.",
+          "claim_id": "academic-atomic-m2-dev-0010-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24809,
+              "char_start": 24757,
+              "region_id": "source-region-de7797650149410df653a76ddf98aa6d9ed5d35f8e2dd35a5523210e3e95566c",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Since hash functions are non-invertible, Alice and Bob could decide to use them to exchange Alice's password in a secure manner.",
+          "claim_id": "academic-atomic-m2-dev-0010-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 24938,
+              "char_start": 24810,
+              "region_id": "source-region-70a59c4f1d94820ecd8ffe4b77179158b29ca17bad7a0a42bde21375d3af46d8",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0010-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This implies that Eve can discover Alice's username and Alice's password.",
+      "case_id": "academic-atomic-m2-dev-0012-q1",
+      "claims": [
+        {
+          "answer_span": "This implies that Eve can discover Alice's username and Alice's password.",
+          "claim_id": "academic-atomic-m2-dev-0012-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5225,
+              "char_start": 5152,
+              "region_id": "source-region-136fd32f1abba3120e1f0443021d65085604e909bb99b7730ab51184e2116edc",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "With this information, Eve can then authenticate as Alice on Bob's computer and do whatever Alice is authorized to do.",
+      "case_id": "academic-atomic-m2-dev-0012-q2",
+      "claims": [
+        {
+          "answer_span": "With this information, Eve can then authenticate as Alice on Bob's computer and do whatever Alice is authorized to do.",
+          "claim_id": "academic-atomic-m2-dev-0012-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5344,
+              "char_start": 5226,
+              "region_id": "source-region-8f7c28272775ff7e55cbfce2696654d5f1ae50e6c6b5d8d21040f853ab6db199",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This is a major problem from a security point of view.",
+      "case_id": "academic-atomic-m2-dev-0012-q3",
+      "claims": [
+        {
+          "answer_span": "This is a major problem from a security point of view.",
+          "claim_id": "academic-atomic-m2-dev-0012-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5399,
+              "char_start": 5345,
+              "region_id": "source-region-f739ac25257b7ee12bad339c4e29d277d02d75a30bce3f7fa41e3eab865cce96",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This implies that Eve can discover Alice's username and Alice's password. With this information, Eve can then authenticate as Alice on Bob's computer and do whatever Alice is authorized to do.",
+      "case_id": "academic-atomic-m2-dev-0012-q4",
+      "claims": [
+        {
+          "answer_span": "This implies that Eve can discover Alice's username and Alice's password.",
+          "claim_id": "academic-atomic-m2-dev-0012-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5225,
+              "char_start": 5152,
+              "region_id": "source-region-136fd32f1abba3120e1f0443021d65085604e909bb99b7730ab51184e2116edc",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "With this information, Eve can then authenticate as Alice on Bob's computer and do whatever Alice is authorized to do.",
+          "claim_id": "academic-atomic-m2-dev-0012-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 5344,
+              "char_start": 5226,
+              "region_id": "source-region-8f7c28272775ff7e55cbfce2696654d5f1ae50e6c6b5d8d21040f853ab6db199",
+              "source_artifact_id": "computer-networking:principles/security.rst",
+              "source_sha256": "d77d7a41d5b4d6cc6f4d4622ce452879cef52397ab286bf5a4fc33503b086767",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-atomic-m2-dev-0012-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "An example of such a request to upgrade the version of HTTP is shown below.",
+      "case_id": "academic-atomic-m2-dev-0019-q1",
+      "claims": [
+        {
+          "answer_span": "An example of such a request to upgrade the version of HTTP is shown below.",
+          "claim_id": "academic-atomic-m2-dev-0019-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24211,
+              "char_start": 24136,
+              "region_id": "source-region-9decd4c28f47edb071f870635090feb806f3ef1914d645159882ec5d37a24bca",
+              "source_artifact_id": "computer-networking:protocols/http2.rst",
+              "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The HTTP2-Settings line contains the HTTP/2.0 settings frame that the client would server over an HTTP/2.0 session encoded in Base64.",
+      "case_id": "academic-atomic-m2-dev-0019-q2",
+      "claims": [
+        {
+          "answer_span": "The HTTP2-Settings line contains the HTTP/2.0 settings frame that the client would server over an HTTP/2.0 session encoded in Base64.",
+          "claim_id": "academic-atomic-m2-dev-0019-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24550,
+              "char_start": 24415,
+              "region_id": "source-region-568525cc402a822c3f410c6e1d673cd7815d24203f7d201212f9d3aee368b15d",
+              "source_artifact_id": "computer-networking:protocols/http2.rst",
+              "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "GET /robots.txt HTTP/1.1",
+      "case_id": "academic-atomic-m2-dev-0019-q3",
+      "claims": [
+        {
+          "answer_span": "GET /robots.txt HTTP/1.1",
+          "claim_id": "academic-atomic-m2-dev-0019-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24273,
+              "char_start": 24249,
+              "region_id": "source-region-0b4b108d846be0206adb55448dec4c39659ef84a63c7bcd7b4570d5f8f1c5292",
+              "source_artifact_id": "computer-networking:protocols/http2.rst",
+              "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "GET /robots.txt HTTP/1.1",
+      "case_id": "academic-atomic-m2-dev-0019-q4",
+      "claims": [
+        {
+          "answer_span": "GET /robots.txt HTTP/1.1",
+          "claim_id": "academic-atomic-m2-dev-0019-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 24273,
+              "char_start": 24249,
+              "region_id": "source-region-0b4b108d846be0206adb55448dec4c39659ef84a63c7bcd7b4570d5f8f1c5292",
+              "source_artifact_id": "computer-networking:protocols/http2.rst",
+              "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0019-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This made the ISN predictable and caused a security issue.",
+      "case_id": "academic-atomic-m2-dev-0025-q1",
+      "claims": [
+        {
+          "answer_span": "This made the ISN predictable and caused a security issue.",
+          "claim_id": "academic-atomic-m2-dev-0025-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10364,
+              "char_start": 10306,
+              "region_id": "source-region-2d37193c52ddb44ed3bee7a036427c954295a9ffb76fad0feecc003931224433",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The typical security problem was the following.",
+      "case_id": "academic-atomic-m2-dev-0025-q2",
+      "claims": [
+        {
+          "answer_span": "The typical security problem was the following.",
+          "claim_id": "academic-atomic-m2-dev-0025-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10412,
+              "char_start": 10365,
+              "region_id": "source-region-a0d823b841416c5b100616feeb63beb42f64004a36ea203d06ad434ece5027cf",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Consider a server that trusts a host based on its IP address and allows the system administrator to log in from this host without giving a password [#frlogin]_.",
+      "case_id": "academic-atomic-m2-dev-0025-q3",
+      "claims": [
+        {
+          "answer_span": "Consider a server that trusts a host based on its IP address and allows the system administrator to log in from this host without giving a password [#frlogin]_.",
+          "claim_id": "academic-atomic-m2-dev-0025-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10573,
+              "char_start": 10413,
+              "region_id": "source-region-addc6e1e574d2762b071cee54e5e34054c02fe53001951d292983ae07787a76f",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "This made the ISN predictable and caused a security issue. The typical security problem was the following.",
+      "case_id": "academic-atomic-m2-dev-0025-q4",
+      "claims": [
+        {
+          "answer_span": "This made the ISN predictable and caused a security issue.",
+          "claim_id": "academic-atomic-m2-dev-0025-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 10364,
+              "char_start": 10306,
+              "region_id": "source-region-2d37193c52ddb44ed3bee7a036427c954295a9ffb76fad0feecc003931224433",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The typical security problem was the following.",
+          "claim_id": "academic-atomic-m2-dev-0025-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 10412,
+              "char_start": 10365,
+              "region_id": "source-region-a0d823b841416c5b100616feeb63beb42f64004a36ea203d06ad434ece5027cf",
+              "source_artifact_id": "computer-networking:protocols/tcp.rst",
+              "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0025-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If the height of the tree is very large, then this recursion could very well use more stack space than is available, causing a crash.",
+      "case_id": "academic-atomic-m2-dev-0035-q1",
+      "claims": [
+        {
+          "answer_span": "If the height of the tree is very large, then this recursion could very well use more stack space than is available, causing a crash.",
+          "claim_id": "academic-atomic-m2-dev-0035-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5459,
+              "char_start": 5326,
+              "region_id": "source-region-08308f41b45a277ea9b5d62cc07c86a1aedcb72591c340dacb51d546aa4c7ae6",
+              "source_artifact_id": "data-structures:latex/binarytrees.tex",
+              "source_sha256": "effb3ae69557d7e1ade54bd8a3a1c582bedc7ead1319ce1e478423bf078876ec",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "To traverse a binary tree without recursion, you can use an algorithm that relies on where it came from to determine where it will go next.",
+      "case_id": "academic-atomic-m2-dev-0035-q2",
+      "claims": [
+        {
+          "answer_span": "To traverse a binary tree without recursion, you can use an algorithm that relies on where it came from to determine where it will go next.",
+          "claim_id": "academic-atomic-m2-dev-0035-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5600,
+              "char_start": 5461,
+              "region_id": "source-region-9fbc20952946ce0a177cafa9a1a47d21372ee62c37d17695447aad51f8bc21bc",
+              "source_artifact_id": "data-structures:latex/binarytrees.tex",
+              "source_sha256": "effb3ae69557d7e1ade54bd8a3a1c582bedc7ead1319ce1e478423bf078876ec",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If we arrive at a node u from u.parent, then the next thing to do is to visit u.left.",
+      "case_id": "academic-atomic-m2-dev-0035-q3",
+      "claims": [
+        {
+          "answer_span": "If we arrive at a node u from u.parent, then the next thing to do is to visit u.left.",
+          "claim_id": "academic-atomic-m2-dev-0035-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5725,
+              "char_start": 5634,
+              "region_id": "source-region-cc5d1bad988a01b4ebe97108398045ddd03229044757a30059c115a5bc4a82b2",
+              "source_artifact_id": "data-structures:latex/binarytrees.tex",
+              "source_sha256": "effb3ae69557d7e1ade54bd8a3a1c582bedc7ead1319ce1e478423bf078876ec",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "If the height of the tree is very large, then this recursion could very well use more stack space than is available, causing a crash. To traverse a binary tree without recursion, you can use an algorithm that relies on where it came from to determine where it will go next.",
+      "case_id": "academic-atomic-m2-dev-0035-q4",
+      "claims": [
+        {
+          "answer_span": "If the height of the tree is very large, then this recursion could very well use more stack space than is available, causing a crash.",
+          "claim_id": "academic-atomic-m2-dev-0035-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5459,
+              "char_start": 5326,
+              "region_id": "source-region-08308f41b45a277ea9b5d62cc07c86a1aedcb72591c340dacb51d546aa4c7ae6",
+              "source_artifact_id": "data-structures:latex/binarytrees.tex",
+              "source_sha256": "effb3ae69557d7e1ade54bd8a3a1c582bedc7ead1319ce1e478423bf078876ec",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "To traverse a binary tree without recursion, you can use an algorithm that relies on where it came from to determine where it will go next.",
+          "claim_id": "academic-atomic-m2-dev-0035-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 5600,
+              "char_start": 5461,
+              "region_id": "source-region-9fbc20952946ce0a177cafa9a1a47d21372ee62c37d17695447aad51f8bc21bc",
+              "source_artifact_id": "data-structures:latex/binarytrees.tex",
+              "source_sha256": "effb3ae69557d7e1ade54bd8a3a1c582bedc7ead1319ce1e478423bf078876ec",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0035-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this section we present two algorithms for exploring a graph, starting at one of its vertices, i, and finding all vertices that are reachable from i.",
+      "case_id": "academic-atomic-m2-dev-0038-q1",
+      "claims": [
+        {
+          "answer_span": "In this section we present two algorithms for exploring a graph, starting at one of its vertices, i, and finding all vertices that are reachable from i.",
+          "claim_id": "academic-atomic-m2-dev-0038-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13211,
+              "char_start": 13055,
+              "region_id": "source-region-07bd8bf426e2e74b8f95c5fdcd9a1da48a3886ff8b43140e31e5c67234601e8c",
+              "source_artifact_id": "data-structures:latex/graphs.tex",
+              "source_sha256": "71b92deebf9dcd4b6107d89487033049aac78d0b8b5c858804118cf64e54fe30",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Both of these algorithms are best suited to graphs represented using an adjacency list representation.",
+      "case_id": "academic-atomic-m2-dev-0038-q2",
+      "claims": [
+        {
+          "answer_span": "Both of these algorithms are best suited to graphs represented using an adjacency list representation.",
+          "claim_id": "academic-atomic-m2-dev-0038-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13315,
+              "char_start": 13213,
+              "region_id": "source-region-6ff0678236c77c5c73fff70269572ece05491df175db9da66a3917507258de78",
+              "source_artifact_id": "data-structures:latex/graphs.tex",
+              "source_sha256": "71b92deebf9dcd4b6107d89487033049aac78d0b8b5c858804118cf64e54fe30",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Therefore, when analyzing these algorithms we will assume that the underlying representation is an AdjacencyLists.",
+      "case_id": "academic-atomic-m2-dev-0038-q3",
+      "claims": [
+        {
+          "answer_span": "Therefore, when analyzing these algorithms we will assume that the underlying representation is an AdjacencyLists.",
+          "claim_id": "academic-atomic-m2-dev-0038-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13433,
+              "char_start": 13317,
+              "region_id": "source-region-2ee40a1563613203e23513b50bd395eea6b5c981dff5120e3664f2bee96d3386",
+              "source_artifact_id": "data-structures:latex/graphs.tex",
+              "source_sha256": "71b92deebf9dcd4b6107d89487033049aac78d0b8b5c858804118cf64e54fe30",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In this section we present two algorithms for exploring a graph, starting at one of its vertices, i, and finding all vertices that are reachable from i. Both of these algorithms are best suited to graphs represented using an adjacency list representation.",
+      "case_id": "academic-atomic-m2-dev-0038-q4",
+      "claims": [
+        {
+          "answer_span": "In this section we present two algorithms for exploring a graph, starting at one of its vertices, i, and finding all vertices that are reachable from i.",
+          "claim_id": "academic-atomic-m2-dev-0038-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 13211,
+              "char_start": 13055,
+              "region_id": "source-region-07bd8bf426e2e74b8f95c5fdcd9a1da48a3886ff8b43140e31e5c67234601e8c",
+              "source_artifact_id": "data-structures:latex/graphs.tex",
+              "source_sha256": "71b92deebf9dcd4b6107d89487033049aac78d0b8b5c858804118cf64e54fe30",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Both of these algorithms are best suited to graphs represented using an adjacency list representation.",
+          "claim_id": "academic-atomic-m2-dev-0038-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 13315,
+              "char_start": 13213,
+              "region_id": "source-region-6ff0678236c77c5c73fff70269572ece05491df175db9da66a3917507258de78",
+              "source_artifact_id": "data-structures:latex/graphs.tex",
+              "source_sha256": "71b92deebf9dcd4b6107d89487033049aac78d0b8b5c858804118cf64e54fe30",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0038-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The remaining work takes only constant time, so the find(x) method in an XFastTrie takes only $O(\\logw)$ expected time.",
+      "case_id": "academic-atomic-m2-dev-0045-q1",
+      "claims": [
+        {
+          "answer_span": "The remaining work takes only constant time, so the find(x) method in an XFastTrie takes only $O(\\logw)$ expected time.",
+          "claim_id": "academic-atomic-m2-dev-0045-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11701,
+              "char_start": 11576,
+              "region_id": "source-region-52ba1adfaa02bac90ff245a097397b050181062f4664bada94c63286af294b33",
+              "source_artifact_id": "data-structures:latex/integers.tex",
+              "source_sha256": "f0a8b4c022f355cfc58f265c2fe2d1f09c143f9e2a21e3d4040ae72d5dd448b7",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The add(x) and remove(x) methods for an XFastTrie are almost identical to the same methods in a BinaryTrie.",
+      "case_id": "academic-atomic-m2-dev-0045-q2",
+      "claims": [
+        {
+          "answer_span": "The add(x) and remove(x) methods for an XFastTrie are almost identical to the same methods in a BinaryTrie.",
+          "claim_id": "academic-atomic-m2-dev-0045-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11818,
+              "char_start": 11703,
+              "region_id": "source-region-9f7ade89f8a6561d465d25472f96a09e740984f0edb53b6353c939ab483184dd",
+              "source_artifact_id": "data-structures:latex/integers.tex",
+              "source_sha256": "f0a8b4c022f355cfc58f265c2fe2d1f09c143f9e2a21e3d4040ae72d5dd448b7",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The only modifications are for managing the hash tables t[0],...,t[w].",
+      "case_id": "academic-atomic-m2-dev-0045-q3",
+      "claims": [
+        {
+          "answer_span": "The only modifications are for managing the hash tables t[0],...,t[w].",
+          "claim_id": "academic-atomic-m2-dev-0045-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11897,
+              "char_start": 11820,
+              "region_id": "source-region-aab2cd34a0730c2d3bf43317d9f163622a5c85ede271b636ffbb2154c839d5ee",
+              "source_artifact_id": "data-structures:latex/integers.tex",
+              "source_sha256": "f0a8b4c022f355cfc58f265c2fe2d1f09c143f9e2a21e3d4040ae72d5dd448b7",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "The remaining work takes only constant time, so the find(x) method in an XFastTrie takes only $O(\\logw)$ expected time. The add(x) and remove(x) methods for an XFastTrie are almost identical to the same methods in a BinaryTrie.",
+      "case_id": "academic-atomic-m2-dev-0045-q4",
+      "claims": [
+        {
+          "answer_span": "The remaining work takes only constant time, so the find(x) method in an XFastTrie takes only $O(\\logw)$ expected time.",
+          "claim_id": "academic-atomic-m2-dev-0045-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 11701,
+              "char_start": 11576,
+              "region_id": "source-region-52ba1adfaa02bac90ff245a097397b050181062f4664bada94c63286af294b33",
+              "source_artifact_id": "data-structures:latex/integers.tex",
+              "source_sha256": "f0a8b4c022f355cfc58f265c2fe2d1f09c143f9e2a21e3d4040ae72d5dd448b7",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "The add(x) and remove(x) methods for an XFastTrie are almost identical to the same methods in a BinaryTrie.",
+          "claim_id": "academic-atomic-m2-dev-0045-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 11818,
+              "char_start": 11703,
+              "region_id": "source-region-9f7ade89f8a6561d465d25472f96a09e740984f0edb53b6353c939ab483184dd",
+              "source_artifact_id": "data-structures:latex/integers.tex",
+              "source_sha256": "f0a8b4c022f355cfc58f265c2fe2d1f09c143f9e2a21e3d4040ae72d5dd448b7",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0045-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When implementing an SLList, we saw that there were always several special cases to worry about.",
+      "case_id": "academic-atomic-m2-dev-0049-q1",
+      "claims": [
+        {
+          "answer_span": "When implementing an SLList, we saw that there were always several special cases to worry about.",
+          "claim_id": "academic-atomic-m2-dev-0049-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4947,
+              "char_start": 4849,
+              "region_id": "source-region-9812bd93caa3700c470bbe14ce49cecc8f0916113fe0e18db23fadda80af38a0",
+              "source_artifact_id": "data-structures:latex/linkedlists.tex",
+              "source_sha256": "448feda79da186991746bff1c5d8d0c248ac274e1e87956942b3dd6e092d2159",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "For example, removing the last element from an SLList or adding an element to an empty SLList requires care to ensure that head and tail are correctly updated.",
+      "case_id": "academic-atomic-m2-dev-0049-q2",
+      "claims": [
+        {
+          "answer_span": "For example, removing the last element from an SLList or adding an element to an empty SLList requires care to ensure that head and tail are correctly updated.",
+          "claim_id": "academic-atomic-m2-dev-0049-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5115,
+              "char_start": 4948,
+              "region_id": "source-region-362312ea749b09af9466d25853402f661f06c5ccd2ab66b41613ab8f9a1fc7bd",
+              "source_artifact_id": "data-structures:latex/linkedlists.tex",
+              "source_sha256": "448feda79da186991746bff1c5d8d0c248ac274e1e87956942b3dd6e092d2159",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "In a DLList, the number of these special cases increases considerably.",
+      "case_id": "academic-atomic-m2-dev-0049-q3",
+      "claims": [
+        {
+          "answer_span": "In a DLList, the number of these special cases increases considerably.",
+          "claim_id": "academic-atomic-m2-dev-0049-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5189,
+              "char_start": 5117,
+              "region_id": "source-region-29e9affa80e79334fd87949adfa364402506705e244565321da43c6d4852359c",
+              "source_artifact_id": "data-structures:latex/linkedlists.tex",
+              "source_sha256": "448feda79da186991746bff1c5d8d0c248ac274e1e87956942b3dd6e092d2159",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "When implementing an SLList, we saw that there were always several special cases to worry about. For example, removing the last element from an SLList or adding an element to an empty SLList requires care to ensure that head and tail are correctly updated.",
+      "case_id": "academic-atomic-m2-dev-0049-q4",
+      "claims": [
+        {
+          "answer_span": "When implementing an SLList, we saw that there were always several special cases to worry about.",
+          "claim_id": "academic-atomic-m2-dev-0049-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4947,
+              "char_start": 4849,
+              "region_id": "source-region-9812bd93caa3700c470bbe14ce49cecc8f0916113fe0e18db23fadda80af38a0",
+              "source_artifact_id": "data-structures:latex/linkedlists.tex",
+              "source_sha256": "448feda79da186991746bff1c5d8d0c248ac274e1e87956942b3dd6e092d2159",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "For example, removing the last element from an SLList or adding an element to an empty SLList requires care to ensure that head and tail are correctly updated.",
+          "claim_id": "academic-atomic-m2-dev-0049-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 5115,
+              "char_start": 4948,
+              "region_id": "source-region-362312ea749b09af9466d25853402f661f06c5ccd2ab66b41613ab8f9a1fc7bd",
+              "source_artifact_id": "data-structures:latex/linkedlists.tex",
+              "source_sha256": "448feda79da186991746bff1c5d8d0c248ac274e1e87956942b3dd6e092d2159",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0049-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "A 2-4 tree is a rooted tree with the following properties: \\begin{prp}[height] All leaves have the same depth.",
+      "case_id": "academic-atomic-m2-dev-0055-q1",
+      "claims": [
+        {
+          "answer_span": "A 2-4 tree is a rooted tree with the following properties: \\begin{prp}[height] All leaves have the same depth.",
+          "claim_id": "academic-atomic-m2-dev-0055-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2422,
+              "char_start": 2310,
+              "region_id": "source-region-ba13cc097e7f3835e5dc407264010a33644b7fb2fa7b60ce2193521d4f5ec281",
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Every internal node has 2, 3, or 4 children.",
+      "case_id": "academic-atomic-m2-dev-0055-q2",
+      "claims": [
+        {
+          "answer_span": "Every internal node has 2, 3, or 4 children.",
+          "claim_id": "academic-atomic-m2-dev-0055-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2499,
+              "char_start": 2455,
+              "region_id": "source-region-b97b9f3f7ae63fb6cb7aa45a9080d9cc52657dc841bc71e56c7737b6690a3ee2",
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#n# \\ge 2^h \\enspace .",
+      "case_id": "academic-atomic-m2-dev-0055-q3",
+      "claims": [
+        {
+          "answer_span": "#n# \\ge 2^h \\enspace .",
+          "claim_id": "academic-atomic-m2-dev-0055-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3168,
+              "char_start": 3146,
+              "region_id": "source-region-f8ca1472f575b5ebbe4b094a815f776412120451ffdb9a198058936a9278f517",
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "#n# \\ge 2^h \\enspace .",
+      "case_id": "academic-atomic-m2-dev-0055-q4",
+      "claims": [
+        {
+          "answer_span": "#n# \\ge 2^h \\enspace .",
+          "claim_id": "academic-atomic-m2-dev-0055-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 3168,
+              "char_start": 3146,
+              "region_id": "source-region-f8ca1472f575b5ebbe4b094a815f776412120451ffdb9a198058936a9278f517",
+              "source_artifact_id": "data-structures:latex/redblack.tex",
+              "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0055-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "$ lsof -p $(pidof firefox)",
+      "case_id": "academic-atomic-m2-dev-0063-q1",
+      "claims": [
+        {
+          "answer_span": "$ lsof -p $(pidof firefox)",
+          "claim_id": "academic-atomic-m2-dev-0063-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 58,
+              "char_start": 32,
+              "region_id": "source-region-5da321319a2e62803919e9a2d696164d3a012316530b690b58a68d4ae66572c5",
+              "source_artifact_id": "operating-systems:content/app-interact/lecture/slides/why.md",
+              "source_sha256": "7b80318649d7f303d25215454a93c2d2727b504237b1ee0cac4533568b8f31d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "firefox 32100 student 64u IPv4 38654330 0t0 TCP so:44750->lb-140-82-112-26-iad.github.com:https (ESTABLISHED)",
+      "case_id": "academic-atomic-m2-dev-0063-q2",
+      "claims": [
+        {
+          "answer_span": "firefox 32100 student 64u IPv4 38654330 0t0 TCP so:44750->lb-140-82-112-26-iad.github.com:https (ESTABLISHED)",
+          "claim_id": "academic-atomic-m2-dev-0063-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 201,
+              "char_start": 65,
+              "region_id": "source-region-98734a69a18d42ce613239ef6e98b8d7938a4e81cc5482ed6c9cd509d3fa039b",
+              "source_artifact_id": "operating-systems:content/app-interact/lecture/slides/why.md",
+              "source_sha256": "7b80318649d7f303d25215454a93c2d2727b504237b1ee0cac4533568b8f31d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "firefox 32100 student 65u IPv4 38659353 0t0 TCP so:37528->239.237.117.34.bc.googleusercontent.com:https (ESTABLISHED)",
+      "case_id": "academic-atomic-m2-dev-0063-q3",
+      "claims": [
+        {
+          "answer_span": "firefox 32100 student 65u IPv4 38659353 0t0 TCP so:37528->239.237.117.34.bc.googleusercontent.com:https (ESTABLISHED)",
+          "claim_id": "academic-atomic-m2-dev-0063-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 346,
+              "char_start": 202,
+              "region_id": "source-region-83ad7aed4700bba9482a6448cb998a72af86c4b2be03a9a5be40bd96fe04cc39",
+              "source_artifact_id": "operating-systems:content/app-interact/lecture/slides/why.md",
+              "source_sha256": "7b80318649d7f303d25215454a93c2d2727b504237b1ee0cac4533568b8f31d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "$ lsof -p $(pidof firefox)",
+      "case_id": "academic-atomic-m2-dev-0063-q4",
+      "claims": [
+        {
+          "answer_span": "$ lsof -p $(pidof firefox)",
+          "claim_id": "academic-atomic-m2-dev-0063-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 58,
+              "char_start": 32,
+              "region_id": "source-region-5da321319a2e62803919e9a2d696164d3a012316530b690b58a68d4ae66572c5",
+              "source_artifact_id": "operating-systems:content/app-interact/lecture/slides/why.md",
+              "source_sha256": "7b80318649d7f303d25215454a93c2d2727b504237b1ee0cac4533568b8f31d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0063-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Unlike the example in fork.c, this one calls fork() twice more.",
+      "case_id": "academic-atomic-m2-dev-0064-q1",
+      "claims": [
+        {
+          "answer_span": "Unlike the example in fork.c, this one calls fork() twice more.",
+          "claim_id": "academic-atomic-m2-dev-0064-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1627,
+              "char_start": 1560,
+              "region_id": "source-region-bd8863aabf488f77c67449d2faad3422ac2682737e3b6862da718fd7546d0ac6",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Can you tell how many processes there will be in the end?",
+      "case_id": "academic-atomic-m2-dev-0064-q2",
+      "claims": [
+        {
+          "answer_span": "Can you tell how many processes there will be in the end?",
+          "claim_id": "academic-atomic-m2-dev-0064-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1685,
+              "char_start": 1628,
+              "region_id": "source-region-afac101a62c4c25e66a9548dc4388d956361c4fe768451491ea03ae1506f8c3a",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Note that after they're created, the processes act independently.",
+      "case_id": "academic-atomic-m2-dev-0064-q3",
+      "claims": [
+        {
+          "answer_span": "Note that after they're created, the processes act independently.",
+          "claim_id": "academic-atomic-m2-dev-0064-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2394,
+              "char_start": 2329,
+              "region_id": "source-region-8a99e4c398167115ba25915260919c44c9a528becd1e5619df4a2ae51967fe95",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Unlike the example in fork.c, this one calls fork() twice more. Can you tell how many processes there will be in the end?",
+      "case_id": "academic-atomic-m2-dev-0064-q4",
+      "claims": [
+        {
+          "answer_span": "Unlike the example in fork.c, this one calls fork() twice more.",
+          "claim_id": "academic-atomic-m2-dev-0064-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 1627,
+              "char_start": 1560,
+              "region_id": "source-region-bd8863aabf488f77c67449d2faad3422ac2682737e3b6862da718fd7546d0ac6",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Can you tell how many processes there will be in the end?",
+          "claim_id": "academic-atomic-m2-dev-0064-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 1685,
+              "char_start": 1628,
+              "region_id": "source-region-afac101a62c4c25e66a9548dc4388d956361c4fe768451491ea03ae1506f8c3a",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "academic-integrity",
+      "canonical_answer": "I cannot provide a submission-ready answer to graded work.",
+      "case_id": "academic-atomic-m2-dev-0064-q5",
+      "claims": [],
+      "expected_action": "refuse",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~/.../lab/support/create-process$ $ pstree -p 8667 # 8667 is the PID of the first multiple_forks process",
+      "case_id": "academic-atomic-m2-dev-0065-q1",
+      "claims": [
+        {
+          "answer_span": "student@os:~/.../lab/support/create-process$ $ pstree -p 8667 # 8667 is the PID of the first multiple_forks process",
+          "claim_id": "academic-atomic-m2-dev-0065-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2721,
+              "char_start": 2605,
+              "region_id": "source-region-0eb4f67188996588d2ab822202f13519e374d1e09326697fab73f73b15ee68f5",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "multiple_forks(8667)\u2500\u252c\u2500multiple_forks(8668)\u2500\u252c\u2500multiple_forks(8760)\u2500\u2500\u2500multiple_forks(8764)",
+      "case_id": "academic-atomic-m2-dev-0065-q2",
+      "claims": [
+        {
+          "answer_span": "multiple_forks(8667)\u2500\u252c\u2500multiple_forks(8668)\u2500\u252c\u2500multiple_forks(8760)\u2500\u2500\u2500multiple_forks(8764)",
+          "claim_id": "academic-atomic-m2-dev-0065-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2811,
+              "char_start": 2722,
+              "region_id": "source-region-5c38f8c8f46bfa89dc25843ef682723136f8db7e77954039e5703802bd7529ae",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "\u2502 \u2514\u2500multiple_forks(8763)",
+      "case_id": "academic-atomic-m2-dev-0065-q3",
+      "claims": [
+        {
+          "answer_span": "\u2502 \u2514\u2500multiple_forks(8763)",
+          "claim_id": "academic-atomic-m2-dev-0065-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2878,
+              "char_start": 2833,
+              "region_id": "source-region-1aeb8acabc2c47757b9e13121b8ea1e4972f319f82df73237f7a9109accedd1b",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~/.../lab/support/create-process$ $ pstree -p 8667 # 8667 is the PID of the first multiple_forks process",
+      "case_id": "academic-atomic-m2-dev-0065-q4",
+      "claims": [
+        {
+          "answer_span": "student@os:~/.../lab/support/create-process$ $ pstree -p 8667 # 8667 is the PID of the first multiple_forks process",
+          "claim_id": "academic-atomic-m2-dev-0065-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2721,
+              "char_start": 2605,
+              "region_id": "source-region-0eb4f67188996588d2ab822202f13519e374d1e09326697fab73f73b15ee68f5",
+              "source_artifact_id": "operating-systems:content/compute/lecture/demo/create-process/README.md",
+              "source_sha256": "a3731314e35a35791bd0928f40bca290187fe00428d5c6cbb6cc4b0f90f29f87",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0065-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "| User level | Kernel level |",
+      "case_id": "academic-atomic-m2-dev-0066-q1",
+      "claims": [
+        {
+          "answer_span": "| User level | Kernel level |",
+          "claim_id": "academic-atomic-m2-dev-0066-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4859,
+              "char_start": 4778,
+              "region_id": "source-region-c168f5187986f8bea414d66a6e46a97dc2632d53893854caf7db8dbeb2e3ad8e",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/cool-extra-stuff.md",
+              "source_sha256": "d5a51992a194451db96ccfc85d2a80f69358628eb9811fe5b9e44ee0ceca1591",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "| implemented by libraries | implemented by the kernel |",
+      "case_id": "academic-atomic-m2-dev-0066-q2",
+      "claims": [
+        {
+          "answer_span": "| implemented by libraries | implemented by the kernel |",
+          "claim_id": "academic-atomic-m2-dev-0066-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5023,
+              "char_start": 4942,
+              "region_id": "source-region-397f733004f163cf7337159ee49ef4ea6cab662f5c655b953f7830d4451aaa24",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/cool-extra-stuff.md",
+              "source_sha256": "d5a51992a194451db96ccfc85d2a80f69358628eb9811fe5b9e44ee0ceca1591",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "| blocking actions stall process | blocking actions only stall current thread |",
+      "case_id": "academic-atomic-m2-dev-0066-q3",
+      "claims": [
+        {
+          "answer_span": "| blocking actions stall process | blocking actions only stall current thread |",
+          "claim_id": "academic-atomic-m2-dev-0066-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 5105,
+              "char_start": 5024,
+              "region_id": "source-region-c38442e1cafc5ccb4b663e79904c12c7cbb32392eac0108b380c671410fa3b5f",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/cool-extra-stuff.md",
+              "source_sha256": "d5a51992a194451db96ccfc85d2a80f69358628eb9811fe5b9e44ee0ceca1591",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "| User level | Kernel level |",
+      "case_id": "academic-atomic-m2-dev-0066-q4",
+      "claims": [
+        {
+          "answer_span": "| User level | Kernel level |",
+          "claim_id": "academic-atomic-m2-dev-0066-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4859,
+              "char_start": 4778,
+              "region_id": "source-region-c168f5187986f8bea414d66a6e46a97dc2632d53893854caf7db8dbeb2e3ad8e",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/cool-extra-stuff.md",
+              "source_sha256": "d5a51992a194451db96ccfc85d2a80f69358628eb9811fe5b9e44ee0ceca1591",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0066-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~$ ps -e | wc -l",
+      "case_id": "academic-atomic-m2-dev-0067-q1",
+      "claims": [
+        {
+          "answer_span": "student@os:~$ ps -e | wc -l",
+          "claim_id": "academic-atomic-m2-dev-0067-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 468,
+              "char_start": 441,
+              "region_id": "source-region-4fa931855e09d7eaeba5d4d20452ad8f6b01084d14f2eb82cb3b78e51af6cb32",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/intro.md",
+              "source_sha256": "970ebd925b93f49c6917af364ee95a3fbb8950b769b772619fac3d678de3a964",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~$ ps -e",
+      "case_id": "academic-atomic-m2-dev-0067-q2",
+      "claims": [
+        {
+          "answer_span": "student@os:~$ ps -e",
+          "claim_id": "academic-atomic-m2-dev-0067-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 492,
+              "char_start": 473,
+              "region_id": "source-region-4494c9b3840ef07a9590c2b4a80431a66a397bd50c288d2cd6455abc8f2f7116",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/intro.md",
+              "source_sha256": "970ebd925b93f49c6917af364ee95a3fbb8950b769b772619fac3d678de3a964",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "PID TTY TIME CMD",
+      "case_id": "academic-atomic-m2-dev-0067-q3",
+      "claims": [
+        {
+          "answer_span": "PID TTY TIME CMD",
+          "claim_id": "academic-atomic-m2-dev-0067-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 520,
+              "char_start": 495,
+              "region_id": "source-region-32651a0a662624615f10916c4d7008b9f58ed45b63c8374f293cd919df82b15a",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/intro.md",
+              "source_sha256": "970ebd925b93f49c6917af364ee95a3fbb8950b769b772619fac3d678de3a964",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "student@os:~$ ps -e | wc -l",
+      "case_id": "academic-atomic-m2-dev-0067-q4",
+      "claims": [
+        {
+          "answer_span": "student@os:~$ ps -e | wc -l",
+          "claim_id": "academic-atomic-m2-dev-0067-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 468,
+              "char_start": 441,
+              "region_id": "source-region-4fa931855e09d7eaeba5d4d20452ad8f6b01084d14f2eb82cb3b78e51af6cb32",
+              "source_artifact_id": "operating-systems:content/compute/lecture/slides/intro.md",
+              "source_sha256": "970ebd925b93f49c6917af364ee95a3fbb8950b769b772619fac3d678de3a964",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0067-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "total = 0",
+      "case_id": "academic-atomic-m2-dev-0082-q1",
+      "claims": [
+        {
+          "answer_span": "total = 0",
+          "claim_id": "academic-atomic-m2-dev-0082-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7561,
+              "char_start": 7552,
+              "region_id": "source-region-fc4e0747d0508ac3c0c35ca76ab41cf236d7884df77826838d595c10a82dd0f0",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "for line in open('words.txt'):",
+      "case_id": "academic-atomic-m2-dev-0082-q2",
+      "claims": [
+        {
+          "answer_span": "for line in open('words.txt'):",
+          "claim_id": "academic-atomic-m2-dev-0082-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7593,
+              "char_start": 7563,
+              "region_id": "source-region-0a35eb93e46dbbd6010f137b7d56ccdadcba32b737156dc6a7cc58684ef09ad7",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "word = line.strip()",
+      "case_id": "academic-atomic-m2-dev-0082-q3",
+      "claims": [
+        {
+          "answer_span": "word = line.strip()",
+          "claim_id": "academic-atomic-m2-dev-0082-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7617,
+              "char_start": 7598,
+              "region_id": "source-region-08c063e244b436e368601f83c830ae1da642271ab943fe1ca621367974d6a86c",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "total = 0",
+      "case_id": "academic-atomic-m2-dev-0082-q4",
+      "claims": [
+        {
+          "answer_span": "total = 0",
+          "claim_id": "academic-atomic-m2-dev-0082-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7561,
+              "char_start": 7552,
+              "region_id": "source-region-fc4e0747d0508ac3c0c35ca76ab41cf236d7884df77826838d595c10a82dd0f0",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0082-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "for letter in \"Gadsby\":",
+      "case_id": "academic-atomic-m2-dev-0083-q1",
+      "claims": [
+        {
+          "answer_span": "for letter in \"Gadsby\":",
+          "claim_id": "academic-atomic-m2-dev-0083-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2345,
+              "char_start": 2322,
+              "region_id": "source-region-ea5f316bad10340928ad9720230705324bb77150ae8891c17c198741c00885cb",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "if letter == 'E' or letter == 'e':",
+      "case_id": "academic-atomic-m2-dev-0083-q2",
+      "claims": [
+        {
+          "answer_span": "if letter == 'E' or letter == 'e':",
+          "claim_id": "academic-atomic-m2-dev-0083-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2384,
+              "char_start": 2350,
+              "region_id": "source-region-eb5e3c1007c179503683924c81861554a66adf723dd8f8dae6fdf887ad549039",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "print('This word has an \"e\"')",
+      "case_id": "academic-atomic-m2-dev-0083-q3",
+      "claims": [
+        {
+          "answer_span": "print('This word has an \"e\"')",
+          "claim_id": "academic-atomic-m2-dev-0083-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2422,
+              "char_start": 2393,
+              "region_id": "source-region-46ec0b543fb21e2fa47caac8b60ce10456b7f585034ca8e7d8e12715d7489689",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "for letter in \"Gadsby\":",
+      "case_id": "academic-atomic-m2-dev-0083-q4",
+      "claims": [
+        {
+          "answer_span": "for letter in \"Gadsby\":",
+          "claim_id": "academic-atomic-m2-dev-0083-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 2345,
+              "char_start": 2322,
+              "region_id": "source-region-ea5f316bad10340928ad9720230705324bb77150ae8891c17c198741c00885cb",
+              "source_artifact_id": "python-programming:chapters/chap07.ipynb",
+              "source_sha256": "b6e615f57af7384107e3bf4b30d37ce8a671cbda0fb7636d98bae13dd4fd6b62",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "ambiguity",
+      "canonical_answer": "Please clarify which concept and step you mean.",
+      "case_id": "academic-atomic-m2-dev-0083-q5",
+      "claims": [],
+      "expected_action": "clarify",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "for line in reader:",
+      "case_id": "academic-atomic-m2-dev-0085-q1",
+      "claims": [
+        {
+          "answer_span": "for line in reader:",
+          "claim_id": "academic-atomic-m2-dev-0085-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8964,
+              "char_start": 8945,
+              "region_id": "source-region-d96e1afb1df20306db48b4aee33b7c430fe91517b9b4ee05c8e549f1e463cdfe",
+              "source_artifact_id": "python-programming:chapters/chap08.ipynb",
+              "source_sha256": "569027ed67308b834b1e7c61e115eb6c58eaa71035118f22bd64b2b3913a8e48",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "if is_special_line(line):",
+      "case_id": "academic-atomic-m2-dev-0085-q2",
+      "claims": [
+        {
+          "answer_span": "if is_special_line(line):",
+          "claim_id": "academic-atomic-m2-dev-0085-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8994,
+              "char_start": 8969,
+              "region_id": "source-region-b997a8a0c81116460367f815bd3346d4ded446f3f149168d60d3834c4deec5dc",
+              "source_artifact_id": "python-programming:chapters/chap08.ipynb",
+              "source_sha256": "569027ed67308b834b1e7c61e115eb6c58eaa71035118f22bd64b2b3913a8e48",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "print(line.strip())",
+      "case_id": "academic-atomic-m2-dev-0085-q3",
+      "claims": [
+        {
+          "answer_span": "print(line.strip())",
+          "claim_id": "academic-atomic-m2-dev-0085-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 9022,
+              "char_start": 9003,
+              "region_id": "source-region-458f7282f5a5389eea6e895f67043b7d31c83f2ad6d41f5a8761a9c91c4dfc8f",
+              "source_artifact_id": "python-programming:chapters/chap08.ipynb",
+              "source_sha256": "569027ed67308b834b1e7c61e115eb6c58eaa71035118f22bd64b2b3913a8e48",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "for line in reader:",
+      "case_id": "academic-atomic-m2-dev-0085-q4",
+      "claims": [
+        {
+          "answer_span": "for line in reader:",
+          "claim_id": "academic-atomic-m2-dev-0085-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 8964,
+              "char_start": 8945,
+              "region_id": "source-region-d96e1afb1df20306db48b4aee33b7c430fe91517b9b4ee05c8e549f1e463cdfe",
+              "source_artifact_id": "python-programming:chapters/chap08.ipynb",
+              "source_sha256": "569027ed67308b834b1e7c61e115eb6c58eaa71035118f22bd64b2b3913a8e48",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0085-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "As in the previous example, the method definition is indented and the name of the parameter is self.",
+      "case_id": "academic-atomic-m2-dev-0093-q1",
+      "claims": [
+        {
+          "answer_span": "As in the previous example, the method definition is indented and the name of the parameter is self.",
+          "claim_id": "academic-atomic-m2-dev-0093-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4565,
+              "char_start": 4463,
+              "region_id": "source-region-0fc2f35c249581be3e22b3d710c6ca7c0130f7dc54ca577e4d8e5e37e901e9f9",
+              "source_artifact_id": "python-programming:chapters/chap15.ipynb",
+              "source_sha256": "b8e7eac61f1d3a6f13d19b320fda198a21b5db146b43be0e6abc7482748c69d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Other than that, the method is identical to the function.",
+      "case_id": "academic-atomic-m2-dev-0093-q2",
+      "claims": [
+        {
+          "answer_span": "Other than that, the method is identical to the function.",
+          "claim_id": "academic-atomic-m2-dev-0093-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4623,
+              "char_start": 4566,
+              "region_id": "source-region-40b4fbeb5548b2f01c28a5bf1b579185c0d80ed0edd64ba61987cc12c237a8b6",
+              "source_artifact_id": "python-programming:chapters/chap15.ipynb",
+              "source_sha256": "b8e7eac61f1d3a6f13d19b320fda198a21b5db146b43be0e6abc7482748c69d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "Here's how we invoke it.",
+      "case_id": "academic-atomic-m2-dev-0093-q3",
+      "claims": [
+        {
+          "answer_span": "Here's how we invoke it.",
+          "claim_id": "academic-atomic-m2-dev-0093-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4648,
+              "char_start": 4624,
+              "region_id": "source-region-88d3a41b7ca34818e9be3fd45b8248964e35249de81b15227d85f5aaf83938d3",
+              "source_artifact_id": "python-programming:chapters/chap15.ipynb",
+              "source_sha256": "b8e7eac61f1d3a6f13d19b320fda198a21b5db146b43be0e6abc7482748c69d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "As in the previous example, the method definition is indented and the name of the parameter is self. Other than that, the method is identical to the function.",
+      "case_id": "academic-atomic-m2-dev-0093-q4",
+      "claims": [
+        {
+          "answer_span": "As in the previous example, the method definition is indented and the name of the parameter is self.",
+          "claim_id": "academic-atomic-m2-dev-0093-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 4565,
+              "char_start": 4463,
+              "region_id": "source-region-0fc2f35c249581be3e22b3d710c6ca7c0130f7dc54ca577e4d8e5e37e901e9f9",
+              "source_artifact_id": "python-programming:chapters/chap15.ipynb",
+              "source_sha256": "b8e7eac61f1d3a6f13d19b320fda198a21b5db146b43be0e6abc7482748c69d8",
+              "source_version": 1
+            }
+          ]
+        },
+        {
+          "answer_span": "Other than that, the method is identical to the function.",
+          "claim_id": "academic-atomic-m2-dev-0093-q4-claim-2",
+          "evidence_refs": [
+            {
+              "char_end": 4623,
+              "char_start": 4566,
+              "region_id": "source-region-40b4fbeb5548b2f01c28a5bf1b579185c0d80ed0edd64ba61987cc12c237a8b6",
+              "source_artifact_id": "python-programming:chapters/chap15.ipynb",
+              "source_sha256": "b8e7eac61f1d3a6f13d19b320fda198a21b5db146b43be0e6abc7482748c69d8",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "The approved course evidence does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0093-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def draw(self):",
+      "case_id": "academic-atomic-m2-dev-0094-q1",
+      "claims": [
+        {
+          "answer_span": "def draw(self):",
+          "claim_id": "academic-atomic-m2-dev-0094-q1-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7157,
+              "char_start": 7142,
+              "region_id": "source-region-d57d31fbd77a7b68ed55f22600633b9ce4ae2ae527862a4fda9fb48185667973",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "jumpto(self.p1.x, self.p1.y)",
+      "case_id": "academic-atomic-m2-dev-0094-q2",
+      "claims": [
+        {
+          "answer_span": "jumpto(self.p1.x, self.p1.y)",
+          "claim_id": "academic-atomic-m2-dev-0094-q2-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7194,
+              "char_start": 7166,
+              "region_id": "source-region-4dfca773f41629667cd6d6a4ce82ad920dbba64febeb0978b22b89b7d34686e7",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "moveto(self.p2.x, self.p2.y)",
+      "case_id": "academic-atomic-m2-dev-0094-q3",
+      "claims": [
+        {
+          "answer_span": "moveto(self.p2.x, self.p2.y)",
+          "claim_id": "academic-atomic-m2-dev-0094-q3-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7231,
+              "char_start": 7203,
+              "region_id": "source-region-7ceac023a106edc1ab5c6c3d459ecf72446ff82f13da79abb4ed68a4583ded89",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": null,
+      "canonical_answer": "def draw(self):",
+      "case_id": "academic-atomic-m2-dev-0094-q4",
+      "claims": [
+        {
+          "answer_span": "def draw(self):",
+          "claim_id": "academic-atomic-m2-dev-0094-q4-claim-1",
+          "evidence_refs": [
+            {
+              "char_end": 7157,
+              "char_start": 7142,
+              "region_id": "source-region-d57d31fbd77a7b68ed55f22600633b9ce4ae2ae527862a4fda9fb48185667973",
+              "source_artifact_id": "python-programming:chapters/chap16.ipynb",
+              "source_sha256": "204d2ff8818a59a6a1ad77d0cd11e69ce4e0dcea1cbddeb2c11ec23c2005651e",
+              "source_version": 1
+            }
+          ]
+        }
+      ],
+      "expected_action": "answer",
+      "schema_version": 1
+    },
+    {
+      "boundary_reason": "cross-course",
+      "canonical_answer": "The approved evidence for this course does not establish that.",
+      "case_id": "academic-atomic-m2-dev-0094-q5",
+      "claims": [],
+      "expected_action": "abstain",
+      "schema_version": 1
+    }
+  ],
+  "schema_version": 1,
+  "split": "development"
+}

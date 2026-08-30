@@ -1,0 +1,19 @@
+{
+  "adapter_version": "v1",
+  "code_revision": "fa388201be7ad2e9086ccb5661a4b60ca1b81b29",
+  "evidence_gate": "atomic-structured-coverage-evidence-gate-v1",
+  "flow_id": "t0-atomic-m2-structured-candidate-001",
+  "generator": "openai-gpt-5.4-mini-live-extractive-boundary",
+  "known_benchmark": false,
+  "model_bindings": {
+    "claim-validator": "contiguous-quote-atomic-claim-verifier-v1@1.0.0",
+    "embedding": "text-embedding-3-small",
+    "embedding-cache": "academic-factual-qa-atomic-m2-confirmation-001",
+    "generator": "gpt-5.4-mini-2026-03-17",
+    "response-contract": "extractive-boundary-output-v1"
+  },
+  "policy": "grounded-assistant-approved-synthetic-policy-v1",
+  "profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+  "retriever": "atomic-bm25-openai-small-rrf-v1@academic-factual-qa-atomic-m2-confirmation-001",
+  "schema_version": 1
+}

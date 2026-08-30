@@ -152,6 +152,21 @@ it is not professor-fidelity or product-retrieval evidence. C3 remains closed
 until the actual-product factual checkpoint passes, and a real professor must
 approve the profile before fidelity evaluation.
 
+AFQC-108 freezes the next actual-product checkpoint without opening the sealed
+10,000-case set. It runs the real T0 `StudentTutoringService` on all 500 fresh
+atomic-M2 development cases and compares its structured evidence gate with an
+any-hit control on a fixed 100-case/four-course subset. Both conditions use the
+same immutable API-built BM25 plus OpenAI-small hybrid index, cached public
+question vectors, exact GPT-5.4 mini snapshot, policy, persistence, citations,
+and atomic-claim validator; only the release gate differs. The response process
+can load neither hidden gold nor a scorer. Gold may open only after both response
+ledgers are durable. The finite checkpoint permits at most 600 product calls,
+zero retries, and USD 7 under the existing program-level authority. A valid
+quality failure stops factual scaling; a pass advances once to final
+construction. The separate terminal visual diagnostic cannot block this
+text/OCR track, and the synthetic-profile Refine result cannot support a
+professor-fidelity claim.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval

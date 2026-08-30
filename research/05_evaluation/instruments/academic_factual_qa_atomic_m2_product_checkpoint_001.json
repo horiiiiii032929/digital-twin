@@ -1,0 +1,85 @@
+{
+  "boundaries": {
+    "final_10000_opened": false,
+    "human_participants": 0,
+    "private_data_used": false,
+    "professor_fidelity": false,
+    "visual_evaluation": "separate"
+  },
+  "content_sha256": "781fd7e4cafd208ecb6a0bb12797b91ffeb2dfde1f69410c90b9c4259b8a3545",
+  "dataset": {
+    "candidate_case_count": 500,
+    "candidate_cases_path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-product-development-001-cases.json",
+    "candidate_cases_sha256": "d08ead16e9b8c963abe0929a6f663e7fbc9ee7555ebb78baee52693a72e90009",
+    "candidate_gold_path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-product-development-001-gold.json",
+    "candidate_gold_sha256": "8fc5395c4d6aeb9f659b424397e3997cb230e1e7790391d2627bafa8f7ee9220",
+    "control_case_count": 100,
+    "control_cases_path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-product-development-001-control-cases.json",
+    "control_cases_sha256": "849f88149a3e3745331dc1a5c26fe28131baf437cd8d26ddf5d551a59b368758",
+    "control_gold_path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-product-development-001-control-gold.json",
+    "control_gold_sha256": "6a430d395c3d4fec49f4b8967ffb77595be2002f0e0b095900deb506afe438a9"
+  },
+  "decision_id": "AFQC-108",
+  "execution": {
+    "atomic_sqlite_checkpoints": true,
+    "automatic_progression_on_pass": true,
+    "final_execution_authorized": false,
+    "hidden_gold_after_both_response_ledgers": true,
+    "maximum_cost_usd": 7.0,
+    "maximum_product_calls": 600,
+    "maximum_transport_retries": 0,
+    "safe_resume": true,
+    "stage_order": [
+      "candidate-500",
+      "control-100",
+      "hidden-gold-score",
+      "paired-decision"
+    ]
+  },
+  "hard_gates": {
+    "action_accuracy_answerable_min": 0.95,
+    "action_accuracy_overall_min": 0.95,
+    "atomic_claim_precision_min": 0.98,
+    "atomic_claim_recall_min": 0.95,
+    "boundary_action_accuracy_min": 0.98,
+    "canonical_all_evidence_at_3_min": 0.9,
+    "citation_precision_min": 0.98,
+    "citation_recall_min": 0.95,
+    "evidence_recall_at_5_min": 0.95,
+    "exact_duplicate_count_max": 0,
+    "fully_grounded_factual_success_min": 0.95,
+    "fully_grounded_source_family_lower_95_min": 0.93,
+    "malformed_output_max": 0.005,
+    "paired_boundary_safety_not_worse": true,
+    "paired_supported_retention_delta_lower_95_min": -0.03,
+    "provider_completion_min": 0.995,
+    "severe_unsupported_release_count_max": 0,
+    "source_version_validity_min": 1.0
+  },
+  "instrument_id": "academic-factual-qa-atomic-m2-product-checkpoint-001",
+  "method": {
+    "candidate_evidence_gate": "atomic-structured-coverage-evidence-gate-v1",
+    "control_evidence_gate": "atomic-any-hit-evidence-gate-v1",
+    "deterministic_scoring_authoritative": true,
+    "generator": "gpt-5.4-mini-2026-03-17",
+    "retriever": "atomic-bm25-openai-small-rrf-v1"
+  },
+  "owner_issue": 127,
+  "program_id": "course-digital-twin-nonhuman-evaluation-program-002",
+  "provider_binding": {
+    "content_sha256": "308705d14f003c5632bcab76fe3a7f8e9a623ded4ed9c09679066b09192771d4",
+    "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_openai_binding_001.json"
+  },
+  "retrieval_runtime": {
+    "content_sha256": "dd939a4ee35f6cbe34b604fb662fd116539eb431cbc72f5a80ca4492b510beb8",
+    "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_retrieval_runtime_001.json"
+  },
+  "schema_version": 1,
+  "source_package": {
+    "content_sha256": "a2cd2ec36b5d3134710caac5bf544f046420416a176ec8f846c66d44a5062456",
+    "file_sha256": "8a426f6e22f242033874a18c53375dd4d896a02cd79849bb6390aed76c906e51",
+    "path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-sources.json",
+    "registered_region_count": 300
+  },
+  "status": "frozen-authorized-by-program"
+}

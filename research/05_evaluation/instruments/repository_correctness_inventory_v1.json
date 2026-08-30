@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 739
+    "audited": 748
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 172,
+    "active_or_unclassified_tooling": 175,
     "active_runtime": 127,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 181,
+    "evaluation_configuration": 186,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 160
+    "verification": 161
   },
-  "file_count": 739,
+  "file_count": 748,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9d5642a42ca040e14b73b2e2233480e805a67bebbed65c4ad55f340976aec986",
+  "record_sha256": "96ac331ae1e5af452ca56094d9f59d4926d86676ba608441d7c6e95afcf06d18",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "2f128c14a6fbfa13b1be9cfe653e0c6b5c7398161c180dde54323da270d2760b"
+      "sha256": "f983580e424a73c13dbf724519f9972ee8242de622c6d37097536e96a93250a5"
     },
     {
       "audit": {
@@ -1636,6 +1636,86 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_confirmation_001.json",
       "risk": "high",
       "sha256": "f89208cabc9f52791fbfe9144b47bc29b2824cc935ee99a831a0932872a85913"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Manifest review verifies the actual T0 candidate uses selected atomic-M2 retrieval, exact GPT-5.4 mini, grounded policy, atomic claim validation, and the structured evidence gate; the exact executable revision is ledger-bound.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_candidate_manifest_001.json",
+      "risk": "high",
+      "sha256": "d6cd451485c9084e53dcacf8554d790d74bb315ef587dce93d3c129d8dd72794"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Instrument review verifies fixed 500+100 inputs, response-before-gold ordering, 600-call and zero-retry bounds, USD 7 stop, unchanged hard gates, finite progression, and closed final execution.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_checkpoint_001.json",
+      "risk": "high",
+      "sha256": "14ffe25715aa8939bba1fa4b8409e47835f29460927fe157fe145cfef165f71b"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Control-manifest review confirms that retriever, generator, policy, profile, model bindings, and claim validation match the candidate and only the any-hit evidence gate differs.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_control_manifest_001.json",
+      "risk": "high",
+      "sha256": "e9ebfdfb83bfda3bdcfa36fb329fbf2d8b33c91416e7a682a8a25f6888ddb149"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Provider-binding review verifies direct OpenAI Responses API, exact dated model identity, store false, zero transport retries, official recorded pricing, 24-hour freshness, and program-scoped authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_openai_binding_001.json",
+      "risk": "high",
+      "sha256": "9311384de423a9ae3228a5c666aa577289ba574322f142572b14ff55e2856921"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Runtime-manifest review binds public source atoms, immutable per-course indexes, cached public question vectors, exact hashes, and explicitly contains no hidden-gold path.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_atomic_m2_product_retrieval_runtime_001.json",
+      "risk": "high",
+      "sha256": "81911c0d35ad9422fe34ef72902997ae04ffe32d1845260bb919df5943413b8f"
     },
     {
       "audit": {
@@ -4391,6 +4471,22 @@
     },
     {
       "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case conversation isolation, bounded provider accounting, and no gold or scorer dependency.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
+      "risk": "high",
+      "sha256": "58eca6d0eea39f082890fdc74172970cc4bacfc49c8743790893527f0f967c4e"
+    },
+    {
+      "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Adapter review verified precomputed hierarchical retrieval is public-question-only, hash-bound, source-authorized, and evaluated through the existing flow-independent response contract.",
         "findings": [],
@@ -4809,6 +4905,24 @@
       "path": "scripts/build_academic_factual_qa_atomic_m2_confirmation.py",
       "risk": "high",
       "sha256": "cf4556091c6767d5842f716ae8cd4abf830ef61a1c5a674582c49a3430d152c3"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Builder review verifies deterministic 500-case reuse, fixed 20-cluster/four-course control selection, public/gold separation, exact manifests, immutable retrieval binding, and byte-stable generated artifacts.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-atomic-m2-product-package"
+      ],
+      "path": "scripts/build_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "fff0e59d78be1a4a7d575525ce8f04f13bc5f2832aafe194ac21c450a6dcf38d"
     },
     {
       "audit": {
@@ -5928,6 +6042,28 @@
       "path": "scripts/run_academic_factual_qa_atomic_m2_confirmation.py",
       "risk": "high",
       "sha256": "4c138bae76f6075b7488d038de517dbdb8d0e0b1295b849015e1bc079d13597a"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint",
+        "evidence": "Runner review verifies finite candidate/control ordering, exact resume and revision binding, exclusive outputs, gold opening only after both response ledgers, deterministic scoring, paired decision, and complete call/token/latency/cost accounting.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:academic-factual-qa-atomic-m2-product",
+        "preflight:academic-factual-qa-atomic-m2-product",
+        "resume:academic-factual-qa-atomic-m2-product",
+        "simulate:academic-factual-qa-atomic-m2-product",
+        "verify:academic-factual-qa-atomic-m2-product"
+      ],
+      "path": "scripts/run_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "high",
+      "sha256": "bee446bebce02cd891c8d7454603bb250717444f05cdfae37c59c46d188dabb2"
     },
     {
       "audit": {
@@ -9595,7 +9731,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "e57e4ad0662c99519483636f8d112d3faf3473e2f9f56acf46faf6e133ad0f9c"
+      "sha256": "00f3e6535f8159180e6585640bc5261e12965955ef8479d678acda7d49a9e542"
     },
     {
       "audit": {
@@ -10524,6 +10660,22 @@
       "path": "tests/services/test_runtime_lifecycle.py",
       "risk": "medium",
       "sha256": "581ccab0577597cdb0d2d2c2280154d80a5c706ed3311bcf1d4259c1d65207ca"
+    },
+    {
+      "audit": {
+        "domain": "atomic-m2-actual-product-checkpoint-verification",
+        "evidence": "Focused tests verify finite bounds, public input gold exclusion, one-variable candidate/control comparison, adapter dependency isolation, terminal outcomes, and no-call resume simulation.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-product-checkpoint-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_atomic_m2_product_checkpoint.py",
+      "risk": "medium",
+      "sha256": "0f1ffa38600926ab9657cac03a0ba084945ba7118abaacbb86909f854577a72e"
     },
     {
       "audit": {
@@ -12367,8 +12519,8 @@
     }
   ],
   "risk_counts": {
-    "high": 565,
-    "medium": 174
+    "high": 573,
+    "medium": 175
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
