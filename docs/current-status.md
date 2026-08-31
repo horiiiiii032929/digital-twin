@@ -110,10 +110,11 @@ recorded as an accounting limitation for #157. This integration cannot select
 or promote V2.1; #157 remains the academic full-autonomy decision.
 
 GitHub tracks the remaining evidence path explicitly: #153 remains
-`In Progress / Refine` for grounding selection, #155 remains
-`In Progress / Go Deeper` until provider-backed V2.1 confirmation, #156 remains
-`Todo / Go Deeper` until A2 promotion evidence, and #157 remains
-`Todo / Go Deeper` until the actual flow-independent evaluation. Parent #8
+`In Progress / Refine` for grounding selection. #155 is complete as the
+software-and-provider-integration milestone and moves to `Done / Keep`; it does
+not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
+and #157 moves to `In Progress / Go Deeper` for the actual flow-independent
+evaluation. Parent #8
 remains open. The execution freeze is active again with no provider checkpoint
 authorized. Repository correctness is 801/801 audited
 execution-relevant files with zero pending findings.

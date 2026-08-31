@@ -75,10 +75,10 @@ belief planes, deterministic evidence-count updates, an independently
 implemented reactive/autonomous graph, node-level SQLite checkpoints, durable
 provider-call ledgers, APIs/UI, and a flow-independent autonomy evaluation
 adapter. A 30-day network-free regression passes restart, expiry, finite-loop,
-and duplicate-suppression gates. This is implementation evidence only. No paid
-call, held-out run, A2 qualification, or full-autonomy evaluation was
-performed, so #153, #155, #156, and #157 all remain open. T1-v2.1 remains
-`Go Deeper` and the selected local R1 profile is unchanged.
+and duplicate-suppression gates. The successor provider integration also
+passes, so #155 closes as `Done / Keep` for implementation readiness. No
+held-out run, A2 qualification, or full-autonomy evaluation was performed.
+T1-v2.1 remains unselected and the selected local R1 profile is unchanged.
 
 Revision `adfc8bd7` is frozen as build-only release candidate 001 with exact
 profile, source, and local image hashes. The successor provider-integration
@@ -89,9 +89,10 @@ unselected. Token and per-call latency totals were not surfaced by the aggregate
 runner, so #157 still owns complete academic and operational evaluation.
 
 The remaining full-autonomy work is now separated in GitHub rather than hidden
-inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
-owns the governed T1-v2.1 product completion, [#156](https://github.com/horiiiiii032929/digital-twin/issues/156)
-owns A2 learner-state-driven in-app intervention, and
+inside the release parent. Completed [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
+owns the immutable governed T1-v2.1 implementation milestone,
+[#156](https://github.com/horiiiiii032929/digital-twin/issues/156) owns A2
+learner-state-driven in-app intervention, and
 [#157](https://github.com/horiiiiii032929/digital-twin/issues/157) owns the
 immutable full-autonomy product evaluation. Issue #153 remains the first P0
 dependency because no autonomous release is safe before the grounding successor
