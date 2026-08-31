@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-smoke-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "governed-full-autonomy-v2-1-actual-product-smoke-4",
+  "corpus_id": "public-synthetic-autonomy-product-fixture-v1",
+  "code_revision": "75917cf589b3888d28511c040e58a8064655d1e8",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "callback-autonomy-reference-driver-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "actual_product_services": false,
+          "condition_count": 4,
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {
+          "name": "actual-product-condition-coverage",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "observable-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "goal-termination-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "invalid-citation-lineage-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-delivery-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "actual-product-service-boundary",
+          "passed": false,
+          "evidence": "The reference driver exercises contract plumbing but does not call product services."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "The flow-independent contract keeps expected actions outside product-visible cases."
+        },
+        {
+          "name": "restart-safe-autonomous-delivery",
+          "passed": false,
+          "evidence": "The reference driver does not execute the durable product repository or delivery outbox."
+        },
+        {
+          "name": "zero-scope-or-lineage-defects",
+          "passed": true,
+          "evidence": "The scripted reference responses remain inside their synthetic public scope."
+        },
+        {
+          "name": "zero-provider-use",
+          "passed": true,
+          "evidence": "The reference harness is network-free."
+        }
+      ],
+      "failures_by_category": {
+        "actual-product-adapter-absent": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "student-product-autonomy-adapter-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "actual_product_services": true,
+          "condition_count": 4,
+          "student_service": "StudentTutoringService",
+          "autonomy_service": "GovernedAutonomyService",
+          "repository": "SQLiteStudentRepository",
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {
+          "name": "actual-product-condition-coverage",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "observable-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "goal-termination-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "invalid-citation-lineage-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-delivery-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "actual-product-service-boundary",
+          "passed": true,
+          "evidence": "All four conditions executed the real tutoring, repository, and applicable autonomy/outreach services."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "The adapter received only AutonomyEvaluationCaseV1; hidden expectations joined after durable responses."
+        },
+        {
+          "name": "restart-safe-autonomous-delivery",
+          "passed": true,
+          "evidence": "T1-v2 autonomous delivered one cited due intervention after restart with no duplicate action or message."
+        },
+        {
+          "name": "zero-scope-or-lineage-defects",
+          "passed": true,
+          "evidence": "No wrong recipient, course, release, citation lineage, consent, or authority mutation was observed."
+        },
+        {
+          "name": "zero-provider-use",
+          "passed": true,
+          "evidence": "The smoke used deterministic local generation and recorded zero calls, tokens, and cost."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "student-product-autonomy-adapter-v1",
+    "rationale": "Use the candidate adapter for #157 because it preserves the flow-independent public/gold boundary while driving the actual T0, T1-v1, T1-v2 reactive, and T1-v2 autonomous services. This selects evaluation infrastructure only and does not promote V2.1.",
+    "limitations": [
+      "Four synthetic network-free cases establish integration, not product quality or academic validity.",
+      "T0 and T1-v1 failed the current strict atomic-claim validator closed; issue #153 owns that grounding decision.",
+      "Provider-backed exact per-call accounting remains unexecuted, and the 820-case scripted timing must be rebound to the product's 24-hour wake-up semantics without changing public cases, gold, conditions, or gates.",
+      "Professor fidelity, external usability, and learning outcomes remain unsupported."
+    ]
+  }
+}

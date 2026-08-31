@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 806
+    "audited": 810
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 184,
-    "active_runtime": 135,
+    "active_or_unclassified_tooling": 185,
+    "active_runtime": 136,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 213,
+    "evaluation_configuration": 214,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 173
+    "verification": 174
   },
-  "file_count": 806,
+  "file_count": 810,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3df1a9588c40c1f64374d5b03e3ee8cc600b7772739a8331c9f77d6ac4deb5ab",
+  "record_sha256": "a5c70e2edef05477e308bf18f6ac08f3c9423bf1b5e015103a70a767d308ff8e",
   "records": [
     {
       "audit": {
@@ -1416,7 +1416,7 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration and flow-independent full-autonomy harness commands.",
+        "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration, flow-independent harness, and actual-product smoke commands.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "Codex primary plus independent Impeccable cross-review"
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d56f3a95426ad1cdd7bac8c025201106de0958201c13a6f8c44b0f53039b4fc6"
+      "sha256": "1a7f558b764e88b49d73ff456bc63bccbbcfcbf45475c816f9db825aa1779b05"
     },
     {
       "audit": {
@@ -2967,8 +2967,8 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Pure-package export and import-cycle review confirms the student-dependent product adapter stays in its direct module; generation imports and focused actual-product tests pass.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -4004,6 +4004,22 @@
       "path": "research/05_evaluation/instruments/generator_qualification_v3_v4_pro_p3_development_001.json",
       "risk": "high",
       "sha256": "075c9113a877468a07b960b12671be7279f5f944f960c2c0c65812e9c7a98c63"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex #157 actual-product adapter audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_smoke_001.json",
+      "risk": "high",
+      "sha256": "8949d5b9a8adc7e0c8e42bd71eb5391497e2f2406bd81461441d37c927fe7b01"
     },
     {
       "audit": {
@@ -7657,7 +7673,7 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+        "evidence": "Entrypoint, freeze, network, data-access, and termination review confirms the new actual-product smoke is deterministic synthetic-only and has no provider, execute, paid, or held-out path; freeze coverage passes.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "Codex primary plus independent Impeccable cross-review"
@@ -7672,6 +7688,25 @@
       "path": "scripts/run_governed_full_autonomy_product_freeze.py",
       "risk": "high",
       "sha256": "039237fd4fc115287442b184e1476b7c53fe3042facb462bb7f49efc6f4877ac"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Manual service-fixture and clock/restart review plus a four-condition network-free run verified real student, governed autonomy, outreach, SQLite restart, and due-delivery paths without provider use.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex #157 actual-product adapter audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:governed-autonomy-v2-1-actual-product-smoke",
+        "validate:governed-autonomy-v2-1-actual-product-smoke"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_smoke.py",
+      "risk": "high",
+      "sha256": "5b6ed436474ef8c81d42473631ef7c9811167607e18f42bc9c43bc2ab43f4981"
     },
     {
       "audit": {
@@ -8472,7 +8507,7 @@
         "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewer": "Codex #157 actual-product adapter audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8482,7 +8517,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "6a4b77308a9f027c06df1463181b3077d93826803ccf71041f7ab5202ece3602"
+      "sha256": "47fb9ac01793e157491ec4551670380e568f72e3f099a70c30fb44425b031c64"
     },
     {
       "audit": {
@@ -9271,8 +9306,8 @@
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex #157 actual-product adapter audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9297,6 +9332,22 @@
       "path": "src/digital_twin/evaluation/autonomy_contract.py",
       "risk": "high",
       "sha256": "780cbbd77745252e08f8c7994d67e1dfd8d1bd9b99636b4a27c2a7f2dd401e52"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Manual adapter review verified public/internal scope mapping, actual service calls, restart equality, no duplicate action collection, citation lineage, fail-closed metrics collection, and no gold access.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex #157 actual-product adapter audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/autonomy_product_adapter.py",
+      "risk": "high",
+      "sha256": "d80c8cbfa2e6a28c74f7e3304e4437347e5e53c1d7a93cfffbd4b2c61152034b"
     },
     {
       "audit": {
@@ -12821,6 +12872,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Focused tests verify network-free authority, public/gold separation, all four real service conditions, restart consistency, one actual autonomous delivery, and zero provider accounting.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex #157 actual-product adapter audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_smoke.py",
+      "risk": "medium",
+      "sha256": "4ff6b77e2ec3567d88cbdd0a4fea1ac4f88320466d93ff22148f55eeb811c959"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Focused harness regressions verify the exact 820-case allocation, unique public/gold IDs, gold-field exclusion, all four conditions, full hard-gate simulation, and zero provider calls/tokens/cost.",
         "findings": [],
         "reviewed_at": "2026-08-31",
@@ -13556,8 +13623,8 @@
     }
   ],
   "risk_counts": {
-    "high": 619,
-    "medium": 187
+    "high": 622,
+    "medium": 188
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

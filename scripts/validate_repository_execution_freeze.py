@@ -63,6 +63,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This build-only harness expands public/gold contracts in memory and runs
     # a deterministic reference driver. It has no provider or held-out mode.
     "run_governed_full_autonomy_v2_1_evaluation_harness.py",
+    # This integration smoke drives only deterministic local services over
+    # synthetic data. It has no provider, paid, execute, or held-out mode.
+    "run_governed_full_autonomy_v2_1_actual_product_smoke.py",
     "run_ingestion_worker.py",
 }
 EXEMPT_SCRIPTS = {

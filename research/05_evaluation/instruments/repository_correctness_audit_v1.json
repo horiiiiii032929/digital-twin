@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration and flow-independent full-autonomy harness commands.",
+      "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration, flow-independent harness, and actual-product smoke commands.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "d56f3a95426ad1cdd7bac8c025201106de0958201c13a6f8c44b0f53039b4fc6"
+      "sha256": "1a7f558b764e88b49d73ff456bc63bccbbcfcbf45475c816f9db825aa1779b05"
     },
     {
       "audit_status": "audited",
@@ -2017,8 +2017,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Pure-package export and import-cycle review confirms the student-dependent product adapter stays in its direct module; generation imports and focused actual-product tests pass.",
       "findings": [],
       "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_001.json",
       "reviewed_at": "2026-08-29",
@@ -4882,7 +4882,7 @@
       "domain": "governed-autonomy-v2-1",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+      "evidence": "Entrypoint, freeze, network, data-access, and termination review confirms the new actual-product smoke is deterministic synthetic-only and has no provider, execute, paid, or held-out path; freeze coverage passes.",
       "findings": []
     },
     {
@@ -5366,8 +5366,8 @@
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "6a4b77308a9f027c06df1463181b3077d93826803ccf71041f7ab5202ece3602"
+      "reviewer": "Codex #157 actual-product adapter audit",
+      "sha256": "47fb9ac01793e157491ec4551670380e568f72e3f099a70c30fb44425b031c64"
     },
     {
       "audit_status": "audited",
@@ -5893,8 +5893,8 @@
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
       "findings": [],
       "path": "src/digital_twin/evaluation/__init__.py",
-      "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-review",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 actual-product adapter audit",
       "sha256": "a54c628e38a31a51313c42c76831e80d9e701f157586a6a46730c68e08048b75"
     },
     {
@@ -8866,6 +8866,50 @@
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 harness audit",
       "sha256": "1a964b5a7adce5104a8c8b2e3aa8417ce67b68d95036bcfa7c03a7126a1fe5d3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_smoke_001.json",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 actual-product adapter audit",
+      "sha256": "8949d5b9a8adc7e0c8e42bd71eb5391497e2f2406bd81461441d37c927fe7b01"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Manual service-fixture and clock/restart review plus a four-condition network-free run verified real student, governed autonomy, outreach, SQLite restart, and due-delivery paths without provider use.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_smoke.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 actual-product adapter audit",
+      "sha256": "5b6ed436474ef8c81d42473631ef7c9811167607e18f42bc9c43bc2ab43f4981"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Manual adapter review verified public/internal scope mapping, actual service calls, restart equality, no duplicate action collection, citation lineage, fail-closed metrics collection, and no gold access.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/autonomy_product_adapter.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 actual-product adapter audit",
+      "sha256": "d80c8cbfa2e6a28c74f7e3304e4437347e5e53c1d7a93cfffbd4b2c61152034b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify network-free authority, public/gold separation, all four real service conditions, restart consistency, one actual autonomous delivery, and zero provider accounting.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_smoke.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 actual-product adapter audit",
+      "sha256": "4ff6b77e2ec3567d88cbdd0a4fea1ac4f88320466d93ff22148f55eeb811c959"
     }
   ],
   "schema_version": 1
