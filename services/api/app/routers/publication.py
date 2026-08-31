@@ -353,6 +353,7 @@ def create_autonomous_opportunity(
             goal_id=request.goal_id,
             concept_id=request.concept_id,
             source_chunk_id=request.source_chunk_id,
+            source_chunk_ids=request.source_chunk_ids,
             supporting_observation_ids=request.supporting_observation_ids,
             idempotency_key=request.idempotency_key,
         )

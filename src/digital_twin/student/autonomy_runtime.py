@@ -55,6 +55,8 @@ class AutonomousJobInput(BaseModel):
     recent_message_count: int = Field(default=0, ge=0)
     same_concept_cooldown_active: bool = False
     evidence_keys: list[str] = Field(default_factory=list, max_length=8)
+    evidence_chunk_ids: list[str] = Field(default_factory=list, max_length=5)
+    evidence_decision_reason: str = Field(default="not-assessed", min_length=1, max_length=256)
     evidence_complete: bool = False
     evidence_unique: bool = False
     evidence_current: bool = False
@@ -64,6 +66,14 @@ class AutonomousJobInput(BaseModel):
     @model_validator(mode="after")
     def bindings_must_match(self) -> "AutonomousJobInput":
         opportunity = self.opportunity
+        if len(self.evidence_keys) != len(set(self.evidence_keys)):
+            raise ValueError("autonomous evidence keys must be unique")
+        if len(self.evidence_chunk_ids) != len(set(self.evidence_chunk_ids)):
+            raise ValueError("autonomous evidence chunk IDs must be unique")
+        if self.evidence_complete and (
+            not self.evidence_keys or not self.evidence_chunk_ids
+        ):
+            raise ValueError("complete autonomous evidence requires keys and chunk IDs")
         if self.goal is not None and (
             opportunity.goal_id != self.goal.goal_id
             or opportunity.student_id != self.goal.student_id
@@ -116,6 +126,9 @@ class DeterministicAutonomousPlanner:
     async def plan(self, job: AutonomousJobInput) -> AutonomousPlannerOutputV1:
         event = job.opportunity.event_kind
         action = {
+            AutonomousEventKind.STUDENT_MESSAGE: (
+                AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
+            ),
             AutonomousEventKind.REPEATED_CONFUSION: (
                 AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE
             ),
@@ -132,6 +145,9 @@ class DeterministicAutonomousPlanner:
                 AutonomousActionKind.SEND_IN_APP_CHECK_IN
             ),
             AutonomousEventKind.EVIDENCE_RECOVERED: (
+                AutonomousActionKind.RECOMMEND_APPROVED_SOURCE
+            ),
+            AutonomousEventKind.NEW_COURSE_RELEASE: (
                 AutonomousActionKind.RECOMMEND_APPROVED_SOURCE
             ),
             AutonomousEventKind.PRACTICE_INCOMPLETE: (
@@ -386,6 +402,11 @@ class GovernedAutonomousTutoringGraph:
             reason = "opportunity-expired"
         elif job.goal is not None and job.goal.status.value != "active":
             reason = "goal-not-active"
+        elif (
+            job.goal is not None
+            and job.goal.attempt_count >= job.goal.attempt_limit
+        ):
+            reason = "goal-attempt-limit-reached"
         return {"blocked_reason": reason}
 
     @staticmethod
@@ -443,11 +464,25 @@ class GovernedAutonomousTutoringGraph:
             "evidence-lineage-present": bool(
                 job.evidence_keys and proposal.required_evidence_keys
             ),
+            "planned-evidence-authorized": (
+                len(proposal.required_evidence_keys)
+                == len(set(proposal.required_evidence_keys))
+                and set(proposal.required_evidence_keys).issubset(
+                    set(job.evidence_keys)
+                )
+            ),
         }
         if proposal.action == AutonomousActionKind.NO_ACTION:
             return {"blocked_reason": proposal.reason_code}
         failed = next((name for name, passed in checks.items() if not passed), None)
-        trace = state["trace"].model_copy(update={"validation_results": checks})
+        trace = state["trace"].model_copy(
+            update={
+                "validation_results": checks,
+                "decision_reason": (
+                    failed or f"evidence-approved:{job.evidence_decision_reason}"
+                ),
+            }
+        )
         return {"blocked_reason": failed, "trace": trace}
 
     @staticmethod

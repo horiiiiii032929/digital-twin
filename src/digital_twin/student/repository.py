@@ -28,6 +28,7 @@ from src.digital_twin.student.autonomy_runtime import AutonomousJobResult
 from src.digital_twin.student.models import (
     Account,
     AccountRole,
+    AccountStatus,
     AuditEvent,
     Citation,
     Conversation,
@@ -103,6 +104,8 @@ class StudentRepository(Protocol):
 
     def get_conversation(self, conversation_id: str) -> Conversation | None: ...
 
+    def list_course_conversations(self, course_id: str) -> list[Conversation]: ...
+
     def get_learner_state(self, conversation_id: str) -> LearnerState | None: ...
 
     def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool: ...
@@ -156,6 +159,7 @@ class StudentRepository(Protocol):
         learning_gap_signal: LearningGapSignalV1 | None = None,
         autonomous_opportunity: ProactiveOpportunityV1 | None = None,
         responding_to_outreach_message_id: str | None = None,
+        completed_autonomous_goal_ids: list[str] | None = None,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -254,6 +258,8 @@ class StudentRepository(Protocol):
 
     def get_autonomy_policy(self, course_id: str) -> PedagogicalPolicyV2 | None: ...
 
+    def list_autonomy_policies(self) -> list[PedagogicalPolicyV2]: ...
+
     def save_autonomous_goal(self, goal: AutonomousGoalV1) -> AutonomousGoalV1: ...
 
     def get_autonomous_goal(self, goal_id: str) -> AutonomousGoalV1 | None: ...
@@ -276,6 +282,10 @@ class StudentRepository(Protocol):
 
     def get_autonomous_opportunity(
         self, opportunity_id: str
+    ) -> ProactiveOpportunityV1 | None: ...
+
+    def get_autonomous_opportunity_by_key(
+        self, idempotency_key: str
     ) -> ProactiveOpportunityV1 | None: ...
 
     def list_due_autonomous_opportunities(
@@ -379,6 +389,21 @@ class SQLiteStudentRepository:
                      status = excluded.status""",
                 (account.id, account.role.value, account.status.value),
             )
+            if (
+                account.role == AccountRole.STUDENT
+                and account.status != AccountStatus.ACTIVE
+            ):
+                course_rows = self._connection.execute(
+                    "SELECT course_id FROM memberships WHERE account_id = ?",
+                    (account.id,),
+                ).fetchall()
+                for row in course_rows:
+                    self._cancel_autonomy_scope_sql(
+                        student_id=account.id,
+                        course_id=str(row["course_id"]),
+                        release_id=None,
+                        changed_at=timestamp_now(),
+                    )
         return account.model_copy(deep=True)
 
     def save_course(self, course: Course) -> Course:
@@ -656,6 +681,15 @@ class SQLiteStudentRepository:
     def get_conversation(self, conversation_id: str) -> Conversation | None:
         row = self._one("SELECT * FROM conversations WHERE id = ?", (conversation_id,))
         return Conversation.model_validate(dict(row)) if row else None
+
+    def list_course_conversations(self, course_id: str) -> list[Conversation]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT * FROM conversations WHERE course_id = ?
+                   ORDER BY updated_at DESC, id""",
+                (course_id,),
+            ).fetchall()
+        return [Conversation.model_validate(dict(row)) for row in rows]
 
     def get_learner_state(self, conversation_id: str) -> LearnerState | None:
         row = self._one(
@@ -947,6 +981,7 @@ class SQLiteStudentRepository:
         learning_gap_signal: LearningGapSignalV1 | None = None,
         autonomous_opportunity: ProactiveOpportunityV1 | None = None,
         responding_to_outreach_message_id: str | None = None,
+        completed_autonomous_goal_ids: list[str] | None = None,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -982,6 +1017,21 @@ class SQLiteStudentRepository:
                 or autonomous_opportunity.release_id != conversation.release_id
             ):
                 raise ValueError("autonomous opportunity has inconsistent turn scope")
+        completed_autonomous_goal_ids = completed_autonomous_goal_ids or []
+        if len(completed_autonomous_goal_ids) != len(set(completed_autonomous_goal_ids)):
+            raise ValueError("completed autonomous goal IDs must be unique")
+        completed_goals: list[AutonomousGoalV1] = []
+        for goal_id in completed_autonomous_goal_ids:
+            goal = self.get_autonomous_goal(goal_id)
+            if (
+                goal is None
+                or goal.student_id != conversation.student_id
+                or goal.course_id != conversation.course_id
+                or goal.release_id != conversation.release_id
+                or goal.status != AutonomousGoalStatus.ACTIVE
+            ):
+                raise ValueError("completed autonomous goal has inconsistent turn scope")
+            completed_goals.append(goal)
         if learner_state is not None:
             learner_state = LearnerState.model_validate(
                 learner_state.model_dump(mode="python")
@@ -1106,11 +1156,41 @@ class SQLiteStudentRepository:
                     self._insert_learning_gap_signal(learning_gap_signal)
                 if autonomous_opportunity is not None:
                     self._insert_autonomous_opportunity(autonomous_opportunity)
+                for goal in completed_goals:
+                    completed = goal.model_copy(
+                        update={
+                            "status": AutonomousGoalStatus.COMPLETED,
+                            "updated_at": conversation.updated_at,
+                        }
+                    )
+                    self._connection.execute(
+                        """UPDATE autonomous_goals
+                           SET status = ?, goal_json = ?, updated_at = ?
+                           WHERE goal_id = ? AND status = ?""",
+                        (
+                            AutonomousGoalStatus.COMPLETED.value,
+                            completed.model_dump_json(),
+                            conversation.updated_at,
+                            goal.goal_id,
+                            AutonomousGoalStatus.ACTIVE.value,
+                        ),
+                    )
+                    self._set_goal_opportunities_status(
+                        goal.goal_id,
+                        AutonomousOpportunityStatus.CANCELLED,
+                        changed_at=conversation.updated_at,
+                    )
+                    self._connection.execute(
+                        """UPDATE autonomous_wakeups SET status = 'cancelled'
+                           WHERE goal_id = ? AND status = 'pending'""",
+                        (goal.goal_id,),
+                    )
                 if response_message is not None:
                     self._link_autonomous_response(
                         response_message=response_message,
                         student_message=student_message,
                         action=response_action,
+                        learner_state=learner_state,
                         linked_at=conversation.updated_at,
                     )
                 self._connection.execute(
@@ -1475,6 +1555,10 @@ class SQLiteStudentRepository:
             raise ValueError("student message state may only become read or dismissed")
         column = "read_at" if status == ProactiveMessageStatus.READ else "dismissed_at"
         with self._lock, self._connection:
+            message_row = self._connection.execute(
+                "SELECT trigger_id FROM proactive_messages WHERE id = ?",
+                (message_id,),
+            ).fetchone()
             cursor = self._connection.execute(
                 f"""UPDATE proactive_messages SET status = ?, {column} = ?
                     WHERE id = ? AND status IN (?, ?)""",
@@ -1493,6 +1577,45 @@ class SQLiteStudentRepository:
                 if row is None:
                     raise KeyError("proactive_message_not_found")
                 raise ValueError("proactive message cannot change from its current state")
+            if (
+                status == ProactiveMessageStatus.DISMISSED
+                and message_row is not None
+            ):
+                action = self._autonomous_action_for_trigger(
+                    str(message_row["trigger_id"])
+                )
+                if action is not None:
+                    outcome_row = self._connection.execute(
+                        "SELECT outcome_json FROM autonomous_outcomes WHERE action_id = ?",
+                        (action.action_id,),
+                    ).fetchone()
+                    if outcome_row is None:
+                        raise ValueError("autonomous dismissal has no outcome")
+                    outcome = AutonomousOutcomeV1.model_validate_json(
+                        outcome_row["outcome_json"]
+                    ).model_copy(
+                        update={
+                            "kind": AutonomousOutcomeKind.DISMISSED,
+                            "next_wake_at": None,
+                            "recorded_at": changed_at,
+                        }
+                    )
+                    self._connection.execute(
+                        """UPDATE autonomous_outcomes SET outcome_json = ?, recorded_at = ?
+                           WHERE action_id = ?""",
+                        (outcome.model_dump_json(), changed_at, action.action_id),
+                    )
+                    if action.goal_id is not None:
+                        self._set_goal_opportunities_status(
+                            action.goal_id,
+                            AutonomousOpportunityStatus.CANCELLED,
+                            changed_at=changed_at,
+                        )
+                        self._connection.execute(
+                            """UPDATE autonomous_wakeups SET status = 'cancelled'
+                               WHERE goal_id = ? AND status = 'pending'""",
+                            (action.goal_id,),
+                        )
         message = self.get_proactive_message(message_id)
         if message is None:
             raise KeyError("proactive_message_not_found")
@@ -1579,7 +1702,14 @@ class SQLiteStudentRepository:
                     policy.updated_at,
                 ),
             )
-            if policy.kill_switch or not policy.autonomy_enabled:
+            boundary_changed = bool(
+                current is not None and policy.version != int(current["version"])
+            )
+            if (
+                boundary_changed
+                or policy.kill_switch
+                or not policy.autonomy_enabled
+            ):
                 self._cancel_autonomy_scope_sql(
                     student_id=None,
                     course_id=policy.course_id,
@@ -1594,6 +1724,16 @@ class SQLiteStudentRepository:
             (course_id,),
         )
         return PedagogicalPolicyV2.model_validate_json(row["policy_json"]) if row else None
+
+    def list_autonomy_policies(self) -> list[PedagogicalPolicyV2]:
+        with self._lock:
+            rows = self._connection.execute(
+                "SELECT policy_json FROM autonomy_policies ORDER BY course_id"
+            ).fetchall()
+        return [
+            PedagogicalPolicyV2.model_validate_json(row["policy_json"])
+            for row in rows
+        ]
 
     def save_autonomous_goal(self, goal: AutonomousGoalV1) -> AutonomousGoalV1:
         goal = AutonomousGoalV1.model_validate(goal.model_dump(mode="python"))
@@ -1732,6 +1872,20 @@ class SQLiteStudentRepository:
             """SELECT opportunity_json FROM autonomous_opportunities
                WHERE opportunity_id = ?""",
             (opportunity_id,),
+        )
+        return (
+            ProactiveOpportunityV1.model_validate_json(row["opportunity_json"])
+            if row
+            else None
+        )
+
+    def get_autonomous_opportunity_by_key(
+        self, idempotency_key: str
+    ) -> ProactiveOpportunityV1 | None:
+        row = self._one(
+            """SELECT opportunity_json FROM autonomous_opportunities
+               WHERE idempotency_key = ?""",
+            (idempotency_key,),
         )
         return (
             ProactiveOpportunityV1.model_validate_json(row["opportunity_json"])
@@ -2010,6 +2164,36 @@ class SQLiteStudentRepository:
                     outcome.recorded_at,
                 ),
             )
+            if (
+                action.goal_id is not None
+                and action.status == AutonomousActionStatus.DELIVERED
+            ):
+                goal_row = self._connection.execute(
+                    "SELECT goal_json FROM autonomous_goals WHERE goal_id = ?",
+                    (action.goal_id,),
+                ).fetchone()
+                if goal_row is None:
+                    raise ValueError("delivered autonomous action has no goal")
+                goal = AutonomousGoalV1.model_validate_json(goal_row["goal_json"])
+                if goal.status != AutonomousGoalStatus.ACTIVE:
+                    raise ValueError("delivered autonomous action goal is not active")
+                if goal.attempt_count >= goal.attempt_limit:
+                    raise ValueError("autonomous goal attempt limit is exhausted")
+                attempted = goal.model_copy(
+                    update={
+                        "attempt_count": goal.attempt_count + 1,
+                        "updated_at": action.updated_at,
+                    }
+                )
+                self._connection.execute(
+                    """UPDATE autonomous_goals SET goal_json = ?, updated_at = ?
+                       WHERE goal_id = ?""",
+                    (
+                        attempted.model_dump_json(),
+                        attempted.updated_at,
+                        attempted.goal_id,
+                    ),
+                )
             if result.wake_up is not None:
                 self._insert_autonomous_wakeup(result.wake_up)
             self._connection.execute(
@@ -2640,6 +2824,7 @@ class SQLiteStudentRepository:
         response_message: ProactiveMessage,
         student_message: Message,
         action: AutonomousActionV1 | None,
+        learner_state: LearnerState | None,
         linked_at: str,
     ) -> None:
         existing = self._connection.execute(
@@ -2675,11 +2860,26 @@ class SQLiteStudentRepository:
         if row is None:
             raise ValueError("autonomous action response is missing its outcome")
         outcome = AutonomousOutcomeV1.model_validate_json(row["outcome_json"])
+        progress = max(outcome.goal_progress, 0.5)
+        if learner_state is not None and learner_state.mastery_by_concept:
+            strongest = max(
+                learner_state.mastery_by_concept.values(),
+                key=lambda item: (item.estimate, item.confidence, item.observation_count),
+            )
+            progress = max(
+                progress,
+                min(
+                    1.0,
+                    0.5 * strongest.estimate
+                    + 0.3 * strongest.confidence
+                    + 0.2 * min(1.0, strongest.observation_count / 2),
+                ),
+            )
         answered = outcome.model_copy(
             update={
                 "kind": AutonomousOutcomeKind.ANSWERED,
                 "learner_observation_id": student_message.id,
-                "goal_progress": max(outcome.goal_progress, 0.5),
+                "goal_progress": progress,
                 "recorded_at": linked_at,
             }
         )

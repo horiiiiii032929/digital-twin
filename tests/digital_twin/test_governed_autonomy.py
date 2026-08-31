@@ -1,8 +1,20 @@
 from datetime import UTC, datetime, timedelta
+from pathlib import Path
 
 import pytest
 
 from src.digital_twin.llm import FixtureLlmClient
+from src.digital_twin.generation import authoritative_citation_for_chunk
+from src.digital_twin.grounding import (
+    AtomicClaimEvidenceValidator,
+    ExactQuoteAtomicClaimVerifier,
+    StructuredLexicalCoverageEvidenceGate,
+)
+from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
+    GenerationTrace,
+    TutorAnswer,
+)
 from src.digital_twin.student import (
     Conversation,
     Message,
@@ -10,6 +22,7 @@ from src.digital_twin.student import (
     ProactiveOutreachService,
     SQLiteStudentRepository,
     StudentReleaseStatus,
+    StudentTutoringService,
     TeachingProfileDepth,
     TeachingProfileService,
     seed_synthetic_student_workflow,
@@ -19,6 +32,7 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
     PedagogicalPolicyV2,
 )
+from src.digital_twin.student.autonomy_control import AutonomousEvidenceAssessor
 from src.digital_twin.student.autonomy_runtime import (
     DETERMINISTIC_GENERATOR_MODEL,
     GRAPH_VERSION,
@@ -27,7 +41,11 @@ from src.digital_twin.student.autonomy_runtime import (
     GovernedAutonomousTutoringGraph,
     LiveAutonomousPlanner,
 )
-from src.digital_twin.student.autonomy_service import GovernedAutonomyService
+from src.digital_twin.student.autonomy_service import (
+    GovernedAutonomyService,
+    RepositoryGroundedWordingGenerator,
+)
+from src.digital_twin.student.tutoring_graph import TutoringMode
 
 
 NOW = datetime(2026, 8, 31, 4, 0, tzinfo=UTC)
@@ -39,6 +57,34 @@ ALLOWED_ACTIONS = [
     AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE,
     AutonomousActionKind.SEND_IN_APP_CHECK_IN,
 ]
+PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-v1.json"
+)
+
+
+class _UnsupportedClaimGenerator:
+    async def generate_for_intent(self, question, hits, policy, **kwargs):
+        del question, policy, kwargs
+        chunk = hits[0].chunk
+        return TutorAnswer(
+            content="The Moon is made of cheese.",
+            citations=[authoritative_citation_for_chunk(chunk)],
+            atomic_claims=[
+                AtomicAnswerClaim(
+                    claim_id="claim-unsupported",
+                    text="The Moon is made of cheese.",
+                    evidence_hit_ids=[chunk.id],
+                )
+            ],
+            trace=GenerationTrace(
+                generator_id="unsupported-test-generator",
+                provider_model="synthetic-provider",
+                prompt_version="test-v1",
+                policy_action="answer",
+                latency_ms=0,
+            ),
+        )
 
 
 def _autonomy_fixture(tmp_path):
@@ -144,7 +190,10 @@ async def test_due_opportunity_delivers_once_and_survives_restart(tmp_path):
     repository.close()
 
     reopened = SQLiteStudentRepository(tmp_path / "autonomy.sqlite3")
-    assert reopened.get_autonomous_goal(goal.goal_id) == goal
+    stored_goal = reopened.get_autonomous_goal(goal.goal_id)
+    assert stored_goal is not None
+    assert stored_goal.attempt_count == 1
+    assert stored_goal.status == goal.status
     assert len(reopened.list_autonomous_actions(fixture.course_a_id)) == 1
     assert reopened.list_due_autonomous_opportunities(NOW.isoformat()) == []
     reopened.close()
@@ -221,6 +270,28 @@ async def test_student_response_links_back_to_autonomous_goal(tmp_path):
     assert outcome.kind.value == "answered"
     assert outcome.goal_id == goal.goal_id
     assert outcome.learner_observation_id == student_message.id
+
+
+@pytest.mark.asyncio
+async def test_student_dismissal_updates_outcome_and_cancels_replan(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    goal, _ = _goal_and_opportunity(service, fixture, release)
+    await service.process_due(worker_id="worker", now=NOW)
+    action = repository.list_autonomous_actions(fixture.course_a_id)[0]
+    message = service.outreach.list_inbox(fixture.student_a_id)[0].message
+
+    dismissed = service.outreach.dismiss(fixture.student_a_id, message.id)
+    later = await service.process_due(
+        worker_id="worker-later",
+        now=NOW + timedelta(days=1),
+    )
+
+    outcome = repository.get_autonomous_outcome(action.action_id)
+    assert dismissed.message.status.value == "dismissed"
+    assert outcome is not None and outcome.kind.value == "dismissed"
+    assert outcome.next_wake_at is None
+    assert repository.get_autonomous_goal(goal.goal_id).status.value == "active"
+    assert later == []
 
 
 @pytest.mark.asyncio
@@ -367,6 +438,7 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
         membership_active=True,
         consent_active=True,
         evidence_keys=[key],
+        evidence_chunk_ids=[chunk.id],
         evidence_complete=True,
         evidence_unique=True,
         evidence_current=True,
@@ -396,3 +468,241 @@ def test_policy_contract_enforces_governance_limits():
             allowed_actions=ALLOWED_ACTIONS,
             max_messages_per_7_days=4,
         )
+
+
+def test_autonomous_evidence_uses_tutoring_permission_not_crop_display(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(service, fixture, release)
+
+    decision = AutonomousEvidenceAssessor().assess(
+        release,
+        opportunity,
+        query=OBJECTIVE,
+    )
+
+    assert release.chunks[0].display_allowed is False
+    assert decision.sufficient is True
+    assert decision.authorized is True
+    assert decision.selected_chunk_ids == [release.chunks[0].id]
+
+    blocked_release = release.model_copy(
+        update={
+            "chunks": [
+                release.chunks[0].model_copy(update={"retrieval_allowed": False}),
+                *release.chunks[1:],
+            ]
+        },
+        deep=True,
+    )
+    blocked = AutonomousEvidenceAssessor().assess(
+        blocked_release,
+        opportunity,
+        query=OBJECTIVE,
+    )
+    assert blocked.sufficient is False
+    assert blocked.authorized is False
+
+
+def test_autonomous_evidence_rejects_stale_or_incomplete_ranges(tmp_path):
+    _, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(service, fixture, release)
+    current = release.chunks[0].model_copy(
+        update={
+            "id": "chunk-cache-current",
+            "source_version": 2,
+            "source_checksum": "b" * 64,
+        }
+    )
+    mixed_release = release.model_copy(
+        update={"chunks": [release.chunks[0], current, *release.chunks[1:]]},
+        deep=True,
+    )
+
+    stale = AutonomousEvidenceAssessor().assess(
+        mixed_release,
+        opportunity,
+        query=OBJECTIVE,
+    )
+    incomplete = AutonomousEvidenceAssessor().assess(
+        release,
+        opportunity,
+        query="Explain quantum entanglement and Bell inequalities.",
+    )
+
+    assert stale.current is False
+    assert stale.sufficient is False
+    assert incomplete.complete is False
+    assert incomplete.sufficient is False
+
+
+def test_observer_materializes_new_release_event_once(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    repository.save_conversation(
+        Conversation(
+            id="conversation-prior-release",
+            student_id=fixture.student_a_id,
+            course_id=fixture.course_a_id,
+            release_id=fixture.release_a_id,
+            created_at=(NOW - timedelta(days=2)).isoformat(),
+            updated_at=(NOW - timedelta(days=2)).isoformat(),
+        )
+    )
+
+    first = service.observe_events(now=NOW)
+    second = service.observe_events(now=NOW)
+    due = repository.list_due_autonomous_opportunities(NOW.isoformat())
+
+    assert first.goals_created == 1
+    assert first.by_event == {AutonomousEventKind.NEW_COURSE_RELEASE.value: 1}
+    assert second.opportunities_created == 0
+    assert len(due) == 1
+    assert due[0].release_id == release.id
+    assert due[0].event_kind == AutonomousEventKind.NEW_COURSE_RELEASE
+    assert due[0].source_chunk_ids == [release.chunks[0].id]
+
+
+@pytest.mark.asyncio
+async def test_goal_attempt_limit_stops_additional_delivery(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    goal = service.create_goal(
+        student_id=fixture.student_a_id,
+        course_id=fixture.course_a_id,
+        approved_course_objective=OBJECTIVE,
+        learner_subgoal="Explain one coherence invariant.",
+        success_condition="Give one grounded explanation.",
+        expires_at=(NOW + timedelta(days=7)).isoformat(),
+        attempt_limit=1,
+    )
+    for suffix in ("first", "second"):
+        service.create_opportunity(
+            student_id=fixture.student_a_id,
+            course_id=fixture.course_a_id,
+            goal_id=goal.goal_id,
+            event_kind=AutonomousEventKind.SPACED_REVIEW_DUE,
+            concept_id="cache-coherence",
+            source_chunk_id=release.chunks[0].id,
+            earliest_action_at=(NOW - timedelta(minutes=1)).isoformat(),
+            latest_action_at=(NOW + timedelta(hours=1)).isoformat(),
+            idempotency_key=f"attempt-limit-{suffix}",
+        )
+        result = await service.process_due(worker_id=f"worker-{suffix}", now=NOW)
+        assert len(result) == 1
+        if suffix == "first":
+            assert result[0].outcome == "delivered"
+        else:
+            assert result[0].outcome == "no-action"
+            assert result[0].reason == "goal-attempt-limit-reached"
+
+    stored = repository.get_autonomous_goal(goal.goal_id)
+    assert stored is not None
+    assert stored.attempt_count == 1
+    assert len(service.outreach.list_inbox(fixture.student_a_id)) == 1
+
+
+@pytest.mark.asyncio
+async def test_unsupported_live_atomic_claim_fails_closed_before_delivery(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, _ = _goal_and_opportunity(service, fixture, release)
+    validator = AtomicClaimEvidenceValidator(
+        ExactQuoteAtomicClaimVerifier(),
+        minimum_entailment=1.0,
+        maximum_contradiction=0.0,
+    )
+    graph = GovernedAutonomousTutoringGraph(
+        generator=RepositoryGroundedWordingGenerator(
+            repository,
+            _UnsupportedClaimGenerator(),
+            model_id="synthetic-provider",
+            claim_validator=validator,
+        )
+    )
+    governed = GovernedAutonomyService(
+        repository,
+        service.outreach,
+        graph=graph,
+    )
+
+    result = await governed.process_due(worker_id="claim-validator", now=NOW)
+
+    assert len(result) == 1
+    assert result[0].outcome == "no-action"
+    assert result[0].reason == "claim-lineage-complete"
+    assert governed.outreach.list_inbox(fixture.student_a_id) == []
+
+
+def test_policy_boundary_change_cancels_existing_autonomy_scope(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    goal, opportunity = _goal_and_opportunity(service, fixture, release)
+
+    updated = service.set_policy(
+        fixture.professor_id,
+        fixture.course_a_id,
+        approved_course_objectives=[
+            OBJECTIVE,
+            "Explain how virtual memory maps process addresses.",
+        ],
+        allowed_actions=ALLOWED_ACTIONS,
+        autonomy_enabled=True,
+    )
+
+    assert updated.version == 2
+    assert repository.get_autonomous_goal(goal.goal_id).status.value == "cancelled"
+    assert (
+        repository.get_autonomous_opportunity(opportunity.opportunity_id).status.value
+        == "cancelled"
+    )
+
+
+@pytest.mark.asyncio
+async def test_two_grounded_attempts_complete_goal_and_cancel_follow_up(tmp_path):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        tutoring_mode=TutoringMode.T1_V2,
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+    attempt = (
+        "I think cache coherence keeps replicated processor data consistent "
+        "because invalidation prevents cached copies from diverging."
+    )
+
+    first = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content=attempt,
+        client_request_id="goal-attempt-1",
+    )
+    active = repository.list_autonomous_goals(
+        fixture.student_a_id,
+        fixture.course_a_id,
+        active_only=True,
+    )
+    assert first.citations
+    assert len(active) == 1
+    pending = repository.get_autonomous_opportunity_by_key(
+        f"turn-follow-up:{first.tutor_message.id}:incomplete-objective"
+    )
+    assert pending is not None
+
+    second = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content=attempt,
+        client_request_id="goal-attempt-2",
+    )
+
+    state = repository.get_learner_state(conversation.id)
+    goals = repository.list_autonomous_goals(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+    assert second.citations
+    assert state is not None and state.objective_complete is True
+    assert len(goals) == 1
+    assert goals[0].status.value == "completed"
+    assert repository.get_autonomous_opportunity(pending.opportunity_id).status.value == "cancelled"

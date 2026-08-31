@@ -53,13 +53,32 @@ remains conversation-first. An LLM may propose interpretation and teaching
 moves but cannot establish mastery or mutate policy. See
 [the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md).
 
+The next five V2.1 product mechanisms are now implemented prospectively on
+draft PR #158, but have not been evaluated or selected. Autonomous evidence is
+resolved from the current published release and must be unique, retrievable,
+version-current, source-authorized, query-complete, claim-supported, and
+citation-valid before delivery. A deterministic observer idempotently turns
+durable release, inactivity, incomplete-practice, spaced-review, and recovered-
+evidence state into opportunities. A deterministic goal manager selects only
+professor-approved objectives, enforces attempt limits, records progress, and
+completes a goal after observable grounded attempts. Student replies and
+dismissals are linked to their originating actions so the runtime can complete,
+stop, or schedule one finite replan without an unbounded loop. The live path is
+wired to direct OpenAI Responses API calls: `gpt-5.6-terra` proposes plans and
+the exact profile-selected generator (currently
+`gpt-5.4-mini-2026-03-17`) produces wording, while deterministic code retains
+all authority and fails closed on provider or grounding defects. No paid call
+or academic evaluation was made for these changes. The Terra identifier is a
+mutable model ID rather than a dated snapshot and therefore requires fresh
+availability and returned-identity verification before any evaluation.
+
 GitHub now tracks the finite successor path explicitly: #153 remains the P0
 grounding dependency, #155 owns governed T1-v2.1 completion, #156 owns A2
 activation and qualification, and #157 owns the frozen full-autonomy product
 evaluation. Parent #8 remains open until those results support a release
-decision. Repository correctness is currently 792/792 audited files with zero
-pending findings; the execution freeze remains active and no provider call was
-made by this checkpoint.
+decision. Repository correctness is 793/793 audited files with zero pending
+findings; the execution freeze remains active and no provider call was made by
+this implementation checkpoint.
 
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094

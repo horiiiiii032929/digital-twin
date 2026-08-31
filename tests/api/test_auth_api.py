@@ -459,6 +459,28 @@ def test_live_generator_is_bound_to_openai_snapshot_and_responses_api():
         _configured_generator(settings, drifted)
 
 
+def test_governed_runtime_binds_planner_and_generator_identities(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    app = create_app(
+        settings=AppSettings(
+            generator_mode=GeneratorMode.OPENAI_GPT_5_4_MINI,
+            evidence_gate_mode=EvidenceGateMode.STRUCTURED_LEXICAL_V1,
+            student_profile_path=CANDIDATE_PROFILE,
+            student_tutoring_mode=(
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+            ),
+        )
+    )
+
+    graph = app.state.governed_autonomy_service.graph
+    tutoring = app.state.student_service
+    assert graph.planner.model_id == "gpt-5.6-terra"
+    assert graph.planner.client.client.model == "gpt-5.6-terra"
+    assert graph.generator.model_id == "gpt-5.4-mini-2026-03-17"
+    assert tutoring.autonomy_planner_model == graph.planner.model_id
+    assert tutoring.autonomy_generator_model == graph.generator.model_id
+
+
 def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):
     client, _, _, identity, fixture, _ = _client(tmp_path)
     assert (

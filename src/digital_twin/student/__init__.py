@@ -85,7 +85,14 @@ from src.digital_twin.student.autonomy_runtime import (
     GovernedAutonomousTutoringGraph,
     LiveAutonomousPlanner,
 )
+from src.digital_twin.student.autonomy_control import (
+    AutonomousEvidenceAssessor,
+    AutonomousEvidenceDecisionV1,
+    AutonomousGoalLifecycleDecisionV1,
+    DeterministicAutonomousGoalManager,
+)
 from src.digital_twin.student.autonomy_service import (
+    AutonomousObservationSweepV1,
     AutonomousRecipientEligibilityV1,
     AutonomousProcessResultV1,
     GovernedAutonomyError,
@@ -213,11 +220,15 @@ __all__ = [
     "AutonomousActionStatus",
     "AutonomousActionV1",
     "AutonomousEventKind",
+    "AutonomousEvidenceAssessor",
+    "AutonomousEvidenceDecisionV1",
     "AutonomousGoalStatus",
     "AutonomousGoalV1",
+    "AutonomousGoalLifecycleDecisionV1",
     "AutonomousJobInput",
     "AutonomousJobResult",
     "AutonomousOpportunityStatus",
+    "AutonomousObservationSweepV1",
     "AutonomousOutcomeKind",
     "AutonomousOutcomeV1",
     "AutonomousPlanV1",
@@ -226,6 +237,7 @@ __all__ = [
     "AutonomousRecipientEligibilityV1",
     "AutonomousWakeUpV1",
     "ConceptAttributionV2",
+    "DeterministicAutonomousGoalManager",
     "GovernedAutonomousTutoringGraph",
     "GovernedAutonomyError",
     "GovernedAutonomyService",

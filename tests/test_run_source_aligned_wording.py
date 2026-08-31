@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
 import json
 
 import scripts.run_academic_factual_qa_source_aligned_wording as runner
@@ -79,6 +80,15 @@ def test_parser_quarantines_duplicate_or_unknown_ids() -> None:
 def test_preflight_is_ready_only_for_clean_exclusive_paths(
     monkeypatch, tmp_path
 ) -> None:
+    load_hashed = runner._load_hashed  # noqa: SLF001
+
+    def load_with_fresh_binding(path):
+        payload = load_hashed(path)
+        if path == runner.BINDING_PATH:
+            payload = {**payload, "verified_at": datetime.now(UTC).isoformat()}
+        return payload
+
+    monkeypatch.setattr(runner, "_load_hashed", load_with_fresh_binding)
     monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
     monkeypatch.setattr(runner, "LEDGER_PATH", tmp_path / "calls.sqlite3")
     monkeypatch.setattr(runner, "OUTPUT_CASES_PATH", tmp_path / "cases.json")

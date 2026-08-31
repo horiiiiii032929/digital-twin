@@ -580,7 +580,7 @@ def test_publish_runs_evidence_recovery_in_shadow_without_creating_trigger(tmp_p
     assert repository.list_due_proactive_triggers("9999-12-31T00:00:00+00:00") == []
 
 
-def test_publish_preserves_release_and_audits_shadow_hook_failure(tmp_path):
+def test_publish_preserves_release_and_audits_autonomy_observer_failure(tmp_path):
     client, repository, sessions, fixture = _client(tmp_path, approved=True)
     draft = _create_draft(
         client, repository, sessions, fixture, "release-a-v2-hook-failure"
@@ -604,7 +604,7 @@ def test_publish_preserves_release_and_audits_shadow_hook_failure(tmp_path):
         if event.event_type == "release.post_publish_hook_failed"
     )
     assert failure.details == {
-        "hook": "proactive-evidence-recovery-shadow",
+        "hook": "governed-autonomy-source-observer",
         "error_type": "RuntimeError",
         "publication_preserved": True,
     }

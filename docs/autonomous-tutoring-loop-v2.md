@@ -536,3 +536,35 @@ grounding, professor fidelity, usability, and learning outcomes remain open.
 A valid quality failure stops the affected promotion and produces one
 method-level decision. It does not trigger another prompt-only loop or modify a
 known evaluation set.
+
+### Prospective implementation after the checkpoint
+
+The following product code now exists on PR #158 and is deliberately recorded
+as **implemented but unevaluated**:
+
+1. `AutonomousEvidenceAssessor` resolves opportunity lineage against the
+   current published release, verifies retrieval permission and source hashes,
+   applies the question-targeted atomic evidence gate, and passes only canonical
+   source ranges to generation. Post-generation atomic-claim and citation
+   validation fail closed before delivery.
+2. `GovernedAutonomyService.observe_events` converts durable product state into
+   idempotent release, inactivity, incomplete-practice, and spaced-review
+   opportunities. Publication can separately materialize evidence-recovery
+   opportunities without granting the model source authority.
+3. `DeterministicAutonomousGoalManager` selects among professor-approved
+   objectives, computes bounded priority and completion from observable learner
+   signals, enforces attempt limits, and cancels pending work on completion or
+   governance-boundary changes.
+4. Student responses and dismissals are bound to the originating autonomous
+   action. A grounded response may complete the goal or schedule one new finite
+   job; dismissal stops its pending wake-up. No outcome can recursively execute
+   another job inside the same graph invocation.
+5. The live runtime uses direct OpenAI Responses API adapters with strict
+   structured output, `store: false`, exact returned-model checks, no routing
+   fallback, and deterministic safe fallback. `gpt-5.6-terra` is the prospective
+   planner and the exact selected product model is the wording generator. The
+   currently configured generator is `gpt-5.4-mini-2026-03-17`.
+
+This implementation does not promote T1-v2.1, A2, or a provider-backed profile.
+The exact code, model binding, evidence gate, and release must be frozen and
+evaluated prospectively under #153, #156, and #157 before any such claim.

@@ -12,6 +12,7 @@ from services.api.app.factory import create_app
 
 
 async def _process_once(app, *, worker_id: str, batch_size: int) -> None:
+    app.state.governed_autonomy_service.observe_events(limit=batch_size)
     await app.state.governed_autonomy_service.process_due(
         worker_id=worker_id,
         limit=batch_size,

@@ -69,6 +69,15 @@ remains conversation-first; professor autonomy is operated through an explicit
 workflow-first governance console. T1-v1 and T0 remain the selected control and
 rollback until prospective provider-backed and held-out product evidence passes.
 
+PR #158 now also contains the prospective implementation of five previously
+open product mechanisms: authoritative release-bound evidence sufficiency,
+automatic durable event observation, deterministic goal lifecycle management,
+outcome-linked stopping/replanning, and direct OpenAI planner/generator wiring.
+This is implementation progress only. No paid call, held-out run, A2
+qualification, or full-autonomy evaluation was performed, so #153, #155, #156,
+and #157 all remain open. T1-v2.1 remains `Go Deeper` and the selected local R1
+profile is unchanged.
+
 The remaining full-autonomy work is now separated in GitHub rather than hidden
 inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
 owns the governed T1-v2.1 product completion, [#156](https://github.com/horiiiiii032929/digital-twin/issues/156)

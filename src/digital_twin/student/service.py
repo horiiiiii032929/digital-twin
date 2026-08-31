@@ -20,6 +20,7 @@ from src.digital_twin.grounding import (
     build_selected_retriever,
 )
 from src.digital_twin.grounding.models import (
+    DocumentChunk,
     GenerationTrace,
     GenerationUsage,
     RetrievalHit,
@@ -55,16 +56,19 @@ from src.digital_twin.student.learning_gap import (
     LearningGapSignalV1,
     build_learning_gap_signal,
 )
-from src.digital_twin.model_policy import (
-    OPENAI_GPT_5_6_TERRA_MODEL,
-    OPENAI_HIGH_VOLUME_MODEL,
-)
 from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
     AutonomousGoalV1,
     ProactiveOpportunityV1,
 )
-from src.digital_twin.student.autonomy_runtime import GRAPH_VERSION
+from src.digital_twin.student.autonomy_control import (
+    DeterministicAutonomousGoalManager,
+)
+from src.digital_twin.student.autonomy_runtime import (
+    DETERMINISTIC_GENERATOR_MODEL,
+    DETERMINISTIC_PLANNER_MODEL,
+    GRAPH_VERSION,
+)
 from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
 from src.digital_twin.student.repository import LearnerStateConflictError
 from src.digital_twin.student.tutoring_graph import (
@@ -102,6 +106,9 @@ class StudentTutoringService:
         retrieval_index_chunker_version: str = "v1",
         learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
         learning_gap_policy: LearningGapPrivacyPolicyV1 | None = None,
+        autonomy_goal_manager: DeterministicAutonomousGoalManager | None = None,
+        autonomy_planner_model: str = DETERMINISTIC_PLANNER_MODEL,
+        autonomy_generator_model: str = DETERMINISTIC_GENERATOR_MODEL,
     ) -> None:
         self.repository = repository
         profile = load_release_profile(profile_path)
@@ -121,6 +128,13 @@ class StudentTutoringService:
         self.retrieval_index_chunker_version = retrieval_index_chunker_version
         self.learning_gap_pseudonymizer = learning_gap_pseudonymizer
         self.learning_gap_policy = learning_gap_policy or LearningGapPrivacyPolicyV1()
+        self.autonomy_goal_manager = (
+            autonomy_goal_manager or DeterministicAutonomousGoalManager()
+        )
+        self.autonomy_planner_model = autonomy_planner_model.strip()
+        self.autonomy_generator_model = autonomy_generator_model.strip()
+        if not self.autonomy_planner_model or not self.autonomy_generator_model:
+            raise ValueError("autonomy model identities must not be blank")
         if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1, TutoringMode.T1_V2}:
             raise ValueError("unsupported student tutoring mode")
         self.tutoring_mode = tutoring_mode
@@ -367,14 +381,16 @@ class StudentTutoringService:
             tutoring_intent=tutoring_intent,
             observed_at=now,
         )
-        autonomous_opportunity = self._autonomous_follow_up(
+        autonomous_opportunity, completed_autonomous_goal_ids = self._autonomous_follow_up(
             account_id=account_id,
             conversation=conversation,
             release=release,
             tutor_message=tutor_message,
             hits=hits,
+            citations=citations,
             learner_state=learner_state,
             observed_at=now,
+            responding_to_outreach_message_id=responding_to_outreach_message_id,
         )
         try:
             self.repository.save_turn(
@@ -388,6 +404,7 @@ class StudentTutoringService:
                 learning_gap_signal,
                 autonomous_opportunity,
                 responding_to_outreach_message_id,
+                completed_autonomous_goal_ids,
             )
         except DuplicateTurnError:
             existing = self.repository.find_turn(conversation.id, client_request_id)
@@ -506,9 +523,11 @@ class StudentTutoringService:
         release: DigitalTwinRelease,
         tutor_message: Message,
         hits: list[RetrievalHit],
+        citations: list[Citation],
         learner_state: LearnerState | None,
         observed_at: str,
-    ) -> ProactiveOpportunityV1 | None:
+        responding_to_outreach_message_id: str | None,
+    ) -> tuple[ProactiveOpportunityV1 | None, list[str]]:
         """Create one A2 opportunity that commits atomically with the V2 turn."""
 
         if (
@@ -516,8 +535,9 @@ class StudentTutoringService:
             or learner_state is None
             or learner_state.latest_signals is None
             or not hits
+            or not citations
         ):
-            return None
+            return None, []
         policy = self.repository.get_autonomy_policy(conversation.course_id)
         if (
             policy is None
@@ -528,7 +548,21 @@ class StudentTutoringService:
             or policy.approved_profile_id != release.teaching_profile_id
             or policy.approved_profile_sha256 != release.teaching_profile_sha256
         ):
-            return None
+            return None, []
+        active_goals = self.repository.list_autonomous_goals(
+            account_id, conversation.course_id, active_only=True
+        )
+        lifecycle_by_goal = {
+            goal.goal_id: self.autonomy_goal_manager.interpret(goal, learner_state)
+            for goal in active_goals
+        }
+        completed_goal_ids = [
+            goal_id
+            for goal_id, lifecycle in lifecycle_by_goal.items()
+            if lifecycle.complete
+        ]
+        if completed_goal_ids:
+            return None, completed_goal_ids
         signals = learner_state.latest_signals
         if signals.misconception_observed:
             event_kind = AutonomousEventKind.MISCONCEPTION
@@ -536,21 +570,50 @@ class StudentTutoringService:
             event_kind = AutonomousEventKind.REPEATED_CONFUSION
         elif signals.attempt_present and not learner_state.objective_complete:
             event_kind = AutonomousEventKind.INCOMPLETE_OBJECTIVE
+        elif responding_to_outreach_message_id is not None:
+            event_kind = AutonomousEventKind.STUDENT_MESSAGE
         else:
-            return None
-        goals = self.repository.list_autonomous_goals(
-            account_id, conversation.course_id, active_only=True
+            return None, []
+        cited_chunks = []
+        for citation in citations:
+            matches = [
+                hit.chunk
+                for hit in hits
+                if _stored_citation_matches_chunk(citation, hit.chunk)
+            ]
+            if len(matches) != 1:
+                return None, []
+            if matches[0].id not in {chunk.id for chunk in cited_chunks}:
+                cited_chunks.append(matches[0])
+        if not cited_chunks:
+            return None, []
+        objective = self.autonomy_goal_manager.select_objective(policy, cited_chunks)
+        goal = next(
+            (
+                item
+                for item in active_goals
+                if item.approved_course_objective == objective
+            ),
+            None,
         )
-        goal = goals[0] if goals else self._create_autonomous_goal(
-            account_id=account_id,
-            release=release,
-            policy=policy,
-            observed_at=observed_at,
-        )
+        if (
+            goal is not None
+            and lifecycle_by_goal[goal.goal_id].next_event is None
+        ):
+            return None, []
         if goal is None:
-            return None
+            goal = self._create_autonomous_goal(
+                account_id=account_id,
+                release=release,
+                policy=policy,
+                objective=objective,
+                learner_state=learner_state,
+                observed_at=observed_at,
+            )
+        if goal is None:
+            return None, []
         instant = datetime.fromisoformat(observed_at).astimezone(UTC)
-        hit = hits[0]
+        primary = cited_chunks[0]
         return ProactiveOpportunityV1(
             opportunity_id=f"autonomous-opportunity-{uuid4()}",
             idempotency_key=f"turn-follow-up:{tutor_message.id}:{event_kind.value}",
@@ -562,19 +625,20 @@ class StudentTutoringService:
             profile_id=policy.approved_profile_id,
             profile_sha256=policy.approved_profile_sha256,
             graph_version=GRAPH_VERSION,
-            planner_model=OPENAI_GPT_5_6_TERRA_MODEL,
-            generator_model=OPENAI_HIGH_VOLUME_MODEL,
+            planner_model=self.autonomy_planner_model,
+            generator_model=self.autonomy_generator_model,
             goal_id=goal.goal_id,
             supporting_observation_ids=[tutor_message.id],
             concept_id=(
-                hit.chunk.source_artifact_id or hit.chunk.document_id
+                primary.source_artifact_id or primary.document_id
             )[:128],
-            source_chunk_id=hit.chunk.id,
+            source_chunk_id=primary.id,
+            source_chunk_ids=[chunk.id for chunk in cited_chunks[:5]],
             earliest_action_at=(instant + timedelta(hours=24)).isoformat(),
             latest_action_at=(instant + timedelta(hours=48)).isoformat(),
             created_at=observed_at,
             updated_at=observed_at,
-        )
+        ), []
 
     def _create_autonomous_goal(
         self,
@@ -582,28 +646,19 @@ class StudentTutoringService:
         account_id: str,
         release: DigitalTwinRelease,
         policy,
+        objective: str,
+        learner_state: LearnerState,
         observed_at: str,
     ) -> AutonomousGoalV1 | None:
-        if not policy.approved_course_objectives:
-            return None
-        instant = datetime.fromisoformat(observed_at).astimezone(UTC)
-        goal = AutonomousGoalV1(
-            goal_id=f"autonomous-goal-{uuid4()}",
+        goal = self.autonomy_goal_manager.build_goal(
             student_id=account_id,
-            course_id=release.course_id,
-            release_id=release.id,
-            policy_version=policy.version,
-            profile_id=policy.approved_profile_id,
-            profile_sha256=policy.approved_profile_sha256,
-            graph_version=GRAPH_VERSION,
-            planner_model=OPENAI_GPT_5_6_TERRA_MODEL,
-            generator_model=OPENAI_HIGH_VOLUME_MODEL,
-            approved_course_objective=policy.approved_course_objectives[0],
-            learner_subgoal="Resolve the latest observed learning difficulty.",
-            success_condition="The learner explains the concept without escalating help.",
-            expires_at=(instant + timedelta(days=7)).isoformat(),
-            created_at=observed_at,
-            updated_at=observed_at,
+            release=release,
+            policy=policy,
+            objective=objective,
+            learner_state=learner_state,
+            observed_at=observed_at,
+            planner_model=self.autonomy_planner_model,
+            generator_model=self.autonomy_generator_model,
         )
         try:
             return self.repository.save_autonomous_goal(goal)
@@ -1253,3 +1308,26 @@ class StudentTutoringService:
             conversation_id=conversation_id,
             details=details or {},
         )
+
+
+def _stored_citation_matches_chunk(
+    citation: Citation,
+    chunk: DocumentChunk,
+) -> bool:
+    """Match a persisted product citation back to one authoritative hit."""
+
+    return bool(
+        chunk.retrieval_allowed
+        and citation.source_document_id == chunk.document_id
+        and citation.source_artifact_id
+        == (chunk.source_artifact_id or chunk.document_id)
+        and citation.source_version == chunk.source_version
+        and citation.source_checksum == chunk.source_checksum
+        and citation.locator == (chunk.locator or f"chunk {chunk.ordinal + 1}")
+        and citation.page == chunk.page_start
+        and citation.region_id == chunk.region_id
+        and citation.region_kind
+        == (chunk.region_kind.value if chunk.region_kind is not None else None)
+        and citation.bounding_box == chunk.bounding_box
+        and citation.crop_ref == (chunk.crop_ref if chunk.display_allowed else None)
+    )

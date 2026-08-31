@@ -201,6 +201,7 @@ class AutonomousOpportunityCreateRequest(BaseModel):
     goal_id: str | None = Field(default=None, max_length=128)
     concept_id: str | None = Field(default=None, max_length=128)
     source_chunk_id: str | None = Field(default=None, max_length=256)
+    source_chunk_ids: list[str] = Field(default_factory=list, max_length=5)
     supporting_observation_ids: list[str] = Field(default_factory=list, max_length=16)
     idempotency_key: str | None = Field(default=None, max_length=128)
 

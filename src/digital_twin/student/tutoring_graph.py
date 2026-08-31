@@ -398,6 +398,13 @@ class BoundedTutoringGraph:
 
     def _finalize(self, state: _GraphState) -> dict:
         learner_state = state["learner_state"].model_copy(deep=True)
+        signals = state["signals"]
+        if signals is not None:
+            learner_state = _update_mastery_from_turn(
+                learner_state,
+                signals,
+                state["hits"],
+            )
         learner_state.revision += 1
         learner_state.turn_count += 1
         learner_state.prior_intent = state["intent"]
@@ -419,6 +426,62 @@ class GovernedReactiveTutoringGraphV2(BoundedTutoringGraph):
 
     implementation_id = "governed-reactive-tutoring-graph-v2.1"
     recursion_limit = 12
+
+
+def _update_mastery_from_turn(
+    learner_state: LearnerState,
+    signals: TurnSignals,
+    hits: list[RetrievalHit],
+) -> LearnerState:
+    """Update a conservative, observable learner estimate without model authority."""
+
+    if not hits or signals.ambiguous or signals.direct_solution_request:
+        learner_state.objective_complete = False
+        return learner_state
+    if signals.misconception_observed:
+        observed_mastery = 0.15
+    elif signals.confusion >= 0.7:
+        observed_mastery = 0.30
+    elif signals.attempt_present:
+        observed_mastery = 0.85
+    else:
+        observed_mastery = 0.55
+    concept_ids: list[str] = []
+    for hit in hits[:3]:
+        concept_id = (hit.chunk.source_artifact_id or hit.chunk.document_id)[:128]
+        if concept_id in concept_ids:
+            continue
+        concept_ids.append(concept_id)
+        prior = learner_state.mastery_by_concept.get(concept_id, ConceptMastery())
+        count = prior.observation_count + 1
+        estimate = (
+            prior.estimate * prior.observation_count + observed_mastery
+        ) / count
+        confidence = min(1.0, prior.confidence + 0.30)
+        learner_state.mastery_by_concept[concept_id] = ConceptMastery(
+            estimate=estimate,
+            confidence=confidence,
+            observation_count=count,
+        )
+        if concept_id not in learner_state.concept_ids:
+            learner_state.concept_ids.append(concept_id)
+    learner_state.learning_objective = (
+        learner_state.learning_objective
+        or (f"Develop source-grounded understanding of {concept_ids[0]}" if concept_ids else None)
+    )
+    learner_state.objective_complete = bool(
+        signals.attempt_present
+        and signals.confusion < 0.40
+        and not signals.misconception_observed
+        and any(
+            mastery.estimate >= 0.80
+            and mastery.confidence >= 0.60
+            and mastery.observation_count >= 2
+            for concept_id, mastery in learner_state.mastery_by_concept.items()
+            if concept_id in concept_ids
+        )
+    )
+    return learner_state
 
 
 def _validation_failure(

@@ -35,7 +35,6 @@ from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
 from src.digital_twin.model_policy import (
     OPENAI_GPT_5_6_TERRA_MODEL,
-    OPENAI_HIGH_VOLUME_MODEL,
     OPENAI_MODEL_PRICING_USD_PER_MILLION,
     OPENAI_PRODUCT_CANDIDATE_MODELS,
 )
@@ -47,6 +46,8 @@ from src.digital_twin.generation import (
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import (
+    AtomicClaimEvidenceValidator,
+    ExactQuoteAtomicClaimVerifier,
     LocalCourseSourceIngestionService,
     RetrievalIndexStoreV1,
     StructuredLexicalCoverageEvidenceGate,
@@ -79,10 +80,11 @@ from src.digital_twin.student import (
 )
 from src.digital_twin.student.proactive import (
     DiscordWebhookDeliveryAdapter,
-    EvidenceRecoveryMode,
     ProactiveOutreachService,
 )
 from src.digital_twin.student.autonomy_runtime import (
+    DETERMINISTIC_GENERATOR_MODEL,
+    DETERMINISTIC_PLANNER_MODEL,
     GovernedAutonomousTutoringGraph,
     LiveAutonomousPlanner,
 )
@@ -199,6 +201,29 @@ def create_app(
         else _configured_evidence_gate(runtime_settings)
     )
     active_generator = student_generator or configured_generator
+    live_autonomy = bool(
+        runtime_settings.student_tutoring_mode
+        == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        and runtime_settings.generator_mode
+        in {
+            GeneratorMode.OPENAI_GPT_5_4_MINI,
+            GeneratorMode.OPENAI_PROFILE_SELECTED,
+        }
+    )
+    active_generator_model = (
+        provider_budget.client.model
+        if live_autonomy and provider_budget is not None
+        else DETERMINISTIC_GENERATOR_MODEL
+    )
+    active_claim_validator = student_claim_evidence_validator
+    if active_claim_validator is None and live_autonomy:
+        active_claim_validator = AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
     app.state.provider_budget = provider_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
@@ -206,7 +231,7 @@ def create_app(
         embedder=student_embedder,
         generator=active_generator,
         evidence_gate=configured_evidence_gate,
-        claim_evidence_validator=student_claim_evidence_validator,
+        claim_evidence_validator=active_claim_validator,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
         retrieval_index_store=retrieval_index_store,
         retrieval_index_chunker_id=(
@@ -227,20 +252,18 @@ def create_app(
                 else None
             )
         ),
+        autonomy_planner_model=(
+            OPENAI_GPT_5_6_TERRA_MODEL
+            if live_autonomy
+            else DETERMINISTIC_PLANNER_MODEL
+        ),
+        autonomy_generator_model=active_generator_model,
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
         app.state.student_repository
     )
     autonomy_graph = None
-    if (
-        runtime_settings.student_tutoring_mode
-        == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
-        and runtime_settings.generator_mode
-        in {
-            GeneratorMode.OPENAI_GPT_5_4_MINI,
-            GeneratorMode.OPENAI_PROFILE_SELECTED,
-        }
-    ):
+    if live_autonomy:
         autonomy_planner_budget = BudgetedLlmClient(
             OpenAiResponsesClient(
                 OPENAI_GPT_5_6_TERRA_MODEL,
@@ -260,7 +283,8 @@ def create_app(
             generator=RepositoryGroundedWordingGenerator(
                 app.state.student_repository,
                 active_generator,
-                model_id=OPENAI_HIGH_VOLUME_MODEL,
+                model_id=active_generator_model,
+                claim_validator=active_claim_validator,
             ),
         )
     app.state.governed_autonomy_service = GovernedAutonomyService(
@@ -276,10 +300,9 @@ def create_app(
         professor_id: str,
         course_id: str,
     ) -> None:
-        app.state.proactive_outreach_service.scan_evidence_recovery(
+        app.state.governed_autonomy_service.observe_evidence_recovery(
             professor_id,
             course_id,
-            mode=EvidenceRecoveryMode.SHADOW,
         )
 
     app.state.discord_delivery_adapter = DiscordWebhookDeliveryAdapter(enabled=False)

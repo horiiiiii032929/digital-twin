@@ -9,27 +9,35 @@ from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from src.digital_twin.grounding.models import RetrievalHit
+from src.digital_twin.generation import citation_matches_chunk
+from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.protocols import TutorGenerator
+from src.digital_twin.grounding.protocols import PostGenerationClaimValidator
 from src.digital_twin.student.autonomy_models import (
     AutonomousActionKind,
     AutonomousActionStatus,
     AutonomousEventKind,
     AutonomousGoalV1,
     AutonomousOutcomeKind,
+    GroundedTutorResponseV2,
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
+)
+from src.digital_twin.student.autonomy_control import (
+    AutonomousEvidenceAssessor,
+    DeterministicAutonomousGoalManager,
+    select_relevant_chunks,
 )
 from src.digital_twin.student.autonomy_runtime import (
     GRAPH_VERSION,
     AutonomousJobInput,
     AutonomousJobResult,
-    DeterministicAutonomousWordingGenerator,
     GovernedAutonomousTutoringGraph,
 )
 from src.digital_twin.student.models import (
     AccountRole,
     AccountStatus,
+    EvidenceRecoveryMode,
     MembershipRole,
     OutreachChannel,
     ProactiveTriggerKind,
@@ -73,6 +81,18 @@ class AutonomousRecipientEligibilityV1(BaseModel):
     ineligibility_reasons: list[str] = Field(default_factory=list, max_length=8)
 
 
+class AutonomousObservationSweepV1(BaseModel):
+    """Counts from one deterministic, idempotent observer sweep."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    observed_courses: int = Field(ge=0)
+    observed_students: int = Field(ge=0)
+    goals_created: int = Field(ge=0)
+    opportunities_created: int = Field(ge=0)
+    by_event: dict[str, int] = Field(default_factory=dict)
+
+
 class RepositoryGroundedWordingGenerator:
     """Adapt the selected grounded tutor generator to one proactive action."""
 
@@ -82,55 +102,82 @@ class RepositoryGroundedWordingGenerator:
         generator: TutorGenerator,
         *,
         model_id: str,
+        claim_validator: PostGenerationClaimValidator,
     ) -> None:
         self.repository = repository
         self.generator = generator
         self.model_id = model_id
-        self.fallback = DeterministicAutonomousWordingGenerator()
+        self.claim_validator = claim_validator
 
     async def generate(self, job, plan):
         release = self.repository.get_release(job.opportunity.release_id)
-        chunk = _resolve_evidence_chunk(release, job.opportunity.source_chunk_id)
-        if release is None or chunk is None:
-            return await self.fallback.generate(job, plan)
+        chunks = _resolve_evidence_chunks(release, job.evidence_chunk_ids)
+        if release is None or not chunks:
+            return _failed_grounded_response(plan.action)
         question = (
             f"Create one concise in-app tutoring intervention for {job.opportunity.concept_id or 'the current objective'}. "
             f"Pedagogical action: {plan.action.value}. Expected learner action: "
             f"{plan.expected_learner_action or 'respond with the next learning step'}."
         )
-        hit = RetrievalHit(chunk=chunk, relevance_score=1.0, raw_score=1.0)
+        hits = [
+            RetrievalHit(
+                chunk=chunk,
+                relevance_score=max(0.0, 1.0 - index * 0.05),
+                raw_score=max(0.0, 1.0 - index * 0.05),
+            )
+            for index, chunk in enumerate(chunks)
+        ]
         generate_for_intent = getattr(self.generator, "generate_for_intent", None)
         try:
             answer = (
                 await generate_for_intent(
                     question,
-                    [hit],
+                    hits,
                     release.policy,
                     intent=_intent_for_action(plan.action),
                     help_level=1,
                     repair_reason=None,
                 )
                 if callable(generate_for_intent)
-                else await self.generator.generate(question, [hit], release.policy)
+                else await self.generator.generate(question, hits, release.policy)
             )
         except (RuntimeError, ValueError):
-            return await self.fallback.generate(job, plan)
+            return _failed_grounded_response(plan.action)
         if (
             answer.trace is None
             or answer.trace.policy_action != "answer"
             or not answer.citations
         ):
-            return await self.fallback.generate(job, plan)
-        source_key = job.evidence_keys[0]
-        claims = [claim.text for claim in answer.atomic_claims] or [chunk.text]
+            return _failed_grounded_response(plan.action)
+        cited_keys: list[str] = []
+        for citation in answer.citations:
+            matches = [
+                hit.chunk for hit in hits if citation_matches_chunk(citation, hit.chunk)
+            ]
+            if len(matches) != 1:
+                return _failed_grounded_response(plan.action)
+            key = _source_range_key(matches[0])
+            if key not in cited_keys:
+                cited_keys.append(key)
+        if not cited_keys or not set(cited_keys).issubset(set(job.evidence_keys)):
+            return _failed_grounded_response(plan.action)
+        claims = [claim.text for claim in answer.atomic_claims]
+        if not claims:
+            return _failed_grounded_response(plan.action)
+        try:
+            validation = self.claim_validator.validate(answer.atomic_claims, hits)
+        except (RuntimeError, ValueError):
+            return _failed_grounded_response(plan.action)
+        if not validation.releasable:
+            return _failed_grounded_response(plan.action)
         from src.digital_twin.student.autonomy_models import GroundedTutorResponseV2
 
         return GroundedTutorResponseV2(
             action=plan.action,
             content=answer.content,
             atomic_claims=claims[:8],
-            citation_ids=[f"citation:{source_key}"],
-            source_range_keys=[source_key],
+            citation_ids=[f"citation:{key}" for key in cited_keys],
+            source_range_keys=cited_keys,
             policy_action="answer",
         )
 
@@ -144,6 +191,8 @@ class GovernedAutonomyService:
         outreach: ProactiveOutreachService,
         *,
         graph: GovernedAutonomousTutoringGraph | None = None,
+        evidence_assessor: AutonomousEvidenceAssessor | None = None,
+        goal_manager: DeterministicAutonomousGoalManager | None = None,
         lease_seconds: int = 300,
     ) -> None:
         if not 30 <= lease_seconds <= 900:
@@ -151,6 +200,8 @@ class GovernedAutonomyService:
         self.repository = repository
         self.outreach = outreach
         self.graph = graph or GovernedAutonomousTutoringGraph()
+        self.evidence_assessor = evidence_assessor or AutonomousEvidenceAssessor()
+        self.goal_manager = goal_manager or DeterministicAutonomousGoalManager()
         self.lease_seconds = lease_seconds
 
     def set_policy(
@@ -312,6 +363,7 @@ class GovernedAutonomyService:
         goal_id: str | None = None,
         concept_id: str | None = None,
         source_chunk_id: str | None = None,
+        source_chunk_ids: list[str] | None = None,
         supporting_observation_ids: list[str] | None = None,
         idempotency_key: str | None = None,
     ) -> ProactiveOpportunityV1:
@@ -333,10 +385,353 @@ class GovernedAutonomyService:
             supporting_observation_ids=supporting_observation_ids or [],
             concept_id=concept_id,
             source_chunk_id=source_chunk_id,
+            source_chunk_ids=(
+                source_chunk_ids
+                if source_chunk_ids is not None
+                else ([source_chunk_id] if source_chunk_id else [])
+            ),
             earliest_action_at=earliest_action_at,
             latest_action_at=latest_action_at,
         )
         return self.repository.save_autonomous_opportunity(opportunity)
+
+    def observe_events(
+        self,
+        *,
+        now: datetime | None = None,
+        limit: int = 100,
+        inactivity_hours: int = 72,
+    ) -> AutonomousObservationSweepV1:
+        """Materialize due opportunities from durable product state only."""
+
+        if isinstance(limit, bool) or not 1 <= limit <= 500:
+            raise ValueError("autonomy observer limit must be between 1 and 500")
+        if isinstance(inactivity_hours, bool) or not 24 <= inactivity_hours <= 720:
+            raise ValueError("inactivity threshold must be between 24 and 720 hours")
+        instant = _utc(now or datetime.now(UTC))
+        goals_created = 0
+        opportunities_created = 0
+        observed_students = 0
+        observed_courses = 0
+        by_event: dict[str, int] = {}
+        for policy in self.repository.list_autonomy_policies():
+            if opportunities_created >= limit:
+                break
+            if not policy.autonomy_enabled or policy.paused or policy.kill_switch:
+                continue
+            release = self.repository.get_published_release(policy.course_id)
+            if (
+                release is None
+                or release.teaching_profile_id != policy.approved_profile_id
+                or release.teaching_profile_sha256 != policy.approved_profile_sha256
+            ):
+                continue
+            observed_courses += 1
+            conversations = self.repository.list_course_conversations(policy.course_id)
+            by_student: dict[str, list] = {}
+            for conversation in conversations:
+                by_student.setdefault(conversation.student_id, []).append(conversation)
+            for membership in self.repository.list_course_memberships(policy.course_id):
+                if opportunities_created >= limit:
+                    break
+                if membership.role != MembershipRole.STUDENT or not membership.active:
+                    continue
+                student_id = membership.account_id
+                account = self.repository.get_account(student_id)
+                preference = self.repository.get_outreach_preference(
+                    student_id, policy.course_id, OutreachChannel.IN_APP
+                )
+                if (
+                    account is None
+                    or account.status != AccountStatus.ACTIVE
+                    or account.role != AccountRole.STUDENT
+                    or preference is None
+                    or not preference.enabled
+                ):
+                    continue
+                observed_students += 1
+                student_conversations = by_student.get(student_id, [])
+                current = next(
+                    (
+                        conversation
+                        for conversation in student_conversations
+                        if conversation.release_id == release.id
+                    ),
+                    None,
+                )
+                old = next(
+                    (
+                        conversation
+                        for conversation in student_conversations
+                        if conversation.release_id != release.id
+                    ),
+                    None,
+                )
+                learner_state = (
+                    self.repository.get_learner_state(current.id) if current else None
+                )
+                goals = self.repository.list_autonomous_goals(
+                    student_id, policy.course_id, active_only=True
+                )
+                if not goals and (current is not None or old is not None):
+                    evidence = _policy_evidence(policy, release)
+                    if evidence:
+                        objective = self.goal_manager.select_objective(policy, evidence)
+                        goal = self.goal_manager.build_goal(
+                            student_id=student_id,
+                            release=release,
+                            policy=policy,
+                            objective=objective,
+                            learner_state=learner_state,
+                            observed_at=instant.isoformat(),
+                            planner_model=self.graph.planner.model_id,
+                            generator_model=self.graph.generator.model_id,
+                        )
+                        try:
+                            goal = self.repository.save_autonomous_goal(goal)
+                            goals = [goal]
+                            goals_created += 1
+                        except ValueError:
+                            goals = self.repository.list_autonomous_goals(
+                                student_id, policy.course_id, active_only=True
+                            )
+                for goal in goals:
+                    if opportunities_created >= limit:
+                        break
+                    if goal.attempt_count >= goal.attempt_limit:
+                        continue
+                    evidence = select_relevant_chunks(
+                        goal.approved_course_objective, release.chunks
+                    )
+                    if not evidence:
+                        continue
+                    event = self._observed_event(
+                        goal,
+                        current=current,
+                        prior_release_conversation=old,
+                        now=instant,
+                        inactivity_hours=inactivity_hours,
+                    )
+                    if event is None:
+                        continue
+                    latest_student_message = None
+                    if current is not None:
+                        latest_student_message = next(
+                            (
+                                message
+                                for message in reversed(
+                                    self.repository.list_messages(current.id)
+                                )
+                                if message.role == "student"
+                            ),
+                            None,
+                        )
+                    observation_key = (
+                        latest_student_message.id
+                        if latest_student_message is not None
+                        else release.id
+                    )
+                    key = f"observer:{event.value}:{goal.goal_id}:{observation_key}"
+                    if self.repository.get_autonomous_opportunity_by_key(key) is not None:
+                        continue
+                    primary = evidence[0]
+                    self.create_opportunity(
+                        student_id=student_id,
+                        course_id=policy.course_id,
+                        goal_id=goal.goal_id,
+                        event_kind=event,
+                        concept_id=(
+                            primary.source_artifact_id or primary.document_id
+                        )[:128],
+                        source_chunk_id=primary.id,
+                        source_chunk_ids=[chunk.id for chunk in evidence],
+                        supporting_observation_ids=(
+                            [latest_student_message.id]
+                            if latest_student_message is not None
+                            else []
+                        ),
+                        earliest_action_at=instant.isoformat(),
+                        latest_action_at=(instant + timedelta(hours=24)).isoformat(),
+                        idempotency_key=key,
+                    )
+                    opportunities_created += 1
+                    by_event[event.value] = by_event.get(event.value, 0) + 1
+        return AutonomousObservationSweepV1(
+            observed_courses=observed_courses,
+            observed_students=observed_students,
+            goals_created=goals_created,
+            opportunities_created=opportunities_created,
+            by_event=by_event,
+        )
+
+    def observe_evidence_recovery(
+        self,
+        professor_id: str,
+        course_id: str,
+        *,
+        now: datetime | None = None,
+        limit: int = 100,
+    ) -> AutonomousObservationSweepV1:
+        """Convert source-recovery findings into governed V2 opportunities."""
+
+        if isinstance(limit, bool) or not 1 <= limit <= 500:
+            raise ValueError("evidence-recovery observer limit must be between 1 and 500")
+        instant = _utc(now or datetime.now(UTC))
+        scan = self.outreach.scan_evidence_recovery(
+            professor_id,
+            course_id,
+            mode=EvidenceRecoveryMode.SHADOW,
+            now=instant,
+            limit=limit,
+        )
+        policy = self.repository.get_autonomy_policy(course_id)
+        release = self.repository.get_published_release(course_id)
+        if (
+            policy is None
+            or not policy.autonomy_enabled
+            or policy.paused
+            or policy.kill_switch
+            or release is None
+            or release.id != scan.release_id
+            or release.teaching_profile_id != policy.approved_profile_id
+            or release.teaching_profile_sha256 != policy.approved_profile_sha256
+        ):
+            return AutonomousObservationSweepV1(
+                observed_courses=1,
+                observed_students=0,
+                goals_created=0,
+                opportunities_created=0,
+            )
+        observed_students: set[str] = set()
+        goals_created = 0
+        opportunities_created = 0
+        for decision in scan.decisions:
+            if opportunities_created >= limit or decision.action != "propose":
+                continue
+            if decision.source_chunk_id is None:
+                continue
+            chunk = _resolve_evidence_chunk(release, decision.source_chunk_id)
+            if chunk is None:
+                continue
+            observed_students.add(decision.student_id)
+            key = (
+                f"observer:evidence-recovered:{release.id}:"
+                f"{decision.student_message_id}"
+            )
+            if self.repository.get_autonomous_opportunity_by_key(key) is not None:
+                continue
+            goals = self.repository.list_autonomous_goals(
+                decision.student_id, course_id, active_only=True
+            )
+            objective = self.goal_manager.select_objective(policy, [chunk])
+            goal = next(
+                (
+                    item
+                    for item in goals
+                    if item.approved_course_objective == objective
+                    and item.attempt_count < item.attempt_limit
+                ),
+                None,
+            )
+            if goal is None and len(goals) < policy.max_active_goals:
+                goal = self.goal_manager.build_goal(
+                    student_id=decision.student_id,
+                    release=release,
+                    policy=policy,
+                    objective=objective,
+                    learner_state=None,
+                    observed_at=instant.isoformat(),
+                    planner_model=self.graph.planner.model_id,
+                    generator_model=self.graph.generator.model_id,
+                )
+                try:
+                    goal = self.repository.save_autonomous_goal(goal)
+                    goals_created += 1
+                except ValueError:
+                    goal = None
+            if goal is None:
+                continue
+            try:
+                self.create_opportunity(
+                    student_id=decision.student_id,
+                    course_id=course_id,
+                    goal_id=goal.goal_id,
+                    event_kind=AutonomousEventKind.EVIDENCE_RECOVERED,
+                    concept_id=(
+                        chunk.source_artifact_id or chunk.document_id
+                    )[:128],
+                    source_chunk_id=chunk.id,
+                    source_chunk_ids=[chunk.id],
+                    supporting_observation_ids=[
+                        decision.student_message_id,
+                        decision.tutor_message_id,
+                    ],
+                    earliest_action_at=instant.isoformat(),
+                    latest_action_at=(instant + timedelta(days=14)).isoformat(),
+                    idempotency_key=key,
+                )
+            except (GovernedAutonomyError, ValueError):
+                continue
+            opportunities_created += 1
+        return AutonomousObservationSweepV1(
+            observed_courses=1,
+            observed_students=len(observed_students),
+            goals_created=goals_created,
+            opportunities_created=opportunities_created,
+            by_event={
+                AutonomousEventKind.EVIDENCE_RECOVERED.value: opportunities_created
+            },
+        )
+
+    def _observed_event(
+        self,
+        goal: AutonomousGoalV1,
+        *,
+        current,
+        prior_release_conversation,
+        now: datetime,
+        inactivity_hours: int,
+    ) -> AutonomousEventKind | None:
+        if prior_release_conversation is not None and current is None:
+            return AutonomousEventKind.NEW_COURSE_RELEASE
+        if current is None:
+            return None
+        messages = self.repository.list_messages(current.id)
+        latest_student = next(
+            (message for message in reversed(messages) if message.role == "student"),
+            None,
+        )
+        if latest_student is not None:
+            last_at = _utc(datetime.fromisoformat(latest_student.created_at))
+            if now - last_at >= timedelta(hours=inactivity_hours):
+                return AutonomousEventKind.STUDENT_INACTIVITY
+        actions = self.repository.list_autonomous_actions(
+            goal.course_id, student_id=goal.student_id
+        )
+        for action in reversed(actions):
+            if action.goal_id != goal.goal_id:
+                continue
+            outcome = self.repository.get_autonomous_outcome(action.action_id)
+            if outcome is None:
+                continue
+            if outcome.kind in {
+                AutonomousOutcomeKind.DISMISSED,
+                AutonomousOutcomeKind.ANSWERED,
+            }:
+                return None
+            if outcome.kind not in {
+                AutonomousOutcomeKind.DELIVERED,
+                AutonomousOutcomeKind.FAILED,
+            }:
+                continue
+            delivered_at = _utc(datetime.fromisoformat(outcome.recorded_at))
+            if now - delivered_at >= timedelta(hours=24):
+                return AutonomousEventKind.PRACTICE_INCOMPLETE
+            return None
+        created_at = _utc(datetime.fromisoformat(goal.created_at))
+        if now - created_at >= timedelta(hours=24):
+            return AutonomousEventKind.SPACED_REVIEW_DUE
+        return None
 
     def materialize_due_wakeups(
         self, *, now: datetime | None = None, limit: int = 100
@@ -441,19 +836,15 @@ class GovernedAutonomyService:
             if opportunity.goal_id
             else None
         )
-        chunk = _resolve_evidence_chunk(release, opportunity.source_chunk_id)
-        evidence_keys = [_source_range_key(chunk)] if chunk is not None else []
-        max_version = 0
-        if release is not None and chunk is not None:
-            source_id = chunk.source_artifact_id or chunk.document_id
-            max_version = max(
-                (
-                    item.source_version
-                    for item in release.chunks
-                    if (item.source_artifact_id or item.document_id) == source_id
-                ),
-                default=0,
-            )
+        evidence = self.evidence_assessor.assess(
+            release,
+            opportunity,
+            query=(
+                goal.approved_course_objective
+                if goal is not None
+                else opportunity.concept_id or "approved course objective"
+            ),
+        )
         recent_since = (instant - timedelta(days=7)).isoformat()
         recent_count = self.repository.count_recent_proactive_messages(
             opportunity.student_id,
@@ -487,11 +878,13 @@ class GovernedAutonomyService:
             ),
             recent_message_count=recent_count,
             same_concept_cooldown_active=cooldown,
-            evidence_keys=evidence_keys,
-            evidence_complete=chunk is not None,
-            evidence_unique=chunk is not None,
-            evidence_current=bool(chunk is not None and chunk.source_version == max_version),
-            evidence_authorized=bool(chunk is not None and chunk.retrieval_allowed),
+            evidence_keys=evidence.source_range_keys,
+            evidence_chunk_ids=evidence.selected_chunk_ids,
+            evidence_decision_reason=evidence.reason,
+            evidence_complete=evidence.complete,
+            evidence_unique=evidence.unique,
+            evidence_current=evidence.current,
+            evidence_authorized=evidence.authorized,
             now=instant.isoformat(),
         )
         result = await self.graph.run(job)
@@ -608,6 +1001,42 @@ def _resolve_evidence_chunk(release, source_chunk_id: str | None):
         if chunk.id == source_chunk_id and chunk.retrieval_allowed
     ]
     return matches[0] if len(matches) == 1 else None
+
+
+def _failed_grounded_response(
+    action: AutonomousActionKind,
+) -> GroundedTutorResponseV2:
+    return GroundedTutorResponseV2(
+        action=action,
+        content="No validated proactive tutoring response was available.",
+        policy_action="no-action",
+    )
+
+
+def _policy_evidence(
+    policy: PedagogicalPolicyV2, release
+) -> list[DocumentChunk]:
+    selected: dict[str, DocumentChunk] = {}
+    for objective in policy.approved_course_objectives:
+        for chunk in select_relevant_chunks(objective, release.chunks):
+            selected.setdefault(chunk.id, chunk)
+    return list(selected.values())[:5]
+
+
+def _resolve_evidence_chunks(release, source_chunk_ids: list[str]):
+    if (
+        release is None
+        or not source_chunk_ids
+        or len(source_chunk_ids) != len(set(source_chunk_ids))
+    ):
+        return []
+    chunks = []
+    for source_chunk_id in source_chunk_ids:
+        chunk = _resolve_evidence_chunk(release, source_chunk_id)
+        if chunk is None:
+            return []
+        chunks.append(chunk)
+    return chunks
 
 
 def _source_range_key(chunk) -> str:

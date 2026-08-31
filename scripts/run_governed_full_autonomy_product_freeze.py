@@ -172,6 +172,9 @@ async def simulate() -> dict:
             learner_subgoal="Explain the purpose of cache invalidation.",
             success_condition="Answer one cited retrieval prompt without a hint.",
             expires_at=(NOW + timedelta(days=8)).isoformat(),
+            # The frozen fixture intentionally spans seven daily jobs. Keep that
+            # contract explicit now that the runtime enforces attempt limits.
+            attempt_limit=7,
         )
         service.create_opportunity(
             student_id=fixture.student_a_id,

@@ -85,6 +85,36 @@ async def test_openai_responses_client_uses_atomic_claim_schema(monkeypatch):
 
 
 @pytest.mark.asyncio
+async def test_openai_responses_client_uses_bounded_autonomy_plan_schema(monkeypatch):
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return _response(
+            model="gpt-5.6-terra",
+            text=(
+                '{"action":"no-action","reason_code":"not-needed",'
+                '"stop_condition":"Stop without delivery."}'
+            ),
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-terra", post=post)
+
+    result = await client.chat(
+        [LlmMessage(role="user", content="Plan one bounded tutoring event.")],
+        task="autonomous_tutoring_plan",
+    )
+
+    payload = captured["json"]
+    assert payload["model"] == "gpt-5.6-terra"
+    assert payload["store"] is False
+    assert payload["text"]["format"]["strict"] is True
+    assert "allowed_actions" not in payload["text"]["format"]["schema"]["properties"]
+    assert result.provider_model == "gpt-5.6-terra"
+
+
+@pytest.mark.asyncio
 async def test_openai_responses_client_fails_closed_on_identity_drift(monkeypatch):
     async def post(**kwargs):
         del kwargs

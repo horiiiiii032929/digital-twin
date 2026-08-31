@@ -314,6 +314,7 @@ class ProactiveOpportunityV1(_Contract):
     supporting_observation_ids: list[str] = Field(default_factory=list, max_length=16)
     concept_id: str | None = Field(default=None, max_length=128)
     source_chunk_id: str | None = Field(default=None, max_length=256)
+    source_chunk_ids: list[str] = Field(default_factory=list, max_length=5)
     earliest_action_at: str
     latest_action_at: str
     status: AutonomousOpportunityStatus = AutonomousOpportunityStatus.PENDING
@@ -323,6 +324,10 @@ class ProactiveOpportunityV1(_Contract):
     @model_validator(mode="after")
     def action_window_must_be_ordered(self) -> "ProactiveOpportunityV1":
         _require_after(self.earliest_action_at, self.latest_action_at, "opportunity window")
+        if len(self.source_chunk_ids) != len(set(self.source_chunk_ids)):
+            raise ValueError("opportunity source chunk IDs must be unique")
+        if self.source_chunk_id and self.source_chunk_ids and self.source_chunk_id not in self.source_chunk_ids:
+            raise ValueError("primary source chunk must be included in the evidence bundle")
         return self
 
 

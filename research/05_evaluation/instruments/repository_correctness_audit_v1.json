@@ -3567,7 +3567,7 @@
     },
     {
       "path": "scripts/autonomous_tutoring_worker.py",
-      "sha256": "0b21e8c5690b8081df242ccf11912080e7b2632a41ec3599e9afa3d0f9670174",
+      "sha256": "e01177eec431409a1e8ed94404b92b66bfbaff30796b27c840b0b9a6a8b8772c",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -4854,7 +4854,7 @@
     },
     {
       "path": "scripts/run_governed_full_autonomy_product_freeze.py",
-      "sha256": "0cb3539c8e70670054e3fdfd7401b5b74959030b83941e1c991686a223b02da2",
+      "sha256": "039237fd4fc115287442b184e1476b7c53fe3042facb462bb7f49efc6f4877ac",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -5466,7 +5466,7 @@
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "9b9da6c35e2de50362a9e3ea9f3eff752c7e9736e66a03be6ba2ca1715c46246"
+      "sha256": "03b98b43842e2387c08b510c445586a72b2d8c45bead847ae7666eb6c8c6be01"
     },
     {
       "audit_status": "audited",
@@ -5554,7 +5554,7 @@
       "path": "services/api/app/routers/publication.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "99e4b1222a5cb2ee40a7225ad1afb5dbc469762d76889385724bbc4214fb3f5c"
+      "sha256": "ec07b071c63f000393d9b13eabe69594340db9fee16f6cc04698a16c7bf2f8ef"
     },
     {
       "audit_status": "audited",
@@ -5576,7 +5576,7 @@
       "path": "services/api/app/schemas.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "f1ce76845c086e2b3f3917d2db40e2f35d1bd71c9886e4cae64378d01adf8e31"
+      "sha256": "7b823453698f808eddbcbbc91373d81e830aac3a42e4ca580e7ff586fae1f745"
     },
     {
       "audit_status": "audited",
@@ -6687,11 +6687,22 @@
       "path": "src/digital_twin/student/__init__.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "1bb0973878234d44d651008f7aa22643b5792ee29e2ad9f0641b288b2baa9bdb"
+      "sha256": "847c87d05e94ba9077204011f0a2ba7b657598d7ecc6b8ed984ac91b050969be"
+    },
+    {
+      "path": "src/digital_twin/student/autonomy_control.py",
+      "sha256": "87ec36e7df809aae32a6edb2dde05bc68cc0184a19f50d6ab13c573158bec33f",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex implementation review",
+      "evidence": "Manual authority and fail-closed boundary review plus Ruff and focused tests covering source permission/version/completeness, bounded goal selection, attempt limits, completion, and event scheduling; no provider call or evaluation run.",
+      "findings": []
     },
     {
       "path": "src/digital_twin/student/autonomy_models.py",
-      "sha256": "ccf5b634e2bece51a5105b6b5dd091648f0cb000da1af67ce783edfe6ef76af8",
+      "sha256": "a3f7d7d1ef72610cdb56d4bb682b19193f6445cc709b158156296ea10601c634",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -6702,7 +6713,7 @@
     },
     {
       "path": "src/digital_twin/student/autonomy_runtime.py",
-      "sha256": "8233a7ad102d4a0fa338d28bf14757d0129418319904584e89edf6c06b01c599",
+      "sha256": "282a2402b1869267ec171deec0b9737f5629cb0b68e3a51eef94df57c78cbf4b",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -6713,7 +6724,7 @@
     },
     {
       "path": "src/digital_twin/student/autonomy_service.py",
-      "sha256": "89023e84c703e4e11a0927f02d9adf040e99db1c8bfb2c30722f910516d4fc68",
+      "sha256": "d95a47dbe4dc49842f8ed2b62b5382ceb6e28e7051e82576f9e36a6b9147492f",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -6786,7 +6797,7 @@
       "path": "src/digital_twin/student/publication.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "714cd67839e00a0551f22f68c3e56acf4fdce42d7993b97855b032e7bbdcd03b"
+      "sha256": "a0b5680660e5ad057ebbfa87df6b355f12db0c7ea4a0f7966a7130fb7208d6b3"
     },
     {
       "audit_status": "audited",
@@ -6797,7 +6808,7 @@
       "path": "src/digital_twin/student/repository.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "377350acd19d3244c25c7cb686881f6902c6767bcadea57928c24a2f57957d14"
+      "sha256": "76437e73b4addb00319c1fb4eba4f591453f3fc2d13b496b067290729a046b24"
     },
     {
       "audit_status": "audited",
@@ -6808,7 +6819,7 @@
       "path": "src/digital_twin/student/service.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "7684c9e0af280acdb8e40729c3097c37f791965323eeaac6e06ce0fb3533d0ef"
+      "sha256": "1f77547a6eac960f4ffeebc34454ec720e86cade3fe7dc325edb517f5ca3c984"
     },
     {
       "audit_status": "audited",
@@ -6830,7 +6841,7 @@
       "path": "src/digital_twin/student/tutoring_graph.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "5eabc7972faf56def100ebc6a26767a8c27ba912eaee2bb7f2ab1c0e4fae6354"
+      "sha256": "0b26521e5d73ea3ed520304ca6eabed7621ca9840caa970753144484a0cc0301"
     },
     {
       "audit_status": "audited",
@@ -6852,7 +6863,7 @@
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "86b7d05a0d42c79bf2562e2f165326542fbf493aca520b54bb12b348dd902094"
+      "sha256": "3536773a9c563bc7a3ec5fec449a7d0e66c3f29ecb1f86c3e61f7b82f37c5c95"
     },
     {
       "audit_status": "audited",
@@ -6907,7 +6918,7 @@
       "path": "tests/api/test_publication_api.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "afb78e0046d9474aa40e50958f3969de5e7401cc72b9f508ee03b1dcbbed2ddf"
+      "sha256": "99681991e576a57989c7f47421ed6cfcebc170a270be4f23bcf56fc438621bce"
     },
     {
       "audit_status": "audited",
@@ -6999,7 +7010,7 @@
     },
     {
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "sha256": "3a08ebbfd7da5f0d076c4ecbf37010fd9d86bd990403ad0994cc0d380f1a62ec",
+      "sha256": "b00f53a45d1dfdce0a6a547b95f87f41e2266c52e1dc1c1718514f5fa001584d",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -7116,7 +7127,7 @@
       "path": "tests/digital_twin/test_proactive_outreach.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "410c8a11b2471323db4f06ee4e294c5a5ce1bc3b1b1bff176b41c0084a343c65"
+      "sha256": "276d38d6221673d311616e351b89756729948135e720dfd13ec0a44b368084a8"
     },
     {
       "audit_status": "audited",
@@ -7325,7 +7336,7 @@
       "path": "tests/services/test_openai_responses_client.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "2f674977e946920ae20f2ff8d80d17719560a949f8e7cff8a958297f40c7e4c4"
+      "sha256": "8d37a3d9483e0c47cc400a28de0656ff0b1a492e57efcf4eebe40415b310d748"
     },
     {
       "audit_status": "audited",
@@ -8502,7 +8513,7 @@
       "path": "tests/test_run_source_aligned_wording.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-review",
-      "sha256": "415a0fd69d7fb6b2b1b1f3243848976d83db129703fbbca0ad086edc3186ecb5"
+      "sha256": "473f3636f688c0d62567e710237113f2298db0b7991b9928bb655531302df000"
     },
     {
       "audit_status": "audited",
