@@ -24,11 +24,15 @@ between rounds. Twenty-seven duplicate questions were excluded and retained by
 ID in the freeze manifest; public cases and hidden gold remain physically
 separate. The fresh 1,000-case confirmation is still unopened.
 
-Round 1 is now build-only qualified over the 495-case first fold. It compares
-the current lexical/any-hit control, an evidence-first hierarchical design, and
-a plan-observe/event-sourced design. All candidates bind 13/13 architecture
-planes; the 12-case network-free simulation passed with zero calls/cost. No
-candidate is selected until the one full Round 1 execution is recorded.
+Round 1 is complete as an immutable `Refine` result over the 495-case first
+fold. The lexical/any-hit control reached 52.66% grounded factual success; the
+evidence-first hierarchical and plan-observe candidates each reached 24.81%.
+All three preserved 100% boundary action accuracy and zero severe unsupported
+releases, but none passed the factual, claim, citation, source-version, and
+retrieval gates. The lexical control is retained only as the Round 2 baseline.
+Round 2 will replace whole-question coverage with typed public-question
+evidence targets, per-target retrieval and cardinality, and exact atomic
+claim/citation range assembly. No provider calls or paid cost were incurred.
 
 The initial causal audit
 identifies the dominant structural defect as the action -> evidence -> claim ->
