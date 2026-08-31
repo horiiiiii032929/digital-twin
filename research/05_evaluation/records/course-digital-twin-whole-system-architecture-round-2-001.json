@@ -1,0 +1,113 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-2-001",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-2",
+  "round_number": 2,
+  "status": "completed-refine",
+  "supersedes": [],
+  "decision_question": "Does typed public-question target decomposition with per-target retrieval and exact atomic lineage improve the Round 1 baseline while preserving safety?",
+  "code_revision": "15c9d884675285b01b1a5e9613078b145de8a3dd",
+  "dirty_state": false,
+  "started_at": "2026-08-31T20:47:58Z",
+  "completed_at": "2026-08-31T20:48:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_2_001.json",
+      "sha256": "0fb9f802b0ca3383f81655c664921739cb776e71da3fc47f318a15422c68a192",
+      "role": "round-instrument"
+    },
+    {
+      "path": "reports/generated/course-digital-twin-whole-system-architecture-round-2-001/result.json",
+      "sha256": "3a4f035269694957a9f988e20243e9372694596a7a7a54969c595a80dd7eb0b6",
+      "role": "ignored-raw-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "governed-v2-1-lexical-control",
+      "version": "v1",
+      "role": "baseline",
+      "changed_planes": [],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.6372795969773299, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9596977329974811, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9773299748110831, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Grounded-success, claim, citation, and source-version gates failed."}
+      ]
+    },
+    {
+      "architecture_id": "typed-target-evidence-v1",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": ["retrieval", "action-routing", "claim-citation", "pedagogical-policy", "reactive-loop", "product-experience"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.8942065491183879, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.9899244332493703, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "atomic-claim-precision", "value": 0.9005037783375315, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.9005037783375315, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.929471032745592, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.929471032745592, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "all-evidence-at-3", "value": 0.9874055415617129, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9899244332493703, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "source-version-validity", "value": 0.9899244332493703, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Grounded-success, claim, citation, and source-version gates failed despite passing retrieval and safety gates."}
+      ]
+    },
+    {
+      "architecture_id": "typed-target-section-evidence-v1",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": ["domain", "retrieval", "action-routing", "claim-citation", "learner-state", "pedagogical-policy", "reactive-loop", "proactive-loop", "product-experience"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.8942065491183879, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9874055415617129, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9899244332493703, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "p95-latency-ms", "value": 2.7860830014105886, "unit": "milliseconds", "direction": "lower-is-better", "threshold": 2.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Quality was identical to typed-target-evidence-v1 and latency was higher."}
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {"category": "method", "count": 42, "evidence": "The selected candidate had 42 answerable cases without fully grounded success."},
+    {"category": "method", "count": 4, "evidence": "Four answerable paraphrase questions with unresolved low-information targets safely abstained."},
+    {"category": "method", "count": 28, "evidence": "Twenty-eight answerable cases lacked complete canonical citation lineage; repeated lexical anchors commonly selected a neighboring region."},
+    {"category": "implementation", "count": 14, "evidence": "Fourteen additional cases cited canonical evidence but did not represent the complete canonical answer span in the atomic claim."}
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": "typed-target-evidence-v1",
+    "rationale": "Retain typed targets only as the Round 3 baseline. Add source-range-aware candidate sets, ambiguity detection, and canonical-span-preserving claim assembly without changing the frozen Round 2 result or thresholds."
+  },
+  "limitations": [
+    "This is a development fold, not the one-time fresh final confirmation.",
+    "Deterministic extractive wording isolates architecture behavior rather than hosted-model generation quality.",
+    "Some residual failures expose underspecified public questions as well as runtime selection defects.",
+    "No professor fidelity, real usability, or real student learning improvement is established."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-2-001-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-2-001.json"
+}

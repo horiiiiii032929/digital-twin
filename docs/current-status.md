@@ -34,10 +34,17 @@ Round 2 will replace whole-question coverage with typed public-question
 evidence targets, per-target retrieval and cardinality, and exact atomic
 claim/citation range assembly. No provider calls or paid cost were incurred.
 
-Round 2 is now build-only qualified on its source-disjoint 497-case fold. It
-compares the Round 1 lexical baseline with target-aware lexical and
-target-aware section-ranked architectures. The network-free simulation and 29
-focused tests passed; the full fold has not yet been opened for scoring.
+Round 2 is complete as an immutable `Refine` result on its source-disjoint
+497-case fold. Typed targets reached 89.42% grounded factual success versus
+63.73% for the within-fold lexical control, with 98.74% all-evidence@3,
+98.99% Recall@5, 100% boundary action accuracy, and zero severe releases. It
+did not pass the frozen 95% grounded-success or claim/citation/source-version
+gates. The section-ranked variant produced identical quality at higher
+latency. The 42 answerable failures reduce to unresolved low-information
+targets, neighboring source-region selection, and canonical-span assembly.
+Round 3 will retain typed targets as a baseline and compare a source-range-aware
+candidate-set and ambiguity-aware claim assembly successor on the untouched
+481-case third fold. No provider calls or paid cost were incurred.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
