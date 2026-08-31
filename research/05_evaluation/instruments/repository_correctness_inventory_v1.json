@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3b5c80df5b8005a3b186f373ee3fddacfa09efee67ab22b1c4cd4aeb14b57a2b",
+  "record_sha256": "6f8962d9d5e15c6b286b069b7ae714219efbfe971c464bacffa894c44af684d2",
   "records": [
     {
       "audit": {
@@ -3128,10 +3128,10 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Program review verifies the sole active successor preserves all truth, cases, gates, models, and descriptive interpretation while changing only construction's measured reserve split to 15/85 under four-course concurrency and the remaining cumulative authority.",
+        "evidence": "Program closeout review verifies the exact executed manifest is terminal, its provider and paid flags are false, its hash is current, and all truth, case, model, gate, budget, and construction bindings remain reproducible.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -3139,7 +3139,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_011.json",
       "risk": "high",
-      "sha256": "7dc7a4dedb7596a2ac99478b91bf6bfd586a908a2ce24705def8ff79846138e0"
+      "sha256": "69f745cab10a7eea8e7dfb3c14b41e3435b6283d1fe330e21a6d00dbe35f31c4"
     },
     {
       "audit": {
@@ -10262,10 +10262,10 @@
     {
       "audit": {
         "domain": "atomic-m2-confirmation",
-        "evidence": "Freeze review revokes programs 008-010 and authorizes only deterministic aggregate construction plus the exact program-011 descriptive dataset/model/method operations.",
+        "evidence": "Freeze review removes completed program 011 from bounded execution while retaining only the provider-free deterministic development and aggregate-construction authorizations.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "codex-primary-reference-truth-review"
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10273,7 +10273,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "7fe499822b0f899958dc09f0c89258f0ea286c991521f83e35cbf7825fa91b98"
+      "sha256": "9b698cb294c1a517912d74162faf5451a81f2ad480f9938643fd70a442f4736e"
     },
     {
       "audit": {
@@ -10854,10 +10854,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Freeze regression verifies the exact deterministic builders and program-011 operations while terminated programs 009/010, completed program 008, and other historical programs remain rejected.",
+        "evidence": "Freeze regression verifies the two remaining provider-free dataset authorizations and rejects completed program 011 plus all historical paid successors.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "codex-primary-reference-truth-review"
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10865,7 +10865,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "85dc2cf784be1bff32a4d67cdaf142b601093b0d8719e5d44c7120bbaf1555c7"
+      "sha256": "ddf9734125d550651e413831792cb98d39e7e998729261d45972696e78ee680d"
     },
     {
       "audit": {
@@ -12022,10 +12022,10 @@
     {
       "audit": {
         "domain": "finite-evaluation-program-verification",
-        "evidence": "Tests preserve programs 006-010, prove program 011 binds the exact balanced package, corrected verifier, concurrency, and 15/85 reserve settings, and 450 matchable references, and ensure descriptive retrieval cannot be reported as a passed gate.",
+        "evidence": "Tests preserve programs 006-010, prove program 011 is terminal with paid authority revoked, retain its exact balanced package and 15/85 construction binding, and ensure descriptive retrieval cannot be reported as a passed gate.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12033,7 +12033,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
       "risk": "medium",
-      "sha256": "52c9f959f112d8cbe0dac0c41f0db100b6b2aa610f3c94bae7487ab6f3619c0d"
+      "sha256": "5f38381f9e7c744fa9957f615f8fd95069db642a599fea404d2ef4727600558c"
     },
     {
       "audit": {

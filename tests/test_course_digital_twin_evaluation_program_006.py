@@ -149,7 +149,9 @@ def test_program_011_corrects_only_the_measured_construction_budget_split() -> N
     result = runner.validate(INSTRUMENT_011)
 
     assert manifest.program_id == "course-digital-twin-evaluation-program-011"
-    assert manifest.status == "frozen-authorized"
+    assert manifest.status == "completed"
+    assert manifest.provider_execution_authorized is False
+    assert manifest.paid_execution_authorized is False
     assert manifest.total_budget_usd == 45.7
     assert manifest.final_construction_verifier_role == "product-answer-generator"
     assert manifest.final_construction_wording_budget_fraction == 0.15

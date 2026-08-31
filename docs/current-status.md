@@ -6,6 +6,35 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Current decision checkpoint
+
+`course-digital-twin-evaluation-program-011` has completed the actual-product
+10,000-case candidate plus paired 1,000-case control evaluation. This is a valid
+`Refine` result, not an operationally invalid stop. The candidate reached 44.16%
+fully grounded factual success with a source-family 95% interval of
+41.03%–44.96%, 72.9% boundary action accuracy, and 478 severe unsupported
+releases. It answered 433/500 explicit graded-work requests that required
+refusal. Although it beat the control by 6.26 percentage points on paired
+supported-answer retention and by nine points on boundary safety, neither
+condition passed the absolute release gates.
+
+The final package, all 11,000 product responses, deterministic scoring,
+5,703-case advisory coverage, 20-case critical escalation, 30-cluster visual
+supplement, and 12-case C0–C2 synthetic-profile diagnostic are durable. No
+critical source-truth case requires researcher adjudication. Visual remains
+`Go Deeper` at 17/30 complete assets and 75.94% atomic recall. C3 and the
+provider-backed T0/T1 comparison were not opened because factual grounding did
+not pass. Program 011 used USD 39.14017165; cumulative spend across programs
+008–011 was USD 43.43751328 under the authorized USD 50 ceiling. All paid
+authority is revoked.
+
+Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
+evidence. The next P0 is one method-level action-router and grounding successor
+on fresh development evidence. The sealed final set cannot be tuned or rerun.
+The qualified local R1 remains unchanged and available as a deterministic,
+fail-closed product baseline; no LLM-backed factual-quality, multimodal,
+professor-fidelity, usability, or learning-outcome claim is added.
+
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094
 then terminated it as `invalid-execution` in stage 1. Attempt 001 stalled while
@@ -423,6 +452,20 @@ about USD 0.6 and verification about USD 4.3. Program 011 is the final
 harness-only correction: it changes that split to 15/85 and uses a USD 45.70
 ceiling so cumulative spend across programs 008-011 remains below the existing
 USD 50 authorization. No cases, truth, prompts, product method, or gates change.
+
+AFQC-136 records program 011 as the completed flow-independent actual-product
+measurement. Deterministic construction sealed 10,000 final cases and the
+paired 1,000-case control; all 11,000 responses were durable before hidden gold
+opened. Candidate grounded success was 44.16%, boundary action accuracy was
+72.9%, claim precision/recall were 46.43%, citation precision/recall were
+67.44%/67.75%, all-evidence@3 was 88.33%, and Evidence Recall@5 was 93.29%.
+The candidate produced 478 severe releases, dominated by answering 433/500
+graded-work requests that required refusal. It improved paired supported-answer
+retention over the any-hit control, but every absolute release gate failed.
+The visual supplement is Go Deeper, C0–C2 remains synthetic diagnostic evidence,
+and provider T0/T1 was skipped after the factual failure. Program authority is
+revoked and the next decision is an action-router/grounding architecture
+successor, not another evaluator or sealed-set prompt loop.
 
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
@@ -1472,7 +1515,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Program 004 invalid; program 005 frozen and authorized | Program 004 used mismatched parent-section runtime units and exact gold ranges, so its retrieval percentages are non-interpretable. Program 005 proves 452/452 development references exactly match 300 non-overlapping source atoms before calls. The earlier 10,000 correlated template rows remain engineering evidence | Run program 005 once; a development pass advances automatically to the sealed 10,000+1,000 evaluation, while a valid quality failure stops without another tuning loop |
+| Large factual QA | Program 011 completed / Refine | The actual T0 product completed 10,000 candidate plus 1,000 paired control cases without gold leakage. Candidate grounded success was 44.16% (source-family 95% interval 41.03%–44.96%) and boundary action accuracy was 72.9%; all absolute gates failed | Preserve the sealed result; build one deterministic action-router and grounding successor on fresh development evidence, then run a new confirmation tranche rather than retuning the final set |
 
 ## Release readiness and critical path
 
@@ -1493,7 +1536,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
 | 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
-| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | In Progress / Go Deeper | Execute the exactly matchable program 005 automatically through 500+100 and, only on pass, sealed 10,000+1,000 plus supplementary stages |
+| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Done / Refine | Preserve Program 011's valid 10,000+1,000 result and transfer method redesign to a fresh successor issue |
 | 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 

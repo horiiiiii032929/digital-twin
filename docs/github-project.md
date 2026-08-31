@@ -43,19 +43,23 @@ qualified local release explicitly uses the deterministic fail-closed fallback
 and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
-The sealed 10,000-case execution stays in #127 as the first post-demo academic
-goal. AFQC-113/114 preserve two operationally invalid API-first successors.
-AFQC-115 corrects program 004 to invalid because 0/456 gold references exactly
-matched its parent-section runtime corpus; its retrieval percentages cannot
-support a decision. AFQC-116 freezes program 005 as the single harness-only
-successor. It binds the reviewed action-router 500+100 package to 300
-non-overlapping source atoms, proves 452/452 exact reference matchability before
-network access, and atomizes the final corpus before any 10,000+1,000 stage.
-The visual supplement remains `Go Deeper`; the synthetic C0-C2 diagnostic is
-not professor-fidelity evidence. #127 stays In Progress / Go Deeper /
-priority:p0. #105 and #131 remain evidence
-consumers; #24 and #10 retain their professor-approval and external-human
-boundaries. The qualified local R1 remains unchanged.
+Program 011 has completed the post-demo actual-product milestone in #127. All
+10,000 candidate and 1,000 paired control responses were persisted before
+hidden gold opened. The result is valid `Refine`, not another operational stop:
+candidate grounded success was 44.16% with a source-family 95% interval of
+41.03%–44.96%, boundary action accuracy was 72.9%, and 478 severe releases
+occurred. It answered 433/500 explicit graded-work requests that required
+refusal. The candidate beat the control comparatively, but both failed the
+absolute release gates. Visual remains `Go Deeper` at 17/30 complete assets;
+synthetic C0–C2 is not professor fidelity; provider-backed T0/T1 was skipped
+after the factual failure.
+
+#127 moves to `Done / Refine` as the completed measurement milestone. A new P0
+successor owns the deterministic action-router and grounding architecture
+change on fresh development evidence. #105 remains `In Progress / Refine`,
+#131 remains `Go Deeper`, #24 remains open for real professor approval, and the
+parent release goal remains open. Program 011 paid authority is revoked; the
+qualified local deterministic R1 is unchanged.
 
 ## Release stages and product gates
 
@@ -76,12 +80,11 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must preserve AFQC-109 as unfavorable quality evidence and AFQC-111–115
-   as invalid operational evidence. Execute program 005 once against its fresh,
-   exactly matchable action-router package; do not reuse program 004 metrics.
-
-2. Program 005 automatically opens 500+100 after retrieval passes and opens the
-   sealed 10,000+1,000 stage only after the leakage-free product result passes.
+1. Preserve #127 and Program 011 as completed unfavorable evidence; do not tune
+   or rerun the sealed 10,000+1,000 package.
+2. Execute one fresh method-level successor for deterministic action routing,
+   evidence sufficiency, and claim/citation release; keep the local fail-closed
+   fallback selected until it passes.
 3. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 4. #131 — retain the terminal visual diagnostic and design a separate true-
