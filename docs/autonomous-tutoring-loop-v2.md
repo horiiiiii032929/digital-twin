@@ -482,6 +482,21 @@ task, returned model identity, input/output tokens, reported cost, latency, and
 bounded error status. Public cases never contain expected actions or terminal
 state. Gold scoring occurs only after the product response is durable.
 
+`StudentProductAutonomyAdapterV1` is the concrete product bridge for this
+boundary. It drives the real student-turn, governed worker, SQLite restart, and
+in-app delivery services while mapping only observable actions and public scope
+back into the evaluation contract. Its four-condition network-free smoke passed
+with one restart-safe cited proactive delivery and zero provider use. This
+qualifies the adapter, not V2.1 pedagogy. T0/T1-v1 strict-validation no-actions
+remain an explicit #153 grounding limitation, and the full provider-backed
+portfolio remains separately frozen and unauthorized.
+
+The 820-case reference package is not yet directly executable through this
+adapter: its scripted-driver action windows use compressed timestamps, whereas
+the product schedules the tested follow-up at 24 hours. A successor may change
+only the timing/observer binding needed to drive real services; it must preserve
+the public cases, hidden gold, conditions, and decision gates.
+
 ### Pedagogical measures
 
 Adapt the MRBench dimensions rather than relying on generic answer-quality

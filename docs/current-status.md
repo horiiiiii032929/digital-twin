@@ -126,15 +126,32 @@ scoring. It is not product-quality evidence, does not open held-out data, and
 does not select V2.1. Actual T0/T1-v1/T1-v2 reactive/autonomous adapters and
 provider-backed execution remain the next #157 checkpoint.
 
+The actual-service boundary is now implemented and qualified by
+`governed-full-autonomy-v2-1-actual-product-smoke-001`. Four synthetic-public
+cases drove the real `StudentTutoringService`, `GovernedAutonomyService`,
+`ProactiveOutreachService`, and `SQLiteStudentRepository` across T0, T1-v1,
+T1-v2 reactive, and T1-v2 autonomous. All four integration cases matched their
+frozen observable behavior; restart consistency was 100%, and T1-v2 autonomous
+issued one cited due intervention without a student message at delivery time or
+a duplicate after restart. Calls, tokens, and cost were zero. This selects the
+actual-product adapter as evaluation infrastructure only. T0 and T1-v1 both
+failed their current strict atomic-claim validation closed in this smoke; that
+disclosed behavior remains part of #153 rather than being interpreted as
+product quality. The 820-case provider-backed run is still unauthorized and
+V2.1 remains unselected. Its scripted-driver timestamps also do not match the
+real product's 24-hour wake-up semantics, so #157 must freeze an actual-service
+timing/observer successor before any paid portfolio execution. This correction
+may not change the public cases, hidden gold, conditions, or gates.
+
 GitHub tracks the remaining evidence path explicitly: #153 remains
 `In Progress / Refine` for grounding selection. #155 is complete as the
 software-and-provider-integration milestone and moves to `Done / Keep`; it does
 not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
-and #157 moves to `In Progress / Go Deeper` for the actual flow-independent
-evaluation. Parent #8
+and #157 remains `In Progress / Go Deeper` for the provider-backed
+flow-independent evaluation. Parent #8
 remains open. The execution freeze is active again with no provider checkpoint
-authorized. Repository correctness is 806/806 audited
-execution-relevant files with zero pending findings.
+authorized. Repository correctness is 810/810 audited execution-relevant files
+with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094

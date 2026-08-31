@@ -105,8 +105,19 @@ content. Its 820-case network-free harness covers the four conditions, 50
 multi-turn templates across three seeds, 100 learners over 30 days, and 120
 proactive opportunities. All reference-driver gates pass with zero provider
 usage. This is harness qualification only; #157 remains `In Progress / Go
-Deeper` until the immutable product adapters run and a Keep/Refine decision is
-registered.
+Deeper`.
+
+The actual-product adapter checkpoint is also complete. Four network-free
+synthetic cases ran through the real T0, T1-v1, T1-v2 reactive, and T1-v2
+autonomous services. The adapter preserved public/gold separation, observed a
+restart-safe cited proactive delivery, and recorded zero scope, lineage, or
+duplicate defects. T0/T1-v1 safe no-actions exposed the still-open #153
+atomic-claim/grounding dependency. This result selects evaluation plumbing, not
+T1-v2.1. #157's next executable item is the separately frozen provider-backed
+product portfolio after #153 supplies a selected grounding configuration. The
+current 820-case scripted timestamps are reference-driver fixtures; #157 must
+first bind the same public cases and gold to real 24-hour wake-up observation
+without changing the evaluation gates.
 
 ## Release stages and product gates
 

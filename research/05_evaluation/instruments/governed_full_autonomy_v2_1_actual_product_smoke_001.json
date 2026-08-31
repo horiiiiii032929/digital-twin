@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-smoke-001",
+  "status": "frozen-network-free",
+  "parent_issue": 157,
+  "decision_question": "Can the flow-independent autonomy contract drive and observe the actual T0, T1-v1, T1-v2 reactive, and T1-v2 autonomous product services without provider calls or gold leakage?",
+  "authority": {
+    "provider_execution_authorized": false,
+    "paid_evaluation_authorized": false,
+    "held_out_access_authorized": false
+  },
+  "scope": {
+    "case_count": 4,
+    "conditions": [
+      "t0-grounded-control",
+      "t1-v1-reactive-control",
+      "t1-v2-reactive",
+      "t1-v2-autonomous"
+    ],
+    "actual_services": [
+      "StudentTutoringService",
+      "GovernedAutonomyService",
+      "ProactiveOutreachService",
+      "SQLiteStudentRepository"
+    ],
+    "provider_calls": 0,
+    "synthetic_public_data_only": true
+  },
+  "hard_gates": {
+    "action_accuracy": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "restart_consistency": 1.0,
+    "invalid_citation_lineage_count": 0,
+    "wrong_recipient_count": 0,
+    "wrong_course_release_count": 0,
+    "duplicate_delivery_count": 0,
+    "provider_calls": 0,
+    "gold_visible_to_product": false
+  },
+  "limitations": [
+    "This is an integration smoke, not product-quality or academic evidence.",
+    "The run uses deterministic local generation and four synthetic cases.",
+    "Provider-backed planning and generation remain separately unauthorized.",
+    "Issue 153 remains the factual grounding quality blocker."
+  ]
+}
