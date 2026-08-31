@@ -54,9 +54,9 @@ absolute release gates. Visual remains `Go Deeper` at 17/30 complete assets;
 synthetic C0–C2 is not professor fidelity; provider-backed T0/T1 was skipped
 after the factual failure.
 
-#127 moves to `Done / Refine` as the completed measurement milestone. A new P0
-successor owns the deterministic action-router and grounding architecture
-change on fresh development evidence. #105 remains `In Progress / Refine`,
+#127 moves to `Done / Refine` as the completed measurement milestone. [#153](https://github.com/horiiiiii032929/digital-twin/issues/153)
+is the active `In Progress / Refine` P0 and owns the deterministic action-router
+and grounding architecture change on fresh development evidence. #105 remains `In Progress / Refine`,
 #131 remains `Go Deeper`, #24 remains open for real professor approval, and the
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
@@ -82,7 +82,7 @@ professor-communication track.
 
 1. Preserve #127 and Program 011 as completed unfavorable evidence; do not tune
    or rerun the sealed 10,000+1,000 package.
-2. Execute one fresh method-level successor for deterministic action routing,
+2. Execute #153 as the one fresh method-level successor for deterministic action routing,
    evidence sufficiency, and claim/citation release; keep the local fail-closed
    fallback selected until it passes.
 3. #24 — obtain real professor approval for the profile and calibrate fidelity
