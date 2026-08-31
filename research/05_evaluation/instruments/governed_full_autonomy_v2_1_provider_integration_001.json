@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "governed-full-autonomy-v2-1-provider-integration-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-go-deeper-authorization-revoked",
   "decision_question": "Can the frozen V2.1 candidate execute real planner, grounded generator, reactive, and proactive provider boundaries without weakening deterministic authority?",
   "release_candidate_manifest": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_release_candidate_001.json",
   "public_synthetic_data_only": true,
@@ -41,15 +41,22 @@
     }
   },
   "execution": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "authorized_at": "2026-08-31T13:35:00Z",
-    "authorization_scope": "User authorized governed-full-autonomy-v2-1-provider-integration-001 up to USD 1.",
+    "authorization_scope": "User authorized governed-full-autonomy-v2-1-provider-integration-001 up to USD 1; authority was consumed once and revoked after completion.",
+    "authorization_revoked_at": "2026-08-31T13:42:00Z",
     "automatic_release_promotion": false,
     "maximum_calls": 12,
     "maximum_cost_usd": 1.0,
     "maximum_retries": 0,
     "exclusive_output": "reports/generated/governed-full-autonomy-v2-1-provider-integration-001/result.json"
+  },
+  "result": {
+    "status": "completed-go-deeper",
+    "record": "research/05_evaluation/records/governed-full-autonomy-v2-1-provider-integration-001.json",
+    "summary": "research/05_evaluation/governed-full-autonomy-v2-1-provider-integration-001-results.md",
+    "raw_result_sha256": "3cfa5b4974b802563092d87dfe77e3207dd84b6645a3889a48b026dee8bd0f3f"
   },
   "checks": [
     "one simple factual reactive turn uses the fast path and exact grounded generator",

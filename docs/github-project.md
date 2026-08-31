@@ -82,9 +82,11 @@ performed, so #153, #155, #156, and #157 all remain open. T1-v2.1 remains
 
 Revision `adfc8bd7` is frozen as build-only release candidate 001 with exact
 profile, source, and local image hashes. The successor provider-integration
-instrument is bounded to 12 calls, zero retries, and USD 1. Its network-free
-simulation passes, but live execution is not yet evidence and cannot promote
-V2.1. Issue #157 remains the only owner of the academic full-autonomy decision.
+instrument was bounded to 12 calls, zero retries, and USD 1. Live execution
+completed with all 12 aggregate gates passing, five calls, one delivered in-app
+message, and USD 0.0017055 reported cost. Authority is revoked and V2.1 remains
+unselected. Token and per-call latency totals were not surfaced by the aggregate
+runner, so #157 still owns complete academic and operational evaluation.
 
 The remaining full-autonomy work is now separated in GitHub rather than hidden
 inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)

@@ -12,15 +12,16 @@ def test_provider_integration_instrument_is_bounded_and_unselected() -> None:
     instrument = payload["instrument"]
     candidate = payload["candidate"]
 
-    assert instrument["status"] == "frozen-pending-execution"
+    assert instrument["status"] == "completed-go-deeper-authorization-revoked"
     assert instrument["execution"] == {
-        "provider_execution_authorized": True,
-        "paid_execution_authorized": True,
+        "provider_execution_authorized": False,
+        "paid_execution_authorized": False,
         "authorized_at": "2026-08-31T13:35:00Z",
         "authorization_scope": (
             "User authorized governed-full-autonomy-v2-1-provider-integration-001 "
-            "up to USD 1."
+            "up to USD 1; authority was consumed once and revoked after completion."
         ),
+        "authorization_revoked_at": "2026-08-31T13:42:00Z",
         "automatic_release_promotion": False,
         "maximum_calls": 12,
         "maximum_cost_usd": 1.0,
@@ -47,7 +48,9 @@ def test_network_free_simulation_exercises_actual_reactive_and_proactive_service
     assert all(result["gates"].values())
 
 
-def test_live_preflight_is_ready_after_explicit_authority(monkeypatch) -> None:
+def test_live_preflight_is_blocked_after_authority_is_revoked(
+    monkeypatch, tmp_path
+) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "synthetic-preflight-key")
     monkeypatch.setattr(
         runner,
@@ -66,13 +69,14 @@ def test_live_preflight_is_ready_after_explicit_authority(monkeypatch) -> None:
         "run",
         lambda *args, **kwargs: SimpleNamespace(returncode=0),
     )
+    monkeypatch.setattr(runner, "OUTPUT_PATH", tmp_path / "unused-result.json")
 
     result = runner.live_preflight()
 
-    assert result["status"] == "ready"
+    assert result["status"] == "blocked-not-authorized"
     assert result["provider_calls"] == 0
-    assert result["checks"]["provider_execution_authorized"] is True
-    assert result["checks"]["paid_execution_authorized"] is True
+    assert result["checks"]["provider_execution_authorized"] is False
+    assert result["checks"]["paid_execution_authorized"] is False
 
 
 def test_execute_fails_before_constructing_a_provider_request(monkeypatch) -> None:
