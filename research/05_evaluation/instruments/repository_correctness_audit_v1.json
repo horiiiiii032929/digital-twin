@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "0df03b9597ce8c245fc2f1fd3c560b81949ab8ae3d5359e53b760b7fe1e66412"
+      "sha256": "7bad3de7c209509a3f519814dd5c49b0a73aacbe08508d32d4342d0b5f30f053"
     },
     {
       "audit_status": "audited",
@@ -2738,6 +2738,28 @@
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
       "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_provider_integration_001.json",
+      "sha256": "7c75d97d909c533fde2515b8fb81a8bbaa0f8d1e73d1d91376ef8809e7eef305",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex V2.1 provider-integration audit",
+      "evidence": "The named checkpoint completed Go Deeper under its USD 1 scope and was immediately revoked. The terminal instrument links the sanitized record, readable result, and ignored raw-result hash while preserving the no-promotion boundary.",
+      "findings": []
+    },
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_release_candidate_001.json",
+      "sha256": "b50d31e594155ea079a3ea8d360aadd52224a924f509264e68be4b870e6e6f84",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex V2.1 provider-integration audit",
+      "evidence": "Manual freeze review binds merged revision adfc8bd7, exact profile and product source hashes, immutable local API/worker and Web image digests, T1-v1/T0 controls, and an explicit unselected status.",
       "findings": []
     },
     {
@@ -4864,6 +4886,17 @@
       "findings": []
     },
     {
+      "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
+      "sha256": "c9a889331d0d3ab1b192ebf9c9bd2ff168d5f0f937e46157ee6434e210fd05db",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex V2.1 provider-integration audit",
+      "evidence": "The consumed runner returned to the repository-wide freeze guard. Exclusive output, metadata freshness, credential, hash, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
+      "findings": []
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
@@ -6676,7 +6709,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "9b698cb294c1a517912d74162faf5451a81f2ad480f9938643fd70a442f4736e"
+      "sha256": "0d67384479b64a64f675d04a4c5d62de7c038cb811f7b5987cda36014c7b4342"
     },
     {
       "audit_status": "audited",
@@ -7133,7 +7166,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Freeze regression verifies the two remaining provider-free dataset authorizations and rejects completed program 011 plus all historical paid successors.",
+      "evidence": "Freeze regression again verifies only the two provider-free dataset authorizations and rejects the consumed V2.1 provider integration plus completed program 011 and all other historical paid successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-31",
@@ -8239,6 +8272,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "9c4597d857c84838d823211b4e2e7faec9ed657ee9b274bc5e449c82e4eade48"
+    },
+    {
+      "path": "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
+      "sha256": "0396eb7c1110d3067c47ad270352876cf9b2885157d04be15c3d4be243820b06",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex V2.1 provider-integration audit",
+      "evidence": "Focused tests prove the terminal candidate remains unselected, network-free simulation still crosses actual services, revoked authority blocks preflight, and blocked execution constructs no provider request.",
+      "findings": []
     },
     {
       "path": "tests/test_grounded_action_router_v2.py",

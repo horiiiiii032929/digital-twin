@@ -351,6 +351,12 @@ Current utilities:
   action or delivery, and no work after expiry. Run it with
   `npm run verify:governed-autonomy-v2-1-implementation`; it is a software
   regression check and does not select or academically evaluate T1-v2.1.
+- `run_governed_full_autonomy_v2_1_provider_integration.py`: validates and
+  simulates the frozen V2.1 direct-OpenAI integration, performs a metadata-only
+  live preflight, and—only when its immutable instrument is separately
+  authorized—executes two reactive turns plus one proactive job. It uses at
+  most 12 calls, zero retries, and USD 1, cannot promote the release, and is
+  smaller than the academic full-autonomy evaluation in #157.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run

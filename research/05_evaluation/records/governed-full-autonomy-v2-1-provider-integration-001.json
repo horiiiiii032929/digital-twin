@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-provider-integration-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "public-synthetic-cache-coherence-provider-integration-v1",
+  "corpus_id": "public-synthetic-cache-coherence-release-v1",
+  "code_revision": "7e565c401e541511676e51d2283da2e9f9c0f4c7",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "fixture-provider-boundary-control",
+        "version": "v1",
+        "configuration": {
+          "planner": "task-fixture-gpt-5.6-terra",
+          "generator": "task-fixture-gpt-5.4-mini",
+          "provider_calls": 0,
+          "fixture_calls": 4,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "aggregate-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "duplicate-job-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "bounded-call-count", "value": 4.0, "unit": "calls", "direction": "lower-is-better", "threshold": 12.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.0, "unit": "USD", "direction": "lower-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "grounded-reactive-and-proactive-completion", "passed": true, "evidence": "Two reactive turns and one proactive job completed through actual product services with fixture provider responses."},
+        {"name": "identity-and-authority-boundary", "passed": true, "evidence": "Fixture identities matched their bound model contracts and deterministic code retained policy, evidence, state, and delivery authority."},
+        {"name": "restart-and-duplicate-safety", "passed": true, "evidence": "State matched after reopening SQLite and a second worker produced no duplicate job."},
+        {"name": "bounded-nonpromotion-execution", "passed": true, "evidence": "Four fixture calls completed with zero provider cost and no release selection."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "openai-provider-boundary-v2-1",
+        "version": "v1",
+        "configuration": {
+          "planner": "gpt-5.6-terra",
+          "generator": "gpt-5.4-mini-2026-03-17",
+          "provider": "openai-direct-responses-api",
+          "store": false,
+          "retries": 0,
+          "maximum_calls": 12,
+          "maximum_cost_usd": 1.0,
+          "automatic_promotion": false
+        }
+      },
+      "metrics": [
+        {"name": "aggregate-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "duplicate-job-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true},
+        {"name": "bounded-call-count", "value": 5.0, "unit": "calls", "direction": "lower-is-better", "threshold": 12.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.0017055, "unit": "USD", "direction": "lower-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "grounded-reactive-and-proactive-completion", "passed": true, "evidence": "Two grounded reactive turns completed and one due proactive opportunity delivered one private in-app message."},
+        {"name": "identity-and-authority-boundary", "passed": true, "evidence": "Exact planner and generator identities were returned while deterministic code retained policy, evidence, state, and delivery authority."},
+        {"name": "restart-and-duplicate-safety", "passed": true, "evidence": "Trace, inbox, and action counts matched after restart and the second worker produced no duplicate job or delivery."},
+        {"name": "bounded-nonpromotion-execution", "passed": true, "evidence": "Five calls and USD 0.0017055 remained inside the frozen ceilings; selected_for_release remained false."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "openai-provider-boundary-v2-1",
+    "rationale": "Advance the exact live provider binding to representative evaluation because it reproduced the fixture integration gates without weakening deterministic authority. Do not select V2.1 for release from this small checkpoint.",
+    "limitations": [
+      "Only two reactive turns and one proactive opportunity used one public synthetic cache-coherence release.",
+      "The aggregate runner persisted call counts and reported cost but did not surface input/output token totals or per-call latency; those operational measures remain required in #157.",
+      "This result does not evaluate professor fidelity, real students, learning outcomes, long-horizon autonomy, or the sealed factual benchmark.",
+      "The selected implementation is selected only for deeper evaluation; the V2.1 release candidate remains unselected and T1-v1/T0 remain control and rollback."
+    ]
+  }
+}

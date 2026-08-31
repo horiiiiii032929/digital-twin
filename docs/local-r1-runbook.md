@@ -187,6 +187,19 @@ This exercises 30 simulated days, restart, bounded execution, duplicate
 suppression, and goal expiry against the real governed autonomy service. It is
 software regression evidence, not provider-backed academic evaluation.
 
+Validate and simulate the separately frozen provider boundary with:
+
+```bash
+npm run validate:governed-autonomy-v2-1-provider-integration
+npm run simulate:governed-autonomy-v2-1-provider-integration
+npm run preflight:governed-autonomy-v2-1-provider-integration
+```
+
+The preflight performs OpenAI model-metadata checks but makes no inference
+call. The live checkpoint is limited to public synthetic data, 12 calls, zero
+retries, and USD 1. A pass proves provider integration only; it does not
+activate V2.1 or replace #157's full-autonomy evaluation.
+
 To qualify V2.1 later, first produce the dedicated passing result record and
 then set all three values explicitly in the private environment file:
 
