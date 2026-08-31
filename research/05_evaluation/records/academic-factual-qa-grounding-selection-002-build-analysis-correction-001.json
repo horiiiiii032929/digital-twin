@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-grounding-selection-002-build-analysis-correction-001",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-grounding-selection-500-plus-100-v2-unopened",
+  "corpus_id": "public-open-academic-atomic-evidence-v1",
+  "code_revision": "982dc1fe7a38ffc5b7b891ef70988e32c091431f",
+  "dirty_state": true,
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "grounding-selection-002-original-adapter-contract",
+        "version": "historical-build",
+        "configuration": {
+          "manifest_adapter_version": "v2-action-router",
+          "runtime_adapter_version": "v1",
+          "provider_calls": 0
+        }
+      },
+      "metrics": [
+        {
+          "name": "adapter-manifest-identity-match",
+          "value": 0.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "focused-test-pass-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 10.0,
+          "passed": false
+        },
+        {
+          "name": "full-python-test-pass-count",
+          "value": 1441.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1443.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "pre-provider-adapter-contract",
+          "passed": false,
+          "evidence": "The final permitted execution stopped before provider I/O because the adapter returned v1 while the manifest required v2-action-router."
+        },
+        {
+          "name": "historical-evidence-immutable",
+          "passed": true,
+          "evidence": "The invalid attempt remains preserved with zero provider calls and no hidden-gold access."
+        },
+        {
+          "name": "execution-authority-closed",
+          "passed": true,
+          "evidence": "The terminal program revoked every provider and paid authorization."
+        }
+      ],
+      "failures_by_category": {
+        "adapter-manifest-identity": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "explicit-action-router-adapter-contract-v2",
+        "version": "build-correction-001",
+        "configuration": {
+          "manifest_adapter_version": "v2-action-router",
+          "runtime_adapter_version": "v2-action-router",
+          "provider_calls": 0
+        }
+      },
+      "metrics": [
+        {
+          "name": "adapter-manifest-identity-match",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "focused-test-pass-count",
+          "value": 10.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 10.0,
+          "passed": true
+        },
+        {
+          "name": "full-python-test-pass-count",
+          "value": 1443.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1443.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "pre-provider-adapter-contract",
+          "passed": true,
+          "evidence": "Build validation binds both frozen manifests to the explicit v2-action-router adapter identity; a drifted manifest is rejected before provider construction."
+        },
+        {
+          "name": "historical-evidence-immutable",
+          "passed": true,
+          "evidence": "No historical instrument, result, cases, gold, prompts, model binding, or quality gate was changed."
+        },
+        {
+          "name": "execution-authority-closed",
+          "passed": true,
+          "evidence": "No provider or paid authority is active and no provider call occurred."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "explicit-action-router-adapter-contract-v2",
+    "rationale": "Retain the contract correction as build infrastructure. Use a separately versioned #153 successor for one valid 500+100 quality decision; do not create a third attempt under the terminal instrument.",
+    "limitations": [
+      "No factual or autonomous product quality was measured.",
+      "The 500+100 hidden gold and Program 011 sealed final package remained unopened.",
+      "A future paid run requires a new immutable instrument, fresh outputs, and bounded authority."
+    ]
+  }
+}

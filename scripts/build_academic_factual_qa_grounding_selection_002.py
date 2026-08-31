@@ -11,6 +11,9 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from scripts.academic_factual_qa_atomic_m2_t0_adapter import (
+    ACTION_ROUTER_ADAPTER_VERSION,
+)
 from src.digital_twin.evaluation.factual_qa_contract import (
     EvaluationCaseV1,
     EvaluationGoldV1,
@@ -201,6 +204,13 @@ def validate() -> dict[str, object]:
         or control.model_bindings.get("action-router") != "none-historical-control"
     ):
         raise GroundingSelectionBuildError("candidate/control comparison drifted")
+    if (
+        candidate.adapter_version != ACTION_ROUTER_ADAPTER_VERSION
+        or control.adapter_version != ACTION_ROUTER_ADAPTER_VERSION
+    ):
+        raise GroundingSelectionBuildError(
+            "system manifest does not match the action-router adapter contract"
+        )
     public = _load_hashed(CASES)
     hidden = _load_hashed(GOLD)
     control_public = _load_hashed(CONTROL_CASES)
@@ -240,6 +250,7 @@ def validate() -> dict[str, object]:
         "candidate_case_count": 500,
         "control_case_count": 100,
         "binding_id": binding.binding_id,
+        "adapter_version": ACTION_ROUTER_ADAPTER_VERSION,
         "metadata_status": binding.metadata_status,
         "provider_execution_authorized": (
             binding.authorization.provider_execution_authorized
