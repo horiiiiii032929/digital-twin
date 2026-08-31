@@ -65,6 +65,25 @@ def test_live_preflight_is_blocked_after_authority_is_revoked(
         ),
     )
     monkeypatch.setattr(
+        runner,
+        "_sha256_at_revision",
+        lambda path, revision: (
+            runner._load(runner.CANDIDATE_PATH)["system"]["release_profile_sha256"]
+            if path == runner.PROFILE_PATH
+            else runner._load(runner.CANDIDATE_PATH)["source_hashes"][
+                {
+                    "compose.local-r1.yml": "compose_local_r1_sha256",
+                    "src/digital_twin/student/tutoring_graph.py": (
+                        "reactive_graph_sha256"
+                    ),
+                    "src/digital_twin/student/autonomy_runtime.py": (
+                        "proactive_runtime_sha256"
+                    ),
+                }[path.relative_to(runner.ROOT).as_posix()]
+            ]
+        ),
+    )
+    monkeypatch.setattr(
         runner.subprocess,
         "run",
         lambda *args, **kwargs: SimpleNamespace(returncode=0),

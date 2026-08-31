@@ -8,6 +8,7 @@ from uuid import uuid4
 
 from pydantic import ValidationError
 
+from src.digital_twin.clock import SystemUtcClock, UtcClock, utc_timestamp
 from src.digital_twin.evaluation import ComponentKind, load_release_profile
 from src.digital_twin.generation import (
     DeterministicGroundedGenerator,
@@ -86,9 +87,6 @@ from src.digital_twin.student.tutoring_graph import (
     TutoringMode,
     initial_learner_state,
 )
-from src.digital_twin.tutor_policy import timestamp_now
-
-
 class StudentWorkflowError(ValueError):
     def __init__(self, code: str, message: str) -> None:
         super().__init__(message)
@@ -116,8 +114,10 @@ class StudentTutoringService:
         autonomy_planner_model: str = DETERMINISTIC_PLANNER_MODEL,
         autonomy_generator_model: str = DETERMINISTIC_GENERATOR_MODEL,
         reactive_semantic_planner: ReactiveSemanticPlanner | None = None,
+        clock: UtcClock | None = None,
     ) -> None:
         self.repository = repository
+        self.clock = clock or SystemUtcClock()
         profile = load_release_profile(profile_path)
         self.profile_id = profile.profile_id
         self.profile_version = profile.profile_version
@@ -287,6 +287,7 @@ class StudentTutoringService:
                 learner_state_revision=tutor_message.learner_state_revision,
             )
         release = self._require_current_release(conversation, account_id)
+        turn_timestamp = utc_timestamp(self.clock.now())
         tutoring_mode = self._runtime_mode(conversation.course_id)
         tutoring_graph = self._runtime_graph(tutoring_mode)
         tutoring_intent: str | None = None
@@ -310,7 +311,10 @@ class StudentTutoringService:
         else:
             prior_state = self.repository.get_learner_state(conversation.id)
             if prior_state is None:
-                prior_state = initial_learner_state(conversation)
+                prior_state = initial_learner_state(
+                    conversation,
+                    observed_at=turn_timestamp,
+                )
             expected_learner_state_revision = prior_state.revision
             graph_kwargs: dict[str, object] = {}
             if tutoring_mode == TutoringMode.T1_V2:
@@ -362,6 +366,7 @@ class StudentTutoringService:
                     release=release,
                     student_message=content,
                     learner_state=prior_state,
+                    observed_at=turn_timestamp,
                     **graph_kwargs,
                 )
             )
@@ -401,7 +406,7 @@ class StudentTutoringService:
             conversation=conversation,
         )
         generation_events.extend(claim_validation_events)
-        now = timestamp_now()
+        now = turn_timestamp
         student_message = Message(
             id=f"message-{uuid4()}",
             conversation_id=conversation.id,
@@ -1456,8 +1461,8 @@ class StudentTutoringService:
         )
         raise StudentWorkflowError(code, message)
 
-    @staticmethod
     def _event(
+        self,
         event_type: str,
         *,
         account_id: str | None = None,
@@ -1474,6 +1479,7 @@ class StudentTutoringService:
             release_id=release_id,
             conversation_id=conversation_id,
             details=details or {},
+            created_at=utc_timestamp(self.clock.now()),
         )
 
 def _generator_model_identity(generator: object) -> str:

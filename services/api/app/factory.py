@@ -4,6 +4,7 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from src.digital_twin.clock import SystemUtcClock, UtcClock
 from services.api.app.config import (
     AppSettings,
     EvidenceGateMode,
@@ -119,9 +120,11 @@ def create_app(
     retrieval_index_store: RetrievalIndexStoreV1 | None = None,
     learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
     settings: AppSettings | None = None,
+    clock: UtcClock | None = None,
 ) -> FastAPI:
     runtime_settings = settings or AppSettings()
     runtime_settings.validate()
+    runtime_clock = clock or SystemUtcClock()
     app = FastAPI(
         title=(
             "Course Digital Twin API"
@@ -283,9 +286,11 @@ def create_app(
         ),
         autonomy_generator_model=active_generator_model,
         reactive_semantic_planner=reactive_semantic_planner,
+        clock=runtime_clock,
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
-        app.state.student_repository
+        app.state.student_repository,
+        clock=runtime_clock,
     )
     autonomy_graph = None
     if live_autonomy:
@@ -303,6 +308,7 @@ def create_app(
         app.state.student_repository,
         app.state.proactive_outreach_service,
         graph=autonomy_graph,
+        clock=runtime_clock,
     )
     app.state.teaching_profile_service = TeachingProfileService(
         app.state.student_repository

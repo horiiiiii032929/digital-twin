@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from src.digital_twin.clock import SystemUtcClock, UtcClock, utc_timestamp
 from src.digital_twin.generation import citation_matches_chunk
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.protocols import TutorGenerator
@@ -199,6 +200,7 @@ class GovernedAutonomyService:
         evidence_assessor: AutonomousEvidenceAssessor | None = None,
         goal_manager: DeterministicAutonomousGoalManager | None = None,
         lease_seconds: int = 300,
+        clock: UtcClock | None = None,
     ) -> None:
         if not 30 <= lease_seconds <= 900:
             raise ValueError("autonomy lease must be between 30 and 900 seconds")
@@ -210,6 +212,7 @@ class GovernedAutonomyService:
         self.evidence_assessor = evidence_assessor or AutonomousEvidenceAssessor()
         self.goal_manager = goal_manager or DeterministicAutonomousGoalManager()
         self.lease_seconds = lease_seconds
+        self.clock = clock or SystemUtcClock()
 
     def set_policy(
         self,
@@ -255,6 +258,7 @@ class GovernedAutonomyService:
             paused=paused,
             kill_switch=kill_switch,
             allowed_actions=allowed_actions,
+            updated_at=utc_timestamp(self.clock.now()),
         )
         return self.repository.save_autonomy_policy(policy)
 
@@ -343,7 +347,7 @@ class GovernedAutonomyService:
                 "autonomy_goal_not_found",
                 "The autonomous learner goal was not found in this course.",
             )
-        changed_at = _utc(now or datetime.now(UTC)).isoformat()
+        changed_at = utc_timestamp(_utc(now or self.clock.now()))
         cancelled = self.repository.set_autonomous_goal_status(
             goal_id,
             AutonomousGoalStatus.CANCELLED,
@@ -401,6 +405,8 @@ class GovernedAutonomyService:
             priority=priority,
             attempt_limit=attempt_limit,
             expires_at=expires_at,
+            created_at=utc_timestamp(self.clock.now()),
+            updated_at=utc_timestamp(self.clock.now()),
         )
         return self.repository.save_autonomous_goal(goal)
 
@@ -444,6 +450,8 @@ class GovernedAutonomyService:
             ),
             earliest_action_at=earliest_action_at,
             latest_action_at=latest_action_at,
+            created_at=utc_timestamp(self.clock.now()),
+            updated_at=utc_timestamp(self.clock.now()),
         )
         return self.repository.save_autonomous_opportunity(opportunity)
 
@@ -460,7 +468,7 @@ class GovernedAutonomyService:
             raise ValueError("autonomy observer limit must be between 1 and 500")
         if isinstance(inactivity_hours, bool) or not 24 <= inactivity_hours <= 720:
             raise ValueError("inactivity threshold must be between 24 and 720 hours")
-        instant = _utc(now or datetime.now(UTC))
+        instant = _utc(now or self.clock.now())
         goals_created = 0
         opportunities_created = 0
         observed_students = 0
@@ -653,7 +661,7 @@ class GovernedAutonomyService:
 
         if isinstance(limit, bool) or not 1 <= limit <= 500:
             raise ValueError("evidence-recovery observer limit must be between 1 and 500")
-        instant = _utc(now or datetime.now(UTC))
+        instant = _utc(now or self.clock.now())
         scan = self.outreach.scan_evidence_recovery(
             professor_id,
             course_id,
@@ -844,7 +852,7 @@ class GovernedAutonomyService:
     def materialize_due_wakeups(
         self, *, now: datetime | None = None, limit: int = 100
     ) -> int:
-        instant = _utc(now or datetime.now(UTC))
+        instant = _utc(now or self.clock.now())
         count = 0
         for wake in self.repository.list_due_autonomous_wakeups(
             instant.isoformat(), limit=limit
@@ -892,7 +900,7 @@ class GovernedAutonomyService:
         now: datetime | None = None,
         limit: int = 100,
     ) -> list[AutonomousProcessResultV1]:
-        instant = _utc(now or datetime.now(UTC))
+        instant = _utc(now or self.clock.now())
         self.repository.expire_autonomous_goals(expired_at=instant.isoformat())
         self.repository.expire_autonomous_opportunities(
             expired_at=instant.isoformat()

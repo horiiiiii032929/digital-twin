@@ -161,6 +161,7 @@ class TutoringGraphInput(BaseModel):
     release: DigitalTwinRelease
     student_message: str = Field(min_length=1)
     learner_state: LearnerState
+    observed_at: str = Field(default_factory=timestamp_now, min_length=1)
     event_id: str | None = Field(default=None, min_length=1, max_length=128)
     learner_key: str | None = Field(
         default=None,
@@ -175,6 +176,10 @@ class TutoringGraphInput(BaseModel):
 
     @model_validator(mode="after")
     def authoritative_scope_must_match(self) -> "TutoringGraphInput":
+        observed_at = datetime.fromisoformat(self.observed_at.replace("Z", "+00:00"))
+        if observed_at.tzinfo is None or observed_at.utcoffset() is None:
+            raise ValueError("tutoring graph observation time must be timezone-aware")
+        self.observed_at = observed_at.astimezone(UTC).replace(microsecond=0).isoformat()
         if (
             self.conversation.student_id != self.account_id
             or self.conversation.course_id != self.release.course_id
@@ -604,20 +609,26 @@ class BoundedTutoringGraph:
         learner_state.turn_count += 1
         learner_state.prior_intent = state["intent"]
         learner_state.next_activity = _next_activity(state["intent"])
-        learner_state.updated_at = timestamp_now()
+        learner_state.updated_at = state["graph_input"].observed_at
         return {"learner_state": learner_state}
 
 
-def initial_learner_state(conversation: Conversation) -> LearnerState:
+def initial_learner_state(
+    conversation: Conversation,
+    *,
+    observed_at: str | None = None,
+) -> LearnerState:
     return LearnerState(
         conversation_id=conversation.id,
         course_id=conversation.course_id,
         release_id=conversation.release_id,
+        updated_at=observed_at or timestamp_now(),
     )
 
 
 class _V2GraphState(TypedDict):
     event_id: str
+    observed_at: str
     node_path: list[str]
     signals: TurnSignals | None
     perception: TurnPerceptionV2 | None
@@ -715,6 +726,7 @@ class GovernedReactiveTutoringGraphV2:
         )
         initial: _V2GraphState = {
             "event_id": graph_input.event_id,
+            "observed_at": graph_input.observed_at,
             "node_path": [],
             "signals": None,
             "perception": None,
@@ -844,7 +856,7 @@ class GovernedReactiveTutoringGraphV2:
                     result["validation_passed"] and state_committed
                 ),
             },
-            completed_at=timestamp_now(),
+            completed_at=graph_input.observed_at,
         )
         artifacts = ReactiveTurnArtifactsV2(
             conversation_id=graph_input.conversation.id,
@@ -1215,7 +1227,7 @@ class GovernedReactiveTutoringGraphV2:
                     stage,
                     graph_input.conversation.id,
                     request_sha256,
-                    timestamp_now(),
+                    graph_input.observed_at,
                 ),
             )
             await connection.commit()
@@ -1234,7 +1246,12 @@ class GovernedReactiveTutoringGraphV2:
                     """UPDATE tutoring_model_calls_v2
                        SET status = 'failed', failure_code = ?, completed_at = ?
                        WHERE event_id = ? AND stage = ?""",
-                    (type(error).__name__, timestamp_now(), state["event_id"], stage),
+                    (
+                        type(error).__name__,
+                        graph_input.observed_at,
+                        state["event_id"],
+                        stage,
+                    ),
                 )
                 await connection.commit()
             return None, "operational-provider-failure"
@@ -1246,7 +1263,7 @@ class GovernedReactiveTutoringGraphV2:
                    WHERE event_id = ? AND stage = ?""",
                 (
                     proposal.model_dump_json(),
-                    timestamp_now(),
+                    graph_input.observed_at,
                     state["event_id"],
                     stage,
                 ),
@@ -1420,7 +1437,7 @@ class GovernedReactiveTutoringGraphV2:
                     stage,
                     graph_input.conversation.id,
                     request_sha256,
-                    timestamp_now(),
+                    graph_input.observed_at,
                 ),
             )
             await connection.commit()
@@ -1438,7 +1455,12 @@ class GovernedReactiveTutoringGraphV2:
                     """UPDATE tutoring_model_calls_v2
                        SET status = 'failed', failure_code = ?, completed_at = ?
                        WHERE event_id = ? AND stage = ?""",
-                    (type(error).__name__, timestamp_now(), state["event_id"], stage),
+                    (
+                        type(error).__name__,
+                        graph_input.observed_at,
+                        state["event_id"],
+                        stage,
+                    ),
                 )
                 await connection.commit()
             return None, [], "operational-provider-failure"
@@ -1454,7 +1476,7 @@ class GovernedReactiveTutoringGraphV2:
                         [event.model_dump(mode="json") for event in events],
                         sort_keys=True,
                     ),
-                    timestamp_now(),
+                    graph_input.observed_at,
                     state["event_id"],
                     stage,
                 ),
@@ -1492,7 +1514,7 @@ class GovernedReactiveTutoringGraphV2:
         learner_state.turn_count += 1
         learner_state.prior_intent = state["intent"]
         learner_state.next_activity = _next_activity(state["intent"])
-        learner_state.updated_at = timestamp_now()
+        learner_state.updated_at = state["observed_at"]
         # V2 does not write mastery estimates into the historical V1 field.
         learner_state.mastery_by_concept = {}
         learner_state.objective_complete = False

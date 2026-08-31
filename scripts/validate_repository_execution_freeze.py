@@ -49,6 +49,11 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This builder is pure and network-free. Provider execution lives in the
     # separately guarded run_academic_* reference-validation entrypoint.
     "build_academic_factual_qa_open_reference_validation.py",
+    # These two successors only derive and validate immutable in-memory
+    # contracts. Provider and paid execution live in separately guarded run_*
+    # entrypoints.
+    "build_academic_factual_qa_grounding_selection_002.py",
+    "build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",
     # This analysis-only module has no provider execution mode. Provider calls

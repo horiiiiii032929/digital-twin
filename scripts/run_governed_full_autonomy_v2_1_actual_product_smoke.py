@@ -171,10 +171,9 @@ def build_contract() -> list[
                     ),
                 ]
             )
-            # StudentTutoringService timestamps turns from the real UTC clock.
-            # This bounded horizon is long enough to cross its +24h wake-up
-            # without reaching the +48h expiry window.
-            duration = 120_000
+            # The shared virtual clock crosses the +24h eligibility boundary
+            # without reaching the +48h opportunity expiry.
+            duration = 90_000
         else:
             events.append(
                 AutonomyEvaluationEventV1(
@@ -328,9 +327,9 @@ def _runtime_factory(root: Path, condition: str):
         root / f"{hashlib.sha256(condition.encode()).hexdigest()[:12]}.sqlite3"
     )
 
-    def build_services(repository, fixture, release, conversation_id):
-        outreach = ProactiveOutreachService(repository)
-        autonomy = GovernedAutonomyService(repository, outreach)
+    def build_services(repository, fixture, release, conversation_id, clock):
+        outreach = ProactiveOutreachService(repository, clock=clock)
+        autonomy = GovernedAutonomyService(repository, outreach, clock=clock)
         tutoring = StudentTutoringService(
             repository,
             profile_path=PROFILE_PATH,
@@ -344,6 +343,7 @@ def _runtime_factory(root: Path, condition: str):
             learning_gap_pseudonymizer=LearningGapPseudonymizer(
                 b"actual-product-smoke-secret-32-bytes!!"
             ),
+            clock=clock,
         )
 
         async def apply_control_event(runtime, event, now):
@@ -389,12 +389,19 @@ def _runtime_factory(root: Path, condition: str):
         def restart(runtime):
             runtime.repository.close()
             reopened = SQLiteStudentRepository(database_path)
-            return build_services(reopened, fixture, release, conversation_id)
+            return build_services(
+                reopened,
+                fixture,
+                release,
+                conversation_id,
+                runtime.clock,
+            )
 
         return StudentProductAutonomyRuntimeV1(
             repository=repository,
             tutoring=tutoring,
             autonomy=autonomy,
+            clock=clock,
             student_id=fixture.student_a_id,
             professor_id=fixture.professor_id,
             course_id=fixture.course_a_id,
@@ -405,7 +412,7 @@ def _runtime_factory(root: Path, condition: str):
             apply_control_event=apply_control_event,
         )
 
-    def factory(_case):
+    def factory(_case, clock):
         repository = SQLiteStudentRepository(database_path)
         fixture = seed_synthetic_student_workflow(repository)
         release = _install_approved_release(repository, fixture)
@@ -419,7 +426,7 @@ def _runtime_factory(root: Path, condition: str):
                 updated_at=CLOCK_ORIGIN.isoformat(),
             )
         )
-        outreach = ProactiveOutreachService(repository)
+        outreach = ProactiveOutreachService(repository, clock=clock)
         outreach.update_preference(
             fixture.student_a_id,
             fixture.course_a_id,
@@ -430,7 +437,7 @@ def _runtime_factory(root: Path, condition: str):
             quiet_hours_end="02:00",
             max_messages_per_7_days=3,
         )
-        autonomy = GovernedAutonomyService(repository, outreach)
+        autonomy = GovernedAutonomyService(repository, outreach, clock=clock)
         autonomy.set_policy(
             fixture.professor_id,
             fixture.course_a_id,
@@ -451,13 +458,20 @@ def _runtime_factory(root: Path, condition: str):
             learning_gap_pseudonymizer=LearningGapPseudonymizer(
                 b"actual-product-smoke-secret-32-bytes!!"
             ),
+            clock=clock,
         )
         conversation = tutoring.create_conversation(
             fixture.student_a_id,
             fixture.course_a_id,
         )
         # Reuse the common reopen path after the initial setup.
-        initial = build_services(repository, fixture, release, conversation.id)
+        initial = build_services(
+            repository,
+            fixture,
+            release,
+            conversation.id,
+            clock,
+        )
         initial.tutoring = tutoring
         initial.autonomy = autonomy
         return initial

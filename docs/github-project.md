@@ -98,26 +98,28 @@ immutable full-autonomy product evaluation. Issue #153 remains the first P0
 dependency because no autonomous release is safe before the grounding successor
 passes.
 
-#157 now has a complete build-only evaluation boundary rather than another
-open-ended design task. Per-call provider identity, input/output tokens,
-latency, cost, and failure status are prospectively captured without prompt
-content. Its 820-case network-free harness covers the four conditions, 50
-multi-turn templates across three seeds, 100 learners over 30 days, and 120
-proactive opportunities. All reference-driver gates pass with zero provider
-usage. This is harness qualification only; #157 remains `In Progress / Go
-Deeper`.
+#157 now has a complete realistic-time actual-product boundary rather than an
+open-ended design task. Per-call provider identity, tokens, latency, cost, and
+failure status are prospectively captured without prompt content. Its 820 cases
+cover four conditions, 50 multi-turn templates across three seeds, 100 learners
+over 30 virtual days, and 120 proactive opportunities.
 
-The actual-product adapter checkpoint is also complete. Four network-free
-synthetic cases ran through the real T0, T1-v1, T1-v2 reactive, and T1-v2
-autonomous services. The adapter preserved public/gold separation, observed a
-restart-safe cited proactive delivery, and recorded zero scope, lineage, or
-duplicate defects. T0/T1-v1 safe no-actions exposed the still-open #153
-atomic-claim/grounding dependency. This result selects evaluation plumbing, not
-T1-v2.1. #157's next executable item is the separately frozen provider-backed
-product portfolio after #153 supplies a selected grounding configuration. The
-current 820-case scripted timestamps are reference-driver fixtures; #157 must
-first bind the same public cases and gold to real 24-hour wake-up observation
-without changing the evaluation gates.
+`governed-full-autonomy-v2-1-actual-product-evaluation-002` injects one
+monotonic `VirtualUtcClock` through the real tutoring, autonomy, outreach,
+worker, lease, checkpoint, outbox, and delivery paths. The final network-free
+qualification passed all 820 cases with 100% action, termination, transition,
+fallback, and restart rates and zero scope, citation, consent, duplicate, loop,
+or authority defects. This selects the realistic-time evaluation
+infrastructure only; #157 remains `In Progress / Go Deeper` and T1-v2.1 remains
+unselected.
+
+#153 is the next executable decision. Its build-only
+`academic-factual-qa-grounding-selection-002` freezes one 500 candidate plus
+fixed 100 control comparison with typed bindings, exact case-ID joins, public
+canaries, hidden-gold separation, atomic resume, and finite stop rules. All
+network-free simulations pass, but provider metadata must be refreshed and the
+checkpoint remains unauthorized. A valid `Keep` may open #157's provider-backed
+portfolio; a valid `Refine` blocks it.
 
 ## Release stages and product gates
 
@@ -140,19 +142,22 @@ professor-communication track.
 
 1. Preserve #127 and Program 011 as completed unfavorable evidence; do not tune
    or rerun the sealed 10,000+1,000 package.
-2. Execute #153 as the one fresh method-level successor for deterministic action routing,
-   evidence sufficiency, and claim/citation release; keep the local fail-closed
-   fallback selected until it passes.
-3. #24 — obtain real professor approval for the profile and calibrate fidelity
+2. Refresh, freeze, and execute `academic-factual-qa-grounding-selection-002`
+   as #153's one 500+100 decision; keep the local fail-closed fallback selected
+   until it passes.
+3. If and only if #153 returns `Keep`, execute
+   `governed-full-autonomy-v2-1-actual-product-evaluation-002` once under the
+   shared paid-program authorization and publish Keep/Refine evidence.
+4. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
-4. #131 — retain the terminal visual diagnostic and design a separate true-
+5. #131 — retain the terminal visual diagnostic and design a separate true-
    visual successor; text/OCR remains the release fallback.
-5. #88 — externally blocked on host/domain selection; merged PR #93
+6. #88 — externally blocked on host/domain selection; merged PR #93
    (`adf39af`) retains the passed local/container foundation and recovery
    evidence.
-6. #9 and #25 — production operations and deployed end-to-end validation after
+7. #9 and #25 — production operations and deployed end-to-end validation after
    their platform/fidelity dependencies clear.
-7. #10 — approval-gated professor/student workflow and usability pilot.
+8. #10 — approval-gated professor/student workflow and usability pilot.
 
 Issue #87 is completed historical method-building work. Issues #85 and #86 are
 completed `Refine` history. Issue #110 is complete only as a 10,000-row

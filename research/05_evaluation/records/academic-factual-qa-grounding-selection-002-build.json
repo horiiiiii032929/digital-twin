@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-grounding-selection-002-build",
+  "component": "evidence-sufficiency",
+  "dataset_id": "academic-factual-qa-grounding-selection-500-plus-100-v2",
+  "corpus_id": "public-open-academic-atomic-evidence-v1",
+  "code_revision": "7205d262416ef95fa789ccb5702d15e17ae6f492",
+  "dirty_state": true,
+  "instrument_sha256": "9dc562ef220d08ad20114942eeff69a2b06d69d9b0e912c62032a28b0c82af8b",
+  "binding_sha256": "7119e3bff9372fc0b9b088878a76d60d33527454f428eed40a42be9e260c47eb",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "historical-action-router-product-checkpoint-runner-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "candidate_case_count": 500,
+          "paired_control_case_count": 100,
+          "generator": "gpt-5.4-mini-2026-03-17",
+          "maximum_total_calls": 602,
+          "zero_retries": true,
+          "absolute_emergency_cost_usd": 50.0,
+          "provider_execution_authorized": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "finite-simulation-scenarios-passed",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": false
+        },
+        {
+          "name": "historical-runtime-hash-valid",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "typed-run-binding",
+          "passed": false,
+          "evidence": "The historical runner reached a terminal invalid result after a required binding ID was absent."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "Historical responses remained separate from hidden gold."
+        },
+        {
+          "name": "case-id-matching",
+          "passed": false,
+          "evidence": "Earlier related harnesses contained order-sensitive response assumptions."
+        },
+        {
+          "name": "canary-before-bulk",
+          "passed": false,
+          "evidence": "The historical control lacks this successor's two-condition canary contract."
+        },
+        {
+          "name": "execution-authority-closed",
+          "passed": true,
+          "evidence": "Historical authority is revoked."
+        }
+      ],
+      "failures_by_category": {
+        "binding": 1,
+        "response-ordering": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "deterministic-router-hybrid-question-targeted-atomic-gate-v2",
+        "version": "2.0.0",
+        "configuration": {
+          "candidate_case_count": 500,
+          "paired_control_case_count": 100,
+          "generator": "gpt-5.4-mini-2026-03-17",
+          "maximum_total_calls": 602,
+          "zero_retries": true,
+          "absolute_emergency_cost_usd": 50.0,
+          "provider_execution_authorized": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "finite-simulation-scenarios-passed",
+          "value": 5.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 5.0,
+          "passed": true
+        },
+        {
+          "name": "historical-runtime-hash-valid",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "typed-run-binding",
+          "passed": true,
+          "evidence": "Instrument, candidate/control manifests, binding ID, dataset, prompt, model, pricing, code revision, and output path are validated before execution."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "Candidate and control responses persist before hidden gold loads."
+        },
+        {
+          "name": "case-id-matching",
+          "passed": true,
+          "evidence": "Responses join by exact case ID and never by provider array order."
+        },
+        {
+          "name": "canary-before-bulk",
+          "passed": true,
+          "evidence": "Two independent public canaries precede every bulk call; simulated canary failure produced zero bulk calls."
+        },
+        {
+          "name": "execution-authority-closed",
+          "passed": true,
+          "evidence": "Provider and paid execution remain false and repository freeze authorization is absent."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "deterministic-router-hybrid-question-targeted-atomic-gate-v2",
+    "rationale": "Use this finite checkpoint for the single fresh #153 decision. It repairs the prior structural binding and ordering defects without changing the frozen quality gates or opening the sealed final package.",
+    "limitations": [
+      "No provider call or product-quality measurement has occurred.",
+      "Provider metadata must be refreshed within 24 hours immediately before authorization.",
+      "A valid Refine result stops #157; only Keep may open the autonomy provider portfolio.",
+      "The historical 10,000-case package remains known evidence and is not reused for tuning."
+    ]
+  }
+}

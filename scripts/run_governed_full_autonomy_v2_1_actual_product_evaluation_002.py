@@ -1,0 +1,844 @@
+#!/usr/bin/env python3
+"""Run the realistic-time 820-case evaluation through actual product services."""
+
+from __future__ import annotations
+
+import argparse
+import asyncio
+from datetime import UTC, datetime, timedelta
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import sqlite3
+import subprocess
+import tempfile
+from typing import Any
+
+from dotenv import load_dotenv
+
+from scripts import (
+    build_governed_full_autonomy_v2_1_actual_product_evaluation_002 as builder,
+)
+from scripts.governed_full_autonomy_v2_1_actual_product_runtime import (
+    build_runtime_factory,
+)
+from src.digital_twin.evaluation import (
+    AutonomyEvaluationCaseV1,
+    AutonomyEvaluationGoldV1,
+    AutonomyEvaluationResponseV1,
+    AutonomySystemManifestV1,
+    run_autonomy_case,
+    score_autonomy_case,
+    summarize_autonomy_scores,
+)
+from src.digital_twin.evaluation.autonomy_product_adapter import (
+    StudentProductAutonomyAdapterV1,
+)
+from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
+
+
+ROOT = Path(__file__).resolve().parents[1]
+INSTRUMENT_ID = builder.INSTRUMENT_ID
+CLOCK_ORIGIN = datetime(2026, 9, 1, 12, 0, tzinfo=UTC)
+OUTPUT_ROOT = ROOT / "reports/generated" / INSTRUMENT_ID
+RESPONSE_LEDGER = OUTPUT_ROOT / "responses.sqlite3"
+PUBLIC_PACKAGE = OUTPUT_ROOT / "public-cases.json"
+HIDDEN_GOLD_PACKAGE = OUTPUT_ROOT / "hidden-gold.json"
+RESULT_PATH = OUTPUT_ROOT / "result.json"
+CHECKPOINT_PATH = OUTPUT_ROOT / "checkpoint.json"
+GROUNDING_STATE = ROOT / (
+    "reports/generated/academic-factual-qa-grounding-selection-002/"
+    "checkpoint-state.json"
+)
+PROFILE_PATH = (
+    ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+)
+CANARY_CASE_IDS = (
+    "trajectory-001-t0-grounded-control-seed-1",
+    "trajectory-006-t1-v2-reactive-seed-1",
+)
+
+
+class ActualProductEvaluationError(RuntimeError):
+    """Raised when the frozen actual-product execution boundary is invalid."""
+
+
+def _git_revision() -> str:
+    return subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+
+
+def _git_dirty() -> bool:
+    return bool(
+        subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=all"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.strip()
+    )
+
+
+def _hash_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _canonical_hash(value: Any) -> str:
+    return hashlib.sha256(
+        json.dumps(
+            value, sort_keys=True, separators=(",", ":"), ensure_ascii=True
+        ).encode("utf-8")
+    ).hexdigest()
+
+
+def _atomic_write(
+    path: Path, value: dict[str, Any], *, exclusive: bool = False
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if exclusive and path.exists():
+        raise ActualProductEvaluationError(
+            f"exclusive output already exists: {path.name}"
+        )
+    temporary = path.with_name(f"{path.name}.{os.getpid()}.tmp")
+    descriptor = os.open(temporary, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+    with os.fdopen(descriptor, "w", encoding="utf-8") as handle:
+        json.dump(value, handle, indent=2, sort_keys=True)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+
+
+def _load(path: Path) -> dict[str, Any]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ActualProductEvaluationError(f"JSON root is not an object: {path.name}")
+    return payload
+
+
+def _manifest(condition: str, *, network_free: bool) -> AutonomySystemManifestV1:
+    profile_sha = _hash_file(PROFILE_PATH)
+    return AutonomySystemManifestV1(
+        system_id=f"actual-product-evaluation-002-{condition}",
+        flow_id=condition,
+        adapter_version=StudentProductAutonomyAdapterV1.adapter_version,
+        code_revision=_git_revision(),
+        graph_version=condition,
+        release_profile_sha256=profile_sha,
+        policy_version=1,
+        model_bindings=(
+            {"planner": "deterministic", "generator": "deterministic"}
+            if network_free
+            else {
+                "planner": "gpt-5.6-terra",
+                "generator": "gpt-5.4-mini-2026-03-17",
+            }
+        ),
+        network_free=network_free,
+    )
+
+
+def _run_binding(*, network_free: bool) -> dict[str, Any]:
+    manifests = {
+        condition: _manifest(condition, network_free=network_free).model_dump(
+            mode="json"
+        )
+        for condition in builder.CONDITIONS
+    }
+    instrument = _load(builder.INSTRUMENT)
+    return {
+        "instrument_id": INSTRUMENT_ID,
+        "instrument_sha256": _hash_file(builder.INSTRUMENT),
+        "public_sha256": builder.public_payload()["content_sha256"],
+        "code_revision": _git_revision(),
+        "profile_sha256": _hash_file(PROFILE_PATH),
+        "clock_origin": CLOCK_ORIGIN.isoformat(),
+        "clock_timezone": "UTC",
+        "conditions": manifests,
+        "model_metadata": instrument["models"],
+        "network_free": network_free,
+    }
+
+
+class _ResponseLedger:
+    def __init__(self, path: Path, *, binding: dict[str, Any], resume: bool) -> None:
+        expected = {
+            "schema_version": "1",
+            "run_binding_sha256": _canonical_hash(binding),
+            "public_sha256": builder.public_payload()["content_sha256"],
+            "expected_count": "820",
+            "clock_origin": CLOCK_ORIGIN.isoformat(),
+            "clock_timezone": "UTC",
+        }
+        if resume and not path.is_file():
+            raise ActualProductEvaluationError("resume response ledger is missing")
+        if not resume and path.exists():
+            raise ActualProductEvaluationError(
+                "exclusive response ledger already exists"
+            )
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if not resume:
+            descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
+            os.close(descriptor)
+        self.connection = sqlite3.connect(path, isolation_level=None)
+        self.connection.execute("PRAGMA journal_mode=WAL")
+        self.connection.execute("PRAGMA synchronous=FULL")
+        self.connection.execute(
+            "CREATE TABLE IF NOT EXISTS metadata (key TEXT PRIMARY KEY,value TEXT NOT NULL)"
+        )
+        self.connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS responses (
+                sequence INTEGER PRIMARY KEY AUTOINCREMENT,
+                case_id TEXT NOT NULL UNIQUE,
+                condition_id TEXT NOT NULL,
+                payload_json TEXT NOT NULL,
+                payload_sha256 TEXT NOT NULL
+            )
+            """
+        )
+        if resume:
+            actual = dict(self.connection.execute("SELECT key,value FROM metadata"))
+            if any(actual.get(key) != value for key, value in expected.items()):
+                self.close()
+                raise ActualProductEvaluationError(
+                    "response-ledger resume binding drifted"
+                )
+            if actual.get("status") not in {"running", "interrupted"}:
+                self.close()
+                raise ActualProductEvaluationError("response-ledger resume is terminal")
+            self._set("status", "running")
+        else:
+            with self.connection:
+                for key, value in {**expected, "status": "running"}.items():
+                    self.connection.execute(
+                        "INSERT INTO metadata(key,value) VALUES (?,?)", (key, value)
+                    )
+
+    def _set(self, key: str, value: str) -> None:
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO metadata(key,value) VALUES (?,?) "
+                "ON CONFLICT(key) DO UPDATE SET value=excluded.value",
+                (key, value),
+            )
+
+    def completed_ids(self) -> set[str]:
+        return {
+            row[0] for row in self.connection.execute("SELECT case_id FROM responses")
+        }
+
+    def record(self, condition: str, response: AutonomyEvaluationResponseV1) -> None:
+        serialized = response.model_dump_json()
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO responses(case_id,condition_id,payload_json,payload_sha256) "
+                "VALUES (?,?,?,?)",
+                (
+                    response.case_id,
+                    condition,
+                    serialized,
+                    hashlib.sha256(serialized.encode("utf-8")).hexdigest(),
+                ),
+            )
+
+    def responses(self) -> list[tuple[str, AutonomyEvaluationResponseV1]]:
+        rows = list(
+            self.connection.execute(
+                "SELECT condition_id,payload_json,payload_sha256 FROM responses ORDER BY sequence"
+            )
+        )
+        output = []
+        for condition, serialized, expected_hash in rows:
+            if hashlib.sha256(serialized.encode("utf-8")).hexdigest() != expected_hash:
+                raise ActualProductEvaluationError(
+                    "persisted product response hash drifted"
+                )
+            output.append(
+                (
+                    condition,
+                    AutonomyEvaluationResponseV1.model_validate_json(serialized),
+                )
+            )
+        return output
+
+    def totals(self) -> dict[str, float | int | list[str]]:
+        responses = [response for _condition, response in self.responses()]
+        models = {
+            call.provider_model
+            for response in responses
+            for call in response.operational_metrics.call_records
+            if call.provider_model
+        }
+        return {
+            "response_count": len(responses),
+            "provider_calls": sum(response.provider_calls for response in responses),
+            "input_tokens": sum(
+                response.operational_metrics.input_tokens for response in responses
+            ),
+            "output_tokens": sum(
+                response.operational_metrics.output_tokens for response in responses
+            ),
+            "cost_usd": sum(response.cost_usd for response in responses),
+            "returned_models": sorted(models),
+        }
+
+    def mark_interrupted(self) -> None:
+        self._set("status", "interrupted")
+
+    def mark_complete(self) -> None:
+        count = int(
+            self.connection.execute("SELECT COUNT(*) FROM responses").fetchone()[0]
+        )
+        if count != 820:
+            raise ActualProductEvaluationError(f"cannot complete {count}/820 ledger")
+        self._set("response_count", str(count))
+        self._set("status", "completed")
+
+    def status(self) -> str:
+        return dict(self.connection.execute("SELECT key,value FROM metadata")).get(
+            "status", "missing"
+        )
+
+    def close(self) -> None:
+        self.connection.close()
+
+
+def validate() -> dict[str, Any]:
+    build = builder.validate()
+    instrument = _load(builder.INSTRUMENT)
+    if instrument["clock"] != {
+        "implementation": "VirtualUtcClock",
+        "origin": CLOCK_ORIGIN.isoformat(),
+        "timezone": "UTC",
+        "production_selectable": False,
+        "backward_movement_allowed": False,
+        "database_timestamp_rewriting_allowed": False,
+        "evaluation_shortcuts_allowed": False,
+        "timing_assertion": "policy-derived-window",
+    }:
+        raise ActualProductEvaluationError("virtual-clock boundary drifted")
+    if (
+        instrument["models"]["planner"]["model"] != "gpt-5.6-terra"
+        or instrument["models"]["generator"]["model"] != "gpt-5.4-mini-2026-03-17"
+        or instrument["models"]["store"] is not False
+        or instrument["models"]["maximum_transport_retries"] != 0
+    ):
+        raise ActualProductEvaluationError("provider model boundary drifted")
+    return {
+        **build,
+        "status": "passed-build-only",
+        "clock_origin": CLOCK_ORIGIN.isoformat(),
+        "database_timestamp_rewriting": False,
+        "actual_product_services": instrument["execution"]["actual_services"],
+    }
+
+
+def _grounding_keep() -> bool:
+    if not GROUNDING_STATE.is_file():
+        return False
+    state = _load(GROUNDING_STATE)
+    result = state.get("terminal_result")
+    return isinstance(result, dict) and result.get("status") == "completed-keep"
+
+
+def preflight(*, resume: bool = False) -> dict[str, Any]:
+    blockers: list[str] = []
+    try:
+        validate()
+    except Exception as error:  # noqa: BLE001
+        blockers.append(f"validation:{type(error).__name__}:{error}")
+    instrument = _load(builder.INSTRUMENT)
+    authority = instrument["authority"]
+    if not authority["provider_execution_authorized"]:
+        blockers.append("provider-execution-not-authorized")
+    if not authority["paid_execution_authorized"]:
+        blockers.append("paid-execution-not-authorized")
+    if (
+        instrument["models"]["metadata_status"] != "fresh"
+        or not instrument["models"]["verified_at"]
+    ):
+        blockers.append("provider-metadata-refresh-required")
+    else:
+        verified = datetime.fromisoformat(instrument["models"]["verified_at"])
+        age = (datetime.now(UTC) - verified.astimezone(UTC)).total_seconds() / 3600
+        if age < 0 or age > instrument["models"]["freshness_hours"]:
+            blockers.append("provider-metadata-stale")
+    if not _grounding_keep():
+        blockers.append("grounding-selection-002-keep-missing")
+    try:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
+    except Exception:
+        blockers.append("repository-freeze-authorization-missing")
+    if not os.getenv("OPENAI_API_KEY", "").strip():
+        blockers.append("openai-credential-missing")
+    if _git_dirty():
+        blockers.append("working-tree-dirty")
+    if resume:
+        if not RESPONSE_LEDGER.is_file():
+            blockers.append("resume-response-ledger-missing")
+        if RESULT_PATH.exists():
+            blockers.append("terminal-result-already-exists")
+    else:
+        used = [
+            path.name
+            for path in (
+                RESPONSE_LEDGER,
+                PUBLIC_PACKAGE,
+                HIDDEN_GOLD_PACKAGE,
+                RESULT_PATH,
+                CHECKPOINT_PATH,
+            )
+            if path.exists()
+        ]
+        if used:
+            blockers.append("exclusive-output-used:" + ",".join(sorted(used)))
+    return {
+        "instrument_id": INSTRUMENT_ID,
+        "status": "ready" if not blockers else "blocked-not-authorized",
+        "blockers": blockers,
+        "provider_calls": 0,
+        "maximum_provider_calls": authority["maximum_provider_calls"],
+        "maximum_cost_usd": authority["maximum_cost_usd"],
+        "hidden_gold_loaded": False,
+    }
+
+
+def _ordered_contract():
+    contract = builder.build_contract()
+    canaries = [
+        row
+        for case_id in CANARY_CASE_IDS
+        for row in contract
+        if row[1].case_id == case_id
+    ]
+    if len(canaries) != len(CANARY_CASE_IDS):
+        raise ActualProductEvaluationError("frozen canary identities drifted")
+    canary_ids = set(CANARY_CASE_IDS)
+    return [*canaries, *(row for row in contract if row[1].case_id not in canary_ids)]
+
+
+async def _run_case(
+    root: Path,
+    condition: str,
+    case: AutonomyEvaluationCaseV1,
+    *,
+    provider_backed: bool,
+    remaining_cost_usd: float,
+) -> AutonomyEvaluationResponseV1:
+    adapter = StudentProductAutonomyAdapterV1(
+        condition=condition,
+        manifest=_manifest(condition, network_free=not provider_backed),
+        runtime_factory=build_runtime_factory(
+            root / case.case_id,
+            condition,
+            provider_backed=provider_backed,
+            maximum_case_cost_usd=max(0.02, min(2.0, remaining_cost_usd)),
+        ),
+        clock_origin=CLOCK_ORIGIN,
+    )
+    try:
+        return await run_autonomy_case(adapter, case)
+    finally:
+        adapter.close()
+
+
+def _canaries_valid(responses: list[tuple[str, AutonomyEvaluationResponseV1]]) -> bool:
+    if len(responses) != 2:
+        return False
+    expected_models = {
+        "t0-grounded-control": {"gpt-5.4-mini-2026-03-17"},
+        "t1-v2-reactive": {"gpt-5.4-mini-2026-03-17", "gpt-5.6-terra"},
+    }
+    for condition, response in responses:
+        models = {
+            call.provider_model
+            for call in response.operational_metrics.call_records
+            if call.status == "completed" and call.provider_model
+        }
+        if (
+            response.operational_status != "completed"
+            or response.provider_calls == 0
+            or models != expected_models[condition]
+        ):
+            return False
+    return True
+
+
+async def _execute_responses(*, resume: bool) -> dict[str, Any]:
+    public = builder.public_payload()
+    if not resume:
+        _atomic_write(PUBLIC_PACKAGE, public, exclusive=True)
+    ledger = _ResponseLedger(
+        RESPONSE_LEDGER,
+        binding=_run_binding(network_free=False),
+        resume=resume,
+    )
+    completed = ledger.completed_ids()
+    runtime_root = OUTPUT_ROOT / "runtime"
+    try:
+        if set(CANARY_CASE_IDS).issubset(completed):
+            persisted_canaries = [
+                row
+                for row in ledger.responses()
+                if row[1].case_id in set(CANARY_CASE_IDS)
+            ]
+            if not _canaries_valid(persisted_canaries):
+                raise ActualProductEvaluationError(
+                    "persisted provider canary is invalid"
+                )
+        for index, (condition, case, _gold) in enumerate(_ordered_contract()):
+            if case.case_id in completed:
+                continue
+            totals = ledger.totals()
+            remaining_cost = 50.0 - float(totals["cost_usd"])
+            if remaining_cost <= 0:
+                raise ActualProductEvaluationError("USD 50 emergency stop reached")
+            response = await _run_case(
+                runtime_root,
+                condition,
+                case,
+                provider_backed=True,
+                remaining_cost_usd=remaining_cost,
+            )
+            ledger.record(condition, response)
+            if index == 1:
+                canary_rows = ledger.responses()[:2]
+                if not _canaries_valid(canary_rows):
+                    raise ActualProductEvaluationError(
+                        "provider canary failed before bulk"
+                    )
+                canary_costs = [row.cost_usd for _condition, row in canary_rows]
+                projected = 1.5 * max(canary_costs) * 820
+                projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
+                if projected_stop > 50.0:
+                    raise ActualProductEvaluationError(
+                        f"projected p99 cost ${projected_stop:.2f} exceeds $50.00"
+                    )
+                _atomic_write(
+                    CHECKPOINT_PATH,
+                    {
+                        "status": "canaries-passed",
+                        "projected_p99_cost_stop_usd": projected_stop,
+                        "completed_case_count": 2,
+                    },
+                    exclusive=not CHECKPOINT_PATH.exists(),
+                )
+        ledger.mark_complete()
+        return ledger.totals()
+    except BaseException:
+        ledger.mark_interrupted()
+        raise
+    finally:
+        ledger.close()
+
+
+def _load_completed_responses() -> list[tuple[str, AutonomyEvaluationResponseV1]]:
+    if not RESPONSE_LEDGER.is_file():
+        raise ActualProductEvaluationError("completed response ledger is missing")
+    connection = sqlite3.connect(f"file:{RESPONSE_LEDGER}?mode=ro", uri=True)
+    try:
+        metadata = dict(connection.execute("SELECT key,value FROM metadata"))
+        if (
+            metadata.get("status") != "completed"
+            or metadata.get("response_count") != "820"
+            or metadata.get("run_binding_sha256")
+            != _canonical_hash(_run_binding(network_free=False))
+        ):
+            raise ActualProductEvaluationError(
+                "hidden gold cannot open before 820 responses"
+            )
+        persisted = list(
+            connection.execute(
+                "SELECT condition_id,payload_json,payload_sha256 "
+                "FROM responses ORDER BY sequence"
+            )
+        )
+    finally:
+        connection.close()
+    rows = []
+    for condition, serialized, expected_hash in persisted:
+        if hashlib.sha256(serialized.encode("utf-8")).hexdigest() != expected_hash:
+            raise ActualProductEvaluationError("persisted response hash drifted")
+        rows.append(
+            (condition, AutonomyEvaluationResponseV1.model_validate_json(serialized))
+        )
+    return rows
+
+
+def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, Any]:
+    if len(rows) != 820:
+        raise ActualProductEvaluationError(
+            "hidden gold cannot open before all responses"
+        )
+    hidden = builder.hidden_gold_payload()
+    _atomic_write(HIDDEN_GOLD_PACKAGE, hidden, exclusive=True)
+    gold_by_id = {
+        row["case_id"]: AutonomyEvaluationGoldV1.model_validate(row)
+        for row in hidden["gold"]
+    }
+    public_by_id = {
+        case.case_id: case for _condition, case, _gold in builder.build_contract()
+    }
+    condition_scores: dict[str, list[Any]] = {
+        condition: [] for condition in builder.CONDITIONS
+    }
+    all_scores = []
+    response_by_id = {response.case_id: response for _condition, response in rows}
+    for condition, response in rows:
+        case = public_by_id[response.case_id]
+        score = score_autonomy_case(case, gold_by_id[response.case_id], response)
+        all_scores.append(score)
+        condition_scores[condition].append(score)
+    summary = summarize_autonomy_scores(all_scores)
+    by_condition = {
+        condition: summarize_autonomy_scores(scores)
+        for condition, scores in condition_scores.items()
+    }
+    delivered = [
+        action
+        for _condition, response in rows
+        for action in response.actions
+        if action.status == "delivered" and action.action != "no-action"
+    ]
+    quiet_violations = 0
+    for action in delivered:
+        hour = (CLOCK_ORIGIN + timedelta(seconds=action.at_seconds)).hour
+        quiet_violations += int(hour >= 23 or hour < 2)
+    frequency_violations = 0
+    for _condition, response in rows:
+        times = sorted(
+            action.at_seconds
+            for action in response.actions
+            if action.status == "delivered" and action.action != "no-action"
+        )
+        for index, instant in enumerate(times):
+            recent = sum(
+                instant - 7 * builder.DAY <= prior <= instant
+                for prior in times[: index + 1]
+            )
+            frequency_violations += int(recent > 3)
+    proactive_scores = [
+        score
+        for score in all_scores
+        if score.case_id.startswith(("opportunity-", "long-horizon-"))
+    ]
+    proactive_accuracy = sum(score.action_accuracy for score in proactive_scores) / len(
+        proactive_scores
+    )
+    t0 = by_condition["t0-grounded-control"]
+    autonomous = by_condition["t1-v2-autonomous"]
+    grounding_delta = autonomous["action_accuracy"] - t0["action_accuracy"]
+    gates = _load(builder.INSTRUMENT)["hard_gates"]
+    gate_results = {
+        "unauthorized_or_unexpected_actions": summary[
+            "unauthorized_or_unexpected_actions"
+        ]
+        <= gates["unauthorized_or_unexpected_actions_max"],
+        "wrong_recipient": summary["wrong_recipient_count"]
+        <= gates["wrong_recipient_count_max"],
+        "wrong_course_release": summary["wrong_course_release_count"]
+        <= gates["wrong_course_release_count_max"],
+        "valid_citation_lineage": summary["invalid_citation_lineage_count"]
+        <= gates["invalid_citation_lineage_count_max"],
+        "consent": summary["consent_violation_count"]
+        <= gates["consent_violation_count_max"],
+        "quiet_hours": quiet_violations <= gates["quiet_hour_violation_count_max"],
+        "frequency": frequency_violations <= gates["frequency_violation_count_max"],
+        "duplicate_delivery": summary["duplicate_delivery_count"]
+        <= gates["duplicate_state_revision_action_delivery_max"],
+        "bounded_loop": summary["unbounded_loop_count"]
+        <= gates["unbounded_loop_count_max"],
+        "model_authority": summary["model_authority_mutation_count"]
+        <= gates["model_authority_mutation_count_max"],
+        "provider_failure_fallback": summary["provider_failure_safe_fallback_rate"]
+        >= gates["provider_failure_safe_fallback_rate_min"],
+        "restart_consistency": summary["restart_consistency_rate"]
+        >= gates["restart_consistency_rate_min"],
+        "pedagogical_transition": summary["valid_pedagogical_transition_rate"]
+        >= gates["valid_pedagogical_transition_rate_min"],
+        "goal_termination": summary["goal_termination_accuracy"]
+        >= gates["goal_termination_accuracy_min"],
+        "grounding_non_regression": grounding_delta
+        >= gates["grounding_regression_from_t0_min"],
+        "proactive_action_reason_lineage": proactive_accuracy
+        >= gates["proactive_action_reason_lineage_accuracy_min"]
+        and all(
+            action.citation_lineage_valid and bool(action.structured_reason)
+            for action in delivered
+        ),
+    }
+    accounting = {
+        "provider_calls": sum(
+            response.provider_calls for response in response_by_id.values()
+        ),
+        "input_tokens": sum(
+            response.operational_metrics.input_tokens
+            for response in response_by_id.values()
+        ),
+        "output_tokens": sum(
+            response.operational_metrics.output_tokens
+            for response in response_by_id.values()
+        ),
+        "cost_usd": sum(response.cost_usd for response in response_by_id.values()),
+    }
+    operationally_valid = (
+        accounting["provider_calls"] <= 3000 and accounting["cost_usd"] <= 50
+    )
+    status = (
+        "invalid-execution"
+        if not operationally_valid
+        else "completed-keep"
+        if all(gate_results.values())
+        else "completed-refine"
+    )
+    return {
+        "schema_version": 1,
+        "instrument_id": INSTRUMENT_ID,
+        "status": status,
+        "decision": "Keep"
+        if status == "completed-keep"
+        else "Refine"
+        if status == "completed-refine"
+        else None,
+        "summary": summary,
+        "condition_summaries": by_condition,
+        "proactive_action_accuracy": proactive_accuracy,
+        "grounding_delta_from_t0": grounding_delta,
+        "quiet_hour_violation_count": quiet_violations,
+        "frequency_violation_count": frequency_violations,
+        "gates": gate_results,
+        "accounting": accounting,
+        "clock_origin": CLOCK_ORIGIN.isoformat(),
+        "clock_advance_history_persisted_per_case": True,
+        "hidden_gold_opened_after_response_completion": True,
+        "private_data_used": False,
+        "limitations": [
+            "Public synthetic sources and learners only.",
+            "No real professor-fidelity, usability, or learning-outcome claim.",
+            "Semantic planning and generation use two OpenAI model configurations from one provider.",
+        ],
+    }
+
+
+async def execute(*, resume: bool) -> dict[str, Any]:
+    ready = preflight(resume=resume)
+    if ready["status"] != "ready":
+        raise ActualProductEvaluationError(
+            "actual-product preflight blocked: " + ", ".join(ready["blockers"])
+        )
+    try:
+        await _execute_responses(resume=resume)
+        rows = _load_completed_responses()
+        result = _score(rows)
+    except Exception as error:
+        result = {
+            "schema_version": 1,
+            "instrument_id": INSTRUMENT_ID,
+            "status": "invalid-execution",
+            "failure_type": type(error).__name__,
+            "failure_detail": str(error)[:500],
+            "hidden_gold_opened": False,
+        }
+    _atomic_write(RESULT_PATH, result, exclusive=not RESULT_PATH.exists())
+    return result
+
+
+async def _simulate() -> dict[str, Any]:
+    validate()
+    scores = []
+    condition_scores: dict[str, list[Any]] = {
+        condition: [] for condition in builder.CONDITIONS
+    }
+    responses = []
+    with tempfile.TemporaryDirectory(
+        prefix="actual-product-evaluation-002-"
+    ) as directory:
+        root = Path(directory)
+        for condition, case, gold in builder.build_contract():
+            response = await _run_case(
+                root,
+                condition,
+                case,
+                provider_backed=False,
+                remaining_cost_usd=1.0,
+            )
+            responses.append(response)
+            score = score_autonomy_case(case, gold, response)
+            scores.append(score)
+            condition_scores[condition].append(score)
+    summary = summarize_autonomy_scores(scores)
+    clock_histories = [
+        response.diagnostic_trace.get("virtual_clock") for response in responses
+    ]
+    simulation_valid = (
+        len(responses) == 820
+        and all(response.operational_status == "completed" for response in responses)
+        and sum(response.provider_calls for response in responses) == 0
+        and all(isinstance(history, dict) for history in clock_histories)
+    )
+    return {
+        "instrument_id": INSTRUMENT_ID,
+        "status": "passed-network-free-simulation"
+        if simulation_valid
+        else "failed-network-free-simulation",
+        "case_count": len(responses),
+        "summary": summary,
+        "condition_summaries": {
+            condition: summarize_autonomy_scores(rows)
+            for condition, rows in condition_scores.items()
+        },
+        "clock_history_count": len(clock_histories),
+        "provider_calls": 0,
+        "cost_usd": 0,
+        "product_quality_claim": False,
+    }
+
+
+def simulate() -> dict[str, Any]:
+    return asyncio.run(_simulate())
+
+
+def main() -> int:
+    load_dotenv(ROOT / ".env")
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--validate", action="store_true")
+    mode.add_argument("--simulate", action="store_true")
+    mode.add_argument("--preflight", action="store_true")
+    mode.add_argument("--execute", action="store_true")
+    parser.add_argument("--resume", action="store_true")
+    arguments = parser.parse_args()
+    if arguments.execute:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
+        result = asyncio.run(execute(resume=arguments.resume))
+    elif arguments.preflight:
+        result = preflight(resume=arguments.resume)
+    elif arguments.simulate:
+        result = simulate()
+    else:
+        result = validate()
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
