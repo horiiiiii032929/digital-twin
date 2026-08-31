@@ -1,17 +1,22 @@
 import { pathSegment, request } from "@/lib/api/client"
 import type {
   AutonomousActionKind,
+  AgentTraceV2,
   AutonomousRecipientEligibilityV1,
   AutonomousActionV1,
   AutonomousGoalV1,
   AutonomousOutcomeV1,
   CourseMembership,
+  CourseDomainModelV1,
+  CourseTutoringMode,
+  CourseTutoringRuntimeProfileV1,
   OnboardingSession,
   PedagogicalPolicyV2,
   ProfessorCourse,
   ProfessorIngestionJob,
   ProfessorIngestionResult,
   ProfessorLearningGapResult,
+  ProfessorLearnerBeliefEvidence,
   ProfessorProactiveTrigger,
   ProfessorRelease,
   ProfessorTeachingProfile,
@@ -249,6 +254,65 @@ export function listProfessorLearningGaps(
   const query = new URLSearchParams({ release_id: releaseId })
   return professorRequest(
     `/api/professor/courses/${pathSegment(courseId)}/learning-gaps?${query}`,
+  )
+}
+
+export function getProfessorCourseDomainModel(
+  courseId: string,
+  releaseId: string,
+): Promise<CourseDomainModelV1 | null> {
+  const query = new URLSearchParams({ release_id: releaseId })
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/domain-model?${query}`,
+  )
+}
+
+export function createProfessorCourseDomainModel(
+  courseId: string,
+  values: Pick<
+    CourseDomainModelV1,
+    "release_id" | "version" | "objectives" | "concepts" | "misconceptions"
+  >,
+): Promise<CourseDomainModelV1> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/domain-model`,
+    { method: "POST", body: JSON.stringify(values) },
+  )
+}
+
+export function getProfessorTutoringRuntimeProfile(
+  courseId: string,
+): Promise<CourseTutoringRuntimeProfileV1 | null> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/tutoring-runtime-profile`,
+  )
+}
+
+export function updateProfessorTutoringRuntimeProfile(
+  courseId: string,
+  mode: CourseTutoringMode,
+  reason: string,
+): Promise<CourseTutoringRuntimeProfileV1> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/tutoring-runtime-profile`,
+    { method: "PUT", body: JSON.stringify({ mode, reason }) },
+  )
+}
+
+export function listProfessorAutonomyTraces(
+  courseId: string,
+): Promise<AgentTraceV2[]> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/autonomy-traces`,
+  )
+}
+
+export function getProfessorLearnerBeliefEvidence(
+  courseId: string,
+  studentId: string,
+): Promise<ProfessorLearnerBeliefEvidence> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/learners/${pathSegment(studentId)}/belief-evidence`,
   )
 }
 

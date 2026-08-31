@@ -12,7 +12,10 @@ import httpx
 
 from src.digital_twin.generation.models import ModelTutorOutput, ModelTutorOutputV2
 from src.digital_twin.grounding.models import GenerationUsage
-from src.digital_twin.student.autonomy_models import AutonomousPlannerOutputV1
+from src.digital_twin.student.autonomy_models import (
+    AutonomousPlannerOutputV1,
+    ReactiveSemanticProposalV2,
+)
 from src.digital_twin.llm import (
     LlmAuthenticationError,
     LlmConfigurationError,
@@ -106,6 +109,8 @@ class OpenAiResponsesClient:
             return ModelTutorOutput.model_json_schema()
         if task == "autonomous_tutoring_plan":
             return AutonomousPlannerOutputV1.model_json_schema()
+        if task == "reactive_tutoring_plan":
+            return ReactiveSemanticProposalV2.model_json_schema()
         raise LlmConfigurationError()
 
     def _payload(self, messages: list[LlmMessage], task: str) -> dict[str, Any]:
@@ -203,6 +208,8 @@ class OpenAiResponsesClient:
                 validated = ModelTutorOutputV2.model_validate(content)
             elif task == "autonomous_tutoring_plan":
                 validated = AutonomousPlannerOutputV1.model_validate(content)
+            elif task == "reactive_tutoring_plan":
+                validated = ReactiveSemanticProposalV2.model_validate(content)
             else:
                 validated = ModelTutorOutput.model_validate(content)
             usage = payload.get("usage", {})

@@ -21,6 +21,7 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
     AutonomousGoalStatus,
     AutonomousGoalV1,
+    LearnerBeliefStateV2,
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
 )
@@ -202,14 +203,30 @@ class DeterministicAutonomousGoalManager:
         release: DigitalTwinRelease,
         policy: PedagogicalPolicyV2,
         objective: str,
-        learner_state: LearnerState | None,
+        learner_state: LearnerState | LearnerBeliefStateV2 | None,
         observed_at: str,
         planner_model: str,
         generator_model: str,
     ) -> AutonomousGoalV1:
         instant = _instant(observed_at)
-        signals = learner_state.latest_signals if learner_state else None
-        priority = 5 if signals and signals.misconception_observed else 4 if signals and signals.confusion >= 0.7 else 3
+        if isinstance(learner_state, LearnerBeliefStateV2):
+            kinds = {item.kind for item in learner_state.hypotheses}
+            priority = (
+                5
+                if "misconception" in kinds
+                else 4
+                if kinds & {"knowledge-gap", "low-confidence"}
+                else 3
+            )
+        else:
+            signals = learner_state.latest_signals if learner_state else None
+            priority = (
+                5
+                if signals and signals.misconception_observed
+                else 4
+                if signals and signals.confusion >= 0.7
+                else 3
+            )
         return AutonomousGoalV1(
             goal_id=f"autonomous-goal-{uuid4()}",
             student_id=student_id,
@@ -224,8 +241,8 @@ class DeterministicAutonomousGoalManager:
             approved_course_objective=objective,
             learner_subgoal=f"Demonstrate the approved objective: {objective}",
             success_condition=(
-                "Complete at least two source-grounded attempts with mastery at or above "
-                "0.80, confidence at or above 0.60, and no current confusion or misconception."
+                "Complete at least two assessed, source-grounded correct attempts with "
+                "no current contradictory evidence."
             ),
             priority=priority,
             attempt_limit=3,
@@ -237,13 +254,66 @@ class DeterministicAutonomousGoalManager:
     def interpret(
         self,
         goal: AutonomousGoalV1,
-        learner_state: LearnerState | None,
+        learner_state: LearnerState | LearnerBeliefStateV2 | None,
     ) -> AutonomousGoalLifecycleDecisionV1:
         if goal.status != AutonomousGoalStatus.ACTIVE:
             return AutonomousGoalLifecycleDecisionV1(
                 complete=goal.status == AutonomousGoalStatus.COMPLETED,
                 progress=1.0 if goal.status == AutonomousGoalStatus.COMPLETED else 0.0,
                 reason=f"goal-{goal.status.value}",
+            )
+        if isinstance(learner_state, LearnerBeliefStateV2):
+            if not learner_state.concepts:
+                return AutonomousGoalLifecycleDecisionV1(
+                    complete=False,
+                    progress=0.0,
+                    reason=(
+                        "attempt-limit-reached"
+                        if goal.attempt_count >= goal.attempt_limit
+                        else "insufficient-assessed-evidence"
+                    ),
+                    next_event=(
+                        None
+                        if goal.attempt_count >= goal.attempt_limit
+                        else AutonomousEventKind.INCOMPLETE_OBJECTIVE
+                    ),
+                )
+            strongest = max(
+                learner_state.concepts,
+                key=lambda item: (
+                    item.correct_evidence_count,
+                    -item.incorrect_evidence_count,
+                    item.attribution_confidence,
+                ),
+            )
+            complete = bool(
+                strongest.correct_evidence_count >= 2
+                and strongest.incorrect_evidence_count == 0
+                and strongest.attribution_confidence >= 0.5
+            )
+            progress = min(
+                1.0,
+                (
+                    strongest.correct_evidence_count
+                    + 0.5 * strongest.partial_evidence_count
+                )
+                / max(2, strongest.assessed_evidence_count),
+            )
+            return AutonomousGoalLifecycleDecisionV1(
+                complete=complete,
+                progress=1.0 if complete else progress,
+                reason=(
+                    "success-condition-met"
+                    if complete
+                    else "attempt-limit-reached"
+                    if goal.attempt_count >= goal.attempt_limit
+                    else "goal-needs-more-assessed-evidence"
+                ),
+                next_event=(
+                    None
+                    if complete or goal.attempt_count >= goal.attempt_limit
+                    else AutonomousEventKind.INCOMPLETE_OBJECTIVE
+                ),
             )
         if learner_state is None or not learner_state.mastery_by_concept:
             return AutonomousGoalLifecycleDecisionV1(

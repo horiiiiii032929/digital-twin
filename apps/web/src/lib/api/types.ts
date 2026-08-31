@@ -324,6 +324,157 @@ export type ProfessorRelease = ProfessorReleaseSummary & {
   teaching_profile_sha256?: string | null
 }
 
+export type CanonicalSourceRangeV1 = {
+  source_artifact_id: string
+  source_version: number
+  source_sha256: string
+  locator: string
+  char_start?: number | null
+  char_end?: number | null
+  region_id?: string | null
+}
+
+export type CourseObjectiveV1 = {
+  objective_id: string
+  statement: string
+  concept_ids: string[]
+}
+
+export type CourseConceptV1 = {
+  concept_id: string
+  label: string
+  description: string
+  prerequisite_concept_ids: string[]
+  canonical_ranges: CanonicalSourceRangeV1[]
+}
+
+export type CourseMisconceptionV1 = {
+  misconception_id: string
+  concept_id: string
+  description: string
+  diagnostic_cues: string[]
+}
+
+export type CourseDomainModelV1 = {
+  schema_version: "1.0.0"
+  domain_model_id: string
+  course_id: string
+  release_id: string
+  release_sha256: string
+  version: number
+  objectives: CourseObjectiveV1[]
+  concepts: CourseConceptV1[]
+  misconceptions: CourseMisconceptionV1[]
+  approved_by: string
+  approved_at: string
+}
+
+export type ProfessorEvidenceChunkOption = {
+  id: string
+  label: string
+  source_artifact_id: string
+  source_version: number
+  source_sha256: string
+  locator: string
+  char_start: number
+  char_end: number
+}
+
+export type CourseTutoringMode =
+  | "grounded-assistant"
+  | "bounded-tutoring-graph"
+  | "governed-autonomous-tutoring-graph-v2.1"
+
+export type CourseTutoringRuntimeProfileV1 = {
+  schema_version: "1.0.0"
+  course_id: string
+  mode: CourseTutoringMode
+  version: number
+  changed_by: string
+  reason: string
+  updated_at: string
+}
+
+export type ConceptAttributionV2 = {
+  concept_id: string
+  observation_count: number
+  assessed_evidence_count: number
+  correct_evidence_count: number
+  partial_evidence_count: number
+  incorrect_evidence_count: number
+  attribution_confidence: number
+  uncertainty: number
+  observation_ids: string[]
+  evidence_keys: string[]
+}
+
+export type LearnerHypothesisV2 = {
+  hypothesis_id: string
+  concept_id: string
+  kind: "misconception" | "knowledge-gap" | "low-confidence" | "inactive"
+  probability: number
+  observation_ids: string[]
+  status: "tentative" | "supported" | "rejected"
+  expires_at?: string | null
+}
+
+export type LearnerBeliefStateV2 = {
+  schema_version: "2.1.0"
+  learner_key: string
+  course_id: string
+  release_id: string
+  revision: number
+  concepts: ConceptAttributionV2[]
+  hypotheses: LearnerHypothesisV2[]
+  active_goal_ids: string[]
+  updated_at: string
+}
+
+export type ProfessorLearnerBeliefEvidence = {
+  student_id: string
+  course_id: string
+  belief_states: LearnerBeliefStateV2[]
+  claim: "observed-evidence-only"
+}
+
+export type StudentLearnerEvidence = {
+  conversation_id: string
+  belief_state: LearnerBeliefStateV2 | null
+  claim: "observed-evidence-only"
+}
+
+export type AgentTraceV2 = {
+  schema_version: "2.1.0"
+  trace_id: string
+  event_id: string
+  learner_key: string
+  course_id: string
+  release_id: string
+  graph_version: string
+  policy_version: number
+  profile_sha256: string
+  planner_model?: string | null
+  generator_requested_model?: string | null
+  generator_model?: string | null
+  fast_path: boolean
+  planning_calls: number
+  generation_calls: number
+  repair_calls: number
+  provider_input_tokens: number
+  provider_output_tokens: number
+  provider_cost_usd: number
+  provider_latency_ms: number
+  input_state_revision: number
+  output_state_revision: number
+  node_path: string[]
+  checkpoint_ids: string[]
+  restart_count: number
+  decision_reason: string
+  validation_results: Record<string, boolean>
+  started_at: string
+  completed_at?: string | null
+}
+
 export type TeachingProfileStatus =
   | "draft"
   | "approved"

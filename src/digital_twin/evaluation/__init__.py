@@ -74,6 +74,19 @@ from src.digital_twin.evaluation.factual_qa_scoring import (
     source_family_bootstrap_interval,
     summarize_scores,
 )
+from src.digital_twin.evaluation.autonomy_contract import (
+    AutonomyEvaluationAdapterV1,
+    AutonomyEvaluationCaseV1,
+    AutonomyEvaluationEventV1,
+    AutonomyEvaluationGoldV1,
+    AutonomyEvaluationResponseV1,
+    AutonomyObservedActionV1,
+    AutonomyStateSnapshotV1,
+    AutonomySystemManifestV1,
+    CallbackAutonomyEvaluationAdapterV1,
+    ExpectedAutonomyActionV1,
+    run_autonomy_case,
+)
 from src.digital_twin.evaluation.factual_qa_dataset import (
     AuthoredClusterVariantsV1,
     AuthoredQuestionVariantV1,
@@ -118,6 +131,15 @@ from src.digital_twin.evaluation.finite_program_dataset import (
 
 
 __all__ = [
+    "AutonomyEvaluationAdapterV1",
+    "AutonomyEvaluationCaseV1",
+    "AutonomyEvaluationEventV1",
+    "AutonomyEvaluationGoldV1",
+    "AutonomyEvaluationResponseV1",
+    "AutonomyObservedActionV1",
+    "AutonomyStateSnapshotV1",
+    "AutonomySystemManifestV1",
+    "CallbackAutonomyEvaluationAdapterV1",
     "AuthoredClusterVariantsV1",
     "AuthoredQuestionVariantV1",
     "CandidateEvaluation",
@@ -145,6 +167,7 @@ __all__ = [
     "EvaluationResponseV1",
     "EvaluationSplit",
     "EvaluationUsageV1",
+    "ExpectedAutonomyActionV1",
     "FactualQaCaseScoreV1",
     "FiniteProgramDatasetError",
     "GateResult",
@@ -205,6 +228,7 @@ __all__ = [
     "package_rows",
     "paired_control_subset",
     "reconcile_case_batch",
+    "run_autonomy_case",
     "score_case",
     "source_family_bootstrap_interval",
     "source_cluster_hash",

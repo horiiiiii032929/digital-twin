@@ -13,6 +13,7 @@ import {
   Settings2,
   ShieldAlert,
   ShieldCheck,
+  RotateCcw,
   Target,
   UsersRound,
 } from "lucide-react"
@@ -26,11 +27,16 @@ import {
   cancelProfessorAutonomousGoal,
   cancelProfessorProactiveTrigger,
   createProfessorAutonomousGoal,
+  createProfessorCourseDomainModel,
   createProfessorTeachingProfile,
   getProfessorAutonomyPolicy,
+  getProfessorCourseDomainModel,
+  getProfessorLearnerBeliefEvidence,
+  getProfessorTutoringRuntimeProfile,
   listProfessorAutonomousActions,
   listProfessorAutonomousGoals,
   listProfessorAutonomousOutcomes,
+  listProfessorAutonomyTraces,
   listProfessorAutonomyRecipients,
   listProfessorLearningGaps,
   listProfessorProactiveTriggers,
@@ -38,6 +44,7 @@ import {
   previewProfessorTeachingProfile,
   scheduleProfessorProactiveTrigger,
   updateProfessorAutonomyPolicy,
+  updateProfessorTutoringRuntimeProfile,
 } from "@/lib/api/professor"
 import type {
   AutonomousActionKind,
@@ -45,9 +52,15 @@ import type {
   AutonomousGoalV1,
   AutonomousOutcomeV1,
   AutonomousRecipientEligibilityV1,
+  AgentTraceV2,
+  CourseDomainModelV1,
+  CourseTutoringMode,
+  CourseTutoringRuntimeProfileV1,
   PedagogicalPolicyV2,
   ProfessorCourse,
   ProfessorLearningGapResult,
+  ProfessorLearnerBeliefEvidence,
+  ProfessorEvidenceChunkOption,
   ProfessorProactiveTrigger,
   ProfessorTeachingProfile,
   ProfessorTeachingProfilePreview,
@@ -67,7 +80,7 @@ export function ProfessorAutonomyPanel({
 }: {
   course: ProfessorCourse
   releaseId?: string
-  evidenceChunks: Array<{ id: string; label: string }>
+  evidenceChunks: ProfessorEvidenceChunkOption[]
   onApprovedProfileChange: (profileId: string | null) => void
 }) {
   const [view, setView] = useState<GovernanceView>("overview")
@@ -80,6 +93,10 @@ export function ProfessorAutonomyPanel({
   const [outcomes, setOutcomes] = useState<AutonomousOutcomeV1[]>([])
   const [recipients, setRecipients] = useState<AutonomousRecipientEligibilityV1[]>([])
   const [learningGaps, setLearningGaps] = useState<ProfessorLearningGapResult | null>(null)
+  const [domainModel, setDomainModel] = useState<CourseDomainModelV1 | null>(null)
+  const [runtimeProfile, setRuntimeProfile] = useState<CourseTutoringRuntimeProfileV1 | null>(null)
+  const [learnerEvidence, setLearnerEvidence] = useState<ProfessorLearnerBeliefEvidence[]>([])
+  const [traces, setTraces] = useState<AgentTraceV2[]>([])
   const [editingPolicy, setEditingPolicy] = useState(false)
   const [pendingPolicyAction, setPendingPolicyAction] = useState<PolicyStateAction | null>(null)
   const [pendingTriggerCancel, setPendingTriggerCancel] = useState<string | null>(null)
@@ -89,7 +106,7 @@ export function ProfessorAutonomyPanel({
   const [notice, setNotice] = useState<string | null>(null)
 
   const refresh = useCallback(async () => {
-    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients] = await Promise.all([
+    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients, nextDomainModel, nextRuntimeProfile, nextLearnerEvidence, nextTraces] = await Promise.all([
       listProfessorTeachingProfiles(course.course_id),
       listProfessorProactiveTriggers(course.course_id),
       releaseId ? listProfessorLearningGaps(course.course_id, releaseId) : Promise.resolve(null),
@@ -100,6 +117,14 @@ export function ProfessorAutonomyPanel({
       listProfessorAutonomousActions(course.course_id),
       listProfessorAutonomousOutcomes(course.course_id),
       listProfessorAutonomyRecipients(course.course_id),
+      releaseId
+        ? getProfessorCourseDomainModel(course.course_id, releaseId)
+        : Promise.resolve(null),
+      getProfessorTutoringRuntimeProfile(course.course_id),
+      Promise.all(course.student_account_ids.map((studentId) =>
+        getProfessorLearnerBeliefEvidence(course.course_id, studentId),
+      )),
+      listProfessorAutonomyTraces(course.course_id),
     ])
     setProfiles(nextProfiles)
     setTriggers(nextTriggers)
@@ -109,6 +134,10 @@ export function ProfessorAutonomyPanel({
     setActions(nextActions)
     setOutcomes(nextOutcomes)
     setRecipients(nextRecipients)
+    setDomainModel(nextDomainModel)
+    setRuntimeProfile(nextRuntimeProfile)
+    setLearnerEvidence(nextLearnerEvidence)
+    setTraces(nextTraces)
     onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null)
   }, [course.course_id, course.student_account_ids, onApprovedProfileChange, releaseId])
 
@@ -157,6 +186,70 @@ export function ProfessorAutonomyPanel({
       setProfilePreview(null)
       await refresh()
     }, "Draft profile created. Review its ten behavior cases before approval.")
+  }
+
+  async function createDomainModel(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (!releaseId) return
+    const form = event.currentTarget
+    const data = new FormData(form)
+    const evidence = evidenceChunks.find((item) => item.id === text(data, "evidence_id"))
+    if (!evidence) {
+      setError("Select one current release evidence range for the concept.")
+      return
+    }
+    const conceptId = stableId(text(data, "concept_label"))
+    const objectiveId = stableId(text(data, "objective_statement"))
+    const misconception = text(data, "misconception")
+    await run("domain-model", async () => {
+      await createProfessorCourseDomainModel(course.course_id, {
+        release_id: releaseId,
+        version: 1,
+        objectives: [{
+          objective_id: `objective-${objectiveId}`,
+          statement: text(data, "objective_statement"),
+          concept_ids: [`concept-${conceptId}`],
+        }],
+        concepts: [{
+          concept_id: `concept-${conceptId}`,
+          label: text(data, "concept_label"),
+          description: text(data, "concept_description"),
+          prerequisite_concept_ids: [],
+          canonical_ranges: [{
+            source_artifact_id: evidence.source_artifact_id,
+            source_version: evidence.source_version,
+            source_sha256: evidence.source_sha256,
+            locator: evidence.locator,
+            char_start: evidence.char_start,
+            char_end: evidence.char_end,
+          }],
+        }],
+        misconceptions: misconception ? [{
+          misconception_id: `misconception-${stableId(misconception)}`,
+          concept_id: `concept-${conceptId}`,
+          description: misconception,
+          diagnostic_cues: list(data, "diagnostic_cues").length
+            ? list(data, "diagnostic_cues")
+            : [misconception],
+        }] : [],
+      })
+      form.reset()
+      await refresh()
+    }, "The release-bound course model is approved and immutable.")
+  }
+
+  async function setRuntimeMode(mode: CourseTutoringMode) {
+    const reason = mode === "grounded-assistant"
+      ? "Professor initiated immediate T0 safety rollback."
+      : mode === "bounded-tutoring-graph"
+        ? "Professor selected the historical bounded T1 control."
+        : "Professor selected governed T1-v2 inside the approved policy."
+    await run("runtime-mode", async () => {
+      await updateProfessorTutoringRuntimeProfile(course.course_id, mode, reason)
+      await refresh()
+    }, mode === "grounded-assistant"
+      ? "T0 rollback is active and pending autonomous work was cancelled."
+      : "The course tutoring runtime has been updated.")
   }
 
   async function preparePreview(profile: ProfessorTeachingProfile) {
@@ -307,8 +400,22 @@ export function ProfessorAutonomyPanel({
           {view === "overview" ? <Overview actions={actions} blockers={blockers} policy={policy} pendingTriggers={pendingTriggers.length} onNavigate={setView} /> : null}
           {view === "boundary" ? (
             <div className="space-y-7">
+              <DomainModelSection
+                busy={busy}
+                domainModel={domainModel}
+                evidenceChunks={evidenceChunks}
+                releaseReady={Boolean(releaseId)}
+                onCreate={createDomainModel}
+              />
               <TeachingProfileSection approved={approved} busy={busy} draft={draft} preview={profilePreview} onApprove={approveDisplayedPreview} onCreate={createProfile} onDismissPreview={() => setProfilePreview(null)} onPreview={preparePreview} />
               <PolicySection busy={busy} editing={editingPolicy} pendingAction={pendingPolicyAction} policy={policy} approvedProfile={Boolean(approved)} onCancelAction={() => setPendingPolicyAction(null)} onConfirmAction={() => void confirmPolicyState()} onEdit={() => setEditingPolicy(true)} onRequestAction={setPendingPolicyAction} onSave={savePolicy} />
+              <RuntimeModeSection
+                busy={busy}
+                domainModel={domainModel}
+                policy={policy}
+                profile={runtimeProfile}
+                onSelect={(mode) => void setRuntimeMode(mode)}
+              />
             </div>
           ) : null}
           {view === "learners" ? (
@@ -316,6 +423,7 @@ export function ProfessorAutonomyPanel({
               busy={busy}
               goals={goals}
               learningGaps={learningGaps}
+              learnerEvidence={learnerEvidence}
               pendingCancel={pendingGoalCancel}
               policy={policy}
               recipients={recipients}
@@ -346,7 +454,7 @@ export function ProfessorAutonomyPanel({
               onSchedule={schedule}
             />
           ) : null}
-          {view === "activity" ? <ActivitySection actions={actions} outcomes={outcomes} /> : null}
+          {view === "activity" ? <ActivitySection actions={actions} outcomes={outcomes} traces={traces} /> : null}
         </div>
       </CardContent>
     </Card>
@@ -382,6 +490,56 @@ function Overview({ actions, blockers, policy, pendingTriggers, onNavigate }: { 
         <div className="mt-5 border-t pt-4"><p className="text-xs font-semibold text-muted-foreground">Scheduled check-ins</p><p className="mt-1 text-2xl font-semibold tracking-tight">{pendingTriggers}</p></div>
       </aside>
     </div>
+  )
+}
+
+function DomainModelSection({ busy, domainModel, evidenceChunks, releaseReady, onCreate }: { busy: string | null; domainModel: CourseDomainModelV1 | null; evidenceChunks: ProfessorEvidenceChunkOption[]; releaseReady: boolean; onCreate: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+  return (
+    <section aria-labelledby="course-domain-heading">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div>
+          <h3 id="course-domain-heading" className="flex items-center gap-2 text-sm font-semibold"><BrainCircuit className="size-4" /> Course domain model</h3>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Bind approved objectives and concepts to exact ranges in this release. The tutor may observe evidence, but it cannot invent the course model.</p>
+        </div>
+        <Badge variant={domainModel ? "default" : "outline"}>{domainModel ? `Approved v${domainModel.version}` : "Required for T1-v2"}</Badge>
+      </div>
+      {domainModel ? (
+        <div className="mt-4 divide-y rounded-xl border">
+          <div className="grid gap-4 px-4 py-3 sm:grid-cols-2">
+            <div><p className="text-xs font-semibold text-muted-foreground">Objectives</p><ul className="mt-2 space-y-1.5 text-sm">{domainModel.objectives.map((item) => <li key={item.objective_id}>{item.statement}</li>)}</ul></div>
+            <div><p className="text-xs font-semibold text-muted-foreground">Concepts and source ranges</p><ul className="mt-2 space-y-1.5 text-sm">{domainModel.concepts.map((item) => <li key={item.concept_id}>{item.label} <span className="text-xs text-muted-foreground">· {item.canonical_ranges.length} approved range{item.canonical_ranges.length === 1 ? "" : "s"}</span></li>)}</ul></div>
+          </div>
+          <p className="px-4 py-3 text-xs leading-5 text-muted-foreground">Pinned to release {domainModel.release_id}. Changes require a new release and a new approved model.</p>
+        </div>
+      ) : (
+        <form className="mt-4 grid gap-4 rounded-xl border p-4 sm:grid-cols-2" onSubmit={onCreate}>
+          <p className="sm:col-span-2 text-xs leading-5 text-muted-foreground">Create the first approved objective and concept. More complete course models should be prepared before publishing the next release.</p>
+          <Input label="Course objective" name="objective_statement" placeholder="Explain how cache coherence preserves a shared view" />
+          <Input label="Concept name" name="concept_label" placeholder="Cache coherence" />
+          <TextArea label="Concept description" name="concept_description" placeholder="What the concept means inside this course" />
+          <LabeledSelect label="Canonical evidence range" name="evidence_id" options={evidenceChunks.map((item) => ({ value: item.id, label: item.label }))} />
+          <TextArea label="Known misconception (optional)" name="misconception" placeholder="An invalidation always removes the data immediately" required={false} />
+          <TextArea label="Diagnostic cues (optional)" name="diagnostic_cues" placeholder="always removes, every cache updates at once" required={false} />
+          <Button className="sm:col-span-2 sm:justify-self-end" disabled={busy !== null || !releaseReady || !evidenceChunks.length} type="submit"><ShieldCheck /> {busy === "domain-model" ? "Approving…" : "Approve release-bound model"}</Button>
+        </form>
+      )}
+    </section>
+  )
+}
+
+function RuntimeModeSection({ busy, domainModel, policy, profile, onSelect }: { busy: string | null; domainModel: CourseDomainModelV1 | null; policy: PedagogicalPolicyV2 | null; profile: CourseTutoringRuntimeProfileV1 | null; onSelect: (mode: CourseTutoringMode) => void }) {
+  const current = profile?.mode ?? "server default"
+  return (
+    <section className="border-t pt-6" aria-labelledby="runtime-mode-heading">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="runtime-mode-heading" className="flex items-center gap-2 text-sm font-semibold"><RotateCcw className="size-4" /> Tutor runtime and rollback</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">One course-level setting selects the active flow. T0 rollback cancels pending autonomous work and preserves the audit history.</p></div><Badge variant="outline">{format(current)}</Badge></div>
+      <div className="mt-4 divide-y rounded-xl border">
+        {RUNTIME_MODES.map((item) => {
+          const selected = profile?.mode === item.mode
+          const unavailable = item.mode === "governed-autonomous-tutoring-graph-v2.1" && (!domainModel || !policy)
+          return <div key={item.mode} className="flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"><div><p className="text-sm font-medium">{item.label}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{item.description}</p></div><Button size="sm" variant={item.mode === "grounded-assistant" ? "destructive" : selected ? "default" : "outline"} disabled={busy !== null || selected || unavailable} onClick={() => onSelect(item.mode)}>{selected ? "Active" : item.mode === "grounded-assistant" ? "Roll back to T0" : "Select"}</Button></div>
+        })}
+      </div>
+    </section>
   )
 }
 
@@ -454,7 +612,7 @@ function PolicyForm({ approvedProfile, busy, policy, onSubmit }: { approvedProfi
   )
 }
 
-function LearnersSection({ busy, goals, learningGaps, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learningGaps: ProfessorLearningGapResult | null; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+function LearnersSection({ busy, goals, learnerEvidence, learningGaps, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learnerEvidence: ProfessorLearnerBeliefEvidence[]; learningGaps: ProfessorLearningGapResult | null; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const eligible = recipients.filter((recipient) => recipient.goal_eligible)
   return (
     <div className="space-y-7">
@@ -509,6 +667,19 @@ function LearnersSection({ busy, goals, learningGaps, pendingCancel, policy, rec
           <EmptyState icon={Target} title="No learner goals" description="Create a finite goal after the professor profile and autonomy boundary are active." />
         )}
       </section>
+      <section className="border-t pt-6" aria-labelledby="learner-evidence-heading">
+        <div><h3 id="learner-evidence-heading" className="flex items-center gap-2 text-sm font-semibold"><BrainCircuit className="size-4" /> Observed learning evidence</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Evidence counts and uncertainty are shown without converting them into a model-owned mastery score.</p></div>
+        {learnerEvidence.some((item) => item.belief_states.length) ? (
+          <ul className="mt-4 divide-y rounded-lg border">
+            {learnerEvidence.flatMap((item) => item.belief_states.slice(0, 1).map((belief) => (
+              <li key={`${item.student_id}-${belief.release_id}`} className="px-3 py-3">
+                <div className="flex flex-wrap items-start justify-between gap-2"><p className="text-sm font-medium">{item.student_id}</p><span className="text-xs text-muted-foreground">Revision {belief.revision} · {new Date(belief.updated_at).toLocaleString()}</span></div>
+                {belief.concepts.length ? <ul className="mt-2 grid gap-2 sm:grid-cols-2">{belief.concepts.slice(0, 6).map((concept) => <li key={concept.concept_id} className="rounded-lg bg-[var(--shell)] px-3 py-2"><p className="text-xs font-semibold">{format(concept.concept_id)}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{concept.observation_count} observed · {concept.assessed_evidence_count} assessed · {Math.round(concept.uncertainty * 100)}% uncertainty</p></li>)}</ul> : <p className="mt-2 text-xs text-muted-foreground">No concept evidence recorded yet.</p>}
+              </li>
+            )))}
+          </ul>
+        ) : <EmptyState icon={BrainCircuit} title="No learner evidence yet" description="V2 observations will appear after a governed tutoring turn is committed." />}
+      </section>
       <section className="border-t pt-6" aria-labelledby="learning-gap-heading">
         <div className="flex items-center justify-between gap-3"><div><h3 id="learning-gap-heading" className="flex items-center gap-2 text-sm font-semibold"><UsersRound className="size-4" /> Learning-gap insights</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Only privacy-safe aggregate signals are visible.</p></div><span className="text-xs text-muted-foreground">Minimum 5 learners</span></div>
         {learningGaps?.aggregation.visible_aggregates.length ? (
@@ -534,7 +705,7 @@ function LearnersSection({ busy, goals, learningGaps, pendingCancel, policy, rec
   )
 }
 
-function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy, recipients, triggers, onCancelRequest, onCancelTrigger, onSchedule }: { approved: boolean; busy: string | null; evidenceChunks: Array<{ id: string; label: string }>; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; triggers: ProfessorProactiveTrigger[]; onCancelRequest: (triggerId: string | null) => void; onCancelTrigger: (trigger: ProfessorProactiveTrigger) => void; onSchedule: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy, recipients, triggers, onCancelRequest, onCancelTrigger, onSchedule }: { approved: boolean; busy: string | null; evidenceChunks: ProfessorEvidenceChunkOption[]; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; triggers: ProfessorProactiveTrigger[]; onCancelRequest: (triggerId: string | null) => void; onCancelTrigger: (trigger: ProfessorProactiveTrigger) => void; onSchedule: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const eligible = recipients.filter((recipient) => recipient.outreach_eligible)
   return (
     <section aria-labelledby="outreach-heading">
@@ -546,7 +717,7 @@ function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy
   )
 }
 
-function ActivitySection({ actions, outcomes }: { actions: AutonomousActionV1[]; outcomes: AutonomousOutcomeV1[] }) {
+function ActivitySection({ actions, outcomes, traces }: { actions: AutonomousActionV1[]; outcomes: AutonomousOutcomeV1[]; traces: AgentTraceV2[] }) {
   const outcomeByAction = new Map(outcomes.map((outcome) => [outcome.action_id, outcome]))
   return (
     <section aria-labelledby="autonomy-audit-heading">
@@ -587,6 +758,15 @@ function ActivitySection({ actions, outcomes }: { actions: AutonomousActionV1[];
       ) : (
         <EmptyState icon={Activity} title="No activity recorded" description="The audit remains empty until an eligible event reaches the bounded worker." />
       )}
+      <div className="mt-7 border-t pt-6">
+        <h3 className="text-sm font-semibold">Reactive turn traces</h3>
+        <p className="mt-1 text-xs leading-5 text-muted-foreground">Sanitized state revisions, provider accounting, checkpoints, and restart lineage. Raw prompts and chain-of-thought are not retained.</p>
+        {traces.length ? <ul className="mt-4 divide-y rounded-lg border">{traces.slice(0, 30).map((trace) => {
+          const passed = Object.values(trace.validation_results).filter(Boolean).length
+          const total = Object.keys(trace.validation_results).length
+          return <li key={trace.trace_id} className="px-3 py-3"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-medium">State {trace.input_state_revision} → {trace.output_state_revision}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{trace.fast_path ? "Deterministic fast path" : "Semantic plan path"} · {passed}/{total} checks · {trace.restart_count} restarts · {trace.checkpoint_ids.length} checkpoints</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Requested {trace.generator_requested_model ?? "deterministic"} · returned {trace.generator_model ?? "not called"} · {trace.generation_calls + trace.repair_calls} calls · {trace.provider_input_tokens + trace.provider_output_tokens} tokens · ${trace.provider_cost_usd.toFixed(4)}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{trace.decision_reason}</p></div><Badge variant="outline">{trace.graph_version}</Badge></div></li>
+        })}</ul> : <EmptyState icon={Activity} title="No reactive V2 traces" description="The first governed T1-v2 tutoring turn will create a sanitized node and restart trace." />}
+      </div>
     </section>
   )
 }
@@ -631,6 +811,7 @@ function LabeledSelect({ label, name, options }: { label: string; name: string; 
 function text(data: FormData, name: string): string { return String(data.get(name) ?? "").trim() }
 function list(data: FormData, name: string): string[] { return text(data, name).split(",").map((item) => item.trim()).filter(Boolean) }
 function format(value: string): string { const label = value.replaceAll("_", " ").replaceAll("-", " "); return `${label.charAt(0).toUpperCase()}${label.slice(1)}` }
+function stableId(value: string): string { return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80) || "item" }
 function message(reason: unknown): string { return reason instanceof Error ? reason.message : "The request failed. Please try again." }
 
 function policyActionTitle(action: PolicyStateAction): string { return action === "activate" ? "Activate governed autonomy?" : action === "pause" ? "Pause autonomous processing?" : "Use the global kill switch?" }
@@ -664,4 +845,10 @@ const DEFAULT_POLICY_ACTIONS: AutonomousActionKind[] = [
   "issue-retrieval-practice",
   "schedule-follow-up",
   "create-professor-insight-draft",
+]
+
+const RUNTIME_MODES: Array<{ mode: CourseTutoringMode; label: string; description: string }> = [
+  { mode: "governed-autonomous-tutoring-graph-v2.1", label: "T1-v2 governed autonomy", description: "Uses release-bound concepts, observed evidence, node checkpoints, and deterministic safety gates." },
+  { mode: "bounded-tutoring-graph", label: "T1-v1 historical control", description: "Keeps the earlier reactive bounded graph available for regression and rollback comparison." },
+  { mode: "grounded-assistant", label: "T0 safety rollback", description: "Stops autonomous work and returns the course to grounded, non-autonomous tutoring." },
 ]

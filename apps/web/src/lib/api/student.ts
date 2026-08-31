@@ -7,6 +7,7 @@ import type {
   StudentCourse,
   StudentOutreachPreference,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
   StudentTutorTurn,
 } from "@/lib/api/types"
 
@@ -133,6 +134,16 @@ export function getStudentConversation(
 ): Promise<StudentConversationView> {
   return studentRequest<StudentConversationView>(
     `/api/student/conversations/${pathSegment(conversationId)}`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
+export function getStudentLearnerEvidence(
+  conversationId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentLearnerEvidence> {
+  return studentRequest<StudentLearnerEvidence>(
+    `/api/student/conversations/${pathSegment(conversationId)}/learner-evidence`,
     { headers: studentHeaders(accountId) },
   )
 }

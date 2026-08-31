@@ -1,4 +1,5 @@
 import json
+from typing import Literal
 
 from pydantic import BaseModel, Field, field_validator, model_validator
 
@@ -12,6 +13,9 @@ from src.digital_twin.student.models import (
 from src.digital_twin.student.autonomy_models import (
     AutonomousActionKind,
     AutonomousEventKind,
+    CourseConceptV1,
+    CourseMisconceptionV1,
+    CourseObjectiveV1,
 )
 from src.digital_twin.student.teaching_profile import TeachingProfileDepth
 from src.digital_twin.tutor_policy import (
@@ -181,6 +185,26 @@ class AutonomyPolicyRequest(BaseModel):
     autonomy_enabled: bool
     paused: bool = False
     kill_switch: bool = False
+
+
+class CourseDomainModelCreateRequest(BaseModel):
+    release_id: str = Field(min_length=1, max_length=128)
+    version: int = Field(ge=1)
+    objectives: list[CourseObjectiveV1] = Field(min_length=1, max_length=64)
+    concepts: list[CourseConceptV1] = Field(min_length=1, max_length=256)
+    misconceptions: list[CourseMisconceptionV1] = Field(
+        default_factory=list,
+        max_length=256,
+    )
+
+
+class CourseTutoringRuntimeProfileRequest(BaseModel):
+    mode: Literal[
+        "grounded-assistant",
+        "bounded-tutoring-graph",
+        "governed-autonomous-tutoring-graph-v2.1",
+    ]
+    reason: str = Field(min_length=1, max_length=500)
 
 
 class AutonomousGoalCreateRequest(BaseModel):

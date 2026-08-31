@@ -1,11 +1,11 @@
 {
   "audit_status_counts": {
-    "audited": 793
+    "audited": 797
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 181,
-    "active_runtime": 132,
+    "active_or_unclassified_tooling": 182,
+    "active_runtime": 134,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 169
+    "verification": 170
   },
-  "file_count": 793,
+  "file_count": 797,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a9580f37f8ff435656804ad201fe87cead566edc5cf3d292c6ea5621a35ca9f6",
+  "record_sha256": "467674741f6eadaacbe6a280f9973bece19b6ed0b9028851107d823c3c0443e4",
   "records": [
     {
       "audit": {
@@ -435,7 +435,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "d02718de0f7cce570b04b2f600379dd0ced8ad7b20eb6478bbf28242277b73ee"
+      "sha256": "622dfa55ea035fda79aa598ee8e4de737ed4c79c842b0fadbfffd24e6aac9b75"
     },
     {
       "audit": {
@@ -451,7 +451,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "5e4bb98aa032d30c24c0d6de4ac84f8ec7610f1702d1f1c561061b7aa6ca2afb"
+      "sha256": "eb72718e31542c23d8cfeca473c0a04f22820223f68fcdd3485b70dba8198873"
     },
     {
       "audit": {
@@ -483,7 +483,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "risk": "high",
-      "sha256": "ec1a988eff202594cd7b64dc38e0f3ee96c124309d09dab10c5b7c50c507e79f"
+      "sha256": "90b578997718aee2b0eeb8646e556475272a294208338483fdbabe92f59ccb92"
     },
     {
       "audit": {
@@ -787,7 +787,7 @@
       "package_commands": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
       "risk": "high",
-      "sha256": "71cec0669ccde953eb886914b2844cc1f04a00eac8272209575d75ce6c3937d6"
+      "sha256": "3eed6109bbd1ef10f9acd0be963167380f6eb29d3ff087a669dc73cbb2384aa3"
     },
     {
       "audit": {
@@ -915,7 +915,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.ts",
       "risk": "high",
-      "sha256": "3f9e50cc4056174ebb45d574ef65bc41e835cbe498cddd420cd45a243ea848ed"
+      "sha256": "09adf7791d2ba6fdba76535c883dfa3fe1cd5d2bd1a3193b346407ceb73ddfb5"
     },
     {
       "audit": {
@@ -947,7 +947,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/student.ts",
       "risk": "high",
-      "sha256": "2c465e91b60223599d5e1191efca520d076ba2d1dcab0b8dc560cd5678e13f81"
+      "sha256": "9fb0449b57a5952fdead0c02815f5f6b079670978226fc822bec25d5125cc88b"
     },
     {
       "audit": {
@@ -963,7 +963,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/types.ts",
       "risk": "high",
-      "sha256": "75761257344afc37f0b6f79221d32bb771a9aa32bb412aed226724de633442d4"
+      "sha256": "9e33878a9977497635cab9d7fe576e4da99f25eade79cbcdb6f885a2d65b567d"
     },
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "29d3e6daa8e78629931dda2b12423b34cdcd6d44f2ac5b3f16eb37681f9c2eff"
+      "sha256": "0df03b9597ce8c245fc2f1fd3c560b81949ab8ae3d5359e53b760b7fe1e66412"
     },
     {
       "audit": {
@@ -1443,7 +1443,7 @@
       "package_commands": [],
       "path": "pyproject.toml",
       "risk": "medium",
-      "sha256": "21ae48417290ed17634b39fc910c60b1ce1ff04a6c1e50ffcc0a30fb836e3e34"
+      "sha256": "305e912bc57960d1af6d612a01701f08fc577f2361ae524cda1d0732086b6e4c"
     },
     {
       "audit": {
@@ -8452,6 +8452,24 @@
     },
     {
       "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual finite-loop and side-effect review plus the network-free 30-day implementation run; restart, goal expiry, duplicate suppression, provider-call absence, and no post-expiry execution all passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:governed-autonomy-v2-1-implementation"
+      ],
+      "path": "scripts/verify_governed_autonomy_v2_1_implementation.py",
+      "risk": "high",
+      "sha256": "8e01cdf4254118629525c0cddebf618daca051a1ed0364a737115c71aeb6342c"
+    },
+    {
+      "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
@@ -8598,7 +8616,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "03b98b43842e2387c08b510c445586a72b2d8c45bead847ae7666eb6c8c6be01"
+      "sha256": "ab44606d3bdfe913c991d1d76204aa383ca6ec1020ea46002b03549b20be3a5c"
     },
     {
       "audit": {
@@ -8726,7 +8744,7 @@
       "package_commands": [],
       "path": "services/api/app/routers/publication.py",
       "risk": "high",
-      "sha256": "3b7a7d71fe640f3fe61cd9a173393c4be15b35d640cc55fd0d0e5aaa7fe61db6"
+      "sha256": "6ebe539f29b23f9c18b5e49c9ebacd43efccbbe4ba78665dba0543163c28b782"
     },
     {
       "audit": {
@@ -8742,7 +8760,7 @@
       "package_commands": [],
       "path": "services/api/app/routers/student.py",
       "risk": "high",
-      "sha256": "5f68526381b90cfaa0e31244b0ca6372f8d398a5d6e8eac46ca5d798b2ea0dfb"
+      "sha256": "d8b07a0fda26933499b088ae547ba0736e7915ba85640a821b4be178a1ae29da"
     },
     {
       "audit": {
@@ -8758,7 +8776,7 @@
       "package_commands": [],
       "path": "services/api/app/schemas.py",
       "risk": "high",
-      "sha256": "7b823453698f808eddbcbbc91373d81e830aac3a42e4ca580e7ff586fae1f745"
+      "sha256": "91e6c90f4eaecbfa9d1bda107a05ccaef23bb40218117d51638b4cb764d38ae6"
     },
     {
       "audit": {
@@ -8950,7 +8968,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "994ee5f44416008b2a148bdd0f0bef61038cd2d70243b7646e30771355aec29d"
+      "sha256": "c4c59ffa2fa18ae01bc07ca797319cb812aade0d3215bfc79e21103a245c1dda"
     },
     {
       "audit": {
@@ -9174,7 +9192,23 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "c911797f298e422415e74f7809a6821cce24bdd21f2a4ad7bdadb98b9cb3864f"
+      "sha256": "c1f4212ee2f0d723057393ba42fee90ab37d3e863a70bb85661bfe536e2189bb"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Manual contract review and focused tests verified case/gold separation, event ordering, observable action/state outputs, time advancement, restart handling, and independence from graph nodes, database tables, and runtime chunk IDs.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/autonomy_contract.py",
+      "risk": "high",
+      "sha256": "3806d4cccf69f574e7d4b6207959964fcd25159ced52e00c431976f0173961cf"
     },
     {
       "audit": {
@@ -10374,7 +10408,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "847c87d05e94ba9077204011f0a2ba7b657598d7ecc6b8ed984ac91b050969be"
+      "sha256": "56062187370a6128059a6777617fd65663dc98d4e27658530df15308da3b09a2"
     },
     {
       "audit": {
@@ -10390,7 +10424,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_control.py",
       "risk": "high",
-      "sha256": "87ec36e7df809aae32a6edb2dde05bc68cc0184a19f50d6ab13c573158bec33f"
+      "sha256": "407f2dd4ccc089ab52ddb0cf8bd6b3f8d99a3eea31f07ef921f9d3c76ab1509c"
     },
     {
       "audit": {
@@ -10406,7 +10440,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_models.py",
       "risk": "high",
-      "sha256": "a3f7d7d1ef72610cdb56d4bb682b19193f6445cc709b158156296ea10601c634"
+      "sha256": "f59bd74315f485a6994da7f079c93a90a56222682a6d0b50b0ee9bfee8f71a60"
     },
     {
       "audit": {
@@ -10422,7 +10456,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
       "risk": "high",
-      "sha256": "282a2402b1869267ec171deec0b9737f5629cb0b68e3a51eef94df57c78cbf4b"
+      "sha256": "5f87d6bdbc731e4972bda55f9cad6a0d7c19740a4476e9a5f3e7579542ef01bb"
     },
     {
       "audit": {
@@ -10438,7 +10472,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_service.py",
       "risk": "high",
-      "sha256": "e15fc7652209771dc2d57ea82b6f0b74f3be448fc1375406e98129a176f2eb95"
+      "sha256": "acb8fa678ddf8a02c50243205c472005505ab543e3646070e1863ed61d58f8ec"
     },
     {
       "audit": {
@@ -10455,6 +10489,22 @@
       "path": "src/digital_twin/student/fixtures.py",
       "risk": "high",
       "sha256": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority-boundary review and focused regressions verified deterministic assessed-evidence counts, reconciled attribution totals, bounded confidence/uncertainty, immutable provenance, monotonic revisions, and no model-written mastery field.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/learner_belief.py",
+      "risk": "high",
+      "sha256": "7ff67977d1ead9f89f5fa55f4461e6d4bd25bdc15d4dbd576d439031f4f953a4"
     },
     {
       "audit": {
@@ -10486,7 +10536,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/migrations.py",
       "risk": "high",
-      "sha256": "54413c1d93c5f4754da75a336c3d5b15d55e280d66ef83fd7708303909f35196"
+      "sha256": "93fba2c6e50f2ec775fcf3158f63a48ff3d543c91b118c41bc68f2b00bbf78ef"
     },
     {
       "audit": {
@@ -10550,7 +10600,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "4dcaf013123964f0c436a28672a88e8d1e69afa229867f0431da255dd18b9bdd"
+      "sha256": "02222e04ef597194f33a3084059fcdac10f19e503599a0c69f4ba9946c743844"
     },
     {
       "audit": {
@@ -10566,7 +10616,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "1f77547a6eac960f4ffeebc34454ec720e86cade3fe7dc325edb517f5ca3c984"
+      "sha256": "1277cfd4ec81d4a28dea7cdce85daad974aaee5d18778eee48ea96fc26568e73"
     },
     {
       "audit": {
@@ -10598,7 +10648,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "0b26521e5d73ea3ed520304ca6eabed7621ca9840caa970753144484a0cc0301"
+      "sha256": "aa59860c7f32fea2c087d9a66d11d1bcdbf8b16277e6560ed828cb2f27f4b89a"
     },
     {
       "audit": {
@@ -10630,7 +10680,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "77270a76ec7aa2d0bc419a1c5e14ac6d9b44532182cec33451b31a93a9c7950c"
+      "sha256": "6509a8b6ce2bb1db0a1f4e5b4bef1c19b84fd4d1d5fc84c68a2e884ebbb56688"
     },
     {
       "audit": {
@@ -10710,7 +10760,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "e22e59bd27e98b10f6def979deb2b978de32d59c2f1702f9a454a9dfa267dc9b"
+      "sha256": "d599ab60c7ab1fa2327afb784122de91b56701498878f920c0bf8d7d3357944f"
     },
     {
       "audit": {
@@ -10854,7 +10904,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "b00f53a45d1dfdce0a6a547b95f87f41e2266c52e1dc1c1718514f5fa001584d"
+      "sha256": "cf377190f1e9feb4527973f37841b007bfea7e4fd9650f0bdebdf453f650e78b"
     },
     {
       "audit": {
@@ -11318,7 +11368,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "8d37a3d9483e0c47cc400a28de0656ff0b1a492e57efcf4eebe40415b310d748"
+      "sha256": "f87ba8ba92d45578fa1678baa02b463279927e9dd85099876c4d687fef592b30"
     },
     {
       "audit": {
@@ -11991,6 +12041,22 @@
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
       "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Focused network-free regressions cover schema rejection, duplicate and out-of-order events, gold isolation, time progression, restart forwarding, observable action collection, and final state capture.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_autonomy_evaluation_contract.py",
+      "risk": "medium",
+      "sha256": "941d03245a5d61d91584d11d7be197e829aab6b2fabb5d3b459088d38be9f545"
     },
     {
       "audit": {
@@ -12870,7 +12936,7 @@
       "package_commands": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "risk": "medium",
-      "sha256": "37c7ecb673e9bedb86f1b299075bfdaa377ab58a5e06d9b75e4704eb14e56f66"
+      "sha256": "53f744353f33c4d51574568c278a09ad0fd90deaacd235773799c06d523d2f01"
     },
     {
       "audit": {
@@ -13334,12 +13400,12 @@
       "package_commands": [],
       "path": "uv.lock",
       "risk": "medium",
-      "sha256": "a730c31642dae7502a38f4dc5e1f97cce1d2a9143763d71d6449a5800536c0f3"
+      "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
     }
   ],
   "risk_counts": {
-    "high": 610,
-    "medium": 183
+    "high": 613,
+    "medium": 184
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

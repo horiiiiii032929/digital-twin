@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 from datetime import UTC, datetime, timedelta
 from typing import Literal
 from uuid import uuid4
@@ -19,6 +20,8 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
     AutonomousGoalStatus,
     AutonomousGoalV1,
+    LearnerBeliefStateV2,
+    LearnerObservationV2,
     AutonomousOutcomeKind,
     GroundedTutorResponseV2,
     PedagogicalPolicyV2,
@@ -201,7 +204,9 @@ class GovernedAutonomyService:
             raise ValueError("autonomy lease must be between 30 and 900 seconds")
         self.repository = repository
         self.outreach = outreach
-        self.graph = graph or GovernedAutonomousTutoringGraph()
+        self.graph = graph or GovernedAutonomousTutoringGraph(
+            checkpoint_database_path=getattr(repository, "path", ":memory:"),
+        )
         self.evidence_assessor = evidence_assessor or AutonomousEvidenceAssessor()
         self.goal_manager = goal_manager or DeterministicAutonomousGoalManager()
         self.lease_seconds = lease_seconds
@@ -517,6 +522,16 @@ class GovernedAutonomyService:
                 learner_state = (
                     self.repository.get_learner_state(current.id) if current else None
                 )
+                learner_belief = (
+                    self.repository.get_learner_belief_state_v2(current.id)
+                    if current
+                    else None
+                )
+                learner_observations = (
+                    self.repository.list_learner_observations_v2(current.id)
+                    if current
+                    else []
+                )
                 goals = self.repository.list_autonomous_goals(
                     student_id, policy.course_id, active_only=True
                 )
@@ -529,7 +544,7 @@ class GovernedAutonomyService:
                             release=release,
                             policy=policy,
                             objective=objective,
-                            learner_state=learner_state,
+                            learner_state=learner_belief or learner_state,
                             observed_at=instant.isoformat(),
                             planner_model=self.graph.planner.model_id,
                             generator_model=self.graph.generator.model_id,
@@ -556,6 +571,8 @@ class GovernedAutonomyService:
                         goal,
                         current=current,
                         prior_release_conversation=old,
+                        learner_belief=learner_belief,
+                        learner_observations=learner_observations,
                         now=instant,
                         inactivity_hours=inactivity_hours,
                     )
@@ -573,12 +590,20 @@ class GovernedAutonomyService:
                             ),
                             None,
                         )
+                    latest_v2_observation = (
+                        learner_observations[-1] if learner_observations else None
+                    )
                     observation_key = (
-                        latest_student_message.id
+                        latest_v2_observation.observation_id
+                        if latest_v2_observation is not None
+                        else latest_student_message.id
                         if latest_student_message is not None
                         else release.id
                     )
-                    key = f"observer:{event.value}:{goal.goal_id}:{observation_key}"
+                    key_digest = hashlib.sha256(
+                        f"{event.value}:{goal.goal_id}:{observation_key}".encode("utf-8")
+                    ).hexdigest()
+                    key = f"observer:{event.value}:{key_digest}"
                     if self.repository.get_autonomous_opportunity_by_key(key) is not None:
                         continue
                     primary = evidence[0]
@@ -588,12 +613,17 @@ class GovernedAutonomyService:
                         goal_id=goal.goal_id,
                         event_kind=event,
                         concept_id=(
-                            primary.source_artifact_id or primary.document_id
+                            latest_v2_observation.concept_ids[0]
+                            if latest_v2_observation is not None
+                            and latest_v2_observation.concept_ids
+                            else primary.source_artifact_id or primary.document_id
                         )[:128],
                         source_chunk_id=primary.id,
                         source_chunk_ids=[chunk.id for chunk in evidence],
                         supporting_observation_ids=(
-                            [latest_student_message.id]
+                            [latest_v2_observation.observation_id]
+                            if latest_v2_observation is not None
+                            else [latest_student_message.id]
                             if latest_student_message is not None
                             else []
                         ),
@@ -681,12 +711,28 @@ class GovernedAutonomyService:
                 None,
             )
             if goal is None and len(goals) < policy.max_active_goals:
+                current_conversation = next(
+                    (
+                        item
+                        for item in self.repository.list_course_conversations(course_id)
+                        if item.student_id == decision.student_id
+                        and item.release_id == release.id
+                    ),
+                    None,
+                )
+                learner_belief = (
+                    self.repository.get_learner_belief_state_v2(
+                        current_conversation.id
+                    )
+                    if current_conversation is not None
+                    else None
+                )
                 goal = self.goal_manager.build_goal(
                     student_id=decision.student_id,
                     release=release,
                     policy=policy,
                     objective=objective,
-                    learner_state=None,
+                    learner_state=learner_belief,
                     observed_at=instant.isoformat(),
                     planner_model=self.graph.planner.model_id,
                     generator_model=self.graph.generator.model_id,
@@ -736,6 +782,8 @@ class GovernedAutonomyService:
         *,
         current,
         prior_release_conversation,
+        learner_belief: LearnerBeliefStateV2 | None,
+        learner_observations: list[LearnerObservationV2],
         now: datetime,
         inactivity_hours: int,
     ) -> AutonomousEventKind | None:
@@ -743,6 +791,19 @@ class GovernedAutonomyService:
             return AutonomousEventKind.NEW_COURSE_RELEASE
         if current is None:
             return None
+        if learner_belief is not None and learner_observations:
+            latest = learner_observations[-1]
+            if latest.perception.misconception_observed:
+                return AutonomousEventKind.MISCONCEPTION
+            recent = learner_observations[-2:]
+            if (
+                len(recent) == 2
+                and all(item.perception.confusion >= 0.7 for item in recent)
+                and bool(set(recent[0].concept_ids) & set(recent[1].concept_ids))
+            ):
+                return AutonomousEventKind.REPEATED_CONFUSION
+            if latest.assessment_outcome.value in {"partial", "incorrect"}:
+                return AutonomousEventKind.PRACTICE_INCOMPLETE
         messages = self.repository.list_messages(current.id)
         latest_student = next(
             (message for message in reversed(messages) if message.role == "student"),

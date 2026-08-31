@@ -5,6 +5,7 @@ import {
   StudentApiError,
   createStudentConversation,
   getStudentConversation,
+  getStudentLearnerEvidence,
   dismissStudentOutreach,
   listStudentAutonomousGoals,
   listStudentOutreach,
@@ -23,6 +24,7 @@ import type {
   StudentCourse,
   StudentOutreachPreference,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
 } from "@/lib/api"
 import {
   forgetStudentConversation,
@@ -55,6 +57,7 @@ export type StudentWorkspaceController = {
   isSubmitting: boolean
   outreachMessages: StudentProactiveMessageView[]
   autonomousGoals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
   inAppOutreachEnabled: boolean
   outreachSnoozedUntil: string | null
   isLoadingOutreach: boolean
@@ -104,6 +107,8 @@ export function useStudentWorkspace(
     StudentProactiveMessageView[]
   >([])
   const [autonomousGoals, setAutonomousGoals] = useState<AutonomousGoalV1[]>([])
+  const [learnerEvidence, setLearnerEvidence] =
+    useState<StudentLearnerEvidence | null>(null)
   const [outreachPreferences, setOutreachPreferences] = useState<
     StudentOutreachPreference[]
   >([])
@@ -147,6 +152,7 @@ export function useStudentWorkspace(
       setMessages([])
       setCitationsByMessage({})
       setSelectedCitation(null)
+      setLearnerEvidence(null)
       setError(null)
       setIsLoadingConversation(true)
       pendingRequestRef.current = null
@@ -167,11 +173,14 @@ export function useStudentWorkspace(
             const tutorMessages = view.messages.filter(
               (message) => message.role === "tutor",
             )
-            const citationLists = await Promise.all(
-              tutorMessages.map((message) =>
-                listStudentMessageCitations(message.id, accountId),
+            const [citationLists, nextLearnerEvidence] = await Promise.all([
+              Promise.all(
+                tutorMessages.map((message) =>
+                  listStudentMessageCitations(message.id, accountId),
+                ),
               ),
-            )
+              getStudentLearnerEvidence(view.conversation.id, accountId),
+            ])
             if (operation !== operationRef.current) return
 
             const nextCitations = Object.fromEntries(
@@ -187,6 +196,7 @@ export function useStudentWorkspace(
             setMessages(view.messages)
             setCitationsByMessage(nextCitations)
             setSelectedCitation(latestCitation ?? null)
+            setLearnerEvidence(nextLearnerEvidence)
             setIsLoadingConversation(false)
             return
           }
@@ -216,6 +226,7 @@ export function useStudentWorkspace(
           ),
         )
         setConversation(created)
+        setLearnerEvidence(null)
         setIsLoadingConversation(false)
       } catch (caught) {
         if (operation !== operationRef.current) return
@@ -410,6 +421,14 @@ export function useStudentWorkspace(
         [turn.tutor_message.id]: turn.citations,
       }))
       setSelectedCitation(turn.citations[0] ?? null)
+      try {
+        setLearnerEvidence(
+          await getStudentLearnerEvidence(conversation.id, accountId),
+        )
+      } catch {
+        // The completed tutoring turn remains authoritative if this optional
+        // evidence summary is temporarily unavailable.
+      }
       setDraft("")
       outreachReplyRef.current = null
       pendingRequestRef.current = null
@@ -539,6 +558,7 @@ export function useStudentWorkspace(
     isSubmitting,
     outreachMessages,
     autonomousGoals,
+    learnerEvidence,
     inAppOutreachEnabled:
       outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
       false,

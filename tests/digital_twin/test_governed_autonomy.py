@@ -17,6 +17,12 @@ from src.digital_twin.grounding.models import (
 )
 from src.digital_twin.student import (
     Conversation,
+    CanonicalSourceRangeV1,
+    CourseConceptV1,
+    CourseDomainModelV1,
+    CourseObjectiveV1,
+    CourseTutoringRuntimeProfileV1,
+    LearningGapPseudonymizer,
     Message,
     OutreachChannel,
     ProactiveOutreachService,
@@ -28,9 +34,16 @@ from src.digital_twin.student import (
     seed_synthetic_student_workflow,
 )
 from src.digital_twin.student.autonomy_models import (
+    AssessmentOutcome,
     AutonomousActionKind,
     AutonomousEventKind,
+    ConceptAttributionV2,
+    LearnerObservationV2,
     PedagogicalPolicyV2,
+    TurnPerceptionV2,
+)
+from src.digital_twin.student.learner_belief import (
+    DeterministicEvidenceCountBeliefEstimator,
 )
 from src.digital_twin.student.autonomy_control import AutonomousEvidenceAssessor
 from src.digital_twin.student.autonomy_runtime import (
@@ -45,7 +58,14 @@ from src.digital_twin.student.autonomy_service import (
     GovernedAutonomyService,
     RepositoryGroundedWordingGenerator,
 )
-from src.digital_twin.student.tutoring_graph import TutoringMode
+from src.digital_twin.student.tutoring_graph import (
+    GovernedReactiveTutoringGraphV2,
+    LiveReactiveSemanticPlanner,
+    TutoringGraphInput,
+    TutoringMode,
+    initial_learner_state,
+    resolve_policy_action,
+)
 
 
 NOW = datetime(2026, 8, 31, 4, 0, tzinfo=UTC)
@@ -85,6 +105,18 @@ class _UnsupportedClaimGenerator:
                 latency_ms=0,
             ),
         )
+
+
+class _UnavailableV2Generator:
+    implementation_id = "unavailable-v2-generator"
+
+    def __init__(self) -> None:
+        self.calls = 0
+
+    async def generate_for_intent(self, *args, **kwargs):
+        del args, kwargs
+        self.calls += 1
+        raise RuntimeError("synthetic provider outage")
 
 
 def _autonomy_fixture(tmp_path):
@@ -127,6 +159,44 @@ def _autonomy_fixture(tmp_path):
     )
     repository.save_release(release)
     repository.publish_release(release.id)
+    chunk = release.chunks[0]
+    repository.save_course_domain_model(
+        CourseDomainModelV1(
+            domain_model_id="domain-cache-coherence-v1",
+            course_id=fixture.course_a_id,
+            release_id=release.id,
+            release_sha256="d" * 64,
+            version=1,
+            objectives=[
+                CourseObjectiveV1(
+                    objective_id="objective-cache-coherence",
+                    statement=OBJECTIVE,
+                    concept_ids=["cache-coherence"],
+                )
+            ],
+            concepts=[
+                CourseConceptV1(
+                    concept_id="cache-coherence",
+                    label="Cache coherence",
+                    description=(
+                        "Cache coherence keeps replicated processor data consistent; "
+                        "invalidation prevents cached copies from diverging."
+                    ),
+                    canonical_ranges=[
+                        CanonicalSourceRangeV1(
+                            source_artifact_id=chunk.source_artifact_id,
+                            source_version=chunk.source_version,
+                            source_sha256=chunk.source_checksum or chunk.content_hash,
+                            locator=chunk.locator,
+                            char_start=0,
+                            char_end=len(chunk.text),
+                        )
+                    ],
+                )
+            ],
+            approved_by=fixture.professor_id,
+        )
+    )
     outreach = ProactiveOutreachService(repository)
     outreach.update_preference(
         fixture.student_a_id,
@@ -416,6 +486,7 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
     graph = GovernedAutonomousTutoringGraph(
         planner=planner,
         generator=DeterministicAutonomousWordingGenerator(),
+        checkpoint_database_path=repository.path,
     )
     policy = repository.get_autonomy_policy(fixture.course_a_id)
     chunk = release.chunks[0]
@@ -453,6 +524,71 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
     assert result.trace.repair_calls == 0
     assert result.trace.graph_version == GRAPH_VERSION
     assert result.trace.generator_model == DETERMINISTIC_GENERATOR_MODEL
+
+
+@pytest.mark.asyncio
+async def test_proactive_uncertain_generator_call_is_not_repeated(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(service, fixture, release)
+    policy = repository.get_autonomy_policy(fixture.course_a_id)
+    chunk = release.chunks[0]
+    evidence_key = ":".join(
+        (
+            chunk.source_artifact_id,
+            str(chunk.source_version),
+            chunk.content_hash,
+            chunk.locator,
+        )
+    )
+    job = AutonomousJobInput(
+        opportunity=opportunity,
+        goal=repository.get_autonomous_goal(opportunity.goal_id),
+        policy=policy,
+        professor_id=fixture.professor_id,
+        current_release_id=release.id,
+        current_profile_id=policy.approved_profile_id,
+        current_profile_sha256=policy.approved_profile_sha256,
+        membership_active=True,
+        consent_active=True,
+        evidence_keys=[evidence_key],
+        evidence_chunk_ids=[chunk.id],
+        evidence_complete=True,
+        evidence_unique=True,
+        evidence_current=True,
+        evidence_authorized=True,
+        now=NOW.isoformat(),
+    )
+
+    class SimulatedProcessExit(BaseException):
+        pass
+
+    class InterruptingGenerator:
+        model_id = "synthetic-live-generator"
+
+        def __init__(self):
+            self.calls = 0
+
+        async def generate(self, job, plan):
+            self.calls += 1
+            raise SimulatedProcessExit()
+
+    generator = InterruptingGenerator()
+    graph = GovernedAutonomousTutoringGraph(
+        generator=generator,
+        checkpoint_database_path=repository.path,
+    )
+    with pytest.raises(SimulatedProcessExit):
+        await graph.run(job)
+
+    resumed = await GovernedAutonomousTutoringGraph(
+        generator=generator,
+        checkpoint_database_path=repository.path,
+    ).run(job)
+
+    assert generator.calls == 1
+    assert resumed.action.kind == AutonomousActionKind.NO_ACTION
+    assert resumed.trace.restart_count == 1
+    assert resumed.trace.decision_reason == "operational-provider-call-outcome-uncertain"
 
 
 def test_policy_contract_enforces_governance_limits():
@@ -614,7 +750,8 @@ async def test_unsupported_live_atomic_claim_fails_closed_before_delivery(tmp_pa
             _UnsupportedClaimGenerator(),
             model_id="synthetic-provider",
             claim_validator=validator,
-        )
+        ),
+        checkpoint_database_path=repository.path,
     )
     governed = GovernedAutonomyService(
         repository,
@@ -660,7 +797,13 @@ async def test_two_grounded_attempts_complete_goal_and_cancel_follow_up(tmp_path
         repository,
         profile_path=PROFILE,
         evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
         tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(b"v2-test-secret-32-bytes-minimum!!"),
     )
     conversation = tutoring.create_conversation(
         fixture.student_a_id,
@@ -697,12 +840,519 @@ async def test_two_grounded_attempts_complete_goal_and_cancel_follow_up(tmp_path
     )
 
     state = repository.get_learner_state(conversation.id)
+    belief = repository.get_learner_belief_state_v2(conversation.id)
     goals = repository.list_autonomous_goals(
         fixture.student_a_id,
         fixture.course_a_id,
     )
     assert second.citations
-    assert state is not None and state.objective_complete is True
+    assert state is not None and state.mastery_by_concept == {}
+    assert belief is not None and belief.revision == 2
+    assert belief.concepts[0].correct_evidence_count == 2
+    assert belief.concepts[0].attribution_confidence >= 0.5
     assert len(goals) == 1
     assert goals[0].status.value == "completed"
     assert repository.get_autonomous_opportunity(pending.opportunity_id).status.value == "cancelled"
+
+
+def test_v2_evidence_contract_rejects_model_owned_mastery():
+    with pytest.raises(ValueError, match="Extra inputs are not permitted"):
+        ConceptAttributionV2.model_validate(
+            {
+                "concept_id": "cache-coherence",
+                "observed_mastery": 0.9,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+            }
+        )
+
+
+def test_v2_action_lattice_is_fail_closed_and_total():
+    assert resolve_policy_action("answer", "abstain") == "abstain"
+    assert resolve_policy_action("answer", "clarify", "refuse") == "refuse"
+    assert (
+        resolve_policy_action("answer", "refuse", "operational-failure")
+        == "operational-failure"
+    )
+    with pytest.raises(ValueError, match="unsupported policy actions"):
+        resolve_policy_action("invented")
+
+
+def test_v2_belief_revision_uses_assessed_evidence_counts_only():
+    estimator = DeterministicEvidenceCountBeliefEstimator()
+    learner_key = "a" * 64
+    prior = estimator.initial_state(
+        learner_key=learner_key,
+        course_id="course-a",
+        release_id="release-a",
+    )
+    observation = LearnerObservationV2(
+        observation_id="observation-1",
+        learner_key=learner_key,
+        course_id="course-a",
+        release_id="release-a",
+        event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+        concept_ids=["cache-coherence"],
+        perception=TurnPerceptionV2(
+            event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+            request_type="attempt",
+            attempt_present=True,
+        ),
+        assessment_outcome=AssessmentOutcome.CORRECT,
+        assessment_confidence=0.8,
+        evidence_keys=["source:1:hash:range"],
+    )
+
+    revised, delta = estimator.revise(prior, observation)
+
+    attribution = revised.concepts[0]
+    assert revised.revision == 1
+    assert delta.previous_revision == 0 and delta.next_revision == 1
+    assert attribution.observation_count == 1
+    assert attribution.assessed_evidence_count == 1
+    assert attribution.correct_evidence_count == 1
+    assert 0 < attribution.attribution_confidence < 1
+    assert "mastery" not in attribution.model_dump()
+
+
+def test_release_domain_model_is_immutable(tmp_path):
+    repository, _, _, release, _ = _autonomy_fixture(tmp_path)
+    stored = repository.get_course_domain_model(release.id)
+    assert stored is not None
+    changed = stored.model_copy(
+        update={
+            "concepts": [
+                stored.concepts[0].model_copy(update={"label": "Changed label"})
+            ]
+        },
+        deep=True,
+    )
+
+    with pytest.raises(ValueError, match="immutable"):
+        repository.save_course_domain_model(changed)
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_persists_every_reactive_runtime_plane(tmp_path):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-runtime-plane-test-secret-32-bytes"
+        ),
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+
+    turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content="How does cache coherence keep processor copies consistent?",
+        client_request_id="runtime-plane-turn-1",
+    )
+
+    observations = repository.list_learner_observations_v2(conversation.id)
+    deltas = repository.list_learner_state_deltas_v2(conversation.id)
+    plans = repository.list_pedagogical_plans_v2(conversation.id)
+    responses = repository.list_grounded_responses_v2(conversation.id)
+    traces = repository.list_agent_traces_v2(
+        fixture.course_a_id,
+        conversation_id=conversation.id,
+    )
+    assert turn.citations
+    assert len(observations) == len(deltas) == len(plans) == len(responses) == len(traces) == 1
+    assert observations[0].observation_id == traces[0].event_id
+    assert deltas[0].next_revision == traces[0].output_state_revision == 1
+    assert plans[0].required_evidence_keys == responses[0].source_range_keys
+    assert "atomic_commit_boundary" in traces[0].node_path
+    assert len(traces[0].checkpoint_ids) >= 2
+    assert traces[0].fast_path is True
+    assert traces[0].planning_calls == 0
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_uses_one_semantic_proposal_only_for_complex_turn(tmp_path):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    planner = LiveReactiveSemanticPlanner(
+        FixtureLlmClient(
+            response_content=(
+                '{"proposed_intent":"correct_misconception",'
+                '"concept_ids":["cache-coherence"],'
+                '"hypothesis_kind":"misconception",'
+                '"hypothesis_concept_id":"cache-coherence",'
+                '"hypothesis_confidence":0.8,'
+                '"reason_code":"misconception-repair"}'
+            )
+        ),
+        model_id="gpt-5.6-terra",
+    )
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-semantic-proposal-secret-32-bytes"
+        ),
+        reactive_semantic_planner=planner,
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+
+    turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content=(
+            "I am confused because I think cache coherence duplicates stale values; "
+            "my attempt says invalidation makes every copy stale."
+        ),
+        client_request_id="semantic-complex-turn",
+    )
+
+    belief = repository.get_learner_belief_state_v2(conversation.id)
+    trace = repository.list_agent_traces_v2(
+        fixture.course_a_id,
+        conversation_id=conversation.id,
+    )[0]
+    assert turn.citations
+    assert trace.fast_path is False
+    assert trace.planning_calls == 1
+    assert trace.planner_model == "gpt-5.6-terra"
+    assert belief is not None and len(belief.hypotheses) == 1
+    assert belief.hypotheses[0].kind == "misconception"
+    assert belief.hypotheses[0].status == "tentative"
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_resumes_after_node_failure_without_duplicate_generation(tmp_path):
+    repository, fixture, _, release, _ = _autonomy_fixture(tmp_path)
+    validator = AtomicClaimEvidenceValidator(
+        ExactQuoteAtomicClaimVerifier(),
+        minimum_entailment=1.0,
+        maximum_contradiction=0.0,
+    )
+    pseudonymizer = LearningGapPseudonymizer(
+        b"v2-checkpoint-test-secret-32-bytes!!"
+    )
+    service = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=validator,
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=pseudonymizer,
+    )
+    conversation = service.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+    domain = repository.get_course_domain_model(release.id)
+    learner_key = pseudonymizer.learner_key(
+        course_id=fixture.course_a_id,
+        account_id=fixture.student_a_id,
+    )
+    belief = DeterministicEvidenceCountBeliefEstimator().initial_state(
+        learner_key=learner_key,
+        course_id=fixture.course_a_id,
+        release_id=release.id,
+    )
+    graph_input = TutoringGraphInput(
+        account_id=fixture.student_a_id,
+        conversation=conversation,
+        release=release,
+        student_message="Explain cache coherence and invalidation.",
+        learner_state=initial_learner_state(conversation),
+        event_id="checkpoint-resume-event",
+        learner_key=learner_key,
+        domain_model=domain,
+        learner_belief=belief,
+    )
+    generation_calls = 0
+
+    async def counted_generate(*args, **kwargs):
+        nonlocal generation_calls
+        generation_calls += 1
+        return await service.tutoring_graph.generate(*args, **kwargs)
+
+    class InterruptAfterValidationGraph(GovernedReactiveTutoringGraphV2):
+        def __init__(self, *, interrupt_once: bool, **kwargs):
+            self.interrupt_once = interrupt_once
+            super().__init__(**kwargs)
+
+        def _atomic_commit_boundary(self, state):
+            if self.interrupt_once:
+                self.interrupt_once = False
+                raise RuntimeError("simulated process stop after validation")
+            return super()._atomic_commit_boundary(state)
+
+    kwargs = {
+        "retrieve": service.tutoring_graph.retrieve,
+        "generate": counted_generate,
+        "fallback": service.tutoring_graph.fallback,
+        "evidence_gate_configured": True,
+        "claim_validator": validator,
+        "checkpoint_database_path": repository.path,
+    }
+    first_process = InterruptAfterValidationGraph(interrupt_once=True, **kwargs)
+    with pytest.raises(RuntimeError, match="simulated process stop"):
+        await first_process.run(graph_input)
+    assert generation_calls == 1
+
+    restarted_process = InterruptAfterValidationGraph(interrupt_once=False, **kwargs)
+    resumed = await restarted_process.run(graph_input)
+
+    assert generation_calls == 1
+    artifacts = resumed.reactive_v2_artifacts
+    assert artifacts is not None
+    assert artifacts.trace.restart_count == 1
+    assert artifacts.trace.output_state_revision == 1
+    assert artifacts.response.policy_action == "answer"
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_uncertain_provider_call_fails_closed_without_retry(tmp_path):
+    repository, fixture, _, release, _ = _autonomy_fixture(tmp_path)
+    validator = AtomicClaimEvidenceValidator(
+        ExactQuoteAtomicClaimVerifier(),
+        minimum_entailment=1.0,
+        maximum_contradiction=0.0,
+    )
+    pseudonymizer = LearningGapPseudonymizer(
+        b"v2-uncertain-call-secret-32-bytes!!"
+    )
+    service = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=validator,
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=pseudonymizer,
+    )
+    conversation = service.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+    learner_key = pseudonymizer.learner_key(
+        course_id=fixture.course_a_id,
+        account_id=fixture.student_a_id,
+    )
+    graph_input = TutoringGraphInput(
+        account_id=fixture.student_a_id,
+        conversation=conversation,
+        release=release,
+        student_message="Explain cache coherence and invalidation.",
+        learner_state=initial_learner_state(conversation),
+        event_id="uncertain-provider-call-event",
+        learner_key=learner_key,
+        domain_model=repository.get_course_domain_model(release.id),
+        learner_belief=DeterministicEvidenceCountBeliefEstimator().initial_state(
+            learner_key=learner_key,
+            course_id=fixture.course_a_id,
+            release_id=release.id,
+        ),
+    )
+    generation_calls = 0
+
+    class SimulatedProcessExit(BaseException):
+        pass
+
+    async def interrupted_generate(*args, **kwargs):
+        nonlocal generation_calls
+        generation_calls += 1
+        raise SimulatedProcessExit()
+
+    kwargs = {
+        "retrieve": service.tutoring_graph.retrieve,
+        "generate": interrupted_generate,
+        "fallback": service.tutoring_graph.fallback,
+        "evidence_gate_configured": True,
+        "claim_validator": validator,
+        "checkpoint_database_path": repository.path,
+    }
+    with pytest.raises(SimulatedProcessExit):
+        await GovernedReactiveTutoringGraphV2(**kwargs).run(graph_input)
+
+    resumed = await GovernedReactiveTutoringGraphV2(**kwargs).run(graph_input)
+
+    assert generation_calls == 1
+    artifacts = resumed.reactive_v2_artifacts
+    assert artifacts is not None and not artifacts.state_committed
+    assert artifacts.trace.restart_count == 1
+    assert artifacts.trace.decision_reason == "operational-provider-call-outcome-uncertain"
+    assert artifacts.response.policy_action != "answer"
+
+
+@pytest.mark.asyncio
+async def test_autonomy_observer_uses_v2_belief_observation_lineage(tmp_path):
+    repository, fixture, autonomy, _, _ = _autonomy_fixture(tmp_path)
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-observer-test-secret-32-bytes!!!"
+        ),
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+    await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content=(
+            "I thought cache coherence must always duplicate stale values, "
+            "and I am confused because invalidation seems opposite."
+        ),
+        client_request_id="v2-observer-misconception",
+    )
+    observation = repository.list_learner_observations_v2(conversation.id)[0]
+
+    sweep = autonomy.observe_events(now=datetime.now(UTC) + timedelta(minutes=1))
+    observed = [
+        item
+        for item in repository.list_due_autonomous_opportunities(
+            (datetime.now(UTC) + timedelta(hours=1)).isoformat()
+        )
+        if item.idempotency_key.startswith("observer:misconception:")
+    ]
+
+    assert sweep.by_event[AutonomousEventKind.MISCONCEPTION.value] == 1
+    assert len(observed) == 1
+    assert observed[0].concept_id == "cache-coherence"
+    assert observed[0].supporting_observation_ids == [observation.observation_id]
+    goal = repository.get_autonomous_goal(observed[0].goal_id)
+    assert goal is not None
+    assert "mastery" not in goal.success_condition.casefold()
+
+
+@pytest.mark.asyncio
+async def test_v2_provider_failure_falls_back_without_state_advance_or_retry(tmp_path):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    generator = _UnavailableV2Generator()
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        generator=generator,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-provider-failure-secret-32-bytes"
+        ),
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+
+    turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content="Explain cache coherence and invalidation.",
+        client_request_id="v2-provider-failure",
+    )
+
+    traces = repository.list_agent_traces_v2(
+        fixture.course_a_id,
+        conversation_id=conversation.id,
+    )
+    assert turn.tutor_message.action == "safe-graph-failure"
+    assert generator.calls == 1
+    assert repository.get_learner_state(conversation.id) is None
+    assert repository.get_learner_belief_state_v2(conversation.id) is None
+    assert repository.list_learner_state_deltas_v2(conversation.id) == []
+    assert len(repository.list_learner_observations_v2(conversation.id)) == 1
+    assert len(repository.list_pedagogical_plans_v2(conversation.id)) == 1
+    assert len(repository.list_grounded_responses_v2(conversation.id)) == 1
+    assert len(traces) == 1
+    assert traces[0].repair_calls == 0
+    assert traces[0].input_state_revision == traces[0].output_state_revision == 0
+    assert traces[0].validation_results["graph-validation"] is False
+
+
+@pytest.mark.asyncio
+async def test_course_runtime_profile_selects_v2_and_one_setting_rolls_back_to_t0(
+    tmp_path,
+):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T0,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"course-runtime-profile-test-secret!!"
+        ),
+    )
+    repository.save_course_tutoring_runtime_profile(
+        CourseTutoringRuntimeProfileV1(
+            course_id=fixture.course_a_id,
+            mode=TutoringMode.T1_V2,
+            version=1,
+            changed_by=fixture.professor_id,
+            reason="Select governed V2 for this course.",
+        )
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+
+    v2_turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content="How does cache coherence keep processor copies consistent?",
+        client_request_id="runtime-v2-turn",
+    )
+    repository.save_course_tutoring_runtime_profile(
+        CourseTutoringRuntimeProfileV1(
+            course_id=fixture.course_a_id,
+            mode=TutoringMode.T0,
+            version=2,
+            changed_by=fixture.professor_id,
+            reason="Immediate professor safety rollback.",
+        )
+    )
+    t0_turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content="What does invalidation prevent?",
+        client_request_id="runtime-t0-turn",
+    )
+
+    assert v2_turn.tutoring_mode == TutoringMode.T1_V2
+    assert t0_turn.tutoring_mode == TutoringMode.T0
+    assert len(repository.list_agent_traces_v2(fixture.course_a_id)) == 1

@@ -145,6 +145,21 @@ def get_student_conversation(
     return _call(service.get_conversation, account_id, conversation_id)
 
 
+@router.get("/conversations/{conversation_id}/learner-evidence")
+def get_student_learner_evidence(
+    conversation_id: str,
+    account_id: StudentAccountDependency,
+    service: StudentServiceDependency,
+):
+    _call(service.get_conversation, account_id, conversation_id)
+    belief = service.repository.get_learner_belief_state_v2(conversation_id)
+    return {
+        "conversation_id": conversation_id,
+        "belief_state": belief,
+        "claim": "observed-evidence-only",
+    }
+
+
 @router.post(
     "/conversations/{conversation_id}/messages",
     response_model=TutorTurn,

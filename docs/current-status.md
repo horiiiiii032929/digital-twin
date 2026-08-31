@@ -36,63 +36,70 @@ The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
 professor-fidelity, usability, or learning-outcome claim is added.
 
-The autonomous tutor V2.1 candidate now implements the durable event-driven
-goal, opportunity, plan, action/outcome, wake-up, reply-linkage, policy, and
-transactional delivery path. Its network-free development qualification passed
-500/500 fresh action-routing cases and seven simulated days: three cited
-messages were delivered, four later jobs correctly produced `no-action` under
-the weekly limit, and restart, consent withdrawal, response linkage, and clean
-restore remained consistent. Provider calls and cost were zero.
+Draft PR #158 now contains the complete software implementation checkpoint for
+governed autonomy V2.1. It is no longer a T1-v1 alias. A release-bound
+`CourseDomainModelV1`, V2 perception/observation/attribution/belief/plan/delta/
+response/trace contracts, a deterministic assessed-evidence-count belief
+baseline, durable goals and opportunities, and an independently implemented
+reactive/autonomous graph are connected to the runtime and SQLite persistence.
+`ConceptAttributionV2` stores observation and assessment evidence with
+uncertainty; neither an LLM nor the UI writes or displays a mastery score.
 
-This is a `Go Deeper` implementation checkpoint, not release selection. T1-v1
-and T0 remain the control and rollback. Provider-backed pedagogy, held-out
-factual grounding, professor fidelity, usability, and learning outcomes remain
-open. The professor interface is now workflow-first for explicit review,
-approval, policy, recipient eligibility, and audit; the student interface
-remains conversation-first. An LLM may propose interpretation and teaching
-moves but cannot establish mastery or mutate policy. See
-[the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md).
+Simple factual turns take a deterministic fast path. Misconception, attempted
+work, repeated confusion, goal selection, and proactive intervention may use
+one bounded `gpt-5.6-terra` semantic proposal. The proposal can reference only
+approved concepts and cannot alter identity, policy, release, evidence,
+learner-state authority, delivery, or cost limits. `gpt-5.4-mini-2026-03-17`
+is the configured wording generator. Both calls are protected by durable
+request ledgers: an uncertain started or failed call is never repeated after a
+restart. Exact returned-model identity, token, latency, cost, state revision,
+checkpoint, validation, and restart lineage are retained in sanitized
+`AgentTraceV2` records.
 
-The next five V2.1 product mechanisms are now implemented prospectively on
-draft PR #158, but have not been evaluated or selected. Autonomous evidence is
-resolved from the current published release and must be unique, retrievable,
-version-current, source-authorized, query-complete, claim-supported, and
-citation-valid before delivery. A deterministic observer idempotently turns
-durable release, inactivity, incomplete-practice, spaced-review, and recovered-
-evidence state into opportunities. A deterministic goal manager selects only
-professor-approved objectives, enforces attempt limits, records progress, and
-completes a goal after observable grounded attempts. Student replies and
-dismissals are linked to their originating actions so the runtime can complete,
-stop, or schedule one finite replan without an unbounded loop. The live path is
-wired to direct OpenAI Responses API calls: `gpt-5.6-terra` proposes plans and
-the exact profile-selected generator (currently
-`gpt-5.4-mini-2026-03-17`) produces wording, while deterministic code retains
-all authority and fails closed on provider or grounding defects. No paid call
-or academic evaluation was made for these changes. The Terra identifier is a
-mutable model ID rather than a dated snapshot and therefore requires fresh
-availability and returned-identity verification before any evaluation.
+Reactive execution now follows a finite, fail-closed graph from scope and
+policy binding through perception, deterministic belief revision, evidence,
+pedagogical planning, generation, validation, one repair, safe fallback, and
+atomic commit. LangGraph `AsyncSqliteSaver` checkpoints each node while the
+existing product transaction owns the final message, learner observation,
+belief delta, learning-gap signal, goal/opportunity, trace, and delivery
+outbox. The explicit action lattice is operational failure, refuse, clarify,
+abstain, then answer. An answer is permitted only with current, authorized,
+complete evidence and valid claim/citation lineage. Provider, parse, or
+validation failure leaves the learner state unchanged.
 
-The same draft now closes the remaining day-to-day control gaps. Professors can
-cancel an individual active learner goal without using the course-wide kill
-switch and can inspect each autonomous action together with its deterministic
-checks, delivery state, linked learner outcome, and next wake-up. Students can
-consent to private check-ins, pause them for seven days, resume immediately,
-reply, dismiss, and inspect bounded goals. Desktop and 390-pixel mobile browser
-walkthroughs passed these navigation and preference interactions with no
-console error. The local Compose profile remains deliberately conservative:
-deterministic generation and qualified T1-v1 are the defaults. A fail-closed
-configuration guard now prevents the historical T1-v1 qualification record
-from activating governed T1-v2.1; V2.1 requires its own future confirmation
-record. This is product implementation evidence only, not an evaluation or
-release claim.
+Professor APIs/UI now expose the domain model, approved teaching profile,
+autonomy policy, learner goals, evidence-based belief summary, action/outcome/
+restart trace, pause, kill switch, goal cancellation, and T0 rollback. Student
+APIs/UI expose goal status, next activity, private proactive inbox, consent,
+snooze, resume, reply, and dismissal. Desktop and 390-pixel mobile Impeccable
+walkthroughs passed without overflow or console errors. Discord, email, and
+Teams delivery remain disabled.
 
-GitHub now tracks the finite successor path explicitly: #153 remains the P0
-grounding dependency, #155 owns governed T1-v2.1 completion, #156 owns A2
-activation and qualification, and #157 owns the frozen full-autonomy product
-evaluation. Parent #8 remains open until those results support a release
-decision. Repository correctness is 793/793 audited files with zero pending
-findings; the execution freeze remains active and no provider call was made by
-this implementation checkpoint.
+A flow-independent `AutonomyEvaluationAdapterV1` boundary now supports reset,
+event submission, simulated time, restart, action collection, and state
+snapshots without exposing graph node names, Python classes, database tables,
+or runtime chunk IDs. A network-free 30-day software verification exercised the
+actual governed service, a day-eight restart, and day-fifteen goal expiry: 15
+finite jobs produced six unique messages, no duplicate action or delivery, and
+zero post-expiry job. Provider calls and cost were zero. This is regression
+evidence for implementation completeness, not the provider-backed academic
+evaluation or a V2.1 release selection.
+
+T1-v1 and T0 therefore remain the selected control and rollback. A fail-closed
+configuration guard prevents the historical T1-v1 result from activating
+T1-v2.1. Provider-backed pedagogy, fresh grounding quality, full-autonomy
+evaluation, professor fidelity, usability, and learning outcomes remain open.
+See [the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
+and [the implementation design](autonomous-tutoring-loop-v2.md).
+
+GitHub tracks the remaining evidence path explicitly: #153 remains
+`In Progress / Refine` for grounding selection, #155 remains
+`In Progress / Go Deeper` until provider-backed V2.1 confirmation, #156 remains
+`Todo / Go Deeper` until A2 promotion evidence, and #157 remains
+`Todo / Go Deeper` until the actual flow-independent evaluation. Parent #8
+remains open. The execution freeze remains active and no provider call was made
+by this implementation checkpoint. Repository correctness is 797/797 audited
+execution-relevant files with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094

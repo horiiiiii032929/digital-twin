@@ -53,6 +53,7 @@ import {
 import type {
   ProfessorCourse,
   ProfessorIngestionJob,
+  ProfessorEvidenceChunkOption,
   ProfessorReleaseSummary,
   ReleasePreflightResult,
 } from "@/lib/api/types"
@@ -90,12 +91,33 @@ export function ProfessorDeliveryWorkspace({
   const hasActiveJob = jobs.some(
     (job) => job.status === "pending" || job.status === "running",
   )
-  const evidenceChunks = successfulJobs.flatMap((job) =>
+  const evidenceChunks: ProfessorEvidenceChunkOption[] = successfulJobs.flatMap((job) =>
     (job.result?.chunks ?? []).flatMap((chunk) => {
       const id = typeof chunk.id === "string" ? chunk.id : null
-      if (!id) return []
+      const sourceArtifactId = typeof chunk.source_artifact_id === "string"
+        ? chunk.source_artifact_id
+        : typeof chunk.document_id === "string"
+          ? chunk.document_id
+          : null
+      const sourceSha256 = typeof chunk.source_checksum === "string"
+        ? chunk.source_checksum
+        : typeof chunk.content_hash === "string"
+          ? chunk.content_hash
+          : null
+      const locator = typeof chunk.locator === "string" ? chunk.locator : null
+      const text = typeof chunk.text === "string" ? chunk.text : null
+      if (!id || !sourceArtifactId || !sourceSha256 || !locator || !text) return []
       const title = typeof chunk.document_id === "string" ? chunk.document_id : id
-      return [{ id, label: title }]
+      return [{
+        id,
+        label: `${title} · ${locator}`,
+        source_artifact_id: sourceArtifactId,
+        source_version: typeof chunk.source_version === "number" ? chunk.source_version : 1,
+        source_sha256: sourceSha256,
+        locator,
+        char_start: 0,
+        char_end: text.length,
+      }]
     }),
   )
 

@@ -162,8 +162,8 @@ command without the environment override, then rerun `--mode-check` with
 
 ## Governed autonomy operating workflow
 
-The prospective V2.1 product workflow is available for implementation review
-without promoting it into this qualified local profile:
+The V2.1 product implementation is complete for software review but is not
+promoted into this qualified local profile:
 
 1. The professor creates and approves an explicit teaching profile.
 2. A release binds the approved profile and current evidence.
@@ -176,6 +176,16 @@ without promoting it into this qualified local profile:
    goal can be cancelled without stopping the whole course.
 6. The student can consent, pause check-ins for seven days, resume, reply,
    dismiss, and inspect active learning goals.
+
+Run its network-free implementation acceptance check with:
+
+```bash
+npm run verify:governed-autonomy-v2-1-implementation
+```
+
+This exercises 30 simulated days, restart, bounded execution, duplicate
+suppression, and goal expiry against the real governed autonomy service. It is
+software regression evidence, not provider-backed academic evaluation.
 
 To qualify V2.1 later, first produce the dedicated passing result record and
 then set all three values explicitly in the private environment file:

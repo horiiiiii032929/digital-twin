@@ -19,7 +19,7 @@ and
 
 ## Document role
 
-This is the single implementation-facing prospective architecture for the
+This is the single implementation-facing architecture for the
 autonomous tutor. The best-practice audit above is its evidence and alternatives
 record. The predecessor and earlier research notes remain historical evidence;
 they do not override V2.1 model ownership, contracts, or evaluation boundaries.
@@ -537,34 +537,57 @@ A valid quality failure stops the affected promotion and produces one
 method-level decision. It does not trigger another prompt-only loop or modify a
 known evaluation set.
 
-### Prospective implementation after the checkpoint
+### Implementation traceability checkpoint
 
-The following product code now exists on PR #158 and is deliberately recorded
-as **implemented but unevaluated**:
+PR #158 implements the architecture while deliberately leaving it unevaluated
+and unselected:
 
-1. `AutonomousEvidenceAssessor` resolves opportunity lineage against the
-   current published release, verifies retrieval permission and source hashes,
-   applies the question-targeted atomic evidence gate, and passes only canonical
-   source ranges to generation. Post-generation atomic-claim and citation
-   validation fail closed before delivery.
-2. `GovernedAutonomyService.observe_events` converts durable product state into
-   idempotent release, inactivity, incomplete-practice, and spaced-review
-   opportunities. Publication can separately materialize evidence-recovery
-   opportunities without granting the model source authority.
-3. `DeterministicAutonomousGoalManager` selects among professor-approved
-   objectives, computes bounded priority and completion from observable learner
-   signals, enforces attempt limits, and cancels pending work on completion or
-   governance-boundary changes.
-4. Student responses and dismissals are bound to the originating autonomous
-   action. A grounded response may complete the goal or schedule one new finite
-   job; dismissal stops its pending wake-up. No outcome can recursively execute
-   another job inside the same graph invocation.
-5. The live runtime uses direct OpenAI Responses API adapters with strict
-   structured output, `store: false`, exact returned-model checks, no routing
-   fallback, and deterministic safe fallback. `gpt-5.6-terra` is the prospective
-   planner and the exact selected product model is the wording generator. The
-   currently configured generator is `gpt-5.4-mini-2026-03-17`.
+| Design contract | Runtime implementation |
+| --- | --- |
+| `CourseDomainModelV1` | Immutable release-bound objectives, concepts, misconceptions, canonical source ranges, API, and professor UI |
+| `TurnPerceptionV2` | Deterministic request/policy perception plus one optional bounded semantic proposal for complex turns |
+| `LearnerObservationV2` | Immutable event, concept, assessment, evidence, and source-turn provenance committed with the turn |
+| `ConceptAttributionV2` / `LearnerBeliefStateV2` | Deterministic assessed-evidence counts, confidence, uncertainty, revision, and expiring hypotheses; no model-written mastery |
+| `PedagogicalPolicyV2` / `PedagogicalPlanV2` | Professor-owned constraints merged before one finite pedagogical action |
+| `LearnerStateDeltaV2` | Exactly one revision step, committed only after response validation succeeds |
+| `GroundedTutorResponseV2` | Action, claims, citations, and canonical source ranges with fail-closed lineage validation |
+| `AgentTraceV2` | State revisions, requested/returned models, calls, tokens, latency, cost, node/checkpoint path, validation, and restart lineage |
+| Goal/opportunity/plan/action/outcome/wake-up contracts | Durable proactive graph, leasing, transactional outbox, outcome linkage, expiry, cancellation, and finite replanning |
+| `CourseTutoringRuntimeProfileV1` | Per-course T0, historical T1-v1, and governed T1-v2.1 selection with one-setting rollback and qualification guard |
+| `AutonomyEvaluation*V1` / `AutonomyEvaluationAdapterV1` | Flow-independent reset, event, time, restart, action, and state boundary for future product evaluation |
 
-This implementation does not promote T1-v2.1, A2, or a provider-backed profile.
-The exact code, model binding, evidence gate, and release must be frozen and
-evaluated prospectively under #153, #156, and #157 before any such claim.
+`GovernedReactiveTutoringGraphV2` is an independent graph:
+
+```text
+bind scope
+→ hard policy prefilter
+→ perceive turn
+→ validate observation/hypothesis
+→ update deterministic learner belief
+→ merge action constraints
+→ retrieve and verify evidence
+→ plan pedagogy
+→ generate
+→ validate
+→ repair once or safe fallback
+→ atomic commit
+```
+
+Simple factual turns skip the semantic planner. Complex tutoring may use one
+`gpt-5.6-terra` proposal, but only deterministic code may accept an approved
+concept, update the evidence ledger, choose the authoritative action, commit
+state, or deliver a message. The wording generator is the exact profile-selected
+model, currently `gpt-5.4-mini-2026-03-17`.
+
+LangGraph `AsyncSqliteSaver` writes a sanitized checkpoint after every node.
+Separate durable call ledgers make provider side effects idempotent: a completed
+call may be replayed from its sanitized response, while an uncertain started or
+failed call stops safely and is never called again. The existing product
+transaction remains authoritative for the final turn, observation, belief
+delta, learning-gap signal, goal/opportunity, trace, and delivery outbox.
+
+The actual governed service also passes a network-free 30-day implementation
+verification with restart and goal expiry. This does not promote T1-v2.1, A2,
+or a provider-backed profile. The exact implementation, release, model binding,
+and evidence gate still require the prospective evaluations in #153, #156, and
+#157.

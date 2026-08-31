@@ -93,6 +93,7 @@ from src.digital_twin.student.autonomy_service import (
     RepositoryGroundedWordingGenerator,
 )
 from src.digital_twin.student.service import StudentTutoringService
+from src.digital_twin.student.tutoring_graph import LiveReactiveSemanticPlanner
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -225,6 +226,29 @@ def create_app(
             evidence_limit=5,
         )
     app.state.provider_budget = provider_budget
+    autonomy_planner_budget = None
+    live_proactive_planner = None
+    reactive_semantic_planner = None
+    if live_autonomy:
+        autonomy_planner_budget = BudgetedLlmClient(
+            OpenAiResponsesClient(
+                OPENAI_GPT_5_6_TERRA_MODEL,
+                timeout_seconds=30,
+                max_output_tokens=500,
+                reasoning_effort="low",
+            ),
+            max_calls=runtime_settings.provider_max_calls_per_process,
+            max_cost_usd=runtime_settings.provider_cost_cap_usd,
+        )
+        app.state.autonomy_planner_budget = autonomy_planner_budget
+        live_proactive_planner = LiveAutonomousPlanner(
+            autonomy_planner_budget,
+            model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+        )
+        reactive_semantic_planner = LiveReactiveSemanticPlanner(
+            autonomy_planner_budget,
+            model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+        )
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=resolved_student_profile_path,
@@ -258,34 +282,22 @@ def create_app(
             else DETERMINISTIC_PLANNER_MODEL
         ),
         autonomy_generator_model=active_generator_model,
+        reactive_semantic_planner=reactive_semantic_planner,
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
         app.state.student_repository
     )
     autonomy_graph = None
     if live_autonomy:
-        autonomy_planner_budget = BudgetedLlmClient(
-            OpenAiResponsesClient(
-                OPENAI_GPT_5_6_TERRA_MODEL,
-                timeout_seconds=30,
-                max_output_tokens=500,
-                reasoning_effort="low",
-            ),
-            max_calls=runtime_settings.provider_max_calls_per_process,
-            max_cost_usd=runtime_settings.provider_cost_cap_usd,
-        )
-        app.state.autonomy_planner_budget = autonomy_planner_budget
         autonomy_graph = GovernedAutonomousTutoringGraph(
-            planner=LiveAutonomousPlanner(
-                autonomy_planner_budget,
-                model_id=OPENAI_GPT_5_6_TERRA_MODEL,
-            ),
+            planner=live_proactive_planner,
             generator=RepositoryGroundedWordingGenerator(
                 app.state.student_repository,
                 active_generator,
                 model_id=active_generator_model,
                 claim_validator=active_claim_validator,
             ),
+            checkpoint_database_path=str(runtime_settings.database_path),
         )
     app.state.governed_autonomy_service = GovernedAutonomyService(
         app.state.student_repository,

@@ -53,6 +53,7 @@ import type {
   StudentCitation,
   StudentCourse,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
 } from "@/lib/api"
 import { loadStudentCitationCrop } from "@/lib/api"
 import { cn } from "@/lib/utils"
@@ -86,6 +87,7 @@ export function StudentWorkspace({
     isSubmitting,
     outreachMessages,
     autonomousGoals,
+    learnerEvidence,
     inAppOutreachEnabled,
     outreachSnoozedUntil,
     isLoadingOutreach,
@@ -314,6 +316,7 @@ export function StudentWorkspace({
             <OutreachPanel
               messages={outreachMessages}
               goals={autonomousGoals}
+              learnerEvidence={learnerEvidence}
               enabled={inAppOutreachEnabled}
               snoozedUntil={outreachSnoozedUntil}
               isLoading={isLoadingOutreach}
@@ -456,6 +459,7 @@ function StudentHeader({
 function OutreachPanel({
   messages,
   goals,
+  learnerEvidence,
   enabled,
   snoozedUntil,
   isLoading,
@@ -471,6 +475,7 @@ function OutreachPanel({
 }: {
   messages: StudentProactiveMessageView[]
   goals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
   enabled: boolean
   snoozedUntil: string | null
   isLoading: boolean
@@ -587,6 +592,8 @@ function OutreachPanel({
         )}
       </div>
 
+      <LearnerEvidenceSection evidence={learnerEvidence} />
+
       <div className="flex items-center justify-between gap-3 px-5 py-3">
         <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           Inbox
@@ -702,6 +709,62 @@ function OutreachPanel({
   )
 }
 
+function LearnerEvidenceSection({
+  evidence,
+}: {
+  evidence: StudentLearnerEvidence | null
+}) {
+  const belief = evidence?.belief_state
+  return (
+    <section className="border-b px-5 py-4" aria-labelledby="learning-evidence-heading">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2
+            id="learning-evidence-heading"
+            className="text-xs font-semibold tracking-wide text-muted-foreground uppercase"
+          >
+            Observed learning evidence
+          </h2>
+          <p className="mt-1 text-xs leading-5 text-muted-foreground">
+            These are observations, not a final mastery score.
+          </p>
+        </div>
+        {belief ? (
+          <span className="shrink-0 text-xs text-muted-foreground">
+            Rev. {belief.revision}
+          </span>
+        ) : null}
+      </div>
+      {belief?.concepts.length ? (
+        <ul className="mt-3 divide-y rounded-lg border">
+          {belief.concepts.slice(0, 4).map((concept) => (
+            <li key={concept.concept_id} className="px-3 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm font-medium">{formatLabel(concept.concept_id)}</p>
+                <span className="text-xs text-muted-foreground">
+                  {Math.round(concept.uncertainty * 100)}% uncertainty
+                </span>
+              </div>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                {concept.observation_count} observations · {concept.assessed_evidence_count} assessed · {concept.correct_evidence_count} correct · {concept.partial_evidence_count} partial · {concept.incorrect_evidence_count} incorrect
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-3 rounded-lg bg-[var(--shell)] px-3 py-2.5 text-xs leading-5 text-muted-foreground">
+          No assessed learning evidence has been recorded in this conversation yet.
+        </p>
+      )}
+      {belief ? (
+        <p className="mt-2 text-xs text-muted-foreground">
+          Last updated {formatOutreachTime(belief.updated_at)}
+        </p>
+      ) : null}
+    </section>
+  )
+}
+
 function formatOutreachTime(value: string): string {
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return "Recently"
@@ -711,6 +774,11 @@ function formatOutreachTime(value: string): string {
     hour: "numeric",
     minute: "2-digit",
   }).format(date)
+}
+
+function formatLabel(value: string): string {
+  const label = value.replaceAll("_", " ").replaceAll("-", " ")
+  return `${label.charAt(0).toUpperCase()}${label.slice(1)}`
 }
 
 function CourseRail({

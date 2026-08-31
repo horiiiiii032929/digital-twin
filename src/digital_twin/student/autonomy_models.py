@@ -83,6 +83,127 @@ class AutonomousOutcomeKind(StrEnum):
     NO_ACTION = "no-action"
 
 
+class AssessmentOutcome(StrEnum):
+    """Observable result used by the deterministic belief estimator."""
+
+    CORRECT = "correct"
+    PARTIAL = "partial"
+    INCORRECT = "incorrect"
+    NOT_ASSESSED = "not-assessed"
+
+
+class CanonicalSourceRangeV1(_Contract):
+    source_artifact_id: str = Field(min_length=1, max_length=256)
+    source_version: int = Field(ge=1)
+    source_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    locator: str = Field(min_length=1, max_length=500)
+    char_start: int | None = Field(default=None, ge=0)
+    char_end: int | None = Field(default=None, gt=0)
+    region_id: str | None = Field(default=None, max_length=256)
+
+    @model_validator(mode="after")
+    def coordinates_must_be_complete(self) -> "CanonicalSourceRangeV1":
+        if (self.char_start is None) != (self.char_end is None):
+            raise ValueError("canonical range requires both character coordinates")
+        if (
+            self.char_start is not None
+            and self.char_end is not None
+            and self.char_end <= self.char_start
+        ):
+            raise ValueError("canonical range must be non-empty")
+        if self.char_start is None and self.region_id is None:
+            raise ValueError("canonical range requires character or region coordinates")
+        return self
+
+
+class CourseObjectiveV1(_Contract):
+    objective_id: str = Field(min_length=1, max_length=128)
+    statement: str = Field(min_length=1, max_length=500)
+    concept_ids: list[str] = Field(min_length=1, max_length=32)
+
+    @field_validator("concept_ids")
+    @classmethod
+    def concepts_must_be_unique(cls, value: list[str]) -> list[str]:
+        if len(value) != len(set(value)):
+            raise ValueError("objective concept IDs must be unique")
+        return value
+
+
+class CourseConceptV1(_Contract):
+    concept_id: str = Field(min_length=1, max_length=128)
+    label: str = Field(min_length=1, max_length=200)
+    description: str = Field(min_length=1, max_length=1_000)
+    prerequisite_concept_ids: list[str] = Field(default_factory=list, max_length=16)
+    canonical_ranges: list[CanonicalSourceRangeV1] = Field(min_length=1, max_length=16)
+
+
+class CourseMisconceptionV1(_Contract):
+    misconception_id: str = Field(min_length=1, max_length=128)
+    concept_id: str = Field(min_length=1, max_length=128)
+    description: str = Field(min_length=1, max_length=1_000)
+    diagnostic_cues: list[str] = Field(min_length=1, max_length=16)
+
+
+class CourseDomainModelV1(_Contract):
+    """Professor-owned course semantics pinned to one immutable release."""
+
+    schema_version: Literal["1.0.0"] = "1.0.0"
+    domain_model_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    release_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    version: int = Field(ge=1)
+    objectives: list[CourseObjectiveV1] = Field(min_length=1, max_length=64)
+    concepts: list[CourseConceptV1] = Field(min_length=1, max_length=256)
+    misconceptions: list[CourseMisconceptionV1] = Field(default_factory=list, max_length=256)
+    approved_by: str = Field(min_length=1, max_length=128)
+    approved_at: str = Field(default_factory=timestamp_now)
+
+    @model_validator(mode="after")
+    def references_must_be_closed(self) -> "CourseDomainModelV1":
+        concept_ids = [item.concept_id for item in self.concepts]
+        objective_ids = [item.objective_id for item in self.objectives]
+        misconception_ids = [item.misconception_id for item in self.misconceptions]
+        for values, label in (
+            (concept_ids, "concept"),
+            (objective_ids, "objective"),
+            (misconception_ids, "misconception"),
+        ):
+            if len(values) != len(set(values)):
+                raise ValueError(f"domain model {label} IDs must be unique")
+        known = set(concept_ids)
+        referenced = {
+            concept_id
+            for objective in self.objectives
+            for concept_id in objective.concept_ids
+        }
+        referenced.update(
+            concept_id
+            for concept in self.concepts
+            for concept_id in concept.prerequisite_concept_ids
+        )
+        referenced.update(item.concept_id for item in self.misconceptions)
+        if not referenced.issubset(known):
+            raise ValueError("domain model references an unknown concept")
+        return self
+
+
+class CourseTutoringRuntimeProfileV1(_Contract):
+    """Professor-selected course runtime with an explicit safe rollback."""
+
+    schema_version: Literal["1.0.0"] = "1.0.0"
+    course_id: str = Field(min_length=1, max_length=128)
+    mode: Literal[
+        "grounded-assistant",
+        "bounded-tutoring-graph",
+        "governed-autonomous-tutoring-graph-v2.1",
+    ]
+    version: int = Field(ge=1)
+    changed_by: str = Field(min_length=1, max_length=128)
+    reason: str = Field(min_length=1, max_length=500)
+    updated_at: str = Field(default_factory=timestamp_now)
+
+
 class TurnPerceptionV2(_Contract):
     schema_version: Literal["2.1.0"] = "2.1.0"
     event_kind: AutonomousEventKind
@@ -106,6 +227,9 @@ class LearnerObservationV2(_Contract):
     event_kind: AutonomousEventKind
     concept_ids: list[str] = Field(default_factory=list, max_length=16)
     perception: TurnPerceptionV2
+    assessment_outcome: AssessmentOutcome = AssessmentOutcome.NOT_ASSESSED
+    assessment_confidence: float = Field(default=0, ge=0, le=1)
+    evidence_keys: list[str] = Field(default_factory=list, max_length=16)
     source_turn_key: str | None = Field(default=None, max_length=128)
     observed_at: str = Field(default_factory=timestamp_now)
 
@@ -116,12 +240,41 @@ class LearnerObservationV2(_Contract):
             raise ValueError("learner observation concept IDs must be unique")
         return value
 
+    @field_validator("evidence_keys")
+    @classmethod
+    def evidence_must_be_unique(cls, value: list[str]) -> list[str]:
+        if len(value) != len(set(value)):
+            raise ValueError("learner observation evidence keys must be unique")
+        return value
+
 
 class ConceptAttributionV2(_Contract):
     concept_id: str = Field(min_length=1, max_length=128)
-    observed_mastery: float = Field(ge=0, le=1)
+    observation_count: int = Field(default=0, ge=0)
+    assessed_evidence_count: int = Field(default=0, ge=0)
+    correct_evidence_count: int = Field(default=0, ge=0)
+    partial_evidence_count: int = Field(default=0, ge=0)
+    incorrect_evidence_count: int = Field(default=0, ge=0)
     attribution_confidence: float = Field(ge=0, le=1)
+    uncertainty: float = Field(ge=0, le=1)
+    observation_ids: list[str] = Field(default_factory=list, max_length=64)
     evidence_keys: list[str] = Field(default_factory=list, max_length=16)
+
+    @model_validator(mode="after")
+    def assessed_counts_must_be_consistent(self) -> "ConceptAttributionV2":
+        if self.assessed_evidence_count != (
+            self.correct_evidence_count
+            + self.partial_evidence_count
+            + self.incorrect_evidence_count
+        ):
+            raise ValueError("assessed evidence counts must reconcile")
+        if self.assessed_evidence_count > self.observation_count:
+            raise ValueError("assessed evidence cannot exceed observations")
+        if len(self.observation_ids) != len(set(self.observation_ids)):
+            raise ValueError("concept observation IDs must be unique")
+        if len(self.evidence_keys) != len(set(self.evidence_keys)):
+            raise ValueError("concept evidence keys must be unique")
+        return self
 
 
 class LearnerHypothesisV2(_Contract):
@@ -131,6 +284,7 @@ class LearnerHypothesisV2(_Contract):
     probability: float = Field(ge=0, le=1)
     observation_ids: list[str] = Field(min_length=1, max_length=16)
     status: Literal["tentative", "supported", "rejected"] = "tentative"
+    expires_at: str | None = None
 
 
 class LearnerBeliefStateV2(_Contract):
@@ -208,6 +362,42 @@ class PedagogicalPlanV2(_Contract):
     replan_condition: str | None = Field(default=None, max_length=500)
 
 
+class ReactiveSemanticProposalV2(_Contract):
+    """One bounded semantic proposal; deterministic code retains authority."""
+
+    schema_version: Literal["2.1.0"] = "2.1.0"
+    proposed_intent: Literal[
+        "diagnose_understanding",
+        "ask_next_step",
+        "prompt_self_explanation",
+        "give_hint",
+        "give_analogy_or_example",
+        "correct_misconception",
+        "explain_concept",
+        "check_understanding",
+        "give_retrieval_practice",
+        "summarize_progress",
+        "abstain_no_evidence",
+    ]
+    concept_ids: list[str] = Field(default_factory=list, max_length=3)
+    hypothesis_kind: Literal[
+        "misconception", "knowledge-gap", "low-confidence", "inactive"
+    ] | None = None
+    hypothesis_concept_id: str | None = Field(default=None, max_length=128)
+    hypothesis_confidence: float = Field(default=0, ge=0, le=1)
+    reason_code: str = Field(min_length=1, max_length=128)
+
+    @model_validator(mode="after")
+    def hypothesis_fields_must_be_consistent(self) -> "ReactiveSemanticProposalV2":
+        if (self.hypothesis_kind is None) != (self.hypothesis_concept_id is None):
+            raise ValueError("semantic hypothesis kind and concept must appear together")
+        if self.hypothesis_kind is None and self.hypothesis_confidence != 0:
+            raise ValueError("semantic hypothesis confidence requires a hypothesis")
+        if len(self.concept_ids) != len(set(self.concept_ids)):
+            raise ValueError("semantic proposal concept IDs must be unique")
+        return self
+
+
 class LearnerStateDeltaV2(_Contract):
     schema_version: Literal["2.1.0"] = "2.1.0"
     previous_revision: int = Field(ge=0)
@@ -250,19 +440,83 @@ class GroundedTutorResponseV2(_Contract):
 
 class AgentTraceV2(_Contract):
     schema_version: Literal["2.1.0"] = "2.1.0"
+    trace_id: str = Field(min_length=1, max_length=128)
+    event_id: str = Field(min_length=1, max_length=128)
+    learner_key: str = Field(min_length=64, max_length=64, pattern=r"^[0-9a-f]{64}$")
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
     graph_version: str = Field(min_length=1, max_length=64)
     policy_version: int = Field(ge=1)
     profile_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     planner_model: str | None = Field(default=None, max_length=128)
+    generator_requested_model: str | None = Field(default=None, max_length=128)
     generator_model: str | None = Field(default=None, max_length=128)
     fast_path: bool = False
     planning_calls: int = Field(default=0, ge=0, le=1)
     generation_calls: int = Field(default=0, ge=0, le=1)
     repair_calls: int = Field(default=0, ge=0, le=1)
+    provider_input_tokens: int = Field(default=0, ge=0)
+    provider_output_tokens: int = Field(default=0, ge=0)
+    provider_cost_usd: float = Field(default=0, ge=0, allow_inf_nan=False)
+    provider_latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
+    input_state_revision: int = Field(default=0, ge=0)
+    output_state_revision: int = Field(default=0, ge=0)
+    node_path: list[str] = Field(default_factory=list, max_length=32)
+    checkpoint_ids: list[str] = Field(default_factory=list, max_length=32)
+    restart_count: int = Field(default=0, ge=0)
     decision_reason: str = Field(min_length=1, max_length=500)
     validation_results: dict[str, bool] = Field(default_factory=dict)
     started_at: str = Field(default_factory=timestamp_now)
     completed_at: str | None = None
+
+    @model_validator(mode="after")
+    def trace_lineage_must_be_consistent(self) -> "AgentTraceV2":
+        if self.output_state_revision < self.input_state_revision:
+            raise ValueError("trace output revision cannot precede its input")
+        if len(self.checkpoint_ids) != len(set(self.checkpoint_ids)):
+            raise ValueError("trace checkpoint IDs must be unique")
+        return self
+
+
+class ReactiveTurnArtifactsV2(_Contract):
+    """Sanitized V2 records committed atomically with one tutoring turn."""
+
+    schema_version: Literal["2.1.0"] = "2.1.0"
+    conversation_id: str = Field(min_length=1, max_length=128)
+    observation: LearnerObservationV2
+    state_committed: bool = True
+    belief_state: LearnerBeliefStateV2 | None = None
+    state_delta: LearnerStateDeltaV2 | None = None
+    plan: PedagogicalPlanV2
+    response: GroundedTutorResponseV2
+    trace: AgentTraceV2
+
+    @model_validator(mode="after")
+    def artifacts_must_share_scope_and_revision(self) -> "ReactiveTurnArtifactsV2":
+        observation = self.observation
+        belief = self.belief_state
+        delta = self.state_delta
+        trace = self.trace
+        if self.state_committed != (belief is not None and delta is not None):
+            raise ValueError("reactive state commit requires both belief and delta")
+        if not self.state_committed:
+            if trace.input_state_revision != trace.output_state_revision:
+                raise ValueError("uncommitted reactive turn cannot advance state revision")
+            return self
+        assert belief is not None and delta is not None
+        if (
+            observation.learner_key != belief.learner_key
+            or observation.learner_key != trace.learner_key
+            or observation.course_id != belief.course_id
+            or observation.course_id != trace.course_id
+            or observation.release_id != belief.release_id
+            or observation.release_id != trace.release_id
+            or delta.next_revision != belief.revision
+            or trace.input_state_revision != delta.previous_revision
+            or trace.output_state_revision != delta.next_revision
+        ):
+            raise ValueError("reactive turn artifacts have inconsistent scope or revision")
+        return self
 
 
 class AutonomousGoalV1(_Contract):

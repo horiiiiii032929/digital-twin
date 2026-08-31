@@ -13,6 +13,7 @@ from src.digital_twin.student.learning_gap import (
     normalize_learning_gap_timestamp,
 )
 from src.digital_twin.student.autonomy_models import (
+    AgentTraceV2,
     AutonomousActionStatus,
     AutonomousActionV1,
     AutonomousGoalStatus,
@@ -21,8 +22,16 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousOutcomeV1,
     AutonomousOpportunityStatus,
     AutonomousWakeUpV1,
+    CourseDomainModelV1,
+    CourseTutoringRuntimeProfileV1,
+    GroundedTutorResponseV2,
+    LearnerBeliefStateV2,
+    LearnerObservationV2,
+    LearnerStateDeltaV2,
+    PedagogicalPlanV2,
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
+    ReactiveTurnArtifactsV2,
 )
 from src.digital_twin.student.autonomy_runtime import AutonomousJobResult
 from src.digital_twin.student.models import (
@@ -108,6 +117,46 @@ class StudentRepository(Protocol):
 
     def get_learner_state(self, conversation_id: str) -> LearnerState | None: ...
 
+    def save_course_domain_model(
+        self, model: CourseDomainModelV1
+    ) -> CourseDomainModelV1: ...
+
+    def get_course_domain_model(
+        self, release_id: str
+    ) -> CourseDomainModelV1 | None: ...
+
+    def save_course_tutoring_runtime_profile(
+        self, profile: CourseTutoringRuntimeProfileV1
+    ) -> CourseTutoringRuntimeProfileV1: ...
+
+    def get_course_tutoring_runtime_profile(
+        self, course_id: str
+    ) -> CourseTutoringRuntimeProfileV1 | None: ...
+
+    def get_learner_belief_state_v2(
+        self, conversation_id: str
+    ) -> LearnerBeliefStateV2 | None: ...
+
+    def list_learner_observations_v2(
+        self, conversation_id: str
+    ) -> list[LearnerObservationV2]: ...
+
+    def list_learner_state_deltas_v2(
+        self, conversation_id: str
+    ) -> list[LearnerStateDeltaV2]: ...
+
+    def list_pedagogical_plans_v2(
+        self, conversation_id: str
+    ) -> list[PedagogicalPlanV2]: ...
+
+    def list_grounded_responses_v2(
+        self, conversation_id: str
+    ) -> list[GroundedTutorResponseV2]: ...
+
+    def list_agent_traces_v2(
+        self, course_id: str, *, conversation_id: str | None = None
+    ) -> list[AgentTraceV2]: ...
+
     def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool: ...
 
     def list_learning_gap_signals(
@@ -160,6 +209,7 @@ class StudentRepository(Protocol):
         autonomous_opportunity: ProactiveOpportunityV1 | None = None,
         responding_to_outreach_message_id: str | None = None,
         completed_autonomous_goal_ids: list[str] | None = None,
+        reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -702,6 +752,193 @@ class SQLiteStudentRepository:
         )
         return LearnerState.model_validate_json(row["state_json"]) if row else None
 
+    def save_course_domain_model(
+        self, model: CourseDomainModelV1
+    ) -> CourseDomainModelV1:
+        model = CourseDomainModelV1.model_validate(model.model_dump(mode="python"))
+        with self._lock, self._connection:
+            release = self._connection.execute(
+                "SELECT course_id FROM releases WHERE id = ?", (model.release_id,)
+            ).fetchone()
+            course = self._connection.execute(
+                "SELECT owner_professor_id FROM courses WHERE id = ?", (model.course_id,)
+            ).fetchone()
+            if release is None or course is None:
+                raise KeyError("domain_model_scope_not_found")
+            if release["course_id"] != model.course_id:
+                raise ValueError("domain model release has cross-course scope")
+            if course["owner_professor_id"] != model.approved_by:
+                raise ValueError("domain model must be approved by the course owner")
+            existing = self._connection.execute(
+                "SELECT model_json FROM course_domain_models WHERE release_id = ?",
+                (model.release_id,),
+            ).fetchone()
+            if existing is not None:
+                stored = CourseDomainModelV1.model_validate_json(existing["model_json"])
+                if stored != model:
+                    raise ValueError("release domain model is immutable")
+                return stored
+            self._connection.execute(
+                """INSERT INTO course_domain_models
+                   (domain_model_id, course_id, release_id, release_sha256,
+                    version, model_json, approved_by, approved_at)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                (
+                    model.domain_model_id,
+                    model.course_id,
+                    model.release_id,
+                    model.release_sha256,
+                    model.version,
+                    model.model_dump_json(),
+                    model.approved_by,
+                    model.approved_at,
+                ),
+            )
+        return model.model_copy(deep=True)
+
+    def get_course_domain_model(
+        self, release_id: str
+    ) -> CourseDomainModelV1 | None:
+        row = self._one(
+            "SELECT model_json FROM course_domain_models WHERE release_id = ?",
+            (release_id,),
+        )
+        return CourseDomainModelV1.model_validate_json(row["model_json"]) if row else None
+
+    def save_course_tutoring_runtime_profile(
+        self, profile: CourseTutoringRuntimeProfileV1
+    ) -> CourseTutoringRuntimeProfileV1:
+        profile = CourseTutoringRuntimeProfileV1.model_validate(
+            profile.model_dump(mode="python")
+        )
+        with self._lock, self._connection:
+            course = self._connection.execute(
+                "SELECT owner_professor_id FROM courses WHERE id = ?",
+                (profile.course_id,),
+            ).fetchone()
+            if course is None:
+                raise KeyError("course_not_found")
+            if course["owner_professor_id"] != profile.changed_by:
+                raise ValueError("runtime profile must be changed by the course owner")
+            existing = self._connection.execute(
+                "SELECT version FROM course_tutoring_runtime_profiles WHERE course_id = ?",
+                (profile.course_id,),
+            ).fetchone()
+            expected_version = 1 if existing is None else int(existing["version"]) + 1
+            if profile.version != expected_version:
+                raise ValueError("runtime profile version must advance exactly once")
+            self._connection.execute(
+                """INSERT INTO course_tutoring_runtime_profiles
+                   (course_id, mode, version, profile_json, changed_by, updated_at)
+                   VALUES (?, ?, ?, ?, ?, ?)
+                   ON CONFLICT(course_id) DO UPDATE SET
+                     mode = excluded.mode,
+                     version = excluded.version,
+                     profile_json = excluded.profile_json,
+                     changed_by = excluded.changed_by,
+                     updated_at = excluded.updated_at""",
+                (
+                    profile.course_id,
+                    profile.mode,
+                    profile.version,
+                    profile.model_dump_json(),
+                    profile.changed_by,
+                    profile.updated_at,
+                ),
+            )
+        return profile.model_copy(deep=True)
+
+    def get_course_tutoring_runtime_profile(
+        self, course_id: str
+    ) -> CourseTutoringRuntimeProfileV1 | None:
+        row = self._one(
+            "SELECT profile_json FROM course_tutoring_runtime_profiles WHERE course_id = ?",
+            (course_id,),
+        )
+        return (
+            CourseTutoringRuntimeProfileV1.model_validate_json(row["profile_json"])
+            if row
+            else None
+        )
+
+    def get_learner_belief_state_v2(
+        self, conversation_id: str
+    ) -> LearnerBeliefStateV2 | None:
+        row = self._one(
+            "SELECT state_json FROM learner_belief_states_v2 WHERE conversation_id = ?",
+            (conversation_id,),
+        )
+        return LearnerBeliefStateV2.model_validate_json(row["state_json"]) if row else None
+
+    def list_learner_observations_v2(
+        self, conversation_id: str
+    ) -> list[LearnerObservationV2]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT observation_json FROM learner_observations_v2
+                   WHERE conversation_id = ? ORDER BY observed_at, observation_id""",
+                (conversation_id,),
+            ).fetchall()
+        return [
+            LearnerObservationV2.model_validate_json(row["observation_json"])
+            for row in rows
+        ]
+
+    def list_learner_state_deltas_v2(
+        self, conversation_id: str
+    ) -> list[LearnerStateDeltaV2]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT delta_json FROM learner_state_deltas_v2
+                   WHERE conversation_id = ? ORDER BY next_revision""",
+                (conversation_id,),
+            ).fetchall()
+        return [LearnerStateDeltaV2.model_validate_json(row["delta_json"]) for row in rows]
+
+    def list_pedagogical_plans_v2(
+        self, conversation_id: str
+    ) -> list[PedagogicalPlanV2]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT plan_json FROM reactive_pedagogical_plans_v2
+                   WHERE conversation_id = ? ORDER BY created_at, observation_id""",
+                (conversation_id,),
+            ).fetchall()
+        return [PedagogicalPlanV2.model_validate_json(row["plan_json"]) for row in rows]
+
+    def list_grounded_responses_v2(
+        self, conversation_id: str
+    ) -> list[GroundedTutorResponseV2]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT response_json FROM grounded_tutor_responses_v2
+                   WHERE conversation_id = ? ORDER BY created_at, observation_id""",
+                (conversation_id,),
+            ).fetchall()
+        return [
+            GroundedTutorResponseV2.model_validate_json(row["response_json"])
+            for row in rows
+        ]
+
+    def list_agent_traces_v2(
+        self, course_id: str, *, conversation_id: str | None = None
+    ) -> list[AgentTraceV2]:
+        query = (
+            """SELECT trace_json FROM tutoring_agent_traces_v2
+               WHERE course_id = ? AND conversation_id = ? ORDER BY created_at DESC"""
+            if conversation_id is not None
+            else """SELECT trace_json FROM tutoring_agent_traces_v2
+                     WHERE course_id = ? ORDER BY created_at DESC"""
+        )
+        parameters = (
+            (course_id, conversation_id)
+            if conversation_id is not None
+            else (course_id,)
+        )
+        with self._lock:
+            rows = self._connection.execute(query, parameters).fetchall()
+        return [AgentTraceV2.model_validate_json(row["trace_json"]) for row in rows]
+
     def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool:
         """Persist an idempotent privacy-minimized signal within its release scope."""
 
@@ -986,6 +1223,7 @@ class SQLiteStudentRepository:
         autonomous_opportunity: ProactiveOpportunityV1 | None = None,
         responding_to_outreach_message_id: str | None = None,
         completed_autonomous_goal_ids: list[str] | None = None,
+        reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -1050,6 +1288,18 @@ class SQLiteStudentRepository:
                 raise ValueError("learner state has inconsistent turn lineage")
         elif expected_learner_state_revision is not None:
             raise ValueError("learner state revision requires learner state")
+        if reactive_v2_artifacts is not None:
+            reactive_v2_artifacts = ReactiveTurnArtifactsV2.model_validate(
+                reactive_v2_artifacts.model_dump(mode="python")
+            )
+            if (
+                reactive_v2_artifacts.conversation_id != conversation.id
+                or reactive_v2_artifacts.observation.course_id != conversation.course_id
+                or reactive_v2_artifacts.observation.release_id != conversation.release_id
+                or reactive_v2_artifacts.trace.event_id
+                != reactive_v2_artifacts.observation.observation_id
+            ):
+                raise ValueError("reactive V2 artifacts have inconsistent turn scope")
         response_message: ProactiveMessage | None = None
         response_action: AutonomousActionV1 | None = None
         if responding_to_outreach_message_id is not None:
@@ -1091,6 +1341,23 @@ class SQLiteStudentRepository:
                     ).fetchone()
                     current_revision = int(current["revision"]) if current else 0
                     if current_revision != expected_learner_state_revision:
+                        duplicate = self._connection.execute(
+                            """SELECT 1 FROM messages
+                               WHERE conversation_id = ? AND client_request_id = ?""",
+                            (conversation.id, student_message.client_request_id),
+                        ).fetchone()
+                        if duplicate is not None:
+                            raise DuplicateTurnError
+                        raise LearnerStateConflictError
+                if reactive_v2_artifacts is not None:
+                    current_v2 = self._connection.execute(
+                        """SELECT revision FROM learner_belief_states_v2
+                           WHERE conversation_id = ?""",
+                        (conversation.id,),
+                    ).fetchone()
+                    current_v2_revision = int(current_v2["revision"]) if current_v2 else 0
+                    expected_v2_revision = reactive_v2_artifacts.trace.input_state_revision
+                    if current_v2_revision != expected_v2_revision:
                         duplicate = self._connection.execute(
                             """SELECT 1 FROM messages
                                WHERE conversation_id = ? AND client_request_id = ?""",
@@ -1156,6 +1423,11 @@ class SQLiteStudentRepository:
                             learner_state.updated_at,
                         ),
                     )
+                if reactive_v2_artifacts is not None:
+                    self._insert_reactive_v2_artifacts(
+                        conversation.id,
+                        reactive_v2_artifacts,
+                    )
                 if learning_gap_signal is not None:
                     self._insert_learning_gap_signal(learning_gap_signal)
                 if autonomous_opportunity is not None:
@@ -1205,6 +1477,129 @@ class SQLiteStudentRepository:
             if "messages.conversation_id, messages.client_request_id" in str(error):
                 raise DuplicateTurnError from error
             raise
+
+    def _insert_reactive_v2_artifacts(
+        self,
+        conversation_id: str,
+        artifacts: ReactiveTurnArtifactsV2,
+    ) -> None:
+        """Insert sanitized V2 records inside the caller-owned turn transaction."""
+
+        observation = artifacts.observation
+        belief = artifacts.belief_state
+        delta = artifacts.state_delta
+        trace = artifacts.trace
+        self._connection.execute(
+            """INSERT INTO learner_observations_v2
+               (observation_id, conversation_id, learner_key, course_id,
+                release_id, source_turn_key, observation_json, observed_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                observation.observation_id,
+                conversation_id,
+                observation.learner_key,
+                observation.course_id,
+                observation.release_id,
+                observation.source_turn_key,
+                observation.model_dump_json(),
+                observation.observed_at,
+            ),
+        )
+        if artifacts.state_committed:
+            assert belief is not None and delta is not None
+            self._connection.execute(
+                """INSERT INTO learner_belief_states_v2
+               (conversation_id, learner_key, course_id, release_id, revision,
+                state_json, updated_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?)
+               ON CONFLICT(conversation_id) DO UPDATE SET
+                 learner_key = excluded.learner_key,
+                 course_id = excluded.course_id,
+                 release_id = excluded.release_id,
+                 revision = excluded.revision,
+                 state_json = excluded.state_json,
+                 updated_at = excluded.updated_at""",
+                (
+                    conversation_id,
+                    belief.learner_key,
+                    belief.course_id,
+                    belief.release_id,
+                    belief.revision,
+                    belief.model_dump_json(),
+                    belief.updated_at,
+                ),
+            )
+            self._connection.executemany(
+                """INSERT INTO learner_concept_attributions_v2
+               (conversation_id, revision, concept_id, attribution_json, updated_at)
+               VALUES (?, ?, ?, ?, ?)""",
+                [
+                    (
+                        conversation_id,
+                        belief.revision,
+                        item.concept_id,
+                        item.model_dump_json(),
+                        belief.updated_at,
+                    )
+                    for item in belief.concepts
+                ],
+            )
+            self._connection.execute(
+                """INSERT INTO learner_state_deltas_v2
+               (conversation_id, next_revision, observation_id, delta_json, created_at)
+               VALUES (?, ?, ?, ?, ?)""",
+                (
+                    conversation_id,
+                    delta.next_revision,
+                    observation.observation_id,
+                    delta.model_dump_json(),
+                    belief.updated_at,
+                ),
+            )
+        recorded_at = belief.updated_at if belief is not None else observation.observed_at
+        self._connection.execute(
+            """INSERT INTO reactive_pedagogical_plans_v2
+               (observation_id, conversation_id, plan_json, created_at)
+               VALUES (?, ?, ?, ?)""",
+            (
+                observation.observation_id,
+                conversation_id,
+                artifacts.plan.model_dump_json(),
+                recorded_at,
+            ),
+        )
+        self._connection.execute(
+            """INSERT INTO grounded_tutor_responses_v2
+               (observation_id, conversation_id, response_json, created_at)
+               VALUES (?, ?, ?, ?)""",
+            (
+                observation.observation_id,
+                conversation_id,
+                artifacts.response.model_dump_json(),
+                recorded_at,
+            ),
+        )
+        self._connection.execute(
+            """INSERT INTO tutoring_agent_traces_v2
+               (trace_id, event_id, conversation_id, learner_key, course_id,
+                release_id, graph_version, input_state_revision,
+                output_state_revision, trace_json, created_at, completed_at)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                trace.trace_id,
+                trace.event_id,
+                conversation_id,
+                trace.learner_key,
+                trace.course_id,
+                trace.release_id,
+                trace.graph_version,
+                trace.input_state_revision,
+                trace.output_state_revision,
+                trace.model_dump_json(),
+                trace.started_at,
+                trace.completed_at,
+            ),
+        )
 
     def list_citations(self, message_id: str) -> list[Citation]:
         with self._lock:

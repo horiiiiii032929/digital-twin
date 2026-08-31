@@ -2,11 +2,16 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from datetime import UTC, datetime, timedelta
 from typing import Protocol, TypedDict
 from uuid import uuid4
 
+import aiosqlite
 from langgraph.graph import END, START, StateGraph
+from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
+from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from src.digital_twin.student.autonomy_models import (
@@ -26,7 +31,7 @@ from src.digital_twin.student.autonomy_models import (
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
 )
-from src.digital_twin.llm import LlmClient, LlmError, LlmMessage
+from src.digital_twin.llm import LlmClient, LlmError, LlmIdentityDriftError, LlmMessage
 from src.digital_twin.tutor_policy import timestamp_now
 
 
@@ -240,6 +245,8 @@ class LiveAutonomousPlanner:
                 task="autonomous_tutoring_plan",
             )
             return AutonomousPlannerOutputV1.model_validate_json(response.content)
+        except LlmIdentityDriftError:
+            raise
         except (LlmError, ValueError):
             return await self.fallback.plan(job)
 
@@ -316,10 +323,21 @@ class GovernedAutonomousTutoringGraph:
         *,
         planner: AutonomousPlanner | None = None,
         generator: AutonomousWordingGenerator | None = None,
+        checkpoint_database_path: str = ":memory:",
     ) -> None:
         self.planner = planner or DeterministicAutonomousPlanner()
         self.generator = generator or DeterministicAutonomousWordingGenerator()
-        self._graph = self._build_graph()
+        if not checkpoint_database_path.strip():
+            raise ValueError("autonomous graph requires a checkpoint database path")
+        if checkpoint_database_path == ":memory:" and (
+            not self.planner.model_id.startswith("deterministic/")
+            or not self.generator.model_id.startswith("deterministic/")
+        ):
+            raise ValueError(
+                "provider-backed autonomy requires a durable checkpoint database"
+            )
+        self.checkpoint_database_path = checkpoint_database_path
+        self._builder = self._build_graph()
 
     async def run(self, job: AutonomousJobInput) -> AutonomousJobResult:
         initial: _RuntimeState = {
@@ -331,22 +349,88 @@ class GovernedAutonomousTutoringGraph:
             "outcome": None,
             "wake_up": None,
             "trace": AgentTraceV2(
+                trace_id=f"trace-{job.opportunity.opportunity_id}",
+                event_id=job.opportunity.opportunity_id,
+                learner_key=hashlib.sha256(
+                    (
+                        f"{job.opportunity.course_id}:"
+                        f"{job.opportunity.student_id}"
+                    ).encode("utf-8")
+                ).hexdigest(),
+                course_id=job.opportunity.course_id,
+                release_id=job.opportunity.release_id,
                 graph_version=self.implementation_id,
                 policy_version=job.policy.version,
                 profile_sha256=job.policy.approved_profile_sha256,
                 planner_model=self.planner.model_id,
+                generator_requested_model=self.generator.model_id,
                 generator_model=self.generator.model_id,
                 decision_reason="job-started",
             ),
             "blocked_reason": None,
         }
-        result = await self._graph.ainvoke(
-            initial,
-            config={"recursion_limit": self.recursion_limit},
+        config = {
+            "configurable": {"thread_id": job.opportunity.opportunity_id},
+            "recursion_limit": self.recursion_limit,
+        }
+        serializer = JsonPlusSerializer(
+            allowed_msgpack_modules=[
+                ("src.digital_twin.student.autonomy_runtime", "AutonomousJobInput"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousEventKind"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousActionKind"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousActionStatus"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousOutcomeKind"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousGoalStatus"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousOpportunityStatus"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousGoalV1"),
+                ("src.digital_twin.student.autonomy_models", "ProactiveOpportunityV1"),
+                ("src.digital_twin.student.autonomy_models", "PedagogicalPolicyV2"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousPlannerOutputV1"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousPlanV1"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousActionV1"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousOutcomeV1"),
+                ("src.digital_twin.student.autonomy_models", "AutonomousWakeUpV1"),
+                ("src.digital_twin.student.autonomy_models", "GroundedTutorResponseV2"),
+                ("src.digital_twin.student.autonomy_models", "AgentTraceV2"),
+            ]
         )
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            saver = AsyncSqliteSaver(connection, serde=serializer)
+            await saver.setup()
+            graph = self._builder.compile(checkpointer=saver)
+            snapshot = await graph.aget_state(config)
+            restart_count = 0
+            if snapshot.values:
+                restart_count = 1
+                result = (
+                    await graph.ainvoke(None, config=config)
+                    if snapshot.next
+                    else snapshot.values
+                )
+            else:
+                result = await graph.ainvoke(initial, config=config)
+            checkpoint_ids: list[str] = []
+            checkpoint_nodes: list[str] = []
+            async for item in saver.alist(config, limit=32):
+                configurable = item.config.get("configurable", {})
+                checkpoint_id = configurable.get("checkpoint_id")
+                if checkpoint_id and str(checkpoint_id) not in checkpoint_ids:
+                    checkpoint_ids.append(str(checkpoint_id))
+                writes = item.metadata.get("writes")
+                if isinstance(writes, dict):
+                    for node in writes:
+                        if node != "__start__" and node not in checkpoint_nodes:
+                            checkpoint_nodes.append(str(node))
         required = (result["plan"], result["action"], result["outcome"])
         if any(item is None for item in required):
             raise AutonomousRuntimeError("autonomous graph ended without durable records")
+        trace = result["trace"].model_copy(
+            update={
+                "checkpoint_ids": checkpoint_ids,
+                "node_path": list(reversed(checkpoint_nodes)),
+                "restart_count": restart_count,
+            }
+        )
         return AutonomousJobResult(
             opportunity=result["job"].opportunity,
             plan=result["plan"],
@@ -354,7 +438,7 @@ class GovernedAutonomousTutoringGraph:
             outcome=result["outcome"],
             response=result["response"],
             wake_up=result["wake_up"],
-            trace=result["trace"],
+            trace=trace,
         )
 
     def _build_graph(self):
@@ -364,6 +448,8 @@ class GovernedAutonomousTutoringGraph:
         graph.add_node("authorize", self._authorize)
         graph.add_node("generate", self._generate)
         graph.add_node("validate", self._validate)
+        graph.add_node("repair", self._repair)
+        graph.add_node("validate_repair", self._validate)
         graph.add_node("record_no_action", self._record_no_action)
         graph.add_node("finalize", self._finalize)
         graph.add_edge(START, "observe")
@@ -380,11 +466,20 @@ class GovernedAutonomousTutoringGraph:
         graph.add_conditional_edges(
             "validate",
             self._after_validate,
+            {"pass": "finalize", "repair": "repair", "stop": "record_no_action"},
+        )
+        graph.add_edge("repair", "validate_repair")
+        graph.add_conditional_edges(
+            "validate_repair",
+            self._after_repair_validate,
             {"pass": "finalize", "stop": "record_no_action"},
         )
         graph.add_edge("record_no_action", "finalize")
         graph.add_edge("finalize", END)
-        return graph.compile()
+        # Keep the mutable builder here so each run can bind its own durable
+        # SQLite checkpointer. Compiling at construction time would create an
+        # in-memory graph that cannot later be rebound to AsyncSqliteSaver.
+        return graph
 
     def _observe(self, state: _RuntimeState) -> dict:
         job = state["job"]
@@ -414,7 +509,13 @@ class GovernedAutonomousTutoringGraph:
         return "stop" if state["blocked_reason"] else "plan"
 
     async def _plan(self, state: _RuntimeState) -> dict:
-        proposal = await self.planner.plan(state["job"])
+        proposal = await self._plan_once(state["job"])
+        if proposal is None:
+            proposal = AutonomousPlannerOutputV1(
+                action=AutonomousActionKind.NO_ACTION,
+                reason_code="operational-provider-call-outcome-uncertain",
+                stop_condition="Stop without repeating an uncertain provider call.",
+            )
         job = state["job"]
         plan = AutonomousPlanV1(
             plan_id=f"autonomous-plan-{uuid4()}",
@@ -493,14 +594,179 @@ class GovernedAutonomousTutoringGraph:
         proposal = state["proposal"]
         if proposal is None:
             raise AutonomousRuntimeError("generation requires an authorized proposal")
-        response = await self.generator.generate(state["job"], proposal)
+        response = await self._generate_once(state["job"], proposal, stage="generate")
         trace = state["trace"].model_copy(update={"generation_calls": 1})
+        if response is None:
+            return {
+                "response": None,
+                "trace": trace,
+                "blocked_reason": "operational-provider-call-outcome-uncertain",
+            }
         return {"response": response, "trace": trace}
+
+    async def _repair(self, state: _RuntimeState) -> dict:
+        proposal = state["proposal"]
+        if proposal is None:
+            raise AutonomousRuntimeError("repair requires an authorized proposal")
+        response = await self._generate_once(state["job"], proposal, stage="repair")
+        trace = state["trace"].model_copy(update={"repair_calls": 1})
+        if response is None:
+            return {
+                "response": None,
+                "trace": trace,
+                "blocked_reason": "operational-provider-call-outcome-uncertain",
+            }
+        return {"response": response, "trace": trace, "blocked_reason": None}
+
+    async def _plan_once(
+        self,
+        job: AutonomousJobInput,
+    ) -> AutonomousPlannerOutputV1 | None:
+        if self.planner.model_id.startswith("deterministic/"):
+            return await self.planner.plan(job)
+        payload = {
+            "opportunity": job.opportunity.model_dump(mode="json"),
+            "goal": job.goal.model_dump(mode="json") if job.goal else None,
+            "policy": job.policy.model_dump(mode="json"),
+            "model": self.planner.model_id,
+        }
+        cached, reserved = await self._reserve_model_call(
+            job,
+            stage="plan",
+            request_payload=payload,
+        )
+        if cached is not None:
+            return AutonomousPlannerOutputV1.model_validate_json(cached)
+        if not reserved:
+            return None
+        try:
+            proposal = await self.planner.plan(job)
+        except Exception as error:
+            await self._fail_model_call(job, "plan", type(error).__name__)
+            return None
+        await self._complete_model_call(job, "plan", proposal.model_dump_json())
+        return proposal
+
+    async def _generate_once(
+        self,
+        job: AutonomousJobInput,
+        proposal: AutonomousPlannerOutputV1,
+        *,
+        stage: str,
+    ) -> GroundedTutorResponseV2 | None:
+        if self.generator.model_id.startswith("deterministic/"):
+            return await self.generator.generate(job, proposal)
+        payload = {
+            "opportunity": job.opportunity.model_dump(mode="json"),
+            "proposal": proposal.model_dump(mode="json"),
+            "evidence_keys": job.evidence_keys,
+            "model": self.generator.model_id,
+        }
+        cached, reserved = await self._reserve_model_call(
+            job,
+            stage=stage,
+            request_payload=payload,
+        )
+        if cached is not None:
+            return GroundedTutorResponseV2.model_validate_json(cached)
+        if not reserved:
+            return None
+        try:
+            response = await self.generator.generate(job, proposal)
+        except Exception as error:
+            await self._fail_model_call(job, stage, type(error).__name__)
+            return None
+        await self._complete_model_call(job, stage, response.model_dump_json())
+        return response
+
+    async def _reserve_model_call(
+        self,
+        job: AutonomousJobInput,
+        *,
+        stage: str,
+        request_payload: dict,
+    ) -> tuple[str | None, bool]:
+        request_sha256 = hashlib.sha256(
+            json.dumps(
+                request_payload,
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        ).hexdigest()
+        opportunity_id = job.opportunity.opportunity_id
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            await connection.execute("BEGIN IMMEDIATE")
+            cursor = await connection.execute(
+                """SELECT request_sha256, status, output_json
+                   FROM autonomous_model_calls_v2
+                   WHERE opportunity_id = ? AND stage = ?""",
+                (opportunity_id, stage),
+            )
+            row = await cursor.fetchone()
+            if row is not None:
+                await connection.commit()
+                if row[0] != request_sha256:
+                    raise AutonomousRuntimeError(
+                        "autonomous model-call resume binding changed"
+                    )
+                if row[1] == "completed" and row[2] is not None:
+                    return str(row[2]), False
+                return None, False
+            await connection.execute(
+                """INSERT INTO autonomous_model_calls_v2(
+                       opportunity_id, stage, request_sha256, status, started_at
+                   ) VALUES (?, ?, ?, 'started', ?)""",
+                (opportunity_id, stage, request_sha256, timestamp_now()),
+            )
+            await connection.commit()
+        return None, True
+
+    async def _complete_model_call(
+        self,
+        job: AutonomousJobInput,
+        stage: str,
+        output_json: str,
+    ) -> None:
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            await connection.execute(
+                """UPDATE autonomous_model_calls_v2
+                   SET status = 'completed', output_json = ?, completed_at = ?
+                   WHERE opportunity_id = ? AND stage = ?""",
+                (
+                    output_json,
+                    timestamp_now(),
+                    job.opportunity.opportunity_id,
+                    stage,
+                ),
+            )
+            await connection.commit()
+
+    async def _fail_model_call(
+        self,
+        job: AutonomousJobInput,
+        stage: str,
+        failure_code: str,
+    ) -> None:
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            await connection.execute(
+                """UPDATE autonomous_model_calls_v2
+                   SET status = 'failed', failure_code = ?, completed_at = ?
+                   WHERE opportunity_id = ? AND stage = ?""",
+                (
+                    failure_code,
+                    timestamp_now(),
+                    job.opportunity.opportunity_id,
+                    stage,
+                ),
+            )
+            await connection.commit()
 
     def _validate(self, state: _RuntimeState) -> dict:
         response = state["response"]
         proposal = state["proposal"]
         job = state["job"]
+        if (state["blocked_reason"] or "").startswith("operational-provider-"):
+            return {"blocked_reason": state["blocked_reason"]}
         if response is None or proposal is None:
             return {"blocked_reason": "missing-generated-response"}
         checks = {
@@ -521,6 +787,14 @@ class GovernedAutonomousTutoringGraph:
 
     @staticmethod
     def _after_validate(state: _RuntimeState) -> str:
+        if not state["blocked_reason"]:
+            return "pass"
+        if (state["blocked_reason"] or "").startswith("operational-provider-"):
+            return "stop"
+        return "repair" if state["trace"].repair_calls == 0 else "stop"
+
+    @staticmethod
+    def _after_repair_validate(state: _RuntimeState) -> str:
         return "stop" if state["blocked_reason"] else "pass"
 
     def _record_no_action(self, state: _RuntimeState) -> dict:
@@ -612,6 +886,14 @@ class GovernedAutonomousTutoringGraph:
         trace = state["trace"].model_copy(
             update={
                 "decision_reason": state["blocked_reason"] or plan.reason_code,
+                "node_path": [
+                    "observe",
+                    "plan",
+                    "authorize",
+                    "generate",
+                    "validate",
+                    "finalize",
+                ],
                 "completed_at": job.now,
             }
         )

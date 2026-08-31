@@ -486,6 +486,7 @@ def test_governed_runtime_binds_planner_and_generator_identities(monkeypatch):
         settings=AppSettings(
             generator_mode=GeneratorMode.OPENAI_GPT_5_4_MINI,
             evidence_gate_mode=EvidenceGateMode.STRUCTURED_LEXICAL_V1,
+            learning_gap_hmac_secret=b"x" * 32,
             student_profile_path=CANDIDATE_PROFILE,
             student_tutoring_mode=(
                 StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
