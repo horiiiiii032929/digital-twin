@@ -9,6 +9,8 @@ from src.digital_twin.evaluation import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationEventV1,
     AutonomyObservedActionV1,
+    AutonomyOperationalMetricsV1,
+    AutonomyProviderCallV1,
     AutonomyStateSnapshotV1,
     AutonomySystemManifestV1,
     CallbackAutonomyEvaluationAdapterV1,
@@ -171,3 +173,44 @@ async def test_callback_adapter_rejects_backward_time() -> None:
     adapter = _adapter(_FiniteDriver())
     with pytest.raises(ValueError, match="backward"):
         await adapter.advance_time(-1)
+
+
+def test_operational_metrics_require_exact_per_call_accounting() -> None:
+    metrics = AutonomyOperationalMetricsV1(
+        provider_calls=1,
+        input_tokens=12,
+        output_tokens=5,
+        total_tokens=17,
+        provider_latency_ms=8.5,
+        cost_usd=0.001,
+        call_records=[
+            AutonomyProviderCallV1(
+                call_number=1,
+                task="reactive_tutoring_plan",
+                status="completed",
+                provider_model="provider/model-v1",
+                provider_revision="provider/model-v1",
+                input_tokens=12,
+                output_tokens=5,
+                total_tokens=17,
+                reported_cost_usd=0.001,
+                latency_ms=8.5,
+            )
+        ],
+    )
+
+    assert metrics.provider_calls == 1
+    assert metrics.total_tokens == 17
+
+
+def test_operational_metrics_reject_missing_call_lineage() -> None:
+    with pytest.raises(ValidationError):
+        AutonomyOperationalMetricsV1(
+            provider_calls=1,
+            input_tokens=12,
+            output_tokens=5,
+            total_tokens=17,
+            provider_latency_ms=8.5,
+            cost_usd=0.001,
+            call_records=[],
+        )

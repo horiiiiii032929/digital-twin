@@ -60,6 +60,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This development qualification is deterministic and network-free. It
     # cannot call a provider or open the sealed Program 011 final package.
     "run_governed_full_autonomy_product_freeze.py",
+    # This build-only harness expands public/gold contracts in memory and runs
+    # a deterministic reference driver. It has no provider or held-out mode.
+    "run_governed_full_autonomy_v2_1_evaluation_harness.py",
     "run_ingestion_worker.py",
 }
 EXEMPT_SCRIPTS = {

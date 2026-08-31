@@ -8,6 +8,8 @@ retrieval chunk IDs, prompts, or provider-specific response objects.
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable
+import math
+import time
 from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -142,6 +144,9 @@ class AutonomyStateSnapshotV1(_Contract):
     release_id: str = Field(min_length=1, max_length=128)
     policy_version: int = Field(ge=1)
     restart_count: int = Field(default=0, ge=0)
+    terminal_goal_status: Literal[
+        "active", "completed", "expired", "cancelled", "none"
+    ] = "none"
 
     @model_validator(mode="after")
     def identifiers_must_be_unique(self) -> "AutonomyStateSnapshotV1":
@@ -155,6 +160,70 @@ class AutonomyStateSnapshotV1(_Contract):
         return self
 
 
+class AutonomyProviderCallV1(_Contract):
+    """Privacy-safe accounting for one provider boundary crossing."""
+
+    call_number: int = Field(ge=1)
+    task: str = Field(min_length=1, max_length=64)
+    status: Literal["completed", "failed"]
+    provider_model: str | None = Field(default=None, max_length=128)
+    provider_revision: str | None = Field(default=None, max_length=128)
+    input_tokens: int = Field(default=0, ge=0)
+    output_tokens: int = Field(default=0, ge=0)
+    total_tokens: int = Field(default=0, ge=0)
+    reported_cost_usd: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
+    error_code: str | None = Field(default=None, max_length=128)
+
+    @model_validator(mode="after")
+    def accounting_must_be_consistent(self) -> "AutonomyProviderCallV1":
+        if self.total_tokens != self.input_tokens + self.output_tokens:
+            raise ValueError("provider call token total is inconsistent")
+        if self.status == "completed" and self.provider_model is None:
+            raise ValueError("completed provider call requires returned model identity")
+        if self.status == "failed" and self.error_code is None:
+            raise ValueError("failed provider call requires a bounded error code")
+        return self
+
+
+class AutonomyOperationalMetricsV1(_Contract):
+    provider_calls: int = Field(default=0, ge=0)
+    input_tokens: int = Field(default=0, ge=0)
+    output_tokens: int = Field(default=0, ge=0)
+    total_tokens: int = Field(default=0, ge=0)
+    provider_latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
+    cost_usd: float = Field(default=0, ge=0, allow_inf_nan=False)
+    call_records: list[AutonomyProviderCallV1] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def aggregate_must_match_calls(self) -> "AutonomyOperationalMetricsV1":
+        if self.total_tokens != self.input_tokens + self.output_tokens:
+            raise ValueError("autonomy operational token total is inconsistent")
+        if self.provider_calls != len(self.call_records):
+            raise ValueError("provider-call aggregate does not match call records")
+        call_numbers = [item.call_number for item in self.call_records]
+        if len(call_numbers) != len(set(call_numbers)):
+            raise ValueError("provider call numbers must be unique")
+        if self.call_records:
+            if self.input_tokens != sum(item.input_tokens for item in self.call_records):
+                raise ValueError("provider input-token aggregate is inconsistent")
+            if self.output_tokens != sum(item.output_tokens for item in self.call_records):
+                raise ValueError("provider output-token aggregate is inconsistent")
+            measured_latency = sum(item.latency_ms for item in self.call_records)
+            if not math.isclose(
+                self.provider_latency_ms, measured_latency, abs_tol=0.01
+            ):
+                raise ValueError("provider latency aggregate is inconsistent")
+            reported_costs = [
+                item.reported_cost_usd
+                for item in self.call_records
+                if item.reported_cost_usd is not None
+            ]
+            if not math.isclose(self.cost_usd, sum(reported_costs), abs_tol=1e-8):
+                raise ValueError("provider cost aggregate is inconsistent")
+        return self
+
+
 class AutonomyEvaluationResponseV1(_Contract):
     schema_version: Literal["1.0.0"] = "1.0.0"
     case_id: str = Field(min_length=1, max_length=128)
@@ -162,10 +231,22 @@ class AutonomyEvaluationResponseV1(_Contract):
     final_state: AutonomyStateSnapshotV1
     operational_status: Literal["completed", "failed"]
     latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
-    provider_calls: int = Field(default=0, ge=0)
-    tokens: int = Field(default=0, ge=0)
-    cost_usd: float = Field(default=0, ge=0, allow_inf_nan=False)
+    operational_metrics: AutonomyOperationalMetricsV1 = Field(
+        default_factory=AutonomyOperationalMetricsV1
+    )
     diagnostic_trace: dict[str, Any] = Field(default_factory=dict)
+
+    @property
+    def provider_calls(self) -> int:
+        return self.operational_metrics.provider_calls
+
+    @property
+    def tokens(self) -> int:
+        return self.operational_metrics.total_tokens
+
+    @property
+    def cost_usd(self) -> float:
+        return self.operational_metrics.cost_usd
 
 
 class AutonomySystemManifestV1(_Contract):
@@ -198,6 +279,10 @@ class AutonomyEvaluationAdapterV1(Protocol):
 
     async def snapshot_state(self) -> AutonomyStateSnapshotV1: ...
 
+    async def collect_operational_metrics(self) -> AutonomyOperationalMetricsV1: ...
+
+    async def collect_diagnostic_trace(self) -> dict[str, Any]: ...
+
 
 class CallbackAutonomyEvaluationAdapterV1:
     """Adapter for local services, future graphs, or deployed HTTP drivers."""
@@ -212,6 +297,11 @@ class CallbackAutonomyEvaluationAdapterV1:
         restart: Callable[[], Awaitable[None]],
         collect_actions: Callable[[], Awaitable[list[AutonomyObservedActionV1]]],
         snapshot_state: Callable[[], Awaitable[AutonomyStateSnapshotV1]],
+        collect_operational_metrics: Callable[
+            [], Awaitable[AutonomyOperationalMetricsV1]
+        ]
+        | None = None,
+        collect_diagnostic_trace: Callable[[], Awaitable[dict[str, Any]]] | None = None,
     ) -> None:
         self.manifest = manifest
         self._reset = reset
@@ -220,6 +310,8 @@ class CallbackAutonomyEvaluationAdapterV1:
         self._restart = restart
         self._collect_actions = collect_actions
         self._snapshot_state = snapshot_state
+        self._collect_operational_metrics = collect_operational_metrics
+        self._collect_diagnostic_trace = collect_diagnostic_trace
 
     async def reset(self, case: AutonomyEvaluationCaseV1) -> None:
         await self._reset(case)
@@ -241,6 +333,16 @@ class CallbackAutonomyEvaluationAdapterV1:
     async def snapshot_state(self) -> AutonomyStateSnapshotV1:
         return await self._snapshot_state()
 
+    async def collect_operational_metrics(self) -> AutonomyOperationalMetricsV1:
+        if self._collect_operational_metrics is None:
+            return AutonomyOperationalMetricsV1()
+        return await self._collect_operational_metrics()
+
+    async def collect_diagnostic_trace(self) -> dict[str, Any]:
+        if self._collect_diagnostic_trace is None:
+            return {}
+        return await self._collect_diagnostic_trace()
+
 
 async def run_autonomy_case(
     adapter: AutonomyEvaluationAdapterV1,
@@ -248,6 +350,7 @@ async def run_autonomy_case(
 ) -> AutonomyEvaluationResponseV1:
     """Run one case without exposing its gold package to the product adapter."""
 
+    started = time.perf_counter()
     await adapter.reset(case)
     elapsed = 0
     for event in case.events:
@@ -262,10 +365,19 @@ async def run_autonomy_case(
         await adapter.submit_event(event)
     if elapsed < case.duration_seconds:
         await adapter.advance_time(case.duration_seconds - elapsed)
+    actions = await adapter.collect_actions()
+    final_state = await adapter.snapshot_state()
+    metrics = await adapter.collect_operational_metrics()
+    diagnostic_trace = await adapter.collect_diagnostic_trace()
     return AutonomyEvaluationResponseV1(
         case_id=case.case_id,
-        actions=await adapter.collect_actions(),
-        final_state=await adapter.snapshot_state(),
+        actions=actions,
+        final_state=final_state,
         operational_status="completed",
-        diagnostic_trace={"manifest": adapter.manifest.model_dump(mode="json")},
+        latency_ms=max(0.0, (time.perf_counter() - started) * 1_000),
+        operational_metrics=metrics,
+        diagnostic_trace={
+            "manifest": adapter.manifest.model_dump(mode="json"),
+            **diagnostic_trace,
+        },
     )
