@@ -8,6 +8,7 @@ import random
 import re
 import statistics
 import unicodedata
+from collections.abc import Callable
 from typing import Any, Iterable
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -24,6 +25,24 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 def normalize_text(value: str) -> str:
     value = unicodedata.normalize("NFKC", value).casefold()
     return " ".join(re.findall(r"[a-z0-9]+", value))
+
+
+def normalize_semantic_source_text(value: str) -> str:
+    """Normalize visible source meaning without counting authoring markup.
+
+    The v1 scorer intentionally remains the default for historical runs.  This
+    prospective normalizer treats common RST/LaTeX authoring syntax as display
+    markup so semantically identical source spans are not rejected merely for
+    retaining ``\\emph``, ``\\index``, or hash-delimited identifiers.
+    """
+
+    normalized = unicodedata.normalize("NFKC", value).casefold()
+    normalized = re.sub(r"\\index\{[^{}]*\}%?", " ", normalized)
+    normalized = re.sub(r"\\(?:emph|textit|textbf)\{([^{}]*)\}", r" \1 ", normalized)
+    normalized = re.sub(r"#([^#\n]+)#", r"\1", normalized)
+    normalized = normalized.replace(r"\ldots", "...")
+    normalized = re.sub(r":[a-z0-9_-]+:`([^`]*)`", r"\1", normalized)
+    return " ".join(re.findall(r"[a-z0-9]+", normalized))
 
 
 class FactualQaCaseScoreV1(BaseModel):
@@ -73,15 +92,20 @@ def _lineage_matches(
     return len(matched_expected), len(matched_observed), len(expected)
 
 
-def _claim_matches(response: EvaluationResponseV1, gold: EvaluationGoldV1) -> tuple[int, int]:
+def _claim_matches(
+    response: EvaluationResponseV1,
+    gold: EvaluationGoldV1,
+    *,
+    normalizer: Callable[[str], str] = normalize_text,
+) -> tuple[int, int]:
     matched_expected: set[int] = set()
     matched_observed: set[int] = set()
     for expected_index, expected_claim in enumerate(gold.claims):
-        expected_text = normalize_text(expected_claim.answer_span)
+        expected_text = normalizer(expected_claim.answer_span)
         for observed_index, observed_claim in enumerate(response.atomic_claims):
             if observed_index in matched_observed:
                 continue
-            observed_text = normalize_text(observed_claim.text)
+            observed_text = normalizer(observed_claim.text)
             has_lineage = any(
                 evidence_ranges_overlap(expected_ref, observed_ref)
                 for expected_ref in expected_claim.evidence_refs
@@ -98,18 +122,24 @@ def score_case(
     case: EvaluationCaseV1,
     gold: EvaluationGoldV1,
     response: EvaluationResponseV1,
+    *,
+    normalizer: Callable[[str], str] = normalize_text,
 ) -> FactualQaCaseScoreV1:
     if case.case_id != gold.case_id or case.case_id != response.case_id:
         raise ValueError("case, gold, and response identities do not match")
     answerable = gold.expected_action == EvaluationAction.ANSWER
     action_correct = response.action == gold.expected_action
-    answer = normalize_text(response.answer)
-    expected_spans = [normalize_text(claim.answer_span) for claim in gold.claims]
+    answer = normalizer(response.answer)
+    expected_spans = [normalizer(claim.answer_span) for claim in gold.claims]
     matched_spans = [span for span in expected_spans if span and span in answer]
     answer_span_recall = (
         len(matched_spans) / len(expected_spans) if expected_spans else 1.0
     )
-    matched_claims, matched_observed_claims = _claim_matches(response, gold)
+    matched_claims, matched_observed_claims = _claim_matches(
+        response,
+        gold,
+        normalizer=normalizer,
+    )
     atomic_claim_precision = (
         matched_observed_claims / len(response.atomic_claims)
         if response.atomic_claims

@@ -156,6 +156,26 @@ from src.digital_twin.grounding.hierarchical_retrieval import (
     should_use_semantic_reranking,
     structured_tokens,
 )
+from src.digital_twin.grounding.plan_observe_retrieval import (
+    PlanObserveRetrieverV1,
+    PlanObserveRetrievalTraceV1,
+    decompose_evidence_queries,
+)
+from src.digital_twin.grounding.target_evidence import (
+    PublicEvidenceTargetPlanV1,
+    TargetAwareEvidenceRetrieverV1,
+    TargetEvidenceGateV1,
+    TargetRetrievalTraceV1,
+    plan_public_evidence_targets,
+)
+from src.digital_twin.grounding.source_range_evidence import (
+    PublicSourceRangePlanV2,
+    SourceRangeCandidateRetrieverV2,
+    SourceRangeCandidateTraceV2,
+    SourceRangeEvidenceGateV2,
+    canonicalize_source_claim,
+    plan_public_source_ranges,
+)
 
 
 __all__ = [
@@ -218,6 +238,8 @@ __all__ = [
     "ModalityAwareRegionRetriever",
     "SecondaryRetrieverAgreementGate",
     "ParsedDocumentBundle",
+    "PlanObserveRetrieverV1",
+    "PlanObserveRetrievalTraceV1",
     "OCRProvider",
     "OCRTextRegion",
     "NliProbabilities",
@@ -228,6 +250,7 @@ __all__ = [
     "PairScoreBackend",
     "PostGenerationClaimValidator",
     "PublishedRetrievalIndexV1",
+    "PublicEvidenceTargetPlanV1",
     "InvalidRetrievalLimitError",
     "RelevantChunkReference",
     "RetrievalBenchmarkCorpus",
@@ -268,6 +291,9 @@ __all__ = [
     "TutorAnswer",
     "TutorGenerator",
     "TermOverlapRetriever",
+    "TargetAwareEvidenceRetrieverV1",
+    "TargetEvidenceGateV1",
+    "TargetRetrievalTraceV1",
     "TextEmbedder",
     "UnsupportedSourceError",
     "UnsupportedRetrieverSelectionError",
@@ -280,6 +306,13 @@ __all__ = [
     "evaluate_evidence_sufficiency",
     "lexical_tokens",
     "p95",
+    "plan_public_evidence_targets",
+    "PublicSourceRangePlanV2",
+    "SourceRangeCandidateRetrieverV2",
+    "SourceRangeCandidateTraceV2",
+    "SourceRangeEvidenceGateV2",
+    "canonicalize_source_claim",
+    "plan_public_source_ranges",
     "retrieval_text",
     "requires_clarification",
     "should_use_semantic_reranking",
@@ -288,4 +321,5 @@ __all__ = [
     "load_retrieval_benchmark_corpus",
     "source_artifact_from_path",
     "structured_tokens",
+    "decompose_evidence_queries",
 ]

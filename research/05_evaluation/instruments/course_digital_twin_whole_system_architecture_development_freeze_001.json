@@ -1,0 +1,115 @@
+{
+  "deterministic_truth_authoritative": true,
+  "freeze_id": "course-digital-twin-whole-system-architecture-development-freeze-001",
+  "paid_cost_usd": 0,
+  "product_inputs_exclude_gold": true,
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "program_sha256": "04756b34ef0178b792018c0c80ba44b76605bd768feba10bbab2c5159d6b0e8f",
+  "provider_calls": 0,
+  "schema_version": 1,
+  "status": "frozen-build-only",
+  "tranches": [
+    {
+      "case_count": 495,
+      "cluster_count": 100,
+      "hidden_gold": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-1-gold.json",
+        "role": "hidden-gold",
+        "sha256": "13e2ac239fd3f416e0a75c19c68dd14595ca94a15cc6b10850a13d123989c355"
+      },
+      "normalized_question_overlap_with_earlier_folds": 0,
+      "public_cases": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-1-cases.json",
+        "role": "public-cases",
+        "sha256": "df1abc1594568f8728622bb4d28cec934f6380ee67843611f133b74d6405298d"
+      },
+      "removed_duplicate_case_ids": [
+        "academic-open-dev3-0030-q1",
+        "academic-open-dev3-0031-q1",
+        "academic-open-dev3-0076-q1",
+        "academic-open-dev3-0078-q1",
+        "academic-open-dev3-0078-q2"
+      ],
+      "round_number": 1,
+      "source": {
+        "path": "research/05_evaluation/datasets/academic-factual-qa-source-aligned-confirmation-001-sources.json",
+        "role": "source-corpus",
+        "sha256": "97ec1a9953e259c07409482cb11ebdc35dfca0a71a960aacfa0dc3eade31a921"
+      },
+      "source_range_overlap_with_earlier_folds": 0,
+      "tranche_id": "architecture-round-1-development"
+    },
+    {
+      "case_count": 497,
+      "cluster_count": 100,
+      "hidden_gold": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-2-gold.json",
+        "role": "hidden-gold",
+        "sha256": "3d23605961ca5c0ba86eba2825b9c61e5393aa8422d1ab44d0d4a3ba41d1a36e"
+      },
+      "normalized_question_overlap_with_earlier_folds": 0,
+      "public_cases": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-2-cases.json",
+        "role": "public-cases",
+        "sha256": "9c82524f8ddce5c81dc0fee424bd1e989ffde81af51df4503a4748d16ff3e4db"
+      },
+      "removed_duplicate_case_ids": [
+        "academic-atomic-m2-dev-0013-q2",
+        "academic-atomic-m2-dev-0098-q2",
+        "academic-atomic-m2-dev-0099-q2"
+      ],
+      "round_number": 2,
+      "source": {
+        "path": "research/05_evaluation/datasets/academic-factual-qa-atomic-m2-confirmation-001-sources.json",
+        "role": "source-corpus",
+        "sha256": "8a426f6e22f242033874a18c53375dd4d896a02cd79849bb6390aed76c906e51"
+      },
+      "source_range_overlap_with_earlier_folds": 0,
+      "tranche_id": "architecture-round-2-development"
+    },
+    {
+      "case_count": 481,
+      "cluster_count": 100,
+      "hidden_gold": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-3-gold.json",
+        "role": "hidden-gold",
+        "sha256": "fc0339f8c54a925535cebc2d4f399dea621315015ea069be46738d7b14651f5d"
+      },
+      "normalized_question_overlap_with_earlier_folds": 0,
+      "public_cases": {
+        "path": "research/05_evaluation/datasets/architecture_evolution_001/round-3-cases.json",
+        "role": "public-cases",
+        "sha256": "9c4c985839cd7566040daac13659d00d71d5adbdd70a46b44173c194e27c0bee"
+      },
+      "removed_duplicate_case_ids": [
+        "academic-action-router-dev-0010-q1",
+        "academic-action-router-dev-0010-q2",
+        "academic-action-router-dev-0010-q3",
+        "academic-action-router-dev-0010-q4",
+        "academic-action-router-dev-0012-q2",
+        "academic-action-router-dev-0055-q5",
+        "academic-action-router-dev-0061-q2",
+        "academic-action-router-dev-0071-q3",
+        "academic-action-router-dev-0076-q2",
+        "academic-action-router-dev-0076-q3",
+        "academic-action-router-dev-0079-q2",
+        "academic-action-router-dev-0079-q5",
+        "academic-action-router-dev-0083-q1",
+        "academic-action-router-dev-0083-q4",
+        "academic-action-router-dev-0084-q1",
+        "academic-action-router-dev-0084-q2",
+        "academic-action-router-dev-0084-q4",
+        "academic-action-router-dev-0096-q2",
+        "academic-action-router-dev-0099-q2"
+      ],
+      "round_number": 3,
+      "source": {
+        "path": "research/05_evaluation/datasets/academic-factual-qa-action-router-confirmation-001-sources.json",
+        "role": "source-corpus",
+        "sha256": "959637747b9f530289fc2f73880806775b6df89c2bc22c1d1d0d1365096ae854"
+      },
+      "source_range_overlap_with_earlier_folds": 0,
+      "tranche_id": "architecture-round-3-development"
+    }
+  ]
+}

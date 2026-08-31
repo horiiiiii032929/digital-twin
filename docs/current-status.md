@@ -6,6 +6,77 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+The active successor is now
+`course-digital-twin-whole-system-architecture-evolution-001` under issue #165.
+It treats V2.1 as an immutable baseline rather than a predetermined winner and
+permits substantial replacement across domain, grounding, learner-state,
+pedagogy, reactive/proactive loops, governance, persistence, product UX,
+operations, and evaluation. Three source-disjoint development rounds precede
+one fresh confirmation. Every build, simulation, preflight, execution, invalid
+or cancelled run, comparison, and decision must receive an immutable manifest,
+machine record, readable summary, registry row, artifact and code bindings,
+operational accounting, limitations, and GitHub checkpoint before progression.
+
+The program is build-only and provider-unauthorized. Its three development
+folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
+clusters. Canonical source ranges and normalized questions have zero overlap
+between rounds. Twenty-seven duplicate questions were excluded and retained by
+ID in the freeze manifest; public cases and hidden gold remain physically
+separate. The fresh 1,000-case confirmation is still unopened.
+
+Round 1 is complete as an immutable `Refine` result over the 495-case first
+fold. The lexical/any-hit control reached 52.66% grounded factual success; the
+evidence-first hierarchical and plan-observe candidates each reached 24.81%.
+All three preserved 100% boundary action accuracy and zero severe unsupported
+releases, but none passed the factual, claim, citation, source-version, and
+retrieval gates. The lexical control is retained only as the Round 2 baseline.
+Round 2 will replace whole-question coverage with typed public-question
+evidence targets, per-target retrieval and cardinality, and exact atomic
+claim/citation range assembly. No provider calls or paid cost were incurred.
+
+Round 2 is complete as an immutable `Refine` result on its source-disjoint
+497-case fold. Typed targets reached 89.42% grounded factual success versus
+63.73% for the within-fold lexical control, with 98.74% all-evidence@3,
+98.99% Recall@5, 100% boundary action accuracy, and zero severe releases. It
+did not pass the frozen 95% grounded-success or claim/citation/source-version
+gates. The section-ranked variant produced identical quality at higher
+latency. The 42 answerable failures reduce to unresolved low-information
+targets, neighboring source-region selection, and canonical-span assembly.
+Round 3 retained typed targets as its baseline and compared source-range-aware
+candidate-set and ambiguity-aware claim-assembly successors on the untouched
+481-case third fold. No provider calls or paid cost were incurred.
+
+Round 3 is complete as `Refine` on the untouched 481-case fold. The retained
+typed-target control led at 91.64% grounded factual success, versus 89.82% for
+source-range assembly and 79.90% for strict ambiguity clarification. Every
+condition retained 100% boundary action and zero severe releases, and both
+source-range methods exceeded 99.7% evidence@3/Recall@5. However, none passed
+the frozen grounded, claim, citation, and source-version gates. Four RST-role
+serialization false negatives are disclosed; even the best-case sensitivity
+would be 92.69%, still below the 95% gate.
+
+The finite program is terminal `Refine` with no winner and no release
+selection. Observed grounded success moved from 52.66% to 89.42% to a 91.64%
+diagnostic result across source-disjoint folds, but high retrieval coverage did
+not yield release-quality claim/citation lineage. A post-run protocol audit
+also found that Round 3 executed three architectures while the frozen parent
+allowed at most two; the build validator failed to enforce this bound. Round 3
+is therefore retained as diagnostic known-development evidence, not a formal
+selection result, and it will not be rerun or post-hoc reduced. The fresh 1,000-case confirmation,
+known 10,000+1,000 rerun, 820-case provider autonomy comparison, and downstream
+proxy/release stages remain unopened. All three folds are now known regression
+data; any successor requires fresh evidence and a method-level semantic target
+resolution design.
+
+The initial causal audit identified the dominant structural defect as the
+action -> evidence -> claim -> citation contract, not missing autonomy
+plumbing. Round 1 confirmed that whole-question coverage over-abstained and
+did not repair the low factual success. Round 2 therefore changes the evidence
+representation and assembly contract coherently rather than tuning prompts.
+Real professor and real student evaluation are outside the program;
+prospective proxy claims are limited to formal-profile adherence and simulated
+learning utility.
+
 ## Current decision checkpoint
 
 `course-digital-twin-evaluation-program-011` has completed the actual-product
@@ -38,7 +109,7 @@ integration correction gives the action-router product adapter an explicit
 `v2-action-router` identity and validates both manifests against it before
 provider construction. A deliberately drifted manifest fails closed; focused
 tests pass 10/10 and the complete gate passes Python 1,443, frontend 50,
-inventory 827/827, and freeze 121/121. This corrects the overstated historical
+inventory 839/839, and freeze 123/123. This corrects the overstated historical
 build-readiness interpretation but does not create a third attempt or a quality
 result. The next evaluation must use a separately versioned #153 successor.
 
@@ -197,7 +268,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 827/827 audited execution-relevant files
+long-run operation authorized. Repository correctness is 842/842 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

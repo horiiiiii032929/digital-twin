@@ -1,0 +1,63 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-2-001-build",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-2-build",
+  "round_number": 2,
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Is the typed-target Round 2 comparison frozen, gold-isolated, source-disjoint, finite, and network-free?",
+  "code_revision": "78730a1e28bcc457217dfba4744e43dc763224b4",
+  "dirty_state": true,
+  "started_at": "2026-08-31T20:28:00Z",
+  "completed_at": "2026-08-31T20:36:21Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_2_001.json",
+      "sha256": "0fb9f802b0ca3383f81655c664921739cb776e71da3fc47f318a15422c68a192",
+      "role": "round-instrument"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "architecture-round-2-harness-v1",
+      "version": "build-001",
+      "role": "candidate",
+      "changed_planes": ["domain", "retrieval", "action-routing", "claim-citation", "reactive-loop", "evaluation"],
+      "metrics": [
+        {"name": "candidate-architectures", "value": 3, "unit": "count", "direction": "higher-is-better", "threshold": 3, "passed": true},
+        {"name": "bound-planes-per-architecture", "value": 13, "unit": "count", "direction": "higher-is-better", "threshold": 13, "passed": true},
+        {"name": "development-cases", "value": 497, "unit": "count", "direction": "higher-is-better", "threshold": 497, "passed": true},
+        {"name": "network-free-simulation-cases", "value": 12, "unit": "count", "direction": "higher-is-better", "threshold": 12, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "hidden-gold-after-response-persistence", "passed": true, "evidence": "Every candidate response is persisted before hidden gold is loaded."},
+        {"name": "fresh-development-fold", "passed": true, "evidence": "Round 2 has zero source-range and normalized-question overlap with Round 1."},
+        {"name": "provider-authority-closed", "passed": true, "evidence": "Simulation made zero provider calls and incurred zero cost."}
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "architecture-round-2-harness-v1",
+    "rationale": "Keep the qualified harness and execute the frozen 497-case Round 2 once from a clean revision."
+  },
+  "limitations": [
+    "No Round 2 quality result exists yet.",
+    "Deterministic extractive output isolates architecture rather than provider generation.",
+    "This build cannot establish professor fidelity, usability, or learning improvement."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-2-001-build-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-2-001-build.json"
+}

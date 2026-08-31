@@ -1,0 +1,106 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-1-001",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-1",
+  "round_number": 1,
+  "status": "completed-refine",
+  "supersedes": [],
+  "decision_question": "Does a hierarchical or plan-observe whole-system design improve grounded factual performance over the current lexical control while preserving safety?",
+  "code_revision": "795cd3ce44c961e328b3077c7d64051909a246b1",
+  "dirty_state": false,
+  "started_at": "2026-08-31T20:27:30Z",
+  "completed_at": "2026-08-31T20:27:40Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_1_001.json",
+      "sha256": "c7f537da483fb358487a24336f36273b7ccb03fa1f1deafee83202d5bc1bb3d0",
+      "role": "round-instrument"
+    },
+    {
+      "path": "reports/generated/course-digital-twin-whole-system-architecture-round-1-001/result.json",
+      "sha256": "1f08d172b3512fda41cc17ee597aa82187ac6b3ed9f20653dc560ec6ab3d66b0",
+      "role": "ignored-raw-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "governed-v2-1-lexical-control",
+      "version": "1.0.0",
+      "role": "baseline",
+      "changed_planes": [],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.5265822784810127, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.8987341772151899, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.9620253164556962, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Claim, citation, source-version, all-evidence@3, and grounded-success gates failed."}
+      ]
+    },
+    {
+      "architecture_id": "evidence-first-hierarchical-v1",
+      "version": "1.0.0",
+      "role": "candidate",
+      "changed_planes": ["retrieval", "action-routing", "claim-citation"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.2481012658227848, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.36455696202531646, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.8886075949367088, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.9620253164556962, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Over-abstention and claim/citation/source-version failures."}
+      ]
+    },
+    {
+      "architecture_id": "plan-observe-event-sourced-v1",
+      "version": "1.0.0",
+      "role": "candidate",
+      "changed_planes": ["retrieval", "action-routing", "claim-citation", "reactive-loop", "learner-state"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.2481012658227848, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.3620253164556962, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.8835443037974684, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": false},
+        {"name": "evidence-recall-at-5", "value": 0.959493670886076, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Over-abstention and claim/citation/source-version failures."}
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {"category": "architecture", "count": 251, "evidence": "The best hierarchical condition abstained on answerable cases because whole-question concept coverage included non-evidence scaffolding."},
+    {"category": "method", "count": 50, "evidence": "The lexical control achieved zero fully grounded success for multi-evidence cases."},
+    {"category": "method", "count": 50, "evidence": "The lexical control achieved low or zero grounded success across code, equation, and table slices."}
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": "governed-v2-1-lexical-control",
+    "rationale": "Retain the best condition only as the Round 2 baseline. Replace whole-question coverage with typed public-question evidence targets, per-target retrieval, cardinality checks, and exact atomic claim/citation emission."
+  },
+  "limitations": [
+    "This is a development fold, not the one-time fresh final confirmation.",
+    "Deterministic extractive wording isolates architecture behavior rather than hosted-model generation quality.",
+    "No professor fidelity, real usability, or real student learning improvement is established."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-1-001-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-1-001.json"
+}
