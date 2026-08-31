@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "atomic-m2-confirmation",
-      "evidence": "Freeze review removes completed program 011 from bounded execution while retaining only the provider-free deterministic development and aggregate-construction authorizations.",
+      "evidence": "Freeze review revokes the terminal autonomous long-run parent and both child provider authorizations while retaining only the two provider-free construction authorizations.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "3cbc9ed376306b666033e04d5bc871a4d007b4daf1083b86c89f977baf05dffa"
+      "sha256": "17d0c9b4de695d11c97c126f80acca33db087e9ed216f3fdf8eef2001e39a0f8"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Freeze regression again verifies only the two provider-free dataset authorizations and rejects the consumed V2.1 provider integration plus completed program 011 and all other historical paid successors.",
+      "evidence": "Freeze regression verifies only the two provider-free dataset authorizations and rejects both terminal long-run attempts, both child provider runs, Program 011, and all other historical paid successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "2f5a7dabe409871cd0defbd8b49da65eda94e390dbf646cb6eaa8f35c2916b21"
+      "sha256": "77491f852ad382ca60029f4884f1190f5dca301c1ca36a7c6bb510bed4c4c810"
     },
     {
       "audit_status": "audited",
@@ -8915,12 +8915,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-selection-002",
-      "evidence": "Manual authority, binding, hidden-gold, canary, case-ID, resume, budget, and terminal-state review plus five network-free simulations.",
+      "evidence": "Terminal authority review preserves the unchanged 500+100 method and hidden-gold boundary while revoking execution after two zero-call invalid attempts.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_002.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #153 finite grounding-selection audit",
-      "sha256": "d613b8b6d7debe30967a53d962165a2b7a33a26139201b316e880c804a06242b"
+      "sha256": "a46aa8f2be0bc0397c2d477e1048e45825ec8c4fef5c25fff0a24b76c922ee50"
     },
     {
       "audit_status": "audited",
@@ -8948,23 +8948,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-selection-002",
-      "evidence": "OpenAI binding review verified exact snapshot, direct first-party Responses API, store false, structured output, zero fallback/retry, fresh metadata, and the bounded program authority.",
+      "evidence": "Terminal OpenAI binding review preserves the exact direct first-party snapshot, store false, structured output, and zero fallback/retry while revoking provider and paid authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_openai_binding_002.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #153 finite grounding-selection audit",
-      "sha256": "a64e1582769640455ee9a6565acbbe2c2a87f206f7b3140b94f9f2187fdc5d08"
+      "sha256": "0960d26fdceb023be7fbd8d540190b156937d40b3b903d2aa895b9c4a7e78fc6"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-002",
-      "evidence": "Instrument review and complete 820-case network-free actual-service execution verified realistic policy timing, public/gold isolation, four conditions, finite gates, and false execution authority.",
+      "evidence": "Instrument review preserves the qualified 820-case network-free boundary while returning it to build-only status and revoking provider authority after its grounding dependency was not satisfied.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_002.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "a8d46f24a5451cfa1790637ab9d5bec5d0612bcc4842c0ffbec13cff8500d683"
+      "sha256": "95c7021ee6513493562635c0e3945406f2e3401d4d9f93581f32ad6fdda23f8d"
     },
     {
       "audit_status": "audited",
@@ -9047,56 +9047,56 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover exact 500+100 identities, executable direct first-party transport construction, attempt-002 identity, immutable runtime hash, preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
+      "evidence": "Focused tests cover exact 500+100 identities, executable direct transport construction, final attempt identity, revoked preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #153 finite grounding-selection audit",
-      "sha256": "ae50da56cd4f562e50e58231a437b5d81747c88b8b5cf53e9f2484b7d3918bdd"
+      "sha256": "e5491784f1f1b00a3f96b9b1bab35e0ac6289914eaf79c3879ae7eb41209fc22"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover 820-case distribution, realistic 24-hour and 30-day timing, public/gold isolation, authorization blockers, and representative real-service cases across all four conditions.",
+      "evidence": "Focused tests cover the build-only 820-case distribution, realistic 24-hour and 30-day timing, public/gold isolation, revoked provider authority, grounding dependency, and representative real-service cases.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "011658e6cef466af851a772104c73d7ef743280337425cbf340680aa436524de"
+      "sha256": "0ade18278bb4d8ff86a8d9d185754acaf30989c27bf75ef8925a39b7255881c1"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-long-run-001",
-      "evidence": "Manifest review verified final corrective attempt-002 identity, one owner authority, four finite stages, a USD 200 emergency stop, exact dependency progression, immutable Program 011 evidence, and prohibition of same-case quality reruns.",
+      "evidence": "Terminal manifest review records the final invalid attempt, revoked authority, four finite stages, exact dependency skip, immutable Program 011 evidence, and prohibition of any third or same-case quality rerun.",
       "findings": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_autonomous_long_run_001.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex finite long-run audit",
-      "sha256": "1b5f3487c15d054c7eda1467503e3f76813e0c6e4a9334aeeb9083df5cc5102a"
+      "sha256": "42fdf01f3673ca4461a362a4c9ceb74b98fa6c5f3165e9ff16ba45f223ec6032"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomous-long-run-001",
-      "evidence": "Runner review verified final attempt-002 exclusive outputs, an explicit existing-file local-regression test set, manifest/revision-bound SQLite resume, terminal child recovery, exact child execution, cost aggregation, dependency skip, evidence synthesis, and publication.",
+      "evidence": "Runner review verifies terminal-state validation with revoked authority while preserving attempt-002 ledgers, existing-file local regression, dependency skip, Program 011 synthesis, and publication evidence.",
       "findings": [],
       "path": "scripts/run_course_digital_twin_autonomous_long_run_001.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex finite long-run audit",
-      "sha256": "98d588d994490ab61ecf54c2e03bcc8efd9c7a9af8625479c37ab93499eb09ea"
+      "sha256": "1fb826a2b9c7d73ff104c8aed2a059e565787fa5187d60bdc3d75c7f6f16fa6e"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests verify the final corrective attempt identity, finite stage count, existing local-regression paths, global budget, known-final preservation, dependency stop, publication continuation, zero-network simulation, and read-only parent-ledger recovery.",
+      "evidence": "Focused tests verify terminal authority revocation, final attempt identity, finite stage count, existing local-regression paths, known-final preservation, dependency stop, zero-network simulation, and ledger recovery.",
       "findings": [],
       "path": "tests/test_course_digital_twin_autonomous_long_run_001.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex finite long-run audit",
-      "sha256": "97e4b84a3f6ae5cfb5f0da169249c21c7d44d4e8bb4eb70a68f788da660b945b"
+      "sha256": "8e4b0b3767821bff074c1489e7bf430d40d6c63c6319dc0e8c60531991e8a9a7"
     }
   ],
   "schema_version": 1

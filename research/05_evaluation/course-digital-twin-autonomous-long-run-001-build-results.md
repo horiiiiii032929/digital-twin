@@ -40,6 +40,10 @@ two moved tests. The invalid result is preserved separately. Attempt 002 is the
 single permitted harness-only correction and changes neither the evaluation
 method nor its evidence.
 
+Attempt 002 subsequently stopped before provider I/O on an adapter/system-
+manifest version mismatch. The final invalid result is registered separately;
+all program authority is revoked and no third attempt is permitted.
+
 ## Limitations
 
 - No product-quality measurement occurred in this build checkpoint.

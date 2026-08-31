@@ -8,7 +8,7 @@ from scripts import run_course_digital_twin_autonomous_long_run_001 as runner
 def test_long_run_program_is_finite_and_preserves_known_final() -> None:
     result = runner.validate()
 
-    assert result["status"] == "passed-frozen-pending-execution"
+    assert result["status"] == "passed-terminal-authority-revoked"
     assert runner.EXECUTION_ATTEMPT_ID.endswith("attempt-002")
     assert result["stage_count"] == 4
     assert result["global_emergency_cost_usd"] == 200.0

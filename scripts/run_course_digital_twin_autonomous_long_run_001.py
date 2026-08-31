@@ -151,9 +151,10 @@ def validate() -> dict[str, Any]:
     )
     if manifest.get("content_sha256") != observed_hash:
         raise AutonomousLongRunError("program manifest hash drifted")
+    status = manifest.get("status")
     if (
         manifest.get("program_id") != PROGRAM_ID
-        or manifest.get("status") != "frozen-pending-execution"
+        or status not in {"frozen-pending-execution", "completed-invalid-execution"}
         or manifest.get("execution_attempt_id") != EXECUTION_ATTEMPT_ID
         or manifest.get("global_emergency_cost_usd") != 200.0
         or manifest.get("automatic_stage_progression") is not True
@@ -161,12 +162,16 @@ def validate() -> dict[str, Any]:
     ):
         raise AutonomousLongRunError("finite program boundary drifted")
     authority = manifest["authorization"]
-    if (
-        authority["provider_execution_authorized"] is not True
-        or authority["paid_execution_authorized"] is not True
-        or authority["additional_stage_authorization_required"] is not False
-    ):
+    authorized = (
+        authority["provider_execution_authorized"],
+        authority["paid_execution_authorized"],
+    )
+    if authority["additional_stage_authorization_required"] is not False:
         raise AutonomousLongRunError("single program authority drifted")
+    if status == "frozen-pending-execution" and authorized != (True, True):
+        raise AutonomousLongRunError("single program authority drifted")
+    if status == "completed-invalid-execution" and authorized != (False, False):
+        raise AutonomousLongRunError("terminal program authority is not revoked")
     stage_ids = [row["stage_id"] for row in manifest["stages"]]
     if stage_ids != [
         "grounding-selection-500-plus-100",
@@ -179,7 +184,11 @@ def validate() -> dict[str, Any]:
         raise AutonomousLongRunError("Program 011 historical evidence is missing")
     return {
         "program_id": PROGRAM_ID,
-        "status": "passed-frozen-pending-execution",
+        "status": (
+            "passed-frozen-pending-execution"
+            if status == "frozen-pending-execution"
+            else "passed-terminal-authority-revoked"
+        ),
         "stage_count": len(stage_ids),
         "global_emergency_cost_usd": 200.0,
         "known_10000_plus_1000_preserved": True,

@@ -28,9 +28,9 @@
     }
   },
   "authorization": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "final_execution_authorized": false
   },
-  "content_sha256": "cd8082c2808868bd98a89cdc4a9220418bc2b86c404f80129f5e36ae48aa2a08"
+  "content_sha256": "700e72688e4d27507ebba76bf5388f3f900adc35a8edf24abf55c36ba9ca6fa8"
 }

@@ -36,9 +36,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
         "academic-factual-qa-open-10000-reference-aggregate-007",
-        "course-digital-twin-autonomous-long-run-001",
-        "academic-factual-qa-grounding-selection-002",
-        "governed-full-autonomy-v2-1-actual-product-evaluation-002",
     }
 
     for pilot_id in pilot_ids:
@@ -56,10 +53,10 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-grounding-selection-002",
         "governed-full-autonomy-v2-1-actual-product-evaluation-002",
     ):
-        assert BOUNDED_PILOT_AUTHORIZATIONS[instrument_id] == (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        )
+        with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+            require_bounded_pilot_operation_allowed(
+                instrument_id, "external_model_evaluation"
+            )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "course-digital-twin-evaluation-program-011",

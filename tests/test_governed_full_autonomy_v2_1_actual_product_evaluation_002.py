@@ -24,13 +24,13 @@ from src.digital_twin.evaluation.autonomy_product_adapter import (
 def test_actual_product_successor_has_realistic_virtual_time_portfolio() -> None:
     result = builder.validate()
 
-    assert result["status"] == "passed-frozen-pending-execution"
+    assert result["status"] == "passed-build-only"
     assert result["case_count"] == 820
     assert result["trajectory_case_count"] == 600
     assert result["long_horizon_case_count"] == 100
     assert result["proactive_opportunity_case_count"] == 120
     assert result["source_template_count"] == 50
-    assert result["provider_execution_authorized"] is True
+    assert result["provider_execution_authorized"] is False
 
 
 def test_actual_product_successor_uses_policy_windows_not_compressed_seconds() -> None:
@@ -68,13 +68,13 @@ def test_actual_product_public_contract_does_not_contain_gold() -> None:
     assert public["content_sha256"] != builder.hidden_gold_payload()["content_sha256"]
 
 
-def test_actual_product_runner_is_blocked_only_before_grounding() -> None:
+def test_actual_product_runner_is_blocked_after_authority_revocation() -> None:
     result = runner.preflight()
 
     assert result["status"] == "blocked-not-authorized"
     assert "grounding-selection-002-keep-missing" in result["blockers"]
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False
 

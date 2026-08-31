@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-002",
-  "status": "frozen-pending-execution",
+  "status": "reviewed-build-only",
   "owner_issue": 157,
   "blocking_issue": 153,
   "decision_question": "Does the actual governed V2.1 product preserve grounding and authority while operating reactively and proactively across realistic virtual-time windows?",
@@ -70,8 +70,8 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "automatic_promotion": false,
     "grounding_keep_required": true,
     "grounding_result_id": "academic-factual-qa-grounding-selection-002",
