@@ -1,0 +1,335 @@
+{
+  "schema_version": 1,
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "status": "reviewed-build-only",
+  "owner_issue": 165,
+  "parent_issue": 8,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "automatic_stage_progression": false,
+  "maximum_architecture_rounds": 3,
+  "final_confirmation_maximum_executions": 1,
+  "human_participants_required": false,
+  "deterministic_truth_authoritative": true,
+  "llm_reviews_authoritative": false,
+  "historical_baseline_run_ids": [
+    "course-digital-twin-evaluation-program-011",
+    "academic-factual-qa-grounding-selection-002-build-analysis-correction-001",
+    "governed-full-autonomy-v2-1-actual-product-evaluation-002-build"
+  ],
+  "baseline_artifacts": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_011.json",
+      "sha256": "69f745cab10a7eea8e7dfb3c14b41e3435b6283d1fe330e21a6d00dbe35f31c4",
+      "role": "known-factual-program"
+    },
+    {
+      "path": "research/05_evaluation/records/course-digital-twin-evaluation-program-011.json",
+      "sha256": "f35d7cfd57b1266d829d25d64daa6f84ad49cbbeaaee32b17b04eb8cbdc6b4ea",
+      "role": "known-factual-result"
+    },
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_release_candidate_001.json",
+      "sha256": "b50d31e594155ea079a3ea8d360aadd52224a924f509264e68be4b870e6e6f84",
+      "role": "v2-1-release-candidate"
+    },
+    {
+      "path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-002-build.json",
+      "sha256": "5bdfd82ac795898d0be2c1a5a7e1792b89eaf058d156ac9fff2df88f62564fb1",
+      "role": "autonomy-harness-result"
+    }
+  ],
+  "architecture_planes": [
+    "domain",
+    "retrieval",
+    "action-routing",
+    "claim-citation",
+    "learner-state",
+    "pedagogical-policy",
+    "reactive-loop",
+    "proactive-loop",
+    "governance",
+    "persistence",
+    "product-experience",
+    "operations",
+    "evaluation"
+  ],
+  "recording_policy": {
+    "stable_run_id_required": true,
+    "manifest_required": true,
+    "machine_record_required": true,
+    "readable_summary_required": true,
+    "registry_entry_required": true,
+    "artifact_hashes_required": true,
+    "operational_accounting_required": true,
+    "limitations_required": true,
+    "github_checkpoint_required": true,
+    "unfavorable_results_immutable": true,
+    "zero_call_runs_recorded": true,
+    "corrections_use_new_run_id": true,
+    "registry_path": "research/05_evaluation/result-registry.md",
+    "records_directory": "research/05_evaluation/records"
+  },
+  "tranches": [
+    {
+      "tranche_id": "architecture-development-fold-1",
+      "role": "development",
+      "status": "planned",
+      "source_disjoint_group": "architecture-development-a",
+      "case_count": 600,
+      "may_influence_development": true,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "architecture-development-fold-2",
+      "role": "development",
+      "status": "planned",
+      "source_disjoint_group": "architecture-development-b",
+      "case_count": 600,
+      "may_influence_development": true,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "architecture-development-fold-3",
+      "role": "development",
+      "status": "planned",
+      "source_disjoint_group": "architecture-development-c",
+      "case_count": 600,
+      "may_influence_development": true,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-fresh-confirmation-1000",
+      "role": "fresh-confirmation",
+      "status": "planned",
+      "source_disjoint_group": "whole-system-final-confirmation",
+      "case_count": 1000,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "program-011-known-regression-10000-plus-1000",
+      "role": "known-regression",
+      "status": "planned",
+      "source_disjoint_group": "program-011-known",
+      "case_count": 11000,
+      "may_influence_development": true,
+      "maximum_executions": 3
+    },
+    {
+      "tranche_id": "whole-system-autonomy-portfolio-820",
+      "role": "autonomy",
+      "status": "planned",
+      "source_disjoint_group": "autonomy-final-a",
+      "case_count": 820,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-visual-supplement-60",
+      "role": "visual-supplement",
+      "status": "frozen",
+      "source_disjoint_group": "visual-public-synthetic-v1",
+      "case_count": 60,
+      "public_path": "research/05_evaluation/datasets/academic_factual_qa_visual_supplement_001.json",
+      "public_sha256": "73c8590998d41f1564a88411b9370d4e5a27d253f2266c911e50456d6e75aebc",
+      "may_influence_development": true,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-profile-proxy-c0-c3",
+      "role": "profile-proxy",
+      "status": "planned",
+      "source_disjoint_group": "formal-profile-proxy-final",
+      "case_count": 48,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-learning-utility-proxy-1200",
+      "role": "learning-utility-proxy",
+      "status": "planned",
+      "source_disjoint_group": "hidden-learner-state-final",
+      "case_count": 1200,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-local-product-qualification-45",
+      "role": "product-qualification",
+      "status": "planned",
+      "source_disjoint_group": "local-product-final",
+      "case_count": 45,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    },
+    {
+      "tranche_id": "whole-system-security-red-team-120",
+      "role": "security-red-team",
+      "status": "planned",
+      "source_disjoint_group": "security-final",
+      "case_count": 120,
+      "may_influence_development": false,
+      "maximum_executions": 1
+    }
+  ],
+  "rounds": [
+    {
+      "round_number": 1,
+      "development_tranche_id": "architecture-development-fold-1",
+      "minimum_candidate_count": 3,
+      "maximum_candidate_count": 4,
+      "allowed_planes": [
+        "domain",
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "learner-state",
+        "pedagogical-policy",
+        "reactive-loop",
+        "proactive-loop",
+        "governance",
+        "persistence",
+        "product-experience",
+        "operations"
+      ],
+      "result_required_before_progression": true,
+      "invalid_harness_corrections_maximum": 1,
+      "same_tranche_quality_rerun_allowed": false,
+      "selection_rule": "Reject any hard-gate failure; among passing candidates prefer grounded and autonomous task success, then reliability, p95 latency, cost, and lower operational complexity."
+    },
+    {
+      "round_number": 2,
+      "development_tranche_id": "architecture-development-fold-2",
+      "minimum_candidate_count": 2,
+      "maximum_candidate_count": 3,
+      "allowed_planes": [
+        "domain",
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "learner-state",
+        "pedagogical-policy",
+        "reactive-loop",
+        "proactive-loop",
+        "governance",
+        "persistence",
+        "product-experience",
+        "operations"
+      ],
+      "result_required_before_progression": true,
+      "invalid_harness_corrections_maximum": 1,
+      "same_tranche_quality_rerun_allowed": false,
+      "selection_rule": "Retain strong system planes, replace weak planes using round-1 causal evidence, apply hard gates first, and use the same multi-objective tie-break order."
+    },
+    {
+      "round_number": 3,
+      "development_tranche_id": "architecture-development-fold-3",
+      "minimum_candidate_count": 2,
+      "maximum_candidate_count": 2,
+      "allowed_planes": [
+        "domain",
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "learner-state",
+        "pedagogical-policy",
+        "reactive-loop",
+        "proactive-loop",
+        "governance",
+        "persistence",
+        "product-experience",
+        "operations"
+      ],
+      "result_required_before_progression": true,
+      "invalid_harness_corrections_maximum": 1,
+      "same_tranche_quality_rerun_allowed": false,
+      "selection_rule": "Compare the strongest coherent successor with the retained rollback, select only a full hard-gate pass, and freeze the selected whole-product manifest before final confirmation."
+    }
+  ],
+  "final_stages": [
+    {
+      "stage_id": "fresh-factual-confirmation",
+      "tranche_ids": ["whole-system-fresh-confirmation-1000"],
+      "depends_on": [],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "known-factual-regression",
+      "tranche_ids": ["program-011-known-regression-10000-plus-1000"],
+      "depends_on": ["fresh-factual-confirmation"],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "provider-autonomy-portfolio",
+      "tranche_ids": ["whole-system-autonomy-portfolio-820"],
+      "depends_on": ["fresh-factual-confirmation"],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "visual-supplement",
+      "tranche_ids": ["whole-system-visual-supplement-60"],
+      "depends_on": [],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "formal-profile-proxy",
+      "tranche_ids": ["whole-system-profile-proxy-c0-c3"],
+      "depends_on": ["provider-autonomy-portfolio"],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "simulated-learning-utility",
+      "tranche_ids": ["whole-system-learning-utility-proxy-1200"],
+      "depends_on": ["provider-autonomy-portfolio"],
+      "result_required": true,
+      "provider_backed": true
+    },
+    {
+      "stage_id": "security-red-team",
+      "tranche_ids": ["whole-system-security-red-team-120"],
+      "depends_on": ["provider-autonomy-portfolio"],
+      "result_required": true,
+      "provider_backed": false
+    },
+    {
+      "stage_id": "local-product-qualification",
+      "tranche_ids": ["whole-system-local-product-qualification-45"],
+      "depends_on": [
+        "fresh-factual-confirmation",
+        "provider-autonomy-portfolio",
+        "security-red-team"
+      ],
+      "result_required": true,
+      "provider_backed": false
+    }
+  ],
+  "hard_stops": [
+    "private-data-exposure",
+    "hidden-gold-leakage",
+    "provider-model-identity-drift",
+    "corrupted-ledger-or-hash",
+    "security-boundary-failure",
+    "unbounded-agent-loop",
+    "recording-contract-violation",
+    "program-cost-ceiling-exhausted"
+  ],
+  "allowed_claims": [
+    "bounded autonomous tutoring behavior under recorded synthetic and public-source conditions",
+    "formal professor-profile adherence under calibrated blinded multi-LLM proxy review",
+    "simulated learning utility under hidden deterministic learner-state models",
+    "software reliability, privacy, security, persistence, rollback, latency, and cost under the recorded qualification conditions"
+  ],
+  "prohibited_claims": [
+    "accurate representation of a real professor",
+    "improvement of real student learning",
+    "real student usability or satisfaction",
+    "production reliability beyond the recorded local qualification environment",
+    "human-independent LLM agreement as ground truth"
+  ]
+}

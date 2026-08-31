@@ -1,0 +1,120 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-evolution-001-build",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "program-build",
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Does the prospective program enforce a finite three-round architecture comparison, one-time sealed confirmation, non-human claim boundaries, and immutable evidence for every run outcome?",
+  "code_revision": "44edab78c68f884dfd75cd924976983fedf6a4bb",
+  "dirty_state": true,
+  "started_at": "2026-08-31T19:35:00Z",
+  "completed_at": "2026-08-31T19:40:03Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_evolution_001.json",
+      "sha256": "04756b34ef0178b792018c0c80ba44b76605bd768feba10bbab2c5159d6b0e8f",
+      "role": "program-instrument"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "architecture-evolution-program-v1",
+      "version": "build-001",
+      "role": "candidate",
+      "changed_planes": ["evaluation"],
+      "metrics": [
+        {
+          "name": "architecture-plane-coverage",
+          "value": 13,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 13,
+          "passed": true
+        },
+        {
+          "name": "ordered-architecture-rounds",
+          "value": 3,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 3,
+          "passed": true
+        },
+        {
+          "name": "mandatory-recording-controls",
+          "value": 12,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 12,
+          "passed": true
+        },
+        {
+          "name": "fresh-confirmation-maximum-executions",
+          "value": 1,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 1,
+          "passed": true
+        },
+        {
+          "name": "human-participants-required",
+          "value": 0,
+          "unit": "boolean-count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "historical-baseline-immutable",
+          "passed": true,
+          "evidence": "Program 011, V2.1, the actual-product autonomy harness, and the finite-loop policy are hash-bound baseline artifacts."
+        },
+        {
+          "name": "fresh-confirmation-isolated",
+          "passed": true,
+          "evidence": "The one fresh confirmation tranche is absent from all three architecture development rounds and permits one execution."
+        },
+        {
+          "name": "every-run-recorded",
+          "passed": true,
+          "evidence": "The manifest requires a run ID, manifest, record, summary, registry row, hashes, accounting, limitations, and GitHub checkpoint for every outcome."
+        },
+        {
+          "name": "nonhuman-claim-boundary",
+          "passed": true,
+          "evidence": "The program prohibits real-professor fidelity and real-student learning claims from LLM and simulator evidence."
+        },
+        {
+          "name": "provider-authority-closed",
+          "passed": true,
+          "evidence": "Provider and paid execution remain unauthorized; this build made zero calls and opened no hidden gold."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "architecture-evolution-program-v1",
+    "rationale": "Keep the finite recording and selection infrastructure, then complete the causal audit and freeze independent development tranches before implementing Round 1 candidates."
+  },
+  "limitations": [
+    "No product or provider quality was evaluated.",
+    "The three development folds and final proxy datasets remain planned rather than frozen.",
+    "The program cannot establish real-professor fidelity, real-student usability, or real-student learning improvement."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-evolution-001-build-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-evolution-001-build.json"
+}

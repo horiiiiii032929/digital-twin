@@ -961,13 +961,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration, flow-independent harness, and actual-product smoke commands.",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Command-surface review confirms the architecture-evolution validator is part of the complete local gate while historical execution commands and their authority boundaries remain unchanged.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "8c468a624155f4a9b95beda5233cf84c4341d88e0bcc2735b6f031ba6702c6b5"
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "d8deb055eaa589c5d0fedda44ecfebcac2d0bf7c7be447b02705562074488da4"
     },
     {
       "audit_status": "audited",
@@ -4657,8 +4657,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Export review confirms the new versioned architecture program and run-record contracts are reachable without changing historical evaluation models.",
       "findings": [],
       "path": "scripts/run_autonomous_tutoring_r1_confirmation.py",
       "reviewed_at": "2026-08-29",
@@ -5893,9 +5893,9 @@
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
       "findings": [],
       "path": "src/digital_twin/evaluation/__init__.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "a54c628e38a31a51313c42c76831e80d9e701f157586a6a46730c68e08048b75"
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "f73ffac24bf22ad74b527730739c539b1801fea3079b4d8aecbcd3c2e6bf6eae"
     },
     {
       "audit_status": "audited",
@@ -6065,13 +6065,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-runtime-correctness",
-      "evidence": "Manual metric, split, course-isolation, profile, model-binding, and threshold review corrected duplicate-gain, zero-score, spoofed-lineage, and malformed-input cases; focused evaluation tests passed.",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Loader review and focused regression tests confirm architecture-evolution records are dispatched by schema while legacy component records retain their previous validation path.",
       "findings": [],
       "path": "src/digital_twin/evaluation/models.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "f9f968a9c064f9367f3296ebbc9e7e4e778616266dff6898f6616a34a2b55a98"
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "d317fd04fa461510ed68cec548ccc7b239ac69b15f3f4f5ef8a9bdceaaeb076e"
     },
     {
       "audit_status": "audited",
@@ -9097,6 +9097,50 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex finite long-run audit",
       "sha256": "8e4b0b3767821bff074c1489e7bf430d40d6c63c6319dc0e8c60531991e8a9a7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Manual contract review and validator execution confirm three distinct development rounds, one sealed confirmation, immutable historical bindings, non-authoritative LLM review, and mandatory recording of every outcome.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_evolution_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "04756b34ef0178b792018c0c80ba44b76605bd768feba10bbab2c5159d6b0e8f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Validator review confirms artifact hashes, registry baselines, tranche isolation, final-confirmation limits, and recording boundaries fail closed before any execution.",
+      "findings": [],
+      "path": "scripts/validate_whole_system_architecture_program.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "4f604370276f17b03b9cd079f2f09365e3e4b0a89f62ca489078c6dc9ef7531d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Typed-schema review confirms finite three-round progression, immutable tranche roles, zero-call accounting, authority separation, and passing-selection consistency.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/architecture_evolution.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "837ad690edcd2f15311c973c0f676960a9293f701b52851daaff948aad2773f9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover program validation, distinct round folds, sealed confirmation isolation, zero-call accounting, selection-gate consistency, and generic record loading.",
+      "findings": [],
+      "path": "tests/test_architecture_evolution_program.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "5382aecaec89655c2c3f29f56fd503c1c474182987f93e7318c610abeb4c207c"
     }
   ],
   "schema_version": 1

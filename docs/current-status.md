@@ -6,6 +6,26 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+The active successor is now
+`course-digital-twin-whole-system-architecture-evolution-001` under issue #165.
+It treats V2.1 as an immutable baseline rather than a predetermined winner and
+permits substantial replacement across domain, grounding, learner-state,
+pedagogy, reactive/proactive loops, governance, persistence, product UX,
+operations, and evaluation. Three source-disjoint development rounds precede
+one fresh confirmation. Every build, simulation, preflight, execution, invalid
+or cancelled run, comparison, and decision must receive an immutable manifest,
+machine record, readable summary, registry row, artifact and code bindings,
+operational accounting, limitations, and GitHub checkpoint before progression.
+
+The program is build-only and provider-unauthorized. The initial causal audit
+identifies the dominant structural defect as the action -> evidence -> claim ->
+citation contract, not missing autonomy plumbing. Round 1 will compare the
+unchanged V2.1 control with an evidence-first hierarchical candidate and an
+event-sourced plan-observe candidate on a newly frozen development fold. Real
+professor and real student evaluation are outside the program; prospective
+proxy claims are limited to formal-profile adherence and simulated learning
+utility.
+
 ## Current decision checkpoint
 
 `course-digital-twin-evaluation-program-011` has completed the actual-product
@@ -38,7 +58,7 @@ integration correction gives the action-router product adapter an explicit
 `v2-action-router` identity and validates both manifests against it before
 provider construction. A deliberately drifted manifest fails closed; focused
 tests pass 10/10 and the complete gate passes Python 1,443, frontend 50,
-inventory 827/827, and freeze 121/121. This corrects the overstated historical
+inventory 831/831, and freeze 121/121. This corrects the overstated historical
 build-readiness interpretation but does not create a third attempt or a quality
 result. The next evaluation must use a separately versioned #153 successor.
 
@@ -197,7 +217,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 827/827 audited execution-relevant files
+long-run operation authorized. Repository correctness is 831/831 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

@@ -4,6 +4,12 @@ The Course Digital Twin uses a finite, evidence-driven improvement loop across
 retrieval, grounding, tutoring behavior, autonomy, product workflows, privacy,
 and operations.
 
+The whole-system successor is governed by
+`course-digital-twin-whole-system-architecture-evolution-001`. It permits
+substantial architecture replacement across three source-disjoint development
+rounds. Candidate selection is not limited to improving the current V2.1
+design; V2.1 remains the immutable baseline and rollback.
+
 ## Loop contract
 
 Each iteration must complete these stages in order:
@@ -20,6 +26,31 @@ Each iteration must complete these stages in order:
    operational measurement.
 7. Promote only after a valid pass. Keep the previous selected implementation
    as rollback until a source-disjoint confirmation also passes.
+
+Every named build, simulation, preflight, execution, invalid execution,
+cancellation, comparison, and decision must be registered before progression.
+A durable run requires a stable ID, immutable manifest, machine record, readable
+summary, registry row, artifact hashes, operational accounting, limitations,
+and GitHub checkpoint. Zero-call runs are not omitted.
+
+## Whole-system architecture branch
+
+The architecture branch executes at most three improvement rounds. Each round
+uses a different source-disjoint development fold. It may keep, replace,
+recompose, or redesign any product plane, but all candidates use the same
+flow-independent factual and autonomy adapters and the same preregistered hard
+gates. A model-only or prompt-only swap is a component candidate, not a distinct
+whole-system architecture.
+
+After Round 3, one winner is frozen. The fresh 1,000-case confirmation is opened
+once, Program 011 is used only as a labelled known regression, and the 820-case
+provider-backed autonomy portfolio follows only after factual Keep. A valid
+final failure starts a new benchmark version; it is never tuned and rerun.
+
+Professor-profile and learning-utility stages use non-human proxies. They may
+support claims about formal-profile adherence and simulated learning utility,
+but never accurate representation of a real professor, real-student usability,
+or real-student learning improvement.
 
 An operationally invalid execution permits a harness-only correction when that
 correction was preregistered. It does not justify changing the method or making

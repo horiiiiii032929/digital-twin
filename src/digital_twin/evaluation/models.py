@@ -1,3 +1,4 @@
+import json
 import math
 import re
 from enum import StrEnum
@@ -295,7 +296,17 @@ def load_release_profile(path: Path) -> SystemReleaseProfile:
     return SystemReleaseProfile.model_validate_json(path.read_text(encoding="utf-8"))
 
 
-def load_evaluation_record(path: Path) -> ComponentEvaluationRecord:
-    return ComponentEvaluationRecord.model_validate_json(
-        path.read_text(encoding="utf-8")
-    )
+def load_evaluation_record(path: Path) -> BaseModel:
+    """Load any registered evaluation record without rewriting legacy records."""
+
+    text = path.read_text(encoding="utf-8")
+    payload = json.loads(text)
+    if payload.get("record_schema") == "architecture-evolution-run-v1":
+        # Imported lazily because architecture_evolution reuses MetricResult and
+        # GateResult from this module.
+        from src.digital_twin.evaluation.architecture_evolution import (
+            ArchitectureEvolutionRunRecordV1,
+        )
+
+        return ArchitectureEvolutionRunRecordV1.model_validate(payload)
+    return ComponentEvaluationRecord.model_validate(payload)
