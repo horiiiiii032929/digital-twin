@@ -332,6 +332,10 @@ class StudentRepository(Protocol):
         self, action_id: str
     ) -> AutonomousOutcomeV1 | None: ...
 
+    def list_autonomous_outcomes(
+        self, course_id: str, *, student_id: str | None = None
+    ) -> list[AutonomousOutcomeV1]: ...
+
     def expire_autonomous_goals(self, *, expired_at: str) -> int: ...
 
     def expire_autonomous_opportunities(self, *, expired_at: str) -> int: ...
@@ -2287,6 +2291,22 @@ class SQLiteStudentRepository:
             if row is not None
             else None
         )
+
+    def list_autonomous_outcomes(
+        self, course_id: str, *, student_id: str | None = None
+    ) -> list[AutonomousOutcomeV1]:
+        sql = "SELECT outcome_json FROM autonomous_outcomes WHERE course_id = ?"
+        parameters: list[object] = [course_id]
+        if student_id is not None:
+            sql += " AND student_id = ?"
+            parameters.append(student_id)
+        sql += " ORDER BY recorded_at DESC, outcome_id"
+        with self._lock:
+            rows = self._connection.execute(sql, tuple(parameters)).fetchall()
+        return [
+            AutonomousOutcomeV1.model_validate_json(row["outcome_json"])
+            for row in rows
+        ]
 
     def expire_autonomous_goals(self, *, expired_at: str) -> int:
         with self._lock, self._connection:

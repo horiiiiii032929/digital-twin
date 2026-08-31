@@ -5,8 +5,10 @@ Status: production-like local release candidate; no hosted-production claim
 This runbook starts the invite-only Course Digital Twin at
 `https://localhost:8443`. It runs the API, ingestion worker, scheduled-outreach
 worker, and Caddy-served web application in containers. It selects the exact
-network-free-qualified T1 profile and retains T0 as a one-setting rollback. No
-model provider key is passed to these services.
+network-free-qualified T1-v1 profile and retains T0 as a one-setting rollback.
+This is the safe default. The Compose contract can pass an OpenAI key for a
+future governed V2.1 candidate, but the default deterministic path neither
+requires nor calls a model provider.
 
 ## One-time setup
 
@@ -20,7 +22,20 @@ chmod 600 .env.local-r1
 
 Keep `.env.local-r1` outside Git. `APP_LEARNING_GAP_HMAC_SECRET` must be an
 unpredictable value of at least 32 bytes. The three staging passwords are used
-only by the local bootstrap and acceptance verifier.
+only by the local bootstrap and acceptance verifier. Leave
+`OPENAI_API_KEY` empty for the default deterministic qualification.
+
+The committed example intentionally selects:
+
+```text
+APP_GENERATOR_MODE=deterministic
+APP_STUDENT_TUTORING_MODE=bounded-tutoring-graph
+APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
+```
+
+Do not point governed V2.1 at that historical T1-v1 result. Staging fails
+closed unless the governed mode is bound to a separate passing record whose
+selected implementation is `governed-autonomous-tutoring-graph-v2-1`.
 
 ## Build and start
 
@@ -144,6 +159,36 @@ npm run verify:staging-https -- \
 Restore the default T1 selection by running the same `up -d --force-recreate`
 command without the environment override, then rerun `--mode-check` with
 `bounded-tutoring-graph`.
+
+## Governed autonomy operating workflow
+
+The prospective V2.1 product workflow is available for implementation review
+without promoting it into this qualified local profile:
+
+1. The professor creates and approves an explicit teaching profile.
+2. A release binds the approved profile and current evidence.
+3. The professor defines approved objectives, actions, frequency, and pause or
+   kill-switch state.
+4. The worker leases one due opportunity and completes one finite planning,
+   grounding, validation, and delivery job.
+5. The professor can inspect structured decisions, deterministic checks,
+   delivery, linked learner outcomes, and next wake-up; an individual learner
+   goal can be cancelled without stopping the whole course.
+6. The student can consent, pause check-ins for seven days, resume, reply,
+   dismiss, and inspect active learning goals.
+
+To qualify V2.1 later, first produce the dedicated passing result record and
+then set all three values explicitly in the private environment file:
+
+```text
+APP_GENERATOR_MODE=openai-profile-selected
+APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
+APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
+```
+
+At that point `OPENAI_API_KEY` is required locally. Until the dedicated record
+exists, the API must refuse to start in governed V2.1 staging mode. Never bypass
+that guard by reusing a T1-v1 result.
 
 ## Stop without deleting evidence
 

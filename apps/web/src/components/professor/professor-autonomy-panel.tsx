@@ -23,12 +23,14 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   approveProfessorTeachingProfile,
+  cancelProfessorAutonomousGoal,
   cancelProfessorProactiveTrigger,
   createProfessorAutonomousGoal,
   createProfessorTeachingProfile,
   getProfessorAutonomyPolicy,
   listProfessorAutonomousActions,
   listProfessorAutonomousGoals,
+  listProfessorAutonomousOutcomes,
   listProfessorAutonomyRecipients,
   listProfessorLearningGaps,
   listProfessorProactiveTriggers,
@@ -41,6 +43,7 @@ import type {
   AutonomousActionKind,
   AutonomousActionV1,
   AutonomousGoalV1,
+  AutonomousOutcomeV1,
   AutonomousRecipientEligibilityV1,
   PedagogicalPolicyV2,
   ProfessorCourse,
@@ -74,17 +77,19 @@ export function ProfessorAutonomyPanel({
   const [policy, setPolicy] = useState<PedagogicalPolicyV2 | null>(null)
   const [goals, setGoals] = useState<AutonomousGoalV1[]>([])
   const [actions, setActions] = useState<AutonomousActionV1[]>([])
+  const [outcomes, setOutcomes] = useState<AutonomousOutcomeV1[]>([])
   const [recipients, setRecipients] = useState<AutonomousRecipientEligibilityV1[]>([])
   const [learningGaps, setLearningGaps] = useState<ProfessorLearningGapResult | null>(null)
   const [editingPolicy, setEditingPolicy] = useState(false)
   const [pendingPolicyAction, setPendingPolicyAction] = useState<PolicyStateAction | null>(null)
   const [pendingTriggerCancel, setPendingTriggerCancel] = useState<string | null>(null)
+  const [pendingGoalCancel, setPendingGoalCancel] = useState<string | null>(null)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
 
   const refresh = useCallback(async () => {
-    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextRecipients] = await Promise.all([
+    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients] = await Promise.all([
       listProfessorTeachingProfiles(course.course_id),
       listProfessorProactiveTriggers(course.course_id),
       releaseId ? listProfessorLearningGaps(course.course_id, releaseId) : Promise.resolve(null),
@@ -93,6 +98,7 @@ export function ProfessorAutonomyPanel({
         listProfessorAutonomousGoals(course.course_id, studentId),
       )).then((items) => items.flat()),
       listProfessorAutonomousActions(course.course_id),
+      listProfessorAutonomousOutcomes(course.course_id),
       listProfessorAutonomyRecipients(course.course_id),
     ])
     setProfiles(nextProfiles)
@@ -101,6 +107,7 @@ export function ProfessorAutonomyPanel({
     setPolicy(nextPolicy)
     setGoals(nextGoals)
     setActions(nextActions)
+    setOutcomes(nextOutcomes)
     setRecipients(nextRecipients)
     onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null)
   }, [course.course_id, course.student_account_ids, onApprovedProfileChange, releaseId])
@@ -110,6 +117,7 @@ export function ProfessorAutonomyPanel({
     setProfilePreview(null)
     setPendingPolicyAction(null)
     setPendingTriggerCancel(null)
+    setPendingGoalCancel(null)
     void refresh().catch((reason) => {
       if (active) setError(message(reason))
     })
@@ -272,7 +280,7 @@ export function ProfessorAutonomyPanel({
           <SummaryItem label="Delivered actions" value={`${deliveredActions.length}`} ready={deliveredActions.length > 0} />
         </dl>
 
-        <nav className="-mx-1 mt-1 flex gap-1 overflow-x-auto" aria-label="Tutor governance views" role="tablist">
+        <nav className="-mx-1 mt-1 grid grid-cols-2 gap-x-1 sm:flex" aria-label="Tutor governance views" role="tablist">
           {GOVERNANCE_VIEWS.map((item) => (
             <button
               key={item.id}
@@ -280,7 +288,7 @@ export function ProfessorAutonomyPanel({
               role="tab"
               aria-selected={view === item.id}
               aria-controls={`governance-${item.id}`}
-              className={cn("shrink-0 border-b-2 px-3 py-3 text-xs font-semibold transition-colors", view === item.id ? "border-[var(--accent-strong)] text-foreground" : "border-transparent text-muted-foreground hover:text-foreground")}
+              className={cn("border-b-2 px-2 py-3 text-left text-xs font-semibold transition-colors sm:shrink-0 sm:px-3 sm:text-center", view === item.id ? "border-[var(--accent-strong)] text-foreground" : "border-transparent text-muted-foreground hover:text-foreground")}
               onClick={() => setView(item.id)}
             >
               {item.label}
@@ -303,7 +311,23 @@ export function ProfessorAutonomyPanel({
               <PolicySection busy={busy} editing={editingPolicy} pendingAction={pendingPolicyAction} policy={policy} approvedProfile={Boolean(approved)} onCancelAction={() => setPendingPolicyAction(null)} onConfirmAction={() => void confirmPolicyState()} onEdit={() => setEditingPolicy(true)} onRequestAction={setPendingPolicyAction} onSave={savePolicy} />
             </div>
           ) : null}
-          {view === "learners" ? <LearnersSection busy={busy} goals={goals} learningGaps={learningGaps} policy={policy} recipients={recipients} onCreateGoal={createGoal} /> : null}
+          {view === "learners" ? (
+            <LearnersSection
+              busy={busy}
+              goals={goals}
+              learningGaps={learningGaps}
+              pendingCancel={pendingGoalCancel}
+              policy={policy}
+              recipients={recipients}
+              onCancelRequest={setPendingGoalCancel}
+              onCancelGoal={(goal) => void run(`cancel-goal-${goal.goal_id}`, async () => {
+                await cancelProfessorAutonomousGoal(course.course_id, goal.goal_id)
+                setPendingGoalCancel(null)
+                await refresh()
+              }, "The learner goal and all pending work derived from it were cancelled.")}
+              onCreateGoal={createGoal}
+            />
+          ) : null}
           {view === "outreach" ? (
             <OutreachSection
               approved={Boolean(approved)}
@@ -322,7 +346,7 @@ export function ProfessorAutonomyPanel({
               onSchedule={schedule}
             />
           ) : null}
-          {view === "activity" ? <ActivitySection actions={actions} /> : null}
+          {view === "activity" ? <ActivitySection actions={actions} outcomes={outcomes} /> : null}
         </div>
       </CardContent>
     </Card>
@@ -430,7 +454,7 @@ function PolicyForm({ approvedProfile, busy, policy, onSubmit }: { approvedProfi
   )
 }
 
-function LearnersSection({ busy, goals, learningGaps, policy, recipients, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learningGaps: ProfessorLearningGapResult | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+function LearnersSection({ busy, goals, learningGaps, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learningGaps: ProfessorLearningGapResult | null; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const eligible = recipients.filter((recipient) => recipient.goal_eligible)
   return (
     <div className="space-y-7">
@@ -438,7 +462,52 @@ function LearnersSection({ busy, goals, learningGaps, policy, recipients, onCrea
         <div className="flex items-start justify-between gap-3"><div><h3 id="learner-goal-heading" className="flex items-center gap-2 text-sm font-semibold"><Target className="size-4" /> Bounded learner goals</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Goals must derive from an approved course objective and expire after a finite number of attempts.</p></div><span className="text-xs text-muted-foreground">Maximum 3 active per learner</span></div>
         <form className="mt-4 grid gap-4 sm:grid-cols-2" onSubmit={onCreateGoal}><RecipientSelect label="Student" name="student_account_id" recipients={recipients} eligibility="goal" /><Select label="Approved objective" name="approved_course_objective" options={policy?.approved_course_objectives ?? []} /><TextArea label="Learner subgoal" name="learner_subgoal" placeholder="Correctly explain the invalidation step" /><TextArea label="Success condition" name="success_condition" placeholder="Answers one retrieval prompt with cited reasoning" /><Input label="Expires at" name="expires_at" type="datetime-local" /><Button className="self-end" type="submit" disabled={busy !== null || !eligible.length}><Target /> {busy === "goal" ? "Creating…" : "Create bounded goal"}</Button></form>
         {!eligible.length ? <EligibilityNote recipients={recipients} kind="goal" /> : null}
-        {goals.length ? <ul className="mt-5 grid gap-2 sm:grid-cols-2">{goals.slice(0, 8).map((goal) => <li key={goal.goal_id} className="rounded-lg border p-3"><div className="flex items-start justify-between gap-2"><p className="text-sm font-medium">{goal.learner_subgoal}</p><Badge variant="outline">{format(goal.status)}</Badge></div><p className="mt-1 text-xs leading-5 text-muted-foreground">{goal.student_id} · {goal.attempt_count}/{goal.attempt_limit} attempts</p></li>)}</ul> : <EmptyState icon={Target} title="No learner goals" description="Create a finite goal after the professor profile and autonomy boundary are active." />}
+        {goals.length ? (
+          <ul className="mt-5 grid gap-2 sm:grid-cols-2">
+            {goals.slice(0, 8).map((goal) => (
+              <li key={goal.goal_id} className="min-w-0 rounded-lg border p-3">
+                <div className="flex items-start justify-between gap-2">
+                  <p className="min-w-0 [overflow-wrap:anywhere] text-sm font-medium">
+                    {goal.learner_subgoal}
+                  </p>
+                  <Badge variant="outline">{format(goal.status)}</Badge>
+                </div>
+                <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                  {goal.student_id} · {goal.attempt_count}/{goal.attempt_limit} attempts
+                </p>
+                {goal.status === "active" && pendingCancel !== goal.goal_id ? (
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="mt-2"
+                    disabled={busy !== null}
+                    onClick={() => onCancelRequest(goal.goal_id)}
+                  >
+                    Stop goal
+                  </Button>
+                ) : null}
+                {pendingCancel === goal.goal_id ? (
+                  <div className="mt-3 rounded-lg bg-[var(--warning-soft)] p-3">
+                    <p className="text-xs leading-5 text-[var(--warning)]">
+                      Stop this goal and cancel its pending opportunities and follow-ups?
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      <Button type="button" size="sm" variant="outline" onClick={() => onCancelRequest(null)}>
+                        Keep active
+                      </Button>
+                      <Button type="button" size="sm" variant="destructive" disabled={busy !== null} onClick={() => onCancelGoal(goal)}>
+                        {busy === `cancel-goal-${goal.goal_id}` ? "Stopping…" : "Stop goal"}
+                      </Button>
+                    </div>
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyState icon={Target} title="No learner goals" description="Create a finite goal after the professor profile and autonomy boundary are active." />
+        )}
       </section>
       <section className="border-t pt-6" aria-labelledby="learning-gap-heading">
         <div className="flex items-center justify-between gap-3"><div><h3 id="learning-gap-heading" className="flex items-center gap-2 text-sm font-semibold"><UsersRound className="size-4" /> Learning-gap insights</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Only privacy-safe aggregate signals are visible.</p></div><span className="text-xs text-muted-foreground">Minimum 5 learners</span></div>
@@ -477,8 +546,49 @@ function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy
   )
 }
 
-function ActivitySection({ actions }: { actions: AutonomousActionV1[] }) {
-  return <section aria-labelledby="autonomy-audit-heading"><div><h3 id="autonomy-audit-heading" className="flex items-center gap-2 text-sm font-semibold"><Activity className="size-4" /> Autonomous activity audit</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Inspect structured decision reasons, safety outcomes, and delivery status. Hidden chain-of-thought is never stored.</p></div>{actions.length ? <ul className="mt-4 divide-y rounded-lg border">{actions.slice(0, 40).map((action) => <li key={action.action_id} className="px-3 py-3"><div className="flex items-start justify-between gap-3"><div><p className="text-sm font-medium">{format(action.kind)}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{action.student_id} · {action.structured_reason}</p></div><Badge variant="outline">{format(action.status)}</Badge></div></li>)}</ul> : <EmptyState icon={Activity} title="No activity recorded" description="The audit remains empty until an eligible event reaches the bounded worker." />}</section>
+function ActivitySection({ actions, outcomes }: { actions: AutonomousActionV1[]; outcomes: AutonomousOutcomeV1[] }) {
+  const outcomeByAction = new Map(outcomes.map((outcome) => [outcome.action_id, outcome]))
+  return (
+    <section aria-labelledby="autonomy-audit-heading">
+      <div>
+        <h3 id="autonomy-audit-heading" className="flex items-center gap-2 text-sm font-semibold">
+          <Activity className="size-4" /> Autonomous activity audit
+        </h3>
+        <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">
+          Inspect structured decision reasons, deterministic validation, delivery, and learner outcomes. Hidden chain-of-thought is never stored.
+        </p>
+      </div>
+      {actions.length ? (
+        <ul className="mt-4 divide-y rounded-lg border">
+          {actions.slice(0, 40).map((action) => {
+            const outcome = outcomeByAction.get(action.action_id)
+            const checks = Object.entries(action.validation_results)
+            const passed = checks.filter(([, value]) => value).length
+            return (
+              <li key={action.action_id} className="min-w-0 px-3 py-3">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium">{format(action.kind)}</p>
+                    <p className="mt-1 [overflow-wrap:anywhere] text-xs leading-5 text-muted-foreground">
+                      {action.student_id} · {action.structured_reason}
+                    </p>
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      {passed}/{checks.length} deterministic checks passed
+                      {outcome ? ` · Outcome: ${format(outcome.kind)}` : " · Awaiting outcome"}
+                      {outcome?.next_wake_at ? ` · Next check ${new Date(outcome.next_wake_at).toLocaleString()}` : ""}
+                    </p>
+                  </div>
+                  <Badge variant="outline">{format(action.status)}</Badge>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <EmptyState icon={Activity} title="No activity recorded" description="The audit remains empty until an eligible event reaches the bounded worker." />
+      )}
+    </section>
+  )
 }
 
 function SummaryItem({ label, value, ready }: { label: string; value: string; ready: boolean }) {

@@ -113,3 +113,42 @@ def test_outreach_is_opt_in_and_cross_course_scheduling_is_forbidden(tmp_path):
 
     assert response.status_code == 403
     assert response.json()["detail"]["code"] == "course_forbidden"
+
+
+def test_student_can_snooze_and_resume_autonomous_check_ins(tmp_path):
+    repository = SQLiteStudentRepository(tmp_path / "proactive-snooze-api.sqlite3")
+    fixture = seed_synthetic_student_workflow(repository)
+    client = TestClient(
+        create_app(student_repository=repository, settings=AppSettings())
+    )
+    snoozed_until = (datetime.now(UTC) + timedelta(days=7)).isoformat()
+
+    snoozed = client.put(
+        f"/api/student/courses/{fixture.course_a_id}/outreach-preferences/in-app",
+        headers=_headers(fixture.student_a_id),
+        json={
+            "enabled": True,
+            "timezone": "UTC",
+            "quiet_hours_start": "22:00",
+            "quiet_hours_end": "08:00",
+            "max_messages_per_7_days": 3,
+            "snoozed_until": snoozed_until,
+        },
+    )
+    assert snoozed.status_code == 200
+    assert snoozed.json()["snoozed_until"] == snoozed_until
+
+    resumed = client.put(
+        f"/api/student/courses/{fixture.course_a_id}/outreach-preferences/in-app",
+        headers=_headers(fixture.student_a_id),
+        json={
+            "enabled": True,
+            "timezone": "UTC",
+            "quiet_hours_start": "22:00",
+            "quiet_hours_end": "08:00",
+            "max_messages_per_7_days": 3,
+            "snoozed_until": None,
+        },
+    )
+    assert resumed.status_code == 200
+    assert resumed.json()["snoozed_until"] is None

@@ -75,6 +75,7 @@ export function updateStudentInAppOutreachPreference(
   courseId: string,
   enabled: boolean,
   accountId = STUDENT_ACCOUNT_ID,
+  snoozedUntil?: string | null,
 ): Promise<StudentOutreachPreference> {
   return studentRequest<StudentOutreachPreference>(
     `/api/student/courses/${pathSegment(courseId)}/outreach-preferences/in-app`,
@@ -87,6 +88,7 @@ export function updateStudentInAppOutreachPreference(
         quiet_hours_start: "22:00",
         quiet_hours_end: "08:00",
         max_messages_per_7_days: 3,
+        snoozed_until: snoozedUntil ?? null,
       }),
     },
   )

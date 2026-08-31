@@ -234,6 +234,7 @@ class AppSettings:
                 _validate_t1_qualification_result(
                     self.t1_qualification_result_path,
                     self.student_profile_path,
+                    self.student_tutoring_mode,
                 )
             if not self.secure_cookies:
                 raise ValueError("staging requires APP_SECURE_COOKIES=true")
@@ -295,6 +296,7 @@ def _positive_int(name: str, default: int) -> int:
 def _validate_t1_qualification_result(
     result_path: Path | None,
     profile_path: Path,
+    tutoring_mode: StudentTutoringMode,
 ) -> None:
     if result_path is None or not result_path.is_file():
         raise ValueError(
@@ -319,6 +321,19 @@ def _validate_t1_qualification_result(
         else {}
     )
     profile_sha256 = hashlib.sha256(profile_path.read_bytes()).hexdigest()
+    allowed_run_ids = (
+        {"governed-full-autonomy-v2-1-confirmation-001"}
+        if tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        else {
+            "autonomous-tutoring-r1-confirmation-001",
+            "autonomous-tutoring-r1-confirmation-002",
+        }
+    )
+    expected_implementation_id = (
+        "governed-autonomous-tutoring-graph-v2-1"
+        if tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        else "deterministic-bounded-tutoring-graph-t1"
+    )
     if "run_id" in result:
         try:
             record = ComponentEvaluationRecord.model_validate(result)
@@ -344,14 +359,11 @@ def _validate_t1_qualification_result(
             selected.implementation.configuration if selected is not None else {}
         )
         if (
-            record.run_id
-            not in {
-                "autonomous-tutoring-r1-confirmation-001",
-                "autonomous-tutoring-r1-confirmation-002",
-            }
+            record.run_id not in allowed_run_ids
             or record.component.value != "conversation-orchestration"
             or record.decision.outcome.value != "keep"
             or selected is None
+            or selected_id != expected_implementation_id
             or not all_passed
             or selected_configuration.get("t0_rollback_available") is not True
             or selected_configuration.get("generator")
@@ -372,11 +384,8 @@ def _validate_t1_qualification_result(
         ).encode("utf-8")
     ).hexdigest()
     if (
-        result.get("instrument_id")
-        not in {
-            "autonomous-tutoring-r1-confirmation-001",
-            "autonomous-tutoring-r1-confirmation-002",
-        }
+        result.get("instrument_id") not in allowed_run_ids
+        or result.get("selected_implementation_id") != expected_implementation_id
         or result.get("status") != "completed-keep"
         or result.get("decision") != "Keep"
         or result.get("hard_gates_passed") is not True

@@ -4,6 +4,7 @@ import type {
   AutonomousRecipientEligibilityV1,
   AutonomousActionV1,
   AutonomousGoalV1,
+  AutonomousOutcomeV1,
   CourseMembership,
   OnboardingSession,
   PedagogicalPolicyV2,
@@ -354,6 +355,16 @@ export function createProfessorAutonomousGoal(
   )
 }
 
+export function cancelProfessorAutonomousGoal(
+  courseId: string,
+  goalId: string,
+): Promise<AutonomousGoalV1> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/autonomous-goals/${pathSegment(goalId)}/cancel`,
+    { method: "POST" },
+  )
+}
+
 export function listProfessorAutonomousActions(
   courseId: string,
   studentAccountId?: string,
@@ -363,6 +374,18 @@ export function listProfessorAutonomousActions(
     : ""
   return professorRequest(
     `/api/professor/courses/${pathSegment(courseId)}/autonomous-actions${query}`,
+  )
+}
+
+export function listProfessorAutonomousOutcomes(
+  courseId: string,
+  studentAccountId?: string,
+): Promise<AutonomousOutcomeV1[]> {
+  const query = studentAccountId
+    ? `?${new URLSearchParams({ student_account_id: studentAccountId })}`
+    : ""
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/autonomous-outcomes${query}`,
   )
 }
 

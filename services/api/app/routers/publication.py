@@ -39,6 +39,7 @@ from src.digital_twin.onboarding import (
 from src.digital_twin.student import (
     AutonomousActionV1,
     AutonomousGoalV1,
+    AutonomousOutcomeV1,
     AutonomousRecipientEligibilityV1,
     GovernedAutonomyError,
     PedagogicalPolicyV2,
@@ -331,6 +332,22 @@ def create_autonomous_goal(
 
 
 @router.post(
+    "/courses/{course_id}/autonomous-goals/{goal_id}/cancel",
+    response_model=AutonomousGoalV1,
+)
+def cancel_autonomous_goal(
+    course_id: str,
+    goal_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+):
+    try:
+        return autonomy.cancel_goal(account_id, course_id, goal_id)
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.post(
     "/courses/{course_id}/autonomous-opportunities",
     response_model=ProactiveOpportunityV1,
     status_code=status.HTTP_201_CREATED,
@@ -377,6 +394,26 @@ def list_autonomous_actions(
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         return autonomy.repository.list_autonomous_actions(
+            course_id, student_id=student_account_id
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-outcomes",
+    response_model=list[AutonomousOutcomeV1],
+)
+def list_autonomous_outcomes(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+    student_account_id: str | None = None,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_outcomes(
             course_id, student_id=student_account_id
         )
     except PublicationError as error:
@@ -951,8 +988,14 @@ def _teaching_profile_http_error(error: TeachingProfileError) -> HTTPException:
 
 def _autonomy_http_error(error: GovernedAutonomyError) -> HTTPException:
     code = (
-        status.HTTP_403_FORBIDDEN
-        if error.code in {"approved_release_required", "objective_not_approved"}
+        status.HTTP_404_NOT_FOUND
+        if error.code == "autonomy_goal_not_found"
+        else status.HTTP_403_FORBIDDEN
+        if error.code in {
+            "approved_release_required",
+            "objective_not_approved",
+            "course_forbidden",
+        }
         else status.HTTP_409_CONFLICT
         if error.code == "autonomy_scope_unavailable"
         else status.HTTP_422_UNPROCESSABLE_CONTENT

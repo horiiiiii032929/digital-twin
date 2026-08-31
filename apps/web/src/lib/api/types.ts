@@ -504,6 +504,24 @@ export type AutonomousActionV1 = {
   updated_at: string
 }
 
+export type AutonomousOutcomeV1 = {
+  schema_version: "1.0.0"
+  outcome_id: string
+  action_id: string
+  goal_id?: string | null
+  student_id: string
+  course_id: string
+  release_id: string
+  policy_version: number
+  profile_sha256: string
+  graph_version: string
+  kind: "delivered" | "dismissed" | "answered" | "expired" | "failed" | "no-action"
+  learner_observation_id?: string | null
+  goal_progress: number
+  next_wake_at?: string | null
+  recorded_at: string
+}
+
 export type ReleasePreflightCheck = {
   id: string
   label: string

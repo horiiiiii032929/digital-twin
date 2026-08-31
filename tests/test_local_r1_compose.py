@@ -15,7 +15,7 @@ def test_local_r1_uses_the_qualified_offline_t1_profile() -> None:
     runtime = compose["x-runtime-environment"]
 
     assert runtime["APP_MODE"] == "staging"
-    assert runtime["APP_GENERATOR_MODE"] == "deterministic"
+    assert runtime["APP_GENERATOR_MODE"] == "${APP_GENERATOR_MODE:-deterministic}"
     assert runtime["APP_EVIDENCE_GATE_MODE"] == "structured-lexical-v1"
     assert runtime["APP_STUDENT_TUTORING_MODE"] == (
         "${APP_STUDENT_TUTORING_MODE:-bounded-tutoring-graph}"
@@ -24,10 +24,10 @@ def test_local_r1_uses_the_qualified_offline_t1_profile() -> None:
     assert runtime["APP_STUDENT_PROFILE_PATH"].endswith(
         "student-tutor-r1-local-candidate-v1.json"
     )
-    assert runtime["APP_T1_QUALIFICATION_RESULT_PATH"].endswith(
-        "autonomous-tutoring-r1-confirmation-002.json"
-    )
-    assert "OPENAI_API_KEY" not in runtime
+    assert "autonomous-tutoring-r1-confirmation-002.json" in runtime[
+        "APP_T1_QUALIFICATION_RESULT_PATH"
+    ]
+    assert runtime["OPENAI_API_KEY"] == "${OPENAI_API_KEY:-}"
 
 
 def test_local_r1_exposes_only_the_https_web_origin() -> None:

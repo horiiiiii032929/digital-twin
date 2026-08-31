@@ -72,6 +72,20 @@ or academic evaluation was made for these changes. The Terra identifier is a
 mutable model ID rather than a dated snapshot and therefore requires fresh
 availability and returned-identity verification before any evaluation.
 
+The same draft now closes the remaining day-to-day control gaps. Professors can
+cancel an individual active learner goal without using the course-wide kill
+switch and can inspect each autonomous action together with its deterministic
+checks, delivery state, linked learner outcome, and next wake-up. Students can
+consent to private check-ins, pause them for seven days, resume immediately,
+reply, dismiss, and inspect bounded goals. Desktop and 390-pixel mobile browser
+walkthroughs passed these navigation and preference interactions with no
+console error. The local Compose profile remains deliberately conservative:
+deterministic generation and qualified T1-v1 are the defaults. A fail-closed
+configuration guard now prevents the historical T1-v1 qualification record
+from activating governed T1-v2.1; V2.1 requires its own future confirmation
+record. This is product implementation evidence only, not an evaluation or
+release claim.
+
 GitHub now tracks the finite successor path explicitly: #153 remains the P0
 grounding dependency, #155 owns governed T1-v2.1 completion, #156 owns A2
 activation and qualification, and #157 owns the frozen full-autonomy product

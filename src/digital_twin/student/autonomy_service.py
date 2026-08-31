@@ -17,6 +17,7 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousActionKind,
     AutonomousActionStatus,
     AutonomousEventKind,
+    AutonomousGoalStatus,
     AutonomousGoalV1,
     AutonomousOutcomeKind,
     GroundedTutorResponseV2,
@@ -37,6 +38,7 @@ from src.digital_twin.student.autonomy_runtime import (
 from src.digital_twin.student.models import (
     AccountRole,
     AccountStatus,
+    AuditEvent,
     EvidenceRecoveryMode,
     MembershipRole,
     OutreachChannel,
@@ -313,6 +315,51 @@ class GovernedAutonomyService:
                 )
             )
         return recipients
+
+    def cancel_goal(
+        self,
+        professor_id: str,
+        course_id: str,
+        goal_id: str,
+        *,
+        now: datetime | None = None,
+    ) -> AutonomousGoalV1:
+        """Cancel one learner goal and every pending job derived from it."""
+
+        course = self.repository.get_course(course_id)
+        if course is None or course.owner_professor_id != professor_id:
+            raise GovernedAutonomyError(
+                "course_forbidden",
+                "Only the course professor can cancel an autonomous learner goal.",
+            )
+        goal = self.repository.get_autonomous_goal(goal_id)
+        if goal is None or goal.course_id != course_id:
+            raise GovernedAutonomyError(
+                "autonomy_goal_not_found",
+                "The autonomous learner goal was not found in this course.",
+            )
+        changed_at = _utc(now or datetime.now(UTC)).isoformat()
+        cancelled = self.repository.set_autonomous_goal_status(
+            goal_id,
+            AutonomousGoalStatus.CANCELLED,
+            changed_at=changed_at,
+        )
+        self.repository.save_audit_event(
+            AuditEvent(
+                id=f"autonomous-goal-cancelled-{uuid4()}",
+                event_type="autonomous-goal-cancelled",
+                account_id=professor_id,
+                course_id=course_id,
+                release_id=cancelled.release_id,
+                details={
+                    "goal_id": cancelled.goal_id,
+                    "student_id": cancelled.student_id,
+                    "previous_status": goal.status.value,
+                    "pending_work_cancelled": goal.status == AutonomousGoalStatus.ACTIVE,
+                },
+            )
+        )
+        return cancelled
 
     def create_goal(
         self,

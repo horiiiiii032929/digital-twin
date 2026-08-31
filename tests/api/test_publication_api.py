@@ -114,6 +114,50 @@ def _teaching_profile_payload() -> dict:
     }
 
 
+def _publish_profile_bound_release(client, repository, fixture) -> None:
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles",
+        headers=_headers(fixture.professor_id),
+        json=_teaching_profile_payload(),
+    ).json()
+    preview = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{created['profile_id']}/preview",
+        headers=_headers(fixture.professor_id),
+    ).json()
+    client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{created['profile_id']}/approve",
+        headers=_headers(fixture.professor_id),
+        json={"preview_sha256": preview["preview_sha256"]},
+    )
+    source = repository.get_release(fixture.release_a_id)
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": "onboarding-release-synthetic",
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "teaching_profile_id": created["profile_id"],
+            "release_id": "release-autonomy-api-controls",
+            "chunks": [chunk.model_dump(mode="json") for chunk in source.chunks],
+        },
+    )
+    assert response.status_code == 201
+    assert _set_evaluation(
+        client, fixture, "release-autonomy-api-controls"
+    ).status_code == 200
+    assert client.post(
+        "/api/professor/releases/release-autonomy-api-controls/preflight",
+        headers=_headers(fixture.professor_id),
+    ).status_code == 200
+    assert client.post(
+        "/api/professor/releases/release-autonomy-api-controls/publish",
+        headers=_headers(fixture.professor_id),
+    ).status_code == 200
+
+
 def test_approved_teaching_profile_is_hash_bound_to_release(tmp_path):
     client, repository, sessions, fixture = _client(tmp_path, approved=True)
     created = client.post(
@@ -254,6 +298,55 @@ def test_autonomy_recipient_index_explains_ineligible_students(tmp_path):
     assert revoked["goal_eligible"] is False
     assert revoked["outreach_eligible"] is False
     assert "Student account is inactive" in revoked["ineligibility_reasons"]
+
+
+def test_professor_can_cancel_one_goal_and_read_outcome_audit(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+    _publish_profile_bound_release(client, repository, fixture)
+    objective = "Explain cache coherence using the approved release."
+    policy = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomy-policy",
+        headers=_headers(fixture.professor_id),
+        json={
+            "approved_course_objectives": [objective],
+            "allowed_actions": ["ask-diagnostic-question", "no-action"],
+            "autonomy_enabled": True,
+            "paused": False,
+            "kill_switch": False,
+        },
+    )
+    assert policy.status_code == 200
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-goals",
+        headers=_headers(fixture.professor_id),
+        json={
+            "student_account_id": fixture.student_a_id,
+            "approved_course_objective": objective,
+            "learner_subgoal": "Explain why invalidation prevents stale replicas.",
+            "success_condition": "Answer one cited diagnostic question.",
+            "expires_at": "2026-09-10T00:00:00+00:00",
+        },
+    )
+    assert created.status_code == 201
+
+    cancelled = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-goals/"
+        f"{created.json()['goal_id']}/cancel",
+        headers=_headers(fixture.professor_id),
+    )
+    assert cancelled.status_code == 200
+    assert cancelled.json()["status"] == "cancelled"
+    assert any(
+        event.event_type == "autonomous-goal-cancelled"
+        for event in repository.list_audit_events()
+    )
+
+    outcomes = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-outcomes",
+        headers=_headers(fixture.professor_id),
+    )
+    assert outcomes.status_code == 200
+    assert outcomes.json() == []
 
 
 def _record_prior_no_evidence_turn(repository, fixture) -> None:

@@ -17,6 +17,7 @@ import {
   Bell,
   BellOff,
   BookOpen,
+  Clock3,
   FileText,
   Menu,
   MessageCircle,
@@ -86,6 +87,7 @@ export function StudentWorkspace({
     outreachMessages,
     autonomousGoals,
     inAppOutreachEnabled,
+    outreachSnoozedUntil,
     isLoadingOutreach,
     isUpdatingOutreach,
     outreachError,
@@ -98,6 +100,7 @@ export function StudentWorkspace({
     sendMessage,
     refreshOutreach,
     setInAppOutreachEnabled,
+    snoozeOutreach,
     markOutreachRead,
     dismissOutreach,
     replyToOutreach,
@@ -312,12 +315,14 @@ export function StudentWorkspace({
               messages={outreachMessages}
               goals={autonomousGoals}
               enabled={inAppOutreachEnabled}
+              snoozedUntil={outreachSnoozedUntil}
               isLoading={isLoadingOutreach}
               isUpdating={isUpdatingOutreach}
               error={outreachError}
               onClose={() => setOutreachOpen(false)}
               onRefresh={refreshOutreach}
               onEnabledChange={setInAppOutreachEnabled}
+              onSnooze={snoozeOutreach}
               onMarkRead={markOutreachRead}
               onDismiss={dismissOutreach}
               onReply={(messageId) => {
@@ -452,12 +457,14 @@ function OutreachPanel({
   messages,
   goals,
   enabled,
+  snoozedUntil,
   isLoading,
   isUpdating,
   error,
   onClose,
   onRefresh,
   onEnabledChange,
+  onSnooze,
   onMarkRead,
   onDismiss,
   onReply,
@@ -465,16 +472,22 @@ function OutreachPanel({
   messages: StudentProactiveMessageView[]
   goals: AutonomousGoalV1[]
   enabled: boolean
+  snoozedUntil: string | null
   isLoading: boolean
   isUpdating: boolean
   error: string | null
   onClose: () => void
   onRefresh: () => Promise<void>
   onEnabledChange: (enabled: boolean) => Promise<void>
+  onSnooze: (days: number | null) => Promise<void>
   onMarkRead: (messageId: string) => Promise<void>
   onDismiss: (messageId: string) => Promise<void>
   onReply: (messageId: string) => void
 }) {
+  const snoozeDate = snoozedUntil ? new Date(snoozedUntil) : null
+  const isSnoozed = Boolean(
+    snoozeDate && !Number.isNaN(snoozeDate.getTime()) && snoozeDate > new Date(),
+  )
   return (
     <>
       <div className="flex min-h-14 items-center justify-between gap-3 border-b pl-5 pr-14">
@@ -521,6 +534,25 @@ function OutreachPanel({
           Only private in-app delivery is enabled. Individual learning details
           are never posted to a shared channel.
         </p>
+        {enabled ? (
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white px-3 py-2.5">
+            <p className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+              <Clock3 className="size-3.5 shrink-0" aria-hidden="true" />
+              {isSnoozed && snoozeDate
+                ? `Paused until ${formatOutreachTime(snoozeDate.toISOString())}`
+                : "Quiet hours are respected automatically."}
+            </p>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              disabled={isUpdating}
+              onClick={() => void onSnooze(isSnoozed ? null : 7)}
+            >
+              {isSnoozed ? "Resume now" : "Pause for 7 days"}
+            </Button>
+          </div>
+        ) : null}
       </div>
 
       <div className="border-b px-5 py-4">

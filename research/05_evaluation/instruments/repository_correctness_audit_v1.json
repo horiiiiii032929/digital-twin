@@ -280,12 +280,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-ux",
-      "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+      "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; professor profile/policy, individual-goal cancellation, outcome audit, responsive tabs, and fail-closed status language were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
       "findings": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "f33e1191a9099244c89cb0b05a2413455d21f0108a2d994dfcc407539021d77f"
+      "sha256": "d02718de0f7cce570b04b2f600379dd0ced8ad7b20eb6478bbf28242277b73ee"
     },
     {
       "audit_status": "audited",
@@ -313,12 +313,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-ux",
-      "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+      "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; student consent, seven-day snooze, immediate resume, goals, inbox, and responsive chat behavior were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
       "findings": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "da3b6feebcf458c4fbed0bcacf8245f286e58b3be28568b131cb26014497c521"
+      "sha256": "ec1a988eff202594cd7b64dc38e0f3ee96c124309d09dab10c5b7c50c507e79f"
     },
     {
       "audit_status": "audited",
@@ -527,7 +527,7 @@
       "path": "apps/web/src/hooks/use-student-workspace.ts",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "9be1ce6f66b9b42162ebb7fd94017e81b9e75ecb36add1e905482cf1f98abfb5"
+      "sha256": "71cec0669ccde953eb886914b2844cc1f04a00eac8272209575d75ce6c3937d6"
     },
     {
       "audit_status": "audited",
@@ -602,9 +602,9 @@
       "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
       "findings": [],
       "path": "apps/web/src/lib/api/professor.test.ts",
-      "reviewed_at": "2026-08-20",
+      "reviewed_at": "2026-08-31",
       "reviewer": "repository-maintenance",
-      "sha256": "cc3ea14c12449d308864ded2247d0e78e88cce780834c2cdeffe869d39ff2f70"
+      "sha256": "ef9d0238263632363356d99147eb7e013597fd89a5bdd937526a43a64cad4d03"
     },
     {
       "audit_status": "audited",
@@ -615,7 +615,7 @@
       "path": "apps/web/src/lib/api/professor.ts",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "17c93297d59d521934db2aef8696915f299ca2618838dbebdeacdbc94c2fcff6"
+      "sha256": "3f9e50cc4056174ebb45d574ef65bc41e835cbe498cddd420cd45a243ea848ed"
     },
     {
       "audit_status": "audited",
@@ -624,9 +624,9 @@
       "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
       "findings": [],
       "path": "apps/web/src/lib/api/student.test.ts",
-      "reviewed_at": "2026-08-27",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-review",
-      "sha256": "fb95f2fc33c0e4750511f297c875aaf2c7666131a7d3cb84fee6510e2618af31"
+      "sha256": "e1373944d70620a745a8350842159cfe17a6bd165f5b84fe3c5e85df41f90ba0"
     },
     {
       "audit_status": "audited",
@@ -637,7 +637,7 @@
       "path": "apps/web/src/lib/api/student.ts",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "3251b4b03d201325ca04f58366408f255961177561a98a34b651049efcd6d993"
+      "sha256": "2c465e91b60223599d5e1191efca520d076ba2d1dcab0b8dc560cd5678e13f81"
     },
     {
       "audit_status": "audited",
@@ -648,7 +648,7 @@
       "path": "apps/web/src/lib/api/types.ts",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "2f01c8d8e5c01fa86bc73d21e349309d8fb7fbe0d20834908e51eef948ad35ba"
+      "sha256": "75761257344afc37f0b6f79221d32bb771a9aa32bb412aed226724de633442d4"
     },
     {
       "audit_status": "audited",
@@ -857,7 +857,7 @@
       "path": "compose.local-r1.yml",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "d88ab45d26842c746d8a8ef2fe71c90aac606b464fbf75a809fdf16d3ca778b8"
+      "sha256": "b49d5765679ee695da39351cc441a89f4cddea5a1a6b4722fd9a35716ca4b651"
     },
     {
       "audit_status": "audited",
@@ -932,9 +932,9 @@
       "evidence": "Example local settings expose no credential and retain safe deterministic T1, budget, and localhost defaults.",
       "findings": [],
       "path": "deploy/local-r1.env.example",
-      "reviewed_at": "2026-08-29",
+      "reviewed_at": "2026-08-31",
       "reviewer": "Codex local R1 release qualification",
-      "sha256": "7f829fa594470fd798d7850afe2efbb055663f6921d7474c2fd6dc6fa2b780d1"
+      "sha256": "1975034dca3d56d9b1976414777dd5200febe0e6e59e4614e3a80fa891c3b040"
     },
     {
       "audit_status": "audited",
@@ -4573,9 +4573,9 @@
       "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
       "findings": [],
       "path": "scripts/run_academic_factual_qa_source_aligned_retrieval.py",
-      "reviewed_at": "2026-08-30",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-review",
-      "sha256": "ca2f61d36d8212c72eaf8b3642f3f0a4bf7d9c8f553eebbbda362f23c6bdd3d2"
+      "sha256": "7fab6e5cf5176f9679daab7ef9ebba0726a38c31ab920ae39197855b572f4f33"
     },
     {
       "audit_status": "audited",
@@ -5444,7 +5444,7 @@
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "c7ca0eef7ca17ea016da6d4b9d8728679a23204efcaf03f2d24163b448cf89b7"
+      "sha256": "91c9f11ff2281937519ba8bbc57db5001d3630ab58ff13813e14040cfe33de06"
     },
     {
       "audit_status": "audited",
@@ -5554,7 +5554,7 @@
       "path": "services/api/app/routers/publication.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "ec07b071c63f000393d9b13eabe69594340db9fee16f6cc04698a16c7bf2f8ef"
+      "sha256": "3b7a7d71fe640f3fe61cd9a173393c4be15b35d640cc55fd0d0e5aaa7fe61db6"
     },
     {
       "audit_status": "audited",
@@ -6724,7 +6724,7 @@
     },
     {
       "path": "src/digital_twin/student/autonomy_service.py",
-      "sha256": "d95a47dbe4dc49842f8ed2b62b5382ceb6e28e7051e82576f9e36a6b9147492f",
+      "sha256": "e15fc7652209771dc2d57ea82b6f0b74f3be448fc1375406e98129a176f2eb95",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -6808,7 +6808,7 @@
       "path": "src/digital_twin/student/repository.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "76437e73b4addb00319c1fb4eba4f591453f3fc2d13b496b067290729a046b24"
+      "sha256": "4dcaf013123964f0c436a28672a88e8d1e69afa229867f0431da255dd18b9bdd"
     },
     {
       "audit_status": "audited",
@@ -6861,9 +6861,9 @@
       "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
-      "reviewed_at": "2026-08-29",
+      "reviewed_at": "2026-08-31",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "3536773a9c563bc7a3ec5fec449a7d0e66c3f29ecb1f86c3e61f7b82f37c5c95"
+      "sha256": "77270a76ec7aa2d0bc419a1c5e14ac6d9b44532182cec33451b31a93a9c7950c"
     },
     {
       "audit_status": "audited",
@@ -6905,9 +6905,9 @@
       "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, cross-course rejection, and time-independent quiet-hour behavior with no external calls.",
       "findings": [],
       "path": "tests/api/test_proactive_outreach_api.py",
-      "reviewed_at": "2026-08-27",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-review",
-      "sha256": "be0f5cdf598bdb559e99c997f03ea2d9fd8b4accd93c0f447d21ffa178e9b5f4"
+      "sha256": "934132bf3bd66bdbb89153a254bde985ce774f32a1f0b048cf825303637fcff6"
     },
     {
       "audit_status": "audited",
@@ -6918,7 +6918,7 @@
       "path": "tests/api/test_publication_api.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "99681991e576a57989c7f47421ed6cfcebc170a270be4f23bcf56fc438621bce"
+      "sha256": "e22e59bd27e98b10f6def979deb2b978de32d59c2f1702f9a454a9dfa267dc9b"
     },
     {
       "audit_status": "audited",
@@ -8291,9 +8291,9 @@
       "evidence": "Focused Compose and runbook tests verify the qualified offline T1 profile, local-only HTTPS exposure, least-privileged restart-safe services, release headers, and durable host-mounted backup procedure.",
       "findings": [],
       "path": "tests/test_local_r1_compose.py",
-      "reviewed_at": "2026-08-29",
+      "reviewed_at": "2026-08-31",
       "reviewer": "Codex local R1 release qualification",
-      "sha256": "4d53dae33516d8039d0e4db07591034d65ba04a1a1c9621584fef526b686aa89"
+      "sha256": "c4995459420606202ca431119042cb38e824704c73d46adc081cc1db6be8cc37"
     },
     {
       "audit_status": "audited",
@@ -8588,9 +8588,9 @@
       "evidence": "Focused tests verify exact package matchability, terminal pass/fail simulations, simplest-near-best selection, a clean program-authorized preflight with no repeated approval blocker, and that preflight/execution cannot open hidden gold before public rankings are durable.",
       "findings": [],
       "path": "tests/test_source_aligned_retrieval_runner.py",
-      "reviewed_at": "2026-08-30",
+      "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-review",
-      "sha256": "689e071f96d4643f39be9707311fa1ffc5111a5939e55f28bcdc073fd6f2fdf6"
+      "sha256": "94eeac7328b56d6f6b0a40d418d5fe9327f53f63fe993bc8773b6a419d04d97f"
     },
     {
       "audit_status": "audited",

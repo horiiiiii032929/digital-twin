@@ -56,6 +56,7 @@ export type StudentWorkspaceController = {
   outreachMessages: StudentProactiveMessageView[]
   autonomousGoals: AutonomousGoalV1[]
   inAppOutreachEnabled: boolean
+  outreachSnoozedUntil: string | null
   isLoadingOutreach: boolean
   isUpdatingOutreach: boolean
   outreachError: string | null
@@ -68,6 +69,7 @@ export type StudentWorkspaceController = {
   sendMessage: () => Promise<void>
   refreshOutreach: () => Promise<void>
   setInAppOutreachEnabled: (enabled: boolean) => Promise<void>
+  snoozeOutreach: (days: number | null) => Promise<void>
   markOutreachRead: (messageId: string) => Promise<void>
   dismissOutreach: (messageId: string) => Promise<void>
   replyToOutreach: (messageId: string) => void
@@ -458,6 +460,34 @@ export function useStudentWorkspace(
     [accountId, activeCourse, isUpdatingOutreach],
   )
 
+  const snoozeOutreach = useCallback(
+    async (days: number | null) => {
+      if (!activeCourse || isUpdatingOutreach || (days !== null && days < 1)) return
+      setIsUpdatingOutreach(true)
+      setOutreachError(null)
+      try {
+        const until = days === null
+          ? null
+          : new Date(Date.now() + days * 24 * 60 * 60 * 1_000).toISOString()
+        const preference = await updateStudentInAppOutreachPreference(
+          activeCourse.course_id,
+          true,
+          accountId,
+          until,
+        )
+        setOutreachPreferences((current) => [
+          ...current.filter((item) => item.channel !== "in-app"),
+          preference,
+        ])
+      } catch (caught) {
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      } finally {
+        setIsUpdatingOutreach(false)
+      }
+    },
+    [accountId, activeCourse, isUpdatingOutreach],
+  )
+
   const markOutreachRead = useCallback(
     async (messageId: string) => {
       try {
@@ -512,6 +542,9 @@ export function useStudentWorkspace(
     inAppOutreachEnabled:
       outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
       false,
+    outreachSnoozedUntil:
+      outreachPreferences.find((item) => item.channel === "in-app")
+        ?.snoozed_until ?? null,
     isLoadingOutreach,
     isUpdatingOutreach,
     outreachError,
@@ -525,6 +558,7 @@ export function useStudentWorkspace(
     sendMessage,
     refreshOutreach,
     setInAppOutreachEnabled,
+    snoozeOutreach,
     markOutreachRead,
     dismissOutreach,
     replyToOutreach,
