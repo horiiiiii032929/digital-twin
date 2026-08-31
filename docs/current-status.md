@@ -68,6 +68,14 @@ proxy/release stages remain unopened. All three folds are now known regression
 data; any successor requires fresh evidence and a method-level semantic target
 resolution design.
 
+For implementation continuity, `typed-target-evidence-v1` is now explicitly
+designated as the **best protocol-valid development architecture** and retained
+rollback baseline. It reached 89.42% grounded factual success, 100% boundary
+action, and zero severe releases on the valid Round 2 comparison. This is not a
+release selection: the method failed the grounded, claim, citation, and
+source-version gates, while the higher 91.64% Round 3 number remains diagnostic
+only because of the parent/child protocol mismatch.
+
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
 plumbing. Round 1 confirmed that whole-question coverage over-abstained and

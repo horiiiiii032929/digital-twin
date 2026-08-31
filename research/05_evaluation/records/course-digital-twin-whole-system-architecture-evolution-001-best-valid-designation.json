@@ -1,0 +1,175 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-evolution-001-best-valid-designation",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "best-valid-development-architecture-designation",
+  "round_number": null,
+  "status": "completed-refine",
+  "supersedes": ["course-digital-twin-whole-system-architecture-evolution-001-decision"],
+  "decision_question": "Which architecture is the strongest protocol-valid development design after the finite three-round program, without treating it as a release winner?",
+  "code_revision": "049f12e4403271378ab25a2a6253811eb65b9db6",
+  "dirty_state": true,
+  "started_at": "2026-08-31T21:25:25Z",
+  "completed_at": "2026-08-31T21:25:25Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-2-001.json",
+      "sha256": "0b353e35f463e054a880bfeb83848b1317a799a3f9b97e0ae3f231378f88a0fa",
+      "role": "strongest-protocol-valid-round-result"
+    },
+    {
+      "path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-evolution-001-decision.json",
+      "sha256": "61308549171584ae624f7635b2231d69830abd052935655e263e4d03e2c7eec8",
+      "role": "terminal-no-release-decision"
+    },
+    {
+      "path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001.json",
+      "sha256": "6793f3035c749774658387250333c3c41b04091da9ea92ff0e368256d663f8a5",
+      "role": "round-3-protocol-correction"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "typed-target-evidence-v1",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": [
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "pedagogical-policy",
+        "reactive-loop",
+        "product-experience"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.8942065491183879,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "answerable-action-accuracy",
+          "value": 0.9899244332493703,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.9005037783375315,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "atomic-claim-recall",
+          "value": 0.9005037783375315,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "citation-precision",
+          "value": 0.929471032745592,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "citation-recall",
+          "value": 0.929471032745592,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "all-evidence-at-3",
+          "value": 0.9874055415617129,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "evidence-recall-at-5",
+          "value": 0.9899244332493703,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "source-version-validity",
+          "value": 0.9899244332493703,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "best-protocol-valid-development-architecture",
+          "passed": true,
+          "evidence": "It produced the largest protocol-valid within-fold improvement and dominated the section-ranked tie on latency."
+        },
+        {
+          "name": "all-release-quality-gates",
+          "passed": false,
+          "evidence": "Grounded-success, claim, citation, and source-version gates failed."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "method",
+      "count": 42,
+      "evidence": "The designated architecture retained 42 answerable cases without fully grounded success in the protocol-valid Round 2 comparison."
+    },
+    {
+      "category": "evaluation",
+      "count": 1,
+      "evidence": "The higher Round 3 diagnostic rate cannot replace this designation because Round 3 violated the frozen parent architecture-count bound."
+    }
+  ],
+  "decision": {
+    "outcome": "no-release",
+    "selected_architecture_id": "typed-target-evidence-v1",
+    "rationale": "Designate typed-target-evidence-v1 as the best protocol-valid development architecture and retained rollback baseline, while preserving the terminal Refine/no-release decision."
+  },
+  "limitations": [
+    "This is a development-baseline designation, not a release selection or fresh-confirmation result.",
+    "Round 3 remains diagnostic only and is not used to select this architecture.",
+    "The final 1,000-case confirmation and dependent evaluations remain unopened.",
+    "No real-human professor, student, usability, or learning evidence was collected."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-evolution-001-best-valid-designation-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-evolution-001-best-valid-designation.json"
+}
