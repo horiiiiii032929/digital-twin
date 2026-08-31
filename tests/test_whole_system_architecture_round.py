@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 from copy import deepcopy
+from pathlib import Path
 
 import pytest
 
 from scripts import run_whole_system_architecture_round as runner
 from src.digital_twin.evaluation.architecture_evolution import (
     ArchitectureRoundInstrumentV1,
+)
+
+
+ROUND_2 = Path(
+    "research/05_evaluation/instruments/"
+    "course_digital_twin_whole_system_architecture_round_2_001.json"
 )
 
 
@@ -43,6 +50,30 @@ def test_network_free_simulation_is_finite() -> None:
         "paid_cost_usd": 0,
         "hidden_gold_loaded_after_responses": True,
     }
+
+
+def test_round_two_uses_fresh_fold_and_typed_target_candidates() -> None:
+    instrument = runner._load_instrument(ROUND_2)
+
+    assert instrument.round_number == 2
+    assert runner.validate(ROUND_2)["case_count"] == 497
+    assert {row.plane_bindings["retrieval"] for row in instrument.candidates} == {
+        "bm25-course-scoped-v1",
+        "target-aware-evidence-retriever-v1",
+        "target-aware-section-retriever-v1",
+    }
+    assert all(not row.provider_execution_authorized for row in instrument.candidates)
+
+
+def test_round_two_simulation_is_network_free() -> None:
+    result = runner.simulate(ROUND_2)
+
+    assert result["instrument_id"] == (
+        "course-digital-twin-whole-system-architecture-round-2-001"
+    )
+    assert result["case_count"] == 12
+    assert result["provider_calls"] == 0
+    assert result["paid_cost_usd"] == 0
 
 
 def test_public_response_generation_does_not_accept_gold() -> None:

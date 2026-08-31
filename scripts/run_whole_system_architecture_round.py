@@ -19,6 +19,7 @@ from src.digital_twin.action_router import (
 )
 from src.digital_twin.evaluation.architecture_evolution import (
     ArchitectureDevelopmentFreezeV1,
+    ArchitecturePlane,
     ArchitectureRoundInstrumentV1,
     ArchitectureSystemManifestV1,
 )
@@ -42,6 +43,8 @@ from src.digital_twin.grounding import (
     PlanObserveRetrieverV1,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredHierarchicalRetriever,
+    TargetAwareEvidenceRetrieverV1,
+    TargetEvidenceGateV1,
 )
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
@@ -134,9 +137,7 @@ def _build_retrievers(
     result: dict[str, Any] = {}
     for course_id, course_chunks in _group_chunks(chunks).items():
         lexical = BM25Retriever(course_chunks)
-        retrieval_binding = architecture.plane_bindings[next(
-            plane for plane in architecture.plane_bindings if plane.value == "retrieval"
-        )]
+        retrieval_binding = architecture.plane_bindings[ArchitecturePlane.RETRIEVAL]
         if retrieval_binding == "bm25-course-scoped-v1":
             result[course_id] = lexical
         elif retrieval_binding == "structured-hierarchical-coverage-retriever-v1":
@@ -158,6 +159,20 @@ def _build_retrievers(
                 candidate_limit=30,
                 adjacent_radius=1,
             )
+        elif retrieval_binding == "target-aware-evidence-retriever-v1":
+            result[course_id] = TargetAwareEvidenceRetrieverV1(
+                lexical,
+                course_chunks,
+                candidate_limit=30,
+                metadata_ranking_enabled=False,
+            )
+        elif retrieval_binding == "target-aware-section-retriever-v1":
+            result[course_id] = TargetAwareEvidenceRetrieverV1(
+                lexical,
+                course_chunks,
+                candidate_limit=30,
+                metadata_ranking_enabled=True,
+            )
         else:
             raise ArchitectureRoundExecutionError(
                 f"unsupported architecture retriever: {retrieval_binding}"
@@ -166,9 +181,7 @@ def _build_retrievers(
 
 
 def _router(architecture: ArchitectureSystemManifestV1) -> Any:
-    binding = architecture.plane_bindings[next(
-        plane for plane in architecture.plane_bindings if plane.value == "action-routing"
-    )]
+    binding = architecture.plane_bindings[ArchitecturePlane.ACTION_ROUTING]
     if binding == "deterministic-tutor-action-router-v1":
         return DeterministicActionRouterV1()
     if binding == "deterministic-tutor-action-router-v2":
@@ -227,10 +240,17 @@ def _response(
 
     try:
         hits = list(retriever.retrieve(case.question, limit=5))
-        if architecture.architecture_id == "governed-v2-1-lexical-control":
+        claim_binding = architecture.plane_bindings[ArchitecturePlane.CLAIM_CITATION]
+        if claim_binding == "single-hit-extractive-lineage-v1":
             selected = hits[:1]
             sufficient = bool(selected)
             gate_reason = "any-hit lexical control"
+        elif claim_binding == "target-aware-atomic-extractive-lineage-v1":
+            decision = TargetEvidenceGateV1().assess(case.question, hits)
+            selected_ids = set(decision.selected_hit_ids)
+            selected = [row for row in hits if row.chunk.id in selected_ids]
+            sufficient = decision.sufficient
+            gate_reason = decision.reason
         else:
             decision = StructuredHierarchicalCoverageEvidenceGate().assess(
                 case.question, hits

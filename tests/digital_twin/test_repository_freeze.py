@@ -38,6 +38,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-open-10000-reference-aggregate-007",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
+        "course-digital-twin-whole-system-architecture-round-2-001",
     }
 
     for pilot_id in pilot_ids:

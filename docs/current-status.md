@@ -34,14 +34,19 @@ Round 2 will replace whole-question coverage with typed public-question
 evidence targets, per-target retrieval and cardinality, and exact atomic
 claim/citation range assembly. No provider calls or paid cost were incurred.
 
-The initial causal audit
-identifies the dominant structural defect as the action -> evidence -> claim ->
-citation contract, not missing autonomy plumbing. Round 1 will compare the
-unchanged V2.1 control with an evidence-first hierarchical candidate and an
-event-sourced plan-observe candidate on a newly frozen development fold. Real
-professor and real student evaluation are outside the program; prospective
-proxy claims are limited to formal-profile adherence and simulated learning
-utility.
+Round 2 is now build-only qualified on its source-disjoint 497-case fold. It
+compares the Round 1 lexical baseline with target-aware lexical and
+target-aware section-ranked architectures. The network-free simulation and 29
+focused tests passed; the full fold has not yet been opened for scoring.
+
+The initial causal audit identified the dominant structural defect as the
+action -> evidence -> claim -> citation contract, not missing autonomy
+plumbing. Round 1 confirmed that whole-question coverage over-abstained and
+did not repair the low factual success. Round 2 therefore changes the evidence
+representation and assembly contract coherently rather than tuning prompts.
+Real professor and real student evaluation are outside the program;
+prospective proxy claims are limited to formal-profile adherence and simulated
+learning utility.
 
 ## Current decision checkpoint
 
@@ -234,7 +239,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 839/839 audited execution-relevant files
+long-run operation authorized. Repository correctness is 842/842 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

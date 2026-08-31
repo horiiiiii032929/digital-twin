@@ -161,6 +161,13 @@ from src.digital_twin.grounding.plan_observe_retrieval import (
     PlanObserveRetrievalTraceV1,
     decompose_evidence_queries,
 )
+from src.digital_twin.grounding.target_evidence import (
+    PublicEvidenceTargetPlanV1,
+    TargetAwareEvidenceRetrieverV1,
+    TargetEvidenceGateV1,
+    TargetRetrievalTraceV1,
+    plan_public_evidence_targets,
+)
 
 
 __all__ = [
@@ -235,6 +242,7 @@ __all__ = [
     "PairScoreBackend",
     "PostGenerationClaimValidator",
     "PublishedRetrievalIndexV1",
+    "PublicEvidenceTargetPlanV1",
     "InvalidRetrievalLimitError",
     "RelevantChunkReference",
     "RetrievalBenchmarkCorpus",
@@ -275,6 +283,9 @@ __all__ = [
     "TutorAnswer",
     "TutorGenerator",
     "TermOverlapRetriever",
+    "TargetAwareEvidenceRetrieverV1",
+    "TargetEvidenceGateV1",
+    "TargetRetrievalTraceV1",
     "TextEmbedder",
     "UnsupportedSourceError",
     "UnsupportedRetrieverSelectionError",
@@ -287,6 +298,7 @@ __all__ = [
     "evaluate_evidence_sufficiency",
     "lexical_tokens",
     "p95",
+    "plan_public_evidence_targets",
     "retrieval_text",
     "requires_clarification",
     "should_use_semantic_reranking",
