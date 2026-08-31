@@ -94,6 +94,11 @@ from src.digital_twin.evaluation.autonomy_scoring import (
     score_autonomy_case,
     summarize_autonomy_scores,
 )
+from src.digital_twin.evaluation.autonomy_product_adapter import (
+    ProductConditionV1,
+    StudentProductAutonomyAdapterV1,
+    StudentProductAutonomyRuntimeV1,
+)
 from src.digital_twin.evaluation.factual_qa_dataset import (
     AuthoredClusterVariantsV1,
     AuthoredQuestionVariantV1,
@@ -150,6 +155,9 @@ __all__ = [
     "AutonomyStateSnapshotV1",
     "AutonomySystemManifestV1",
     "CallbackAutonomyEvaluationAdapterV1",
+    "ProductConditionV1",
+    "StudentProductAutonomyAdapterV1",
+    "StudentProductAutonomyRuntimeV1",
     "AuthoredClusterVariantsV1",
     "AuthoredQuestionVariantV1",
     "CandidateEvaluation",
