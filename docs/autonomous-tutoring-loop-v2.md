@@ -491,11 +491,20 @@ qualifies the adapter, not V2.1 pedagogy. T0/T1-v1 strict-validation no-actions
 remain an explicit #153 grounding limitation, and the full provider-backed
 portfolio remains separately frozen and unauthorized.
 
-The 820-case reference package is not yet directly executable through this
-adapter: its scripted-driver action windows use compressed timestamps, whereas
-the product schedules the tested follow-up at 24 hours. A successor may change
-only the timing/observer binding needed to drive real services; it must preserve
-the public cases, hidden gold, conditions, and decision gates.
+`governed-full-autonomy-v2-1-actual-product-evaluation-002` closes the timing
+gap. `SystemUtcClock` remains the production clock, while a monotonic
+`VirtualUtcClock` is constructor-injected only by test/evaluation factories.
+The same clock controls turns, +24h/+48h opportunities, quiet hours, cooldowns,
+seven-day frequency windows, expiry, inactivity, leases, and wake-ups. The
+runner does not rewrite database timestamps or bypass product services.
+
+The final network-free 820-case qualification drove the real tutoring,
+autonomy, outreach, SQLite, LangGraph checkpoint, outbox, and delivery paths.
+All four conditions reached 100% observable action matching, goal termination,
+transition validity, safe provider-failure fallback, and restart consistency,
+with zero scope, citation, consent, duplicate, loop, or authority defects. This
+qualifies evaluation infrastructure and deterministic fallback only. It does
+not promote T1-v2.1 or establish provider-backed pedagogy.
 
 ### Pedagogical measures
 

@@ -118,6 +118,17 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _sha256_at_revision(path: Path, revision: str) -> str:
+    """Hash a frozen candidate file without comparing it to the current tree."""
+
+    relative_path = path.relative_to(ROOT).as_posix()
+    content = subprocess.check_output(
+        ["git", "show", f"{revision}:{relative_path}"],
+        cwd=ROOT,
+    )
+    return hashlib.sha256(content).hexdigest()
+
+
 def validate() -> dict[str, Any]:
     instrument = _load(INSTRUMENT_PATH)
     candidate = _load(CANDIDATE_PATH)
@@ -135,7 +146,10 @@ def validate() -> dict[str, Any]:
         raise ValueError("provider integration must use zero retries")
     if instrument["execution"]["automatic_release_promotion"]:
         raise ValueError("provider integration cannot promote the release")
-    if _sha256(PROFILE_PATH) != candidate["system"]["release_profile_sha256"]:
+    frozen_revision = candidate["source_revision"]
+    if _sha256_at_revision(PROFILE_PATH, frozen_revision) != candidate["system"][
+        "release_profile_sha256"
+    ]:
         raise ValueError("candidate release profile hash drifted")
     source_hashes = candidate["source_hashes"]
     expected = {
@@ -148,7 +162,7 @@ def validate() -> dict[str, Any]:
         ],
     }
     for path, digest in expected.items():
-        if _sha256(path) != digest:
+        if _sha256_at_revision(path, frozen_revision) != digest:
             raise ValueError(f"candidate source hash drifted: {path.relative_to(ROOT)}")
     return {"instrument": instrument, "candidate": candidate}
 

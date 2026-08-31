@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "1a7f558b764e88b49d73ff456bc63bccbbcfcbf45475c816f9db825aa1779b05"
+      "sha256": "e93665b2b10c0cb8d1d97d8a943e78ba1ef734dadc9cd17ddbac606d52d4c026"
     },
     {
       "audit_status": "audited",
@@ -4887,13 +4887,13 @@
     },
     {
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
-      "sha256": "c9a889331d0d3ab1b192ebf9c9bd2ff168d5f0f937e46157ee6434e210fd05db",
+      "sha256": "1140ea60096e3bf3209c618856b2a2206bf5a1d4e401a941712229e58e93e8b7",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "reviewed_at": "2026-08-31",
+      "reviewed_at": "2026-09-01",
       "reviewer": "Codex V2.1 provider-integration audit",
-      "evidence": "The consumed runner returned to the repository-wide freeze guard. Exclusive output, metadata freshness, credential, hash, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
+      "evidence": "The consumed runner remains behind the repository-wide freeze guard. Frozen candidate source/profile hashes are checked against the manifest's immutable source revision rather than the evolving working tree; exclusive output, metadata freshness, credential, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
       "findings": []
     },
     {
@@ -5367,7 +5367,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "47fb9ac01793e157491ec4551670380e568f72e3f099a70c30fb44425b031c64"
+      "sha256": "b42b66cf2839a6dbfbf271935ec23db961fd16c663ee9be95421e3e629ebcf7e"
     },
     {
       "audit_status": "audited",
@@ -5499,7 +5499,7 @@
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "ab44606d3bdfe913c991d1d76204aa383ca6ec1020ea46002b03549b20be3a5c"
+      "sha256": "74445f8a710b4b68994b83dfd9942e8d22080e76bab27a26e36749e68035330b"
     },
     {
       "audit_status": "audited",
@@ -6709,7 +6709,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "0d67384479b64a64f675d04a4c5d62de7c038cb811f7b5987cda36014c7b4342"
+      "sha256": "04a32a1445438efdc2a0168568505824ed2184769c60bbc38deedc5b38520ce1"
     },
     {
       "audit_status": "audited",
@@ -6757,7 +6757,7 @@
     },
     {
       "path": "src/digital_twin/student/autonomy_service.py",
-      "sha256": "acb8fa678ddf8a02c50243205c472005505ab543e3646070e1863ed61d58f8ec",
+      "sha256": "5bc508629267b0a66e73d4b77bbfba381a340e6eab3ad274c1778bff62feb153",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -6819,7 +6819,7 @@
       "path": "src/digital_twin/student/proactive.py",
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
-      "sha256": "bb62878ee2ebc565abe36489df1bcab3adbfabb039d7134a301993a166fa848b"
+      "sha256": "9a1fad65d49a167e95eb775d5094728579d7d3994bd8a99d3dd8025395b483c3"
     },
     {
       "audit_status": "audited",
@@ -6852,7 +6852,7 @@
       "path": "src/digital_twin/student/service.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "1277cfd4ec81d4a28dea7cdce85daad974aaee5d18778eee48ea96fc26568e73"
+      "sha256": "6f4b8e40abd891143027c6c8535035062f90d4469bc493420ab195eb9dc76345"
     },
     {
       "audit_status": "audited",
@@ -6874,7 +6874,7 @@
       "path": "src/digital_twin/student/tutoring_graph.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "aa59860c7f32fea2c087d9a66d11d1bcdbf8b16277e6560ed828cb2f27f4b89a"
+      "sha256": "84f481075d80b3ccaa84815575f7ab37200c062b516a83dd2f45fc82ce21036b"
     },
     {
       "audit_status": "audited",
@@ -7043,7 +7043,7 @@
     },
     {
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "sha256": "cf377190f1e9feb4527973f37841b007bfea7e4fd9650f0bdebdf453f650e78b",
+      "sha256": "14bb8f9438e813eaff6fb3dbc4a6e26c1d28872fc4d74d78b08d2ba6ae5800ba",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
@@ -8275,13 +8275,13 @@
     },
     {
       "path": "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
-      "sha256": "0396eb7c1110d3067c47ad270352876cf9b2885157d04be15c3d4be243820b06",
+      "sha256": "e70a0c25a35995f7332edac410839261aaef31a98e5f470dc5d6b4cf46f07b4e",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "reviewed_at": "2026-08-31",
+      "reviewed_at": "2026-09-01",
       "reviewer": "Codex V2.1 provider-integration audit",
-      "evidence": "Focused tests prove the terminal candidate remains unselected, network-free simulation still crosses actual services, revoked authority blocks preflight, and blocked execution constructs no provider request.",
+      "evidence": "Focused tests prove the terminal candidate remains unselected and hash-bound to its immutable revision, network-free simulation still crosses actual services, revoked authority blocks preflight, and blocked execution constructs no provider request.",
       "findings": []
     },
     {
@@ -8887,7 +8887,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_smoke.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "5b6ed436474ef8c81d42473631ef7c9811167607e18f42bc9c43bc2ab43f4981"
+      "sha256": "910195706b252a2053e876b1f2ba2fd88bf01153029ef905da63f0ee49ed3899"
     },
     {
       "audit_status": "audited",
@@ -8898,7 +8898,7 @@
       "path": "src/digital_twin/evaluation/autonomy_product_adapter.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "d80c8cbfa2e6a28c74f7e3304e4437347e5e53c1d7a93cfffbd4b2c61152034b"
+      "sha256": "4d047c5405bb62583a91e0b277d5f3871c1eced0ba10bb95c39a863eeb5d6270"
     },
     {
       "audit_status": "audited",
@@ -8910,6 +8910,160 @@
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
       "sha256": "4ff6b77e2ec3567d88cbdd0a4fea1ac4f88320466d93ff22148f55eeb811c959"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "Manual authority, binding, hidden-gold, canary, case-ID, resume, budget, and terminal-state review plus five network-free simulations.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_002.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "9dc562ef220d08ad20114942eeff69a2b06d69d9b0e912c62032a28b0c82af8b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "Candidate manifest review verified deterministic routing, hybrid retrieval, question-targeted atomic release, canonical source-range validation, and immutable profile binding.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_candidate_manifest_002.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "96f5c264292c2f7ec79bd0e043c4840755a54e043dda00228b6eb0af977ce813"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "Control manifest review verified the same corpus, retrieval, model, decoding, and policy with only the any-hit evidence-release method changed.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_control_manifest_002.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "0aef68be2b25044504ed0d3c44c9f99ad074148c07032f8dfc86a06e4cb41133"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "OpenAI binding review verified exact snapshot, direct Responses API, store false, structured output, zero fallback/retry, refresh-required metadata, and false execution authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_openai_binding_002.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "7119e3bff9372fc0b9b088878a76d60d33527454f428eed40a42be9e260c47eb"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-002",
+      "evidence": "Instrument review and complete 820-case network-free actual-service execution verified realistic policy timing, public/gold isolation, four conditions, finite gates, and false execution authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_002.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "05a1187eee2697b11308a12d9bd1e778c259f7276c2246bbc82e30f711a83661"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "Builder review verified typed binding identities, unchanged 500+100 packages, two-canary ordering, USD 50 absolute stop, and sealed-final exclusion.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_grounding_selection_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "f39f2e7fcc571511504338f76381f5904769b1752cadc76248cf16e5a5a65e05"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-002",
+      "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "4e1ea0b5f3797ff1e9f67db959c56d68c383c0fbf4acac83c6c8edd6153a0c0b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-002",
+      "evidence": "Runtime-factory review plus representative and full runs verified real services, release-bound fixtures, shared clock injection, safe failure injection, restart, provider metrics, and no product bypass.",
+      "findings": [],
+      "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "6b62a16b6e866957f8e0dbeab91ea0f254195295d1298d6d48e508ec32e5a23f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-selection-002",
+      "evidence": "Runner review and five terminal simulations verified exact case-ID persistence, exclusive outputs, hidden-gold order, canary bulk stop, atomic resume, budget projection, and authorization failure-closed behavior.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_grounding_selection_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "bfdd54ffeed645cffbe263501318c2c20943dc888e4a3174910ab39a3904bb09"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-002",
+      "evidence": "Runner review and complete 820-case simulation verified atomic SQLite response persistence, clock history, exact manifests, two canaries, hidden-gold order, budget/accounting stops, terminal results, and safe resume.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "f36881915628417d583e8bca3dd627071ae13badd709f80bc7702848214e7b18"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "product-time-boundary",
+      "evidence": "Clock contract review and focused tests verified aware UTC system time, monotonic virtual advancement, backward-time rejection, exact snapshot/restore, and absence of production configuration selection.",
+      "findings": [],
+      "path": "src/digital_twin/clock.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "f0cc74428db9edac3fca954ac0f802a39d168fc075680cfce4e4654958779117"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover aware UTC, monotonic advance, backward-time rejection, and byte-stable snapshot/restore.",
+      "findings": [],
+      "path": "tests/digital_twin/test_clock.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "3e661239a29659638adc9b07834933e3a754347683131c2ba57f1ca11e0e5f9f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover exact 500+100 identities, immutable runtime hash, unauthorized preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #153 finite grounding-selection audit",
+      "sha256": "fa197bb1c9113e8ccd3b7bb9d988bf83c10b8f07f3c5c152f15c90c0f184548e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover 820-case distribution, realistic 24-hour and 30-day timing, public/gold isolation, authorization blockers, and representative real-service cases across all four conditions.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 realistic-time product audit",
+      "sha256": "958d188c4f62223dc4587b8b43e3c7cc0521331fc6ec4baac93e8186ac1c2c89"
     }
   ],
   "schema_version": 1

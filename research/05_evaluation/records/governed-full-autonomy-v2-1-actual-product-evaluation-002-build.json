@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-002-build",
+  "component": "conversation-orchestration",
+  "dataset_id": "governed-full-autonomy-v2-1-actual-product-820-v1",
+  "corpus_id": "public-synthetic-autonomy-product-fixture-v2",
+  "code_revision": "7205d262416ef95fa789ccb5702d15e17ae6f492",
+  "dirty_state": true,
+  "instrument_sha256": "05a1187eee2697b11308a12d9bd1e778c259f7276c2246bbc82e30f711a83661",
+  "public_contract_sha256": "7c73e97c11f774885456aa3100c6b7be0b2f1000dd8ae6a1b2c816a388cf9aec",
+  "hidden_gold_sha256": "4bb31df4055bdeb167ce0d7d14f7c6aee15e2519cca0d29f76435949b8292af1",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "student-product-autonomy-adapter-v1-smoke-timing",
+        "version": "1.0.0",
+        "configuration": {
+          "condition_count": 4,
+          "case_count": 4,
+          "trajectory_case_count": 4,
+          "long_horizon_case_count": 0,
+          "proactive_opportunity_case_count": 0,
+          "clock_origin": "scripted-short-window",
+          "actual_product_services": true,
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {
+          "name": "observable-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "goal-termination-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "pedagogical-transition-validity",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-safe-fallback",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "unauthorized-or-unexpected-action-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "invalid-citation-lineage-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-delivery-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "actual-product-service-boundary",
+          "passed": true,
+          "evidence": "The four-case smoke used the real product service boundary."
+        },
+        {
+          "name": "realistic-policy-time",
+          "passed": false,
+          "evidence": "The smoke used short scripted timing and did not cover the full 24-hour, seven-day, or 30-day policy windows."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "The smoke preserved public/gold separation."
+        },
+        {
+          "name": "scope-lineage-policy-integrity",
+          "passed": true,
+          "evidence": "The four smoke cases had zero scope, lineage, or duplicate defects."
+        },
+        {
+          "name": "zero-provider-use",
+          "passed": true,
+          "evidence": "The smoke was network-free."
+        }
+      ],
+      "failures_by_category": {
+        "timing-coverage-incomplete": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "student-product-autonomy-adapter-v1-with-virtual-utc-clock",
+        "version": "1.0.0",
+        "configuration": {
+          "condition_count": 4,
+          "case_count": 820,
+          "trajectory_case_count": 600,
+          "long_horizon_case_count": 100,
+          "proactive_opportunity_case_count": 120,
+          "clock_origin": "2026-09-01T12:00:00+00:00",
+          "actual_product_services": true,
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {
+          "name": "observable-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "goal-termination-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "pedagogical-transition-validity",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-safe-fallback",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "unauthorized-or-unexpected-action-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "invalid-citation-lineage-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "duplicate-delivery-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        },
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "actual-product-service-boundary",
+          "passed": true,
+          "evidence": "All 820 cases used StudentTutoringService, GovernedAutonomyService, ProactiveOutreachService, SQLiteStudentRepository, LangGraph checkpoints, the transactional outbox, and delivery processing."
+        },
+        {
+          "name": "realistic-policy-time",
+          "passed": true,
+          "evidence": "One injected VirtualUtcClock controlled turn time, 24-hour opportunities, quiet hours, cooldowns, seven-day frequency, expiry, leases, and 30-day wake-ups without direct database timestamp rewriting."
+        },
+        {
+          "name": "public-gold-separation",
+          "passed": true,
+          "evidence": "Public cases and hidden gold have distinct hashes; scoring joined gold only after responses completed."
+        },
+        {
+          "name": "scope-lineage-policy-integrity",
+          "passed": true,
+          "evidence": "There were zero wrong-recipient, wrong-course/release, invalid-citation, consent, duplicate, unbounded-loop, or authority-mutation findings."
+        },
+        {
+          "name": "zero-provider-use",
+          "passed": true,
+          "evidence": "The qualification used deterministic provider substitutes and recorded zero calls, tokens, and cost."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "student-product-autonomy-adapter-v1-with-virtual-utc-clock",
+    "rationale": "Keep the realistic-time actual-product evaluation boundary for the prospective provider-backed run. The result qualifies the clock, product adapter, persistence, restart, worker, outbox, deterministic scoring, and failure-injection infrastructure only; it does not promote T1-v2.1.",
+    "limitations": [
+      "All model roles used deterministic network-free substitutes, so the perfect rates are not provider-backed product-quality evidence.",
+      "Grounding selection 002 must produce Keep before the provider-backed autonomy portfolio can run.",
+      "Professor fidelity, external usability, and learning improvement were not evaluated.",
+      "The run used public synthetic sources and synthetic learners rather than private course or student data.",
+      "The run was executed from the recorded base revision with an implementation worktree; source and instrument hashes bind the evaluated files."
+    ]
+  }
+}

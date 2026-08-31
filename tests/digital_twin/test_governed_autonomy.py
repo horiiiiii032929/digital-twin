@@ -242,6 +242,25 @@ def _goal_and_opportunity(service, fixture, release):
     return goal, opportunity
 
 
+def test_withdrawing_in_app_consent_cancels_pending_autonomy_scope(tmp_path):
+    repository, fixture, service, release, _approved = _autonomy_fixture(tmp_path)
+    goal, opportunity = _goal_and_opportunity(service, fixture, release)
+
+    service.outreach.update_preference(
+        fixture.student_a_id,
+        fixture.course_a_id,
+        channel=OutreachChannel.IN_APP,
+        enabled=False,
+        timezone="UTC",
+        quiet_hours_start="23:00",
+        quiet_hours_end="02:00",
+        max_messages_per_7_days=3,
+    )
+
+    assert repository.get_autonomous_goal(goal.goal_id).status.value == "cancelled"
+    assert repository.get_autonomous_opportunity(opportunity.opportunity_id).status.value == "cancelled"
+
+
 @pytest.mark.asyncio
 async def test_due_opportunity_delivers_once_and_survives_restart(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)

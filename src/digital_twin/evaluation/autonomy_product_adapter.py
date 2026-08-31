@@ -10,9 +10,10 @@ from __future__ import annotations
 
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime
 from typing import Literal
 
+from src.digital_twin.clock import UtcClock, VirtualUtcClock
 from src.digital_twin.evaluation.autonomy_contract import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationEventV1,
@@ -37,7 +38,7 @@ ProductConditionV1 = Literal[
 ]
 
 _RuntimeFactory = Callable[
-    [AutonomyEvaluationCaseV1], "StudentProductAutonomyRuntimeV1"
+    [AutonomyEvaluationCaseV1, VirtualUtcClock], "StudentProductAutonomyRuntimeV1"
 ]
 _RestartRuntime = Callable[
     ["StudentProductAutonomyRuntimeV1"], "StudentProductAutonomyRuntimeV1"
@@ -62,6 +63,7 @@ class StudentProductAutonomyRuntimeV1:
     repository: StudentRepository
     tutoring: StudentTutoringService
     autonomy: GovernedAutonomyService | None
+    clock: UtcClock
     student_id: str
     professor_id: str
     course_id: str
@@ -92,6 +94,7 @@ class StudentProductAutonomyAdapterV1:
         self.manifest = manifest
         self._runtime_factory = runtime_factory
         self._clock_origin = clock_origin.astimezone(UTC)
+        self._clock = VirtualUtcClock(self._clock_origin)
         self._runtime: StudentProductAutonomyRuntimeV1 | None = None
         self._case: AutonomyEvaluationCaseV1 | None = None
         self._elapsed_seconds = 0
@@ -105,7 +108,7 @@ class StudentProductAutonomyAdapterV1:
 
     @property
     def _now(self) -> datetime:
-        return self._clock_origin + timedelta(seconds=self._elapsed_seconds)
+        return self._clock.now()
 
     def _require_runtime(self) -> StudentProductAutonomyRuntimeV1:
         if self._runtime is None or self._case is None:
@@ -115,7 +118,8 @@ class StudentProductAutonomyAdapterV1:
     async def reset(self, case: AutonomyEvaluationCaseV1) -> None:
         if self._runtime is not None and self._runtime.close_runtime is not None:
             self._runtime.close_runtime(self._runtime)
-        runtime = self._runtime_factory(case)
+        self._clock = VirtualUtcClock(self._clock_origin)
+        runtime = self._runtime_factory(case, self._clock)
         release = runtime.repository.get_published_release(runtime.course_id)
         conversation = runtime.repository.get_conversation(runtime.conversation_id)
         if (
@@ -156,7 +160,7 @@ class StudentProductAutonomyAdapterV1:
             outreach = (
                 runtime.autonomy.outreach
                 if runtime.autonomy is not None
-                else ProactiveOutreachService(runtime.repository)
+                else ProactiveOutreachService(runtime.repository, clock=runtime.clock)
             )
             outreach.update_preference(
                 runtime.student_id,
@@ -244,6 +248,7 @@ class StudentProductAutonomyAdapterV1:
         if seconds < 0:
             raise ValueError("actual-product adapter cannot move time backward")
         self._elapsed_seconds += seconds
+        self._clock.advance_by(seconds)
         runtime = self._require_runtime()
         if self.condition != "t1-v2-autonomous" or runtime.autonomy is None:
             return
@@ -309,6 +314,8 @@ class StudentProductAutonomyAdapterV1:
         runtime = self._require_runtime()
         before = self._durable_identity_snapshot(runtime)
         replacement = runtime.restart_runtime(runtime)
+        if replacement.clock.now() != self._clock.now():
+            raise RuntimeError("actual-product restart changed the evaluation clock")
         after = self._durable_identity_snapshot(replacement)
         self._restart_consistent = self._restart_consistent and before == after
         self._runtime = replacement
@@ -416,6 +423,7 @@ class StudentProductAutonomyAdapterV1:
             "turn_count": self._turn_count,
             "reactive_trace_count": len(traces),
             "restart_count": self._restart_count,
+            "virtual_clock": self._clock.snapshot().model_dump(mode="json"),
             "invariant_results": {
                 "bounded-loop": bounded,
                 "restart-consistent": self._restart_consistent,
@@ -438,7 +446,10 @@ def _reactive_action(turn: TutorTurn) -> str:
     if policy_action in {
         "no-evidence",
         "safe-claim-validation-failure",
+        "safe-citation-failure",
         "safe-failure",
+        "safe-graph-failure",
+        "safe-provider-failure",
         "redirect-graded-work",
         "refuse",
         "clarify",

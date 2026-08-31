@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, Field, SecretStr, field_validator, model_validator
 
+from src.digital_twin.clock import SystemUtcClock, UtcClock, utc_timestamp
 from src.digital_twin.grounding import (
     BM25Retriever,
     DocumentChunk,
@@ -39,9 +40,6 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
 )
 from src.digital_twin.student.repository import StudentRepository
-from src.digital_twin.tutor_policy import timestamp_now
-
-
 class ProactiveOutreachError(ValueError):
     def __init__(self, code: str, message: str) -> None:
         super().__init__(message)
@@ -166,9 +164,11 @@ class ProactiveOutreachService:
         repository: StudentRepository,
         *,
         evidence_recovery_active: bool = False,
+        clock: UtcClock | None = None,
     ) -> None:
         self.repository = repository
         self.evidence_recovery_active = evidence_recovery_active
+        self.clock = clock or SystemUtcClock()
 
     def scan_evidence_recovery(
         self,
@@ -181,7 +181,7 @@ class ProactiveOutreachService:
     ) -> EvidenceRecoveryScanResult:
         """Find newly supportable no-evidence turns without calling a model."""
 
-        instant = _as_utc(now or datetime.now(UTC))
+        instant = _as_utc(now or self.clock.now())
         release = self._authorize_professor_course(professor_id, course_id)
         if mode == EvidenceRecoveryMode.ACTIVE and not self.evidence_recovery_active:
             raise ProactiveOutreachError(
@@ -372,6 +372,7 @@ class ProactiveOutreachService:
         self._authorize_student(account_id, course_id)
         if snoozed_until is not None:
             _parse_instant(snoozed_until, "snoozed_until")
+        changed_at = utc_timestamp(self.clock.now())
         preference = OutreachPreference(
             student_id=account_id,
             course_id=course_id,
@@ -384,8 +385,16 @@ class ProactiveOutreachService:
             snoozed_until=snoozed_until,
             destination_ref=destination_ref,
             private_destination=private_destination,
+            updated_at=changed_at,
         )
         saved = self.repository.save_outreach_preference(preference)
+        pending_autonomy_cancelled = channel == OutreachChannel.IN_APP and not enabled
+        if pending_autonomy_cancelled:
+            self.repository.cancel_autonomy_scope(
+                student_id=account_id,
+                course_id=course_id,
+                changed_at=changed_at,
+            )
         self.repository.save_audit_event(
             self._event(
                 "outreach-preference-updated",
@@ -395,6 +404,7 @@ class ProactiveOutreachService:
                     "channel": channel.value,
                     "enabled": enabled,
                     "private_destination": private_destination,
+                    "pending_autonomy_cancelled": pending_autonomy_cancelled,
                 },
             )
         )
@@ -463,6 +473,8 @@ class ProactiveOutreachService:
         trigger = ProactiveTrigger(
             id=f"proactive-trigger-{uuid4()}",
             idempotency_key=normalized_key,
+            created_at=utc_timestamp(self.clock.now()),
+            updated_at=utc_timestamp(self.clock.now()),
             **candidate_fields,
         )
         saved = self.repository.save_proactive_trigger(trigger)
@@ -508,7 +520,7 @@ class ProactiveOutreachService:
                 "proactive_trigger_not_cancellable",
                 "Only a pending proactive trigger can be cancelled.",
             )
-        changed_at = datetime.now(UTC).isoformat()
+        changed_at = utc_timestamp(self.clock.now())
         cancelled = self.repository.set_proactive_trigger_status(
             trigger.id,
             ProactiveTriggerStatus.CANCELLED,
@@ -529,7 +541,7 @@ class ProactiveOutreachService:
     def process_due(
         self, *, now: datetime | None = None, limit: int = 100
     ) -> list[ProactiveProcessResult]:
-        instant = _as_utc(now or datetime.now(UTC))
+        instant = _as_utc(now or self.clock.now())
         return [
             self.process_trigger(trigger.id, now=instant)
             for trigger in self.repository.list_due_proactive_triggers(
@@ -540,7 +552,7 @@ class ProactiveOutreachService:
     def process_trigger(
         self, trigger_id: str, *, now: datetime | None = None
     ) -> ProactiveProcessResult:
-        instant = _as_utc(now or datetime.now(UTC))
+        instant = _as_utc(now or self.clock.now())
         trigger = self.repository.get_proactive_trigger(trigger_id)
         if trigger is None:
             raise ProactiveOutreachError(
@@ -722,7 +734,7 @@ class ProactiveOutreachService:
         self._authorize_student(account_id, message.course_id)
         try:
             updated = self.repository.set_proactive_message_status(
-                message.id, status, changed_at=timestamp_now()
+                message.id, status, changed_at=utc_timestamp(self.clock.now())
             )
         except ValueError as error:
             raise ProactiveOutreachError(
@@ -871,8 +883,8 @@ class ProactiveOutreachService:
                 "student_account_required", "An active student account is required."
             )
 
-    @staticmethod
     def _event(
+        self,
         event_type: str,
         *,
         account_id: str | None,
@@ -887,6 +899,7 @@ class ProactiveOutreachService:
             course_id=course_id,
             release_id=release_id,
             details=details,
+            created_at=utc_timestamp(self.clock.now()),
         )
 
 

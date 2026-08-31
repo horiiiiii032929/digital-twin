@@ -1004,6 +1004,30 @@ Current utilities:
   budget remain fail-closed. Use package commands ending in
   `finite-evaluation-program-005`; a stopped run resumes with
   `npm run resume:finite-evaluation-program-005`.
+- `build_academic_factual_qa_grounding_selection_002.py` and
+  `run_academic_factual_qa_grounding_selection_002.py`: define the one-shot
+  issue-153 successor over the frozen 500 candidate and 100 control questions.
+  Two public-question canaries must pass exact direct-OpenAI identity and cost
+  checks before any bulk call. Product responses are persisted by case ID, both
+  ledgers must complete before hidden gold opens, retries remain zero, and the
+  emergency stop is USD 50. The historical API retrieval materialization is
+  reused by exact hash; no prior response or score is reused. Validation,
+  simulation, preflight, execute, and resume commands use the
+  `academic-factual-qa-grounding-selection-002` suffix.
+- `build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py`,
+  `governed_full_autonomy_v2_1_actual_product_runtime.py`, and
+  `run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py`: replace
+  harness 001's compressed reference timing with an 820-case actual-service
+  successor. One injected `VirtualUtcClock` drives tutoring, autonomy, outreach,
+  leases, wake-ups, quiet hours, cooldowns, expiry, restart, and the 30-day
+  horizon without rewriting database timestamps. The response process uses 50
+  source-disjoint synthetic-public releases and keeps hidden policy/source gold
+  closed until all responses are durable. The complete network-free execution
+  passed as runtime evidence with 820 clock histories and zero provider calls;
+  its low deterministic behavior metrics are explicitly not a product-quality
+  result. Paid Terra/mini execution remains blocked by #153, fresh metadata,
+  freeze authorization, and a separate checkpoint authorization. Commands use
+  the `governed-autonomy-v2-1-actual-product-evaluation-002` suffix.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

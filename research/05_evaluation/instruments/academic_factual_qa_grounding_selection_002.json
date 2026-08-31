@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-grounding-selection-002",
+  "status": "reviewed-build-only",
+  "binding_id": "academic-factual-qa-grounding-selection-openai-binding-002",
+  "owner_issue": 153,
+  "decision_question": "Does the deterministic pre-generation router plus targeted atomic evidence selection pass the frozen factual grounding gates against the structured-evidence control?",
+  "dataset": {
+    "candidate_cases_path": "research/05_evaluation/datasets/academic-factual-qa-action-router-product-development-001-cases.json",
+    "candidate_cases_sha256": "c3efe966bab8df5a1b213a0c016d96fc6c26a788d9ce2603919d74a651de4b1f",
+    "candidate_gold_path": "research/05_evaluation/datasets/academic-factual-qa-action-router-product-development-001-gold.json",
+    "candidate_gold_sha256": "da797f5e52bcc85056f6bf7a37e0e8742021cd1e7867bc5f69393d05eb514283",
+    "control_cases_path": "research/05_evaluation/datasets/academic-factual-qa-action-router-product-development-001-control-cases.json",
+    "control_cases_sha256": "7c54a3a5768d8344f8b68718d9052eba52ed69f23d5ea0edc6d7addceea57f11",
+    "control_gold_path": "research/05_evaluation/datasets/academic-factual-qa-action-router-product-development-001-control-gold.json",
+    "control_gold_sha256": "9f3d9f41a4377418474d702a0fa9a873b0420a7350678803477fcd01842be151",
+    "candidate_case_count": 500,
+    "control_case_count": 100,
+    "known_development_evidence": true
+  },
+  "retrieval_runtime": {
+    "path": "reports/generated/academic-factual-qa-action-router-product-checkpoint-001/retrieval-runtime.json",
+    "file_sha256": "a3a00689c81619eef5a10e6761fae97aaf688d699c9aed713c67c59bc517d951",
+    "reuse_reason": "Reuse the completed immutable text-embedding-3-small materialization; no product responses or hidden-gold scoring occurred in the historical invalid attempt."
+  },
+  "execution": {
+    "stage_order": [
+      "candidate-canary-and-500",
+      "control-canary-and-100",
+      "hidden-gold-score",
+      "paired-decision"
+    ],
+    "maximum_product_calls": 600,
+    "maximum_canary_calls": 2,
+    "maximum_total_calls": 602,
+    "maximum_transport_retries": 0,
+    "projected_cost_ceiling_usd": 8.0,
+    "absolute_emergency_cost_usd": 50.0,
+    "atomic_sqlite_checkpoints": true,
+    "safe_resume": true,
+    "hidden_gold_after_both_response_ledgers": true,
+    "maximum_harness_corrections": 1,
+    "harness_corrections_used": 0,
+    "automatic_progression": false,
+    "canary_case_ids": [
+      "academic-action-router-dev-0001-q1",
+      "academic-action-router-dev-0003-q1"
+    ]
+  },
+  "hard_gates": {
+    "fully_grounded_factual_success_min": 0.95,
+    "fully_grounded_source_family_lower_95_min": 0.93,
+    "action_accuracy_overall_min": 0.95,
+    "action_accuracy_answerable_min": 0.95,
+    "boundary_action_accuracy_min": 0.98,
+    "atomic_claim_precision_min": 0.98,
+    "atomic_claim_recall_min": 0.95,
+    "citation_precision_min": 0.98,
+    "citation_recall_min": 0.95,
+    "source_version_validity_min": 1.0,
+    "canonical_all_evidence_at_3_min": 0.9,
+    "evidence_recall_at_5_min": 0.95,
+    "provider_completion_min": 0.995,
+    "malformed_output_max": 0.005,
+    "severe_unsupported_release_count_max": 0,
+    "exact_duplicate_count_max": 0,
+    "paired_supported_retention_delta_lower_95_min": -0.03,
+    "paired_boundary_safety_not_worse": true
+  },
+  "boundaries": {
+    "final_10000_opened": false,
+    "private_data_used": false,
+    "professor_fidelity": false,
+    "visual_evaluation": "separate",
+    "one_valid_quality_decision_only": true
+  },
+  "content_sha256": "beb2dc7b26f5112f449af7d3351b180bcb90e9863546648b41d504395f0c2dfe"
+}

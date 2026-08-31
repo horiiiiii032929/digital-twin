@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-08-31
+Status date: 2026-09-01
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -135,22 +135,43 @@ frozen observable behavior; restart consistency was 100%, and T1-v2 autonomous
 issued one cited due intervention without a student message at delivery time or
 a duplicate after restart. Calls, tokens, and cost were zero. This selects the
 actual-product adapter as evaluation infrastructure only. T0 and T1-v1 both
-failed their current strict atomic-claim validation closed in this smoke; that
-disclosed behavior remains part of #153 rather than being interpreted as
-product quality. The 820-case provider-backed run is still unauthorized and
-V2.1 remains unselected. Its scripted-driver timestamps also do not match the
-real product's 24-hour wake-up semantics, so #157 must freeze an actual-service
-timing/observer successor before any paid portfolio execution. This correction
-may not change the public cases, hidden gold, conditions, or gates.
+failed their then-current strict atomic-claim validation closed in this smoke;
+that behavior remains historical #153 evidence rather than product quality.
+
+The timing/observer successor is now built as
+`governed-full-autonomy-v2-1-actual-product-evaluation-002`. A product-level
+`UtcClock` uses `SystemUtcClock` in production and an injectable, monotonic
+`VirtualUtcClock` only in tests and evaluation. One clock now governs turn
+timestamps, +24h/+48h opportunities, quiet hours, cooldown/frequency windows,
+expiry, inactivity, leases, and scheduled wake-ups. The evaluation never
+rewrites database timestamps or uses an evaluation-only product shortcut.
+
+The final network-free 820-case qualification passed all observable hard gates
+across T0, T1-v1, T1-v2 reactive, and T1-v2 autonomous: 100% action matching,
+goal termination, pedagogical transition validity, safe provider-failure
+fallback, and restart consistency; zero scope, citation, consent, duplicate,
+loop, or authority defects; and zero calls or cost. Every case crossed the real
+student, autonomy, outreach, SQLite, LangGraph checkpoint, outbox, and delivery
+paths. This is infrastructure and deterministic-fallback evidence only, not
+provider-backed quality or V2.1 promotion evidence.
+
+Issue #153 now has a separately frozen build-only successor,
+`academic-factual-qa-grounding-selection-002`, for one 500 candidate plus fixed
+100 control decision. Its typed run binding closes the historical missing
+`binding_id` and array-order failure classes; two canaries precede bulk calls,
+responses bind by case ID, and hidden gold opens only after both ledgers are
+durable. Five finite simulations pass. Provider metadata is intentionally
+refresh-required and execution remains unauthorized. A valid `Keep` is required
+before the provider-backed 820-case run may start; a valid `Refine` stops #157.
 
 GitHub tracks the remaining evidence path explicitly: #153 remains
-`In Progress / Refine` for grounding selection. #155 is complete as the
+`In Progress / Refine` with its finite selection build ready. #155 is complete as the
 software-and-provider-integration milestone and moves to `Done / Keep`; it does
 not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze is active again with no provider checkpoint
-authorized. Repository correctness is 810/810 audited execution-relevant files
+authorized. Repository correctness is 824/824 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
