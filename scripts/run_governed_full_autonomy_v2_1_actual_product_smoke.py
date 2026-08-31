@@ -17,11 +17,13 @@ from src.digital_twin.evaluation import (
     AutonomyEvaluationGoldV1,
     AutonomySystemManifestV1,
     ExpectedAutonomyActionV1,
-    StudentProductAutonomyAdapterV1,
-    StudentProductAutonomyRuntimeV1,
     run_autonomy_case,
     score_autonomy_case,
     summarize_autonomy_scores,
+)
+from src.digital_twin.evaluation.autonomy_product_adapter import (
+    StudentProductAutonomyAdapterV1,
+    StudentProductAutonomyRuntimeV1,
 )
 from src.digital_twin.grounding import (
     AtomicClaimEvidenceValidator,
