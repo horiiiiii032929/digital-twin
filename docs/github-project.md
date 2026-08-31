@@ -142,12 +142,14 @@ professor-communication track.
 
 1. Preserve #127 and Program 011 as completed unfavorable evidence; do not tune
    or rerun the sealed 10,000+1,000 package.
-2. Refresh, freeze, and execute `academic-factual-qa-grounding-selection-002`
-   as #153's one 500+100 decision; keep the local fail-closed fallback selected
-   until it passes.
-3. If and only if #153 returns `Keep`, execute
+2. Preserve both `course-digital-twin-autonomous-long-run-001` attempts as
+   zero-call invalid integration evidence. Authority is revoked; there is no
+   third attempt. Keep the local fail-closed fallback selected.
+3. If and only if a separately reviewed future #153 successor returns `Keep`,
+   execute
    `governed-full-autonomy-v2-1-actual-product-evaluation-002` once under the
-   shared paid-program authorization and publish Keep/Refine evidence.
+   appropriate future authority. The current 820-case provider-backed stage
+   was not executed.
 4. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 5. #131 — retain the terminal visual diagnostic and design a separate true-

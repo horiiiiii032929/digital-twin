@@ -41,7 +41,7 @@
     "hidden_gold_after_both_response_ledgers": true,
     "maximum_harness_corrections": 1,
     "harness_corrections_used": 0,
-    "automatic_progression": false,
+    "automatic_progression": true,
     "canary_case_ids": [
       "academic-action-router-dev-0001-q1",
       "academic-action-router-dev-0003-q1"
@@ -74,5 +74,5 @@
     "visual_evaluation": "separate",
     "one_valid_quality_decision_only": true
   },
-  "content_sha256": "beb2dc7b26f5112f449af7d3351b180bcb90e9863546648b41d504395f0c2dfe"
+  "content_sha256": "e9ab26ef5050e199b3650410609d79cd504a235db55c6f6f3932c42a2119a948"
 }

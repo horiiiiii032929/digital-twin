@@ -28,10 +28,11 @@ from src.digital_twin.repository_freeze import require_bounded_pilot_operation_a
 ROOT = Path(__file__).resolve().parents[1]
 INSTRUMENT_ID = builder.INSTRUMENT_ID
 PROGRAM_ID = builder.PROGRAM_ID
+EXECUTION_ATTEMPT_ID = f"{INSTRUMENT_ID}-attempt-002"
 ADAPTER_FACTORY = (
     "scripts.academic_factual_qa_atomic_m2_t0_adapter:build_atomic_m2_t0_adapter"
 )
-OUTPUT_ROOT = ROOT / "reports/generated" / INSTRUMENT_ID
+OUTPUT_ROOT = ROOT / "reports/generated" / EXECUTION_ATTEMPT_ID
 CHECKPOINT_STATE = OUTPUT_ROOT / "checkpoint-state.json"
 CANDIDATE_RESPONSES = OUTPUT_ROOT / "candidate-responses.sqlite3"
 CANDIDATE_PROVIDER = OUTPUT_ROOT / "candidate-provider.sqlite3"
@@ -255,13 +256,14 @@ def validate() -> dict[str, Any]:
     if (
         provider["binding_id"] != "grounding-selection-openai-gpt-5.4-mini-002"
         or provider["provider_model"] != "gpt-5.4-mini-2026-03-17"
+        or provider["first_party_endpoint"] is not True
         or provider["request_store"] is not False
         or provider["maximum_transport_retries"] != 0
     ):
         raise GroundingSelectionExecutionError("exact OpenAI binding drifted")
     return {
         **build,
-        "status": "passed-build-only",
+        "status": build["status"],
         "maximum_canary_calls": 2,
         "maximum_product_calls": 600,
         "maximum_total_calls": 602,
@@ -578,6 +580,7 @@ async def execute(*, resume: bool = False) -> dict[str, Any]:
         result = {
             "schema_version": 1,
             "instrument_id": INSTRUMENT_ID,
+            "execution_attempt_id": EXECUTION_ATTEMPT_ID,
             "status": status,
             "decision": paired.get("decision") if operationally_valid else None,
             "candidate_status": candidate["status"],
@@ -600,6 +603,7 @@ async def execute(*, resume: bool = False) -> dict[str, Any]:
         result = {
             "schema_version": 1,
             "instrument_id": INSTRUMENT_ID,
+            "execution_attempt_id": EXECUTION_ATTEMPT_ID,
             "status": "invalid-execution",
             "failure_stage": state.get("current_stage"),
             "failure_type": type(error).__name__,

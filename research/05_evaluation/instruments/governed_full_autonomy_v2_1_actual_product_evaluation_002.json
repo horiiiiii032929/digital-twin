@@ -35,13 +35,15 @@
     "timing_assertion": "policy-derived-window"
   },
   "models": {
-    "metadata_status": "refresh-required",
-    "verified_at": null,
+    "metadata_status": "fresh",
+    "verified_at": "2026-09-01T01:10:43+08:00",
     "freshness_hours": 24,
     "planner": {
       "provider": "openai",
       "model": "gpt-5.6-terra",
       "dated_snapshot": false,
+      "pricing_usd_per_million_input_tokens": 2.0,
+      "pricing_usd_per_million_output_tokens": 12.0,
       "tasks": [
         "complex-perception",
         "goal-selection",
@@ -52,8 +54,15 @@
     "generator": {
       "provider": "openai",
       "model": "gpt-5.4-mini-2026-03-17",
-      "dated_snapshot": true
+      "dated_snapshot": true,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5
     },
+    "official_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+      "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "https://developers.openai.com/api/reference/cli/resources/responses/methods/create"
+    ],
     "api": "https://api.openai.com/v1/responses",
     "store": false,
     "structured_output": true,

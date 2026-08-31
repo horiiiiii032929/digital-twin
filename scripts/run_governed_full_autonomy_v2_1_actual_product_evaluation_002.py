@@ -335,7 +335,7 @@ def validate() -> dict[str, Any]:
         raise ActualProductEvaluationError("provider model boundary drifted")
     return {
         **build,
-        "status": "passed-build-only",
+        "status": build["status"],
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "database_timestamp_rewriting": False,
         "actual_product_services": instrument["execution"]["actual_services"],

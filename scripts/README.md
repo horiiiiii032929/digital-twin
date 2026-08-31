@@ -1028,6 +1028,14 @@ Current utilities:
   result. Paid Terra/mini execution remains blocked by #153, fresh metadata,
   freeze authorization, and a separate checkpoint authorization. Commands use
   the `governed-autonomy-v2-1-actual-product-evaluation-002` suffix.
+- `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
+  authority finite controller for the #153/#157 path. Both permitted attempts
+  are terminal invalid evidence before provider I/O; authority is revoked and
+  the 820-case stage was not opened. The local regression passed 45/45. Its
+  revision-bound ledgers and result hashes are preserved, and it references but
+  never quality-reruns Program 011's sealed 10,000+1,000 evidence. The package
+  commands ending in `autonomous-long-run-001` now validate or simulate only;
+  live preflight and execution fail closed.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

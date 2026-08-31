@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "program_id": "course-digital-twin-autonomous-long-run-001",
+  "execution_attempt_id": "course-digital-twin-autonomous-long-run-001-attempt-002",
+  "predecessor_invalid_attempt": {
+    "execution_attempt_id": "course-digital-twin-autonomous-long-run-001-attempt-001",
+    "provider_calls": 0,
+    "cost_usd": 0.0,
+    "hidden_gold_opened": false,
+    "correction_scope": [
+      "declare the already selected direct OpenAI endpoint first-party",
+      "replace moved local-regression test paths"
+    ]
+  },
+  "status": "completed-invalid-execution",
+  "owner_issue": 157,
+  "parent_issue": 8,
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorized_by": "repository-owner",
+    "authorized_at": "2026-09-01T00:55:00+08:00",
+    "additional_stage_authorization_required": false
+  },
+  "global_emergency_cost_usd": 200.0,
+  "automatic_resume": true,
+  "automatic_stage_progression": true,
+  "maximum_harness_only_corrections_per_stage": 1,
+  "same_case_quality_rerun_allowed": false,
+  "stages": [
+    {
+      "stage_id": "grounding-selection-500-plus-100",
+      "instrument_id": "academic-factual-qa-grounding-selection-002",
+      "required": true,
+      "dependency": null,
+      "opens_on": "always"
+    },
+    {
+      "stage_id": "actual-product-autonomy-820",
+      "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-002",
+      "required": true,
+      "dependency": "grounding-selection-500-plus-100",
+      "opens_on": "completed-keep"
+    },
+    {
+      "stage_id": "local-release-regression",
+      "instrument_id": "governed-full-autonomy-v2-1-release-candidate-001",
+      "required": true,
+      "dependency": null,
+      "opens_on": "always"
+    },
+    {
+      "stage_id": "evidence-synthesis-and-publication",
+      "instrument_id": "course-digital-twin-autonomous-long-run-001-publication",
+      "required": true,
+      "dependency": null,
+      "opens_on": "always"
+    }
+  ],
+  "historical_evidence": {
+    "known_actual_product_10000_plus_1000": "course-digital-twin-evaluation-program-011",
+    "known_benchmark_decision": "completed-refine",
+    "sealed_set_quality_rerun_forbidden": true,
+    "true_visual_supplement": "course-digital-twin-evaluation-program-011:true-visual-30-plus-60",
+    "synthetic_profile_supplement": "course-digital-twin-evaluation-program-011:synthetic-profile-c0-c2"
+  },
+  "metadata": {
+    "verified_at": "2026-09-01T01:10:43+08:00",
+    "freshness_hours": 24,
+    "official_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+      "https://developers.openai.com/api/reference/cli/resources/responses/methods/create"
+    ]
+  },
+  "hard_stops": [
+    "private-data-or-credential-exposure",
+    "gold-leakage",
+    "provider-identity-drift",
+    "corrupted-ledger-or-hash",
+    "wrong-recipient-course-or-release",
+    "unbounded-loop",
+    "global-cost-ceiling-exhausted"
+  ],
+  "content_sha256": "a25abc5b69a25e24096e76b0e4ba85f99e72ea76831797a50f85134a0c4d5e16"
+}

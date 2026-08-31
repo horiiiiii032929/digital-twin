@@ -68,13 +68,14 @@ def test_actual_product_public_contract_does_not_contain_gold() -> None:
     assert public["content_sha256"] != builder.hidden_gold_payload()["content_sha256"]
 
 
-def test_actual_product_runner_is_blocked_before_grounding_and_authorization() -> None:
+def test_actual_product_runner_is_blocked_after_authority_revocation() -> None:
     result = runner.preflight()
 
     assert result["status"] == "blocked-not-authorized"
     assert "grounding-selection-002-keep-missing" in result["blockers"]
     assert "provider-execution-not-authorized" in result["blockers"]
     assert "paid-execution-not-authorized" in result["blockers"]
+    assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False
 
 
