@@ -12,6 +12,7 @@ import httpx
 
 from src.digital_twin.generation.models import ModelTutorOutput, ModelTutorOutputV2
 from src.digital_twin.grounding.models import GenerationUsage
+from src.digital_twin.student.autonomy_models import AutonomousPlannerOutputV1
 from src.digital_twin.llm import (
     LlmAuthenticationError,
     LlmConfigurationError,
@@ -103,6 +104,8 @@ class OpenAiResponsesClient:
             "bounded_pedagogical_tutor_answer",
         }:
             return ModelTutorOutput.model_json_schema()
+        if task == "autonomous_tutoring_plan":
+            return AutonomousPlannerOutputV1.model_json_schema()
         raise LlmConfigurationError()
 
     def _payload(self, messages: list[LlmMessage], task: str) -> dict[str, Any]:
@@ -196,11 +199,12 @@ class OpenAiResponsesClient:
             content = json.loads(self._output_text(payload))
             if not isinstance(content, dict):
                 raise ValueError("structured output root is not an object")
-            validated = (
-                ModelTutorOutputV2.model_validate(content)
-                if task == "grounded_tutor_atomic_claims"
-                else ModelTutorOutput.model_validate(content)
-            )
+            if task == "grounded_tutor_atomic_claims":
+                validated = ModelTutorOutputV2.model_validate(content)
+            elif task == "autonomous_tutoring_plan":
+                validated = AutonomousPlannerOutputV1.model_validate(content)
+            else:
+                validated = ModelTutorOutput.model_validate(content)
             usage = payload.get("usage", {})
             if not isinstance(usage, dict):
                 raise ValueError("usage is not an object")

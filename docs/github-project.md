@@ -61,6 +61,23 @@ and grounding architecture change on fresh development evidence. #105 remains `I
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
+The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
+new release selection. Its network-free development checkpoint passed 500/500
+fresh routing cases and seven simulated days with bounded cited delivery,
+restart, reply linkage, consent termination, and restore. The student surface
+remains conversation-first; professor autonomy is operated through an explicit
+workflow-first governance console. T1-v1 and T0 remain the selected control and
+rollback until prospective provider-backed and held-out product evidence passes.
+
+The remaining full-autonomy work is now separated in GitHub rather than hidden
+inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
+owns the governed T1-v2.1 product completion, [#156](https://github.com/horiiiiii032929/digital-twin/issues/156)
+owns A2 learner-state-driven in-app intervention, and
+[#157](https://github.com/horiiiiii032929/digital-twin/issues/157) owns the
+immutable full-autonomy product evaluation. Issue #153 remains the first P0
+dependency because no autonomous release is safe before the grounding successor
+passes.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2

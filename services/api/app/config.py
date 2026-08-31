@@ -35,6 +35,7 @@ class GeneratorMode(StrEnum):
 class StudentTutoringMode(StrEnum):
     GROUNDED_ASSISTANT = "grounded-assistant"
     BOUNDED_TUTORING_GRAPH = "bounded-tutoring-graph"
+    GOVERNED_AUTONOMOUS_TUTORING_GRAPH = "governed-autonomous-tutoring-graph-v2.1"
 
 
 class EvidenceGateMode(StrEnum):
@@ -225,7 +226,10 @@ class AppSettings:
         if self.mode == RuntimeMode.STAGING:
             if (
                 self.student_tutoring_mode
-                == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+                in {
+                    StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+                    StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+                }
             ):
                 _validate_t1_qualification_result(
                     self.t1_qualification_result_path,
@@ -247,7 +251,10 @@ class AppSettings:
                 )
             if (
                 self.student_tutoring_mode
-                == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+                in {
+                    StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+                    StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+                }
                 and (
                     self.learning_gap_hmac_secret is None
                     or len(self.learning_gap_hmac_secret) < 32

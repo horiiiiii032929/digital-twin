@@ -4,6 +4,7 @@ from fastapi import APIRouter, Header, HTTPException, Query, Request, Response, 
 
 from services.api.app.config import RuntimeMode
 from services.api.app.dependencies import (
+    GovernedAutonomyServiceDependency,
     IngestionJobServiceDependency,
     ProactiveOutreachServiceDependency,
     TeachingProfileServiceDependency,
@@ -14,6 +15,9 @@ from services.api.app.dependencies import (
     SourceIngestionServiceDependency,
 )
 from services.api.app.schemas import (
+    AutonomyPolicyRequest,
+    AutonomousGoalCreateRequest,
+    AutonomousOpportunityCreateRequest,
     CourseCreateRequest,
     CourseSourceIngestionResponse,
     ReleaseCreateRequest,
@@ -33,6 +37,12 @@ from src.digital_twin.onboarding import (
     bind_session_to_course,
 )
 from src.digital_twin.student import (
+    AutonomousActionV1,
+    AutonomousGoalV1,
+    AutonomousRecipientEligibilityV1,
+    GovernedAutonomyError,
+    PedagogicalPolicyV2,
+    ProactiveOpportunityV1,
     Course,
     CourseMembership,
     DigitalTwinRelease,
@@ -207,6 +217,167 @@ def review_learning_gap_proposal(
             )
         )
         return {"proposal_id": request.proposal_id, "decision": request.decision}
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomy-policy",
+    response_model=PedagogicalPolicyV2 | None,
+)
+def get_autonomy_policy(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.get_autonomy_policy(course_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.put(
+    "/courses/{course_id}/autonomy-policy",
+    response_model=PedagogicalPolicyV2,
+)
+def set_autonomy_policy(
+    course_id: str,
+    request: AutonomyPolicyRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+):
+    try:
+        return autonomy.set_policy(
+            account_id,
+            course_id,
+            **request.model_dump(mode="python"),
+        )
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={"code": "autonomy_policy_invalid", "message": str(error)},
+        ) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-goals",
+    response_model=list[AutonomousGoalV1],
+)
+def list_autonomous_goals(
+    course_id: str,
+    student_account_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_goals(
+            student_account_id, course_id
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomy-recipients",
+    response_model=list[AutonomousRecipientEligibilityV1],
+)
+def list_autonomy_recipients(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.list_recipient_eligibility(course_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/autonomous-goals",
+    response_model=AutonomousGoalV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_autonomous_goal(
+    course_id: str,
+    request: AutonomousGoalCreateRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.create_goal(
+            student_id=request.student_account_id,
+            course_id=course_id,
+            approved_course_objective=request.approved_course_objective,
+            learner_subgoal=request.learner_subgoal,
+            success_condition=request.success_condition,
+            expires_at=request.expires_at,
+            priority=request.priority,
+            attempt_limit=request.attempt_limit,
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/autonomous-opportunities",
+    response_model=ProactiveOpportunityV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_autonomous_opportunity(
+    course_id: str,
+    request: AutonomousOpportunityCreateRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.create_opportunity(
+            student_id=request.student_account_id,
+            course_id=course_id,
+            event_kind=request.event_kind,
+            earliest_action_at=request.earliest_action_at,
+            latest_action_at=request.latest_action_at,
+            goal_id=request.goal_id,
+            concept_id=request.concept_id,
+            source_chunk_id=request.source_chunk_id,
+            supporting_observation_ids=request.supporting_observation_ids,
+            idempotency_key=request.idempotency_key,
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-actions",
+    response_model=list[AutonomousActionV1],
+)
+def list_autonomous_actions(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+    student_account_id: str | None = None,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_actions(
+            course_id, student_id=student_account_id
+        )
     except PublicationError as error:
         raise _http_error(error) from error
 
@@ -769,6 +940,20 @@ def _teaching_profile_http_error(error: TeachingProfileError) -> HTTPException:
             "teaching_profile_not_withdrawable",
             "teaching_profile_preview_drifted",
         }
+        else status.HTTP_422_UNPROCESSABLE_CONTENT
+    )
+    return HTTPException(
+        status_code=code,
+        detail={"code": error.code, "message": error.message},
+    )
+
+
+def _autonomy_http_error(error: GovernedAutonomyError) -> HTTPException:
+    code = (
+        status.HTTP_403_FORBIDDEN
+        if error.code in {"approved_release_required", "objective_not_approved"}
+        else status.HTTP_409_CONFLICT
+        if error.code == "autonomy_scope_unavailable"
         else status.HTTP_422_UNPROCESSABLE_CONTENT
     )
     return HTTPException(

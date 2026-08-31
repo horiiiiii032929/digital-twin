@@ -34,12 +34,16 @@ from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
 from src.digital_twin.model_policy import (
+    OPENAI_GPT_5_6_TERRA_MODEL,
+    OPENAI_HIGH_VOLUME_MODEL,
     OPENAI_MODEL_PRICING_USD_PER_MILLION,
     OPENAI_PRODUCT_CANDIDATE_MODELS,
 )
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
     LiveAtomicGroundedGenerator,
+    DeterministicActionRouterV2,
+    DeterministicPolicyEnforcer,
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import (
@@ -77,6 +81,14 @@ from src.digital_twin.student.proactive import (
     DiscordWebhookDeliveryAdapter,
     EvidenceRecoveryMode,
     ProactiveOutreachService,
+)
+from src.digital_twin.student.autonomy_runtime import (
+    GovernedAutonomousTutoringGraph,
+    LiveAutonomousPlanner,
+)
+from src.digital_twin.student.autonomy_service import (
+    GovernedAutonomyService,
+    RepositoryGroundedWordingGenerator,
 )
 from src.digital_twin.student.service import StudentTutoringService
 
@@ -186,12 +198,13 @@ def create_app(
         if student_evidence_gate is not None
         else _configured_evidence_gate(runtime_settings)
     )
+    active_generator = student_generator or configured_generator
     app.state.provider_budget = provider_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=resolved_student_profile_path,
         embedder=student_embedder,
-        generator=student_generator or configured_generator,
+        generator=active_generator,
         evidence_gate=configured_evidence_gate,
         claim_evidence_validator=student_claim_evidence_validator,
         tutoring_mode=runtime_settings.student_tutoring_mode.value,
@@ -217,6 +230,43 @@ def create_app(
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
         app.state.student_repository
+    )
+    autonomy_graph = None
+    if (
+        runtime_settings.student_tutoring_mode
+        == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        and runtime_settings.generator_mode
+        in {
+            GeneratorMode.OPENAI_GPT_5_4_MINI,
+            GeneratorMode.OPENAI_PROFILE_SELECTED,
+        }
+    ):
+        autonomy_planner_budget = BudgetedLlmClient(
+            OpenAiResponsesClient(
+                OPENAI_GPT_5_6_TERRA_MODEL,
+                timeout_seconds=30,
+                max_output_tokens=500,
+                reasoning_effort="low",
+            ),
+            max_calls=runtime_settings.provider_max_calls_per_process,
+            max_cost_usd=runtime_settings.provider_cost_cap_usd,
+        )
+        app.state.autonomy_planner_budget = autonomy_planner_budget
+        autonomy_graph = GovernedAutonomousTutoringGraph(
+            planner=LiveAutonomousPlanner(
+                autonomy_planner_budget,
+                model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+            ),
+            generator=RepositoryGroundedWordingGenerator(
+                app.state.student_repository,
+                active_generator,
+                model_id=OPENAI_HIGH_VOLUME_MODEL,
+            ),
+        )
+    app.state.governed_autonomy_service = GovernedAutonomyService(
+        app.state.student_repository,
+        app.state.proactive_outreach_service,
+        graph=autonomy_graph,
     )
     app.state.teaching_profile_service = TeachingProfileService(
         app.state.student_repository
@@ -271,7 +321,10 @@ def create_app(
         evidence_sufficiency_ready=configured_evidence_gate is not None,
         teaching_profile_required=(
             runtime_settings.student_tutoring_mode
-            == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+            in {
+                StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+            }
         ),
         post_publish_hook=scan_evidence_recovery_after_publish,
         retrieval_index_ready=(
@@ -374,13 +427,19 @@ def _configured_generator(
     prompt_builder = (
         BoundedPedagogicalPromptBuilder()
         if settings.student_tutoring_mode
-        == StudentTutoringMode.BOUNDED_TUTORING_GRAPH
+        in {
+            StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+            StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+        }
         else StrictEvidenceGroundedPromptBuilder()
     )
     return (
         LiveAtomicGroundedGenerator(
             client,
             prompt_builder=prompt_builder,
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV2()
+            ),
         ),
         client,
     )

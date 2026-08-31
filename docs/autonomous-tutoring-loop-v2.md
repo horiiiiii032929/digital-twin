@@ -58,6 +58,26 @@ LangGraph is an execution framework, not a pedagogical theory. Its use does not
 by itself establish that the learner model, tutoring strategy, or evaluation is
 valid.
 
+## Interface architecture
+
+The product does not use one conversation-first pattern for every role.
+
+- The student surface is conversation-first because the primary job is asking,
+  practicing, receiving grounded help, and responding to an intervention.
+- The professor surface is workflow-first because the primary jobs are setting
+  an explicit boundary, reviewing a ten-case teaching-profile preview,
+  approving or pausing policy, selecting eligible recipients, and auditing
+  consequences.
+- Conversation may explain a setting or draft content, but it is never the
+  control plane for approval, activation, cancellation, delivery, or rollback.
+- Current published state, next-draft readiness, and V2.1 development status
+  must be visually distinct. A candidate must not be labelled as a live or
+  production capability before its promotion evidence exists.
+
+This split was cross-reviewed through the Impeccable workflow and rendered on
+desktop and mobile. It corrects the earlier assumption that both roles should
+share the same LLM-chat product pattern.
+
 ## ITS model separation amendment
 
 The temporal loops below remain useful, but established intelligent tutoring
@@ -502,6 +522,16 @@ evidence defect.
 8. Evaluate A1/A2 in shadow mode and promote only an eligible passing policy.
 9. Obtain professor profile approval and run C0-C3.
 10. Run whole-product and human stages without broadening the earlier claims.
+
+## Development implementation checkpoint
+
+`governed-full-autonomy-v2-1-product-freeze-001` implements the durable finite
+job, policy, goal, opportunity, action/outcome, wake-up, reply-linkage,
+restart, and backup/restore path. Its network-free development run passed
+500/500 fresh routing cases and seven simulated days with three cited deliveries
+followed by four frequency-limited `no-action` outcomes. The result is
+`Go Deeper`, not release selection: provider-backed pedagogy, held-out factual
+grounding, professor fidelity, usability, and learning outcomes remain open.
 
 A valid quality failure stops the affected promotion and produces one
 method-level decision. It does not trigger another prompt-only loop or modify a

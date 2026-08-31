@@ -478,6 +478,151 @@ TEACHING_PROFILE_SCHEMA_STATEMENTS = (
 )
 
 
+GOVERNED_AUTONOMY_SCHEMA_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS autonomy_policies (
+           course_id TEXT PRIMARY KEY REFERENCES courses(id) ON DELETE CASCADE,
+           version INTEGER NOT NULL CHECK(version >= 1),
+           policy_json TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE TABLE IF NOT EXISTS autonomous_goals (
+           goal_id TEXT PRIMARY KEY,
+           student_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           release_id TEXT NOT NULL REFERENCES releases(id) ON DELETE CASCADE,
+           policy_version INTEGER NOT NULL,
+           profile_id TEXT NOT NULL,
+           profile_sha256 TEXT NOT NULL,
+           graph_version TEXT NOT NULL,
+           planner_model TEXT NOT NULL,
+           generator_model TEXT NOT NULL,
+           status TEXT NOT NULL,
+           priority INTEGER NOT NULL,
+           expires_at TEXT NOT NULL,
+           goal_json TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS autonomous_goals_active_idx
+       ON autonomous_goals(student_id, course_id, release_id, status, priority,
+                           expires_at)""",
+    """CREATE TABLE IF NOT EXISTS autonomous_opportunities (
+           opportunity_id TEXT PRIMARY KEY,
+           idempotency_key TEXT NOT NULL UNIQUE,
+           goal_id TEXT REFERENCES autonomous_goals(goal_id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           release_id TEXT NOT NULL REFERENCES releases(id) ON DELETE CASCADE,
+           policy_version INTEGER NOT NULL,
+           profile_id TEXT NOT NULL,
+           profile_sha256 TEXT NOT NULL,
+           graph_version TEXT NOT NULL,
+           planner_model TEXT NOT NULL,
+           generator_model TEXT NOT NULL,
+           event_kind TEXT NOT NULL,
+           status TEXT NOT NULL,
+           earliest_action_at TEXT NOT NULL,
+           latest_action_at TEXT NOT NULL,
+           opportunity_json TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS autonomous_opportunities_due_idx
+       ON autonomous_opportunities(status, earliest_action_at, latest_action_at,
+                                   opportunity_id)""",
+    """CREATE TABLE IF NOT EXISTS autonomous_plans (
+           plan_id TEXT PRIMARY KEY,
+           opportunity_id TEXT NOT NULL UNIQUE
+               REFERENCES autonomous_opportunities(opportunity_id) ON DELETE CASCADE,
+           goal_id TEXT REFERENCES autonomous_goals(goal_id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           policy_version INTEGER NOT NULL,
+           profile_sha256 TEXT NOT NULL,
+           graph_version TEXT NOT NULL,
+           plan_json TEXT NOT NULL,
+           created_at TEXT NOT NULL
+       )""",
+    """CREATE TABLE IF NOT EXISTS autonomous_actions (
+           action_id TEXT PRIMARY KEY,
+           plan_id TEXT NOT NULL UNIQUE
+               REFERENCES autonomous_plans(plan_id) ON DELETE CASCADE,
+           opportunity_id TEXT NOT NULL UNIQUE
+               REFERENCES autonomous_opportunities(opportunity_id) ON DELETE CASCADE,
+           goal_id TEXT REFERENCES autonomous_goals(goal_id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           policy_version INTEGER NOT NULL,
+           profile_sha256 TEXT NOT NULL,
+           graph_version TEXT NOT NULL,
+           proactive_trigger_id TEXT UNIQUE REFERENCES proactive_triggers(id),
+           status TEXT NOT NULL,
+           action_json TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS autonomous_actions_audit_idx
+       ON autonomous_actions(course_id, student_id, created_at DESC)""",
+    """CREATE TABLE IF NOT EXISTS autonomous_outcomes (
+           outcome_id TEXT PRIMARY KEY,
+           action_id TEXT NOT NULL UNIQUE
+               REFERENCES autonomous_actions(action_id) ON DELETE CASCADE,
+           goal_id TEXT REFERENCES autonomous_goals(goal_id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           policy_version INTEGER NOT NULL,
+           profile_sha256 TEXT NOT NULL,
+           graph_version TEXT NOT NULL,
+           outcome_json TEXT NOT NULL,
+           recorded_at TEXT NOT NULL
+       )""",
+    """CREATE TABLE IF NOT EXISTS autonomous_graph_checkpoints (
+           job_id TEXT PRIMARY KEY,
+           opportunity_id TEXT NOT NULL UNIQUE
+               REFERENCES autonomous_opportunities(opportunity_id) ON DELETE CASCADE,
+           binding_sha256 TEXT NOT NULL,
+           status TEXT NOT NULL,
+           state_json TEXT NOT NULL,
+           updated_at TEXT NOT NULL
+       )""",
+    """CREATE TABLE IF NOT EXISTS autonomous_wakeups (
+           wake_up_id TEXT PRIMARY KEY,
+           goal_id TEXT NOT NULL REFERENCES autonomous_goals(goal_id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id),
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           due_at TEXT NOT NULL,
+           event_kind TEXT NOT NULL,
+           status TEXT NOT NULL,
+           wake_up_json TEXT NOT NULL,
+           created_at TEXT NOT NULL
+       )""",
+    """CREATE INDEX IF NOT EXISTS autonomous_wakeups_due_idx
+       ON autonomous_wakeups(status, due_at, wake_up_id)""",
+    """CREATE TABLE IF NOT EXISTS autonomous_response_links (
+           proactive_message_id TEXT PRIMARY KEY
+               REFERENCES proactive_messages(id) ON DELETE CASCADE,
+           student_message_id TEXT NOT NULL UNIQUE
+               REFERENCES messages(id) ON DELETE CASCADE,
+           action_id TEXT REFERENCES autonomous_actions(action_id) ON DELETE SET NULL,
+           goal_id TEXT REFERENCES autonomous_goals(goal_id) ON DELETE SET NULL,
+           course_id TEXT NOT NULL REFERENCES courses(id),
+           release_id TEXT NOT NULL REFERENCES releases(id),
+           linked_at TEXT NOT NULL
+       )""",
+    """CREATE TABLE IF NOT EXISTS autonomy_execution_leases (
+           opportunity_id TEXT PRIMARY KEY
+               REFERENCES autonomous_opportunities(opportunity_id) ON DELETE CASCADE,
+           lease_owner TEXT NOT NULL,
+           lease_expires_at TEXT NOT NULL,
+           acquired_at TEXT NOT NULL
+       )""",
+)
+
+
 def _add_teaching_profiles(connection: sqlite3.Connection) -> None:
     _execute_statements(connection, TEACHING_PROFILE_SCHEMA_STATEMENTS)
     columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(releases)")}
@@ -581,5 +726,13 @@ DEFAULT_MIGRATIONS = (
             "create versioned teaching profiles and bind approved profile hashes to releases"
         ),
         operation=_add_teaching_profiles,
+    ),
+    SQLiteMigration(
+        version=13,
+        name="governed-autonomous-tutoring-v2-1",
+        definition="\n".join(GOVERNED_AUTONOMY_SCHEMA_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, GOVERNED_AUTONOMY_SCHEMA_STATEMENTS
+        ),
     ),
 )

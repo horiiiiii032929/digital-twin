@@ -231,6 +231,31 @@ def test_professor_can_list_and_cancel_pending_scheduled_outreach(tmp_path):
     assert repeated.status_code == 200
 
 
+def test_autonomy_recipient_index_explains_ineligible_students(tmp_path):
+    client, _, _, fixture = _client(tmp_path, approved=True)
+
+    response = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomy-recipients",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert response.status_code == 200
+    recipients = {
+        item["student_account_id"]: item for item in response.json()
+    }
+    active = recipients[fixture.student_a_id]
+    assert active["account_active"] is True
+    assert active["membership_active"] is True
+    assert active["goal_eligible"] is False
+    assert "Autonomy policy is not active" in active["ineligibility_reasons"]
+
+    revoked = recipients[fixture.revoked_student_id]
+    assert revoked["account_active"] is False
+    assert revoked["goal_eligible"] is False
+    assert revoked["outreach_eligible"] is False
+    assert "Student account is inactive" in revoked["ineligibility_reasons"]
+
+
 def _record_prior_no_evidence_turn(repository, fixture) -> None:
     current = repository.get_release(fixture.release_a_id)
     assert current is not None

@@ -16,6 +16,7 @@ from src.digital_twin.generation.generator import (
 from src.digital_twin.action_router import (
     ActionRouteV1,
     DeterministicActionRouterV1,
+    DeterministicActionRouterV2,
     deterministic_boundary_action,
     required_atomic_claim_count,
     requires_clarification,
@@ -58,6 +59,7 @@ __all__ = [
     "ConservativeGroundedPromptBuilder",
     "DeterministicCitationValidator",
     "DeterministicActionRouterV1",
+    "DeterministicActionRouterV2",
     "DeterministicGroundedGenerator",
     "LiveAtomicGroundedGenerator",
     "LiveExtractiveBoundaryGroundedGenerator",

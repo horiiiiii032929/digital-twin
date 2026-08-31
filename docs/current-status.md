@@ -36,15 +36,30 @@ The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
 professor-fidelity, usability, or learning-outcome claim is added.
 
-The prospective autonomous tutor has now received a best-practice architecture
-audit. The bounded LangGraph, deterministic authority, durable state, evidence
-gates, proactive controls, and T0 rollback are retained. V2 is not yet a
-selected implementation: V2.1 must explicitly separate the domain model,
-learner observations and calibrated belief updates, professor-approved
-pedagogical policy, interaction realization, and governance/execution authority.
-An LLM may propose interpretation and teaching moves but cannot establish
-mastery or mutate policy. See
+The autonomous tutor V2.1 candidate now implements the durable event-driven
+goal, opportunity, plan, action/outcome, wake-up, reply-linkage, policy, and
+transactional delivery path. Its network-free development qualification passed
+500/500 fresh action-routing cases and seven simulated days: three cited
+messages were delivered, four later jobs correctly produced `no-action` under
+the weekly limit, and restart, consent withdrawal, response linkage, and clean
+restore remained consistent. Provider calls and cost were zero.
+
+This is a `Go Deeper` implementation checkpoint, not release selection. T1-v1
+and T0 remain the control and rollback. Provider-backed pedagogy, held-out
+factual grounding, professor fidelity, usability, and learning outcomes remain
+open. The professor interface is now workflow-first for explicit review,
+approval, policy, recipient eligibility, and audit; the student interface
+remains conversation-first. An LLM may propose interpretation and teaching
+moves but cannot establish mastery or mutate policy. See
 [the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md).
+
+GitHub now tracks the finite successor path explicitly: #153 remains the P0
+grounding dependency, #155 owns governed T1-v2.1 completion, #156 owns A2
+activation and qualification, and #157 owns the frozen full-autonomy product
+evaluation. Parent #8 remains open until those results support a release
+decision. Repository correctness is currently 792/792 audited files with zero
+pending findings; the execution freeze remains active and no provider call was
+made by this checkpoint.
 
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094
@@ -1522,7 +1537,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | Local T1-v1 Keep with T0 rollback; T1-v2.1 prospective | Professor and student conversation-first workspaces; typed learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; the 50-trajectory/200-turn-per-condition network-free confirmation passed every local graph gate | Complete #153, then implement the provisional [Autonomous Tutoring Loop V2.1](autonomous-tutoring-loop-v2.md): explicit domain/learner-belief/pedagogical-policy/interaction/governance models, typed LLM proposals, calibrated state updates, first-class traces, repeated-run provider-backed T0/T1 comparison, shadow outreach, professor-approved C0-C3, and human evidence |
+| Product UX and autonomous tutoring | Local T1-v1 Keep with T0 rollback; T1-v2.1 Go Deeper candidate | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; 500/500 fresh routing plus seven simulated days passed with zero provider use | Complete #153's full grounding boundary, then run prospective provider-backed T0/T1-v1/T1-v2 comparison, learner-state calibration, A1/A2 promotion evidence, professor-approved C0-C3, and human evidence |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from uuid import uuid4
 
@@ -54,10 +55,21 @@ from src.digital_twin.student.learning_gap import (
     LearningGapSignalV1,
     build_learning_gap_signal,
 )
+from src.digital_twin.model_policy import (
+    OPENAI_GPT_5_6_TERRA_MODEL,
+    OPENAI_HIGH_VOLUME_MODEL,
+)
+from src.digital_twin.student.autonomy_models import (
+    AutonomousEventKind,
+    AutonomousGoalV1,
+    ProactiveOpportunityV1,
+)
+from src.digital_twin.student.autonomy_runtime import GRAPH_VERSION
 from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
 from src.digital_twin.student.repository import LearnerStateConflictError
 from src.digital_twin.student.tutoring_graph import (
     BoundedTutoringGraph,
+    GovernedReactiveTutoringGraphV2,
     LearnerState,
     TutoringGraphInput,
     TutoringIntent,
@@ -109,18 +121,23 @@ class StudentTutoringService:
         self.retrieval_index_chunker_version = retrieval_index_chunker_version
         self.learning_gap_pseudonymizer = learning_gap_pseudonymizer
         self.learning_gap_policy = learning_gap_policy or LearningGapPrivacyPolicyV1()
-        if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1}:
+        if tutoring_mode not in {TutoringMode.T0, TutoringMode.T1, TutoringMode.T1_V2}:
             raise ValueError("unsupported student tutoring mode")
         self.tutoring_mode = tutoring_mode
         self._retrievers: dict[str, object] = {}
         self._retrieval_artifact_ids: dict[str, str] = {}
+        graph_type = (
+            GovernedReactiveTutoringGraphV2
+            if self.tutoring_mode == TutoringMode.T1_V2
+            else BoundedTutoringGraph
+        )
         self.tutoring_graph = (
-            BoundedTutoringGraph(
+            graph_type(
                 retrieve=self._graph_retrieve,
                 generate=self._graph_generate,
                 fallback=self._graph_fallback,
             )
-            if self.tutoring_mode == TutoringMode.T1
+            if self.tutoring_mode in {TutoringMode.T1, TutoringMode.T1_V2}
             else None
         )
 
@@ -183,6 +200,7 @@ class StudentTutoringService:
         *,
         content: str,
         client_request_id: str,
+        responding_to_outreach_message_id: str | None = None,
     ) -> TutorTurn:
         content = content.strip()
         client_request_id = client_request_id.strip()
@@ -349,6 +367,15 @@ class StudentTutoringService:
             tutoring_intent=tutoring_intent,
             observed_at=now,
         )
+        autonomous_opportunity = self._autonomous_follow_up(
+            account_id=account_id,
+            conversation=conversation,
+            release=release,
+            tutor_message=tutor_message,
+            hits=hits,
+            learner_state=learner_state,
+            observed_at=now,
+        )
         try:
             self.repository.save_turn(
                 conversation,
@@ -359,6 +386,8 @@ class StudentTutoringService:
                 learner_state,
                 expected_learner_state_revision,
                 learning_gap_signal,
+                autonomous_opportunity,
+                responding_to_outreach_message_id,
             )
         except DuplicateTurnError:
             existing = self.repository.find_turn(conversation.id, client_request_id)
@@ -416,7 +445,7 @@ class StudentTutoringService:
         """Build a content-free T1 signal that commits atomically with the turn."""
 
         if (
-            self.tutoring_mode != TutoringMode.T1
+            self.tutoring_mode not in {TutoringMode.T1, TutoringMode.T1_V2}
             or self.learning_gap_pseudonymizer is None
             or learner_state is None
             or tutoring_intent is None
@@ -468,6 +497,118 @@ class StudentTutoringService:
             evidence_status=evidence_status,
             observed_at=observed_at,
         )
+
+    def _autonomous_follow_up(
+        self,
+        *,
+        account_id: str,
+        conversation: Conversation,
+        release: DigitalTwinRelease,
+        tutor_message: Message,
+        hits: list[RetrievalHit],
+        learner_state: LearnerState | None,
+        observed_at: str,
+    ) -> ProactiveOpportunityV1 | None:
+        """Create one A2 opportunity that commits atomically with the V2 turn."""
+
+        if (
+            self.tutoring_mode != TutoringMode.T1_V2
+            or learner_state is None
+            or learner_state.latest_signals is None
+            or not hits
+        ):
+            return None
+        policy = self.repository.get_autonomy_policy(conversation.course_id)
+        if (
+            policy is None
+            or not policy.autonomy_enabled
+            or policy.paused
+            or policy.kill_switch
+            or policy.version < 1
+            or policy.approved_profile_id != release.teaching_profile_id
+            or policy.approved_profile_sha256 != release.teaching_profile_sha256
+        ):
+            return None
+        signals = learner_state.latest_signals
+        if signals.misconception_observed:
+            event_kind = AutonomousEventKind.MISCONCEPTION
+        elif signals.confusion >= 0.7 and learner_state.help_level >= 2:
+            event_kind = AutonomousEventKind.REPEATED_CONFUSION
+        elif signals.attempt_present and not learner_state.objective_complete:
+            event_kind = AutonomousEventKind.INCOMPLETE_OBJECTIVE
+        else:
+            return None
+        goals = self.repository.list_autonomous_goals(
+            account_id, conversation.course_id, active_only=True
+        )
+        goal = goals[0] if goals else self._create_autonomous_goal(
+            account_id=account_id,
+            release=release,
+            policy=policy,
+            observed_at=observed_at,
+        )
+        if goal is None:
+            return None
+        instant = datetime.fromisoformat(observed_at).astimezone(UTC)
+        hit = hits[0]
+        return ProactiveOpportunityV1(
+            opportunity_id=f"autonomous-opportunity-{uuid4()}",
+            idempotency_key=f"turn-follow-up:{tutor_message.id}:{event_kind.value}",
+            event_kind=event_kind,
+            student_id=account_id,
+            course_id=conversation.course_id,
+            release_id=release.id,
+            policy_version=policy.version,
+            profile_id=policy.approved_profile_id,
+            profile_sha256=policy.approved_profile_sha256,
+            graph_version=GRAPH_VERSION,
+            planner_model=OPENAI_GPT_5_6_TERRA_MODEL,
+            generator_model=OPENAI_HIGH_VOLUME_MODEL,
+            goal_id=goal.goal_id,
+            supporting_observation_ids=[tutor_message.id],
+            concept_id=(
+                hit.chunk.source_artifact_id or hit.chunk.document_id
+            )[:128],
+            source_chunk_id=hit.chunk.id,
+            earliest_action_at=(instant + timedelta(hours=24)).isoformat(),
+            latest_action_at=(instant + timedelta(hours=48)).isoformat(),
+            created_at=observed_at,
+            updated_at=observed_at,
+        )
+
+    def _create_autonomous_goal(
+        self,
+        *,
+        account_id: str,
+        release: DigitalTwinRelease,
+        policy,
+        observed_at: str,
+    ) -> AutonomousGoalV1 | None:
+        if not policy.approved_course_objectives:
+            return None
+        instant = datetime.fromisoformat(observed_at).astimezone(UTC)
+        goal = AutonomousGoalV1(
+            goal_id=f"autonomous-goal-{uuid4()}",
+            student_id=account_id,
+            course_id=release.course_id,
+            release_id=release.id,
+            policy_version=policy.version,
+            profile_id=policy.approved_profile_id,
+            profile_sha256=policy.approved_profile_sha256,
+            graph_version=GRAPH_VERSION,
+            planner_model=OPENAI_GPT_5_6_TERRA_MODEL,
+            generator_model=OPENAI_HIGH_VOLUME_MODEL,
+            approved_course_objective=policy.approved_course_objectives[0],
+            learner_subgoal="Resolve the latest observed learning difficulty.",
+            success_condition="The learner explains the concept without escalating help.",
+            expires_at=(instant + timedelta(days=7)).isoformat(),
+            created_at=observed_at,
+            updated_at=observed_at,
+        )
+        try:
+            return self.repository.save_autonomous_goal(goal)
+        except ValueError:
+            return None
 
     def list_citations(self, account_id: str, message_id: str) -> list[Citation]:
         message = self.repository.get_message(message_id)

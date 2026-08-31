@@ -9,6 +9,10 @@ from src.digital_twin.student.models import (
     ProactiveTriggerKind,
     ReleaseEvaluationStatus,
 )
+from src.digital_twin.student.autonomy_models import (
+    AutonomousActionKind,
+    AutonomousEventKind,
+)
 from src.digital_twin.student.teaching_profile import TeachingProfileDepth
 from src.digital_twin.tutor_policy import (
     FieldStatus,
@@ -100,11 +104,18 @@ class CustomPreviewRequest(BaseModel):
 class StudentMessageRequest(BaseModel):
     content: str = Field(min_length=1, max_length=8_000)
     request_id: str = Field(min_length=1, max_length=128)
+    responding_to_outreach_message_id: str | None = Field(
+        default=None, min_length=1, max_length=128
+    )
 
-    @field_validator("request_id")
+    @field_validator("request_id", "responding_to_outreach_message_id")
     @classmethod
-    def required_text_must_be_nonblank(cls, value: str) -> str:
-        return _nonblank(value, "student request identifier")
+    def required_text_must_be_nonblank(cls, value: str | None) -> str | None:
+        return (
+            None
+            if value is None
+            else _nonblank(value, "student request identifier")
+        )
 
 
 class OutreachPreferenceRequest(BaseModel):
@@ -162,6 +173,36 @@ class LearningGapReviewRequest(BaseModel):
     proposal_id: str = Field(pattern=r"^[0-9a-f]{64}$")
     decision: str = Field(pattern=r"^(consider-for-next-release|dismissed)$")
     rationale: str = Field(default="", max_length=1_000)
+
+
+class AutonomyPolicyRequest(BaseModel):
+    approved_course_objectives: list[str] = Field(min_length=1, max_length=32)
+    allowed_actions: list[AutonomousActionKind] = Field(max_length=9)
+    autonomy_enabled: bool
+    paused: bool = False
+    kill_switch: bool = False
+
+
+class AutonomousGoalCreateRequest(BaseModel):
+    student_account_id: str = Field(min_length=1, max_length=128)
+    approved_course_objective: str = Field(min_length=1, max_length=500)
+    learner_subgoal: str = Field(min_length=1, max_length=500)
+    success_condition: str = Field(min_length=1, max_length=500)
+    expires_at: str = Field(min_length=1, max_length=64)
+    priority: int = Field(default=1, ge=1, le=5)
+    attempt_limit: int = Field(default=3, ge=1, le=10)
+
+
+class AutonomousOpportunityCreateRequest(BaseModel):
+    student_account_id: str = Field(min_length=1, max_length=128)
+    event_kind: AutonomousEventKind
+    earliest_action_at: str = Field(min_length=1, max_length=64)
+    latest_action_at: str = Field(min_length=1, max_length=64)
+    goal_id: str | None = Field(default=None, max_length=128)
+    concept_id: str | None = Field(default=None, max_length=128)
+    source_chunk_id: str | None = Field(default=None, max_length=256)
+    supporting_observation_ids: list[str] = Field(default_factory=list, max_length=16)
+    idempotency_key: str | None = Field(default=None, max_length=128)
 
 
 class ReleaseCreateRequest(BaseModel):

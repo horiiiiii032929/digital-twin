@@ -25,6 +25,7 @@ class TutoringMode(str):
 
     T0 = "grounded-assistant"
     T1 = "bounded-tutoring-graph"
+    T1_V2 = "governed-autonomous-tutoring-graph-v2.1"
 
 
 class TutoringIntent(str):
@@ -411,6 +412,13 @@ def initial_learner_state(conversation: Conversation) -> LearnerState:
         course_id=conversation.course_id,
         release_id=conversation.release_id,
     )
+
+
+class GovernedReactiveTutoringGraphV2(BoundedTutoringGraph):
+    """Reactive plane for V2.1; V1 remains an immutable historical control."""
+
+    implementation_id = "governed-reactive-tutoring-graph-v2.1"
+    recursion_limit = 12
 
 
 def _validation_failure(

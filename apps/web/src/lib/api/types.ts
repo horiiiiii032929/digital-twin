@@ -412,6 +412,98 @@ export type ProfessorProactiveTrigger = {
   updated_at: string
 }
 
+export type AutonomousActionKind =
+  | "ask-diagnostic-question"
+  | "provide-hint-or-example"
+  | "recommend-approved-source"
+  | "issue-retrieval-practice"
+  | "schedule-follow-up"
+  | "send-in-app-check-in"
+  | "summarize-progress"
+  | "create-professor-insight-draft"
+  | "no-action"
+
+export type PedagogicalPolicyV2 = {
+  schema_version: "2.1.0"
+  course_id: string
+  version: number
+  approved_by: string
+  approved_profile_id: string
+  approved_profile_sha256: string
+  approved_course_objectives: string[]
+  autonomy_enabled: boolean
+  paused: boolean
+  kill_switch: boolean
+  allowed_actions: AutonomousActionKind[]
+  max_active_goals: number
+  max_messages_per_7_days: number
+  same_concept_cooldown_hours: number
+  planning_calls_per_event: number
+  generation_calls_per_event: number
+  repair_calls_per_event: number
+  provider_retries: number
+  recursion_limit: number
+  integrity_ceiling: string
+  updated_at: string
+}
+
+export type AutonomousRecipientEligibilityV1 = {
+  schema_version: "1.0.0"
+  student_account_id: string
+  account_active: boolean
+  membership_active: boolean
+  consent_active: boolean
+  goal_eligible: boolean
+  outreach_eligible: boolean
+  ineligibility_reasons: string[]
+}
+
+export type AutonomousGoalV1 = {
+  schema_version: "1.0.0"
+  goal_id: string
+  student_id: string
+  course_id: string
+  release_id: string
+  policy_version: number
+  profile_id: string
+  profile_sha256: string
+  graph_version: string
+  planner_model: string
+  generator_model: string
+  approved_course_objective: string
+  learner_subgoal: string
+  success_condition: string
+  priority: number
+  attempt_limit: number
+  attempt_count: number
+  status: "active" | "completed" | "expired" | "cancelled"
+  expires_at: string
+  created_at: string
+  updated_at: string
+}
+
+export type AutonomousActionV1 = {
+  schema_version: "1.0.0"
+  action_id: string
+  plan_id: string
+  opportunity_id: string
+  goal_id?: string | null
+  student_id: string
+  course_id: string
+  release_id: string
+  policy_version: number
+  profile_sha256: string
+  graph_version: string
+  generator_model: string
+  kind: AutonomousActionKind
+  status: "proposed" | "delivered" | "suppressed" | "failed" | "cancelled"
+  proactive_trigger_id?: string | null
+  structured_reason: string
+  validation_results: Record<string, boolean>
+  created_at: string
+  updated_at: string
+}
+
 export type ReleasePreflightCheck = {
   id: string
   label: string

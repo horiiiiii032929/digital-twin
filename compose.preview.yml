@@ -66,7 +66,7 @@ services:
 
   outreach-worker:
     image: digital-twin-api:${APP_IMAGE_TAG:-r1-preview}
-    command: [python, -m, scripts.proactive_outreach_worker]
+    command: [python, -m, scripts.autonomous_tutoring_worker]
     environment: *runtime-environment
     init: true
     read_only: true

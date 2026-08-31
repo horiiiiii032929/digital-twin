@@ -1,5 +1,6 @@
 import { ApiError, pathSegment } from "@/lib/api/client"
 import type {
+  AutonomousGoalV1,
   StudentCitation,
   StudentConversation,
   StudentConversationView,
@@ -38,6 +39,16 @@ export function listStudentCourses(
   return studentRequest<StudentCourse[]>("/api/student/courses", {
     headers: studentHeaders(accountId),
   })
+}
+
+export function listStudentAutonomousGoals(
+  courseId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<AutonomousGoalV1[]> {
+  return studentRequest<AutonomousGoalV1[]>(
+    `/api/student/courses/${pathSegment(courseId)}/autonomous-goals`,
+    { headers: studentHeaders(accountId) },
+  )
 }
 
 export function listStudentOutreach(
@@ -129,13 +140,20 @@ export function submitStudentMessage(
   content: string,
   requestId: string,
   accountId = STUDENT_ACCOUNT_ID,
+  respondingToOutreachMessageId?: string,
 ): Promise<StudentTutorTurn> {
   return studentRequest<StudentTutorTurn>(
     `/api/student/conversations/${pathSegment(conversationId)}/messages`,
     {
       method: "POST",
       headers: studentHeaders(accountId),
-      body: JSON.stringify({ content, request_id: requestId }),
+      body: JSON.stringify({
+        content,
+        request_id: requestId,
+        ...(respondingToOutreachMessageId
+          ? { responding_to_outreach_message_id: respondingToOutreachMessageId }
+          : {}),
+      }),
     },
   )
 }
