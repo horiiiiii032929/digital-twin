@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7c20c9f473708a0975aa519843eddc4c61b63a1568ad72f88be0e7e465b433a4",
+  "record_sha256": "00d379730007649a5df3d481b504013e5363d96b0f65ded5c71393f260a9af75",
   "records": [
     {
       "audit": {
@@ -5048,10 +5048,10 @@
     {
       "audit": {
         "domain": "atomic-m2-actual-product-checkpoint",
-        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case isolation, no gold dependency, and exact cached API-embedding batch/token bindings.",
+        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case isolation, no gold dependency, exact cached API-embedding bindings, and an explicit v2-action-router adapter identity for successor manifests.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-product-checkpoint-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #153 adapter-contract review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5059,7 +5059,7 @@
       "package_commands": [],
       "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
       "risk": "high",
-      "sha256": "4bd44825b16733332c2d756ed9b5cd820c171c5a8624d507137d4b097e93256e"
+      "sha256": "67bcfc5771fb8d35be7562de079c10a68e0e01fa372cf80a01a1788fd7b5ca3c"
     },
     {
       "audit": {
@@ -5576,10 +5576,10 @@
     {
       "audit": {
         "domain": "grounding-selection-002",
-        "evidence": "Builder review verified typed direct first-party binding identities, unchanged 500+100 packages, two-canary ordering, USD 50 absolute stop, and sealed-final exclusion.",
+        "evidence": "Builder review verified typed direct first-party binding identities, unchanged 500+100 packages, two-canary ordering, USD 50 absolute stop, sealed-final exclusion, and pre-provider equality between both frozen manifests and the v2 action-router adapter contract.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #153 finite grounding-selection audit"
+        "reviewer": "Codex #153 adapter-contract review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5587,7 +5587,7 @@
       "package_commands": [],
       "path": "scripts/build_academic_factual_qa_grounding_selection_002.py",
       "risk": "high",
-      "sha256": "ea301bcefb079d2e6e89c8a94c582dca36b947501836315e06986f79f357fe0d"
+      "sha256": "e1f25be79adb9d1b6b70a2bedd2c895c18f36671bb4e64f72caa69a9f91de456"
     },
     {
       "audit": {
@@ -11914,10 +11914,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests cover exact 500+100 identities, executable direct transport construction, final attempt identity, revoked preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
+        "evidence": "Focused tests cover exact 500+100 identities, explicit v2 action-router adapter selection, pre-provider manifest-drift rejection, executable direct transport construction, revoked preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #153 finite grounding-selection audit"
+        "reviewer": "Codex #153 adapter-contract review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11925,7 +11925,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
       "risk": "medium",
-      "sha256": "e5491784f1f1b00a3f96b9b1bab35e0ac6289914eaf79c3879ae7eb41209fc22"
+      "sha256": "f0d1e23dc01c1f5eb9cbafeb0697762e50e9b7bfa9347a573137a9a5fe3c3e68"
     },
     {
       "audit": {

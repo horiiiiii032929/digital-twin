@@ -68,6 +68,19 @@ class AtomicM2ProductAdapterError(RuntimeError):
     """Raised when the selected retrieval/product boundary drifts."""
 
 
+ACTION_ROUTER_ADAPTER_VERSION = "v2-action-router"
+
+
+class _ActionRouterProductAdapterV2(base._ManagedAdapter):  # noqa: SLF001
+    """Identity-bearing adapter for the action-router product successor."""
+
+    adapter_version = ACTION_ROUTER_ADAPTER_VERSION
+
+
+def _adapter_type(*, successor: bool) -> type[base._ManagedAdapter]:  # noqa: SLF001
+    return _ActionRouterProductAdapterV2 if successor else base._ManagedAdapter
+
+
 def _load_hashed(path: Path) -> dict[str, Any]:
     payload = json.loads(path.read_text(encoding="utf-8"))
     expected = canonical_json_sha256(
@@ -381,7 +394,7 @@ def build_atomic_m2_t0_adapter(
             for claim in answer.atomic_claims
         ]
 
-    return base._ManagedAdapter(  # noqa: SLF001
+    return _adapter_type(successor=successor)(
         flow_id=manifest.flow_id,
         execute_turn=execute_turn,
         resolve_citation=resolve_citation,

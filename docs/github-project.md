@@ -161,6 +161,12 @@ professor-communication track.
    their platform/fidelity dependencies clear.
 8. #10 — approval-gated professor/student workflow and usability pilot.
 
+The critical path follows the finite
+[software improvement loop](software-improvement-loop.md). An operationally
+invalid run may receive only a preregistered harness correction; a valid quality
+failure creates one causal, method-level successor on fresh development data.
+No iteration tunes against or reruns a sealed confirmation package.
+
 Issue #87 is completed historical method-building work. Issues #85 and #86 are
 completed `Refine` history. Issue #110 is complete only as a 10,000-row
 engineering pipeline-scale milestone; analysis correction 001 prevents it from

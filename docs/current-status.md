@@ -33,6 +33,15 @@ paid/provider authority is revoked. It did not reopen or rerun Program 011's
 sealed 10,000+1,000 package. Both permitted attempts stopped before provider
 I/O, so no new grounding or autonomy quality claim exists.
 
+AFQC-142 now establishes a finite software-wide improvement loop. The first
+integration correction gives the action-router product adapter an explicit
+`v2-action-router` identity and validates both manifests against it before
+provider construction. A deliberately drifted manifest fails closed; focused
+tests pass 10/10 and the complete gate passes Python 1,443, frontend 50,
+inventory 827/827, and freeze 121/121. This corrects the overstated historical
+build-readiness interpretation but does not create a third attempt or a quality
+result. The next evaluation must use a separately versioned #153 successor.
+
 Execution attempt 001 stopped before provider I/O because the pinned direct
 OpenAI binding omitted the transport's first-party declaration; the orthogonal
 local regression also named two moved test files. The invalid result records
