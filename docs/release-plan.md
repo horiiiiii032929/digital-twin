@@ -12,10 +12,13 @@ results.
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,
 publish, update, withdraw, and roll back, and that authorized students can use
-for autonomous, persistent, citation-grounded tutoring. The accepted
-[autonomous tutoring graph](autonomous-tutoring-graph.md) is the student-facing
-method: code controls the bounded graph while models interpret learner state
-and generate natural responses inside approved evidence and policy boundaries.
+for autonomous, persistent, citation-grounded tutoring. The provisional
+[autonomous tutoring loop V2.1](autonomous-tutoring-loop-v2.md) is the
+prospective student-facing method: code controls the bounded graph and owns
+learner-belief updates, while models propose interpretations, teaching moves,
+and natural responses inside approved evidence and pedagogical-policy
+boundaries. The [V1 graph](autonomous-tutoring-graph.md) remains the historical
+T1-v1 control and T0 remains the immediate release rollback.
 The accepted [proactive outreach design](proactive-outreach.md) adds a separate
 asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates

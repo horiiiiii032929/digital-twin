@@ -1236,7 +1236,9 @@ study.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the
-student-facing architecture decision on 2026-08-21. The existing student
+student-facing architecture decision on 2026-08-21. It is now the historical
+T1-v1 design; prospective implementation follows the provisional
+[V2.1 architecture](autonomous-tutoring-loop-v2.md). The existing student
 workflow is now named as the T0 grounded control. The build-only T1 successor
 now adds a typed learner-state contract, deterministic pedagogical-intent
 selection, a fixed LangGraph path, one-repair maximum, deterministic fallback,

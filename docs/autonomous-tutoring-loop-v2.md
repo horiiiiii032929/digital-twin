@@ -1,8 +1,10 @@
-# Autonomous tutoring loop V2
+# Autonomous tutoring loop V2.1
 
 Date: 2026-08-31
 
 Decision ID: `autonomous-tutoring-loop-002`
+
+Amendment ID: `autonomous-tutoring-loop-002-best-practice-amendment-001`
 
 Status: provisional reference architecture, amended by the best-practice audit;
 not selected for release; no new provider, paid, private-data, human-study, or
@@ -14,6 +16,13 @@ Research basis:
 [`2026-08-31-autonomous-tutoring-loop-and-evaluation`](../research/01_literature/2026-08-31-autonomous-tutoring-loop-and-evaluation.md)
 and
 [`2026-08-31-autonomous-tutor-best-practice-audit`](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
+
+## Document role
+
+This is the single implementation-facing prospective architecture for the
+autonomous tutor. The best-practice audit above is its evidence and alternatives
+record. The predecessor and earlier research notes remain historical evidence;
+they do not override V2.1 model ownership, contracts, or evaluation boundaries.
 
 ## Decision
 

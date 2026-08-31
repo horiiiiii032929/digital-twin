@@ -17,13 +17,16 @@ Deliver a deployed, invite-only Course Digital Twin that a real professor can
 configure and publish and that authorized students can use for autonomous,
 persistent, citation-grounded tutoring.
 
-The accepted
-[autonomous tutoring graph](../../docs/autonomous-tutoring-graph.md) defines the
-student-facing product method. A published Digital Twin autonomously traces a
-bounded learner state, retrieves approved evidence, chooses a pedagogical move,
-responds, verifies the response, and adapts on the next turn. The professor
-governs the published policy and consequential updates but does not approve
-normal student responses turn by turn.
+The provisional
+[autonomous tutoring loop V2.1](../../docs/autonomous-tutoring-loop-v2.md)
+defines the prospective student-facing product method. The existing
+[autonomous tutoring graph V1](../../docs/autonomous-tutoring-graph.md) remains
+the historical local T1-v1 control. A published Digital Twin autonomously
+interprets observations, updates an application-owned learner belief, retrieves
+approved evidence, chooses a move permitted by the professor-approved
+pedagogical policy, realizes and verifies the response, and adapts on the next
+turn. The professor governs policy and consequential updates but does not
+approve normal student responses turn by turn.
 
 The 2026-08-27
 [proactive outreach amendment](../../docs/proactive-outreach.md) makes
