@@ -261,7 +261,7 @@ def validate() -> dict[str, Any]:
         raise GroundingSelectionExecutionError("exact OpenAI binding drifted")
     return {
         **build,
-        "status": "passed-build-only",
+        "status": build["status"],
         "maximum_canary_calls": 2,
         "maximum_product_calls": 600,
         "maximum_total_calls": 602,

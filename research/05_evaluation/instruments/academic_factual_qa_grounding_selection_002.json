@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-grounding-selection-002",
-  "status": "reviewed-build-only",
+  "status": "frozen-pending-execution",
   "binding_id": "academic-factual-qa-grounding-selection-openai-binding-002",
   "owner_issue": 153,
   "decision_question": "Does the deterministic pre-generation router plus targeted atomic evidence selection pass the frozen factual grounding gates against the structured-evidence control?",
@@ -41,7 +41,7 @@
     "hidden_gold_after_both_response_ledgers": true,
     "maximum_harness_corrections": 1,
     "harness_corrections_used": 0,
-    "automatic_progression": false,
+    "automatic_progression": true,
     "canary_case_ids": [
       "academic-action-router-dev-0001-q1",
       "academic-action-router-dev-0003-q1"
@@ -74,5 +74,5 @@
     "visual_evaluation": "separate",
     "one_valid_quality_decision_only": true
   },
-  "content_sha256": "beb2dc7b26f5112f449af7d3351b180bcb90e9863546648b41d504395f0c2dfe"
+  "content_sha256": "2a572a5963e4a7639d35a93fd36c1816da2c0358848f8a8a3cdd2a04eac0badb"
 }

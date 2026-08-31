@@ -161,15 +161,22 @@ def validate() -> dict[str, object]:
         raise GroundingSelectionBuildError(
             "instrument/provider binding identity drifted"
         )
-    if any(
-        (
-            binding.authorization.provider_execution_authorized,
-            binding.authorization.paid_execution_authorized,
-            binding.authorization.final_execution_authorized,
-        )
-    ):
+    authorization_values = (
+        binding.authorization.provider_execution_authorized,
+        binding.authorization.paid_execution_authorized,
+        binding.authorization.final_execution_authorized,
+    )
+    if instrument.status == "reviewed-build-only" and any(authorization_values):
         raise GroundingSelectionBuildError(
             "build-only checkpoint gained execution authority"
+        )
+    if instrument.status == "frozen-pending-execution" and authorization_values != (
+        True,
+        True,
+        False,
+    ):
+        raise GroundingSelectionBuildError(
+            "frozen checkpoint requires exact bounded development authority"
         )
     execution = instrument.execution
     if (
@@ -224,13 +231,19 @@ def validate() -> dict[str, object]:
         raise GroundingSelectionBuildError("historical retrieval runtime drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-build-only",
+        "status": (
+            "passed-frozen-pending-execution"
+            if instrument.status == "frozen-pending-execution"
+            else "passed-build-only"
+        ),
         "candidate_case_count": 500,
         "control_case_count": 100,
         "binding_id": binding.binding_id,
         "metadata_status": binding.metadata_status,
-        "provider_execution_authorized": False,
-        "paid_execution_authorized": False,
+        "provider_execution_authorized": (
+            binding.authorization.provider_execution_authorized
+        ),
+        "paid_execution_authorized": binding.authorization.paid_execution_authorized,
         "historical_retrieval_runtime_available": RETRIEVAL_RUNTIME.is_file(),
         "historical_retrieval_runtime_sha256": (
             _file_sha256(RETRIEVAL_RUNTIME) if RETRIEVAL_RUNTIME.is_file() else None

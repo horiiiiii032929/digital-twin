@@ -453,10 +453,13 @@ def validate() -> dict[str, Any]:
     instrument = json.loads(INSTRUMENT.read_text(encoding="utf-8"))
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise ValueError("actual-product evaluation instrument identity drifted")
-    if instrument.get("status") != "reviewed-build-only":
-        raise ValueError("actual-product evaluation is not build-only")
+    if instrument.get("status") not in {
+        "reviewed-build-only",
+        "frozen-pending-execution",
+    }:
+        raise ValueError("actual-product evaluation status is invalid")
     authority = instrument["authority"]
-    if any(
+    if instrument["status"] == "reviewed-build-only" and any(
         authority[key]
         for key in (
             "provider_execution_authorized",
@@ -465,6 +468,12 @@ def validate() -> dict[str, Any]:
         )
     ):
         raise ValueError("actual-product build gained execution authority")
+    if instrument["status"] == "frozen-pending-execution" and (
+        authority["provider_execution_authorized"] is not True
+        or authority["paid_execution_authorized"] is not True
+        or authority["automatic_promotion"] is not False
+    ):
+        raise ValueError("actual-product frozen authority drifted")
     contract = build_contract()
     case_ids = [case.case_id for _condition, case, _gold in contract]
     gold_ids = [gold.case_id for _condition, _case, gold in contract]
@@ -498,7 +507,11 @@ def validate() -> dict[str, Any]:
         raise ValueError("source-disjoint template coverage drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-build-only",
+        "status": (
+            "passed-frozen-pending-execution"
+            if instrument["status"] == "frozen-pending-execution"
+            else "passed-build-only"
+        ),
         "case_count": 820,
         "trajectory_case_count": 600,
         "long_horizon_case_count": 100,
@@ -506,8 +519,10 @@ def validate() -> dict[str, Any]:
         "source_template_count": 50,
         "public_sha256": public["content_sha256"],
         "hidden_gold_sha256": hidden["content_sha256"],
-        "provider_execution_authorized": False,
-        "paid_execution_authorized": False,
+        "provider_execution_authorized": authority[
+            "provider_execution_authorized"
+        ],
+        "paid_execution_authorized": authority["paid_execution_authorized"],
         "provider_calls": 0,
     }
 

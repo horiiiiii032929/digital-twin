@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-autonomous-long-run-001-build",
+  "component": "conversation-orchestration",
+  "dataset_id": "grounding-selection-500-plus-100-and-autonomy-820-v1",
+  "corpus_id": "public-open-and-public-synthetic-course-sources",
+  "code_revision": "72df9e8315c92e52e0298b55ad57f87fae2b37f9",
+  "dirty_state": true,
+  "instrument_sha256": "b4e80b3e0e16610942d579cf31a9a5d2e6c191001c44dd3a11b0f91dc1afb2e5",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "manual-stage-authorization-and-publication-control",
+        "version": "historical",
+        "configuration": {
+          "automatic_stage_progression": false,
+          "additional_stage_authorization_required": true,
+          "durable_parent_resume_ledger": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "focused-tests-passed",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 14.0,
+          "passed": false
+        },
+        {
+          "name": "network-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "finite-stage-progression",
+          "passed": false,
+          "evidence": "The historical workflow required repeated manual authorization and did not own one parent resume ledger."
+        },
+        {
+          "name": "known-final-preservation",
+          "passed": true,
+          "evidence": "The historical workflow also preserved Program 011 as immutable evidence."
+        },
+        {
+          "name": "bounded-authority",
+          "passed": false,
+          "evidence": "The historical workflow used multiple child authority checkpoints rather than one bounded parent program."
+        }
+      ],
+      "failures_by_category": {
+        "manual-stop-boundaries": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "finite-autonomous-long-run-controller-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "stage_count": 4,
+          "global_emergency_cost_usd": 200.0,
+          "automatic_stage_progression": true,
+          "additional_stage_authorization_required": false,
+          "same_case_quality_rerun_allowed": false,
+          "known_10000_plus_1000_rerun": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "focused-tests-passed",
+          "value": 14.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 14.0,
+          "passed": true
+        },
+        {
+          "name": "network-calls",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "finite-stage-progression",
+          "passed": true,
+          "evidence": "A valid grounding Refine skips dependent autonomy while local regression and publication continue."
+        },
+        {
+          "name": "known-final-preservation",
+          "passed": true,
+          "evidence": "Program 011 remains immutable known evidence and is not quality-rerun."
+        },
+        {
+          "name": "bounded-authority",
+          "passed": true,
+          "evidence": "Parent and child operations are exact repository-freeze entries under one USD 200 ceiling."
+        }
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "finite-autonomous-long-run-controller-v1",
+    "rationale": "Use one durable execution authority and SQLite ledger to reach a valid grounding/autonomy decision and final publication without repeated approval pauses.",
+    "limitations": [
+      "This build checkpoint made no provider call and establishes no quality claim.",
+      "Real professor and real student evidence remain separate.",
+      "Non-removable safety and cost hard stops remain active."
+    ]
+  }
+}

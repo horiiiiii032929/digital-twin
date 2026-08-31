@@ -28,6 +28,16 @@ not pass. Program 011 used USD 39.14017165; cumulative spend across programs
 008–011 was USD 43.43751328 under the authorized USD 50 ceiling. All paid
 authority is revoked.
 
+Successor `course-digital-twin-autonomous-long-run-001` is separately frozen
+under one repository-owner authorization and a USD 200 emergency stop. It does
+not reopen or rerun Program 011's sealed 10,000+1,000 package. It first runs
+#153's fresh 500+100 grounding selection. A valid Keep automatically opens the
+provider-backed 820-case #157 autonomy evaluation; a valid Refine skips that
+dependent stage while local release regression and final evidence publication
+continue. No additional per-stage authorization is required. Privacy, gold
+isolation, exact model identity, ledger integrity, wrong-scope delivery,
+bounded-loop, and cost stops remain fail-closed.
+
 Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
 evidence. Issue #153 is the active P0 and owns one method-level action-router
 and grounding successor on fresh development evidence. The sealed final set
@@ -155,13 +165,14 @@ student, autonomy, outreach, SQLite, LangGraph checkpoint, outbox, and delivery
 paths. This is infrastructure and deterministic-fallback evidence only, not
 provider-backed quality or V2.1 promotion evidence.
 
-Issue #153 now has a separately frozen build-only successor,
+Issue #153 now has a separately frozen and authorized successor,
 `academic-factual-qa-grounding-selection-002`, for one 500 candidate plus fixed
 100 control decision. Its typed run binding closes the historical missing
 `binding_id` and array-order failure classes; two canaries precede bulk calls,
 responses bind by case ID, and hidden gold opens only after both ledgers are
-durable. Five finite simulations pass. Provider metadata is intentionally
-refresh-required and execution remains unauthorized. A valid `Keep` is required
+durable. Five finite simulations pass. Official GPT-5.4 mini metadata and
+pricing were refreshed on 2026-09-01 and the exact run is covered by the
+long-run authority. A valid `Keep` is required
 before the provider-backed 820-case run may start; a valid `Refine` stops #157.
 
 GitHub tracks the remaining evidence path explicitly: #153 remains
@@ -170,8 +181,8 @@ software-and-provider-integration milestone and moves to `Done / Keep`; it does
 not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
-remains open. The execution freeze is active again with no provider checkpoint
-authorized. Repository correctness is 824/824 audited execution-relevant files
+remains open. The execution freeze remains active with only the three exact
+long-run parent/child operations authorized. Repository correctness is 827/827 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

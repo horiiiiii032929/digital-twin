@@ -2,8 +2,8 @@
   "schema_version": 1,
   "binding_id": "academic-factual-qa-grounding-selection-openai-binding-002",
   "instrument_id": "academic-factual-qa-grounding-selection-002",
-  "metadata_status": "refresh-required",
-  "verified_at": null,
+  "metadata_status": "fresh",
+  "verified_at": "2026-09-01T01:10:43+08:00",
   "freshness_hours": 24,
   "official_sources": [
     "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
@@ -27,9 +27,9 @@
     }
   },
   "authorization": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "6387186c7941a7cf7b41532a87ceafdb7b8e9087c2aabb71ce7efdb87de259c6"
+  "content_sha256": "3debca43846b76714a4e5d06f40482b40c4fdef8f9aa6b4bc76e79fbcd4bfd12"
 }

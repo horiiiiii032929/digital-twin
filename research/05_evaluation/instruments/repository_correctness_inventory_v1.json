@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 824
+    "audited": 827
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 190,
+    "active_or_unclassified_tooling": 191,
     "active_runtime": 137,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 219,
+    "evaluation_configuration": 220,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 177
+    "verification": 178
   },
-  "file_count": 824,
+  "file_count": 827,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3c25c65ef26a387ab7b909d138a7ee3a659471ed5698505d2dcdc942c5856930",
+  "record_sha256": "5296fff31711b1b428b560518421c924965476b527c361e409a0eda5542a1fa5",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "e93665b2b10c0cb8d1d97d8a943e78ba1ef734dadc9cd17ddbac606d52d4c026"
+      "sha256": "8c468a624155f4a9b95beda5233cf84c4341d88e0bcc2735b6f031ba6702c6b5"
     },
     {
       "audit": {
@@ -2003,7 +2003,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_002.json",
       "risk": "high",
-      "sha256": "9dc562ef220d08ad20114942eeff69a2b06d69d9b0e912c62032a28b0c82af8b"
+      "sha256": "d613b8b6d7debe30967a53d962165a2b7a33a26139201b316e880c804a06242b"
     },
     {
       "audit": {
@@ -2051,7 +2051,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_openai_binding_002.json",
       "risk": "high",
-      "sha256": "7119e3bff9372fc0b9b088878a76d60d33527454f428eed40a42be9e260c47eb"
+      "sha256": "5ccca7e1311ce8bdf886e525ee625ea87849f1bc67add8fa559de7e3f4a28ed4"
     },
     {
       "audit": {
@@ -3060,6 +3060,22 @@
       "path": "research/05_evaluation/instruments/autonomous_tutoring_r1_confirmation_002.json",
       "risk": "high",
       "sha256": "744d91d41736c1cd244203549e1903c2ee360f5b5da25a4b9c68fd711704a6e9"
+    },
+    {
+      "audit": {
+        "domain": "autonomous-long-run-001",
+        "evidence": "Manifest review verified one owner authority, four finite stages, a USD 200 emergency stop, exact dependency progression, immutable Program 011 reference evidence, and prohibition of same-case quality reruns.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex finite long-run audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_autonomous_long_run_001.json",
+      "risk": "high",
+      "sha256": "b4e80b3e0e16610942d579cf31a9a5d2e6c191001c44dd3a11b0f91dc1afb2e5"
     },
     {
       "audit": {
@@ -4083,7 +4099,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_002.json",
       "risk": "high",
-      "sha256": "05a1187eee2697b11308a12d9bd1e778c259f7276c2246bbc82e30f711a83661"
+      "sha256": "a8d46f24a5451cfa1790637ab9d5bec5d0612bcc4842c0ffbec13cff8500d683"
     },
     {
       "audit": {
@@ -5571,7 +5587,7 @@
       "package_commands": [],
       "path": "scripts/build_academic_factual_qa_grounding_selection_002.py",
       "risk": "high",
-      "sha256": "f39f2e7fcc571511504338f76381f5904769b1752cadc76248cf16e5a5a65e05"
+      "sha256": "387235d8610d268afd12a955f8db4e2a1f0d73bee0f31ff2512632306c125536"
     },
     {
       "audit": {
@@ -5908,7 +5924,7 @@
       "package_commands": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "4e1ea0b5f3797ff1e9f67db959c56d68c383c0fbf4acac83c6c8edd6153a0c0b"
+      "sha256": "c1089b23a8022037d1da6bd0146707ab57a9e6fb119a1c4d4ea5ebd8ad656a0e"
     },
     {
       "audit": {
@@ -6835,7 +6851,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_grounding_selection_002.py",
       "risk": "high",
-      "sha256": "bfdd54ffeed645cffbe263501318c2c20943dc888e4a3174910ab39a3904bb09"
+      "sha256": "8ad119f937b5462e63d092727977f7468e58c4997482ce227b7e6aae8f12edb6"
     },
     {
       "audit": {
@@ -7387,6 +7403,28 @@
     },
     {
       "audit": {
+        "domain": "autonomous-long-run-001",
+        "evidence": "Runner review verified manifest/revision-bound SQLite resume, read-only recovery of terminal child results after interruption, exact child execution, cost aggregation, dependency skip, orthogonal release continuation, historical-evidence synthesis, and professor-message publication.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex finite long-run audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:autonomous-long-run-001",
+        "preflight:autonomous-long-run-001",
+        "resume:autonomous-long-run-001",
+        "simulate:autonomous-long-run-001",
+        "validate:autonomous-long-run-001"
+      ],
+      "path": "scripts/run_course_digital_twin_autonomous_long_run_001.py",
+      "risk": "high",
+      "sha256": "bbb32d7c8f2a2dd2dd0e410682bf07b18e81c1118137ccd0af53f2b15ec4e814"
+    },
+    {
+      "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Entrypoint review verified source, dataset, model-policy, metadata-freshness, p99 projection, credential, local-index, renderer, executor, output-exclusivity, and repository-freeze checks make zero provider calls and fail closed.",
         "findings": [],
@@ -7859,7 +7897,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "f36881915628417d583e8bca3dd627071ae13badd709f80bc7702848214e7b18"
+      "sha256": "901ed8e3f1ad4adc8bd813540d6de49b79f4dff903047683c263faeaa66588bb"
     },
     {
       "audit": {
@@ -10735,7 +10773,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "04a32a1445438efdc2a0168568505824ed2184769c60bbc38deedc5b38520ce1"
+      "sha256": "3cbc9ed376306b666033e04d5bc871a4d007b4daf1083b86c89f977baf05dffa"
     },
     {
       "audit": {
@@ -11439,7 +11477,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "ddf9734125d550651e413831792cb98d39e7e998729261d45972696e78ee680d"
+      "sha256": "2f5a7dabe409871cd0defbd8b49da65eda94e390dbf646cb6eaa8f35c2916b21"
     },
     {
       "audit": {
@@ -11887,7 +11925,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
       "risk": "medium",
-      "sha256": "fa197bb1c9113e8ccd3b7bb9d988bf83c10b8f07f3c5c152f15c90c0f184548e"
+      "sha256": "579d219470e9bf1c650a5ef193903249cc4d6ccdcde3c7239e2c0b358f01a737"
     },
     {
       "audit": {
@@ -12611,6 +12649,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify the finite stage count, global budget, known-final preservation, dependency stop, publication continuation, zero-network simulation, and read-only parent-ledger stage recovery.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex finite long-run audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_autonomous_long_run_001.py",
+      "risk": "medium",
+      "sha256": "9ef7bf786f8109a25c08105c3ef3520d991c447a8ad5f345d6c0aba1fd3574ee"
+    },
+    {
+      "audit": {
         "domain": "api-first-finite-evaluation-program-verification",
         "evidence": "Tests validate terminal program-004 authority revocation, explicit reranker exclusion, paid-index reuse, network-free product scoring, and embedding-batch failure accounting.",
         "findings": [],
@@ -13103,7 +13157,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "medium",
-      "sha256": "958d188c4f62223dc4587b8b43e3c7cc0521331fc6ec4baac93e8186ac1c2c89"
+      "sha256": "011658e6cef466af851a772104c73d7ef743280337425cbf340680aa436524de"
     },
     {
       "audit": {
@@ -13859,8 +13913,8 @@
     }
   ],
   "risk_counts": {
-    "high": 633,
-    "medium": 191
+    "high": 635,
+    "medium": 192
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

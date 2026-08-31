@@ -1028,6 +1028,14 @@ Current utilities:
   result. Paid Terra/mini execution remains blocked by #153, fresh metadata,
   freeze authorization, and a separate checkpoint authorization. Commands use
   the `governed-autonomy-v2-1-actual-product-evaluation-002` suffix.
+- `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
+  authority finite controller for the remaining #153/#157 path. It runs the
+  frozen 500+100 grounding decision, conditionally opens the provider-backed
+  820-case autonomy stage only after Keep, always reruns the local release
+  regression, and publishes a professor-ready checkpoint. Its SQLite ledger is
+  revision- and manifest-bound and can resume after interruption. It references
+  but never quality-reruns Program 011's sealed 10,000+1,000 evidence. Use the
+  package commands ending in `autonomous-long-run-001`.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The
