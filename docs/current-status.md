@@ -24,6 +24,12 @@ between rounds. Twenty-seven duplicate questions were excluded and retained by
 ID in the freeze manifest; public cases and hidden gold remain physically
 separate. The fresh 1,000-case confirmation is still unopened.
 
+Round 1 is now build-only qualified over the 495-case first fold. It compares
+the current lexical/any-hit control, an evidence-first hierarchical design, and
+a plan-observe/event-sourced design. All candidates bind 13/13 architecture
+planes; the 12-case network-free simulation passed with zero calls/cost. No
+candidate is selected until the one full Round 1 execution is recorded.
+
 The initial causal audit
 identifies the dominant structural defect as the action -> evidence -> claim ->
 citation contract, not missing autonomy plumbing. Round 1 will compare the
@@ -65,7 +71,7 @@ integration correction gives the action-router product adapter an explicit
 `v2-action-router` identity and validates both manifests against it before
 provider construction. A deliberately drifted manifest fails closed; focused
 tests pass 10/10 and the complete gate passes Python 1,443, frontend 50,
-inventory 834/834, and freeze 121/121. This corrects the overstated historical
+inventory 839/839, and freeze 123/123. This corrects the overstated historical
 build-readiness interpretation but does not create a third attempt or a quality
 result. The next evaluation must use a separately versioned #153 successor.
 
@@ -224,7 +230,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 834/834 audited execution-relevant files
+long-run operation authorized. Repository correctness is 839/839 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

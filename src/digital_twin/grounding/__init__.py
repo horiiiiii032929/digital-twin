@@ -156,6 +156,11 @@ from src.digital_twin.grounding.hierarchical_retrieval import (
     should_use_semantic_reranking,
     structured_tokens,
 )
+from src.digital_twin.grounding.plan_observe_retrieval import (
+    PlanObserveRetrieverV1,
+    PlanObserveRetrievalTraceV1,
+    decompose_evidence_queries,
+)
 
 
 __all__ = [
@@ -218,6 +223,8 @@ __all__ = [
     "ModalityAwareRegionRetriever",
     "SecondaryRetrieverAgreementGate",
     "ParsedDocumentBundle",
+    "PlanObserveRetrieverV1",
+    "PlanObserveRetrievalTraceV1",
     "OCRProvider",
     "OCRTextRegion",
     "NliProbabilities",
@@ -288,4 +295,5 @@ __all__ = [
     "load_retrieval_benchmark_corpus",
     "source_artifact_from_path",
     "structured_tokens",
+    "decompose_evidence_queries",
 ]

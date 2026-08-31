@@ -18,6 +18,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.factual_qa_dataset import normalize_question
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
+from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -293,6 +294,8 @@ def main() -> int:
     mode.add_argument("--write", action="store_true")
     mode.add_argument("--check", action="store_true")
     args = parser.parse_args()
+    if args.write:
+        require_bounded_pilot_operation_allowed(FREEZE_ID, "dataset_generation")
     result = write() if args.write else check()
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0

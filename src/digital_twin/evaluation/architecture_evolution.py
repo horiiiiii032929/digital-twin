@@ -205,6 +205,77 @@ class ArchitectureDevelopmentFreezeV1(BaseModel):
         return self
 
 
+class ArchitectureSystemManifestV1(BaseModel):
+    """Flow-independent architecture identity used by every comparison."""
+
+    schema_version: Literal[1]
+    architecture_id: str
+    version: str = Field(min_length=1)
+    role: Literal["baseline", "candidate", "winner"]
+    plane_bindings: dict[ArchitecturePlane, str]
+    factual_adapter: str = Field(min_length=1)
+    autonomy_adapter: str = Field(min_length=1)
+    rollback_architecture_id: str | None = None
+    public_question_only_planning: bool
+    hidden_gold_available_to_runtime: Literal[False]
+    deterministic_policy_authoritative: Literal[True]
+    deterministic_source_truth_authoritative: Literal[True]
+    provider_execution_authorized: bool
+
+    @model_validator(mode="after")
+    def every_plane_is_bound(self) -> "ArchitectureSystemManifestV1":
+        if not _IDENTIFIER_PATTERN.fullmatch(self.architecture_id):
+            raise ValueError("architecture ID must use lowercase kebab-case")
+        if set(self.plane_bindings) != set(ArchitecturePlane):
+            raise ValueError("architecture manifest must bind every system plane")
+        if any(not value.strip() for value in self.plane_bindings.values()):
+            raise ValueError("architecture plane bindings cannot be blank")
+        if self.rollback_architecture_id is not None and not _IDENTIFIER_PATTERN.fullmatch(
+            self.rollback_architecture_id
+        ):
+            raise ValueError("rollback architecture ID must use lowercase kebab-case")
+        return self
+
+
+class ArchitectureRoundInstrumentV1(BaseModel):
+    schema_version: Literal[1]
+    instrument_id: str
+    program_id: str
+    round_number: int = Field(ge=1, le=3)
+    status: Literal["frozen-network-free", "completed"]
+    development_freeze: BoundArtifactV1
+    development_tranche_id: str
+    candidates: list[ArchitectureSystemManifestV1] = Field(min_length=2, max_length=4)
+    network_free_execution_authorized: bool
+    provider_execution_authorized: Literal[False]
+    paid_execution_authorized: Literal[False]
+    hidden_gold_after_response_persistence: Literal[True]
+    maximum_executions: Literal[1]
+    hard_gates: dict[str, float] = Field(min_length=1)
+    output_directory: str = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def round_is_finite_and_portable(self) -> "ArchitectureRoundInstrumentV1":
+        for identifier in (
+            self.instrument_id,
+            self.program_id,
+            self.development_tranche_id,
+        ):
+            if not _IDENTIFIER_PATTERN.fullmatch(identifier):
+                raise ValueError("round identifiers must use lowercase kebab-case")
+        architecture_ids = [row.architecture_id for row in self.candidates]
+        if len(architecture_ids) != len(set(architecture_ids)):
+            raise ValueError("round architecture IDs must be unique")
+        if sum(row.role == "baseline" for row in self.candidates) != 1:
+            raise ValueError("round requires exactly one baseline architecture")
+        output = Path(self.output_directory)
+        if output.is_absolute() or ".." in output.parts:
+            raise ValueError("round output directory must be repository relative")
+        if any(not math.isfinite(value) for value in self.hard_gates.values()):
+            raise ValueError("round hard gates must be finite")
+        return self
+
+
 class ArchitectureRoundV1(BaseModel):
     round_number: int = Field(ge=1, le=3)
     development_tranche_id: str

@@ -1,0 +1,114 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-1-001-build",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-1-build",
+  "round_number": 1,
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Is Round 1 frozen as a gold-isolated, flow-independent, network-free comparison of three materially distinct architectures?",
+  "code_revision": "d6a7480f94b0f9adbc0a604a91e540c5cdd71db5",
+  "dirty_state": true,
+  "started_at": "2026-08-31T20:04:00Z",
+  "completed_at": "2026-08-31T20:10:13Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_1_001.json",
+      "sha256": "c7f537da483fb358487a24336f36273b7ccb03fa1f1deafee83202d5bc1bb3d0",
+      "role": "round-instrument"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "architecture-round-1-harness-v1",
+      "version": "build-001",
+      "role": "candidate",
+      "changed_planes": [
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "reactive-loop",
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "candidate-architectures",
+          "value": 3,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 3,
+          "passed": true
+        },
+        {
+          "name": "bound-planes-per-architecture",
+          "value": 13,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 13,
+          "passed": true
+        },
+        {
+          "name": "development-cases",
+          "value": 495,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 495,
+          "passed": true
+        },
+        {
+          "name": "network-free-simulation-cases",
+          "value": 12,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 12,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "hidden-gold-after-response-persistence",
+          "passed": true,
+          "evidence": "The execute path writes every candidate response package before opening the hidden-gold package."
+        },
+        {
+          "name": "case-id-reconciliation",
+          "passed": true,
+          "evidence": "Public, response, and gold identities must match exactly; ordering is not authoritative."
+        },
+        {
+          "name": "architecture-manifests-complete",
+          "passed": true,
+          "evidence": "Each candidate binds all 13 architecture planes and an explicit rollback boundary."
+        },
+        {
+          "name": "provider-authority-closed",
+          "passed": true,
+          "evidence": "The build and simulation made zero provider calls and incurred zero paid cost."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "architecture-round-1-harness-v1",
+    "rationale": "Keep the qualified harness, commit it, and execute the frozen 495-case Round 1 exactly once from a clean revision."
+  },
+  "limitations": [
+    "No full Round 1 quality result exists yet.",
+    "Deterministic extractive wording isolates architecture behavior rather than hosted-model generation quality.",
+    "This development checkpoint cannot establish professor fidelity, usability, or student learning improvement."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-1-001-build-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-1-001-build.json"
+}
