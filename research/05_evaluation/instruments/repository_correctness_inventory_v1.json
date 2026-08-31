@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 831
+    "audited": 834
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 192,
+    "active_or_unclassified_tooling": 193,
     "active_runtime": 138,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 221,
+    "evaluation_configuration": 222,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 179
+    "verification": 180
   },
-  "file_count": 831,
+  "file_count": 834,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ecabbb0cb0e4eff9abbcd48422147cecf56e7ff536f41454f8a3ff3c1c06f25a",
+  "record_sha256": "a5373fc6b671f7c91cd414636281c852973aeed888c27da32f4994c5e18f9f91",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d8deb055eaa589c5d0fedda44ecfebcac2d0bf7c7be447b02705562074488da4"
+      "sha256": "17a9cdd80b348fbfc0333dc7a2eac3de6bc56404f3d5538e786408f7f01b330f"
     },
     {
       "audit": {
@@ -3268,6 +3268,22 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_nonhuman_evaluation_program_002.json",
       "risk": "high",
       "sha256": "f9fe80349fe6ae4ff73aba7980a2f5c5e0a6c6d5cc63589ac9b0c6e761b39cb1"
+    },
+    {
+      "audit": {
+        "domain": "whole-system-architecture-evolution",
+        "evidence": "Freeze-manifest review confirms three ordered folds, exact source/case/gold hashes, zero cross-fold source-range or normalized-question overlap, public/gold isolation, zero provider calls, and immutable duplicate exclusions.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex whole-system architecture audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_development_freeze_001.json",
+      "risk": "high",
+      "sha256": "1e022aa582a41f2f84585e5fa81a93860d9ad2c0632ee3e4dab27e77a6d862c1"
     },
     {
       "audit": {
@@ -6028,6 +6044,24 @@
       "path": "scripts/build_repository_correctness_inventory.py",
       "risk": "high",
       "sha256": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998"
+    },
+    {
+      "audit": {
+        "domain": "whole-system-architecture-evolution",
+        "evidence": "Builder review and focused tests confirm deterministic order-preserving question deduplication, source-range overlap rejection, exact public/gold ID parity, content hashing, and byte-stable check mode.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex whole-system architecture audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:whole-system-architecture-evolution"
+      ],
+      "path": "scripts/build_whole_system_architecture_tranches.py",
+      "risk": "high",
+      "sha256": "5066c8ede42bb6ea0caf8b43d5bb1cb71e668fb79ce9d0bae6ef557e28bf4a48"
     },
     {
       "audit": {
@@ -8797,7 +8831,7 @@
       ],
       "path": "scripts/validate_whole_system_architecture_program.py",
       "risk": "high",
-      "sha256": "4f604370276f17b03b9cd079f2f09365e3e4b0a89f62ca489078c6dc9ef7531d"
+      "sha256": "c8750d4e50576a76cdd4f2902cbd25c4bba6d276f4bbf0b58a87fc2c680b5f9a"
     },
     {
       "audit": {
@@ -9575,7 +9609,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "f73ffac24bf22ad74b527730739c539b1801fea3079b4d8aecbcd3c2e6bf6eae"
+      "sha256": "1890b9844fe5f930528d0e693d7cf6937d7c57fcee33f816d91d71869f2ee667"
     },
     {
       "audit": {
@@ -9591,7 +9625,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/architecture_evolution.py",
       "risk": "high",
-      "sha256": "837ad690edcd2f15311c973c0f676960a9293f701b52851daaff948aad2773f9"
+      "sha256": "79cb39286468138a0206c0f10e9ff22234f23a6c89a3c0baf64edc78f300dae1"
     },
     {
       "audit": {
@@ -13963,6 +13997,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests cover exact fold counts, cross-fold normalized-question uniqueness, public gold exclusion, source-range disjointness, and ordered-round validation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex whole-system architecture audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_whole_system_architecture_tranches.py",
+      "risk": "medium",
+      "sha256": "c8436a18989117df9941be605af3d1cdf6f141f9f68feb4befa4ebcb8ffaa19e"
+    },
+    {
+      "audit": {
         "domain": "configuration-and-deployment",
         "evidence": "uv locked resolution passed; complete dependency audit reported zero known vulnerabilities and zero exceptions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
         "findings": [],
@@ -13979,8 +14029,8 @@
     }
   ],
   "risk_counts": {
-    "high": 638,
-    "medium": 193
+    "high": 640,
+    "medium": 194
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

@@ -490,6 +490,6 @@
     "preflight-live:academic-factual-qa-confirmation-v2-review-execution": "uv run python -m scripts.execute_academic_factual_qa_panel_review_v2 --preflight-live",
     "prepare:academic-factual-qa-confirmation-v2-codex-workspace": "uv run python -m scripts.execute_academic_factual_qa_panel_review_v2 --prepare-codex-workspace",
     "preflight:academic-factual-qa-confirmation-v2": "uv run python -m scripts.validate_academic_factual_qa_confirmation_v2 --preflight",
-    "verify:whole-system-architecture-evolution": "uv run python -m scripts.validate_whole_system_architecture_program && uv run pytest tests/test_architecture_evolution_program.py -q"
+    "verify:whole-system-architecture-evolution": "uv run python -m scripts.build_whole_system_architecture_tranches --check && uv run python -m scripts.validate_whole_system_architecture_program && uv run pytest tests/test_architecture_evolution_program.py tests/test_whole_system_architecture_tranches.py -q"
   }
 }

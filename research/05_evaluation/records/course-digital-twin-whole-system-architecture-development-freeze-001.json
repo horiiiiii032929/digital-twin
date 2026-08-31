@@ -1,0 +1,122 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-development-freeze-001",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "development-tranche-freeze",
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Are three source-range-disjoint, question-deduplicated, gold-isolated development folds frozen for the finite architecture rounds?",
+  "code_revision": "0991aba13c176b64dd3cf19290103d29a5cf6f29",
+  "dirty_state": true,
+  "started_at": "2026-08-31T19:58:00Z",
+  "completed_at": "2026-08-31T20:02:25Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_development_freeze_001.json",
+      "sha256": "1e022aa582a41f2f84585e5fa81a93860d9ad2c0632ee3e4dab27e77a6d862c1",
+      "role": "development-freeze"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "architecture-development-freeze-v1",
+      "version": "freeze-001",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "frozen-development-folds",
+          "value": 3,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 3,
+          "passed": true
+        },
+        {
+          "name": "frozen-development-cases",
+          "value": 1473,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1400,
+          "passed": true
+        },
+        {
+          "name": "source-range-overlaps",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "normalized-question-overlaps",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "deterministically-removed-duplicates",
+          "value": 27,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 27,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "public-hidden-gold-isolation",
+          "passed": true,
+          "evidence": "Every fold stores public cases and hidden gold separately with exact matching case-ID sets."
+        },
+        {
+          "name": "source-range-disjointness",
+          "passed": true,
+          "evidence": "Canonical source artifact, version, and character ranges have zero overlap between rounds."
+        },
+        {
+          "name": "question-deduplication",
+          "passed": true,
+          "evidence": "Normalized questions have zero within-fold or cross-fold duplicates after deterministic exclusion."
+        },
+        {
+          "name": "historical-datasets-immutable",
+          "passed": true,
+          "evidence": "The three source datasets remain unchanged; successor packages and excluded IDs are recorded separately."
+        },
+        {
+          "name": "provider-authority-closed",
+          "passed": true,
+          "evidence": "Dataset freezing made zero provider calls and incurred zero paid cost."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "architecture-development-freeze-v1",
+    "rationale": "Keep these folds for rounds 1–3 and proceed to architecture manifests and Round 1 without opening the fresh confirmation tranche."
+  },
+  "limitations": [
+    "The folds reuse the same four open educational source collections as earlier work, though their canonical ranges are pairwise disjoint.",
+    "This is dataset-construction evidence and makes no product-quality claim.",
+    "The one-time fresh 1,000-case confirmation tranche is not yet constructed or opened."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-development-freeze-001-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-development-freeze-001.json"
+}

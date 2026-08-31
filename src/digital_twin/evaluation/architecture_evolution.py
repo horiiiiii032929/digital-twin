@@ -139,6 +139,72 @@ class DatasetTrancheV1(BaseModel):
         return self
 
 
+class FrozenDevelopmentTrancheV1(BaseModel):
+    """One immutable, gold-isolated architecture-development fold."""
+
+    tranche_id: str
+    round_number: int = Field(ge=1, le=3)
+    source: BoundArtifactV1
+    public_cases: BoundArtifactV1
+    hidden_gold: BoundArtifactV1
+    case_count: int = Field(ge=400)
+    cluster_count: int = Field(ge=1)
+    removed_duplicate_case_ids: list[str] = Field(default_factory=list)
+    source_range_overlap_with_earlier_folds: Literal[0]
+    normalized_question_overlap_with_earlier_folds: Literal[0]
+
+    @model_validator(mode="after")
+    def identifiers_and_roles_are_consistent(self) -> "FrozenDevelopmentTrancheV1":
+        if not _IDENTIFIER_PATTERN.fullmatch(self.tranche_id):
+            raise ValueError("frozen tranche ID must use lowercase kebab-case")
+        if len(self.removed_duplicate_case_ids) != len(
+            set(self.removed_duplicate_case_ids)
+        ):
+            raise ValueError("removed duplicate case IDs must be unique")
+        roles = {
+            self.source.role,
+            self.public_cases.role,
+            self.hidden_gold.role,
+        }
+        if roles != {"source-corpus", "public-cases", "hidden-gold"}:
+            raise ValueError("frozen tranche artifacts require distinct canonical roles")
+        return self
+
+
+class ArchitectureDevelopmentFreezeV1(BaseModel):
+    """Realization of the three planned development folds.
+
+    The main program remains immutable build evidence.  This successor binds
+    the concrete source/case/gold packages without rewriting that checkpoint.
+    """
+
+    schema_version: Literal[1]
+    freeze_id: str
+    program_id: str
+    program_sha256: str
+    status: Literal["frozen-build-only"]
+    deterministic_truth_authoritative: Literal[True]
+    product_inputs_exclude_gold: Literal[True]
+    provider_calls: Literal[0]
+    paid_cost_usd: Literal[0]
+    tranches: list[FrozenDevelopmentTrancheV1]
+
+    @model_validator(mode="after")
+    def exactly_three_rounds_are_frozen(self) -> "ArchitectureDevelopmentFreezeV1":
+        if not _IDENTIFIER_PATTERN.fullmatch(self.freeze_id):
+            raise ValueError("freeze ID must use lowercase kebab-case")
+        if not _IDENTIFIER_PATTERN.fullmatch(self.program_id):
+            raise ValueError("program ID must use lowercase kebab-case")
+        if not _SHA256_PATTERN.fullmatch(self.program_sha256):
+            raise ValueError("program sha256 must be lowercase hexadecimal")
+        if [row.round_number for row in self.tranches] != [1, 2, 3]:
+            raise ValueError("development freeze requires exactly rounds 1, 2, and 3")
+        tranche_ids = [row.tranche_id for row in self.tranches]
+        if len(tranche_ids) != len(set(tranche_ids)):
+            raise ValueError("development freeze tranche IDs must be unique")
+        return self
+
+
 class ArchitectureRoundV1(BaseModel):
     round_number: int = Field(ge=1, le=3)
     development_tranche_id: str

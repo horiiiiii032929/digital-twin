@@ -138,6 +138,7 @@ from src.digital_twin.evaluation.finite_program_dataset import (
 from src.digital_twin.evaluation.architecture_evolution import (
     ArchitectureCandidateResultV1,
     ArchitectureDecisionOutcome,
+    ArchitectureDevelopmentFreezeV1,
     ArchitectureEvolutionProgramV1,
     ArchitectureEvolutionRunRecordV1,
     ArchitecturePlane,
@@ -148,6 +149,7 @@ from src.digital_twin.evaluation.architecture_evolution import (
     DatasetTrancheV1,
     FailureClassificationV1,
     FinalEvaluationStageV1,
+    FrozenDevelopmentTrancheV1,
     OperationalAccountingV1,
     RecordingPolicyV1,
     TrancheRole,
@@ -160,6 +162,7 @@ from src.digital_twin.evaluation.architecture_evolution import (
 __all__ = [
     "ArchitectureCandidateResultV1",
     "ArchitectureDecisionOutcome",
+    "ArchitectureDevelopmentFreezeV1",
     "ArchitectureEvolutionProgramV1",
     "ArchitectureEvolutionRunRecordV1",
     "ArchitecturePlane",
@@ -212,6 +215,7 @@ __all__ = [
     "FailureClassificationV1",
     "FiniteProgramDatasetError",
     "FinalEvaluationStageV1",
+    "FrozenDevelopmentTrancheV1",
     "GateResult",
     "ImplementationRef",
     "MetricDirection",

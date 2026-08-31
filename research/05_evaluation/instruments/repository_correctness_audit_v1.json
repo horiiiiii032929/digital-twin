@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "d8deb055eaa589c5d0fedda44ecfebcac2d0bf7c7be447b02705562074488da4"
+      "sha256": "17a9cdd80b348fbfc0333dc7a2eac3de6bc56404f3d5538e786408f7f01b330f"
     },
     {
       "audit_status": "audited",
@@ -5895,7 +5895,7 @@
       "path": "src/digital_twin/evaluation/__init__.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "f73ffac24bf22ad74b527730739c539b1801fea3079b4d8aecbcd3c2e6bf6eae"
+      "sha256": "1890b9844fe5f930528d0e693d7cf6937d7c57fcee33f816d91d71869f2ee667"
     },
     {
       "audit_status": "audited",
@@ -9118,7 +9118,7 @@
       "path": "scripts/validate_whole_system_architecture_program.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "4f604370276f17b03b9cd079f2f09365e3e4b0a89f62ca489078c6dc9ef7531d"
+      "sha256": "c8750d4e50576a76cdd4f2902cbd25c4bba6d276f4bbf0b58a87fc2c680b5f9a"
     },
     {
       "audit_status": "audited",
@@ -9129,7 +9129,7 @@
       "path": "src/digital_twin/evaluation/architecture_evolution.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "837ad690edcd2f15311c973c0f676960a9293f701b52851daaff948aad2773f9"
+      "sha256": "79cb39286468138a0206c0f10e9ff22234f23a6c89a3c0baf64edc78f300dae1"
     },
     {
       "audit_status": "audited",
@@ -9141,6 +9141,39 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
       "sha256": "5382aecaec89655c2c3f29f56fd503c1c474182987f93e7318c610abeb4c207c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Freeze-manifest review confirms three ordered folds, exact source/case/gold hashes, zero cross-fold source-range or normalized-question overlap, public/gold isolation, zero provider calls, and immutable duplicate exclusions.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_development_freeze_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "1e022aa582a41f2f84585e5fa81a93860d9ad2c0632ee3e4dab27e77a6d862c1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Builder review and focused tests confirm deterministic order-preserving question deduplication, source-range overlap rejection, exact public/gold ID parity, content hashing, and byte-stable check mode.",
+      "findings": [],
+      "path": "scripts/build_whole_system_architecture_tranches.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "5066c8ede42bb6ea0caf8b43d5bb1cb71e668fb79ce9d0bae6ef557e28bf4a48"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover exact fold counts, cross-fold normalized-question uniqueness, public gold exclusion, source-range disjointness, and ordered-round validation.",
+      "findings": [],
+      "path": "tests/test_whole_system_architecture_tranches.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "c8436a18989117df9941be605af3d1cdf6f141f9f68feb4befa4ebcb8ffaa19e"
     }
   ],
   "schema_version": 1

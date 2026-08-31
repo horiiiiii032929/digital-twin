@@ -17,7 +17,14 @@ or cancelled run, comparison, and decision must receive an immutable manifest,
 machine record, readable summary, registry row, artifact and code bindings,
 operational accounting, limitations, and GitHub checkpoint before progression.
 
-The program is build-only and provider-unauthorized. The initial causal audit
+The program is build-only and provider-unauthorized. Its three development
+folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
+clusters. Canonical source ranges and normalized questions have zero overlap
+between rounds. Twenty-seven duplicate questions were excluded and retained by
+ID in the freeze manifest; public cases and hidden gold remain physically
+separate. The fresh 1,000-case confirmation is still unopened.
+
+The initial causal audit
 identifies the dominant structural defect as the action -> evidence -> claim ->
 citation contract, not missing autonomy plumbing. Round 1 will compare the
 unchanged V2.1 control with an evidence-first hierarchical candidate and an
@@ -58,7 +65,7 @@ integration correction gives the action-router product adapter an explicit
 `v2-action-router` identity and validates both manifests against it before
 provider construction. A deliberately drifted manifest fails closed; focused
 tests pass 10/10 and the complete gate passes Python 1,443, frontend 50,
-inventory 831/831, and freeze 121/121. This corrects the overstated historical
+inventory 834/834, and freeze 121/121. This corrects the overstated historical
 build-readiness interpretation but does not create a third attempt or a quality
 result. The next evaluation must use a separately versioned #153 successor.
 
@@ -217,7 +224,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 remains `In Progress / Go Deeper` for the provider-backed
 flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 831/831 audited execution-relevant files
+long-run operation authorized. Repository correctness is 834/834 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
