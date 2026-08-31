@@ -1,16 +1,17 @@
 # Course Digital Twin Release
 
-Status date: 2026-08-30
+Status date: 2026-08-31
 
-Issue #127 is the active P0 research item at `In Progress / Refine`. AFQC-105
-selected atomic M2 retrieval, but AFQC-109's actual-product 500+100 run validly
-failed with 44.25% fully grounded success, 89% boundary accuracy, and five
-unsafe ambiguity releases. AFQC-110 built the single finite action-router and
-targeted-atomic successor, but AFQC-111/112 exhausted its two permitted
-execution attempts without reaching product case 1. Attempt 001 made zero
-calls; attempt 002 completed 15 embeddings for USD 0.00057488 and then failed a
-missing `binding_id` runtime contract. Authorization is revoked. The sealed
-10,000 cases remain unopened and the qualified local R1 is unchanged.
+Issue #127 is complete at `Done / Refine`. Program 011 executed the
+flow-independent actual product on 10,000 candidate cases and a frozen paired
+1,000-case control without gold leakage. The candidate reached 44.16% fully
+grounded factual success, 72.9% boundary action accuracy, and answered 433/500
+explicit graded-work requests that required refusal. It improved paired
+supported-answer retention by 6.26 percentage points, but both conditions
+failed the absolute release gates. Merged PR #152 publishes the result and
+revokes all Program 011 authority. Issue #153 is the active P0 at
+`In Progress / Refine`; it owns one deterministic action-router and grounding
+successor on fresh development evidence. The qualified local R1 is unchanged.
 
 This Project tracks one parent outcome: release an invite-only Course Digital
 Twin that professors can govern and authorized students can use for persistent,
@@ -35,15 +36,13 @@ evidence, not competing end goals.
 - Proactive tutoring: #134 restores opt-in asynchronous initiation as a core
   product track. The deterministic private in-app vertical slice is build-only;
   external Discord delivery and real-student use remain disabled.
-- Repository: PRs #130, #133, and #135 are merged. The correctness inventory
-  and execution freeze remain active. PR #136 merged the direct OpenAI base;
-  the action-router successor now covers 758/758 audited files and 116/116
-  frozen entrypoints.
-- Factual quality: #110 remains engineering-scale history. #127 is the active
-  leakage-free actual-product evaluation. Atomic retrieval passed
-  prospectively, but its first T0 product run validly failed. AFQC-110 has now
-  terminated operationally invalid after its sole correction. No new quality
-  estimate exists; authority is revoked and final 10,000+1,000 is unopened.
+- Repository: merged PR #152 is on `main`; the correctness inventory is
+  782/782 complete and the execution freeze covers 117/117 entrypoints with no
+  paid stage authorized.
+- Factual quality: #127 and Program 011 are completed unfavorable evidence.
+  The 10,000+1,000 actual-product result is valid `Refine`; #153 is the only
+  active factual-method successor. The sealed Program 011 package cannot be
+  tuned or rerun.
 - Professor fidelity: fixed C0–C3 and explicit/inferred profile contracts are
   build-ready; professor guidance and calibration are pending.
 - Deployment: local/container checks passed; public host/domain, trusted TLS,
@@ -54,11 +53,11 @@ evidence, not competing end goals.
 
 ## Release-critical order
 
-1. Keep release goal #8 `In Progress` as the parent.
-2. Preserve #127's completed retrieval Keep and actual-product Refine evidence.
-3. Preserve AFQC-111/112 and make one explicit harness/method decision. Do not
-   retry AFQC-110 or open sealed 10,000+1,000 execution.
-4. Complete #105 from that leakage-free evidence and select the production
+1. Keep release goal #8 `In Progress / Refine` as the parent.
+2. Preserve #127 and Program 011 as immutable `Done / Refine` evidence.
+3. Complete one finite fresh-development method decision in #153. Do not tune
+   or rerun the sealed Program 011 package.
+4. Complete #105 from the successor evidence and select the production
    grounding gate.
 5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
 6. Complete #132 and #134; keep Discord
@@ -75,9 +74,9 @@ evidence, not competing end goals.
 
 | Blocker | Unblocks |
 | --- | --- |
-| Explicit post-AFQC-112 harness/method decision | A new valid #127 actual-product checkpoint |
+| #153 action-router and grounding result | Production factual method decision |
 | Professor profile-authoring response | Fidelity calibration |
-| Leakage-free #127 development/final result | Production answerability-gate selection |
+| Passing fresh-development grounding result | Production answerability-gate selection |
 | Public host and domain | Target-host deployment and operations |
 | Consent/privacy/supervisor approval | Invite-only human pilot |
 
@@ -90,8 +89,10 @@ evidence, not competing end goals.
   unrestricted outputs enter GitHub.
 - No model, pricing, routing, or retention metadata older than 24 hours may
   authorize a paid run.
-- No held-out, paid, 1,000-case, or 10,000-case execution occurs without its
-  own explicit authorization.
+- A single bounded program-level authority may advance passing non-human stages
+  automatically; do not add redundant stage-by-stage approval pauses. Privacy,
+  gold isolation, identity, ledger integrity, credential, and budget stops
+  remain mandatory.
 - A failed release hard gate produces `Refine`, `Go Deeper`, `Drop`, or an
   explicit no-release decision; it is never hidden by the schedule.
 

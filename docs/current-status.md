@@ -29,8 +29,9 @@ not pass. Program 011 used USD 39.14017165; cumulative spend across programs
 authority is revoked.
 
 Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
-evidence. The next P0 is one method-level action-router and grounding successor
-on fresh development evidence. The sealed final set cannot be tuned or rerun.
+evidence. Issue #153 is the active P0 and owns one method-level action-router
+and grounding successor on fresh development evidence. The sealed final set
+cannot be tuned or rerun.
 The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
 professor-fidelity, usability, or learning-outcome claim is added.
@@ -1515,7 +1516,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Program 011 completed / Refine | The actual T0 product completed 10,000 candidate plus 1,000 paired control cases without gold leakage. Candidate grounded success was 44.16% (source-family 95% interval 41.03%–44.96%) and boundary action accuracy was 72.9%; all absolute gates failed | Preserve the sealed result; build one deterministic action-router and grounding successor on fresh development evidence, then run a new confirmation tranche rather than retuning the final set |
+| Large factual QA | Program 011 completed / Refine | The actual T0 product completed 10,000 candidate plus 1,000 paired control cases without gold leakage. Candidate grounded success was 44.16% (source-family 95% interval 41.03%–44.96%) and boundary action accuracy was 72.9%; all absolute gates failed | Preserve the sealed result; complete [#153](https://github.com/horiiiiii032929/digital-twin/issues/153) on fresh development evidence, then run a new confirmation tranche rather than retuning the final set |
 
 ## Release readiness and critical path
 
