@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-evaluation-harness-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "governed-full-autonomy-v2-1-harness-820",
+  "corpus_id": "public-synthetic-autonomy-events-v1",
+  "code_revision": "0ce63dfa07a81ff772a2fa9532cc4abdaad48212",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "callback-autonomy-evaluation-contract-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "condition_count": 1,
+          "case_count": 2,
+          "per_call_operational_accounting": false,
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {"name": "condition-coverage", "value": 0.25, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "portfolio-case-count", "value": 2.0, "unit": "count", "direction": "higher-is-better", "threshold": 820.0, "passed": false},
+        {"name": "per-call-accounting-completeness", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "gold-isolation", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "reference-hard-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-provider-use", "passed": true, "evidence": "The original contract tests were network-free."},
+        {"name": "public-gold-separation", "passed": true, "evidence": "The original public case did not contain expected action fields."},
+        {"name": "flow-independent-boundary", "passed": true, "evidence": "The original callback boundary exposed events, time, restart, actions, and state."},
+        {"name": "complete-finite-portfolio", "passed": false, "evidence": "The original contract covered one synthetic condition and two durations, not the frozen four-condition portfolio."},
+        {"name": "privacy-safe-operational-lineage", "passed": false, "evidence": "The original response exposed only aggregate zero-valued operational fields."}
+      ],
+      "failures_by_category": {
+        "portfolio-incomplete": 1,
+        "operational-accounting-incomplete": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "governed-autonomy-evaluation-harness-v1",
+        "version": "1.0.0",
+        "configuration": {
+          "condition_count": 4,
+          "case_count": 820,
+          "trajectory_case_count": 600,
+          "long_horizon_case_count": 100,
+          "proactive_opportunity_case_count": 120,
+          "per_call_operational_accounting": true,
+          "network_free": true
+        }
+      },
+      "metrics": [
+        {"name": "condition-coverage", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "portfolio-case-count", "value": 820.0, "unit": "count", "direction": "higher-is-better", "threshold": 820.0, "passed": true},
+        {"name": "per-call-accounting-completeness", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "gold-isolation", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "reference-hard-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-provider-use", "passed": true, "evidence": "The 820-case reference simulation made zero provider calls and incurred zero tokens or cost."},
+        {"name": "public-gold-separation", "passed": true, "evidence": "Every public case excludes expected action, terminal state, and required-invariant fields; public and gold hashes differ."},
+        {"name": "flow-independent-boundary", "passed": true, "evidence": "Scoring consumes observable events, actions, state, diagnostic invariants, and operational metrics without graph or storage internals."},
+        {"name": "complete-finite-portfolio", "passed": true, "evidence": "The deterministic package contains exactly 600 trajectory, 100 long-horizon, and 120 proactive-opportunity cases."},
+        {"name": "privacy-safe-operational-lineage", "passed": true, "evidence": "Per-call rows include bounded task, identity, token, latency, cost, status, and error fields and exclude prompt content."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "governed-autonomy-evaluation-harness-v1",
+    "rationale": "Use the candidate harness for #157 because it preserves the flow-independent boundary while adding the complete frozen condition portfolio, deterministic hard-gate scoring, public/gold isolation, and prospective per-call operational accounting. This selects evaluation infrastructure only and does not select T1-v2.1 for release.",
+    "limitations": [
+      "The reference driver is deterministic and scripted; its perfect rates are not product-quality evidence.",
+      "No provider-backed product adapter, held-out factual tranche, professor reference, external human, or learning outcome was evaluated.",
+      "T1-v2.1 remains unselected and T1-v1/T0 remain control and rollback."
+    ]
+  }
+}
