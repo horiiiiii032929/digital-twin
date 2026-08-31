@@ -15,6 +15,10 @@ ROUND_2 = Path(
     "research/05_evaluation/instruments/"
     "course_digital_twin_whole_system_architecture_round_2_001.json"
 )
+ROUND_3 = Path(
+    "research/05_evaluation/instruments/"
+    "course_digital_twin_whole_system_architecture_round_3_001.json"
+)
 
 
 def test_round_instrument_binds_three_complete_architectures() -> None:
@@ -70,6 +74,31 @@ def test_round_two_simulation_is_network_free() -> None:
 
     assert result["instrument_id"] == (
         "course-digital-twin-whole-system-architecture-round-2-001"
+    )
+    assert result["case_count"] == 12
+    assert result["provider_calls"] == 0
+    assert result["paid_cost_usd"] == 0
+
+
+def test_round_three_uses_final_development_fold_and_semantic_scoring() -> None:
+    instrument = runner._load_instrument(ROUND_3)
+
+    assert instrument.round_number == 3
+    assert instrument.scoring_profile == "source-semantic-token-v2"
+    assert runner.validate(ROUND_3)["case_count"] == 481
+    assert {row.plane_bindings["retrieval"] for row in instrument.candidates} == {
+        "target-aware-evidence-retriever-v1",
+        "source-range-candidate-retriever-v2",
+        "source-range-ambiguity-retriever-v2",
+    }
+    assert all(not row.provider_execution_authorized for row in instrument.candidates)
+
+
+def test_round_three_simulation_is_network_free() -> None:
+    result = runner.simulate(ROUND_3)
+
+    assert result["instrument_id"] == (
+        "course-digital-twin-whole-system-architecture-round-3-001"
     )
     assert result["case_count"] == 12
     assert result["provider_calls"] == 0

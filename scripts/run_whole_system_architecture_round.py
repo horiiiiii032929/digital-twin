@@ -34,6 +34,7 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
 from src.digital_twin.evaluation.factual_qa_scoring import (
+    normalize_semantic_source_text,
     score_case,
     summarize_scores,
 )
@@ -43,8 +44,11 @@ from src.digital_twin.grounding import (
     PlanObserveRetrieverV1,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredHierarchicalRetriever,
+    SourceRangeCandidateRetrieverV2,
+    SourceRangeEvidenceGateV2,
     TargetAwareEvidenceRetrieverV1,
     TargetEvidenceGateV1,
+    canonicalize_source_claim,
 )
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
@@ -173,6 +177,15 @@ def _build_retrievers(
                 candidate_limit=30,
                 metadata_ranking_enabled=True,
             )
+        elif retrieval_binding in {
+            "source-range-candidate-retriever-v2",
+            "source-range-ambiguity-retriever-v2",
+        }:
+            result[course_id] = SourceRangeCandidateRetrieverV2(
+                lexical,
+                course_chunks,
+                candidate_limit=30,
+            )
         else:
             raise ArchitectureRoundExecutionError(
                 f"unsupported architecture retriever: {retrieval_binding}"
@@ -251,6 +264,20 @@ def _response(
             selected = [row for row in hits if row.chunk.id in selected_ids]
             sufficient = decision.sufficient
             gate_reason = decision.reason
+        elif claim_binding in {
+            "source-range-canonical-claim-lineage-v2",
+            "source-range-ambiguity-aware-claim-lineage-v2",
+        }:
+            decision = SourceRangeEvidenceGateV2(
+                clarify_ambiguous=(
+                    claim_binding
+                    == "source-range-ambiguity-aware-claim-lineage-v2"
+                )
+            ).assess(case.question, hits)
+            selected_ids = set(decision.selected_hit_ids)
+            selected = [row for row in hits if row.chunk.id in selected_ids]
+            sufficient = decision.sufficient
+            gate_reason = decision.reason
         else:
             decision = StructuredHierarchicalCoverageEvidenceGate().assess(
                 case.question, hits
@@ -261,11 +288,21 @@ def _response(
             sufficient = decision.sufficient and len(selected) >= required
             gate_reason = decision.reason
         if not sufficient:
+            action = (
+                EvaluationAction.CLARIFY
+                if "ambiguous" in gate_reason
+                else EvaluationAction.ABSTAIN
+            )
+            content = (
+                "Please clarify which source detail or concept you mean."
+                if action == EvaluationAction.CLARIFY
+                else "The approved course evidence does not establish that."
+            )
             return EvaluationResponseV1(
                 case_id=case.case_id,
                 flow_id=architecture.architecture_id,
-                action=EvaluationAction.ABSTAIN,
-                answer="The approved course evidence does not establish that.",
+                action=action,
+                answer=content,
                 retrieved_evidence=[_citation(row) for row in hits],
                 operational_status="completed-evidence-abstention",
                 usage=EvaluationUsageV1(
@@ -274,8 +311,22 @@ def _response(
                 trace={"gate_reason": gate_reason, "provider_calls": 0},
             )
         citations = [_citation(row) for row in selected]
+        canonical_claims = claim_binding in {
+            "source-range-canonical-claim-lineage-v2",
+            "source-range-ambiguity-aware-claim-lineage-v2",
+        }
         claims = [
-            EvaluationAtomicClaimV1(text=row.chunk.text, citations=[_citation(row)])
+            EvaluationAtomicClaimV1(
+                text=(
+                    canonicalize_source_claim(
+                        row.chunk.text,
+                        modality=str(row.chunk.metadata.get("modality", "")),
+                    )
+                    if canonical_claims
+                    else row.chunk.text
+                ),
+                citations=[_citation(row)],
+            )
             for row in selected
         ]
         trace: dict[str, str | int | float | bool | None] = {
@@ -291,7 +342,7 @@ def _response(
             case_id=case.case_id,
             flow_id=architecture.architecture_id,
             action=EvaluationAction.ANSWER,
-            answer="\n\n".join(row.chunk.text for row in selected),
+            answer="\n\n".join(row.text for row in claims),
             atomic_claims=claims,
             citations=citations,
             retrieved_evidence=[_citation(row) for row in hits],
@@ -363,6 +414,7 @@ def _score_packages(
     cases: list[EvaluationCaseV1],
     gold_path: Path,
     response_paths: dict[str, Path],
+    scoring_profile: str = "lexical-token-v1",
 ) -> dict[str, Any]:
     gold_payload = _load_hashed(gold_path)
     gold_by_id = {
@@ -386,10 +438,19 @@ def _score_packages(
         }
         if set(responses) != set(gold_by_id):
             raise ArchitectureRoundExecutionError("response case IDs drifted")
-        scores = [
-            score_case(case, gold_by_id[case.case_id], responses[case.case_id])
-            for case in cases
-        ]
+        scores = []
+        for case in cases:
+            arguments: dict[str, Any] = {}
+            if scoring_profile == "source-semantic-token-v2":
+                arguments["normalizer"] = normalize_semantic_source_text
+            scores.append(
+                score_case(
+                    case,
+                    gold_by_id[case.case_id],
+                    responses[case.case_id],
+                    **arguments,
+                )
+            )
         results[architecture_id] = {
             "aggregate": summarize_scores(scores),
             "case_scores": [row.model_dump(mode="json") for row in scores],
@@ -498,7 +559,12 @@ def execute(instrument_path: Path) -> dict[str, Any]:
         response_path = output_root / f"{candidate.architecture_id}-responses.json"
         _atomic_write(response_path, package)
         response_paths[candidate.architecture_id] = response_path
-    scored = _score_packages(cases=cases, gold_path=gold_path, response_paths=response_paths)
+    scored = _score_packages(
+        cases=cases,
+        gold_path=gold_path,
+        response_paths=response_paths,
+        scoring_profile=instrument.scoring_profile,
+    )
     gate_results = {
         architecture_id: _gate_results(instrument, result["aggregate"])
         for architecture_id, result in scored.items()
@@ -522,6 +588,7 @@ def execute(instrument_path: Path) -> dict[str, Any]:
         "provider_calls": 0,
         "paid_cost_usd": 0,
         "hidden_gold_loaded_after_all_responses": True,
+        "scoring_profile": instrument.scoring_profile,
         "candidates": {
             architecture_id: {
                 "aggregate": result["aggregate"],

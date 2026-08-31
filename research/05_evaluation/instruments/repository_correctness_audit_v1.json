@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Command-surface review confirms the architecture-evolution validator plus Round 1 and Round 2 validation, simulation, and one-shot network-free execution remain explicit while historical execution commands and provider authority boundaries remain unchanged.",
+      "evidence": "Command-surface review confirms the architecture-evolution validator plus Round 1, Round 2, and Round 3 validation, simulation, and one-shot network-free execution remain explicit while provider authority stays closed.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "99444ac86c56a6bbdf6aa62c9746823b80ea7a005e27a80efbfd4953a42585bc"
+      "sha256": "776b1c7e9bf281da8517cae387e57d8f3734a310ebd71a70fa949e0b6a9be5fc"
     },
     {
       "audit_status": "audited",
@@ -5978,12 +5978,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Manual metric review verifies exact answer spans, claim-to-lineage matching, citation precision/recall, strict source hashes, source-range retrieval at 3/5, boundary safety, operational accounting, and source-family bootstrap uncertainty.",
+      "evidence": "Metric review verifies the historical lexical scorer remains the default while the prospective semantic-source profile removes only non-visible authoring markup; answer spans, claim lineage, citation metrics, source hashes, retrieval, boundary safety, accounting, and uncertainty remain unchanged.",
       "findings": [],
       "path": "src/digital_twin/evaluation/factual_qa_scoring.py",
-      "reviewed_at": "2026-08-26",
-      "reviewer": "codex-primary-review",
-      "sha256": "251984bc0a226f0549918afe5b45010588c0a0225c2b352b6a0492d8fe2dc805"
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "3a93217998b1a4a9360455bb89ac73242d863e4510c6492530f0ae95d86518fd"
     },
     {
       "audit_status": "audited",
@@ -6264,12 +6264,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Grounding export review confirms the typed target planner, target-aware retriever, evidence-cardinality gate, and deterministic plan-observe retriever are explicit alongside retained controls; no provider or hidden-gold dependency is introduced.",
+      "evidence": "Grounding export review confirms typed-target and source-range planners, retrievers, gates, canonical source rendering, and retained controls are explicit with no provider or hidden-gold dependency.",
       "findings": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "921b9a45301e00e9b83785f3ee678e34343dcbd0ac0c5c59f25bd93e78193c0e"
+      "sha256": "f59de33cde7eaf3ff5862217d4b1f4798a1fc133b19bebc6d4dfce895621a228"
     },
     {
       "audit_status": "audited",
@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze review retains the global block while authorizing only the exact provider-free architecture tranche build and Round 1/Round 2 comparisons; the shared entrypoint is registered and fails closed outside those bounded identities.",
+      "evidence": "Freeze review retains the global block while authorizing only the exact provider-free architecture tranche build and three finite architecture comparisons; the shared entrypoint fails closed outside those bounded identities.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "c76d28a1c483d0e455d996c6136d788549480de926dd53d93a55cde4543b347d"
+      "sha256": "b678688097ae4ab31c19abce9a41c0c64c16c5c8cd70beb3e09de7af0cc74710"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the exact five provider-free authorizations, including the architecture tranche build and Round 1/Round 2 comparisons, while rejecting terminal paid and historical successors.",
+      "evidence": "Freeze regression verifies the exact six provider-free authorizations, including the architecture tranche build and all three comparisons, while rejecting terminal paid and historical successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "3f6efbe2517a25526b730b1bb13e008bb6cfdb4b9f567088da66042b78af17cc"
+      "sha256": "7f5945148de871d39a3d9066d87ff24754e1070e96141386532b43270b86487a"
     },
     {
       "audit_status": "audited",
@@ -9124,12 +9124,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Typed-schema review confirms finite three-round progression, immutable tranche roles, 13-plane candidate manifests, one-shot round execution, zero-call accounting, authority separation, and passing-selection consistency.",
+      "evidence": "Typed-schema review confirms finite three-round progression, immutable tranche roles, 13-plane candidate manifests, versioned lexical/semantic scoring profiles, one-shot execution, zero-call accounting, authority separation, and selection consistency.",
       "findings": [],
       "path": "src/digital_twin/evaluation/architecture_evolution.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "353613e82d0dd9b55441a4414d851fcd8706b01d3de6b0dc6e2fe147cae63525"
+      "sha256": "e98289a7c54dd063e59a993c36a733c862cc16e77aed24a37dbe2f2d8977fe8f"
     },
     {
       "audit_status": "audited",
@@ -9190,12 +9190,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Runner review verifies bounded freeze authorization, versioned Round 1/Round 2 instruments, public-input-only response generation, typed-target candidate dispatch, case-ID joins, durable response persistence before gold opening, deterministic scoring, exclusive output creation, and zero provider calls.",
+      "evidence": "Runner review verifies bounded authorization, versioned Round 1–3 instruments, public-input-only response generation, typed-target/source-range dispatch, ambiguity clarification, canonical claim rendering, case-ID joins, response persistence before gold opening, versioned deterministic scoring, exclusive outputs, and zero provider calls.",
       "findings": [],
       "path": "scripts/run_whole_system_architecture_round.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "475d7c1c7dc69be523bc9c404ffaa761d2e5c5749c1345aba47f306717dd73d3"
+      "sha256": "8da1d3e2cc5b43a32404ae57b65c911a5ee398826515426f29dc318bc2a6735c"
     },
     {
       "audit_status": "audited",
@@ -9223,12 +9223,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover both frozen round instruments, three-candidate and 13-plane validation, all 495/497 case IDs, network-free simulation, hidden-gold exclusion from response generation, typed-target bindings, unknown implementation rejection, and baseline cardinality.",
+      "evidence": "Focused tests cover all three frozen round instruments, three-candidate and 13-plane validation, exact 495/497/481 case counts, network-free simulation, hidden-gold exclusion, typed-target/source-range bindings, unknown implementation rejection, and baseline cardinality.",
       "findings": [],
       "path": "tests/test_whole_system_architecture_round.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
-      "sha256": "b722c078721dd5268a64b7982cf105fd530b3c55831ccb9fe7ae68c143f5d24a"
+      "sha256": "1a79903ad628c948d037c2eecd34805dd75cd07b5b932a9623160bd41e5a540f"
     },
     {
       "audit_status": "audited",
@@ -9262,6 +9262,39 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
       "sha256": "acc8aa9be2da57094c2197abf4f3ba2da33d1c24e72b46252d4058858ff52e65"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "grounding-and-retrieval-correctness",
+      "evidence": "Manual and focused-test review verifies public-only source-cluster and exact-title scoping, deterministic per-target coverage and compactness ranking, distinct source-range selection, ambiguity clarification, source authorization, and student-visible authoring-markup rendering without provider or hidden-gold access.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/source_range_evidence.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "f9f67fdab6ca130aa634ededb6fa8dfdbbcc9236175a2b20300640741d61d11c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify semantic source normalization, canonical source rendering, public cluster anchors, exact-title scoping, distinct multi-target source ranges, and strict versus permissive handling of ambiguous source details.",
+      "findings": [],
+      "path": "tests/digital_twin/test_source_range_evidence.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "2acdfbfe4c6f82a7aa65db467f5a289cc9cc3758bdbfdf1144d2ebc8bc9a0f51"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "whole-system-architecture-evolution",
+      "evidence": "Round 3 instrument review confirms the untouched source-disjoint 481-case final development fold, one Round 2 baseline, two coherent source-range candidates, complete 13-plane bindings, prospective semantic scoring, hidden-gold isolation, one network-free execution, and no provider or paid authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_3_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex whole-system architecture audit",
+      "sha256": "1da9d15b386589e6a9aaafcdf627972c3ac187a5a0ed35fbd372cf9f3416b2cf"
     }
   ],
   "schema_version": 1

@@ -251,6 +251,9 @@ class ArchitectureRoundInstrumentV1(BaseModel):
     paid_execution_authorized: Literal[False]
     hidden_gold_after_response_persistence: Literal[True]
     maximum_executions: Literal[1]
+    scoring_profile: Literal["lexical-token-v1", "source-semantic-token-v2"] = (
+        "lexical-token-v1"
+    )
     hard_gates: dict[str, float] = Field(min_length=1)
     output_directory: str = Field(min_length=1)
 

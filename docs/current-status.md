@@ -46,6 +46,14 @@ Round 3 will retain typed targets as a baseline and compare a source-range-aware
 candidate-set and ambiguity-aware claim assembly successor on the untouched
 481-case third fold. No provider calls or paid cost were incurred.
 
+The Round 3 build is now qualified. Its prospective scorer removes only
+non-visible source-authoring markup and does not rewrite any Round 1/2 score.
+The two candidates rank distinct canonical source ranges, render student-visible
+claims, and either select a complete range set or explicitly clarify an
+unresolved low-information target. The 12-case simulation, 1,480 Python tests,
+50 frontend tests, 845/845 correctness inventory, and 123/123 freeze coverage
+all pass. Round 3 has not yet been executed and no winner is selected.
+
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
 plumbing. Round 1 confirmed that whole-question coverage over-abstained and

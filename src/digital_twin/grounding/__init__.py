@@ -168,6 +168,14 @@ from src.digital_twin.grounding.target_evidence import (
     TargetRetrievalTraceV1,
     plan_public_evidence_targets,
 )
+from src.digital_twin.grounding.source_range_evidence import (
+    PublicSourceRangePlanV2,
+    SourceRangeCandidateRetrieverV2,
+    SourceRangeCandidateTraceV2,
+    SourceRangeEvidenceGateV2,
+    canonicalize_source_claim,
+    plan_public_source_ranges,
+)
 
 
 __all__ = [
@@ -299,6 +307,12 @@ __all__ = [
     "lexical_tokens",
     "p95",
     "plan_public_evidence_targets",
+    "PublicSourceRangePlanV2",
+    "SourceRangeCandidateRetrieverV2",
+    "SourceRangeCandidateTraceV2",
+    "SourceRangeEvidenceGateV2",
+    "canonicalize_source_claim",
+    "plan_public_source_ranges",
     "retrieval_text",
     "requires_clarification",
     "should_use_semantic_reranking",
