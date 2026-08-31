@@ -146,6 +146,9 @@ professor-communication track.
    #153's one 500+100 decision; keep the local fail-closed fallback selected
    until it passes. The program has one authority and requests no per-stage
    approval.
+   Attempt 001 is preserved as zero-call invalid harness evidence; attempt 002
+   is the final execution attempt and changes only the direct-transport
+   declaration and moved local-regression test paths.
 3. If and only if #153 returns `Keep`, the same program automatically executes
    `governed-full-autonomy-v2-1-actual-product-evaluation-002` once under the
    shared paid-program authorization and publishes Keep/Refine evidence. A

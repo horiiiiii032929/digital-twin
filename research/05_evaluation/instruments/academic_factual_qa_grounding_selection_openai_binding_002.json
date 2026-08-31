@@ -13,6 +13,7 @@
     "high-volume-generator": {
       "binding_id": "grounding-selection-openai-gpt-5.4-mini-002",
       "provider": "openai",
+      "first_party_endpoint": true,
       "api_url": "https://api.openai.com/v1/responses",
       "credential_environment_variable": "OPENAI_API_KEY",
       "provider_model": "gpt-5.4-mini-2026-03-17",
@@ -31,5 +32,5 @@
     "paid_execution_authorized": true,
     "final_execution_authorized": false
   },
-  "content_sha256": "3debca43846b76714a4e5d06f40482b40c4fdef8f9aa6b4bc76e79fbcd4bfd12"
+  "content_sha256": "cd8082c2808868bd98a89cdc4a9220418bc2b86c404f80129f5e36ae48aa2a08"
 }

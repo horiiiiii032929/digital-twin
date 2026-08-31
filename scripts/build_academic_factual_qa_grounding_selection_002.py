@@ -77,6 +77,7 @@ class _OpenAiGeneratorBindingV1(BaseModel):
 
     binding_id: str = Field(min_length=1)
     provider: Literal["openai"]
+    first_party_endpoint: Literal[True]
     api_url: Literal["https://api.openai.com/v1/responses"]
     credential_environment_variable: Literal["OPENAI_API_KEY"]
     provider_model: Literal["gpt-5.4-mini-2026-03-17"]

@@ -9,6 +9,7 @@ def test_long_run_program_is_finite_and_preserves_known_final() -> None:
     result = runner.validate()
 
     assert result["status"] == "passed-frozen-pending-execution"
+    assert runner.EXECUTION_ATTEMPT_ID.endswith("attempt-002")
     assert result["stage_count"] == 4
     assert result["global_emergency_cost_usd"] == 200.0
     assert result["known_10000_plus_1000_preserved"] is True
@@ -45,3 +46,7 @@ def test_recorded_program_stage_supports_read_only_resume(tmp_path: Path) -> Non
     assert runner._recorded_program_stage(
         tmp_path, "grounding-selection-500-plus-100"
     ) == result
+
+
+def test_local_release_regression_paths_exist() -> None:
+    assert all((runner.ROOT / path).is_file() for path in runner.LOCAL_RELEASE_TESTS)

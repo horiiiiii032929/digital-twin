@@ -38,6 +38,13 @@ continue. No additional per-stage authorization is required. Privacy, gold
 isolation, exact model identity, ledger integrity, wrong-scope delivery,
 bounded-loop, and cost stops remain fail-closed.
 
+Execution attempt 001 stopped before provider I/O because the pinned direct
+OpenAI binding omitted the transport's first-party declaration; the orthogonal
+local regression also named two moved test files. The invalid result records
+zero calls, tokens, cost, responses, or hidden-gold access. The sole permitted
+harness-only correction is frozen as attempt 002 with fresh exclusive outputs;
+cases, gold, prompts, models, method, and gates are unchanged.
+
 Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
 evidence. Issue #153 is the active P0 and owns one method-level action-router
 and grounding successor on fresh development evidence. The sealed final set

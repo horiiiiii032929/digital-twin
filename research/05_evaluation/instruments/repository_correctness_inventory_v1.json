@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5296fff31711b1b428b560518421c924965476b527c361e409a0eda5542a1fa5",
+  "record_sha256": "86ab3b4091d911e00ecafcb658ebfc37323a538b8bfa4982060f5620adf61fe3",
   "records": [
     {
       "audit": {
@@ -2040,7 +2040,7 @@
     {
       "audit": {
         "domain": "grounding-selection-002",
-        "evidence": "OpenAI binding review verified exact snapshot, direct Responses API, store false, structured output, zero fallback/retry, refresh-required metadata, and false execution authority.",
+        "evidence": "OpenAI binding review verified exact snapshot, direct first-party Responses API, store false, structured output, zero fallback/retry, fresh metadata, and the bounded program authority.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex #153 finite grounding-selection audit"
@@ -2051,7 +2051,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_grounding_selection_openai_binding_002.json",
       "risk": "high",
-      "sha256": "5ccca7e1311ce8bdf886e525ee625ea87849f1bc67add8fa559de7e3f4a28ed4"
+      "sha256": "a64e1582769640455ee9a6565acbbe2c2a87f206f7b3140b94f9f2187fdc5d08"
     },
     {
       "audit": {
@@ -3064,7 +3064,7 @@
     {
       "audit": {
         "domain": "autonomous-long-run-001",
-        "evidence": "Manifest review verified one owner authority, four finite stages, a USD 200 emergency stop, exact dependency progression, immutable Program 011 reference evidence, and prohibition of same-case quality reruns.",
+        "evidence": "Manifest review verified final corrective attempt-002 identity, one owner authority, four finite stages, a USD 200 emergency stop, exact dependency progression, immutable Program 011 evidence, and prohibition of same-case quality reruns.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex finite long-run audit"
@@ -3075,7 +3075,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/course_digital_twin_autonomous_long_run_001.json",
       "risk": "high",
-      "sha256": "b4e80b3e0e16610942d579cf31a9a5d2e6c191001c44dd3a11b0f91dc1afb2e5"
+      "sha256": "1b5f3487c15d054c7eda1467503e3f76813e0c6e4a9334aeeb9083df5cc5102a"
     },
     {
       "audit": {
@@ -5576,7 +5576,7 @@
     {
       "audit": {
         "domain": "grounding-selection-002",
-        "evidence": "Builder review verified typed binding identities, unchanged 500+100 packages, two-canary ordering, USD 50 absolute stop, and sealed-final exclusion.",
+        "evidence": "Builder review verified typed direct first-party binding identities, unchanged 500+100 packages, two-canary ordering, USD 50 absolute stop, and sealed-final exclusion.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex #153 finite grounding-selection audit"
@@ -5587,7 +5587,7 @@
       "package_commands": [],
       "path": "scripts/build_academic_factual_qa_grounding_selection_002.py",
       "risk": "high",
-      "sha256": "387235d8610d268afd12a955f8db4e2a1f0d73bee0f31ff2512632306c125536"
+      "sha256": "ea301bcefb079d2e6e89c8a94c582dca36b947501836315e06986f79f357fe0d"
     },
     {
       "audit": {
@@ -6834,7 +6834,7 @@
     {
       "audit": {
         "domain": "grounding-selection-002",
-        "evidence": "Runner review and five terminal simulations verified exact case-ID persistence, exclusive outputs, hidden-gold order, canary bulk stop, atomic resume, budget projection, and authorization failure-closed behavior.",
+        "evidence": "Runner review and five terminal simulations verified attempt-002 exclusive outputs, exact case-ID persistence, hidden-gold order, canary bulk stop, atomic resume, budget projection, and authorization failure-closed behavior.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex #153 finite grounding-selection audit"
@@ -6851,7 +6851,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_grounding_selection_002.py",
       "risk": "high",
-      "sha256": "8ad119f937b5462e63d092727977f7468e58c4997482ce227b7e6aae8f12edb6"
+      "sha256": "b570d498a90686b8efebf84918b05467139c89a3753f8d20488e0980642edae1"
     },
     {
       "audit": {
@@ -7404,7 +7404,7 @@
     {
       "audit": {
         "domain": "autonomous-long-run-001",
-        "evidence": "Runner review verified manifest/revision-bound SQLite resume, read-only recovery of terminal child results after interruption, exact child execution, cost aggregation, dependency skip, orthogonal release continuation, historical-evidence synthesis, and professor-message publication.",
+        "evidence": "Runner review verified final attempt-002 exclusive outputs, an explicit existing-file local-regression test set, manifest/revision-bound SQLite resume, terminal child recovery, exact child execution, cost aggregation, dependency skip, evidence synthesis, and publication.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex finite long-run audit"
@@ -7421,7 +7421,7 @@
       ],
       "path": "scripts/run_course_digital_twin_autonomous_long_run_001.py",
       "risk": "high",
-      "sha256": "bbb32d7c8f2a2dd2dd0e410682bf07b18e81c1118137ccd0af53f2b15ec4e814"
+      "sha256": "98d588d994490ab61ecf54c2e03bcc8efd9c7a9af8625479c37ab93499eb09ea"
     },
     {
       "audit": {
@@ -11914,7 +11914,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests cover exact 500+100 identities, immutable runtime hash, unauthorized preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
+        "evidence": "Focused tests cover exact 500+100 identities, executable direct first-party transport construction, attempt-002 identity, immutable runtime hash, preflight, canary bulk stop, hidden-gold order, provider failure, quality failure, and resume.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex #153 finite grounding-selection audit"
@@ -11925,7 +11925,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
       "risk": "medium",
-      "sha256": "579d219470e9bf1c650a5ef193903249cc4d6ccdcde3c7239e2c0b358f01a737"
+      "sha256": "ae50da56cd4f562e50e58231a437b5d81747c88b8b5cf53e9f2484b7d3918bdd"
     },
     {
       "audit": {
@@ -12650,7 +12650,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify the finite stage count, global budget, known-final preservation, dependency stop, publication continuation, zero-network simulation, and read-only parent-ledger stage recovery.",
+        "evidence": "Focused tests verify the final corrective attempt identity, finite stage count, existing local-regression paths, global budget, known-final preservation, dependency stop, publication continuation, zero-network simulation, and read-only parent-ledger recovery.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex finite long-run audit"
@@ -12661,7 +12661,7 @@
       "package_commands": [],
       "path": "tests/test_course_digital_twin_autonomous_long_run_001.py",
       "risk": "medium",
-      "sha256": "9ef7bf786f8109a25c08105c3ef3520d991c447a8ad5f345d6c0aba1fd3574ee"
+      "sha256": "97e4b84a3f6ae5cfb5f0da169249c21c7d44d4e8bb4eb70a68f788da660b945b"
     },
     {
       "audit": {

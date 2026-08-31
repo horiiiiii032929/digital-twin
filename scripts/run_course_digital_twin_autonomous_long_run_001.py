@@ -26,17 +26,24 @@ from src.digital_twin.repository_freeze import require_bounded_pilot_operation_a
 
 ROOT = Path(__file__).resolve().parents[1]
 PROGRAM_ID = "course-digital-twin-autonomous-long-run-001"
+EXECUTION_ATTEMPT_ID = f"{PROGRAM_ID}-attempt-002"
 INSTRUMENT = ROOT / (
     "research/05_evaluation/instruments/"
     "course_digital_twin_autonomous_long_run_001.json"
 )
-DEFAULT_OUTPUT = ROOT / "reports/generated" / PROGRAM_ID
+DEFAULT_OUTPUT = ROOT / "reports/generated" / EXECUTION_ATTEMPT_ID
 LEDGER_NAME = "program-ledger.sqlite3"
 RESULT_NAME = "program-result.json"
 TEAMS_NAME = "professor-update.txt"
 HISTORICAL_RECORD = ROOT / (
     "research/05_evaluation/records/"
     "course-digital-twin-evaluation-program-011.json"
+)
+LOCAL_RELEASE_TESTS = (
+    "tests/digital_twin/test_governed_autonomy.py",
+    "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+    "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
+    "tests/services/test_runtime_backup.py",
 )
 
 
@@ -147,6 +154,7 @@ def validate() -> dict[str, Any]:
     if (
         manifest.get("program_id") != PROGRAM_ID
         or manifest.get("status") != "frozen-pending-execution"
+        or manifest.get("execution_attempt_id") != EXECUTION_ATTEMPT_ID
         or manifest.get("global_emergency_cost_usd") != 200.0
         or manifest.get("automatic_stage_progression") is not True
         or manifest.get("same_case_quality_rerun_allowed") is not False
@@ -283,10 +291,7 @@ def _local_release_regression() -> dict[str, Any]:
         "uv",
         "run",
         "pytest",
-        "tests/test_governed_full_autonomy_product_freeze.py",
-        "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
-        "tests/api/test_governed_autonomy_v2.py",
-        "tests/services/test_runtime_backup.py",
+        *LOCAL_RELEASE_TESTS,
         "-q",
     ]
     process = subprocess.run(
@@ -324,6 +329,7 @@ def _publication(results: dict[str, dict[str, Any]], output_root: Path) -> dict[
     result = {
         "schema_version": 1,
         "program_id": PROGRAM_ID,
+        "execution_attempt_id": EXECUTION_ATTEMPT_ID,
         "status": status,
         "decision": "Keep" if status == "completed-keep" else "Refine",
         "stages": results,

@@ -1,6 +1,17 @@
 {
   "schema_version": 1,
   "program_id": "course-digital-twin-autonomous-long-run-001",
+  "execution_attempt_id": "course-digital-twin-autonomous-long-run-001-attempt-002",
+  "predecessor_invalid_attempt": {
+    "execution_attempt_id": "course-digital-twin-autonomous-long-run-001-attempt-001",
+    "provider_calls": 0,
+    "cost_usd": 0.0,
+    "hidden_gold_opened": false,
+    "correction_scope": [
+      "declare the already selected direct OpenAI endpoint first-party",
+      "replace moved local-regression test paths"
+    ]
+  },
   "status": "frozen-pending-execution",
   "owner_issue": 157,
   "parent_issue": 8,
@@ -71,5 +82,5 @@
     "unbounded-loop",
     "global-cost-ceiling-exhausted"
   ],
-  "content_sha256": "36eac2f832d1e1a56ac6888b2f80b9a718629f8d5485d63744f8f3ed23e75d8c"
+  "content_sha256": "4f92dd528756ae83861d330c52324404147c515f3d6bf5c10000c89e4fb29196"
 }

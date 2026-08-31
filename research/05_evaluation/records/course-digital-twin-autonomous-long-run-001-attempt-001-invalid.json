@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-autonomous-long-run-001-attempt-001-invalid",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-grounding-selection-002-development",
+  "corpus_id": "four-pinned-open-educational-source-families-grounding-selection-002",
+  "code_revision": "cd50278f337391e89ee8c3fc3f6fe40e3f582ecb",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "question-targeted-atomic-grounding-selection",
+        "version": "attempt-001-invalid",
+        "configuration": {
+          "failure_stage": "candidate-canary",
+          "failure_type": "ProviderJsonError",
+          "failure_detail": "direct provider binding is not first-party",
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0,
+          "hidden_gold_opened": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 602.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 50.0,
+          "passed": true
+        },
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "direct-provider-transport-contract",
+          "passed": false,
+          "evidence": "The pinned direct OpenAI URL lacked the required first-party declaration."
+        },
+        {
+          "name": "paired-execution-complete",
+          "passed": false,
+          "evidence": "The candidate canary stopped before either full condition executed."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "Construction stopped before the first provider attempt."
+        },
+        {
+          "name": "gold-and-final-closure",
+          "passed": true,
+          "evidence": "Hidden gold stayed closed and Program 011 was not rerun."
+        }
+      ],
+      "failures_by_category": {
+        "provider-binding-schema-defect": 1,
+        "incomplete-product-execution": 1
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-grounding-control",
+        "version": "attempt-001-not-reached",
+        "configuration": {
+          "provider_calls": 0,
+          "reported_cost_usd": 0.0,
+          "hidden_gold_opened": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "provider-call-count",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.0,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 50.0,
+          "passed": true
+        },
+        {
+          "name": "persisted-product-responses",
+          "value": 0.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "direct-provider-transport-contract",
+          "passed": false,
+          "evidence": "The shared direct OpenAI transport contract failed before the control stage."
+        },
+        {
+          "name": "paired-execution-complete",
+          "passed": false,
+          "evidence": "The shared candidate canary defect stopped execution before the control."
+        },
+        {
+          "name": "zero-unaccounted-provider-usage",
+          "passed": true,
+          "evidence": "No control request was attempted."
+        },
+        {
+          "name": "gold-and-final-closure",
+          "passed": true,
+          "evidence": "Hidden gold and the sealed final package remained closed."
+        }
+      ],
+      "failures_by_category": {
+        "dependency-not-reached": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Attempt 001 is operationally invalid before provider I/O. Apply the single preregistered harness-only correction and use a fresh attempt identity.",
+    "limitations": [
+      "No product-quality metric can be interpreted from this attempt.",
+      "No provider call, token, or paid usage occurred.",
+      "Attempt 002 is the final permitted execution attempt."
+    ]
+  }
+}

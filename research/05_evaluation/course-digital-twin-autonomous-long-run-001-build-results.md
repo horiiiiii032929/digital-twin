@@ -34,6 +34,12 @@ the repository freeze.
 Outcome: **Go Deeper**. Execute the already authorized finite program from a
 clean revision. No additional stage authorization is required.
 
+Attempt 001 later stopped before provider I/O because the direct OpenAI
+transport declaration omitted its first-party flag and local regression named
+two moved tests. The invalid result is preserved separately. Attempt 002 is the
+single permitted harness-only correction and changes neither the evaluation
+method nor its evidence.
+
 ## Limitations
 
 - No product-quality measurement occurred in this build checkpoint.
@@ -42,4 +48,3 @@ clean revision. No additional stage authorization is required.
 - The mutable `gpt-5.6-terra` identity must remain exact during the live run.
 - Security, privacy, gold isolation, ledger integrity, model identity, loop,
   and global-cost hard stops remain active.
-
