@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Command-surface and configuration review plus successful focused validation for the governed autonomy V2.1 development candidate.",
+      "evidence": "Command-surface review plus successful validation of the governed-autonomy provider integration and flow-independent full-autonomy harness commands.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "7bad3de7c209509a3f519814dd5c49b0a73aacbe08508d32d4342d0b5f30f053"
+      "sha256": "d56f3a95426ad1cdd7bac8c025201106de0958201c13a6f8c44b0f53039b4fc6"
     },
     {
       "audit_status": "audited",
@@ -3595,7 +3595,7 @@
       "domain": "governed-autonomy-v2-1",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+      "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused tests. The explicit non-evaluation allowlist includes the provider-free V2.1 reference harness and continues to reject unguarded paid or held-out entrypoints.",
       "findings": []
     },
     {
@@ -5367,7 +5367,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "fde3712642829e1400e66edd83eaae06f28fa46af670c3c821268d490240ed78"
+      "sha256": "6a4b77308a9f027c06df1463181b3077d93826803ccf71041f7ab5202ece3602"
     },
     {
       "audit_status": "audited",
@@ -5714,12 +5714,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-provider-boundary",
-      "evidence": "Process-local call/cost serialization and fail-closed unknown-cost behavior reviewed; focused budget tests passed.",
+      "evidence": "Process-local call/cost serialization, fail-closed unknown-cost behavior, and privacy-safe per-call identity/token/latency/cost/failure accounting reviewed; focused budget tests passed.",
       "findings": [],
       "path": "services/llm/budget.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "41e18dbfc0404a2d81c556d0f790daf44a36205e38664729961b42286c898449"
+      "sha256": "fe5be12d7eb2357ea04b8f2470597242e6069735e610986bfd6a4e0a866e4279"
     },
     {
       "audit_status": "audited",
@@ -5895,7 +5895,7 @@
       "path": "src/digital_twin/evaluation/__init__.py",
       "reviewed_at": "2026-08-30",
       "reviewer": "codex-primary-finite-program-review",
-      "sha256": "c1f4212ee2f0d723057393ba42fee90ab37d3e863a70bb85661bfe536e2189bb"
+      "sha256": "a54c628e38a31a51313c42c76831e80d9e701f157586a6a46730c68e08048b75"
     },
     {
       "audit_status": "audited",
@@ -7353,12 +7353,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-verification",
-      "evidence": "Call cap, reported cost cap, and unknown-cost fail-closed regressions reviewed and passed.",
+      "evidence": "Call cap, reported cost cap, unknown-cost fail-closed behavior, complete successful-call accounting, failed-call accounting, and prompt-content exclusion regressions passed.",
       "findings": [],
       "path": "tests/services/test_llm_budget.py",
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
-      "sha256": "321652425981b9ac3563d4273fb8664f89fa5cbf9a52a45a73b495128a7a383e"
+      "sha256": "a2f8c61f423d2894ce36e716aab972b3ec900dd9ad2502d63f02b1d451c9dcd3"
     },
     {
       "audit_status": "audited",
@@ -8772,12 +8772,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "full-autonomy-evaluation-boundary",
-      "evidence": "Manual contract review and focused tests verified case/gold separation, event ordering, observable action/state outputs, time advancement, restart handling, and independence from graph nodes, database tables, and runtime chunk IDs.",
+      "evidence": "Manual contract review and focused tests verified case/gold separation, event ordering, observable action/state outputs, time advancement, restart handling, per-call operational accounting, diagnostic invariants, and independence from graph nodes, database tables, and runtime chunk IDs.",
       "findings": [],
       "path": "src/digital_twin/evaluation/autonomy_contract.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex V2.1 implementation audit",
-      "sha256": "3806d4cccf69f574e7d4b6207959964fcd25159ced52e00c431976f0173961cf"
+      "sha256": "780cbbd77745252e08f8c7994d67e1dfd8d1bd9b99636b4a27c2a7f2dd401e52"
     },
     {
       "audit_status": "audited",
@@ -8794,12 +8794,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "full-autonomy-evaluation-boundary",
-      "evidence": "Focused network-free regressions cover schema rejection, duplicate and out-of-order events, gold isolation, time progression, restart forwarding, observable action collection, and final state capture.",
+      "evidence": "Focused network-free regressions cover schema rejection, duplicate and out-of-order events, gold isolation, time progression, restart forwarding, observable action collection, final state capture, and exact operational-metric lineage.",
       "findings": [],
       "path": "tests/test_autonomy_evaluation_contract.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex V2.1 implementation audit",
-      "sha256": "941d03245a5d61d91584d11d7be197e829aab6b2fabb5d3b459088d38be9f545"
+      "sha256": "beb02d7003639f8b7353e34052d5cb346a0443e3ff7409905de920b46ceb1cb6"
     },
     {
       "audit_status": "audited",
@@ -8811,6 +8811,61 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Prospective build-only instrument review verified the four condition identities, exact 600 trajectory, 100 long-horizon, and 120 opportunity allocations, zero execution authority, and preregistered deterministic hard gates.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_evaluation_harness_001.json",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 harness audit",
+      "sha256": "2ade9060b38465d3902ac2f390735cb2a66c7dd4c60af5baee4ee2ffac9196d8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Manual finite-program review plus the complete 820-case network-free simulation verified deterministic case/gold construction, exact IDs, gold-field exclusion, four-condition coverage, long-horizon time/restart handling, proactive opportunity coverage, and zero provider use.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_evaluation_harness.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 harness audit",
+      "sha256": "8a80d8a066eeeee53d41833372b4ed325671f99d22425e35e74427415d1a0037"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "full-autonomy-evaluation-boundary",
+      "evidence": "Deterministic scorer review verified action-window matching, recipient/course/release checks, citation lineage, consent chronology, duplicate detection, goal termination, restart, bounded-loop, provider-failure, and model-authority invariants without graph-internal dependencies.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/autonomy_scoring.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 harness audit",
+      "sha256": "070fed21c74be386cd8b25d94e16fd775ba91b4d104ea1a93d4ca6726eb4f4e9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused scoring regressions prove exact observable behavior passes and wrong-recipient and post-consent deliveries fail deterministically.",
+      "findings": [],
+      "path": "tests/test_autonomy_scoring.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 harness audit",
+      "sha256": "14f94c12375df416e7a767c45c54df219151293d411e94acbba583ee0433fa86"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused harness regressions verify the exact 820-case allocation, unique public/gold IDs, gold-field exclusion, all four conditions, full hard-gate simulation, and zero provider calls/tokens/cost.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_evaluation_harness.py",
+      "reviewed_at": "2026-08-31",
+      "reviewer": "Codex #157 harness audit",
+      "sha256": "1a964b5a7adce5104a8c8b2e3aa8417ce67b68d95036bcfa7c03a7126a1fe5d3"
     }
   ],
   "schema_version": 1

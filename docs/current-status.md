@@ -109,6 +109,23 @@ per-call latency totals were not surfaced by this aggregate runner and are
 recorded as an accounting limitation for #157. This integration cannot select
 or promote V2.1; #157 remains the academic full-autonomy decision.
 
+The #157 build-only successor now closes that prospective accounting gap.
+`BudgetedLlmClient` records one privacy-safe row for every completed or failed
+call with task, returned identity, input/output tokens, reported cost, latency,
+and bounded error code; prompt content is never copied into the ledger. The
+flow-independent response contract carries exact per-call operational metrics,
+observable goal termination, and diagnostic invariant results.
+
+Instrument `governed-full-autonomy-v2-1-evaluation-harness-001` also freezes a
+finite reusable portfolio: 600 multi-turn cases from 50 trajectory templates,
+four conditions, and three seeds; 100 synthetic learners over 30 simulated
+days; and 120 proactive opportunities. The 820-case network-free reference
+simulation passes every scorer and integrity gate with zero calls, tokens, or
+cost. This proves only the harness, public/gold isolation, and deterministic
+scoring. It is not product-quality evidence, does not open held-out data, and
+does not select V2.1. Actual T0/T1-v1/T1-v2 reactive/autonomous adapters and
+provider-backed execution remain the next #157 checkpoint.
+
 GitHub tracks the remaining evidence path explicitly: #153 remains
 `In Progress / Refine` for grounding selection. #155 is complete as the
 software-and-provider-integration milestone and moves to `Done / Keep`; it does
@@ -116,7 +133,7 @@ not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
 and #157 moves to `In Progress / Go Deeper` for the actual flow-independent
 evaluation. Parent #8
 remains open. The execution freeze is active again with no provider checkpoint
-authorized. Repository correctness is 801/801 audited
+authorized. Repository correctness is 806/806 audited
 execution-relevant files with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

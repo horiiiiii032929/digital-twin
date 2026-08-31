@@ -467,6 +467,21 @@ trajectory-disjoint sealed tranche is required for a new confirmatory claim.
 Safety gates apply to every repeated run. Soft pedagogical measures cannot
 compensate for a hard-gate failure.
 
+### Flow-independent harness checkpoint
+
+`governed-full-autonomy-v2-1-evaluation-harness-001` operationalizes these
+rules without coupling evaluation to LangGraph nodes, Python classes, SQLite
+tables, UI routes, prompts, or runtime chunk IDs. Its public case contract and
+hidden gold contract expand deterministically to 820 cases: 600 condition/seed
+trajectory cases, 100 30-day learner cases, and 120 proactive opportunities.
+The reference-driver simulation is network-free and validates the harness only;
+it cannot be cited as product-quality evidence.
+
+Every later product adapter must emit privacy-safe per-call rows containing the
+task, returned model identity, input/output tokens, reported cost, latency, and
+bounded error status. Public cases never contain expected actions or terminal
+state. Gold scoring occurs only after the product response is durable.
+
 ### Pedagogical measures
 
 Adapt the MRBench dimensions rather than relying on generic answer-quality

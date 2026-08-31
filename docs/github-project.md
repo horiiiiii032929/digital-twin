@@ -98,6 +98,16 @@ immutable full-autonomy product evaluation. Issue #153 remains the first P0
 dependency because no autonomous release is safe before the grounding successor
 passes.
 
+#157 now has a complete build-only evaluation boundary rather than another
+open-ended design task. Per-call provider identity, input/output tokens,
+latency, cost, and failure status are prospectively captured without prompt
+content. Its 820-case network-free harness covers the four conditions, 50
+multi-turn templates across three seeds, 100 learners over 30 days, and 120
+proactive opportunities. All reference-driver gates pass with zero provider
+usage. This is harness qualification only; #157 remains `In Progress / Go
+Deeper` until the immutable product adapters run and a Keep/Refine decision is
+registered.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2
