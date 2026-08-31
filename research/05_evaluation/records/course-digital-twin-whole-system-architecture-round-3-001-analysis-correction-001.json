@@ -1,0 +1,48 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-3-protocol-audit",
+  "round_number": 3,
+  "status": "invalid-execution",
+  "supersedes": ["course-digital-twin-whole-system-architecture-round-3-001"],
+  "decision_question": "Did the executed Round 3 instrument comply with the frozen parent program's architecture-count bound?",
+  "code_revision": "a3fe4fc2c57d91c86f71a5102eefa371dfb84303",
+  "dirty_state": true,
+  "started_at": "2026-08-31T21:20:00Z",
+  "completed_at": "2026-08-31T21:24:00Z",
+  "bindings": [
+    {"path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_evolution_001.json", "sha256": "04756b34ef0178b792018c0c80ba44b76605bd768feba10bbab2c5159d6b0e8f", "role": "parent-program"},
+    {"path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_3_001.json", "sha256": "1da9d15b386589e6a9aaafcdf627972c3ac187a5a0ed35fbd372cf9f3416b2cf", "role": "executed-round-instrument"},
+    {"path": "reports/generated/course-digital-twin-whole-system-architecture-round-3-001/result.json", "sha256": "1826e0d6825271c3ca78cf68619f4e0c2342b0f73b0bd1cea993e26ebc8a60aa", "role": "ignored-raw-result"}
+  ],
+  "candidates": [
+    {
+      "architecture_id": "round-3-parent-bound-audit",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": ["evaluation"],
+      "metrics": [
+        {"name": "executed-architecture-count", "value": 3, "unit": "count", "direction": "lower-is-better", "threshold": 2, "passed": false},
+        {"name": "provider-call-count", "value": 0, "unit": "count", "direction": "lower-is-better", "threshold": 0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "parent-candidate-bound", "passed": false, "evidence": "The parent allows at most two total Round 3 architectures; the executed child contained three."},
+        {"name": "same-fold-rerun-prohibited", "passed": true, "evidence": "The opened 481-case fold will not be rerun or reduced post hoc."}
+      ]
+    }
+  ],
+  "operational": {"provider_calls": 0, "input_tokens": 0, "output_tokens": 0, "reported_cost_usd": 0, "malformed_responses": 0, "provider_failures": 0, "p95_latency_ms": 0},
+  "failures": [
+    {"category": "evaluation", "count": 1, "evidence": "The build validator failed to enforce the frozen parent program's maximum architecture count."}
+  ],
+  "decision": {"outcome": "no-release", "selected_architecture_id": null, "rationale": "Round 3 is diagnostic only and invalid for formal selection; the opened fold cannot be rerun, and no condition passed all quality gates."},
+  "limitations": [
+    "The raw quality metrics remain descriptive known-development evidence.",
+    "No valid third-round winner or fresh confirmation result exists.",
+    "No real-human professor, student, usability, or learning evidence was collected."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001.json"
+}

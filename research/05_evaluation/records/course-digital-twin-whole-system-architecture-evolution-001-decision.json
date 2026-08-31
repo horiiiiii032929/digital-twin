@@ -1,0 +1,52 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-evolution-001-decision",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-evolution-decision",
+  "round_number": null,
+  "status": "completed-refine",
+  "supersedes": [],
+  "decision_question": "Did any architecture pass every frozen hard gate after the three finite source-disjoint development rounds?",
+  "code_revision": "a3fe4fc2c57d91c86f71a5102eefa371dfb84303",
+  "dirty_state": true,
+  "started_at": "2026-08-31T21:15:00Z",
+  "completed_at": "2026-08-31T21:20:00Z",
+  "bindings": [
+    {"path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_evolution_001.json", "sha256": "04756b34ef0178b792018c0c80ba44b76605bd768feba10bbab2c5159d6b0e8f", "role": "program-instrument"},
+    {"path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-3-001.json", "sha256": "2b1c2867fb5aae0c080ccf56a81d688666ccecd829420c16ba566e9bcc67a63a", "role": "terminal-round-result"}
+  ],
+  "candidates": [
+    {
+      "architecture_id": "whole-system-no-release-decision",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": [],
+      "metrics": [
+        {"name": "valid-development-rounds-completed", "value": 2, "unit": "count", "direction": "higher-is-better", "threshold": 3, "passed": false},
+        {"name": "best-grounded-factual-success", "value": 0.9164490861618799, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "best-boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "winner-passed-every-frozen-gate", "passed": false, "evidence": "No architecture passed the complete grounded, claim, citation, source-version, retrieval, and safety gate set."},
+        {"name": "all-rounds-complied-with-parent-protocol", "passed": false, "evidence": "Round 3 executed three architectures while the frozen parent maximum was two."},
+        {"name": "fresh-confirmation-remained-unopened", "passed": true, "evidence": "The 1,000-case confirmation and every dependent final stage made zero calls and opened no gold."}
+      ]
+    }
+  ],
+  "operational": {"provider_calls": 0, "input_tokens": 0, "output_tokens": 0, "reported_cost_usd": 0, "malformed_responses": 0, "provider_failures": 0, "p95_latency_ms": 0},
+  "failures": [
+    {"category": "architecture", "count": 3, "evidence": "The best observed condition in each of three source-disjoint folds failed at least one frozen hard gate."},
+    {"category": "evaluation", "count": 1, "evidence": "Round 3 exceeded the frozen parent candidate-count limit and is diagnostic rather than selection-valid."},
+    {"category": "method", "count": 32, "evidence": "The terminal strongest control retained 32 answerable fully-grounded failures."}
+  ],
+  "decision": {"outcome": "no-release", "selected_architecture_id": null, "rationale": "No architecture passed every frozen hard gate, and the third fold is protocol-invalid for selection; no winner or release is selected."},
+  "limitations": [
+    "Only two of three planned architecture rounds are selection-valid; the third remains diagnostic known-development evidence.",
+    "The final 1,000-case confirmation and downstream evaluations were not opened.",
+    "No real-human professor, student, usability, or learning evidence was collected.",
+    "The local V2.1 software remains build evidence and is not a selected release."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-evolution-001-decision-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-evolution-001-decision.json"
+}

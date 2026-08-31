@@ -1,0 +1,92 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "course-digital-twin-whole-system-architecture-round-3-001",
+  "program_id": "course-digital-twin-whole-system-architecture-evolution-001",
+  "stage_id": "architecture-round-3",
+  "round_number": 3,
+  "status": "completed-refine",
+  "supersedes": [],
+  "decision_question": "Does either source-range successor pass every frozen quality gate on the untouched Round 3 fold?",
+  "code_revision": "a3fe4fc2c57d91c86f71a5102eefa371dfb84303",
+  "dirty_state": false,
+  "started_at": "2026-08-31T21:13:00Z",
+  "completed_at": "2026-08-31T21:15:00Z",
+  "bindings": [
+    {"path": "research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_3_001.json", "sha256": "1da9d15b386589e6a9aaafcdf627972c3ac187a5a0ed35fbd372cf9f3416b2cf", "role": "round-instrument"},
+    {"path": "reports/generated/course-digital-twin-whole-system-architecture-round-3-001/result.json", "sha256": "1826e0d6825271c3ca78cf68619f4e0c2342b0f73b0bd1cea993e26ebc8a60aa", "role": "ignored-raw-result"}
+  ],
+  "candidates": [
+    {
+      "architecture_id": "typed-target-round-3-control-v1",
+      "version": "v1",
+      "role": "baseline",
+      "changed_planes": [],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.9164490861618799, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.97911227154047, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "atomic-claim-precision", "value": 0.9190600522193212, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "atomic-claim-recall", "value": 0.9190600522193212, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "citation-precision", "value": 0.9268929503916449, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": false},
+        {"name": "citation-recall", "value": 0.9268929503916449, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "all-evidence-at-3", "value": 0.9869451697127938, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9869451697127938, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "source-version-validity", "value": 0.9973890339425587, "unit": "rate", "direction": "higher-is-better", "threshold": 1.0, "passed": false}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Grounded-success, claim, citation, and source-version gates failed."}
+      ]
+    },
+    {
+      "architecture_id": "source-range-candidate-assembly-v2",
+      "version": "v2",
+      "role": "candidate",
+      "changed_planes": ["domain", "retrieval", "claim-citation", "learner-state", "pedagogical-policy", "reactive-loop", "proactive-loop", "product-experience", "evaluation"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.8981723237597912, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.9895561357702349, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9973890339425587, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9973890339425587, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Improved retrieval did not improve grounded, claim, citation, or source-version quality."}
+      ]
+    },
+    {
+      "architecture_id": "source-range-ambiguity-aware-v2",
+      "version": "v2",
+      "role": "candidate",
+      "changed_planes": ["domain", "retrieval", "claim-citation", "learner-state", "pedagogical-policy", "reactive-loop", "proactive-loop", "product-experience", "evaluation"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.7989556135770235, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.8485639686684073, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9973890339425587, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9973890339425587, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "severe-unsupported-release-count", "passed": true, "evidence": "0"},
+        {"name": "all-frozen-quality-gates", "passed": false, "evidence": "Over-broad clarification reduced answerable action and grounded success."}
+      ]
+    }
+  ],
+  "operational": {"provider_calls": 0, "input_tokens": 0, "output_tokens": 0, "reported_cost_usd": 0, "malformed_responses": 0, "provider_failures": 0, "p95_latency_ms": 0},
+  "failures": [
+    {"category": "method", "count": 32, "evidence": "The strongest condition had 32 answerable cases without fully grounded success."},
+    {"category": "method", "count": 28, "evidence": "The strongest condition lacked complete canonical citation lineage in 28 answerable cases."},
+    {"category": "method", "count": 8, "evidence": "The strongest condition used an incorrect non-answer action in eight answerable cases."},
+    {"category": "evaluation", "count": 4, "evidence": "Equivalent RST role serializations produced four disclosed scorer false negatives; a best-case sensitivity remains below the 95% gate."}
+  ],
+  "decision": {"outcome": "refine", "selected_architecture_id": null, "rationale": "No candidate passed all hard gates. Retain typed-target only as the strongest diagnostic control and do not open final confirmation."},
+  "limitations": [
+    "This is the third development fold, not the one-time fresh confirmation.",
+    "The RST role sensitivity is post-hoc and does not rewrite the primary result.",
+    "No provider generation, professor fidelity, real usability, human judgment, or student learning improvement is established."
+  ],
+  "summary_path": "research/05_evaluation/course-digital-twin-whole-system-architecture-round-3-001-results.md",
+  "record_path": "research/05_evaluation/records/course-digital-twin-whole-system-architecture-round-3-001.json"
+}

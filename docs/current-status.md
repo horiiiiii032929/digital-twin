@@ -42,17 +42,31 @@ did not pass the frozen 95% grounded-success or claim/citation/source-version
 gates. The section-ranked variant produced identical quality at higher
 latency. The 42 answerable failures reduce to unresolved low-information
 targets, neighboring source-region selection, and canonical-span assembly.
-Round 3 will retain typed targets as a baseline and compare a source-range-aware
-candidate-set and ambiguity-aware claim assembly successor on the untouched
+Round 3 retained typed targets as its baseline and compared source-range-aware
+candidate-set and ambiguity-aware claim-assembly successors on the untouched
 481-case third fold. No provider calls or paid cost were incurred.
 
-The Round 3 build is now qualified. Its prospective scorer removes only
-non-visible source-authoring markup and does not rewrite any Round 1/2 score.
-The two candidates rank distinct canonical source ranges, render student-visible
-claims, and either select a complete range set or explicitly clarify an
-unresolved low-information target. The 12-case simulation, 1,480 Python tests,
-50 frontend tests, 845/845 correctness inventory, and 123/123 freeze coverage
-all pass. Round 3 has not yet been executed and no winner is selected.
+Round 3 is complete as `Refine` on the untouched 481-case fold. The retained
+typed-target control led at 91.64% grounded factual success, versus 89.82% for
+source-range assembly and 79.90% for strict ambiguity clarification. Every
+condition retained 100% boundary action and zero severe releases, and both
+source-range methods exceeded 99.7% evidence@3/Recall@5. However, none passed
+the frozen grounded, claim, citation, and source-version gates. Four RST-role
+serialization false negatives are disclosed; even the best-case sensitivity
+would be 92.69%, still below the 95% gate.
+
+The finite program is terminal `Refine` with no winner and no release
+selection. Observed grounded success moved from 52.66% to 89.42% to a 91.64%
+diagnostic result across source-disjoint folds, but high retrieval coverage did
+not yield release-quality claim/citation lineage. A post-run protocol audit
+also found that Round 3 executed three architectures while the frozen parent
+allowed at most two; the build validator failed to enforce this bound. Round 3
+is therefore retained as diagnostic known-development evidence, not a formal
+selection result, and it will not be rerun or post-hoc reduced. The fresh 1,000-case confirmation,
+known 10,000+1,000 rerun, 820-case provider autonomy comparison, and downstream
+proxy/release stages remain unopened. All three folds are now known regression
+data; any successor requires fresh evidence and a method-level semantic target
+resolution design.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
