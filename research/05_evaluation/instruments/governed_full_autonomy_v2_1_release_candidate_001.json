@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "manifest_id": "governed-full-autonomy-v2-1-release-candidate-001",
+  "status": "frozen-build-only-unselected",
+  "frozen_at": "2026-08-31T13:01:02Z",
+  "source_revision": "adfc8bd7a5af6d32e635f91f8bc5f6859534f8c5",
+  "source_pull_request": 158,
+  "system": {
+    "flow_id": "governed-autonomous-tutoring-graph-v2.1",
+    "reactive_graph_implementation": "governed-reactive-tutoring-graph-v2.1",
+    "proactive_graph_implementation": "governed-autonomous-tutoring-graph-v2.1",
+    "release_profile_path": "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json",
+    "release_profile_sha256": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+    "planner_model": "gpt-5.6-terra",
+    "generator_model": "gpt-5.4-mini-2026-03-17",
+    "evidence_gate": "structured-lexical-coverage-evidence-gate-v1",
+    "atomic_claim_validator": "exact-quote-atomic-claim-verifier-v1",
+    "t0_rollback_available": true,
+    "t1_v1_control_available": true
+  },
+  "source_hashes": {
+    "compose_local_r1_sha256": "b49d5765679ee695da39351cc441a89f4cddea5a1a6b4722fd9a35716ca4b651",
+    "reactive_graph_sha256": "aa59860c7f32fea2c087d9a66d11d1bcdbf8b16277e6560ed828cb2f27f4b89a",
+    "proactive_runtime_sha256": "5f87d6bdbc731e4972bda55f9cad6a0d7c19740a4476e9a5f3e7579542ef01bb"
+  },
+  "images": {
+    "api_and_workers": {
+      "tag": "digital-twin-api:v2-1-adfc8bd7",
+      "digest": "sha256:f921fc748976be71af1f882642e5c8771c9e10ffbc8cc612306025049fc79cf5"
+    },
+    "web": {
+      "tag": "digital-twin-web:v2-1-adfc8bd7",
+      "digest": "sha256:12e216605cf15c7e8755aa82fd0691d9e0704059615b2c2008da0229e9c260bb"
+    }
+  },
+  "selection": {
+    "selected_for_release": false,
+    "provider_backed_confirmation_complete": false,
+    "academic_full_autonomy_evaluation_complete": false
+  },
+  "limitations": [
+    "The images are immutable local build artifacts and are not pushed to a public registry.",
+    "This manifest freezes a software candidate; it is not quality, professor-fidelity, usability, or learning-outcome evidence.",
+    "The mutable Terra model alias requires an exact returned-identity check on every provider call."
+  ]
+}

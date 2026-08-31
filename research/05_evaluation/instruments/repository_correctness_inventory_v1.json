@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 797
+    "audited": 801
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 182,
+    "active_or_unclassified_tooling": 183,
     "active_runtime": 134,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 210,
+    "evaluation_configuration": 212,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 170
+    "verification": 171
   },
-  "file_count": 797,
+  "file_count": 801,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "467674741f6eadaacbe6a280f9973bece19b6ed0b9028851107d823c3c0443e4",
+  "record_sha256": "4e10cac4eb948a6a0eaef17c47d7c07d5cf4f1e1e62ea44678f36c0eed96a30e",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "0df03b9597ce8c245fc2f1fd3c560b81949ab8ae3d5359e53b760b7fe1e66412"
+      "sha256": "7bad3de7c209509a3f519814dd5c49b0a73aacbe08508d32d4342d0b5f30f053"
     },
     {
       "audit": {
@@ -4020,6 +4020,38 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_product_freeze_001.json",
       "risk": "high",
       "sha256": "3bbfda8d1e2f21bf4136dc2b27201182dda4acf6d8596c7ce28e92827c980471"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Prospective authority, model identity, pricing, public-data, retry, cost, output, and no-promotion boundaries were reviewed; focused tests and the actual-service network-free simulation passed with zero provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 provider-integration audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_provider_integration_001.json",
+      "risk": "high",
+      "sha256": "ec9eb08703d3dbc9e10492bcf494725efc78f7db16e8ca4b9011203eb0463a1f"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual freeze review binds merged revision adfc8bd7, exact profile and product source hashes, immutable local API/worker and Web image digests, T1-v1/T0 controls, and an explicit unselected status.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 provider-integration audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_release_candidate_001.json",
+      "risk": "high",
+      "sha256": "b50d31e594155ea079a3ea8d360aadd52224a924f509264e68be4b870e6e6f84"
     },
     {
       "audit": {
@@ -7627,6 +7659,27 @@
     },
     {
       "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Entrypoint, repository freeze guard, exclusive-output, metadata freshness, credential, hash, identity, budget, zero-retry, authority, actual reactive/proactive service, restart, and no-promotion paths passed focused Ruff, pytest, validation, and network-free simulation.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 provider-integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-provider-integration",
+        "preflight:governed-autonomy-v2-1-provider-integration",
+        "simulate:governed-autonomy-v2-1-provider-integration",
+        "validate:governed-autonomy-v2-1-provider-integration"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
+      "risk": "high",
+      "sha256": "c9a889331d0d3ab1b192ebf9c9bd2ff168d5f0f937e46157ee6434e210fd05db"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -10392,7 +10445,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9b698cb294c1a517912d74162faf5451a81f2ad480f9938643fd70a442f4736e"
+      "sha256": "0d67384479b64a64f675d04a4c5d62de7c038cb811f7b5987cda36014c7b4342"
     },
     {
       "audit": {
@@ -12701,6 +12754,22 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
+        "evidence": "Focused tests prove the build-only candidate remains unselected, network-free execution crosses actual reactive/proactive services, live preflight stops only at authority under exact metadata, and execute cannot construct a request while unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 provider-integration audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
+      "risk": "medium",
+      "sha256": "6215d2f8a4921080118d6c32ee94dc9f9f3406ddfd7b94df63ac5cafef046a97"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
         "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
         "reviewed_at": "2026-08-31",
@@ -13404,8 +13473,8 @@
     }
   ],
   "risk_counts": {
-    "high": 613,
-    "medium": 184
+    "high": 616,
+    "medium": 185
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

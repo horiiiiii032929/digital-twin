@@ -36,7 +36,7 @@ The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
 professor-fidelity, usability, or learning-outcome claim is added.
 
-Draft PR #158 now contains the complete software implementation checkpoint for
+Merged PR #158 (`adfc8bd7`) contains the complete software implementation checkpoint for
 governed autonomy V2.1. It is no longer a T1-v1 alias. A release-bound
 `CourseDomainModelV1`, V2 perception/observation/attribution/belief/plan/delta/
 response/trace contracts, a deterministic assessed-evidence-count belief
@@ -92,13 +92,25 @@ evaluation, professor fidelity, usability, and learning outcomes remain open.
 See [the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
 and [the implementation design](autonomous-tutoring-loop-v2.md).
 
+The merged revision is now frozen as build-only candidate
+`governed-full-autonomy-v2-1-release-candidate-001`. The manifest binds the
+OpenAI candidate profile hash, reactive/proactive source hashes, and immutable
+local API/worker and Web image digests. A separate provider-integration
+checkpoint exercises two actual T1-v2 reactive turns and one due proactive job
+through direct OpenAI Responses API boundaries. Its network-free simulation
+passes every gate with four fixture calls. Live metadata confirms account
+access to exact `gpt-5.6-terra` and `gpt-5.4-mini-2026-03-17`, but paid
+execution remains unauthorized until the clean build-only checkpoint is
+published. This integration cannot select or promote V2.1; #157 remains the
+academic full-autonomy decision.
+
 GitHub tracks the remaining evidence path explicitly: #153 remains
 `In Progress / Refine` for grounding selection, #155 remains
 `In Progress / Go Deeper` until provider-backed V2.1 confirmation, #156 remains
 `Todo / Go Deeper` until A2 promotion evidence, and #157 remains
 `Todo / Go Deeper` until the actual flow-independent evaluation. Parent #8
 remains open. The execution freeze remains active and no provider call was made
-by this implementation checkpoint. Repository correctness is 797/797 audited
+by this implementation or build-only freeze checkpoint. Repository correctness is 801/801 audited
 execution-relevant files with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package

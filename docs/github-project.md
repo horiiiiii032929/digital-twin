@@ -69,7 +69,7 @@ remains conversation-first; professor autonomy is operated through an explicit
 workflow-first governance console. T1-v1 and T0 remain the selected control and
 rollback until prospective provider-backed and held-out product evidence passes.
 
-PR #158 now contains the complete software implementation checkpoint for
+Merged PR #158 now contains the complete software implementation checkpoint for
 governed autonomy V2.1: release-bound domain semantics, V2 perception and
 belief planes, deterministic evidence-count updates, an independently
 implemented reactive/autonomous graph, node-level SQLite checkpoints, durable
@@ -79,6 +79,12 @@ and duplicate-suppression gates. This is implementation evidence only. No paid
 call, held-out run, A2 qualification, or full-autonomy evaluation was
 performed, so #153, #155, #156, and #157 all remain open. T1-v2.1 remains
 `Go Deeper` and the selected local R1 profile is unchanged.
+
+Revision `adfc8bd7` is frozen as build-only release candidate 001 with exact
+profile, source, and local image hashes. The successor provider-integration
+instrument is bounded to 12 calls, zero retries, and USD 1. Its network-free
+simulation passes, but live execution is not yet evidence and cannot promote
+V2.1. Issue #157 remains the only owner of the academic full-autonomy decision.
 
 The remaining full-autonomy work is now separated in GitHub rather than hidden
 inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
