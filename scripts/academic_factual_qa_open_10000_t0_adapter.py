@@ -26,11 +26,17 @@ from src.digital_twin.evaluation.provider_json import (
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
+    DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
+    LiveQuestionTargetedAtomicGroundedGenerator,
+    LiveQuestionTargetedExtractionGroundedGenerator,
+    QuestionTargetedAtomicPromptBuilder,
+    QuestionTargetedExtractionPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
 )
+from src.digital_twin.action_router import DeterministicActionRouterV1
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
@@ -39,6 +45,7 @@ from src.digital_twin.grounding import (
     DocumentChunk,
     LocalNliCrossEncoderBackend,
     NliAtomicClaimVerifier,
+    QuestionTargetedAtomicEvidenceGate,
     RetrievalHit,
     RetrievalIndexStoreV1,
     StructuredHierarchicalCoverageEvidenceGate,
@@ -64,6 +71,7 @@ from src.digital_twin.tutor_policy import SourceLabel
 from src.digital_twin.model_policy import (
     OPENAI_MODEL_PRICING_USD_PER_MILLION,
     OPENAI_PRODUCT_CANDIDATE_MODELS,
+    OPENAI_SEMANTIC_REVIEW_MODEL,
 )
 
 
@@ -78,8 +86,7 @@ RETRIEVAL_INDEX_ROOT = Path(
     )
 )
 PROFILE_PATH = (
-    ROOT
-    / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
+    ROOT / "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json"
 )
 SOURCE_PLAN_PATH = Path(
     os.getenv(
@@ -92,8 +99,7 @@ HISTORICAL_BINDING_PATH = (
     / "research/05_evaluation/instruments/academic_factual_qa_open_10000_provider_binding_003.json"
 )
 OPENAI_BINDING_PATH = (
-    ROOT
-    / "research/05_evaluation/instruments/"
+    ROOT / "research/05_evaluation/instruments/"
     "academic_factual_qa_open_10000_openai_binding_002.json"
 )
 PRODUCT_MAXIMUM_CALLS = {"candidate": 500, "control": 100}
@@ -176,7 +182,9 @@ def _evaluation_citation(chunk: DocumentChunk) -> EvaluationCitationV1:
         char_start = int(chunk.metadata["char_start"])
         char_end = int(chunk.metadata["char_end"])
     except (KeyError, TypeError, ValueError) as error:
-        raise LiveT0AdapterError("retrieved chunk lacks canonical character lineage") from error
+        raise LiveT0AdapterError(
+            "retrieved chunk lacks canonical character lineage"
+        ) from error
     return EvaluationCitationV1(
         source_artifact_id=chunk.source_artifact_id or chunk.document_id,
         source_version=chunk.source_version,
@@ -187,8 +195,25 @@ def _evaluation_citation(chunk: DocumentChunk) -> EvaluationCitationV1:
     )
 
 
-def _chunks_by_course() -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
-    plan = _load(SOURCE_PLAN_PATH)
+def _chunks_by_course(
+    source_path: Path | None = None,
+) -> tuple[dict[str, list[DocumentChunk]], dict[str, DocumentChunk]]:
+    plan = _load(source_path or SOURCE_PLAN_PATH)
+    if "chunks" in plan:
+        chunks = [DocumentChunk.model_validate(row) for row in plan["chunks"]]
+        grouped: dict[str, list[DocumentChunk]] = {}
+        by_id: dict[str, DocumentChunk] = {}
+        for chunk in chunks:
+            course_id = str(chunk.metadata.get("course_id", ""))
+            if not course_id:
+                raise LiveT0AdapterError("registered chunk lacks course identity")
+            if chunk.id in by_id:
+                raise LiveT0AdapterError("registered chunk identity is duplicated")
+            grouped.setdefault(course_id, []).append(chunk)
+            by_id[chunk.id] = chunk
+        if len(grouped) != 4 or not chunks:
+            raise LiveT0AdapterError("registered source package has invalid coverage")
+        return grouped, by_id
     grouped: dict[str, list[DocumentChunk]] = {}
     by_id: dict[str, DocumentChunk] = {}
     ordinals: dict[str, int] = {}
@@ -248,12 +273,11 @@ class _BoundedProductLlmClient:
             raise LiveT0AdapterError("provider call escaped the active evaluation case")
         if case_id in self.forced_failure_case_ids:
             raise LlmUnavailableError("frozen provider-failure injection")
-        system = "\n\n".join(
-            row.content for row in messages if row.role == "system"
-        ) or "Return only the requested grounded JSON object."
-        prompt = "\n\n".join(
-            row.content for row in messages if row.role != "system"
+        system = (
+            "\n\n".join(row.content for row in messages if row.role == "system")
+            or "Return only the requested grounded JSON object."
         )
+        prompt = "\n\n".join(row.content for row in messages if row.role != "system")
         response = await self.transport.call_with_ledger(
             ledger=self.ledger,
             request_key=f"{self.flow_id}:{case_id}:generator",
@@ -303,19 +327,21 @@ def _generator_transport(
         "openai-gpt-5.4-mini-live-atomic",
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-gpt-5.4-mini-question-targeted-atomic-v1",
+        "openai-gpt-5.4-question-targeted-extraction-v2",
         "openai-responses-live-atomic-v2",
     }:
         candidate = runtime.get("model_candidate_manifest")
         if candidate is None:
             provider_binding = _load(OPENAI_BINDING_PATH)
-            binding = deepcopy(
-                provider_binding["providers"]["high-volume-generator"]
-            )
+            binding = deepcopy(provider_binding["providers"]["high-volume-generator"])
         else:
             if not isinstance(candidate, dict):
                 raise LiveT0AdapterError("model candidate manifest is invalid")
             provider_model = str(candidate.get("provider_model", ""))
-            if provider_model not in OPENAI_PRODUCT_CANDIDATE_MODELS:
+            allowed_models = OPENAI_PRODUCT_CANDIDATE_MODELS
+            if manifest.generator == "openai-gpt-5.4-question-targeted-extraction-v2":
+                allowed_models = (*allowed_models, OPENAI_SEMANTIC_REVIEW_MODEL)
+            if provider_model not in allowed_models:
                 raise LiveT0AdapterError("model candidate is not allowlisted")
             input_price, output_price = OPENAI_MODEL_PRICING_USD_PER_MILLION[
                 provider_model
@@ -338,6 +364,13 @@ def _generator_transport(
                 "pricing_usd_per_million_input_tokens": input_price,
                 "pricing_usd_per_million_output_tokens": output_price,
             }
+        if (
+            not isinstance(binding.get("binding_id"), str)
+            or not binding["binding_id"].strip()
+        ):
+            raise LiveT0AdapterError(
+                "OpenAI generator binding lacks a nested binding_id"
+            )
         binding.update(
             {
                 "binding_id": f"{binding['binding_id']}-product",
@@ -370,7 +403,9 @@ class _RecordingGenerator:
         self.generator = generator
         self.answers_by_case: dict[str, TutorAnswer] = {}
 
-    async def generate(self, question: str, hits: list[RetrievalHit], policy: Any) -> TutorAnswer:
+    async def generate(
+        self, question: str, hits: list[RetrievalHit], policy: Any
+    ) -> TutorAnswer:
         answer = await self.generator.generate(question, hits, policy)
         case_id = _CURRENT_CASE_ID.get()
         if case_id:
@@ -410,7 +445,7 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
         *,
         provider_ledger: ProviderCallLedgerV1,
         repository: SQLiteStudentRepository,
-        maximum_quarantined_failures: int = 0,
+        maximum_quarantined_failures: int | None = 0,
         **kwargs: Any,
     ) -> None:
         super().__init__(**kwargs)
@@ -421,10 +456,14 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
 
     def validate_completion(self) -> None:
         snapshot = self.provider_ledger.snapshot()
-        if snapshot.get("status") != "running" or int(
-            snapshot.get("failed_calls", 0)
-        ) > self.maximum_quarantined_failures:
-            raise LiveT0AdapterError("product provider ledger is not valid for completion")
+        too_many_failures = (
+            self.maximum_quarantined_failures is not None
+            and int(snapshot.get("failed_calls", 0)) > self.maximum_quarantined_failures
+        )
+        if snapshot.get("status") != "running" or too_many_failures:
+            raise LiveT0AdapterError(
+                "product provider ledger is not valid for completion"
+            )
 
     def finalize(self) -> None:
         self.provider_ledger.mark_complete()
@@ -521,8 +560,7 @@ def _setup_service(
         os.getenv(
             "ACADEMIC_EVAL_QWEN_MODEL_ROOT",
             str(
-                ROOT
-                / "data/external/huggingface/hub/"
+                ROOT / "data/external/huggingface/hub/"
                 "models--Qwen--Qwen3-Embedding-0.6B/snapshots"
             ),
         )
@@ -558,6 +596,70 @@ def _setup_service(
     return repository, service, conversations
 
 
+def _setup_precomputed_service(
+    *,
+    chunks_by_course: dict[str, list[DocumentChunk]],
+    generator: _RecordingGenerator,
+    gate: _RecordingGate,
+    database_path: Path,
+    claim_evidence_validator: Any,
+    tutoring_mode: str,
+    conversation_courses: dict[str, str] | None,
+) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
+    """Build a product service that consumes only precomputed retrieval rows."""
+
+    repository = SQLiteStudentRepository(database_path)
+    profile = _load(PROFILE_PATH)
+    professor_id = "academic-open-professor"
+    student_id = "academic-open-student"
+    repository.save_account(Account(id=professor_id, role=AccountRole.PROFESSOR))
+    repository.save_account(Account(id=student_id, role=AccountRole.STUDENT))
+    for course_id, chunks in chunks_by_course.items():
+        repository.save_course(
+            Course(
+                id=course_id,
+                title=course_id.replace("-", " ").title(),
+                owner_professor_id=professor_id,
+            )
+        )
+        for account_id, role in (
+            (professor_id, MembershipRole.PROFESSOR),
+            (student_id, MembershipRole.STUDENT),
+        ):
+            repository.save_membership(
+                CourseMembership(account_id=account_id, course_id=course_id, role=role)
+            )
+        repository.save_release(
+            DigitalTwinRelease(
+                id=f"{course_id}-academic-open-release",
+                course_id=course_id,
+                profile_id=str(profile["profile_id"]),
+                profile_version=str(profile["profile_version"]),
+                policy_version=1,
+                policy=approved_synthetic_policy(),
+                chunks=chunks,
+                status=StudentReleaseStatus.PUBLISHED,
+                evaluation_status=ReleaseEvaluationStatus.PASSED,
+            )
+        )
+    service = StudentTutoringService(
+        repository,
+        profile_path=PROFILE_PATH,
+        generator=generator,
+        evidence_gate=gate,
+        claim_evidence_validator=claim_evidence_validator,
+        tutoring_mode=tutoring_mode,
+    )
+    requested = conversation_courses or {
+        course_id: course_id for course_id in chunks_by_course
+    }
+    conversations = {
+        key: service.create_conversation(student_id, course_id).id
+        for key, course_id in sorted(requested.items())
+    }
+    return repository, service, conversations
+
+
 def build_live_t0_adapter(
     *,
     manifest: SystemUnderTestManifestV1,
@@ -569,6 +671,7 @@ def build_live_t0_adapter(
     if manifest.evidence_gate in {
         "structured-lexical-coverage-evidence-gate-v1",
         "structured-hierarchical-coverage-evidence-gate-v1",
+        "question-targeted-atomic-evidence-gate-v1",
     }:
         condition = "candidate"
     elif manifest.evidence_gate == "any-hit-evidence-gate-v1":
@@ -580,7 +683,24 @@ def build_live_t0_adapter(
         runtime.get("maximum_cost_usd", PRODUCT_MAXIMUM_COST_USD[condition])
     )
     cascade_v2 = runtime.get("model_candidate_manifest") is not None
-    if manifest.generator in {
+    targeted_generator = manifest.generator == (
+        "openai-gpt-5.4-mini-question-targeted-atomic-v1"
+    )
+    extraction_generator = manifest.generator == (
+        "openai-gpt-5.4-question-targeted-extraction-v2"
+    )
+    if extraction_generator:
+        response_schema = ATOMIC_RESPONSE_SCHEMA
+        live_generator = LiveQuestionTargetedExtractionGroundedGenerator
+        prompt_builder = QuestionTargetedExtractionPromptBuilder()
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            ContiguousQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
+    elif targeted_generator or manifest.generator in {
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-responses-live-atomic-v2",
     }:
@@ -636,23 +756,42 @@ def build_live_t0_adapter(
         quarantine_failures=cascade_v2,
         forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
     )
-    recording_generator = _RecordingGenerator(
-        live_generator(
+    if extraction_generator:
+        generator_impl = LiveQuestionTargetedExtractionGroundedGenerator(
             client,
-            prompt_builder=prompt_builder,
+            prompt_builder=QuestionTargetedExtractionPromptBuilder(),
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV1()
+            ),
         )
-    )
+    elif targeted_generator:
+        generator_impl = LiveQuestionTargetedAtomicGroundedGenerator(
+            client,
+            prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+            policy_enforcer=DeterministicPolicyEnforcer(
+                action_router=DeterministicActionRouterV1()
+            ),
+        )
+    else:
+        generator_impl = live_generator(client, prompt_builder=prompt_builder)
+    recording_generator = _RecordingGenerator(generator_impl)
     gate = _RecordingGate(
         (
-            StructuredHierarchicalCoverageEvidenceGate()
-            if manifest.evidence_gate
-            == "structured-hierarchical-coverage-evidence-gate-v1"
-            else StructuredLexicalCoverageEvidenceGate()
+            QuestionTargetedAtomicEvidenceGate()
+            if manifest.evidence_gate == "question-targeted-atomic-evidence-gate-v1"
+            else (
+                StructuredHierarchicalCoverageEvidenceGate()
+                if manifest.evidence_gate
+                == "structured-hierarchical-coverage-evidence-gate-v1"
+                else StructuredLexicalCoverageEvidenceGate()
+            )
         )
         if condition == "candidate"
         else AnyHitEvidenceGate()
     )
-    chunks_by_course, chunks_by_id = _chunks_by_course()
+    source_path_value = runtime.get("source_package_path")
+    source_path = Path(str(source_path_value)) if source_path_value else None
+    chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
     state_path = Path(runtime["state_path"])
     tutoring_mode = str(runtime.get("tutoring_mode", "grounded-assistant"))
     conversation_scope = str(runtime.get("conversation_scope", "course"))
@@ -663,25 +802,35 @@ def build_live_t0_adapter(
         if conversation_scope == "cluster"
         else None
     )
-    repository, service, conversations = _setup_service(
-        chunks_by_course=chunks_by_course,
-        generator=recording_generator,
-        gate=gate,
-        database_path=state_path,
-        index_root=RETRIEVAL_INDEX_ROOT,
-        claim_evidence_validator=claim_evidence_validator,
-        tutoring_mode=tutoring_mode,
-        conversation_courses=conversation_courses,
-    )
     precomputed_path_value = runtime.get("precomputed_retrieval_path")
+    if precomputed_path_value is not None:
+        repository, service, conversations = _setup_precomputed_service(
+            chunks_by_course=chunks_by_course,
+            generator=recording_generator,
+            gate=gate,
+            database_path=state_path,
+            claim_evidence_validator=claim_evidence_validator,
+            tutoring_mode=tutoring_mode,
+            conversation_courses=conversation_courses,
+        )
+    else:
+        repository, service, conversations = _setup_service(
+            chunks_by_course=chunks_by_course,
+            generator=recording_generator,
+            gate=gate,
+            database_path=state_path,
+            index_root=RETRIEVAL_INDEX_ROOT,
+            claim_evidence_validator=claim_evidence_validator,
+            tutoring_mode=tutoring_mode,
+            conversation_courses=conversation_courses,
+        )
     if precomputed_path_value is not None:
         precomputed_path = Path(str(precomputed_path_value))
         payload = _load(precomputed_path)
         rankings = payload.get("ranked_chunk_ids")
         if (
             payload.get("schema_version") != 1
-            or payload.get("program_id")
-            != "course-digital-twin-evaluation-program-001"
+            or payload.get("program_id") != runtime["instrument_id"]
             or not isinstance(rankings, dict)
             or payload.get("content_sha256")
             != canonical_json_sha256(
@@ -744,10 +893,17 @@ def build_live_t0_adapter(
             raise LiveT0AdapterError("released citation cannot map to one source range")
         return _evaluation_citation(matching[0])
 
-    def resolve_retrieved(case: EvaluationCaseV1, _turn: Any) -> list[EvaluationCitationV1]:
-        return [_evaluation_citation(hit.chunk) for hit in gate.hits_by_case.get(case.case_id, [])]
+    def resolve_retrieved(
+        case: EvaluationCaseV1, _turn: Any
+    ) -> list[EvaluationCitationV1]:
+        return [
+            _evaluation_citation(hit.chunk)
+            for hit in gate.hits_by_case.get(case.case_id, [])
+        ]
 
-    def resolve_claims(case: EvaluationCaseV1, turn: Any) -> list[EvaluationAtomicClaimV1]:
+    def resolve_claims(
+        case: EvaluationCaseV1, turn: Any
+    ) -> list[EvaluationAtomicClaimV1]:
         if turn.tutor_message.action != "answer":
             return []
         answer = recording_generator.answers_by_case.get(case.case_id)
@@ -756,7 +912,10 @@ def build_live_t0_adapter(
         return [
             EvaluationAtomicClaimV1(
                 text=claim.text,
-                citations=[_evaluation_citation(chunks_by_id[hit_id]) for hit_id in claim.evidence_hit_ids],
+                citations=[
+                    _evaluation_citation(chunks_by_id[hit_id])
+                    for hit_id in claim.evidence_hit_ids
+                ],
             )
             for claim in answer.atomic_claims
         ]
@@ -769,5 +928,8 @@ def build_live_t0_adapter(
         resolve_retrieved=resolve_retrieved,
         provider_ledger=provider_ledger,
         repository=repository,
-        maximum_quarantined_failures=(maximum_calls // 100 if cascade_v2 else 0),
+        # Evaluation-v2 persists every failed provider response as an explicit
+        # operational-failure case. Completion and malformed-response rates are
+        # quality metrics; an individual failure is not a corrupt execution.
+        maximum_quarantined_failures=(None if cascade_v2 else 0),
     )

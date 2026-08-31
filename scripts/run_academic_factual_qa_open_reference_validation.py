@@ -36,16 +36,23 @@ from src.digital_twin.evaluation.factual_qa_execution import (  # noqa: E402
 )
 from src.digital_twin.evaluation.factual_qa_reference_questions import (  # noqa: E402
     ReferenceQuestionAuthorResponseV1,
+    ReferenceQuestionCandidateAuthorResponseV1,
+    ReferenceQuestionCandidateReviewResponseV1,
     ReferenceQuestionReviewerResponseV1,
+    score_multi_candidate_reference_questions,
     score_reference_questions,
 )
 from src.digital_twin.evaluation.factual_qa_references import (  # noqa: E402
     SourceClusterV2,
+    build_reference_cluster_rows,
 )
 from src.digital_twin.evaluation.provider_json import (  # noqa: E402
     DirectProviderJsonTransport,
     ProviderCallLedgerV1,
     ProviderJsonResponse,
+)
+from src.digital_twin.grounding.source_registration import (  # noqa: E402
+    registered_source_chunks,
 )
 from src.digital_twin.repository_freeze import (  # noqa: E402
     BOUNDED_PILOT_AUTHORIZATIONS,
@@ -67,10 +74,19 @@ class ReferenceQuestionAttempt:
     result_path: Path
     cases_path: Path
     gold_path: Path
+    sources_path: Path
     author_question_pattern: str | None = None
+    multi_candidate_answerable: bool = False
+    quarantine_batch_failures: bool = False
 
 
-def _attempt(*, suffix: str, question_pattern: str | None) -> ReferenceQuestionAttempt:
+def _attempt(
+    *,
+    suffix: str,
+    question_pattern: str | None,
+    multi_candidate_answerable: bool = False,
+    quarantine_batch_failures: bool = False,
+) -> ReferenceQuestionAttempt:
     return ReferenceQuestionAttempt(
         instrument_id=(
             "academic-factual-qa-open-10000-reference-question-validation-" + suffix
@@ -116,15 +132,45 @@ def _attempt(*, suffix: str, question_pattern: str | None) -> ReferenceQuestionA
             + suffix
             + "_gold.json"
         ),
+        sources_path=ROOT
+        / (
+            "research/05_evaluation/datasets/"
+            "academic_factual_qa_open_10000_v1_development_reference_validated_"
+            + suffix
+            + "_sources.json"
+        ),
         author_question_pattern=question_pattern,
+        multi_candidate_answerable=multi_candidate_answerable,
+        quarantine_batch_failures=quarantine_batch_failures,
     )
 
 
 ATTEMPT_001 = _attempt(suffix="001", question_pattern=None)
 ATTEMPT_002 = _attempt(suffix="002", question_pattern=r"\?$")
+ATTEMPT_003 = _attempt(suffix="003", question_pattern=r"\?$")
+ATTEMPT_004 = _attempt(
+    suffix="004",
+    question_pattern=r"\?$",
+    multi_candidate_answerable=True,
+)
+ATTEMPT_005 = _attempt(
+    suffix="005",
+    question_pattern=r"\?$",
+    multi_candidate_answerable=True,
+)
+ATTEMPT_006 = _attempt(
+    suffix="006",
+    question_pattern=r"\?$",
+    multi_candidate_answerable=True,
+    quarantine_batch_failures=True,
+)
 ATTEMPTS = {
     ATTEMPT_001.instrument_id: ATTEMPT_001,
     ATTEMPT_002.instrument_id: ATTEMPT_002,
+    ATTEMPT_003.instrument_id: ATTEMPT_003,
+    ATTEMPT_004.instrument_id: ATTEMPT_004,
+    ATTEMPT_005.instrument_id: ATTEMPT_005,
+    ATTEMPT_006.instrument_id: ATTEMPT_006,
 }
 
 
@@ -258,6 +304,49 @@ def _review_schema(count: int) -> dict[str, Any]:
     }
 
 
+def _candidate_author_schema(count: int) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "required": ["items"],
+        "properties": {
+            "items": {
+                "type": "array",
+                "minItems": count,
+                "maxItems": count,
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": ["case_id", "questions"],
+                    "properties": {
+                        "case_id": {"type": "string", "minLength": 1},
+                        "questions": {
+                            "type": "array",
+                            "minItems": 3,
+                            "maxItems": 3,
+                            "items": {
+                                "type": "string",
+                                "minLength": 12,
+                                "maxLength": 500,
+                                "pattern": r"\?$",
+                            },
+                        },
+                    },
+                },
+            }
+        },
+    }
+
+
+def _candidate_review_schema(count: int) -> dict[str, Any]:
+    schema = _review_schema(count)
+    item = schema["properties"]["items"]["items"]
+    item["required"][0] = "candidate_id"
+    del item["properties"]["case_id"]
+    item["properties"]["candidate_id"] = {"type": "string", "minLength": 1}
+    return schema
+
+
 def _source_rows(clusters: list[SourceClusterV2]) -> list[dict[str, Any]]:
     return [
         {
@@ -268,6 +357,25 @@ def _source_rows(clusters: list[SourceClusterV2]) -> list[dict[str, Any]]:
         }
         for row in clusters
     ]
+
+
+def _canonical_rows(
+    pool: dict[str, Any],
+) -> tuple[list[EvaluationCaseV1], list[EvaluationGoldV1]]:
+    cases: list[EvaluationCaseV1] = []
+    gold: list[EvaluationGoldV1] = []
+    for raw in pool["clusters"]:
+        cluster = SourceClusterV2.model_validate(raw)
+        cluster_cases, cluster_gold = build_reference_cluster_rows(
+            cluster,
+            course_ids=sorted(TARGET_ALLOCATION),
+            source_derived_region_ids=True,
+        )
+        cases.extend(cluster_cases)
+        gold.extend(cluster_gold)
+    cases.sort(key=lambda row: row.case_id)
+    gold.sort(key=lambda row: row.case_id)
+    return cases, gold
 
 
 def _author_prompt(
@@ -307,6 +415,38 @@ def _review_prompt(
     return system, prompt
 
 
+def _candidate_author_prompt(
+    *, clusters: list[SourceClusterV2], requests: list[dict[str, Any]]
+) -> tuple[str, str]:
+    system = (
+        "For each answerable item, write three materially different, clear student "
+        "questions using only the supplied public source. Every question must "
+        "uniquely elicit all required exact answer spans, without copying the full "
+        "answer into the question. Avoid vague phrases such as 'the source detail'. "
+        "Do not change case IDs and return only the requested schema."
+    )
+    return system, json.dumps(
+        {"sources": _source_rows(clusters), "answerable_items": requests},
+        sort_keys=True,
+    )
+
+
+def _candidate_review_prompt(
+    *, clusters: list[SourceClusterV2], items: list[dict[str, Any]]
+) -> tuple[str, str]:
+    system = (
+        "Independently validate each candidate question using only its supplied "
+        "public source. You are not given the intended answer. Predict the action "
+        "and return every exact source span required to answer, in question order. "
+        "Mark a question unambiguous only when one answer is uniquely determined; "
+        "reject unnatural wording and answer leakage. Return only the schema."
+    )
+    return system, json.dumps(
+        {"sources": _source_rows(clusters), "blind_candidate_items": items},
+        sort_keys=True,
+    )
+
+
 def _parse_authors(
     content: dict[str, Any], expected_ids: list[str]
 ) -> list[ReferenceQuestionAuthorResponseV1]:
@@ -314,9 +454,13 @@ def _parse_authors(
         ReferenceQuestionAuthorResponseV1.model_validate(row)
         for row in content.get("items", [])
     ]
-    if [row.case_id for row in rows] != expected_ids:
-        raise ReferenceQuestionCheckpointError("author response IDs or order drifted")
-    return rows
+    observed_ids = [row.case_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("author response IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("author response ID set drifted")
+    by_id = {row.case_id: row for row in rows}
+    return [by_id[case_id] for case_id in expected_ids]
 
 
 def _parse_reviews(
@@ -326,9 +470,45 @@ def _parse_reviews(
         ReferenceQuestionReviewerResponseV1.model_validate(row)
         for row in content.get("items", [])
     ]
-    if [row.case_id for row in rows] != expected_ids:
-        raise ReferenceQuestionCheckpointError("review response IDs or order drifted")
-    return rows
+    observed_ids = [row.case_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("review response IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("review response ID set drifted")
+    by_id = {row.case_id: row for row in rows}
+    return [by_id[case_id] for case_id in expected_ids]
+
+
+def _parse_candidate_authors(
+    content: dict[str, Any], expected_ids: list[str]
+) -> list[ReferenceQuestionCandidateAuthorResponseV1]:
+    rows = [
+        ReferenceQuestionCandidateAuthorResponseV1.model_validate(row)
+        for row in content.get("items", [])
+    ]
+    observed_ids = [row.case_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("candidate author IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("candidate author ID set drifted")
+    by_id = {row.case_id: row for row in rows}
+    return [by_id[case_id] for case_id in expected_ids]
+
+
+def _parse_candidate_reviews(
+    content: dict[str, Any], expected_ids: list[str]
+) -> list[ReferenceQuestionCandidateReviewResponseV1]:
+    rows = [
+        ReferenceQuestionCandidateReviewResponseV1.model_validate(row)
+        for row in content.get("items", [])
+    ]
+    observed_ids = [row.candidate_id for row in rows]
+    if len(observed_ids) != len(set(observed_ids)):
+        raise ReferenceQuestionCheckpointError("candidate review IDs are duplicated")
+    if len(observed_ids) != len(expected_ids) or set(observed_ids) != set(expected_ids):
+        raise ReferenceQuestionCheckpointError("candidate review ID set drifted")
+    by_id = {row.candidate_id: row for row in rows}
+    return [by_id[candidate_id] for candidate_id in expected_ids]
 
 
 def _git_revision() -> str:
@@ -339,6 +519,19 @@ def _git_revision() -> str:
         capture_output=True,
         text=True,
     ).stdout.strip()
+
+
+def _quarantinable_batch_failure(error: Exception) -> bool:
+    detail = str(error).lower()
+    fail_closed_markers = (
+        "identity drifted",
+        "credential missing",
+        "cost limit",
+        "call limit",
+        "binding drifted",
+        "request drifted",
+    )
+    return not any(marker in detail for marker in fail_closed_markers)
 
 
 def _repo_dirty() -> bool:
@@ -370,28 +563,60 @@ def validate(
     clusters = [SourceClusterV2.model_validate(row) for row in pool["clusters"][:4]]
     ids = {row.cluster_id for row in clusters}
     requests = [row for row in author_requests(pool) if row["cluster_id"] in ids]
-    author_system, author_prompt = _author_prompt(clusters=clusters, requests=requests)
-    authors = [
-        ReferenceQuestionAuthorResponseV1(
-            case_id=row["case_id"],
-            question=f"What does the source establish for reference {row['case_id']}?",
+    if attempt.multi_candidate_answerable:
+        requests = [row for row in requests if row["expected_action"] == "answer"]
+        author_system, author_prompt = _candidate_author_prompt(
+            clusters=clusters, requests=requests
         )
-        for row in requests
-    ]
-    review_items = [
-        {
-            "case_id": row.case_id,
-            "cluster_id": row.case_id.rsplit("-q", 1)[0],
-            "course_id": next(
-                request["course_id"]
-                for request in requests
-                if request["case_id"] == row.case_id
-            ),
-            "candidate_question": row.question,
-        }
-        for row in authors
-    ]
-    review_system, review_prompt = _review_prompt(clusters=clusters, items=review_items)
+        review_items = [
+            {
+                "candidate_id": f"{row['case_id']}-candidate-{ordinal}",
+                "case_id": row["case_id"],
+                "cluster_id": row["cluster_id"],
+                "course_id": row["course_id"],
+                "candidate_question": (
+                    f"Which exact fact about candidate {ordinal} is established?"
+                ),
+            }
+            for row in requests
+            for ordinal in range(1, 4)
+        ]
+        review_system, review_prompt = _candidate_review_prompt(
+            clusters=clusters, items=review_items
+        )
+        author_schema = _candidate_author_schema(len(requests))
+        review_schema = _candidate_review_schema(len(review_items))
+    else:
+        author_system, author_prompt = _author_prompt(
+            clusters=clusters, requests=requests
+        )
+        authors = [
+            ReferenceQuestionAuthorResponseV1(
+                case_id=row["case_id"],
+                question=(
+                    f"What does the source establish for reference {row['case_id']}?"
+                ),
+            )
+            for row in requests
+        ]
+        review_items = [
+            {
+                "case_id": row.case_id,
+                "cluster_id": row.case_id.rsplit("-q", 1)[0],
+                "course_id": next(
+                    request["course_id"]
+                    for request in requests
+                    if request["case_id"] == row.case_id
+                ),
+                "candidate_question": row.question,
+            }
+            for row in authors
+        ]
+        review_system, review_prompt = _review_prompt(
+            clusters=clusters, items=review_items
+        )
+        author_schema = _author_schema(len(requests), attempt=attempt)
+        review_schema = _review_schema(len(requests))
     author_transport = DirectProviderJsonTransport(binding["providers"][AUTHOR_ROLE])
     reviewer_transport = DirectProviderJsonTransport(
         binding["providers"][REVIEWER_ROLE]
@@ -400,13 +625,13 @@ def validate(
         system=author_system,
         prompt=author_prompt,
         task="reference-question-author-contract",
-        schema=_author_schema(len(requests), attempt=attempt),
+        schema=author_schema,
     )
     review_payload = reviewer_transport._payload(  # noqa: SLF001
         system=review_system,
         prompt=review_prompt,
         task="reference-question-review-contract",
-        schema=_review_schema(len(requests)),
+        schema=review_schema,
     )
     if (
         author_payload.get("store") is not False
@@ -427,13 +652,15 @@ def validate(
         for key in ("expected_action", "canonical_answer", "required_answer_spans")
     ):
         raise ReferenceQuestionCheckpointError("blind reviewer input exposes truth")
-    question_schema = author_payload["text"]["format"]["schema"]["properties"]["items"][
+    author_item_properties = author_payload["text"]["format"]["schema"]["properties"][
         "items"
-    ]["properties"]["question"]
-    if (
-        attempt.author_question_pattern is not None
-        and question_schema.get("pattern") != attempt.author_question_pattern
-    ):
+    ]["items"]["properties"]
+    question_schema = (
+        author_item_properties["questions"]["items"]
+        if attempt.multi_candidate_answerable
+        else author_item_properties["question"]
+    )
+    if question_schema.get("pattern") != attempt.author_question_pattern:
         raise ReferenceQuestionCheckpointError("author question schema pattern drifted")
     if require_unauthorized and (
         any(instrument["authorization"].values())
@@ -453,6 +680,7 @@ def validate(
         "source_disjoint_from_checkpoint_007": True,
         "strict_schema_requested": True,
         "author_question_pattern": attempt.author_question_pattern,
+        "multi_candidate_answerable": attempt.multi_candidate_answerable,
         "openai_store": False,
         "provider_calls": 0,
         "product_calls": 0,
@@ -494,7 +722,73 @@ def _simulated_votes() -> tuple[
     return pool, authors, reviewers
 
 
+def _simulated_multi_candidate_votes() -> tuple[
+    dict[str, Any],
+    list[EvaluationCaseV1],
+    list[EvaluationGoldV1],
+    list[ReferenceQuestionCandidateAuthorResponseV1],
+    list[ReferenceQuestionCandidateReviewResponseV1],
+]:
+    pool = build_reference_pool()
+    cases, gold = _canonical_rows(pool)
+    gold_by_id = {row.case_id: row for row in gold}
+    answerable = [
+        row for row in cases if gold_by_id[row.case_id].expected_action == "answer"
+    ]
+    authors = [
+        ReferenceQuestionCandidateAuthorResponseV1(
+            case_id=row.case_id,
+            questions=[
+                f"What exact fact does source case {row.case_id} establish in form {n}?"
+                for n in range(1, 4)
+            ],
+        )
+        for row in answerable
+    ]
+    reviewers = [
+        ReferenceQuestionCandidateReviewResponseV1(
+            candidate_id=f"{row.case_id}-candidate-{ordinal}",
+            predicted_action="answer",
+            recovered_answer_spans=[
+                claim.answer_span for claim in gold_by_id[row.case_id].claims
+            ],
+            unambiguous=True,
+            natural_student_question=True,
+            gold_hint_leak=False,
+            rationale="Network-free simulated exact recovery.",
+        )
+        for row in answerable
+        for ordinal in range(1, 4)
+    ]
+    return pool, cases, gold, authors, reviewers
+
+
 def simulate(*, attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
+    if attempt.multi_candidate_answerable:
+        pool, cases, gold, authors, reviewers = _simulated_multi_candidate_votes()
+        score = score_multi_candidate_reference_questions(
+            canonical_cases=cases,
+            gold=gold,
+            cluster_modalities={
+                row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+            },
+            authors=authors,
+            reviewers=reviewers,
+            target_allocation=TARGET_ALLOCATION,
+        )
+        return {
+            "instrument_id": attempt.instrument_id,
+            "status": "simulated-network-free",
+            "decision": score["status"],
+            "candidate_case_count": score["candidate_case_count"],
+            "selected_cluster_count": score["selected_cluster_count"],
+            "selected_case_count": score["selected_case_count"],
+            "allocation_shortfalls": score["allocation_shortfalls"],
+            "provider_calls": 0,
+            "network_accessed": False,
+            "product_calls": 0,
+            "final_split_opened": False,
+        }
     pool, authors, reviewers = _simulated_votes()
     score = score_reference_questions(
         base_cases=[EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]],
@@ -637,51 +931,108 @@ async def execute(
                 for cluster in cluster_batch
                 for row in requests_by_cluster[cluster.cluster_id]
             ]
-            expected_ids = [row["case_id"] for row in batch_requests]
-            author_system, author_prompt = _author_prompt(
-                clusters=cluster_batch, requests=batch_requests
-            )
+            if attempt.multi_candidate_answerable:
+                batch_requests = [
+                    row for row in batch_requests if row["expected_action"] == "answer"
+                ]
+                expected_ids = [row["case_id"] for row in batch_requests]
+                author_system, author_prompt = _candidate_author_prompt(
+                    clusters=cluster_batch, requests=batch_requests
+                )
+                author_schema = _candidate_author_schema(len(expected_ids))
+            else:
+                expected_ids = [row["case_id"] for row in batch_requests]
+                author_system, author_prompt = _author_prompt(
+                    clusters=cluster_batch, requests=batch_requests
+                )
+                author_schema = _author_schema(len(expected_ids), attempt=attempt)
             author_transport = DirectProviderJsonTransport(
                 binding["providers"][AUTHOR_ROLE]
             )
-            authored = await author_transport.call_with_ledger(
-                ledger=ledger,
-                request_key=f"author-{batch_number:03d}",
-                provider_role=AUTHOR_ROLE,
-                system=author_system,
-                prompt=author_prompt,
-                task="academic-reference-question-authoring",
-                schema=_author_schema(len(expected_ids), attempt=attempt),
-            )
-            author_rows = _parse_authors(authored.content, expected_ids)
+            try:
+                authored = await author_transport.call_with_ledger(
+                    ledger=ledger,
+                    request_key=f"author-{batch_number:03d}",
+                    provider_role=AUTHOR_ROLE,
+                    system=author_system,
+                    prompt=author_prompt,
+                    task="academic-reference-question-authoring",
+                    schema=author_schema,
+                    quarantine_failures=attempt.quarantine_batch_failures,
+                )
+            except Exception as error:
+                if (
+                    not attempt.quarantine_batch_failures
+                    or not _quarantinable_batch_failure(error)
+                ):
+                    raise
+                continue
             request_by_id = {row["case_id"]: row for row in batch_requests}
-            review_items = [
-                {
-                    "case_id": row.case_id,
-                    "cluster_id": request_by_id[row.case_id]["cluster_id"],
-                    "course_id": request_by_id[row.case_id]["course_id"],
-                    "candidate_question": row.question,
-                }
-                for row in author_rows
-            ]
-            review_system, review_prompt = _review_prompt(
-                clusters=cluster_batch, items=review_items
-            )
+            if attempt.multi_candidate_answerable:
+                candidate_authors = _parse_candidate_authors(
+                    authored.content, expected_ids
+                )
+                review_items = [
+                    {
+                        "candidate_id": f"{row.case_id}-candidate-{ordinal}",
+                        "case_id": row.case_id,
+                        "cluster_id": request_by_id[row.case_id]["cluster_id"],
+                        "course_id": request_by_id[row.case_id]["course_id"],
+                        "candidate_question": question,
+                    }
+                    for row in candidate_authors
+                    for ordinal, question in enumerate(row.questions, start=1)
+                ]
+                review_ids = [row["candidate_id"] for row in review_items]
+                review_system, review_prompt = _candidate_review_prompt(
+                    clusters=cluster_batch, items=review_items
+                )
+                review_schema = _candidate_review_schema(len(review_items))
+                review_task = "academic-reference-question-candidate-blind-review"
+            else:
+                author_rows = _parse_authors(authored.content, expected_ids)
+                review_items = [
+                    {
+                        "case_id": row.case_id,
+                        "cluster_id": request_by_id[row.case_id]["cluster_id"],
+                        "course_id": request_by_id[row.case_id]["course_id"],
+                        "candidate_question": row.question,
+                    }
+                    for row in author_rows
+                ]
+                review_ids = expected_ids
+                review_system, review_prompt = _review_prompt(
+                    clusters=cluster_batch, items=review_items
+                )
+                review_schema = _review_schema(len(expected_ids))
+                review_task = "academic-reference-question-blind-review"
             reviewer_transport = DirectProviderJsonTransport(
                 binding["providers"][REVIEWER_ROLE]
             )
-            reviewed = await reviewer_transport.call_with_ledger(
-                ledger=ledger,
-                request_key=f"review-{batch_number:03d}",
-                provider_role=REVIEWER_ROLE,
-                system=review_system,
-                prompt=review_prompt,
-                task="academic-reference-question-blind-review",
-                schema=_review_schema(len(expected_ids)),
-            )
-            _parse_reviews(reviewed.content, expected_ids)
+            try:
+                reviewed = await reviewer_transport.call_with_ledger(
+                    ledger=ledger,
+                    request_key=f"review-{batch_number:03d}",
+                    provider_role=REVIEWER_ROLE,
+                    system=review_system,
+                    prompt=review_prompt,
+                    task=review_task,
+                    schema=review_schema,
+                    quarantine_failures=attempt.quarantine_batch_failures,
+                )
+            except Exception as error:
+                if (
+                    not attempt.quarantine_batch_failures
+                    or not _quarantinable_batch_failure(error)
+                ):
+                    raise
+                continue
+            if attempt.multi_candidate_answerable:
+                _parse_candidate_reviews(reviewed.content, review_ids)
+            else:
+                _parse_reviews(reviewed.content, review_ids)
         snapshot = ledger.snapshot()
-        if (
+        if not attempt.quarantine_batch_failures and (
             snapshot["provider_calls"]
             != instrument["operational_bounds"]["maximum_logical_calls"]
         ):
@@ -711,6 +1062,14 @@ def _ledger_rows(
             "SELECT provider_role, response_json FROM calls "
             "WHERE status = 'completed' ORDER BY sequence"
         ).fetchall()
+        metadata["total_call_count"] = str(
+            connection.execute("SELECT COUNT(*) FROM calls").fetchone()[0]
+        )
+        metadata["failed_call_count"] = str(
+            connection.execute(
+                "SELECT COUNT(*) FROM calls WHERE status = 'failed'"
+            ).fetchone()[0]
+        )
     finally:
         connection.close()
     return metadata, [
@@ -727,45 +1086,93 @@ def score(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, Any]:
     metadata, rows = _ledger_rows(attempt)
     if metadata.get("status") != "completed":
         raise ReferenceQuestionCheckpointError("reference ledger is not complete")
-    if len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]:
+    if (
+        not attempt.quarantine_batch_failures
+        and len(rows) != instrument["operational_bounds"]["maximum_logical_calls"]
+    ):
         raise ReferenceQuestionCheckpointError("reference ledger coverage drifted")
-    authors: list[ReferenceQuestionAuthorResponseV1] = []
-    reviewers: list[ReferenceQuestionReviewerResponseV1] = []
-    for role, response in rows:
-        if role == AUTHOR_ROLE:
-            authors.extend(
-                ReferenceQuestionAuthorResponseV1.model_validate(row)
-                for row in response.content.get("items", [])
-            )
-        elif role == REVIEWER_ROLE:
-            reviewers.extend(
-                ReferenceQuestionReviewerResponseV1.model_validate(row)
-                for row in response.content.get("items", [])
-            )
-        else:
-            raise ReferenceQuestionCheckpointError("unknown reference provider role")
     pool = build_reference_pool()
-    scored = score_reference_questions(
-        base_cases=[EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]],
-        gold=[EvaluationGoldV1.model_validate(row) for row in pool["gold"]],
-        cluster_modalities={
-            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
-        },
-        authors=authors,
-        reviewers=reviewers,
-        target_allocation=TARGET_ALLOCATION,
-    )
+    if attempt.multi_candidate_answerable:
+        candidate_authors: list[ReferenceQuestionCandidateAuthorResponseV1] = []
+        candidate_reviewers: list[ReferenceQuestionCandidateReviewResponseV1] = []
+        for role, response in rows:
+            if role == AUTHOR_ROLE:
+                candidate_authors.extend(
+                    ReferenceQuestionCandidateAuthorResponseV1.model_validate(row)
+                    for row in response.content.get("items", [])
+                )
+            elif role == REVIEWER_ROLE:
+                candidate_reviewers.extend(
+                    ReferenceQuestionCandidateReviewResponseV1.model_validate(row)
+                    for row in response.content.get("items", [])
+                )
+            else:
+                raise ReferenceQuestionCheckpointError(
+                    "unknown reference provider role"
+                )
+        canonical_cases, canonical_gold = _canonical_rows(pool)
+        scored = score_multi_candidate_reference_questions(
+            canonical_cases=canonical_cases,
+            gold=canonical_gold,
+            cluster_modalities={
+                row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+            },
+            authors=candidate_authors,
+            reviewers=candidate_reviewers,
+            target_allocation=TARGET_ALLOCATION,
+        )
+    else:
+        authors: list[ReferenceQuestionAuthorResponseV1] = []
+        reviewers: list[ReferenceQuestionReviewerResponseV1] = []
+        for role, response in rows:
+            if role == AUTHOR_ROLE:
+                authors.extend(
+                    ReferenceQuestionAuthorResponseV1.model_validate(row)
+                    for row in response.content.get("items", [])
+                )
+            elif role == REVIEWER_ROLE:
+                reviewers.extend(
+                    ReferenceQuestionReviewerResponseV1.model_validate(row)
+                    for row in response.content.get("items", [])
+                )
+            else:
+                raise ReferenceQuestionCheckpointError(
+                    "unknown reference provider role"
+                )
+        scored = score_reference_questions(
+            base_cases=[
+                EvaluationCaseV1.model_validate(row) for row in pool["base_cases"]
+            ],
+            gold=[EvaluationGoldV1.model_validate(row) for row in pool["gold"]],
+            cluster_modalities={
+                row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+            },
+            authors=authors,
+            reviewers=reviewers,
+            target_allocation=TARGET_ALLOCATION,
+        )
     payload: dict[str, Any] = {
         "schema_version": 1,
         "instrument_id": attempt.instrument_id,
         "binding_id": attempt.binding_id,
         "source_pool_sha256": pool["content_sha256"],
         **scored,
-        "provider_calls": len(rows),
+        "provider_calls": int(metadata.get("total_call_count", len(rows))),
+        "completed_provider_calls": len(rows),
+        "failed_provider_calls": int(metadata.get("failed_call_count", 0)),
         "product_calls": 0,
         "private_data_used": False,
         "final_split_opened": False,
     }
+    payload["provider_completion_rate"] = (
+        payload["completed_provider_calls"]
+        / instrument["operational_bounds"]["maximum_logical_calls"]
+    )
+    required_completion = instrument["acceptance"].get(
+        "provider_completion_rate_required", 1.0
+    )
+    if payload["provider_completion_rate"] < required_completion:
+        payload["status"] = "completed-refine"
     payload["content_sha256"] = canonical_json_sha256(payload)
     if attempt.result_path.exists():
         raise ReferenceQuestionCheckpointError("reference result path already exists")
@@ -815,6 +1222,34 @@ def materialize(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, An
         )
     if result.get("selected_case_count") != 500:
         raise ReferenceQuestionCheckpointError("selected reference set is incomplete")
+    selected_cluster_ids = {str(row["cluster_id"]) for row in result["selected_cases"]}
+    pool = build_reference_pool()
+    selected_clusters = [
+        SourceClusterV2.model_validate(row)
+        for row in pool["clusters"]
+        if row["cluster_id"] in selected_cluster_ids
+    ]
+    if len(selected_clusters) != 100:
+        raise ReferenceQuestionCheckpointError(
+            "selected reference source coverage is incomplete"
+        )
+    chunks = registered_source_chunks(selected_clusters)
+    source_payload: dict[str, Any] = {
+        "schema_version": 1,
+        "dataset_id": (
+            "academic-factual-qa-open-10000-v1-development-reference-validated-"
+            + attempt.instrument_id.rsplit("-", 1)[-1]
+            + "-sources"
+        ),
+        "construction_instrument_id": attempt.instrument_id,
+        "cluster_count": len(selected_clusters),
+        "case_count": 500,
+        "clusters": [row.model_dump(mode="json") for row in selected_clusters],
+        "chunks": [row.model_dump(mode="json") for row in chunks],
+        "private_data_used": False,
+        "final_split_opened": False,
+    }
+    source_payload["content_sha256"] = canonical_json_sha256(source_payload)
     packages = {
         attempt.cases_path: _package(
             dataset_id=(
@@ -835,6 +1270,7 @@ def materialize(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, An
             rows=result["selected_gold"],
             attempt=attempt,
         ),
+        attempt.sources_path: source_payload,
     }
     if any(path.exists() for path in packages):
         raise ReferenceQuestionCheckpointError(
@@ -851,6 +1287,7 @@ def materialize(attempt: ReferenceQuestionAttempt = ATTEMPT_001) -> dict[str, An
         "case_count": 500,
         "cases_content_sha256": packages[attempt.cases_path]["content_sha256"],
         "gold_content_sha256": packages[attempt.gold_path]["content_sha256"],
+        "sources_content_sha256": packages[attempt.sources_path]["content_sha256"],
         "provider_calls": 0,
         "product_calls": 0,
         "final_split_opened": False,
@@ -873,6 +1310,7 @@ def main() -> int:
         default=ATTEMPT_001.instrument_id,
     )
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--allow-authorized-validation", action="store_true")
     arguments = parser.parse_args()
     attempt = ATTEMPTS[arguments.attempt]
     if arguments.execute:
@@ -884,7 +1322,10 @@ def main() -> int:
             attempt.instrument_id, "method_evaluation_execution"
         )
     if arguments.validate:
-        result = validate(attempt=attempt)
+        result = validate(
+            require_unauthorized=not arguments.allow_authorized_validation,
+            attempt=attempt,
+        )
     elif arguments.simulate:
         result = simulate(attempt=attempt)
     elif arguments.preflight:

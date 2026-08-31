@@ -11,6 +11,7 @@ from src.digital_twin.generation.generator import (
     LiveExtractiveBoundaryGroundedGenerator,
     LiveGroundedGenerator,
     LiveQuestionTargetedAtomicGroundedGenerator,
+    LiveQuestionTargetedExtractionGroundedGenerator,
 )
 from src.digital_twin.action_router import (
     ActionRouteV1,
@@ -46,6 +47,7 @@ from src.digital_twin.generation.prompt import (
     GroundedPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
     QuestionTargetedAtomicPromptBuilder,
+    QuestionTargetedExtractionPromptBuilder,
 )
 
 
@@ -67,6 +69,7 @@ __all__ = [
     "GroundedPromptBuilder",
     "LiveGroundedGenerator",
     "LiveQuestionTargetedAtomicGroundedGenerator",
+    "LiveQuestionTargetedExtractionGroundedGenerator",
     "ModelTutorOutput",
     "ModelBoundaryAction",
     "ModelAtomicClaimOutput",
@@ -77,6 +80,7 @@ __all__ = [
     "PromptPackage",
     "StrictEvidenceGroundedPromptBuilder",
     "QuestionTargetedAtomicPromptBuilder",
+    "QuestionTargetedExtractionPromptBuilder",
     "ExtractiveBoundaryGroundedPromptBuilder",
     "authoritative_citation_for_chunk",
     "citation_matches_chunk",

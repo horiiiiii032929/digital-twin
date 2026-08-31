@@ -18,7 +18,10 @@ from src.digital_twin.evaluation.factual_qa_contract import (
 )
 from src.digital_twin.evaluation.factual_qa_reference_questions import (
     ReferenceQuestionAuthorResponseV1,
+    ReferenceQuestionCandidateAuthorResponseV1,
+    ReferenceQuestionCandidateReviewResponseV1,
     ReferenceQuestionReviewerResponseV1,
+    score_multi_candidate_reference_questions,
     score_reference_questions,
 )
 
@@ -224,3 +227,191 @@ def test_attempt_002_has_fresh_outputs_and_revoked_authority(
     assert preflight["provider_calls"] == 0
     assert preflight["product_calls"] == 0
     assert preflight["final_split_opened"] is False
+
+
+def test_attempt_003_matches_unique_response_ids_without_array_order() -> None:
+    expected_ids = ["case-a", "case-b"]
+    authors = runner._parse_authors(  # noqa: SLF001
+        {
+            "items": [
+                {"case_id": "case-b", "question": "What does source B establish?"},
+                {"case_id": "case-a", "question": "What does source A establish?"},
+            ]
+        },
+        expected_ids,
+    )
+    reviews = runner._parse_reviews(  # noqa: SLF001
+        {
+            "items": [
+                {
+                    "case_id": "case-b",
+                    "predicted_action": "abstain",
+                    "recovered_answer_spans": [],
+                    "unambiguous": True,
+                    "natural_student_question": True,
+                    "gold_hint_leak": False,
+                    "rationale": "Source B has no answer.",
+                },
+                {
+                    "case_id": "case-a",
+                    "predicted_action": "answer",
+                    "recovered_answer_spans": ["Source A answer."],
+                    "unambiguous": True,
+                    "natural_student_question": True,
+                    "gold_hint_leak": False,
+                    "rationale": "Source A uniquely supports the answer.",
+                },
+            ]
+        },
+        expected_ids,
+    )
+
+    assert [row.case_id for row in authors] == expected_ids
+    assert [row.case_id for row in reviews] == expected_ids
+
+
+def test_attempt_003_rejects_duplicate_or_unknown_response_ids() -> None:
+    with pytest.raises(runner.ReferenceQuestionCheckpointError, match="duplicated"):
+        runner._parse_authors(  # noqa: SLF001
+            {
+                "items": [
+                    {"case_id": "case-a", "question": "What does source A establish?"},
+                    {
+                        "case_id": "case-a",
+                        "question": "What else does source A establish?",
+                    },
+                ]
+            },
+            ["case-a", "case-b"],
+        )
+
+
+def test_attempt_004_uses_three_candidates_and_deterministic_boundaries() -> None:
+    result = runner.validate(
+        require_unauthorized=False,
+        attempt=runner.ATTEMPT_004,
+    )
+    simulation = runner.simulate(attempt=runner.ATTEMPT_004)
+    author_schema = runner._candidate_author_schema(16)  # noqa: SLF001
+
+    assert result["multi_candidate_answerable"] is True
+    assert (
+        author_schema["properties"]["items"]["items"]["properties"]["questions"][
+            "minItems"
+        ]
+        == 3
+    )
+    assert simulation["decision"] == "completed-go-deeper"
+    assert simulation["selected_cluster_count"] == 100
+    assert simulation["selected_case_count"] == 500
+
+
+def test_attempt_004_can_select_a_later_blind_validated_candidate() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    first_case_id = authors[0].case_id
+    mutated = [
+        ReferenceQuestionCandidateReviewResponseV1(
+            **{
+                **row.model_dump(),
+                "predicted_action": "abstain",
+                "recovered_answer_spans": [],
+                "rationale": "Injected first-candidate failure.",
+            }
+        )
+        if row.candidate_id == f"{first_case_id}-candidate-1"
+        else row
+        for row in reviewers
+    ]
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=authors,
+        reviewers=mutated,
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    assert result["status"] == "completed-go-deeper"
+    selected = {row["case_id"]: row for row in result["selected_cases"]}
+    assert selected[first_case_id]["question"].endswith("form 2?")
+    with pytest.raises(runner.ReferenceQuestionCheckpointError, match="set drifted"):
+        runner._parse_authors(  # noqa: SLF001
+            {
+                "items": [
+                    {"case_id": "case-a", "question": "What does source A establish?"},
+                    {"case_id": "case-c", "question": "What does source C establish?"},
+                ]
+            },
+            ["case-a", "case-b"],
+        )
+
+
+def test_duplicate_candidates_are_recorded_as_quality_failures() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    first = authors[0]
+    duplicate = ReferenceQuestionCandidateAuthorResponseV1(
+        case_id=first.case_id,
+        questions=[first.questions[0], first.questions[0], first.questions[2]],
+    )
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=[duplicate, *authors[1:]],
+        reviewers=reviewers,
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    duplicated = {
+        row["candidate_id"]: row
+        for row in result["decisions"]
+        if row["case_id"] == first.case_id
+    }
+    assert (
+        "duplicate-candidate" in duplicated[f"{first.case_id}-candidate-1"]["reasons"]
+    )
+    assert (
+        "duplicate-candidate" in duplicated[f"{first.case_id}-candidate-2"]["reasons"]
+    )
+    assert result["status"] == "completed-go-deeper"
+
+
+def test_attempt_006_quarantines_nonidentity_batch_failures() -> None:
+    result = runner.validate(require_unauthorized=False, attempt=runner.ATTEMPT_006)
+    simulation = runner.simulate(attempt=runner.ATTEMPT_006)
+
+    assert result["batch_count"] == 54
+    assert simulation["decision"] == "completed-go-deeper"
+    assert runner._quarantinable_batch_failure(  # noqa: SLF001
+        RuntimeError("OpenAI response did not complete")
+    )
+    assert not runner._quarantinable_batch_failure(  # noqa: SLF001
+        RuntimeError("direct provider model identity drifted")
+    )
+
+
+def test_multi_candidate_reserve_tolerates_one_missing_author_case() -> None:
+    pool, cases, gold, authors, reviewers = runner._simulated_multi_candidate_votes()  # noqa: SLF001
+    missing_case_id = authors[0].case_id
+    result = score_multi_candidate_reference_questions(
+        canonical_cases=cases,
+        gold=gold,
+        cluster_modalities={
+            row["cluster_id"]: row["source_modality"] for row in pool["clusters"]
+        },
+        authors=authors[1:],
+        reviewers=[
+            row
+            for row in reviewers
+            if not row.candidate_id.startswith(f"{missing_case_id}-candidate-")
+        ],
+        target_allocation=TARGET_ALLOCATION,
+    )
+
+    assert result["completed_authored_answerable_case_count"] == 639
+    assert result["status"] == "completed-go-deeper"
+    assert result["selected_case_count"] == 500

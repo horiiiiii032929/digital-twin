@@ -1,10 +1,39 @@
 # Current project status
 
-Status date: 2026-08-30
+Status date: 2026-08-31
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
+
+## Current decision checkpoint
+
+`course-digital-twin-evaluation-program-011` has completed the actual-product
+10,000-case candidate plus paired 1,000-case control evaluation. This is a valid
+`Refine` result, not an operationally invalid stop. The candidate reached 44.16%
+fully grounded factual success with a source-family 95% interval of
+41.03%–44.96%, 72.9% boundary action accuracy, and 478 severe unsupported
+releases. It answered 433/500 explicit graded-work requests that required
+refusal. Although it beat the control by 6.26 percentage points on paired
+supported-answer retention and by nine points on boundary safety, neither
+condition passed the absolute release gates.
+
+The final package, all 11,000 product responses, deterministic scoring,
+5,703-case advisory coverage, 20-case critical escalation, 30-cluster visual
+supplement, and 12-case C0–C2 synthetic-profile diagnostic are durable. No
+critical source-truth case requires researcher adjudication. Visual remains
+`Go Deeper` at 17/30 complete assets and 75.94% atomic recall. C3 and the
+provider-backed T0/T1 comparison were not opened because factual grounding did
+not pass. Program 011 used USD 39.14017165; cumulative spend across programs
+008–011 was USD 43.43751328 under the authorized USD 50 ceiling. All paid
+authority is revoked.
+
+Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
+evidence. The next P0 is one method-level action-router and grounding successor
+on fresh development evidence. The sealed final set cannot be tuned or rerun.
+The qualified local R1 remains unchanged and available as a deterministic,
+fail-closed product baseline; no LLM-backed factual-quality, multimodal,
+professor-fidelity, usability, or learning-outcome claim is added.
 
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094
@@ -214,11 +243,229 @@ Because this is the second operationally invalid attempt, no further correction
 or retry is authorized. The checkpoint supports no product-quality conclusion;
 #127 remains `Refine` and now requires an explicit harness/method decision.
 
+AFQC-113/114 preserve two API-first finite-program operational failures. Program
+002 successfully materialized four reusable public-course indexes and 500 query
+vectors in 44 embedding batches for USD 0.00755274, then stopped before scoring
+because its cached-query token limit did not match the persisted index binding.
+Program 003 corrected that binding and reused the paid indexes, but its first
+optional GPT-5.4 nano reranking request returned an incomplete response; the
+automatic correction reproduced the stop. Program 003 made nine calls for USD
+0.00016134. Neither run produced product responses, hidden-gold scores, final-
+set access, or a quality estimate. Both authorities are revoked.
+
+AFQC-115 corrects `course-digital-twin-evaluation-program-004` to
+`invalid-execution`. Its runtime corpus exactly matched 0/456 required gold
+references; 393 references were contained only by broader parent sections and
+63 were absent from every runtime unit. The reported retrieval percentages are
+therefore non-interpretable and support no method or product decision. The
+500+100 and sealed 10,000+1,000 product stages did not run. Independent
+supplements remain diagnostic evidence: true visual reached 17/30 complete
+evidence@3, 76.13% Recall@5, zero boundary releases, and 30/30 original-region
+lineage, while 36/36 synthetic C0-C2 calls completed without establishing
+professor fidelity. Program 004 used 74 calls/batches and USD 0.05216944; its
+authority is revoked.
+
+AFQC-116 freezes the one harness-only successor as
+`course-digital-twin-evaluation-program-005`. Before any provider call, its
+mandatory matchability gate proves all 452 action-router development references
+map exactly to 300 non-overlapping authoritative source atoms. The program uses
+the previously reviewed 500 candidate and 100 control cases, retains automatic
+stage progression under the single USD 50 authority, and atomizes overlapping
+final source ranges before a possible 10,000+1,000 run. No prompt, model,
+quality gate, or hidden answer is changed by this correction.
+
+AFQC-117 records program 005 as a valid `completed-refine` result. Retrieval
+passed (95.0% all-evidence@3 and 97.5% Recall@5), but the 500-case T0 candidate
+reached only 51.75% fully grounded success, 70.5% answerable action accuracy,
+and 75.0% boundary accuracy, with nine severe unsupported releases. The paired
+control was safer on boundaries (90.0% versus 70.0%). The sealed 10,000+1,000
+stages remained unopened. Program 005 used 649 calls/batches and USD
+0.85525693; its authority is revoked.
+
+AFQC-118 freezes program 006 as the finite method-level successor under the
+existing program authority. Code owns answer/abstain/clarify/refuse policy,
+including ambiguity clarification; exact GPT-5.4 may return only one or two
+contiguous claims with original citations. It cannot author actions, source
+truth, or citation lineage. This reruns the now-known development checkpoint
+once. A pass automatically opens the untouched 10,000+1,000 confirmation; a
+valid failure terminates the factual branch.
+
+AFQC-119 records program 006 as `invalid-execution`, not a quality failure. It
+persisted all 500 candidate and 100 control responses, but three non-completed
+control responses triggered an obsolete whole-run failure rule. The automatic
+correction then changed the provider-ledger budget binding on resume and failed
+closed before another call. Hidden gold and the sealed 10,000+1,000 stage never
+opened. The immutable ledger records 512 calls/batches and USD 1.51091188;
+authority is revoked.
+
+AFQC-120 freezes program 007 as the sole harness-only successor under the
+existing program-level authority. It does not change cases, source truth,
+method, prompts, models, gates, or budgets. Persisted provider failures now
+remain measurable cases, and provider ceilings stay immutable across resume.
+Valid stages advance automatically without further approval; only privacy,
+gold leakage, identity, ledger/security integrity, and the global USD 50 hard
+stop remain blocking controls.
+
+AFQC-121 records program 007 as valid `completed-refine` development evidence.
+The 500-case candidate reached 64.25% fully grounded factual success, 99.2%
+overall action accuracy, 100% boundary accuracy, 65.5% claim precision/recall,
+80.75% citation precision/recall, 95% complete evidence@3, and 97.5% Evidence
+Recall@5, with zero severe unsupported releases. On the paired 100 cases it
+improved supported-answer retention by 25 points and boundary safety from 90%
+to 100%. The factual, claim, citation, and source-version gates still failed,
+so the sealed 10,000+1,000 stages remained unopened. The visual supplement
+reached 17/30 complete evidence@3 and 76.64% Recall@5 with zero boundary
+releases; C0-C2 completed as synthetic diagnostic evidence only. Across all
+stages, program 007 used 614 calls or batches and USD 1.82048188.
+
+AFQC-122 records the direct audit correction. All 16 references flagged by the
+advisory review have a confirmed benchmark-quality defect: five are non-unique
+or underspecified, nine use malformed/truncated/non-responsive code, equation,
+or table answers, and two are not natural or semantically well-formed. The two
+cases previously marked for human resolution are decisively non-unique from
+their pinned source regions, so no user adjudication is needed. Program 007
+authority is revoked. One finite successor now reuses the fresh
+160-cluster/800-case reference reserve from attempts 001/002 and fixes only the
+demonstrated response-order defect: it requires the exact unique case-ID set
+and restores frozen order deterministically. The author/reviewer roles, source
+pool, hidden truth, prompts, models, quotas, and quality gates remain unchanged.
+It may produce one fresh 500-case package; the sealed 10,000+1,000 execution
+remains contingent on a valid reference and product-development pass rather
+than on another approval message.
+
+AFQC-123 records reference validation 003 as valid `completed-refine` evidence.
+All 80 direct OpenAI calls completed with exact identities, zero retries, and
+USD 1.4173615 reported cost. The method passed 448/800 individual questions,
+but only 8/160 complete five-question clusters survived, yielding 40/500
+required selected cases. Overlapping defects included 234 answer-span
+mismatches, 89 unnatural questions, 86 action mismatches, 38 ambiguous
+questions, 24 gold-hint leaks, and 22 duplicate-question findings. Attempt 003
+authority is revoked; it supports no product-quality or final-set claim.
+
+AFQC-124 freezes one method-level successor under the existing program-level
+authority. For each answerable source target, GPT-5.4 mini proposes three
+distinct questions and target-blind GPT-5.4 independently recovers the action
+and exact source spans for every candidate. Code selects the first unique
+candidate passing every invariant. Versioned deterministic templates own the
+160 boundary probes so a wording model cannot mutate policy actions or evidence
+lineage. The same fresh 160-cluster source reserve and frozen 100-cluster quota
+are retained. The successor is bounded to 80 calls and USD 18; product and
+sealed 10,000+1,000 execution remain closed until it produces a complete
+reference package.
+
+AFQC-125 records attempt 004 as `invalid-execution`, not a quality result. Seven
+direct OpenAI calls completed with exact identities, zero retries, 23,040 input
+tokens, 17,375 output tokens, and USD 0.2426915 before duplicate candidate
+wording triggered an overly strict whole-run parser termination. The duplicate
+is preserved in the ignored ledger. No selected package, product response,
+private source, hidden final gold, or sealed 10,000+1,000 case opened.
+
+AFQC-126 freezes the sole harness-only correction as attempt 005 under the
+existing program-level authority. It changes no source, case, prompt, model,
+gold, quota, call limit, retry rule, or acceptance gate. Duplicate candidates
+are now durably recorded and rejected as candidate-level quality failures while
+the remaining batches continue. A valid pass advances automatically to the
+fresh 500+100 product confirmation; a valid quality failure terminates this
+reference branch without another authoring attempt.
+
+AFQC-127 records attempt 005 as `invalid-execution`. The duplicate-candidate
+correction worked and 32 calls completed with exact identity, but author batch
+17 returned a non-completed OpenAI response under the frozen zero-retry policy.
+Completed calls reported 116,096 input tokens, 86,645 output tokens, and USD
+1.291204. The failed response is preserved; no selected package, product,
+private data, hidden gold, or final case opened.
+
+AFQC-128 freezes the finite provider-resilient attempt 006 under the existing
+program authority. It retains the same three-candidate truth method, reduces
+batches from four to three clusters, and quarantines isolated non-identity
+provider failures. Every affected cluster is ineligible; selected clusters
+still require exact action/span recovery, natural unambiguous wording, no
+leakage or duplicate, valid lineage, and all frozen quotas. Identity,
+credential, request, binding, and budget drift remain terminal. A valid result
+ends reference construction and either advances to 500+100 or stops scaling.
+
 R1 consolidation is complete on `main`: PR #130 merged the flow-independent
 evaluation, PR #133 merged the privacy-preserving learning-gap core, and PR
 #135 merged the opt-in proactive-outreach core. Qualified immutable retrieval
-closed #139. Checkpoints 006 and 007 are terminal historical evidence; neither
-produced a valid product-quality estimate.
+closed #139. Checkpoint 006 is terminal invalid evidence; program 007 is a valid
+development `Refine` result whose estimate is explicitly limited by confirmed
+reference-package defects.
+
+AFQC-129 records reference validation 006 as valid `completed-refine` evidence.
+The provider-resilient run completed 106/107 calls at USD 3.19243675. It found
+1,028 passing candidates and at least one passing wording for 449/640 answerable
+targets, but the all-five complete-cluster rule yielded only 71 eligible clusters
+and 315/500 quota-selected cases. Attempt 006 authority is revoked. No product,
+private source, or sealed final split was opened.
+
+AFQC-130 records one explicit sampling-method correction. Aggregate 007 selects
+questions—not complete five-question clusters—from immutable accepted votes in
+attempts 003–006. The resulting 500-case development package contains 400
+answerable and 100 boundary cases, exactly 125 per course and 100 per question
+position, plus a frozen balanced 100-case control. The package spans 134 source
+clusters, which remain the hierarchical uncertainty unit. Reuse of completed
+candidate evidence from the two operationally invalid attempts is disclosed, so
+this is development evidence rather than untouched confirmation.
+
+AFQC-131 freezes `course-digital-twin-evaluation-program-008` under the existing
+USD 50 program authority. It runs the fresh 500+100 actual-product checkpoint and
+automatically proceeds to final construction and 10,000+1,000 only after every
+frozen development gate passes. Repeated approval pauses are removed; privacy,
+gold isolation, exact model identity, ledger integrity, valid-quality stops, and
+the global emergency ceiling remain fail-closed.
+
+AFQC-132 records program 008 as a valid `completed-refine` result. The fresh
+300-case retrieval decision exactly matched all 450 required references. The
+best method, OpenAI-small hybrid, reached 89.74% complete evidence@3, 95.51%
+Evidence Recall@5, 100% boundary accuracy, and zero course/version/severe
+violations; it missed the frozen 90% gate by one answerable case. Independent
+visual evidence reached 18/30 complete clusters with 76.31% atomic recall and
+zero boundary releases; synthetic C0-C2 completed but is not professor-fidelity
+evidence. Program 008 used 83 calls and USD 0.04600311; its authority is revoked.
+
+AFQC-133 freezes `course-digital-twin-evaluation-program-009` as the single
+descriptive completion under the remaining USD 49.95 program ceiling. It does
+not reinterpret program 008 as a pass or select the hybrid for release. It
+freezes the strongest observed hybrid solely to measure the actual 500+100 and
+sealed 10,000+1,000 product behavior, then runs the remaining non-human product
+diagnostics automatically. Quality failures remain visible in every report;
+only privacy exposure, gold leakage, model-identity drift, corrupted ledgers,
+security failure, or the cumulative cost ceiling can stop execution.
+
+AFQC-134 records program 009 as `Refine` development evidence plus an
+interrupted final-construction attempt. The 500-case candidate reached 59.75%
+fully grounded success and 100% boundary action accuracy but failed the factual,
+claim, citation, completion, version, and paired-retention gates. Construction
+was stopped after 37 wording and 36 verification batches because measured
+strong-verifier usage projected USD 14–15 against a USD 5 reserve. Program 010
+is the sole active correction: it uses GPT-5.4 mini for bulk verification,
+preserves GPT-5.4 for the product candidate and critical review, runs at most
+four course streams concurrently, and retains unchanged truth, cases, gates,
+and descriptive interpretation. Its USD 47.30 ceiling keeps cumulative program
+spend within the user's existing USD 50 authority.
+
+AFQC-135 records program 010 as another valid development `Refine` plus an
+interrupted construction attempt. Four-course concurrency passed its focused
+and complete repository gates, but measured mini-verifier usage exposed that
+the USD 6 construction reserve was still divided 50/50 despite wording needing
+about USD 0.6 and verification about USD 4.3. Program 011 is the final
+harness-only correction: it changes that split to 15/85 and uses a USD 45.70
+ceiling so cumulative spend across programs 008-011 remains below the existing
+USD 50 authorization. No cases, truth, prompts, product method, or gates change.
+
+AFQC-136 records program 011 as the completed flow-independent actual-product
+measurement. Deterministic construction sealed 10,000 final cases and the
+paired 1,000-case control; all 11,000 responses were durable before hidden gold
+opened. Candidate grounded success was 44.16%, boundary action accuracy was
+72.9%, claim precision/recall were 46.43%, citation precision/recall were
+67.44%/67.75%, all-evidence@3 was 88.33%, and Evidence Recall@5 was 93.29%.
+The candidate produced 478 severe releases, dominated by answering 433/500
+graded-work requests that required refusal. It improved paired supported-answer
+retention over the any-hit control, but every absolute release gate failed.
+The visual supplement is Go Deeper, C0–C2 remains synthetic diagnostic evidence,
+and provider T0/T1 was skipped after the factual failure. Program authority is
+revoked and the next decision is an action-router/grounding architecture
+successor, not another evaluator or sealed-set prompt loop.
 
 The active Sunday R1-demo successor starts from merged PR #145 and is published
 for review in draft PR #146. Evaluation-v2 completed its corrected four-model
@@ -1268,7 +1515,7 @@ continues to hold report, presentation, and professor-communication work.
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Valid 200-case product Refine / final closed | The earlier 10,000 correlated template rows remain engineering evidence. Evaluation-v2 produced a valid leakage-free four-model product screen, selected no model, and stopped before 500/control/advisory stages | Preserve the result, keep the sealed 10,000 cases closed, and make one prospective retrieval/evidence method decision before another academic execution |
+| Large factual QA | Program 011 completed / Refine | The actual T0 product completed 10,000 candidate plus 1,000 paired control cases without gold leakage. Candidate grounded success was 44.16% (source-family 95% interval 41.03%–44.96%) and boundary action accuracy was 72.9%; all absolute gates failed | Preserve the sealed result; build one deterministic action-router and grounding successor on fresh development evidence, then run a new confirmation tranche rather than retuning the final set |
 
 ## Release readiness and critical path
 
@@ -1289,7 +1536,7 @@ professor-fidelity calibration, and human workflow evidence remain separate.
 | 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
 | 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
 | 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
-| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Todo / Refine | Preserve the cascade result and design one prospective retrieval/evidence successor after the operational release; keep the sealed 10,000 run closed |
+| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Done / Refine | Preserve Program 011's valid 10,000+1,000 result and transfer method redesign to a fresh successor issue |
 | 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 

@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-30
+Status date: 2026-08-31
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -113,6 +113,14 @@ confirm on new source-disjoint data. Independent visual, synthetic-profile,
 and local product checks may continue without reopening the factual or final
 split.
 
+AFQC-115 corrects program 004 to `invalid-execution`: 0/456 gold references
+exactly matched its parent-section runtime corpus, so its retrieval percentages
+are non-interpretable. AFQC-116 is the one harness-only successor. Program 005
+binds the reviewed action-router 500+100 package to 300 non-overlapping atomic
+source regions, proves 452/452 exact matchability before calls, and atomizes the
+final corpus before any sealed 10,000+1,000 execution. Automatic progression is
+finite: a valid development failure stops; a pass advances once to the final.
+
 AFQC-105 subsequently selected unchanged small hybrid retrieval over unique
 atomic evidence, but AFQC-109's actual T0 500+100 checkpoint validly failed:
 44.25% fully grounded success, 75% overall action accuracy, 89% boundary
@@ -132,6 +140,24 @@ missing `binding_id` runtime contract. Authorization is revoked and the sealed
 harness/method decision; this terminal invalid result does not alter the
 qualified local R1.
 
+Program 011 now completes the professor-requested actual-product scale
+measurement. The sealed run persisted 10,000 candidate and 1,000 paired control
+responses before hidden gold opened. It is a valid `Refine`: candidate grounded
+success was 44.16% (source-family 95% interval 41.03%–44.96%), boundary action
+accuracy was 72.9%, and 478 severe releases occurred. The dominant defect was
+answering 433/500 explicit graded-work requests that required refusal. The
+candidate improved paired supported-answer retention over the control, but
+neither passed the absolute release gates. The 30-cluster visual supplement is
+`Go Deeper`; C0–C2 is synthetic diagnostic evidence only; provider-backed
+T0/T1 was skipped because factual grounding failed.
+
+All Program 011 authority is revoked. Issue #127's measurement milestone may
+close as completed unfavorable evidence, while #105 and the release goal remain
+`Refine`/blocked. One new P0 successor must redesign the deterministic action
+router and grounding/claim boundary on fresh development evidence. It cannot
+retune or rerun the sealed final package. The qualified local deterministic R1
+remains the rollback baseline and makes no LLM factual-quality claim.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |
@@ -149,7 +175,7 @@ qualified local R1.
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | Confirmation 002 passed 50 trajectories and 200 turns per condition with every hard gate at 100%, zero provider calls, and zero cost. T1 is selected for the hash-bound local R1; T0 remains rollback | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | Local R1 verified A0 creation, worker delivery, student consent, citation, expiry, deduplication, and restart behavior. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
-| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Evaluation-v2 produced valid unfavorable evidence: all four models completed, none passed, grounded success was 15.0–18.1%, shared all-evidence@3 was 57.5%, and every model had a severe unsupported release. Deterministic fallback is retained; final 10,000 stays closed pending a retrieval/evidence method successor | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
+| Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Program 011 completed the sealed 10,000+1,000 evaluation without gold leakage but validly failed every absolute gate: 44.16% grounded success, 72.9% boundary action, and 478 severe releases. Deterministic fallback remains selected | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
 | Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Draft/preview/approval/withdrawal workflow and ten-case preview are implemented. Synthetic demo approval is not the professor-fidelity reference, so C0–C3 remains open | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | Local Compose API, ingestion worker, outreach worker, web, internal HTTPS, roles, and exact result binding passed; durable public host remains pending | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local restart, checksum backup, clean restore, and T0/T1 rollback passed; target-host operations remain pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |

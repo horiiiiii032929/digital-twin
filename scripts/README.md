@@ -826,8 +826,29 @@ Current utilities:
   or the `*:academic-factual-qa-reference-validation-002` package commands. It
   adds only the provider-side terminal-question pattern required by the local
   validator and uses distinct ledger, result, and materialized-package paths.
-  Validation, simulation, and preflight are network-free; execute and score
-  remain freeze blocked until attempt 002 receives separate authorization.
+  Attempt 003 is the finite order-insensitive successor. It requires every
+  expected case ID exactly once, rejects duplicate/missing/unknown IDs, and
+  restores frozen request order deterministically; it does not change source,
+  prompt, model, gold, quota, or quality gates. Use the
+  `*:academic-factual-qa-reference-validation-003` package commands. Validation,
+  simulation, and preflight are network-free. Attempt 003 completed Refine with
+  448/800 passing individual questions but only 8/160 complete clusters. Attempt
+  004 is the finite method successor: it authors three variants for each
+  answerable target, blind-reviews all variants, and keeps deterministic policy
+  templates for boundary cases. Use the
+  `*:academic-factual-qa-reference-validation-004` commands. Attempt 004 made
+  seven durable calls before duplicate author candidates triggered an invalid
+  whole-run parser termination. Attempt 005 is the sole harness-only correction:
+  duplicate candidates are recorded as deterministic quality failures while the
+  remaining batches continue unchanged. Use the
+  `*:academic-factual-qa-reference-validation-005` commands; live execution is
+  restricted to that exact bounded authorization. Attempt 005 then completed 32
+  calls before one non-completed OpenAI author response caused an operational
+  invalidity. Attempt 006 is the finite provider-resilient successor: it uses
+  three-cluster batches and quarantines isolated non-identity provider failures,
+  making affected reserve clusters ineligible while identity, credential,
+  binding, request, and budget drift remain terminal. Use the
+  `*:academic-factual-qa-reference-validation-006` commands.
 - `run_factual_qa_v3_scale_pilot_100.py`: provides the separately bounded
   100-case stage over the hash-bound 10,000-case design. Validation and
   preflight make no provider calls; preflight must report
@@ -956,6 +977,21 @@ Current utilities:
   identity checks, zero retries, safe resume, 66 calls maximum, and separate USD
   2/USD 1.5 stage stops. Use package commands ending in
   `nonhuman-evaluation-supplements`.
+- `run_course_digital_twin_evaluation_program.py`: owns the finite factual,
+  visual, synthetic-profile, and autonomous-tutoring evaluation dispatcher.
+  Historical programs 002 and 003 are immutable invalid executions. Program
+  004 is also invalid for academic interpretation because its parent-section
+  runtime corpus did not contain the development gold ranges exactly; its
+  visual and synthetic-profile diagnostics remain recorded separately.
+  Program 005 binds the validated 500-case action-router package to its exact
+  300-atom source corpus, checks every gold range before any provider call, and
+  automatically advances from fresh retrieval through 500+100 product
+  development and then the sealed 10,000+1,000 evaluation only when the frozen
+  gates pass. One program-level USD 50 authority replaces per-stage approval
+  pauses. Privacy, gold isolation, identity, ledger integrity, and the global
+  budget remain fail-closed. Use package commands ending in
+  `finite-evaluation-program-005`; a stopped run resumes with
+  `npm run resume:finite-evaluation-program-005`.
 - `build_atomic_claim_validation_dataset.py` and
   `run_atomic_claim_validation_confirmation.py`: build and protect the fresh
   120-case synthetic-public successor to the failed query/evidence gate. The

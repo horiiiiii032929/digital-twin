@@ -43,22 +43,23 @@ qualified local release explicitly uses the deterministic fail-closed fallback
 and makes no LLM-quality claim. #24 remains open because the synthetic demo
 professor is not the fidelity reference.
 
-The sealed 10,000-case execution stays in #127 as the first post-demo academic
-goal. AFQC-105 selected the unchanged small hybrid retriever over unique atomic
-evidence, but AFQC-109 then validly showed that the actual T0 product was not
-usable: 44.25% fully grounded success, 75% overall action accuracy, 89%
-boundary accuracy, and five unsafe ambiguity releases. That authority is
-revoked and the consumed 500 cases cannot be tuned or rerun. AFQC-110 built one
-finite successor with deterministic action routing and question-targeted atomic
-generation over fresh source ranges. AFQC-111/112 preserve its two permitted
-execution attempts as operationally invalid: attempt 001 stopped before calls
-on an embedding batch/client mismatch; attempt 002 completed 15 embedding calls
-for USD 0.00057488, then stopped before product case 1 on a missing `binding_id`
-runtime contract. Authorization is revoked, no quality result exists, and the
-sealed 10,000 cases remain unopened. #127 stays In Progress / Refine /
-priority:p0. #105 and #131 remain evidence
-consumers; #24 and #10 retain their professor-approval and external-human
-boundaries. The qualified local R1 remains unchanged.
+Program 011 has completed the post-demo actual-product milestone in #127. All
+10,000 candidate and 1,000 paired control responses were persisted before
+hidden gold opened. The result is valid `Refine`, not another operational stop:
+candidate grounded success was 44.16% with a source-family 95% interval of
+41.03%–44.96%, boundary action accuracy was 72.9%, and 478 severe releases
+occurred. It answered 433/500 explicit graded-work requests that required
+refusal. The candidate beat the control comparatively, but both failed the
+absolute release gates. Visual remains `Go Deeper` at 17/30 complete assets;
+synthetic C0–C2 is not professor fidelity; provider-backed T0/T1 was skipped
+after the factual failure.
+
+#127 moves to `Done / Refine` as the completed measurement milestone. A new P0
+successor owns the deterministic action-router and grounding architecture
+change on fresh development evidence. #105 remains `In Progress / Refine`,
+#131 remains `Go Deeper`, #24 remains open for real professor approval, and the
+parent release goal remains open. Program 011 paid authority is revoked; the
+qualified local deterministic R1 is unchanged.
 
 ## Release stages and product gates
 
@@ -79,13 +80,11 @@ professor-communication track.
 
 ## Critical path
 
-1. #127 must preserve AFQC-109 as valid unfavorable quality evidence and
-   AFQC-111/112 as terminal invalid execution evidence. Do not retry AFQC-110.
-   Make one explicit harness/method decision before any new factual checkpoint;
-   the qualified local R1 and deterministic rollback remain unchanged.
-
-2. Keep #105 and sealed 10,000+1,000 execution closed until a new prospective
-   checkpoint produces a valid leakage-free actual-product result.
+1. Preserve #127 and Program 011 as completed unfavorable evidence; do not tune
+   or rerun the sealed 10,000+1,000 package.
+2. Execute one fresh method-level successor for deterministic action routing,
+   evidence sufficiency, and claim/citation release; keep the local fail-closed
+   fallback selected until it passes.
 3. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 4. #131 — retain the terminal visual diagnostic and design a separate true-

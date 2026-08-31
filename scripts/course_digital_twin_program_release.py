@@ -365,6 +365,7 @@ def _chart(
     path: Path,
     *,
     final_result: dict[str, Any] | None,
+    development_result: dict[str, Any] | None,
     visual_result: dict[str, Any] | None,
 ) -> bool:
     try:
@@ -372,9 +373,10 @@ def _chart(
     except ImportError:
         return False
     figure, axes = plt.subplots(1, 2, figsize=(12, 5))
-    if final_result is not None:
-        metrics = final_result["candidate"]["summary"]["metrics"]
-        interval = final_result["candidate"]["summary"][
+    factual_result = final_result if final_result is not None else development_result
+    if factual_result is not None:
+        metrics = factual_result["candidate"]["summary"]["metrics"]
+        interval = factual_result["candidate"]["summary"][
             "fully_grounded_source_family_interval"
         ]
         labels = [
@@ -406,19 +408,20 @@ def _chart(
         )
         axes[0].axhline(0.95, color="#b91c1c", linestyle="--", linewidth=1)
         axes[0].set_ylim(0, 1.02)
-        axes[0].set_title("10,000-case actual-product KPIs")
-        paired = final_result["paired"]
+        factual_case_count = factual_result["candidate"]["summary"]["case_count"]
+        axes[0].set_title(f"{factual_case_count}-case actual-product KPIs")
+        paired = factual_result["paired"]
         control_ids = {
-            row["case_id"] for row in final_result["control"]["case_scores"]
+            row["case_id"] for row in factual_result["control"]["case_scores"]
         }
         candidate_answerable = [
             row
-            for row in final_result["candidate"]["case_scores"]
+            for row in factual_result["candidate"]["case_scores"]
             if row["case_id"] in control_ids and row["answerable"]
         ]
         control_answerable = [
             row
-            for row in final_result["control"]["case_scores"]
+            for row in factual_result["control"]["case_scores"]
             if row["answerable"]
         ]
         candidate_supported = sum(
@@ -443,7 +446,9 @@ def _chart(
             color=["#4f46e5", "#94a3b8", "#4f46e5", "#94a3b8"],
         )
         axes[1].set_ylim(0, 1.02)
-        axes[1].set_title("Paired 1,000-case candidate vs control")
+        axes[1].set_title(
+            f"Paired {paired['paired_case_count']}-case candidate vs control"
+        )
     else:
         axes[0].text(0.5, 0.5, "Factual branch stopped before final", ha="center")
         axes[0].set_axis_off()
@@ -501,7 +506,12 @@ def run_reporting(context: StageExecutionContext) -> StageResultEnvelopeV1:
         )
     )
     chart_path = context.output_root / "professor-evaluation-summary.png"
-    chart_created = _chart(chart_path, final_result=final, visual_result=visual)
+    chart_created = _chart(
+        chart_path,
+        final_result=final,
+        development_result=development,
+        visual_result=visual,
+    )
     if final is not None:
         decision = final["status"].replace("completed-", "").title()
         metrics = final["candidate"]["summary"]["metrics"]

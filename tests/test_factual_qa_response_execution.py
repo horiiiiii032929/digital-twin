@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 from pathlib import Path
 
 import pytest
@@ -97,6 +96,53 @@ async def test_response_execution_is_atomic_and_complete(tmp_path: Path) -> None
         )
         assert snapshot["status"] == "completed"
         assert snapshot["response_count"] == 3
+    finally:
+        ledger.close()
+
+
+@pytest.mark.asyncio
+async def test_response_execution_preserves_order_within_course_when_concurrent(
+    tmp_path: Path,
+) -> None:
+    cases = [
+        EvaluationCaseV1(
+            case_id=f"{course}-{index}",
+            cluster_id=f"{course}-cluster-{index}",
+            source_family_id=f"{course}-family-{index}",
+            course_id=course,
+            question=f"Question {index}?",
+            split=EvaluationSplit.DEVELOPMENT,
+            slice="direct-factual",
+            author_family="fixture",
+        )
+        for index in range(3)
+        for course in ("course-a", "course-b")
+    ]
+    path = tmp_path / "concurrent-responses.sqlite3"
+    ledger = ResponseLedgerV1(
+        path,
+        cases_sha256=canonical_json_sha256(
+            [row.model_dump(mode="json") for row in cases]
+        ),
+        system_manifest_sha256=canonical_json_sha256(
+            _manifest().model_dump(mode="json")
+        ),
+        run_configuration_sha256="d" * 64,
+        resume=False,
+    )
+    adapter = _Adapter()
+    try:
+        snapshot = await execute_cases(
+            cases=cases,
+            adapter=adapter,
+            manifest=_manifest(),
+            ledger=ledger,
+            maximum_concurrency=2,
+        )
+        assert snapshot["response_count"] == 6
+        for course in ("course-a", "course-b"):
+            observed = [row for row in adapter.calls if row.startswith(course)]
+            assert observed == [f"{course}-{index}" for index in range(3)]
     finally:
         ledger.close()
 

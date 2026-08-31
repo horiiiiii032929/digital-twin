@@ -22,6 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 
 PROGRAM_ID = "course-digital-twin-evaluation-program-001"
+PROGRAM_ID_PATTERN = r"^course-digital-twin-evaluation-program-[0-9]{3}$"
 
 
 def canonical_sha256(value: Any) -> str:
@@ -86,6 +87,37 @@ class ProgramModelBindingV1(BaseModel):
     output_price_usd_per_million: float = Field(ge=0, allow_inf_nan=False)
 
 
+class ProgramEmbeddingBindingV1(BaseModel):
+    """Exact hosted embedding contract used by an API-first program."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    provider: Literal["openai"] = "openai"
+    model: str = Field(min_length=1)
+    documented_revision: str = Field(min_length=1)
+    dimensions: int = Field(ge=1)
+    batch_size: int = Field(ge=1, le=64)
+    request_token_limit: int = Field(ge=1, le=300_000)
+    input_price_usd_per_million: float = Field(ge=0, allow_inf_nan=False)
+    exact_identity_required: Literal[True] = True
+    artifact_instrument_id: str | None = Field(
+        default=None, pattern=PROGRAM_ID_PATTERN
+    )
+    artifact_root_path: str | None = None
+
+    @model_validator(mode="after")
+    def validate_artifact_reuse(self) -> "ProgramEmbeddingBindingV1":
+        if (self.artifact_instrument_id is None) != (self.artifact_root_path is None):
+            raise ValueError(
+                "embedding artifact instrument and root must be supplied together"
+            )
+        if self.artifact_root_path is not None:
+            path = Path(self.artifact_root_path)
+            if path.is_absolute() or ".." in path.parts:
+                raise ValueError("embedding artifact root must be repository relative")
+        return self
+
+
 class ProgramStageV1(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
@@ -114,7 +146,7 @@ class ProgramManifestV1(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
     schema_version: Literal["1.0.0"] = "1.0.0"
-    program_id: Literal[PROGRAM_ID] = PROGRAM_ID
+    program_id: str = Field(default=PROGRAM_ID, pattern=PROGRAM_ID_PATTERN)
     status: Literal[
         "reviewed-pending-authorization",
         "frozen-authorized",
@@ -122,7 +154,7 @@ class ProgramManifestV1(BaseModel):
         "terminated",
     ]
     owner_issue: Literal[127] = 127
-    total_budget_usd: Literal[50.0] = 50.0
+    total_budget_usd: float = Field(default=50.0, gt=0, le=50.0)
     credential_environment_variable: Literal["OPENAI_API_KEY"] = "OPENAI_API_KEY"
     provider_api: Literal["responses"] = "responses"
     provider_endpoint: Literal["https://api.openai.com/v1/responses"] = (
@@ -136,6 +168,9 @@ class ProgramManifestV1(BaseModel):
     private_data_authorized: Literal[False] = False
     retrieval_execution_device: Literal["cpu"] = "cpu"
     retrieval_execution_dtype: Literal["float16"] = "float16"
+    retrieval_embedding: ProgramEmbeddingBindingV1 | None = None
+    retrieval_nano_reranking_enabled: bool | None = None
+    descriptive_factual_continuation: bool | None = None
     models: list[ProgramModelBindingV1] = Field(min_length=4, max_length=4)
     stages: list[ProgramStageV1] = Field(min_length=9, max_length=9)
     metadata_verified_at: datetime
@@ -143,6 +178,17 @@ class ProgramManifestV1(BaseModel):
     source_plan_path: str = Field(min_length=1)
     development_cases_path: str = Field(min_length=1)
     development_gold_path: str = Field(min_length=1)
+    development_source_path: str | None = None
+    development_control_cases_path: str | None = None
+    development_control_gold_path: str | None = None
+    product_candidate_generator: str | None = None
+    product_candidate_evidence_gate: str | None = None
+    product_candidate_model_role: str | None = None
+    final_construction_verifier_role: str | None = None
+    final_construction_wording_budget_fraction: float | None = Field(
+        default=None, gt=0, lt=1
+    )
+    provider_concurrency: int | None = Field(default=None, ge=1, le=8)
     visual_dataset_path: str = Field(min_length=1)
     global_hard_stops: list[str] = Field(min_length=6)
     content_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
@@ -169,6 +215,11 @@ class ProgramManifestV1(BaseModel):
         roles = [row.role for row in self.models]
         if len(roles) != len(set(roles)):
             raise ValueError("program model roles must be unique")
+        if (
+            self.final_construction_verifier_role is not None
+            and self.final_construction_verifier_role not in roles
+        ):
+            raise ValueError("final construction verifier role is not bound")
         orders = [row.order for row in self.stages]
         names = [row.name for row in self.stages]
         if orders != list(range(1, len(self.stages) + 1)):
@@ -192,7 +243,11 @@ class ProgramManifestV1(BaseModel):
                 raise ValueError("program stage dependency must precede the stage")
             seen.add(stage.name)
         expected_hash = canonical_sha256(
-            self.model_dump(mode="json", exclude={"content_sha256"})
+            self.model_dump(
+                mode="json",
+                exclude={"content_sha256"},
+                exclude_none=True,
+            )
         )
         if self.content_sha256 != expected_hash:
             raise ValueError("program manifest content hash drifted")

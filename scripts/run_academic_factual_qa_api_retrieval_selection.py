@@ -380,14 +380,21 @@ def _chunks_by_course(source: dict[str, Any]) -> dict[str, list[DocumentChunk]]:
 class _CachedQueryEmbedder:
     provider_id = "openai"
     endpoint = "https://api.openai.com/v1/embeddings"
-    request_token_limit = 50_000
-    batch_size = 64
-
-    def __init__(self, *, model: str, dimensions: int, vectors: dict[str, list[float]]):
+    def __init__(
+        self,
+        *,
+        model: str,
+        dimensions: int,
+        vectors: dict[str, list[float]],
+        batch_size: int = 64,
+        request_token_limit: int = 50_000,
+    ):
         self.model_name = model
         self.model = model
         self.model_revision = model
         self.dimensions = dimensions
+        self.batch_size = batch_size
+        self.request_token_limit = request_token_limit
         self._vectors = vectors
 
     def embed_documents(self, texts):

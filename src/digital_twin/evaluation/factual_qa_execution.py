@@ -150,7 +150,10 @@ async def execute_cases(
     adapter: TutorEvaluationAdapterV1,
     manifest: SystemUnderTestManifestV1,
     ledger: ResponseLedgerV1,
+    maximum_concurrency: int = 1,
 ) -> dict[str, str | int]:
+    if maximum_concurrency < 1:
+        raise ValueError("maximum concurrency must be positive")
     rows = list(cases)
     identifiers = [row.case_id for row in rows]
     if len(identifiers) != len(set(identifiers)):
@@ -158,8 +161,8 @@ async def execute_cases(
     completed = ledger.completed_case_ids()
     if not completed <= set(identifiers):
         raise FactualQaExecutionError("ledger contains a case outside the input package")
-    try:
-        for case in rows:
+    async def execute_partition(partition: list[EvaluationCaseV1]) -> None:
+        for case in partition:
             if case.case_id in completed:
                 continue
             try:
@@ -177,6 +180,18 @@ async def execute_cases(
                     trace={"failure_type": type(error).__name__},
                 )
             ledger.record(response)
+
+    partitions: dict[str, list[EvaluationCaseV1]] = {}
+    for case in rows:
+        partitions.setdefault(case.course_id, []).append(case)
+    semaphore = asyncio.Semaphore(maximum_concurrency)
+
+    async def bounded(partition: list[EvaluationCaseV1]) -> None:
+        async with semaphore:
+            await execute_partition(partition)
+
+    try:
+        await asyncio.gather(*(bounded(row) for row in partitions.values()))
         validate_completion = getattr(adapter, "validate_completion", None)
         if callable(validate_completion):
             validate_completion()

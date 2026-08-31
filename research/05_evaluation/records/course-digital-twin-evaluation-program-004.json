@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-004",
+  "component": "retriever",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-retrieval-decision",
+  "corpus_id": "mismatched-parent-section-runtime-corpus",
+  "code_revision": "d4201c7c9318eedbf9909bec233a845f19891420",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "finite-program-004-factual-harness",
+        "version": "invalid-corpus-gold-binding",
+        "configuration": {
+          "case_count": 300,
+          "required_reference_count": 456,
+          "exactly_matched_reference_count": 0,
+          "parent_contained_reference_count": 393,
+          "not_contained_reference_count": 63,
+          "product_calls": 0,
+          "final_10000_opened": false
+        }
+      },
+      "metrics": [
+        {"name": "exact-reference-match-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "provider-calls-or-batches", "value": 74.0, "unit": "count", "direction": "lower-is-better", "threshold": 286.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.05216944, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "pre-ranking-exact-reference-matchability", "passed": false, "evidence": "All 456 required references lacked an exact runtime retrieval unit; 63 were not contained by any runtime unit."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "No product response or final 10,000-case execution occurred."}
+      ],
+      "failures_by_category": {"runtime-corpus-gold-binding-defect": 1}
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-valid-factual-comparison",
+        "version": "program-004-invalid",
+        "configuration": {"product_calls": 0, "final_10000_opened": false}
+      },
+      "metrics": [
+        {"name": "exact-reference-match-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "provider-calls-or-batches", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 286.0, "passed": true},
+        {"name": "reported-cost-usd", "value": 0.0, "unit": "usd", "direction": "lower-is-better", "threshold": 50.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "pre-ranking-exact-reference-matchability", "passed": false, "evidence": "No retrieval method can be compared fairly against an unmatchable corpus/gold pair."},
+        {"name": "gold-and-final-isolation", "passed": true, "evidence": "No product response or final 10,000-case execution occurred."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Program 004 is operationally invalid for factual evaluation. Preserve the independent visual/profile diagnostics, add a mandatory pre-ranking matchability gate, and use one exactly matched atomic-corpus successor.",
+    "limitations": [
+      "The recorded retrieval percentages are non-interpretable.",
+      "The visual supplement remains Go Deeper and the synthetic profile is not professor-fidelity evidence.",
+      "The sealed 10,000+1,000 product evaluation was not executed."
+    ]
+  }
+}

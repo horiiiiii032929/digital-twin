@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-009",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-reference-aggregate-007",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+  "code_revision": "e244ff50f98141bd74318a3b61dc76d724c7d9d1",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "openai-gpt-5-4-question-targeted-extraction-v2",
+        "version": "program-009",
+        "configuration": {
+          "retrieval": "openai-small-hybrid-v2-descriptive",
+          "evidence_gate": "any-hit-evidence-gate-v1",
+          "model": "gpt-5.4-2026-03-05",
+          "case_count": 500,
+          "provider_calls": 520,
+          "reported_stage_cost_usd": 1.49896685
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.5975,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "product-quality",
+          "passed": false,
+          "evidence": "The 500-case candidate passed only boundary accuracy, Evidence Recall@5, and zero-severe-release gates."
+        }
+      ],
+      "failures_by_category": {
+        "quality-gate-failures": 9,
+        "operational-failures": 31,
+        "cost-projection-defects": 1
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-control-v1",
+        "version": "program-009",
+        "configuration": {
+          "model": "gpt-5.4-mini-2026-03-17",
+          "case_count": 100,
+          "reported_cost_usd": 0.103146
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.7375,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 0.95,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "product-quality",
+          "passed": false,
+          "evidence": "The control is comparative evidence and did not pass the release gates."
+        }
+      ],
+      "failures_by_category": {
+        "severe-unsupported-releases": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Preserve the valid development failure, terminate the under-budgeted construction attempt, and correct only bulk verifier cost and execution concurrency in program 010.",
+    "limitations": [
+      "Development cases are known after this run.",
+      "Final 10,000 construction and 10,000+1,000 product execution did not occur.",
+      "The successor remains descriptive and cannot reverse the failed development gates."
+    ]
+  },
+  "ignored_artifacts": {
+    "program_ledger_sha256": "d3e71dd4eb388161cbb18c49d6a0e3d3dce72c78195e9ff42bcc9cf53f21aedf",
+    "retrieval_result_sha256": "323f97e78cc6694e01f616b4becc5df23adb0fb2abfd0109cfe4796815e4e35a",
+    "product_result_sha256": "3d0f0d98b724937eb20e2e54632fdd6b366f408eb8eba7acfbfa2b9b1a57d745",
+    "interrupted_wording_ledger_sha256": "ca9b7a5d038ed1b4d97fe392adeee30049b0d4583a653db009920a74a39bc461",
+    "interrupted_verification_ledger_sha256": "7275d20ddfc2c5bd7c7e5a6529ca7e17e0da00da2d0ae35b4d2ea3f01d662c6c"
+  }
+}

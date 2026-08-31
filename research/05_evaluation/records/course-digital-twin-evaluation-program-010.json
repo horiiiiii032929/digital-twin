@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-010",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-reference-aggregate-007",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+  "code_revision": "97ab7d0",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "openai-gpt-5-4-question-targeted-extraction-v2",
+        "version": "program-010",
+        "configuration": {
+          "case_count": 500,
+          "provider_concurrency": 4,
+          "final_construction_budget_usd": 6.0,
+          "observed_program_cost_usd": 1.68129536
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.585,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "product-quality",
+          "passed": false,
+          "evidence": "The candidate failed the grounded factual, action, claim, citation, completion, version, and paired-retention gates."
+        }
+      ],
+      "failures_by_category": {
+        "quality-gate-failures": 9,
+        "operational-failures": 32,
+        "budget-split-defects": 1
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-control-v1",
+        "version": "program-010",
+        "configuration": {
+          "case_count": 100,
+          "provider_concurrency": 4
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.7625,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 0.95,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "product-quality",
+          "passed": false,
+          "evidence": "The comparative control did not pass the release gates."
+        }
+      ],
+      "failures_by_category": {
+        "severe-unsupported-releases": 1
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Preserve the development failure and correct only the measured 15/85 construction budget split in program 011.",
+    "limitations": [
+      "Development cases are known.",
+      "Final construction and product execution did not occur.",
+      "Program 011 remains descriptive."
+    ]
+  },
+  "ignored_artifacts": {
+    "program_ledger_sha256": "756e953591c70f496bacd836794f82c3d860d4c00b20de9c4d645b85031dd48d",
+    "product_result_sha256": "9640c6840eda64610f22197780945fca13c00e172fb2b8bac24d7480972df262",
+    "interrupted_wording_ledger_sha256": "c53cb5eb500fae3d0bd5998c77207d519637dd323f855a3800b675d7032aae58",
+    "interrupted_verification_ledger_sha256": "238bf14d9a74d3489727206c51b003c7b9fc89669fd17697ea08fb2607d52313"
+  }
+}

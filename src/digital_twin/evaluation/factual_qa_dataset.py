@@ -586,8 +586,9 @@ def assemble_deterministic_verified_cluster(
                     zip(expected.evidence_spans, refs, strict=True), start=1
                 )
             ]
-            answer_tokens = normalize_question(expected.canonical_answer)
-            if answer_tokens and answer_tokens in normalize_question(variant.question):
+            if normalized_token_sequence_contains(
+                variant.question, expected.canonical_answer
+            ):
                 raise ValueError(f"authored question leaks its canonical answer: {case_id}")
         else:
             if reviewed.evidence_spans:
@@ -635,6 +636,20 @@ def assemble_deterministic_verified_cluster(
 def normalize_question(value: str) -> str:
     normalized = unicodedata.normalize("NFKC", value).casefold()
     return " ".join(re.findall(r"[a-z0-9]+", normalized))
+
+
+def normalized_token_sequence_contains(container: str, candidate: str) -> bool:
+    """Return whether complete normalized candidate tokens occur contiguously."""
+
+    container_tokens = normalize_question(container).split()
+    candidate_tokens = normalize_question(candidate).split()
+    if not candidate_tokens or len(candidate_tokens) > len(container_tokens):
+        return False
+    width = len(candidate_tokens)
+    return any(
+        container_tokens[index : index + width] == candidate_tokens
+        for index in range(len(container_tokens) - width + 1)
+    )
 
 
 def _validated_ref(

@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-006",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001",
+  "corpus_id": "academic-action-router-confirmation-001-atomic-regions",
+  "code_revision": "ccee3ce1d44134c1e333b94f66f90af5bfa0f0af",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "question-targeted-extraction-v2",
+        "version": "program-006-invalid-harness",
+        "configuration": {
+          "candidate_case_count": 500,
+          "control_case_count": 100,
+          "candidate_responses_persisted": 500,
+          "control_responses_persisted": 100,
+          "candidate_provider_calls_completed": 400,
+          "control_provider_calls_completed": 94,
+          "control_provider_calls_failed": 3,
+          "hidden_gold_opened": false,
+          "final_10000_plus_1000_opened": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "persisted-development-responses",
+          "value": 600.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 600.0,
+          "passed": true
+        },
+        {
+          "name": "provider-calls-or-batches",
+          "value": 512.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 11000.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 1.51091188,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 50.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "valid-evaluation-harness",
+          "passed": false,
+          "evidence": "Persisted per-case failures were misclassified as whole-run corruption and the automatic resume changed the frozen provider budget binding."
+        },
+        {
+          "name": "gold-and-final-isolation",
+          "passed": true,
+          "evidence": "Hidden gold and the final 10,000+1,000 stage remained unopened."
+        }
+      ],
+      "failures_by_category": {
+        "provider-non-completed-response": 3,
+        "completion-classification-defect": 1,
+        "resume-budget-binding-drift": 1
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-valid-product-comparison",
+        "version": "program-006-invalid",
+        "configuration": {
+          "control_case_count": 100,
+          "control_responses_persisted": 100,
+          "hidden_gold_opened": false,
+          "final_10000_plus_1000_opened": false
+        }
+      },
+      "metrics": [
+        {
+          "name": "persisted-development-responses",
+          "value": 100.0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 100.0,
+          "passed": true
+        },
+        {
+          "name": "provider-calls-or-batches",
+          "value": 97.0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 11000.0,
+          "passed": true
+        },
+        {
+          "name": "reported-cost-usd",
+          "value": 0.1187445,
+          "unit": "usd",
+          "direction": "lower-is-better",
+          "threshold": 0.4,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "valid-evaluation-harness",
+          "passed": false,
+          "evidence": "The control was persisted but could not be scored before the harness misclassified three provider failures."
+        },
+        {
+          "name": "gold-and-final-isolation",
+          "passed": true,
+          "evidence": "Hidden gold and the final 10,000+1,000 stage remained unopened."
+        }
+      ],
+      "failures_by_category": {
+        "provider-non-completed-response": 3
+      }
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "Preserve program 006 and run one fresh harness-only successor that scores per-case provider failures and retains immutable resume bindings.",
+    "limitations": [
+      "No product-quality metrics were calculated.",
+      "The sealed 10,000+1,000 evaluation remained unopened.",
+      "Program 007 reuses a now-known development set only for method confirmation."
+    ]
+  }
+}

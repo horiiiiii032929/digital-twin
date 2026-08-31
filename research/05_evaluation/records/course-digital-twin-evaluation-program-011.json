@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "run_id": "course-digital-twin-evaluation-program-011",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-open-10000-v1-final-mixed-wording-001",
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+  "code_revision": "e60a19245e20c8ab64ebc8580fa21b5067020898",
+  "candidates": [
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "openai-gpt-5-4-question-targeted-extraction-v2",
+        "version": "program-011",
+        "configuration": {
+          "flow_id": "course-digital-twin-evaluation-program-011-final-product-10000-plus-1000-candidate",
+          "adapter_version": "v1",
+          "retrieval": "selected-api-program-retrieval-v2",
+          "evidence_gate": "any-hit-evidence-gate-v1",
+          "policy": "structured-professor-policy-v1",
+          "model": "gpt-5.4-2026-03-05",
+          "case_count": 10000,
+          "provider_calls": 7992,
+          "reported_cost_usd": 28.686595
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.441625,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "overall-action-accuracy",
+          "value": 0.8819,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 0.729,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.46425,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "citation-recall",
+          "value": 0.6775,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "canonical-all-evidence-at-3",
+          "value": 0.88325,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": false
+        },
+        {
+          "name": "evidence-recall-at-5",
+          "value": 0.9329375,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "release-quality-gates",
+          "passed": false,
+          "evidence": "Every factual, action, claim, citation, retrieval, source-version, completion, and severe-release gate failed."
+        }
+      ],
+      "failures_by_category": {
+        "severe-unsupported-releases": 478,
+        "operational-failures": 594,
+        "integrity-requests-answered": 433
+      }
+    },
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "any-hit-control-v1",
+        "version": "program-011",
+        "configuration": {
+          "case_count": 1000,
+          "model": "gpt-5.4-mini-2026-03-17",
+          "provider_calls": 1000,
+          "reported_cost_usd": 1.308426
+        }
+      },
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.36625,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "overall-action-accuracy",
+          "value": 0.681,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 0.655,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.4441875,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "citation-recall",
+          "value": 0.59125,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        },
+        {
+          "name": "canonical-all-evidence-at-3",
+          "value": 0.90125,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "evidence-recall-at-5",
+          "value": 0.944375,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "release-quality-gates",
+          "passed": false,
+          "evidence": "The paired control is comparative evidence and remained below the absolute gates."
+        }
+      ],
+      "failures_by_category": {
+        "severe-unsupported-releases": 18,
+        "operational-failures": 18
+      }
+    }
+  ],
+  "paired_comparison": {
+    "case_count": 1000,
+    "supported_answer_retention_delta": 0.0626204238921002,
+    "supported_answer_retention_delta_lower_95": 0.010597302504816955,
+    "supported_answer_retention_delta_upper_95": 0.11416184971098266,
+    "candidate_boundary_safety": 0.745,
+    "control_boundary_safety": 0.655
+  },
+  "supplements": {
+    "true_visual": {
+      "decision": "go-deeper",
+      "complete_visual_evidence_count": 17,
+      "asset_count": 30,
+      "atomic_evidence_recall": 0.7593766659117537,
+      "unsupported_description_asset_count": 6
+    },
+    "synthetic_profile": {
+      "decision": "go-deeper",
+      "case_count": 12,
+      "conditions": ["C0", "C1", "C2"],
+      "professor_fidelity_evidence": false
+    },
+    "provider_t0_t1": {
+      "decision": "skipped-dependency",
+      "reason": "The actual-product factual method failed its frozen gates."
+    }
+  },
+  "decision": {
+    "outcome": "refine",
+    "selected_implementation_id": null,
+    "rationale": "The sealed actual-product run completed without gold leakage but failed every release-quality gate. Replace the action router and grounding architecture before any new confirmation; never tune or rerun against this sealed final package.",
+    "limitations": [
+      "Open licensed educational sources only.",
+      "Same-provider model-assisted review with deterministic truth authoritative.",
+      "No independent external human annotation.",
+      "No real professor-fidelity, usability, or learning-outcome claim.",
+      "Twenty of 494 advisory source-truth concerns received critical escalation; none required human resolution."
+    ]
+  },
+  "operational_summary": {
+    "program_calls_or_batches": 11354,
+    "program_cost_usd": 39.14017165,
+    "cumulative_program_008_to_011_cost_usd": 43.43751328,
+    "authorized_cumulative_ceiling_usd": 50.0,
+    "private_data_used": false,
+    "gold_leakage_detected": false,
+    "authority_revoked": true
+  },
+  "ignored_artifacts": {
+    "program_ledger_sha256": "e22c45cad1e5bbb693ed1dcf6271829cfec29de7d954bd022a60729f7123bf08",
+    "retrieval_result_sha256": "5687f4376bc592447ff7f643d80d1134027c79c2e7296ba945b14c14ccb83d97",
+    "development_result_sha256": "b23eaa9031f250ffec37a1f05a6b99beb8fc1b98e14bdb6a6d230d8e2d283544",
+    "construction_result_sha256": "9c18a734eb17279b3750665a975913557166729d0f0ee354f62a5b1f7d48f205",
+    "final_product_result_sha256": "0d68c60447df9683a897ae86ee8dc7b2f926d61175779000a71894530fda90df",
+    "visual_result_sha256": "b9d175252da7778a1c8bd21a0cf5542b23b8ab50bf9b7e42d7be2d30b40fabb3",
+    "synthetic_profile_result_sha256": "3e1369a2f821bb7289631f1969b02ed656ae0d1d974bbf5b727fb87c94fb212e",
+    "professor_ready_result_sha256": "16684b3f25c86e78aace2a551953e04dba22e933a4915752eb18db5df96ab9c6"
+  }
+}

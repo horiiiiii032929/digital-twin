@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 758
+    "audited": 782
   },
   "category_counts": {
     "active_frontend": 69,
-    "active_or_unclassified_tooling": 178,
+    "active_or_unclassified_tooling": 179,
     "active_runtime": 128,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 190,
+    "evaluation_configuration": 209,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 163
+    "verification": 167
   },
-  "file_count": 758,
+  "file_count": 782,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1dc43e58da005935e49e65637f76f425596aaaf8705cc0e3c0a2d216075fdd41",
+  "record_sha256": "6f8962d9d5e15c6b286b069b7ae714219efbfe971c464bacffa894c44af684d2",
   "records": [
     {
       "audit": {
@@ -1384,10 +1384,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Command review confirms historical attempts remain verifiable, programs 010/011 expose validate, smoke, preflight, execute, and resume entrypoints, and the default finite command targets the sole authorized final budget-split correction.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "b2adaa15978bdf697ae956bbefbc0c08092f6dea215864789528430f53b54fe2"
+      "sha256": "2989a2b8eb3d70d589cfbce5442de4cb9e46bda692cdbeedb521ace4dc35ce53"
     },
     {
       "audit": {
@@ -2280,6 +2280,22 @@
     {
       "audit": {
         "domain": "reference-question-validation",
+        "evidence": "Instrument review verifies question-level selection, exact course and position quotas, immutable accepted-vote provenance, empty boundary lineage, zero provider authority, and a closed final split.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_aggregate_007.json",
+      "risk": "high",
+      "sha256": "27bf1af371faf3c13cae8276170775f7599ac94225e0f542d56fa971de8741fa"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
         "evidence": "Binding review preserves the exact dated direct OpenAI snapshots, store=false, no router or fallback, separate author and target-blind reviewer roles, public sources only, zero retries, and the historical 80-call ceiling while revoking all execution authority after the invalid run.",
         "findings": [],
         "reviewed_at": "2026-08-29",
@@ -2312,6 +2328,70 @@
     {
       "audit": {
         "domain": "reference-question-validation",
+        "evidence": "Terminal binding review confirms attempt 003 authority is revoked after the valid Refine result.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_003.json",
+      "risk": "high",
+      "sha256": "5a7c48a467f20988fec40de167eaff42b133ccdcdf7c7289477857eb058b882f"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal binding review preserves exact direct OpenAI snapshots and accounting while revoking attempt 004 after the parser invalidity.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_004.json",
+      "risk": "high",
+      "sha256": "c4fbbea24dcd2cb7b02c560fc61b174388aaf0020cb26052e5ad4231db029aa8"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal attempt 005 binding review preserves exact OpenAI snapshots and completed-call accounting while revoking authority after the non-completed provider response.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_005.json",
+      "risk": "high",
+      "sha256": "f482d509dffe1e07248b89ea6bd5cb227e30e1867ebc3d3105752144ff29a2d6"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal binding review verifies attempt 006 retains exact OpenAI identities and accounting while all provider, paid, reference, product, and final authority is revoked.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_binding_006.json",
+      "risk": "high",
+      "sha256": "329d203c17ba1fd79c4abf473419667a20a9418e9d342d12cb2b26c7cac8d29f"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
         "evidence": "Instrument review preserves the 160 fresh source-disjoint reserve clusters, exact 100-cluster and 500-case selection, target-blind action/span recovery, no fallback or quota relaxation, and deterministic authority while recording invalid execution and revoked provider, paid, validation, product, and final authority.",
         "findings": [],
         "reviewed_at": "2026-08-29",
@@ -2340,6 +2420,70 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_002.json",
       "risk": "high",
       "sha256": "46378f4ee1cbbb16a93ae9d867184674201937cb00676651a67c310146478434"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal instrument review confirms attempt 003 is immutable completed-Refine evidence with all execution authority revoked.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_003.json",
+      "risk": "high",
+      "sha256": "7c784bb22af060e9cdb99c2faabcbad335a616123b7c2fe3987ada7d81d9e2d7"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal instrument review records attempt 004 as invalid after seven calls and revokes all execution authority without a quality interpretation.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_004.json",
+      "risk": "high",
+      "sha256": "9de3c8869a99d5605b6ef70edf721e5af95930165b7d75082475e865e580bef6"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal attempt 005 instrument review preserves the duplicate-accounting correction and records the non-completed provider response with all execution authority revoked.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_005.json",
+      "risk": "high",
+      "sha256": "e2699ca1bd82ae3bc1cd70328cb16ae93f756c6f52cb6ea1afee4ad440f6418b"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
+        "evidence": "Terminal instrument review preserves the valid complete-cluster Refine result, closes all attempt-006 authority, and retains product/final-stage boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_reference_question_validation_006.json",
+      "risk": "high",
+      "sha256": "efa177497e17f3040361ed05d94c967385bb41ce01909993c90c97246b78e169"
     },
     {
       "audit": {
@@ -2836,6 +2980,166 @@
       "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_001.json",
       "risk": "high",
       "sha256": "c9c678e9eeb39990499c1d71019e16011ba8c3bf01ca17a6c6ff7b0a2cd60f1f"
+    },
+    {
+      "audit": {
+        "domain": "api-first-finite-evaluation-program",
+        "evidence": "Manifest review verifies one program-level authorization, exact OpenAI model and embedding bindings, automatic nine-stage progression, hidden-gold separation, and the retained USD 50 emergency ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_002.json",
+      "risk": "high",
+      "sha256": "e20b592f985b78970ac1b9d6a7962138b1bae1b377ca8f5256b29954eb57a839"
+    },
+    {
+      "audit": {
+        "domain": "api-first-finite-evaluation-program",
+        "evidence": "Corrective manifest review verifies immutable reuse of program 002 document indexes, fresh program-003 outputs, exact OpenAI bindings, automatic finite progression, hidden-gold separation, and the retained USD 50 emergency ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_003.json",
+      "risk": "high",
+      "sha256": "e7fee3b5a0df115661fe2d3b681f13b5cc86da6fefff4c3e5ba56ac422c7570b"
+    },
+    {
+      "audit": {
+        "domain": "api-first-finite-evaluation-program",
+        "evidence": "Terminal manifest review verifies the completed program-004 state, explicit nano exclusion, unchanged cases/gold/gates, reused document indexes, false provider/paid flags, and revoked authority.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_004.json",
+      "risk": "high",
+      "sha256": "c7a808c3d32df11b39d46e797c31b599f9d36ff3c65df7b4b4e67283cfbe0d94"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Manifest review verifies exact 500-case atomic source binding, separate control packages, automatic finite progression to the sealed 10,000+1,000 stage, exact OpenAI bindings, gold isolation, and the USD 50 emergency ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_005.json",
+      "risk": "high",
+      "sha256": "85212954a8cfab61963d7b42b71814680c7be9d49f441f330a9ef037336d39fc"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Manifest review verifies the code-owned action and exact-span extraction successor, exact source matchability, automatic finite progression, final-set isolation, and the unchanged USD 50 ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_006.json",
+      "risk": "high",
+      "sha256": "4f78870ea0a95738e85906eece9f2833d21fd34e43072fc8a93b2f0d57b19a6d"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Manifest review confirms program 007 changes only per-case provider-failure classification and immutable resume budgets while preserving method, cases, models, gold, gates, and finite automatic progression.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_007.json",
+      "risk": "high",
+      "sha256": "c6902a719761c10c0d4c0a643bf4a538feb7b51e3bc0524b071a28908e94003d"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Terminal instrument review verifies program 008 authority is revoked while its exact balanced packages, model bindings, and immutable failed retrieval decision remain reproducible.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_008.json",
+      "risk": "high",
+      "sha256": "973fd2703e22daf36f7f6a08a3cb8ba515d3114a680ec34ccff94ef06e4ff8ff"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Terminal instrument review preserves the failed retrieval and product-development gates, revokes all authority, and records that final construction was interrupted before a predictable cost-reserve stop without opening final gold.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_009.json",
+      "risk": "high",
+      "sha256": "8b320e2e8661765f15c0b3f498ad135d9401174c62731019992979bb82e88b62"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Terminal instrument review preserves the development Refine result, revokes authority, and records the interrupted 50/50 construction reserve split without creating a final package or opening final gold.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_010.json",
+      "risk": "high",
+      "sha256": "199897b6d0990649e4d3ba932ed5c98e30f8e5f4ef7c9e57504f6dfab05c6b7f"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program",
+        "evidence": "Program closeout review verifies the exact executed manifest is terminal, its provider and paid flags are false, its hash is current, and all truth, case, model, gate, budget, and construction bindings remain reproducible.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-program-011-closeout-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/course_digital_twin_evaluation_program_011.json",
+      "risk": "high",
+      "sha256": "69f745cab10a7eea8e7dfb3c14b41e3435b6283d1fe330e21a6d00dbe35f31c4"
     },
     {
       "audit": {
@@ -4536,7 +4840,7 @@
     {
       "audit": {
         "domain": "atomic-m2-actual-product-checkpoint",
-        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case conversation isolation, bounded provider accounting, and no gold or scorer dependency.",
+        "evidence": "Adapter review verifies actual StudentTutoringService policy, persistence, retrieval, generation, claim validation, citations, per-case isolation, no gold dependency, and exact cached API-embedding batch/token bindings.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-product-checkpoint-review"
@@ -4547,14 +4851,14 @@
       "package_commands": [],
       "path": "scripts/academic_factual_qa_atomic_m2_t0_adapter.py",
       "risk": "high",
-      "sha256": "2413be9dcddcc826c06955209ca6e5581ea9e2d5d85b3c0badd2f02e3fdc2f08"
+      "sha256": "4bd44825b16733332c2d756ed9b5cd820c171c5a8624d507137d4b097e93256e"
     },
     {
       "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Adapter review verified precomputed hierarchical retrieval is public-question-only, hash-bound, source-authorized, and evaluated through the existing flow-independent response contract.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
@@ -4566,7 +4870,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "cfeb2f7376e57923926f7f3a59c429d674f810850261a4983916e888a1d3e8f6"
+      "sha256": "6a1e0dfe2e462c0d74c9e273c573911d6163ff21713f21abbf7fe9d2741a9358"
     },
     {
       "audit": {
@@ -5126,6 +5430,24 @@
     {
       "audit": {
         "domain": "reference-question-validation",
+        "evidence": "Builder review verifies deterministic quota selection, unique normalized questions, exact source/gold lineage, balanced paired control generation, exclusive writes, clean-clone package validation, and a bounded dataset-generation guard.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:academic-factual-qa-reference-aggregate-007"
+      ],
+      "path": "scripts/build_academic_factual_qa_open_reference_aggregate_007.py",
+      "risk": "high",
+      "sha256": "f67d060012f46400d1618badd9fea946c348c2d1ebba6b88f05ddbb9466b963a"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation",
         "evidence": "Builder review and repeat execution prove a byte-stable 160-cluster, 800-case public-source pool with exact reserve and target allocations, no overlap with checkpoint 007, no private data, no final access, and zero provider calls.",
         "findings": [],
         "reviewed_at": "2026-08-29",
@@ -5136,7 +5458,11 @@
       "disposition": "active_audited",
       "package_commands": [
         "verify:academic-factual-qa-reference-validation",
-        "verify:academic-factual-qa-reference-validation-002"
+        "verify:academic-factual-qa-reference-validation-002",
+        "verify:academic-factual-qa-reference-validation-003",
+        "verify:academic-factual-qa-reference-validation-004",
+        "verify:academic-factual-qa-reference-validation-005",
+        "verify:academic-factual-qa-reference-validation-006"
       ],
       "path": "scripts/build_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
@@ -5487,7 +5813,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Executor-bundle review verified all nine manifest stages have an exact callable binding and hard-stop inspection before and after every stage.",
+        "evidence": "Executor-bundle review verified all nine stages have exact callable bindings and that exception accounting includes both response-call and embedding-batch ledgers before hard-stop classification.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -5498,14 +5824,14 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_evaluation_live_stages.py",
       "risk": "high",
-      "sha256": "c67fcddf1dd20ea8c11dd60deb144c3e22029e8f4f32fc3cb764f3854d175591"
+      "sha256": "1754ea45365615e901766cbb8dffcb75f42bce9c97f637b901254161b4993cd8"
     },
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Factual-stage review verified question-only retrieval, manifest-bound CPU/float16 embedding execution after the MPS stall, bounded reranking, physically delayed gold opening, deterministic scoring, labelled canonical fallback, fixed paired control, advisory-only review, and atomic provider/product ledgers.",
+        "evidence": "Factual-stage review verifies question-only retrieval, delayed gold opening, deterministic scoring, atomic ledgers, explicit descriptive continuation, configurable bulk-verifier and budget-allocation bindings, and bounded four-course concurrency without changing failed gates or within-course order.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
@@ -5514,7 +5840,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_factual.py",
       "risk": "high",
-      "sha256": "86f780ad3710699cb59ffdaf2981dbb368107eb21a69d6aa2532b3712883ab2d"
+      "sha256": "893cbc5b6842e455b7629ef15cb5e915c1de52c41871e57988c600fd9182ef98"
     },
     {
       "audit": {
@@ -5530,7 +5856,7 @@
       "package_commands": [],
       "path": "scripts/course_digital_twin_program_release.py",
       "risk": "high",
-      "sha256": "7cfbbc2c955c1992038e3f261771039b1abee069bcfb04c61d0a07d1518e41ad"
+      "sha256": "f215deb8efb7af93af631e9d6b7fffc648f238009c8053a75e765a907d22a74b"
     },
     {
       "audit": {
@@ -6124,7 +6450,7 @@
     {
       "audit": {
         "domain": "api-first-retrieval-successor",
-        "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, optional-method fail isolation, and fail-closed terminal validation after authority revocation.",
+        "evidence": "Entrypoint review verifies package/hash validation, streamed checkpoints, all-ranking-before-gold ordering, exact M0-M6 scoring, and cached-query embedders carrying the exact batch and token-limit binding of their persisted API index.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-api-retrieval-review"
@@ -6141,7 +6467,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_api_retrieval_selection.py",
       "risk": "high",
-      "sha256": "e3c66e01fd3e6fdb6fb87decd191549c75354ed215fd3aa39b284850a13aa12f"
+      "sha256": "8486164e4f2ea3e57ee1db582e4d94f76a714b6e812ef8c65cf34cee994d43b9"
     },
     {
       "audit": {
@@ -6399,10 +6725,10 @@
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Runner review verifies immutable attempt selection and fail-closed execution while restoring default validation to require revoked authority after the invalid attempt-002 stop.",
+        "evidence": "Runner review verifies exact ID matching, three answerable candidates, blind candidate review, candidate-level duplicate rejection, deterministic boundary cases, atomic ledger accounting, materialization, and fail-closed authorization.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -6410,22 +6736,50 @@
       "package_commands": [
         "execute:academic-factual-qa-reference-validation",
         "execute:academic-factual-qa-reference-validation-002",
+        "execute:academic-factual-qa-reference-validation-003",
+        "execute:academic-factual-qa-reference-validation-004",
+        "execute:academic-factual-qa-reference-validation-005",
+        "execute:academic-factual-qa-reference-validation-006",
         "materialize:academic-factual-qa-reference-validation",
         "materialize:academic-factual-qa-reference-validation-002",
+        "materialize:academic-factual-qa-reference-validation-003",
+        "materialize:academic-factual-qa-reference-validation-004",
+        "materialize:academic-factual-qa-reference-validation-005",
+        "materialize:academic-factual-qa-reference-validation-006",
         "preflight:academic-factual-qa-reference-validation",
         "preflight:academic-factual-qa-reference-validation-002",
+        "preflight:academic-factual-qa-reference-validation-003",
+        "preflight:academic-factual-qa-reference-validation-004",
+        "preflight:academic-factual-qa-reference-validation-005",
+        "preflight:academic-factual-qa-reference-validation-006",
         "resume:academic-factual-qa-reference-validation",
         "resume:academic-factual-qa-reference-validation-002",
+        "resume:academic-factual-qa-reference-validation-003",
+        "resume:academic-factual-qa-reference-validation-004",
+        "resume:academic-factual-qa-reference-validation-005",
+        "resume:academic-factual-qa-reference-validation-006",
         "score:academic-factual-qa-reference-validation",
         "score:academic-factual-qa-reference-validation-002",
+        "score:academic-factual-qa-reference-validation-003",
+        "score:academic-factual-qa-reference-validation-004",
+        "score:academic-factual-qa-reference-validation-005",
+        "score:academic-factual-qa-reference-validation-006",
         "simulate:academic-factual-qa-reference-validation",
         "simulate:academic-factual-qa-reference-validation-002",
+        "simulate:academic-factual-qa-reference-validation-003",
+        "simulate:academic-factual-qa-reference-validation-004",
+        "simulate:academic-factual-qa-reference-validation-005",
+        "simulate:academic-factual-qa-reference-validation-006",
         "verify:academic-factual-qa-reference-validation",
-        "verify:academic-factual-qa-reference-validation-002"
+        "verify:academic-factual-qa-reference-validation-002",
+        "verify:academic-factual-qa-reference-validation-003",
+        "verify:academic-factual-qa-reference-validation-004",
+        "verify:academic-factual-qa-reference-validation-005",
+        "verify:academic-factual-qa-reference-validation-006"
       ],
       "path": "scripts/run_academic_factual_qa_open_reference_validation.py",
       "risk": "high",
-      "sha256": "273dd050548253ac5168cf6fb30704ffab662f02448d4fb703a5de27c1f38b37"
+      "sha256": "633e4a087e7f36f96d53550eda43952a723f3e47289e23ef63949ff64fe04842"
     },
     {
       "audit": {
@@ -6764,14 +7118,64 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:finite-evaluation-program",
+        "execute:finite-evaluation-program-002",
+        "execute:finite-evaluation-program-003",
+        "execute:finite-evaluation-program-004",
+        "execute:finite-evaluation-program-005",
+        "execute:finite-evaluation-program-006",
+        "execute:finite-evaluation-program-007",
+        "execute:finite-evaluation-program-008",
+        "execute:finite-evaluation-program-009",
+        "execute:finite-evaluation-program-010",
+        "execute:finite-evaluation-program-011",
         "preflight:finite-evaluation-program",
+        "preflight:finite-evaluation-program-002",
+        "preflight:finite-evaluation-program-003",
+        "preflight:finite-evaluation-program-004",
+        "preflight:finite-evaluation-program-005",
+        "preflight:finite-evaluation-program-006",
+        "preflight:finite-evaluation-program-007",
+        "preflight:finite-evaluation-program-008",
+        "preflight:finite-evaluation-program-009",
+        "preflight:finite-evaluation-program-010",
+        "preflight:finite-evaluation-program-011",
         "resume:finite-evaluation-program",
+        "resume:finite-evaluation-program-002",
+        "resume:finite-evaluation-program-003",
+        "resume:finite-evaluation-program-004",
+        "resume:finite-evaluation-program-005",
+        "resume:finite-evaluation-program-006",
+        "resume:finite-evaluation-program-007",
+        "resume:finite-evaluation-program-008",
+        "resume:finite-evaluation-program-009",
+        "resume:finite-evaluation-program-010",
+        "resume:finite-evaluation-program-011",
         "simulate:finite-evaluation-program",
-        "verify:finite-evaluation-program"
+        "smoke:finite-evaluation-program-002",
+        "smoke:finite-evaluation-program-003",
+        "smoke:finite-evaluation-program-004",
+        "smoke:finite-evaluation-program-005",
+        "smoke:finite-evaluation-program-006",
+        "smoke:finite-evaluation-program-007",
+        "smoke:finite-evaluation-program-008",
+        "smoke:finite-evaluation-program-009",
+        "smoke:finite-evaluation-program-010",
+        "smoke:finite-evaluation-program-011",
+        "verify:finite-evaluation-program",
+        "verify:finite-evaluation-program-002",
+        "verify:finite-evaluation-program-003",
+        "verify:finite-evaluation-program-004",
+        "verify:finite-evaluation-program-005",
+        "verify:finite-evaluation-program-006",
+        "verify:finite-evaluation-program-007",
+        "verify:finite-evaluation-program-008",
+        "verify:finite-evaluation-program-009",
+        "verify:finite-evaluation-program-010",
+        "verify:finite-evaluation-program-011"
       ],
       "path": "scripts/run_course_digital_twin_evaluation_program.py",
       "risk": "high",
-      "sha256": "e215a6ef7064828a96f18ad3e3d51a8ef97551d9dbf53e03d0cf25e4674300a5"
+      "sha256": "5674493df817c65e1b67ce4053fbea19659ea202d6464a27ba18dff7c9c7f71d"
     },
     {
       "audit": {
@@ -8685,7 +9089,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "83cf82ae0bb604f65f6ded458cb2f06e332c5c9690e3f381e67931a349e769f0"
+      "sha256": "c911797f298e422415e74f7809a6821cce24bdd21f2a4ad7bdadb98b9cb3864f"
     },
     {
       "audit": {
@@ -8749,15 +9153,15 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_dataset.py",
       "risk": "high",
-      "sha256": "31922a1997e9548ec5410676bffa0eea0750d4ab9a29a12a6bc45fac19a4afe4"
+      "sha256": "dad0d64bb6a5283caefa8e8095ba4837228f30ac324708308b320a3081e591ce"
     },
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual persistence review verifies exclusive creation, WAL/FULL synchronization, one-row transactions, exact resume hashes, duplicate rejection, terminal completion counts, adapter completion/interruption hooks, and absence of scorer/gold imports.",
+        "evidence": "Manual persistence review verifies exclusive creation, WAL/FULL synchronization, one-row transactions, exact resume hashes, duplicate rejection, terminal completion counts, bounded course-partition concurrency with within-course ordering, adapter interruption hooks, and absence of scorer/gold imports.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8765,15 +9169,15 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_execution.py",
       "risk": "high",
-      "sha256": "b45f6f8c180fb6c32b8899796533755be93267adfb6094e83f769c08df7762cb"
+      "sha256": "47ff0bd5fec50322613ff0fee29cdfafb8c4b83c61dc0044b33dc096935dc72d"
     },
     {
       "audit": {
         "domain": "reference-question-validation",
-        "evidence": "Algorithm review verifies exact model response schemas, deterministic action and answer-span comparison, ambiguity, naturalness, leakage and duplicate rejection, complete-cluster selection, and immutable course/modality quotas.",
+        "evidence": "Scoring review verifies exact source-span/action recovery, ambiguity/naturalness/leakage checks, per-candidate duplicate rejection, duplicate-safe deterministic selection, complete-cluster quotas, and immutable gold.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8781,7 +9185,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_reference_questions.py",
       "risk": "high",
-      "sha256": "85cfcd9d772684abd1802560eed64e58ce2f077e094b3619dc8f5480dd3f9145"
+      "sha256": "1d4b0c5b6a2d1342844849b658502d843ec1f76c01a32a6361b7dfd3e2eae4a2"
     },
     {
       "audit": {
@@ -8850,7 +9254,7 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Control-plane review verified immutable manifest validation including terminal authority revocation, the frozen retrieval execution device/dtype, exact budget sums and p99 headroom, exclusive SQLite creation, revision/hash-bound resume, stage dependency checks, one invalid correction, atomic usage, and global termination.",
+        "evidence": "Control-plane review verifies immutable manifest validation, a cumulative ceiling at or below USD 50, backward-compatible optional descriptive continuation, explicit verifier/concurrency/budget-split bindings, exact stage budgets, exclusive outputs, revision/hash-bound resume, and global termination.",
         "findings": [],
         "reviewed_at": "2026-08-30",
         "reviewer": "codex-primary-finite-program-review"
@@ -8861,7 +9265,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program.py",
       "risk": "high",
-      "sha256": "2570b287f111178e8b3278b18e0865b6400e5edb4f90cefcdecf91a80baa0d57"
+      "sha256": "cfcca5ff78051fb93b6a0d93ba7e5f7d95c68da146b9c018f15ca9c7907e0336"
     },
     {
       "audit": {
@@ -8877,7 +9281,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program_dataset.py",
       "risk": "high",
-      "sha256": "49b198b224fbe23670c89aa97a9d0a3dcc2661fb641a66c71eef7538cae5b995"
+      "sha256": "98d1dca22ff898c84be55e0cbfd6e5377550f994c11c90e72af43dfb94070fde"
     },
     {
       "audit": {
@@ -8909,7 +9313,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/finite_program_runner.py",
       "risk": "high",
-      "sha256": "20a1ae65a4262151b010dcef41755f42864999e8dcdecb14554e1437701aaad3"
+      "sha256": "860ccfa2158568bf7cb72dc38a3dbc84d841e7fd867091e109b829ead46240c8"
     },
     {
       "audit": {
@@ -9117,7 +9521,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "a3ebfb17dae9dfebaa93f494a5d251194da0f368bbfaee2f4e3d70a6a3f5c581"
+      "sha256": "67b62b629e3fbd984ee8391bfd9d6b83c48188219180d45810a117e1c030ce8f"
     },
     {
       "audit": {
@@ -9165,7 +9569,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "9a10714a779a122914888acfeb2a3c0a83c63b2aed1d45b4fc90a15b0dfb8fc2"
+      "sha256": "7d8bef079c45bd6f154705394bf1c35a2d9fce5a5b2f81e8b2c8d05153f726c5"
     },
     {
       "audit": {
@@ -9213,7 +9617,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "205e81b0742c3000d646eb3502076cf63b1fa18e0bd0472f9e881c1c47cdf05c"
+      "sha256": "7d00d260f7fd4d95487808308a1af34d99acab52638f4965f70c408a8181f896"
     },
     {
       "audit": {
@@ -9858,10 +10262,10 @@
     {
       "audit": {
         "domain": "atomic-m2-confirmation",
-        "evidence": "Freeze review registers the atomic package builder and confirmation runner under the existing finite non-human program while preserving the repository-wide freeze and excluding private or human-participant execution.",
+        "evidence": "Freeze review removes completed program 011 from bounded execution while retaining only the provider-free deterministic development and aggregate-construction authorizations.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-plus-three-agent-cross-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9869,7 +10273,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8f5e48e7a232e3f9691e69d1fe4db6edd9020e1702b44fe80ffd7c6a0af5e168"
+      "sha256": "9b698cb294c1a517912d74162faf5451a81f2ad480f9938643fd70a442f4736e"
     },
     {
       "audit": {
@@ -10285,7 +10689,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "fcc66d9d15b976b6608da59c07e5828802cf90a9ad56aae0b0ec20776beaf85d"
+      "sha256": "3a117060c990d24e8951a64b7e1ea012c4e486c02029071e547af2422adc6bad"
     },
     {
       "audit": {
@@ -10450,10 +10854,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Focused freeze-policy tests verify AFQC-100 remains revoked, the exact non-human successor receives only its four frozen execution capabilities, and unrelated instruments remain rejected.",
+        "evidence": "Freeze regression verifies the two remaining provider-free dataset authorizations and rejects completed program 011 plus all historical paid successors.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-plus-three-agent-cross-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-program-011-closeout-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10461,7 +10865,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "478c4d124c400f8e8640e4a82228a7342f211b8297d0a345900be8b78086b8ef"
+      "sha256": "ddf9734125d550651e413831792cb98d39e7e998729261d45972696e78ee680d"
     },
     {
       "audit": {
@@ -11041,11 +11445,27 @@
     },
     {
       "audit": {
-        "domain": "reference-question-validation-verification",
-        "evidence": "Focused tests cover source disjointness, schema equality, selection behavior, and attempt-002 revoked-authority preflight after the immutable invalid execution.",
+        "domain": "reference-question-validation",
+        "evidence": "Focused tests verify package stability, authoritative answer and boundary lineage, exact course/question-position balance, and a balanced candidate-subset control.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_reference_aggregate_007.py",
+      "risk": "medium",
+      "sha256": "65234ee4026908de462f48c74b7da3ba7190ca4b39f9f6e9b58571a522a8356f"
+    },
+    {
+      "audit": {
+        "domain": "reference-question-validation-verification",
+        "evidence": "Focused tests cover historical ID invariants, three-candidate schema and simulation, later-candidate selection, duplicate rejection, missing-batch reserve behavior, quarantine classification, quotas, and revoked preflight.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-reference-truth-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11053,7 +11473,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_reference_validation.py",
       "risk": "medium",
-      "sha256": "49a92e456f87cb5ea1a8f8dd2f6448cf43e2f84d62ed9f898e2c32e8e5a99472"
+      "sha256": "3e422a9c67cb2d5af6f604602f98d5627766c17c61f9cb264d75e30222db0b53"
     },
     {
       "audit": {
@@ -11569,6 +11989,54 @@
     },
     {
       "audit": {
+        "domain": "api-first-finite-evaluation-program-verification",
+        "evidence": "Tests validate terminal program-004 authority revocation, explicit reranker exclusion, paid-index reuse, network-free product scoring, and embedding-batch failure accounting.",
+        "findings": [],
+        "reviewed_at": "2026-08-30",
+        "reviewer": "codex-primary-api-first-program-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_evaluation_program_004.py",
+      "risk": "medium",
+      "sha256": "408a4bbd01c3e92a41d2fc2ac4acb293de637d86e505414519dd7974d0146f3c"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program-verification",
+        "evidence": "Tests prove 452/452 development references are exactly matchable, final 10,000 truth and source packages are deterministic and non-overlapping, gold opens after persistence, simulations are finite, and program authority is bounded.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_evaluation_program_005.py",
+      "risk": "medium",
+      "sha256": "c6a547a462efac3c0002849d37299503bbd626978dc24f14ae4745c5f5d7c393"
+    },
+    {
+      "audit": {
+        "domain": "finite-evaluation-program-verification",
+        "evidence": "Tests preserve programs 006-010, prove program 011 is terminal with paid authority revoked, retain its exact balanced package and 15/85 construction binding, and ensure descriptive retrieval cannot be reported as a passed gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-program-011-closeout-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_course_digital_twin_evaluation_program_006.py",
+      "risk": "medium",
+      "sha256": "5f38381f9e7c744fa9957f615f8fd95069db642a599fea404d2ef4727600558c"
+    },
+    {
+      "audit": {
         "domain": "nonhuman-evaluation-supplements-verification",
         "evidence": "Focused tests cover manifest/hash binding, public-only validation, exact model bindings, memory-bounded rasterization of the oversized pinned SVG, terminal semantic-output invalidation, independent profile-only execution, safe output roots, identity and ledger checks, simulated pass/failure propagation, C0-C2 condition handling, resume rejection for corrupted or exclusive outputs, and explicit test-only authorization substitution after the real program authority was revoked.",
         "findings": [],
@@ -11762,10 +12230,10 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Focused tests verify exclusive atomic response execution, interruption-safe resume without duplicate calls, existing-output and hash-drift rejection, and absence of hidden-gold/scorer imports.",
+        "evidence": "Focused tests verify exclusive atomic response execution, interruption-safe resume without duplicate calls, bounded concurrency with preserved per-course order, existing-output and hash-drift rejection, and absence of hidden-gold/scorer imports.",
         "findings": [],
-        "reviewed_at": "2026-08-26",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "codex-primary-finite-program-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11773,7 +12241,7 @@
       "package_commands": [],
       "path": "tests/test_factual_qa_response_execution.py",
       "risk": "medium",
-      "sha256": "4941c8a48738aeb6380ac21d5caa711ad4067f7406211f5a55399ecbfa88658f"
+      "sha256": "c9dc67eae52442f6d16599ab28f03efee3df42f384f2295be42ce93b253571fc"
     },
     {
       "audit": {
@@ -12689,8 +13157,8 @@
     }
   ],
   "risk_counts": {
-    "high": 581,
-    "medium": 177
+    "high": 601,
+    "medium": 181
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

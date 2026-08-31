@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-reference-aggregate-007",
+  "owner_issue": 127,
+  "status": "frozen-build-only",
+  "successor_of": "academic-factual-qa-open-10000-reference-question-validation-006",
+  "decision_question": "Can individually blind-validated source-linked questions form a balanced 500-case development package without the unnecessary complete-five-question-cluster constraint?",
+  "method": {
+    "selection_unit": "individual-question",
+    "answerable_case_count": 400,
+    "boundary_case_count": 100,
+    "course_case_count_each": 125,
+    "question_position_count_each": 100,
+    "answerable_question_source": "First unique candidate that passed exact action/span recovery, naturalness, ambiguity, leakage, and duplicate checks in immutable attempts 003-006.",
+    "boundary_question_source": "Versioned deterministic policy templates with empty evidence lineage.",
+    "question_priority": [
+      "reference-validation-006",
+      "reference-validation-005",
+      "reference-validation-004",
+      "reference-validation-003"
+    ],
+    "source_cluster_uncertainty_unit_retained": true,
+    "complete_cluster_selection_required": false,
+    "rationale": "The complete-cluster rule discarded valid questions because any one of five failures removed a whole source cluster. Question-level stratification preserves every accepted question and still bootstraps uncertainty over source clusters."
+  },
+  "evidence_bindings": {
+    "reference_validation_003_ledger_sha256": "2031fd8bf85b87ffada38b6a3a0221ae66f2b636780d9707d9a85e9467ddc77d",
+    "reference_validation_003_result_sha256": "26704da0da5e3f7bafeb8bc913b1e3d29d268b4801033402f268eedad3d2dc42",
+    "reference_validation_004_ledger_sha256": "086266e9da815fb58e1f470c5268dc9bd42db8c01a8aade97224901e3a5719b2",
+    "reference_validation_005_ledger_sha256": "9231a515c72fd33cdba838be8a56f12c3df6739e1cdc6665afdc7640216e03b3",
+    "reference_validation_006_ledger_sha256": "1364e12faab91bbc670017cc6185c34818930c693b95f8123f204ee46f1eee05",
+    "reference_validation_006_result_sha256": "e3cfd4d4992239f5df47063e72d8b2f466b0743dcca79b5e194941b3d6183b55"
+  },
+  "acceptance": {
+    "case_count_required": 500,
+    "answerable_count_required": 400,
+    "boundary_count_required": 100,
+    "course_count_each_required": 125,
+    "question_position_count_each_required": 100,
+    "normalized_duplicate_count_max": 0,
+    "selected_answer_action_recovery_required": 1.0,
+    "selected_answer_span_recovery_required": 1.0,
+    "selected_question_naturalness_required": 1.0,
+    "selected_question_unambiguous_required": 1.0,
+    "selected_question_gold_hint_leak_count_max": 0,
+    "boundary_evidence_lineage_count_max": 0,
+    "private_data_count_max": 0,
+    "final_split_opened": false
+  },
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "product_development_execution_authorized": false,
+    "final_execution_authorized": false
+  },
+  "content_sha256": "9d36ba4f0539f9716fdc4c15e80ad1971509ca908ca40c937c4b18454921cc06"
+}

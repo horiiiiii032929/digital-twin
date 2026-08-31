@@ -35,6 +35,7 @@ def test_repository_freeze_status_is_explicit() -> None:
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
+        "academic-factual-qa-open-10000-reference-aggregate-007",
     }
 
     for pilot_id in pilot_ids:
@@ -44,6 +45,59 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "academic-factual-qa-open-10000-reference-aggregate-007"
+    ] == ("dataset_generation",)
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-011",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "academic-factual-qa-open-10000-reference-question-validation-006",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-010",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-009",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-008",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-007",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-006",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-004",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-003",
+            "external_model_evaluation",
+        )
+    with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
+        require_bounded_pilot_operation_allowed(
+            "course-digital-twin-evaluation-program-002",
+            "external_model_evaluation",
+        )
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         require_bounded_pilot_operation_allowed(
             "course-digital-twin-nonhuman-evaluation-program-002",
