@@ -13,6 +13,8 @@ design records.
 - [Project brief](project-brief.md)
 - [Digital Twin architecture](architecture.md)
 - [Autonomous tutoring graph](autonomous-tutoring-graph.md)
+- [Autonomous tutoring loop V2](autonomous-tutoring-loop-v2.md)
+- [Autonomous loop and evaluation research](../research/01_literature/2026-08-31-autonomous-tutoring-loop-and-evaluation.md)
 - [Proactive Professor Digital Twin outreach](proactive-outreach.md)
 - [Proactive mixed-initiative tutoring research](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
 - [Component inventory](component-inventory.md)

@@ -1510,7 +1510,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | Keep T0 as release baseline; T1 development Go Deeper | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free development passed every gate | Design and separately authorize one untouched T0/T1 confirmation; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
+| Product UX and autonomous tutoring | Local T1-v1 Keep with T0 rollback; T1-v2 prospective | Professor and student conversation-first workspaces; typed learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; the 50-trajectory/200-turn-per-condition network-free confirmation passed every local graph gate | Complete #153, then implement the accepted [Autonomous Tutoring Loop V2](autonomous-tutoring-loop-v2.md): typed LLM perception/planning, observation-versus-hypothesis state, first-class traces, repeated-run provider-backed T0/T1 comparison, shadow outreach, professor-approved C0-C3, and human evidence |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
@@ -1521,10 +1521,12 @@ continues to hold report, presentation, and professor-communication work.
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The immediate correction is to obtain academically valid
-end-to-end factual and evidence-sufficiency evidence before selecting a
-grounding gate. T1 confirmation, host/domain selection, target-host operations,
-professor-fidelity calibration, and human workflow evidence remain separate.
+release-ready. The immediate correction is #153's academically valid factual
+action/evidence boundary. The accepted T1-v2 architecture then adds LLM
+perception and pedagogical planning without giving the model execution
+authority. Its provider-backed repeated-trajectory evaluation, shadow
+outreach, host/domain selection, target-host operations, professor-fidelity
+calibration, and human workflow evidence remain separate claims.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
