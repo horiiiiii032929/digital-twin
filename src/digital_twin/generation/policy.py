@@ -1,6 +1,9 @@
 import re
 
-from src.digital_twin.action_router import DeterministicActionRouterV1
+from src.digital_twin.action_router import (
+    DeterministicActionRouterV1,
+    DeterministicActionRouterV2,
+)
 from src.digital_twin.generation.models import PolicyAction, PolicyDecision
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.tutor_policy import (
@@ -32,7 +35,7 @@ class DeterministicPolicyEnforcer:
     def __init__(
         self,
         *,
-        action_router: DeterministicActionRouterV1 | None = None,
+        action_router: DeterministicActionRouterV1 | DeterministicActionRouterV2 | None = None,
     ) -> None:
         self.action_router = action_router
 

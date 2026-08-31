@@ -27,6 +27,7 @@ COPY scripts/manage_runtime_data.py scripts/manage_runtime_data.py
 COPY scripts/restore_runtime.py scripts/restore_runtime.py
 COPY scripts/run_ingestion_worker.py scripts/run_ingestion_worker.py
 COPY scripts/proactive_outreach_worker.py scripts/proactive_outreach_worker.py
+COPY scripts/autonomous_tutoring_worker.py scripts/autonomous_tutoring_worker.py
 COPY research/05_evaluation/profiles research/05_evaluation/profiles
 COPY research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
 RUN uv sync --locked --no-dev \

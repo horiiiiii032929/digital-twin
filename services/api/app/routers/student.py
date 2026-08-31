@@ -4,12 +4,14 @@ from fastapi import APIRouter, HTTPException, Request, status
 from fastapi.responses import FileResponse
 
 from services.api.app.dependencies import (
+    GovernedAutonomyServiceDependency,
     ProactiveOutreachServiceDependency,
     StudentAccountDependency,
     StudentServiceDependency,
 )
 from services.api.app.schemas import OutreachPreferenceRequest, StudentMessageRequest
 from src.digital_twin.student import (
+    AutonomousGoalV1,
     Citation,
     Conversation,
     ConversationView,
@@ -32,6 +34,25 @@ def list_student_courses(
     service: StudentServiceDependency,
 ):
     return _call(service.list_courses, account_id)
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-goals",
+    response_model=list[AutonomousGoalV1],
+)
+def list_student_autonomous_goals(
+    course_id: str,
+    account_id: StudentAccountDependency,
+    service: StudentServiceDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+):
+    courses = _call(service.list_courses, account_id)
+    if course_id not in {course.course_id for course in courses}:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={"code": "course_forbidden", "message": "Course access denied."},
+        )
+    return autonomy.repository.list_autonomous_goals(account_id, course_id)
 
 
 @router.get(
@@ -124,6 +145,21 @@ def get_student_conversation(
     return _call(service.get_conversation, account_id, conversation_id)
 
 
+@router.get("/conversations/{conversation_id}/learner-evidence")
+def get_student_learner_evidence(
+    conversation_id: str,
+    account_id: StudentAccountDependency,
+    service: StudentServiceDependency,
+):
+    _call(service.get_conversation, account_id, conversation_id)
+    belief = service.repository.get_learner_belief_state_v2(conversation_id)
+    return {
+        "conversation_id": conversation_id,
+        "belief_state": belief,
+        "claim": "observed-evidence-only",
+    }
+
+
 @router.post(
     "/conversations/{conversation_id}/messages",
     response_model=TutorTurn,
@@ -140,6 +176,9 @@ async def submit_student_message(
             conversation_id,
             content=request.content,
             client_request_id=request.request_id,
+            responding_to_outreach_message_id=(
+                request.responding_to_outreach_message_id
+            ),
         )
     except StudentWorkflowError as error:
         raise _http_error(error) from error

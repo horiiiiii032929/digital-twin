@@ -4,8 +4,10 @@ Date: 2026-08-21
 
 Decision ID: `autonomous-tutoring-graph-001`
 
-Status: accepted by the project owner on 2026-08-21; no runtime, provider,
-dataset, or release authorization
+Status: accepted by the project owner on 2026-08-21 and retained as the T1-v1
+historical design. The prospective architecture is now
+[`autonomous-tutoring-loop-002`](autonomous-tutoring-loop-v2.md). No new
+runtime, provider, dataset, or release authorization follows from either design.
 
 Implementation owner: [GitHub issue #107](https://github.com/horiiiiii032929/digital-twin/issues/107)
 

@@ -17,6 +17,7 @@ import {
   Bell,
   BellOff,
   BookOpen,
+  Clock3,
   FileText,
   Menu,
   MessageCircle,
@@ -47,10 +48,12 @@ import {
 } from "@/components/ui/prompt-input"
 import type { StudentWorkspaceController } from "@/hooks/use-student-workspace"
 import type {
+  AutonomousGoalV1,
   StudentChatMessage,
   StudentCitation,
   StudentCourse,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
 } from "@/lib/api"
 import { loadStudentCitationCrop } from "@/lib/api"
 import { cn } from "@/lib/utils"
@@ -83,7 +86,10 @@ export function StudentWorkspace({
     isLoadingConversation,
     isSubmitting,
     outreachMessages,
+    autonomousGoals,
+    learnerEvidence,
     inAppOutreachEnabled,
+    outreachSnoozedUntil,
     isLoadingOutreach,
     isUpdatingOutreach,
     outreachError,
@@ -96,8 +102,10 @@ export function StudentWorkspace({
     sendMessage,
     refreshOutreach,
     setInAppOutreachEnabled,
+    snoozeOutreach,
     markOutreachRead,
     dismissOutreach,
+    replyToOutreach,
     selectCitation,
   } = controller
 
@@ -307,15 +315,23 @@ export function StudentWorkspace({
           >
             <OutreachPanel
               messages={outreachMessages}
+              goals={autonomousGoals}
+              learnerEvidence={learnerEvidence}
               enabled={inAppOutreachEnabled}
+              snoozedUntil={outreachSnoozedUntil}
               isLoading={isLoadingOutreach}
               isUpdating={isUpdatingOutreach}
               error={outreachError}
               onClose={() => setOutreachOpen(false)}
               onRefresh={refreshOutreach}
               onEnabledChange={setInAppOutreachEnabled}
+              onSnooze={snoozeOutreach}
               onMarkRead={markOutreachRead}
               onDismiss={dismissOutreach}
+              onReply={(messageId) => {
+                replyToOutreach(messageId)
+                setOutreachOpen(false)
+              }}
             />
           </DialogPrimitive.Content>
         </DialogPrimitive.Portal>
@@ -401,7 +417,7 @@ function StudentHeader({
         >
           <Bell aria-hidden="true" />
           {unreadOutreachCount > 0 ? (
-            <span className="absolute top-1 right-1 flex min-w-4 items-center justify-center rounded-full bg-[var(--accent-strong)] px-1 text-[10px] leading-4 font-bold text-white">
+            <span className="absolute top-0.5 right-0.5 flex min-w-5 items-center justify-center rounded-full bg-[var(--accent-strong)] px-1 text-xs leading-5 font-bold text-white">
               {Math.min(unreadOutreachCount, 9)}
             </span>
           ) : null}
@@ -442,27 +458,41 @@ function StudentHeader({
 
 function OutreachPanel({
   messages,
+  goals,
+  learnerEvidence,
   enabled,
+  snoozedUntil,
   isLoading,
   isUpdating,
   error,
   onClose,
   onRefresh,
   onEnabledChange,
+  onSnooze,
   onMarkRead,
   onDismiss,
+  onReply,
 }: {
   messages: StudentProactiveMessageView[]
+  goals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
   enabled: boolean
+  snoozedUntil: string | null
   isLoading: boolean
   isUpdating: boolean
   error: string | null
   onClose: () => void
   onRefresh: () => Promise<void>
   onEnabledChange: (enabled: boolean) => Promise<void>
+  onSnooze: (days: number | null) => Promise<void>
   onMarkRead: (messageId: string) => Promise<void>
   onDismiss: (messageId: string) => Promise<void>
+  onReply: (messageId: string) => void
 }) {
+  const snoozeDate = snoozedUntil ? new Date(snoozedUntil) : null
+  const isSnoozed = Boolean(
+    snoozeDate && !Number.isNaN(snoozeDate.getTime()) && snoozeDate > new Date(),
+  )
   return (
     <>
       <div className="flex min-h-14 items-center justify-between gap-3 border-b pl-5 pr-14">
@@ -506,10 +536,63 @@ function OutreachPanel({
           </span>
         </label>
         <p className="mt-2.5 px-1 text-xs leading-5 text-muted-foreground">
-          Discord delivery is not connected yet. Individual learning details
-          will never be posted to a shared channel.
+          Only private in-app delivery is enabled. Individual learning details
+          are never posted to a shared channel.
         </p>
+        {enabled ? (
+          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white px-3 py-2.5">
+            <p className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+              <Clock3 className="size-3.5 shrink-0" aria-hidden="true" />
+              {isSnoozed && snoozeDate
+                ? `Paused until ${formatOutreachTime(snoozeDate.toISOString())}`
+                : "Quiet hours are respected automatically."}
+            </p>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              disabled={isUpdating}
+              onClick={() => void onSnooze(isSnoozed ? null : 7)}
+            >
+              {isSnoozed ? "Resume now" : "Pause for 7 days"}
+            </Button>
+          </div>
+        ) : null}
       </div>
+
+      <div className="border-b px-5 py-4">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+            My learning goals
+          </h2>
+          <span className="text-xs text-muted-foreground">
+            {goals.filter((goal) => goal.status === "active").length}/3 active
+          </span>
+        </div>
+        {goals.length ? (
+          <ul className="mt-3 space-y-2">
+            {goals.slice(0, 3).map((goal) => (
+              <li key={goal.goal_id} className="rounded-lg border bg-white p-3">
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-sm font-medium">{goal.learner_subgoal}</p>
+                  <span className="shrink-0 rounded-full bg-[var(--subtle)] px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                    {goal.status}
+                  </span>
+                </div>
+                <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                  Success: {goal.success_condition}
+                </p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-2 text-xs leading-5 text-muted-foreground">
+            No active goal. Your tutor can create a bounded goal only from a professor-approved course objective.
+          </p>
+        )}
+      </div>
+
+      <LearnerEvidenceSection evidence={learnerEvidence} />
 
       <div className="flex items-center justify-between gap-3 px-5 py-3">
         <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
@@ -577,7 +660,7 @@ function OutreachPanel({
                   </span>
                   <time
                     dateTime={message.created_at}
-                    className="shrink-0 text-[11px] text-muted-foreground"
+                    className="shrink-0 text-xs text-muted-foreground"
                   >
                     {formatOutreachTime(message.created_at)}
                   </time>
@@ -591,6 +674,13 @@ function OutreachPanel({
                   </p>
                 ) : null}
                 <div className="mt-3 flex items-center justify-end gap-2">
+                  <Button
+                    type="button"
+                    size="sm"
+                    onClick={() => onReply(message.id)}
+                  >
+                    Reply in chat
+                  </Button>
                   {message.status === "delivered" ? (
                     <Button
                       type="button"
@@ -619,6 +709,62 @@ function OutreachPanel({
   )
 }
 
+function LearnerEvidenceSection({
+  evidence,
+}: {
+  evidence: StudentLearnerEvidence | null
+}) {
+  const belief = evidence?.belief_state
+  return (
+    <section className="border-b px-5 py-4" aria-labelledby="learning-evidence-heading">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2
+            id="learning-evidence-heading"
+            className="text-xs font-semibold tracking-wide text-muted-foreground uppercase"
+          >
+            Observed learning evidence
+          </h2>
+          <p className="mt-1 text-xs leading-5 text-muted-foreground">
+            These are observations, not a final mastery score.
+          </p>
+        </div>
+        {belief ? (
+          <span className="shrink-0 text-xs text-muted-foreground">
+            Rev. {belief.revision}
+          </span>
+        ) : null}
+      </div>
+      {belief?.concepts.length ? (
+        <ul className="mt-3 divide-y rounded-lg border">
+          {belief.concepts.slice(0, 4).map((concept) => (
+            <li key={concept.concept_id} className="px-3 py-3">
+              <div className="flex items-start justify-between gap-3">
+                <p className="text-sm font-medium">{formatLabel(concept.concept_id)}</p>
+                <span className="text-xs text-muted-foreground">
+                  {Math.round(concept.uncertainty * 100)}% uncertainty
+                </span>
+              </div>
+              <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                {concept.observation_count} observations · {concept.assessed_evidence_count} assessed · {concept.correct_evidence_count} correct · {concept.partial_evidence_count} partial · {concept.incorrect_evidence_count} incorrect
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-3 rounded-lg bg-[var(--shell)] px-3 py-2.5 text-xs leading-5 text-muted-foreground">
+          No assessed learning evidence has been recorded in this conversation yet.
+        </p>
+      )}
+      {belief ? (
+        <p className="mt-2 text-xs text-muted-foreground">
+          Last updated {formatOutreachTime(belief.updated_at)}
+        </p>
+      ) : null}
+    </section>
+  )
+}
+
 function formatOutreachTime(value: string): string {
   const date = new Date(value)
   if (Number.isNaN(date.getTime())) return "Recently"
@@ -628,6 +774,11 @@ function formatOutreachTime(value: string): string {
     hour: "numeric",
     minute: "2-digit",
   }).format(date)
+}
+
+function formatLabel(value: string): string {
+  const label = value.replaceAll("_", " ").replaceAll("-", " ")
+  return `${label.charAt(0).toUpperCase()}${label.slice(1)}`
 }
 
 function CourseRail({

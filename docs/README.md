@@ -12,7 +12,8 @@ design records.
 - [Frozen claim-to-evidence matrix](../reports/claim-to-evidence-matrix.md)
 - [Project brief](project-brief.md)
 - [Digital Twin architecture](architecture.md)
-- [Autonomous tutoring graph](autonomous-tutoring-graph.md)
+- [Autonomous tutoring loop V2.1 — canonical prospective design](autonomous-tutoring-loop-v2.md)
+- [Autonomous tutor best-practice audit — research basis](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
 - [Proactive Professor Digital Twin outreach](proactive-outreach.md)
 - [Proactive mixed-initiative tutoring research](../research/01_literature/2026-08-27-proactive-mixed-initiative-tutoring.md)
 - [Component inventory](component-inventory.md)
@@ -29,6 +30,19 @@ The product definition is maintained in
 The [release plan](release-plan.md) is the operational order of work.
 The earlier frontier scope and all frozen experiment records remain historical
 sources of truth for the decisions and results they document.
+
+### Autonomous tutoring reading order
+
+1. Use [Autonomous tutoring loop V2.1](autonomous-tutoring-loop-v2.md) as the
+   only implementation-facing prospective architecture.
+2. Use the
+   [best-practice audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
+   for the academic justification, alternatives, limitations, and evidence.
+3. Use the earlier
+   [loop and evaluation research](../research/01_literature/2026-08-31-autonomous-tutoring-loop-and-evaluation.md)
+   for the temporal-loop and evaluation synthesis.
+4. Treat [Autonomous tutoring graph V1](autonomous-tutoring-graph.md) as the
+   historical T1-v1 design and local-control evidence only.
 
 ## Active component guides
 
@@ -50,6 +64,10 @@ is superseded by the active scope and component inventory.
 Historical implementation plans and specifications live under
 [`archive/`](archive/README.md). They explain why the current code exists but
 must not be used as the active delivery plan.
+
+The [Autonomous tutoring graph V1](autonomous-tutoring-graph.md) remains in the
+main documentation tree because current T1-v1 evidence binds to it, but it is
+not the prospective implementation specification.
 
 Research experiment plans and results are not moved to the documentation
 archive. Their dates, frozen protocols, failures, and decisions are durable

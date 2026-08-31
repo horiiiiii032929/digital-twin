@@ -60,6 +60,13 @@ evidence, not competing end goals.
 4. Complete #105 from the successor evidence and select the production
    grounding gate.
 5. Preserve T0 and run #107's separately frozen T0/T1 confirmation.
+   The completed local T1-v1 confirmation remains historical Keep evidence;
+   prospective implementation follows
+   [`autonomous-tutoring-loop-002`](../../docs/autonomous-tutoring-loop-v2.md)
+   only after #153 resolves the factual action/evidence boundary and the
+   [V2.1 best-practice amendment](../01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
+   separates domain, learner-belief, pedagogical-policy, interaction, and
+   governance/execution models.
 6. Complete #132 and #134; keep Discord
    network delivery disabled until its privacy and operations gates pass.
 7. Select a public host/domain and finish #88's trusted-HTTPS rehearsal.

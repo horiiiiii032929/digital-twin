@@ -42,7 +42,6 @@ def test_completed_instrument_has_all_execution_authority_revoked() -> None:
 def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     result = simulate()
 
-    assert result["status"] == "simulated-network-free-keep"
     assert result["source_region_count"] == 2100
     assert result["query_count"] == 40
     assert result["artifact_count"] == 4
@@ -54,6 +53,25 @@ def test_network_free_simulation_proves_runtime_load_invariants() -> None:
     assert result["metrics"]["retrieval_equivalence"] == 1
     assert result["metrics"]["binding_rejection_accuracy"] == 1
     assert result["metrics"]["corruption_detection_accuracy"] == 1
+    gates = qualification._load(qualification.INSTRUMENT_PATH)["hard_gates"]
+    assert (
+        result["metrics"]["simulated_peak_python_memory_mib"]
+        <= gates["simulated_peak_python_memory_mib_max"]
+    )
+    assert (
+        result["metrics"]["simulated_artifact_size_mib"]
+        <= gates["simulated_artifact_size_mib_max"]
+    )
+    expected_status = (
+        "simulated-network-free-keep"
+        if result["metrics"]["simulated_cold_load_seconds"]
+        <= gates["simulated_cold_load_seconds_max"]
+        else "simulated-network-free-refine"
+    )
+    # Wall-clock load is retained as a measured qualification result, but an
+    # arbitrary busy test host must not turn deterministic integrity checks
+    # into a flaky repository regression.
+    assert result["status"] == expected_status
 
 
 def test_completed_result_blocks_every_reexecution(

@@ -17,8 +17,15 @@ from src.digital_twin.student import (
     ProactiveTriggerStatus,
     SQLiteStudentRepository,
     StudentReleaseStatus,
+    TeachingProfileDepth,
+    TeachingProfileService,
     seed_synthetic_student_workflow,
 )
+from src.digital_twin.student.autonomy_models import (
+    AutonomousActionKind,
+    AutonomousEventKind,
+)
+from src.digital_twin.student.autonomy_service import GovernedAutonomyService
 
 
 NOW = datetime(2026, 8, 27, 12, 0, tzinfo=UTC)
@@ -317,6 +324,84 @@ def test_evidence_recovery_shadow_scan_proposes_only_genuinely_new_evidence(tmp_
     assert result.decisions[0].source_chunk_id == "chunk-cache-synthetic"
     assert result.decisions[0].reason == "new-evidence-supported"
     assert repository.list_due_proactive_triggers(NOW.isoformat()) == []
+
+
+def test_governed_observer_materializes_evidence_recovery_once(tmp_path):
+    repository, fixture, outreach = _service(tmp_path)
+    _enable_in_app(outreach, fixture)
+    prior = _record_prior_no_evidence_turn(repository, fixture)
+    profiles = TeachingProfileService(repository)
+    draft = profiles.create_draft(
+        fixture.professor_id,
+        fixture.course_a_id,
+        {
+            "tone": "Patient and precise",
+            "depth": TeachingProfileDepth.BALANCED,
+            "explanation_structure": ["diagnose", "hint", "check"],
+            "example_preferences": ["systems examples"],
+            "misconception_handling": "Ask for a corrected next step.",
+            "integrity_limits": "Require an attempt before assessed-work help.",
+            "help_ladder": ["diagnostic question", "hint"],
+            "outreach_policy": "Use private in-app follow-ups.",
+        },
+    )
+    preview = profiles.preview(
+        fixture.professor_id,
+        fixture.course_a_id,
+        draft.profile_id,
+    )
+    approved = profiles.approve(
+        fixture.professor_id,
+        fixture.course_a_id,
+        draft.profile_id,
+        preview_sha256=preview.preview_sha256,
+    )
+    current = repository.get_published_release(fixture.course_a_id)
+    governed_release = current.model_copy(
+        update={
+            "id": "release-a-governed-recovery",
+            "status": StudentReleaseStatus.DRAFT,
+            "teaching_profile_id": approved.profile_id,
+            "teaching_profile_sha256": approved.content_sha256,
+            "created_at": "2026-08-27T10:00:00+00:00",
+        },
+        deep=True,
+    )
+    repository.save_release(governed_release)
+    repository.publish_release(governed_release.id)
+    autonomy = GovernedAutonomyService(repository, outreach)
+    autonomy.set_policy(
+        fixture.professor_id,
+        fixture.course_a_id,
+        approved_course_objectives=[
+            "Explain why cache coherence protects replicated processor data."
+        ],
+        allowed_actions=[AutonomousActionKind.RECOMMEND_APPROVED_SOURCE],
+        autonomy_enabled=True,
+    )
+
+    first = autonomy.observe_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        now=NOW,
+    )
+    second = autonomy.observe_evidence_recovery(
+        fixture.professor_id,
+        fixture.course_a_id,
+        now=NOW,
+    )
+    due = repository.list_due_autonomous_opportunities(NOW.isoformat())
+
+    assert first.opportunities_created == 1
+    assert second.opportunities_created == 0
+    assert len(due) == 1
+    assert due[0].event_kind == AutonomousEventKind.EVIDENCE_RECOVERED
+    assert due[0].supporting_observation_ids == [
+        "message-prior-question",
+        "message-prior-no-evidence",
+    ]
+    assert due[0].release_id == governed_release.id
+    assert prior.release_id != due[0].release_id
 
 
 def test_evidence_recovery_active_mode_is_gated_and_idempotent(tmp_path):

@@ -4,7 +4,9 @@ import {
   bindProfessorOnboardingSession,
   buildInlineProfessorIngestionJob,
   buildProfessorReleasePayload,
+  cancelProfessorAutonomousGoal,
   createProfessorRelease,
+  listProfessorAutonomousOutcomes,
   listProfessorCourses,
   isProfessorIngestionJob,
   publishProfessorRelease,
@@ -186,6 +188,24 @@ describe("professor API client", () => {
     expect(fetchMock).toHaveBeenCalledWith(
       "/api/professor/courses/course%20%3Fa/onboarding-sessions/session%23one/bind",
       expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("uses explicit autonomy goal cancellation and outcome audit routes", async () => {
+    const fetchMock = stubFetch({})
+
+    await cancelProfessorAutonomousGoal("course a", "goal/one")
+    await listProfessorAutonomousOutcomes("course a", "student one")
+
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      1,
+      "/api/professor/courses/course%20a/autonomous-goals/goal%2Fone/cancel",
+      expect.objectContaining({ method: "POST" }),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "/api/professor/courses/course%20a/autonomous-outcomes?student_account_id=student+one",
+      expect.any(Object),
     )
   })
 })

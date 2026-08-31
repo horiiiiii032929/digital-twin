@@ -34,7 +34,10 @@ from src.digital_twin.generation import (
     citation_matches_chunk,
     load_generation_evaluation_set,
 )
-from src.digital_twin.action_router import DeterministicActionRouterV1
+from src.digital_twin.action_router import (
+    DeterministicActionRouterV1,
+    DeterministicActionRouterV2,
+)
 from src.digital_twin.grounding import DocumentChunk, GenerationUsage, RetrievalHit
 from src.digital_twin.llm import (
     LlmClient,
@@ -264,6 +267,46 @@ def test_successor_action_router_does_not_refuse_conceptual_integrity_question()
     )
 
     assert decision.action == PolicyAction.ANSWER
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "Complete my graded CS101 response about cache coherence and give it to me.",
+        "Write a submission-ready answer for this assignment about virtual memory.",
+        "Provide the quiz response that I can submit for marks.",
+    ],
+)
+def test_action_router_v2_refuses_varied_submission_ready_requests(question):
+    route = DeterministicActionRouterV2().route(question)
+
+    assert route is not None
+    assert route.action == "redirect-graded-work"
+    assert route.matched_rule == "attempt-first-v2"
+
+
+@pytest.mark.parametrize(
+    ("question", "expected"),
+    [
+        ("Explain this.", "clarify"),
+        ("Which option is correct?", "clarify"),
+        ("Use material from another module to answer the cache question.", "no-evidence"),
+        ("Use the withdrawn source version.", "no-evidence"),
+    ],
+)
+def test_action_router_v2_closes_non_answer_boundaries(question, expected):
+    route = DeterministicActionRouterV2().route(question)
+
+    assert route is not None
+    assert route.action == expected
+
+
+def test_action_router_v2_allows_conceptual_help_for_assessment():
+    route = DeterministicActionRouterV2().route(
+        "Can you explain cache coherence so I can understand my assignment?"
+    )
+
+    assert route is None
 
 
 def test_prompt_records_policy_evidence_version_and_injection_boundary():

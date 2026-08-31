@@ -36,6 +36,71 @@ The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
 professor-fidelity, usability, or learning-outcome claim is added.
 
+Draft PR #158 now contains the complete software implementation checkpoint for
+governed autonomy V2.1. It is no longer a T1-v1 alias. A release-bound
+`CourseDomainModelV1`, V2 perception/observation/attribution/belief/plan/delta/
+response/trace contracts, a deterministic assessed-evidence-count belief
+baseline, durable goals and opportunities, and an independently implemented
+reactive/autonomous graph are connected to the runtime and SQLite persistence.
+`ConceptAttributionV2` stores observation and assessment evidence with
+uncertainty; neither an LLM nor the UI writes or displays a mastery score.
+
+Simple factual turns take a deterministic fast path. Misconception, attempted
+work, repeated confusion, goal selection, and proactive intervention may use
+one bounded `gpt-5.6-terra` semantic proposal. The proposal can reference only
+approved concepts and cannot alter identity, policy, release, evidence,
+learner-state authority, delivery, or cost limits. `gpt-5.4-mini-2026-03-17`
+is the configured wording generator. Both calls are protected by durable
+request ledgers: an uncertain started or failed call is never repeated after a
+restart. Exact returned-model identity, token, latency, cost, state revision,
+checkpoint, validation, and restart lineage are retained in sanitized
+`AgentTraceV2` records.
+
+Reactive execution now follows a finite, fail-closed graph from scope and
+policy binding through perception, deterministic belief revision, evidence,
+pedagogical planning, generation, validation, one repair, safe fallback, and
+atomic commit. LangGraph `AsyncSqliteSaver` checkpoints each node while the
+existing product transaction owns the final message, learner observation,
+belief delta, learning-gap signal, goal/opportunity, trace, and delivery
+outbox. The explicit action lattice is operational failure, refuse, clarify,
+abstain, then answer. An answer is permitted only with current, authorized,
+complete evidence and valid claim/citation lineage. Provider, parse, or
+validation failure leaves the learner state unchanged.
+
+Professor APIs/UI now expose the domain model, approved teaching profile,
+autonomy policy, learner goals, evidence-based belief summary, action/outcome/
+restart trace, pause, kill switch, goal cancellation, and T0 rollback. Student
+APIs/UI expose goal status, next activity, private proactive inbox, consent,
+snooze, resume, reply, and dismissal. Desktop and 390-pixel mobile Impeccable
+walkthroughs passed without overflow or console errors. Discord, email, and
+Teams delivery remain disabled.
+
+A flow-independent `AutonomyEvaluationAdapterV1` boundary now supports reset,
+event submission, simulated time, restart, action collection, and state
+snapshots without exposing graph node names, Python classes, database tables,
+or runtime chunk IDs. A network-free 30-day software verification exercised the
+actual governed service, a day-eight restart, and day-fifteen goal expiry: 15
+finite jobs produced six unique messages, no duplicate action or delivery, and
+zero post-expiry job. Provider calls and cost were zero. This is regression
+evidence for implementation completeness, not the provider-backed academic
+evaluation or a V2.1 release selection.
+
+T1-v1 and T0 therefore remain the selected control and rollback. A fail-closed
+configuration guard prevents the historical T1-v1 result from activating
+T1-v2.1. Provider-backed pedagogy, fresh grounding quality, full-autonomy
+evaluation, professor fidelity, usability, and learning outcomes remain open.
+See [the V2.1 audit](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
+and [the implementation design](autonomous-tutoring-loop-v2.md).
+
+GitHub tracks the remaining evidence path explicitly: #153 remains
+`In Progress / Refine` for grounding selection, #155 remains
+`In Progress / Go Deeper` until provider-backed V2.1 confirmation, #156 remains
+`Todo / Go Deeper` until A2 promotion evidence, and #157 remains
+`Todo / Go Deeper` until the actual flow-independent evaluation. Parent #8
+remains open. The execution freeze remains active and no provider call was made
+by this implementation checkpoint. Repository correctness is 797/797 audited
+execution-relevant files with zero pending findings.
+
 AFQC-093 authorized the exact finite academic package
 `course-digital-twin-evaluation-program-001` under its USD 50 ceiling. AFQC-094
 then terminated it as `invalid-execution` in stage 1. Attempt 001 stalled while
@@ -1226,7 +1291,9 @@ study.
 
 The project owner accepted
 [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md) as the
-student-facing architecture decision on 2026-08-21. The existing student
+student-facing architecture decision on 2026-08-21. It is now the historical
+T1-v1 design; prospective implementation follows the provisional
+[V2.1 architecture](autonomous-tutoring-loop-v2.md). The existing student
 workflow is now named as the T0 grounded control. The build-only T1 successor
 now adds a typed learner-state contract, deterministic pedagogical-intent
 selection, a fixed LangGraph path, one-repair maximum, deterministic fallback,
@@ -1510,7 +1577,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | Keep T0 as release baseline; T1 development Go Deeper | Professor and student conversation-first workspaces; typed T1 learner state and intent graph; atomic persistence, bounded repair/fallback, race/restart tests; ten-trajectory network-free development passed every gate | Design and separately authorize one untouched T0/T1 confirmation; add privacy-preserving course-improvement aggregation; then obtain human workflow/usability evidence. T2 waits for professor-profile guidance |
+| Product UX and autonomous tutoring | Local T1-v1 Keep with T0 rollback; T1-v2.1 Go Deeper candidate | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; 500/500 fresh routing plus seven simulated days passed with zero provider use | Complete #153's full grounding boundary, then run prospective provider-backed T0/T1-v1/T1-v2 comparison, learner-state calibration, A1/A2 promotion evidence, professor-approved C0-C3, and human evidence |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
@@ -1521,10 +1588,12 @@ continues to hold report, presentation, and professor-communication work.
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The immediate correction is to obtain academically valid
-end-to-end factual and evidence-sufficiency evidence before selecting a
-grounding gate. T1 confirmation, host/domain selection, target-host operations,
-professor-fidelity calibration, and human workflow evidence remain separate.
+release-ready. The immediate correction is #153's academically valid factual
+action/evidence boundary. The accepted T1-v2 architecture then adds LLM
+perception and pedagogical planning without giving the model execution
+authority. Its provider-backed repeated-trajectory evaluation, shadow
+outreach, host/domain selection, target-host operations, professor-fidelity
+calibration, and human workflow evidence remain separate claims.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |

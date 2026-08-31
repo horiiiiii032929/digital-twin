@@ -53,6 +53,7 @@ import {
 import type {
   ProfessorCourse,
   ProfessorIngestionJob,
+  ProfessorEvidenceChunkOption,
   ProfessorReleaseSummary,
   ReleasePreflightResult,
 } from "@/lib/api/types"
@@ -90,12 +91,33 @@ export function ProfessorDeliveryWorkspace({
   const hasActiveJob = jobs.some(
     (job) => job.status === "pending" || job.status === "running",
   )
-  const evidenceChunks = successfulJobs.flatMap((job) =>
+  const evidenceChunks: ProfessorEvidenceChunkOption[] = successfulJobs.flatMap((job) =>
     (job.result?.chunks ?? []).flatMap((chunk) => {
       const id = typeof chunk.id === "string" ? chunk.id : null
-      if (!id) return []
+      const sourceArtifactId = typeof chunk.source_artifact_id === "string"
+        ? chunk.source_artifact_id
+        : typeof chunk.document_id === "string"
+          ? chunk.document_id
+          : null
+      const sourceSha256 = typeof chunk.source_checksum === "string"
+        ? chunk.source_checksum
+        : typeof chunk.content_hash === "string"
+          ? chunk.content_hash
+          : null
+      const locator = typeof chunk.locator === "string" ? chunk.locator : null
+      const text = typeof chunk.text === "string" ? chunk.text : null
+      if (!id || !sourceArtifactId || !sourceSha256 || !locator || !text) return []
       const title = typeof chunk.document_id === "string" ? chunk.document_id : id
-      return [{ id, label: title }]
+      return [{
+        id,
+        label: `${title} · ${locator}`,
+        source_artifact_id: sourceArtifactId,
+        source_version: typeof chunk.source_version === "number" ? chunk.source_version : 1,
+        source_sha256: sourceSha256,
+        locator,
+        char_start: 0,
+        char_end: text.length,
+      }]
     }),
   )
 
@@ -764,28 +786,41 @@ function ReleaseCard({
   onPublish: (release: ProfessorReleaseSummary) => void
   onOpenSetup: () => void
 }) {
+  const publishedRelease = release?.status === "published"
+  const draftRelease = release?.status === "draft"
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Release</CardTitle>
+        <CardTitle>{publishedRelease ? "Current release and next draft" : "Release"}</CardTitle>
         <CardDescription>
-          A release freezes the reviewed tutor policy and all currently successful evidence uploads.
+          {publishedRelease
+            ? "Students keep using the current published release while you prepare the next reviewed version."
+            : "A release freezes the reviewed tutor policy and all currently successful evidence uploads."}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <ol className="grid gap-2 sm:grid-cols-4">
+        <div>
+          <p className="mb-2 text-xs font-semibold text-muted-foreground">
+            {publishedRelease ? "Next release readiness" : "Release readiness"}
+          </p>
+          <ol className={cn("grid gap-2", publishedRelease ? "sm:grid-cols-3" : "sm:grid-cols-4")}>
           <ReleaseStep done={onboardingReady} label="Tutor approved" />
           <ReleaseStep done={profileReady} label="Profile approved" />
           <ReleaseStep done={sourceCount > 0} label="Evidence ready" />
-          <ReleaseStep done={release?.status === "published"} label="Published" />
-        </ol>
+          {!publishedRelease ? (
+            <ReleaseStep done={Boolean(draftRelease && release?.evaluation_status === "passed")} label="Checks passed" />
+          ) : null}
+          </ol>
+        </div>
 
         {!onboardingReady ? (
           <Alert>
             <CircleAlert />
-            <AlertTitle>Tutor setup is not approved</AlertTitle>
+            <AlertTitle>{publishedRelease ? "The next release draft is blocked" : "The first release is blocked"}</AlertTitle>
             <AlertDescription>
-              Resolve the policy, preview, and approval checklist before creating a release.
+              {publishedRelease
+                ? "The current published release remains active. Complete the new policy, preview, and approval checklist before creating its successor."
+                : "Resolve the policy, preview, and approval checklist before creating a release."}
             </AlertDescription>
           </Alert>
         ) : null}
@@ -794,7 +829,9 @@ function ReleaseCard({
           <div className="rounded-lg border bg-muted/30 p-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-semibold">Latest release</p>
+                <p className="text-sm font-semibold">
+                  {publishedRelease ? "Current published release" : "Draft release"}
+                </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   {release.chunk_count} chunks · policy v{release.policy_version}
                 </p>

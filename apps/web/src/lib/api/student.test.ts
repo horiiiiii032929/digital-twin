@@ -117,6 +117,12 @@ describe("student API client", () => {
     await listStudentOutreach("course a", "student-a")
     await listStudentOutreachPreferences("course a", "student-a")
     await updateStudentInAppOutreachPreference("course a", true, "student-a")
+    await updateStudentInAppOutreachPreference(
+      "course a",
+      true,
+      "student-a",
+      "2026-09-07T10:00:00.000Z",
+    )
     await markStudentOutreachRead("message a", "student-a")
     await dismissStudentOutreach("message a", "student-a")
 
@@ -137,11 +143,19 @@ describe("student API client", () => {
     )
     expect(fetchMock).toHaveBeenNthCalledWith(
       4,
+      "/api/student/courses/course%20a/outreach-preferences/in-app",
+      expect.objectContaining({
+        method: "PUT",
+        body: expect.stringContaining("2026-09-07T10:00:00.000Z"),
+      }),
+    )
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      5,
       "/api/student/outreach/message%20a/read",
       expect.objectContaining({ method: "POST" }),
     )
     expect(fetchMock).toHaveBeenNthCalledWith(
-      5,
+      6,
       "/api/student/outreach/message%20a/dismiss",
       expect.objectContaining({ method: "POST" }),
     )

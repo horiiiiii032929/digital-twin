@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -46,6 +47,9 @@ def test_api_retrieval_preflight_is_blocked_after_authority_revocation(
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "synthetic-present")
     monkeypatch.setattr(selection, "_git_dirty", lambda: False)
+    instrument = json.loads(json.dumps(selection._instrument()))
+    instrument["metadata"]["verified_at"] = datetime.now(UTC).isoformat()
+    monkeypatch.setattr(selection, "_instrument", lambda: instrument)
 
     result = selection.preflight(output_root=tmp_path / "unused")
 

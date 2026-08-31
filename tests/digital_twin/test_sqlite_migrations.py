@@ -32,6 +32,15 @@ def test_clean_database_applies_all_ordered_migrations(tmp_path):
         "proactive_triggers",
         "proactive_messages",
         "proactive_delivery_outbox",
+        "autonomy_policies",
+        "autonomous_goals",
+        "autonomous_opportunities",
+        "autonomous_plans",
+        "autonomous_actions",
+        "autonomous_outcomes",
+        "autonomous_graph_checkpoints",
+        "autonomous_wakeups",
+        "autonomy_execution_leases",
         "schema_migrations",
     }
     repository.close()

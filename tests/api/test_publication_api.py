@@ -114,6 +114,50 @@ def _teaching_profile_payload() -> dict:
     }
 
 
+def _publish_profile_bound_release(client, repository, fixture) -> None:
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles",
+        headers=_headers(fixture.professor_id),
+        json=_teaching_profile_payload(),
+    ).json()
+    preview = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{created['profile_id']}/preview",
+        headers=_headers(fixture.professor_id),
+    ).json()
+    client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/teaching-profiles/"
+        f"{created['profile_id']}/approve",
+        headers=_headers(fixture.professor_id),
+        json={"preview_sha256": preview["preview_sha256"]},
+    )
+    source = repository.get_release(fixture.release_a_id)
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/releases",
+        headers=_headers(fixture.professor_id),
+        json={
+            "session_id": "onboarding-release-synthetic",
+            "profile_id": "student-tutor",
+            "profile_version": "v1",
+            "teaching_profile_id": created["profile_id"],
+            "release_id": "release-autonomy-api-controls",
+            "chunks": [chunk.model_dump(mode="json") for chunk in source.chunks],
+        },
+    )
+    assert response.status_code == 201
+    assert _set_evaluation(
+        client, fixture, "release-autonomy-api-controls"
+    ).status_code == 200
+    assert client.post(
+        "/api/professor/releases/release-autonomy-api-controls/preflight",
+        headers=_headers(fixture.professor_id),
+    ).status_code == 200
+    assert client.post(
+        "/api/professor/releases/release-autonomy-api-controls/publish",
+        headers=_headers(fixture.professor_id),
+    ).status_code == 200
+
+
 def test_approved_teaching_profile_is_hash_bound_to_release(tmp_path):
     client, repository, sessions, fixture = _client(tmp_path, approved=True)
     created = client.post(
@@ -229,6 +273,80 @@ def test_professor_can_list_and_cancel_pending_scheduled_outreach(tmp_path):
         headers=_headers(fixture.professor_id),
     )
     assert repeated.status_code == 200
+
+
+def test_autonomy_recipient_index_explains_ineligible_students(tmp_path):
+    client, _, _, fixture = _client(tmp_path, approved=True)
+
+    response = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomy-recipients",
+        headers=_headers(fixture.professor_id),
+    )
+
+    assert response.status_code == 200
+    recipients = {
+        item["student_account_id"]: item for item in response.json()
+    }
+    active = recipients[fixture.student_a_id]
+    assert active["account_active"] is True
+    assert active["membership_active"] is True
+    assert active["goal_eligible"] is False
+    assert "Autonomy policy is not active" in active["ineligibility_reasons"]
+
+    revoked = recipients[fixture.revoked_student_id]
+    assert revoked["account_active"] is False
+    assert revoked["goal_eligible"] is False
+    assert revoked["outreach_eligible"] is False
+    assert "Student account is inactive" in revoked["ineligibility_reasons"]
+
+
+def test_professor_can_cancel_one_goal_and_read_outcome_audit(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+    _publish_profile_bound_release(client, repository, fixture)
+    objective = "Explain cache coherence using the approved release."
+    policy = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomy-policy",
+        headers=_headers(fixture.professor_id),
+        json={
+            "approved_course_objectives": [objective],
+            "allowed_actions": ["ask-diagnostic-question", "no-action"],
+            "autonomy_enabled": True,
+            "paused": False,
+            "kill_switch": False,
+        },
+    )
+    assert policy.status_code == 200
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-goals",
+        headers=_headers(fixture.professor_id),
+        json={
+            "student_account_id": fixture.student_a_id,
+            "approved_course_objective": objective,
+            "learner_subgoal": "Explain why invalidation prevents stale replicas.",
+            "success_condition": "Answer one cited diagnostic question.",
+            "expires_at": "2026-09-10T00:00:00+00:00",
+        },
+    )
+    assert created.status_code == 201
+
+    cancelled = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-goals/"
+        f"{created.json()['goal_id']}/cancel",
+        headers=_headers(fixture.professor_id),
+    )
+    assert cancelled.status_code == 200
+    assert cancelled.json()["status"] == "cancelled"
+    assert any(
+        event.event_type == "autonomous-goal-cancelled"
+        for event in repository.list_audit_events()
+    )
+
+    outcomes = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/autonomous-outcomes",
+        headers=_headers(fixture.professor_id),
+    )
+    assert outcomes.status_code == 200
+    assert outcomes.json() == []
 
 
 def _record_prior_no_evidence_turn(repository, fixture) -> None:
@@ -555,7 +673,7 @@ def test_publish_runs_evidence_recovery_in_shadow_without_creating_trigger(tmp_p
     assert repository.list_due_proactive_triggers("9999-12-31T00:00:00+00:00") == []
 
 
-def test_publish_preserves_release_and_audits_shadow_hook_failure(tmp_path):
+def test_publish_preserves_release_and_audits_autonomy_observer_failure(tmp_path):
     client, repository, sessions, fixture = _client(tmp_path, approved=True)
     draft = _create_draft(
         client, repository, sessions, fixture, "release-a-v2-hook-failure"
@@ -579,7 +697,7 @@ def test_publish_preserves_release_and_audits_shadow_hook_failure(tmp_path):
         if event.event_type == "release.post_publish_hook_failed"
     )
     assert failure.details == {
-        "hook": "proactive-evidence-recovery-shadow",
+        "hook": "governed-autonomy-source-observer",
         "error_type": "RuntimeError",
         "publication_preserved": True,
     }
@@ -702,3 +820,116 @@ def test_professor_ingests_scanned_pdf_into_release_ready_region_chunks(tmp_path
     )
     assert denied.status_code == 403
     assert denied.json()["detail"]["code"] == "professor_role_required"
+
+
+def test_professor_can_pin_one_immutable_domain_model_to_a_release(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+    release = repository.get_release(fixture.release_a_id)
+    chunk = release.chunks[0]
+    payload = {
+        "release_id": release.id,
+        "version": 1,
+        "objectives": [
+            {
+                "objective_id": "objective-cache-coherence",
+                "statement": "Explain cache coherence.",
+                "concept_ids": ["cache-coherence"],
+            }
+        ],
+        "concepts": [
+            {
+                "concept_id": "cache-coherence",
+                "label": "Cache coherence",
+                "description": "Keeps replicated processor data consistent.",
+                "prerequisite_concept_ids": [],
+                "canonical_ranges": [
+                    {
+                        "source_artifact_id": chunk.source_artifact_id,
+                        "source_version": chunk.source_version,
+                        "source_sha256": chunk.source_checksum or chunk.content_hash,
+                        "locator": chunk.locator,
+                        "char_start": 0,
+                        "char_end": len(chunk.text),
+                    }
+                ],
+            }
+        ],
+        "misconceptions": [],
+    }
+
+    created = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/domain-model",
+        headers=_headers(fixture.professor_id),
+        json=payload,
+    )
+    fetched = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/domain-model",
+        params={"release_id": release.id},
+        headers=_headers(fixture.professor_id),
+    )
+    denied = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/domain-model",
+        params={"release_id": release.id},
+        headers=_headers(fixture.student_a_id),
+    )
+    changed_payload = {
+        **payload,
+        "concepts": [
+            {**payload["concepts"][0], "label": "Changed after approval"}
+        ],
+    }
+    changed = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/domain-model",
+        headers=_headers(fixture.professor_id),
+        json=changed_payload,
+    )
+
+    assert created.status_code == 201
+    assert fetched.status_code == 200
+    assert fetched.json() == created.json()
+    assert denied.status_code == 403
+    assert changed.status_code == 422
+    assert changed.json()["detail"]["code"] == "domain_model_invalid"
+
+
+def test_professor_can_select_course_runtime_and_roll_back_to_t0(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+
+    selected = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/tutoring-runtime-profile",
+        headers=_headers(fixture.professor_id),
+        json={
+            "mode": "governed-autonomous-tutoring-graph-v2.1",
+            "reason": "Use the governed course runtime.",
+        },
+    )
+    rolled_back = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/tutoring-runtime-profile",
+        headers=_headers(fixture.professor_id),
+        json={
+            "mode": "grounded-assistant",
+            "reason": "Immediate safety rollback.",
+        },
+    )
+    fetched = client.get(
+        f"/api/professor/courses/{fixture.course_a_id}/tutoring-runtime-profile",
+        headers=_headers(fixture.professor_id),
+    )
+    denied = client.put(
+        f"/api/professor/courses/{fixture.course_a_id}/tutoring-runtime-profile",
+        headers=_headers(fixture.student_a_id),
+        json={
+            "mode": "bounded-tutoring-graph",
+            "reason": "Student cannot change the course runtime.",
+        },
+    )
+
+    assert selected.status_code == 200
+    assert selected.json()["version"] == 1
+    assert rolled_back.status_code == 200
+    assert rolled_back.json()["mode"] == "grounded-assistant"
+    assert rolled_back.json()["version"] == 2
+    assert fetched.json() == rolled_back.json()
+    assert denied.status_code == 403
+    stored = repository.get_course_tutoring_runtime_profile(fixture.course_a_id)
+    assert stored is not None and stored.mode == "grounded-assistant"

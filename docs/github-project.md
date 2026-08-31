@@ -61,6 +61,34 @@ and grounding architecture change on fresh development evidence. #105 remains `I
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
+The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
+new release selection. Its network-free development checkpoint passed 500/500
+fresh routing cases and seven simulated days with bounded cited delivery,
+restart, reply linkage, consent termination, and restore. The student surface
+remains conversation-first; professor autonomy is operated through an explicit
+workflow-first governance console. T1-v1 and T0 remain the selected control and
+rollback until prospective provider-backed and held-out product evidence passes.
+
+PR #158 now contains the complete software implementation checkpoint for
+governed autonomy V2.1: release-bound domain semantics, V2 perception and
+belief planes, deterministic evidence-count updates, an independently
+implemented reactive/autonomous graph, node-level SQLite checkpoints, durable
+provider-call ledgers, APIs/UI, and a flow-independent autonomy evaluation
+adapter. A 30-day network-free regression passes restart, expiry, finite-loop,
+and duplicate-suppression gates. This is implementation evidence only. No paid
+call, held-out run, A2 qualification, or full-autonomy evaluation was
+performed, so #153, #155, #156, and #157 all remain open. T1-v2.1 remains
+`Go Deeper` and the selected local R1 profile is unchanged.
+
+The remaining full-autonomy work is now separated in GitHub rather than hidden
+inside the release parent. [#155](https://github.com/horiiiiii032929/digital-twin/issues/155)
+owns the governed T1-v2.1 product completion, [#156](https://github.com/horiiiiii032929/digital-twin/issues/156)
+owns A2 learner-state-driven in-app intervention, and
+[#157](https://github.com/horiiiiii032929/digital-twin/issues/157) owns the
+immutable full-autonomy product evaluation. Issue #153 remains the first P0
+dependency because no autonomous release is safe before the grounding successor
+passes.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2

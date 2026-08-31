@@ -1,11 +1,13 @@
 import { ApiError, pathSegment } from "@/lib/api/client"
 import type {
+  AutonomousGoalV1,
   StudentCitation,
   StudentConversation,
   StudentConversationView,
   StudentCourse,
   StudentOutreachPreference,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
   StudentTutorTurn,
 } from "@/lib/api/types"
 
@@ -40,6 +42,16 @@ export function listStudentCourses(
   })
 }
 
+export function listStudentAutonomousGoals(
+  courseId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<AutonomousGoalV1[]> {
+  return studentRequest<AutonomousGoalV1[]>(
+    `/api/student/courses/${pathSegment(courseId)}/autonomous-goals`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
 export function listStudentOutreach(
   courseId: string,
   accountId = STUDENT_ACCOUNT_ID,
@@ -64,6 +76,7 @@ export function updateStudentInAppOutreachPreference(
   courseId: string,
   enabled: boolean,
   accountId = STUDENT_ACCOUNT_ID,
+  snoozedUntil?: string | null,
 ): Promise<StudentOutreachPreference> {
   return studentRequest<StudentOutreachPreference>(
     `/api/student/courses/${pathSegment(courseId)}/outreach-preferences/in-app`,
@@ -76,6 +89,7 @@ export function updateStudentInAppOutreachPreference(
         quiet_hours_start: "22:00",
         quiet_hours_end: "08:00",
         max_messages_per_7_days: 3,
+        snoozed_until: snoozedUntil ?? null,
       }),
     },
   )
@@ -124,18 +138,35 @@ export function getStudentConversation(
   )
 }
 
+export function getStudentLearnerEvidence(
+  conversationId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentLearnerEvidence> {
+  return studentRequest<StudentLearnerEvidence>(
+    `/api/student/conversations/${pathSegment(conversationId)}/learner-evidence`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
 export function submitStudentMessage(
   conversationId: string,
   content: string,
   requestId: string,
   accountId = STUDENT_ACCOUNT_ID,
+  respondingToOutreachMessageId?: string,
 ): Promise<StudentTutorTurn> {
   return studentRequest<StudentTutorTurn>(
     `/api/student/conversations/${pathSegment(conversationId)}/messages`,
     {
       method: "POST",
       headers: studentHeaders(accountId),
-      body: JSON.stringify({ content, request_id: requestId }),
+      body: JSON.stringify({
+        content,
+        request_id: requestId,
+        ...(respondingToOutreachMessageId
+          ? { responding_to_outreach_message_id: respondingToOutreachMessageId }
+          : {}),
+      }),
     },
   )
 }

@@ -1,9 +1,12 @@
 from collections import Counter
+import hashlib
+import json
 
 from fastapi import APIRouter, Header, HTTPException, Query, Request, Response, status
 
 from services.api.app.config import RuntimeMode
 from services.api.app.dependencies import (
+    GovernedAutonomyServiceDependency,
     IngestionJobServiceDependency,
     ProactiveOutreachServiceDependency,
     TeachingProfileServiceDependency,
@@ -14,6 +17,11 @@ from services.api.app.dependencies import (
     SourceIngestionServiceDependency,
 )
 from services.api.app.schemas import (
+    AutonomyPolicyRequest,
+    AutonomousGoalCreateRequest,
+    AutonomousOpportunityCreateRequest,
+    CourseDomainModelCreateRequest,
+    CourseTutoringRuntimeProfileRequest,
     CourseCreateRequest,
     CourseSourceIngestionResponse,
     ReleaseCreateRequest,
@@ -33,7 +41,17 @@ from src.digital_twin.onboarding import (
     bind_session_to_course,
 )
 from src.digital_twin.student import (
+    AutonomousActionV1,
+    AutonomousGoalV1,
+    AutonomousOutcomeV1,
+    AutonomousRecipientEligibilityV1,
+    AgentTraceV2,
+    GovernedAutonomyError,
+    PedagogicalPolicyV2,
+    ProactiveOpportunityV1,
     Course,
+    CourseDomainModelV1,
+    CourseTutoringRuntimeProfileV1,
     CourseMembership,
     DigitalTwinRelease,
     ProfessorCourseView,
@@ -207,6 +225,399 @@ def review_learning_gap_proposal(
             )
         )
         return {"proposal_id": request.proposal_id, "decision": request.decision}
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/domain-model",
+    response_model=CourseDomainModelV1 | None,
+)
+def get_course_domain_model(
+    course_id: str,
+    release_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        release = publication.repository.get_release(release_id)
+        if release is None or release.course_id != course_id:
+            raise KeyError("release_not_found")
+        return publication.repository.get_course_domain_model(release_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except KeyError as error:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "release_not_found", "message": "Release not found."},
+        ) from error
+
+
+@router.post(
+    "/courses/{course_id}/domain-model",
+    response_model=CourseDomainModelV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_course_domain_model(
+    course_id: str,
+    request: CourseDomainModelCreateRequest,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        release = publication.repository.get_release(request.release_id)
+        if release is None or release.course_id != course_id:
+            raise KeyError("release_not_found")
+        release_payload = json.dumps(
+            release.model_dump(mode="json"),
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        release_sha256 = hashlib.sha256(release_payload.encode("utf-8")).hexdigest()
+        identity = hashlib.sha256(
+            f"{course_id}:{request.release_id}:{request.version}".encode("utf-8")
+        ).hexdigest()[:24]
+        model = CourseDomainModelV1(
+            domain_model_id=f"course-domain-{identity}",
+            course_id=course_id,
+            release_id=request.release_id,
+            release_sha256=release_sha256,
+            version=request.version,
+            objectives=request.objectives,
+            concepts=request.concepts,
+            misconceptions=request.misconceptions,
+            approved_by=account_id,
+        )
+        return publication.repository.save_course_domain_model(model)
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except KeyError as error:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail={"code": "release_not_found", "message": "Release not found."},
+        ) from error
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={"code": "domain_model_invalid", "message": str(error)},
+        ) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomy-traces",
+    response_model=list[AgentTraceV2],
+)
+def list_autonomy_traces(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+    conversation_id: str | None = None,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return publication.repository.list_agent_traces_v2(
+            course_id,
+            conversation_id=conversation_id,
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get("/courses/{course_id}/learners/{student_id}/belief-evidence")
+def get_learner_belief_evidence(
+    course_id: str,
+    student_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        conversations = [
+            item
+            for item in publication.repository.list_course_conversations(course_id)
+            if item.student_id == student_id
+        ]
+        states = [
+            state
+            for item in conversations
+            if (state := publication.repository.get_learner_belief_state_v2(item.id))
+            is not None
+        ]
+        return {
+            "student_id": student_id,
+            "course_id": course_id,
+            "belief_states": states,
+            "claim": "observed-evidence-only",
+        }
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/tutoring-runtime-profile",
+    response_model=CourseTutoringRuntimeProfileV1 | None,
+)
+def get_tutoring_runtime_profile(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return publication.repository.get_course_tutoring_runtime_profile(course_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.put(
+    "/courses/{course_id}/tutoring-runtime-profile",
+    response_model=CourseTutoringRuntimeProfileV1,
+)
+def set_tutoring_runtime_profile(
+    course_id: str,
+    request: CourseTutoringRuntimeProfileRequest,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        current = publication.repository.get_course_tutoring_runtime_profile(course_id)
+        changed_at = timestamp_now()
+        profile = CourseTutoringRuntimeProfileV1(
+            course_id=course_id,
+            mode=request.mode,
+            version=(current.version + 1 if current is not None else 1),
+            changed_by=account_id,
+            reason=request.reason,
+            updated_at=changed_at,
+        )
+        saved = publication.repository.save_course_tutoring_runtime_profile(profile)
+        if saved.mode == "grounded-assistant":
+            publication.repository.cancel_autonomy_scope(
+                course_id=course_id,
+                changed_at=changed_at,
+            )
+        publication.repository.save_audit_event(
+            AuditEvent(
+                id=f"audit-runtime-profile-{course_id}-{saved.version}",
+                event_type="course-tutoring-runtime-profile-changed",
+                account_id=account_id,
+                course_id=course_id,
+                details={
+                    "mode": saved.mode,
+                    "version": saved.version,
+                    "reason": saved.reason,
+                    "pending_autonomy_cancelled": saved.mode == "grounded-assistant",
+                },
+                created_at=changed_at,
+            )
+        )
+        return saved
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except (KeyError, ValueError) as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={"code": "runtime_profile_invalid", "message": str(error)},
+        ) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomy-policy",
+    response_model=PedagogicalPolicyV2 | None,
+)
+def get_autonomy_policy(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.get_autonomy_policy(course_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.put(
+    "/courses/{course_id}/autonomy-policy",
+    response_model=PedagogicalPolicyV2,
+)
+def set_autonomy_policy(
+    course_id: str,
+    request: AutonomyPolicyRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+):
+    try:
+        return autonomy.set_policy(
+            account_id,
+            course_id,
+            **request.model_dump(mode="python"),
+        )
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+    except ValueError as error:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail={"code": "autonomy_policy_invalid", "message": str(error)},
+        ) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-goals",
+    response_model=list[AutonomousGoalV1],
+)
+def list_autonomous_goals(
+    course_id: str,
+    student_account_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_goals(
+            student_account_id, course_id
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomy-recipients",
+    response_model=list[AutonomousRecipientEligibilityV1],
+)
+def list_autonomy_recipients(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.list_recipient_eligibility(course_id)
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/autonomous-goals",
+    response_model=AutonomousGoalV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_autonomous_goal(
+    course_id: str,
+    request: AutonomousGoalCreateRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.create_goal(
+            student_id=request.student_account_id,
+            course_id=course_id,
+            approved_course_objective=request.approved_course_objective,
+            learner_subgoal=request.learner_subgoal,
+            success_condition=request.success_condition,
+            expires_at=request.expires_at,
+            priority=request.priority,
+            attempt_limit=request.attempt_limit,
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/autonomous-goals/{goal_id}/cancel",
+    response_model=AutonomousGoalV1,
+)
+def cancel_autonomous_goal(
+    course_id: str,
+    goal_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+):
+    try:
+        return autonomy.cancel_goal(account_id, course_id, goal_id)
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.post(
+    "/courses/{course_id}/autonomous-opportunities",
+    response_model=ProactiveOpportunityV1,
+    status_code=status.HTTP_201_CREATED,
+)
+def create_autonomous_opportunity(
+    course_id: str,
+    request: AutonomousOpportunityCreateRequest,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.create_opportunity(
+            student_id=request.student_account_id,
+            course_id=course_id,
+            event_kind=request.event_kind,
+            earliest_action_at=request.earliest_action_at,
+            latest_action_at=request.latest_action_at,
+            goal_id=request.goal_id,
+            concept_id=request.concept_id,
+            source_chunk_id=request.source_chunk_id,
+            source_chunk_ids=request.source_chunk_ids,
+            supporting_observation_ids=request.supporting_observation_ids,
+            idempotency_key=request.idempotency_key,
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+    except GovernedAutonomyError as error:
+        raise _autonomy_http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-actions",
+    response_model=list[AutonomousActionV1],
+)
+def list_autonomous_actions(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+    student_account_id: str | None = None,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_actions(
+            course_id, student_id=student_account_id
+        )
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get(
+    "/courses/{course_id}/autonomous-outcomes",
+    response_model=list[AutonomousOutcomeV1],
+)
+def list_autonomous_outcomes(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    autonomy: GovernedAutonomyServiceDependency,
+    publication: PublicationServiceDependency,
+    student_account_id: str | None = None,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        return autonomy.repository.list_autonomous_outcomes(
+            course_id, student_id=student_account_id
+        )
     except PublicationError as error:
         raise _http_error(error) from error
 
@@ -769,6 +1180,26 @@ def _teaching_profile_http_error(error: TeachingProfileError) -> HTTPException:
             "teaching_profile_not_withdrawable",
             "teaching_profile_preview_drifted",
         }
+        else status.HTTP_422_UNPROCESSABLE_CONTENT
+    )
+    return HTTPException(
+        status_code=code,
+        detail={"code": error.code, "message": error.message},
+    )
+
+
+def _autonomy_http_error(error: GovernedAutonomyError) -> HTTPException:
+    code = (
+        status.HTTP_404_NOT_FOUND
+        if error.code == "autonomy_goal_not_found"
+        else status.HTTP_403_FORBIDDEN
+        if error.code in {
+            "approved_release_required",
+            "objective_not_approved",
+            "course_forbidden",
+        }
+        else status.HTTP_409_CONFLICT
+        if error.code == "autonomy_scope_unavailable"
         else status.HTTP_422_UNPROCESSABLE_CONTENT
     )
     return HTTPException(

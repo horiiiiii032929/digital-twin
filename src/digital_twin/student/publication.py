@@ -431,7 +431,9 @@ class ReleaseLifecycleService:
         self._require_publishable(release)
         self._prepare_retrieval_index(release)
         self.repository.publish_release(release.id)
-        return self._require_release(release.id)
+        published = self._require_release(release.id)
+        self._run_post_publish_hook(professor_id, published)
+        return published
 
     def _run_post_publish_hook(
         self,
@@ -453,7 +455,7 @@ class ReleaseLifecycleService:
                     course_id=release.course_id,
                     release_id=release.id,
                     details={
-                        "hook": "proactive-evidence-recovery-shadow",
+                        "hook": "governed-autonomy-source-observer",
                         "error_type": type(error).__name__,
                         "publication_preserved": True,
                     },

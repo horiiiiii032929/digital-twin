@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 782
+    "audited": 797
   },
   "category_counts": {
-    "active_frontend": 69,
-    "active_or_unclassified_tooling": 179,
-    "active_runtime": 128,
+    "active_frontend": 71,
+    "active_or_unclassified_tooling": 182,
+    "active_runtime": 134,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 209,
+    "evaluation_configuration": 210,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 167
+    "verification": 170
   },
-  "file_count": 782,
+  "file_count": 797,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6f8962d9d5e15c6b286b069b7ae714219efbfe971c464bacffa894c44af684d2",
+  "record_sha256": "467674741f6eadaacbe6a280f9973bece19b6ed0b9028851107d823c3c0443e4",
   "records": [
     {
       "audit": {
@@ -391,11 +391,43 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Command-surface review verified the API-first retrieval validator, finite simulations, blocked no-call preflight, authority-gated execution/resume commands, and all retained repository gates.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_frontend",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "apps/web/src/components/professor/governance-approval.test.ts",
+      "risk": "high",
+      "sha256": "0966ba0069de2bd076d49393230b633227d4ec9a1d13e4f8f675745582ed8795"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_frontend",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "apps/web/src/components/professor/governance-approval.ts",
+      "risk": "high",
+      "sha256": "340b48b42b309f208561c8f0eeac9545e77031afa6753959493b8376dd1501ed"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; professor profile/policy, individual-goal cancellation, outcome audit, responsive tabs, and fail-closed status language were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -403,15 +435,15 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "99ab9dd539cb1e645051ee94c86040b3ad0a6cf645739820d869c6ea69500475"
+      "sha256": "622dfa55ea035fda79aa598ee8e4de737ed4c79c842b0fadbfffd24e6aac9b75"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, source-aligned AFQC-101 validation command, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -419,7 +451,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "21691e23143faf2d33144dc6dcb6e869c5636b661278c67f077eeb469f6c991d"
+      "sha256": "eb72718e31542c23d8cfeca473c0a04f22820223f68fcdd3485b70dba8198873"
     },
     {
       "audit": {
@@ -439,11 +471,11 @@
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; student consent, seven-day snooze, immediate resume, goals, inbox, and responsive chat behavior were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -451,7 +483,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "risk": "high",
-      "sha256": "dd37e40ab2dfc3408c798548ffe5b3822f845cfaf7b3e2d4825117043ae72e1d"
+      "sha256": "90b578997718aee2b0eeb8646e556475272a294208338483fdbabe92f59ccb92"
     },
     {
       "audit": {
@@ -743,11 +775,11 @@
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -755,7 +787,7 @@
       "package_commands": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
       "risk": "high",
-      "sha256": "50b33470db46687c41bee285e8283cd1b87e49ca3ebd2418e91d720fa9651ff3"
+      "sha256": "3eed6109bbd1ef10f9acd0be963167380f6eb29d3ff087a669dc73cbb2384aa3"
     },
     {
       "audit": {
@@ -858,7 +890,7 @@
         "domain": "repository-correctness",
         "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
         "findings": [],
-        "reviewed_at": "2026-08-20",
+        "reviewed_at": "2026-08-31",
         "reviewer": "repository-maintenance"
       },
       "audit_status": "audited",
@@ -867,15 +899,15 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.test.ts",
       "risk": "high",
-      "sha256": "cc3ea14c12449d308864ded2247d0e78e88cce780834c2cdeffe869d39ff2f70"
+      "sha256": "ef9d0238263632363356d99147eb7e013597fd89a5bdd937526a43a64cad4d03"
     },
     {
       "audit": {
-        "domain": "atomic-m2-confirmation",
-        "evidence": "Command review adds deterministic package validation, terminal pass/fail simulations, no-call preflight, bounded execute/resume entrypoints, and retains the complete repository gate.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -883,14 +915,14 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.ts",
       "risk": "high",
-      "sha256": "5ce6236347d7c77eddb3a545a8d44973e0c5b9e326ab7ab944a33ec03c7df16c"
+      "sha256": "09adf7791d2ba6fdba76535c883dfa3fe1cd5d2bd1a3193b346407ceb73ddfb5"
     },
     {
       "audit": {
         "domain": "frontend-correctness",
         "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -899,15 +931,15 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/student.test.ts",
       "risk": "high",
-      "sha256": "fb95f2fc33c0e4750511f297c875aaf2c7666131a7d3cb84fee6510e2618af31"
+      "sha256": "e1373944d70620a745a8350842159cfe17a6bd165f5b84fe3c5e85df41f90ba0"
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -915,15 +947,15 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/student.ts",
       "risk": "high",
-      "sha256": "06cfefe8991531df1fb4d4cf538083dc88464d3f756bf2f93807a97b1711fb58"
+      "sha256": "9fb0449b57a5952fdead0c02815f5f6b079670978226fc822bec25d5125cc88b"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, explicit independent profile-supplement command coverage, and the complete repository gate.",
+        "domain": "governed-autonomy-ux",
+        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -931,7 +963,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/types.ts",
       "risk": "high",
-      "sha256": "ed01a4861b07cc3afffeac963bb3fc686ea98e2bcf1e3476c426e18353c85dc3"
+      "sha256": "9e33878a9977497635cab9d7fe576e4da99f25eade79cbcdb6f885a2d65b567d"
     },
     {
       "audit": {
@@ -1223,11 +1255,11 @@
     },
     {
       "audit": {
-        "domain": "local-r1-release",
-        "evidence": "Dedicated local HTTPS topology reviewed with focused Compose tests, credentialed journey, restart, clean restore, rollback, and complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex local R1 release qualification"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1235,15 +1267,15 @@
       "package_commands": [],
       "path": "compose.local-r1.yml",
       "risk": "high",
-      "sha256": "51d887ca05fe8c9056c06d763f110d0a88874ece031bdfaab4488386c8243f71"
+      "sha256": "b49d5765679ee695da39351cc441a89f4cddea5a1a6b4722fd9a35716ca4b651"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1251,15 +1283,15 @@
       "package_commands": [],
       "path": "compose.preview.yml",
       "risk": "high",
-      "sha256": "e72ca8dbc0eac696ddb37916be27c2287fe61f96b66a1fac140de03f0de88f9d"
+      "sha256": "02499c07689183b7ecba6cd343ba9b408069822bd5f097a4a7229b022906cb0c"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, Compose validation, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1267,7 +1299,7 @@
       "package_commands": [],
       "path": "compose.staging.yml",
       "risk": "high",
-      "sha256": "4deab9b9784521a919019e475a95e0e12dd852397adf2714d7aa8d497bd33326"
+      "sha256": "700006b93681910b5dfe47119ed878c80966b7fb4593bce0eb3b916abccec716"
     },
     {
       "audit": {
@@ -1319,11 +1351,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1331,14 +1363,14 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "c5c52ac6d746f8650d00ba81ed4bd018ed6fe5ea5eef16f32f3d007899375b04"
+      "sha256": "2774448d8d7cc41873c08be43a928d6df55e71afbed695ea740dbbb569df9afa"
     },
     {
       "audit": {
         "domain": "local-r1-release",
         "evidence": "Example local settings expose no credential and retain safe deterministic T1, budget, and localhost defaults.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
+        "reviewed_at": "2026-08-31",
         "reviewer": "Codex local R1 release qualification"
       },
       "audit_status": "audited",
@@ -1347,7 +1379,7 @@
       "package_commands": [],
       "path": "deploy/local-r1.env.example",
       "risk": "high",
-      "sha256": "7f829fa594470fd798d7850afe2efbb055663f6921d7474c2fd6dc6fa2b780d1"
+      "sha256": "1975034dca3d56d9b1976414777dd5200febe0e6e59e4614e3a80fa891c3b040"
     },
     {
       "audit": {
@@ -1383,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Command review confirms historical attempts remain verifiable, programs 010/011 expose validate, smoke, preflight, execute, and resume entrypoints, and the default finite command targets the sole authorized final budget-split correction.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Command-surface and configuration review plus successful focused validation for the governed autonomy V2.1 development candidate.",
         "findings": [],
         "reviewed_at": "2026-08-31",
-        "reviewer": "codex-primary-reference-truth-review"
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1395,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "2989a2b8eb3d70d589cfbce5442de4cb9e46bda692cdbeedb521ace4dc35ce53"
+      "sha256": "0df03b9597ce8c245fc2f1fd3c560b81949ab8ae3d5359e53b760b7fe1e66412"
     },
     {
       "audit": {
@@ -1411,7 +1443,7 @@
       "package_commands": [],
       "path": "pyproject.toml",
       "risk": "medium",
-      "sha256": "21ae48417290ed17634b39fc910c60b1ce1ff04a6c1e50ffcc0a30fb836e3e34"
+      "sha256": "305e912bc57960d1af6d612a01701f08fc577f2361ae524cda1d0732086b6e4c"
     },
     {
       "audit": {
@@ -3975,6 +4007,22 @@
     },
     {
       "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_product_freeze_001.json",
+      "risk": "high",
+      "sha256": "3bbfda8d1e2f21bf4136dc2b27201182dda4acf6d8596c7ce28e92827c980471"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -5182,6 +5230,24 @@
       "path": "scripts/audit_python_dependencies.py",
       "risk": "high",
       "sha256": "7a9ee4faf59ee70d0c2d70e3861a568fe750f8a1caf0ea17886009cbb94516c0"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "worker:governed-autonomy"
+      ],
+      "path": "scripts/autonomous_tutoring_worker.py",
+      "risk": "high",
+      "sha256": "e01177eec431409a1e8ed94404b92b66bfbaff30796b27c840b0b9a6a8b8772c"
     },
     {
       "audit": {
@@ -6933,7 +6999,7 @@
         "domain": "source-aligned-retrieval-confirmation",
         "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -6948,7 +7014,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_source_aligned_retrieval.py",
       "risk": "high",
-      "sha256": "ca2f61d36d8212c72eaf8b3642f3f0a4bf7d9c8f553eebbbda362f23c6bdd3d2"
+      "sha256": "7fab6e5cf5176f9679daab7ef9ebba0726a38c31ab920ae39197855b572f4f33"
     },
     {
       "audit": {
@@ -7539,6 +7605,25 @@
       "path": "scripts/run_generator_qualification_stability.py",
       "risk": "high",
       "sha256": "9a2c9d3230a7211a567baa7c4bf48c8390c023a581ecdb91750369c76b829008"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:governed-autonomy-product-freeze",
+        "verify:governed-autonomy-product-freeze"
+      ],
+      "path": "scripts/run_governed_full_autonomy_product_freeze.py",
+      "risk": "high",
+      "sha256": "039237fd4fc115287442b184e1476b7c53fe3042facb462bb7f49efc6f4877ac"
     },
     {
       "audit": {
@@ -8295,11 +8380,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8309,7 +8394,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "55a65ac9788e3e22102524b720cc2eb7a9a12e8089e04efcfc4eb45ee8a757ef"
+      "sha256": "fde3712642829e1400e66edd83eaae06f28fa46af670c3c821268d490240ed78"
     },
     {
       "audit": {
@@ -8364,6 +8449,24 @@
       "path": "scripts/verify_deployable_foundation.py",
       "risk": "high",
       "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual finite-loop and side-effect review plus the network-free 30-day implementation run; restart, goal expiry, duplicate suppression, provider-call absence, and no post-expiry execution all passed.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:governed-autonomy-v2-1-implementation"
+      ],
+      "path": "scripts/verify_governed_autonomy_v2_1_implementation.py",
+      "risk": "high",
+      "sha256": "8e01cdf4254118629525c0cddebf618daca051a1ed0364a737115c71aeb6342c"
     },
     {
       "audit": {
@@ -8469,11 +8572,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8481,15 +8584,15 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "a25b4fa57490e4e01a774a4b89b236c21a7eeff8f86b53a9027da4bda444f78d"
+      "sha256": "91c9f11ff2281937519ba8bbc57db5001d3630ab58ff13813e14040cfe33de06"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8497,15 +8600,15 @@
       "package_commands": [],
       "path": "services/api/app/dependencies.py",
       "risk": "high",
-      "sha256": "8f70d915c2a27330c23f0adf9b729153f268d9d481e144a06499a3bd21a2fa6d"
+      "sha256": "91d0958eeb012fa889285421a5e7a63a5fb358f73190b624faf70c48f27ea5a3"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8513,7 +8616,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "98d396e5e9e65b1bcd3db4e60eaa5603c5a8b9ef76c2e07b399e9ff396d05466"
+      "sha256": "ab44606d3bdfe913c991d1d76204aa383ca6ec1020ea46002b03549b20be3a5c"
     },
     {
       "audit": {
@@ -8629,11 +8732,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8641,15 +8744,15 @@
       "package_commands": [],
       "path": "services/api/app/routers/publication.py",
       "risk": "high",
-      "sha256": "b226d8e03c833912634a4a08ce42c1e1282e335a926c85f6eaf13dab36a9dcf8"
+      "sha256": "6ebe539f29b23f9c18b5e49c9ebacd43efccbbe4ba78665dba0543163c28b782"
     },
     {
       "audit": {
-        "domain": "runtime-api-boundaries",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8657,15 +8760,15 @@
       "package_commands": [],
       "path": "services/api/app/routers/student.py",
       "risk": "high",
-      "sha256": "7aef5cfdeef1c25b547ea9dcbf1ff2720ebdd46e149d7f61ed20d45e2e01d5ce"
+      "sha256": "d8b07a0fda26933499b088ae547ba0736e7915ba85640a821b4be178a1ae29da"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8673,7 +8776,7 @@
       "package_commands": [],
       "path": "services/api/app/schemas.py",
       "risk": "high",
-      "sha256": "46d5a2bd67c7fd05fdde28245c42f9a4fb6b80fa529c5e683d5a5274521d3632"
+      "sha256": "91e6c90f4eaecbfa9d1bda107a05ccaef23bb40218117d51638b4cb764d38ae6"
     },
     {
       "audit": {
@@ -8853,11 +8956,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -8865,7 +8968,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "17d5ec3af2b0aea0c79954e1a6ddf05e58dafda27328324550d644b80613ec55"
+      "sha256": "c4c59ffa2fa18ae01bc07ca797319cb812aade0d3215bfc79e21103a245c1dda"
     },
     {
       "audit": {
@@ -9061,11 +9164,11 @@
     },
     {
       "audit": {
-        "domain": "action-router-runtime",
-        "evidence": "Focused tests verify explicit ambiguity, cross-course, future, and direct graded-work routing; ordinary conceptual questions remain answerable and multi-evidence claim count is public-question-derived.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-action-router-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9073,7 +9176,7 @@
       "package_commands": [],
       "path": "src/digital_twin/action_router.py",
       "risk": "high",
-      "sha256": "1444440f6ed07dc093c44a2de466d1430948225d3183ab068d9da930491955a5"
+      "sha256": "c90729c80bccf4b067d5eeb39b8f758c7f619f4cdca373f41c39bdc0ff38a6b5"
     },
     {
       "audit": {
@@ -9089,7 +9192,23 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "c911797f298e422415e74f7809a6821cce24bdd21f2a4ad7bdadb98b9cb3864f"
+      "sha256": "c1f4212ee2f0d723057393ba42fee90ab37d3e863a70bb85661bfe536e2189bb"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Manual contract review and focused tests verified case/gold separation, event ordering, observable action/state outputs, time advancement, restart handling, and independence from graph nodes, database tables, and runtime chunk IDs.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/autonomy_contract.py",
+      "risk": "high",
+      "sha256": "3806d4cccf69f574e7d4b6207959964fcd25159ced52e00c431976f0173961cf"
     },
     {
       "audit": {
@@ -9509,11 +9628,11 @@
     },
     {
       "audit": {
-        "domain": "atomic-claim-evidence-validation",
-        "evidence": "Export review confirms the prospective claim-only response models and deterministic lineage resolver are explicit without changing the selected generator contract. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9521,7 +9640,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "67b62b629e3fbd984ee8391bfd9d6b83c48188219180d45810a117e1c030ce8f"
+      "sha256": "b8d06833d867f1cefbd4f96b1305640b69b61d82c42f42079f70596010105c5a"
     },
     {
       "audit": {
@@ -9589,11 +9708,11 @@
     },
     {
       "audit": {
-        "domain": "grounded-generation-correctness",
-        "evidence": "Manual policy, prompt, citation-lineage, provider-failure, and evaluation review verified fail-closed generation and authoritative evidence boundaries; focused generation tests passed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9601,7 +9720,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/policy.py",
       "risk": "high",
-      "sha256": "8456766ecc9dc613a7d861ca7d998c99b6bcea6b83d57274c3c42fd196c817f5"
+      "sha256": "8a4faec295fbea35373636815d6dceb412c07c69d2c3dd4a09bbf96b212b5383"
     },
     {
       "audit": {
@@ -10277,11 +10396,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Bounded-authorization review permits only the named R1 cascade operations while the repository-wide freeze and sealed-final prohibition remain active.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10289,7 +10408,71 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "30f35bacc8872562cea7ad52fdfc655a2a9e675af3abcfd739afceaabcf48fd0"
+      "sha256": "56062187370a6128059a6777617fd65663dc98d4e27658530df15308da3b09a2"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority and fail-closed boundary review plus Ruff and focused tests covering source permission/version/completeness, bounded goal selection, attempt limits, completion, and event scheduling; no provider call or evaluation run.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex implementation review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/autonomy_control.py",
+      "risk": "high",
+      "sha256": "407f2dd4ccc089ab52ddb0cf8bd6b3f8d99a3eea31f07ef921f9d3c76ab1509c"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/autonomy_models.py",
+      "risk": "high",
+      "sha256": "f59bd74315f485a6994da7f079c93a90a56222682a6d0b50b0ee9bfee8f71a60"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/autonomy_runtime.py",
+      "risk": "high",
+      "sha256": "5f87d6bdbc731e4972bda55f9cad6a0d7c19740a4476e9a5f3e7579542ef01bb"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/autonomy_service.py",
+      "risk": "high",
+      "sha256": "acb8fa678ddf8a02c50243205c472005505ab543e3646070e1863ed61d58f8ec"
     },
     {
       "audit": {
@@ -10309,6 +10492,22 @@
     },
     {
       "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority-boundary review and focused regressions verified deterministic assessed-evidence counts, reconciled attribution totals, bounded confidence/uncertainty, immutable provenance, monotonic revisions, and no model-written mastery field.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/learner_belief.py",
+      "risk": "high",
+      "sha256": "7ff67977d1ead9f89f5fa55f4461e6d4bd25bdc15d4dbd576d439031f4f953a4"
+    },
+    {
+      "audit": {
         "domain": "privacy-preserving-course-improvement-loop",
         "evidence": "Manual contract review and focused tests cover strong-secret HMAC pseudonymization, raw-content exclusion, UTC retention, cross-scope rejection, small-cell suppression, deterministic aggregation, and professor-review-only drafts.",
         "findings": [],
@@ -10325,11 +10524,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused freeze tests confirm the completed cascade authority is revoked while the repository-wide evaluation freeze and unrelated bounded authorization remain intact.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10337,7 +10536,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/migrations.py",
       "risk": "high",
-      "sha256": "63ad7d5a9a8587170a3fec72f4ec121e3daa529bd47e887119b2a3dd74174972"
+      "sha256": "93fba2c6e50f2ec775fcf3158f63a48ff3d543c91b118c41bc68f2b00bbf78ef"
     },
     {
       "audit": {
@@ -10385,15 +10584,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/publication.py",
       "risk": "high",
-      "sha256": "714cd67839e00a0551f22f68c3e56acf4fdce42d7993b97855b032e7bbdcd03b"
+      "sha256": "a0b5680660e5ad057ebbfa87df6b355f12db0c7ea4a0f7966a7130fb7208d6b3"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10401,15 +10600,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "6f2eacdbdd951e713fc76196e9236989e406e28689210b36a3ff6503e6da5db0"
+      "sha256": "02222e04ef597194f33a3084059fcdac10f19e503599a0c69f4ba9946c743844"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10417,7 +10616,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "b3b295779eaa2e18bbad0e80f35904250c3ef8dc1335cf01bd1dcf5bae43ff50"
+      "sha256": "1277cfd4ec81d4a28dea7cdce85daad974aaee5d18778eee48ea96fc26568e73"
     },
     {
       "audit": {
@@ -10437,11 +10636,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Focused code and contract review; network-free graph, API, persistence, migration, configuration, and instrument regressions passed with T0 preserved and T1 staging-blocked.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-21",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10449,7 +10648,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "ca9d85d554b30ad7e3bb9056353b8b86232fc79da2ac09158225b8cfd5ea66ea"
+      "sha256": "aa59860c7f32fea2c087d9a66d11d1bcdbf8b16277e6560ed828cb2f27f4b89a"
     },
     {
       "audit": {
@@ -10472,7 +10671,7 @@
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
+        "reviewed_at": "2026-08-31",
         "reviewer": "Codex repository correctness sweep"
       },
       "audit_status": "audited",
@@ -10481,7 +10680,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "86b7d05a0d42c79bf2562e2f165326542fbf493aca520b54bb12b348dd902094"
+      "sha256": "6509a8b6ce2bb1db0a1f4e5b4bef1c19b84fd4d1d5fc84c68a2e884ebbb56688"
     },
     {
       "audit": {
@@ -10536,7 +10735,7 @@
         "domain": "proactive-outreach",
         "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, cross-course rejection, and time-independent quiet-hour behavior with no external calls.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -10545,15 +10744,15 @@
       "package_commands": [],
       "path": "tests/api/test_proactive_outreach_api.py",
       "risk": "medium",
-      "sha256": "be0f5cdf598bdb559e99c997f03ea2d9fd8b4accd93c0f447d21ffa178e9b5f4"
+      "sha256": "934132bf3bd66bdbb89153a254bde985ce774f32a1f0b048cf825303637fcff6"
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10561,7 +10760,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "6a7ed1e3e59a3e37ef340ea4d237a8d8d5d5aa2abc6f1e6aa211de46fe99f844"
+      "sha256": "d599ab60c7ab1fa2327afb784122de91b56701498878f920c0bf8d7d3357944f"
     },
     {
       "audit": {
@@ -10677,11 +10876,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10689,7 +10888,23 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "3a117060c990d24e8951a64b7e1ea012c4e486c02029071e547af2422adc6bad"
+      "sha256": "cb5f376c0c4e74a08fef3ae241fee48d8c38859bedbce691845ea790c6f4771f"
+    },
+    {
+      "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_governed_autonomy.py",
+      "risk": "medium",
+      "sha256": "cf377190f1e9feb4527973f37841b007bfea7e4fd9650f0bdebdf453f650e78b"
     },
     {
       "audit": {
@@ -10849,7 +11064,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_proactive_outreach.py",
       "risk": "medium",
-      "sha256": "410c8a11b2471323db4f06ee4e294c5a5ce1bc3b1b1bff176b41c0084a343c65"
+      "sha256": "276d38d6221673d311616e351b89756729948135e720dfd13ec0a44b368084a8"
     },
     {
       "audit": {
@@ -10981,11 +11196,11 @@
     },
     {
       "audit": {
-        "domain": "autonomous-tutoring-graph",
-        "evidence": "Issue #134 proactive-outreach review plus focused domain, API, persistence, migration, privacy-boundary, React, lint, build, and network-free regression checks. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -10993,7 +11208,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_sqlite_migrations.py",
       "risk": "medium",
-      "sha256": "831da7e0aa8ed8001490807de1aa0bf614b0ff1135da83672b7615cdb0ed6c7f"
+      "sha256": "a203af5cae3b018a6bd29b755b0fcd0a1b49780c3a5ec3f04478315af91bdd15"
     },
     {
       "audit": {
@@ -11153,7 +11368,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "2f674977e946920ae20f2ff8d80d17719560a949f8e7cff8a958297f40c7e4c4"
+      "sha256": "f87ba8ba92d45578fa1678baa02b463279927e9dd85099876c4d687fef592b30"
     },
     {
       "audit": {
@@ -11669,11 +11884,11 @@
     },
     {
       "audit": {
-        "domain": "api-first-retrieval-successor-verification",
-        "evidence": "Focused tests cover terminal validation, blocked post-run preflight, revoked authority, finite simulations, hash-bound query replay, and no-retry isolation of optional reranker semantic failure.",
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-api-retrieval-review"
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11681,7 +11896,7 @@
       "package_commands": [],
       "path": "tests/test_api_retrieval_selection.py",
       "risk": "medium",
-      "sha256": "a8c42f4ba3fbb07c6610b5856c17a2ac5657a976bb2f3f7b8c6843f253a1ab40"
+      "sha256": "8df648649a5fa83557d9c0043db68e7ae6a2baee5013c83edc42093040aef146"
     },
     {
       "audit": {
@@ -11826,6 +12041,22 @@
       "path": "tests/test_autonomous_tutoring_r1_local_confirmation.py",
       "risk": "medium",
       "sha256": "f0dae78015e9f212c70887dfb28df50d89ddb960e2b6e7305b18727d9cbc655b"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Focused network-free regressions cover schema rejection, duplicate and out-of-order events, gold isolation, time progression, restart forwarding, observable action collection, and final state capture.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex V2.1 implementation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_autonomy_evaluation_contract.py",
+      "risk": "medium",
+      "sha256": "941d03245a5d61d91584d11d7be197e829aab6b2fabb5d3b459088d38be9f545"
     },
     {
       "audit": {
@@ -12469,6 +12700,22 @@
     },
     {
       "audit": {
+        "domain": "governed-autonomy-v2-1",
+        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-08-31",
+        "reviewer": "Codex primary plus independent Impeccable cross-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_grounded_action_router_v2.py",
+      "risk": "medium",
+      "sha256": "c691417e95cef5d5ea438124bab319838f5c96ec94a1fc2ee2331356c734feb3"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -12520,7 +12767,7 @@
         "domain": "verification-evidence",
         "evidence": "Focused Compose and runbook tests verify the qualified offline T1 profile, local-only HTTPS exposure, least-privileged restart-safe services, release headers, and durable host-mounted backup procedure.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
+        "reviewed_at": "2026-08-31",
         "reviewer": "Codex local R1 release qualification"
       },
       "audit_status": "audited",
@@ -12529,7 +12776,7 @@
       "package_commands": [],
       "path": "tests/test_local_r1_compose.py",
       "risk": "medium",
-      "sha256": "4d53dae33516d8039d0e4db07591034d65ba04a1a1c9621584fef526b686aa89"
+      "sha256": "c4995459420606202ca431119042cb38e824704c73d46adc081cc1db6be8cc37"
     },
     {
       "audit": {
@@ -12689,7 +12936,7 @@
       "package_commands": [],
       "path": "tests/test_retrieval_index_lifecycle.py",
       "risk": "medium",
-      "sha256": "37c7ecb673e9bedb86f1b299075bfdaa377ab58a5e06d9b75e4704eb14e56f66"
+      "sha256": "53f744353f33c4d51574568c278a09ad0fd90deaacd235773799c06d523d2f01"
     },
     {
       "audit": {
@@ -12849,7 +13096,7 @@
       "package_commands": [],
       "path": "tests/test_run_source_aligned_wording.py",
       "risk": "medium",
-      "sha256": "415a0fd69d7fb6b2b1b1f3243848976d83db129703fbbca0ad086edc3186ecb5"
+      "sha256": "473f3636f688c0d62567e710237113f2298db0b7991b9928bb655531302df000"
     },
     {
       "audit": {
@@ -12952,7 +13199,7 @@
         "domain": "source-aligned-retrieval-verification",
         "evidence": "Focused tests verify exact package matchability, terminal pass/fail simulations, simplest-near-best selection, a clean program-authorized preflight with no repeated approval blocker, and that preflight/execution cannot open hidden gold before public rankings are durable.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
+        "reviewed_at": "2026-08-31",
         "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
@@ -12961,7 +13208,7 @@
       "package_commands": [],
       "path": "tests/test_source_aligned_retrieval_runner.py",
       "risk": "medium",
-      "sha256": "689e071f96d4643f39be9707311fa1ffc5111a5939e55f28bcdc073fd6f2fdf6"
+      "sha256": "94eeac7328b56d6f6b0a40d418d5fe9327f53f63fe993bc8773b6a419d04d97f"
     },
     {
       "audit": {
@@ -13153,12 +13400,12 @@
       "package_commands": [],
       "path": "uv.lock",
       "risk": "medium",
-      "sha256": "a730c31642dae7502a38f4dc5e1f97cce1d2a9143763d71d6449a5800536c0f3"
+      "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
     }
   ],
   "risk_counts": {
-    "high": 601,
-    "medium": 181
+    "high": 613,
+    "medium": 184
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

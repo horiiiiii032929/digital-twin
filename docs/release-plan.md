@@ -12,10 +12,13 @@ results.
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,
 publish, update, withdraw, and roll back, and that authorized students can use
-for autonomous, persistent, citation-grounded tutoring. The accepted
-[autonomous tutoring graph](autonomous-tutoring-graph.md) is the student-facing
-method: code controls the bounded graph while models interpret learner state
-and generate natural responses inside approved evidence and policy boundaries.
+for autonomous, persistent, citation-grounded tutoring. The provisional
+[autonomous tutoring loop V2.1](autonomous-tutoring-loop-v2.md) is the
+prospective student-facing method: code controls the bounded graph and owns
+learner-belief updates, while models propose interpretations, teaching moves,
+and natural responses inside approved evidence and pedagogical-policy
+boundaries. The [V1 graph](autonomous-tutoring-graph.md) remains the historical
+T1-v1 control and T0 remains the immediate release rollback.
 The accepted [proactive outreach design](proactive-outreach.md) adds a separate
 asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates
@@ -173,6 +176,7 @@ remains the rollback baseline and makes no LLM factual-quality claim.
 | --- | --- | --- | --- |
 | Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | Complete local HTTPS journey passed 24/24 on `c235e56`; external hosted journey remains pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | Confirmation 002 passed 50 trajectories and 200 turns per condition with every hard gate at 100%, zero provider calls, and zero cost. T1 is selected for the hash-bound local R1; T0 remains rollback | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
+| Governed full autonomy V2.1 | A durable event-driven tutor may initiate finite, cited actions inside professor policy and student consent without per-message approval | PR #158 completes the software implementation checkpoint: release-bound domain semantics, V2 perception/belief/plan/delta/trace planes, deterministic evidence-count belief updates, independent T1-v2 reactive/autonomous graphs, node checkpoints, provider-call idempotency, professor/student controls, and a flow-independent evaluation adapter. A 30-day network-free regression passes restart, expiry, bounded-loop, and duplicate-suppression gates. Local Compose remains on deterministic generation plus qualified T1-v1 by default; a distinct provider-backed V2.1 confirmation is still required before selection. T1-v1/T0 remain control and rollback | [#153](https://github.com/horiiiiii032929/digital-twin/issues/153), [#155](https://github.com/horiiiiii032929/digital-twin/issues/155), [#156](https://github.com/horiiiiii032929/digital-twin/issues/156), [#157](https://github.com/horiiiiii032929/digital-twin/issues/157) |
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | Local R1 verified A0 creation, worker delivery, student consent, citation, expiry, deduplication, and restart behavior. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
 | Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Program 011 completed the sealed 10,000+1,000 evaluation without gold leakage but validly failed every absolute gate: 44.16% grounded success, 72.9% boundary action, and 478 severe releases. Deterministic fallback remains selected; #153 owns the fresh-development replacement | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#153](https://github.com/horiiiiii032929/digital-twin/issues/153), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |

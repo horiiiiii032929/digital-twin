@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-product-freeze-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "academic-factual-qa-action-router-product-development-001-plus-seven-day-synthetic-learner",
+  "corpus_id": "synthetic-policy-course-release",
+  "code_revision": "cfd38fea5ad69925a3ab9d090c62e1540a00585a",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "no-governed-autonomy-control",
+        "version": "disabled-policy-v1",
+        "configuration": {
+          "action_router": "deterministic-action-router-v2",
+          "autonomous_worker": false,
+          "proactive_policy": "always-no-action",
+          "provider_calls": 0
+        }
+      },
+      "metrics": [
+        {"name": "action-router-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "finite-job-terminal-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "cited-autonomous-delivery-rate", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "restart-consistency", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "response-goal-linkage", "value": 0.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": false},
+        {"name": "consent-withdrawal-termination", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-invalid-citations", "passed": true, "evidence": "The disabled control cannot emit an autonomous academic message."},
+        {"name": "zero-duplicate-actions-or-messages", "passed": true, "evidence": "The disabled control creates no autonomous action or delivery."},
+        {"name": "bounded-planning-and-generation", "passed": true, "evidence": "The disabled control makes zero planning or generation attempts."},
+        {"name": "durable-goal-outcome-lifecycle", "passed": false, "evidence": "The disabled control has no autonomous goal, wake-up, outcome, or reply-linkage lifecycle."},
+        {"name": "zero-provider-use", "passed": true, "evidence": "Provider calls, tokens, and cost are zero."}
+      ],
+      "failures_by_category": {
+        "autonomy-capability-absent": 1
+      }
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "governed-autonomous-tutoring-graph-v2-1",
+        "version": "development-candidate-001",
+        "configuration": {
+          "planner": "deterministic-autonomy-planner-v1",
+          "generator": "deterministic-autonomy-wording-v1",
+          "action_router": "deterministic-action-router-v2",
+          "simulated_days": 7,
+          "maximum_planning_proposals_per_job": 1,
+          "maximum_generation_attempts_per_job": 1,
+          "dirty_execution": true,
+          "provider_calls": 0
+        }
+      },
+      "metrics": [
+        {"name": "action-router-accuracy", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "finite-job-terminal-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "cited-autonomous-delivery-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "response-goal-linkage", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "consent-withdrawal-termination", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-call-count", "value": 0.0, "unit": "count", "direction": "lower-is-better", "threshold": 0.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-invalid-citations", "passed": true, "evidence": "All three delivered messages retained current-release citation lineage."},
+        {"name": "zero-duplicate-actions-or-messages", "passed": true, "evidence": "Seven actions and three messages had unique identifiers across restart."},
+        {"name": "bounded-planning-and-generation", "passed": true, "evidence": "Every one of seven jobs used at most one planning proposal and one generation attempt and reached a terminal outcome."},
+        {"name": "durable-goal-outcome-lifecycle", "passed": true, "evidence": "Reply linkage, consent-withdrawal cancellation, restart state, and clean restore matched the originating goal and action."},
+        {"name": "zero-provider-use", "passed": true, "evidence": "The deterministic development run made zero provider calls and incurred zero tokens or cost."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "governed-autonomous-tutoring-graph-v2-1",
+    "rationale": "Retain V2.1 as the prospective implementation candidate because it adds a finite durable goal and outreach lifecycle while passing every frozen control, lineage, persistence, restart, and termination development gate. Do not promote it into the release profile before provider-backed and held-out evaluation.",
+    "limitations": [
+      "This is synthetic network-free development qualification, not professor fidelity, student usability, learning-outcome, or natural LLM quality evidence.",
+      "The no-autonomy control is defined by its disabled policy rather than a second seven-day execution.",
+      "The run used a disclosed dirty candidate working tree based on cfd38fe; file and instrument hashes bind the tested implementation.",
+      "Program 011 remains immutable Refine evidence for the known 10,000+1,000 actual-product run."
+    ]
+  }
+}

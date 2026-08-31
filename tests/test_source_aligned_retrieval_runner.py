@@ -1,10 +1,18 @@
 from __future__ import annotations
 
+from datetime import datetime, timedelta
 from pathlib import Path
 
 import pytest
 
 from scripts import run_academic_factual_qa_source_aligned_retrieval as runner
+
+
+def _fresh_preflight_time() -> datetime:
+    verified_at = datetime.fromisoformat(
+        runner._instrument()["metadata"]["verified_at"]
+    )
+    return verified_at + timedelta(hours=1)
 
 
 def test_source_aligned_retrieval_validates_exact_matchability() -> None:
@@ -65,7 +73,7 @@ def test_source_aligned_retrieval_preflight_never_requests_stage_approval(
     monkeypatch.setattr(runner, "OUTPUT_ROOT", tmp_path / "unused-output")
     monkeypatch.setattr(runner, "RESULT_PATH", tmp_path / "unused-result.json")
 
-    result = runner.preflight()
+    result = runner.preflight(now=_fresh_preflight_time())
 
     assert result["status"] == "ready"
     assert result["technical_blockers"] == []
@@ -91,7 +99,7 @@ def test_source_aligned_retrieval_preflight_does_not_load_hidden_gold(
     monkeypatch.setattr(runner, "OUTPUT_ROOT", tmp_path / "unused-output")
     monkeypatch.setattr(runner, "RESULT_PATH", tmp_path / "unused-result.json")
 
-    assert runner.preflight()["status"] == "ready"
+    assert runner.preflight(now=_fresh_preflight_time())["status"] == "ready"
 
 
 def test_hidden_gold_cannot_open_before_rankings_are_durable(

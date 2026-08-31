@@ -255,12 +255,21 @@ def validate() -> dict[str, Any]:
     }
 
 
-def preflight(*, resume: bool = False) -> dict[str, Any]:
+def preflight(
+    *,
+    resume: bool = False,
+    now: datetime | None = None,
+) -> dict[str, Any]:
     instrument = _instrument()
     _, _, chunks, cases = _validate_public(instrument)
     blockers: list[str] = []
     verified_at = datetime.fromisoformat(instrument["metadata"]["verified_at"])
-    age_hours = (datetime.now(UTC) - verified_at.astimezone(UTC)).total_seconds() / 3600
+    current_time = now or datetime.now(UTC)
+    if current_time.tzinfo is None:
+        raise ValueError("preflight time must include a timezone")
+    age_hours = (
+        current_time.astimezone(UTC) - verified_at.astimezone(UTC)
+    ).total_seconds() / 3600
     if age_hours < 0 or age_hours > instrument["metadata"]["freshness_hours"]:
         blockers.append("provider-metadata-older-than-24-hours")
     if _git_dirty():

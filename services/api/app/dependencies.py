@@ -9,6 +9,7 @@ from src.digital_twin.grounding import LocalCourseSourceIngestionService
 from src.digital_twin.onboarding import ScopedSessionRepository, SessionRepository
 from src.digital_twin.student import AccountRole
 from src.digital_twin.student import (
+    GovernedAutonomyService,
     ProactiveOutreachService,
     ReleaseLifecycleService,
     StudentTutoringService,
@@ -60,6 +61,10 @@ def get_proactive_outreach_service(request: Request) -> ProactiveOutreachService
 
 def get_teaching_profile_service(request: Request) -> TeachingProfileService:
     return request.app.state.teaching_profile_service
+
+
+def get_governed_autonomy_service(request: Request) -> GovernedAutonomyService:
+    return request.app.state.governed_autonomy_service
 
 
 def get_source_ingestion_service(request: Request) -> LocalCourseSourceIngestionService:
@@ -131,6 +136,10 @@ ProactiveOutreachServiceDependency = Annotated[
 TeachingProfileServiceDependency = Annotated[
     TeachingProfileService,
     Depends(get_teaching_profile_service),
+]
+GovernedAutonomyServiceDependency = Annotated[
+    GovernedAutonomyService,
+    Depends(get_governed_autonomy_service),
 ]
 SourceIngestionServiceDependency = Annotated[
     LocalCourseSourceIngestionService,

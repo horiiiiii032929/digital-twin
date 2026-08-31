@@ -57,6 +57,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This prospective contract currently exposes validation/simulation and a
     # blocked preflight only. The paid executor is added after model selection.
     "run_autonomous_tutoring_r1_confirmation.py",
+    # This development qualification is deterministic and network-free. It
+    # cannot call a provider or open the sealed Program 011 final package.
+    "run_governed_full_autonomy_product_freeze.py",
     "run_ingestion_worker.py",
 }
 EXEMPT_SCRIPTS = {

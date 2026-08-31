@@ -5,7 +5,9 @@ import {
   StudentApiError,
   createStudentConversation,
   getStudentConversation,
+  getStudentLearnerEvidence,
   dismissStudentOutreach,
+  listStudentAutonomousGoals,
   listStudentOutreach,
   listStudentOutreachPreferences,
   listStudentCourses,
@@ -15,12 +17,14 @@ import {
   updateStudentInAppOutreachPreference,
 } from "@/lib/api"
 import type {
+  AutonomousGoalV1,
   StudentChatMessage,
   StudentCitation,
   StudentConversation,
   StudentCourse,
   StudentOutreachPreference,
   StudentProactiveMessageView,
+  StudentLearnerEvidence,
 } from "@/lib/api"
 import {
   forgetStudentConversation,
@@ -52,7 +56,10 @@ export type StudentWorkspaceController = {
   isLoadingConversation: boolean
   isSubmitting: boolean
   outreachMessages: StudentProactiveMessageView[]
+  autonomousGoals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
   inAppOutreachEnabled: boolean
+  outreachSnoozedUntil: string | null
   isLoadingOutreach: boolean
   isUpdatingOutreach: boolean
   outreachError: string | null
@@ -65,14 +72,17 @@ export type StudentWorkspaceController = {
   sendMessage: () => Promise<void>
   refreshOutreach: () => Promise<void>
   setInAppOutreachEnabled: (enabled: boolean) => Promise<void>
+  snoozeOutreach: (days: number | null) => Promise<void>
   markOutreachRead: (messageId: string) => Promise<void>
   dismissOutreach: (messageId: string) => Promise<void>
+  replyToOutreach: (messageId: string) => void
   selectCitation: (messageId: string, citationId: string) => void
 }
 
 type PendingRequest = {
   content: string
   requestId: string
+  respondingToOutreachMessageId?: string
 }
 
 export function useStudentWorkspace(
@@ -96,6 +106,9 @@ export function useStudentWorkspace(
   const [outreachMessages, setOutreachMessages] = useState<
     StudentProactiveMessageView[]
   >([])
+  const [autonomousGoals, setAutonomousGoals] = useState<AutonomousGoalV1[]>([])
+  const [learnerEvidence, setLearnerEvidence] =
+    useState<StudentLearnerEvidence | null>(null)
   const [outreachPreferences, setOutreachPreferences] = useState<
     StudentOutreachPreference[]
   >([])
@@ -105,6 +118,7 @@ export function useStudentWorkspace(
   const startedRef = useRef(false)
   const operationRef = useRef(0)
   const pendingRequestRef = useRef<PendingRequest | null>(null)
+  const outreachReplyRef = useRef<string | null>(null)
   const outreachOperationRef = useRef(0)
   const indexRef = useRef(
     typeof window === "undefined"
@@ -138,6 +152,7 @@ export function useStudentWorkspace(
       setMessages([])
       setCitationsByMessage({})
       setSelectedCitation(null)
+      setLearnerEvidence(null)
       setError(null)
       setIsLoadingConversation(true)
       pendingRequestRef.current = null
@@ -158,11 +173,14 @@ export function useStudentWorkspace(
             const tutorMessages = view.messages.filter(
               (message) => message.role === "tutor",
             )
-            const citationLists = await Promise.all(
-              tutorMessages.map((message) =>
-                listStudentMessageCitations(message.id, accountId),
+            const [citationLists, nextLearnerEvidence] = await Promise.all([
+              Promise.all(
+                tutorMessages.map((message) =>
+                  listStudentMessageCitations(message.id, accountId),
+                ),
               ),
-            )
+              getStudentLearnerEvidence(view.conversation.id, accountId),
+            ])
             if (operation !== operationRef.current) return
 
             const nextCitations = Object.fromEntries(
@@ -178,6 +196,7 @@ export function useStudentWorkspace(
             setMessages(view.messages)
             setCitationsByMessage(nextCitations)
             setSelectedCitation(latestCitation ?? null)
+            setLearnerEvidence(nextLearnerEvidence)
             setIsLoadingConversation(false)
             return
           }
@@ -207,6 +226,7 @@ export function useStudentWorkspace(
           ),
         )
         setConversation(created)
+        setLearnerEvidence(null)
         setIsLoadingConversation(false)
       } catch (caught) {
         if (operation !== operationRef.current) return
@@ -264,13 +284,15 @@ export function useStudentWorkspace(
       if (!silent) setIsLoadingOutreach(true)
       setOutreachError(null)
       try {
-        const [nextMessages, nextPreferences] = await Promise.all([
+        const [nextMessages, nextPreferences, nextGoals] = await Promise.all([
           listStudentOutreach(courseId, accountId),
           listStudentOutreachPreferences(courseId, accountId),
+          listStudentAutonomousGoals(courseId, accountId),
         ])
         if (operation !== outreachOperationRef.current) return
         setOutreachMessages(nextMessages)
         setOutreachPreferences(nextPreferences)
+        setAutonomousGoals(nextGoals)
       } catch (caught) {
         if (operation !== outreachOperationRef.current) return
         setOutreachError(toWorkspaceError(caught, "workspace").message)
@@ -288,6 +310,7 @@ export function useStudentWorkspace(
     if (!courseId) {
       setOutreachMessages([])
       setOutreachPreferences([])
+      setAutonomousGoals([])
       return
     }
     void loadOutreach(courseId)
@@ -369,7 +392,13 @@ export function useStudentWorkspace(
     const request =
       pending?.content === content
         ? pending
-        : { content, requestId: createStudentRequestId() }
+        : {
+            content,
+            requestId: createStudentRequestId(),
+            ...(outreachReplyRef.current
+              ? { respondingToOutreachMessageId: outreachReplyRef.current }
+              : {}),
+          }
     pendingRequestRef.current = request
     const operation = operationRef.current
     setIsSubmitting(true)
@@ -381,6 +410,7 @@ export function useStudentWorkspace(
         content,
         request.requestId,
         accountId,
+        request.respondingToOutreachMessageId,
       )
       if (operation !== operationRef.current) return
       setMessages((current) =>
@@ -391,7 +421,16 @@ export function useStudentWorkspace(
         [turn.tutor_message.id]: turn.citations,
       }))
       setSelectedCitation(turn.citations[0] ?? null)
+      try {
+        setLearnerEvidence(
+          await getStudentLearnerEvidence(conversation.id, accountId),
+        )
+      } catch {
+        // The completed tutoring turn remains authoritative if this optional
+        // evidence summary is temporarily unavailable.
+      }
       setDraft("")
+      outreachReplyRef.current = null
       pendingRequestRef.current = null
     } catch (caught) {
       if (operation !== operationRef.current) return
@@ -440,6 +479,34 @@ export function useStudentWorkspace(
     [accountId, activeCourse, isUpdatingOutreach],
   )
 
+  const snoozeOutreach = useCallback(
+    async (days: number | null) => {
+      if (!activeCourse || isUpdatingOutreach || (days !== null && days < 1)) return
+      setIsUpdatingOutreach(true)
+      setOutreachError(null)
+      try {
+        const until = days === null
+          ? null
+          : new Date(Date.now() + days * 24 * 60 * 60 * 1_000).toISOString()
+        const preference = await updateStudentInAppOutreachPreference(
+          activeCourse.course_id,
+          true,
+          accountId,
+          until,
+        )
+        setOutreachPreferences((current) => [
+          ...current.filter((item) => item.channel !== "in-app"),
+          preference,
+        ])
+      } catch (caught) {
+        setOutreachError(toWorkspaceError(caught, "workspace").message)
+      } finally {
+        setIsUpdatingOutreach(false)
+      }
+    },
+    [accountId, activeCourse, isUpdatingOutreach],
+  )
+
   const markOutreachRead = useCallback(
     async (messageId: string) => {
       try {
@@ -470,6 +537,12 @@ export function useStudentWorkspace(
     [accountId],
   )
 
+  const replyToOutreach = useCallback((messageId: string) => {
+    outreachReplyRef.current = messageId
+    pendingRequestRef.current = null
+    setDraft("My response to this check-in: ")
+  }, [])
+
   return {
     accountId,
     courses,
@@ -484,9 +557,14 @@ export function useStudentWorkspace(
     isLoadingConversation,
     isSubmitting,
     outreachMessages,
+    autonomousGoals,
+    learnerEvidence,
     inAppOutreachEnabled:
       outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
       false,
+    outreachSnoozedUntil:
+      outreachPreferences.find((item) => item.channel === "in-app")
+        ?.snoozed_until ?? null,
     isLoadingOutreach,
     isUpdatingOutreach,
     outreachError,
@@ -500,8 +578,10 @@ export function useStudentWorkspace(
     sendMessage,
     refreshOutreach,
     setInAppOutreachEnabled,
+    snoozeOutreach,
     markOutreachRead,
     dismissOutreach,
+    replyToOutreach,
     selectCitation,
   }
 }

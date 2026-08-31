@@ -345,6 +345,12 @@ Current utilities:
   sanitized result after container restart or clean restore. The optional
   `--mode-check` path creates a fresh grounded turn and proves that the selected
   T0 or T1 runtime mode is active rather than silently falling back.
+- `verify_governed_autonomy_v2_1_implementation.py`: runs the actual governed
+  autonomy service for 30 network-free simulated days, including a restart and
+  goal expiry, and requires finite execution, preserved progress, no duplicate
+  action or delivery, and no work after expiry. Run it with
+  `npm run verify:governed-autonomy-v2-1-implementation`; it is a software
+  regression check and does not select or academically evaluate T1-v2.1.
 - `run_professor_fidelity_experiment.py`: validates the frozen R2 conditions,
   exact qualified generator/prompt binding, private split hashes, and sanitized
   preflight without opening held-out outputs; run `npm run
