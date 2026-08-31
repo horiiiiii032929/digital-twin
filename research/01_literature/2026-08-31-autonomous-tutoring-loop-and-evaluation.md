@@ -1,5 +1,13 @@
 # Autonomous tutoring loop and evaluation research
 
+Amendment: the subsequent
+[best-practice audit](2026-08-31-autonomous-tutor-best-practice-audit.md)
+retains the bounded execution design but requires explicit domain,
+learner-belief, pedagogical-policy, interaction, and governance/execution
+models before implementation. This note remains the evidence for the temporal
+loop and evaluation structure; the audit is authoritative for V2.1 model
+separation.
+
 Date: 2026-08-31
 
 Status: implementation-facing literature and architecture synthesis

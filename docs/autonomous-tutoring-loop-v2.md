@@ -4,13 +4,16 @@ Date: 2026-08-31
 
 Decision ID: `autonomous-tutoring-loop-002`
 
-Status: accepted as the prospective autonomous-agent architecture; no new
-provider, paid, private-data, human-study, or release authorization
+Status: provisional reference architecture, amended by the best-practice audit;
+not selected for release; no new provider, paid, private-data, human-study, or
+release authorization
 
 Predecessor: [`autonomous-tutoring-graph-001`](autonomous-tutoring-graph.md)
 
 Research basis:
 [`2026-08-31-autonomous-tutoring-loop-and-evaluation`](../research/01_literature/2026-08-31-autonomous-tutoring-loop-and-evaluation.md)
+and
+[`2026-08-31-autonomous-tutor-best-practice-audit`](../research/01_literature/2026-08-31-autonomous-tutor-best-practice-audit.md)
 
 ## Decision
 
@@ -41,6 +44,28 @@ The framework decision is replaceable. Model access, semantic planning,
 retrieval, validation, persistence, and delivery remain behind explicit
 interfaces so a future candidate can be compared without changing the product
 contract.
+
+LangGraph is an execution framework, not a pedagogical theory. Its use does not
+by itself establish that the learner model, tutoring strategy, or evaluation is
+valid.
+
+## ITS model separation amendment
+
+The temporal loops below remain useful, but established intelligent tutoring
+systems also separate conceptual responsibilities. V2.1 therefore requires five
+independently testable model planes:
+
+| Model plane | Authoritative contents | LLM role |
+| --- | --- | --- |
+| Domain | Concepts, objectives, approved sources, source ranges, tasks, constraints, common misconceptions, releases, and permissions | Propose bounded concept or task mappings |
+| Learner belief | Observations, concept attributions, calibrated belief estimates, uncertainty, and expiring hypotheses | Propose attributions and hypotheses only |
+| Pedagogical policy | Professor-approved strategy, intents, help ladder, transition guards, answer ceiling, and stopping conditions | Select among currently permitted moves |
+| Interaction | Dialogue state, activities, response realization, citations, and UI-facing actions | Interpret language and generate grounded wording |
+| Governance/execution | Identity, policy, consent, budgets, commits, schedules, delivery, interruption, and rollback | No direct mutation authority |
+
+The loops describe *when* decisions occur; these planes describe *which model
+and authority* each decision uses. State estimation, pedagogical planning, and
+language generation must not be collapsed into one model call.
 
 ## Non-negotiable invariants
 
@@ -198,6 +223,43 @@ A more capable generator cannot correct an upstream action-authority defect.
 - supporting turn and evidence IDs;
 - base state revision.
 
+### `LearnerObservationV2` and `ConceptAttributionV2`
+
+- immutable observed learner action, answer, attempt, request, or explicit
+  self-report with turn/task provenance;
+- candidate mapping to approved concepts or knowledge components;
+- attribution confidence, competing mappings, and supporting evidence;
+- assessment opportunity, scoring method, and result when one exists;
+- no inferred mastery, protected trait, or permanent personality label.
+
+### `LearnerBeliefStateV2`
+
+- per-concept estimate, uncertainty, evidence count, estimator version, and
+  update time;
+- contributing assessed opportunities and accepted attributions;
+- explicit distinction between calibrated estimates and uncalibrated evidence
+  summaries;
+- expiry or decay rules where justified;
+- no direct LLM-written mastery probability.
+
+The initial release may expose only the evidence summary. BKT, PFA, or another
+estimator becomes selectable only after comparison with a simple baseline on
+representative assessed opportunities. A high-capacity knowledge-tracing model
+is not justified without sufficient student traces and calibration evidence.
+
+### `PedagogicalPolicyV2`
+
+- instructional objective and strategy family;
+- allowed intents, activities, and help levels;
+- required observations and transition guards;
+- answer-revealing and academic-integrity ceilings;
+- expected learner action;
+- completion, hand-back, clarification, and stopping rules;
+- professor approval, provenance, version, and release binding.
+
+`PedagogicalPlanV2` is a turn-specific proposal under this immutable policy; it
+cannot invent or activate a new teaching strategy.
+
 ### `GroundedTutorResponseV2`
 
 - terminal action;
@@ -235,6 +297,16 @@ It must not infer or store protected traits, mental-health state, laziness,
 motivation, general intelligence, disciplinary risk, or hidden grades. A single
 model observation cannot establish mastery. Hypotheses decay or expire unless
 confirmed by new evidence.
+
+Where a task produces an assessed opportunity, observations flow through
+concept attribution into a separately owned belief update. The LLM may propose
+the attribution but cannot write mastery. Open-ended dialogue without a scored
+opportunity remains evidence, not a calibrated knowledge estimate.
+
+V2.1 adopts a POMDP-style separation of observation, belief, action, outcome,
+and stop condition without selecting a learned POMDP or reinforcement-learning
+policy. Such a policy requires representative learner trajectories and a
+validated reward; synthetic learners alone are insufficient.
 
 ## L3 proactive loop
 
@@ -308,13 +380,15 @@ after the professor approves the reference profile.
 1. Contract and state-machine tests.
 2. Node evaluations with planted perception, routing, evidence, plan,
    generation, and commit defects.
-3. Source-linked single-turn grounding and boundary evaluation.
-4. Multi-turn trajectory evaluation, including goal changes and repeated
+3. Learner-observation attribution and belief-calibration evaluation.
+4. Source-linked single-turn grounding and boundary evaluation.
+5. Multi-turn pedagogical-policy evaluation, including answer revealing,
+   goal changes, and repeated
    seeded runs.
-5. Proactive opportunity and suppression evaluation in shadow mode.
-6. C0-C3 profile/fidelity evaluation.
-7. Whole-product failure, restart, backup/restore, and rollback journeys.
-8. Professor calibration and consented student usability/learning studies.
+6. Proactive opportunity and suppression evaluation in shadow mode.
+7. C0-C3 profile/fidelity evaluation.
+8. Whole-product failure, restart, backup/restore, and rollback journeys.
+9. Professor calibration and consented student usability/learning studies.
 
 ### Study design and analysis unit
 
@@ -383,6 +457,11 @@ state calibration, repeated-run consistency, recovery after confusion, and
 unnecessary-help rate. LLM judges remain advisory until calibrated against
 professor or human labels for this exact rubric.
 
+State calibration must report the estimator and unit of observation. When a
+probabilistic learner estimate is claimed, report Brier score, calibration
+error, and selective risk/coverage against assessed opportunities. LLM
+confidence is not a calibrated learner-state measure.
+
 ### Failure taxonomy
 
 Every failure is assigned to one primary boundary:
@@ -398,17 +477,22 @@ evidence defect.
 ## Finite implementation path
 
 1. Complete #153's deterministic action/evidence boundary against fresh data.
-2. Introduce `TurnPerceptionV2`, `PedagogicalPlanV2`, and
-   `LearnerStateDeltaV2` behind provider-neutral interfaces.
-3. Add deterministic constraint merging and observation/hypothesis validation.
-4. Add `AgentTraceV2`, durable graph checkpoints, atomic state commits, and
+2. Make the domain, learner-belief, pedagogical-policy, interaction, and
+   governance/execution planes explicit.
+3. Introduce `TurnPerceptionV2`, `LearnerObservationV2`,
+   `ConceptAttributionV2`, `LearnerBeliefStateV2`, `PedagogicalPolicyV2`,
+   `PedagogicalPlanV2`, and `LearnerStateDeltaV2` behind provider-neutral
+   interfaces.
+4. Add deterministic constraint merging, observation/hypothesis validation,
+   and a simple learner-state baseline before considering BKT/PFA.
+5. Add `AgentTraceV2`, durable graph checkpoints, atomic state commits, and
    replay tests.
-5. Integrate the selected generator and the one-repair response path.
-6. Run prospective T0/T1-v1/T1-v2 node, turn, trajectory, and repeated-run
-   evaluations.
-7. Evaluate A1/A2 in shadow mode and promote only an eligible passing policy.
-8. Obtain professor profile approval and run C0-C3.
-9. Run whole-product and human stages without broadening the earlier claims.
+6. Integrate the selected generator and the one-repair response path.
+7. Run prospective T0/T1-v1/T1-v2 node, turn, trajectory, calibration, and
+   repeated-run evaluations.
+8. Evaluate A1/A2 in shadow mode and promote only an eligible passing policy.
+9. Obtain professor profile approval and run C0-C3.
+10. Run whole-product and human stages without broadening the earlier claims.
 
 A valid quality failure stops the affected promotion and produces one
 method-level decision. It does not trigger another prompt-only loop or modify a

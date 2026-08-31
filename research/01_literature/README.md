@@ -21,5 +21,9 @@ Use this folder for papers, summaries, and citation notes related to:
   benchmark-specific SOTA claims, recent context-sufficiency and tutor-evaluation
   research, and the resulting local evaluation changes required before the next
   provider run.
+- [Autonomous tutor best-practice audit](2026-08-31-autonomous-tutor-best-practice-audit.md):
+  comparison of the proposed LangGraph loop with classic ITS architecture,
+  learner modeling, pedagogical policy, recent LLM tutors, safety, and
+  learning-outcome evidence; records the mandatory V2.1 amendments.
 
 Do not store paywalled PDFs here unless the license permits repository storage.
