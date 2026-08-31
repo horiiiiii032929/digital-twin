@@ -12,10 +12,15 @@ def test_provider_integration_instrument_is_bounded_and_unselected() -> None:
     instrument = payload["instrument"]
     candidate = payload["candidate"]
 
-    assert instrument["status"] == "reviewed-provider-unauthorized"
+    assert instrument["status"] == "frozen-pending-execution"
     assert instrument["execution"] == {
-        "provider_execution_authorized": False,
-        "paid_execution_authorized": False,
+        "provider_execution_authorized": True,
+        "paid_execution_authorized": True,
+        "authorized_at": "2026-08-31T13:35:00Z",
+        "authorization_scope": (
+            "User authorized governed-full-autonomy-v2-1-provider-integration-001 "
+            "up to USD 1."
+        ),
         "automatic_release_promotion": False,
         "maximum_calls": 12,
         "maximum_cost_usd": 1.0,
@@ -42,7 +47,7 @@ def test_network_free_simulation_exercises_actual_reactive_and_proactive_service
     assert all(result["gates"].values())
 
 
-def test_live_preflight_is_ready_except_for_explicit_authority(monkeypatch) -> None:
+def test_live_preflight_is_ready_after_explicit_authority(monkeypatch) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "synthetic-preflight-key")
     monkeypatch.setattr(
         runner,
@@ -64,10 +69,10 @@ def test_live_preflight_is_ready_except_for_explicit_authority(monkeypatch) -> N
 
     result = runner.live_preflight()
 
-    assert result["status"] == "blocked-not-authorized"
+    assert result["status"] == "ready"
     assert result["provider_calls"] == 0
-    assert result["checks"]["provider_execution_authorized"] is False
-    assert result["checks"]["paid_execution_authorized"] is False
+    assert result["checks"]["provider_execution_authorized"] is True
+    assert result["checks"]["paid_execution_authorized"] is True
 
 
 def test_execute_fails_before_constructing_a_provider_request(monkeypatch) -> None:

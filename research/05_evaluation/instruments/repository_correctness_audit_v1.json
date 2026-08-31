@@ -2742,13 +2742,13 @@
     },
     {
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_provider_integration_001.json",
-      "sha256": "ec9eb08703d3dbc9e10492bcf494725efc78f7db16e8ca4b9011203eb0463a1f",
+      "sha256": "9a54a4dd6c647085168a956b86352b98cc40534421aca3075bb0c02169a35604",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex V2.1 provider-integration audit",
-      "evidence": "Prospective authority, model identity, pricing, public-data, retry, cost, output, and no-promotion boundaries were reviewed; focused tests and the actual-service network-free simulation passed with zero provider calls.",
+      "evidence": "The user authorized only this named checkpoint up to USD 1. Model identity, pricing, public-data, retry, call, output, and no-promotion boundaries remain frozen; execution has not yet occurred.",
       "findings": []
     },
     {
@@ -4887,13 +4887,13 @@
     },
     {
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
-      "sha256": "c9a889331d0d3ab1b192ebf9c9bd2ff168d5f0f937e46157ee6434e210fd05db",
+      "sha256": "937b8668655a3bf2bb2062b257098f7bb2d654d8bfdbd6af4f616e47750dbd80",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex V2.1 provider-integration audit",
-      "evidence": "Entrypoint, repository freeze guard, exclusive-output, metadata freshness, credential, hash, identity, budget, zero-retry, authority, actual reactive/proactive service, restart, and no-promotion paths passed focused Ruff, pytest, validation, and network-free simulation.",
+      "evidence": "Entrypoint now uses the exact bounded authorization for both provider and method evaluation operations. Exclusive output, metadata freshness, credential, hash, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
       "findings": []
     },
     {
@@ -6709,7 +6709,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "0d67384479b64a64f675d04a4c5d62de7c038cb811f7b5987cda36014c7b4342"
+      "sha256": "7483bd3930a96d94eee0fc4d6ec986db0780f4325a54ce3521e5e426fbffe076"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Freeze regression verifies the two remaining provider-free dataset authorizations and rejects completed program 011 plus all historical paid successors.",
+      "evidence": "Freeze regression verifies the two provider-free dataset authorizations plus the exact, newly authorized V2.1 provider-integration checkpoint, while rejecting completed program 011 and all other historical paid successors.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "ddf9734125d550651e413831792cb98d39e7e998729261d45972696e78ee680d"
+      "sha256": "2bb415919bb6aa49edc68a62feba37e59495431a1d84f30e8c7687107a3bcfb1"
     },
     {
       "audit_status": "audited",
@@ -8275,13 +8275,13 @@
     },
     {
       "path": "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
-      "sha256": "6215d2f8a4921080118d6c32ee94dc9f9f3406ddfd7b94df63ac5cafef046a97",
+      "sha256": "24931f2ec690c359e464350be0608a39806ece3f54e69d2b483964085bbe3354",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex V2.1 provider-integration audit",
-      "evidence": "Focused tests prove the build-only candidate remains unselected, network-free execution crosses actual reactive/proactive services, live preflight stops only at authority under exact metadata, and execute cannot construct a request while unauthorized.",
+      "evidence": "Focused tests prove the candidate remains unselected, network-free execution crosses actual reactive/proactive services, live preflight becomes ready only under the exact authorization, and blocked execution still constructs no provider request.",
       "findings": []
     },
     {

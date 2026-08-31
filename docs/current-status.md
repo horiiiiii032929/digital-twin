@@ -99,10 +99,11 @@ local API/worker and Web image digests. A separate provider-integration
 checkpoint exercises two actual T1-v2 reactive turns and one due proactive job
 through direct OpenAI Responses API boundaries. Its network-free simulation
 passes every gate with four fixture calls. Live metadata confirms account
-access to exact `gpt-5.6-terra` and `gpt-5.4-mini-2026-03-17`, but paid
-execution remains unauthorized until the clean build-only checkpoint is
-published. This integration cannot select or promote V2.1; #157 remains the
-academic full-autonomy decision.
+access to exact `gpt-5.6-terra` and `gpt-5.4-mini-2026-03-17`. After the clean
+build-only checkpoint was published, the exact checkpoint was separately
+authorized for at most 12
+calls, zero retries, and USD 1; no provider result exists yet. This integration
+cannot select or promote V2.1; #157 remains the academic full-autonomy decision.
 
 GitHub tracks the remaining evidence path explicitly: #153 remains
 `In Progress / Refine` for grounding selection, #155 remains

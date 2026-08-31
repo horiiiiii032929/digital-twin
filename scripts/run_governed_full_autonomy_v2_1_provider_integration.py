@@ -40,7 +40,7 @@ from src.digital_twin.model_policy import (
     OPENAI_HIGH_VOLUME_MODEL,
 )
 from src.digital_twin.repository_freeze import (
-    require_pre_evaluation_operation_allowed,
+    require_bounded_pilot_operation_allowed,
 )
 from src.digital_twin.student import (
     CanonicalSourceRangeV1,
@@ -674,7 +674,14 @@ def main() -> None:
     mode.add_argument("--execute", action="store_true")
     arguments = parser.parse_args()
     if arguments.execute:
-        require_pre_evaluation_operation_allowed("external_model_evaluation")
+        require_bounded_pilot_operation_allowed(
+            "governed-full-autonomy-v2-1-provider-integration-001",
+            "external_model_evaluation",
+        )
+        require_bounded_pilot_operation_allowed(
+            "governed-full-autonomy-v2-1-provider-integration-001",
+            "method_evaluation_execution",
+        )
     if arguments.validate:
         result = {"status": "valid", **validate()}
     elif arguments.simulate:

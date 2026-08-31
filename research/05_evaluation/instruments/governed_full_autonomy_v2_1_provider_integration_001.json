@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "governed-full-autonomy-v2-1-provider-integration-001",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "decision_question": "Can the frozen V2.1 candidate execute real planner, grounded generator, reactive, and proactive provider boundaries without weakening deterministic authority?",
   "release_candidate_manifest": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_release_candidate_001.json",
   "public_synthetic_data_only": true,
@@ -41,8 +41,10 @@
     }
   },
   "execution": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorized_at": "2026-08-31T13:35:00Z",
+    "authorization_scope": "User authorized governed-full-autonomy-v2-1-provider-integration-001 up to USD 1.",
     "automatic_release_promotion": false,
     "maximum_calls": 12,
     "maximum_cost_usd": 1.0,
