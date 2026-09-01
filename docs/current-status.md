@@ -6,12 +6,14 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The three-round whole-system architecture study under issue #165 is complete
-and closed `Refine`. Issue #153 is now the active P0. It retains
-`typed-target-evidence-v1` as the best protocol-valid development baseline and
-tests one semantic-target/source-range successor on genuinely fresh evidence.
-The sealed Program 011 final set and all three known development folds remain
-closed to tuning.
+The three-round whole-system architecture study under issue #165 and both
+fresh #153 method successors are complete as `Refine`. The strongest new
+candidate, source-side semantic evidence atoms, reached 96.0% fully grounded
+factual success but failed immutable claim/citation precision and exact
+source-version gates. The release decision is therefore **No Release** for the
+autonomous LLM-backed R1. The sealed Program 011 final set, all known
+development folds, the fresh 1,000-case confirmation, and provider-backed
+autonomy evaluation remain closed.
 
 The program is build-only and provider-unauthorized. Its three development
 folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
@@ -95,6 +97,34 @@ validity. Semantic-target v3 is rejected, typed-target v1 remains rollback only,
 and all semantic-target authorizations are revoked. The next correction must be
 a source-side semantic evidence-atom architecture evaluated on new evidence;
 the fresh 1,000, known 10,000+1,000, and 820-case autonomy stages remain closed.
+
+That source-side successor is now complete as
+`academic-factual-qa-source-semantic-atom-comparison-001`, and it is a valid
+`Refine` result rather than an execution failure. On another fresh 500 cases
+across 100 source-range-disjoint clusters, source-side semantic atoms reached
+96.0% fully grounded factual success, a 93.5% source-family lower 95% bound,
+100% answerable and boundary action accuracy, 100% all-evidence@3 and
+Recall@5, and zero severe unsupported releases. The candidate improved over
+the within-run typed-target baseline at 95.25% and substantially over the
+rejected 81.0% question-side semantic resolver.
+
+The candidate nevertheless missed immutable release gates: atomic-claim and
+citation precision were 96.125% rather than 98%, and source-version validity
+was 99.75% rather than 100%. All 16 answerable failures had the required atom
+inside the first three retrieved results; the gate selected a neighboring atom
+with overlapping low-information terms. This is a real top-k disambiguation
+and claim-lineage method defect, not a retrieval, provider, or harness failure.
+The 500 cases are now known and will not be tuned or rerun. Both bounded
+authorizations are revoked.
+
+The resulting product decision is **No Release for the autonomous LLM-backed
+R1**. The deterministic fail-closed local software candidate remains available
+as a development/demo baseline, but no grounding architecture is promoted.
+Consequently the fresh 1,000-case confirmation, known 10,000+1,000 regression,
+and provider-backed 820-case autonomy evaluation remain unopened; running them
+would not repair the failed prerequisite. Issue #153 remains `Refine` evidence,
+and #157 stays blocked. Any future research iteration must introduce a new
+method at the evidence-selection boundary and use new source-disjoint evidence.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
@@ -1775,23 +1805,23 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | Local T1-v1 Keep with T0 rollback; T1-v2.1 Go Deeper candidate | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; 500/500 fresh routing plus seven simulated days passed with zero provider use | Complete #153's full grounding boundary, then run prospective provider-backed T0/T1-v1/T1-v2 comparison, learner-state calibration, A1/A2 promotion evidence, professor-approved C0-C3, and human evidence |
+| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; network-free autonomy mechanics passed | Grounding did not pass all release gates, so provider-backed T1-v2 promotion is closed; any future release requires a new evidence-selection method and new confirmation evidence |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Program 011 completed / Refine | The actual T0 product completed 10,000 candidate plus 1,000 paired control cases without gold leakage. Candidate grounded success was 44.16% (source-family 95% interval 41.03%–44.96%) and boundary action accuracy was 72.9%; all absolute gates failed | Preserve the sealed result; complete [#153](https://github.com/horiiiiii032929/digital-twin/issues/153) on fresh development evidence, then run a new confirmation tranche rather than retuning the final set |
+| Large factual QA | Program 011 and fresh #153 successors completed / Refine | Program 011 preserved the leakage-free 10,000+1,000 failure. The latest fresh 500-case source-semantic-atom candidate reached 96.0% grounded success and 100% retrieval/boundary safety but missed claim/citation precision and exact source-version gates | Preserve all results; do not open the fresh 1,000 or rerun the known 10,000+1,000 under the failed method |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. The immediate correction is #153's academically valid factual
-action/evidence boundary. The accepted T1-v2 architecture then adds LLM
-perception and pedagogical planning without giving the model execution
-authority. Its provider-backed repeated-trajectory evaluation, shadow
-outreach, host/domain selection, target-host operations, professor-fidelity
-calibration, and human workflow evidence remain separate claims.
+release-ready. #153's latest method improved substantially yet validly failed
+the claim/citation and exact lineage gates. This finite evaluation therefore
+ends with **No Release** rather than opening more final or autonomy tests after
+a failed prerequisite. Provider-backed repeated-trajectory evaluation, A2
+promotion, target-host operations, professor fidelity, and real-user evidence
+remain future work and support no current release claim.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |

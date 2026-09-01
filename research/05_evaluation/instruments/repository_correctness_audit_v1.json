@@ -6263,13 +6263,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "whole-system-architecture-evolution",
-      "evidence": "Grounding export review confirms typed-target, source-range, and semantic-target planners, retrievers, gates, canonical source rendering, and retained controls are explicit with no provider or hidden-gold dependency.",
+      "domain": "source-semantic-evidence-atoms",
+      "evidence": "Grounding export review confirms the source-derived semantic-atom materializer, retriever, relation-aware gate, retained controls, and canonical source rendering are explicit with no provider or hidden-gold dependency.",
       "findings": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "27786bbd38fd745a0faf7e2c05b7d48b0d3d02d5ca0b44e6a261d68920c99f78"
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "bbebc378475040c6f6fc82fe8af36a3af05a53df772f9717528a522ef40fa154"
     },
     {
       "audit_status": "audited",
@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review retains the global block and revokes the completed dataset build plus both semantic-target attempts after the terminal Refine result; no semantic-target execution identity remains authorized.",
+      "evidence": "Post-result freeze review revokes both source-semantic-atom authorizations while retaining the global block; paid, final, autonomy, private-data, and same-data rerun execution remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "3d25f3316555b246d1fe64096f78db73f1f1de671c7bca2bfef57e23dafb4f7a"
+      "reviewer": "Codex source-semantic-atom result audit",
+      "sha256": "b32c165858c88d8f2616c9e7579dbe6a9abc29b2763a010334bd1170db9f68ea"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the exact six remaining provider-free authorizations: two deterministic package builds and the architecture tranche build plus all three comparisons; all semantic-target identities, terminal paid runs, and historical successors remain rejected.",
+      "evidence": "Freeze regression verifies the terminal authorization set rejects both completed source-semantic-atom operations alongside paid, final, autonomy, and historical execution identities.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "7f5945148de871d39a3d9066d87ff24754e1070e96141386532b43270b86487a"
+      "reviewer": "Codex source-semantic-atom result audit",
+      "sha256": "ba1233d861a4f22b1b739934d410d8cb51358030886837d7c755caa97c44a57a"
     },
     {
       "audit_status": "audited",
@@ -9190,12 +9190,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Runner review verifies bounded authorization, versioned Round 1–3 behavior plus semantic-target dispatch, public-input-only response generation, ambiguity clarification, canonical claim rendering, case-ID joins, response persistence before gold opening, deterministic scoring, exclusive outputs, and zero provider calls.",
+      "evidence": "Runner review verifies bounded authorization, historical architecture behavior plus source-semantic-atom dispatch, public-input-only response generation, relation-aware evidence gating, canonical claim rendering, response persistence before gold opening, deterministic scoring, and zero provider calls.",
       "findings": [],
       "path": "scripts/run_whole_system_architecture_round.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "a7bdafffd3087368bd43235011978329a5499004b43fdc1656de38d62aecdb32"
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "a9476ce83c74af72beaf01c039fdfade3cc42943d008363b1a469192d545307c"
     },
     {
       "audit_status": "audited",
@@ -9394,6 +9394,83 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex semantic-target grounding audit",
       "sha256": "b76edf57596056b52920abcba985a953561781955f06ec8831c212ca10a1f55b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-semantic-evidence-atoms",
+      "evidence": "Instrument review verifies a fresh 500-case source-disjoint comparison, one retained baseline, one source-semantic-atom candidate, unchanged hard gates, hidden gold after durable responses, one network-free execution, and zero provider or paid authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_comparison_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "de9c5ab2c6d8bd3de7d17072f5fc0998633ca7c0851d49f9ab0c2aeb8c008bed"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-semantic-evidence-atoms",
+      "evidence": "Builder review and focused tests verify pinned public-source provenance, exclusion of all prior development ranges, balanced deterministic selection, byte stability, 474/474 exact references, 100 relation groups, exclusive guarded writes, and no provider, private, or final data.",
+      "findings": [],
+      "path": "scripts/build_academic_factual_qa_source_semantic_atoms.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "4a523bec3a3e60195716a282de737abeaa7759e5656b2f1a5b34ff5d2f259cc7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-semantic-evidence-atoms",
+      "evidence": "Comparison runner review verifies exact artifact hashes, clean-worktree and freeze guards, public-only response generation, hidden-gold opening order, exclusive output creation, deterministic scoring, and terminal Keep/Refine/invalid behavior with zero provider calls.",
+      "findings": [],
+      "path": "scripts/run_academic_factual_qa_source_semantic_atom_comparison.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "1af3e60d2f985fbd6dae209372624d7a7022639dedab0aa1d2db77f05c75d42e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "source-semantic-evidence-atoms",
+      "evidence": "Manual and focused-test review verifies immutable citable text, atom-specific source-only projections, canonical ranges, explicit relation groups, distinct multi-atom selection, authorization checks, bounded retrieval, and no question, gold, provider, or learner-state mutation of source truth.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/semantic_evidence_atoms.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "b203d36ce2591802337c47c1625e8f350062f82ad025330bcffdb7f119b91d63"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify citable-text preservation, atom-specific projections, deterministic related and adjacent IDs, related multi-evidence resolution, and rejection of unrelated multi-atom evidence.",
+      "findings": [],
+      "path": "tests/digital_twin/test_semantic_evidence_atoms.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "f9821b3da9ce8a9e2cfe3cd88b4be27c92d0b126d57195716e543049c1ca2d29"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify the exact two-condition comparison binding, network-free simulation, hidden-gold closure, zero provider/cost behavior, rollback identity, and invalid classification for operational failure.",
+      "findings": [],
+      "path": "tests/test_academic_factual_qa_source_semantic_atom_comparison.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "12eb73b2fc57b1bd180f3720371e00abe80a957b0ff9d933a9de3da9918c813b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify 500-case balance, fresh-range exclusion, exact atom relations, canonical matchability, unique questions, public-only inputs, and byte-stable package construction.",
+      "findings": [],
+      "path": "tests/test_build_academic_factual_qa_source_semantic_atoms.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex source-semantic-atom audit",
+      "sha256": "104d18675e1c937e35bfb3d2890ec6dbd5d84661958accbf695e27ef2177f147"
     }
   ],
   "schema_version": 1

@@ -56,6 +56,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",
         "governed-full-autonomy-v2-1-actual-product-evaluation-002",
+        "academic-factual-qa-source-semantic-atoms-successor-001",
+        "academic-factual-qa-source-semantic-atom-comparison-001",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

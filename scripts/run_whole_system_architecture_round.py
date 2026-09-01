@@ -44,6 +44,8 @@ from src.digital_twin.grounding import (
     PlanObserveRetrieverV1,
     SemanticTargetEvidenceGateV3,
     SemanticTargetEvidenceRetrieverV3,
+    SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomRetrieverV1,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredHierarchicalRetriever,
     SourceRangeCandidateRetrieverV2,
@@ -194,6 +196,11 @@ def _build_retrievers(
                 course_chunks,
                 candidate_limit=30,
             )
+        elif retrieval_binding == "source-semantic-evidence-atom-retriever-v1":
+            result[course_id] = SourceSemanticEvidenceAtomRetrieverV1(
+                course_chunks,
+                candidate_limit=30,
+            )
         else:
             raise ArchitectureRoundExecutionError(
                 f"unsupported architecture retriever: {retrieval_binding}"
@@ -282,6 +289,14 @@ def _response(
                 decision.features.get("semantic_action_clarify", False)
             )
             gate_reason = decision.reason
+        elif claim_binding == "source-semantic-evidence-atom-lineage-v1":
+            decision = SourceSemanticEvidenceAtomGateV1().assess(
+                case.question, hits
+            )
+            selected_ids = set(decision.selected_hit_ids)
+            selected = [row for row in hits if row.chunk.id in selected_ids]
+            sufficient = decision.sufficient
+            gate_reason = decision.reason
         elif claim_binding in {
             "source-range-canonical-claim-lineage-v2",
             "source-range-ambiguity-aware-claim-lineage-v2",
@@ -333,6 +348,7 @@ def _response(
             "source-range-canonical-claim-lineage-v2",
             "source-range-ambiguity-aware-claim-lineage-v2",
             "semantic-target-canonical-claim-lineage-v3",
+            "source-semantic-evidence-atom-lineage-v1",
         }
         claims = [
             EvaluationAtomicClaimV1(

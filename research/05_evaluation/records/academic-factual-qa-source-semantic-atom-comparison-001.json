@@ -1,0 +1,190 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-source-semantic-atom-comparison-001",
+  "program_id": "course-digital-twin-grounding-correction-002",
+  "stage_id": "source-semantic-evidence-atom-comparison",
+  "round_number": null,
+  "status": "completed-refine",
+  "supersedes": [
+    "academic-factual-qa-semantic-target-comparison-002"
+  ],
+  "decision_question": "Does source-side semantic evidence atom materialization pass the unchanged grounding gates and improve on typed-target-evidence-v1 using new source-disjoint evidence?",
+  "code_revision": "354c745f8d40e2a7389acf77770c54c8a349fb9c",
+  "dirty_state": false,
+  "started_at": "2026-09-01T04:08:00Z",
+  "completed_at": "2026-09-01T04:10:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_comparison_001.json",
+      "sha256": "de9c5ab2c6d8bd3de7d17072f5fc0998633ca7c0851d49f9ab0c2aeb8c008bed",
+      "role": "comparison-instrument"
+    },
+    {
+      "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-cases.json",
+      "sha256": "6713ddcdfe6aa028abe188501109655ea38cb24e871276128aceb4ef1fe32661",
+      "role": "public-cases"
+    },
+    {
+      "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-gold.json",
+      "sha256": "c52525a10017bd61949dc742b4e81767c3ae5eb64890490d2f44231d0ffa1f42",
+      "role": "hidden-gold"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-source-semantic-atom-comparison-001/result.json",
+      "sha256": "d97e9d6647c1576b7f96f615062729bd90a65c9138a2d7398317a05d9c9ed043",
+      "role": "ignored-raw-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "typed-target-evidence-v1",
+      "version": "v1-rollback-baseline",
+      "role": "baseline",
+      "changed_planes": [
+        "retrieval",
+        "claim-citation"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.9525,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.95375,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "citation-precision",
+          "value": 0.95375,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-gates",
+          "passed": false,
+          "evidence": "Grounded success passed, but atomic-claim and citation precision remained below 98%."
+        }
+      ]
+    },
+    {
+      "architecture_id": "source-semantic-evidence-atoms-v1",
+      "version": "v1",
+      "role": "candidate",
+      "changed_planes": [
+        "domain",
+        "retrieval",
+        "claim-citation"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.96,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.96125,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "citation-precision",
+          "value": 0.96125,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": false
+        },
+        {
+          "name": "all-evidence-at-3",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "source-version-validity",
+          "value": 0.9975,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "operational-completion",
+          "passed": true,
+          "evidence": "All 500 cases completed with zero operational failures, calls, or cost."
+        },
+        {
+          "name": "grounded-and-retrieval",
+          "passed": true,
+          "evidence": "96.0% fully grounded, 100% all-evidence@3 and Recall@5, and source-family lower 95% bound 93.5%."
+        },
+        {
+          "name": "claim-citation-and-version",
+          "passed": false,
+          "evidence": "Claim/citation precision was 96.125% and source-version validity was 99.75%."
+        },
+        {
+          "name": "boundary-and-safety",
+          "passed": true,
+          "evidence": "100% boundary action and zero severe unsupported releases."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "method",
+      "count": 16,
+      "evidence": "Every required range was retrieved in the top three, but the evidence gate selected a neighboring semantic atom for 16/400 answerable cases."
+    },
+    {
+      "category": "architecture",
+      "count": 1,
+      "evidence": "One wrong-atom citation did not match the exact authoritative source hash/version reference."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "The candidate improved grounded success to 96.0% but failed immutable claim, citation, and source-version gates. No architecture is selected for release; final and autonomy stages stay closed."
+  },
+  "limitations": [
+    "This is fresh development evidence rather than release confirmation.",
+    "Extractive provider-free output isolates grounding architecture.",
+    "No professor fidelity, real usability, learning outcome, visual, or provider-backed autonomy claim is supported."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-source-semantic-atom-comparison-001-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-source-semantic-atom-comparison-001.json"
+}

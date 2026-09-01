@@ -113,13 +113,18 @@ or authority defects. This selects the realistic-time evaluation
 infrastructure only; #157 remains `In Progress / Go Deeper` and T1-v2.1 remains
 unselected.
 
-#153 is the next executable decision. Its build-only
-`academic-factual-qa-grounding-selection-002` freezes one 500 candidate plus
-fixed 100 control comparison with typed bindings, exact case-ID joins, public
-canaries, hidden-gold separation, atomic resume, and finite stop rules. All
-network-free simulations pass, but provider metadata must be refreshed and the
-checkpoint remains unauthorized. A valid `Keep` may open #157's provider-backed
-portfolio; a valid `Refine` blocks it.
+#153 is no longer waiting for execution. Its historical paid checkpoint and
+the two later network-free method comparisons are complete evidence. No
+execution authority remains active.
+
+The later source-semantic-atom successor is now terminal `Refine`. It reached
+96.0% fully grounded success and 100% retrieval/boundary safety on a fresh
+500-case set, but failed claim/citation precision and exact source-version
+validity gates. No final architecture was selected. The repository-owner
+decision is **No Release** for the autonomous LLM-backed R1; #157 remains
+blocked and the fresh 1,000, known 10,000+1,000, and provider-backed 820-case
+stages stay unopened. The deterministic fail-closed local candidate remains a
+demo/development baseline only.
 
 ## Release stages and product gates
 

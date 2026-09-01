@@ -184,6 +184,13 @@ from src.digital_twin.grounding.semantic_target_resolution import (
     SemanticTargetResolutionV3,
     resolve_semantic_targets,
 )
+from src.digital_twin.grounding.semantic_evidence_atoms import (
+    ATOM_VERSION,
+    SemanticEvidenceAtomTraceV1,
+    SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomRetrieverV1,
+    materialize_semantic_evidence_atoms,
+)
 
 
 __all__ = [
@@ -319,6 +326,17 @@ __all__ = [
     "SourceRangeCandidateRetrieverV2",
     "SourceRangeCandidateTraceV2",
     "SourceRangeEvidenceGateV2",
+    "ATOM_VERSION",
+    "SemanticEvidenceAtomTraceV1",
+    "SemanticTargetCandidateV3",
+    "SemanticTargetEvidenceGateV3",
+    "SemanticTargetEvidenceRetrieverV3",
+    "SemanticTargetResolutionTraceV3",
+    "SemanticTargetResolutionV3",
+    "SourceSemanticEvidenceAtomGateV1",
+    "SourceSemanticEvidenceAtomRetrieverV1",
+    "materialize_semantic_evidence_atoms",
+    "resolve_semantic_targets",
     "canonicalize_source_claim",
     "plan_public_source_ranges",
     "retrieval_text",
