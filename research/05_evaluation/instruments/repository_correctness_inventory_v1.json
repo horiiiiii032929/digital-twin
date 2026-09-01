@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 921
+    "audited": 924
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 221,
+    "active_or_unclassified_tooling": 222,
     "active_runtime": 149,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 244,
+    "evaluation_configuration": 245,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 206
+    "verification": 207
   },
-  "file_count": 921,
+  "file_count": 924,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "2504c01a95542a3397439aae6216ff652f2425d88ed3584b06ed6c64ce1cc5ca",
+  "record_sha256": "c8deecbfd2d142213e5e28ddf9f2ae8cfb27b73456e147c91d46319c8ce03921",
   "records": [
     {
       "audit": {
@@ -4503,6 +4503,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Prospective instrument binds fresh public/gold/source package hashes, exact code revision, immutable candidate/control architectures, zero provider calls, no quality rerun, and hidden-gold separation.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding-successor root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
+      "risk": "high",
+      "sha256": "611982b201cea6670a02f8aae60f304002dafa00ca5c7c269613487b65ea5917"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
         "findings": [],
@@ -8814,6 +8830,22 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_evaluation_harness.py",
       "risk": "high",
       "sha256": "8a80d8a066eeeee53d41833372b4ed325671f99d22425e35e74427415d1a0037"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Runner validates immutable package hashes, complete-cluster control sampling, scoped clean-worktree state, exact code binding, exclusive output, atomic ledgers, resume behavior, all preregistered factual/retrieval/paired gates, and zero provider usage.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding-successor root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "risk": "high",
+      "sha256": "486d5e5c0a76f977bdb8ef00a7bede537fa68216c6ea65ccd0eccfcbbddbc1f2"
     },
     {
       "audit": {
@@ -15107,6 +15139,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Tests cover frozen package validation, source and control cardinality, five complete clusters per primary course, and the provider/cost prohibition.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding-successor root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_run_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "risk": "medium",
+      "sha256": "307bacf6a9adfaed898b1e5c96ae6f856eacda1840fdaea942d723494590cead"
+    },
+    {
+      "audit": {
         "domain": "proactive-outreach-evaluation",
         "evidence": "Focused tests cover frozen cardinality, revoked authority and blocked rerun preflight, exclusive output handling, complete P0/P1 gate execution, zero side effects, and duplicate-case rejection.",
         "findings": [],
@@ -15491,8 +15539,8 @@
     }
   ],
   "risk_counts": {
-    "high": 701,
-    "medium": 220
+    "high": 703,
+    "medium": 221
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

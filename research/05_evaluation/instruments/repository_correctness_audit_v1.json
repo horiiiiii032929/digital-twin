@@ -10131,6 +10131,39 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Prospective instrument binds fresh public/gold/source package hashes, exact code revision, immutable candidate/control architectures, zero provider calls, no quality rerun, and hidden-gold separation.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex grounding-successor root-cause review",
+      "sha256": "611982b201cea6670a02f8aae60f304002dafa00ca5c7c269613487b65ea5917"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Runner validates immutable package hashes, complete-cluster control sampling, scoped clean-worktree state, exact code binding, exclusive output, atomic ledgers, resume behavior, all preregistered factual/retrieval/paired gates, and zero provider usage.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex grounding-successor root-cause review",
+      "sha256": "486d5e5c0a76f977bdb8ef00a7bede537fa68216c6ea65ccd0eccfcbbddbc1f2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Tests cover frozen package validation, source and control cardinality, five complete clusters per primary course, and the provider/cost prohibition.",
+      "findings": [],
+      "path": "tests/test_run_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex grounding-successor root-cause review",
+      "sha256": "307bacf6a9adfaed898b1e5c96ae6f856eacda1840fdaea942d723494590cead"
     }
   ],
   "schema_version": 1
