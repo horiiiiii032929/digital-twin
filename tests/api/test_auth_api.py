@@ -23,7 +23,10 @@ from src.digital_twin.evaluation import (
     load_release_profile,
 )
 from src.digital_twin.identity import IdentityService, SQLiteIdentityRepository
-from src.digital_twin.grounding import StructuredLexicalCoverageEvidenceGate
+from src.digital_twin.grounding import (
+    AmbiguitySafeEvidenceGateV1,
+    StructuredLexicalCoverageEvidenceGate,
+)
 from src.digital_twin.onboarding import create_session
 from src.digital_twin.student import (
     AccountRole,
@@ -307,6 +310,19 @@ def test_conservative_local_release_gate_is_explicit_and_deterministic() -> None
 
 def test_unselected_evidence_gate_remains_fail_closed() -> None:
     assert _configured_evidence_gate(AppSettings()) is None
+
+
+def test_ambiguity_safe_gate_is_available_without_selecting_it_by_default() -> None:
+    settings = AppSettings(
+        evidence_gate_mode=(
+            EvidenceGateMode.AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1
+        ),
+    )
+
+    gate = _configured_evidence_gate(settings)
+
+    assert isinstance(gate, AmbiguitySafeEvidenceGateV1)
+    assert isinstance(gate.base, StructuredLexicalCoverageEvidenceGate)
 
 
 def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):

@@ -1,0 +1,184 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-ambiguity-safe-comparison-002",
+  "program_id": "course-digital-twin-grounding-correction-003",
+  "stage_id": "ambiguity-safe-comparison-attempt-002",
+  "round_number": null,
+  "status": "completed-keep",
+  "supersedes": [
+    "academic-factual-qa-ambiguity-safe-comparison-001-invalid"
+  ],
+  "decision_question": "Does the ambiguity-safe candidate pass the frozen grounding gates without regressing against the source-semantic baseline?",
+  "code_revision": "a7d692216465ea9429486ed7bd2c08fc0b74f340",
+  "dirty_state": false,
+  "started_at": "2026-09-01T06:08:48Z",
+  "completed_at": "2026-09-01T06:08:49Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_002.json",
+      "sha256": "01e4aae4bc8f11e9202b85006ebe3bf08eec557334bd5384cb77bd8cd340e67e",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-002/result.json",
+      "sha256": "ff960cf6e99a15e8b689cdbc2541db3dadcf8aa4618e3077b607d2a26fee3e96",
+      "role": "ignored-raw-result"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-002/source-semantic-evidence-atoms-v1-responses.json",
+      "sha256": "ca606e4a059329ff8427bdfbfeb2e7026cd4dc5745636c39fb76baa077e92670",
+      "role": "baseline-responses"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-002/ambiguity-safe-source-semantic-evidence-atoms-v2-responses.json",
+      "sha256": "95b0a14cbe17597124ac60492de9925ca03d67ec8cec6454492da3d21c43e972",
+      "role": "candidate-responses"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "source-semantic-evidence-atoms-v1",
+      "version": "v1-historical-method-control",
+      "role": "baseline",
+      "changed_planes": [
+        "domain",
+        "retrieval",
+        "claim-citation"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.9775,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.9825,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "citation-precision",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-frozen-gates",
+          "passed": true,
+          "evidence": "All ten frozen quality and safety gates passed on 500 fresh cases."
+        }
+      ]
+    },
+    {
+      "architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
+      "version": "v2-pre-generation-reference-uniqueness",
+      "role": "candidate",
+      "changed_planes": [
+        "claim-citation",
+        "pedagogical-policy",
+        "reactive-loop"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.9775,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.9825,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "citation-precision",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "planted-reference-controls",
+          "value": 6,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 6,
+          "passed": true
+        },
+        {
+          "name": "known-ambiguity-clarification-regression",
+          "value": 16,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 16,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-frozen-gates",
+          "passed": true,
+          "evidence": "Grounded success, action, claim, citation, evidence, source-version, and unsupported-release gates all passed."
+        },
+        {
+          "name": "fresh-non-inferiority",
+          "passed": true,
+          "evidence": "Candidate and baseline each reached 97.75% fully grounded success on the same fresh source-disjoint cases."
+        },
+        {
+          "name": "ambiguity-safety",
+          "passed": true,
+          "evidence": "Six planted controls passed and all 16 known non-unique predecessor cases now clarify before generation."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "keep",
+    "selected_architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
+    "rationale": "The candidate passed every frozen gate, was non-inferior on fresh unambiguous evidence, and adds calibrated fail-closed behavior for non-unique references. Select it for the next provider-backed product confirmation while retaining V1 rollback."
+  },
+  "limitations": [
+    "This is fresh development evidence, not autonomous-product release evidence.",
+    "All fresh answerable cases were pre-seal reference-unique, so the fresh comparison estimates non-regression rather than ambiguity-effect size.",
+    "Planted controls and known-case regression establish ambiguity behavior but are not a fresh natural ambiguity sample.",
+    "No professor fidelity, real usability, learning outcome, visual, or provider-backed autonomy claim is supported."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-ambiguity-safe-comparison-002-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-ambiguity-safe-comparison-002.json"
+}

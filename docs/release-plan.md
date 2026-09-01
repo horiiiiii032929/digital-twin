@@ -341,7 +341,7 @@ operations, and rollback gates. Otherwise record `Refine`, `Go Deeper`, or
 `Drop`, identify the failing owner issue, and retain the previous local package
 as rollback.
 
-Current decision (2026-09-01): **No Release / Refine**. The source-semantic
+Current release decision (2026-09-01): **No Release / Refine**. The source-semantic
 evidence-atom candidate improved fresh development grounding to 96.0%, but it
 failed claim/citation precision and exact source-version validity. The local
 deterministic package remains a development/demo rollback and is not promoted
@@ -350,3 +350,12 @@ audit did not justify lowering those gates: every question was non-unique and
 should have elicited clarification, while the product answered all 16. A future
 successor must correct both reference uniqueness and fail-closed ambiguity
 handling before using new source-disjoint evidence.
+
+That successor is now complete under #172 as a development-method `Keep`. Its
+six planted controls pass, all 16 known audited ambiguities route to `clarify`
+as regression diagnostics, and its fresh 500-case comparison passed every
+frozen gate at 97.75% grounded success, 100% action/citation/retrieval, 98.25%
+claim precision/recall, and zero severe releases. V2 is selected with V1
+rollback for the next provider-backed product confirmation. This does not
+change the No Release decision: #157 must freeze and evaluate the selected
+actual-product configuration before any autonomous promotion.

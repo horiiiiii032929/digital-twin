@@ -18,6 +18,22 @@ autonomous LLM-backed R1. The sealed Program 011 final set, all known
 development folds, the fresh 1,000-case confirmation, and provider-backed
 autonomy evaluation remain closed.
 
+Issue #172 is complete as `Keep` for the audited dual defect.
+The product can preserve a deterministic evidence-gate recommendation and
+return `clarify` before generation under T0, T1-v1, or T1-v2. Six planted
+reference controls pass, the known 16 non-unique predecessor questions now
+route 16/16 to `clarify` without rescoring their historical result, and a new
+source-disjoint package contains 500 cases across 100 clusters. All 400
+answerable questions resolve to exactly one canonical answer class before
+sealing; 474/474 references map to 300 source atoms, with zero normalized
+duplicates, provider calls, or private/final data. The valid attempt-002
+comparison passed every frozen gate: both V1 and ambiguity-safe V2 reached
+97.75% fully grounded success, a 95.5% source-family lower 95% bound, 100%
+action/citation/retrieval, 98.25% claim precision/recall, and zero severe
+releases. V2 is selected for the next provider-backed confirmation with V1 as
+rollback. All execution authority is revoked; this development Keep does not
+change the autonomous LLM-backed No Release decision.
+
 The program is build-only and provider-unauthorized. Its three development
 folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
 clusters. Canonical source ranges and normalized questions have zero overlap
@@ -120,14 +136,13 @@ and claim-lineage method defect, not a retrieval, provider, or harness failure.
 The 500 cases are now known and will not be tuned or rerun. Both bounded
 authorizations are revoked.
 
-The resulting product decision is **No Release for the autonomous LLM-backed
-R1**. The deterministic fail-closed local software candidate remains available
-as a development/demo baseline, but no grounding architecture is promoted.
-Consequently the fresh 1,000-case confirmation, known 10,000+1,000 regression,
-and provider-backed 820-case autonomy evaluation remain unopened; running them
-would not repair the failed prerequisite. Issue #153 remains `Refine` evidence,
-and #157 stays blocked. Any future research iteration must introduce a new
-method at the evidence-selection boundary and use new source-disjoint evidence.
+The resulting product decision remains **No Release for the autonomous
+LLM-backed R1**. The deterministic fail-closed local software candidate remains
+available as a development/demo baseline. The later #172 successor now selects
+ambiguity-safe evidence atoms V2 at the development-method level, but it has
+not passed provider-backed actual-product autonomy confirmation. Issue #153
+remains historical `Refine` evidence; #157 is no longer dependency-blocked and
+owns the next separately frozen product-quality decision.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy
@@ -1809,38 +1824,40 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; network-free autonomy mechanics passed | Grounding did not pass all release gates, so provider-backed T1-v2 promotion is closed; any future release requires a new evidence-selection method and new confirmation evidence |
+| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; network-free autonomy mechanics passed; ambiguity-safe grounding V2 passed fresh development gates | Provider-backed actual-product T1-v2 confirmation under #157 and later release qualification remain missing |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Program 011 and fresh #153 successors completed / Refine | Program 011 preserved the leakage-free 10,000+1,000 failure. The latest fresh 500-case source-semantic-atom candidate reached 96.0% grounded success and 100% retrieval/boundary safety but missed claim/citation precision and exact source-version gates | Preserve all results; do not open the fresh 1,000 or rerun the known 10,000+1,000 under the failed method |
+| Large factual QA | Historical 10,000+1,000 Refine; fresh ambiguity-safe method Keep | Program 011 preserves the leakage-free final failure. On new source-disjoint development evidence, ambiguity-safe V2 passed every frozen gate at 97.75% grounded success, 100% action/citation/retrieval, 98.25% claim precision/recall, and zero severe releases | Keep the final package known and immutable; use the selected method only in a separately frozen provider-backed product confirmation before any release claim |
 
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. #153's latest method improved substantially yet validly failed
-the claim/citation and exact lineage gates. This finite evaluation therefore
-ends with **No Release** rather than opening more final or autonomy tests after
-a failed prerequisite. Provider-backed repeated-trajectory evaluation, A2
-promotion, target-host operations, professor fidelity, and real-user evidence
-remain future work and support no current release claim.
+release-ready. #172 has repaired the reference-uniqueness and ambiguity defect
+and selected V2 on fresh development evidence. The next product decision is a
+new immutable #157 provider-backed actual-product autonomy confirmation; no
+execution authority is active yet. A2 promotion, target-host operations,
+professor fidelity, and real-user evidence remain future work and support no
+current release claim.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
 | 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
-| 4 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration; do not infer an academic quality claim from it |
-| 5 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
-| 6 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |
-| 7 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
-| 8 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
-| 9 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
-| 10 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Done / Refine | Preserve Program 011's valid 10,000+1,000 result and transfer method redesign to a fresh successor issue |
-| 11 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
-| 12 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
+| 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |
+| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | Todo / Go Deeper | Freeze the selected ambiguity-safe V2 product manifest and run the provider-backed 820-case confirmation before any T1-v2 promotion |
+| 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration only after product confirmation; do not infer a release claim from development evidence |
+| 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
+| 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |
+| 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
+| 10 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
+| 11 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
+| 12 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Done / Refine | Preserve Program 011's valid 10,000+1,000 result and transfer method redesign to a fresh successor issue |
+| 13 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
+| 14 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
 
 Issues #85 and #86 are complete and archived from the live Project view. PR #91 merged the tested multimodal product
 foundation and three registered prospective development attempts. Attempt 003 passed 13/14 gates:

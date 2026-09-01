@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-ambiguity-safe-comparison-001",
+  "program_id": "course-digital-twin-grounding-correction-003",
+  "status": "invalid-execution-authorization-revoked",
+  "source": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-sources.json",
+    "sha256": "46e9bb78e8648f0e14fa335323964888b6e60568bfc0dc96ba427e70350b6217",
+    "role": "fresh-source-disjoint-corpus"
+  },
+  "public_cases": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-cases.json",
+    "sha256": "04a4057ded8872afc87c958bd1c637a56b5e234f288ed2f57fecda4cc1b88363",
+    "role": "public-source-scoped-cases"
+  },
+  "hidden_gold": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-gold.json",
+    "sha256": "15d6257dafd6d6730b605ca93e62d8514c812d55f03f1eff7482e7e73091caa2",
+    "role": "sealed-source-linked-gold"
+  },
+  "reference_controls": {
+    "path": "research/05_evaluation/instruments/reference_uniqueness_controls_v1.json",
+    "sha256": "164e33caa80a7f3c92f34efa655af0703a46bb984be00e924334bb9adf5b51c2",
+    "role": "planted-reference-validity-controls"
+  },
+  "case_count": 500,
+  "candidates": [
+    {
+      "schema_version": 1,
+      "architecture_id": "source-semantic-evidence-atoms-v1",
+      "version": "v1-historical-method-control",
+      "role": "baseline",
+      "plane_bindings": {
+        "domain": "source-semantic-evidence-atom-domain-v1",
+        "retrieval": "source-semantic-evidence-atom-retriever-v1",
+        "action-routing": "deterministic-tutor-action-router-v2",
+        "claim-citation": "source-semantic-evidence-atom-lineage-v1",
+        "learner-state": "assessed-evidence-count-belief-v1",
+        "pedagogical-policy": "unique-complete-related-atom-policy-v1",
+        "reactive-loop": "source-semantic-evidence-atom-reactive-loop-v1",
+        "proactive-loop": "governed-autonomy-service-v2.1",
+        "governance": "professor-approved-policy-v1",
+        "persistence": "sqlite-wal-checkpoint-outbox-v1",
+        "product-experience": "evidence-target-transparent-r1-v1",
+        "operations": "local-r1-compose-v1",
+        "evaluation": "flow-independent-adapters-v1"
+      },
+      "factual_adapter": "architecture-network-free-factual-adapter-v1",
+      "autonomy_adapter": "student-product-autonomy-adapter-v1",
+      "rollback_architecture_id": null,
+      "public_question_only_planning": true,
+      "hidden_gold_available_to_runtime": false,
+      "deterministic_policy_authoritative": true,
+      "deterministic_source_truth_authoritative": true,
+      "provider_execution_authorized": false
+    },
+    {
+      "schema_version": 1,
+      "architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
+      "version": "v2-pre-generation-reference-uniqueness",
+      "role": "candidate",
+      "plane_bindings": {
+        "domain": "source-semantic-evidence-atom-domain-v1",
+        "retrieval": "source-semantic-evidence-atom-retriever-v1",
+        "action-routing": "deterministic-tutor-action-router-v2",
+        "claim-citation": "source-semantic-evidence-atom-lineage-v2",
+        "learner-state": "assessed-evidence-count-belief-v1",
+        "pedagogical-policy": "ambiguity-safe-complete-related-atom-policy-v2",
+        "reactive-loop": "ambiguity-safe-source-semantic-reactive-loop-v2",
+        "proactive-loop": "governed-autonomy-service-v2.1",
+        "governance": "professor-approved-policy-v1",
+        "persistence": "sqlite-wal-checkpoint-outbox-v1",
+        "product-experience": "evidence-target-transparent-r1-v1",
+        "operations": "local-r1-compose-v1",
+        "evaluation": "flow-independent-adapters-v1"
+      },
+      "factual_adapter": "architecture-network-free-factual-adapter-v1",
+      "autonomy_adapter": "student-product-autonomy-adapter-v1",
+      "rollback_architecture_id": "source-semantic-evidence-atoms-v1",
+      "public_question_only_planning": true,
+      "hidden_gold_available_to_runtime": false,
+      "deterministic_policy_authoritative": true,
+      "deterministic_source_truth_authoritative": true,
+      "provider_execution_authorized": false
+    }
+  ],
+  "hard_gates": {
+    "fully_grounded_factual_success": 0.95,
+    "boundary_action_accuracy": 0.98,
+    "atomic_claim_precision": 0.98,
+    "atomic_claim_recall": 0.95,
+    "citation_precision": 0.98,
+    "citation_recall": 0.95,
+    "canonical_all_evidence_at_3": 0.9,
+    "evidence_recall_at_5": 0.95,
+    "source_version_validity": 1.0,
+    "severe_unsupported_release_count": 0.0
+  },
+  "candidate_grounded_success_non_inferiority_margin": 0.0,
+  "scoring_profile": "source-semantic-token-v2",
+  "output_directory": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-001",
+  "network_free_execution_authorized": false,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "maximum_executions": 1,
+  "hidden_gold_after_response_persistence": true,
+  "known_500_used_only_for_regression": true,
+  "prior_results_immutable": true,
+  "content_sha256": "13f463494041ca8b7f60158c21722aa8bb5db8f57e7ff39fec980f5c0e8da53b"
+}

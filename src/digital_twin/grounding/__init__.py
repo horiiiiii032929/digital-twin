@@ -188,13 +188,18 @@ from src.digital_twin.grounding.semantic_evidence_atoms import (
     ATOM_VERSION,
     SemanticEvidenceAtomTraceV1,
     SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomGateV2,
     SourceSemanticEvidenceAtomRetrieverV1,
     materialize_semantic_evidence_atoms,
+)
+from src.digital_twin.grounding.ambiguity_safe_evidence import (
+    AmbiguitySafeEvidenceGateV1,
 )
 
 
 __all__ = [
     "AnyHitEvidenceGate",
+    "AmbiguitySafeEvidenceGateV1",
     "ApiRetrievalIndexBindingV2",
     "ApiRetrievalIndexManifestV2",
     "AtomicAnswerClaim",
@@ -334,6 +339,7 @@ __all__ = [
     "SemanticTargetResolutionTraceV3",
     "SemanticTargetResolutionV3",
     "SourceSemanticEvidenceAtomGateV1",
+    "SourceSemanticEvidenceAtomGateV2",
     "SourceSemanticEvidenceAtomRetrieverV1",
     "materialize_semantic_evidence_atoms",
     "resolve_semantic_targets",

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 865
+    "audited": 874
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 199,
-    "active_runtime": 143,
+    "active_or_unclassified_tooling": 202,
+    "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 231,
+    "evaluation_configuration": 234,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 191
+    "verification": 192
   },
-  "file_count": 865,
+  "file_count": 874,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "1d2859e62eb16ca9027cec2714d132d7b3fe1cf795ca75111da79f7a2ca3adf3",
+  "record_sha256": "7ba1642e1dcb42d2e925a7873868f2501545610baccdb63db1795266d13ab272",
   "records": [
     {
       "audit": {
@@ -1416,10 +1416,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Command-surface review confirms the existing architecture commands plus explicit validate and one-shot execute commands for the bounded source-semantic failure-validity audit; provider authority remains closed.",
+        "evidence": "Command-surface review verifies deterministic controls and successor validation, network-free comparison simulation, blocked preflight, freeze-guarded execution, and inclusion of the three safe build checks in the complete repository gate.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex failure-validity audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "a5580299c0eceef79a55fd91741015964f4cef9f60c3cd64f854ac6ac9e990f0"
+      "sha256": "a8085a80e2d8304a58ddee63d97e6787ac79721984bbbb30bdfad665b953cbe6"
     },
     {
       "audit": {
@@ -1700,6 +1700,38 @@
       "path": "research/05_evaluation/instruments/academic_factual_qa_action_router_product_openai_binding_001.json",
       "risk": "high",
       "sha256": "5b78489eb6dd70c4c83f57d11293a53a397ce7da2074bd1aea4532e3da096f4c"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Historical-attempt review preserves the exact source-disjoint 500-case package and fixed gates while revoking attempt 001 after its scorer-namespace harness defect; the persisted responses and invalid result remain traceable and no provider call occurred.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_001.json",
+      "risk": "high",
+      "sha256": "d21fa71edb6d28e75ccfdcbf89b939f6ef0bfc997efaa06c71ca573470f50277"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Terminal instrument review preserves the unchanged source, public cases, hidden gold, planted controls, architectures, and quality gates while recording completed execution and revoked network-free authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_002.json",
+      "risk": "high",
+      "sha256": "74aa561aa6eeaaa0241933dc20e27ab757319b573e7f7e30411f25daa707ead7"
     },
     {
       "audit": {
@@ -4743,6 +4775,22 @@
     },
     {
       "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Planted-control review covers unique, alternate-valid, partial, conflicting, unrelated, and ambiguous evidence relationships with source-derived expected classifications and no provider-owned truth.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/reference_uniqueness_controls_v1.json",
+      "risk": "high",
+      "sha256": "164e33caa80a7f3c92f34efa655af0703a46bb984be00e924334bb9adf5b51c2"
+    },
+    {
+      "audit": {
         "domain": "retrieval-index-lifecycle",
         "evidence": "Terminal instrument review verified completed Keep status, exact 2,100-region/four-course Qwen3 scope, every execution authority false, finite progression, preserved product/final locks, and no automatic promotion.",
         "findings": [],
@@ -5712,6 +5760,24 @@
       "path": "scripts/build_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "high",
       "sha256": "7cbc69d5a6ec23a9171cd358c67478edc60bf0eb21034a9d6fdcb9decc4a06a5"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Builder review verifies fresh-range exclusion, deterministic public source/section cues, rejection of non-unique answerable references, exact source lineage, fixed course balance, boundary construction, private-data exclusion, and byte-stable output.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:ambiguity-safe-successor"
+      ],
+      "path": "scripts/build_academic_factual_qa_ambiguity_safe_successor.py",
+      "risk": "high",
+      "sha256": "30209c08b6631b9aa47bf7686c545f8f0920c6ddf4e8e6e396cf35779d10c214"
     },
     {
       "audit": {
@@ -6965,6 +7031,27 @@
       "path": "scripts/run_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "high",
       "sha256": "aae73b367718af97ac344459a4db77a7e00a57dd0016b195c27ed96744c4a515"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Runner review verifies immutable binding hashes, per-attempt identities, public-input-only execution, response persistence before gold opening, exact baseline/candidate dispatch, scorer metric namespace validation, one-shot output, clean-tree/freeze guards, and zero provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:ambiguity-safe-comparison",
+        "preflight:ambiguity-safe-comparison",
+        "simulate:ambiguity-safe-comparison",
+        "verify:ambiguity-safe-comparison"
+      ],
+      "path": "scripts/run_academic_factual_qa_ambiguity_safe_comparison.py",
+      "risk": "high",
+      "sha256": "b81bbfda8424f9ec596127a397dd8dcacac89ce0a1e8feef459fbba47dc2756d"
     },
     {
       "audit": {
@@ -8420,10 +8507,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Runner review verifies bounded authorization, historical architecture behavior plus source-semantic-atom dispatch, public-input-only response generation, relation-aware evidence gating, canonical claim rendering, response persistence before gold opening, deterministic scoring, and zero provider calls.",
+        "evidence": "Architecture-runner review verifies the V2 claim-binding dispatch, source-semantic ambiguity classification, public-input-only response generation, canonical claim rendering, response persistence before gold opening, deterministic scoring, and unchanged historical modes.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex source-semantic-atom audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8439,7 +8526,7 @@
       ],
       "path": "scripts/run_whole_system_architecture_round.py",
       "risk": "high",
-      "sha256": "a9476ce83c74af72beaf01c039fdfade3cc42943d008363b1a469192d545307c"
+      "sha256": "d65f56a57a6f12f8a25e11c00dc56599a5a84197a57ee22291c5f9909e2095c3"
     },
     {
       "audit": {
@@ -9014,6 +9101,24 @@
     },
     {
       "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Validator review verifies control-file content hashing, exact ID coverage, source-chunk validation, expected relationship classifications, and six-of-six deterministic planted-control agreement.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "verify:reference-uniqueness-controls"
+      ],
+      "path": "scripts/validate_reference_uniqueness_controls.py",
+      "risk": "high",
+      "sha256": "a90addb6a14467b2138e70e5572ed4e394e608ab16ab28f8d617ba25ec8eb5fa"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
         "findings": [],
@@ -9225,10 +9330,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Configuration review verifies the ambiguity-safe evidence gate is an explicit unselected mode, preserves the selected release default, and remains unavailable without intentional profile configuration.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9236,15 +9341,15 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "91c9f11ff2281937519ba8bbc57db5001d3630ab58ff13813e14040cfe33de06"
+      "sha256": "f2234a8d4ca23f9ccc42867a13f031fe6eb609c7a7a612a6fdebd59e478744df"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Factory review verifies the ambiguity-safe mode composes only public-question/source uniqueness checking with the existing structured lexical gate and does not alter the selected release profile or provider boundary.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9268,7 +9373,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "74445f8a710b4b68994b83dfd9942e8d22080e76bab27a26e36749e68035330b"
+      "sha256": "7cadff240f7abd346fb5c6daa9a6add7805174cd8ac339b90eb26848d77585bd"
     },
     {
       "audit": {
@@ -10025,10 +10130,10 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Successor review verifies exact quote/range validation, complete text and structured extraction, source-derived region IDs shared by runtime and gold, context-bearing cue selection, separate boundary construction, and provider-independent public/gold assembly.",
+        "evidence": "Reference-builder review verifies optional public source/section scoping, source-derived wording, unchanged historical defaults, exact quote/range validation, separate boundary construction, and provider-independent public/gold assembly.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-plus-three-agent-cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10036,7 +10141,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_references.py",
       "risk": "high",
-      "sha256": "6b8aaaa355aab3baf75a9cf54f4c10ae9dda20aaa787fdab6b1adb9acdb776c6"
+      "sha256": "bb84d28b4db51f524e9df8780190813fd5d9efe045e7260097fd8a49525363e8"
     },
     {
       "audit": {
@@ -10457,10 +10562,10 @@
     {
       "audit": {
         "domain": "source-semantic-evidence-atoms",
-        "evidence": "Grounding export review confirms the source-derived semantic-atom materializer, retriever, relation-aware gate, retained controls, and canonical source rendering are explicit with no provider or hidden-gold dependency.",
+        "evidence": "Grounding export review confirms the ambiguity-safe wrapper, reference-uniqueness contracts, source-semantic V2 gate, retained historical gates, and canonical source rendering are explicit with no provider or hidden-gold dependency.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex source-semantic-atom audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10468,7 +10573,23 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "bbebc378475040c6f6fc82fe8af36a3af05a53df772f9717528a522ef40fa154"
+      "sha256": "1894d5400edd4f62f1a0009282d1d08e47cc382afa52f383e2d7655a82bbbe50"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Runtime wrapper review verifies public-question and approved-source-only ambiguity detection, fail-closed clarify/abstain recommendations, unchanged base evidence-gate behavior for unique targets, and no hidden-gold dependency.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/ambiguity_safe_evidence.py",
+      "risk": "high",
+      "sha256": "ae308e0d88d1a59b17e7a205101943d30073b6ab8b2d8df344e9babc968ca900"
     },
     {
       "audit": {
@@ -10521,10 +10642,10 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual boundary review plus 30 focused adversarial tests confirm semantic scoring cannot own the final decision; missing hits, malformed verifier output, unknown hit IDs, incomplete support, contradiction, ambiguity, and verifier failure all fail closed. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "evidence": "Decision-contract review verifies a sufficient decision cannot carry a boundary recommendation and that insufficient evidence may recommend only clarify or abstain; authoritative sufficiency and all existing fail-closed semantics remain unchanged.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10532,7 +10653,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
       "risk": "high",
-      "sha256": "40f17ea942d6508451293e1b725fd0d42e43deceb357f1ec902cef60d38a49fd"
+      "sha256": "b840c01a37776dc9d39003417799757bc4df8a05ea7d660e8bee8872be2ab27e"
     },
     {
       "audit": {
@@ -10645,6 +10766,22 @@
       "path": "src/digital_twin/grounding/protocols.py",
       "risk": "high",
       "sha256": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Reference-uniqueness review verifies deterministic unique, alternate-valid, partial, conflicting, unrelated, ambiguous, and unresolved classification; canonical-equivalent duplicate regions are accepted while decision-changing ambiguity fails closed.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/reference_uniqueness.py",
+      "risk": "high",
+      "sha256": "6ba664e8b0399ee92879278ba23b6d48590ddee906b1dc92991e3aae657f55e5"
     },
     {
       "audit": {
@@ -10761,10 +10898,10 @@
     {
       "audit": {
         "domain": "source-semantic-evidence-atoms",
-        "evidence": "Manual and focused-test review verifies immutable citable text, atom-specific source-only projections, canonical ranges, explicit relation groups, distinct multi-atom selection, authorization checks, bounded retrieval, and no question, gold, provider, or learner-state mutation of source truth.",
+        "evidence": "Semantic-gate review verifies strict public source scoping and V2 ambiguity-aware clarify/abstain behavior while retaining immutable citable text, canonical ranges, relation-aware atom selection, authorization checks, and V1 historical behavior.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex source-semantic-atom audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10772,7 +10909,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/semantic_evidence_atoms.py",
       "risk": "high",
-      "sha256": "b203d36ce2591802337c47c1625e8f350062f82ad025330bcffdb7f119b91d63"
+      "sha256": "30b90179eaf8489b761f57171a033745a39096218f3f5a42b4343f7ce8b0a13b"
     },
     {
       "audit": {
@@ -10793,10 +10930,10 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Manual and focused-test review verifies public-only source-cluster and exact-title scoping, deterministic per-target coverage and compactness ranking, distinct source-range selection, ambiguity clarification, source authorization, and student-visible authoring-markup rendering without provider or hidden-gold access.",
+        "evidence": "Source-range review verifies explicit public source/section cues produce strict source-path scoping while historical cluster/title scopes remain compatible; all ranking and rendering remain deterministic and hidden-gold-free.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10804,7 +10941,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/source_range_evidence.py",
       "risk": "high",
-      "sha256": "f9f67fdab6ca130aa634ededb6fa8dfdbbcc9236175a2b20300640741d61d11c"
+      "sha256": "e26e63478c1e00790f1e33b984cb8a774a90b86692f57410eb92ee155e98afdf"
     },
     {
       "audit": {
@@ -11177,10 +11314,10 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Post-execution freeze review revokes the one-time failure-validity audit authorization while retaining all provider, paid, final, autonomy, private-data, and same-data quality rerun blocks.",
+        "evidence": "Freeze review confirms both comparison attempts are revoked after the valid attempt-002 result while every provider, paid, final, autonomy, private-data, and other evaluation block remains active.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex failure-validity audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11188,15 +11325,15 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "153ba979c942393f8740c137a4f2b75c64788e0baf43862b60e33b4a910a1348"
+      "sha256": "4ecc7da2e1c4085d5b05f9c106e67a4b3a181703139f4444b6d14a30bdb6ebb7"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "T0 service review verifies ambiguity recommendations become deterministic clarify/abstain policy responses before generation, are included in sanitized evidence audit events, and preserve refusal precedence and existing provider boundaries.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11225,7 +11362,7 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Graph review verifies evidence recommendations propagate to T1-v1 and T1-v2 intent selection, refusal remains dominant, ambiguous evidence cannot reach generation, and existing bounded repair/fallback behavior is unchanged.",
         "findings": [],
         "reviewed_at": "2026-08-31",
         "reviewer": "Codex primary plus independent Impeccable cross-review"
@@ -11243,8 +11380,8 @@
         "domain": "governed-autonomy-v2-1",
         "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11353,7 +11490,7 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "API regression review verifies the ambiguity-safe evidence mode is accepted by configuration while preserving selected defaults, authentication boundaries, and factory startup behavior.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -11412,7 +11549,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "6f4b8e40abd891143027c6c8535035062f90d4469bc493420ab195eb9dc76345"
+      "sha256": "1e7639d1a8c14ac24ae388ce125ae27248b94602f80e97168946b30ad931e50c"
     },
     {
       "audit": {
@@ -11444,7 +11581,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "84f481075d80b3ccaa84815575f7ab37200c062b516a83dd2f45fc82ce21036b"
+      "sha256": "9f85dad0643badc87664481a8eaa45db2d74a732aac5c7dc1051ea53b16f0969"
     },
     {
       "audit": {
@@ -11467,8 +11604,8 @@
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11476,7 +11613,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "6509a8b6ce2bb1db0a1f4e5b4bef1c19b84fd4d1d5fc84c68a2e884ebbb56688"
+      "sha256": "b9108184347b5e8d0fb67418743c5ac6707211fada766cccfdf742819e0cbd65"
     },
     {
       "audit": {
@@ -11897,10 +12034,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies revocation of the completed audit authorization and continued rejection of completed comparison, paid, final, autonomy, and historical execution identities.",
+        "evidence": "Freeze regression verifies both ambiguity-safe comparison attempts are rejected after terminal publication and provider, paid, final, autonomy, and every other historical execution remain rejected.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex failure-validity audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11908,7 +12045,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "d970c0b5be82a864df8db0afd231d2fa81bed73e188b6f8889794bba621506db"
+      "sha256": "fccbef6e799778309c32472149d5eec87214c3306fe43fa9c1454b02ce6ed0b4"
     },
     {
       "audit": {
@@ -12009,10 +12146,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify citable-text preservation, atom-specific projections, deterministic related and adjacent IDs, related multi-evidence resolution, and rejection of unrelated multi-atom evidence.",
+        "evidence": "Focused tests verify strict source scope, unique/alternate-valid/ambiguous classifications, V2 clarify behavior, V1 preservation, citable-text integrity, and related multi-evidence resolution.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex source-semantic-atom audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12020,7 +12157,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_semantic_evidence_atoms.py",
       "risk": "medium",
-      "sha256": "f9821b3da9ce8a9e2cfe3cd88b4be27c92d0b126d57195716e543049c1ca2d29"
+      "sha256": "dbb72111b44e8c9bc20046da692325b98e039ecac452ea6415ca44b509c215c8"
     },
     {
       "audit": {
@@ -12041,10 +12178,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify semantic source normalization, canonical source rendering, public cluster anchors, exact-title scoping, distinct multi-target source ranges, and strict versus permissive handling of ambiguous source details.",
+        "evidence": "Focused tests verify explicit source-path and section parsing, strict scope rejection, historical source-cluster/title behavior, distinct multi-target ranges, and deterministic rendering.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewer": "Codex ambiguity-safe grounding audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12052,7 +12189,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_source_range_evidence.py",
       "risk": "medium",
-      "sha256": "2acdfbfe4c6f82a7aa65db467f5a289cc9cc3758bdbfdf1144d2ebc8bc9a0f51"
+      "sha256": "7c36c2e3061f43614868ea7bcc90b3355732efa027f63912dc41860e6fc9e24c"
     },
     {
       "audit": {
@@ -12325,6 +12462,22 @@
       "path": "tests/test_academic_factual_qa_action_router_product_checkpoint.py",
       "risk": "medium",
       "sha256": "3ff7330b05fcf99f5389777ba3ab3a335e14d3501c084f47215eb5caff5a558c"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify all planted relationship classes, fresh package integrity, both terminal attempt revocations, ambiguity-to-clarify propagation, and regression coverage for the scorer metric namespace defect.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_ambiguity_safe_successor.py",
+      "risk": "medium",
+      "sha256": "48e45b64858952352d6c5e8c3dcde546d12f3ff8dab29bb2828b8c40d8a788f2"
     },
     {
       "audit": {
@@ -14536,8 +14689,8 @@
     }
   ],
   "risk_counts": {
-    "high": 660,
-    "medium": 205
+    "high": 668,
+    "medium": 206
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

@@ -441,27 +441,70 @@ def _other_course(course_id: str, course_ids: list[str]) -> str:
 def _question_for_target(
     cluster: SourceClusterV2,
     target: ReferenceTargetV1,
+    *,
+    public_source_scope: bool = False,
+    cues: tuple[str, ...] | None = None,
 ) -> str:
-    cue = _cue(" ".join(target.canonical_claims))
+    resolved_cues = cues or tuple(_cue(value) for value in target.canonical_claims)
+    if len(resolved_cues) != len(target.canonical_claims):
+        raise ValueError("one public cue is required for every canonical claim")
+    cue = " ".join(resolved_cues)
+    scope = (
+        f'Using source "{cluster.source_path}" in section '
+        f'"{cluster.section_heading}", '
+        if public_source_scope
+        else ""
+    )
     if target.slice == "direct-factual":
-        return f'What fact does "{cluster.section_heading}" state about {cue}?'
+        body = (
+            f"what fact does the section state about {cue}?"
+            if public_source_scope
+            else f'What fact does "{cluster.section_heading}" state about {cue}?'
+        )
+        return scope + body
     if target.slice == "paraphrased":
-        return f"How can the source point about {cue} be restated?"
+        return scope + f"how can the source point about {cue} be restated?"
     if target.slice == "definition-explanation":
-        return f'How does "{cluster.section_heading}" explain {cue}?'
+        body = (
+            f"how does the section explain {cue}?"
+            if public_source_scope
+            else f'How does "{cluster.section_heading}" explain {cue}?'
+        )
+        return scope + body
     if target.slice == "multi-evidence":
-        return (
-            f'Which two statements in "{cluster.section_heading}" connect '
-            f"{_cue(target.canonical_claims[0])} with "
-            f"{_cue(target.canonical_claims[1])}?"
+        context = "" if public_source_scope else f'in "{cluster.section_heading}" '
+        return scope + (
+            f"which two statements {context}connect "
+            f"{resolved_cues[0]} with "
+            f"{resolved_cues[1]}?"
         )
     if target.slice == "structured-code":
-        return f'What code detail in "{cluster.section_heading}" concerns {cue}?'
+        context = "" if public_source_scope else f'in "{cluster.section_heading}" '
+        return scope + f"what code detail {context}concerns {cue}?"
     if target.slice == "structured-equation":
-        return f'What equation in "{cluster.section_heading}" concerns {cue}?'
+        context = "" if public_source_scope else f'in "{cluster.section_heading}" '
+        return scope + f"what equation {context}concerns {cue}?"
     if target.slice == "structured-table":
-        return f'What table entry in "{cluster.section_heading}" concerns {cue}?'
+        context = "" if public_source_scope else f'in "{cluster.section_heading}" '
+        return scope + f"what table entry {context}concerns {cue}?"
     raise ValueError(f"unsupported reference slice: {target.slice}")
+
+
+def question_for_reference_target(
+    cluster: SourceClusterV2,
+    target: ReferenceTargetV1,
+    *,
+    public_source_scope: bool,
+    cues: tuple[str, ...] | None = None,
+) -> str:
+    """Build a public question without exposing internal runtime identifiers."""
+
+    return _question_for_target(
+        cluster,
+        target,
+        public_source_scope=public_source_scope,
+        cues=cues,
+    )
 
 
 def build_reference_cluster_rows(
@@ -469,6 +512,7 @@ def build_reference_cluster_rows(
     *,
     course_ids: list[str],
     source_derived_region_ids: bool = False,
+    public_source_scope: bool = False,
 ) -> tuple[list[EvaluationCaseV1], list[EvaluationGoldV1]]:
     """Build public cases and hidden gold from the prospective references."""
 
@@ -476,7 +520,11 @@ def build_reference_cluster_rows(
     gold: list[EvaluationGoldV1] = []
     for index, target in enumerate(cluster.reference_targets, start=1):
         case_id = f"{cluster.cluster_id}-q{index}"
-        question = _question_for_target(cluster, target)
+        question = _question_for_target(
+            cluster,
+            target,
+            public_source_scope=public_source_scope,
+        )
         claims: list[EvaluationClaimV1] = []
         for claim_index, (claim, span) in enumerate(
             zip(target.canonical_claims, target.evidence_spans, strict=True), start=1

@@ -47,6 +47,7 @@ from src.digital_twin.generation import (
     StrictEvidenceGroundedPromptBuilder,
 )
 from src.digital_twin.grounding import (
+    AmbiguitySafeEvidenceGateV1,
     AtomicClaimEvidenceValidator,
     ExactQuoteAtomicClaimVerifier,
     LocalCourseSourceIngestionService,
@@ -493,6 +494,17 @@ def _configured_evidence_gate(settings: AppSettings):
         return StructuredLexicalCoverageEvidenceGate(
             minimum_content_matching_terms=2,
             evidence_limit=3,
+        )
+    if (
+        settings.evidence_gate_mode
+        == EvidenceGateMode.AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1
+    ):
+        return AmbiguitySafeEvidenceGateV1(
+            StructuredLexicalCoverageEvidenceGate(
+                minimum_content_matching_terms=2,
+                evidence_limit=3,
+            ),
+            evidence_limit=5,
         )
     raise ValueError("unsupported evidence gate mode")
 

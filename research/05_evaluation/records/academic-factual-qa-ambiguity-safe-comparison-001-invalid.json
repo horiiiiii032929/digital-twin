@@ -1,0 +1,98 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-ambiguity-safe-comparison-001-invalid",
+  "program_id": "course-digital-twin-grounding-correction-003",
+  "stage_id": "ambiguity-safe-comparison-attempt-001",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [],
+  "decision_question": "Does the ambiguity-safe candidate pass the frozen grounding gates without regressing against the source-semantic baseline?",
+  "code_revision": "4f513fc",
+  "dirty_state": false,
+  "started_at": "2026-09-01T06:10:00Z",
+  "completed_at": "2026-09-01T06:11:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_001.json",
+      "sha256": "aef941e0b1d8299eeeda5a8741652bbb4af3b833309816e57e3af6a388730350",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-001/source-semantic-evidence-atoms-v1-responses.json",
+      "sha256": "a15ab308442cb842c7cbee984499bd4c894a719e427f5e36b51fed9d76ebbcfb",
+      "role": "baseline-responses"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-001/ambiguity-safe-source-semantic-evidence-atoms-v2-responses.json",
+      "sha256": "558c628ada483f77fcac639da92ffd07f65b7a25c23efd84b49541f8b176727d",
+      "role": "candidate-responses"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "ambiguity-safe-comparison-harness-v1",
+      "version": "attempt-001",
+      "role": "candidate",
+      "changed_planes": ["evaluation"],
+      "metrics": [
+        {
+          "name": "persisted-responses",
+          "value": 1000,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1000,
+          "passed": true
+        },
+        {
+          "name": "terminal-result-records",
+          "value": 0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "response-persistence-before-gold",
+          "passed": true,
+          "evidence": "Both 500-response packages were durably persisted before scoring opened hidden gold."
+        },
+        {
+          "name": "terminal-scoring-decision",
+          "passed": false,
+          "evidence": "Decision assembly raised KeyError because the grounded-success metric was read from the wrong aggregate namespace."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "evaluation",
+      "count": 1,
+      "evidence": "The runner expected aggregate.fully_grounded_factual_success, while the scorer contract exposes aggregate.metrics.fully_grounded_factual_success."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Preserve the invalid attempt, revoke its authority, and permit one fresh harness-only correction without changing method, cases, gold, or gates."
+  },
+  "limitations": [
+    "No candidate-quality conclusion is valid from this attempt.",
+    "Generated response files remain ignored but are hash-bound in this record.",
+    "The corrective attempt must use a fresh run identity and exclusive output path."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-ambiguity-safe-comparison-001-invalid-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-ambiguity-safe-comparison-001-invalid.json"
+}

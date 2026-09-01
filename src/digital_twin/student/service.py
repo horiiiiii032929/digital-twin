@@ -85,6 +85,7 @@ from src.digital_twin.student.tutoring_graph import (
     TutoringGraphInput,
     TutoringIntent,
     TutoringMode,
+    retrieval_boundary_intent,
     initial_learner_state,
 )
 class StudentWorkflowError(ValueError):
@@ -301,13 +302,23 @@ class StudentTutoringService:
                 conversation=conversation,
                 question=content,
             )
-            answer, generation_events = await self._generate(
-                release,
-                hits,
-                content,
-                account_id=account_id,
-                conversation=conversation,
+            tutoring_intent = retrieval_boundary_intent(retrieval_events)
+            boundary_answer = (
+                self._graph_policy_answer(tutoring_intent)
+                if tutoring_intent is not None
+                else None
             )
+            if boundary_answer is not None:
+                answer = boundary_answer
+                generation_events = []
+            else:
+                answer, generation_events = await self._generate(
+                    release,
+                    hits,
+                    content,
+                    account_id=account_id,
+                    conversation=conversation,
+                )
         else:
             prior_state = self.repository.get_learner_state(conversation.id)
             if prior_state is None:
@@ -1081,6 +1092,7 @@ class StudentTutoringService:
                     "sufficient": decision.sufficient,
                     "score": decision.score,
                     "selected_hit_count": len(decision.selected_hit_ids),
+                    "recommended_action": decision.recommended_action,
                 },
             )
         )
