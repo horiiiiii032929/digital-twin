@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Awaitable, Callable
+import hashlib
 import json
 import math
 import os
@@ -186,29 +187,142 @@ class OpenAiResponsesClient:
             "metadata": {"task": task},
         }
 
+    def _usage(self, payload: dict[str, Any]) -> GenerationUsage:
+        usage = payload.get("usage", {})
+        if not isinstance(usage, dict):
+            raise ValueError("usage is not an object")
+        input_tokens = _token_count(usage, "input_tokens")
+        output_tokens = _token_count(usage, "output_tokens")
+        cost = (
+            input_tokens * self.input_price + output_tokens * self.output_price
+        ) / 1_000_000
+        return GenerationUsage(
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=input_tokens + output_tokens,
+            approximate_cost_usd=cost,
+        )
+
     @staticmethod
-    def _output_text(payload: dict[str, Any]) -> str:
+    def _privacy_safe_diagnostics(
+        response: httpx.Response,
+        payload: dict[str, Any] | None,
+        *,
+        stage: str,
+    ) -> dict[str, Any]:
+        output_item_types: list[str] = []
+        content_part_types: list[str] = []
+        output_text_count = 0
+        refusal_present = False
+        if isinstance(payload, dict):
+            output = payload.get("output")
+            if isinstance(output, list):
+                for item in output:
+                    if not isinstance(item, dict):
+                        output_item_types.append(type(item).__name__)
+                        continue
+                    output_item_types.append(str(item.get("type") or "missing"))
+                    content = item.get("content")
+                    if not isinstance(content, list):
+                        continue
+                    for part in content:
+                        if not isinstance(part, dict):
+                            content_part_types.append(type(part).__name__)
+                            continue
+                        part_type = str(part.get("type") or "missing")
+                        content_part_types.append(part_type)
+                        output_text_count += int(part_type == "output_text")
+                        refusal_present = refusal_present or part_type == "refusal"
+        incomplete = payload.get("incomplete_details") if isinstance(payload, dict) else None
+        provider_error = payload.get("error") if isinstance(payload, dict) else None
+        return {
+            "failure_stage": stage,
+            "http_status": response.status_code,
+            "response_sha256": hashlib.sha256(response.content).hexdigest(),
+            "response_status": (
+                str(payload.get("status"))
+                if isinstance(payload, dict) and payload.get("status") is not None
+                else None
+            ),
+            "incomplete_reason": (
+                str(incomplete.get("reason"))
+                if isinstance(incomplete, dict) and incomplete.get("reason") is not None
+                else None
+            ),
+            "provider_error_code": (
+                str(provider_error.get("code"))
+                if isinstance(provider_error, dict) and provider_error.get("code") is not None
+                else None
+            ),
+            "output_item_types": output_item_types,
+            "content_part_types": content_part_types,
+            "output_text_count": output_text_count,
+            "refusal_present": refusal_present,
+        }
+
+    def _malformed(
+        self,
+        response: httpx.Response,
+        payload: dict[str, Any] | None,
+        *,
+        stage: str,
+        usage: GenerationUsage | None = None,
+    ) -> LlmMalformedResponseError:
+        observed_model = (
+            str(payload.get("model"))
+            if isinstance(payload, dict) and payload.get("model") is not None
+            else None
+        )
+        return LlmMalformedResponseError(
+            stage=stage,
+            provider_model=observed_model,
+            provider_revision=self.model if observed_model == self.model else None,
+            usage=usage,
+            diagnostics=self._privacy_safe_diagnostics(
+                response,
+                payload,
+                stage=stage,
+            ),
+        )
+
+    def _output_text(
+        self,
+        response: httpx.Response,
+        payload: dict[str, Any],
+        *,
+        usage: GenerationUsage,
+    ) -> str:
         if payload.get("status") != "completed":
-            raise LlmMalformedResponseError()
+            raise self._malformed(
+                response, payload, stage="response-status", usage=usage
+            )
         values: list[str] = []
         output = payload.get("output")
         if not isinstance(output, list):
-            raise LlmMalformedResponseError()
+            raise self._malformed(
+                response, payload, stage="output-shape", usage=usage
+            )
         for item in output:
             if not isinstance(item, dict) or item.get("type") != "message":
                 continue
             content = item.get("content")
             if not isinstance(content, list):
-                raise LlmMalformedResponseError()
+                raise self._malformed(
+                    response, payload, stage="content-shape", usage=usage
+                )
             for part in content:
                 if isinstance(part, dict) and part.get("type") == "refusal":
-                    raise LlmMalformedResponseError()
+                    raise self._malformed(
+                        response, payload, stage="refusal", usage=usage
+                    )
                 if isinstance(part, dict) and part.get("type") == "output_text":
                     text = part.get("text")
                     if isinstance(text, str) and text.strip():
                         values.append(text)
         if len(values) != 1:
-            raise LlmMalformedResponseError()
+            raise self._malformed(
+                response, payload, stage="output-text-count", usage=usage
+            )
         return values[0]
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
@@ -240,9 +354,11 @@ class OpenAiResponsesClient:
         try:
             payload = response.json()
         except ValueError as error:
-            raise LlmMalformedResponseError() from error
+            raise self._malformed(
+                response, None, stage="response-json-decode"
+            ) from error
         if not isinstance(payload, dict):
-            raise LlmMalformedResponseError()
+            raise self._malformed(response, None, stage="response-root")
         observed_model = payload.get("model")
         if observed_model != self.model:
             raise LlmIdentityDriftError(
@@ -250,9 +366,23 @@ class OpenAiResponsesClient:
                 provider_revision=None,
             )
         try:
-            content = json.loads(self._output_text(payload))
-            if not isinstance(content, dict):
-                raise ValueError("structured output root is not an object")
+            usage = self._usage(payload)
+        except (TypeError, ValueError) as error:
+            raise self._malformed(
+                response, payload, stage="usage-validation"
+            ) from error
+        output_text = self._output_text(response, payload, usage=usage)
+        try:
+            content = json.loads(output_text)
+        except (TypeError, ValueError) as error:
+            raise self._malformed(
+                response, payload, stage="structured-json-decode", usage=usage
+            ) from error
+        if not isinstance(content, dict):
+            raise self._malformed(
+                response, payload, stage="structured-root", usage=usage
+            )
+        try:
             if task == "grounded_tutor_atomic_claims":
                 validated = ModelTutorOutputV2.model_validate(content)
             elif task == "autonomous_tutoring_plan":
@@ -261,26 +391,15 @@ class OpenAiResponsesClient:
                 validated = ReactiveSemanticProposalV2.model_validate(content)
             else:
                 validated = ModelTutorOutput.model_validate(content)
-            usage = payload.get("usage", {})
-            if not isinstance(usage, dict):
-                raise ValueError("usage is not an object")
-            input_tokens = _token_count(usage, "input_tokens")
-            output_tokens = _token_count(usage, "output_tokens")
         except (TypeError, ValueError) as error:
-            raise LlmMalformedResponseError() from error
-        cost = (
-            input_tokens * self.input_price + output_tokens * self.output_price
-        ) / 1_000_000
+            raise self._malformed(
+                response, payload, stage="schema-validation", usage=usage
+            ) from error
         return LlmResponse(
             content=validated.model_dump_json(),
             provider_model=observed_model,
             provider_revision=self.model,
-            usage=GenerationUsage(
-                input_tokens=input_tokens,
-                output_tokens=output_tokens,
-                total_tokens=input_tokens + output_tokens,
-                approximate_cost_usd=cost,
-            ),
+            usage=usage,
         )
 
 

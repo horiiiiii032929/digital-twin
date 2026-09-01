@@ -444,6 +444,18 @@ def test_bounded_pedagogical_prompt_carries_only_code_selected_plan():
     assert '"claims"' in prompt.messages[0].content
 
 
+def test_bounded_pedagogical_prompt_uses_claim_only_contract_without_intent():
+    prompt = BoundedPedagogicalPromptBuilder().build(
+        "How does CSRF work?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert '"claims"' in prompt.messages[0].content
+    assert '"answer"' not in prompt.messages[0].content
+    assert '"citation_ids": ["S1"]' not in prompt.messages[0].content
+
+
 @pytest.mark.asyncio
 async def test_deterministic_generator_produces_grounded_citation_and_trace():
     answer = await DeterministicGroundedGenerator().generate(

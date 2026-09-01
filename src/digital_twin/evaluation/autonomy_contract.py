@@ -174,6 +174,9 @@ class AutonomyProviderCallV1(_Contract):
     reported_cost_usd: float | None = Field(default=None, ge=0, allow_inf_nan=False)
     latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
     error_code: str | None = Field(default=None, max_length=128)
+    failure_diagnostics: dict[
+        str, str | int | bool | None | list[str]
+    ] | None = None
 
     @model_validator(mode="after")
     def accounting_must_be_consistent(self) -> "AutonomyProviderCallV1":
@@ -183,6 +186,10 @@ class AutonomyProviderCallV1(_Contract):
             raise ValueError("completed provider call requires returned model identity")
         if self.status == "failed" and self.error_code is None:
             raise ValueError("failed provider call requires a bounded error code")
+        if self.failure_diagnostics is not None:
+            forbidden = {"content", "text", "message", "prompt", "refusal_text"}
+            if forbidden.intersection(self.failure_diagnostics):
+                raise ValueError("provider diagnostics contain unrestricted content")
         return self
 
 

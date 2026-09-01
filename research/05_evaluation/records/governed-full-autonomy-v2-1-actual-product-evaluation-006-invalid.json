@@ -1,0 +1,124 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-006-invalid",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-evaluation",
+  "stage_id": "actual-product-attempt-006",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-actual-product-evaluation-005-invalid"
+  ],
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior under provider-backed realistic virtual time?",
+  "code_revision": "f743cbd8cce470afd37744d9bd95b7588fcbbd5a",
+  "dirty_state": false,
+  "started_at": "2026-09-01T17:10:29Z",
+  "completed_at": "2026-09-01T17:10:48Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_006.json",
+      "sha256": "54f343c2f5d64b49ceac587f6f62e4a8217a9be37559875c71f0359c8f58e886",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-006/public-cases.json",
+      "sha256": "bf217722eb2802ff6c5b0f7878f4c82796b9fcd15658b21012e8c084276b55b4",
+      "role": "public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-006/responses.sqlite3",
+      "sha256": "5cfb4601227babc8bed304b2a5b090cd4bced666ac54e14c6d1f4862f1530f1b",
+      "role": "ignored-atomic-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-006/result.json",
+      "sha256": "89a0b84580cb1b870d8b64221ea08629d1bb3999b60a6270740caa81419e2c6f",
+      "role": "ignored-terminal-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "actual-product-evaluation-privacy-safe-diagnostics-v1",
+      "version": "attempt-006",
+      "role": "candidate",
+      "changed_planes": [
+        "operations",
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "canary-cases-persisted",
+          "value": 2,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2,
+          "passed": true
+        },
+        {
+          "name": "bulk-cases-executed",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "failure-stage-classified",
+          "value": 1,
+          "unit": "boolean",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "bulk-stops-on-canary-failure",
+          "passed": true,
+          "evidence": "Both canaries were persisted and the remaining 818 cases were not started."
+        },
+        {
+          "name": "hidden-gold-remains-closed",
+          "passed": true,
+          "evidence": "No hidden-gold file was materialized or loaded."
+        },
+        {
+          "name": "all-provider-canaries-valid",
+          "passed": false,
+          "evidence": "The T0 non-intent prompt contradicted the authoritative atomic-claim response contract."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 11,
+    "completed_provider_calls": 7,
+    "failed_provider_calls": 4,
+    "input_tokens": 5123,
+    "output_tokens": 759,
+    "reported_cost_usd": 0.0112615,
+    "malformed_responses": 3,
+    "provider_failures": 1,
+    "p95_latency_ms": 2822.34,
+    "post_stop_diagnostic_calls": 0
+  },
+  "failures": [
+    {
+      "category": "implementation",
+      "count": 3,
+      "evidence": "Privacy-safe diagnostics classified all completed T0 generation failures at local schema validation. The T0 builder asked for answer/citation_ids while the API and validator required claims; the T1-v2 claims-only path completed normally."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Revoke 006, preserve it as invalid operational evidence, and permit one prompt-schema-aligned successor without changing cases, gold, retrieval, model roles, or quality gates."
+  },
+  "limitations": [
+    "No provider-backed autonomy-quality conclusion is valid from this attempt.",
+    "Unrestricted provider response text was not retained; the cause was established from bounded diagnostics and the conflicting runtime contracts.",
+    "The 820-case network-free pass remains infrastructure evidence and cannot promote T1-v2."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-evaluation-006-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-006-invalid.json"
+}

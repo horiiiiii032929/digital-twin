@@ -57,23 +57,39 @@ class BudgetedLlmClient:
                 response = await self.client.chat(messages, task)
             except BaseException as error:
                 latency_ms = max(0.0, (time.perf_counter() - started) * 1_000)
-                self._unknown_cost_calls += 1
-                self._cost_reporting_failed = True
-                self._call_records.append(
-                    {
+                usage = getattr(error, "usage", None)
+                input_tokens = int(getattr(usage, "input_tokens", 0) or 0)
+                output_tokens = int(getattr(usage, "output_tokens", 0) or 0)
+                total_tokens = input_tokens + output_tokens
+                cost = getattr(usage, "approximate_cost_usd", None)
+                if cost is None:
+                    self._unknown_cost_calls += 1
+                    self._cost_reporting_failed = True
+                else:
+                    self._input_tokens += input_tokens
+                    self._output_tokens += output_tokens
+                    self._reported_cost_usd += float(cost)
+                record = {
                         "call_number": call_number,
                         "task": task,
                         "status": "failed",
-                        "provider_model": None,
-                        "provider_revision": None,
-                        "input_tokens": 0,
-                        "output_tokens": 0,
-                        "total_tokens": 0,
-                        "reported_cost_usd": None,
+                        "provider_model": getattr(error, "provider_model", None),
+                        "provider_revision": getattr(
+                            error, "provider_revision", None
+                        ),
+                        "input_tokens": input_tokens,
+                        "output_tokens": output_tokens,
+                        "total_tokens": total_tokens,
+                        "reported_cost_usd": (
+                            round(float(cost), 10) if cost is not None else None
+                        ),
                         "latency_ms": round(latency_ms, 3),
                         "error_code": getattr(error, "code", type(error).__name__),
                     }
-                )
+                diagnostics = getattr(error, "diagnostics", None)
+                if isinstance(diagnostics, dict) and diagnostics:
+                    record["failure_diagnostics"] = dict(diagnostics)
+                self._call_records.append(record)
                 raise
             latency_ms = max(0.0, (time.perf_counter() - started) * 1_000)
             cost = response.usage.approximate_cost_usd

@@ -1,4 +1,5 @@
 from datetime import UTC, datetime
+from types import SimpleNamespace
 
 import pytest
 
@@ -66,6 +67,37 @@ def test_actual_product_public_contract_does_not_contain_gold() -> None:
     }
     assert all(not forbidden.intersection(row["case"]) for row in public["rows"])
     assert public["content_sha256"] != builder.hidden_gold_payload()["content_sha256"]
+
+
+def test_frequency_gate_counts_only_autonomous_deliveries() -> None:
+    response = SimpleNamespace(
+        actions=[
+            *[
+                SimpleNamespace(
+                    action_id=f"turn:{index}",
+                    status="delivered",
+                    action="provide-hint-or-example",
+                    at_seconds=index * 60,
+                )
+                for index in range(8)
+            ],
+            *[
+                SimpleNamespace(
+                    action_id=f"autonomous:{index}",
+                    status="delivered",
+                    action="send-in-app-check-in",
+                    at_seconds=index * builder.DAY,
+                )
+                for index in range(4)
+            ],
+        ]
+    )
+
+    assert runner._proactive_frequency_violation_count(
+        [("t1-v2-autonomous", response)],
+        window_seconds=7 * builder.DAY,
+        maximum_deliveries=3,
+    ) == 1
 
 
 def test_actual_product_runner_is_blocked_after_authority_revocation() -> None:

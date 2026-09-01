@@ -1051,6 +1051,25 @@ Current utilities:
   final connectivity retry. Events, hidden gold, method, schemas, models, and
   gates are unchanged. Commands use the
   `governed-autonomy-v2-1-actual-product-evaluation-005` suffix.
+
+`governed-autonomy-v2-1-actual-product-evaluation-006` is the first
+diagnosable successor after the terminal malformed-response retries. It keeps
+the 820-case method and hidden gold unchanged while recording only bounded
+Responses API status, item/part types, refusal presence, response hashes, model
+identity, usage, and cost. It never retains unrestricted provider output.
+The run classified the T0 failures at local schema validation and exposed the
+non-intent answer-prompt versus atomic-claim-schema mismatch. It is terminal
+invalid evidence. The `007` commands preserve the same 820 cases, gold,
+retrieval, models, and gates while correcting only that demonstrated runtime
+prompt binding. Attempt 007 passed both canaries but stopped before hidden gold
+after proving its 3,000-call ceiling could not contain the conservative
+5,740-call upper bound. The `008` commands keep every evaluation and product
+binding unchanged, perform that call projection before bulk, use a 10,000-call
+safety ceiling, and process at most eight independent cases concurrently while
+persisting every completed case atomically. Attempt 008 completed 820/820 and is
+terminal `Refine`: corrected frequency and paired-grounding analysis pass, but
+all 290 expected proactive check-ins were emitted as diagnostic questions. Its
+authorization is revoked; the opened cases must not be reused for confirmation.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

@@ -212,6 +212,18 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_006.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_007.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_008.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_whole_system_architecture_round.py": (
             "method_evaluation_execution",
         ),

@@ -5,6 +5,7 @@ from services.llm.openai_responses_client import OpenAiResponsesClient
 from src.digital_twin.llm import (
     LlmAuthenticationError,
     LlmIdentityDriftError,
+    LlmMalformedResponseError,
     LlmMessage,
 )
 
@@ -176,3 +177,98 @@ async def test_openai_responses_client_requires_environment_owned_key(monkeypatc
             [LlmMessage(role="user", content="Question")],
             task="grounded_tutor_answer",
         )
+
+
+@pytest.mark.asyncio
+async def test_openai_responses_client_classifies_incomplete_without_content(
+    monkeypatch,
+):
+    async def post(**kwargs):
+        del kwargs
+        return httpx.Response(
+            200,
+            request=httpx.Request("POST", OpenAiResponsesClient.API_URL),
+            json={
+                "status": "incomplete",
+                "incomplete_details": {"reason": "max_output_tokens"},
+                "model": MODEL,
+                "output": [],
+                "usage": {"input_tokens": 12, "output_tokens": 600},
+            },
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient(MODEL, post=post)
+
+    with pytest.raises(LlmMalformedResponseError) as raised:
+        await client.chat(
+            [LlmMessage(role="user", content="Sensitive synthetic prompt")],
+            task="grounded_tutor_atomic_claims",
+        )
+
+    error = raised.value
+    assert error.stage == "response-status"
+    assert error.diagnostics["response_status"] == "incomplete"
+    assert error.diagnostics["incomplete_reason"] == "max_output_tokens"
+    assert error.diagnostics["output_text_count"] == 0
+    assert error.usage.total_tokens == 612
+    assert "Sensitive" not in str(error.diagnostics)
+
+
+@pytest.mark.asyncio
+async def test_openai_responses_client_classifies_refusal_without_refusal_text(
+    monkeypatch,
+):
+    async def post(**kwargs):
+        del kwargs
+        return httpx.Response(
+            200,
+            request=httpx.Request("POST", OpenAiResponsesClient.API_URL),
+            json={
+                "status": "completed",
+                "model": MODEL,
+                "output": [
+                    {
+                        "type": "message",
+                        "content": [
+                            {"type": "refusal", "refusal": "Private refusal text"}
+                        ],
+                    }
+                ],
+                "usage": {"input_tokens": 12, "output_tokens": 5},
+            },
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient(MODEL, post=post)
+
+    with pytest.raises(LlmMalformedResponseError) as raised:
+        await client.chat(
+            [LlmMessage(role="user", content="Question")],
+            task="grounded_tutor_atomic_claims",
+        )
+
+    assert raised.value.stage == "refusal"
+    assert raised.value.diagnostics["refusal_present"] is True
+    assert "Private refusal text" not in str(raised.value.diagnostics)
+
+
+@pytest.mark.asyncio
+async def test_openai_responses_client_classifies_schema_validation(monkeypatch):
+    async def post(**kwargs):
+        del kwargs
+        return _response(text='{"unexpected":"private generated value"}')
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient(MODEL, post=post)
+
+    with pytest.raises(LlmMalformedResponseError) as raised:
+        await client.chat(
+            [LlmMessage(role="user", content="Question")],
+            task="grounded_tutor_atomic_claims",
+        )
+
+    assert raised.value.stage == "schema-validation"
+    assert raised.value.diagnostics["output_text_count"] == 1
+    assert raised.value.usage.total_tokens == 17
+    assert "private generated value" not in str(raised.value.diagnostics)

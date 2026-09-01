@@ -310,7 +310,27 @@ explicitly requested one unchanged connectivity retry; attempt 005 preserved
 the method, schema, 820 cases, gold, models, and gates under a fresh ledger. It
 reproduced the same T0 malformed response while the following seven T1-v2 calls
 succeeded. Bulk and hidden gold remained closed, authority is revoked, and
-identical retries stop.
+identical retries stop. Successor 006 was not another unchanged retry: it added a
+privacy-safe Responses API diagnostic boundary that records response status,
+incomplete reason, provider error code, output/content types, refusal presence,
+response hash, returned identity, and reported usage/cost without retaining
+generated text. It classified the repeated T0 failures at local schema
+validation and exposed a concrete runtime mismatch: the T0 non-intent path used
+the obsolete answer/citation prompt while its API and validator required atomic
+claims. All seven T1-v2 Terra/mini calls completed. Attempt 006 stopped before
+818 bulk cases and hidden gold, cost USD 0.0112615, and is revoked as immutable
+invalid evidence. Successor 007 changed only that prompt inheritance. Its
+provider canaries passed and bulk execution started, but the canaries showed a
+conservative 5,740-call upper bound against the frozen 3,000-call ceiling. It
+was stopped after 32 durable cases and USD 0.12250275, before hidden gold
+opened. Successor 008 changed only the execution envelope and completed all 820
+cases for USD 5.5902555. The corrected result is `completed-refine`: every
+safety, scope, citation, restart, fallback, transition, termination, corrected
+frequency, and paired grounding gate passed, but all 290 expected proactive
+`send-in-app-check-in` actions were emitted as `ask-diagnostic-question`.
+Governed T1-v2.1 is therefore not promoted or deployed. The causal defect is
+that the live planner receives the full policy allowlist instead of an
+event-scoped eligible action set.
 
 The actual-service boundary is now implemented and qualified by
 `governed-full-autonomy-v2-1-actual-product-smoke-001`. Four synthetic-public
@@ -358,7 +378,7 @@ At the typed-run build checkpoint, GitHub tracked #153 as
 supersedes that operational status: #153 is `Done / Refine`, #156 and #157 are
 blocked, and parent #8 remains open as `Refine / No Release`. The execution
 freeze remains active with no paid/provider long-run operation authorized.
-Repository correctness is currently 861/861 audited execution-relevant files
+Repository correctness is currently 894/894 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
@@ -1837,7 +1857,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; ambiguity-safe grounding V2 passed fresh development gates; the actual-product harness passed all 820 network-free cases | Provider-backed attempts 003/004/005 were operationally invalid at canary; a new provider-output diagnostic and evaluation-method decision are required before promotion |
+| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 deployment retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; ambiguity-safe grounding V2 passed fresh development gates; provider-backed 008 completed 820/820 with every safety/persistence gate passing | Replace the full planner action palette with deterministic event-scoped eligibility, then confirm on fresh cases; do not reuse the opened 820 cases or promote current T1-v2.1 |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
@@ -1864,7 +1884,7 @@ operations, professor fidelity, and real-user evidence remain future work.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |
-| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Refine | Preserve 003/004/005 as invalid; stop identical retries and redesign bounded provider-output diagnostics before a fresh portfolio |
+| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Refine | Preserve 003–007 as invalid and 008 as valid Refine; implement deterministic event-scoped action eligibility and use fresh confirmation cases |
 | 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration only after product confirmation; do not infer a release claim from development evidence |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
 | 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |

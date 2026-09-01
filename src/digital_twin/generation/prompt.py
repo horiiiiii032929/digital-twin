@@ -296,7 +296,7 @@ class QuestionTargetedExtractionPromptBuilder(GroundedPromptBuilder):
         return package
 
 
-class BoundedPedagogicalPromptBuilder(GroundedPromptBuilder):
+class BoundedPedagogicalPromptBuilder(QuestionTargetedExtractionPromptBuilder):
     """T1-only prompt that binds generation to a code-selected tutoring move."""
 
     implementation_id = "bounded-pedagogical-prompt"

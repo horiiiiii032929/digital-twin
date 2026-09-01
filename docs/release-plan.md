@@ -378,4 +378,16 @@ connectivity and explicitly requested a retry, attempt 005 was frozen with no
 method, schema, case, gold, model, or gate change. It reproduced the same T0
 malformed-response pattern while the following seven T1-v2 calls succeeded.
 All 818 bulk cases and hidden gold remained closed. Authority is revoked;
-identical retries stop, and T1-v2 promotion remains unsupported.
+identical retries stop, and T1-v2 promotion remains unsupported. Successor 006
+added privacy-safe provider-response classification and exact malformed-call
+usage accounting. Its 11-call canary classified the T0 failure at local schema
+validation and revealed that the non-intent path used the obsolete answer
+prompt against the atomic-claim schema. It stopped before 818 bulk cases and
+hidden gold and is revoked. Successor 007 fixed only that runtime contract and
+passed both provider canaries. Successor 008 then completed all 820 cases under
+a corrected execution envelope. It is a valid Refine result: safety and
+persistence passed, but exact proactive action selection failed 290/290 because
+the live planner was offered the complete policy action palette. T1-v2.1
+remains unselected and cannot enter the local HTTPS release. The next candidate
+must add deterministic event-scoped action eligibility and use fresh
+confirmation cases before deployment.
