@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "86f3fc5f4fd3b1225ae929be3eb2572d8dd33980764d41c99ef3f963a5a3e17e"
+      "sha256": "50b5b29503760dc08ba5c981c156239f9a43db7d59955a3efb863fe2a6fd83a1"
     },
     {
       "audit_status": "audited",
@@ -5367,7 +5367,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "b7dd8743412d5a8a827dca874186b2ee52ab1f14d9e3685590332c083ef27319"
+      "sha256": "8b6b7d54cc35e17e2b3e793d535cec0c3e163996271da792f6c9c86bc6e50103"
     },
     {
       "audit_status": "audited",
@@ -5741,7 +5741,7 @@
       "path": "services/llm/openai_responses_client.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "c4c59ffa2fa18ae01bc07ca797319cb812aade0d3215bfc79e21103a245c1dda"
+      "sha256": "d4d4b4013119e329fac7dcdd91447296b70d4dac91056042ea41a758e34bcd7f"
     },
     {
       "audit_status": "audited",
@@ -6709,7 +6709,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 execution-authorization audit",
-      "sha256": "9575ec52c962bf0a407b83117b119eb682473418312ebc29619940559b78430b"
+      "sha256": "02200fe20cf5b4e857425c875671f9754832e91eb0a8835873acdd36f058d76a"
     },
     {
       "audit_status": "audited",
@@ -7171,7 +7171,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 execution-authorization audit",
-      "sha256": "4002dc1e5e577b9de89b0f52cb8e89e79aa8a2e8bd6fc3a7f9ea5b7e935d8d2b"
+      "sha256": "1af7dddffb7f6084b23541cb200c5f8decd79e6041716eec0fce89baac8edccd"
     },
     {
       "audit_status": "audited",
@@ -7369,7 +7369,7 @@
       "path": "tests/services/test_openai_responses_client.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "f87ba8ba92d45578fa1678baa02b463279927e9dd85099876c4d687fef592b30"
+      "sha256": "8b1eb14bf436c9d82ef45cba912050f54c6197a919dcb69da20efec04d97edaf"
     },
     {
       "audit_status": "audited",
@@ -9624,7 +9624,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 actual-product successor audit",
-      "sha256": "2ffaf2c33559fc0cd0a3423eda3001b002682ac1349891a25ee189e9fe5b4521"
+      "sha256": "69c1b82323ed4cb158a34cbfae9b0bda88429778f4e95043b7154f1e9afa93f1"
     },
     {
       "audit_status": "audited",
@@ -9657,7 +9657,51 @@
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 actual-product successor audit",
-      "sha256": "415e73c479decc7a0a33e26a8b7a473a511b9278e30b1a7589d923354f66116d"
+      "sha256": "8b90a6cd8fa8715ca2f2b43a9588e5b2fa48703e41692a00c36b243846ca9b84"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-004",
+      "evidence": "Corrective instrument review verifies that attempt 004 preserves attempt 003's 820-case portfolio, deterministic gold, selected grounding method, model roles, quality gates, and USD 50 ceiling while changing only the OpenAI strict-schema transport and using a fresh exclusive ledger.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_004.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 schema-correction audit",
+      "sha256": "1b40615f623fe8f6c2d2d4e355e8c2cbc62c4b43dade64bdcc9ac3ee487855b3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-004",
+      "evidence": "Corrective builder review verifies byte-equivalent events and gold relative to attempt 003 except for the new immutable dataset identity and hashes; it does not change the evaluated method, prompts, cases, gold, model roles, or gates.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 schema-correction audit",
+      "sha256": "410e46b3f1fe81aadba14c79f4b09b6db1b366ba37d2578418d9bce9a326d986"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-004",
+      "evidence": "Corrective runner review verifies validate, simulate, preflight, execute, and resume modes; exact freeze and model-identity guards; fresh exclusive output; atomic accounting; hidden-gold order; and the rule that attempt 004 is the final permitted harness-only correction.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 schema-correction audit",
+      "sha256": "b6ed31e145d8156d009e4bfdb17d1cfc6a84e707ac5e3c8b8140f6915502be96"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify attempt 004's event/gold equivalence with attempt 003, fresh identities and output path, strict bounded authority, final-attempt status, and rejection of any silent method or gate change.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 schema-correction audit",
+      "sha256": "8290421a96ced2fee765e621f514fc7617e07f8d037ac6bbfdb69a5b1731b384"
     }
   ],
   "schema_version": 1

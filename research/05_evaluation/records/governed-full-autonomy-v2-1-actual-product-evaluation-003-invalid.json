@@ -1,0 +1,124 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-003-invalid",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-evaluation",
+  "stage_id": "actual-product-attempt-003",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-actual-product-evaluation-002-build"
+  ],
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior under provider-backed realistic virtual time?",
+  "code_revision": "db805a945b7b6a9d1358869566c8143fa994f236",
+  "dirty_state": false,
+  "started_at": "2026-09-01T07:03:44Z",
+  "completed_at": "2026-09-01T07:04:03Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
+      "sha256": "2ffaf2c33559fc0cd0a3423eda3001b002682ac1349891a25ee189e9fe5b4521",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-003/public-cases.json",
+      "sha256": "40ac81e8d25d6e94b46708dc72e9c15f1dfa1e68d4d63a69819d2a3d657b8ee3",
+      "role": "public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-003/responses.sqlite3",
+      "sha256": "cf518342a46672f949b7fc49a8c62e088a5924950db271b01ac565f2b8746594",
+      "role": "ignored-atomic-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-003/result.json",
+      "sha256": "0234f44c12e91df9f73168b4fbf8d475218d9dd8b3a0d445d51b11b00139a966",
+      "role": "ignored-terminal-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "actual-product-evaluation-provider-schema-v1",
+      "version": "attempt-003",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "canary-cases-persisted",
+          "value": 2,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2,
+          "passed": true
+        },
+        {
+          "name": "bulk-cases-executed",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "exact-canary-model-role-coverage",
+          "value": 0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "bulk-stops-on-canary-failure",
+          "passed": true,
+          "evidence": "Both canaries were persisted and the remaining 818 cases were not started."
+        },
+        {
+          "name": "hidden-gold-remains-closed",
+          "passed": true,
+          "evidence": "No hidden-gold file was materialized or loaded."
+        },
+        {
+          "name": "exact-planner-identity-observed",
+          "passed": false,
+          "evidence": "The Terra request was rejected before inference because the strict provider schema omitted defaulted properties from required."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 9,
+    "completed_provider_calls": 7,
+    "failed_provider_calls": 2,
+    "input_tokens": 3438,
+    "output_tokens": 474,
+    "reported_cost_usd": 0.0047115,
+    "malformed_responses": 0,
+    "provider_failures": 2,
+    "p95_latency_ms": 11823.0238,
+    "post_stop_diagnostic_calls": 2,
+    "post_stop_diagnostic_accounting_note": "One rejected schema probe and one successful schema-correction probe were outside the immutable run ledger; their exact token/cost totals were not retained."
+  },
+  "failures": [
+    {
+      "category": "evaluation",
+      "count": 1,
+      "evidence": "OpenAI returned invalid_json_schema: every object property must appear in required; schema_version was the first missing property."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Preserve the invalid attempt, revoke 003, and use the single preregistered harness-only correction with identical events, gold, method, models, and gates."
+  },
+  "limitations": [
+    "No autonomy-quality conclusion is valid from this attempt.",
+    "Two post-stop API schema probes were not written to the immutable evaluation ledger; this is disclosed rather than reconstructed.",
+    "Attempt 004 is the final permitted execution attempt for this portfolio."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-evaluation-003-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-003-invalid.json"
+}

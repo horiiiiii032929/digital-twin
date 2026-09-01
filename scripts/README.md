@@ -1038,6 +1038,13 @@ Current utilities:
   and the complete network-free simulation must pass before freeze authority
   enables direct OpenAI canaries and a resumable paid run. Commands use the
   `governed-autonomy-v2-1-actual-product-evaluation-003` suffix.
+- `build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py` and
+  `run_governed_full_autonomy_v2_1_actual_product_evaluation_004.py`: preserve
+  003 as invalid canary evidence and apply its one permitted harness-only
+  correction. The public events, hidden gold, method, models, and gates are
+  unchanged; only Pydantic schemas are translated to OpenAI's conservative
+  strict subset before post-parse Pydantic validation. Commands use the
+  `governed-autonomy-v2-1-actual-product-evaluation-004` suffix.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

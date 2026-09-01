@@ -364,7 +364,10 @@ The corresponding #157 successor is now built as
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. The 820-case
 network-free qualification passes through the actual tutoring, autonomy,
 outreach, SQLite, checkpoint, outbox, and virtual-time paths using the selected
-V2 grounding binding. One-time direct OpenAI execution is now authorized only
-for this exact frozen instrument under 3,000-call and USD 50 ceilings. T1-v2
-promotion and the release decision remain closed until the result is recorded
-and authorization is revoked.
+V2 grounding binding. Attempt 003 then stopped after two canaries because the
+provider strict-schema contract required every property in `required`; bulk
+cases and hidden gold remained unopened. Attempt 004 is the one permitted
+harness-only correction. It changes only provider schema translation and keeps
+the same portfolio, gold, method, model roles, and gates under the unchanged
+3,000-call and USD 50 ceilings. T1-v2 promotion remains closed pending its
+result.

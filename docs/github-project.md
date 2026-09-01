@@ -140,10 +140,12 @@ That immutable candidate is now
 exact Keep record and selected architecture, adds only public source/section
 scope to the prospective questions, and injects the source-semantic retriever
 plus ambiguity-safe V2 gate through the actual tutoring service. Its complete
-820-case network-free run passed every hard gate with zero provider calls. #157
-is therefore `In Progress / Go Deeper`; its exact one-time paid execution is
-authorized under 3,000-call and USD 50 ceilings. No autonomous release claim
-exists until the result is recorded and the authority is revoked.
+820-case network-free run passed every hard gate with zero provider calls.
+Provider attempt 003 stopped at the canary gate because its strict schema was
+not API-compatible; all 818 bulk cases and hidden gold stayed closed. #157 is
+therefore `In Progress / Go Deeper`; final attempt 004 changes only schema
+translation and is authorized under the same 3,000-call and USD 50 ceilings.
+No autonomous release claim exists until its result is recorded.
 
 ## Release stages and product gates
 
