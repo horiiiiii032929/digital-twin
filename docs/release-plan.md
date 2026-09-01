@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-31
+Status date: 2026-09-02
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -24,19 +24,20 @@ asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates
 pass.
 
-The current release-selection successor is the finite cross-engine program
+The completed release-selection comparison is the finite cross-engine program
 `governed-full-autonomy-v2-1-cross-engine-evaluation-010`. It holds product and
 evaluation behavior constant while comparing deterministic E0, three economical
 OpenAI engines, direct DeepSeek V4 Flash, and the existing Terra/mini split.
-Its independent scorer has passed the complete 820-case network-free product
-path, but provider-backed model quality remains unmeasured. The complete finite
-runner is now built: E0-E5 receive identical 500+100 factual and 820 autonomy
-tests, the top two alone receive a fresh source-disjoint 1,000-case
-confirmation, and only the passing winner receives the known 10,000+1,000
-regression and local release qualification. The 1,000-case package is frozen
-and unopened by a provider. PR #177 published the build, provider metadata was
-refreshed on 2026-09-02, and one USD 50 program authorization is committed as
-the final pre-execution checkpoint.
+Its paid attempt 002 completed the identical 500+100 factual and 820 autonomy
+tests for E0-E5 for USD 12.538784948. No engine passed the combined eligibility
+gates. The fresh 1,000, known 10,000+1,000, proxy, and local release stages were
+therefore not opened. GPT-5.4 mini passed all autonomy gates, but the common
+factual path had 100/500 retrieval-integration failures and the best fully
+grounded score was only 50.5%. The one-time authority is revoked. The next
+release architecture must repair the shared retrieval case binding and improve
+evidence-to-answer generation on a new development tranche; this run must not
+be tuned or rerun. Issue #180 owns that finite successor; issue #157 closes as
+the completed `Refine` measurement milestone.
 
 The first release is a supervisor-reviewable hosted candidate. It becomes an
 invite-only pilot release only after the approval-gated real-workflow checks

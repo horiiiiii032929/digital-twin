@@ -962,7 +962,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+      "evidence": "Terminal cross-engine result review verified the completed-refine state, immutable attempt-002 evidence, revoked paid authority, finite stage stop, and preserved unopened sealed stages.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-01",
@@ -3057,7 +3057,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "98cb83118f6b8c08674ca84b89b91ea942538c39c6f12ea513b9decdfb64c58e"
+      "sha256": "1bb01980db34834e38cd9e57787002374bfadd3220e7c5e70470dae4b130a11d"
     },
     {
       "audit_status": "audited",
@@ -4394,12 +4394,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "active-or-unclassified-tooling",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, fail-closed execution boundaries, and the fixed privacy-safe DeepSeek provider user ID.",
+      "evidence": "Terminal-state builder review verified immutable bindings, revoked authority handling, completed-refine validation, finite progression, and preserved historical result hashes.",
       "findings": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "3c95a3edd3ee5d3ab14071e54f510dd6c886c311207e4ffbcef90ebf6a41d7bf"
+      "sha256": "623052e6966c92fabe7c093d450050fca4a8667fbf23c6d4d8a6c2c6fb5588c0"
     },
     {
       "audit_status": "audited",
@@ -4548,7 +4548,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "active-or-unclassified-tooling",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+      "evidence": "Repository-freeze review verified program 010 paid authority is revoked after the terminal completed-refine result while all other execution remains fail closed.",
       "findings": [],
       "path": "scripts/cross_engine_factual.py",
       "reviewed_at": "2026-09-01",
@@ -7644,7 +7644,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "f56762fc49552b89fd828b762baef3164f9ebad1141ea33b718164045fdcb7ea"
+      "sha256": "de181f56a9f5fa6a54c37716db74a150a426b330917c18035962945c67edee9c"
     },
     {
       "audit_status": "audited",
@@ -8156,12 +8156,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+      "evidence": "Freeze regression verifies terminal program 010 is blocked after authority revocation and no unintended paid stage remains authorized.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "9eef8569b643412783ce112700542a446cc94d6d73c53d2267992b4114c9604b"
+      "sha256": "0a1ce0f25a22c6438c936276379b9d6c77d4fb3a6e3b756b7e7409564bcb736e"
     },
     {
       "audit_status": "audited",
@@ -9179,7 +9179,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+      "evidence": "Focused regressions verify terminal completed-refine loading, revoked authorization, immutable hashes, blocked preflight, and no accidental continuation into sealed stages.",
       "findings": [],
       "path": "tests/test_cross_engine_program.py",
       "reviewed_at": "2026-09-02",
@@ -9580,7 +9580,7 @@
       "path": "tests/test_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "3e1fc06f95b9b144ba22c77fed00050d3d0c29e6bf22f1f57c142a1d760269d5"
+      "sha256": "1606e0ebfa46e975f8980cf5d1ad19c737c6d3736a2c3aea70b2ce92d173912a"
     },
     {
       "audit_status": "audited",

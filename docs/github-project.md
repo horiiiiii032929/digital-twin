@@ -167,6 +167,18 @@ once through 500+100, 820 per engine, top-two 1,000, winner 10,000+1,000,
 proxy synthesis, and local release/no-release. No intermediate stage requires
 a new issue or user decision.
 
+Cross-engine program 010 attempt 002 is now terminal `completed-refine`. All
+six engines completed 500+100 factual cases and 820 autonomy cases, producing
+8,520 durable product cases for USD 12.538784948. GPT-5.4 mini passed all 820
+autonomy gates, but no engine passed factual grounding; the best fully grounded
+score was 50.5% against the frozen 95% gate. Every engine also exposed the same
+100/500 precomputed-retrieval case-binding defect. The fresh 1,000, known
+10,000+1,000, proxy, and release stages remained unopened, and paid authority
+is revoked. Issue #157 closes as `Done / Refine`; issue #180 is the only active
+P0 successor for the shared integration repair, one coherent evidence-to-answer
+redesign, and fresh release qualification. E0/T0 remains rollback and E3
+GPT-5.4 mini remains the leading provider-backed autonomy candidate.
+
 That immutable candidate is now
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's
 exact Keep record and selected architecture, adds only public source/section
@@ -211,10 +223,9 @@ professor-communication track.
 2. Preserve both `course-digital-twin-autonomous-long-run-001` attempts as
    zero-call invalid integration evidence. Authority is revoked; there is no
    third attempt. Keep the local fail-closed fallback selected.
-3. Preserve #172's ambiguity-safe V2 `Keep`, then create a new immutable #157
-   product manifest that binds that selected method. Execute the provider-backed
-   820-case autonomy confirmation only under its own future authority; the
-   historical evaluation-002 build remains unexecuted.
+3. Complete #180 on fresh development evidence: repair the shared retrieval
+   case binding, redesign evidence-to-answer generation once, then require both
+   factual and autonomy confirmation before opening sealed regression stages.
 4. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 5. #131 — retain the terminal visual diagnostic and design a separate true-
