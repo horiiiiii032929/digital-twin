@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review retains the global block while authorizing only the fresh provider-free source-semantic-atom dataset build and one exact network-free comparison; paid, final, autonomy, and private-data execution remain blocked.",
+      "evidence": "Post-result freeze review revokes both source-semantic-atom authorizations while retaining the global block; paid, final, autonomy, private-data, and same-data rerun execution remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex source-semantic-atom audit",
-      "sha256": "07d8da75f6cb8514260fb98271e09c9da58982c714df39d52881c4d80562254e"
+      "reviewer": "Codex source-semantic-atom result audit",
+      "sha256": "b32c165858c88d8f2616c9e7579dbe6a9abc29b2763a010334bd1170db9f68ea"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the exact provider-free authorization set, including one fresh semantic-atom package build and one network-free comparison; paid, final, autonomy, and historical execution identities remain rejected.",
+      "evidence": "Freeze regression verifies the terminal authorization set rejects both completed source-semantic-atom operations alongside paid, final, autonomy, and historical execution identities.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex source-semantic-atom audit",
-      "sha256": "e565bf3ff3ddae8b4cb5021a19ac6cd1db83cb50ff04d34ff8ae011e1fefa7d3"
+      "reviewer": "Codex source-semantic-atom result audit",
+      "sha256": "ba1233d861a4f22b1b739934d410d8cb51358030886837d7c755caa97c44a57a"
     },
     {
       "audit_status": "audited",

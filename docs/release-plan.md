@@ -177,6 +177,16 @@ authority is revoked. Any further correction must replace question-side target
 ranking with source-side semantic evidence atoms and use new development
 evidence; it cannot reopen the sealed 10,000+1,000 result.
 
+The source-side successor has now completed once on another 500 fresh cases.
+It improved fully grounded success to 96.0%, with 100% boundary action and
+evidence recall, but failed the frozen 98% claim/citation precision and 100%
+source-version validity gates. The failure is localized to neighboring-atom
+selection after successful retrieval. The result is therefore `Refine`, all
+execution authority is revoked, and the release decision is **No Release** for
+the autonomous LLM-backed R1. The fresh 1,000, known 10,000+1,000, and
+provider-backed 820-case stages remain closed rather than being used to
+compensate for a failed development prerequisite.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |
@@ -317,8 +327,7 @@ not require model spending or private data:
 | Decision | Needed from | Earliest dependent action |
 | --- | --- | --- |
 | Authorize the real local-Qwen retrieval-index qualification | Researcher | One resumable 2,100-region build/load resource result with no product/provider/final-case execution |
-| Authorize a new 500-case candidate plus 100-case control | Researcher only after #139 passes and a successor is frozen | One actual-product development result using prebuilt indexes and the immutable 452-model/48-canonical package |
-| Authorize the sealed 10,000-case run | Researcher only after the successor 500+100 passes | Professor-reportable actual-product final result |
+| Design a future evidence-selection successor | Researcher only if work continues beyond this finite No Release decision | New source-disjoint development evidence; never tune or rerun the known 500 or sealed 10,000+1,000 sets |
 | Explicit professor profile, or inferred profile reviewed and approved by the professor | Professor guidance | Populate fidelity calibration cases |
 | Select or reject the provisional atomic-claim method using leakage-free end-to-end evidence | Researcher/evaluation checkpoint | Product binding and grounded publication/student journeys |
 | Public host and domain | Researcher | Trusted-HTTPS target-host rehearsal |
@@ -331,3 +340,9 @@ data/profile versions, and deployment pass product, quality, safety, privacy,
 operations, and rollback gates. Otherwise record `Refine`, `Go Deeper`, or
 `Drop`, identify the failing owner issue, and retain the previous local package
 as rollback.
+
+Current decision (2026-09-01): **No Release / Refine**. The source-semantic
+evidence-atom candidate improved fresh development grounding to 96.0%, but it
+failed claim/citation precision and exact source-version validity. The local
+deterministic package remains a development/demo rollback and is not promoted
+as an autonomous LLM-backed release.
