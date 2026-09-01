@@ -23,7 +23,10 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     AtomicClaimEvidenceValidator,
     ExactQuoteAtomicClaimVerifier,
+    SourceSemanticEvidenceAtomGateV2,
+    SourceSemanticEvidenceAtomRetrieverV1,
     StructuredLexicalCoverageEvidenceGate,
+    materialize_semantic_evidence_atoms,
 )
 from src.digital_twin.grounding.models import AtomicAnswerClaim
 from src.digital_twin.llm import LlmClient, LlmMessage, LlmResponse, LlmUnavailableError
@@ -227,7 +230,14 @@ def _metrics(bundle: _ProviderBundle | None) -> AutonomyOperationalMetricsV1:
     )
 
 
-def _install_release(repository, fixture, case, *, now: datetime):
+def _install_release(
+    repository,
+    fixture,
+    case,
+    *,
+    now: datetime,
+    grounding_architecture_id: str,
+):
     source = source_fixture(source_template_number(case.case_id))
     profiles = TeachingProfileService(repository)
     draft = profiles.create_draft(
@@ -265,15 +275,26 @@ def _install_release(repository, fixture, case, *, now: datetime):
             "text": source["statement"],
             "content_hash": source_sha,
             "source_checksum": source_sha,
+            "region_id": f"region-{source['source_id']}",
+            "retrieval_allowed": True,
+            "display_allowed": True,
             "locator": f"{source['source_id']} paragraph 1",
             "metadata": {
                 **current.chunks[0].metadata,
                 "course_id": fixture.course_a_id,
                 "source_template": source["source_id"],
+                "source_path": f"{source['source_id']}.md",
+                "title": f"Protocol {source_template_number(case.case_id):03d}",
+                "parent_cluster_id": f"cluster-{source['source_id']}",
+                "modality": "text",
+                "char_start": "0",
+                "char_end": str(len(source["statement"])),
             },
         },
         deep=True,
     )
+    if grounding_architecture_id == "ambiguity-safe-source-semantic-evidence-atoms-v2":
+        chunk = materialize_semantic_evidence_atoms([chunk])[0]
     release = current.model_copy(
         update={
             "id": "release-autonomy-product-evaluation-v2",
@@ -332,6 +353,7 @@ def build_runtime_factory(
     *,
     provider_backed: bool,
     maximum_case_cost_usd: float = 1.0,
+    grounding_architecture_id: str = "legacy-structured-lexical-v1",
 ):
     """Return a per-case factory used only by the product evaluation adapter."""
 
@@ -351,7 +373,13 @@ def build_runtime_factory(
             profile_version=str(profile["profile_version"]),
             source_namespace=f"actual-product-evaluation-{case.case_id}",
         )
-        release, source = _install_release(repository, fixture, case, now=clock.now())
+        release, source = _install_release(
+            repository,
+            fixture,
+            case,
+            now=clock.now(),
+            grounding_architecture_id=grounding_architecture_id,
+        )
         repository.save_course_tutoring_runtime_profile(
             CourseTutoringRuntimeProfileV1(
                 course_id=fixture.course_a_id,
@@ -369,6 +397,25 @@ def build_runtime_factory(
             maximum_claims=8,
             evidence_limit=5,
         )
+        if grounding_architecture_id == "legacy-structured-lexical-v1":
+            evidence_gate = StructuredLexicalCoverageEvidenceGate()
+            retriever_factory = None
+        elif (
+            grounding_architecture_id
+            == "ambiguity-safe-source-semantic-evidence-atoms-v2"
+        ):
+            evidence_gate = SourceSemanticEvidenceAtomGateV2()
+
+            def retriever_factory(chunks, _active_versions):
+                return SourceSemanticEvidenceAtomRetrieverV1(
+                    chunks,
+                    candidate_limit=30,
+                )
+
+        else:
+            raise ValueError(
+                f"unsupported grounding architecture: {grounding_architecture_id}"
+            )
         bundle = (
             _provider_bundle(maximum_cost_usd=maximum_case_cost_usd)
             if provider_backed
@@ -418,13 +465,14 @@ def build_runtime_factory(
                 open_repository,
                 profile_path=PROFILE_PATH,
                 generator=generator,
-                evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+                evidence_gate=evidence_gate,
                 claim_evidence_validator=validator,
                 tutoring_mode=mode,
                 learning_gap_pseudonymizer=LearningGapPseudonymizer(
                     b"actual-product-evaluation-secret-32"
                 ),
                 reactive_semantic_planner=semantic_planner,
+                retriever_factory=retriever_factory,
                 clock=clock,
             )
             return outreach, autonomy, tutoring

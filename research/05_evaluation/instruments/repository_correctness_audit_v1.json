@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "a8085a80e2d8304a58ddee63d97e6787ac79721984bbbb30bdfad665b953cbe6"
+      "sha256": "86f3fc5f4fd3b1225ae929be3eb2572d8dd33980764d41c99ef3f963a5a3e17e"
     },
     {
       "audit_status": "audited",
@@ -5367,7 +5367,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex #157 actual-product adapter audit",
-      "sha256": "b42b66cf2839a6dbfbf271935ec23db961fd16c663ee9be95421e3e629ebcf7e"
+      "sha256": "b7dd8743412d5a8a827dca874186b2ee52ab1f14d9e3685590332c083ef27319"
     },
     {
       "audit_status": "audited",
@@ -6709,7 +6709,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "4ecc7da2e1c4085d5b05f9c106e67a4b3a181703139f4444b6d14a30bdb6ebb7"
+      "sha256": "1ec966b485b6454c6c6d7f3bb705780ab3712a883bc379707e7f961571f12095"
     },
     {
       "audit_status": "audited",
@@ -6852,7 +6852,7 @@
       "path": "src/digital_twin/student/service.py",
       "reviewed_at": "2026-08-31",
       "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "1e7639d1a8c14ac24ae388ce125ae27248b94602f80e97168946b30ad931e50c"
+      "sha256": "9ea333851131880a86bf45f5b917988e308e36eabde2772a3d5a6a19ecafb036"
     },
     {
       "audit_status": "audited",
@@ -8997,7 +8997,7 @@
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "6b62a16b6e866957f8e0dbeab91ea0f254195295d1298d6d48e508ec32e5a23f"
+      "sha256": "07ff9c5d458c77083d09c6dd7e09701d01f7b3c39e071246803e9c8406c0ae6b"
     },
     {
       "audit_status": "audited",
@@ -9019,7 +9019,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "901ed8e3f1ad4adc8bd813540d6de49b79f4dff903047683c263faeaa66588bb"
+      "sha256": "747c7587ca3de4ca5745bf4443b1b8fc1c4c2af365d9c2422d5c5a608d1e65c3"
     },
     {
       "audit_status": "audited",
@@ -9272,7 +9272,7 @@
       "path": "src/digital_twin/grounding/source_range_evidence.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "e26e63478c1e00790f1e33b984cb8a774a90b86692f57410eb92ee155e98afdf"
+      "sha256": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb"
     },
     {
       "audit_status": "audited",
@@ -9283,7 +9283,7 @@
       "path": "tests/digital_twin/test_source_range_evidence.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "7c36c2e3061f43614868ea7bcc90b3355732efa027f63912dc41860e6fc9e24c"
+      "sha256": "bd52774f33e61c04626037b382b682d66de3d97418d23813b83c2016e3cdde76"
     },
     {
       "audit_status": "audited",
@@ -9614,6 +9614,50 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
       "sha256": "48e45b64858952352d6c5e8c3dcde546d12f3ff8dab29bb2828b8c40d8a788f2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-003",
+      "evidence": "Instrument review verifies exact #172 Keep-result binding, selected V2 and rollback identities, public/hidden package hashes, current direct-OpenAI metadata, immutable hard gates, exclusive output, zero retries, and bounded call/cost authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 actual-product successor audit",
+      "sha256": "549683df41432adfaf7f10ee0c06af4effc78bc6aebbdea97017907f4b7855bd"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-003",
+      "evidence": "Builder review and deterministic validation verify 820 unique case/gold identities, exact public source/section scoping without answer leakage, stable hashes, selected-result integrity, and unchanged condition and hard-gate portfolio.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 actual-product successor audit",
+      "sha256": "2e7533b684ad08a661ac07414e1314417b76a55c29c68113372289dc9c08bedf"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-003",
+      "evidence": "Runner review verifies explicit successor context, selected-grounding hash binding, clean no-call preflight, two exact-identity canaries, atomic ledger/resume, hidden-gold order, call/cost stops, and terminal result persistence.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 actual-product successor audit",
+      "sha256": "392fc51573157345877f71f9758fedd065378f8845b8f1abc4e2073c1ae9c026"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify selected-result binding, blocked authority, actual service injection of the semantic atom retriever and V2 gate, source-scope target resolution, and hard-gate passage on a representative V2 trajectory.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex #157 actual-product successor audit",
+      "sha256": "1069a7a567576cee732e78f44ab96fa5c36887f138e38d83cc196534e4a970cc"
     }
   ],
   "schema_version": 1

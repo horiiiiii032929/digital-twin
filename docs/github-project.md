@@ -135,6 +135,15 @@ product confirmation with V1 rollback. The result does not promote a release.
 #157 is now the active downstream `Todo / Go Deeper` decision; provider-backed
 execution remains unauthorized until a new immutable candidate is frozen.
 
+That immutable candidate is now
+`governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's
+exact Keep record and selected architecture, adds only public source/section
+scope to the prospective questions, and injects the source-semantic retriever
+plus ambiguity-safe V2 gate through the actual tutoring service. Its complete
+820-case network-free run passed every hard gate with zero provider calls. #157
+is therefore `In Progress / Go Deeper`; paid execution remains a separate
+bounded checkpoint and no autonomous release claim exists yet.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2

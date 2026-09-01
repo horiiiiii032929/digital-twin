@@ -359,3 +359,11 @@ claim precision/recall, and zero severe releases. V2 is selected with V1
 rollback for the next provider-backed product confirmation. This does not
 change the No Release decision: #157 must freeze and evaluate the selected
 actual-product configuration before any autonomous promotion.
+
+The corresponding #157 successor is now built as
+`governed-full-autonomy-v2-1-actual-product-evaluation-003`. The 820-case
+network-free qualification passes through the actual tutoring, autonomy,
+outreach, SQLite, checkpoint, outbox, and virtual-time paths using the selected
+V2 grounding binding. This establishes execution readiness only. Direct OpenAI
+provider execution, T1-v2 promotion, and the release decision remain closed
+until the bounded paid result is recorded.

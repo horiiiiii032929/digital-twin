@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Mapping, Sequence
 import hashlib
 from functools import partial
 from datetime import UTC, datetime, timedelta
@@ -32,6 +33,7 @@ from src.digital_twin.grounding.models import (
 from src.digital_twin.grounding.protocols import (
     EvidenceSufficiencyGate,
     PostGenerationClaimValidator,
+    Retriever,
     TextEmbedder,
     TutorGenerator,
 )
@@ -115,6 +117,10 @@ class StudentTutoringService:
         autonomy_planner_model: str = DETERMINISTIC_PLANNER_MODEL,
         autonomy_generator_model: str = DETERMINISTIC_GENERATOR_MODEL,
         reactive_semantic_planner: ReactiveSemanticPlanner | None = None,
+        retriever_factory: Callable[
+            [Sequence[DocumentChunk], Mapping[str, int]], Retriever
+        ]
+        | None = None,
         clock: UtcClock | None = None,
     ) -> None:
         self.repository = repository
@@ -134,6 +140,7 @@ class StudentTutoringService:
         self.retrieval_index_store = retrieval_index_store
         self.retrieval_index_chunker_id = retrieval_index_chunker_id
         self.retrieval_index_chunker_version = retrieval_index_chunker_version
+        self.retriever_factory = retriever_factory
         self.learning_gap_pseudonymizer = learning_gap_pseudonymizer
         self.learning_gap_policy = learning_gap_policy or LearningGapPrivacyPolicyV1()
         self.autonomy_goal_manager = (
@@ -936,7 +943,12 @@ class StudentTutoringService:
                     chunk.source_version,
                     active_versions.get(source_id, 0),
                 )
-            if self.retrieval_index_store is not None:
+            if self.retriever_factory is not None:
+                retriever = self.retriever_factory(
+                    release.chunks,
+                    active_versions,
+                )
+            elif self.retrieval_index_store is not None:
                 try:
                     if self.embedder is None:
                         raise RetrievalIndexError(

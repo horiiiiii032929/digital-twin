@@ -86,6 +86,18 @@ def test_source_range_plan_extracts_public_source_and_section_scope() -> None:
     assert plan.evidence.targets == ("enqueue",)
 
 
+def test_explicit_source_section_is_target_for_broad_instructional_question() -> None:
+    plan = plan_public_source_ranges(
+        'Using source "notes.md" in section "Queue behavior", '
+        "please explain this section with a grounded hint."
+    )
+
+    assert plan.source_path_anchor == "notes.md"
+    assert plan.evidence.context == "Queue behavior"
+    assert plan.evidence.targets == ("Queue behavior",)
+    assert plan.evidence.extraction_rule == "explicit-source-section-scope"
+
+
 def test_retriever_hard_scopes_exact_title_before_target_ranking() -> None:
     chunks = [
         _chunk("wrong", "Enqueue preserves order.", ordinal=0, title="Stack behavior"),

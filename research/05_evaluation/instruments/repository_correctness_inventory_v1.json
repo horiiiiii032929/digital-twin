@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 874
+    "audited": 878
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 202,
+    "active_or_unclassified_tooling": 204,
     "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 234,
+    "evaluation_configuration": 235,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 192
+    "verification": 193
   },
-  "file_count": 874,
+  "file_count": 878,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7ba1642e1dcb42d2e925a7873868f2501545610baccdb63db1795266d13ab272",
+  "record_sha256": "dafde07090f2638cc50ce6437efb251e523551b121cb65776a9613bb0957701d",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "a8085a80e2d8304a58ddee63d97e6787ac79721984bbbb30bdfad665b953cbe6"
+      "sha256": "86f3fc5f4fd3b1225ae929be3eb2572d8dd33980764d41c99ef3f963a5a3e17e"
     },
     {
       "audit": {
@@ -4311,6 +4311,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Instrument review verifies exact #172 Keep-result binding, selected V2 and rollback identities, public/hidden package hashes, current direct-OpenAI metadata, immutable hard gates, exclusive output, zero retries, and bounded call/cost authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
+      "risk": "high",
+      "sha256": "549683df41432adfaf7f10ee0c06af4effc78bc6aebbdea97017907f4b7855bd"
+    },
+    {
+      "audit": {
         "domain": "full-autonomy-evaluation-boundary",
         "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
         "findings": [],
@@ -6221,6 +6237,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Builder review and deterministic validation verify 820 unique case/gold identities, exact public source/section scoping without answer leakage, stable hashes, selected-result integrity, and unchanged condition and hard-gate portfolio.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "high",
+      "sha256": "2e7533b684ad08a661ac07414e1314417b76a55c29c68113372289dc9c08bedf"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -6646,7 +6678,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "6b62a16b6e866957f8e0dbeab91ea0f254195295d1298d6d48e508ec32e5a23f"
+      "sha256": "07ff9c5d458c77083d09c6dd7e09701d01f7b3c39e071246803e9c8406c0ae6b"
     },
     {
       "audit": {
@@ -8261,7 +8293,29 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "901ed8e3f1ad4adc8bd813540d6de49b79f4dff903047683c263faeaa66588bb"
+      "sha256": "747c7587ca3de4ca5745bf4443b1b8fc1c4c2af365d9c2422d5c5a608d1e65c3"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Runner review verifies explicit successor context, selected-grounding hash binding, clean no-call preflight, two exact-identity canaries, atomic ledger/resume, hidden-gold order, call/cost stops, and terminal result persistence.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-003"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "high",
+      "sha256": "392fc51573157345877f71f9758fedd065378f8845b8f1abc4e2073c1ae9c026"
     },
     {
       "audit": {
@@ -9133,7 +9187,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "b42b66cf2839a6dbfbf271935ec23db961fd16c663ee9be95421e3e629ebcf7e"
+      "sha256": "b7dd8743412d5a8a827dca874186b2ee52ab1f14d9e3685590332c083ef27319"
     },
     {
       "audit": {
@@ -10941,7 +10995,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/source_range_evidence.py",
       "risk": "high",
-      "sha256": "e26e63478c1e00790f1e33b984cb8a774a90b86692f57410eb92ee155e98afdf"
+      "sha256": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb"
     },
     {
       "audit": {
@@ -11325,7 +11379,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "4ecc7da2e1c4085d5b05f9c106e67a4b3a181703139f4444b6d14a30bdb6ebb7"
+      "sha256": "1ec966b485b6454c6c6d7f3bb705780ab3712a883bc379707e7f961571f12095"
     },
     {
       "audit": {
@@ -11549,7 +11603,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "1e7639d1a8c14ac24ae388ce125ae27248b94602f80e97168946b30ad931e50c"
+      "sha256": "9ea333851131880a86bf45f5b917988e308e36eabde2772a3d5a6a19ecafb036"
     },
     {
       "audit": {
@@ -12189,7 +12243,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_source_range_evidence.py",
       "risk": "medium",
-      "sha256": "7c36c2e3061f43614868ea7bcc90b3355732efa027f63912dc41860e6fc9e24c"
+      "sha256": "bd52774f33e61c04626037b382b682d66de3d97418d23813b83c2016e3cdde76"
     },
     {
       "audit": {
@@ -13906,6 +13960,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Focused tests verify selected-result binding, blocked authority, actual service injection of the semantic atom retriever and V2 gate, source-scope target resolution, and hard-gate passage on a representative V2 trajectory.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "medium",
+      "sha256": "1069a7a567576cee732e78f44ab96fa5c36887f138e38d83cc196534e4a970cc"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Focused tests verify network-free authority, public/gold separation, all four real service conditions, restart consistency, one actual autonomous delivery, and zero provider accounting.",
         "findings": [],
         "reviewed_at": "2026-08-31",
@@ -14689,8 +14759,8 @@
     }
   ],
   "risk_counts": {
-    "high": 668,
-    "medium": 206
+    "high": 671,
+    "medium": 207
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
