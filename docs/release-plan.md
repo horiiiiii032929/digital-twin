@@ -24,6 +24,20 @@ asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates
 pass.
 
+The current release-selection successor is the finite cross-engine program
+`governed-full-autonomy-v2-1-cross-engine-evaluation-010`. It holds product and
+evaluation behavior constant while comparing deterministic E0, three economical
+OpenAI engines, direct DeepSeek V4 Flash, and the existing Terra/mini split.
+Its independent scorer has passed the complete 820-case network-free product
+path, but provider-backed model quality remains unmeasured. The complete finite
+runner is now built: E0-E5 receive identical 500+100 factual and 820 autonomy
+tests, the top two alone receive a fresh source-disjoint 1,000-case
+confirmation, and only the passing winner receives the known 10,000+1,000
+regression and local release qualification. The 1,000-case package is frozen
+and unopened by a provider. Execution remains blocked until the build-only
+checkpoint is published, metadata is refreshed, and one USD 50 program
+authorization is committed.
+
 The first release is a supervisor-reviewable hosted candidate. It becomes an
 invite-only pilot release only after the approval-gated real-workflow checks
 pass. A local demo, a 10,000-case dataset, or a successful model run is evidence

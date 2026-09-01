@@ -344,10 +344,19 @@ class _LeaseHeartbeat:
         self.job_id = job_id
         self.worker_id = worker_id
         self.lease_seconds = lease_seconds
+        # PDF parsing may spend long periods in native code that cannot
+        # schedule this Python heartbeat thread.  Keep a small crash-recovery
+        # floor so a healthy worker does not lose ownership during that window.
+        self.renewal_lease_seconds = max(5.0, lease_seconds)
         self._stop = Event()
         self._thread = Thread(target=self._run, daemon=True)
 
     def start(self) -> None:
+        self.repository.renew_lease(
+            self.job_id,
+            self.worker_id,
+            lease_seconds=self.renewal_lease_seconds,
+        )
         self._thread.start()
 
     def stop(self) -> None:
@@ -355,13 +364,17 @@ class _LeaseHeartbeat:
         self._thread.join(timeout=max(1.0, self.lease_seconds))
 
     def _run(self) -> None:
-        interval = max(0.1, self.lease_seconds / 3)
+        # Keep at least two renewal opportunities inside short leases as well.
+        # A 100 ms floor left only 50 ms of scheduling margin for a 150 ms
+        # lease, which could expire under a busy test or worker process even
+        # though the heartbeat was healthy.
+        interval = max(0.01, self.lease_seconds / 3)
         while not self._stop.wait(interval):
             try:
                 renewed = self.repository.renew_lease(
                     self.job_id,
                     self.worker_id,
-                    lease_seconds=self.lease_seconds,
+                    lease_seconds=self.renewal_lease_seconds,
                 )
             except Exception:
                 return

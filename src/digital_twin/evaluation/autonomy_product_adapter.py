@@ -11,6 +11,8 @@ from __future__ import annotations
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
+import hashlib
+import json
 from typing import Literal
 
 from src.digital_twin.clock import UtcClock, VirtualUtcClock
@@ -21,6 +23,14 @@ from src.digital_twin.evaluation.autonomy_contract import (
     AutonomyOperationalMetricsV1,
     AutonomyStateSnapshotV1,
     AutonomySystemManifestV1,
+)
+from src.digital_twin.evaluation.autonomy_independent_scoring import (
+    AutonomyActionEvidenceV2,
+    AutonomyCitationEvidenceV2,
+    AutonomyRawEvidenceV2,
+    AutonomyRestartEvidenceV2,
+    AutonomyStateDeltaEvidenceV2,
+    AutonomyTraceEvidenceV2,
 )
 from src.digital_twin.student.autonomy_models import AutonomousGoalStatus
 from src.digital_twin.student.autonomy_service import GovernedAutonomyService
@@ -105,6 +115,9 @@ class StudentProductAutonomyAdapterV1:
         self._provider_failure_seen = False
         self._provider_failure_at: int | None = None
         self._restart_consistent = True
+        self._restart_evidence: list[AutonomyRestartEvidenceV2] = []
+        self._action_evidence: dict[str, AutonomyActionEvidenceV2] = {}
+        self._citation_evidence: list[AutonomyCitationEvidenceV2] = []
 
     @property
     def _now(self) -> datetime:
@@ -141,6 +154,9 @@ class StudentProductAutonomyAdapterV1:
         self._provider_failure_seen = False
         self._provider_failure_at = None
         self._restart_consistent = True
+        self._restart_evidence = []
+        self._action_evidence = {}
+        self._citation_evidence = []
 
     async def submit_event(self, event: AutonomyEvaluationEventV1) -> None:
         runtime = self._require_runtime()
@@ -216,17 +232,52 @@ class StudentProductAutonomyAdapterV1:
         turn: TutorTurn,
     ) -> None:
         assert self._case is not None
+        runtime = self._require_runtime()
         action = _reactive_action(turn)
         delivered = action != "no-action"
         lineage_valid = (
             not delivered
             or bool(turn.citations)
             and all(
-                item.course_id == self._require_runtime().course_id
-                and item.release_id == self._require_runtime().release_id
+                item.course_id == runtime.course_id
+                and item.release_id == runtime.release_id
                 for item in turn.citations
             )
         )
+        policy = runtime.repository.get_autonomy_policy(runtime.course_id)
+        release = runtime.repository.get_published_release(runtime.course_id)
+        if policy is None or release is None or release.teaching_profile_sha256 is None:
+            raise RuntimeError("actual-product turn lacks authority bindings")
+        action_id = f"turn:{event.event_id}"
+        self._action_evidence[action_id] = AutonomyActionEvidenceV2(
+            action_id=action_id,
+            action=action,
+            trigger_event_id=event.event_id,
+            trigger_event_kind=(
+                "practice-incomplete"
+                if event.kind == "practice-outcome"
+                else event.kind
+            ),
+            internal_student_id=runtime.student_id,
+            internal_course_id=runtime.course_id,
+            internal_release_id=runtime.release_id,
+            policy_version=policy.version,
+            profile_sha256=release.teaching_profile_sha256,
+        )
+        for citation in turn.citations:
+            if citation.source_checksum is None:
+                continue
+            self._citation_evidence.append(
+                AutonomyCitationEvidenceV2(
+                    action_id=action_id,
+                    course_id=citation.course_id,
+                    release_id=citation.release_id,
+                    source_artifact_id=citation.source_artifact_id,
+                    source_version=citation.source_version,
+                    source_sha256=citation.source_checksum,
+                    locator=citation.locator,
+                )
+            )
         self._append_action(
             AutonomyObservedActionV1(
                 action_id=f"turn:{event.event_id}",
@@ -290,6 +341,28 @@ class StudentProductAutonomyAdapterV1:
                 "failed": "failed",
                 "cancelled": "cancelled",
             }.get(action.status.value, "no-action")
+            opportunity = runtime.repository.get_autonomous_opportunity(
+                action.opportunity_id
+            )
+            if opportunity is None:
+                raise RuntimeError("autonomous action lacks its durable opportunity")
+            message_id = None
+            outbox_id = None
+            if action.proactive_trigger_id is not None:
+                message = runtime.repository.get_proactive_message_for_trigger(
+                    action.proactive_trigger_id
+                )
+                if message is not None:
+                    message_id = message.id
+                    outbox = next(
+                        (
+                            row
+                            for row in runtime.repository.list_delivery_outbox()
+                            if row.message_id == message.id
+                        ),
+                        None,
+                    )
+                    outbox_id = outbox.id if outbox is not None else None
             self._append_action(
                 AutonomyObservedActionV1(
                     action_id=public_id,
@@ -303,6 +376,33 @@ class StudentProductAutonomyAdapterV1:
                     structured_reason=action.structured_reason[:500],
                 )
             )
+            self._action_evidence[public_id] = AutonomyActionEvidenceV2(
+                action_id=public_id,
+                action=action.kind.value,
+                trigger_event_kind=opportunity.event_kind.value,
+                internal_student_id=action.student_id,
+                internal_course_id=action.course_id,
+                internal_release_id=action.release_id,
+                policy_version=action.policy_version,
+                profile_sha256=action.profile_sha256,
+                opportunity_id=action.opportunity_id,
+                outbox_id=outbox_id,
+                delivery_message_id=message_id,
+            )
+            for citation in citations:
+                if citation.source_checksum is None:
+                    continue
+                self._citation_evidence.append(
+                    AutonomyCitationEvidenceV2(
+                        action_id=public_id,
+                        course_id=citation.course_id,
+                        release_id=citation.release_id,
+                        source_artifact_id=citation.source_artifact_id,
+                        source_version=citation.source_version,
+                        source_sha256=citation.source_checksum,
+                        locator=citation.locator,
+                    )
+                )
 
     def _append_action(self, action: AutonomyObservedActionV1) -> None:
         if action.action_id in self._observed_action_ids:
@@ -318,6 +418,12 @@ class StudentProductAutonomyAdapterV1:
             raise RuntimeError("actual-product restart changed the evaluation clock")
         after = self._durable_identity_snapshot(replacement)
         self._restart_consistent = self._restart_consistent and before == after
+        self._restart_evidence.append(
+            AutonomyRestartEvidenceV2(
+                before_sha256=_stable_hash(before),
+                after_sha256=_stable_hash(after),
+            )
+        )
         self._runtime = replacement
         self._restart_count += 1
 
@@ -397,6 +503,64 @@ class StudentProductAutonomyAdapterV1:
             )
         return AutonomyOperationalMetricsV1()
 
+    async def collect_independent_evidence(self) -> AutonomyRawEvidenceV2:
+        """Return sanitized records from which a separate scorer derives gates."""
+
+        runtime = self._require_runtime()
+        assert self._case is not None
+        self._collect_new_autonomous_actions()
+        release = runtime.repository.get_published_release(runtime.course_id)
+        policy = runtime.repository.get_autonomy_policy(runtime.course_id)
+        if policy is None or release is None or release.teaching_profile_sha256 is None:
+            raise RuntimeError("actual-product evidence lacks authority bindings")
+        traces = runtime.repository.list_agent_traces_v2(runtime.course_id)
+        deltas = runtime.repository.list_learner_state_deltas_v2(
+            runtime.conversation_id
+        )
+        allowed_hashes = sorted(
+            {
+                chunk.source_checksum or chunk.content_hash
+                for chunk in release.chunks
+                if chunk.source_checksum or chunk.content_hash
+            }
+        )
+        return AutonomyRawEvidenceV2(
+            case_id=self._case.case_id,
+            expected_internal_student_id=runtime.student_id,
+            expected_internal_course_id=runtime.course_id,
+            expected_internal_release_id=runtime.release_id,
+            expected_policy_version=policy.version,
+            expected_profile_sha256=release.teaching_profile_sha256,
+            allowed_source_sha256=allowed_hashes,
+            traces=[
+                AutonomyTraceEvidenceV2(
+                    trace_id=item.trace_id,
+                    event_id=item.event_id,
+                    course_id=item.course_id,
+                    release_id=item.release_id,
+                    policy_version=item.policy_version,
+                    profile_sha256=item.profile_sha256,
+                    input_state_revision=item.input_state_revision,
+                    output_state_revision=item.output_state_revision,
+                    planning_calls=item.planning_calls,
+                    generation_calls=item.generation_calls,
+                    repair_calls=item.repair_calls,
+                )
+                for item in traces
+            ],
+            actions=list(self._action_evidence.values()),
+            citations=list(self._citation_evidence),
+            state_deltas=[
+                AutonomyStateDeltaEvidenceV2(
+                    previous_revision=item.previous_revision,
+                    next_revision=item.next_revision,
+                    reason_code=item.reason_code,
+                )
+                for item in deltas
+            ],
+            restart_checks=list(self._restart_evidence),
+        )
+
     async def collect_diagnostic_trace(self) -> dict[str, object]:
         runtime = self._require_runtime()
         traces = runtime.repository.list_agent_traces_v2(runtime.course_id)
@@ -463,6 +627,12 @@ def _reactive_action(turn: TutorTurn) -> str:
     if intent in {"recommend-source", "review-source"}:
         return "recommend-approved-source"
     return "provide-hint-or-example"
+
+
+def _stable_hash(value: object) -> str:
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
 
 
 def _message_for_turn_kind(turn_kind: str, *, practice_outcome: bool) -> str:

@@ -40,6 +40,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
+        "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
     }
 
     for pilot_id in pilot_ids:
@@ -51,6 +52,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     ] == ("dataset_generation",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-reference-aggregate-007"
+    ] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "governed-full-autonomy-v2-1-cross-engine-evaluation-010"
     ] == ("dataset_generation",)
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",

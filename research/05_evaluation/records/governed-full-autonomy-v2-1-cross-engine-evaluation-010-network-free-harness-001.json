@@ -1,0 +1,106 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010-network-free-harness-001",
+  "program_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+  "stage_id": "independent-network-free-harness-qualification",
+  "round_number": null,
+  "status": "completed-go-deeper",
+  "supersedes": [],
+  "decision_question": "Can one implementation-independent scorer and finite ledger evaluate the actual autonomy product path without trusting product-reported invariants before comparing engine LLMs?",
+  "code_revision": "ca55f7a9ca0772116813f18dd3e9e24d74e36dfb",
+  "dirty_state": true,
+  "started_at": "2026-09-01T22:15:00+08:00",
+  "completed_at": "2026-09-01T22:19:00+08:00",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010_network_free_harness_001.json",
+      "sha256": "ea4d29c201c25aeeb516386791a3b14caada419f237a841461247051f3223c93",
+      "role": "build-only-provider-unauthorized-program"
+    },
+    {
+      "path": "ignored-network-free-public-package",
+      "sha256": "be561f1ce2eb5eca68ac5f7822532a7ec0eb2b074638da7f879b187ee042d8cc",
+      "role": "autonomy-public-input-package"
+    },
+    {
+      "path": "ignored-network-free-hidden-gold-package",
+      "sha256": "846717dbc4f27aa2f6966b6641f0f5b26a7bebdf5ba05407627c0782be2d9a8c",
+      "role": "autonomy-hidden-gold-package"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "independent-autonomy-scorer-v2",
+      "version": "cross-engine-010-network-free-harness-001",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation",
+        "operations"
+      ],
+      "metrics": [
+        {
+          "name": "safe-grounded-autonomous-success",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "event-action-eligibility-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "authority-preservation-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-independent-network-free-gates",
+          "passed": true,
+          "evidence": "All 820 cases passed independently derived action, eligibility, authority, citation, state/action/delivery, restart, transition, and termination checks."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "independent-autonomy-scorer-v2",
+    "rationale": "Keep the scorer and finite program controller, then compare the six frozen engine bindings on identical factual and autonomy evidence."
+  },
+  "limitations": [
+    "Network-free E0 harness qualification only; no provider-backed product-quality claim.",
+    "The sealed 1,000 and known 10,000+1,000 stages remain unopened.",
+    "LLM-only professor, usability, and learning tracks are proxy evidence, not real-human proof."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-cross-engine-evaluation-010-network-free-harness-001-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-cross-engine-evaluation-010-network-free-harness-001.json"
+}

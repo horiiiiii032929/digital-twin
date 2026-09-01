@@ -6,6 +6,45 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Active cross-engine checkpoint
+
+PR #176 is merged. Evaluation 009 remains immutable network-free development
+evidence and has been superseded before paid execution by
+`governed-full-autonomy-v2-1-cross-engine-evaluation-010` under issue #157.
+Program 010 fixes the cases, retrieval, evidence gate, policy, prompts, clock,
+seeds, and scorer while changing only the planner/generator engine. Its six
+bindings are deterministic E0, GPT-5.4 nano, GPT-5.6 Luna, GPT-5.4 mini, direct
+DeepSeek V4 Flash, and a Terra-planner/GPT-5.4-mini control. Sol and OpenRouter
+are excluded from the active comparison.
+
+The independent scorer and finite SQLite controller have passed an
+820-case actual-product network-free qualification. All independently derived
+action, event-eligibility, authority, citation, state/action/delivery,
+restart, pedagogical-transition, goal-termination, and primary
+safe-grounded-autonomy rates were 100%, with zero calls, tokens, or cost. This
+selects the evaluation infrastructure only; it does not establish LLM product
+quality or promote T1-v2.1.
+
+The finite execution path is now implemented end to end. It runs the same
+500+100 factual and 820-case autonomy evaluations for E0-E5, advances only the
+top two eligible engines to a new source-range-disjoint 1,000-case
+confirmation, and runs only the passing winner on the immutable known
+10,000+1,000 regression. The new sealed package contains 200 source clusters,
+800 answerable and 200 boundary cases, 600 canonical evidence atoms, and 963
+exactly matchable required source ranges. All normalized questions are unique,
+source-family reuse is capped at five clusters, and the package is byte-stable.
+Its public questions, hidden gold, source package, and rankings are hash-bound;
+no provider saw the package during construction.
+
+The winner then receives the LLM/agent-only professor-profile, simulated
+learning, usability, and visual limitation synthesis before immutable local R1
+qualification. Those supplementary tracks are explicitly proxy evidence and
+cannot establish real-professor fidelity, real-student usability, or real
+learning improvement. The runner has a single USD 50 global stop, atomic resume,
+terminal quality stops, and no same-case tuning loop. Paid execution remains
+disabled until the completed build is committed, provider metadata is refreshed,
+and the one program authorization is frozen on a clean revision.
+
 The three-round whole-system architecture study under issue #165 and both
 fresh #153 method successors are complete as `Refine`. The strongest new
 candidate, source-side semantic evidence atoms, reached 96.0% fully grounded

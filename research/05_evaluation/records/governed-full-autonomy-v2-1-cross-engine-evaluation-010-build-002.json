@@ -1,0 +1,51 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010-build-002",
+  "program_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+  "stage_id": "finite-cross-engine-build-qualification",
+  "round_number": null,
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Is the finite six-engine whole-product evaluation program complete, reproducible, gold-isolated, and ready for one separately frozen paid execution?",
+  "code_revision": "ca55f7a9ca0772116813f18dd3e9e24d74e36dfb",
+  "dirty_state": true,
+  "started_at": "2026-09-01T22:20:00+08:00",
+  "completed_at": "2026-09-01T23:20:00+08:00",
+  "bindings": [
+    {"path":"research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010_build_002.json","sha256":"efa86075c23a30767cd6e8167be344e6d43fed90398394dcf9de8345c2d07002","role":"immutable-build-only-program"},
+    {"path":"scripts/run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py","sha256":"77a46d7782f1d6571a62515dffdda24fe2b12723bc5a2654d8a2550f7417b20a","role":"finite-program-runner"},
+    {"path":"scripts/build_cross_engine_sealed_confirmation_010.py","sha256":"c5d228093c4c5e329673314c0c7e28e98f79a48fb1f023a9e257bdbc65edee39","role":"fresh-confirmation-builder"},
+    {"path":"research/05_evaluation/datasets/governed-full-autonomy-v2-1-cross-engine-sealed-1000-010-cases.json","sha256":"69ecb2f8ef39f0a50149503ec08a42f2806c3323d4795c18a57dc855f7156734","role":"sealed-public-cases"},
+    {"path":"research/05_evaluation/datasets/governed-full-autonomy-v2-1-cross-engine-sealed-1000-010-gold.json","sha256":"cfdbd1f3741372f0299c7da858c45c5e83995ed5564f3567050d88cd7148e0f9","role":"sealed-hidden-gold"},
+    {"path":"research/05_evaluation/datasets/governed-full-autonomy-v2-1-cross-engine-sealed-1000-010-sources.json","sha256":"96c440a0025f2223f5d18bbef1b61af913305e9cf918222f0414e76487570f55","role":"sealed-source-regions"}
+  ],
+  "candidates": [
+    {
+      "architecture_id": "finite-cross-engine-evaluation-program",
+      "version": "010-build-002",
+      "role": "candidate",
+      "changed_planes": ["evaluation","operations"],
+      "metrics": [
+        {"name":"sealed-case-integrity","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"source-range-disjointness","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true},
+        {"name":"network-free-stage-simulation","value":1.0,"unit":"ratio","direction":"higher-is-better","threshold":1.0,"passed":true}
+      ],
+      "hard_gates": [
+        {"name":"sealed-package-byte-stable","passed":true,"evidence":"The 1,000-case public, gold, and source packages rebuilt byte-for-byte with zero duplicates or missing source references."},
+        {"name":"finite-stage-controller","passed":true,"evidence":"Development, autonomy, fresh confirmation, known regression, proxy synthesis, and local qualification have one-way terminal transitions with no quality rerun loop."},
+        {"name":"paid-execution-still-blocked","passed":true,"evidence":"The build-only instrument and repository freeze permit no provider-backed program execution."}
+      ]
+    }
+  ],
+  "operational": {"provider_calls":0,"input_tokens":0,"output_tokens":0,"reported_cost_usd":0,"malformed_responses":0,"provider_failures":0,"p95_latency_ms":0},
+  "failures": [],
+  "decision": {"outcome":"go-deeper","selected_architecture_id":"finite-cross-engine-evaluation-program","rationale":"Freeze this exact build, refresh provider metadata, and run the single bounded program without redesigning or tuning the same evaluation cases."},
+  "limitations": [
+    "Build-only evidence; provider-backed product quality remains unmeasured.",
+    "The known 10,000+1,000 package is a regression set, not fresh confirmation.",
+    "Professor, usability, and learning outputs are LLM/agent proxies rather than real-human evidence."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-cross-engine-evaluation-010-build-002-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-cross-engine-evaluation-010-build-002.json"
+}

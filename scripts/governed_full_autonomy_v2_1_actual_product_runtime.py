@@ -9,11 +9,12 @@ import json
 from pathlib import Path
 from collections.abc import Callable
 
-from services.llm import BudgetedLlmClient, OpenAiResponsesClient
+from services.llm import BudgetedLlmClient, LiteLlmClient, OpenAiResponsesClient
 from src.digital_twin.action_router import DeterministicActionRouterV2
 from src.digital_twin.evaluation import (
     AutonomyOperationalMetricsV1,
     AutonomyProviderCallV1,
+    ProductEngineBindingV1,
 )
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
@@ -177,23 +178,67 @@ class _ProviderBundle:
 
 
 def _provider_bundle(*, maximum_cost_usd: float) -> _ProviderBundle:
+    return _provider_bundle_for_engine(
+        maximum_cost_usd=maximum_cost_usd,
+        engine=ProductEngineBindingV1(
+            engine_id="e5",
+            provider="openai-direct",
+            planner_model=OPENAI_GPT_5_6_TERRA_MODEL,
+            generator_model=OPENAI_HIGH_VOLUME_MODEL,
+            planner_reasoning_effort="low",
+            generator_reasoning_effort="none",
+            maximum_output_tokens=600,
+            input_price_usd_per_million=0.75,
+            output_price_usd_per_million=4.5,
+            credential_environment_variable="OPENAI_API_KEY",
+            returned_identity_must_equal=OPENAI_HIGH_VOLUME_MODEL,
+            dated_snapshot=False,
+        ),
+    )
+
+
+def _engine_client(
+    engine: ProductEngineBindingV1,
+    *,
+    role: str,
+):
+    model = engine.planner_model if role == "planner" else engine.generator_model
+    reasoning = (
+        engine.planner_reasoning_effort
+        if role == "planner"
+        else engine.generator_reasoning_effort
+    )
+    if engine.provider == "openai-direct":
+        return OpenAiResponsesClient(
+            model,
+            timeout_seconds=30,
+            max_output_tokens=engine.maximum_output_tokens,
+            reasoning_effort=reasoning,
+        )
+    if engine.provider == "deepseek-direct":
+        if model != "deepseek-v4-flash":
+            raise ValueError("direct DeepSeek engine must use deepseek-v4-flash")
+        return LiteLlmClient(
+            "deepseek/deepseek-v4-flash",
+            timeout_seconds=30,
+            max_output_tokens=engine.maximum_output_tokens,
+            temperature=0,
+            response_format={"type": "json_object"},
+            expected_provider_model="deepseek-v4-flash",
+        )
+    raise ValueError("deterministic engine does not construct provider clients")
+
+
+def _provider_bundle_for_engine(
+    *,
+    maximum_cost_usd: float,
+    engine: ProductEngineBindingV1,
+) -> _ProviderBundle:
+    if engine.provider == "deterministic":
+        raise ValueError("deterministic engine cannot construct a provider bundle")
     per_role_cost = max(0.01, maximum_cost_usd / 2)
-    planner_switch = _SwitchableClient(
-        OpenAiResponsesClient(
-            OPENAI_GPT_5_6_TERRA_MODEL,
-            timeout_seconds=30,
-            max_output_tokens=500,
-            reasoning_effort="low",
-        )
-    )
-    generator_switch = _SwitchableClient(
-        OpenAiResponsesClient(
-            OPENAI_HIGH_VOLUME_MODEL,
-            timeout_seconds=30,
-            max_output_tokens=600,
-            reasoning_effort="none",
-        )
-    )
+    planner_switch = _SwitchableClient(_engine_client(engine, role="planner"))
+    generator_switch = _SwitchableClient(_engine_client(engine, role="generator"))
     return _ProviderBundle(
         planner_switch=planner_switch,
         generator_switch=generator_switch,
@@ -360,6 +405,7 @@ def build_runtime_factory(
     maximum_case_cost_usd: float = 1.0,
     grounding_architecture_id: str = "legacy-structured-lexical-v1",
     source_resolver: Callable[[str], dict[str, str]] | None = None,
+    engine_binding: ProductEngineBindingV1 | None = None,
 ):
     """Return a per-case factory used only by the product evaluation adapter."""
 
@@ -426,10 +472,30 @@ def build_runtime_factory(
             raise ValueError(
                 f"unsupported grounding architecture: {grounding_architecture_id}"
             )
-        bundle = (
-            _provider_bundle(maximum_cost_usd=maximum_case_cost_usd)
-            if provider_backed
-            else None
+        selected_engine = engine_binding
+        if selected_engine is not None and (
+            provider_backed != (selected_engine.provider != "deterministic")
+        ):
+            raise ValueError("provider_backed and engine binding disagree")
+        bundle = None
+        if provider_backed:
+            bundle = (
+                _provider_bundle_for_engine(
+                    maximum_cost_usd=maximum_case_cost_usd,
+                    engine=selected_engine,
+                )
+                if selected_engine is not None
+                else _provider_bundle(maximum_cost_usd=maximum_case_cost_usd)
+            )
+        planner_model = (
+            selected_engine.planner_model
+            if selected_engine is not None
+            else OPENAI_GPT_5_6_TERRA_MODEL
+        )
+        generator_model = (
+            selected_engine.generator_model
+            if selected_engine is not None
+            else OPENAI_HIGH_VOLUME_MODEL
         )
         deterministic_generator = _SwitchableGenerator() if bundle is None else None
         generator = deterministic_generator
@@ -445,7 +511,7 @@ def build_runtime_factory(
             if mode == TutoringMode.T1_V2:
                 semantic_planner = LiveReactiveSemanticPlanner(
                     bundle.planner,
-                    model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+                    model_id=planner_model,
                 )
 
         def services(open_repository):
@@ -455,12 +521,12 @@ def build_runtime_factory(
                 proactive_graph = GovernedAutonomousTutoringGraph(
                     planner=LiveAutonomousPlanner(
                         bundle.planner,
-                        model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+                        model_id=planner_model,
                     ),
                     generator=RepositoryGroundedWordingGenerator(
                         open_repository,
                         generator,
-                        model_id=OPENAI_HIGH_VOLUME_MODEL,
+                        model_id=generator_model,
                         claim_validator=validator,
                     ),
                     checkpoint_database_path=str(database_path),

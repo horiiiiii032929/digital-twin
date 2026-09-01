@@ -30,6 +30,7 @@ from src.digital_twin.evaluation import (
     AutonomyEvaluationGoldV1,
     AutonomyEvaluationResponseV1,
     AutonomySystemManifestV1,
+    ProductEngineBindingV1,
     run_autonomy_case,
     score_autonomy_case,
     summarize_autonomy_scores,
@@ -75,6 +76,8 @@ class ActualProductEvaluationContext:
     grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
     canary_case_ids: tuple[str, str] = CANARY_CASE_IDS
     source_resolver: Any = None
+    engine_binding: ProductEngineBindingV1 | None = None
+    independent_scoring: bool = False
 
     @property
     def case_count(self) -> int:
@@ -194,10 +197,17 @@ def _manifest(
         model_bindings=(
             {"planner": "deterministic", "generator": "deterministic"}
             if network_free
-            else {
-                "planner": "gpt-5.6-terra",
-                "generator": "gpt-5.4-mini-2026-03-17",
-            }
+            else (
+                {
+                    "planner": context.engine_binding.planner_model,
+                    "generator": context.engine_binding.generator_model,
+                }
+                if context.engine_binding is not None
+                else {
+                    "planner": "gpt-5.6-terra",
+                    "generator": "gpt-5.4-mini-2026-03-17",
+                }
+            )
         ),
         network_free=network_free,
     )
@@ -552,11 +562,23 @@ async def _run_case(
             maximum_case_cost_usd=max(0.02, min(2.0, remaining_cost_usd)),
             grounding_architecture_id=context.runtime_grounding_architecture_id,
             source_resolver=context.source_resolver,
+            engine_binding=(context.engine_binding if provider_backed else None),
         ),
         clock_origin=CLOCK_ORIGIN,
     )
     try:
-        return await run_autonomy_case(adapter, case)
+        response = await run_autonomy_case(adapter, case)
+        if not context.independent_scoring:
+            return response
+        evidence = await adapter.collect_independent_evidence()
+        return response.model_copy(
+            update={
+                "diagnostic_trace": {
+                    **response.diagnostic_trace,
+                    "independent_evidence_v2": evidence.model_dump(mode="json"),
+                }
+            }
+        )
     finally:
         adapter.close()
 

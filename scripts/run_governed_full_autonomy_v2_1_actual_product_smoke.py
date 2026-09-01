@@ -19,7 +19,9 @@ from src.digital_twin.evaluation import (
     ExpectedAutonomyActionV1,
     run_autonomy_case,
     score_autonomy_case,
+    score_autonomy_case_independently,
     summarize_autonomy_scores,
+    summarize_independent_autonomy_scores,
 )
 from src.digital_twin.evaluation.autonomy_product_adapter import (
     StudentProductAutonomyAdapterV1,
@@ -499,6 +501,7 @@ def _manifest(condition: str) -> AutonomySystemManifestV1:
 async def _simulate() -> dict[str, Any]:
     validate()
     scores = []
+    independent_scores = []
     responses = []
     with tempfile.TemporaryDirectory(
         prefix="actual-product-autonomy-smoke-"
@@ -513,20 +516,28 @@ async def _simulate() -> dict[str, Any]:
             )
             try:
                 response = await run_autonomy_case(adapter, case)
+                evidence = await adapter.collect_independent_evidence()
             finally:
                 adapter.close()
             responses.append(response)
             scores.append(score_autonomy_case(case, gold, response))
+            independent_scores.append(
+                score_autonomy_case_independently(case, gold, response, evidence)
+            )
     summary = summarize_autonomy_scores(scores)
+    independent_summary = summarize_independent_autonomy_scores(independent_scores)
     total_calls = sum(item.provider_calls for item in responses)
     return {
         "instrument_id": INSTRUMENT_ID,
         "status": (
             "passed-actual-product-smoke"
-            if summary["all_case_hard_gates_passed"] and total_calls == 0
+            if summary["all_case_hard_gates_passed"]
+            and independent_summary["all_case_hard_gates_passed"]
+            and total_calls == 0
             else "failed-actual-product-smoke"
         ),
         "summary": summary,
+        "independent_summary": independent_summary,
         "conditions": {
             condition: {
                 "actions": [item.model_dump(mode="json") for item in response.actions],
