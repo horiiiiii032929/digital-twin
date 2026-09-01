@@ -16,6 +16,7 @@ from src.digital_twin.generation import (
     ClarificationFirstGroundedPromptBuilder,
     ConservativeGroundedPromptBuilder,
     DeterministicCitationValidator,
+    DeterministicEvidenceSetGroundedGenerator,
     DeterministicGroundedGenerator,
     DeterministicPolicyEnforcer,
     GenerationEvaluationSet,
@@ -485,6 +486,54 @@ async def test_deterministic_generator_applies_bounded_intent_without_changing_l
     assert answer.content.startswith("Hint:")
     assert answer.citations == [authoritative_citation_for_chunk(approved_hit().chunk)]
     assert answer.trace is not None and answer.trace.policy_action == "answer"
+
+
+@pytest.mark.asyncio
+async def test_evidence_set_generator_preserves_every_required_source_atom():
+    first = approved_hit()
+    first.chunk.text = "CSRF uses #browser sessions#."
+    first.chunk.metadata.update(
+        {
+            "semantic_atom_version": "source-semantic-evidence-atom-v1",
+            "semantic_atom_claim": "CSRF uses browser sessions.",
+        }
+    )
+    second = approved_hit().model_copy(deep=True)
+    second.chunk.id = "chunk-csrf-2"
+    second.chunk.text = "SameSite cookies restrict cross-site browser requests."
+    second.chunk.locator = "page 2, paragraph 2"
+
+    answer = await DeterministicEvidenceSetGroundedGenerator().generate(
+        "Which two statements connect CSRF with browser sessions?",
+        [first, second],
+        approved_policy(),
+    )
+
+    assert [claim.text for claim in answer.atomic_claims] == [
+        "CSRF uses browser sessions.",
+        second.chunk.text,
+    ]
+    assert [claim.evidence_hit_ids for claim in answer.atomic_claims] == [
+        [first.chunk.id],
+        [second.chunk.id],
+    ]
+    assert len(answer.citations) == 2
+    assert answer.trace is not None
+    assert answer.trace.provider_model == "deterministic/v2"
+
+
+@pytest.mark.asyncio
+async def test_evidence_set_generator_fails_closed_on_incomplete_evidence_set():
+    answer = await DeterministicEvidenceSetGroundedGenerator().generate(
+        "Which two statements connect CSRF with browser sessions?",
+        [approved_hit()],
+        approved_policy(),
+    )
+
+    assert answer.atomic_claims == []
+    assert answer.citations == []
+    assert answer.trace is not None
+    assert answer.trace.policy_action == "no-evidence"
 
 
 @pytest.mark.asyncio

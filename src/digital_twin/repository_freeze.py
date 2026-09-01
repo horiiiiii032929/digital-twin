@@ -79,6 +79,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_cross_engine_sealed_confirmation_010.py": (
             "dataset_generation",
         ),
+        "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -493,6 +496,10 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "course-digital-twin-whole-system-architecture-round-3-001": (
+            "method_evaluation_execution",
+        ),
+        "governed-full-autonomy-v2-1-grounding-successor-011": (
+            "dataset_generation",
             "method_evaluation_execution",
         ),
     }

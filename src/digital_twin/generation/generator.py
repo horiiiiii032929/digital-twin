@@ -5,6 +5,7 @@ from pydantic import ValidationError
 
 from src.digital_twin.generation.citations import (
     DeterministicCitationValidator,
+    authoritative_citation_for_chunk,
     resolve_atomic_claim_lineage,
 )
 from src.digital_twin.action_router import required_atomic_claim_count
@@ -18,6 +19,7 @@ from src.digital_twin.generation.models import (
 from src.digital_twin.generation.policy import DeterministicPolicyEnforcer
 from src.digital_twin.generation.prompt import GroundedPromptBuilder
 from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
     GenerationTrace,
     GenerationUsage,
     RetrievalHit,
@@ -28,6 +30,7 @@ from src.digital_twin.tutor_policy import TutorPolicy
 
 
 _Clock = Callable[[], float]
+_AUTHORITATIVE_SEMANTIC_ATOM_VERSION = "source-semantic-evidence-atom-v1"
 
 
 class DeterministicGroundedGenerator:
@@ -96,6 +99,91 @@ class DeterministicGroundedGenerator:
         evidence = _approved_hits(hits)[0].chunk.text
         content = _deterministic_pedagogical_response(intent, help_level, evidence)
         return answer.model_copy(update={"content": content})
+
+
+class DeterministicEvidenceSetGroundedGenerator(DeterministicGroundedGenerator):
+    """Compile the complete approved evidence set into authoritative claims.
+
+    The evidence gate, not a language model, owns which source atoms may be
+    released. This generator preserves every selected atom and its server-owned
+    lineage, which makes multi-evidence answers complete and provides a safe
+    fallback for provider-backed pedagogical wording.
+    """
+
+    implementation_id = "deterministic-evidence-set-grounded-generator"
+    version = "v2"
+
+    async def generate(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+    ) -> TutorAnswer:
+        started = self.clock()
+        approved_hits = _approved_hits(hits)
+        decision = self.policy_enforcer.evaluate(question, approved_hits, policy)
+        short_circuit = _policy_answer(
+            decision.action,
+            generator_id=self.implementation_id,
+            started=started,
+            clock=self.clock,
+        )
+        if short_circuit is not None:
+            return short_circuit
+        required = required_atomic_claim_count(question)
+        if len(approved_hits) != required:
+            return _policy_answer(
+                PolicyAction.NO_EVIDENCE,
+                generator_id=self.implementation_id,
+                started=started,
+                clock=self.clock,
+            )
+        prompt = self.prompt_builder.build(question, approved_hits, policy)
+        claims = [
+            AtomicAnswerClaim(
+                claim_id=f"claim-evidence-{index}",
+                text=_authoritative_claim_text(hit),
+                evidence_hit_ids=[hit.chunk.id],
+            )
+            for index, hit in enumerate(approved_hits, start=1)
+        ]
+        return TutorAnswer(
+            content=" ".join(claim.text for claim in claims),
+            citations=[
+                authoritative_citation_for_chunk(hit.chunk) for hit in approved_hits
+            ],
+            atomic_claims=claims,
+            trace=_trace(
+                generator_id=self.implementation_id,
+                provider_model="deterministic/v2",
+                prompt_version=prompt.version,
+                policy_action=decision.action,
+                started=started,
+                clock=self.clock,
+            ),
+        )
+
+    async def generate_for_intent(
+        self,
+        question: str,
+        hits: list[RetrievalHit],
+        policy: TutorPolicy,
+        *,
+        intent: str,
+        help_level: int,
+        repair_reason: str | None = None,
+    ) -> TutorAnswer:
+        del repair_reason
+        answer = await self.generate(question, hits, policy)
+        if answer.trace is None or answer.trace.policy_action != PolicyAction.ANSWER:
+            return answer
+        return answer.model_copy(
+            update={
+                "content": _deterministic_pedagogical_response(
+                    intent, help_level, answer.content
+                )
+            }
+        )
 
 
 class LiveGroundedGenerator:
@@ -663,6 +751,20 @@ class LiveQuestionTargetedExtractionGroundedGenerator(LiveGroundedGenerator):
 
 def _approved_hits(hits: list[RetrievalHit]) -> list[RetrievalHit]:
     return [hit for hit in hits if hit.chunk.retrieval_allowed]
+
+
+def _authoritative_claim_text(hit: RetrievalHit) -> str:
+    """Prefer deterministic source-side semantic text over authoring markup."""
+
+    atom_version = hit.chunk.metadata.get("semantic_atom_version")
+    atom_claim = hit.chunk.metadata.get("semantic_atom_claim")
+    if (
+        atom_version == _AUTHORITATIVE_SEMANTIC_ATOM_VERSION
+        and atom_claim
+        and atom_claim.strip()
+    ):
+        return atom_claim.strip()
+    return hit.chunk.text
 
 
 def _deterministic_pedagogical_response(

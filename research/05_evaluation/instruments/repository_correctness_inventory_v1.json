@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 919
+    "audited": 921
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 220,
+    "active_or_unclassified_tooling": 221,
     "active_runtime": 149,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 205
+    "verification": 206
   },
-  "file_count": 919,
+  "file_count": 921,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e5778fa8f1c6de3485d0e0760ddfea7829419762814df35f1d3c30394c642e96",
+  "record_sha256": "2504c01a95542a3397439aae6216ff652f2425d88ed3584b06ed6c64ce1cc5ca",
   "records": [
     {
       "audit": {
@@ -5448,10 +5448,10 @@
     {
       "audit": {
         "domain": "active-or-unclassified-tooling",
-        "evidence": "Factual adapter supports deterministic, direct OpenAI, and direct DeepSeek engine bindings, exact source-semantic V1/V2 gates, zero fallback, explicit lifecycle cleanup, and a fixed non-identifying DeepSeek provider user ID required by the shared transport.",
+        "evidence": "Case-bound precomputed retrieval now keys cluster conversations by course and cluster, preventing cross-course boundary cases from overwriting the answerable course binding; exact five-case regression and focused execution tests pass.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex attempt-001 harness correction audit"
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5462,7 +5462,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "f3584511347f8ec36dd9589ff6bbd3c2bcab05f42eb9ff0b7f47f98fe39645d5"
+      "sha256": "888ca3a366615c568ccb731516e779d8984269a227305c98eb5c9cadab772701"
     },
     {
       "audit": {
@@ -6527,6 +6527,22 @@
     },
     {
       "audit": {
+        "domain": "grounding-successor-build",
+        "evidence": "Manual contract review plus byte-stability, source-disjointness, unique-reference, exact-lineage, allocation, and freeze tests validate the fresh 500-case package builder.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "risk": "high",
+      "sha256": "4d7477d48e8fc3483d8368510c5eeb02abc8cf6f9ac79640b58a5bbb4b807f9e"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -6752,10 +6768,10 @@
     {
       "audit": {
         "domain": "active-or-unclassified-tooling",
-        "evidence": "Repository-freeze review verified program 010 paid authority is revoked after the terminal completed-refine result while all other execution remains fail closed.",
+        "evidence": "The factual executor now accepts explicit program, profile, and deterministic-generator bindings so successor evaluations cannot inherit historical program identities; historical defaults remain unchanged.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -6763,7 +6779,7 @@
       "package_commands": [],
       "path": "scripts/cross_engine_factual.py",
       "risk": "high",
-      "sha256": "99a0df0f9397841a8588713ee2a630ca08a193631e6c6e72cdfceeffdc421cb2"
+      "sha256": "f727ef413144269a2228c0e380ed423c528c10ab166d74948a61bd04c0dd9d00"
     },
     {
       "audit": {
@@ -10596,10 +10612,10 @@
     {
       "audit": {
         "domain": "flow-independent-factual-qa",
-        "evidence": "Manual dependency-boundary and adapter review verifies student-runtime imports are isolated from the pure evaluation schemas, preventing grounding/evaluation circular imports while preserving T0/T1/control/HTTP normalization and lineage hooks.",
+        "evidence": "Action normalization now preserves the server-owned action taxonomy and no longer infers clarify from answer wording; exact regression passes.",
         "findings": [],
-        "reviewed_at": "2026-08-26",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10607,7 +10623,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_adapters.py",
       "risk": "high",
-      "sha256": "4a93684cfe5b056c7f3a4c399e9bbfee4688012eaeb64d7a907dd3d78e251249"
+      "sha256": "cba742152d7d08b784e0d384d645ab3ab15b496d56ea9189e6355b37ee69d7d6"
     },
     {
       "audit": {
@@ -10996,10 +11012,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Public export review confirms the evidence-set compiler is explicitly available without changing historical generator exports.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11007,7 +11023,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/__init__.py",
       "risk": "high",
-      "sha256": "b8d06833d867f1cefbd4f96b1305640b69b61d82c42f42079f70596010105c5a"
+      "sha256": "1071a43c531e83436966e24acba62e432b1c3861ec06f09f949d23584daa3325"
     },
     {
       "audit": {
@@ -11044,10 +11060,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "The V2 compiler emits every gate-selected source atom with authoritative citation lineage, fails closed on incomplete cardinality, and trusts semantic claims only for the exact deterministic atom version; generation regressions pass.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11055,7 +11071,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/generator.py",
       "risk": "high",
-      "sha256": "7d8bef079c45bd6f154705394bf1c35a2d9fce5a5b2f81e8b2c8d05153f726c5"
+      "sha256": "3f83bffb5ce75a1519ceb8c43e153d65a36df28a9825c41c8943766bf2fba040"
     },
     {
       "audit": {
@@ -11860,10 +11876,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+        "evidence": "The global freeze remains active while only successor 011 dataset construction and method evaluation are allowlisted under the user-authorized finite local-demo track.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewer": "Codex grounding successor authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11871,7 +11887,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "de181f56a9f5fa6a54c37716db74a150a426b330917c18035962945c67edee9c"
+      "sha256": "2c96b538679db7b851292e7945787c18d79d1b7a55cbe2194aa3aff4161053df"
     },
     {
       "audit": {
@@ -12404,10 +12420,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "evidence": "Tests cover complete multi-evidence compilation, fail-closed cardinality, exact atom-version trust, and raw-source fallback.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12415,7 +12431,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "040c75a58b3af70eb674427a8358cdcbb9aff15cdb432c4faeff26628eaf9c73"
+      "sha256": "32bc6204dbd6109decf2f8c2bdb1e8042c4fdfcc1277c6aa2dc28440799e6319"
     },
     {
       "audit": {
@@ -12612,10 +12628,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Freeze regression verifies terminal program 010 is blocked after authority revocation and no unintended paid stage remains authorized.",
+        "evidence": "The exact bounded-authorization set and successor 011 operation tuple are asserted while all historical and unknown executions remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewer": "Codex grounding successor authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12623,7 +12639,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "0a1ce0f25a22c6438c936276379b9d6c77d4fb3a6e3b756b7e7409564bcb736e"
+      "sha256": "848cb8ca62ff1025fa402807cda39866915671a6a8b490e2027d29cc0a632e95"
     },
     {
       "audit": {
@@ -13332,10 +13348,10 @@
     {
       "audit": {
         "domain": "r1-openai-verification",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Regression proves explicit answer actions cannot be reclassified from natural-language prefixes while clarify aliases remain normalized.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13343,7 +13359,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_t0_openai.py",
       "risk": "medium",
-      "sha256": "951c991af994ae8dcb90007549065795e285add3ab7a9288f8f5744dd94c73db"
+      "sha256": "ffd18236fa62a6da29826f1f94fc4a98cb7057f5c4c6a509db896d85794d289d"
     },
     {
       "audit": {
@@ -14676,10 +14692,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+        "evidence": "Exact cross-course cluster regression executes four answerable and one boundary case without retrieval binding aliasing or operational failure.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewer": "Codex grounding root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14687,7 +14703,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
       "risk": "medium",
-      "sha256": "1606e0ebfa46e975f8980cf5d1ad19c737c6d3736a2c3aea70b2ce92d173912a"
+      "sha256": "7185c938d22ca701dad478652d5bedea7ff2413bdcc30101b3f0fd7fa167c061"
     },
     {
       "audit": {
@@ -14704,6 +14720,22 @@
       "path": "tests/test_governed_full_autonomy_v2_1_evaluation_harness.py",
       "risk": "medium",
       "sha256": "1a964b5a7adce5104a8c8b2e3aa8417ce67b68d95036bcfa7c03a7126a1fe5d3"
+    },
+    {
+      "audit": {
+        "domain": "grounding-successor-verification",
+        "evidence": "Tests independently verify byte stability, exact 500/100-cluster construction, source-contract canonical answers, empty boundary claim lineage, and exact course/modality allocation.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex grounding successor audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_grounding_successor_011.py",
+      "risk": "medium",
+      "sha256": "3e55ee3af58931469d9cbc8932da2c938366442a33a20f73b4a2013aac4592b7"
     },
     {
       "audit": {
@@ -15459,8 +15491,8 @@
     }
   ],
   "risk_counts": {
-    "high": 700,
-    "medium": 219
+    "high": 701,
+    "medium": 220
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
