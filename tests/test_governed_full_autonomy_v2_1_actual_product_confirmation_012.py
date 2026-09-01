@@ -8,16 +8,17 @@ from scripts import (
 )
 
 
-def test_confirmation_012_is_fresh_source_disjoint_and_frozen() -> None:
+def test_confirmation_012_is_fresh_source_disjoint_and_authorized() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-frozen-provider-unauthorized"
+    assert result["status"] == "passed-frozen-authorized"
     assert result["case_count"] == 820
     assert result["source_family_count"] == 50
     assert result["source_disjoint_from_evaluation_009"] is True
     assert instrument["dataset"]["source_family_range"] == [101, 150]
-    assert instrument["authority"]["provider_execution_authorized"] is False
+    assert instrument["authority"]["provider_execution_authorized"] is True
+    assert instrument["authority"]["paid_execution_authorized"] is True
 
 
 def test_confirmation_012_binds_hybrid_authority_boundary() -> None:
@@ -33,11 +34,10 @@ def test_confirmation_012_binds_hybrid_authority_boundary() -> None:
     }
 
 
-def test_confirmation_012_preflight_fails_closed_before_activation() -> None:
+def test_confirmation_012_preflight_reaches_environment_checks_after_activation() -> None:
     result = runner.preflight()
 
-    assert result["status"] == "blocked-not-authorized"
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
-    assert "repository-freeze-authorization-missing" in result["blockers"]
+    assert "provider-execution-not-authorized" not in result["blockers"]
+    assert "paid-execution-not-authorized" not in result["blockers"]
+    assert "repository-freeze-authorization-missing" not in result["blockers"]
     assert result["provider_calls"] == 0

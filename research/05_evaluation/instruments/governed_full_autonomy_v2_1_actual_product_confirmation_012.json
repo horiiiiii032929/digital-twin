@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-012",
-  "status": "frozen-pending-paid-authorization",
+  "status": "frozen-authorized",
   "owner_issue": 180,
   "parent_issue": 8,
   "decision_question": "Does the release-bound hybrid architecture preserve factual grounding while GPT-5.6 Terra plans complex reactive and proactive tutoring actions on fresh, source-disjoint cases?",
@@ -102,9 +102,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "User authorized the finite track through local demo; activation remains a separate repository checkpoint.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User explicitly authorized every previously discussed model run through the verified local demo on 2026-09-02; this checkpoint remains bounded by its immutable call and cost limits.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 15.0

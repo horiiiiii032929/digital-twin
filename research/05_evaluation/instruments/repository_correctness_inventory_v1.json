@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9fbf872494f19931995261c0275ea04d798c2ab52a55f824603f8f1d924ad567",
+  "record_sha256": "5e5725c0f5ddf86ad2984c6b047ee73a71689ee5b58279fa29b7c76b51501f56",
   "records": [
     {
       "audit": {
@@ -4296,7 +4296,7 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-012",
-        "evidence": "Instrument review binds deterministic source compilation, bounded Terra planning, current direct-OpenAI metadata, exact source and result hashes, finite cost/call limits, and explicit non-claims.",
+        "evidence": "Instrument review binds deterministic source compilation, bounded Terra planning, current direct-OpenAI metadata, exact source and result hashes, finite cost/call limits, explicit non-claims, and the user's finite authorization through local demo.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex release-bound autonomy root-cause review"
@@ -4307,7 +4307,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_012.json",
       "risk": "high",
-      "sha256": "b6c64b079b65a1afffeecbc52a175fbf185458c0e9a0273f1d929dbfc3496105"
+      "sha256": "bbe67369a01b3249e2f45e8e0cbf19ea27db075783f7d828208e6a5255f25c99"
     },
     {
       "audit": {
@@ -5411,7 +5411,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json",
       "risk": "high",
-      "sha256": "fb0ea60c4c35bfed8d1b8f2bbd1f58803ed82cc39459659242bb7e67aef4650e"
+      "sha256": "2748bae3b72760f59cde0bc928c645265aaf39161c70bfa927e84e60ade11c66"
     },
     {
       "audit": {
@@ -11972,10 +11972,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active while only successor 011 dataset construction and method evaluation are allowlisted under the user-authorized finite local-demo track.",
+        "evidence": "The global freeze remains active while successor 012 alone receives the additional bounded external-model and method-evaluation operations authorized for the finite local-demo track.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding successor authorization audit"
+        "reviewer": "Codex release-bound autonomy authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11983,7 +11983,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "86032edd1cb9cde324351b5ab6f6a54b626e1b523998d35ceb4a1f04840412bd"
+      "sha256": "04008a61067999227133bf0818b812d748f0ea7ce743d8dfcd9c02845b4b6c71"
     },
     {
       "audit": {
@@ -12724,10 +12724,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "The exact bounded-authorization set and successor 011 operation tuple are asserted while all historical and unknown executions remain blocked.",
+        "evidence": "The exact bounded-authorization set and successor 012 external-model/method-evaluation tuple are asserted while all historical and unknown executions remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding successor authorization audit"
+        "reviewer": "Codex release-bound autonomy authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12735,7 +12735,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "848cb8ca62ff1025fa402807cda39866915671a6a8b490e2027d29cc0a632e95"
+      "sha256": "fe851876d3b358570f9ae81e8974228202d31033f8b27668f13ad685a072d5ff"
     },
     {
       "audit": {
@@ -14644,7 +14644,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, and fail-closed authorization preflight.",
+        "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, and progression from repository authorization into environment-only preflight checks.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex release-bound autonomy root-cause review"
@@ -14655,7 +14655,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
       "risk": "medium",
-      "sha256": "783227dc77331a20f6e5d17c31839a4cdc4ce237d241b957bca7596776f541d7"
+      "sha256": "61e7bd27b314d6e0e4f5190ce0415ed86db0ad8f8be855381edf091516a0e10c"
     },
     {
       "audit": {
