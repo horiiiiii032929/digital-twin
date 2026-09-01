@@ -20,12 +20,14 @@ from src.digital_twin.evaluation.factual_qa_contract import (
     EvaluationCitationV1,
     SystemUnderTestManifestV1,
 )
+from src.digital_twin.evaluation.cross_engine_program import ProductEngineBindingV1
 from src.digital_twin.evaluation.provider_json import (
     DirectProviderJsonTransport,
     OpenAiCompatibleJsonTransport,
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
+    DeterministicGroundedGenerator,
     DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
@@ -36,7 +38,10 @@ from src.digital_twin.generation import (
     QuestionTargetedExtractionPromptBuilder,
     StrictEvidenceGroundedPromptBuilder,
 )
-from src.digital_twin.action_router import DeterministicActionRouterV1
+from src.digital_twin.action_router import (
+    DeterministicActionRouterV1,
+    DeterministicActionRouterV2,
+)
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
@@ -48,11 +53,17 @@ from src.digital_twin.grounding import (
     QuestionTargetedAtomicEvidenceGate,
     RetrievalHit,
     RetrievalIndexStoreV1,
+    SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomGateV2,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
     build_retrieval_index_binding,
 )
-from src.digital_twin.grounding.models import GenerationUsage, TutorAnswer
+from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
+    GenerationUsage,
+    TutorAnswer,
+)
 from src.digital_twin.llm import LlmMessage, LlmResponse, LlmUnavailableError
 from src.digital_twin.student import (
     Account,
@@ -312,6 +323,51 @@ def _generator_transport(
 
     runtime = runtime or {}
 
+    cross_engine_payload = runtime.get("product_engine_binding")
+    if cross_engine_payload is not None:
+        engine = ProductEngineBindingV1.model_validate(cross_engine_payload)
+        if engine.provider == "deterministic":
+            raise LiveT0AdapterError(
+                "deterministic engine does not construct a provider transport"
+            )
+        model = engine.generator_model
+        binding = {
+            "binding_id": f"cross-engine-010-{engine.engine_id}-generator",
+            "provider": "openai" if engine.provider == "openai-direct" else "deepseek",
+            "provider_display_name": (
+                "OpenAI" if engine.provider == "openai-direct" else "DeepSeek"
+            ),
+            "first_party_endpoint": True,
+            "api_url": (
+                "https://api.openai.com/v1/responses"
+                if engine.provider == "openai-direct"
+                else "https://api.deepseek.com/chat/completions"
+            ),
+            "credential_environment_variable": engine.credential_environment_variable,
+            "provider_model": model,
+            "documented_revision": engine.returned_identity_must_equal or model,
+            "expected_provider_revision": (
+                engine.returned_identity_must_equal
+                if engine.provider == "openai-direct"
+                else None
+            ),
+            "require_provider_revision": True,
+            "reasoning_effort": engine.generator_reasoning_effort,
+            "max_output_tokens": engine.maximum_output_tokens,
+            "temperature": 0,
+            "timeout_seconds": 45,
+            "maximum_transport_retries": 0,
+            "pricing_usd_per_million_input_tokens": (
+                engine.input_price_usd_per_million
+            ),
+            "pricing_usd_per_million_output_tokens": (
+                engine.output_price_usd_per_million
+            ),
+        }
+        if engine.provider == "openai-direct":
+            return binding, DirectProviderJsonTransport(binding)
+        return binding, OpenAiCompatibleJsonTransport(binding)
+
     if manifest.generator == "deepseek-v4-flash-live-atomic":
         provider_binding = _load(HISTORICAL_BINDING_PATH)
         binding = deepcopy(provider_binding["providers"]["deepseek-v4-flash"])
@@ -399,7 +455,7 @@ class _RecordingGenerator:
     implementation_id = "recording-live-atomic-grounded-generator-v1"
     version = "v1"
 
-    def __init__(self, generator: LiveAtomicGroundedGenerator) -> None:
+    def __init__(self, generator: Any) -> None:
         self.generator = generator
         self.answers_by_case: dict[str, TutorAnswer] = {}
 
@@ -438,6 +494,59 @@ class _RecordingGenerator:
             self.answers_by_case[case_id] = answer.model_copy(deep=True)
         return answer
 
+
+class _DeterministicAtomicGenerator:
+    """Deterministic E0 baseline with explicit exact-quote claim lineage."""
+
+    implementation_id = "deterministic-atomic-grounded-generator-v1"
+    version = "v1"
+
+    def __init__(self, *, policy_enforcer: DeterministicPolicyEnforcer) -> None:
+        self.delegate = DeterministicGroundedGenerator(
+            prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
+            policy_enforcer=policy_enforcer,
+        )
+
+    async def generate(self, question, hits, policy):
+        return self._attach(await self.delegate.generate(question, hits, policy), hits)
+
+    async def generate_for_intent(
+        self,
+        question,
+        hits,
+        policy,
+        *,
+        intent,
+        help_level,
+        repair_reason=None,
+    ):
+        answer = await self.delegate.generate_for_intent(
+            question,
+            hits,
+            policy,
+            intent=intent,
+            help_level=help_level,
+            repair_reason=repair_reason,
+        )
+        return self._attach(answer, hits)
+
+    @staticmethod
+    def _attach(answer: TutorAnswer, hits: list[RetrievalHit]) -> TutorAnswer:
+        if answer.atomic_claims or not hits or answer.trace is None:
+            return answer
+        if answer.trace.policy_action != "answer":
+            return answer
+        return answer.model_copy(
+            update={
+                "atomic_claims": [
+                    AtomicAnswerClaim(
+                        claim_id="claim-deterministic-evidence",
+                        text=hits[0].chunk.text,
+                        evidence_hit_ids=[hits[0].chunk.id],
+                    )
+                ]
+            }
+        )
 
 class _ManagedAdapter(StudentTutoringServiceAdapterV1):
     def __init__(
@@ -481,6 +590,26 @@ class _ManagedAdapter(StudentTutoringServiceAdapterV1):
             self.provider_ledger.close()
             self.repository.close()
             self._closed = True
+
+
+class _ManagedDeterministicAdapter(StudentTutoringServiceAdapterV1):
+    """Lifecycle wrapper for the zero-provider E0 factual baseline."""
+
+    def __init__(self, *, repository: SQLiteStudentRepository, **kwargs: Any) -> None:
+        super().__init__(**kwargs)
+        self.repository = repository
+        self._closed = False
+
+    def validate_completion(self) -> None:
+        return None
+
+    def finalize(self) -> None:
+        if not self._closed:
+            self.repository.close()
+            self._closed = True
+
+    def interrupt(self) -> None:
+        self.finalize()
 
 
 def _setup_service(
@@ -666,15 +795,29 @@ def build_live_t0_adapter(
     cases: list[EvaluationCaseV1],
     runtime: dict[str, Any],
 ) -> StudentTutoringServiceAdapterV1:
-    generator_binding, generator_transport = _generator_transport(manifest, runtime)
+    engine_payload = runtime.get("product_engine_binding")
+    engine = (
+        ProductEngineBindingV1.model_validate(engine_payload)
+        if engine_payload is not None
+        else None
+    )
+    deterministic_engine = engine is not None and engine.provider == "deterministic"
+    generator_binding = None
+    generator_transport = None
+    if not deterministic_engine:
+        generator_binding, generator_transport = _generator_transport(manifest, runtime)
     flow_id = manifest.flow_id
     if manifest.evidence_gate in {
         "structured-lexical-coverage-evidence-gate-v1",
         "structured-hierarchical-coverage-evidence-gate-v1",
         "question-targeted-atomic-evidence-gate-v1",
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
     }:
         condition = "candidate"
-    elif manifest.evidence_gate == "any-hit-evidence-gate-v1":
+    elif manifest.evidence_gate in {
+        "any-hit-evidence-gate-v1",
+        "source-semantic-evidence-atoms-v1",
+    }:
         condition = "control"
     else:
         raise LiveT0AdapterError("system manifest evidence gate is unsupported")
@@ -682,7 +825,9 @@ def build_live_t0_adapter(
     maximum_cost = float(
         runtime.get("maximum_cost_usd", PRODUCT_MAXIMUM_COST_USD[condition])
     )
-    cascade_v2 = runtime.get("model_candidate_manifest") is not None
+    cascade_v2 = (
+        runtime.get("model_candidate_manifest") is not None or engine is not None
+    )
     targeted_generator = manifest.generator == (
         "openai-gpt-5.4-mini-question-targeted-atomic-v1"
     )
@@ -703,6 +848,7 @@ def build_live_t0_adapter(
     elif targeted_generator or manifest.generator in {
         "openai-gpt-5.4-mini-live-extractive-boundary",
         "openai-responses-live-atomic-v2",
+        "cross-engine-live-extractive-boundary-v1",
     }:
         response_schema = EXTRACTIVE_BOUNDARY_RESPONSE_SCHEMA
         live_generator = LiveExtractiveBoundaryGroundedGenerator
@@ -731,64 +877,83 @@ def build_live_t0_adapter(
             maximum_claims=8,
             evidence_limit=5,
         )
-    provider_ledger = ProviderCallLedgerV1(
-        Path(runtime["provider_ledger_path"]),
-        run_binding={
-            "instrument_id": runtime["instrument_id"],
-            "flow_id": flow_id,
-            "manifest": manifest.model_dump(mode="json"),
-            "binding": generator_binding,
-            "cases_sha256": runtime["cases_sha256"],
-            "code_revision": runtime["code_revision"],
-        },
-        maximum_calls=maximum_calls,
-        maximum_cost_usd=maximum_cost,
-        resume=bool(runtime["resume"]),
-        maximum_transport_retries_total=(
-            maximum_calls * 2 // 100 if cascade_v2 else None
-        ),
+    provider_ledger = None
+    action_router = (
+        DeterministicActionRouterV2()
+        if manifest.evidence_gate
+        == "ambiguity-safe-source-semantic-evidence-atoms-v2"
+        else DeterministicActionRouterV1()
     )
-    client = _BoundedProductLlmClient(
-        transport=generator_transport,
-        ledger=provider_ledger,
-        flow_id=flow_id,
-        response_schema=response_schema,
-        quarantine_failures=cascade_v2,
-        forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
-    )
-    if extraction_generator:
-        generator_impl = LiveQuestionTargetedExtractionGroundedGenerator(
-            client,
-            prompt_builder=QuestionTargetedExtractionPromptBuilder(),
-            policy_enforcer=DeterministicPolicyEnforcer(
-                action_router=DeterministicActionRouterV1()
-            ),
-        )
-    elif targeted_generator:
-        generator_impl = LiveQuestionTargetedAtomicGroundedGenerator(
-            client,
-            prompt_builder=QuestionTargetedAtomicPromptBuilder(),
-            policy_enforcer=DeterministicPolicyEnforcer(
-                action_router=DeterministicActionRouterV1()
-            ),
+    if deterministic_engine:
+        generator_impl = _DeterministicAtomicGenerator(
+            policy_enforcer=DeterministicPolicyEnforcer(action_router=action_router)
         )
     else:
-        generator_impl = live_generator(client, prompt_builder=prompt_builder)
-    recording_generator = _RecordingGenerator(generator_impl)
-    gate = _RecordingGate(
-        (
-            QuestionTargetedAtomicEvidenceGate()
-            if manifest.evidence_gate == "question-targeted-atomic-evidence-gate-v1"
-            else (
-                StructuredHierarchicalCoverageEvidenceGate()
-                if manifest.evidence_gate
-                == "structured-hierarchical-coverage-evidence-gate-v1"
-                else StructuredLexicalCoverageEvidenceGate()
-            )
+        if generator_binding is None or generator_transport is None:
+            raise LiveT0AdapterError("provider-backed engine lacks transport binding")
+        provider_ledger = ProviderCallLedgerV1(
+            Path(runtime["provider_ledger_path"]),
+            run_binding={
+                "instrument_id": runtime["instrument_id"],
+                "flow_id": flow_id,
+                "manifest": manifest.model_dump(mode="json"),
+                "binding": generator_binding,
+                "cases_sha256": runtime["cases_sha256"],
+                "code_revision": runtime["code_revision"],
+            },
+            maximum_calls=maximum_calls,
+            maximum_cost_usd=maximum_cost,
+            resume=bool(runtime["resume"]),
+            maximum_transport_retries_total=(
+                maximum_calls * 2 // 100 if cascade_v2 else None
+            ),
         )
-        if condition == "candidate"
-        else AnyHitEvidenceGate()
-    )
+        client = _BoundedProductLlmClient(
+            transport=generator_transport,
+            ledger=provider_ledger,
+            flow_id=flow_id,
+            response_schema=response_schema,
+            quarantine_failures=cascade_v2,
+            forced_failure_case_ids=set(runtime.get("forced_failure_case_ids", [])),
+        )
+        if extraction_generator:
+            generator_impl = LiveQuestionTargetedExtractionGroundedGenerator(
+                client,
+                prompt_builder=QuestionTargetedExtractionPromptBuilder(),
+                policy_enforcer=DeterministicPolicyEnforcer(
+                    action_router=action_router
+                ),
+            )
+        elif targeted_generator:
+            generator_impl = LiveQuestionTargetedAtomicGroundedGenerator(
+                client,
+                prompt_builder=QuestionTargetedAtomicPromptBuilder(),
+                policy_enforcer=DeterministicPolicyEnforcer(
+                    action_router=action_router
+                ),
+            )
+        else:
+            generator_impl = live_generator(
+                client,
+                prompt_builder=prompt_builder,
+                policy_enforcer=DeterministicPolicyEnforcer(
+                    action_router=action_router
+                ),
+            )
+    recording_generator = _RecordingGenerator(generator_impl)
+    if manifest.evidence_gate == "ambiguity-safe-source-semantic-evidence-atoms-v2":
+        evidence_gate = SourceSemanticEvidenceAtomGateV2()
+    elif manifest.evidence_gate == "source-semantic-evidence-atoms-v1":
+        evidence_gate = SourceSemanticEvidenceAtomGateV1()
+    elif manifest.evidence_gate == "question-targeted-atomic-evidence-gate-v1":
+        evidence_gate = QuestionTargetedAtomicEvidenceGate()
+    elif manifest.evidence_gate == "structured-hierarchical-coverage-evidence-gate-v1":
+        evidence_gate = StructuredHierarchicalCoverageEvidenceGate()
+    elif condition == "candidate":
+        evidence_gate = StructuredLexicalCoverageEvidenceGate()
+    else:
+        evidence_gate = AnyHitEvidenceGate()
+    gate = _RecordingGate(evidence_gate)
     source_path_value = runtime.get("source_package_path")
     source_path = Path(str(source_path_value)) if source_path_value else None
     chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
@@ -920,14 +1085,21 @@ def build_live_t0_adapter(
             for claim in answer.atomic_claims
         ]
 
+    adapter_kwargs = {
+        "flow_id": flow_id,
+        "execute_turn": execute_turn,
+        "resolve_citation": resolve_citation,
+        "resolve_claims": resolve_claims,
+        "resolve_retrieved": resolve_retrieved,
+        "repository": repository,
+    }
+    if deterministic_engine:
+        return _ManagedDeterministicAdapter(**adapter_kwargs)
+    if provider_ledger is None:
+        raise LiveT0AdapterError("provider-backed adapter lacks a provider ledger")
     return _ManagedAdapter(
-        flow_id=flow_id,
-        execute_turn=execute_turn,
-        resolve_citation=resolve_citation,
-        resolve_claims=resolve_claims,
-        resolve_retrieved=resolve_retrieved,
         provider_ledger=provider_ledger,
-        repository=repository,
+        **adapter_kwargs,
         # Evaluation-v2 persists every failed provider response as an explicit
         # operational-failure case. Completion and malformed-response rates are
         # quality metrics; an individual failure is not a corrupt execution.

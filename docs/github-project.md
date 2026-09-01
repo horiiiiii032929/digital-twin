@@ -153,6 +153,20 @@ refreshed on 2026-09-01 and the package is frozen. Paid authority, the bounded
 freeze allowlist, and a clean live confirmation remain outstanding; no
 promotion or deployment follows from the network-free pass.
 
+PR #176 has now merged that checkpoint. Issue #157 moves prospectively to
+cross-engine program 010 rather than paying for 009 in isolation. The new
+program keeps one evaluation method across six engine bindings, excludes Sol
+and OpenRouter, and uses an independent raw-evidence scorer that does not trust
+the graph's own invariant flags. Its deterministic E0 run passed all 820
+network-free actual-product cases; this is `Keep` for the scorer/controller and
+`Go Deeper` for product quality. The finite runner and fresh source-disjoint
+1,000-case package are now complete. The board should retain #157 as the only
+active `In Progress / Go Deeper` evaluation: next publish the build-only PR,
+refresh direct-provider metadata, freeze the single USD 50 authority, and run
+once through 500+100, 820 per engine, top-two 1,000, winner 10,000+1,000,
+proxy synthesis, and local release/no-release. No intermediate stage requires
+a new issue or user decision.
+
 That immutable candidate is now
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's
 exact Keep record and selected architecture, adds only public source/section

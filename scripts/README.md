@@ -1076,6 +1076,20 @@ authorization is revoked; the opened cases must not be reused for confirmation.
   Validate, simulate, preflight, execute, and resume commands share the actual
   product runner. The network-free simulation passes all gates; provider
   execution remains fail-closed and unauthorized.
+- `build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py` and
+  `run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py`: freeze the
+  six-engine whole-product comparison, verify exact public/gold/prompt/policy
+  hashes, and run the 820-case actual-product network-free qualification with
+  `independent-autonomy-scorer-v2`. The scorer derives action, authority,
+  citation, persistence, delivery, restart, transition, and termination results
+  from raw sanitized evidence rather than product-reported invariant flags.
+  Use `npm run validate:governed-autonomy-v2-1-cross-engine-evaluation-010`,
+  `npm run simulate:governed-autonomy-v2-1-cross-engine-evaluation-010`, or
+  `npm run preflight:governed-autonomy-v2-1-cross-engine-evaluation-010`.
+  `build_cross_engine_sealed_confirmation_010.py` adds the byte-stable,
+  source-range-disjoint 1,000-case confirmation. Execute/resume commands are
+  implemented but fail closed until the program instrument and bounded freeze
+  both carry the one-time USD 50 authorization.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

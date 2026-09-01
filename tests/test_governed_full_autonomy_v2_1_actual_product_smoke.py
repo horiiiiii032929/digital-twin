@@ -36,6 +36,8 @@ def test_actual_product_smoke_drives_all_real_service_conditions() -> None:
     assert result["summary"]["all_case_hard_gates_passed"] is True
     assert result["summary"]["action_accuracy"] == 1.0
     assert result["summary"]["restart_consistency_rate"] == 1.0
+    assert result["independent_summary"]["all_case_hard_gates_passed"] is True
+    assert result["independent_summary"]["safe_grounded_autonomous_success"] == 1.0
     assert result["provider_calls"] == 0
     assert result["tokens"] == 0
     assert result["cost_usd"] == 0
