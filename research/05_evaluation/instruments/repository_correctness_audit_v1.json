@@ -3055,9 +3055,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010.json",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "0bacd8f9b93a18e4f3c508b9ac92838c05a6b1bf5eefbe54eeea3c2c9fa9d099"
+      "sha256": "98cb83118f6b8c08674ca84b89b91ea942538c39c6f12ea513b9decdfb64c58e"
     },
     {
       "audit_status": "audited",
@@ -4397,9 +4397,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "8b301a71d97078b068229029fd9a5d9fb60b62b437938a82c4622feef8fb11fd"
+      "sha256": "3c95a3edd3ee5d3ab14071e54f510dd6c886c311207e4ffbcef90ebf6a41d7bf"
     },
     {
       "audit_status": "audited",
@@ -5596,9 +5596,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "77a46d7782f1d6571a62515dffdda24fe2b12723bc5a2654d8a2550f7417b20a"
+      "sha256": "0bff316fbb33ae94d9dcf0bea1fe498586946602ba155199361165598acd0d76"
     },
     {
       "audit_status": "audited",
@@ -7642,9 +7642,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "350437ba30bfe1a0407f08f9525b537b2b65f87f06f620c0fda6ee9d38598aa3"
+      "sha256": "f56762fc49552b89fd828b762baef3164f9ebad1141ea33b718164045fdcb7ea"
     },
     {
       "audit_status": "audited",
@@ -8159,9 +8159,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "0e537dc840410cba17d9053a971b3a3c1b48446a07a6f06461dc15c1e5b6be38"
+      "sha256": "9eef8569b643412783ce112700542a446cc94d6d73c53d2267992b4114c9604b"
     },
     {
       "audit_status": "audited",
@@ -8951,9 +8951,9 @@
       "evidence": "Mutation tests prove self-reported flags and free-form reasons cannot hide ineligible actions, authority hash drift, citation hash drift, or restart mismatch.",
       "findings": [],
       "path": "tests/test_autonomy_independent_scoring.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine evaluation audit",
-      "sha256": "8e9cf34b5a61338454da392ec473ec7fee1b2a6306e3c3e7f77ee5aacf213b73"
+      "sha256": "e8fe4ebfc795638a3dca2468f1c08b8f1fdcb1feee05bbe34cce02b15c791dfc"
     },
     {
       "audit_status": "audited",
@@ -9171,9 +9171,9 @@
       "evidence": "Tests cover ledger exclusivity, ordered progression, safe resume, duplicate rejection, cost overshoot, and terminal preservation of valid quality failures.",
       "findings": [],
       "path": "tests/test_cross_engine_ledger.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine evaluation audit",
-      "sha256": "d86b2b60525d498c1af20d7a6d228bec4499e206b1b9f7f7f5d669e8da4c150c"
+      "sha256": "97e4da43cdabec9589ad023cacb7a0d951874e5d1651fd89bad93c386d651b60"
     },
     {
       "audit_status": "audited",
@@ -9578,9 +9578,9 @@
       "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
-      "reviewed_at": "2026-09-01",
+      "reviewed_at": "2026-09-02",
       "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "1aa1e1a89cf3ad40b9b1a973ccd8fb88dd48c235044fb5699f91a1fdbf1b1620"
+      "sha256": "3e1fc06f95b9b144ba22c77fed00050d3d0c29e6bf22f1f57c142a1d760269d5"
     },
     {
       "audit_status": "audited",

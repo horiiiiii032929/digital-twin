@@ -160,9 +160,9 @@ and OpenRouter, and uses an independent raw-evidence scorer that does not trust
 the graph's own invariant flags. Its deterministic E0 run passed all 820
 network-free actual-product cases; this is `Keep` for the scorer/controller and
 `Go Deeper` for product quality. The finite runner and fresh source-disjoint
-1,000-case package are now complete. The board should retain #157 as the only
-active `In Progress / Go Deeper` evaluation: next publish the build-only PR,
-refresh direct-provider metadata, freeze the single USD 50 authority, and run
+1,000-case package are now complete. PR #177 has merged the build. The board
+retains #157 as the only active `In Progress / Go Deeper` evaluation: official
+provider metadata was refreshed and the single USD 50 authority is frozen; run
 once through 500+100, 820 per engine, top-two 1,000, winner 10,000+1,000,
 proxy synthesis, and local release/no-release. No intermediate stage requires
 a new issue or user decision.

@@ -344,7 +344,7 @@ def validate() -> dict[str, Any]:
             + program.known_regression_control_cases
         ),
         "provider_calls": 0,
-        "paid_execution_authorized": False,
+        "paid_execution_authorized": program.paid_execution_authorized,
         "independent_scorer": program.shared_scorer,
         "hashes": expected_hashes,
         "factual_rankings": {

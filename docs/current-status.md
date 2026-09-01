@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-09-01
+Status date: 2026-09-02
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -41,9 +41,11 @@ learning, usability, and visual limitation synthesis before immutable local R1
 qualification. Those supplementary tracks are explicitly proxy evidence and
 cannot establish real-professor fidelity, real-student usability, or real
 learning improvement. The runner has a single USD 50 global stop, atomic resume,
-terminal quality stops, and no same-case tuning loop. Paid execution remains
-disabled until the completed build is committed, provider metadata is refreshed,
-and the one program authorization is frozen on a clean revision.
+terminal quality stops, and no same-case tuning loop. PR #177 merged the
+complete build. Official OpenAI and DeepSeek metadata was refreshed on
+2026-09-02, and the user's single program-level authorization is now frozen.
+The next operation is a clean no-call preflight followed by the finite run; no
+intermediate stage requires another authorization.
 
 The three-round whole-system architecture study under issue #165 and both
 fresh #153 method successors are complete as `Refine`. The strongest new

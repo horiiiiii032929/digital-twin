@@ -34,9 +34,9 @@ runner is now built: E0-E5 receive identical 500+100 factual and 820 autonomy
 tests, the top two alone receive a fresh source-disjoint 1,000-case
 confirmation, and only the passing winner receives the known 10,000+1,000
 regression and local release qualification. The 1,000-case package is frozen
-and unopened by a provider. Execution remains blocked until the build-only
-checkpoint is published, metadata is refreshed, and one USD 50 program
-authorization is committed.
+and unopened by a provider. PR #177 published the build, provider metadata was
+refreshed on 2026-09-02, and one USD 50 program authorization is committed as
+the final pre-execution checkpoint.
 
 The first release is a supervisor-reviewable hosted candidate. It becomes an
 invite-only pilot release only after the approval-gated real-workflow checks

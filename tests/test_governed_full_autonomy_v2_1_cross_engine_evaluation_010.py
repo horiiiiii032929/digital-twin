@@ -10,16 +10,16 @@ from scripts import (
 )
 
 
-def test_cross_engine_program_is_finite_identical_and_unauthorized() -> None:
+def test_cross_engine_program_is_finite_identical_and_authorized_once() -> None:
     result = builder.validate()
 
-    assert result["status"] == "passed-build-only-provider-unauthorized"
+    assert result["status"] == "passed-frozen-provider-authorized"
     assert result["engine_ids"] == ["e0", "e1", "e2", "e3", "e4", "e5"]
     assert result["condition_count"] == 4
     assert result["development_factual_cases"] == 500
     assert result["development_control_cases"] == 100
     assert result["autonomy_cases_per_engine"] == 820
-    assert result["paid_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is True
     assert result["provider_calls"] == 0
     assert result["factual_rankings"]["candidate_sha256"]
     assert result["factual_rankings"]["control_sha256"]
@@ -76,12 +76,17 @@ def test_program_simulation_has_one_way_stage_progression() -> None:
     assert result["quality_claim"] is False
 
 
-def test_live_preflight_is_fail_closed_without_build_authority() -> None:
+def test_live_preflight_accepts_the_frozen_authority(
+    monkeypatch, tmp_path
+) -> None:
+    monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key")
+    monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setattr(runner, "_git_dirty", lambda: False)
+    monkeypatch.setattr(runner, "PROGRAM_RESULT", tmp_path / "result.json")
     result = runner.preflight()
 
-    assert result["status"] == "blocked-not-authorized"
-    assert "program-paid-execution-not-authorized" in result["blockers"]
-    assert "program-not-frozen-for-execution" in result["blockers"]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []
     assert result["provider_calls"] == 0
 
 
