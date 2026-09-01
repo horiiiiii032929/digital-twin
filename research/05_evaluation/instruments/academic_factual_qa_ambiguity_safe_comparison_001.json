@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "academic-factual-qa-ambiguity-safe-comparison-001",
   "program_id": "course-digital-twin-grounding-correction-003",
-  "status": "reviewed-not-authorized",
+  "status": "frozen-network-free",
   "source": {
     "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-sources.json",
     "sha256": "46e9bb78e8648f0e14fa335323964888b6e60568bfc0dc96ba427e70350b6217",
@@ -99,12 +99,12 @@
   "candidate_grounded_success_non_inferiority_margin": 0.0,
   "scoring_profile": "source-semantic-token-v2",
   "output_directory": "reports/generated/academic-factual-qa-ambiguity-safe-comparison-001",
-  "network_free_execution_authorized": false,
+  "network_free_execution_authorized": true,
   "provider_execution_authorized": false,
   "paid_execution_authorized": false,
   "maximum_executions": 1,
   "hidden_gold_after_response_persistence": true,
   "known_500_used_only_for_regression": true,
   "prior_results_immutable": true,
-  "content_sha256": "33ea7d9804f5aabb26490f9c3a56243ece958fab5cc26c7de1dfb5d046c5952d"
+  "content_sha256": "0d8e159c925323e3a04a389d6927b0c999afa4df01abc57b82bd31156a70a794"
 }
