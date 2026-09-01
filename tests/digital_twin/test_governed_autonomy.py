@@ -499,7 +499,7 @@ async def test_unapproved_or_incomplete_scope_resolves_to_no_action(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path):
+async def test_live_planner_failure_fails_closed_without_delivery(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
     _, opportunity = _goal_and_opportunity(service, fixture, release)
     planner = LiveAutonomousPlanner(
@@ -542,7 +542,10 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
 
     result = await graph.run(job)
 
-    assert result.plan.action == AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE
+    assert result.plan.action == AutonomousActionKind.NO_ACTION
+    assert result.action.kind == AutonomousActionKind.NO_ACTION
+    assert result.outcome.kind.value == "no-action"
+    assert result.plan.reason_code == "planner-failure-no-action"
     assert result.trace.planning_calls == 1
     assert result.trace.repair_calls == 0
     assert result.trace.graph_version == GRAPH_VERSION

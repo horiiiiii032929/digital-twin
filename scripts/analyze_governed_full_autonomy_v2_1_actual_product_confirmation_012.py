@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 """Apply the one scorer-only correction to immutable confirmation 012 outputs."""
 
+# ruff: noqa: E402
+
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import sqlite3
@@ -19,6 +22,7 @@ from scripts import (
     run_governed_full_autonomy_v2_1_actual_product_confirmation_012 as runner,
 )
 from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed
+from src.digital_twin.evaluation import AutonomyEvaluationResponseV1
 
 
 ANALYSIS_CORRECTION_ID = (
@@ -26,6 +30,48 @@ ANALYSIS_CORRECTION_ID = (
     "analysis-correction-001"
 )
 CORRECTION_RESULT = runner.CONTEXT.output_root / "analysis-correction-001.json"
+ORIGINAL_RUN_BINDING_SHA256 = (
+    "b0c60d4173c2105f2c1303ecf87a5fdcbd4a771d77cabcc420ca663aa246a460"
+)
+
+
+def _load_immutable_responses() -> list[tuple[str, AutonomyEvaluationResponseV1]]:
+    connection = sqlite3.connect(
+        f"file:{runner.CONTEXT.response_ledger}?mode=ro", uri=True
+    )
+    try:
+        metadata = dict(connection.execute("SELECT key,value FROM metadata"))
+        if metadata != {
+            "schema_version": "1",
+            "run_binding_sha256": ORIGINAL_RUN_BINDING_SHA256,
+            "expected_count": "820",
+            "public_sha256": (
+                "23693a4c27b01603147f301bb9d91fe5c6f86be81b432bf601800d689849c9bc"
+            ),
+            "status": "completed",
+            "response_count": "820",
+            "clock_origin": "2026-09-01T12:00:00+00:00",
+            "clock_timezone": "UTC",
+        }:
+            raise ValueError("immutable confirmation-012 ledger metadata drifted")
+        persisted = list(
+            connection.execute(
+                "SELECT condition_id,payload_json,payload_sha256 "
+                "FROM responses ORDER BY sequence"
+            )
+        )
+    finally:
+        connection.close()
+    if len(persisted) != 820:
+        raise ValueError("immutable confirmation-012 response count drifted")
+    rows: list[tuple[str, AutonomyEvaluationResponseV1]] = []
+    for condition, serialized, expected_hash in persisted:
+        if hashlib.sha256(serialized.encode("utf-8")).hexdigest() != expected_hash:
+            raise ValueError("immutable confirmation-012 response hash drifted")
+        rows.append(
+            (condition, AutonomyEvaluationResponseV1.model_validate_json(serialized))
+        )
+    return rows
 
 
 def validate_contract() -> dict[str, Any]:
@@ -73,7 +119,7 @@ def execute() -> dict[str, Any]:
     )
     if CORRECTION_RESULT.exists():
         raise ValueError("analysis-correction output already exists")
-    rows = runner.shared._load_completed_responses(runner.CONTEXT)
+    rows = _load_immutable_responses()
     result = runner.shared._score(rows, runner.CONTEXT)
     result.update(
         {

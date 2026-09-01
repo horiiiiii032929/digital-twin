@@ -3041,7 +3041,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-configuration",
-      "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+      "evidence": "Cross-engine evaluation review plus confirmation-013 root-cause review verified typed immutable bindings, dependency-aware provider-failure simulation, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010.json",
       "reviewed_at": "2026-09-02",
@@ -4684,8 +4684,8 @@
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "6a7d51355542c2c618de1f44bc761d6342da7917eae18db557608dd4001b2809"
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "b84cec3e7d75ecbbcb1e2acb822ac24c99401b840356fd92956e53376c0bd996"
     },
     {
       "audit_status": "audited",
@@ -5510,7 +5510,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex confirmation-012 root-cause audit",
-      "sha256": "b3f7244cdc27b648161fb9b33e158d8fd12854aaf5facdaf1317df32963eec0f"
+      "sha256": "9e584c9a750ce9ae974f580cd006f8f39120668cd95979354392e33ab870b87c"
     },
     {
       "audit_status": "audited",
@@ -6121,12 +6121,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Cross-engine final-program review verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and fail-closed release decisions.",
+      "evidence": "Cross-engine final-program review plus confirmation-013 authorization review verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and fail-closed release decisions.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "b3d8a0f1f7d2ada1f8db2eba806a97a8c36af155c40e20f190cc50811a98d21f"
+      "reviewer": "Codex confirmation-013 authorization audit",
+      "sha256": "29feef704cfae4e6410b45f21d29880e8f0a5a405b61b81c5e604c1c82b7e03b"
     },
     {
       "audit_status": "audited",
@@ -7650,12 +7650,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active while successor 012 alone receives the additional bounded external-model and method-evaluation operations authorized for the finite local-demo track.",
+      "evidence": "The global freeze remains active while fresh successor 013 receives bounded external-model and method-evaluation operations; historical 012 remains registered for immutable analysis only.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex release-bound autonomy authorization audit",
-      "sha256": "93ffc31282efaad38d55329bf8518572b0f6c12af294b8cda2e8ded4405c13ee"
+      "reviewer": "Codex confirmation-013 authorization audit",
+      "sha256": "81c3e62289c906a96e93e4ad3d59e922e7d5b6841e6353d171fdadaaa37164ff"
     },
     {
       "audit_status": "audited",
@@ -7705,12 +7705,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Planner inputs and authorization were reviewed to enforce event-scoped action eligibility before and after model proposals; out-of-envelope output falls back deterministically and focused tests pass.",
+      "evidence": "Planner inputs and authorization enforce event-scoped action eligibility; provider, parsing, and schema failures now fail closed to no_action, while valid out-of-envelope proposals alone use the deterministic envelope fallback.",
       "findings": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex event-scoped eligibility audit",
-      "sha256": "45b93e12d342133fb9c25f7ae4729c103329b74b67cc39078426e068e0919027"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "3dfac7a5d5db6086440c3a0350d390631bcd6f12b4e6302aa280a98a8d0768c3"
     },
     {
       "audit_status": "audited",
@@ -8035,12 +8035,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1-verification",
-      "evidence": "Focused tests verify provider-visible action envelopes, out-of-envelope replacement, trace lineage, and existing governed-autonomy behavior.",
+      "evidence": "Focused tests verify provider-visible action envelopes, valid out-of-envelope replacement, trace lineage, and fail-closed no-action behavior for provider, parse, and schema failures.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex event-scoped eligibility audit",
-      "sha256": "de6b8ad7008cc4dea2438d46d21df10531d5f9ef585230f1b12b3572dbc60f13"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "b6251b93fe226483a92a09f462c050c0b2a9b15089769da4d405c53523166b46"
     },
     {
       "audit_status": "audited",
@@ -8167,12 +8167,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "The exact bounded-authorization set and successor 012 external-model/method-evaluation tuple are asserted while all historical and unknown executions remain blocked.",
+      "evidence": "The exact bounded-authorization set and fresh successor-013 external-model/method-evaluation tuple are asserted while historical and unknown executions remain blocked.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex release-bound autonomy authorization audit",
-      "sha256": "fe851876d3b358570f9ae81e8974228202d31033f8b27668f13ad685a072d5ff"
+      "reviewer": "Codex confirmation-013 authorization audit",
+      "sha256": "67bdb7bd6ea6fc8e6d1a1bdbe74f611b08d242833a9164f03cbc9c2ec46fb032"
     },
     {
       "audit_status": "audited",
@@ -10229,7 +10229,7 @@
       "path": "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex confirmation-012 root-cause audit",
-      "sha256": "e01b7b50c7cc542f20054f3fec65f74cf860b1bc47f4bc31b36d8b96466ca025"
+      "sha256": "ca508abe5b1c7e49c7552bb6ae34d02d4fc52b320bca43bcd313f1b6950eb835"
     },
     {
       "audit_status": "audited",
@@ -10241,6 +10241,50 @@
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex confirmation-012 root-cause audit",
       "sha256": "cbfe63059df814643073df1ed352fe603be751ecaa313ca6ac6ad42013ee7369"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-013",
+      "evidence": "The prospective instrument binds 820 fresh source-disjoint cases, dependency-aware provider-failure semantics, exact OpenAI identities, finite call and cost ceilings, immutable hashes, and the user's bounded authorization through the local demo.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_013.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "e9b5d89a6a2f3ae4ea6c24cfab4c91f1361e718d9ec47049e55dfb973427ed3a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-013",
+      "evidence": "Builder review verifies fresh source identities 151-200, 820 unique cases, exact public and hidden-gold hashes, and prospective gold that distinguishes deterministic controls from provider-dependent V2 conditions.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "b88706963e42c7980675af238860fdc14b6b45112f88411f616c253c5ab8d941"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-013",
+      "evidence": "Runner review verifies clean no-call preflight, exact-identity canaries, dependency-aware execution, atomic ledger/resume, hidden-gold ordering, finite call/cost stops, and terminal result persistence.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "89e5eac29ae361a6c8aa3b972bca5421e4559d74150d5d66edb764c69fdd50bd"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Tests cover fresh source disjointness, exact 820-case cardinality, dependency-aware provider-failure gold, bounded authorization, and full 220-case proactive simulation without network calls.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-013 root-cause audit",
+      "sha256": "b63f0ccd08029abb8568d3a4a5aa4f2b8fef181c6f84df82f8ba8cbf83da270b"
     }
   ],
   "schema_version": 1

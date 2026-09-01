@@ -62,6 +62,7 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
     "build_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+    "build_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
     "build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",

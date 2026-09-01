@@ -81,6 +81,7 @@ class ActualProductEvaluationContext:
     hybrid_safe_generation: bool = False
     generator_model_override: str | None = None
     expected_canary_models: dict[str, set[str]] | None = None
+    dependency_aware_provider_failure: bool = False
 
     @property
     def case_count(self) -> int:
@@ -575,6 +576,9 @@ async def _run_case(
             source_resolver=context.source_resolver,
             engine_binding=(context.engine_binding if provider_backed else None),
             hybrid_safe_generation=context.hybrid_safe_generation,
+            dependency_aware_provider_failure=(
+                context.dependency_aware_provider_failure
+            ),
         ),
         clock_origin=CLOCK_ORIGIN,
     )

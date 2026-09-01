@@ -162,7 +162,12 @@ class DeterministicAutonomousPlanner:
 
 
 class LiveAutonomousPlanner:
-    """One model proposal with deterministic fallback and no retry."""
+    """One model proposal with bounded validation and no retry.
+
+    Invalid but well-formed action choices may use the deterministic event
+    envelope. Provider, parse, or schema failures fail closed to no-action;
+    they must never create a proactive delivery.
+    """
 
     def __init__(self, client: LlmClient, *, model_id: str) -> None:
         self.client = client
@@ -237,7 +242,14 @@ class LiveAutonomousPlanner:
         except LlmIdentityDriftError:
             raise
         except (LlmError, ValueError):
-            return await self.fallback.plan(job)
+            return AutonomousPlannerOutputV1(
+                action=AutonomousActionKind.NO_ACTION,
+                reason_code="planner-failure-no-action",
+                required_evidence_keys=[],
+                stop_condition=(
+                    "Stop this job without delivery; reconsider only after a new durable event."
+                ),
+            )
 
 
 class DeterministicAutonomousWordingGenerator:
