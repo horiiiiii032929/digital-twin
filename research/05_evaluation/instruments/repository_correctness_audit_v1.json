@@ -5505,12 +5505,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Context-driven case counts, canaries, source resolution, ledgers, and hidden-gold joins were reviewed; defaults preserve historical 008 behavior and focused tests cover generalized execution.",
+      "evidence": "The scorer now classifies proactive cases from the stable public practice-outcome event contract instead of mutable case-ID prefixes, validates a non-empty denominator, preserves existing hidden gold by hash on analysis resume, and reports its actual open state on failure.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex event-scoped eligibility audit",
-      "sha256": "a6a59aec0c7d2299f3ad2c506fb932b6c9b819b66cc739e28af93291f7eede53"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-012 root-cause audit",
+      "sha256": "b3f7244cdc27b648161fb9b33e158d8fd12854aaf5facdaf1317df32963eec0f"
     },
     {
       "audit_status": "audited",
@@ -7655,7 +7655,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex release-bound autonomy authorization audit",
-      "sha256": "04008a61067999227133bf0818b812d748f0ea7ce743d8dfcd9c02845b4b6c71"
+      "sha256": "93ffc31282efaad38d55329bf8518572b0f6c12af294b8cda2e8ded4405c13ee"
     },
     {
       "audit_status": "audited",
@@ -10213,12 +10213,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, and progression from repository authorization into environment-only preflight checks.",
+      "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, environment-only preflight checks, and prefix-independent identification of all 220 proactive cases.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex release-bound autonomy root-cause review",
-      "sha256": "61e7bd27b314d6e0e4f5190ce0415ed86db0ad8f8be855381edf091516a0e10c"
+      "sha256": "759638345f1a25ff3bf2b6f4a2f339c931075172f42aebec51a171d6366109d8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-012",
+      "evidence": "The analysis-only entrypoint verifies the immutable invalid terminal result, complete 820-response ledger, exact 220-case public event classification, and then applies the single scorer-only correction with zero provider calls.",
+      "findings": [],
+      "path": "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-012 root-cause audit",
+      "sha256": "e01b7b50c7cc542f20054f3fec65f74cf860b1bc47f4bc31b36d8b96466ca025"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "The correction contract test proves 220 proactive cases are selected without provider calls and without relying on ignored local run output.",
+      "findings": [],
+      "path": "tests/test_analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex confirmation-012 root-cause audit",
+      "sha256": "cbfe63059df814643073df1ed352fe603be751ecaa313ca6ac6ad42013ee7369"
     }
   ],
   "schema_version": 1

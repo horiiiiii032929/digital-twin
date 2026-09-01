@@ -34,6 +34,17 @@ def test_confirmation_012_binds_hybrid_authority_boundary() -> None:
     }
 
 
+def test_confirmation_012_classifies_proactive_cases_by_event_contract() -> None:
+    cases = [case for _condition, case, _gold in builder.build_contract()]
+
+    assert sum(runner.shared._is_proactive_evaluation_case(case) for case in cases) == 220
+    assert all(
+        runner.shared._is_proactive_evaluation_case(case)
+        == any(event.kind == "practice-outcome" for event in case.events)
+        for case in cases
+    )
+
+
 def test_confirmation_012_preflight_reaches_environment_checks_after_activation() -> None:
     result = runner.preflight()
 

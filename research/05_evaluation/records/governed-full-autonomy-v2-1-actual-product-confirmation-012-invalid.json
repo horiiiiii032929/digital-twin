@@ -1,0 +1,120 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-012-invalid",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "release-confirmation-012",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-actual-product-evaluation-009-network-free-development-001"
+  ],
+  "decision_question": "Does the release-bound hybrid architecture preserve factual grounding while GPT-5.6 Terra plans complex reactive and proactive tutoring actions on fresh, source-disjoint cases?",
+  "code_revision": "2d0105d044070a3e335b2854af6e082266a278b1",
+  "dirty_state": false,
+  "started_at": "2026-09-01T22:51:00Z",
+  "completed_at": "2026-09-01T23:13:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_012.json",
+      "sha256": "bbe67369a01b3249e2f45e8e0cbf19ea27db075783f7d828208e6a5255f25c99",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-012/public-cases.json",
+      "sha256": "e8cd09686e83dd82eea2d8846d2fdd82f6dc7b8877b1974ea5a7df3670d9fbb5",
+      "role": "ignored-public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-012/hidden-gold.json",
+      "sha256": "d0d1ed3b7a0b24e5a3e22e95e34cf92e5ad85edc01dca516914947fe954712ee",
+      "role": "ignored-hidden-gold-opened-after-all-responses"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-012/responses.sqlite3",
+      "sha256": "e69e25b9df8bca97330be9c8a31fb45c1a52f6c256484b0e836401d3f0a1bac3",
+      "role": "ignored-complete-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-012/result.json",
+      "sha256": "d51de8f7c6d48370607abf4a5b74e19a702acb0a6e78479a1598ed84ce4faf57",
+      "role": "ignored-terminal-invalid-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "ambiguity-safe-grounding-plus-event-scoped-terra-planning-v2-1",
+      "version": "confirmation-012",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "durable-response-completion",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "proactive-cases-selected-for-scoring",
+          "value": 0,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 220,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-responses-durable-before-gold",
+          "passed": true,
+          "evidence": "The response ledger reached completed with 820/820 unique responses before hidden gold was materialized."
+        },
+        {
+          "name": "flow-independent-case-classification",
+          "passed": false,
+          "evidence": "The scorer selected proactive cases by legacy case-ID prefixes; the fresh release-prefixed IDs therefore produced an empty denominator."
+        },
+        {
+          "name": "quality-gates-computed",
+          "passed": false,
+          "evidence": "A ZeroDivisionError occurred before aggregate quality gates were emitted, so no product-quality decision is valid from this attempt."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 1555,
+    "completed_provider_calls": 1555,
+    "failed_provider_calls": 0,
+    "input_tokens": 837195,
+    "output_tokens": 180334,
+    "reported_cost_usd": 3.838398,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 13871.588,
+    "post_stop_diagnostic_calls": 0
+  },
+  "failures": [
+    {
+      "category": "evaluation",
+      "count": 1,
+      "evidence": "The aggregate scorer depended on old case-ID prefixes instead of the public event contract, selected zero proactive cases, and divided by zero after all 820 responses were durable."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Preserve the invalid attempt and apply one scorer-only analysis correction using the same immutable 820 responses; do not make additional provider calls or change cases, product behavior, models, prompts, or gates."
+  },
+  "limitations": [
+    "No autonomy-quality conclusion is valid from the terminal 012 result because aggregate scoring did not complete.",
+    "Hidden gold was opened only after all 820 responses were durable; the terminal error payload incorrectly reported it as closed and that diagnostic defect is corrected prospectively.",
+    "The preserved responses may be rescored once because the demonstrated defect is confined to case classification in the aggregate scorer."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-012-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-012-invalid.json"
+}
