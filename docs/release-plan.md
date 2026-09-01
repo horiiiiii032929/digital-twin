@@ -391,3 +391,9 @@ the live planner was offered the complete policy action palette. T1-v2.1
 remains unselected and cannot enter the local HTTPS release. The next candidate
 must add deterministic event-scoped action eligibility and use fresh
 confirmation cases before deployment.
+
+Build-only successor 009 implements that control plane and binds 820 fresh,
+source-disjoint but template-matched cases. Its network-free actual-product run
+passed T0, T1-v1, T1-v2 reactive, and T1-v2 autonomous at 100% action accuracy
+with every safety and persistence gate passing. This advances the release path
+to provider-backed confirmation; it does not select or deploy T1-v2.1.

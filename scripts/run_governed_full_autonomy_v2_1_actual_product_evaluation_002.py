@@ -73,6 +73,12 @@ class ActualProductEvaluationContext:
     selected_grounding_architecture_id: str | None = None
     runtime_grounding_architecture_id: str = "legacy-structured-lexical-v1"
     grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
+    canary_case_ids: tuple[str, str] = CANARY_CASE_IDS
+    source_resolver: Any = None
+
+    @property
+    def case_count(self) -> int:
+        return len(self.builder.build_contract())
 
     @property
     def output_root(self) -> Path:
@@ -246,7 +252,7 @@ class _ResponseLedger:
             "schema_version": "1",
             "run_binding_sha256": _canonical_hash(binding),
             "public_sha256": context.builder.public_payload()["content_sha256"],
-            "expected_count": "820",
+            "expected_count": str(context.case_count),
             "clock_origin": CLOCK_ORIGIN.isoformat(),
             "clock_timezone": "UTC",
         }
@@ -261,6 +267,7 @@ class _ResponseLedger:
             descriptor = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
             os.close(descriptor)
         self.connection = sqlite3.connect(path, isolation_level=None)
+        self.expected_count = context.case_count
         self.connection.execute("PRAGMA journal_mode=WAL")
         self.connection.execute("PRAGMA synchronous=FULL")
         self.connection.execute(
@@ -370,8 +377,10 @@ class _ResponseLedger:
         count = int(
             self.connection.execute("SELECT COUNT(*) FROM responses").fetchone()[0]
         )
-        if count != 820:
-            raise ActualProductEvaluationError(f"cannot complete {count}/820 ledger")
+        if count != self.expected_count:
+            raise ActualProductEvaluationError(
+                f"cannot complete {count}/{self.expected_count} ledger"
+            )
         self._set("response_count", str(count))
         self._set("status", "completed")
 
@@ -510,13 +519,13 @@ def _ordered_contract(
     contract = context.builder.build_contract()
     canaries = [
         row
-        for case_id in CANARY_CASE_IDS
+        for case_id in context.canary_case_ids
         for row in contract
         if row[1].case_id == case_id
     ]
-    if len(canaries) != len(CANARY_CASE_IDS):
+    if len(canaries) != len(context.canary_case_ids):
         raise ActualProductEvaluationError("frozen canary identities drifted")
-    canary_ids = set(CANARY_CASE_IDS)
+    canary_ids = set(context.canary_case_ids)
     return [*canaries, *(row for row in contract if row[1].case_id not in canary_ids)]
 
 
@@ -542,6 +551,7 @@ async def _run_case(
             provider_backed=provider_backed,
             maximum_case_cost_usd=max(0.02, min(2.0, remaining_cost_usd)),
             grounding_architecture_id=context.runtime_grounding_architecture_id,
+            source_resolver=context.source_resolver,
         ),
         clock_origin=CLOCK_ORIGIN,
     )
@@ -635,14 +645,17 @@ async def _execute_responses(
         canary_rows = [
             row
             for row in ledger.responses()
-            if row[1].case_id in set(CANARY_CASE_IDS)
+            if row[1].case_id in set(context.canary_case_ids)
         ]
         if not _canaries_valid(canary_rows):
             raise ActualProductEvaluationError("provider canary failed before bulk")
         canary_costs = [row.cost_usd for _condition, row in canary_rows]
-        projected = 1.5 * max(canary_costs) * 820
+        projected = 1.5 * max(canary_costs) * context.case_count
         projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
-        projected_calls = max(row.provider_calls for _condition, row in canary_rows) * 820
+        projected_calls = (
+            max(row.provider_calls for _condition, row in canary_rows)
+            * context.case_count
+        )
         if projected_stop > maximum_cost_usd:
             raise ActualProductEvaluationError(
                 f"projected p99 cost ${projected_stop:.2f} exceeds "
@@ -724,12 +737,12 @@ def _load_completed_responses(
         metadata = dict(connection.execute("SELECT key,value FROM metadata"))
         if (
             metadata.get("status") != "completed"
-            or metadata.get("response_count") != "820"
+            or metadata.get("response_count") != str(context.case_count)
             or metadata.get("run_binding_sha256")
             != _canonical_hash(_run_binding(network_free=False, context=context))
         ):
             raise ActualProductEvaluationError(
-                "hidden gold cannot open before 820 responses"
+                f"hidden gold cannot open before {context.case_count} responses"
             )
         persisted = list(
             connection.execute(
@@ -779,7 +792,7 @@ def _score(
     rows: list[tuple[str, AutonomyEvaluationResponseV1]],
     context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
 ) -> dict[str, Any]:
-    if len(rows) != 820:
+    if len(rows) != context.case_count:
         raise ActualProductEvaluationError(
             "hidden gold cannot open before all responses"
         )
@@ -1001,7 +1014,7 @@ async def _simulate(
         response.diagnostic_trace.get("virtual_clock") for response in responses
     ]
     simulation_valid = (
-        len(responses) == 820
+        len(responses) == context.case_count
         and all(response.operational_status == "completed" for response in responses)
         and sum(response.provider_calls for response in responses) == 0
         and all(isinstance(history, dict) for history in clock_histories)
