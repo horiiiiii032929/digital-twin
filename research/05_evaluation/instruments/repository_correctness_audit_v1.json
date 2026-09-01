@@ -10141,7 +10141,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex grounding-successor root-cause review",
-      "sha256": "91d4b1241cde3f449d1c4cc6cb6c3677e2c4497718f50e0c5a5ba18010e66f36"
+      "sha256": "f6e1aa369b867cc2cb428e474e36ccdefc72c75284053aef4fab5b0ce5641a72"
     },
     {
       "audit_status": "audited",
