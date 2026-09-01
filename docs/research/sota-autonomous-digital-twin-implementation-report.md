@@ -116,7 +116,35 @@ Next steps in order, none started:
 5. Run the provider-backed pedagogy and grounding dimensions only when
    authorized.
 
-## 6. Isolation statement
+## 6. Traceability: audit finding to hypothesis to design to evidence
+
+Each row links one structural finding from the study's audit (section 2.9)
+to the hypothesis it produced in the decision document (section 4), the
+design element that addresses it (study section 5), the experiment that
+tests it, and the current state of evidence. "Simulated" means supported in
+`successor-learner-timing-simulation-001` only; nothing in this table is
+product-data or human evidence.
+
+| Audit finding | Hypothesis | Design element | Test | Evidence state |
+| --- | --- | --- | --- | --- |
+| Belief is count based, per conversation, never decays, never calibrated (2.3) | H1, H5 | Estimator interface, per-learner keying, decay, calibration reporting (5.3) | Estimator contrast in simulation 001 | Simulated: supported on both families; product wiring pending (next step 3) |
+| Timing is a constant +24 h; outcomes are recorded but never read (2.2, 2.4) | H2 | Replan predicates and value margin over no action (5.4, 5.7) | Timing contrast in simulation 001 | Simulated: supported; conditional-only variant under-sends, which is itself a finding against candidate B |
+| No forward model, so selection cannot be value based (2.9) | H4 | Analytic forward model behind an interface (5.7, 5.10) | Value versus conditional in simulation 001 | Simulated: supported; the risk case (mis-calibrated forward model) was not triggered and needs a third simulator family |
+| Delivery precedes commit (2.2) | H6 | Commit then outbox relay (5.1, 5.9) | Restart and duplication suite (evaluation design 3.8) | Not implemented; migration stage 1 |
+| No global kill switch (2.5) | none | Three-level kill switch (5.11) | Kill-switch cases in safety suite (3.7) | Not implemented; migration stage 1 |
+| Three action vocabularies, two proactive stacks, triplicated eligibility (2.9) | none | One move enum, one opportunity ledger, one eligibility gate (5.6, 5.7) | Zero-violation gate under every policy | Simulated: the single gate held (0 violations in 2,640 learner-runs); product unification pending (stage 2) |
+| Engine allowlist is single vendor; prompts unhashed (2.8) | H7 | Task registry with content-hashed prompts (5.10) | Engine swap under identical conditions (7.2) | Not implemented; needs provider calls, which are not authorized |
+| Grounding is lexical; claim validator absent from default T0 (2.6) | H9 | Validator in every mode; semantic gate as separate candidate (5.5) | Paraphrase-case experiment (decision 6) | Not implemented; needs provider calls |
+| No simulated learner, no calibration instrument in the evaluation apparatus (audit of instruments) | none | Hidden-state simulator and calibration dimension (evaluation design 3.2, 4) | Built and used by simulation 001 | Built with two families; not yet integrated with the existing autonomy adapter contract |
+| Pedagogical action quality, profile adherence, multi-turn adaptivity, adversarial safety | H3, H8 | Policy envelope, verifier test (5.6, 4.4) | Evaluation design 3.3, 3.4, 3.7, 3.9 | Not started; requires provider calls or human labels |
+
+The honest reading: the branch has closed the loop for the learner-belief and
+proactive-timing planes at the simulation level, built the evaluation
+instrument those tests needed, and left the governance, grounding, engine,
+and pedagogy planes at the design stage with their experiments specified but
+not run.
+
+## 7. Isolation statement
 
 All work was done in the worktree
 `.claude/worktrees/sota-autonomous-digital-twin-study` on branch
