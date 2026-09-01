@@ -42,6 +42,8 @@ from src.digital_twin.grounding import (
     BM25Retriever,
     DocumentChunk,
     PlanObserveRetrieverV1,
+    SemanticTargetEvidenceGateV3,
+    SemanticTargetEvidenceRetrieverV3,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredHierarchicalRetriever,
     SourceRangeCandidateRetrieverV2,
@@ -186,6 +188,12 @@ def _build_retrievers(
                 course_chunks,
                 candidate_limit=30,
             )
+        elif retrieval_binding == "semantic-target-evidence-retriever-v3":
+            result[course_id] = SemanticTargetEvidenceRetrieverV3(
+                lexical,
+                course_chunks,
+                candidate_limit=30,
+            )
         else:
             raise ArchitectureRoundExecutionError(
                 f"unsupported architecture retriever: {retrieval_binding}"
@@ -254,6 +262,7 @@ def _response(
     try:
         hits = list(retriever.retrieve(case.question, limit=5))
         claim_binding = architecture.plane_bindings[ArchitecturePlane.CLAIM_CITATION]
+        clarify_evidence = False
         if claim_binding == "single-hit-extractive-lineage-v1":
             selected = hits[:1]
             sufficient = bool(selected)
@@ -263,6 +272,15 @@ def _response(
             selected_ids = set(decision.selected_hit_ids)
             selected = [row for row in hits if row.chunk.id in selected_ids]
             sufficient = decision.sufficient
+            gate_reason = decision.reason
+        elif claim_binding == "semantic-target-canonical-claim-lineage-v3":
+            decision = SemanticTargetEvidenceGateV3().assess(case.question, hits)
+            selected_ids = set(decision.selected_hit_ids)
+            selected = [row for row in hits if row.chunk.id in selected_ids]
+            sufficient = decision.sufficient
+            clarify_evidence = bool(
+                decision.features.get("semantic_action_clarify", False)
+            )
             gate_reason = decision.reason
         elif claim_binding in {
             "source-range-canonical-claim-lineage-v2",
@@ -290,7 +308,7 @@ def _response(
         if not sufficient:
             action = (
                 EvaluationAction.CLARIFY
-                if "ambiguous" in gate_reason
+                if clarify_evidence or "ambiguous" in gate_reason
                 else EvaluationAction.ABSTAIN
             )
             content = (
@@ -314,6 +332,7 @@ def _response(
         canonical_claims = claim_binding in {
             "source-range-canonical-claim-lineage-v2",
             "source-range-ambiguity-aware-claim-lineage-v2",
+            "semantic-target-canonical-claim-lineage-v3",
         }
         claims = [
             EvaluationAtomicClaimV1(
@@ -417,11 +436,12 @@ def _score_packages(
     scoring_profile: str = "lexical-token-v1",
 ) -> dict[str, Any]:
     gold_payload = _load_hashed(gold_path)
+    gold_rows = gold_payload.get("rows", gold_payload.get("gold", []))
     gold_by_id = {
         row.case_id: row
         for row in (
             EvaluationGoldV1.model_validate(value)
-            for value in gold_payload.get("rows", [])
+            for value in gold_rows
         )
     }
     if set(gold_by_id) != {row.case_id for row in cases}:

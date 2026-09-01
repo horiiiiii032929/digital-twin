@@ -36,6 +36,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
         "academic-factual-qa-open-10000-reference-aggregate-007",
+        "academic-factual-qa-semantic-target-successor-001",
+        "academic-factual-qa-semantic-target-comparison-001",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",

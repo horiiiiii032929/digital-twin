@@ -1,0 +1,118 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-semantic-target-comparison-001-build",
+  "program_id": "course-digital-twin-grounding-correction-001",
+  "stage_id": "semantic-target-comparison-build",
+  "round_number": null,
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Is one fresh source-range-disjoint two-condition semantic-target comparison frozen, reproducible, gold-isolated, and network-free?",
+  "code_revision": "9d16aa94cdffa348961ccc82e2f8ef19eb1ae738",
+  "dirty_state": true,
+  "started_at": "2026-09-01T01:20:00Z",
+  "completed_at": "2026-09-01T01:55:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_successor_001.json",
+      "sha256": "c30f7d804afa7d7263c1e6bce5daa16b97e629b4b2cf7fd7cbe3f095b834c0d3",
+      "role": "dataset-instrument"
+    },
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_comparison_001.json",
+      "sha256": "81ebfecdc72b7ec89f0758fde6309c9579b33dab3aa9ca3f1453a7b6a628f04c",
+      "role": "comparison-instrument"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "semantic-target-comparison-harness-v1",
+      "version": "build-001",
+      "role": "candidate",
+      "changed_planes": [
+        "domain",
+        "retrieval",
+        "claim-citation",
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "development-cases",
+          "value": 500,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500,
+          "passed": true
+        },
+        {
+          "name": "exactly-matchable-references",
+          "value": 474,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 474,
+          "passed": true
+        },
+        {
+          "name": "network-free-simulation-cases",
+          "value": 20,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 20,
+          "passed": true
+        },
+        {
+          "name": "focused-tests",
+          "value": 22,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 22,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "fresh-source-ranges",
+          "passed": true,
+          "evidence": "All 100 clusters have zero overlap with the three prior development packages."
+        },
+        {
+          "name": "public-hidden-gold-separation",
+          "passed": true,
+          "evidence": "Public cases and hidden gold are separate hash-bound packages; simulation leaves gold closed."
+        },
+        {
+          "name": "two-condition-protocol",
+          "passed": true,
+          "evidence": "The instrument binds exactly the best protocol-valid baseline and one semantic-target candidate."
+        },
+        {
+          "name": "provider-authority-closed",
+          "passed": true,
+          "evidence": "Build and simulation made zero provider calls and incurred zero paid cost."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "semantic-target-comparison-harness-v1",
+    "rationale": "Keep the qualified harness and execute the frozen 500-case two-condition comparison once from a clean revision."
+  },
+  "limitations": [
+    "Build readiness is not a grounding quality result.",
+    "Deterministic extractive output isolates architecture rather than provider generation.",
+    "No professor fidelity, usability, learning-outcome, or provider-backed autonomy claim is supported."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-semantic-target-comparison-001-build-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-semantic-target-comparison-001-build.json"
+}

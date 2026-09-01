@@ -6,16 +6,12 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The active successor is now
-`course-digital-twin-whole-system-architecture-evolution-001` under issue #165.
-It treats V2.1 as an immutable baseline rather than a predetermined winner and
-permits substantial replacement across domain, grounding, learner-state,
-pedagogy, reactive/proactive loops, governance, persistence, product UX,
-operations, and evaluation. Three source-disjoint development rounds precede
-one fresh confirmation. Every build, simulation, preflight, execution, invalid
-or cancelled run, comparison, and decision must receive an immutable manifest,
-machine record, readable summary, registry row, artifact and code bindings,
-operational accounting, limitations, and GitHub checkpoint before progression.
+The three-round whole-system architecture study under issue #165 is complete
+and closed `Refine`. Issue #153 is now the active P0. It retains
+`typed-target-evidence-v1` as the best protocol-valid development baseline and
+tests one semantic-target/source-range successor on genuinely fresh evidence.
+The sealed Program 011 final set and all three known development folds remain
+closed to tuning.
 
 The program is build-only and provider-unauthorized. Its three development
 folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
@@ -75,6 +71,19 @@ action, and zero severe releases on the valid Round 2 comparison. This is not a
 release selection: the method failed the grounded, claim, citation, and
 source-version gates, while the higher 91.64% Round 3 number remains diagnostic
 only because of the parent/child protocol mismatch.
+
+The #153 semantic-target build checkpoint is now ready. A new 500-case package
+contains 100 source-range-disjoint clusters, 25 per course, with 400 answerable
+and 100 boundary questions. Operating-systems evidence comes from pinned
+ThinkOS commit `5ab731d`; the other courses use only ranges not present in the
+three earlier packages. All 474 required references map exactly to 300 minimal
+source ranges, normalized questions are unique, public inputs and hidden gold
+are separate, and no provider/private/final data was used. The comparison
+binds exactly two conditions: the valid typed-target baseline and
+`semantic-target-resolution-v3`. Build validation, 20-case no-gold simulation,
+22 focused tests, and lint pass. The formal 500-case network-free execution is
+the next finite checkpoint; it may select the candidate only if the candidate
+wins and passes every unchanged grounding gate.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy

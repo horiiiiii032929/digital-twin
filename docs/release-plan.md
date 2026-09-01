@@ -161,6 +161,15 @@ action router and grounding/claim boundary on fresh development evidence. It can
 retune or rerun the sealed final package. The qualified local deterministic R1
 remains the rollback baseline and makes no LLM factual-quality claim.
 
+The active #153 successor is frozen build-only. It compares the strongest
+protocol-valid typed-target baseline with semantic target resolution over a new
+500-case, source-range-disjoint package. The package includes a newly pinned
+open operating-systems source and unused ranges from the other three course
+families; public cases and hidden gold remain physically separate. The next
+step is one network-free comparison from a clean revision. A valid failure
+retains the baseline and returns to one method-level architecture decision; it
+does not reopen the sealed 10,000+1,000 result.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |
