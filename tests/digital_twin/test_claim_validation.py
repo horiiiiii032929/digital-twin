@@ -11,6 +11,7 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     AtomicAnswerClaim,
     AtomicClaimEvidenceValidator,
+    CanonicalSourceAtomicClaimVerifier,
     ContiguousQuoteAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     NliAtomicClaimVerifier,
@@ -130,6 +131,36 @@ def test_contiguous_quote_control_rejects_normalized_or_cross_hit_matches() -> N
 
     assert punctuation_drift.releasable is False
     assert cross_hit_join.releasable is False
+
+
+def test_canonical_source_verifier_accepts_only_registered_atom_claim() -> None:
+    source = hit(
+        "atom",
+        r"The \emph{first} challenge is finding an item.\index{finding}%",
+    )
+    source.chunk.metadata.update(
+        {
+            "semantic_atom_version": "source-semantic-evidence-atom-v1",
+            "semantic_atom_claim": "The first challenge is finding an item.",
+        }
+    )
+    candidate = AtomicClaimEvidenceValidator(
+        CanonicalSourceAtomicClaimVerifier(),
+        minimum_entailment=1.0,
+        maximum_contradiction=0.0,
+    )
+
+    accepted = candidate.validate(
+        [claim("claim-source", "The first challenge is finding an item.", "atom")],
+        [source],
+    )
+    mutated = candidate.validate(
+        [claim("claim-source", "The first challenge is deleting an item.", "atom")],
+        [source],
+    )
+
+    assert accepted.releasable is True
+    assert mutated.releasable is False
 
 
 def test_one_unsupported_claim_rejects_the_whole_answer() -> None:

@@ -3739,7 +3739,7 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex grounding root-cause audit",
-      "sha256": "888ca3a366615c568ccb731516e779d8984269a227305c98eb5c9cadab772701"
+      "sha256": "062a87cdd0d56ea6d16907f2453305480f0f6aff690d47efc322aaf550110f5b"
     },
     {
       "audit_status": "audited",
@@ -7138,7 +7138,7 @@
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "1894d5400edd4f62f1a0009282d1d08e47cc382afa52f383e2d7655a82bbbe50"
+      "sha256": "4cb61e7244dfc1078da2144f40ccc1278541df2d732ab20795bb0b5590e2a288"
     },
     {
       "audit_status": "audited",
@@ -7182,7 +7182,7 @@
       "path": "src/digital_twin/grounding/claim_validation.py",
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
-      "sha256": "abe3fe52c840f05afb137bf3db602940ad2e3faf813c468e97dd7539d812d97e"
+      "sha256": "6de100dd965b6fa5792b986367f9278ef6a0be2b1ece937cb685ff49470cd4a9"
     },
     {
       "audit_status": "audited",
@@ -7974,7 +7974,7 @@
       "path": "tests/digital_twin/test_claim_validation.py",
       "reviewed_at": "2026-08-24",
       "reviewer": "codex-primary-review",
-      "sha256": "f952c9459301823e8e4086085ee197a0fdab03303e99f2842c10298435f49c04"
+      "sha256": "faeb937d098853c1e6b11e13fe2bbe17d8f9c67eaca23fa496187749ced75c09"
     },
     {
       "audit_status": "audited",
@@ -10141,7 +10141,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex grounding-successor root-cause review",
-      "sha256": "f6e1aa369b867cc2cb428e474e36ccdefc72c75284053aef4fab5b0ce5641a72"
+      "sha256": "cefcdd0ff5e74abb063e6971c37ff72eb2622e3b89b617282ba244bf7b280865"
     },
     {
       "audit_status": "audited",

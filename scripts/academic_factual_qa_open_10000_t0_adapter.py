@@ -45,6 +45,7 @@ from src.digital_twin.action_router import (
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
+    CanonicalSourceAtomicClaimVerifier,
     CaseBoundPrecomputedRetriever,
     ContiguousQuoteAtomicClaimVerifier,
     DocumentChunk,
@@ -903,6 +904,17 @@ def build_live_t0_adapter(
         == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         else DeterministicActionRouterV1()
     )
+    if manifest.evidence_gate in {
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
+        "source-semantic-evidence-atoms-v1",
+    }:
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            CanonicalSourceAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
     if deterministic_engine:
         generator_impl = _DeterministicAtomicGenerator(
             policy_enforcer=DeterministicPolicyEnforcer(action_router=action_router)
