@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "audit_id": "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
+  "review_method": "deterministic-lineage-plus-codex-assisted-case-audit-v1",
+  "external_human_annotation": false,
+  "adjudications": [
+    {
+      "case_id": "source-semantic-atom-dev-0006-q2",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "unrelated-supported",
+      "plausible_region_ids": ["source-region-a5686fe571f4e6f1a4c98bb71da5ba56120e2626cba12b2752db31c5a271f845", "source-region-e554c5354f10e1b5369cb96b53192bc156a32ba385ba2858a5f6a420db471bfb"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "Color red occurs in multiple unrelated source atoms; the question does not identify the intended routing-table statement, while the product answered instead of clarifying."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0010-q2",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-27792b778c14aaeb8c00e3b0d53781f2d0f6c61c443b3ff53fa284678e3fd64d", "source-region-a5686fe571f4e6f1a4c98bb71da5ba56120e2626cba12b2752db31c5a271f845"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "Both adjacent protocol expressions concern CRC and SDU, so the wording does not uniquely identify the AND is_ok atom and should trigger clarification."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0012-q3",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "partial-supported",
+      "plausible_region_ids": ["source-region-213975716a6d4da1f1e61f8064467ad22e07cdc39fbb58e80698336d7ab13725", "source-region-9267a6e9085378aa3046c4f107cc6234736b85a8c9d1cd72e44077bcffe5996e"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "One atom names the passive-attacker category and the next defines it; explain does not identify which granularity is required, and the returned answer is only partial."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0029-q1",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "conflicting-supported",
+      "plausible_region_ids": ["source-region-6c1c8898a1c83f4d01073531485dc3ca690f8f10a97a732956eaa9e2bb527da1", "source-region-9738e761aacea0a7042bc9e4ab273434f921f9f047a30f621b7ddabc47086755"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The target phrase If we applies to distinct left-child and right-child traversal statements, so the intended branch cannot be recovered from the public question."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0034-q2",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "conflicting-supported",
+      "plausible_region_ids": ["source-region-0da9e32162d65d312c595b7cabe7ab7f693a956c9ea895cdaf8eb620e1b453ba", "source-region-f23536ae54e712fe3c74f119f49f06b162281b6100d861fa73c8c0ce41b4584a"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The source contains separate statements about nodes labelled by addition order and processing order; labelled Nodes does not select one of them."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0038-q1",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-2f8da68cb516561f88d5962b4c7d65cc6a08a2bc2d0665261c26845b9d0ef2fb", "source-region-0f996b12f2cc6882b0b6aa0ad1c491821cedbfcb36af5971c83bd907325ae072"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "Both the random-walk step statement and the logarithmic running-time conclusion are valid facts about merge(h1,h2); the question does not distinguish them."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0038-q2",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-0f996b12f2cc6882b0b6aa0ad1c491821cedbfcb36af5971c83bd907325ae072", "source-region-2f8da68cb516561f88d5962b4c7d65cc6a08a2bc2d0665261c26845b9d0ef2fb"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The phrase h1 h2 applies to two neighboring valid source claims and restated supplies no additional target, so a unique canonical answer is not justified."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0045-q2",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-511d3a53d65bd01eb041d38a3b914f7f4178162e982103e01eb0a35c27e8922a", "source-region-b0a0f8817dbc90553b3f0834630ecfc274b9496dd9ecf4f23064e8ce8c9a2354"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "Both adjacent statements concern removeFixup and a double-black node; the question does not distinguish its input contract from its behavior."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0045-q3",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-b0a0f8817dbc90553b3f0834630ecfc274b9496dd9ecf4f23064e8ce8c9a2354", "source-region-511d3a53d65bd01eb041d38a3b914f7f4178162e982103e01eb0a35c27e8922a"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The combined terms double-black removeFixup match both the method input and the repair process, so the public wording lacks a unique evidence target."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0049-q3",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "conflicting-supported",
+      "plausible_region_ids": ["source-region-5146d94cb4c09aeeaa9b6b3605077904ea35b607e3c1ced544a4d85ff33357db", "source-region-913f6c9db6e19d9cf74bfa41114fc33ede57e23b4e4b85f42eab2dbbbb4ec0b5"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The wording mbox if is authoring syntax shared by the zero and one branches of the same equation, so it cannot identify the intended condition."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0069-q1",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-c72f9eb1d0b5a504f03cc8872ae691626d29d8bd4926d5bb427cfa497a8de218", "source-region-861dc77c3b791047c2574d086f9bc35c2fe05ac1c35d87b4252c21599c7956c3"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The Scheduling section has multiple preparation durations, including crust and filling, while minutes prepare does not name the intended task."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0069-q3",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "partial-supported",
+      "plausible_region_ids": ["source-region-c72f9eb1d0b5a504f03cc8872ae691626d29d8bd4926d5bb427cfa497a8de218", "source-region-d8d17ef360804def1a6128330ff3f306de0646678df5cb1d3f0d2bf24a7b5173"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The selected atom gives the filling duration while the gold gives the combined schedule; prepare filling does not specify whether duration or scheduling interaction is requested."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0069-q4",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "partial-supported",
+      "plausible_region_ids": ["source-region-c72f9eb1d0b5a504f03cc8872ae691626d29d8bd4926d5bb427cfa497a8de218", "source-region-d8d17ef360804def1a6128330ff3f306de0646678df5cb1d3f0d2bf24a7b5173", "source-region-861dc77c3b791047c2574d086f9bc35c2fe05ac1c35d87b4252c21599c7956c3"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The generated multi-evidence question repeats the same target phrase twice and three scheduling atoms are plausible; this is a malformed non-unique reference question."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0086-q1",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-4eaa565f6b6c82d38c12b3935565ca84be1ebdf3db6dbffcb23f495c939b7a07", "source-region-85984f23a6e9619fa6b26f93441b81e62f1ebaf8bac15aec4c2ae4b8d3a220b1"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "If you applies to several adjacent list-slice omission cases, including omitted second bound and omitted both bounds, so the intended fact is not unique."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0091-q1",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-a53f1e51234fc727ced55cbc2f66b2748f5eb8502b8b9afe840f8bd06cc9e59a", "source-region-067aca94778d9117c8dcb13df785af9589de05c08e7b460c53474f6e37ed8600"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "Letters occurs in both the alphabet assignment and the subsequent zip expression, so the question does not identify which code fact to return."
+    },
+    {
+      "case_id": "source-semantic-atom-dev-0091-q4",
+      "question_uniquely_identifies_gold": false,
+      "corrected_expected_action": "clarify",
+      "selected_answer_relationship": "alternative-supported",
+      "plausible_region_ids": ["source-region-a53f1e51234fc727ced55cbc2f66b2748f5eb8502b8b9afe840f8bd06cc9e59a", "source-region-067aca94778d9117c8dcb13df785af9589de05c08e7b460c53474f6e37ed8600"],
+      "reference_valid_for_release_scoring": false,
+      "product_behavior_valid_under_corrected_action": false,
+      "disposition": "dual-reference-and-product-ambiguity-defect",
+      "rationale": "The structured-code wording concerns letters but both the assignment and zip use are valid code details; a unique canonical answer requires clarification."
+    }
+  ]
+}

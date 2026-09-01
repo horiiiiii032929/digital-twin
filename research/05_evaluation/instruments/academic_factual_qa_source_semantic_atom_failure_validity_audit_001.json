@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
+  "status": "frozen-network-free",
+  "original_result": {
+    "path": "reports/generated/academic-factual-qa-source-semantic-atom-comparison-001/result.json",
+    "sha256": "d97e9d6647c1576b7f96f615062729bd90a65c9138a2d7398317a05d9c9ed043",
+    "role": "immutable-original-result"
+  },
+  "candidate_responses": {
+    "path": "reports/generated/academic-factual-qa-source-semantic-atom-comparison-001/source-semantic-evidence-atoms-v1-responses.json",
+    "sha256": "adc074502ab32d8a9706a4fbdfac1ef8baa06ef5b85d554fdab642a1c8da4d83",
+    "role": "immutable-candidate-responses"
+  },
+  "source": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-sources.json",
+    "sha256": "70888fb858da3941f487f5a2aa74482201bca94210b2a6f193c029f3bec8ecf1",
+    "role": "approved-public-source-ranges"
+  },
+  "public_cases": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-cases.json",
+    "sha256": "6713ddcdfe6aa028abe188501109655ea38cb24e871276128aceb4ef1fe32661",
+    "role": "known-public-cases"
+  },
+  "hidden_gold": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-gold.json",
+    "sha256": "c52525a10017bd61949dc742b4e81767c3ae5eb64890490d2f44231d0ffa1f42",
+    "role": "already-opened-hidden-gold"
+  },
+  "adjudications": {
+    "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_failure_adjudications_001.json",
+    "sha256": "50fae37a91b79b24d7049534ff401b8447bf77ba500c1a773215aad4a641c660",
+    "role": "codex-assisted-case-adjudications"
+  },
+  "expected_failure_count": 16,
+  "prior_result_immutable": true,
+  "official_rescoring_prohibited": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "network_free_execution_authorized": true,
+  "semantic_review_method": "deterministic-lineage-plus-codex-assisted-case-audit-v1",
+  "external_human_annotation": false,
+  "output_directory": "reports/generated/academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
+  "content_sha256": "0fd185e5ddbeb1013db962c52d13ddd97e24c403b4acbe58313b04214eadcd2b"
+}
