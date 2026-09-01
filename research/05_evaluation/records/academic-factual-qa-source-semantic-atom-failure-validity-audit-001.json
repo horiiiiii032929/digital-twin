@@ -1,0 +1,129 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
+  "program_id": "course-digital-twin-grounding-correction-002",
+  "stage_id": "failure-validity-audit",
+  "round_number": null,
+  "status": "completed-refine",
+  "supersedes": [],
+  "decision_question": "Were the 16 source-semantic-atom failures genuine product defects, evaluator false positives, or invalid reference questions, and do they justify changing the frozen release gates?",
+  "code_revision": "84ec002b757a0d7e345d1c2bd5dc077ead315799",
+  "dirty_state": false,
+  "started_at": "2026-09-01T04:58:00Z",
+  "completed_at": "2026-09-01T04:59:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_failure_validity_audit_001.json",
+      "sha256": "6e27cd8e6949fd9ea3e39aee7e796bca3c5032fb672560e548249fbecb261968",
+      "role": "audit-instrument"
+    },
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_failure_adjudications_001.json",
+      "sha256": "50fae37a91b79b24d7049534ff401b8447bf77ba500c1a773215aad4a641c660",
+      "role": "case-adjudications"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-source-semantic-atom-failure-validity-audit-001/result.json",
+      "sha256": "4559f6fbdf049402542db47c2e58ebcb405a7c3586208c0b8c3fffc5878a0dc4",
+      "role": "ignored-raw-audit-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "frozen-reference-and-product-interpretation",
+      "version": "failure-validity-audit-v1",
+      "role": "candidate",
+      "changed_planes": [],
+      "metrics": [
+        {
+          "name": "gold-in-retrieved-top-three",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "selected-claim-source-supported",
+          "value": 1.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "reference-valid-for-release-scoring",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        },
+        {
+          "name": "product-correct-under-corrected-action",
+          "value": 0.0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "prior-result-immutability",
+          "passed": true,
+          "evidence": "The official result, metrics, gates, responses, and source packages were hash-bound and unchanged."
+        },
+        {
+          "name": "failure-coverage",
+          "passed": true,
+          "evidence": "All and only the 16 original answerable failures were audited."
+        },
+        {
+          "name": "evaluation-validity",
+          "passed": false,
+          "evidence": "All 16 public questions were non-unique but labelled answerable with one canonical range."
+        },
+        {
+          "name": "product-ambiguity-safety",
+          "passed": false,
+          "evidence": "The product answered all 16 cases instead of clarifying."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "data",
+      "count": 16,
+      "evidence": "Every failed public question permitted at least two plausible retrieved source ranges but gold required one range and answer action."
+    },
+    {
+      "category": "policy",
+      "count": 16,
+      "evidence": "Every corrected action is clarify, but the persisted product action was answer."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Do not lower the frozen gates or reinterpret the previous result as a pass. Correct reference uniqueness and product ambiguity handling together, then evaluate once on new source-disjoint evidence. No Release remains."
+  },
+  "limitations": [
+    "Semantic uniqueness was adjudicated by Codex rather than an independent external human.",
+    "The 96.8% overall and 86.21% boundary action sensitivity values are diagnostic only and do not replace official metrics.",
+    "The audit uses already opened public-source development evidence and supports no fresh confirmation claim."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-source-semantic-atom-failure-validity-audit-001-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-source-semantic-atom-failure-validity-audit-001.json"
+}

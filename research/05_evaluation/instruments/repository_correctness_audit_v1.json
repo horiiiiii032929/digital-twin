@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Command-surface review confirms the architecture-evolution validator plus Round 1, Round 2, and Round 3 validation, simulation, and one-shot network-free execution remain explicit while provider authority stays closed.",
+      "evidence": "Command-surface review confirms the existing architecture commands plus explicit validate and one-shot execute commands for the bounded source-semantic failure-validity audit; provider authority remains closed.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex whole-system architecture audit",
-      "sha256": "776b1c7e9bf281da8517cae387e57d8f3734a310ebd71a70fa949e0b6a9be5fc"
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "a5580299c0eceef79a55fd91741015964f4cef9f60c3cd64f854ac6ac9e990f0"
     },
     {
       "audit_status": "audited",
@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Post-result freeze review revokes both source-semantic-atom authorizations while retaining the global block; paid, final, autonomy, private-data, and same-data rerun execution remain blocked.",
+      "evidence": "Post-execution freeze review revokes the one-time failure-validity audit authorization while retaining all provider, paid, final, autonomy, private-data, and same-data quality rerun blocks.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex source-semantic-atom result audit",
-      "sha256": "b32c165858c88d8f2616c9e7579dbe6a9abc29b2763a010334bd1170db9f68ea"
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "153ba979c942393f8740c137a4f2b75c64788e0baf43862b60e33b4a910a1348"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the terminal authorization set rejects both completed source-semantic-atom operations alongside paid, final, autonomy, and historical execution identities.",
+      "evidence": "Freeze regression verifies revocation of the completed audit authorization and continued rejection of completed comparison, paid, final, autonomy, and historical execution identities.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex source-semantic-atom result audit",
-      "sha256": "ba1233d861a4f22b1b739934d410d8cb51358030886837d7c755caa97c44a57a"
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "d970c0b5be82a864df8db0afd231d2fa81bed73e188b6f8889794bba621506db"
     },
     {
       "audit_status": "audited",
@@ -9471,6 +9471,50 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex source-semantic-atom audit",
       "sha256": "104d18675e1c937e35bfb3d2890ec6dbd5d84661958accbf695e27ef2177f147"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-validity",
+      "evidence": "Instrument review binds the immutable result, candidate responses, public cases, opened gold, source ranges, exact 16-case adjudication ledger, no-rescoring rule, zero-provider boundary, and exclusive audit output.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_failure_validity_audit_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "6e27cd8e6949fd9ea3e39aee7e796bca3c5032fb672560e548249fbecb261968"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-validity",
+      "evidence": "Case-ledger review covers all 16 and only the original answerable failures, cites at least two retrieved plausible source regions per case, records corrected clarify actions, and discloses Codex-only semantic adjudication.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_source_semantic_atom_failure_adjudications_001.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "50fae37a91b79b24d7049534ff401b8447bf77ba500c1a773215aad4a641c660"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-validity",
+      "evidence": "Runner review verifies immutable hashes, exact failure recomputation, source-supported selected claims, gold presence in top three, complete adjudication coverage, diagnostic-only sensitivity metrics, clean-tree and freeze guards, and exclusive zero-call output.",
+      "findings": [],
+      "path": "scripts/audit_academic_factual_qa_source_semantic_atom_failures.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "f6257ab83c904dfcf50e3b4186add5709fa6ee2034cef616cf23487a76740da3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify exact 16-case coverage, immutable prior result, dual-defect aggregation, diagnostic action sensitivity, duplicate-region rejection, and instrument hash-drift rejection.",
+      "findings": [],
+      "path": "tests/test_audit_academic_factual_qa_source_semantic_atom_failures.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex failure-validity audit",
+      "sha256": "b909792fbdf5bd82808b7068ccd9766c0f05128be23a89a45a5c30d88d1baf76"
     }
   ],
   "schema_version": 1

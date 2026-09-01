@@ -1059,3 +1059,9 @@ Current utilities:
   opening hidden gold, and emits exactly one Keep, Refine, or invalid result.
   Use `--validate` or `--simulate` for no-result checks and `--execute` once for
   the authorized network-free comparison; no provider or paid call is possible.
+- `audit_academic_factual_qa_source_semantic_atom_failures.py`: validates the
+  exact 16 answerable failures from that immutable comparison, verifies source
+  support and top-three gold retrieval, and aggregates the committed
+  Codex-assisted case adjudications. The audit never changes the official
+  result or its gates. Use `--validate` for a no-write check and `--execute`
+  once for the bounded network-free audit.

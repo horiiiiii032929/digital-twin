@@ -10,7 +10,10 @@ The three-round whole-system architecture study under issue #165 and both
 fresh #153 method successors are complete as `Refine`. The strongest new
 candidate, source-side semantic evidence atoms, reached 96.0% fully grounded
 factual success but failed immutable claim/citation precision and exact
-source-version gates. The release decision is therefore **No Release** for the
+source-version gates. A subsequent exact 16-case validity audit found that all
+16 failures combined invalid non-unique answer labels with a product failure to
+clarify; it did not show that the gates were too strict. The release decision is
+therefore **No Release** for the
 autonomous LLM-backed R1. The sealed Program 011 final set, all known
 development folds, the fresh 1,000-case confirmation, and provider-backed
 autonomy evaluation remain closed.
