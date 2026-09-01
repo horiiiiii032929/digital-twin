@@ -1,5 +1,5 @@
 import re
-from typing import Literal, Protocol
+from typing import Any, Literal, Protocol
 
 from pydantic import BaseModel, Field, field_validator
 
@@ -78,6 +78,22 @@ class LlmConfigurationError(LlmError):
 
 class LlmMalformedResponseError(LlmError):
     code = "malformed-response"
+
+    def __init__(
+        self,
+        *,
+        stage: str = "unknown",
+        provider_model: str | None = None,
+        provider_revision: str | None = None,
+        usage: GenerationUsage | None = None,
+        diagnostics: dict[str, Any] | None = None,
+    ) -> None:
+        super().__init__(self.code)
+        self.stage = stage
+        self.provider_model = provider_model
+        self.provider_revision = provider_revision
+        self.usage = usage
+        self.diagnostics = dict(diagnostics or {})
 
 
 class LlmIdentityDriftError(LlmError):

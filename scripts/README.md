@@ -1051,6 +1051,12 @@ Current utilities:
   final connectivity retry. Events, hidden gold, method, schemas, models, and
   gates are unchanged. Commands use the
   `governed-autonomy-v2-1-actual-product-evaluation-005` suffix.
+
+`governed-autonomy-v2-1-actual-product-evaluation-006` is the first
+diagnosable successor after the terminal malformed-response retries. It keeps
+the 820-case method and hidden gold unchanged while recording only bounded
+Responses API status, item/part types, refusal presence, response hashes, model
+identity, usage, and cost. It never retains unrestricted provider output.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

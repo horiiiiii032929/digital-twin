@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 886
+    "audited": 890
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 208,
+    "active_or_unclassified_tooling": 210,
     "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 237,
+    "evaluation_configuration": 238,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 195
+    "verification": 196
   },
-  "file_count": 886,
+  "file_count": 890,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cea3d8e8a59c209e0d8efe731b1c74858f447c8327fdfbfc9f1fd7f18c4cc55b",
+  "record_sha256": "3a9c1061c5e166f9f1dc312eb69f0e88d75d2616e5ebd82a0775064b795b8cc9",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "whole-system-architecture-evolution",
-        "evidence": "Command-surface review verifies deterministic controls and successor validation, network-free comparison simulation, blocked preflight, freeze-guarded execution, and inclusion of the three safe build checks in the complete repository gate.",
+        "domain": "actual-product-autonomy-evaluation-006",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "7d65dbbe7d0fa308c3a0dc2925949812ab3bde0ce91809d58b4c884cfcc034a9"
+      "sha256": "32f77b6ce0b416486dbd5a0ae0c1ae7c0554a477afb23e9cf6f8c314c00e52e0"
     },
     {
       "audit": {
@@ -4359,6 +4359,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-006",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_006.json",
+      "risk": "high",
+      "sha256": "54f343c2f5d64b49ceac587f6f62e4a8217a9be37559875c71f0359c8f58e886"
+    },
+    {
+      "audit": {
         "domain": "full-autonomy-evaluation-boundary",
         "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
         "findings": [],
@@ -6314,6 +6330,22 @@
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_005.py",
       "risk": "high",
       "sha256": "4e37c499505b7370ef88d53e02d1d6dcba658b6b8cc50c9e928f8d80c4541c6b"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-006",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
+      "risk": "high",
+      "sha256": "d21c2629060ab619c4f03dc35bdc1057b361d8c80dd4cc403dbda3016d50e300"
     },
     {
       "audit": {
@@ -8427,6 +8459,28 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-006",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-006",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-006",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-006",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-006",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-006"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
+      "risk": "high",
+      "sha256": "aeb6b1112083499eb04e8dbd6d8a7bf0db21500704525756e6ee93fbf7f1ae75"
+    },
+    {
+      "audit": {
         "domain": "full-autonomy-evaluation-boundary",
         "evidence": "Manual service-fixture and clock/restart review plus a four-condition network-free run verified real student, governed autonomy, outreach, SQLite restart, and due-delivery paths without provider use.",
         "findings": [],
@@ -9281,11 +9335,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Entrypoint, argument, freeze, network, data-access, termination, and output review plus focused Ruff/tests and successful network-free validation/simulation.",
+        "domain": "execution-freeze",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex #157 actual-product adapter audit"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9295,7 +9349,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "2d5f3f2335d5589f8d72b2f03770f6148ff7b0697dec5d049b776bb8d52671f3"
+      "sha256": "027966af6fb550148c7f4cf01ed0ddd0ecf4cac0ba8f2c19eac3e73d731ae8c5"
     },
     {
       "audit": {
@@ -9843,11 +9897,11 @@
     },
     {
       "audit": {
-        "domain": "runtime-provider-boundary",
-        "evidence": "Process-local call/cost serialization, fail-closed unknown-cost behavior, and privacy-safe per-call identity/token/latency/cost/failure accounting reviewed; focused budget tests passed.",
+        "domain": "provider-observability",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9855,7 +9909,7 @@
       "package_commands": [],
       "path": "services/llm/budget.py",
       "risk": "high",
-      "sha256": "fe5be12d7eb2357ea04b8f2470597242e6069735e610986bfd6a4e0a866e4279"
+      "sha256": "0558ca841bca0d7989d45d67980658344e9b9f361b38374cae1be24f2306b67e"
     },
     {
       "audit": {
@@ -9875,11 +9929,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "domain": "provider-observability",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -9887,7 +9941,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "d4d4b4013119e329fac7dcdd91447296b70d4dac91056042ea41a758e34bcd7f"
+      "sha256": "0c7259e470ba5e0f0ece03abe2d14742ada9b1444894b0bb2e5e4acc4306fee0"
     },
     {
       "audit": {
@@ -10147,11 +10201,11 @@
     },
     {
       "audit": {
-        "domain": "full-autonomy-evaluation-boundary",
-        "evidence": "Manual contract review and focused tests verified case/gold separation, event ordering, observable action/state outputs, time advancement, restart handling, per-call operational accounting, diagnostic invariants, and independence from graph nodes, database tables, and runtime chunk IDs.",
+        "domain": "provider-observability",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex V2.1 implementation audit"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10159,7 +10213,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_contract.py",
       "risk": "high",
-      "sha256": "780cbbd77745252e08f8c7994d67e1dfd8d1bd9b99636b4a27c2a7f2dd401e52"
+      "sha256": "525ec48ed791ff3cebcd66163d1870f9c1f026793eb736fd8f15f2b5b3281b86"
     },
     {
       "audit": {
@@ -11203,11 +11257,11 @@
     },
     {
       "audit": {
-        "domain": "retrieval-and-model-provider-boundaries",
-        "evidence": "Manual model-policy review verifies stable Gemini 3.7 Flash is registered with exact OpenRouter and provider slugs as prospective and unselected; existing prohibited-model and exact-registration controls remain unchanged and focused tests pass. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+        "domain": "provider-observability",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11215,7 +11269,7 @@
       "package_commands": [],
       "path": "src/digital_twin/llm.py",
       "risk": "high",
-      "sha256": "bae10c0029f60797a9ff5d519758f357a34b96b0731a692e70c971d0be8f906e"
+      "sha256": "a189a0d36dc01118ac15374878e0d863d137c90ca873b0fb11eed32d3309b06f"
     },
     {
       "audit": {
@@ -11475,11 +11529,11 @@
     },
     {
       "audit": {
-        "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Freeze review confirms only actual-product evaluation 003 may perform the two named external/model execution operations; every other provider, paid, final, private-data, and historical evaluation block remains active.",
+        "domain": "execution-freeze",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 execution-authorization audit"
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11487,7 +11541,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "b04bf4fd6864e0a5c03d7e53c33f71a4474c7fb1b9c02438b19ff07a1efbeb86"
+      "sha256": "5895c057e6a9d6fae5685f170a6381ca2ff069a6154204d495864f37f64ef664"
     },
     {
       "audit": {
@@ -12195,11 +12249,11 @@
     },
     {
       "audit": {
-        "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies the exact 003 identifier has only its two reviewed operations and that historical 002 plus every unrelated provider, paid, final, and autonomy execution remains rejected.",
+        "domain": "verification-evidence",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 execution-authorization audit"
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12207,7 +12261,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "f2d8d444c36bb8fc8c252a0a3d2d8d177d11babdb318bd5b29e3b052072d94c4"
+      "sha256": "598e1fad04d6e922ff67314c8a70e7b7e2e59c745f68d2b517e11a698ae8b962"
     },
     {
       "audit": {
@@ -12531,11 +12585,11 @@
     },
     {
       "audit": {
-        "domain": "runtime-verification",
-        "evidence": "Call cap, reported cost cap, unknown-cost fail-closed behavior, complete successful-call accounting, failed-call accounting, and prompt-content exclusion regressions passed.",
+        "domain": "verification-evidence",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12543,15 +12597,15 @@
       "package_commands": [],
       "path": "tests/services/test_llm_budget.py",
       "risk": "medium",
-      "sha256": "a2f8c61f423d2894ce36e716aab972b3ec900dd9ad2502d63f02b1d451c9dcd3"
+      "sha256": "6d7783d7fe3c093d98d1a0f763142066d0583d82779ceb4f48e22518c7143a46"
     },
     {
       "audit": {
-        "domain": "r1-openai-verification",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "domain": "verification-evidence",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12559,7 +12613,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "8b1eb14bf436c9d82ef45cba912050f54c6197a919dcb69da20efec04d97edaf"
+      "sha256": "79a01ad222045ea170a859d9dfe0a4f10fffafb3ffef8b4b69fc308736965e09"
     },
     {
       "audit": {
@@ -14116,6 +14170,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 diagnosable evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
+      "risk": "medium",
+      "sha256": "a73b69fd0d42b21238c56f1ad0918d609328a1ba8a9ce98a9d073a9a0c61b59c"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Focused tests verify network-free authority, public/gold separation, all four real service conditions, restart consistency, one actual autonomous delivery, and zero provider accounting.",
         "findings": [],
         "reviewed_at": "2026-08-31",
@@ -14899,8 +14969,8 @@
     }
   ],
   "risk_counts": {
-    "high": 677,
-    "medium": 209
+    "high": 680,
+    "medium": 210
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

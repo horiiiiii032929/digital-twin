@@ -6,6 +6,7 @@ from services.llm import BudgetedLlmClient
 from src.digital_twin.grounding import GenerationUsage
 from src.digital_twin.llm import (
     LlmBudgetExceededError,
+    LlmMalformedResponseError,
     LlmMessage,
     LlmResponse,
 )
@@ -124,4 +125,49 @@ async def test_budget_records_failed_call_without_prompt_content():
     assert snapshot["failed_calls"] == 1
     assert snapshot["cost_reporting_failed"] is True
     assert snapshot["call_records"][0]["error_code"] == "RuntimeError"
+    assert "Sensitive" not in str(snapshot)
+
+
+class DiagnosedMalformedClient:
+    async def chat(self, messages, task):
+        del messages, task
+        raise LlmMalformedResponseError(
+            stage="schema-validation",
+            provider_model="fixture/diagnosed",
+            provider_revision="fixture/diagnosed",
+            usage=GenerationUsage(
+                input_tokens=11,
+                output_tokens=7,
+                total_tokens=18,
+                approximate_cost_usd=0.25,
+            ),
+            diagnostics={
+                "failure_stage": "schema-validation",
+                "response_status": "completed",
+                "response_sha256": "0" * 64,
+            },
+        )
+
+
+@pytest.mark.asyncio
+async def test_budget_records_privacy_safe_malformed_diagnostics_and_cost():
+    client = BudgetedLlmClient(
+        DiagnosedMalformedClient(), max_calls=2, max_cost_usd=5
+    )
+
+    with pytest.raises(LlmMalformedResponseError):
+        await client.chat([LlmMessage(role="user", content="Sensitive")], "test")
+
+    snapshot = client.snapshot()
+    assert snapshot["reported_cost_usd"] == 0.25
+    assert snapshot["cost_reporting_failed"] is False
+    assert snapshot["unknown_cost_calls"] == 0
+    assert snapshot["input_tokens"] == 11
+    assert snapshot["output_tokens"] == 7
+    assert snapshot["call_records"][0]["provider_model"] == "fixture/diagnosed"
+    assert snapshot["call_records"][0]["failure_diagnostics"] == {
+        "failure_stage": "schema-validation",
+        "response_status": "completed",
+        "response_sha256": "0" * 64,
+    }
     assert "Sensitive" not in str(snapshot)
