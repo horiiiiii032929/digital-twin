@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from datetime import datetime, timedelta, timezone
 import hashlib
 import json
 import os
@@ -1190,8 +1191,21 @@ def preflight() -> dict[str, Any]:
     ):
         if not os.getenv(name, "").strip():
             blockers.append(f"credential-missing:{name}")
-    if program.status == "build-only":
+    if program.status != "frozen-pending-authorization":
         blockers.append("program-not-frozen-for-execution")
+    verified_at = program.freshness.get("verified_at")
+    freshness_hours = program.freshness.get(
+        "refresh_within_hours_before_paid_execution"
+    )
+    try:
+        verified = datetime.fromisoformat(str(verified_at))
+        if verified.tzinfo is None:
+            raise ValueError("metadata timestamp is not timezone-aware")
+        maximum_age = timedelta(hours=float(freshness_hours))
+        if datetime.now(timezone.utc) - verified.astimezone(timezone.utc) > maximum_age:
+            blockers.append("provider-metadata-stale")
+    except (TypeError, ValueError):
+        blockers.append("provider-metadata-invalid")
     if _git_dirty():
         blockers.append("worktree-dirty")
     if PROGRAM_RESULT.exists():
