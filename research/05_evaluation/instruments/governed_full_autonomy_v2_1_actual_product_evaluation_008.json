@@ -1,17 +1,19 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-007",
-  "status": "invalid-execution-authorization-revoked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-008",
+  "status": "frozen-pending-execution",
   "owner_issue": 157,
   "parent_issue": 8,
-  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior after aligning the non-intent generation prompt with its authoritative atomic-claim schema?",
-  "successor_after": "governed-full-autonomy-v2-1-actual-product-evaluation-006",
-  "runtime_correction": {
-    "version": "bounded-prompt-schema-alignment-v1",
-    "reason": "Attempt 006 proved that the T0 non-intent path used an answer/citation prompt while the API and post-parse validator required the atomic claims contract. T1-v2 used the claims-only intent prompt and completed normally.",
-    "changed_file": "src/digital_twin/generation/prompt.py",
-    "change": "BoundedPedagogicalPromptBuilder now inherits the question-targeted claims-only builder for non-intent generation while preserving its intent-specific prompt.",
-    "evaluated_runtime_bug_fixed": true,
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior under a feasible measured call ceiling and bounded case concurrency?",
+  "successor_after": "governed-full-autonomy-v2-1-actual-product-evaluation-007",
+  "execution_correction": {
+    "version": "projected-call-cap-and-concurrency-v1",
+    "reason": "Attempt 007's passing canaries demonstrated a conservative 5,740-call upper bound, making its frozen 3,000-call ceiling impossible even though projected cost remained USD 15. Execution stopped before hidden gold opened.",
+    "call_projection_before_bulk": true,
+    "maximum_concurrency": 8,
+    "atomic_record_on_each_case_completion": true,
+    "cancel_in_flight_on_failure": true,
+    "evaluated_runtime_changed": false,
     "cases_changed": false,
     "gold_changed": false,
     "gates_changed": false,
@@ -42,10 +44,10 @@
     "long_horizon_days": 30,
     "proactive_opportunity_count": 120,
     "source_template_count": 50,
-    "public_sha256": "53adddcb46ec97d5e99cd10877bca68ca6e30b640f44007142a9a418d5defc5d",
-    "hidden_gold_sha256": "10bb79ad39d1c6ae0a9d7cbffb30158c67454dcc1ca63d6534c9e77fe65f3db6",
-    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-006",
-    "content_change_from_006": "dataset identity only; observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256",
+    "public_sha256": "6ee45b572702a00fbab0e43f99386f1961affc092076259b55a41f6591c87f92",
+    "hidden_gold_sha256": "1f4258b433de2071abacdd944160e5a959591819696d8215b168df796831f8e9",
+    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-007",
+    "content_change_from_007": "dataset identity only; observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256",
     "quality_results_previously_opened": 0
   },
   "clock": {
@@ -90,13 +92,13 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_promotion": false,
     "authorization_source": "User instructed the integrated evaluation-and-deployment path to continue through the first valid release decision on 2026-09-01.",
     "grounding_keep_required": true,
     "grounding_result_id": "academic-factual-qa-ambiguity-safe-comparison-002",
-    "maximum_provider_calls": 3000,
+    "maximum_provider_calls": 10000,
     "maximum_cost_usd": 50.0
   },
   "hard_gates": {
@@ -127,6 +129,7 @@
     ],
     "selected_retriever": "source-semantic-evidence-atom-retriever-v1",
     "selected_evidence_gate": "source-semantic-evidence-atom-gate-v2",
+    "maximum_concurrency": 8,
     "atomic_response_ledger": true,
     "safe_resume": true,
     "exclusive_output": true,
@@ -134,8 +137,8 @@
     "same_cases_quality_rerun_allowed": false
   },
   "boundaries": [
-    "Attempts 003 through 006 remain immutable invalid operational evidence.",
-    "This successor fixes one demonstrated runtime prompt-schema mismatch before any bulk or hidden-gold execution occurred.",
+    "Attempts 003 through 007 remain immutable invalid operational evidence.",
+    "This successor changes execution feasibility and throughput only; evaluated product behavior and quality gates are unchanged.",
     "The product receives only observable events and the approved synthetic public course release.",
     "Gold derives from source truth, approved policy, consent, membership, release, and the action lattice.",
     "Real professor fidelity, real student usability, and learning improvement are not established."

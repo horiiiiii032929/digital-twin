@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 894
+    "audited": 898
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 212,
+    "active_or_unclassified_tooling": 214,
     "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 239,
+    "evaluation_configuration": 240,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 197
+    "verification": 198
   },
-  "file_count": 894,
+  "file_count": 898,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9f8a24212f85869895821aec2c5dad35b0d988597d62dd6b7f666bc8b3d4ae7d",
+  "record_sha256": "0e3ecb60bdd705fbe44000420d0dd068a45ae4d30a4e5842039de63e232c6602",
   "records": [
     {
       "audit": {
@@ -1415,8 +1415,8 @@
     },
     {
       "audit": {
-        "domain": "execution-configuration",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "domain": "configuration-and-deployment",
+        "evidence": "Reviewed the successor 008 command registration and confirmed validation, simulation, preflight, execute, and resume commands bind the new immutable run identity.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "fb71f2561a8a8315b09391216851374323b416052b0ae9a661e9c6edb1bd38e1"
+      "sha256": "f1864bdcdc44578eda936bc73643c4c547cd76f36187dcc804d6b955c48d529d"
     },
     {
       "audit": {
@@ -4376,7 +4376,7 @@
     {
       "audit": {
         "domain": "evaluation-evidence",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "evidence": "Reviewed the terminal authorization revocation and preserved 007 as immutable invalid evidence after the infeasible call ceiling was identified before hidden gold.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -4387,7 +4387,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_007.json",
       "risk": "high",
-      "sha256": "d15ebcc3cf05c930d7eac34ca11c682ed2bd501468d06fa1a529fdc961d885a8"
+      "sha256": "2773c7b43aa94e906ae297dfda04369edd9c0b0c0ea1cf47645b6197cc8f3c4e"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence",
+        "evidence": "Reviewed successor 008: unchanged cases, gold, product method, retrieval, models, and hard gates; only pre-bulk call projection, a feasible safety ceiling, and bounded concurrency changed.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_008.json",
+      "risk": "high",
+      "sha256": "5f16f7f09ec2fa7f1ecb66b52a5944671beeafd48ddc42763a021bd25f1ecbd2"
     },
     {
       "audit": {
@@ -6378,6 +6394,22 @@
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
       "risk": "high",
       "sha256": "eae5a48563a5f00b8b15b07b38be73dd9700ecbcb783e8f5287f3903b20d8ae5"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed immutable successor construction and validation proving content-equivalent cases/gold and execution-envelope-only correction.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
+      "risk": "high",
+      "sha256": "811f55b8a6826e3905ce7775f49d196e7e4a711cea8a5623d17fc729db082064"
     },
     {
       "audit": {
@@ -8403,11 +8435,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-evaluation-002",
-        "evidence": "Runner review and complete 820-case simulation verified atomic SQLite response persistence, clock history, exact manifests, two canaries, hidden-gold order, budget/accounting stops, terminal results, and safe resume.",
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed shared canary-first execution, pre-bulk cost and call projection, bounded case concurrency, atomic per-case persistence, in-flight cancellation, resume binding, and hidden-gold ordering.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 realistic-time product audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8421,7 +8453,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "747c7587ca3de4ca5745bf4443b1b8fc1c4c2af365d9c2422d5c5a608d1e65c3"
+      "sha256": "b737e0930c9a1c6d6eab8945f0960abfd34c7a5b2baf96221f3f9e6405640d0b"
     },
     {
       "audit": {
@@ -8532,6 +8564,28 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
       "risk": "high",
       "sha256": "186d7f2cb7e36229f8cd40e5ea8738102a6a0b98a0ce9c23092b49d5fee765e4"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed 008 context binding, execution freeze guards, exact selected grounding result, and shared validate/simulate/preflight/execute interfaces.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-008",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-008",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-008",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-008",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-008"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
+      "risk": "high",
+      "sha256": "8a8397b3b1b557008afda42bb14dcae6a6ae767bcff82023a82c40bee85d4faa"
     },
     {
       "audit": {
@@ -9389,8 +9443,8 @@
     },
     {
       "audit": {
-        "domain": "evaluation-tooling",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "domain": "repository-correctness-controls",
+        "evidence": "Reviewed builder allowlisting for 008 while preserving execution entrypoint protection and bounded authorization requirements.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -9403,7 +9457,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "ff03e7226117d04b437f6be2056320079c43bd7ad116952681776b478e9fe18a"
+      "sha256": "ed43a49943710e992f017881e8bfbb4a5fb7e064448240304242595dc5e794e9"
     },
     {
       "audit": {
@@ -11583,8 +11637,8 @@
     },
     {
       "audit": {
-        "domain": "active-runtime",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "domain": "repository-correctness-controls",
+        "evidence": "Reviewed exact 008 entrypoint registration and replacement of the revoked 007 bounded authorization without broadening other execution authority.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -11595,7 +11649,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "c64fc20b6bd0542dfb3cf9dfcd3b191e4865f58447f3ece0ea39a882fa016c08"
+      "sha256": "14723274cc1dd75504d0c0f948112c1de751e9acbabae191d222a3b178eeccb6"
     },
     {
       "audit": {
@@ -12304,7 +12358,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "evidence": "Reviewed bounded-authorization regression expectation for sole active autonomy successor 008.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -12315,7 +12369,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "9b11a180f1b2baf8b7fb06413065469c60523c4f2ef714bdae2c62467baea271"
+      "sha256": "1dbd919cda7785d91e8629f102c31a11889900e5b884646b2eb3fc95590e52de"
     },
     {
       "audit": {
@@ -14240,7 +14294,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "evidence": "Reviewed terminal-state regression for revoked attempt 007 while preserving contract-equivalence assertions.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "codex-primary-review"
@@ -14251,7 +14305,23 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
       "risk": "medium",
-      "sha256": "91f023f98fa4ca96b26b701f3ff6944deb136178e6792b1d0158dd6b1b672752"
+      "sha256": "830709234d7a73a84ff3a552447a07ff2abc108a2e21083923443b7729302c45"
+    },
+    {
+      "audit": {
+        "domain": "verification",
+        "evidence": "Reviewed focused successor assertions for unchanged 820-case contract, unchanged gold/gates, 10,000-call ceiling, and concurrency eight.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
+      "risk": "medium",
+      "sha256": "d8cfcc3c2f4b387d257f888952c69bee0f1a2d3c6d7c846c8a3f5070923cf641"
     },
     {
       "audit": {
@@ -15039,8 +15109,8 @@
     }
   ],
   "risk_counts": {
-    "high": 683,
-    "medium": 211
+    "high": 686,
+    "medium": 212
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

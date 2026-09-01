@@ -591,28 +591,36 @@ async def _execute_responses(
     runtime_root = context.output_root / "runtime"
     instrument = _load(context.builder.INSTRUMENT)
     maximum_cost_usd = float(instrument["authority"]["maximum_cost_usd"])
+    maximum_provider_calls = int(
+        instrument["authority"]["maximum_provider_calls"]
+    )
+    maximum_concurrency = int(
+        instrument["execution"].get("maximum_concurrency", 1)
+    )
+    if not 1 <= maximum_concurrency <= 16:
+        raise ActualProductEvaluationError(
+            "maximum concurrency must be between one and sixteen"
+        )
+
+    def require_remaining_budget() -> tuple[float, dict[str, Any]]:
+        totals = ledger.totals()
+        remaining_cost = maximum_cost_usd - float(totals["cost_usd"])
+        if remaining_cost <= 0:
+            raise ActualProductEvaluationError(
+                f"USD {maximum_cost_usd:g} emergency stop reached"
+            )
+        if int(totals["provider_calls"]) >= maximum_provider_calls:
+            raise ActualProductEvaluationError(
+                f"{maximum_provider_calls} provider-call stop reached"
+            )
+        return remaining_cost, totals
+
     try:
-        if set(CANARY_CASE_IDS).issubset(completed):
-            persisted_canaries = [
-                row
-                for row in ledger.responses()
-                if row[1].case_id in set(CANARY_CASE_IDS)
-            ]
-            if not _canaries_valid(persisted_canaries):
-                raise ActualProductEvaluationError(
-                    "persisted provider canary is invalid"
-                )
-        for index, (condition, case, _gold) in enumerate(
-            _ordered_contract(context)
-        ):
+        ordered = _ordered_contract(context)
+        for condition, case, _gold in ordered[:2]:
             if case.case_id in completed:
                 continue
-            totals = ledger.totals()
-            remaining_cost = maximum_cost_usd - float(totals["cost_usd"])
-            if remaining_cost <= 0:
-                raise ActualProductEvaluationError(
-                    f"USD {maximum_cost_usd:g} emergency stop reached"
-                )
+            remaining_cost, _totals = require_remaining_budget()
             response = await _run_case(
                 runtime_root,
                 condition,
@@ -622,29 +630,79 @@ async def _execute_responses(
                 context=context,
             )
             ledger.record(condition, response)
-            if index == 1:
-                canary_rows = ledger.responses()[:2]
-                if not _canaries_valid(canary_rows):
-                    raise ActualProductEvaluationError(
-                        "provider canary failed before bulk"
-                    )
-                canary_costs = [row.cost_usd for _condition, row in canary_rows]
-                projected = 1.5 * max(canary_costs) * 820
-                projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
-                if projected_stop > maximum_cost_usd:
-                    raise ActualProductEvaluationError(
-                        f"projected p99 cost ${projected_stop:.2f} exceeds "
-                        f"${maximum_cost_usd:.2f}"
-                    )
-                _atomic_write(
-                    context.checkpoint_path,
-                    {
-                        "status": "canaries-passed",
-                        "projected_p99_cost_stop_usd": projected_stop,
-                        "completed_case_count": 2,
-                    },
-                    exclusive=not context.checkpoint_path.exists(),
+            completed.add(case.case_id)
+
+        canary_rows = [
+            row
+            for row in ledger.responses()
+            if row[1].case_id in set(CANARY_CASE_IDS)
+        ]
+        if not _canaries_valid(canary_rows):
+            raise ActualProductEvaluationError("provider canary failed before bulk")
+        canary_costs = [row.cost_usd for _condition, row in canary_rows]
+        projected = 1.5 * max(canary_costs) * 820
+        projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
+        projected_calls = max(row.provider_calls for _condition, row in canary_rows) * 820
+        if projected_stop > maximum_cost_usd:
+            raise ActualProductEvaluationError(
+                f"projected p99 cost ${projected_stop:.2f} exceeds "
+                f"${maximum_cost_usd:.2f}"
+            )
+        if projected_calls > maximum_provider_calls:
+            raise ActualProductEvaluationError(
+                f"projected call ceiling {projected_calls} exceeds "
+                f"{maximum_provider_calls}"
+            )
+        if not context.checkpoint_path.exists():
+            _atomic_write(
+                context.checkpoint_path,
+                {
+                    "status": "canaries-passed",
+                    "projected_p99_cost_stop_usd": projected_stop,
+                    "projected_provider_calls_upper_bound": projected_calls,
+                    "maximum_concurrency": maximum_concurrency,
+                    "completed_case_count": 2,
+                },
+                exclusive=True,
+            )
+
+        pending = [row for row in ordered[2:] if row[1].case_id not in completed]
+        for offset in range(0, len(pending), maximum_concurrency):
+            batch = pending[offset : offset + maximum_concurrency]
+            remaining_cost, _totals = require_remaining_budget()
+
+            async def run_bound(row):
+                condition, case, _gold = row
+                response = await _run_case(
+                    runtime_root,
+                    condition,
+                    case,
+                    provider_backed=True,
+                    remaining_cost_usd=remaining_cost / len(batch),
+                    context=context,
                 )
+                return condition, response
+
+            tasks = [asyncio.create_task(run_bound(row)) for row in batch]
+            try:
+                for task in asyncio.as_completed(tasks):
+                    condition, response = await task
+                    ledger.record(condition, response)
+                    totals = ledger.totals()
+                    if float(totals["cost_usd"]) > maximum_cost_usd:
+                        raise ActualProductEvaluationError(
+                            f"USD {maximum_cost_usd:g} emergency stop exceeded"
+                        )
+                    if int(totals["provider_calls"]) > maximum_provider_calls:
+                        raise ActualProductEvaluationError(
+                            f"{maximum_provider_calls} provider-call stop exceeded"
+                        )
+            except BaseException:
+                for task in tasks:
+                    if not task.done():
+                        task.cancel()
+                await asyncio.gather(*tasks, return_exceptions=True)
+                raise
         ledger.mark_complete()
         return ledger.totals()
     except BaseException:

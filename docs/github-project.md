@@ -133,12 +133,15 @@ gate on 500 fresh source-disjoint cases: V1 and ambiguity-safe V2 each reached
 controls and the 16/16 known clarify regression. V2 is selected for the next
 product confirmation with V1 rollback. The result does not promote a release.
 #157 is now the active downstream `Todo / Go Deeper` decision; provider-backed
-execution is now bound only to prompt-schema-aligned successor 007. Attempts
-003–006 remain immutable invalid evidence. Attempt 006's privacy-safe diagnostic
-boundary isolated a T0 runtime prompt/schema mismatch while all T1-v2 provider
-calls completed. Successor 007 changes only that runtime contract, not cases,
-gold, retrieval, models, or gates. A valid Keep is required before the local
-deployment may switch from deterministic T1-v1 to governed T1-v2.1.
+execution is bound only to successor 008. Attempts 003–007 remain immutable
+invalid evidence. Attempt 006 isolated the T0 prompt/schema mismatch, and 007
+proved the corrected provider canaries work before exposing an infeasible
+3,000-call ceiling: 5,740 calls were conservatively required. Successor 008
+changes only the execution envelope by projecting calls before bulk, allowing
+10,000 calls, and processing eight independent cases concurrently with atomic
+persistence. Cases, gold, product behavior, retrieval, models, and gates are
+unchanged. A valid Keep is required before the local deployment may switch from
+deterministic T1-v1 to governed T1-v2.1.
 
 That immutable candidate is now
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's
