@@ -40,7 +40,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
-        "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
     }
 
     for pilot_id in pilot_ids:
@@ -53,13 +52,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-reference-aggregate-007"
     ] == ("dataset_generation",)
-    assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "governed-full-autonomy-v2-1-cross-engine-evaluation-010"
-    ] == (
-        "dataset_generation",
-        "external_model_evaluation",
-        "method_evaluation_execution",
-    )
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",
@@ -72,6 +64,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
         "academic-factual-qa-ambiguity-safe-comparison-001",
         "academic-factual-qa-ambiguity-safe-comparison-002",
+        "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(
