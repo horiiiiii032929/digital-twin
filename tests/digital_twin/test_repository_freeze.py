@@ -40,7 +40,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
-        "governed-full-autonomy-v2-1-actual-product-evaluation-008",
     }
 
     for pilot_id in pilot_ids:

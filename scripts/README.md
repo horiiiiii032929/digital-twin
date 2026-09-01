@@ -1066,7 +1066,10 @@ after proving its 3,000-call ceiling could not contain the conservative
 5,740-call upper bound. The `008` commands keep every evaluation and product
 binding unchanged, perform that call projection before bulk, use a 10,000-call
 safety ceiling, and process at most eight independent cases concurrently while
-persisting every completed case atomically.
+persisting every completed case atomically. Attempt 008 completed 820/820 and is
+terminal `Refine`: corrected frequency and paired-grounding analysis pass, but
+all 290 expected proactive check-ins were emitted as diagnostic questions. Its
+authorization is revoked; the opened cases must not be reused for confirmation.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

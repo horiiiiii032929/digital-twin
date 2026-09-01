@@ -384,11 +384,10 @@ usage accounting. Its 11-call canary classified the T0 failure at local schema
 validation and revealed that the non-intent path used the obsolete answer
 prompt against the atomic-claim schema. It stopped before 818 bulk cases and
 hidden gold and is revoked. Successor 007 fixed only that runtime contract and
-passed both provider canaries. It was stopped before hidden gold when observed
-calls proved its 3,000-call ceiling infeasible. Successor 008 keeps the product
-method, cases, hidden gold, retrieval, models, and hard gates unchanged while
-projecting calls before bulk, raising the safety ceiling to 10,000, and
-processing eight cases concurrently with atomic persistence. A valid Keep
-creates the dedicated qualification record, after which the same revision is
-rebuilt with governed T1-v2.1 selected and requalified through the local HTTPS
-professor/student journey, restart, backup/restore, kill switch, and T0 rollback.
+passed both provider canaries. Successor 008 then completed all 820 cases under
+a corrected execution envelope. It is a valid Refine result: safety and
+persistence passed, but exact proactive action selection failed 290/290 because
+the live planner was offered the complete policy action palette. T1-v2.1
+remains unselected and cannot enter the local HTTPS release. The next candidate
+must add deterministic event-scoped action eligibility and use fresh
+confirmation cases before deployment.

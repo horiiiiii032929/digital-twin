@@ -2997,12 +2997,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-evidence",
-      "evidence": "Reviewed successor 008: unchanged cases, gold, product method, retrieval, models, and hard gates; only pre-bulk call projection, a feasible safety ceiling, and bounded concurrency changed.",
+      "evidence": "Reviewed completed-Refine terminal state, one-time authorization revocation, and preservation of the executed instrument hash in the durable result record.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_008.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "5f16f7f09ec2fa7f1ecb66b52a5944671beeafd48ddc42763a021bd25f1ecbd2"
+      "sha256": "15e0038115e81a303f83b389bacb5c416563ab8fe657ff1aa1385268eb420d41"
     },
     {
       "audit_status": "audited",
@@ -4317,12 +4317,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Reviewed immutable successor construction and validation proving content-equivalent cases/gold and execution-envelope-only correction.",
+      "evidence": "Reviewed terminal Refine status validation and authority/status consistency after the completed run.",
       "findings": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "811f55b8a6826e3905ce7775f49d196e7e4a711cea8a5623d17fc729db082064"
+      "sha256": "b75ead6067d6171533be8ce6714fd3c84b4649168ef7e14308320d0ed43d91c1"
     },
     {
       "audit_status": "audited",
@@ -5406,12 +5406,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Reviewed shared canary-first execution, pre-bulk cost and call projection, bounded case concurrency, atomic per-case persistence, in-flight cancellation, resume binding, and hidden-gold ordering.",
+      "evidence": "Post-run audit corrected proactive-frequency scoring to use autonomous lineage only and grounding non-regression to compare paired reactive conditions; raw result remains immutable and the Refine decision is unchanged.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "b737e0930c9a1c6d6eab8945f0960abfd34c7a5b2baf96221f3f9e6405640d0b"
+      "sha256": "98f81e2d97a4ec86e55a046e064a1cc51b928b930c6bef34df83efde3052f4b3"
     },
     {
       "audit_status": "audited",
@@ -7496,12 +7496,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Reviewed exact 008 entrypoint registration and replacement of the revoked 007 bounded authorization without broadening other execution authority.",
+      "evidence": "Reviewed revocation of the sole 008 bounded authorization while preserving its guarded entrypoint and all unrelated freeze boundaries.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "14723274cc1dd75504d0c0f948112c1de751e9acbabae191d222a3b178eeccb6"
+      "sha256": "4f0b887aaaac3ca859309677cb2d818cafd327f006cf6f56ce4f015bcd4de692"
     },
     {
       "audit_status": "audited",
@@ -7991,12 +7991,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Reviewed bounded-authorization regression expectation for sole active autonomy successor 008.",
+      "evidence": "Reviewed regression expectation after revoking 008 bounded execution authority.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "1dbd919cda7785d91e8629f102c31a11889900e5b884646b2eb3fc95590e52de"
+      "sha256": "f2d8d444c36bb8fc8c252a0a3d2d8d177d11babdb318bd5b29e3b052072d94c4"
     },
     {
       "audit_status": "audited",
@@ -9266,13 +9266,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused tests cover the build-only 820-case distribution, realistic 24-hour and 30-day timing, public/gold isolation, revoked provider authority, grounding dependency, and representative real-service cases.",
+      "domain": "verification",
+      "evidence": "Reviewed the lineage-aware frequency regression proving reactive turn deliveries do not count against proactive message limits.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "0ade18278bb4d8ff86a8d9d185754acaf30989c27bf75ef8925a39b7255881c1"
+      "reviewer": "codex-primary-review",
+      "sha256": "ac0b9c3ec95ab0d75732b91baab9189ad533140e1fcc428f964d4bf05dde93cf"
     },
     {
       "audit_status": "audited",
@@ -9333,12 +9333,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Reviewed focused successor assertions for unchanged 820-case contract, unchanged gold/gates, 10,000-call ceiling, and concurrency eight.",
+      "evidence": "Reviewed terminal-state validation while preserving unchanged-contract and execution-envelope assertions.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_008.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
-      "sha256": "d8cfcc3c2f4b387d257f888952c69bee0f1a2d3c6d7c846c8a3f5070923cf641"
+      "sha256": "cec0062e0825e9388b5e48007102adaae885d86f2fe78570ce97460675490def"
     },
     {
       "audit_status": "audited",

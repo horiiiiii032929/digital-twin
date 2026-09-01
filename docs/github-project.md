@@ -132,16 +132,17 @@ gate on 500 fresh source-disjoint cases: V1 and ambiguity-safe V2 each reached
 97.75% grounded success, while V2 additionally passed 6/6 planted ambiguity
 controls and the 16/16 known clarify regression. V2 is selected for the next
 product confirmation with V1 rollback. The result does not promote a release.
-#157 is now the active downstream `Todo / Go Deeper` decision; provider-backed
-execution is bound only to successor 008. Attempts 003–007 remain immutable
-invalid evidence. Attempt 006 isolated the T0 prompt/schema mismatch, and 007
-proved the corrected provider canaries work before exposing an infeasible
-3,000-call ceiling: 5,740 calls were conservatively required. Successor 008
-changes only the execution envelope by projecting calls before bulk, allowing
-10,000 calls, and processing eight independent cases concurrently with atomic
-persistence. Cases, gold, product behavior, retrieval, models, and gates are
-unchanged. A valid Keep is required before the local deployment may switch from
-deterministic T1-v1 to governed T1-v2.1.
+#157 is the active downstream `In Progress / Refine` decision. Attempts 003–007
+remain immutable invalid evidence. Successor 008 completed all 820 cases for
+USD 5.5902555 and produced a valid Refine result. Every safety, authority,
+citation, fallback, persistence, restart, transition, termination, corrected
+frequency, and paired-grounding gate passed. Promotion failed because every one
+of 290 expected proactive check-ins was classified as a diagnostic question.
+Post-run audit also corrected two scorer false negatives without changing the
+decision. The next method must deterministically restrict eligible actions by
+event before model planning and must use fresh confirmation cases. Current
+governed T1-v2.1 remains unselected; deterministic T1-v1/T0 remains the local
+release baseline.
 
 That immutable candidate is now
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's

@@ -67,6 +67,7 @@ def validate() -> dict[str, Any]:
     if instrument.get("status") not in {
         "frozen-pending-execution",
         "completed-authorization-revoked",
+        "completed-refine-authorization-revoked",
         "invalid-execution-authorization-revoked",
     }:
         raise ValueError("actual-product successor status is invalid")

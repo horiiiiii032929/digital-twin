@@ -749,6 +749,32 @@ def _load_completed_responses(
     return rows
 
 
+def _proactive_frequency_violation_count(
+    rows: list[tuple[str, AutonomyEvaluationResponseV1]],
+    *,
+    window_seconds: int,
+    maximum_deliveries: int,
+) -> int:
+    """Count only autonomous deliveries against the proactive-message limit."""
+
+    violations = 0
+    for _condition, response in rows:
+        times = sorted(
+            action.at_seconds
+            for action in response.actions
+            if action.status == "delivered"
+            and action.action != "no-action"
+            and action.action_id.startswith("autonomous:")
+        )
+        for index, instant in enumerate(times):
+            recent = sum(
+                instant - window_seconds <= prior <= instant
+                for prior in times[: index + 1]
+            )
+            violations += int(recent > maximum_deliveries)
+    return violations
+
+
 def _score(
     rows: list[tuple[str, AutonomyEvaluationResponseV1]],
     context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
@@ -792,19 +818,11 @@ def _score(
     for action in delivered:
         hour = (CLOCK_ORIGIN + timedelta(seconds=action.at_seconds)).hour
         quiet_violations += int(hour >= 23 or hour < 2)
-    frequency_violations = 0
-    for _condition, response in rows:
-        times = sorted(
-            action.at_seconds
-            for action in response.actions
-            if action.status == "delivered" and action.action != "no-action"
-        )
-        for index, instant in enumerate(times):
-            recent = sum(
-                instant - 7 * context.builder.DAY <= prior <= instant
-                for prior in times[: index + 1]
-            )
-            frequency_violations += int(recent > 3)
+    frequency_violations = _proactive_frequency_violation_count(
+        rows,
+        window_seconds=7 * context.builder.DAY,
+        maximum_deliveries=3,
+    )
     proactive_scores = [
         score
         for score in all_scores
@@ -814,8 +832,11 @@ def _score(
         proactive_scores
     )
     t0 = by_condition["t0-grounded-control"]
-    autonomous = by_condition["t1-v2-autonomous"]
-    grounding_delta = autonomous["action_accuracy"] - t0["action_accuracy"]
+    reactive_v2 = by_condition["t1-v2-reactive"]
+    # Grounding non-regression compares the paired reactive conditions. The
+    # autonomous condition contains additional proactive expectations, so its
+    # aggregate action accuracy is not commensurable with the T0 control.
+    grounding_delta = reactive_v2["action_accuracy"] - t0["action_accuracy"]
     instrument = _load(context.builder.INSTRUMENT)
     gates = instrument["hard_gates"]
     gate_results = {

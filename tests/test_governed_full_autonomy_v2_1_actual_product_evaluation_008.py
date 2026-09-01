@@ -14,7 +14,7 @@ def test_successor_changes_execution_bounds_not_evaluation_contract() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-frozen-pending-execution"
+    assert result["status"] == "passed-terminal"
     assert result["case_count"] == 820
     assert [
         (condition, case.model_dump(mode="json"), gold.model_dump(mode="json"))

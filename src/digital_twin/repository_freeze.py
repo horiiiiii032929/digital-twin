@@ -484,10 +484,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "course-digital-twin-whole-system-architecture-round-3-001": (
             "method_evaluation_execution",
         ),
-        "governed-full-autonomy-v2-1-actual-product-evaluation-008": (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
     }
 )
 
