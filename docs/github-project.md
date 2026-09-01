@@ -127,11 +127,13 @@ blocked and the fresh 1,000, known 10,000+1,000, and provider-backed 820-case
 stages stay unopened. The deterministic fail-closed local candidate remains a
 demo/development baseline only.
 
-#172 is the active P0 correction and is now at its finite build-only checkpoint.
-Reference uniqueness, product `clarify` propagation, six planted controls, and
-a fresh 500-case source-disjoint package are implemented and verified. The
-comparison remains `reviewed-not-authorized`; #157 and release promotion remain
-blocked until the one fresh network-free Keep/Refine decision is recorded.
+#172 is complete as `Done / Keep`. Corrective attempt 002 passed every frozen
+gate on 500 fresh source-disjoint cases: V1 and ambiguity-safe V2 each reached
+97.75% grounded success, while V2 additionally passed 6/6 planted ambiguity
+controls and the 16/16 known clarify regression. V2 is selected for the next
+product confirmation with V1 rollback. The result does not promote a release.
+#157 is now the active downstream `Todo / Go Deeper` decision; provider-backed
+execution remains unauthorized until a new immutable candidate is frozen.
 
 ## Release stages and product gates
 
@@ -157,11 +159,10 @@ professor-communication track.
 2. Preserve both `course-digital-twin-autonomous-long-run-001` attempts as
    zero-call invalid integration evidence. Authority is revoked; there is no
    third attempt. Keep the local fail-closed fallback selected.
-3. If and only if a separately reviewed future #153 successor returns `Keep`,
-   execute
-   `governed-full-autonomy-v2-1-actual-product-evaluation-002` once under the
-   appropriate future authority. The current 820-case provider-backed stage
-   was not executed.
+3. Preserve #172's ambiguity-safe V2 `Keep`, then create a new immutable #157
+   product manifest that binds that selected method. Execute the provider-backed
+   820-case autonomy confirmation only under its own future authority; the
+   historical evaluation-002 build remains unexecuted.
 4. #24 — obtain real professor approval for the profile and calibrate fidelity
    separately from factual QA.
 5. #131 — retain the terminal visual diagnostic and design a separate true-

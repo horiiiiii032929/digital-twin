@@ -46,14 +46,14 @@ def test_fresh_successor_is_byte_stable_unique_and_source_disjoint() -> None:
     assert result["provider_calls"] == 0
 
 
-def test_comparison_is_simulated_and_ready_when_authorized() -> None:
+def test_comparison_is_simulated_and_blocked_after_authority_revocation() -> None:
     validated = comparison.validate(comparison.DEFAULT_INSTRUMENT)
     simulated = comparison.simulate(comparison.DEFAULT_INSTRUMENT)
     preflight = comparison.preflight(comparison.DEFAULT_INSTRUMENT)
 
     assert validated["planted_control_count"] == 6
     assert simulated["status"] == "passed-network-free-simulation"
-    assert preflight["status"] == "ready-network-free"
+    assert preflight["status"] == "blocked-not-authorized"
     assert preflight["hidden_gold_loaded"] is False
 
     invalid_preflight = comparison.preflight(

@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review revokes invalid attempt 001 and grants only corrective attempt 002 one network-free method-evaluation execution while retaining every provider, paid, final, autonomy, private-data, and other evaluation block.",
+      "evidence": "Freeze review confirms both comparison attempts are revoked after the valid attempt-002 result while every provider, paid, final, autonomy, private-data, and other evaluation block remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "1daa4f4b899c94451b6cf6bf499611a012b66c5c94a0ad734180ac8082960eb9"
+      "sha256": "4ecc7da2e1c4085d5b05f9c106e67a4b3a181703139f4444b6d14a30bdb6ebb7"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies invalid attempt 001 is rejected, corrective attempt 002 is authorized only for network-free method evaluation, and provider, paid, final, autonomy, and every other historical execution remain rejected.",
+      "evidence": "Freeze regression verifies both ambiguity-safe comparison attempts are rejected after terminal publication and provider, paid, final, autonomy, and every other historical execution remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "6b4f10121bd9d301559bb5b98546d8f78f404f893a8e3a0d18450778d834d5d9"
+      "sha256": "fccbef6e799778309c32472149d5eec87214c3306fe43fa9c1454b02ce6ed0b4"
     },
     {
       "audit_status": "audited",
@@ -9531,12 +9531,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "ambiguity-safe-grounding",
-      "evidence": "Corrective instrument review binds the unchanged source, public cases, hidden gold, planted controls, architectures, and quality gates to a fresh exclusive output; only the scorer namespace defect changes and only one network-free execution is authorized.",
+      "evidence": "Terminal instrument review preserves the unchanged source, public cases, hidden gold, planted controls, architectures, and quality gates while recording completed execution and revoked network-free authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_002.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "01e4aae4bc8f11e9202b85006ebe3bf08eec557334bd5384cb77bd8cd340e67e"
+      "sha256": "74aa561aa6eeaaa0241933dc20e27ab757319b573e7f7e30411f25daa707ead7"
     },
     {
       "audit_status": "audited",
@@ -9608,12 +9608,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests verify all planted relationship classes, fresh package integrity, invalid-attempt revocation, corrective preflight, ambiguity-to-clarify propagation, and regression coverage for the scorer metric namespace defect.",
+      "evidence": "Focused tests verify all planted relationship classes, fresh package integrity, both terminal attempt revocations, ambiguity-to-clarify propagation, and regression coverage for the scorer metric namespace defect.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_ambiguity_safe_successor.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "7d680cdb004cdf5e3109ce56a933c3cc68156179c409a51f8647fa01202d3b11"
+      "sha256": "48e45b64858952352d6c5e8c3dcde546d12f3ff8dab29bb2828b8c40d8a788f2"
     }
   ],
   "schema_version": 1
