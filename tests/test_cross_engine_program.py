@@ -193,6 +193,10 @@ def test_factual_adapter_uses_first_party_engine_transport() -> None:
     assert openai_binding["provider_model"] == "gpt-5.4-nano-2026-03-17"
     assert deepseek_binding["api_url"] == "https://api.deepseek.com/chat/completions"
     assert deepseek_binding["provider_model"] == "deepseek-v4-flash"
+    assert (
+        deepseek_binding["provider_user_id"]
+        == "course-digital-twin-public-evaluation"
+    )
     assert deepseek_binding["maximum_transport_retries"] == 0
 
 

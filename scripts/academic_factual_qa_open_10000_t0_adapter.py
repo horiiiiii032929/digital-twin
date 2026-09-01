@@ -357,6 +357,7 @@ def _generator_transport(
             "temperature": 0,
             "timeout_seconds": 45,
             "maximum_transport_retries": 0,
+            "provider_user_id": "course-digital-twin-public-evaluation",
             "pricing_usd_per_million_input_tokens": (
                 engine.input_price_usd_per_million
             ),

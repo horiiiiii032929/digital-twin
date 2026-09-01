@@ -1,0 +1,112 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010-attempt-001-invalid",
+  "program_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+  "stage_id": "finite-cross-engine-paid-attempt-001",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-cross-engine-evaluation-010-build-002"
+  ],
+  "decision_question": "Can the frozen six-engine program execute through a release or redesign decision without a harness, identity, leakage, or accounting defect?",
+  "code_revision": "b1d565b0d3ef0da53a536ba539e873fc9dd0a1e5",
+  "dirty_state": false,
+  "started_at": "2026-09-02T00:49:00+08:00",
+  "completed_at": "2026-09-02T01:03:00+08:00",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_cross_engine_evaluation_010.json",
+      "sha256": "98cb83118f6b8c08674ca84b89b91ea942538c39c6f12ea513b9decdfb64c58e",
+      "role": "executed-program-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-cross-engine-evaluation-010-attempt-001-invalid/program.sqlite3",
+      "sha256": "aef8a3f3cd3b8e127091e12dc6ebbbc85fd114577cfd078543e47fcb53862071",
+      "role": "ignored-atomic-program-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-cross-engine-evaluation-010-attempt-001-invalid/factual/development-500/e4/candidate/provider.sqlite3",
+      "sha256": "750258ceb497c6d383a62d368124ee59bbd24085966dbe46c3034ec99cbfd1eb",
+      "role": "ignored-deepseek-harness-failure-ledger"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "finite-cross-engine-evaluation-program",
+      "version": "010-attempt-001",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation",
+        "operations"
+      ],
+      "metrics": [
+        {
+          "name": "completed-provider-calls",
+          "value": 1079,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 1083,
+          "passed": false
+        },
+        {
+          "name": "deepseek-network-calls",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "harness-validity",
+          "passed": false,
+          "evidence": "The direct-DeepSeek binding omitted provider_user_id and raised KeyError in four concurrent local calls before network I/O."
+        },
+        {
+          "name": "downstream-stages-remain-closed",
+          "passed": true,
+          "evidence": "Autonomy, sealed confirmation, known regression, proxy synthesis, and local release qualification remained pending."
+        },
+        {
+          "name": "quality-result-not-interpreted",
+          "passed": true,
+          "evidence": "The development stage never completed and produced no Keep/Refine selection."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 1084,
+    "completed_provider_calls": 1079,
+    "failed_provider_calls": 5,
+    "input_tokens": 530969,
+    "output_tokens": 56303,
+    "reported_cost_usd": 0.3407715,
+    "malformed_responses": 0,
+    "provider_failures": 1,
+    "harness_failures": 4,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "evaluation",
+      "count": 4,
+      "evidence": "DeepSeek call construction raised KeyError: provider_user_id before network I/O."
+    }
+  ],
+  "decision": {
+    "outcome": "no-release",
+    "selected_architecture_id": null,
+    "rationale": "Preserve attempt 001, use the one preregistered harness-only correction to add a fixed privacy-safe provider user ID, and execute one final fresh attempt without changing the method or gates."
+  },
+  "limitations": [
+    "No development or product-quality conclusion is valid from this incomplete attempt.",
+    "The p95 latency is recorded as zero because the invalid attempt did not produce a complete cross-engine latency distribution suitable for interpretation.",
+    "The first three provider-backed engines incurred cost but are not reused as confirmatory evidence.",
+    "The ordinary GPT-5.4-nano failed response is preserved separately from the four harness failures."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-cross-engine-evaluation-010-attempt-001-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-cross-engine-evaluation-010-attempt-001-invalid.json"
+}

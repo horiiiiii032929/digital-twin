@@ -47,6 +47,15 @@ complete build. Official OpenAI and DeepSeek metadata was refreshed on
 The next operation is a clean no-call preflight followed by the finite run; no
 intermediate stage requires another authorization.
 
+Paid attempt 001 stopped as `invalid-execution` after E0-E3 completed their
+factual arms and before the first DeepSeek network call. The cross-engine
+direct-DeepSeek binding omitted the shared transport's privacy-safe
+`provider_user_id`; four concurrent requests failed locally. The attempt used
+1,084 ledger entries and USD 0.3407715, and no downstream stage was opened.
+This is the single preregistered harness-only correction: add the fixed
+non-identifying field, preserve attempt 001, and run one final fresh attempt
+without changing cases, gold, methods, models, gates, or budget.
+
 The three-round whole-system architecture study under issue #165 and both
 fresh #153 method successors are complete as `Refine`. The strongest new
 candidate, source-side semantic evidence atoms, reached 96.0% fully grounded
