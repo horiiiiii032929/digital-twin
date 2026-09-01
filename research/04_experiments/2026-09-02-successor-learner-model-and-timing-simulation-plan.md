@@ -83,9 +83,13 @@ mis-specification, policy defect, eligibility defect, or harness defect.
 ## Results
 
 Recorded in
-[`research/05_evaluation/successor-learner-timing-simulation-001-results.md`](../05_evaluation/successor-learner-timing-simulation-001-results.md)
-after the run.
+[`research/05_evaluation/successor-learner-timing-simulation-001-results.md`](../05_evaluation/successor-learner-timing-simulation-001-results.md).
+Attempt 001 was declared invalid on a simulator defect before analysis;
+attempt 002 at clean revision `07e4902` is the result. H1 and H2 held on
+both families with intervals away from zero; H4 was not triggered.
 
 ## Decision
 
-Pending until the run.
+Go Deeper. BKT-with-forgetting behind the estimator interface and the
+value-based timing policy are the successor's default hypotheses; not
+selected for release; provider-backed dimensions remain open.

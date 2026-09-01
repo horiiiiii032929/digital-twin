@@ -80,6 +80,10 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # synthetic data. It has no provider, paid, execute, or held-out mode.
     "run_governed_full_autonomy_v2_1_actual_product_smoke.py",
     "run_ingestion_worker.py",
+    # This successor-study simulation drives only synthetic hidden-state
+    # learners through pure-Python estimators and timing policies. It has no
+    # provider, paid, execute, held-out, or product-data mode.
+    "run_successor_learner_timing_simulation_001.py",
 }
 EXEMPT_SCRIPTS = {
     "validate_professor_fidelity_post_audit.py",

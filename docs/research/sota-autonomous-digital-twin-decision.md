@@ -263,10 +263,19 @@ any outcome because they remove defects the audit found in code.
 
 ## 9. Evidence still missing
 
+Addendum (2026-09-02, same branch): the first two items below now have a
+simulated, network-free result in
+[`successor-learner-timing-simulation-001`](../../research/05_evaluation/successor-learner-timing-simulation-001-results.md),
+summarised in the
+[implementation report](sota-autonomous-digital-twin-implementation-report.md).
+It supports H1 and H2 within the simulator and does not change any claim
+boundary in section 10.
+
 - Any measured calibration of any learner estimator on this repository's
-  data; today no instrument exercises the belief module.
+  data; today no instrument exercises the belief module. (Simulated evidence
+  now exists; product-data evidence does not.)
 - Any measured effect of proactive timing on assessed follow-up; today no
-  outcome feeds back into timing.
+  outcome feeds back into timing. (Simulated evidence now exists.)
 - Any comparison of the planner across two providers under identical
   conditions; today the allowlist is single-vendor.
 - Any adversarial answer-leakage result beyond explicit graded-work cases.

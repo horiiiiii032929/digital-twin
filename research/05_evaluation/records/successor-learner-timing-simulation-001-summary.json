@@ -1,0 +1,839 @@
+{
+  "aggregate": {
+    "bkt+conditional": {
+      "auroc_next_outcome": 0.5624153330030986,
+      "brier_next_outcome": 0.2503602258957533,
+      "concepts_mastered_final": 0.875,
+      "ece_next_outcome": 0.2457651376832469,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.309340451586188,
+      "follow_up_fraction": 0.4327015114515114,
+      "messages_sent": 8.8875,
+      "mse_vs_hidden": 0.03499157217356337,
+      "mse_vs_hidden[bkt-like]": 0.04103013104239519,
+      "mse_vs_hidden[logistic-like]": 0.02895301330473154,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 906,
+        "no-action:no-predicate": 4161,
+        "sent:replan-low-uncertain": 159,
+        "sent:replan-stalled": 1974
+      },
+      "wasted_rate": 0.3664027985902986,
+      "wasted_rate[bkt-like]": 0.2347489778739779,
+      "wasted_rate[logistic-like]": 0.4980566193066193
+    },
+    "bkt+constant": {
+      "auroc_next_outcome": 0.5694502971947879,
+      "brier_next_outcome": 0.2590347279508904,
+      "concepts_mastered_final": 0.9625,
+      "ece_next_outcome": 0.24577556088322286,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.3169491000680657,
+      "follow_up_fraction": 0.35059523809523807,
+      "messages_sent": 14.0,
+      "mse_vs_hidden": 0.034571539026053526,
+      "mse_vs_hidden[bkt-like]": 0.03954907709314821,
+      "mse_vs_hidden[logistic-like]": 0.02959400095895885,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 3840,
+        "sent:constant-wakeup": 3360
+      },
+      "wasted_rate": 0.46398809523809526,
+      "wasted_rate[bkt-like]": 0.3630952380952381,
+      "wasted_rate[logistic-like]": 0.5648809523809525
+    },
+    "bkt+value": {
+      "auroc_next_outcome": 0.5665956578746332,
+      "brier_next_outcome": 0.25596145460912223,
+      "concepts_mastered_final": 0.9583333333333334,
+      "ece_next_outcome": 0.23955648569518007,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.32783750221243885,
+      "follow_up_fraction": 0.4508225801975802,
+      "messages_sent": 12.291666666666666,
+      "mse_vs_hidden": 0.03694907892762686,
+      "mse_vs_hidden[bkt-like]": 0.04282366884335446,
+      "mse_vs_hidden[logistic-like]": 0.031074489011899256,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 2049,
+        "no-action:low-value": 2201,
+        "sent:value-margin": 2950
+      },
+      "wasted_rate": 0.3008750277500277,
+      "wasted_rate[bkt-like]": 0.2288721001221001,
+      "wasted_rate[logistic-like]": 0.3728779553779554
+    },
+    "count+conditional": {
+      "auroc_next_outcome": 0.42950731747420245,
+      "brier_next_outcome": 0.2537253492584485,
+      "concepts_mastered_final": 0.8458333333333333,
+      "ece_next_outcome": 0.21561671249526437,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.3021815671197959,
+      "follow_up_fraction": 0.4232674038924039,
+      "messages_sent": 6.970833333333333,
+      "mse_vs_hidden": 0.08388015781576356,
+      "mse_vs_hidden[bkt-like]": 0.10208142932350787,
+      "mse_vs_hidden[logistic-like]": 0.06567888630801927,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 680,
+        "no-action:no-predicate": 4847,
+        "sent:replan-low-uncertain": 123,
+        "sent:replan-stalled": 1550
+      },
+      "wasted_rate": 0.38785270285270285,
+      "wasted_rate[bkt-like]": 0.23634844322344323,
+      "wasted_rate[logistic-like]": 0.5393569624819625
+    },
+    "count+constant": {
+      "auroc_next_outcome": 0.4350772883542754,
+      "brier_next_outcome": 0.25930503642004116,
+      "concepts_mastered_final": 0.975,
+      "ece_next_outcome": 0.20557483565172271,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.31388126010533074,
+      "follow_up_fraction": 0.32023809523809527,
+      "messages_sent": 14.0,
+      "mse_vs_hidden": 0.08422474385452497,
+      "mse_vs_hidden[bkt-like]": 0.10187959318135145,
+      "mse_vs_hidden[logistic-like]": 0.0665698945276985,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 3840,
+        "sent:constant-wakeup": 3360
+      },
+      "wasted_rate": 0.5056547619047619,
+      "wasted_rate[bkt-like]": 0.40476190476190477,
+      "wasted_rate[logistic-like]": 0.6065476190476191
+    },
+    "count+never": {
+      "auroc_next_outcome": 0.42111053368443874,
+      "brier_next_outcome": 0.2527003912431225,
+      "concepts_mastered_final": 0.7083333333333334,
+      "ece_next_outcome": 0.22704311555276238,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.2875336917631242,
+      "follow_up_fraction": null,
+      "messages_sent": 0.0,
+      "mse_vs_hidden": 0.083477424944541,
+      "mse_vs_hidden[bkt-like]": 0.10243599769564568,
+      "mse_vs_hidden[logistic-like]": 0.06451885219343631,
+      "n_learners": 240,
+      "reason_codes": {
+        "no-action:never": 7200
+      },
+      "wasted_rate": null,
+      "wasted_rate[bkt-like]": null,
+      "wasted_rate[logistic-like]": null
+    },
+    "count+oracle": {
+      "auroc_next_outcome": 0.4520201693187465,
+      "brier_next_outcome": 0.2564922330290161,
+      "concepts_mastered_final": 1.2166666666666666,
+      "ece_next_outcome": 0.19259211258343925,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.34460986895632323,
+      "follow_up_fraction": 0.63915093008843,
+      "messages_sent": 12.208333333333334,
+      "mse_vs_hidden": 0.0856998411016506,
+      "mse_vs_hidden[bkt-like]": 0.10190476070912612,
+      "mse_vs_hidden[logistic-like]": 0.06949492149417509,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 2214,
+        "no-action:oracle-no-need": 2056,
+        "sent:oracle": 2930
+      },
+      "wasted_rate": 0.0,
+      "wasted_rate[bkt-like]": 0.0,
+      "wasted_rate[logistic-like]": 0.0
+    },
+    "count+value": {
+      "auroc_next_outcome": 0.44707692638405877,
+      "brier_next_outcome": 0.2607862240239877,
+      "concepts_mastered_final": 0.9875,
+      "ece_next_outcome": 0.21182482298979124,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.31728822003809104,
+      "follow_up_fraction": 0.43894221519221516,
+      "messages_sent": 10.1625,
+      "mse_vs_hidden": 0.0838985271572672,
+      "mse_vs_hidden[bkt-like]": 0.10142960406137265,
+      "mse_vs_hidden[logistic-like]": 0.06636745025316175,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 1211,
+        "no-action:low-value": 3550,
+        "sent:value-margin": 2439
+      },
+      "wasted_rate": 0.3410210853960854,
+      "wasted_rate[bkt-like]": 0.21340980778480778,
+      "wasted_rate[logistic-like]": 0.468632363007363
+    },
+    "pfa+conditional": {
+      "auroc_next_outcome": 0.480852608456239,
+      "brier_next_outcome": 0.24433040690877647,
+      "concepts_mastered_final": 0.8541666666666666,
+      "ece_next_outcome": 0.19366009423716601,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.30261662346255697,
+      "follow_up_fraction": 0.39986603674103677,
+      "messages_sent": 7.316666666666666,
+      "mse_vs_hidden": 0.05108827442981884,
+      "mse_vs_hidden[bkt-like]": 0.06178440866792563,
+      "mse_vs_hidden[logistic-like]": 0.04039214019171206,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 758,
+        "no-action:no-predicate": 4686,
+        "sent:replan-low-uncertain": 213,
+        "sent:replan-stalled": 1543
+      },
+      "wasted_rate": 0.4146735324860325,
+      "wasted_rate[bkt-like]": 0.26609381359381357,
+      "wasted_rate[logistic-like]": 0.5632532513782513
+    },
+    "pfa+constant": {
+      "auroc_next_outcome": 0.4998619468331285,
+      "brier_next_outcome": 0.24887009389141432,
+      "concepts_mastered_final": 0.9791666666666666,
+      "ece_next_outcome": 0.19510630606276483,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.3131658419436936,
+      "follow_up_fraction": 0.319047619047619,
+      "messages_sent": 14.0,
+      "mse_vs_hidden": 0.052063929894050745,
+      "mse_vs_hidden[bkt-like]": 0.061647836232898864,
+      "mse_vs_hidden[logistic-like]": 0.042480023555202626,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 3840,
+        "sent:constant-wakeup": 3360
+      },
+      "wasted_rate": 0.5077380952380952,
+      "wasted_rate[bkt-like]": 0.4041666666666667,
+      "wasted_rate[logistic-like]": 0.6113095238095239
+    },
+    "pfa+value": {
+      "auroc_next_outcome": 0.5105459172911179,
+      "brier_next_outcome": 0.2474508785146652,
+      "concepts_mastered_final": 0.9416666666666667,
+      "ece_next_outcome": 0.1855573899284539,
+      "eligibility_violations": 0.0,
+      "final_hidden_mastery": 0.3134359355212126,
+      "follow_up_fraction": 0.4332483026233026,
+      "messages_sent": 10.504166666666666,
+      "mse_vs_hidden": 0.05103064516657343,
+      "mse_vs_hidden[bkt-like]": 0.06143531886663447,
+      "mse_vs_hidden[logistic-like]": 0.040625971466512395,
+      "n_learners": 240,
+      "reason_codes": {
+        "ineligible:frequency": 1167,
+        "no-action:low-value": 3512,
+        "sent:value-margin": 2521
+      },
+      "wasted_rate": 0.34707513551263547,
+      "wasted_rate[bkt-like]": 0.2209003959003959,
+      "wasted_rate[logistic-like]": 0.4732498751248751
+    }
+  },
+  "config": {
+    "bootstrap_resamples": 1000,
+    "bootstrap_seed": 20260902,
+    "conditions": [
+      "count+constant",
+      "count+conditional",
+      "count+value",
+      "bkt+constant",
+      "bkt+conditional",
+      "bkt+value",
+      "pfa+constant",
+      "pfa+conditional",
+      "pfa+value",
+      "count+oracle",
+      "count+never"
+    ],
+    "days": 30,
+    "development_seeds": [
+      1000,
+      1001,
+      1002,
+      1003,
+      1004,
+      1005
+    ],
+    "families": [
+      "bkt-like",
+      "logistic-like"
+    ],
+    "personas": [
+      "fast-learner",
+      "slow-learner",
+      "high-forgetting",
+      "misconception-prone",
+      "answer-seeking",
+      "low-receptivity"
+    ],
+    "seeds": [
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+      2019
+    ]
+  },
+  "development_fit_log_loss": {
+    "bkt": 0.6774696710774785,
+    "count": 0.697871883450543,
+    "pfa": 0.6658417429476424
+  },
+  "fitted_parameters": {
+    "bkt": {
+      "p_forget_per_day": 0.05,
+      "p_init": 0.3,
+      "p_learn": 0.3
+    },
+    "count": {},
+    "pfa": {
+      "beta": -0.4,
+      "decay_per_day": 0.08,
+      "gamma": 0.5,
+      "rho": 0.3
+    }
+  },
+  "paired_contrasts": {
+    "bkt+conditional vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.016099921093875858,
+          -0.001777394213169894
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.008944810524287835,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.010902993712864023,
+          0.002016014858670361
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.004540808519142772,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.08446888759388758,
+          0.14097949504199506
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.11246341621341621,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          -5.445833333333334,
+          -4.8125
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -5.1125,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.052562529503536175,
+          -0.045850508655903184
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.04923317168096161,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.1612056462056462,
+          -0.11381130443630444
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.1392519633144633,
+        "n_pairs": 240
+      }
+    },
+    "bkt+constant vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.006301062576744809,
+          0.005523946144847515
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.0002703084691507423,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.00038555103235657546,
+          0.00654773117696512
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0030678399627349176,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.02023809523809524,
+          0.03988095238095238
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.030357142857142857,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.05294937569723046,
+          -0.046610232731148754
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.04965320482847145,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.051190476190476196,
+          -0.03214285714285715
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.041666666666666664,
+        "n_pairs": 240
+      }
+    },
+    "bkt+value vs bkt+conditional": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.0018598365756902833,
+          0.012916209829441468
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0056012287133689375,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.011514049035130298,
+          0.02497389502121288
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.018497050626250868,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          -0.011417274854774846,
+          0.04566857910607911
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.018121068746068756,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          3.095833333333333,
+          3.7041666666666666
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 3.404166666666667,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          0.0005302498511731038,
+          0.0032573823304764154
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.001957506754063493,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.08884313603063602,
+          -0.04279571123321123
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.06552777084027084,
+        "n_pairs": 240
+      }
+    },
+    "bkt+value vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.009979339248849493,
+          0.003351450266679611
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.003343581810918897,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.007289640601376989,
+          0.0207559698087365
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.013956242107108097,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.10558129370629371,
+          0.15605207292707296
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.13058448495948496,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          -1.8166666666666667,
+          -1.6
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -1.7083333333333333,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.050626613630493304,
+          -0.04401737169761281
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.04727566492689812,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.2275481462981463,
+          -0.1829380341880342
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.20477973415473416,
+        "n_pairs": 240
+      }
+    },
+    "count+conditional vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.010089426221877883,
+          -0.0009526227602756815
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.005579687161592654,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.018122634136435167,
+          -0.005424031064138824
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.011699692985534912,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.07062725468975468,
+          0.13425118862618862
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.10302930865430865,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          -7.370833333333334,
+          -6.695833333333334
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -7.029166666666667,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.0017762282218982102,
+          0.001071244101085204
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.000344586038761405,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.14725374162874164,
+          -0.09041516354016355
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.11780205905205905,
+        "n_pairs": 240
+      }
+    },
+    "count+value vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.002851369722953891,
+          0.0053656792336402035
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0014811876039466005,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.0032329140896992454,
+          0.009669767118258888
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0034069599327602477,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.0930148902023902,
+          0.14517319486069485
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.11870411995411995,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          -4.1125,
+          -3.5708333333333333
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -3.8375,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.001858884134926336,
+          0.001363046957653645
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.00032621669725778346,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.18740425084175083,
+          -0.1410780885780886
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.1646336765086765,
+        "n_pairs": 240
+      }
+    },
+    "pfa+constant vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.013260871537527693,
+          -0.007680844412962776
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.010434942528626806,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.001989082930452147,
+          0.000194699582916142
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.0007154181616371736,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          -0.005357142857142856,
+          0.0020833333333333337
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.0011904761904761901,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.034322215064768215,
+          -0.029836287422823356
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.03216081396047423,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.0023809523809523816,
+          0.007142857142857143
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0020833333333333324,
+        "n_pairs": 240
+      }
+    },
+    "pfa+value vs count+constant": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.01592086985751803,
+          -0.007514993935403022
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.01185415790537589,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          -0.007344281123169879,
+          0.0056523293155017204
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.00044532458411815275,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.08494214119214119,
+          0.13979593323343323
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.11301020738520738,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          -3.725,
+          -3.279166666666667
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -3.495833333333333,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.03549813856023409,
+          -0.03091297012045991
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.03319409868795155,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.17947024040774043,
+          -0.13734860047360048
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.1585796263921264,
+        "n_pairs": 240
+      }
+    },
+    "pfa+value vs pfa+conditional": {
+      "brier_next_outcome": {
+        "ci95": [
+          -0.0008891929230683223,
+          0.007346306327280422
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0031204716058887546,
+        "n_pairs": 240
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.004808181985186417,
+          0.01699776202743184
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.010819312058655632,
+        "n_pairs": 240
+      },
+      "follow_up_fraction": {
+        "ci95": [
+          0.001196257446257446,
+          0.06401198338698338
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.03338226588226589,
+        "n_pairs": 240
+      },
+      "messages_sent": {
+        "ci95": [
+          2.8958333333333335,
+          3.4833333333333334
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 3.1875,
+        "n_pairs": 240
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.0009673273903990793,
+          0.0008616172135868874
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -5.7629263245412265e-05,
+        "n_pairs": 240
+      },
+      "wasted_rate": {
+        "ci95": [
+          -0.09221594377844378,
+          -0.04293717856217856
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.06759839697339697,
+        "n_pairs": 240
+      }
+    }
+  },
+  "run": {
+    "code": {
+      "dirty": false,
+      "revision": "07e4902e890c1f4ce7f0d856892a07dec0f78a5e"
+    },
+    "elapsed_seconds": 15.23,
+    "network": "none",
+    "provider_calls": 0,
+    "run_id": "successor-learner-timing-simulation-001"
+  }
+}
