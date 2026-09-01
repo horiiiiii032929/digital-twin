@@ -375,5 +375,7 @@ canary, but the T0 GPT-5.4 mini response was classified as malformed. It used
 eight calls and USD 0.00900625; all 818 bulk cases and hidden gold remained
 closed. Its authority is revoked. After the user identified possible transient
 connectivity and explicitly requested a retry, attempt 005 was frozen with no
-method, schema, case, gold, model, or gate change. T1-v2 promotion remains
-closed pending that result.
+method, schema, case, gold, model, or gate change. It reproduced the same T0
+malformed-response pattern while the following seven T1-v2 calls succeeded.
+All 818 bulk cases and hidden gold remained closed. Authority is revoked;
+identical retries stop, and T1-v2 promotion remains unsupported.

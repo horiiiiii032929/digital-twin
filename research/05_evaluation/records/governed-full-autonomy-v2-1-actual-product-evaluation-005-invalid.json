@@ -1,0 +1,121 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-005-invalid",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-evaluation",
+  "stage_id": "actual-product-attempt-005",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-actual-product-evaluation-004-invalid"
+  ],
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior under provider-backed realistic virtual time?",
+  "code_revision": "252c23313e4f0e35deb553636ebfb7ee11638761",
+  "dirty_state": false,
+  "started_at": "2026-09-01T08:17:08Z",
+  "completed_at": "2026-09-01T08:17:23Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_005.json",
+      "sha256": "7058eaf361a78a2ab06e5b266ab81d035d61872718453561c7dc9b6e820508e1",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-005/public-cases.json",
+      "sha256": "08b45756a669ede8792f57d0b43acbd13406ad7eb4e464648087c7a2fb91005a",
+      "role": "public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-005/responses.sqlite3",
+      "sha256": "cd7c02d239b28da64937edfd366a2d399747e04aa0f47e6b55f70753141ffa4b",
+      "role": "ignored-atomic-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-005/result.json",
+      "sha256": "7b158f9f26dd7b87267fae9bbb139478b755ddb2440bf75afafc4e55148f8512",
+      "role": "ignored-terminal-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "actual-product-evaluation-provider-schema-v2",
+      "version": "attempt-005",
+      "role": "candidate",
+      "changed_planes": [],
+      "metrics": [
+        {
+          "name": "canary-cases-persisted",
+          "value": 2,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2,
+          "passed": true
+        },
+        {
+          "name": "bulk-cases-executed",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "exact-canary-model-role-coverage",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "bulk-stops-on-canary-failure",
+          "passed": true,
+          "evidence": "Both canaries were persisted and the remaining 818 cases were not started."
+        },
+        {
+          "name": "hidden-gold-remains-closed",
+          "passed": true,
+          "evidence": "No hidden-gold file was materialized or loaded."
+        },
+        {
+          "name": "all-provider-canaries-valid",
+          "passed": false,
+          "evidence": "The same T0 canary generation was classified malformed in both attempts 004 and 005."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 8,
+    "completed_provider_calls": 7,
+    "failed_provider_calls": 1,
+    "input_tokens": 3824,
+    "output_tokens": 457,
+    "reported_cost_usd": 0.00895825,
+    "malformed_responses": 1,
+    "provider_failures": 1,
+    "p95_latency_ms": 2501.94895,
+    "post_stop_diagnostic_calls": 0
+  },
+  "failures": [
+    {
+      "category": "provider",
+      "count": 1,
+      "evidence": "The unchanged retry reproduced the same T0 malformed-response classification while the next seven calls succeeded. Broad connectivity loss is unlikely; exact structured-output/parsing subtype is not recoverable from the privacy-minimized ledger."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Revoke attempt 005 and stop identical retries. A future evaluation must first improve bounded provider-output diagnostics and prove the T0 canary contract on new development inputs."
+  },
+  "limitations": [
+    "No provider-backed autonomy-quality conclusion is valid from this attempt.",
+    "The failed unrestricted provider response was not retained, so its exact malformed subtype cannot be reconstructed.",
+    "The 820-case network-free pass remains infrastructure evidence and cannot promote T1-v2."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-evaluation-005-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-005-invalid.json"
+}

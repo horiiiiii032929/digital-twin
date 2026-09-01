@@ -17,7 +17,7 @@ def test_retry_changes_only_dataset_identity() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-frozen-pending-execution"
+    assert result["status"] == "passed-terminal"
     assert result["case_count"] == 820
     assert [
         (condition, case.model_dump(mode="json"), gold.model_dump(mode="json"))
@@ -31,12 +31,12 @@ def test_retry_changes_only_dataset_identity() -> None:
     assert instrument["execution_retry"]["gates_changed"] is False
 
 
-def test_retry_preflight_has_exact_authority() -> None:
+def test_retry_preflight_is_terminal_and_authority_is_revoked() -> None:
     result = runner.preflight()
 
-    assert result["status"] in {"blocked-not-authorized", "ready"}
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    assert result["status"] == "blocked-not-authorized"
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False

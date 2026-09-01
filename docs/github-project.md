@@ -149,8 +149,11 @@ and GPT-5.4 mini calls in its T1-v2 canary, but its T0 GPT-5.4 mini response was
 classified malformed. The run failed closed after eight calls and USD
 0.00900625; all 818 bulk cases and hidden gold stayed closed. #157 is now
 `In Progress / Refine` for the invalid result and 004 authority is revoked.
-The user then explicitly requested one unchanged connectivity retry, now frozen
-as attempt 005. No autonomous release claim exists pending its result.
+The user then explicitly requested one unchanged connectivity retry. Attempt
+005 reproduced the same T0 malformed response while the following seven T1-v2
+calls succeeded. It stopped before all 818 bulk cases and hidden gold. #157 is
+`In Progress / Refine`, all authority is revoked, and another identical retry
+is not justified. No autonomous release claim exists.
 
 ## Release stages and product gates
 
