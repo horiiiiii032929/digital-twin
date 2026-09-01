@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 873
+    "audited": 874
   },
   "category_counts": {
     "active_frontend": 71,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 233,
+    "evaluation_configuration": 234,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 192
   },
-  "file_count": 873,
+  "file_count": 874,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "69697d671122bd8f9faf4f0e5c089a5c84787fcca771cb20dbd150bc257430c9",
+  "record_sha256": "4341399b5bc40d7d0e8d98ec6c32a0a79dd13421ed9420858b76321a29f5f2c4",
   "records": [
     {
       "audit": {
@@ -1704,7 +1704,7 @@
     {
       "audit": {
         "domain": "ambiguity-safe-grounding",
-        "evidence": "Frozen instrument review verifies an immutable source-disjoint 500-case package, unchanged baseline/candidate conditions except for reference-uniqueness handling, fixed hard gates, zero provider usage, one-execution maximum, and explicit network-free-only authority.",
+        "evidence": "Historical-attempt review preserves the exact source-disjoint 500-case package and fixed gates while revoking attempt 001 after its scorer-namespace harness defect; the persisted responses and invalid result remain traceable and no provider call occurred.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex ambiguity-safe grounding audit"
@@ -1715,7 +1715,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_001.json",
       "risk": "high",
-      "sha256": "aef941e0b1d8299eeeda5a8741652bbb4af3b833309816e57e3af6a388730350"
+      "sha256": "d21fa71edb6d28e75ccfdcbf89b939f6ef0bfc997efaa06c71ca573470f50277"
+    },
+    {
+      "audit": {
+        "domain": "ambiguity-safe-grounding",
+        "evidence": "Corrective instrument review binds the unchanged source, public cases, hidden gold, planted controls, architectures, and quality gates to a fresh exclusive output; only the scorer namespace defect changes and only one network-free execution is authorized.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex ambiguity-safe grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_002.json",
+      "risk": "high",
+      "sha256": "01e4aae4bc8f11e9202b85006ebe3bf08eec557334bd5384cb77bd8cd340e67e"
     },
     {
       "audit": {
@@ -7019,7 +7035,7 @@
     {
       "audit": {
         "domain": "ambiguity-safe-grounding",
-        "evidence": "Runner review verifies immutable binding hashes, public-input-only execution, response persistence before gold opening, exact baseline/candidate dispatch, deterministic scoring, one-shot output, clean-tree/freeze guards, and zero provider calls.",
+        "evidence": "Runner review verifies immutable binding hashes, per-attempt identities, public-input-only execution, response persistence before gold opening, exact baseline/candidate dispatch, scorer metric namespace validation, one-shot output, clean-tree/freeze guards, and zero provider calls.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex ambiguity-safe grounding audit"
@@ -7035,7 +7051,7 @@
       ],
       "path": "scripts/run_academic_factual_qa_ambiguity_safe_comparison.py",
       "risk": "high",
-      "sha256": "023c66c441df6f95cdd7ce937a7e1b8eb0b7ccd0f2fdc0321d9ee0d88c81ce94"
+      "sha256": "b81bbfda8424f9ec596127a397dd8dcacac89ce0a1e8feef459fbba47dc2756d"
     },
     {
       "audit": {
@@ -11298,7 +11314,7 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Freeze review grants only the explicitly authorized ambiguity-safe comparison one network-free method-evaluation execution while retaining every provider, paid, final, autonomy, private-data, and same-data quality rerun block.",
+        "evidence": "Freeze review revokes invalid attempt 001 and grants only corrective attempt 002 one network-free method-evaluation execution while retaining every provider, paid, final, autonomy, private-data, and other evaluation block.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex ambiguity-safe grounding audit"
@@ -11309,7 +11325,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "94b71a83f4edabc13727b9d15d57c9a0a012d8092e394a20a93d4e5f1466bc3f"
+      "sha256": "1daa4f4b899c94451b6cf6bf499611a012b66c5c94a0ad734180ac8082960eb9"
     },
     {
       "audit": {
@@ -12018,7 +12034,7 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies the exact comparison identity is authorized only for network-free method evaluation while provider, paid, final, autonomy, and every other historical execution identity remain rejected.",
+        "evidence": "Freeze regression verifies invalid attempt 001 is rejected, corrective attempt 002 is authorized only for network-free method evaluation, and provider, paid, final, autonomy, and every other historical execution remain rejected.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex ambiguity-safe grounding audit"
@@ -12029,7 +12045,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "426a723ff38585bea8a66271cc9ce029fd627487a9e1c01cc3e3b6b7a70be35d"
+      "sha256": "6b4f10121bd9d301559bb5b98546d8f78f404f893a8e3a0d18450778d834d5d9"
     },
     {
       "audit": {
@@ -12450,7 +12466,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify all planted relationship classes, 500-case source-disjoint byte-stable construction, 400/400 unique answerable targets, immutable known-result handling, ambiguity-to-clarify product propagation, simulation, and the explicitly authorized network-free preflight.",
+        "evidence": "Focused tests verify all planted relationship classes, fresh package integrity, invalid-attempt revocation, corrective preflight, ambiguity-to-clarify propagation, and regression coverage for the scorer metric namespace defect.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex ambiguity-safe grounding audit"
@@ -12461,7 +12477,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_ambiguity_safe_successor.py",
       "risk": "medium",
-      "sha256": "b68254179a57d4bda5befbb2bb5ad29a9acbfaa156fbae922b374d21b3287141"
+      "sha256": "7d680cdb004cdf5e3109ce56a933c3cc68156179c409a51f8647fa01202d3b11"
     },
     {
       "audit": {
@@ -14673,7 +14689,7 @@
     }
   ],
   "risk_counts": {
-    "high": 667,
+    "high": 668,
     "medium": 206
   },
   "schema_version": 1,

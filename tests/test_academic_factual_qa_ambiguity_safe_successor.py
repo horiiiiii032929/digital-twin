@@ -56,6 +56,13 @@ def test_comparison_is_simulated_and_ready_when_authorized() -> None:
     assert preflight["status"] == "ready-network-free"
     assert preflight["hidden_gold_loaded"] is False
 
+    invalid_preflight = comparison.preflight(
+        ROOT
+        / "research/05_evaluation/instruments/"
+        "academic_factual_qa_ambiguity_safe_comparison_001.json"
+    )
+    assert invalid_preflight["status"] == "blocked-not-authorized"
+
 
 def test_known_sixteen_ambiguous_failures_now_clarify_without_rescoring() -> None:
     source = json.loads(
@@ -111,3 +118,13 @@ def test_evidence_recommendation_maps_to_product_clarification_intent() -> None:
     )
 
     assert retrieval_boundary_intent([event]) == TutoringIntent.CLARIFY_REQUEST
+
+
+def test_comparison_reads_grounded_success_from_metric_namespace() -> None:
+    score = {
+        "aggregate": {
+            "metrics": {"fully_grounded_factual_success": 0.9775}
+        }
+    }
+
+    assert comparison._fully_grounded_success(score) == 0.9775

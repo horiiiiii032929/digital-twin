@@ -40,12 +40,15 @@ from src.digital_twin.grounding.models import DocumentChunk  # noqa: E402
 from src.digital_twin.repository_freeze import require_bounded_pilot_operation_allowed  # noqa: E402
 
 
-INSTRUMENT_ID = "academic-factual-qa-ambiguity-safe-comparison-001"
+INSTRUMENT_IDS = {
+    "academic-factual-qa-ambiguity-safe-comparison-001",
+    "academic-factual-qa-ambiguity-safe-comparison-002",
+}
 BASELINE_ID = "source-semantic-evidence-atoms-v1"
 CANDIDATE_ID = "ambiguity-safe-source-semantic-evidence-atoms-v2"
 DEFAULT_INSTRUMENT = ROOT / (
     "research/05_evaluation/instruments/"
-    "academic_factual_qa_ambiguity_safe_comparison_001.json"
+    "academic_factual_qa_ambiguity_safe_comparison_002.json"
 )
 
 
@@ -53,9 +56,14 @@ class AmbiguitySafeComparisonInstrumentV1(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     schema_version: Literal[1]
-    instrument_id: Literal[INSTRUMENT_ID]
+    instrument_id: str
     program_id: Literal["course-digital-twin-grounding-correction-003"]
-    status: Literal["reviewed-not-authorized", "frozen-network-free"]
+    status: Literal[
+        "reviewed-not-authorized",
+        "frozen-network-free",
+        "invalid-execution-authorization-revoked",
+        "completed-authorization-revoked",
+    ]
     source: BoundArtifactV1
     public_cases: BoundArtifactV1
     hidden_gold: BoundArtifactV1
@@ -77,6 +85,8 @@ class AmbiguitySafeComparisonInstrumentV1(BaseModel):
 
     @model_validator(mode="after")
     def finite_and_complete(self) -> "AmbiguitySafeComparisonInstrumentV1":
+        if self.instrument_id not in INSTRUMENT_IDS:
+            raise ValueError("unknown ambiguity-safe comparison identity")
         identities = {row.architecture_id for row in self.candidates}
         if identities != {BASELINE_ID, CANDIDATE_ID}:
             raise ValueError("comparison candidates drifted")
@@ -194,10 +204,23 @@ def _write(path: Path, payload: dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
+def _fully_grounded_success(score: dict[str, Any]) -> float:
+    try:
+        value = score["aggregate"]["metrics"]["fully_grounded_factual_success"]
+    except (KeyError, TypeError) as error:
+        raise ArchitectureRoundExecutionError(
+            "scorer omitted fully grounded factual success"
+        ) from error
+    return float(value)
+
+
 def execute(path: Path) -> dict[str, Any]:
     instrument = _instrument(path)
     if not instrument.network_free_execution_authorized:
         raise ArchitectureRoundExecutionError("comparison is not authorized")
+    require_bounded_pilot_operation_allowed(
+        instrument.instrument_id, "method_evaluation_execution"
+    )
     dirty = subprocess.run(
         ["git", "status", "--porcelain", "--untracked-files=all"],
         cwd=ROOT,
@@ -235,12 +258,8 @@ def execute(path: Path) -> dict[str, Any]:
         for architecture_id, score in scores.items()
     }
     execution_valid = not any(operational_failures.values())
-    candidate_success = float(
-        scores[CANDIDATE_ID]["aggregate"]["fully_grounded_factual_success"]
-    )
-    baseline_success = float(
-        scores[BASELINE_ID]["aggregate"]["fully_grounded_factual_success"]
-    )
+    candidate_success = _fully_grounded_success(scores[CANDIDATE_ID])
+    baseline_success = _fully_grounded_success(scores[BASELINE_ID])
     candidate_selected = bool(
         all(gates[CANDIDATE_ID].values())
         and candidate_success >= baseline_success
@@ -301,8 +320,9 @@ def main() -> int:
     mode.add_argument("--execute", action="store_true")
     arguments = parser.parse_args()
     if arguments.execute:
+        guarded_instrument = _instrument(arguments.instrument)
         require_bounded_pilot_operation_allowed(
-            INSTRUMENT_ID, "method_evaluation_execution"
+            guarded_instrument.instrument_id, "method_evaluation_execution"
         )
     if arguments.validate:
         result = validate(arguments.instrument)
