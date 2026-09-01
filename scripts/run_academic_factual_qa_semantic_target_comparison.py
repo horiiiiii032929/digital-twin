@@ -48,7 +48,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 DEFAULT_INSTRUMENT = ROOT / (
     "research/05_evaluation/instruments/"
-    "academic_factual_qa_semantic_target_comparison_001.json"
+    "academic_factual_qa_semantic_target_comparison_002.json"
 )
 CANDIDATE_ID = "semantic-target-resolution-v3"
 
@@ -176,6 +176,19 @@ def _write(path: Path, payload: dict[str, Any]) -> None:
         os.fsync(handle.fileno())
 
 
+def _terminal_decision(
+    *,
+    execution_valid: bool,
+    candidate_passed: bool,
+    candidate_selected: bool,
+) -> tuple[str, str]:
+    if not execution_valid:
+        return "invalid-execution", "correct-harness-only"
+    if candidate_passed and candidate_selected:
+        return "completed-keep", "select-semantic-target-resolution-v3"
+    return "completed-refine", "retain-typed-target-evidence-v1"
+
+
 def execute(path: Path) -> dict[str, Any]:
     instrument = _instrument(path)
     dirty = subprocess.run(
@@ -210,25 +223,27 @@ def execute(path: Path) -> dict[str, Any]:
         architecture_id: _gate_results(gate_proxy, result["aggregate"])
         for architecture_id, result in scores.items()
     }
+    operational_failures = {
+        architecture_id: int(result["aggregate"]["operational_failure_count"])
+        for architecture_id, result in scores.items()
+    }
+    execution_valid = not any(operational_failures.values())
     selected_id = max(scores, key=lambda row: _selection_key(scores[row]))
     candidate_passed = all(gates[CANDIDATE_ID].values())
     candidate_selected = selected_id == CANDIDATE_ID
+    terminal_status, terminal_decision = _terminal_decision(
+        execution_valid=execution_valid,
+        candidate_passed=candidate_passed,
+        candidate_selected=candidate_selected,
+    )
     baseline_id = next(
         row.architecture_id for row in instrument.candidates if row.role == "baseline"
     )
     result: dict[str, Any] = {
         "schema_version": 1,
         "instrument_id": instrument.instrument_id,
-        "status": (
-            "completed-keep"
-            if candidate_passed and candidate_selected
-            else "completed-refine"
-        ),
-        "decision": (
-            "select-semantic-target-resolution-v3"
-            if candidate_passed and candidate_selected
-            else "retain-typed-target-evidence-v1"
-        ),
+        "status": terminal_status,
+        "decision": terminal_decision,
         "selected_architecture_id": selected_id,
         "baseline_architecture_id": baseline_id,
         "candidate_architecture_id": CANDIDATE_ID,
@@ -237,6 +252,7 @@ def execute(path: Path) -> dict[str, Any]:
         "paid_cost_usd": 0,
         "hidden_gold_loaded_after_all_responses": True,
         "source_range_disjoint_from_prior_development": True,
+        "operational_failure_counts": operational_failures,
         "code_revision": subprocess.run(
             ["git", "rev-parse", "HEAD"],
             cwd=ROOT,

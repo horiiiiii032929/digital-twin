@@ -445,10 +445,7 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "course-digital-twin-whole-system-architecture-round-3-001": (
             "method_evaluation_execution",
         ),
-        "academic-factual-qa-semantic-target-successor-001": (
-            "dataset_generation",
-        ),
-        "academic-factual-qa-semantic-target-comparison-001": (
+        "academic-factual-qa-semantic-target-comparison-002": (
             "method_evaluation_execution",
         ),
     }

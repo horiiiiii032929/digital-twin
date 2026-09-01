@@ -145,6 +145,24 @@ def test_multi_evidence_resolves_two_distinct_ranges():
     assert set(decision.selected_hit_ids) == {"scheduling", "context-switch"}
 
 
+def test_evidence_gate_normalizes_internal_bonus_score_to_public_contract():
+    exact = _chunk(
+        "exact",
+        "Every N seconds the router shares its distance vector.",
+        title="Distance vector routing",
+        cluster="distance-vector",
+        ordinal=0,
+    )
+
+    decision = SemanticTargetEvidenceGateV3().assess(
+        'What fact does "Distance vector routing" state about seconds?',
+        [_hit(exact)],
+    )
+
+    assert decision.sufficient is True
+    assert decision.score == 1.0
+
+
 def test_retriever_expands_exact_public_context_and_places_selection_first():
     correct = _chunk(
         "correct",

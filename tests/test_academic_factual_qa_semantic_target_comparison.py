@@ -7,7 +7,7 @@ def test_semantic_target_comparison_validates_frozen_two_candidate_contract() ->
     result = runner.validate(runner.DEFAULT_INSTRUMENT)
 
     assert result == {
-        "instrument_id": "academic-factual-qa-semantic-target-comparison-001",
+        "instrument_id": "academic-factual-qa-semantic-target-comparison-002",
         "status": "passed-build-only",
         "case_count": 500,
         "source_chunk_count": 300,
@@ -42,3 +42,11 @@ def test_semantic_target_comparison_binds_best_valid_baseline_and_successor() ->
         "typed-target-evidence-v1"
     )
     assert all(not row.provider_execution_authorized for row in instrument.candidates)
+
+
+def test_operational_failure_cannot_be_reported_as_quality_result() -> None:
+    assert runner._terminal_decision(  # noqa: SLF001
+        execution_valid=False,
+        candidate_passed=False,
+        candidate_selected=False,
+    ) == ("invalid-execution", "correct-harness-only")

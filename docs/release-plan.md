@@ -161,12 +161,16 @@ action router and grounding/claim boundary on fresh development evidence. It can
 retune or rerun the sealed final package. The qualified local deterministic R1
 remains the rollback baseline and makes no LLM factual-quality claim.
 
-The active #153 successor is frozen build-only. It compares the strongest
+The active #153 successor compares the strongest
 protocol-valid typed-target baseline with semantic target resolution over a new
 500-case, source-range-disjoint package. The package includes a newly pinned
 open operating-systems source and unused ranges from the other three course
-families; public cases and hidden gold remain physically separate. The next
-step is one network-free comparison from a clean revision. A valid failure
+families; public cases and hidden gold remain physically separate. Attempt 001
+is invalid because an internal ranking bonus produced a 1.05 score for a
+normalized 0--1 contract in 46 candidate cases. The only permitted correction
+normalizes that score and makes operational failures invalidate the comparison;
+the dataset, methods, gold, and gates are unchanged. Attempt 002 is the final
+network-free execution. A valid failure
 retains the baseline and returns to one method-level architecture decision; it
 does not reopen the sealed 10,000+1,000 result.
 

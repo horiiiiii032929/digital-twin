@@ -72,18 +72,22 @@ release selection: the method failed the grounded, claim, citation, and
 source-version gates, while the higher 91.64% Round 3 number remains diagnostic
 only because of the parent/child protocol mismatch.
 
-The #153 semantic-target build checkpoint is now ready. A new 500-case package
-contains 100 source-range-disjoint clusters, 25 per course, with 400 answerable
+The #153 semantic-target package contains 500 cases across 100
+source-range-disjoint clusters, 25 per course, with 400 answerable
 and 100 boundary questions. Operating-systems evidence comes from pinned
 ThinkOS commit `5ab731d`; the other courses use only ranges not present in the
 three earlier packages. All 474 required references map exactly to 300 minimal
 source ranges, normalized questions are unique, public inputs and hidden gold
 are separate, and no provider/private/final data was used. The comparison
 binds exactly two conditions: the valid typed-target baseline and
-`semantic-target-resolution-v3`. Build validation, 20-case no-gold simulation,
-22 focused tests, and lint pass. The formal 500-case network-free execution is
-the next finite checkpoint; it may select the candidate only if the candidate
-wins and passes every unchanged grounding gate.
+`semantic-target-resolution-v3`. Attempt 001 is preserved as
+`invalid-execution`: 46 candidate cases exceeded the normalized 0--1 evidence
+score contract after internal match bonuses. Its apparent quality metrics are
+not interpreted. The single permitted harness-only correction clamps that
+public score, makes any operational failure invalidate the run, changes no
+case, gold, method, or gate, and uses fresh exclusive attempt 002 output. Both
+attempt-001 and dataset-build authorizations are revoked; only the corrected
+network-free attempt 002 is authorized.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy

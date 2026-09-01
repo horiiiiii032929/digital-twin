@@ -425,7 +425,11 @@ class SemanticTargetEvidenceGateV3:
         resolution = resolve_semantic_targets(query, hits)
         return EvidenceSufficiencyDecision(
             sufficient=resolution.action == "answer",
-            score=resolution.minimum_selected_score,
+            # The ranking score intentionally includes bounded bonuses for exact
+            # phrase, context, and scope matches.  EvidenceSufficiencyDecision is
+            # a normalized public contract, so never leak the internal >1 score
+            # into that interface.
+            score=min(1.0, max(0.0, resolution.minimum_selected_score)),
             reason=resolution.reason,
             features={
                 "semantic_action_answer": resolution.action == "answer",
