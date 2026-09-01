@@ -4,26 +4,19 @@
   "run_id": "governed-full-autonomy-v2-1-grounding-successor-011",
   "program_id": "course-digital-twin-grounding-release-qualification",
   "stage_id": "fresh-grounding-successor-500-plus-100",
+  "round_number": null,
   "status": "completed-keep",
+  "supersedes": [],
   "decision_question": "Does the source-contract-aligned ambiguity-safe grounding successor pass the frozen fresh 500-case gates and remain non-inferior to the 100-case source-semantic control?",
   "code_revision": "5b7fd1cdf9586df74f493b3a7d2d7a0d0c177325",
   "dirty_state": false,
+  "started_at": "2026-09-02T00:00:00+08:00",
   "completed_at": "2026-09-02T00:00:00+08:00",
-  "dataset": {
-    "fresh": true,
-    "known_benchmark": false,
-    "candidate_cases": 500,
-    "control_cases": 100,
-    "source_clusters": 100,
-    "answerable_cases": 400,
-    "boundary_cases": 100,
-    "public_sources_only": true,
-    "private_data_used": false
-  },
   "bindings": [
     {
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
-      "role": "authorization-and-decision-instrument"
+      "sha256": "cefcdd0ff5e74abb063e6971c37ff72eb2622e3b89b617282ba244bf7b280865",
+      "role": "executed-authorization-instrument"
     },
     {
       "path": "reports/generated/governed-full-autonomy-v2-1-grounding-successor-011/result.json",
@@ -41,54 +34,274 @@
       "role": "ignored-control-response-ledger"
     }
   ],
-  "metrics": {
-    "fully_grounded_factual_success": 0.9925,
-    "fully_grounded_source_family_lower_95": 0.98,
-    "answerable_action_accuracy": 0.9925,
-    "boundary_action_accuracy": 1.0,
-    "atomic_claim_precision": 0.9925,
-    "atomic_claim_recall": 0.9925,
-    "citation_precision": 0.9925,
-    "citation_recall": 0.9925,
-    "source_version_validity": 1.0,
-    "canonical_all_evidence_at_3": 0.9975,
-    "evidence_recall_at_5": 0.9975,
-    "provider_completion": 1.0,
-    "severe_unsupported_releases": 0,
-    "paired_supported_answer_retention_delta": 0.0,
-    "candidate_boundary_safety": 1.0,
-    "control_boundary_safety": 1.0
-  },
+  "candidates": [
+    {
+      "architecture_id": "source-semantic-evidence-atoms-v1-control",
+      "version": "v1-control-on-fixed-100",
+      "role": "baseline",
+      "changed_planes": [
+        "retrieval",
+        "claim-citation"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "answerable-action-accuracy",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-recall",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "citation-precision",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "citation-recall",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "source-version-validity",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": true
+        },
+        {
+          "name": "canonical-all-evidence-at-3",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "evidence-recall-at-5",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "fixed-control-gates",
+          "passed": true,
+          "evidence": "The any-hit/source-semantic control passed every measured gate on the frozen 100-case paired subset."
+        }
+      ]
+    },
+    {
+      "architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
+      "version": "v2-source-contract-aligned",
+      "role": "winner",
+      "changed_planes": [
+        "domain",
+        "retrieval",
+        "claim-citation",
+        "pedagogical-policy",
+        "reactive-loop"
+      ],
+      "metrics": [
+        {
+          "name": "fully-grounded-factual-success",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "source-family-lower-95",
+          "value": 0.98,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.93,
+          "passed": true
+        },
+        {
+          "name": "answerable-action-accuracy",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "boundary-action-accuracy",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-precision",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "atomic-claim-recall",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "citation-precision",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        },
+        {
+          "name": "citation-recall",
+          "value": 0.9925,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "source-version-validity",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": true
+        },
+        {
+          "name": "canonical-all-evidence-at-3",
+          "value": 0.9975,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.9,
+          "passed": true
+        },
+        {
+          "name": "evidence-recall-at-5",
+          "value": 0.9975,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "provider-completion",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 0.995,
+          "passed": true
+        },
+        {
+          "name": "paired-supported-answer-retention-delta",
+          "value": 0,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": -0.03,
+          "passed": true
+        },
+        {
+          "name": "candidate-boundary-safety",
+          "value": 1,
+          "unit": "rate",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-frozen-grounding-gates",
+          "passed": true,
+          "evidence": "All factual, action, claim, citation, retrieval, source-version, completion, and unsupported-release gates passed on 500 fresh cases."
+        },
+        {
+          "name": "paired-non-inferiority",
+          "passed": true,
+          "evidence": "Supported-answer retention delta was 0.0 and candidate/control boundary safety were both 100% on the fixed 100-case subset."
+        },
+        {
+          "name": "zero-severe-unsupported-releases",
+          "passed": true,
+          "evidence": "No severe unsupported release occurred."
+        }
+      ]
+    }
+  ],
   "operational": {
     "provider_calls": 0,
     "input_tokens": 0,
     "output_tokens": 0,
     "reported_cost_usd": 0,
-    "gold_leakage": false,
-    "response_count": 600
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
   },
   "failures": [
     {
-      "case_id": "grounding-successor-011-0034-q3",
-      "classification": "reference-label-defect",
-      "observed": "The question used the deictic referent 'these'; the product safely clarified while the frozen label expected an answer.",
-      "posthoc_score_change": false
+      "category": "data",
+      "count": 1,
+      "evidence": "Case grounding-successor-011-0034-q3 used the deictic referent 'these'; the product safely clarified while the frozen reference expected answer. No post-hoc score change was made."
     },
     {
-      "case_ids": [
-        "grounding-successor-011-0041-q1",
-        "grounding-successor-011-0041-q4"
-      ],
-      "classification": "claim-validator-contract-mismatch",
-      "observed": "Retrieval and semantic-atom selection were correct, but the post-generation NLI validator rejected source-derived canonical claims against LaTeX authoring markup.",
-      "posthoc_score_change": false
+      "category": "implementation",
+      "count": 2,
+      "evidence": "Cases grounding-successor-011-0041-q1 and -q4 retrieved correct semantic atoms, but the old post-validator compared canonical claims against LaTeX authoring markup. The prospective canonical-source verifier fix receives no credit in this run."
     }
   ],
   "decision": {
     "outcome": "keep",
     "selected_architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
-    "selected_generator_id": "deterministic-evidence-set-grounded-generator-v2",
-    "rationale": "Every preregistered grounding, retrieval, safety, source-family uncertainty, and paired non-inferiority gate passed. The observed claim-validator mismatch is corrected prospectively at the shared source contract and must be confirmed on fresh cases before release binding."
+    "rationale": "Every preregistered grounding, retrieval, safety, source-family uncertainty, and paired non-inferiority gate passed. The source-contract validator correction remains prospective and requires fresh autonomy confirmation before release binding."
   },
   "limitations": [
     "This is fresh factual-development evidence, not complete autonomous-product release evidence.",

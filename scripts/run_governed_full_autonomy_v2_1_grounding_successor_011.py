@@ -332,6 +332,9 @@ def main() -> None:
     parser.add_argument("--resume", action="store_true")
     arguments = parser.parse_args()
     if arguments.execute:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
         result = execute(resume=arguments.resume)
     elif arguments.preflight:
         result = preflight(resume=arguments.resume)

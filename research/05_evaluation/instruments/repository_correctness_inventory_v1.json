@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 924
+    "audited": 929
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 222,
+    "active_or_unclassified_tooling": 224,
     "active_runtime": 149,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 245,
+    "evaluation_configuration": 247,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 207
+    "verification": 208
   },
-  "file_count": 924,
+  "file_count": 929,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "5aedacac92bea146402bc5e1656a7a30207e70455b3675871b1128202a118cf5",
+  "record_sha256": "9fbf872494f19931995261c0275ea04d798c2ab52a55f824603f8f1d924ad567",
   "records": [
     {
       "audit": {
@@ -51,7 +51,7 @@
       "package_commands": [],
       "path": ".env.example",
       "risk": "medium",
-      "sha256": "c1f83ca1969e2971c91dc866a86839542c11f302964941af973dd9eae95201bb"
+      "sha256": "1a25d1f206d5c15e26a8e4dd7307ea1505edec3742b35710e9147d26ceec4e99"
     },
     {
       "audit": {
@@ -4295,6 +4295,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-012",
+        "evidence": "Instrument review binds deterministic source compilation, bounded Terra planning, current direct-OpenAI metadata, exact source and result hashes, finite cost/call limits, and explicit non-claims.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex release-bound autonomy root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_012.json",
+      "risk": "high",
+      "sha256": "b6c64b079b65a1afffeecbc52a175fbf185458c0e9a0273f1d929dbfc3496105"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Instrument review preserves the qualified 820-case network-free boundary while returning it to build-only status and revoking provider authority after its grounding dependency was not satisfied.",
         "findings": [],
@@ -5383,6 +5399,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-012",
+        "evidence": "Profile review preserves immutable V1 qualification while the separate V2.1 candidate binds grounding 011, deterministic factual compilation, bounded Terra planning, and T0 rollback.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex release-bound autonomy root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json",
+      "risk": "high",
+      "sha256": "fb0ea60c4c35bfed8d1b8f2bbd1f58803ed82cc39459659242bb7e67aef4650e"
+    },
+    {
+      "audit": {
         "domain": "r1-openai-evaluation-contracts",
         "evidence": "Focused current-policy validator review verified the active direct-OpenAI mini, nano, and bounded full-model identities, prohibited historical providers, exact registration, and network-free execution.",
         "findings": [],
@@ -6399,6 +6431,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-012",
+        "evidence": "Builder review verifies 820 unique cases, fresh source identities 101-150, immutable public and hidden-gold hashes, event-scoped authority, and matched hard gates.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex release-bound autonomy root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+      "risk": "high",
+      "sha256": "158182189ed0c678372c46ddf188878226d43575d7c6247e8e6aeb55246615f9"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
         "findings": [],
@@ -7000,7 +7048,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "ce1e470e21fa8bb83ec7b9fd86f268c64233ff266c23e95258814bca2346b5a7"
+      "sha256": "6a7d51355542c2c618de1f44bc761d6342da7917eae18db557608dd4001b2809"
     },
     {
       "audit": {
@@ -8597,6 +8645,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-012",
+        "evidence": "Runner review verifies exact hybrid model expectations, no-provider T0 canary, Terra-only reactive canary, clean preflight, freeze checks, atomic execution, and safe resume.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex release-bound autonomy root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+      "risk": "high",
+      "sha256": "a08704732f2d9e13b4e18bb4f5a04d744cc56a122e39c65e4583eef5e107af09"
+    },
+    {
+      "audit": {
         "domain": "evaluation-tooling",
         "evidence": "Context-driven case counts, canaries, source resolution, ledgers, and hidden-gold joins were reviewed; defaults preserve historical 008 behavior and focused tests cover generalized execution.",
         "findings": [],
@@ -8615,7 +8679,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "effeedfb1474fbecd11a299233ed257d3b196fe669d8f63e4704f55e4acb7c2a"
+      "sha256": "a6a59aec0c7d2299f3ad2c506fb932b6c9b819b66cc739e28af93291f7eede53"
     },
     {
       "audit": {
@@ -8845,7 +8909,7 @@
       "package_commands": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
       "risk": "high",
-      "sha256": "f0e3aa130cf0323efb659184fda98b0c9df83896654244b93050f9063bdca244"
+      "sha256": "c92b8526f84c61081754486ff9fd3d06a0ec2f55a7b09cd44afbeb5194d05d77"
     },
     {
       "audit": {
@@ -9679,7 +9743,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "58ea6c03ce80e2507e80a04c87a03476cb510db13c63bd13ac96710e4f3e9cb6"
+      "sha256": "b3d8a0f1f7d2ada1f8db2eba806a97a8c36af155c40e20f190cc50811a98d21f"
     },
     {
       "audit": {
@@ -9887,7 +9951,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "f2234a8d4ca23f9ccc42867a13f031fe6eb609c7a7a612a6fdebd59e478744df"
+      "sha256": "fbe5cfe72dbf8ae017448fedacecae2085ddc52dfcfffaa58a1c4a5befe2e72b"
     },
     {
       "audit": {
@@ -9919,7 +9983,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "7cadff240f7abd346fb5c6daa9a6add7805174cd8ac339b90eb26848d77585bd"
+      "sha256": "8d599a79f6ed34f2c4373e4238c9fcf12e97a08bea55ba6f975b86633e0cdeba"
     },
     {
       "audit": {
@@ -11919,7 +11983,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2c96b538679db7b851292e7945787c18d79d1b7a55cbe2194aa3aff4161053df"
+      "sha256": "86032edd1cb9cde324351b5ab6f6a54b626e1b523998d35ceb4a1f04840412bd"
     },
     {
       "audit": {
@@ -12223,7 +12287,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "b9108184347b5e8d0fb67418743c5ac6707211fada766cccfdf742819e0cbd65"
+      "sha256": "ef7aa1390059df816211daa21e4736f28377a9e820769a7490d0a7e71cae4418"
     },
     {
       "audit": {
@@ -14579,6 +14643,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, and fail-closed authorization preflight.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex release-bound autonomy root-cause review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
+      "risk": "medium",
+      "sha256": "783227dc77331a20f6e5d17c31839a4cdc4ce237d241b957bca7596776f541d7"
+    },
+    {
+      "audit": {
         "domain": "verification",
         "evidence": "Reviewed the lineage-aware frequency regression proving reactive turn deliveries do not count against proactive message limits.",
         "findings": [],
@@ -15539,8 +15619,8 @@
     }
   ],
   "risk_counts": {
-    "high": 703,
-    "medium": 221
+    "high": 707,
+    "medium": 222
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
