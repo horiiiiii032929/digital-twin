@@ -70,6 +70,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_semantic_target_successor.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_source_semantic_atoms.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -198,6 +201,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_academic_factual_qa_semantic_target_comparison.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_source_semantic_atom_comparison.py": (
             "method_evaluation_execution",
         ),
         "scripts/run_course_digital_twin_autonomous_long_run_001.py": (
@@ -443,6 +449,12 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "course-digital-twin-whole-system-architecture-round-3-001": (
+            "method_evaluation_execution",
+        ),
+        "academic-factual-qa-source-semantic-atoms-successor-001": (
+            "dataset_generation",
+        ),
+        "academic-factual-qa-source-semantic-atom-comparison-001": (
             "method_evaluation_execution",
         ),
     }

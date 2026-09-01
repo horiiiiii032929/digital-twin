@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-source-semantic-atom-comparison-001",
+  "program_id": "course-digital-twin-grounding-correction-002",
+  "status": "frozen-network-free",
+  "source": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-sources.json",
+    "sha256": "70888fb858da3941f487f5a2aa74482201bca94210b2a6f193c029f3bec8ecf1",
+    "role": "source-corpus"
+  },
+  "public_cases": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-cases.json",
+    "sha256": "6713ddcdfe6aa028abe188501109655ea38cb24e871276128aceb4ef1fe32661",
+    "role": "public-cases"
+  },
+  "hidden_gold": {
+    "path": "research/05_evaluation/datasets/academic-factual-qa-source-semantic-atoms-successor-001-gold.json",
+    "sha256": "c52525a10017bd61949dc742b4e81767c3ae5eb64890490d2f44231d0ffa1f42",
+    "role": "hidden-gold"
+  },
+  "case_count": 500,
+  "candidates": [
+    {
+      "schema_version": 1,
+      "architecture_id": "typed-target-evidence-v1",
+      "version": "v1-best-protocol-valid-baseline",
+      "role": "baseline",
+      "plane_bindings": {
+        "domain": "course-domain-model-v1",
+        "retrieval": "target-aware-evidence-retriever-v1",
+        "action-routing": "deterministic-tutor-action-router-v2",
+        "claim-citation": "target-aware-atomic-extractive-lineage-v1",
+        "learner-state": "assessed-evidence-count-belief-v1",
+        "pedagogical-policy": "target-complete-evidence-first-policy-v1",
+        "reactive-loop": "target-complete-reactive-loop-v1",
+        "proactive-loop": "governed-autonomy-service-v2.1",
+        "governance": "professor-approved-policy-v1",
+        "persistence": "sqlite-wal-checkpoint-outbox-v1",
+        "product-experience": "evidence-target-transparent-r1-v1",
+        "operations": "local-r1-compose-v1",
+        "evaluation": "flow-independent-adapters-v1"
+      },
+      "factual_adapter": "architecture-network-free-factual-adapter-v1",
+      "autonomy_adapter": "student-product-autonomy-adapter-v1",
+      "rollback_architecture_id": null,
+      "public_question_only_planning": true,
+      "hidden_gold_available_to_runtime": false,
+      "deterministic_policy_authoritative": true,
+      "deterministic_source_truth_authoritative": true,
+      "provider_execution_authorized": false
+    },
+    {
+      "schema_version": 1,
+      "architecture_id": "source-semantic-evidence-atoms-v1",
+      "version": "v1-source-derived-projection-and-relations",
+      "role": "candidate",
+      "plane_bindings": {
+        "domain": "source-semantic-evidence-atom-domain-v1",
+        "retrieval": "source-semantic-evidence-atom-retriever-v1",
+        "action-routing": "deterministic-tutor-action-router-v2",
+        "claim-citation": "source-semantic-evidence-atom-lineage-v1",
+        "learner-state": "assessed-evidence-count-belief-v1",
+        "pedagogical-policy": "unique-complete-related-atom-policy-v1",
+        "reactive-loop": "source-semantic-evidence-atom-reactive-loop-v1",
+        "proactive-loop": "governed-autonomy-service-v2.1",
+        "governance": "professor-approved-policy-v1",
+        "persistence": "sqlite-wal-checkpoint-outbox-v1",
+        "product-experience": "evidence-target-transparent-r1-v1",
+        "operations": "local-r1-compose-v1",
+        "evaluation": "flow-independent-adapters-v1"
+      },
+      "factual_adapter": "architecture-network-free-factual-adapter-v1",
+      "autonomy_adapter": "student-product-autonomy-adapter-v1",
+      "rollback_architecture_id": "typed-target-evidence-v1",
+      "public_question_only_planning": true,
+      "hidden_gold_available_to_runtime": false,
+      "deterministic_policy_authoritative": true,
+      "deterministic_source_truth_authoritative": true,
+      "provider_execution_authorized": false
+    }
+  ],
+  "hard_gates": {
+    "fully_grounded_factual_success": 0.95,
+    "boundary_action_accuracy": 0.98,
+    "atomic_claim_precision": 0.98,
+    "atomic_claim_recall": 0.95,
+    "citation_precision": 0.98,
+    "citation_recall": 0.95,
+    "canonical_all_evidence_at_3": 0.9,
+    "evidence_recall_at_5": 0.95,
+    "source_version_validity": 1.0,
+    "severe_unsupported_release_count": 0.0
+  },
+  "scoring_profile": "source-semantic-token-v2",
+  "output_directory": "reports/generated/academic-factual-qa-source-semantic-atom-comparison-001",
+  "network_free_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "maximum_executions": 1,
+  "hidden_gold_after_response_persistence": true,
+  "content_sha256": "96d114ae214602f615059ef5379fe0be6aad8a6fa8f9a8d83dfadab815b21932"
+}

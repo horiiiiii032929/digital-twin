@@ -1049,3 +1049,13 @@ Current utilities:
   simulate:evidence-sufficiency-v3-atomic-claim`, or `npm run
   preflight:evidence-sufficiency-v3-atomic-claim`. Local execution and product
   binding remain unauthorized until a separate checkpoint.
+- `build_academic_factual_qa_source_semantic_atoms.py` and
+  `run_academic_factual_qa_source_semantic_atom_comparison.py`: implement the
+  fresh successor to the rejected question-side semantic resolver. The builder
+  derives atom-specific search projections and explicit same-section relations
+  from approved canonical source ranges only, then freezes 500 new questions
+  over 100 source-range-disjoint clusters. The runner compares this candidate
+  with the retained typed-target rollback, persists all public responses before
+  opening hidden gold, and emits exactly one Keep, Refine, or invalid result.
+  Use `--validate` or `--simulate` for no-result checks and `--execute` once for
+  the authorized network-free comparison; no provider or paid call is possible.
