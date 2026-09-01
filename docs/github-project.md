@@ -135,6 +135,26 @@ product confirmation with V1 rollback. The result does not promote a release.
 #157 is now the active downstream `Todo / Go Deeper` decision; provider-backed
 execution remains unauthorized until a new immutable candidate is frozen.
 
+That immutable candidate is now
+`governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's
+exact Keep record and selected architecture, adds only public source/section
+scope to the prospective questions, and injects the source-semantic retriever
+plus ambiguity-safe V2 gate through the actual tutoring service. Its complete
+820-case network-free run passed every hard gate with zero provider calls.
+Provider attempt 003 stopped at the canary gate because its strict schema was
+not API-compatible; all 818 bulk cases and hidden gold stayed closed. #157 is
+therefore retained as invalid operational evidence. Final attempt 004 changed
+only schema translation and proved that corrected schemas support exact Terra
+and GPT-5.4 mini calls in its T1-v2 canary, but its T0 GPT-5.4 mini response was
+classified malformed. The run failed closed after eight calls and USD
+0.00900625; all 818 bulk cases and hidden gold stayed closed. #157 is now
+`In Progress / Refine` for the invalid result and 004 authority is revoked.
+The user then explicitly requested one unchanged connectivity retry. Attempt
+005 reproduced the same T0 malformed response while the following seven T1-v2
+calls succeeded. It stopped before all 818 bulk cases and hidden gold. #157 is
+`In Progress / Refine`, all authority is revoked, and another identical retry
+is not justified. No autonomous release claim exists.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2

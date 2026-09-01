@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 874
+    "audited": 886
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 202,
+    "active_or_unclassified_tooling": 208,
     "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 234,
+    "evaluation_configuration": 237,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 192
+    "verification": 195
   },
-  "file_count": 874,
+  "file_count": 886,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7ba1642e1dcb42d2e925a7873868f2501545610baccdb63db1795266d13ab272",
+  "record_sha256": "cea3d8e8a59c209e0d8efe731b1c74858f447c8327fdfbfc9f1fd7f18c4cc55b",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "a8085a80e2d8304a58ddee63d97e6787ac79721984bbbb30bdfad665b953cbe6"
+      "sha256": "7d65dbbe7d0fa308c3a0dc2925949812ab3bde0ce91809d58b4c884cfcc034a9"
     },
     {
       "audit": {
@@ -4311,6 +4311,54 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Instrument review verifies exact #172 Keep-result binding, selected V2 and rollback identities, public/hidden package hashes, current direct-OpenAI metadata, immutable hard gates, exclusive output, zero retries, and one-time 3,000-call/USD 50 authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
+      "risk": "high",
+      "sha256": "69c1b82323ed4cb158a34cbfae9b0bda88429778f4e95043b7154f1e9afa93f1"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-004",
+        "evidence": "Corrective instrument review verifies that attempt 004 preserves attempt 003's 820-case portfolio, deterministic gold, selected grounding method, model roles, quality gates, and USD 50 ceiling while changing only the OpenAI strict-schema transport and using a fresh exclusive ledger.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 schema-correction audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_004.json",
+      "risk": "high",
+      "sha256": "34ae0689b34504c1df99bbf9900e6f4382eb949e918b29d732b734db63814b50"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-005",
+        "evidence": "Retry instrument review verifies the user's explicit retry authority, fresh output identity, and unchanged 820 cases, gold, method, schema transport, model roles, hard gates, and USD 50 ceiling relative to attempt 004.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 transient-retry audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_005.json",
+      "risk": "high",
+      "sha256": "d73655dccf83fe26fa3fbbce72cdef91b366eafb2550741043d0f18573bc4f34"
+    },
+    {
+      "audit": {
         "domain": "full-autonomy-evaluation-boundary",
         "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
         "findings": [],
@@ -6221,6 +6269,54 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Builder review and deterministic validation verify 820 unique case/gold identities, exact public source/section scoping without answer leakage, stable hashes, selected-result integrity, and unchanged condition and hard-gate portfolio.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "high",
+      "sha256": "2e7533b684ad08a661ac07414e1314417b76a55c29c68113372289dc9c08bedf"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-004",
+        "evidence": "Corrective builder review verifies byte-equivalent events and gold relative to attempt 003 except for the new immutable dataset identity and hashes; it does not change the evaluated method, prompts, cases, gold, model roles, or gates.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 schema-correction audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "risk": "high",
+      "sha256": "410e46b3f1fe81aadba14c79f4b09b6db1b366ba37d2578418d9bce9a326d986"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-005",
+        "evidence": "Retry builder review verifies event and gold equivalence with attempt 004 after excluding only the dataset identity and derived package hashes.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 transient-retry audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_005.py",
+      "risk": "high",
+      "sha256": "4e37c499505b7370ef88d53e02d1d6dcba658b6b8cc50c9e928f8d80c4541c6b"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -6646,7 +6742,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "6b62a16b6e866957f8e0dbeab91ea0f254195295d1298d6d48e508ec32e5a23f"
+      "sha256": "07ff9c5d458c77083d09c6dd7e09701d01f7b3c39e071246803e9c8406c0ae6b"
     },
     {
       "audit": {
@@ -8261,7 +8357,73 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "901ed8e3f1ad4adc8bd813540d6de49b79f4dff903047683c263faeaa66588bb"
+      "sha256": "747c7587ca3de4ca5745bf4443b1b8fc1c4c2af365d9c2422d5c5a608d1e65c3"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-003",
+        "evidence": "Runner review verifies explicit successor context, selected-grounding hash binding, clean no-call preflight, two exact-identity canaries, atomic ledger/resume, hidden-gold order, call/cost stops, and terminal result persistence.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-003",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-003"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "high",
+      "sha256": "392fc51573157345877f71f9758fedd065378f8845b8f1abc4e2073c1ae9c026"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-004",
+        "evidence": "Corrective runner review verifies validate, simulate, preflight, execute, and resume modes; exact freeze and model-identity guards; fresh exclusive output; atomic accounting; hidden-gold order; and the rule that attempt 004 is the final permitted harness-only correction.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 schema-correction audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-004",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-004",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-004",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-004",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-004"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "risk": "high",
+      "sha256": "b6ed31e145d8156d009e4bfdb17d1cfc6a84e707ac5e3c8b8140f6915502be96"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-005",
+        "evidence": "Retry runner review verifies the same validated shared runner, exact selected-grounding context, bounded freeze guards, atomic ledger/resume, hidden-gold order, and fresh exclusive output path.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 transient-retry audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-005",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-005",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-005",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-005",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-005"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_005.py",
+      "risk": "high",
+      "sha256": "213e4eb024479474799be328ec3d9aebc2af3f3d76274bf7d100bd97b47fde5d"
     },
     {
       "audit": {
@@ -9133,7 +9295,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "b42b66cf2839a6dbfbf271935ec23db961fd16c663ee9be95421e3e629ebcf7e"
+      "sha256": "2d5f3f2335d5589f8d72b2f03770f6148ff7b0697dec5d049b776bb8d52671f3"
     },
     {
       "audit": {
@@ -9725,7 +9887,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "c4c59ffa2fa18ae01bc07ca797319cb812aade0d3215bfc79e21103a245c1dda"
+      "sha256": "d4d4b4013119e329fac7dcdd91447296b70d4dac91056042ea41a758e34bcd7f"
     },
     {
       "audit": {
@@ -10941,7 +11103,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/source_range_evidence.py",
       "risk": "high",
-      "sha256": "e26e63478c1e00790f1e33b984cb8a774a90b86692f57410eb92ee155e98afdf"
+      "sha256": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb"
     },
     {
       "audit": {
@@ -11314,10 +11476,10 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Freeze review confirms both comparison attempts are revoked after the valid attempt-002 result while every provider, paid, final, autonomy, private-data, and other evaluation block remains active.",
+        "evidence": "Freeze review confirms only actual-product evaluation 003 may perform the two named external/model execution operations; every other provider, paid, final, private-data, and historical evaluation block remains active.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewer": "Codex #157 execution-authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11325,7 +11487,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "4ecc7da2e1c4085d5b05f9c106e67a4b3a181703139f4444b6d14a30bdb6ebb7"
+      "sha256": "b04bf4fd6864e0a5c03d7e53c33f71a4474c7fb1b9c02438b19ff07a1efbeb86"
     },
     {
       "audit": {
@@ -11549,7 +11711,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "1e7639d1a8c14ac24ae388ce125ae27248b94602f80e97168946b30ad931e50c"
+      "sha256": "9ea333851131880a86bf45f5b917988e308e36eabde2772a3d5a6a19ecafb036"
     },
     {
       "audit": {
@@ -12034,10 +12196,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies both ambiguity-safe comparison attempts are rejected after terminal publication and provider, paid, final, autonomy, and every other historical execution remain rejected.",
+        "evidence": "Freeze regression verifies the exact 003 identifier has only its two reviewed operations and that historical 002 plus every unrelated provider, paid, final, and autonomy execution remains rejected.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewer": "Codex #157 execution-authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12045,7 +12207,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "fccbef6e799778309c32472149d5eec87214c3306fe43fa9c1454b02ce6ed0b4"
+      "sha256": "f2d8d444c36bb8fc8c252a0a3d2d8d177d11babdb318bd5b29e3b052072d94c4"
     },
     {
       "audit": {
@@ -12189,7 +12351,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_source_range_evidence.py",
       "risk": "medium",
-      "sha256": "7c36c2e3061f43614868ea7bcc90b3355732efa027f63912dc41860e6fc9e24c"
+      "sha256": "bd52774f33e61c04626037b382b682d66de3d97418d23813b83c2016e3cdde76"
     },
     {
       "audit": {
@@ -12397,7 +12559,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "f87ba8ba92d45578fa1678baa02b463279927e9dd85099876c4d687fef592b30"
+      "sha256": "8b1eb14bf436c9d82ef45cba912050f54c6197a919dcb69da20efec04d97edaf"
     },
     {
       "audit": {
@@ -13906,6 +14068,54 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Focused tests verify selected-result binding, exact bounded authority, actual service injection of the semantic atom retriever and V2 gate, source-scope target resolution, and hard-gate passage on a representative V2 trajectory.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 actual-product successor audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
+      "risk": "medium",
+      "sha256": "8b90a6cd8fa8715ca2f2b43a9588e5b2fa48703e41692a00c36b243846ca9b84"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify attempt 004's event/gold equivalence with attempt 003, fresh identities and output path, strict bounded authority, final-attempt status, and rejection of any silent method or gate change.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 schema-correction audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
+      "risk": "medium",
+      "sha256": "9f89c934c5b60c17ad0bf7efb4f594dffb932bfe0c44ef2a75f6a55d1ba74ec4"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify byte-equivalent attempt 004/005 contracts, zero evaluated-surface changes, and exact one-run provider and paid authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex #157 transient-retry audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_005.py",
+      "risk": "medium",
+      "sha256": "1b64d6f67434174f3dab34aa71092fe47883a7925e3905ce1d7b7b03b5ec695d"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Focused tests verify network-free authority, public/gold separation, all four real service conditions, restart consistency, one actual autonomous delivery, and zero provider accounting.",
         "findings": [],
         "reviewed_at": "2026-08-31",
@@ -14689,8 +14899,8 @@
     }
   ],
   "risk_counts": {
-    "high": 668,
-    "medium": 206
+    "high": 677,
+    "medium": 209
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

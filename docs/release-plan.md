@@ -359,3 +359,23 @@ claim precision/recall, and zero severe releases. V2 is selected with V1
 rollback for the next provider-backed product confirmation. This does not
 change the No Release decision: #157 must freeze and evaluate the selected
 actual-product configuration before any autonomous promotion.
+
+The corresponding #157 successor is now built as
+`governed-full-autonomy-v2-1-actual-product-evaluation-003`. The 820-case
+network-free qualification passes through the actual tutoring, autonomy,
+outreach, SQLite, checkpoint, outbox, and virtual-time paths using the selected
+V2 grounding binding. Attempt 003 then stopped after two canaries because the
+provider strict-schema contract required every property in `required`; bulk
+cases and hidden gold remained unopened. Attempt 004 is the one permitted
+harness-only correction. It changes only provider schema translation and keeps
+the same portfolio, gold, method, model roles, and gates under the unchanged
+3,000-call and USD 50 ceilings. Attempt 004 also stopped at the canary gate:
+the corrected schemas allowed exact Terra and GPT-5.4 mini calls in the T1-v2
+canary, but the T0 GPT-5.4 mini response was classified as malformed. It used
+eight calls and USD 0.00900625; all 818 bulk cases and hidden gold remained
+closed. Its authority is revoked. After the user identified possible transient
+connectivity and explicitly requested a retry, attempt 005 was frozen with no
+method, schema, case, gold, model, or gate change. It reproduced the same T0
+malformed-response pattern while the following seven T1-v2 calls succeeded.
+All 818 bulk cases and hidden gold remained closed. Authority is revoked;
+identical retries stop, and T1-v2 promotion remains unsupported.

@@ -140,6 +140,10 @@ async def test_openai_responses_client_uses_reactive_semantic_plan_schema(monkey
 
     schema = captured["json"]["text"]["format"]["schema"]
     assert "proposed_intent" in schema["properties"]
+    assert set(schema["required"]) == set(schema["properties"])
+    assert "default" not in schema["properties"]["schema_version"]
+    assert schema["properties"]["schema_version"]["enum"] == ["2.1.0"]
+    assert "maximum" not in schema["properties"]["hypothesis_confidence"]
     assert result.provider_model == "gpt-5.6-terra"
 
 

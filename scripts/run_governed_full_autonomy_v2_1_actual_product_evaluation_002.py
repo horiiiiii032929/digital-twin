@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 import hashlib
 import json
@@ -58,6 +59,51 @@ PROFILE_PATH = (
 CANARY_CASE_IDS = (
     "trajectory-001-t0-grounded-control-seed-1",
     "trajectory-006-t1-v2-reactive-seed-1",
+)
+
+
+@dataclass(frozen=True)
+class ActualProductEvaluationContext:
+    """Bind one immutable successor without mutating historical datasets."""
+
+    builder: Any
+    instrument_id: str
+    grounding_result_path: Path
+    grounding_result_id: str
+    selected_grounding_architecture_id: str | None = None
+    runtime_grounding_architecture_id: str = "legacy-structured-lexical-v1"
+    grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
+
+    @property
+    def output_root(self) -> Path:
+        return ROOT / "reports/generated" / self.instrument_id
+
+    @property
+    def response_ledger(self) -> Path:
+        return self.output_root / "responses.sqlite3"
+
+    @property
+    def public_package(self) -> Path:
+        return self.output_root / "public-cases.json"
+
+    @property
+    def hidden_gold_package(self) -> Path:
+        return self.output_root / "hidden-gold.json"
+
+    @property
+    def result_path(self) -> Path:
+        return self.output_root / "result.json"
+
+    @property
+    def checkpoint_path(self) -> Path:
+        return self.output_root / "checkpoint.json"
+
+
+DEFAULT_CONTEXT = ActualProductEvaluationContext(
+    builder=builder,
+    instrument_id=INSTRUMENT_ID,
+    grounding_result_path=GROUNDING_STATE,
+    grounding_result_id="academic-factual-qa-grounding-selection-002",
 )
 
 
@@ -124,10 +170,15 @@ def _load(path: Path) -> dict[str, Any]:
     return payload
 
 
-def _manifest(condition: str, *, network_free: bool) -> AutonomySystemManifestV1:
+def _manifest(
+    condition: str,
+    *,
+    network_free: bool,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> AutonomySystemManifestV1:
     profile_sha = _hash_file(PROFILE_PATH)
     return AutonomySystemManifestV1(
-        system_id=f"actual-product-evaluation-002-{condition}",
+        system_id=f"{context.instrument_id}-{condition}",
         flow_id=condition,
         adapter_version=StudentProductAutonomyAdapterV1.adapter_version,
         code_revision=_git_revision(),
@@ -146,20 +197,34 @@ def _manifest(condition: str, *, network_free: bool) -> AutonomySystemManifestV1
     )
 
 
-def _run_binding(*, network_free: bool) -> dict[str, Any]:
+def _run_binding(
+    *,
+    network_free: bool,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
     manifests = {
-        condition: _manifest(condition, network_free=network_free).model_dump(
+        condition: _manifest(
+            condition, network_free=network_free, context=context
+        ).model_dump(
             mode="json"
         )
-        for condition in builder.CONDITIONS
+        for condition in context.builder.CONDITIONS
     }
-    instrument = _load(builder.INSTRUMENT)
+    instrument = _load(context.builder.INSTRUMENT)
     return {
-        "instrument_id": INSTRUMENT_ID,
-        "instrument_sha256": _hash_file(builder.INSTRUMENT),
-        "public_sha256": builder.public_payload()["content_sha256"],
+        "instrument_id": context.instrument_id,
+        "instrument_sha256": _hash_file(context.builder.INSTRUMENT),
+        "public_sha256": context.builder.public_payload()["content_sha256"],
         "code_revision": _git_revision(),
         "profile_sha256": _hash_file(PROFILE_PATH),
+        "grounding_result_id": context.grounding_result_id,
+        "grounding_result_sha256": _hash_file(context.grounding_result_path),
+        "selected_grounding_architecture_id": (
+            context.selected_grounding_architecture_id
+        ),
+        "runtime_grounding_architecture_id": (
+            context.runtime_grounding_architecture_id
+        ),
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_timezone": "UTC",
         "conditions": manifests,
@@ -169,11 +234,18 @@ def _run_binding(*, network_free: bool) -> dict[str, Any]:
 
 
 class _ResponseLedger:
-    def __init__(self, path: Path, *, binding: dict[str, Any], resume: bool) -> None:
+    def __init__(
+        self,
+        path: Path,
+        *,
+        binding: dict[str, Any],
+        resume: bool,
+        context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+    ) -> None:
         expected = {
             "schema_version": "1",
             "run_binding_sha256": _canonical_hash(binding),
-            "public_sha256": builder.public_payload()["content_sha256"],
+            "public_sha256": context.builder.public_payload()["content_sha256"],
             "expected_count": "820",
             "clock_origin": CLOCK_ORIGIN.isoformat(),
             "clock_timezone": "UTC",
@@ -312,9 +384,11 @@ class _ResponseLedger:
         self.connection.close()
 
 
-def validate() -> dict[str, Any]:
-    build = builder.validate()
-    instrument = _load(builder.INSTRUMENT)
+def validate(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
+    build = context.builder.validate()
+    instrument = _load(context.builder.INSTRUMENT)
     if instrument["clock"] != {
         "implementation": "VirtualUtcClock",
         "origin": CLOCK_ORIGIN.isoformat(),
@@ -342,21 +416,34 @@ def validate() -> dict[str, Any]:
     }
 
 
-def _grounding_keep() -> bool:
-    if not GROUNDING_STATE.is_file():
+def _grounding_keep(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> bool:
+    if not context.grounding_result_path.is_file():
         return False
-    state = _load(GROUNDING_STATE)
-    result = state.get("terminal_result")
-    return isinstance(result, dict) and result.get("status") == "completed-keep"
+    state = _load(context.grounding_result_path)
+    result = state.get("terminal_result", state)
+    if not isinstance(result, dict) or result.get("status") != "completed-keep":
+        return False
+    if context.selected_grounding_architecture_id is None:
+        return True
+    decision = result.get("decision")
+    return isinstance(decision, dict) and decision.get(
+        "selected_architecture_id"
+    ) == context.selected_grounding_architecture_id
 
 
-def preflight(*, resume: bool = False) -> dict[str, Any]:
+def preflight(
+    *,
+    resume: bool = False,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
     blockers: list[str] = []
     try:
-        validate()
+        validate(context)
     except Exception as error:  # noqa: BLE001
         blockers.append(f"validation:{type(error).__name__}:{error}")
-    instrument = _load(builder.INSTRUMENT)
+    instrument = _load(context.builder.INSTRUMENT)
     authority = instrument["authority"]
     if not authority["provider_execution_authorized"]:
         blockers.append("provider-execution-not-authorized")
@@ -372,14 +459,14 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
         age = (datetime.now(UTC) - verified.astimezone(UTC)).total_seconds() / 3600
         if age < 0 or age > instrument["models"]["freshness_hours"]:
             blockers.append("provider-metadata-stale")
-    if not _grounding_keep():
-        blockers.append("grounding-selection-002-keep-missing")
+    if not _grounding_keep(context):
+        blockers.append(context.grounding_missing_blocker)
     try:
         require_bounded_pilot_operation_allowed(
-            INSTRUMENT_ID, "external_model_evaluation"
+            context.instrument_id, "external_model_evaluation"
         )
         require_bounded_pilot_operation_allowed(
-            INSTRUMENT_ID, "method_evaluation_execution"
+            context.instrument_id, "method_evaluation_execution"
         )
     except Exception:
         blockers.append("repository-freeze-authorization-missing")
@@ -388,26 +475,26 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
     if _git_dirty():
         blockers.append("working-tree-dirty")
     if resume:
-        if not RESPONSE_LEDGER.is_file():
+        if not context.response_ledger.is_file():
             blockers.append("resume-response-ledger-missing")
-        if RESULT_PATH.exists():
+        if context.result_path.exists():
             blockers.append("terminal-result-already-exists")
     else:
         used = [
             path.name
             for path in (
-                RESPONSE_LEDGER,
-                PUBLIC_PACKAGE,
-                HIDDEN_GOLD_PACKAGE,
-                RESULT_PATH,
-                CHECKPOINT_PATH,
+                context.response_ledger,
+                context.public_package,
+                context.hidden_gold_package,
+                context.result_path,
+                context.checkpoint_path,
             )
             if path.exists()
         ]
         if used:
             blockers.append("exclusive-output-used:" + ",".join(sorted(used)))
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": context.instrument_id,
         "status": "ready" if not blockers else "blocked-not-authorized",
         "blockers": blockers,
         "provider_calls": 0,
@@ -417,8 +504,10 @@ def preflight(*, resume: bool = False) -> dict[str, Any]:
     }
 
 
-def _ordered_contract():
-    contract = builder.build_contract()
+def _ordered_contract(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+):
+    contract = context.builder.build_contract()
     canaries = [
         row
         for case_id in CANARY_CASE_IDS
@@ -438,15 +527,21 @@ async def _run_case(
     *,
     provider_backed: bool,
     remaining_cost_usd: float,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
 ) -> AutonomyEvaluationResponseV1:
     adapter = StudentProductAutonomyAdapterV1(
         condition=condition,
-        manifest=_manifest(condition, network_free=not provider_backed),
+        manifest=_manifest(
+            condition,
+            network_free=not provider_backed,
+            context=context,
+        ),
         runtime_factory=build_runtime_factory(
             root / case.case_id,
             condition,
             provider_backed=provider_backed,
             maximum_case_cost_usd=max(0.02, min(2.0, remaining_cost_usd)),
+            grounding_architecture_id=context.runtime_grounding_architecture_id,
         ),
         clock_origin=CLOCK_ORIGIN,
     )
@@ -478,17 +573,24 @@ def _canaries_valid(responses: list[tuple[str, AutonomyEvaluationResponseV1]]) -
     return True
 
 
-async def _execute_responses(*, resume: bool) -> dict[str, Any]:
-    public = builder.public_payload()
+async def _execute_responses(
+    *,
+    resume: bool,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
+    public = context.builder.public_payload()
     if not resume:
-        _atomic_write(PUBLIC_PACKAGE, public, exclusive=True)
+        _atomic_write(context.public_package, public, exclusive=True)
     ledger = _ResponseLedger(
-        RESPONSE_LEDGER,
-        binding=_run_binding(network_free=False),
+        context.response_ledger,
+        binding=_run_binding(network_free=False, context=context),
         resume=resume,
+        context=context,
     )
     completed = ledger.completed_ids()
-    runtime_root = OUTPUT_ROOT / "runtime"
+    runtime_root = context.output_root / "runtime"
+    instrument = _load(context.builder.INSTRUMENT)
+    maximum_cost_usd = float(instrument["authority"]["maximum_cost_usd"])
     try:
         if set(CANARY_CASE_IDS).issubset(completed):
             persisted_canaries = [
@@ -500,19 +602,24 @@ async def _execute_responses(*, resume: bool) -> dict[str, Any]:
                 raise ActualProductEvaluationError(
                     "persisted provider canary is invalid"
                 )
-        for index, (condition, case, _gold) in enumerate(_ordered_contract()):
+        for index, (condition, case, _gold) in enumerate(
+            _ordered_contract(context)
+        ):
             if case.case_id in completed:
                 continue
             totals = ledger.totals()
-            remaining_cost = 50.0 - float(totals["cost_usd"])
+            remaining_cost = maximum_cost_usd - float(totals["cost_usd"])
             if remaining_cost <= 0:
-                raise ActualProductEvaluationError("USD 50 emergency stop reached")
+                raise ActualProductEvaluationError(
+                    f"USD {maximum_cost_usd:g} emergency stop reached"
+                )
             response = await _run_case(
                 runtime_root,
                 condition,
                 case,
                 provider_backed=True,
                 remaining_cost_usd=remaining_cost,
+                context=context,
             )
             ledger.record(condition, response)
             if index == 1:
@@ -524,18 +631,19 @@ async def _execute_responses(*, resume: bool) -> dict[str, Any]:
                 canary_costs = [row.cost_usd for _condition, row in canary_rows]
                 projected = 1.5 * max(canary_costs) * 820
                 projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
-                if projected_stop > 50.0:
+                if projected_stop > maximum_cost_usd:
                     raise ActualProductEvaluationError(
-                        f"projected p99 cost ${projected_stop:.2f} exceeds $50.00"
+                        f"projected p99 cost ${projected_stop:.2f} exceeds "
+                        f"${maximum_cost_usd:.2f}"
                     )
                 _atomic_write(
-                    CHECKPOINT_PATH,
+                    context.checkpoint_path,
                     {
                         "status": "canaries-passed",
                         "projected_p99_cost_stop_usd": projected_stop,
                         "completed_case_count": 2,
                     },
-                    exclusive=not CHECKPOINT_PATH.exists(),
+                    exclusive=not context.checkpoint_path.exists(),
                 )
         ledger.mark_complete()
         return ledger.totals()
@@ -546,17 +654,21 @@ async def _execute_responses(*, resume: bool) -> dict[str, Any]:
         ledger.close()
 
 
-def _load_completed_responses() -> list[tuple[str, AutonomyEvaluationResponseV1]]:
-    if not RESPONSE_LEDGER.is_file():
+def _load_completed_responses(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> list[tuple[str, AutonomyEvaluationResponseV1]]:
+    if not context.response_ledger.is_file():
         raise ActualProductEvaluationError("completed response ledger is missing")
-    connection = sqlite3.connect(f"file:{RESPONSE_LEDGER}?mode=ro", uri=True)
+    connection = sqlite3.connect(
+        f"file:{context.response_ledger}?mode=ro", uri=True
+    )
     try:
         metadata = dict(connection.execute("SELECT key,value FROM metadata"))
         if (
             metadata.get("status") != "completed"
             or metadata.get("response_count") != "820"
             or metadata.get("run_binding_sha256")
-            != _canonical_hash(_run_binding(network_free=False))
+            != _canonical_hash(_run_binding(network_free=False, context=context))
         ):
             raise ActualProductEvaluationError(
                 "hidden gold cannot open before 820 responses"
@@ -579,22 +691,26 @@ def _load_completed_responses() -> list[tuple[str, AutonomyEvaluationResponseV1]
     return rows
 
 
-def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, Any]:
+def _score(
+    rows: list[tuple[str, AutonomyEvaluationResponseV1]],
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
     if len(rows) != 820:
         raise ActualProductEvaluationError(
             "hidden gold cannot open before all responses"
         )
-    hidden = builder.hidden_gold_payload()
-    _atomic_write(HIDDEN_GOLD_PACKAGE, hidden, exclusive=True)
+    hidden = context.builder.hidden_gold_payload()
+    _atomic_write(context.hidden_gold_package, hidden, exclusive=True)
     gold_by_id = {
         row["case_id"]: AutonomyEvaluationGoldV1.model_validate(row)
         for row in hidden["gold"]
     }
     public_by_id = {
-        case.case_id: case for _condition, case, _gold in builder.build_contract()
+        case.case_id: case
+        for _condition, case, _gold in context.builder.build_contract()
     }
     condition_scores: dict[str, list[Any]] = {
-        condition: [] for condition in builder.CONDITIONS
+        condition: [] for condition in context.builder.CONDITIONS
     }
     all_scores = []
     response_by_id = {response.case_id: response for _condition, response in rows}
@@ -627,7 +743,7 @@ def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, An
         )
         for index, instant in enumerate(times):
             recent = sum(
-                instant - 7 * builder.DAY <= prior <= instant
+                instant - 7 * context.builder.DAY <= prior <= instant
                 for prior in times[: index + 1]
             )
             frequency_violations += int(recent > 3)
@@ -642,7 +758,8 @@ def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, An
     t0 = by_condition["t0-grounded-control"]
     autonomous = by_condition["t1-v2-autonomous"]
     grounding_delta = autonomous["action_accuracy"] - t0["action_accuracy"]
-    gates = _load(builder.INSTRUMENT)["hard_gates"]
+    instrument = _load(context.builder.INSTRUMENT)
+    gates = instrument["hard_gates"]
     gate_results = {
         "unauthorized_or_unexpected_actions": summary[
             "unauthorized_or_unexpected_actions"
@@ -696,7 +813,10 @@ def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, An
         "cost_usd": sum(response.cost_usd for response in response_by_id.values()),
     }
     operationally_valid = (
-        accounting["provider_calls"] <= 3000 and accounting["cost_usd"] <= 50
+        accounting["provider_calls"]
+        <= int(instrument["authority"]["maximum_provider_calls"])
+        and accounting["cost_usd"]
+        <= float(instrument["authority"]["maximum_cost_usd"])
     )
     status = (
         "invalid-execution"
@@ -707,7 +827,13 @@ def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, An
     )
     return {
         "schema_version": 1,
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": context.instrument_id,
+        "selected_grounding_architecture_id": (
+            context.selected_grounding_architecture_id
+        ),
+        "runtime_grounding_architecture_id": (
+            context.runtime_grounding_architecture_id
+        ),
         "status": status,
         "decision": "Keep"
         if status == "completed-keep"
@@ -734,47 +860,58 @@ def _score(rows: list[tuple[str, AutonomyEvaluationResponseV1]]) -> dict[str, An
     }
 
 
-async def execute(*, resume: bool) -> dict[str, Any]:
-    ready = preflight(resume=resume)
+async def execute(
+    *,
+    resume: bool,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
+    ready = preflight(resume=resume, context=context)
     if ready["status"] != "ready":
         raise ActualProductEvaluationError(
             "actual-product preflight blocked: " + ", ".join(ready["blockers"])
         )
     try:
-        await _execute_responses(resume=resume)
-        rows = _load_completed_responses()
-        result = _score(rows)
+        await _execute_responses(resume=resume, context=context)
+        rows = _load_completed_responses(context)
+        result = _score(rows, context)
     except Exception as error:
         result = {
             "schema_version": 1,
-            "instrument_id": INSTRUMENT_ID,
+            "instrument_id": context.instrument_id,
             "status": "invalid-execution",
             "failure_type": type(error).__name__,
             "failure_detail": str(error)[:500],
             "hidden_gold_opened": False,
         }
-    _atomic_write(RESULT_PATH, result, exclusive=not RESULT_PATH.exists())
+    _atomic_write(
+        context.result_path,
+        result,
+        exclusive=not context.result_path.exists(),
+    )
     return result
 
 
-async def _simulate() -> dict[str, Any]:
-    validate()
+async def _simulate(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
+    validate(context)
     scores = []
     condition_scores: dict[str, list[Any]] = {
-        condition: [] for condition in builder.CONDITIONS
+        condition: [] for condition in context.builder.CONDITIONS
     }
     responses = []
     with tempfile.TemporaryDirectory(
-        prefix="actual-product-evaluation-002-"
+        prefix=f"{context.instrument_id}-"
     ) as directory:
         root = Path(directory)
-        for condition, case, gold in builder.build_contract():
+        for condition, case, gold in context.builder.build_contract():
             response = await _run_case(
                 root,
                 condition,
                 case,
                 provider_backed=False,
                 remaining_cost_usd=1.0,
+                context=context,
             )
             responses.append(response)
             score = score_autonomy_case(case, gold, response)
@@ -791,7 +928,7 @@ async def _simulate() -> dict[str, Any]:
         and all(isinstance(history, dict) for history in clock_histories)
     )
     return {
-        "instrument_id": INSTRUMENT_ID,
+        "instrument_id": context.instrument_id,
         "status": "passed-network-free-simulation"
         if simulation_valid
         else "failed-network-free-simulation",
@@ -808,8 +945,10 @@ async def _simulate() -> dict[str, Any]:
     }
 
 
-def simulate() -> dict[str, Any]:
-    return asyncio.run(_simulate())
+def simulate(
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> dict[str, Any]:
+    return asyncio.run(_simulate(context))
 
 
 def main() -> int:

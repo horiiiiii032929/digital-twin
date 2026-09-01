@@ -65,6 +65,20 @@ def plan_public_source_ranges(question: str) -> PublicSourceRangePlanV2:
     evidence = plan_public_evidence_targets(evidence_question)
     if section_anchor:
         evidence = replace(evidence, context=section_anchor)
+        if (
+            source_path_anchor
+            and evidence.extraction_rule == "bounded-question-fallback"
+        ):
+            # An explicit public source+section scope is itself the stable target
+            # for broad natural questions such as "explain this section". This
+            # does not reveal an answer; it prevents instructional wording from
+            # diluting target coverage below the ambiguity-safe gate.
+            evidence = replace(
+                evidence,
+                targets=(section_anchor,),
+                requested_cardinality=1,
+                extraction_rule="explicit-source-section-scope",
+            )
     return PublicSourceRangePlanV2(
         evidence=evidence,
         cluster_anchor=cluster.group(1).strip() if cluster else None,

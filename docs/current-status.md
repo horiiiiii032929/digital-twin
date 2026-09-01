@@ -299,6 +299,19 @@ scoring. It is not product-quality evidence, does not open held-out data, and
 does not select V2.1. Actual T0/T1-v1/T1-v2 reactive/autonomous adapters and
 provider-backed execution remain the next #157 checkpoint.
 
+That checkpoint has now terminated without a valid quality result. Attempt 003
+was invalid because the provider rejected the strict Terra schema. The single
+allowed schema-only correction, attempt 004, reached exact Terra and GPT-5.4
+mini identities in its T1-v2 canary, but its T0 GPT-5.4 mini response was
+classified malformed. Attempt 004 stopped after eight calls and USD
+0.00900625; all 818 bulk cases and hidden gold remained unopened. Both attempts
+are immutable invalid evidence and their authority is revoked. The user then
+explicitly requested one unchanged connectivity retry; attempt 005 preserved
+the method, schema, 820 cases, gold, models, and gates under a fresh ledger. It
+reproduced the same T0 malformed response while the following seven T1-v2 calls
+succeeded. Bulk and hidden gold remained closed, authority is revoked, and
+identical retries stop.
+
 The actual-service boundary is now implemented and qualified by
 `governed-full-autonomy-v2-1-actual-product-smoke-001`. Four synthetic-public
 cases drove the real `StudentTutoringService`, `GovernedAutonomyService`,
@@ -1824,7 +1837,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; network-free autonomy mechanics passed; ambiguity-safe grounding V2 passed fresh development gates | Provider-backed actual-product T1-v2 confirmation under #157 and later release qualification remain missing |
+| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 demo retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; ambiguity-safe grounding V2 passed fresh development gates; the actual-product harness passed all 820 network-free cases | Provider-backed attempts 003/004/005 were operationally invalid at canary; a new provider-output diagnostic and evaluation-method decision are required before promotion |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
@@ -1835,12 +1848,15 @@ continues to hold report, presentation, and professor-communication work.
 ## Release readiness and critical path
 
 The repository and local product baseline are healthy, but the system is not
-release-ready. #172 has repaired the reference-uniqueness and ambiguity defect
-and selected V2 on fresh development evidence. The next product decision is a
-new immutable #157 provider-backed actual-product autonomy confirmation; no
-execution authority is active yet. A2 promotion, target-host operations,
-professor fidelity, and real-user evidence remain future work and support no
-current release claim.
+release-ready. #172 repaired the reference-uniqueness and ambiguity defect and
+selected V2 on fresh development evidence. The #157 actual-product harness
+passed all 820 cases through real services with virtual time and zero provider
+calls. Provider-backed attempts 003 and 004 then failed operationally at their
+canary gates without opening bulk cases or hidden gold. The one allowed harness
+correction is consumed and no quality or promotion claim follows from those
+runs. Attempt 005 then reproduced the same canary failure, so broad connectivity
+loss is unlikely and identical retries stop. A2 promotion, target-host
+operations, professor fidelity, and real-user evidence remain future work.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
@@ -1848,7 +1864,7 @@ current release claim.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |
-| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | Todo / Go Deeper | Freeze the selected ambiguity-safe V2 product manifest and run the provider-backed 820-case confirmation before any T1-v2 promotion |
+| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Refine | Preserve 003/004/005 as invalid; stop identical retries and redesign bounded provider-output diagnostics before a fresh portfolio |
 | 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration only after product confirmation; do not infer a release claim from development evidence |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
 | 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |

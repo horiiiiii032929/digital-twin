@@ -33,6 +33,53 @@ from src.digital_twin.model_policy import OPENAI_MODEL_PRICING_USD_PER_MILLION
 
 _Post = Callable[..., Awaitable[httpx.Response]]
 
+_PROVIDER_UNSUPPORTED_SCHEMA_KEYWORDS = frozenset(
+    {
+        "default",
+        "examples",
+        "exclusiveMaximum",
+        "exclusiveMinimum",
+        "format",
+        "maxItems",
+        "maxLength",
+        "maximum",
+        "minItems",
+        "minLength",
+        "minimum",
+        "multipleOf",
+        "pattern",
+        "uniqueItems",
+    }
+)
+
+
+def _openai_strict_schema(value: Any) -> Any:
+    """Translate Pydantic JSON Schema into OpenAI's strict portable subset.
+
+    Pydantic omits fields with defaults from ``required`` and emits validation
+    keywords that the Responses API does not consistently accept. The provider
+    schema controls shape only; Pydantic validation after parsing remains the
+    authority for lengths, ranges, and semantic invariants.
+    """
+
+    if isinstance(value, list):
+        return [_openai_strict_schema(item) for item in value]
+    if not isinstance(value, dict):
+        return value
+    normalized: dict[str, Any] = {}
+    for key, item in value.items():
+        if key in _PROVIDER_UNSUPPORTED_SCHEMA_KEYWORDS or key == "required":
+            continue
+        if key == "const":
+            normalized["enum"] = [item]
+            continue
+        normalized[key] = _openai_strict_schema(item)
+    properties = normalized.get("properties")
+    if isinstance(properties, dict):
+        normalized["additionalProperties"] = False
+        normalized["required"] = list(properties)
+    return normalized
+
 
 class OpenAiResponsesClient:
     """Call one exact OpenAI snapshot with strict, non-stored JSON output.
@@ -101,17 +148,19 @@ class OpenAiResponsesClient:
     @staticmethod
     def _schema(task: str) -> dict[str, Any]:
         if task == "grounded_tutor_atomic_claims":
-            return ModelTutorOutputV2.model_json_schema()
-        if task in {
+            schema = ModelTutorOutputV2.model_json_schema()
+        elif task in {
             "grounded_tutor_answer",
             "bounded_pedagogical_tutor_answer",
         }:
-            return ModelTutorOutput.model_json_schema()
-        if task == "autonomous_tutoring_plan":
-            return AutonomousPlannerOutputV1.model_json_schema()
-        if task == "reactive_tutoring_plan":
-            return ReactiveSemanticProposalV2.model_json_schema()
-        raise LlmConfigurationError()
+            schema = ModelTutorOutput.model_json_schema()
+        elif task == "autonomous_tutoring_plan":
+            schema = AutonomousPlannerOutputV1.model_json_schema()
+        elif task == "reactive_tutoring_plan":
+            schema = ReactiveSemanticProposalV2.model_json_schema()
+        else:
+            raise LlmConfigurationError()
+        return _openai_strict_schema(schema)
 
     def _payload(self, messages: list[LlmMessage], task: str) -> dict[str, Any]:
         return {
