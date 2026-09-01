@@ -141,8 +141,9 @@ exact Keep record and selected architecture, adds only public source/section
 scope to the prospective questions, and injects the source-semantic retriever
 plus ambiguity-safe V2 gate through the actual tutoring service. Its complete
 820-case network-free run passed every hard gate with zero provider calls. #157
-is therefore `In Progress / Go Deeper`; paid execution remains a separate
-bounded checkpoint and no autonomous release claim exists yet.
+is therefore `In Progress / Go Deeper`; its exact one-time paid execution is
+authorized under 3,000-call and USD 50 ceilings. No autonomous release claim
+exists until the result is recorded and the authority is revoked.
 
 ## Release stages and product gates
 

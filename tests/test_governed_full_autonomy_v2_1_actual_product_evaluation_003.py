@@ -27,7 +27,7 @@ def test_successor_binds_selected_grounding_and_preserves_portfolio() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-build-only"
+    assert result["status"] == "passed-frozen-pending-execution"
     assert result["case_count"] == 820
     assert instrument["selected_grounding"]["architecture_id"] == (
         "ambiguity-safe-source-semantic-evidence-atoms-v2"
@@ -43,12 +43,13 @@ def test_successor_binds_selected_grounding_and_preserves_portfolio() -> None:
     )
 
 
-def test_successor_preflight_recognizes_grounding_keep_but_stays_blocked() -> None:
+def test_successor_preflight_recognizes_grounding_keep_and_authority() -> None:
     result = runner.preflight()
 
-    assert result["status"] == "blocked-not-authorized"
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
+    assert result["status"] in {"blocked-not-authorized", "ready"}
+    assert "provider-execution-not-authorized" not in result["blockers"]
+    assert "paid-execution-not-authorized" not in result["blockers"]
+    assert "repository-freeze-authorization-missing" not in result["blockers"]
     assert not any("keep-missing" in row for row in result["blockers"])
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False

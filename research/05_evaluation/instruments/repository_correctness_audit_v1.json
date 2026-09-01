@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review confirms both comparison attempts are revoked after the valid attempt-002 result while every provider, paid, final, autonomy, private-data, and other evaluation block remains active.",
+      "evidence": "Freeze review confirms only actual-product evaluation 003 may perform the two named external/model execution operations; every other provider, paid, final, private-data, and historical evaluation block remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "1ec966b485b6454c6c6d7f3bb705780ab3712a883bc379707e7f961571f12095"
+      "reviewer": "Codex #157 execution-authorization audit",
+      "sha256": "9575ec52c962bf0a407b83117b119eb682473418312ebc29619940559b78430b"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies both ambiguity-safe comparison attempts are rejected after terminal publication and provider, paid, final, autonomy, and every other historical execution remain rejected.",
+      "evidence": "Freeze regression verifies the exact 003 identifier has only its two reviewed operations and that historical 002 plus every unrelated provider, paid, final, and autonomy execution remains rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "fccbef6e799778309c32472149d5eec87214c3306fe43fa9c1454b02ce6ed0b4"
+      "reviewer": "Codex #157 execution-authorization audit",
+      "sha256": "4002dc1e5e577b9de89b0f52cb8e89e79aa8a2e8bd6fc3a7f9ea5b7e935d8d2b"
     },
     {
       "audit_status": "audited",
@@ -9619,12 +9619,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-003",
-      "evidence": "Instrument review verifies exact #172 Keep-result binding, selected V2 and rollback identities, public/hidden package hashes, current direct-OpenAI metadata, immutable hard gates, exclusive output, zero retries, and bounded call/cost authority.",
+      "evidence": "Instrument review verifies exact #172 Keep-result binding, selected V2 and rollback identities, public/hidden package hashes, current direct-OpenAI metadata, immutable hard gates, exclusive output, zero retries, and one-time 3,000-call/USD 50 authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_003.json",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 actual-product successor audit",
-      "sha256": "549683df41432adfaf7f10ee0c06af4effc78bc6aebbdea97017907f4b7855bd"
+      "sha256": "2ffaf2c33559fc0cd0a3423eda3001b002682ac1349891a25ee189e9fe5b4521"
     },
     {
       "audit_status": "audited",
@@ -9652,12 +9652,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests verify selected-result binding, blocked authority, actual service injection of the semantic atom retriever and V2 gate, source-scope target resolution, and hard-gate passage on a representative V2 trajectory.",
+      "evidence": "Focused tests verify selected-result binding, exact bounded authority, actual service injection of the semantic atom retriever and V2 gate, source-scope target resolution, and hard-gate passage on a representative V2 trajectory.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex #157 actual-product successor audit",
-      "sha256": "1069a7a567576cee732e78f44ab96fa5c36887f138e38d83cc196534e4a970cc"
+      "sha256": "415e73c479decc7a0a33e26a8b7a473a511b9278e30b1a7589d923354f66116d"
     }
   ],
   "schema_version": 1

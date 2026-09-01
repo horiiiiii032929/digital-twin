@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-003",
-  "status": "reviewed-build-only",
+  "status": "frozen-pending-execution",
   "owner_issue": 157,
   "parent_issue": 8,
   "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior when the selected ambiguity-safe grounding architecture and live model roles are exercised through realistic virtual time?",
@@ -83,8 +83,8 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_promotion": false,
     "authorization_source": "user message in the active Codex task; authority is activated only after build and no-call preflight",
     "grounding_keep_required": true,

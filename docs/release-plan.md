@@ -364,6 +364,7 @@ The corresponding #157 successor is now built as
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. The 820-case
 network-free qualification passes through the actual tutoring, autonomy,
 outreach, SQLite, checkpoint, outbox, and virtual-time paths using the selected
-V2 grounding binding. This establishes execution readiness only. Direct OpenAI
-provider execution, T1-v2 promotion, and the release decision remain closed
-until the bounded paid result is recorded.
+V2 grounding binding. One-time direct OpenAI execution is now authorized only
+for this exact frozen instrument under 3,000-call and USD 50 ceilings. T1-v2
+promotion and the release decision remain closed until the result is recorded
+and authorization is revoked.
