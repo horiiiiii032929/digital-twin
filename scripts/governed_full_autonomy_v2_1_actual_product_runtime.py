@@ -7,6 +7,7 @@ from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
+from collections.abc import Callable
 
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
 from src.digital_twin.action_router import DeterministicActionRouterV2
@@ -237,8 +238,12 @@ def _install_release(
     *,
     now: datetime,
     grounding_architecture_id: str,
+    source_resolver: Callable[[str], dict[str, str]],
 ):
-    source = source_fixture(source_template_number(case.case_id))
+    source = source_resolver(case.case_id)
+    source_label = source.get(
+        "label", f"Protocol {source_template_number(case.case_id):03d}"
+    )
     profiles = TeachingProfileService(repository)
     draft = profiles.create_draft(
         fixture.professor_id,
@@ -284,7 +289,7 @@ def _install_release(
                 "course_id": fixture.course_a_id,
                 "source_template": source["source_id"],
                 "source_path": f"{source['source_id']}.md",
-                "title": f"Protocol {source_template_number(case.case_id):03d}",
+                "title": source_label,
                 "parent_cluster_id": f"cluster-{source['source_id']}",
                 "modality": "text",
                 "char_start": "0",
@@ -327,7 +332,7 @@ def _install_release(
             concepts=[
                 CourseConceptV1(
                     concept_id=source["concept_id"],
-                    label=f"Protocol {source_template_number(case.case_id):03d}",
+                    label=source_label,
                     description=source["statement"],
                     canonical_ranges=[
                         CanonicalSourceRangeV1(
@@ -354,10 +359,14 @@ def build_runtime_factory(
     provider_backed: bool,
     maximum_case_cost_usd: float = 1.0,
     grounding_architecture_id: str = "legacy-structured-lexical-v1",
+    source_resolver: Callable[[str], dict[str, str]] | None = None,
 ):
     """Return a per-case factory used only by the product evaluation adapter."""
 
     mode = MODES[condition]
+    resolve_source = source_resolver or (
+        lambda case_id: source_fixture(source_template_number(case_id))
+    )
 
     def factory(case, clock):
         root.mkdir(parents=True, exist_ok=True)
@@ -379,6 +388,7 @@ def build_runtime_factory(
             case,
             now=clock.now(),
             grounding_architecture_id=grounding_architecture_id,
+            source_resolver=resolve_source,
         )
         repository.save_course_tutoring_runtime_profile(
             CourseTutoringRuntimeProfileV1(

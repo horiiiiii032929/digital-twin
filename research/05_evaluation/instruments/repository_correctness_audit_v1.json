@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Reviewed the successor 008 command registration and confirmed validation, simulation, preflight, execute, and resume commands bind the new immutable run identity.",
+      "evidence": "Command registration was reviewed for the immutable 009 validate, simulate, preflight, execute, and resume entrypoints; paid execution remains freeze-guarded.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-01",
-      "reviewer": "codex-primary-review",
-      "sha256": "f1864bdcdc44578eda936bc73643c4c547cd76f36187dcc804d6b955c48d529d"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "1fc790d3dce9314acabac01c4d0504a07f2b7027fa05e0a661f94a6d09c6e395"
     },
     {
       "audit_status": "audited",
@@ -3007,6 +3007,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-configuration",
+      "evidence": "Official OpenAI model, pricing, Responses API, structured-output, and store:false metadata were refreshed on 2026-09-01; the package is frozen while provider and paid authority remain false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_009.json",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex 009 provider-readiness audit",
+      "sha256": "42375fc53171c840d0418a16a88e0e0964df4b05950bcf801ad204269e1f71f7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "full-autonomy-evaluation-boundary",
       "evidence": "Prospective instrument review verified four actual-service conditions, public/gold isolation, deterministic network-free execution, no paid authority, and integration-only claim boundaries.",
       "findings": [],
@@ -4327,6 +4338,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Validation now requires the frozen-pending-paid-authorization state while continuing to fail if either execution authority is enabled prematurely.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex 009 provider-readiness audit",
+      "sha256": "a3fbf35ac86cb3cf28a57bf5280e11f1d090affdf0cec24da87dd6575d05e375"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
@@ -4581,12 +4603,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-002",
-      "evidence": "Runtime-factory review plus representative and full runs verified real services, release-bound fixtures, shared clock injection, safe failure injection, restart, provider metrics, and no product bypass.",
+      "evidence": "The optional source resolver was reviewed as a fixture-lineage seam only; default 008 behavior remains unchanged and focused regression plus 009 full network-free execution passed.",
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex #157 realistic-time product audit",
-      "sha256": "07ff9c5d458c77083d09c6dd7e09701d01f7b3c39e071246803e9c8406c0ae6b"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "f4e06c2e9a13c1a16dd4557357d0a4168ad89e4e885c08cd19a4c2f5665ba388"
     },
     {
       "audit_status": "audited",
@@ -5406,12 +5428,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
-      "evidence": "Post-run audit corrected proactive-frequency scoring to use autonomous lineage only and grounding non-regression to compare paired reactive conditions; raw result remains immutable and the Refine decision is unchanged.",
+      "evidence": "Context-driven case counts, canaries, source resolution, ledgers, and hidden-gold joins were reviewed; defaults preserve historical 008 behavior and focused tests cover generalized execution.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "codex-primary-review",
-      "sha256": "98f81e2d97a4ec86e55a046e064a1cc51b928b930c6bef34df83efde3052f4b3"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "88fb44c21498b8d82e8cf8b81d0d55f7218026afb8010f848ea3ff1f5bac1c08"
     },
     {
       "audit_status": "audited",
@@ -5482,6 +5504,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "evaluation-tooling",
+      "evidence": "Runner review verifies immutable 009 context binding, exclusive outputs, protected live execution, and reuse of the generalized audited 002 engine.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "d02622c12966c11d3803a473f71cd6045f1328a4bb3f645782ecd45cb216060e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "full-autonomy-evaluation-boundary",
       "evidence": "Manual service-fixture and clock/restart review plus a four-condition network-free run verified real student, governed autonomy, outreach, SQLite restart, and due-delivery paths without provider use.",
       "findings": [],
@@ -5505,12 +5538,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "The consumed runner remains behind the repository-wide freeze guard. Frozen candidate source/profile hashes are checked against the manifest's immutable source revision rather than the evolving working tree; exclusive output, metadata freshness, credential, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
+      "evidence": "Preflight status now prioritizes revoked authority over time-dependent metadata freshness while retaining every individual readiness check and fail-closed execution behavior.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex V2.1 provider-integration audit",
-      "sha256": "1140ea60096e3bf3209c618856b2a2206bf5a1d4e401a941712229e58e93e8b7"
+      "reviewer": "Codex preflight stability audit",
+      "sha256": "c7ed35da0280bb42fc1ee5affd43c44065eb426e9b1df60bcc7a722b3562b7b7"
     },
     {
       "audit_status": "audited",
@@ -6000,12 +6033,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Reviewed builder allowlisting for 008 while preserving execution entrypoint protection and bounded authorization requirements.",
+      "evidence": "The 009 builder is registered while all live execution remains protected by bounded repository authorization. Freeze validation passes with no provider call.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "codex-primary-review",
-      "sha256": "ed43a49943710e992f017881e8bfbb4a5fb7e064448240304242595dc5e794e9"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "6aea4cb89fe1f505ff67965f5e01eb8b01c5b8c1ea7cc17e7e542b645fb3f922"
     },
     {
       "audit_status": "audited",
@@ -7496,12 +7529,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Reviewed revocation of the sole 008 bounded authorization while preserving its guarded entrypoint and all unrelated freeze boundaries.",
+      "evidence": "The 009 live runner is a protected operation and has no bounded authorization. Repository execution freeze validation passes.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "codex-primary-review",
-      "sha256": "4f0b887aaaac3ca859309677cb2d818cafd327f006cf6f56ce4f015bcd4de692"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "75d9cd00df60f01f18e349ab539cecd2f7823181e9015553e4a8260712b86700"
     },
     {
       "audit_status": "audited",
@@ -7529,23 +7562,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Graph review verifies evidence recommendations propagate to T1-v1 and T1-v2 intent selection, refusal remains dominant, ambiguous evidence cannot reach generation, and existing bounded repair/fallback behavior is unchanged.",
+      "evidence": "The total deterministic event-to-action mapping and professor-policy intersection were reviewed; no-action is always available and all event kinds are covered.",
       "findings": [],
-      "path": "src/digital_twin/student/autonomy_models.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "f59bd74315f485a6994da7f079c93a90a56222682a6d0b50b0ee9bfee8f71a60"
+      "path": "src/digital_twin/student/autonomy_eligibility.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "c492862968e6a5cf3b5643480fc6b403ff4ebf980d032290dbc078d43e0b946a"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+      "evidence": "The trace contract now records the deterministic action-eligibility version without exposing raw reasoning or changing authoritative state ownership.",
+      "findings": [],
+      "path": "src/digital_twin/student/autonomy_models.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "cef1a764c6dd7bb1f3c83e5ea940e2c1facfd083dfd9c0f105276a54cad0c75f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1",
+      "evidence": "Planner inputs and authorization were reviewed to enforce event-scoped action eligibility before and after model proposals; out-of-envelope output falls back deterministically and focused tests pass.",
       "findings": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
       "reviewed_at": "2026-09-01",
-      "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "5f87d6bdbc731e4972bda55f9cad6a0d7c19740a4476e9a5f3e7579542ef01bb"
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "45b93e12d342133fb9c25f7ae4729c103329b74b67cc39078426e068e0919027"
     },
     {
       "audit_status": "audited",
@@ -7792,6 +7836,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "governed-autonomy-v2-1-verification",
+      "evidence": "Tests cover mapping totality, preferred-action order, professor-policy intersection, and the mandatory no-action fallback.",
+      "findings": [],
+      "path": "tests/digital_twin/test_autonomy_eligibility.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "b5ed578c28284c3ca4c6e528393ccd6ea739e83f1c6f03dd00c43b5b35bbe2a0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "atomic-claim-evidence-validation",
       "evidence": "Focused tests cover full-set release, one-claim rejection, unknown and ineligible lineage, correct NLI direction, contradiction/neutral rejection, malformed/backend failure, and server-owned citation resolution.",
       "findings": [],
@@ -7858,13 +7913,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+      "domain": "governed-autonomy-v2-1-verification",
+      "evidence": "Focused tests verify provider-visible action envelopes, out-of-envelope replacement, trace lineage, and existing governed-autonomy behavior.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "14bb8f9438e813eaff6fb3dbc4a6e26c1d28872fc4d74d78b08d2ba6ae5800ba"
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex event-scoped eligibility audit",
+      "sha256": "de6b8ad7008cc4dea2438d46d21df10531d5f9ef585230f1b12b3572dbc60f13"
     },
     {
       "audit_status": "audited",
@@ -9339,6 +9394,17 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "codex-primary-review",
       "sha256": "cec0062e0825e9388b5e48007102adaae885d86f2fe78570ce97460675490def"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "evaluation-verification",
+      "evidence": "Focused tests verify the refreshed metadata removes only the freshness blocker while paid, provider, and repository-freeze authorization remain fail-closed.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
+      "reviewed_at": "2026-09-01",
+      "reviewer": "Codex 009 provider-readiness audit",
+      "sha256": "9ddcf720d7ec68b6bc2244fa5f72899dc0a4cfb9fc43666f47b99c7210addfab"
     },
     {
       "audit_status": "audited",

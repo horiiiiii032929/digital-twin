@@ -31,6 +31,11 @@ from src.digital_twin.student.autonomy_models import (
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
 )
+from src.digital_twin.student.autonomy_eligibility import (
+    ACTION_ELIGIBILITY_VERSION,
+    event_scoped_eligible_actions,
+    preferred_event_action,
+)
 from src.digital_twin.llm import LlmClient, LlmError, LlmIdentityDriftError, LlmMessage
 from src.digital_twin.tutor_policy import timestamp_now
 
@@ -130,38 +135,7 @@ class DeterministicAutonomousPlanner:
 
     async def plan(self, job: AutonomousJobInput) -> AutonomousPlannerOutputV1:
         event = job.opportunity.event_kind
-        action = {
-            AutonomousEventKind.STUDENT_MESSAGE: (
-                AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
-            ),
-            AutonomousEventKind.REPEATED_CONFUSION: (
-                AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE
-            ),
-            AutonomousEventKind.MISCONCEPTION: (
-                AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
-            ),
-            AutonomousEventKind.INCOMPLETE_OBJECTIVE: (
-                AutonomousActionKind.SEND_IN_APP_CHECK_IN
-            ),
-            AutonomousEventKind.SPACED_REVIEW_DUE: (
-                AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE
-            ),
-            AutonomousEventKind.STUDENT_INACTIVITY: (
-                AutonomousActionKind.SEND_IN_APP_CHECK_IN
-            ),
-            AutonomousEventKind.EVIDENCE_RECOVERED: (
-                AutonomousActionKind.RECOMMEND_APPROVED_SOURCE
-            ),
-            AutonomousEventKind.NEW_COURSE_RELEASE: (
-                AutonomousActionKind.RECOMMEND_APPROVED_SOURCE
-            ),
-            AutonomousEventKind.PRACTICE_INCOMPLETE: (
-                AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE
-            ),
-            AutonomousEventKind.PROFESSOR_SCHEDULED: (
-                AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE
-            ),
-        }.get(event, AutonomousActionKind.NO_ACTION)
+        action = preferred_event_action(event, job.policy.allowed_actions)
         return AutonomousPlannerOutputV1(
             action=action,
             reason_code=f"event-{event.value}",
@@ -198,6 +172,10 @@ class LiveAutonomousPlanner:
     async def plan(self, job: AutonomousJobInput) -> AutonomousPlannerOutputV1:
         policy = job.policy
         goal = job.goal
+        eligible_actions = event_scoped_eligible_actions(
+            job.opportunity.event_kind,
+            policy.allowed_actions,
+        )
         prompt = {
             "role": "pedagogical planner",
             "instruction": (
@@ -222,7 +200,8 @@ class LiveAutonomousPlanner:
                 if goal is not None
                 else None
             ),
-            "allowed_actions": [action.value for action in policy.allowed_actions],
+            "action_eligibility_version": ACTION_ELIGIBILITY_VERSION,
+            "eligible_actions": [action.value for action in eligible_actions],
             "evidence_keys": job.evidence_keys,
         }
         import json
@@ -244,7 +223,17 @@ class LiveAutonomousPlanner:
                 ],
                 task="autonomous_tutoring_plan",
             )
-            return AutonomousPlannerOutputV1.model_validate_json(response.content)
+            proposal = AutonomousPlannerOutputV1.model_validate_json(response.content)
+            if proposal.action not in eligible_actions:
+                fallback = await self.fallback.plan(job)
+                return fallback.model_copy(
+                    update={
+                        "reason_code": (
+                            f"event-envelope-fallback-{job.opportunity.event_kind.value}"
+                        )
+                    }
+                )
+            return proposal
         except LlmIdentityDriftError:
             raise
         except (LlmError, ValueError):
@@ -360,6 +349,7 @@ class GovernedAutonomousTutoringGraph:
                 course_id=job.opportunity.course_id,
                 release_id=job.opportunity.release_id,
                 graph_version=self.implementation_id,
+                action_eligibility_version=ACTION_ELIGIBILITY_VERSION,
                 policy_version=job.policy.version,
                 profile_sha256=job.policy.approved_profile_sha256,
                 planner_model=self.planner.model_id,
@@ -541,6 +531,10 @@ class GovernedAutonomousTutoringGraph:
         proposal = state["proposal"]
         if proposal is None:
             raise AutonomousRuntimeError("authorization requires a plan proposal")
+        eligible_actions = event_scoped_eligible_actions(
+            job.opportunity.event_kind,
+            job.policy.allowed_actions,
+        )
         checks = {
             "autonomy-enabled": job.policy.autonomy_enabled,
             "not-paused": not job.policy.paused,
@@ -557,7 +551,11 @@ class GovernedAutonomousTutoringGraph:
                 job.recent_message_count < job.policy.max_messages_per_7_days
             ),
             "concept-cooldown-eligible": not job.same_concept_cooldown_active,
-            "action-allowed": proposal.action in job.policy.allowed_actions,
+            "action-event-eligible": proposal.action in eligible_actions,
+            "action-allowed": (
+                proposal.action == AutonomousActionKind.NO_ACTION
+                or proposal.action in job.policy.allowed_actions
+            ),
             "evidence-complete": job.evidence_complete,
             "evidence-unique": job.evidence_unique,
             "evidence-current": job.evidence_current,

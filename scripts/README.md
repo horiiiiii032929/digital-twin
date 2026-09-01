@@ -1070,6 +1070,12 @@ persisting every completed case atomically. Attempt 008 completed 820/820 and is
 terminal `Refine`: corrected frequency and paired-grounding analysis pass, but
 all 290 expected proactive check-ins were emitted as diagnostic questions. Its
 authorization is revoked; the opened cases must not be reused for confirmation.
+- `build_governed_full_autonomy_v2_1_actual_product_evaluation_009.py` and
+  `run_governed_full_autonomy_v2_1_actual_product_evaluation_009.py`: bind the
+  event-scoped-action successor to 820 fresh cases over source families 051–100.
+  Validate, simulate, preflight, execute, and resume commands share the actual
+  product runner. The network-free simulation passes all gates; provider
+  execution remains fail-closed and unauthorized.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

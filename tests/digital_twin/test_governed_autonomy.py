@@ -1,9 +1,10 @@
 from datetime import UTC, datetime, timedelta
+import json
 from pathlib import Path
 
 import pytest
 
-from src.digital_twin.llm import FixtureLlmClient
+from src.digital_twin.llm import FixtureLlmClient, LlmResponse
 from src.digital_twin.generation import authoritative_citation_for_chunk
 from src.digital_twin.grounding import (
     AtomicClaimEvidenceValidator,
@@ -53,6 +54,9 @@ from src.digital_twin.student.autonomy_runtime import (
     DeterministicAutonomousWordingGenerator,
     GovernedAutonomousTutoringGraph,
     LiveAutonomousPlanner,
+)
+from src.digital_twin.student.autonomy_eligibility import (
+    ACTION_ELIGIBILITY_VERSION,
 )
 from src.digital_twin.student.autonomy_service import (
     GovernedAutonomyService,
@@ -543,6 +547,76 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
     assert result.trace.repair_calls == 0
     assert result.trace.graph_version == GRAPH_VERSION
     assert result.trace.generator_model == DETERMINISTIC_GENERATOR_MODEL
+
+
+@pytest.mark.asyncio
+async def test_live_planner_receives_event_envelope_and_cannot_escape_it(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(service, fixture, release)
+
+    class CapturingOutOfEnvelopeClient:
+        def __init__(self) -> None:
+            self.payload = None
+
+        async def chat(self, messages, task):
+            assert task == "autonomous_tutoring_plan"
+            self.payload = json.loads(messages[-1].content)
+            return LlmResponse(
+                content=json.dumps(
+                    {
+                        "action": "ask-diagnostic-question",
+                        "reason_code": "provider-selected-wrong-action",
+                        "expected_learner_action": "Reply.",
+                        "required_evidence_keys": [],
+                        "outcome_observation": "Observe a reply.",
+                        "stop_condition": "Stop.",
+                        "replan_condition": None,
+                    }
+                ),
+                provider_model="fixture/v1",
+            )
+
+    client = CapturingOutOfEnvelopeClient()
+    planner = LiveAutonomousPlanner(client, model_id="gpt-5.6-terra")
+    policy = repository.get_autonomy_policy(fixture.course_a_id)
+    chunk = release.chunks[0]
+    key = ":".join(
+        (
+            chunk.source_artifact_id,
+            str(chunk.source_version),
+            chunk.content_hash,
+            chunk.locator,
+        )
+    )
+    job = AutonomousJobInput(
+        opportunity=opportunity,
+        goal=repository.get_autonomous_goal(opportunity.goal_id),
+        policy=policy,
+        professor_id=fixture.professor_id,
+        current_release_id=release.id,
+        current_profile_id=policy.approved_profile_id,
+        current_profile_sha256=policy.approved_profile_sha256,
+        membership_active=True,
+        consent_active=True,
+        evidence_keys=[key],
+        evidence_chunk_ids=[chunk.id],
+        evidence_complete=True,
+        evidence_unique=True,
+        evidence_current=True,
+        evidence_authorized=True,
+        now=NOW.isoformat(),
+    )
+
+    proposal = await planner.plan(job)
+
+    assert client.payload["action_eligibility_version"] == ACTION_ELIGIBILITY_VERSION
+    assert client.payload["eligible_actions"] == [
+        "issue-retrieval-practice",
+        "no-action",
+    ]
+    assert "allowed_actions" not in client.payload
+    assert proposal.action == AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE
+    assert proposal.reason_code == "event-envelope-fallback-spaced-review-due"
 
 
 @pytest.mark.asyncio

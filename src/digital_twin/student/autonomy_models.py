@@ -446,6 +446,7 @@ class AgentTraceV2(_Contract):
     course_id: str = Field(min_length=1, max_length=128)
     release_id: str = Field(min_length=1, max_length=128)
     graph_version: str = Field(min_length=1, max_length=64)
+    action_eligibility_version: str | None = Field(default=None, max_length=128)
     policy_version: int = Field(ge=1)
     profile_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     planner_model: str | None = Field(default=None, max_length=128)

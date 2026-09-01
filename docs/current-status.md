@@ -332,6 +332,21 @@ Governed T1-v2.1 is therefore not promoted or deployed. The causal defect is
 that the live planner receives the full policy allowlist instead of an
 event-scoped eligible action set.
 
+Build-only successor 009 now implements
+`event-scoped-action-eligibility-v1`. Deterministic code intersects each durable
+event with the professor-approved action policy before Terra planning, always
+retains safe `no-action`, and rejects or deterministically replaces an
+out-of-envelope proposal. Its fresh source-disjoint 820-case network-free
+actual-product simulation passed all four conditions at 100% action accuracy
+with zero safety, citation, consent, duplicate, restart, loop, or termination
+defects. A pre-freeze draft simulation exposed one under-specified source
+target; the public question was corrected before freezing while product code,
+gold actions, gates, and models remained unchanged. Official OpenAI model,
+pricing, endpoint, structured-output, and `store:false` metadata were refreshed
+on 2026-09-01, and 009 is frozen pending paid authorization. Provider execution
+remains unauthorized, so this is development evidence rather than a release
+Keep.
+
 The actual-service boundary is now implemented and qualified by
 `governed-full-autonomy-v2-1-actual-product-smoke-001`. Four synthetic-public
 cases drove the real `StudentTutoringService`, `GovernedAutonomyService`,
@@ -1857,7 +1872,7 @@ continues to hold report, presentation, and professor-communication work.
 
 | Boundary | Current decision | Established | Missing before product release |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 deployment retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; ambiguity-safe grounding V2 passed fresh development gates; provider-backed 008 completed 820/820 with every safety/persistence gate passing | Replace the full planner action palette with deterministic event-scoped eligibility, then confirm on fresh cases; do not reuse the opened 820 cases or promote current T1-v2.1 |
+| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 deployment retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; provider-backed 008 completed 820/820 and identified the action-envelope defect; successor 009 adds deterministic event-scoped eligibility and passes all 820 fresh network-free cases | Freeze 009 and run one provider-backed confirmation on its fresh cases; do not reuse the opened 008 cases or promote T1-v2.1 from network-free development evidence |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
@@ -1884,7 +1899,7 @@ operations, professor fidelity, and real-user evidence remain future work.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |
-| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Refine | Preserve 003–007 as invalid and 008 as valid Refine; implement deterministic event-scoped action eligibility and use fresh confirmation cases |
+| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Go Deeper | Preserve 003–007 as invalid and 008 as valid Refine; successor 009 passes 820/820 fresh network-free cases and awaits a frozen provider-backed confirmation |
 | 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration only after product confirmation; do not infer a release claim from development evidence |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
 | 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |

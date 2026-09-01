@@ -1,0 +1,113 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-009-network-free-development-001",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-evaluation",
+  "stage_id": "actual-product-attempt-009-network-free-development",
+  "round_number": null,
+  "status": "completed-go-deeper",
+  "supersedes": [],
+  "decision_question": "Does deterministic event-scoped action eligibility correct proactive action selection without weakening product safety or persistence on fresh source-disjoint cases?",
+  "code_revision": "4d7ab90550595cbac8a6ed89edccbb7e9ed67e41",
+  "dirty_state": true,
+  "started_at": "2026-09-01T11:31:34Z",
+  "completed_at": "2026-09-01T11:42:40Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_009.json",
+      "sha256": "cef49a5a8e2456fd067dbcb00f6399404846ee5331fa540b3c24fd0c169ff251",
+      "role": "build-only-provider-unauthorized-instrument"
+    },
+    {
+      "path": "ignored-network-free-public-package",
+      "sha256": "be561f1ce2eb5eca68ac5f7822532a7ec0eb2b074638da7f879b187ee042d8cc",
+      "role": "public-input-package"
+    },
+    {
+      "path": "ignored-network-free-hidden-gold-package",
+      "sha256": "846717dbc4f27aa2f6966b6641f0f5b26a7bebdf5ba05407627c0782be2d9a8c",
+      "role": "hidden-gold-package"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "event-scoped-action-eligibility-v1",
+      "version": "network-free-development-001",
+      "role": "candidate",
+      "changed_planes": [
+        "pedagogical-policy",
+        "proactive-loop",
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "overall-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-safe-fallback-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "goal-termination-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.98,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-network-free-product-gates",
+          "passed": true,
+          "evidence": "All 820 cases passed with zero safety, scope, citation, consent, duplicate, loop, or authority failures."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "evaluation",
+      "count": 1,
+      "evidence": "A draft confusion template omitted sufficient canonical source terms; it was corrected before freezing without changing product code, gold actions, gates, or models."
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "event-scoped-action-eligibility-v1",
+    "rationale": "Freeze the corrected source-disjoint package and run one provider-backed confirmation before any T1-v2.1 selection or deployment."
+  },
+  "limitations": [
+    "Network-free development evidence only.",
+    "Source-disjoint but template-matched synthetic scenarios.",
+    "No real-professor fidelity, real-student usability, or learning-outcome claim."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-evaluation-009-network-free-development-001-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-009-network-free-development-001.json"
+}
