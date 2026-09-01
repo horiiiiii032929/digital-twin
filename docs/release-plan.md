@@ -161,6 +161,22 @@ action router and grounding/claim boundary on fresh development evidence. It can
 retune or rerun the sealed final package. The qualified local deterministic R1
 remains the rollback baseline and makes no LLM factual-quality claim.
 
+The active #153 successor compares the strongest
+protocol-valid typed-target baseline with semantic target resolution over a new
+500-case, source-range-disjoint package. The package includes a newly pinned
+open operating-systems source and unused ranges from the other three course
+families; public cases and hidden gold remain physically separate. Attempt 001
+is invalid because an internal ranking bonus produced a 1.05 score for a
+normalized 0--1 contract in 46 candidate cases. The only permitted correction
+normalizes that score and makes operational failures invalidate the comparison;
+the dataset, methods, gold, and gates are unchanged. Attempt 002 then completed
+without operational failures and produced a valid `Refine`: semantic-target v3
+reached 81.0% grounded success versus 91.0% for typed-target v1; neither passed
+the grounded/claim/citation release gates. The candidate is rejected and all
+authority is revoked. Any further correction must replace question-side target
+ranking with source-side semantic evidence atoms and use new development
+evidence; it cannot reopen the sealed 10,000+1,000 result.
+
 ## Release stages
 
 | Stage | Outcome | Promotion rule |

@@ -67,6 +67,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_action_router_product_checkpoint.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_semantic_target_successor.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -192,6 +195,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_whole_system_architecture_round.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_semantic_target_comparison.py": (
             "method_evaluation_execution",
         ),
         "scripts/run_course_digital_twin_autonomous_long_run_001.py": (

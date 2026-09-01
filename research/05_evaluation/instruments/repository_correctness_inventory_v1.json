@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 845
+    "audited": 854
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 194,
-    "active_runtime": 141,
+    "active_or_unclassified_tooling": 196,
+    "active_runtime": 142,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 225,
+    "evaluation_configuration": 228,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 184
+    "verification": 187
   },
-  "file_count": 845,
+  "file_count": 854,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ab17ffca6202df0fde387d1a5bcaedc407bb527f978d97e8549c513dc9061f41",
+  "record_sha256": "2c601e7a59fcd5b77fc4636193effe31c939e023f597e4edaee21b8a276e0d01",
   "records": [
     {
       "audit": {
@@ -2919,6 +2919,54 @@
     },
     {
       "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Instrument review verifies exactly one best-valid baseline and one semantic-target candidate, full 13-plane manifests, immutable source/case/gold hashes, unchanged grounding gates, one network-free execution, and zero provider or paid authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_comparison_001.json",
+      "risk": "high",
+      "sha256": "81ebfecdc72b7ec89f0758fde6309c9579b33dab3aa9ca3f1453a7b6a628f04c"
+    },
+    {
+      "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Corrective instrument review verifies the exact attempt-001 source, public-case, hidden-gold, baseline, candidate, scoring, and hard-gate bindings; only the candidate version, attempt identity, and exclusive output path change for the single score-contract harness correction.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_comparison_002.json",
+      "risk": "high",
+      "sha256": "3de79819b4156ef15d10e2dec2a7ee5f97f0187f6b12abf2e78f81fd506b0b1a"
+    },
+    {
+      "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Instrument review verifies a provider-free 100-cluster/500-case package, pinned public-source identity and license, zero prior source-range overlap, public/gold separation, unique questions, exact source matchability, and no private or final data access.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_successor_001.json",
+      "risk": "high",
+      "sha256": "c30f7d804afa7d7263c1e6bce5daa16b97e629b4b2cf7fd7cbe3f095b834c0d3"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-retrieval-confirmation",
         "evidence": "Instrument review verifies six frozen methods, exact source/case/gold hashes, 450/450 pre-ranking matchability, durable public rankings before hidden gold, zero retries, USD 2 stop, and automatic progression only on a valid pass.",
         "findings": [],
@@ -5810,6 +5858,22 @@
     },
     {
       "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Builder review and focused tests verify pinned ThinkOS provenance, exclusion of every prior source range, deterministic balanced selection, byte stability, normalized uniqueness, exact 474/474 reference matchability, exclusive guarded writes, and no provider/final/private access.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_academic_factual_qa_semantic_target_successor.py",
+      "risk": "high",
+      "sha256": "9a42f2ff5c6b990a5d57ea36338916b91f19270a9e789315527523c91f42fbd2"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-retrieval-successor",
         "evidence": "Builder review verifies source-family-disjoint balanced selection, exact source-derived region registration, shared source hashes across cases/gold/corpus, 450/450 pre-ranking matchability, exclusive outputs, and zero provider or final-set access.",
         "findings": [],
@@ -7324,6 +7388,22 @@
     },
     {
       "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Comparison runner review verifies exact artifact hashes, two-condition cardinality, clean-worktree and bounded freeze guards, public-only response generation, hidden gold after persistence, exclusive outputs, deterministic scoring, and terminal Keep/Refine/invalid behavior with zero provider calls; any operational failure now invalidates quality interpretation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_academic_factual_qa_semantic_target_comparison.py",
+      "risk": "high",
+      "sha256": "dfba3652463b4289f5010c9546b4761f947eb429e0149db91db7e2a54cf028d3"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-retrieval-confirmation",
         "evidence": "Runner review verifies direct first-party embedding identities, bounded streamed indexes, bound query caches and resume, six course-scoped methods, a public-only paid preflight, durable ranking persistence before hidden-gold loading, standard result evidence, source-range scoring, finite selection, and program-owned authority.",
         "findings": [],
@@ -8241,10 +8321,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Runner review verifies bounded authorization, versioned Round 1\u20133 instruments, public-input-only response generation, typed-target/source-range dispatch, ambiguity clarification, canonical claim rendering, case-ID joins, response persistence before gold opening, versioned deterministic scoring, exclusive outputs, and zero provider calls.",
+        "evidence": "Runner review verifies bounded authorization, versioned Round 1\u20133 behavior plus semantic-target dispatch, public-input-only response generation, ambiguity clarification, canonical claim rendering, case-ID joins, response persistence before gold opening, deterministic scoring, exclusive outputs, and zero provider calls.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewer": "Codex semantic-target grounding audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8260,7 +8340,7 @@
       ],
       "path": "scripts/run_whole_system_architecture_round.py",
       "risk": "high",
-      "sha256": "8da1d3e2cc5b43a32404ae57b65c911a5ee398826515426f29dc318bc2a6735c"
+      "sha256": "a7bdafffd3087368bd43235011978329a5499004b43fdc1656de38d62aecdb32"
     },
     {
       "audit": {
@@ -10278,10 +10358,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Grounding export review confirms typed-target and source-range planners, retrievers, gates, canonical source rendering, and retained controls are explicit with no provider or hidden-gold dependency.",
+        "evidence": "Grounding export review confirms typed-target, source-range, and semantic-target planners, retrievers, gates, canonical source rendering, and retained controls are explicit with no provider or hidden-gold dependency.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10289,7 +10369,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "f59de33cde7eaf3ff5862217d4b1f4798a1fc133b19bebc6d4dfce895621a228"
+      "sha256": "27786bbd38fd745a0faf7e2c05b7d48b0d3d02d5ca0b44e6a261d68920c99f78"
     },
     {
       "audit": {
@@ -10578,6 +10658,22 @@
       "path": "src/digital_twin/grounding/retrieval_runtime.py",
       "risk": "high",
       "sha256": "b085b85c329b5948be7a30d9ef414c030225c578848c904a8fc3319c304d0b82"
+    },
+    {
+      "audit": {
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Manual and focused-test review verifies public semantic-target parsing, context and cluster scoping, deterministic IDF coverage, requested cardinality, distinct approved range selection, ambiguity clarification, authorization checks, normalized public evidence scores, and no provider or gold dependency.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/semantic_target_resolution.py",
+      "risk": "high",
+      "sha256": "5207a03e43d431e2fb0c9c1096913c706c2710fa4bf23a115e9c75bd6645ed03"
     },
     {
       "audit": {
@@ -10965,11 +11061,11 @@
     },
     {
       "audit": {
-        "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze review retains the global block while authorizing only the exact provider-free architecture tranche build and three finite architecture comparisons; the shared entrypoint fails closed outside those bounded identities.",
+        "domain": "grounding-and-retrieval-correctness",
+        "evidence": "Freeze review retains the global block and revokes the completed dataset build plus both semantic-target attempts after the terminal Refine result; no semantic-target execution identity remains authorized.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10977,7 +11073,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "b678688097ae4ab31c19abce9a41c0c64c16c5c8cd70beb3e09de7af0cc74710"
+      "sha256": "3d25f3316555b246d1fe64096f78db73f1f1de671c7bca2bfef57e23dafb4f7a"
     },
     {
       "audit": {
@@ -11686,10 +11782,10 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies the exact six provider-free authorizations, including the architecture tranche build and all three comparisons, while rejecting terminal paid and historical successors.",
+        "evidence": "Freeze regression verifies the exact six remaining provider-free authorizations: two deterministic package builds and the architecture tranche build plus all three comparisons; all semantic-target identities, terminal paid runs, and historical successors remain rejected.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -11794,6 +11890,22 @@
       "path": "tests/digital_twin/test_retrieval_v3_instruments.py",
       "risk": "medium",
       "sha256": "6778e506e755afb1901122a71aa11a07cebdbb85c30f9463c92a344e4d1bf6e2"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests cover low-information exact-section resolution, cross-cluster ambiguity clarification, distinct multi-evidence cardinality, contextual retrieval expansion, normalized score clamping, and fail-closed unauthorized source handling.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_semantic_target_resolution.py",
+      "risk": "medium",
+      "sha256": "c93500022eca9990101321a7333e3e18c1491b17fa2064f7449172a3bfd68eaf"
     },
     {
       "audit": {
@@ -12437,6 +12549,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify corrected comparison artifact validation, exactly two bound architectures, retained best-valid baseline, semantic candidate rollback identity, 20-case network-free simulation, hidden-gold closure, zero provider/cost behavior, and invalid classification for any operational failure.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_semantic_target_comparison.py",
+      "risk": "medium",
+      "sha256": "b76edf57596056b52920abcba985a953561781955f06ec8831c212ca10a1f55b"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-retrieval-verification",
         "evidence": "Focused tests verify the 100-cluster/500-case balanced fresh package, source-family disjointness, corpus/cases/gold hash identity, runtime/gold region-ID equality, 450/450 matchability, and fail-before-ranking mutation behavior.",
         "findings": [],
@@ -12818,6 +12946,22 @@
       "path": "tests/test_build_academic_factual_qa_open_10000.py",
       "risk": "medium",
       "sha256": "49fc7530a47bc379fb34231e19d93086ea13f0608997f5aa3bef7eed41b7afcf"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify exact 500-case package distribution, four-course balance, prior-range exclusion, non-overlapping minimal atoms, normalized uniqueness, exact reference matchability, byte stability, and pinned ThinkOS provenance.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "Codex semantic-target grounding audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_academic_factual_qa_semantic_target_successor.py",
+      "risk": "medium",
+      "sha256": "8bd097520e4f9ae56a38890983ef704856b589344d7081dbd9017107602ec601"
     },
     {
       "audit": {
@@ -14213,8 +14357,8 @@
     }
   ],
   "risk_counts": {
-    "high": 647,
-    "medium": 198
+    "high": 653,
+    "medium": 201
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

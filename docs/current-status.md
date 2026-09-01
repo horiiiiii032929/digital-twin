@@ -6,16 +6,12 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-The active successor is now
-`course-digital-twin-whole-system-architecture-evolution-001` under issue #165.
-It treats V2.1 as an immutable baseline rather than a predetermined winner and
-permits substantial replacement across domain, grounding, learner-state,
-pedagogy, reactive/proactive loops, governance, persistence, product UX,
-operations, and evaluation. Three source-disjoint development rounds precede
-one fresh confirmation. Every build, simulation, preflight, execution, invalid
-or cancelled run, comparison, and decision must receive an immutable manifest,
-machine record, readable summary, registry row, artifact and code bindings,
-operational accounting, limitations, and GitHub checkpoint before progression.
+The three-round whole-system architecture study under issue #165 is complete
+and closed `Refine`. Issue #153 is now the active P0. It retains
+`typed-target-evidence-v1` as the best protocol-valid development baseline and
+tests one semantic-target/source-range successor on genuinely fresh evidence.
+The sealed Program 011 final set and all three known development folds remain
+closed to tuning.
 
 The program is build-only and provider-unauthorized. Its three development
 folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
@@ -75,6 +71,30 @@ action, and zero severe releases on the valid Round 2 comparison. This is not a
 release selection: the method failed the grounded, claim, citation, and
 source-version gates, while the higher 91.64% Round 3 number remains diagnostic
 only because of the parent/child protocol mismatch.
+
+The #153 semantic-target comparison is terminal `Refine` on 500 cases across
+100 source-range-disjoint clusters, 25 per course, with 400 answerable
+and 100 boundary questions. Operating-systems evidence comes from pinned
+ThinkOS commit `5ab731d`; the other courses use only ranges not present in the
+three earlier packages. All 474 required references map exactly to 300 minimal
+source ranges, normalized questions are unique, public inputs and hidden gold
+are separate, and no provider/private/final data was used. The comparison
+binds exactly two conditions: the valid typed-target baseline and
+`semantic-target-resolution-v3`. Attempt 001 is preserved as
+`invalid-execution`: 46 candidate cases exceeded the normalized 0--1 evidence
+score contract after internal match bonuses. Its apparent quality metrics are
+not interpreted. The single permitted harness-only correction clamps that
+public score, makes any operational failure invalidate the run, changes no
+case, gold, method, or gate, and used fresh exclusive attempt 002 output.
+Attempt 002 completed all 1,000 condition responses without operational
+failures. The semantic candidate reached 81.0% grounded factual success versus
+91.0% for the typed-target baseline. Both kept 100% boundary action, zero severe
+unsupported releases, and passing retrieval coverage, but both failed the 95%
+grounded and claim/citation gates; the candidate also missed 100% source-version
+validity. Semantic-target v3 is rejected, typed-target v1 remains rollback only,
+and all semantic-target authorizations are revoked. The next correction must be
+a source-side semantic evidence-atom architecture evaluated on new evidence;
+the fresh 1,000, known 10,000+1,000, and 820-case autonomy stages remain closed.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy

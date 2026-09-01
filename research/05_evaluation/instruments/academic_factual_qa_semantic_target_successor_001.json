@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-semantic-target-successor-001",
+  "program_id": "course-digital-twin-grounding-correction-001",
+  "status": "frozen-build-only",
+  "decision_question": "Can a fresh source-range-disjoint development tranche support a fair comparison between the best protocol-valid typed-target baseline and a semantic target resolver?",
+  "construction": {
+    "cluster_count": 100,
+    "case_count": 500,
+    "course_cluster_count": 25,
+    "answerable_case_count": 400,
+    "boundary_case_count": 100,
+    "public_hidden_gold_separation": true,
+    "normalized_question_uniqueness_required": true,
+    "prior_source_range_overlap_maximum": 0,
+    "provider_calls": 0,
+    "private_data_used": false,
+    "final_split_opened": false
+  },
+  "operating_systems_source": {
+    "repository_url": "https://github.com/AllenDowney/ThinkOS",
+    "repository_commit": "5ab731d25042d4aab455566dc7698fdd31373c75",
+    "source_path": "book/book.tex",
+    "license_spdx": "CC-BY-NC-SA-4.0"
+  },
+  "authority": {
+    "dataset_generation_authorized": true,
+    "method_evaluation_authorized": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "hard_stops": [
+    "private data",
+    "source or license drift",
+    "prior source-range overlap",
+    "public/gold identity mismatch",
+    "duplicate normalized question",
+    "unmatchable canonical evidence",
+    "final split access"
+  ],
+  "content_sha256": "721d123e665ecaac1d30d34109e0414e0f55f6102cbf4a49eca08aad1fc379d2"
+}

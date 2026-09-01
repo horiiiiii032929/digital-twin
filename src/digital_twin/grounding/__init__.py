@@ -176,6 +176,14 @@ from src.digital_twin.grounding.source_range_evidence import (
     canonicalize_source_claim,
     plan_public_source_ranges,
 )
+from src.digital_twin.grounding.semantic_target_resolution import (
+    SemanticTargetCandidateV3,
+    SemanticTargetEvidenceGateV3,
+    SemanticTargetEvidenceRetrieverV3,
+    SemanticTargetResolutionTraceV3,
+    SemanticTargetResolutionV3,
+    resolve_semantic_targets,
+)
 
 
 __all__ = [
