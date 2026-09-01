@@ -624,10 +624,9 @@ def live_preflight() -> dict[str, Any]:
             "paid_execution_authorized"
         ],
     }
-    ready_except_authority = all(
-        value
-        for key, value in checks.items()
-        if key not in {"provider_execution_authorized", "paid_execution_authorized"}
+    authority_ready = (
+        checks["provider_execution_authorized"]
+        and checks["paid_execution_authorized"]
     )
     return {
         "status": (
@@ -635,7 +634,7 @@ def live_preflight() -> dict[str, Any]:
             if all(checks.values())
             else (
                 "blocked-not-authorized"
-                if ready_except_authority
+                if not authority_ready
                 else "blocked-preflight-failure"
             )
         ),

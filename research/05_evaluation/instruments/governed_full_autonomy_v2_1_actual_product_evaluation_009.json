@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-009",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-paid-authorization",
   "owner_issue": 157,
   "parent_issue": 8,
   "decision_question": "Does deterministic event-scoped action eligibility correct proactive action selection without weakening grounding, authority, persistence, or bounded autonomy on fresh source-disjoint cases?",
@@ -98,19 +98,33 @@
     "timing_assertion": "policy-derived-window"
   },
   "models": {
-    "metadata_status": "refresh-required-before-paid-authorization",
+    "metadata_status": "fresh",
+    "verified_at": "2026-09-01T12:50:43+00:00",
+    "freshness_hours": 24,
     "planner": {
       "provider": "openai",
       "model": "gpt-5.6-terra",
+      "dated_snapshot": false,
+      "pricing_usd_per_million_input_tokens": 2.0,
+      "pricing_usd_per_million_output_tokens": 12.0,
       "returned_identity_must_equal": "gpt-5.6-terra"
     },
     "generator": {
       "provider": "openai",
       "model": "gpt-5.4-mini-2026-03-17",
+      "dated_snapshot": true,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5,
       "returned_identity_must_equal": "gpt-5.4-mini-2026-03-17"
     },
+    "official_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+      "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "https://developers.openai.com/api/reference/cli/resources/responses/methods/create"
+    ],
     "api": "https://api.openai.com/v1/responses",
     "store": false,
+    "retention_boundary": "Only public-synthetic evaluation inputs are allowed. store=false disables response-object storage; organization-level API retention is not inferred from this setting.",
     "structured_output": true,
     "fallback": false,
     "maximum_transport_retries": 0

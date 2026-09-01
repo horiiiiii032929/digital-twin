@@ -183,8 +183,8 @@ def validate() -> dict[str, Any]:
     instrument = json.loads(INSTRUMENT.read_text(encoding="utf-8"))
     if instrument.get("instrument_id") != INSTRUMENT_ID:
         raise ValueError("fresh autonomy confirmation identity drifted")
-    if instrument.get("status") != "reviewed-provider-unauthorized":
-        raise ValueError("fresh autonomy confirmation must remain unauthorized")
+    if instrument.get("status") != "frozen-pending-paid-authorization":
+        raise ValueError("fresh autonomy confirmation freeze status drifted")
     authority = instrument["authority"]
     if authority["provider_execution_authorized"] or authority["paid_execution_authorized"]:
         raise ValueError("fresh autonomy confirmation is unexpectedly authorized")
@@ -211,7 +211,7 @@ def validate() -> dict[str, Any]:
         raise ValueError("fresh autonomy source-family count drifted")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-build-only-provider-unauthorized",
+        "status": "passed-frozen-provider-unauthorized",
         "case_count": len(build_contract()),
         "source_family_count": len(fresh_source_ids),
         "source_disjoint_from_attempt_008": True,

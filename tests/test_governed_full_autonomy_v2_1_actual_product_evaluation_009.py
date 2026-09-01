@@ -15,7 +15,7 @@ def test_fresh_confirmation_is_source_disjoint_and_unauthorized() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-build-only-provider-unauthorized"
+    assert result["status"] == "passed-frozen-provider-unauthorized"
     assert result["case_count"] == 820
     assert result["source_family_count"] == 50
     assert result["source_disjoint_from_attempt_008"] is True
@@ -41,6 +41,6 @@ def test_fresh_confirmation_preflight_fails_closed_before_authorization() -> Non
     assert result["status"] == "blocked-not-authorized"
     assert "provider-execution-not-authorized" in result["blockers"]
     assert "paid-execution-not-authorized" in result["blockers"]
-    assert "provider-metadata-refresh-required" in result["blockers"]
+    assert "provider-metadata-refresh-required" not in result["blockers"]
     assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0

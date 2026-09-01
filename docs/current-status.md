@@ -341,8 +341,11 @@ actual-product simulation passed all four conditions at 100% action accuracy
 with zero safety, citation, consent, duplicate, restart, loop, or termination
 defects. A pre-freeze draft simulation exposed one under-specified source
 target; the public question was corrected before freezing while product code,
-gold actions, gates, and models remained unchanged. Provider execution remains
-unauthorized, so this is development evidence rather than a release Keep.
+gold actions, gates, and models remained unchanged. Official OpenAI model,
+pricing, endpoint, structured-output, and `store:false` metadata were refreshed
+on 2026-09-01, and 009 is frozen pending paid authorization. Provider execution
+remains unauthorized, so this is development evidence rather than a release
+Keep.
 
 The actual-service boundary is now implemented and qualified by
 `governed-full-autonomy-v2-1-actual-product-smoke-001`. Four synthetic-public

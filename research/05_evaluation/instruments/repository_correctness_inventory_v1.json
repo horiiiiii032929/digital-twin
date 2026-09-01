@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6385fa29b0470c3b13eff4fdd0fabb0dc52f75bf8ae9d2c4acab8ec6a9f2356c",
+  "record_sha256": "7b467f3fe2c3f0ca8c04c02bb64c6292abe4ca36b0598c912bd3ad719bfbc8d1",
   "records": [
     {
       "audit": {
@@ -4408,10 +4408,10 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Fresh 820-case confirmation identity, hashes, unchanged hard gates, source-disjoint lineage, pre-freeze correction, and provider-unauthorized status were reviewed and validated.",
+        "evidence": "Official OpenAI model, pricing, Responses API, structured-output, and store:false metadata were refreshed on 2026-09-01; the package is frozen while provider and paid authority remain false.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex event-scoped eligibility audit"
+        "reviewer": "Codex 009 provider-readiness audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4419,7 +4419,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_009.json",
       "risk": "high",
-      "sha256": "cef49a5a8e2456fd067dbcb00f6399404846ee5331fa540b3c24fd0c169ff251"
+      "sha256": "42375fc53171c840d0418a16a88e0e0964df4b05950bcf801ad204269e1f71f7"
     },
     {
       "audit": {
@@ -6430,10 +6430,10 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Builder review verifies fresh source-family IDs, deterministic public/gold package construction, hash binding, source disjointness, and no provider execution.",
+        "evidence": "Validation now requires the frozen-pending-paid-authorization state while continuing to fail if either execution authority is enabled prematurely.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex event-scoped eligibility audit"
+        "reviewer": "Codex 009 provider-readiness audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -6441,7 +6441,7 @@
       "package_commands": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
       "risk": "high",
-      "sha256": "ce5739c0b012a143db23ede3e9eab479d644257e88406684dedb4906f4321424"
+      "sha256": "a3fbf35ac86cb3cf28a57bf5280e11f1d090affdf0cec24da87dd6575d05e375"
     },
     {
       "audit": {
@@ -8682,10 +8682,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "The consumed runner remains behind the repository-wide freeze guard. Frozen candidate source/profile hashes are checked against the manifest's immutable source revision rather than the evolving working tree; exclusive output, metadata freshness, credential, identity, budget, zero-retry, actual-service, restart, and no-promotion paths remain fail closed.",
+        "evidence": "Preflight status now prioritizes revoked authority over time-dependent metadata freshness while retaining every individual readiness check and fail-closed execution behavior.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex V2.1 provider-integration audit"
+        "reviewer": "Codex preflight stability audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8698,7 +8698,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
       "risk": "high",
-      "sha256": "1140ea60096e3bf3209c618856b2a2206bf5a1d4e401a941712229e58e93e8b7"
+      "sha256": "c7ed35da0280bb42fc1ee5affd43c44065eb426e9b1df60bcc7a722b3562b7b7"
     },
     {
       "audit": {
@@ -14412,10 +14412,10 @@
     {
       "audit": {
         "domain": "evaluation-verification",
-        "evidence": "Tests cover fresh-source disjointness, package hashes, protected entrypoints, blocked unauthorized preflight, hidden-gold isolation, and full network-free execution.",
+        "evidence": "Focused tests verify the refreshed metadata removes only the freshness blocker while paid, provider, and repository-freeze authorization remain fail-closed.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex event-scoped eligibility audit"
+        "reviewer": "Codex 009 provider-readiness audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14423,7 +14423,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_009.py",
       "risk": "medium",
-      "sha256": "7f6162786b6d7264c8fa279f693e595c457ca2027f267429ca40a6b9e13ac9fa"
+      "sha256": "9ddcf720d7ec68b6bc2244fa5f72899dc0a4cfb9fc43666f47b99c7210addfab"
     },
     {
       "audit": {

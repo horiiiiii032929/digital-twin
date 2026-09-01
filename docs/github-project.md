@@ -148,9 +148,10 @@ Successor 009 is now the active `In Progress / Go Deeper` checkpoint. It adds a
 versioned deterministic event-scoped action envelope before live planning and
 uses 50 fresh source families across 820 source-disjoint cases. The complete
 network-free actual-product simulation passed every condition and hard gate at
-100% action accuracy with zero provider calls. Provider metadata refresh,
-authorization, and a clean paid confirmation remain outstanding; no promotion
-or deployment follows from the network-free pass.
+100% action accuracy with zero provider calls. Official OpenAI metadata was
+refreshed on 2026-09-01 and the package is frozen. Paid authority, the bounded
+freeze allowlist, and a clean live confirmation remain outstanding; no
+promotion or deployment follows from the network-free pass.
 
 That immutable candidate is now
 `governed-full-autonomy-v2-1-actual-product-evaluation-003`. It binds #172's

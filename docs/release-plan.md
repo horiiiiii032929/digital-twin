@@ -396,4 +396,6 @@ Build-only successor 009 implements that control plane and binds 820 fresh,
 source-disjoint but template-matched cases. Its network-free actual-product run
 passed T0, T1-v1, T1-v2 reactive, and T1-v2 autonomous at 100% action accuracy
 with every safety and persistence gate passing. This advances the release path
-to provider-backed confirmation; it does not select or deploy T1-v2.1.
+to provider-backed confirmation. Official OpenAI model, pricing, API, and
+storage-setting metadata were refreshed on 2026-09-01 and the package is frozen
+pending paid authorization; it does not select or deploy T1-v2.1.
