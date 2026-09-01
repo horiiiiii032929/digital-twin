@@ -1,35 +1,23 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-006",
-  "status": "invalid-execution-authorization-revoked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-007",
+  "status": "frozen-pending-execution",
   "owner_issue": 157,
   "parent_issue": 8,
-  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior when provider response failures are classified without retaining unrestricted output?",
-  "successor_after": "governed-full-autonomy-v2-1-actual-product-evaluation-005",
-  "diagnostic_correction": {
-    "version": "privacy-safe-responses-diagnostics-v1",
-    "reason": "Attempts 004 and 005 collapsed a completed provider response into an undifferentiated malformed-response with no accepted usage or failure stage.",
-    "evaluated_method_changed": false,
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior after aligning the non-intent generation prompt with its authoritative atomic-claim schema?",
+  "successor_after": "governed-full-autonomy-v2-1-actual-product-evaluation-006",
+  "runtime_correction": {
+    "version": "bounded-prompt-schema-alignment-v1",
+    "reason": "Attempt 006 proved that the T0 non-intent path used an answer/citation prompt while the API and post-parse validator required the atomic claims contract. T1-v2 used the claims-only intent prompt and completed normally.",
+    "changed_file": "src/digital_twin/generation/prompt.py",
+    "change": "BoundedPedagogicalPromptBuilder now inherits the question-targeted claims-only builder for non-intent generation while preserving its intent-specific prompt.",
+    "evaluated_runtime_bug_fixed": true,
     "cases_changed": false,
     "gold_changed": false,
     "gates_changed": false,
     "model_roles_changed": false,
-    "raw_provider_output_retained": false,
-    "retained_fields": [
-      "HTTP status",
-      "response status",
-      "incomplete reason",
-      "provider error code",
-      "output item types",
-      "content part types",
-      "output-text count",
-      "refusal presence",
-      "response SHA-256",
-      "returned model identity",
-      "reported token usage and cost"
-    ],
-    "provider_usage_retained_on_malformed": true,
-    "identical_retry": false
+    "retrieval_changed": false,
+    "raw_provider_output_retained": false
   },
   "selected_grounding": {
     "result_id": "academic-factual-qa-ambiguity-safe-comparison-002",
@@ -54,10 +42,10 @@
     "long_horizon_days": 30,
     "proactive_opportunity_count": 120,
     "source_template_count": 50,
-    "public_sha256": "d011f125a5d07f364044866415241e1db257995b96a529633766c94fa7f808fd",
-    "hidden_gold_sha256": "698da09a17a2fe3c326c937bcbeec708a073b9866efff97eef2ac039e2edd0db",
-    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-005",
-    "content_change_from_005": "dataset identity only; observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256",
+    "public_sha256": "53adddcb46ec97d5e99cd10877bca68ca6e30b640f44007142a9a418d5defc5d",
+    "hidden_gold_sha256": "10bb79ad39d1c6ae0a9d7cbffb30158c67454dcc1ca63d6534c9e77fe65f3db6",
+    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-006",
+    "content_change_from_006": "dataset identity only; observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256",
     "quality_results_previously_opened": 0
   },
   "clock": {
@@ -102,10 +90,10 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_promotion": false,
-    "authorization_source": "User instructed the integrated evaluation-and-deployment path to proceed on 2026-09-01.",
+    "authorization_source": "User instructed the integrated evaluation-and-deployment path to continue through the first valid release decision on 2026-09-01.",
     "grounding_keep_required": true,
     "grounding_result_id": "academic-factual-qa-ambiguity-safe-comparison-002",
     "maximum_provider_calls": 3000,
@@ -146,8 +134,8 @@
     "same_cases_quality_rerun_allowed": false
   },
   "boundaries": [
-    "Attempts 003 through 005 remain immutable invalid operational evidence.",
-    "This successor changes provider observability and accounting only.",
+    "Attempts 003 through 006 remain immutable invalid operational evidence.",
+    "This successor fixes one demonstrated runtime prompt-schema mismatch before any bulk or hidden-gold execution occurred.",
     "The product receives only observable events and the approved synthetic public course release.",
     "Gold derives from source truth, approved policy, consent, membership, release, and the action lattice.",
     "Real professor fidelity, real student usability, and learning improvement are not established."

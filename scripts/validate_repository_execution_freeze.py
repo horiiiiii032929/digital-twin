@@ -58,6 +58,7 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_005.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
+    "build_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",
     # This analysis-only module has no provider execution mode. Provider calls

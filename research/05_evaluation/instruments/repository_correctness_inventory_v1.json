@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 890
+    "audited": 894
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 210,
+    "active_or_unclassified_tooling": 212,
     "active_runtime": 145,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 238,
+    "evaluation_configuration": 239,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 196
+    "verification": 197
   },
-  "file_count": 890,
+  "file_count": 894,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3a9c1061c5e166f9f1dc312eb69f0e88d75d2616e5ebd82a0775064b795b8cc9",
+  "record_sha256": "9f8a24212f85869895821aec2c5dad35b0d988597d62dd6b7f666bc8b3d4ae7d",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-evaluation-006",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "execution-configuration",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "32f77b6ce0b416486dbd5a0ae0c1ae7c0554a477afb23e9cf6f8c314c00e52e0"
+      "sha256": "fb71f2561a8a8315b09391216851374323b416052b0ae9a661e9c6edb1bd38e1"
     },
     {
       "audit": {
@@ -4359,11 +4359,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-evaluation-006",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "evaluation-evidence",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4371,7 +4371,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_006.json",
       "risk": "high",
-      "sha256": "54f343c2f5d64b49ceac587f6f62e4a8217a9be37559875c71f0359c8f58e886"
+      "sha256": "ee12cae5b9a9d73396a062cf0aab17a4a3896b89fde6be952ec27c338a8ddffa"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_007.json",
+      "risk": "high",
+      "sha256": "d15ebcc3cf05c930d7eac34ca11c682ed2bd501468d06fa1a529fdc961d885a8"
     },
     {
       "audit": {
@@ -6346,6 +6362,22 @@
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
       "risk": "high",
       "sha256": "d21c2629060ab619c4f03dc35bdc1057b361d8c80dd4cc403dbda3016d50e300"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
+      "risk": "high",
+      "sha256": "eae5a48563a5f00b8b15b07b38be73dd9700ecbcb783e8f5287f3903b20d8ae5"
     },
     {
       "audit": {
@@ -8481,6 +8513,28 @@
     },
     {
       "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-evaluation-007",
+        "preflight:governed-autonomy-v2-1-actual-product-evaluation-007",
+        "resume:governed-autonomy-v2-1-actual-product-evaluation-007",
+        "simulate:governed-autonomy-v2-1-actual-product-evaluation-007",
+        "validate:governed-autonomy-v2-1-actual-product-evaluation-007"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
+      "risk": "high",
+      "sha256": "186d7f2cb7e36229f8cd40e5ea8738102a6a0b98a0ce9c23092b49d5fee765e4"
+    },
+    {
+      "audit": {
         "domain": "full-autonomy-evaluation-boundary",
         "evidence": "Manual service-fixture and clock/restart review plus a four-condition network-free run verified real student, governed autonomy, outreach, SQLite restart, and due-delivery paths without provider use.",
         "findings": [],
@@ -9335,11 +9389,11 @@
     },
     {
       "audit": {
-        "domain": "execution-freeze",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "evaluation-tooling",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9349,7 +9403,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "027966af6fb550148c7f4cf01ed0ddd0ecf4cac0ba8f2c19eac3e73d731ae8c5"
+      "sha256": "ff03e7226117d04b437f6be2056320079c43bd7ad116952681776b478e9fe18a"
     },
     {
       "audit": {
@@ -10761,11 +10815,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "active-runtime",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10773,7 +10827,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/prompt.py",
       "risk": "high",
-      "sha256": "7d00d260f7fd4d95487808308a1af34d99acab52638f4965f70c408a8181f896"
+      "sha256": "81f15e577b41a9316ccedb5613b7c70694c102756f260abfafcfe02f2ba7d571"
     },
     {
       "audit": {
@@ -11529,11 +11583,11 @@
     },
     {
       "audit": {
-        "domain": "execution-freeze",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "active-runtime",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11541,7 +11595,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "5895c057e6a9d6fae5685f170a6381ca2ff069a6154204d495864f37f64ef664"
+      "sha256": "c64fc20b6bd0542dfb3cf9dfcd3b191e4865f58447f3ece0ea39a882fa016c08"
     },
     {
       "audit": {
@@ -12041,11 +12095,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+        "domain": "verification",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12053,7 +12107,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "cb5f376c0c4e74a08fef3ae241fee48d8c38859bedbce691845ea790c6f4771f"
+      "sha256": "040c75a58b3af70eb674427a8358cdcbb9aff15cdb432c4faeff26628eaf9c73"
     },
     {
       "audit": {
@@ -12249,11 +12303,11 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "verification",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12261,7 +12315,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "598e1fad04d6e922ff67314c8a70e7b7e2e59c745f68d2b517e11a698ae8b962"
+      "sha256": "9b11a180f1b2baf8b7fb06413065469c60523c4f2ef714bdae2c62467baea271"
     },
     {
       "audit": {
@@ -14169,11 +14223,11 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "domain": "verification",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14181,7 +14235,23 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_006.py",
       "risk": "medium",
-      "sha256": "a73b69fd0d42b21238c56f1ad0918d609328a1ba8a9ce98a9d073a9a0c61b59c"
+      "sha256": "ca540b1a7b60fb497ede54be04a8e34c2b1f8e54665bd79cec40364a11b3a83b"
+    },
+    {
+      "audit": {
+        "domain": "verification",
+        "evidence": "Reviewed the finite prompt-schema correction, immutable invalid-run evidence, execution guard, and focused regression coverage; the corrected contract passed targeted tests and the 820-case network-free simulation.",
+        "findings": [],
+        "reviewed_at": "2026-09-01",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_007.py",
+      "risk": "medium",
+      "sha256": "91f023f98fa4ca96b26b701f3ff6944deb136178e6792b1d0158dd6b1b672752"
     },
     {
       "audit": {
@@ -14969,8 +15039,8 @@
     }
   ],
   "risk_counts": {
-    "high": 680,
-    "medium": 210
+    "high": 683,
+    "medium": 211
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

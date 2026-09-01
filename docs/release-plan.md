@@ -379,10 +379,13 @@ method, schema, case, gold, model, or gate change. It reproduced the same T0
 malformed-response pattern while the following seven T1-v2 calls succeeded.
 All 818 bulk cases and hidden gold remained closed. Authority is revoked;
 identical retries stop, and T1-v2 promotion remains unsupported. Successor 006
-adds privacy-safe provider-response classification and exact malformed-call
-usage accounting while preserving the product method, cases, hidden gold,
-models, and hard gates. It is the finite bridge from evaluation to deployment:
-a valid Keep creates the dedicated qualification record, after which the same
-revision is rebuilt with governed T1-v2.1 selected and is requalified through
-the local HTTPS professor/student journey, restart, backup/restore, kill switch,
-and T0 rollback.
+added privacy-safe provider-response classification and exact malformed-call
+usage accounting. Its 11-call canary classified the T0 failure at local schema
+validation and revealed that the non-intent path used the obsolete answer
+prompt against the atomic-claim schema. It stopped before 818 bulk cases and
+hidden gold and is revoked. Successor 007 fixes only that runtime contract;
+product method, cases, hidden gold, retrieval, models, and hard gates remain
+unchanged. A valid Keep creates the dedicated qualification record, after which
+the same revision is rebuilt with governed T1-v2.1 selected and requalified
+through the local HTTPS professor/student journey, restart, backup/restore,
+kill switch, and T0 rollback.

@@ -1057,6 +1057,11 @@ diagnosable successor after the terminal malformed-response retries. It keeps
 the 820-case method and hidden gold unchanged while recording only bounded
 Responses API status, item/part types, refusal presence, response hashes, model
 identity, usage, and cost. It never retains unrestricted provider output.
+The run classified the T0 failures at local schema validation and exposed the
+non-intent answer-prompt versus atomic-claim-schema mismatch. It is terminal
+invalid evidence. The `007` commands preserve the same 820 cases, gold,
+retrieval, models, and gates while correcting only that demonstrated runtime
+prompt binding.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

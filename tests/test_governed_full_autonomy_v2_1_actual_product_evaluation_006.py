@@ -14,7 +14,7 @@ def test_successor_changes_diagnostics_not_evaluated_contract() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "passed-frozen-pending-execution"
+    assert result["status"] == "passed-terminal"
     assert result["case_count"] == 820
     assert [
         (condition, case.model_dump(mode="json"), gold.model_dump(mode="json"))
@@ -28,3 +28,5 @@ def test_successor_changes_diagnostics_not_evaluated_contract() -> None:
     assert correction["evaluated_method_changed"] is False
     assert correction["raw_provider_output_retained"] is False
     assert correction["provider_usage_retained_on_malformed"] is True
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
