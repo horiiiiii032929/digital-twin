@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3571b654663b68fc4e766f2a32c5faeda80849a293dbc45ea51baa53cfdeff27",
+  "record_sha256": "2c601e7a59fcd5b77fc4636193effe31c939e023f597e4edaee21b8a276e0d01",
   "records": [
     {
       "audit": {
@@ -11062,7 +11062,7 @@
     {
       "audit": {
         "domain": "grounding-and-retrieval-correctness",
-        "evidence": "Freeze review retains the global block, revokes completed dataset construction and invalid attempt 001, and authorizes only the exact provider-free attempt-002 network-free comparison; the entrypoint fails closed outside that identity.",
+        "evidence": "Freeze review retains the global block and revokes the completed dataset build plus both semantic-target attempts after the terminal Refine result; no semantic-target execution identity remains authorized.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex semantic-target grounding audit"
@@ -11073,7 +11073,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9d75c3d11b9c7c7c8db372b2a7c7ffeee41cabee1e1f0ca563aa1c9945e5c871"
+      "sha256": "3d25f3316555b246d1fe64096f78db73f1f1de671c7bca2bfef57e23dafb4f7a"
     },
     {
       "audit": {
@@ -11782,7 +11782,7 @@
     {
       "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Freeze regression verifies the exact seven provider-free authorizations: two deterministic package builds, the corrected semantic-target comparison, and the architecture tranche build plus all three comparisons; completed or invalid semantic-target identities, terminal paid runs, and historical successors remain rejected.",
+        "evidence": "Freeze regression verifies the exact six remaining provider-free authorizations: two deterministic package builds and the architecture tranche build plus all three comparisons; all semantic-target identities, terminal paid runs, and historical successors remain rejected.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex semantic-target grounding audit"
@@ -11793,7 +11793,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "1e5b22d44b11070646c4881db78dca5284835ec3071d4104337030eca5ff118c"
+      "sha256": "7f5945148de871d39a3d9066d87ff24754e1070e96141386532b43270b86487a"
     },
     {
       "audit": {

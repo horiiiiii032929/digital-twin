@@ -1,0 +1,99 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-semantic-target-comparison-002",
+  "program_id": "course-digital-twin-grounding-correction-001",
+  "stage_id": "semantic-target-comparison-corrected",
+  "round_number": null,
+  "status": "completed-refine",
+  "supersedes": ["academic-factual-qa-semantic-target-comparison-001"],
+  "decision_question": "Does corrected semantic-target-resolution-v3 pass the unchanged grounding gates and outperform typed-target-evidence-v1 on the fixed fresh 500-case tranche?",
+  "code_revision": "b62e9f80d2d34df7f4f5c0c77f43fddf966b9856",
+  "dirty_state": false,
+  "started_at": "2026-09-01T02:19:00Z",
+  "completed_at": "2026-09-01T02:21:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_semantic_target_comparison_002.json",
+      "sha256": "3de79819b4156ef15d10e2dec2a7ee5f97f0187f6b12abf2e78f81fd506b0b1a",
+      "role": "comparison-instrument"
+    },
+    {
+      "path": "reports/generated/academic-factual-qa-semantic-target-comparison-002/result.json",
+      "sha256": "e319cd0ca734fd06a7643345aa1f78798353c5231fea847e376f709714c4c998",
+      "role": "ignored-raw-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "typed-target-evidence-v1",
+      "version": "v1-best-protocol-valid-baseline",
+      "role": "baseline",
+      "changed_planes": ["retrieval", "claim-citation"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.91, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.9775, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9825, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.985, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "grounded-success", "passed": false, "evidence": "91.0% is below the frozen 95% gate."},
+        {"name": "claim-and-citation", "passed": false, "evidence": "Claim 91.75% and citation 93.625% are below frozen precision/recall gates."},
+        {"name": "boundary-and-safety", "passed": true, "evidence": "100% boundary action and zero severe unsupported releases."}
+      ]
+    },
+    {
+      "architecture_id": "semantic-target-resolution-v3",
+      "version": "v3-attempt-002-normalized-score-correction",
+      "role": "candidate",
+      "changed_planes": ["domain", "retrieval", "claim-citation", "evaluation"],
+      "metrics": [
+        {"name": "fully-grounded-factual-success", "value": 0.81, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": false},
+        {"name": "answerable-action-accuracy", "value": 0.9525, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "boundary-action-accuracy", "value": 1.0, "unit": "rate", "direction": "higher-is-better", "threshold": 0.98, "passed": true},
+        {"name": "all-evidence-at-3", "value": 0.9725, "unit": "rate", "direction": "higher-is-better", "threshold": 0.9, "passed": true},
+        {"name": "evidence-recall-at-5", "value": 0.9775, "unit": "rate", "direction": "higher-is-better", "threshold": 0.95, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "operational-completion", "passed": true, "evidence": "All 500 cases completed with zero operational failures."},
+        {"name": "grounded-success", "passed": false, "evidence": "81.0% is below the frozen 95% gate and below the 91.0% baseline."},
+        {"name": "claim-and-citation", "passed": false, "evidence": "Claim 83.125% and citation 85.0% remain below frozen gates."},
+        {"name": "boundary-and-safety", "passed": true, "evidence": "100% boundary action and zero severe unsupported releases."}
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [
+    {
+      "category": "method",
+      "count": 76,
+      "evidence": "The semantic-target candidate failed full grounding on 76/400 answerable cases, concentrated in paraphrased, multi-evidence, and structured-table slices."
+    },
+    {
+      "category": "architecture",
+      "count": 36,
+      "evidence": "Even the retained baseline failed full grounding on 36/400 answerable cases despite retrieval gates passing, localizing the residual defect to semantic evidence representation and claim/citation assembly."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": "typed-target-evidence-v1",
+    "rationale": "Reject semantic-target v3, retain typed-target only as rollback, and require a source-side semantic-atom architecture on new evidence before any final or autonomy stage opens."
+  },
+  "limitations": [
+    "This is fresh development evidence rather than release confirmation.",
+    "Extractive provider-free output isolates grounding architecture.",
+    "No professor fidelity, real usability, learning outcome, visual, or provider-backed autonomy claim is supported."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-semantic-target-comparison-002-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-semantic-target-comparison-002.json"
+}

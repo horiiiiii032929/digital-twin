@@ -72,8 +72,8 @@ release selection: the method failed the grounded, claim, citation, and
 source-version gates, while the higher 91.64% Round 3 number remains diagnostic
 only because of the parent/child protocol mismatch.
 
-The #153 semantic-target package contains 500 cases across 100
-source-range-disjoint clusters, 25 per course, with 400 answerable
+The #153 semantic-target comparison is terminal `Refine` on 500 cases across
+100 source-range-disjoint clusters, 25 per course, with 400 answerable
 and 100 boundary questions. Operating-systems evidence comes from pinned
 ThinkOS commit `5ab731d`; the other courses use only ranges not present in the
 three earlier packages. All 474 required references map exactly to 300 minimal
@@ -85,9 +85,16 @@ binds exactly two conditions: the valid typed-target baseline and
 score contract after internal match bonuses. Its apparent quality metrics are
 not interpreted. The single permitted harness-only correction clamps that
 public score, makes any operational failure invalidate the run, changes no
-case, gold, method, or gate, and uses fresh exclusive attempt 002 output. Both
-attempt-001 and dataset-build authorizations are revoked; only the corrected
-network-free attempt 002 is authorized.
+case, gold, method, or gate, and used fresh exclusive attempt 002 output.
+Attempt 002 completed all 1,000 condition responses without operational
+failures. The semantic candidate reached 81.0% grounded factual success versus
+91.0% for the typed-target baseline. Both kept 100% boundary action, zero severe
+unsupported releases, and passing retrieval coverage, but both failed the 95%
+grounded and claim/citation gates; the candidate also missed 100% source-version
+validity. Semantic-target v3 is rejected, typed-target v1 remains rollback only,
+and all semantic-target authorizations are revoked. The next correction must be
+a source-side semantic evidence-atom architecture evaluated on new evidence;
+the fresh 1,000, known 10,000+1,000, and 820-case autonomy stages remain closed.
 
 The initial causal audit identified the dominant structural defect as the
 action -> evidence -> claim -> citation contract, not missing autonomy

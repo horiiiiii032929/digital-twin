@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review retains the global block, revokes completed dataset construction and invalid attempt 001, and authorizes only the exact provider-free attempt-002 network-free comparison; the entrypoint fails closed outside that identity.",
+      "evidence": "Freeze review retains the global block and revokes the completed dataset build plus both semantic-target attempts after the terminal Refine result; no semantic-target execution identity remains authorized.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "9d75c3d11b9c7c7c8db372b2a7c7ffeee41cabee1e1f0ca563aa1c9945e5c871"
+      "sha256": "3d25f3316555b246d1fe64096f78db73f1f1de671c7bca2bfef57e23dafb4f7a"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the exact seven provider-free authorizations: two deterministic package builds, the corrected semantic-target comparison, and the architecture tranche build plus all three comparisons; completed or invalid semantic-target identities, terminal paid runs, and historical successors remain rejected.",
+      "evidence": "Freeze regression verifies the exact six remaining provider-free authorizations: two deterministic package builds and the architecture tranche build plus all three comparisons; all semantic-target identities, terminal paid runs, and historical successors remain rejected.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex semantic-target grounding audit",
-      "sha256": "1e5b22d44b11070646c4881db78dca5284835ec3071d4104337030eca5ff118c"
+      "sha256": "7f5945148de871d39a3d9066d87ff24754e1070e96141386532b43270b86487a"
     },
     {
       "audit_status": "audited",
