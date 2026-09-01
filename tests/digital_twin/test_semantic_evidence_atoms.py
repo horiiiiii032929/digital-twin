@@ -7,6 +7,7 @@ from src.digital_twin.grounding.models import DocumentChunk
 from src.digital_twin.grounding.semantic_evidence_atoms import (
     ATOM_VERSION,
     SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomGateV2,
     SourceSemanticEvidenceAtomRetrieverV1,
     materialize_semantic_evidence_atoms,
 )
@@ -145,3 +146,56 @@ def test_multi_atom_gate_rejects_unrelated_ranges() -> None:
 
     assert decision.sufficient is False
     assert "relation" in decision.reason
+
+
+def test_v2_gate_clarifies_competing_canonical_claims_before_generation() -> None:
+    first = _chunk(
+        "first",
+        "Round-robin scheduling rotates runnable processes after a time slice.",
+        title="Scheduling",
+        cluster="one",
+        ordinal=0,
+    )
+    second = _chunk(
+        "second",
+        "Priority scheduling chooses the highest-priority runnable process.",
+        title="Scheduling",
+        cluster="two",
+        ordinal=1,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([first, second])
+    question = 'How does "Scheduling" explain scheduling runnable process?'
+
+    decision = SourceSemanticEvidenceAtomGateV2().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is False
+    assert decision.recommended_action == "clarify"
+    assert "ambiguous" in decision.reason
+
+
+def test_v2_gate_accepts_equivalent_alternate_regions() -> None:
+    first = _chunk(
+        "first",
+        "A queue removes items in first-in, first-out order.",
+        title="Queues",
+        cluster="one",
+        ordinal=0,
+    )
+    second = _chunk(
+        "second",
+        "A queue removes items in first-in, first-out order.",
+        title="Queues",
+        cluster="two",
+        ordinal=1,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([first, second])
+    question = 'How does "Queues" explain queue removes items order?'
+
+    decision = SourceSemanticEvidenceAtomGateV2().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is True
+    assert len(decision.selected_hit_ids) == 1

@@ -350,3 +350,10 @@ audit did not justify lowering those gates: every question was non-unique and
 should have elicited clarification, while the product answered all 16. A future
 successor must correct both reference uniqueness and fail-closed ambiguity
 handling before using new source-disjoint evidence.
+
+That successor is now build-complete under #172. Its six planted controls pass,
+all 16 known audited ambiguities route to `clarify` as regression diagnostics,
+and all 400 answerable questions in a new 500-case source-disjoint package pass
+pre-seal uniqueness validation. This does not change the No Release decision:
+the fresh comparison is still unauthorized and no new Keep/Refine method result
+exists.

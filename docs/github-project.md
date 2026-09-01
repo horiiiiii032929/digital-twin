@@ -127,6 +127,12 @@ blocked and the fresh 1,000, known 10,000+1,000, and provider-backed 820-case
 stages stay unopened. The deterministic fail-closed local candidate remains a
 demo/development baseline only.
 
+#172 is the active P0 correction and is now at its finite build-only checkpoint.
+Reference uniqueness, product `clarify` propagation, six planted controls, and
+a fresh 500-case source-disjoint package are implemented and verified. The
+comparison remains `reviewed-not-authorized`; #157 and release promotion remain
+blocked until the one fresh network-free Keep/Refine decision is recorded.
+
 ## Release stages and product gates
 
 The release stages are R0 local baseline, R1 hosted release candidate, R2

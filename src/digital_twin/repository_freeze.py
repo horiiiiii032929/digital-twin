@@ -73,6 +73,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_source_semantic_atoms.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_ambiguity_safe_successor.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -204,6 +207,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_academic_factual_qa_source_semantic_atom_comparison.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_ambiguity_safe_comparison.py": (
             "method_evaluation_execution",
         ),
         "scripts/audit_academic_factual_qa_source_semantic_atom_failures.py": (

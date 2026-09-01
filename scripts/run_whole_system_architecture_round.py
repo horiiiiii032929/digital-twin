@@ -45,6 +45,7 @@ from src.digital_twin.grounding import (
     SemanticTargetEvidenceGateV3,
     SemanticTargetEvidenceRetrieverV3,
     SourceSemanticEvidenceAtomGateV1,
+    SourceSemanticEvidenceAtomGateV2,
     SourceSemanticEvidenceAtomRetrieverV1,
     StructuredHierarchicalCoverageEvidenceGate,
     StructuredHierarchicalRetriever,
@@ -297,6 +298,15 @@ def _response(
             selected = [row for row in hits if row.chunk.id in selected_ids]
             sufficient = decision.sufficient
             gate_reason = decision.reason
+        elif claim_binding == "source-semantic-evidence-atom-lineage-v2":
+            decision = SourceSemanticEvidenceAtomGateV2().assess(
+                case.question, hits
+            )
+            selected_ids = set(decision.selected_hit_ids)
+            selected = [row for row in hits if row.chunk.id in selected_ids]
+            sufficient = decision.sufficient
+            clarify_evidence = decision.recommended_action == "clarify"
+            gate_reason = decision.reason
         elif claim_binding in {
             "source-range-canonical-claim-lineage-v2",
             "source-range-ambiguity-aware-claim-lineage-v2",
@@ -349,6 +359,7 @@ def _response(
             "source-range-ambiguity-aware-claim-lineage-v2",
             "semantic-target-canonical-claim-lineage-v3",
             "source-semantic-evidence-atom-lineage-v1",
+            "source-semantic-evidence-atom-lineage-v2",
         }
         claims = [
             EvaluationAtomicClaimV1(

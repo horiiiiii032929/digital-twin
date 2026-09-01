@@ -1,0 +1,147 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "academic-factual-qa-ambiguity-safe-successor-001-build",
+  "program_id": "course-digital-twin-grounding-correction-003",
+  "stage_id": "ambiguity-safe-successor-build",
+  "round_number": null,
+  "status": "build-only-qualified",
+  "supersedes": [],
+  "decision_question": "Is a fresh source-disjoint ambiguity-safe grounding comparison frozen, reproducible, gold-isolated, and ready for one network-free execution?",
+  "code_revision": "5b9db89b95294541e4d7eb9cda5882267db9b9a2",
+  "dirty_state": true,
+  "started_at": "2026-09-01T05:00:00Z",
+  "completed_at": "2026-09-01T06:00:00Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/academic_factual_qa_ambiguity_safe_comparison_001.json",
+      "sha256": "6ea740547b68a147d2c7ebee2e455a6f8da41985c75c9749460f5c8199ac0b8d",
+      "role": "comparison-instrument"
+    },
+    {
+      "path": "research/05_evaluation/instruments/reference_uniqueness_controls_v1.json",
+      "sha256": "164e33caa80a7f3c92f34efa655af0703a46bb984be00e924334bb9adf5b51c2",
+      "role": "planted-controls"
+    },
+    {
+      "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-cases.json",
+      "sha256": "04a4057ded8872afc87c958bd1c637a56b5e234f288ed2f57fecda4cc1b88363",
+      "role": "public-cases"
+    },
+    {
+      "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-gold.json",
+      "sha256": "15d6257dafd6d6730b605ca93e62d8514c812d55f03f1eff7482e7e73091caa2",
+      "role": "hidden-gold"
+    },
+    {
+      "path": "research/05_evaluation/datasets/academic-factual-qa-ambiguity-safe-successor-001-sources.json",
+      "sha256": "46e9bb78e8648f0e14fa335323964888b6e60568bfc0dc96ba427e70350b6217",
+      "role": "source-corpus"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "ambiguity-safe-grounding-comparison-harness-v1",
+      "version": "build-001",
+      "role": "candidate",
+      "changed_planes": [
+        "domain",
+        "retrieval",
+        "action-routing",
+        "claim-citation",
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "development-cases",
+          "value": 500,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 500,
+          "passed": true
+        },
+        {
+          "name": "unique-answerable-reference-targets",
+          "value": 400,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 400,
+          "passed": true
+        },
+        {
+          "name": "exactly-matchable-references",
+          "value": 474,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 474,
+          "passed": true
+        },
+        {
+          "name": "planted-controls-passed",
+          "value": 6,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 6,
+          "passed": true
+        },
+        {
+          "name": "known-ambiguous-cases-routed-to-clarify",
+          "value": 16,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 16,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "fresh-source-ranges",
+          "passed": true,
+          "evidence": "All 100 clusters have zero source-range overlap with every prior development package."
+        },
+        {
+          "name": "reference-uniqueness",
+          "passed": true,
+          "evidence": "All 400 answerable cases have one deterministic canonical claim class within their public source and section scope."
+        },
+        {
+          "name": "public-hidden-gold-separation",
+          "passed": true,
+          "evidence": "Public cases, source corpus, and hidden gold are separate hash-bound artifacts; validation and simulation keep gold closed."
+        },
+        {
+          "name": "historical-result-immutability",
+          "passed": true,
+          "evidence": "The prior 96.0% comparison remains unchanged and the 16-case packet is used only as regression evidence."
+        },
+        {
+          "name": "provider-authority-closed",
+          "passed": true,
+          "evidence": "Build, controls, and simulation made zero provider calls and comparison execution remains unauthorized."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "malformed_responses": 0,
+    "provider_failures": 0,
+    "p95_latency_ms": 0
+  },
+  "failures": [],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": "ambiguity-safe-grounding-comparison-harness-v1",
+    "rationale": "Keep the qualified ambiguity-safe harness and execute the frozen 500-case baseline-versus-candidate comparison once from a clean revision."
+  },
+  "limitations": [
+    "Build readiness is not a fresh method-quality result.",
+    "The known 16-case packet is regression evidence only and the prior result was not rescored.",
+    "No professor fidelity, usability, autonomy quality, or learning outcome is measured."
+  ],
+  "summary_path": "research/05_evaluation/academic-factual-qa-ambiguity-safe-successor-001-build-results.md",
+  "record_path": "research/05_evaluation/records/academic-factual-qa-ambiguity-safe-successor-001-build.json"
+}

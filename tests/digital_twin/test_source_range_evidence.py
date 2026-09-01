@@ -35,6 +35,7 @@ def _chunk(
         display_allowed=True,
         metadata={
             "course_id": "course",
+            "source_path": "notes.md",
             "title": title,
             "modality": modality,
             "parent_cluster_id": cluster,
@@ -71,6 +72,17 @@ def test_source_range_plan_extracts_public_cluster_anchor() -> None:
     )
 
     assert plan.cluster_anchor == "cluster-2"
+    assert plan.evidence.targets == ("enqueue",)
+
+
+def test_source_range_plan_extracts_public_source_and_section_scope() -> None:
+    plan = plan_public_source_ranges(
+        'Using source "notes.md" in section "Queue behavior", '
+        "how can the source point about enqueue be restated?"
+    )
+
+    assert plan.source_path_anchor == "notes.md"
+    assert plan.evidence.context == "Queue behavior"
     assert plan.evidence.targets == ("enqueue",)
 
 

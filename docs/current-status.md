@@ -18,6 +18,18 @@ autonomous LLM-backed R1. The sealed Program 011 final set, all known
 development folds, the fresh 1,000-case confirmation, and provider-backed
 autonomy evaluation remain closed.
 
+Issue #172 now has a complete build-only successor for the audited dual defect.
+The product can preserve a deterministic evidence-gate recommendation and
+return `clarify` before generation under T0, T1-v1, or T1-v2. Six planted
+reference controls pass, the known 16 non-unique predecessor questions now
+route 16/16 to `clarify` without rescoring their historical result, and a new
+source-disjoint package contains 500 cases across 100 clusters. All 400
+answerable questions resolve to exactly one canonical answer class before
+sealing; 474/474 references map to 300 source atoms, with zero normalized
+duplicates, provider calls, or private/final data. The one-shot comparison is
+build-valid and simulated, but remains provider-free and explicitly
+`blocked-not-authorized`. No grounding method or release is selected yet.
+
 The program is build-only and provider-unauthorized. Its three development
 folds are now frozen at 495, 497, and 481 cases (1,473 total) across 300 source
 clusters. Canonical source ranges and normalized questions have zero overlap

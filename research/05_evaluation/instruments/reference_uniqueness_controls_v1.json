@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "instrument_id": "reference-uniqueness-controls-v1",
+  "status": "frozen-network-free",
+  "controls": [
+    {
+      "control_id": "unique-reference",
+      "control_class": "unique",
+      "question": "Using source \"notes.md\" in section \"Queues\", how does the section explain first-in order?",
+      "source_claims": [
+        "A queue removes items in first-in, first-out order.",
+        "A stack removes the most recently inserted item."
+      ],
+      "expected_status": "unique"
+    },
+    {
+      "control_id": "alternate-valid-reference",
+      "control_class": "alternate-valid",
+      "question": "Using source \"notes.md\" in section \"Queues\", how does the section explain first-in order?",
+      "source_claims": [
+        "A queue removes items in first-in, first-out order.",
+        "A queue removes items in first-in, first-out order."
+      ],
+      "expected_status": "alternate-valid",
+      "authoritative_claim": "A queue removes items in first-in, first-out order.",
+      "candidate_claim": "A queue removes items in first-in, first-out order.",
+      "expected_relationship": "alternate-supported"
+    },
+    {
+      "control_id": "partial-supported-reference",
+      "control_class": "partial",
+      "authoritative_claim": "A queue removes items in first-in, first-out order.",
+      "candidate_claim": "A queue removes items in first-in order.",
+      "expected_relationship": "partial-supported"
+    },
+    {
+      "control_id": "conflicting-supported-reference",
+      "control_class": "conflicting",
+      "authoritative_claim": "A queue does not remove the newest item first.",
+      "candidate_claim": "A queue does remove the newest item first.",
+      "expected_relationship": "conflicting-supported"
+    },
+    {
+      "control_id": "unrelated-supported-reference",
+      "control_class": "unrelated",
+      "authoritative_claim": "A queue removes items in first-in, first-out order.",
+      "candidate_claim": "Virtual memory translates addresses through page tables.",
+      "expected_relationship": "unrelated-supported"
+    },
+    {
+      "control_id": "genuinely-ambiguous-reference",
+      "control_class": "ambiguous",
+      "question": "Using source \"notes.md\" in section \"Scheduling\", how does the section explain scheduling runnable process?",
+      "source_claims": [
+        "Round-robin scheduling rotates each runnable process after a time slice.",
+        "Priority scheduling selects the highest-priority runnable process."
+      ],
+      "expected_status": "ambiguous"
+    }
+  ],
+  "control_classes": [
+    "unique",
+    "alternate-valid",
+    "partial",
+    "conflicting",
+    "unrelated",
+    "ambiguous"
+  ],
+  "provider_calls": 0,
+  "hidden_gold_used_by_runtime": false,
+  "content_sha256": "4ccabc7b4d6e0f8eda0407abe8de2434906058e03dc55d21617a2ba548780617"
+}

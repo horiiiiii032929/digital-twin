@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import re
 
 from src.digital_twin.grounding.evidence_sufficiency import EvidenceSufficiencyDecision
@@ -22,6 +22,11 @@ _CLUSTER_SUFFIX = re.compile(
     r'\s+(?:in|for|from)\s+source\s+cluster\s+["“][^"”]+["”](?=\??\s*$)',
     re.IGNORECASE,
 )
+_PUBLIC_SCOPE_PREFIX = re.compile(
+    r'^\s*using\s+source\s+["“]([^"”]+)["”]\s+in\s+section\s+'
+    r'["“]([^"”]+)["”]\s*,\s*',
+    re.IGNORECASE,
+)
 _VISIBLE_COMMAND = re.compile(r"\\(?:emph|textit|textbf)\{([^{}]*)\}")
 _INDEX_COMMAND = re.compile(r"\\index\{[^{}]*\}%?")
 _HASH_IDENTIFIER = re.compile(r"#([^#\n]+)#")
@@ -32,6 +37,7 @@ _RST_ROLE = re.compile(r":[a-zA-Z0-9_-]+:`([^`]*)`")
 class PublicSourceRangePlanV2:
     evidence: PublicEvidenceTargetPlanV1
     cluster_anchor: str | None
+    source_path_anchor: str | None = None
 
 
 @dataclass(frozen=True)
@@ -47,11 +53,22 @@ def plan_public_source_ranges(question: str) -> PublicSourceRangePlanV2:
     """Extend the public target plan with an explicit public cluster anchor."""
 
     cluster = _CLUSTER_ANCHOR.search(question)
-    evidence_question = _CLUSTER_SUFFIX.sub("", question)
+    public_scope = _PUBLIC_SCOPE_PREFIX.match(question)
+    source_path_anchor = None
+    section_anchor = None
+    evidence_question = question
+    if public_scope:
+        source_path_anchor = public_scope.group(1).strip()
+        section_anchor = public_scope.group(2).strip()
+        evidence_question = question[public_scope.end() :]
+    evidence_question = _CLUSTER_SUFFIX.sub("", evidence_question)
     evidence = plan_public_evidence_targets(evidence_question)
+    if section_anchor:
+        evidence = replace(evidence, context=section_anchor)
     return PublicSourceRangePlanV2(
         evidence=evidence,
         cluster_anchor=cluster.group(1).strip() if cluster else None,
+        source_path_anchor=source_path_anchor,
     )
 
 
@@ -117,6 +134,12 @@ def _scope(
     scoped = list(chunks)
     cluster_scope = False
     title_scope = False
+    if plan.source_path_anchor:
+        scoped = [
+            row
+            for row in scoped
+            if _metadata_value(row, "source_path") == plan.source_path_anchor
+        ]
     if plan.cluster_anchor:
         matching = [
             row
@@ -182,6 +205,7 @@ class SourceRangeCandidateRetrieverV2:
             for value in (
                 plan.evidence.context,
                 plan.cluster_anchor,
+                plan.source_path_anchor,
                 target,
             )
             if value

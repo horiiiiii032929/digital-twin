@@ -93,6 +93,20 @@ def resolve_policy_action(*actions: str) -> str:
     return max(actions, key=POLICY_ACTION_PRIORITY.__getitem__)
 
 
+def retrieval_boundary_intent(events: list[AuditEvent]) -> str | None:
+    """Read a deterministic evidence-gate recommendation from audit events."""
+
+    for event in reversed(events):
+        if event.event_type != "evidence-sufficiency-assessed":
+            continue
+        recommendation = event.details.get("recommended_action")
+        if recommendation == "clarify":
+            return TutoringIntent.CLARIFY_REQUEST
+        if recommendation == "abstain":
+            return TutoringIntent.ABSTAIN_NO_EVIDENCE
+    return None
+
+
 class TurnSignals(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -544,6 +558,9 @@ class BoundedTutoringGraph:
         if signals is None:
             raise RuntimeError("intent selection requires turn signals")
         intent = self.selector.select(signals, state["learner_state"], state["hits"])
+        evidence_intent = retrieval_boundary_intent(state["audit_events"])
+        if evidence_intent is not None and intent != TutoringIntent.REFUSE_AND_REDIRECT:
+            intent = evidence_intent
         return {"intent": intent}
 
     async def _generate(self, state: _GraphState) -> dict:
@@ -1045,7 +1062,10 @@ class GovernedReactiveTutoringGraphV2:
             raise RuntimeError("retrieval requires turn perception")
         intent = state["intent"]
         if intent == "pending-evidence":
-            intent = self.selector.select(signals, state["learner_state"], hits)
+            intent = (
+                retrieval_boundary_intent(events)
+                or self.selector.select(signals, state["learner_state"], hits)
+            )
         evidence_keys = [_source_range_key(hit) for hit in hits]
         return {
             "hit_ids": [hit.chunk.id for hit in hits],

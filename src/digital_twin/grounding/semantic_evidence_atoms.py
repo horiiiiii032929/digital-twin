@@ -22,6 +22,9 @@ from src.digital_twin.grounding.retrieval import (
     EmptyQueryError,
     InvalidRetrievalLimitError,
 )
+from src.digital_twin.grounding.reference_uniqueness import (
+    analyze_public_reference_uniqueness,
+)
 from src.digital_twin.grounding.source_range_evidence import (
     canonicalize_source_claim,
     plan_public_source_ranges,
@@ -161,6 +164,7 @@ def _coverage(needle: str, haystack: str) -> float:
 def _scope(
     chunks: Sequence[DocumentChunk],
     *,
+    source_path_anchor: str | None,
     cluster_anchor: str | None,
     context: str | None,
     modality: str | None,
@@ -168,6 +172,12 @@ def _scope(
     scoped = list(chunks)
     cluster_scope = False
     title_scope = False
+    if source_path_anchor:
+        scoped = [
+            row
+            for row in scoped
+            if _metadata(row, "source_path") == source_path_anchor
+        ]
     if cluster_anchor:
         matching = [
             row
@@ -183,7 +193,7 @@ def _scope(
             for row in scoped
             if _metadata(row, "title").casefold() == context.casefold()
         ]
-        if matching:
+        if source_path_anchor or matching:
             scoped = matching
             title_scope = True
     if modality:
@@ -291,6 +301,7 @@ class SourceSemanticEvidenceAtomRetrieverV1:
         plan = plan_public_source_ranges(query)
         scoped, title_scope, cluster_scope = _scope(
             self.chunks,
+            source_path_anchor=plan.source_path_anchor,
             cluster_anchor=plan.cluster_anchor,
             context=plan.evidence.context,
             modality=plan.evidence.modality,
@@ -372,6 +383,7 @@ class SourceSemanticEvidenceAtomGateV1:
             )
         scoped, _, _ = _scope(
             [row.chunk for row in bounded],
+            source_path_anchor=plan.source_path_anchor,
             cluster_anchor=plan.cluster_anchor,
             context=plan.evidence.context,
             modality=plan.evidence.modality,
@@ -442,10 +454,60 @@ class SourceSemanticEvidenceAtomGateV1:
         )
 
 
+class SourceSemanticEvidenceAtomGateV2(SourceSemanticEvidenceAtomGateV1):
+    """Reject non-unique public references before answer generation."""
+
+    implementation_id = "source-semantic-evidence-atom-gate-v2"
+    version = "v2"
+
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSufficiencyDecision:
+        bounded = list(hits[:5])
+        if bounded:
+            uniqueness = analyze_public_reference_uniqueness(
+                query,
+                [row.chunk for row in bounded],
+                minimum_target_coverage=self.minimum_target_coverage,
+            )
+            if uniqueness.status == "ambiguous":
+                return EvidenceSufficiencyDecision(
+                    sufficient=False,
+                    score=0.0,
+                    reason="public reference is ambiguous across canonical answer classes",
+                    features={
+                        "ambiguous_target_count": sum(
+                            row.status == "ambiguous" for row in uniqueness.targets
+                        ),
+                        "source_path_scoped": uniqueness.source_path_anchor is not None,
+                        "section_scoped": uniqueness.section_anchor is not None,
+                    },
+                    selected_hit_ids=[],
+                    recommended_action="clarify",
+                )
+            if uniqueness.status == "unresolved":
+                return EvidenceSufficiencyDecision(
+                    sufficient=False,
+                    score=0.0,
+                    reason="public reference does not resolve to canonical evidence",
+                    features={
+                        "unresolved_target_count": sum(
+                            row.status == "unresolved" for row in uniqueness.targets
+                        )
+                    },
+                    selected_hit_ids=[],
+                    recommended_action="abstain",
+                )
+        return super().assess(query, bounded)
+
+
 __all__ = [
     "ATOM_VERSION",
     "SemanticEvidenceAtomTraceV1",
     "SourceSemanticEvidenceAtomGateV1",
+    "SourceSemanticEvidenceAtomGateV2",
     "SourceSemanticEvidenceAtomRetrieverV1",
     "materialize_semantic_evidence_atoms",
 ]

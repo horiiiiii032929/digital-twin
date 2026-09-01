@@ -41,6 +41,7 @@ class StudentTutoringMode(StrEnum):
 class EvidenceGateMode(StrEnum):
     UNSELECTED = "unselected"
     STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
+    AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1 = "ambiguity-safe-structured-lexical-v1"
 
 
 @dataclass(frozen=True, slots=True)
