@@ -54,9 +54,10 @@ absolute release gates. Visual remains `Go Deeper` at 17/30 complete assets;
 synthetic C0–C2 is not professor fidelity; provider-backed T0/T1 was skipped
 after the factual failure.
 
-#127 moves to `Done / Refine` as the completed measurement milestone. [#153](https://github.com/horiiiiii032929/digital-twin/issues/153)
-is the active `In Progress / Refine` P0 and owns the deterministic action-router
-and grounding architecture change on fresh development evidence. #105 remains `In Progress / Refine`,
+#127 moved to `Done / Refine` as the completed measurement milestone. At that
+checkpoint, [#153](https://github.com/horiiiiii032929/digital-twin/issues/153)
+became the active `In Progress / Refine` P0 for the deterministic action-router
+and grounding architecture change on fresh development evidence. #105 remained `In Progress / Refine`,
 #131 remains `Go Deeper`, #24 remains open for real professor approval, and the
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
@@ -94,9 +95,9 @@ owns the immutable governed T1-v2.1 implementation milestone,
 [#156](https://github.com/horiiiiii032929/digital-twin/issues/156) owns A2
 learner-state-driven in-app intervention, and
 [#157](https://github.com/horiiiiii032929/digital-twin/issues/157) owns the
-immutable full-autonomy product evaluation. Issue #153 remains the first P0
-dependency because no autonomous release is safe before the grounding successor
-passes.
+immutable full-autonomy product evaluation. At this implementation checkpoint,
+issue #153 was the first P0 dependency because no autonomous release was safe
+before the grounding successor passed.
 
 #157 now has a complete realistic-time actual-product boundary rather than an
 open-ended design task. Per-call provider identity, tokens, latency, cost, and
@@ -110,12 +111,12 @@ worker, lease, checkpoint, outbox, and delivery paths. The final network-free
 qualification passed all 820 cases with 100% action, termination, transition,
 fallback, and restart rates and zero scope, citation, consent, duplicate, loop,
 or authority defects. This selects the realistic-time evaluation
-infrastructure only; #157 remains `In Progress / Go Deeper` and T1-v2.1 remains
-unselected.
+infrastructure only; at that checkpoint #157 remained
+`In Progress / Go Deeper` and T1-v2.1 remained unselected.
 
-#153 is no longer waiting for execution. Its historical paid checkpoint and
-the two later network-free method comparisons are complete evidence. No
-execution authority remains active.
+#153 is `Done / Refine`. Its historical paid checkpoint and the later
+network-free method comparisons are complete evidence. No execution authority
+remains active.
 
 The later source-semantic-atom successor is now terminal `Refine`. It reached
 96.0% fully grounded success and 100% retrieval/boundary safety on a fresh

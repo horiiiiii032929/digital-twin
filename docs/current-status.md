@@ -183,8 +183,9 @@ access. The local release regression passed 45/45, but the 820-case provider
 autonomy stage was correctly skipped. There is no third attempt.
 
 Issue #127's 10,000+1,000 measurement milestone is complete as unfavorable
-evidence. Issue #153 is the active P0 and owns one method-level action-router
-and grounding successor on fresh development evidence. The sealed final set
+evidence. At that checkpoint, issue #153 became the active P0 and owned one
+method-level action-router and grounding successor on fresh development
+evidence. That successor has since completed `Refine`; the sealed final set
 cannot be tuned or rerun.
 The qualified local R1 remains unchanged and available as a deterministic,
 fail-closed product baseline; no LLM-backed factual-quality, multimodal,
@@ -316,17 +317,17 @@ Issue #153's successor,
 responses bind by case ID, and hidden gold opens only after both ledgers are
 durable. Five finite simulations pass. Official GPT-5.4 mini metadata and
 pricing were refreshed on 2026-09-01. Its authority is now revoked after the
-two invalid executions. A valid `Keep` remains required
-before the provider-backed 820-case run may start; a valid `Refine` stops #157.
+two invalid executions. At that checkpoint, a valid `Keep` was required before
+the provider-backed 820-case run could start. The later valid `Refine` result
+therefore stopped #157.
 
-GitHub tracks the remaining evidence path explicitly: #153 remains
-`In Progress / Refine` with its finite selection build ready. #155 is complete as the
-software-and-provider-integration milestone and moves to `Done / Keep`; it does
-not promote V2.1. #156 remains `Todo / Go Deeper` until A2 promotion evidence,
-and #157 remains `In Progress / Go Deeper` for the provider-backed
-flow-independent evaluation. Parent #8
-remains open. The execution freeze remains active with no paid/provider
-long-run operation authorized. Repository correctness is 842/842 audited execution-relevant files
+At the typed-run build checkpoint, GitHub tracked #153 as
+`In Progress / Refine`, #155 as `Done / Keep`, #156 as `Todo / Go Deeper`, and
+#157 as `In Progress / Go Deeper`. The later source-semantic-atom result now
+supersedes that operational status: #153 is `Done / Refine`, #156 and #157 are
+blocked, and parent #8 remains open as `Refine / No Release`. The execution
+freeze remains active with no paid/provider long-run operation authorized.
+Repository correctness is currently 861/861 audited execution-relevant files
 with zero pending findings.
 
 AFQC-093 authorized the exact finite academic package
