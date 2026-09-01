@@ -1,24 +1,21 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-004",
-  "status": "invalid-execution-authorization-revoked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-evaluation-005",
+  "status": "frozen-pending-execution",
   "owner_issue": 157,
   "parent_issue": 8,
   "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior when the selected ambiguity-safe grounding architecture and live model roles are exercised through realistic virtual time?",
-  "corrects_invalid_execution": "governed-full-autonomy-v2-1-actual-product-evaluation-003",
-  "harness_correction": {
-    "changed_surface": [
-      "provider-json-schema-transport"
-    ],
-    "provider_schema_adapter": "openai-strict-pydantic-subset-v1",
-    "provider_schema_shape_authoritative": false,
-    "post_parse_pydantic_validation_authoritative": true,
+  "retries_invalid_execution": "governed-full-autonomy-v2-1-actual-product-evaluation-004",
+  "execution_retry": {
+    "reason": "user-requested retry because a brief connectivity interruption may have caused the single malformed T0 canary response",
+    "changed_surface": [],
     "method_changed": false,
     "cases_changed": false,
     "gold_changed": false,
     "gates_changed": false,
     "model_roles_changed": false,
-    "single_correction_consumed": true
+    "schema_transport_changed": false,
+    "final_retry": true
   },
   "selected_grounding": {
     "result_id": "academic-factual-qa-ambiguity-safe-comparison-002",
@@ -43,10 +40,10 @@
     "long_horizon_days": 30,
     "proactive_opportunity_count": 120,
     "source_template_count": 50,
-    "public_sha256": "aec05be176e53f4852fee61633b5a5234d6185d1e6f3841ef90c39225366ef0c",
-    "hidden_gold_sha256": "a581de4158163c8e6b2e619a0542a6769112ce44e4af59d128d688e9d970c66b",
-    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-003",
-    "content_change_from_003": "dataset identity only; all observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256"
+    "public_sha256": "3cd8561d49517125df74ffddd944f4513f9036da314c3b6d1fcb4c5a13a97a61",
+    "hidden_gold_sha256": "0714bd156c6fac6c55f08a5d539482bcd851d3ed17a42e1897bec2a07223aae3",
+    "portfolio_source": "governed-full-autonomy-v2-1-actual-product-evaluation-004",
+    "content_change_from_004": "dataset identity only; all observable events and hidden expectations are byte-equivalent after excluding dataset_id and content_sha256"
   },
   "clock": {
     "implementation": "VirtualUtcClock",
@@ -90,10 +87,10 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_promotion": false,
-    "authorization_source": "consumed by final canary-stage invalid execution; no further attempt authorized",
+    "authorization_source": "user explicitly requested retry in the active Codex task",
     "grounding_keep_required": true,
     "grounding_result_id": "academic-factual-qa-ambiguity-safe-comparison-002",
     "maximum_provider_calls": 3000,
@@ -134,8 +131,8 @@
     "same_cases_quality_rerun_allowed": false
   },
   "boundaries": [
-    "Evaluation 003 remains immutable invalid operational evidence.",
-    "No further harness correction is permitted after this attempt.",
+    "Attempts 003 and 004 remain immutable invalid operational evidence.",
+    "This is the final user-requested transient-failure retry.",
     "The product receives only observable events and the approved synthetic public course release.",
     "Gold derives from source truth, approved policy, consent, membership, release, and the action lattice.",
     "Real professor fidelity, real student usability, and learning improvement are not established."

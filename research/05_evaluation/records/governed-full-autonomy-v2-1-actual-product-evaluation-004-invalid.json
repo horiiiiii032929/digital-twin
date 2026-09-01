@@ -1,0 +1,129 @@
+{
+  "record_schema": "architecture-evolution-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-evaluation-004-invalid",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-evaluation",
+  "stage_id": "actual-product-attempt-004",
+  "round_number": null,
+  "status": "invalid-execution",
+  "supersedes": [
+    "governed-full-autonomy-v2-1-actual-product-evaluation-003-invalid"
+  ],
+  "decision_question": "Does the actual governed V2.1 product preserve grounding, authority, persistence, and bounded proactive behavior under provider-backed realistic virtual time?",
+  "code_revision": "faa438f6b738faa97955f1937abfc6ca2ca51dcd",
+  "dirty_state": false,
+  "started_at": "2026-09-01T07:30:24Z",
+  "completed_at": "2026-09-01T07:30:54Z",
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_evaluation_004.json",
+      "sha256": "1b40615f623fe8f6c2d2d4e355e8c2cbc62c4b43dade64bdcc9ac3ee487855b3",
+      "role": "executed-authorization-instrument"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-004/public-cases.json",
+      "sha256": "ee48621e5d5d3af70b12dbcb3e77e110afc0ed79168859a819f54059dfcb3c6d",
+      "role": "public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-004/responses.sqlite3",
+      "sha256": "b2b66d3f903800773af31be58d56759df5c95ef428294831fe082797502b899a",
+      "role": "ignored-atomic-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-evaluation-004/result.json",
+      "sha256": "26fbf035652eae6cddfce9452a5096f984a1f2b3eaf945e3300d843e421fb6d3",
+      "role": "ignored-terminal-result"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "actual-product-evaluation-provider-schema-v2",
+      "version": "attempt-004",
+      "role": "candidate",
+      "changed_planes": [
+        "evaluation"
+      ],
+      "metrics": [
+        {
+          "name": "canary-cases-persisted",
+          "value": 2,
+          "unit": "count",
+          "direction": "higher-is-better",
+          "threshold": 2,
+          "passed": true
+        },
+        {
+          "name": "bulk-cases-executed",
+          "value": 0,
+          "unit": "count",
+          "direction": "lower-is-better",
+          "threshold": 0,
+          "passed": true
+        },
+        {
+          "name": "exact-canary-model-role-coverage",
+          "value": 0.5,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1,
+          "passed": false
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "bulk-stops-on-canary-failure",
+          "passed": true,
+          "evidence": "Both canaries were persisted and the remaining 818 cases were not started."
+        },
+        {
+          "name": "hidden-gold-remains-closed",
+          "passed": true,
+          "evidence": "No hidden-gold file was materialized or loaded."
+        },
+        {
+          "name": "schema-correction-accepted",
+          "passed": true,
+          "evidence": "The T1-v2 canary completed exact Terra and GPT-5.4 mini calls under the corrected schemas."
+        },
+        {
+          "name": "all-provider-canaries-valid",
+          "passed": false,
+          "evidence": "The T0 canary's only GPT-5.4 mini call was classified as malformed before accepted identity or usage accounting."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "provider_calls": 8,
+    "completed_provider_calls": 7,
+    "failed_provider_calls": 1,
+    "input_tokens": 3824,
+    "output_tokens": 461,
+    "reported_cost_usd": 0.00900625,
+    "malformed_responses": 1,
+    "provider_failures": 1,
+    "p95_latency_ms": 6675.26445,
+    "post_stop_diagnostic_calls": 0
+  },
+  "failures": [
+    {
+      "category": "provider",
+      "count": 1,
+      "evidence": "The typed OpenAI client classified the T0 canary generation as malformed. A brief connectivity interruption cannot be excluded, but the next seven calls succeeded and unrestricted response content was not retained, so the exact transient transport/provider-output cause cannot be reconstructed."
+    }
+  ],
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "Revoke attempt 004 and make no product-quality claim. The user subsequently requested one fresh connectivity retry, frozen separately as attempt 005 without changing the evaluated method."
+  },
+  "limitations": [
+    "No provider-backed autonomy-quality conclusion is valid from this attempt.",
+    "The failed provider response was not retained; only its bounded malformed-response classification is durable, and transient connectivity cannot be confirmed or excluded.",
+    "The 820-case network-free pass remains infrastructure evidence and cannot promote T1-v2.",
+    "Attempt 005 exists only because the user explicitly superseded the prior no-third-attempt boundary after identifying possible transient connectivity."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-evaluation-004-invalid-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-evaluation-004-invalid.json"
+}

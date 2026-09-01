@@ -143,9 +143,14 @@ plus ambiguity-safe V2 gate through the actual tutoring service. Its complete
 820-case network-free run passed every hard gate with zero provider calls.
 Provider attempt 003 stopped at the canary gate because its strict schema was
 not API-compatible; all 818 bulk cases and hidden gold stayed closed. #157 is
-therefore `In Progress / Go Deeper`; final attempt 004 changes only schema
-translation and is authorized under the same 3,000-call and USD 50 ceilings.
-No autonomous release claim exists until its result is recorded.
+therefore retained as invalid operational evidence. Final attempt 004 changed
+only schema translation and proved that corrected schemas support exact Terra
+and GPT-5.4 mini calls in its T1-v2 canary, but its T0 GPT-5.4 mini response was
+classified malformed. The run failed closed after eight calls and USD
+0.00900625; all 818 bulk cases and hidden gold stayed closed. #157 is now
+`In Progress / Refine` for the invalid result and 004 authority is revoked.
+The user then explicitly requested one unchanged connectivity retry, now frozen
+as attempt 005. No autonomous release claim exists pending its result.
 
 ## Release stages and product gates
 

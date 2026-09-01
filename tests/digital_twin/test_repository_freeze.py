@@ -40,7 +40,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
-        "governed-full-autonomy-v2-1-actual-product-evaluation-004",
+        "governed-full-autonomy-v2-1-actual-product-evaluation-005",
     }
 
     for pilot_id in pilot_ids:
@@ -58,6 +58,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-grounding-selection-002",
         "governed-full-autonomy-v2-1-actual-product-evaluation-002",
         "governed-full-autonomy-v2-1-actual-product-evaluation-003",
+        "governed-full-autonomy-v2-1-actual-product-evaluation-004",
         "academic-factual-qa-source-semantic-atoms-successor-001",
         "academic-factual-qa-source-semantic-atom-comparison-001",
         "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
