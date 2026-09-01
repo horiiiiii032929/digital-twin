@@ -345,4 +345,8 @@ Current decision (2026-09-01): **No Release / Refine**. The source-semantic
 evidence-atom candidate improved fresh development grounding to 96.0%, but it
 failed claim/citation precision and exact source-version validity. The local
 deterministic package remains a development/demo rollback and is not promoted
-as an autonomous LLM-backed release.
+as an autonomous LLM-backed release. The exact 16-case post-result validity
+audit did not justify lowering those gates: every question was non-unique and
+should have elicited clarification, while the product answered all 16. A future
+successor must correct both reference uniqueness and fail-closed ambiguity
+handling before using new source-disjoint evidence.

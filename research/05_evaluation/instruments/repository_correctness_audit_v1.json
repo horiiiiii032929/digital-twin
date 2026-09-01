@@ -6704,12 +6704,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Freeze review authorizes only the exact network-free failure-validity audit while retaining all provider, paid, final, autonomy, private-data, and same-data quality rerun blocks.",
+      "evidence": "Post-execution freeze review revokes the one-time failure-validity audit authorization while retaining all provider, paid, final, autonomy, private-data, and same-data quality rerun blocks.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex failure-validity audit",
-      "sha256": "af106751c7d95dd6cb73fbf2190d83588ce6057b7d48d3c031561762b2159ee1"
+      "sha256": "153ba979c942393f8740c137a4f2b75c64788e0baf43862b60e33b4a910a1348"
     },
     {
       "audit_status": "audited",
@@ -7166,12 +7166,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
-      "evidence": "Freeze regression verifies the exact bounded audit authorization and continued rejection of completed comparison, paid, final, autonomy, and historical execution identities.",
+      "evidence": "Freeze regression verifies revocation of the completed audit authorization and continued rejection of completed comparison, paid, final, autonomy, and historical execution identities.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex failure-validity audit",
-      "sha256": "e3359d368b5477cf7b22dd5b738ed37b2d55d79da200bec45e3d2c89dece9f54"
+      "sha256": "d970c0b5be82a864df8db0afd231d2fa81bed73e188b6f8889794bba621506db"
     },
     {
       "audit_status": "audited",

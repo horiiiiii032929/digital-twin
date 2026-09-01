@@ -63,3 +63,13 @@ This comparison uses public open educational sources and extractive,
 provider-free generation to isolate grounding architecture. It does not prove
 professor fidelity, real-student usability, learning improvement, true visual
 reasoning, or provider-backed autonomous behavior.
+
+## Post-result validity audit
+
+The later
+[failure-validity audit](academic-factual-qa-source-semantic-atom-failure-validity-audit-001-results.md)
+preserves this result and its gates but corrects the causal interpretation.
+All 16 questions were non-unique and should have been labelled `clarify`; the
+product nevertheless answered them. The issue is therefore a dual reference
+and product-ambiguity defect, not evidence that the precision gates should be
+lowered. The No Release decision remains unchanged.
