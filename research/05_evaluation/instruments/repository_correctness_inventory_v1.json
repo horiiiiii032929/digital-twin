@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d627f98e22e9a9c62961a2583b6f3c0b04bb743a00c957c89c9be49603f0f19d",
+  "record_sha256": "1255c67a5ed8397dbffe0e6ee8870cfba5b22d8548d0542dd89920c509cf43b4",
   "records": [
     {
       "audit": {
@@ -5448,10 +5448,10 @@
     {
       "audit": {
         "domain": "active-or-unclassified-tooling",
-        "evidence": "Factual adapter supports deterministic, direct OpenAI, and direct DeepSeek engine bindings, exact source-semantic V1/V2 gates, zero fallback, and explicit lifecycle cleanup.",
+        "evidence": "Factual adapter supports deterministic, direct OpenAI, and direct DeepSeek engine bindings, exact source-semantic V1/V2 gates, zero fallback, explicit lifecycle cleanup, and a fixed non-identifying DeepSeek provider user ID required by the shared transport.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex cross-engine evaluation audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex attempt-001 harness correction audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5462,7 +5462,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "21815fe68cbcaff54b88fbffa0515b23c30db7f5243379ea3a17fd7a33740d31"
+      "sha256": "f3584511347f8ec36dd9589ff6bbd3c2bcab05f42eb9ff0b7f47f98fe39645d5"
     },
     {
       "audit": {
@@ -6512,7 +6512,7 @@
     {
       "audit": {
         "domain": "active-or-unclassified-tooling",
-        "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+        "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, fail-closed execution boundaries, and the fixed privacy-safe DeepSeek provider user ID.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex cross-engine final-program audit"
@@ -14102,8 +14102,8 @@
         "domain": "verification-evidence",
         "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex attempt-001 harness correction audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14111,7 +14111,7 @@
       "package_commands": [],
       "path": "tests/test_cross_engine_program.py",
       "risk": "medium",
-      "sha256": "52ec495cbe5efcd5a72aab58d35c751b03a390b19cd0168ef237d743dda0be59"
+      "sha256": "28fa8c1954049fa7fdecec6b447c9d6230e89ab2afee34a3bf0c884b86ef5cfc"
     },
     {
       "audit": {
