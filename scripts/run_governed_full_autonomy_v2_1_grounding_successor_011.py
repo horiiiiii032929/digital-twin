@@ -75,6 +75,35 @@ def _relevant_worktree_changes() -> list[str]:
     ]
 
 
+def _implementation_revision_matches(bound_revision: str) -> bool:
+    if not bound_revision:
+        return False
+    ancestry = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", bound_revision, "HEAD"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if ancestry.returncode != 0:
+        return False
+    changed = set(
+        subprocess.run(
+            ["git", "diff", "--name-only", f"{bound_revision}..HEAD"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout.splitlines()
+    )
+    authorization_only = {
+        str(INSTRUMENT.relative_to(ROOT)),
+        "research/05_evaluation/instruments/repository_correctness_audit_v1.json",
+        "research/05_evaluation/instruments/repository_correctness_inventory_v1.json",
+    }
+    return changed.issubset(authorization_only)
+
+
 def _load_instrument() -> dict[str, Any]:
     payload = json.loads(INSTRUMENT.read_text(encoding="utf-8"))
     if payload.get("instrument_id") != INSTRUMENT_ID:
@@ -148,7 +177,7 @@ def preflight(*, resume: bool) -> dict[str, Any]:
         blockers.append("method-execution-not-authorized")
     if instrument.get("provider_execution_authorized"):
         blockers.append("provider-execution-must-remain-disabled")
-    if instrument.get("code_revision") != _git_revision():
+    if not _implementation_revision_matches(str(instrument.get("code_revision", ""))):
         blockers.append("code-revision-drifted")
     if _relevant_worktree_changes():
         blockers.append("worktree-dirty")

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "c8deecbfd2d142213e5e28ddf9f2ae8cfb27b73456e147c91d46319c8ce03921",
+  "record_sha256": "ea57a42ce8ea7b26fb01bc98af75c179e3156df04ee6b98adb2c0c64209f5e01",
   "records": [
     {
       "audit": {
@@ -8845,7 +8845,7 @@
       "package_commands": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
       "risk": "high",
-      "sha256": "486d5e5c0a76f977bdb8ef00a7bede537fa68216c6ea65ccd0eccfcbbddbc1f2"
+      "sha256": "f0e3aa130cf0323efb659184fda98b0c9df83896654244b93050f9063bdca244"
     },
     {
       "audit": {

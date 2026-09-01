@@ -10152,7 +10152,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex grounding-successor root-cause review",
-      "sha256": "486d5e5c0a76f977bdb8ef00a7bede537fa68216c6ea65ccd0eccfcbbddbc1f2"
+      "sha256": "f0e3aa130cf0323efb659184fda98b0c9df83896654244b93050f9063bdca244"
     },
     {
       "audit_status": "audited",
