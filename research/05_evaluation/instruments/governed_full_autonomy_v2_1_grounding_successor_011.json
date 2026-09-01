@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "governed-full-autonomy-v2-1-grounding-successor-011",
-  "status": "reviewed-pending-authorization",
-  "code_revision": "fdbea500bf402402c1d2cbd6b192936325245818",
+  "status": "frozen-pending-execution",
+  "code_revision": "9e8776bb2848550439216dc1497dc4f6c2d81682",
   "profile_sha256": "627ff88fab3fb73dd2ecd67495159e80fbfaac63126bf156e4f4a8cec666a0e7",
   "package_sha256": {
     "cases": "e69db2289858bd1b6ec57c36914e90a2dea06797a9ebb34e7fc3185531f529ea",
@@ -12,7 +12,7 @@
   "candidate_cases": 500,
   "control_cases": 100,
   "provider_execution_authorized": false,
-  "method_evaluation_execution_authorized": false,
+  "method_evaluation_execution_authorized": true,
   "maximum_provider_calls": 0,
   "maximum_cost_usd": 0,
   "candidate_architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
@@ -22,5 +22,9 @@
   "hidden_gold_policy": "Gold is never passed to the product adapter and is joined only after every response ledger is durable.",
   "quality_failure_rerun_allowed": false,
   "harness_only_correction_maximum": 1,
-  "authorization": null
+  "authorization": {
+    "authorized_at": "2026-09-02T00:00:00+08:00",
+    "scope": "network-free fresh 500-case candidate plus 100-case control; zero provider calls",
+    "source": "User authorized all previously discussed execution through the local demo on 2026-09-02."
+  }
 }

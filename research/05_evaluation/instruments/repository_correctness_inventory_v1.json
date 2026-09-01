@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ea57a42ce8ea7b26fb01bc98af75c179e3156df04ee6b98adb2c0c64209f5e01",
+  "record_sha256": "e38365672a114c1dbafe648518598b479b889046c4aaf8f43aa76e4a3b2a0133",
   "records": [
     {
       "audit": {
@@ -4515,7 +4515,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_grounding_successor_011.json",
       "risk": "high",
-      "sha256": "611982b201cea6670a02f8aae60f304002dafa00ca5c7c269613487b65ea5917"
+      "sha256": "91d4b1241cde3f449d1c4cc6cb6c3677e2c4497718f50e0c5a5ba18010e66f36"
     },
     {
       "audit": {
