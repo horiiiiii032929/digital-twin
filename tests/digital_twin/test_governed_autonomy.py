@@ -44,6 +44,7 @@ from src.digital_twin.student.autonomy_models import (
     ConceptAttributionV2,
     LearnerObservationV2,
     PedagogicalPolicyV2,
+    AutonomousPlannerOutputV1,
     TurnPerceptionV2,
 )
 from src.digital_twin.student.learner_belief import (
@@ -62,6 +63,7 @@ from src.digital_twin.student.autonomy_eligibility import (
     ACTION_ELIGIBILITY_VERSION,
 )
 from src.digital_twin.student.autonomy_service import (
+    BoundedStrategyGroundedWordingGenerator,
     GovernedAutonomyService,
     RepositoryGroundedWordingGenerator,
 )
@@ -676,6 +678,76 @@ async def test_live_planner_failure_fails_closed_without_delivery(tmp_path):
     assert result.trace.repair_calls == 0
     assert result.trace.graph_version == GRAPH_VERSION
     assert result.trace.generator_model == DETERMINISTIC_GENERATOR_MODEL
+
+
+@pytest.mark.asyncio
+async def test_bounded_strategy_generator_keeps_facts_and_lineage_server_owned(
+    tmp_path,
+):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(service, fixture, release)
+    policy = repository.get_autonomy_policy(fixture.course_a_id)
+    chunk = release.chunks[0]
+    source_key = ":".join(
+        (
+            chunk.source_artifact_id,
+            str(chunk.source_version),
+            chunk.content_hash,
+            chunk.locator,
+        )
+    )
+    job = AutonomousJobInput(
+        opportunity=opportunity,
+        goal=repository.get_autonomous_goal(opportunity.goal_id),
+        policy=policy,
+        professor_id=fixture.professor_id,
+        current_release_id=release.id,
+        current_profile_id=policy.approved_profile_id,
+        current_profile_sha256=policy.approved_profile_sha256,
+        membership_active=True,
+        consent_active=True,
+        evidence_keys=[source_key],
+        evidence_chunk_ids=[chunk.id],
+        evidence_complete=True,
+        evidence_unique=True,
+        evidence_current=True,
+        evidence_authorized=True,
+        now=NOW.isoformat(),
+    )
+    client = FixtureLlmClient(
+        response_content=json.dumps(
+            {
+                "opportunity_id": opportunity.opportunity_id,
+                "action": "issue-retrieval-practice",
+                "lead_style": "reflective",
+                "prompt_mode": "apply",
+            }
+        )
+    )
+    generator = BoundedStrategyGroundedWordingGenerator(
+        repository,
+        client,
+        model_id="gpt-5.6-luna",
+        claim_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+    )
+    plan = AutonomousPlannerOutputV1(
+        action=AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE,
+        reason_code="test",
+        required_evidence_keys=[source_key],
+        stop_condition="Stop after one action.",
+    )
+
+    response = await generator.generate(job, plan)
+
+    assert response.policy_action == "answer"
+    assert response.atomic_claims[0] in chunk.text
+    assert response.source_range_keys == [source_key]
+    assert "Pause and connect" in response.content
+    assert "Apply this point" in response.content
 
 
 @pytest.mark.asyncio

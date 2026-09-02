@@ -33,6 +33,8 @@ from src.digital_twin.grounding import (
 from src.digital_twin.onboarding import create_session
 from src.digital_twin.student import (
     AccountRole,
+    BoundedStrategyGroundedWordingGenerator,
+    GuardedPolicyValuePlanner,
     SQLiteStudentRepository,
     approved_synthetic_policy,
     seed_synthetic_student_workflow,
@@ -670,6 +672,36 @@ def test_governed_runtime_decouples_live_planning_from_safe_generation(monkeypat
         "deterministic-tutor-action-router-v2"
     )
     assert app.state.provider_budget is None
+
+
+def test_governed_runtime_binds_selected_h_e1_allocation(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    app = create_app(
+        settings=AppSettings(
+            generator_mode=GeneratorMode.DETERMINISTIC,
+            evidence_gate_mode=EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
+            learning_gap_hmac_secret=b"x" * 32,
+            student_profile_path=LOCAL_R1_V2_PROFILE,
+            student_tutoring_mode=(
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+            ),
+            autonomy_planner_mode=(
+                AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+            ),
+        )
+    )
+
+    graph = app.state.governed_autonomy_service.graph
+    assert isinstance(graph.planner, GuardedPolicyValuePlanner)
+    assert graph.planner.implementation_id == "guarded-policy-value-planner-v2"
+    assert graph.planner.proposal_provider.model_id == "gpt-5.6-luna"
+    assert isinstance(graph.generator, BoundedStrategyGroundedWordingGenerator)
+    assert graph.generator.model_id == "gpt-5.6-luna"
+    assert graph.generator.strategy_client is app.state.autonomy_planner_budget
+    assert app.state.student_service.autonomy_planner_model == "gpt-5.6-luna"
+    assert app.state.student_service.autonomy_generator_model == (
+        "deterministic/evidence-set-v2"
+    )
 
 
 def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):

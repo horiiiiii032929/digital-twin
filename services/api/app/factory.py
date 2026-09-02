@@ -36,6 +36,7 @@ from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
 from src.digital_twin.model_policy import (
+    OPENAI_GPT_5_6_LUNA_MODEL,
     OPENAI_GPT_5_6_TERRA_MODEL,
     OPENAI_MODEL_PRICING_USD_PER_MILLION,
     OPENAI_PRODUCT_CANDIDATE_MODELS,
@@ -95,8 +96,13 @@ from src.digital_twin.student.autonomy_runtime import (
     LiveAutonomousPlanner,
 )
 from src.digital_twin.student.autonomy_service import (
+    BoundedStrategyGroundedWordingGenerator,
     GovernedAutonomyService,
     RepositoryGroundedWordingGenerator,
+)
+from src.digital_twin.student.planning_architectures import (
+    GuardedPolicyValuePlanner,
+    LlmHierarchicalPlanningProvider,
 )
 from src.digital_twin.student.service import StudentTutoringService
 from src.digital_twin.student.tutoring_graph import LiveReactiveSemanticPlanner
@@ -214,11 +220,8 @@ def create_app(
         runtime_settings.student_tutoring_mode
         == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
     )
-    live_autonomy_planner = bool(
-        governed_v2
-        and runtime_settings.autonomy_planner_mode
-        == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
-    )
+    autonomy_provider_model = _autonomy_provider_model(runtime_settings)
+    live_autonomy_planner = bool(governed_v2 and autonomy_provider_model is not None)
     active_generator_model = (
         provider_budget.client.model
         if provider_budget is not None
@@ -247,23 +250,40 @@ def create_app(
     live_proactive_planner = None
     reactive_semantic_planner = None
     if live_autonomy_planner:
+        assert autonomy_provider_model is not None
         autonomy_planner_budget = BudgetedLlmClient(
             OpenAiResponsesClient(
-                OPENAI_GPT_5_6_TERRA_MODEL,
+                autonomy_provider_model,
                 timeout_seconds=30,
                 max_output_tokens=500,
                 reasoning_effort="low",
+                input_price_usd_per_million=(
+                    OPENAI_MODEL_PRICING_USD_PER_MILLION[autonomy_provider_model][0]
+                ),
+                output_price_usd_per_million=(
+                    OPENAI_MODEL_PRICING_USD_PER_MILLION[autonomy_provider_model][1]
+                ),
             ),
             max_calls=runtime_settings.provider_max_calls_per_process,
             max_cost_usd=runtime_settings.provider_cost_cap_usd,
         )
-        live_proactive_planner = LiveAutonomousPlanner(
-            autonomy_planner_budget,
-            model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+        live_proactive_planner = (
+            GuardedPolicyValuePlanner(
+                proposal_provider=LlmHierarchicalPlanningProvider(
+                    autonomy_planner_budget,
+                    model_id=autonomy_provider_model,
+                )
+            )
+            if runtime_settings.autonomy_planner_mode
+            == AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+            else LiveAutonomousPlanner(
+                autonomy_planner_budget,
+                model_id=autonomy_provider_model,
+            )
         )
         reactive_semantic_planner = LiveReactiveSemanticPlanner(
             autonomy_planner_budget,
-            model_id=OPENAI_GPT_5_6_TERRA_MODEL,
+            model_id=autonomy_provider_model,
         )
     app.state.autonomy_planner_budget = autonomy_planner_budget
     app.state.student_service = StudentTutoringService(
@@ -294,7 +314,7 @@ def create_app(
             )
         ),
         autonomy_planner_model=(
-            OPENAI_GPT_5_6_TERRA_MODEL
+            autonomy_provider_model
             if live_autonomy_planner
             else DETERMINISTIC_PLANNER_MODEL
         ),
@@ -308,14 +328,26 @@ def create_app(
     )
     autonomy_graph = None
     if governed_v2:
-        autonomy_graph = GovernedAutonomousTutoringGraph(
-            planner=live_proactive_planner,
-            generator=RepositoryGroundedWordingGenerator(
+        autonomy_wording_generator = (
+            BoundedStrategyGroundedWordingGenerator(
+                app.state.student_repository,
+                autonomy_planner_budget,
+                model_id=OPENAI_GPT_5_6_LUNA_MODEL,
+                claim_validator=active_claim_validator,
+            )
+            if runtime_settings.autonomy_planner_mode
+            == AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+            and autonomy_planner_budget is not None
+            else RepositoryGroundedWordingGenerator(
                 app.state.student_repository,
                 active_generator,
                 model_id=active_generator_model,
                 claim_validator=active_claim_validator,
-            ),
+            )
+        )
+        autonomy_graph = GovernedAutonomousTutoringGraph(
+            planner=live_proactive_planner,
+            generator=autonomy_wording_generator,
             checkpoint_database_path=str(runtime_settings.database_path),
         )
     app.state.governed_autonomy_service = GovernedAutonomyService(
@@ -503,6 +535,16 @@ def _configured_generator(
         ),
         client,
     )
+
+
+def _autonomy_provider_model(settings: AppSettings) -> str | None:
+    return {
+        AutonomyPlannerMode.DETERMINISTIC: None,
+        AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA: OPENAI_GPT_5_6_TERRA_MODEL,
+        AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE: (
+            OPENAI_GPT_5_6_LUNA_MODEL
+        ),
+    }[settings.autonomy_planner_mode]
 
 
 def _deterministic_governed_generator() -> DeterministicEvidenceSetGroundedGenerator:

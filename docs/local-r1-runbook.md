@@ -56,6 +56,21 @@ startup therefore rejects this block by design. Keep the committed bounded
 T1-v1/T0 configuration until a fresh architecture comparison selects and binds
 a successor.
 
+The architecture and engine comparisons have now selected the following
+candidate for fresh whole-system confirmation:
+
+```text
+APP_GENERATOR_MODE=deterministic
+APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2
+APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json
+APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
+APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-luna-policy-value
+```
+
+This is not yet a staging-ready block. Startup must continue to reject it until
+the fresh H+E1 whole-system qualification record binds the profile hash,
+`guarded-policy-value-planner-v2`, Luna identity, and selected evidence gate.
+
 ## Build and start
 
 ```bash

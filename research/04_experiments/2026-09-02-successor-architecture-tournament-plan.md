@@ -91,6 +91,21 @@ decision is retained with the limitation disclosed; the shared runtime contract
 is corrected before confirmation. The next step is one fresh whole-system
 confirmation of H+E1, not another architecture or prompt-tuning loop.
 
+### Product integration amendment AFQC-162
+
+H+E1 is implemented as an explicit prospective runtime mode before the fresh
+confirmation. `guarded-policy-value-planner-v2` consumes Luna's bounded
+hierarchical proposal; Luna's second role may select only a lead-style and
+learner-prompt enum. Deterministic code owns the literal source quote, atomic
+claim, citation, policy, identity, persistence, and delivery. The existing
+factual response compiler is not replaced because engine comparison 006 tested
+proactive strategy selection rather than ordinary student Q&A generation.
+
+The API factory and flow-independent product adapter must construct the same
+planner and wording contracts. Staging activation remains prohibited until the
+fresh whole-system result binds the architecture ID, model identity, evidence
+gate, profile hash, code revision, and rollback configuration.
+
 ## Primary analysis
 
 - acceptable pedagogical move: paired McNemar;

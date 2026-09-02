@@ -446,6 +446,20 @@ class GroundedTutorResponseV2(_Contract):
         return self
 
 
+class AutonomousWordingStrategyV1(_Contract):
+    """Non-authoritative wording choices for one proactive intervention.
+
+    The model cannot write factual content through this contract. Source text,
+    claims, citations, identity, and delivery remain server-owned.
+    """
+
+    schema_version: Literal["1.0.0"] = "1.0.0"
+    opportunity_id: str = Field(min_length=1, max_length=128)
+    action: AutonomousActionKind
+    lead_style: Literal["direct", "encouraging", "reflective"]
+    prompt_mode: Literal["explain", "retrieve", "contrast", "apply"]
+
+
 class AgentTraceV2(_Contract):
     schema_version: Literal["2.1.0"] = "2.1.0"
     trace_id: str = Field(min_length=1, max_length=128)

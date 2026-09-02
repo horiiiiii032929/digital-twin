@@ -67,6 +67,16 @@ shared runtime contract is corrected before confirmation. This component result
 selects H+E1 only for fresh whole-system confirmation; it does not authorize a
 release.
 
+The selected candidate is now implemented in the actual API factory and the
+flow-independent actual-product runtime. The new planner mode binds
+`guarded-policy-value-planner-v2` to exact Luna proposals and uses Luna only to
+select bounded lead/prompt enums for proactive wording. Deterministic code
+still owns source quotes, claims, citations, policy, identity, persistence, and
+delivery. Reactive factual answers retain the selected deterministic evidence
+compiler; the engine comparison did not authorize replacing that component.
+Staging remains fail-closed until fresh whole-system evidence binds this exact
+profile and architecture.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 from datetime import UTC, datetime, timedelta
 from typing import Literal
 from uuid import uuid4
@@ -12,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from src.digital_twin.clock import SystemUtcClock, UtcClock, utc_timestamp
 from src.digital_twin.generation import citation_matches_chunk
-from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
+from src.digital_twin.grounding.models import AtomicAnswerClaim, DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.protocols import TutorGenerator
 from src.digital_twin.grounding.protocols import PostGenerationClaimValidator
 from src.digital_twin.student.autonomy_models import (
@@ -24,10 +25,12 @@ from src.digital_twin.student.autonomy_models import (
     LearnerBeliefStateV2,
     LearnerObservationV2,
     AutonomousOutcomeKind,
+    AutonomousWordingStrategyV1,
     GroundedTutorResponseV2,
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
 )
+from src.digital_twin.llm import LlmClient, LlmError, LlmIdentityDriftError, LlmMessage
 from src.digital_twin.student.autonomy_control import (
     AutonomousEvidenceAssessor,
     DeterministicAutonomousGoalManager,
@@ -189,6 +192,141 @@ class RepositoryGroundedWordingGenerator:
             atomic_claims=claims[:8],
             citation_ids=[f"citation:{key}" for key in cited_keys],
             source_range_keys=cited_keys,
+            policy_action="answer",
+        )
+
+
+_AUTONOMOUS_LEAD_TEXT = {
+    "direct": "Use this approved course evidence for the next step.",
+    "encouraging": (
+        "You can use this approved course evidence to make the next step concrete."
+    ),
+    "reflective": (
+        "Pause and connect the next step to this approved course evidence."
+    ),
+}
+_AUTONOMOUS_PROMPT_TEXT = {
+    "explain": "Explain the next step in your own words.",
+    "retrieve": "Recall the key point before continuing.",
+    "contrast": "Contrast this point with the alternative you considered.",
+    "apply": "Apply this point to the current activity.",
+}
+
+
+class BoundedStrategyGroundedWordingGenerator:
+    """Use a model only for bounded style choices, then render source truth.
+
+    This is the product implementation of engine allocation E1. A provider
+    failure uses the frozen direct/retrieval strategy without a retry. Identity
+    drift remains an operational failure and cannot result in delivery.
+    """
+
+    def __init__(
+        self,
+        repository: StudentRepository,
+        strategy_client: LlmClient,
+        *,
+        model_id: str,
+        claim_validator: PostGenerationClaimValidator,
+    ) -> None:
+        self.repository = repository
+        self.strategy_client = strategy_client
+        self.model_id = model_id
+        self.claim_validator = claim_validator
+
+    async def generate(self, job, plan):
+        release = self.repository.get_release(job.opportunity.release_id)
+        chunks = _resolve_evidence_chunks(release, job.evidence_chunk_ids)
+        if release is None or not chunks:
+            return _failed_grounded_response(plan.action)
+        primary = chunks[0]
+        evidence_quote = _bounded_literal_quote(primary.text)
+        if not evidence_quote:
+            return _failed_grounded_response(plan.action)
+        fallback = AutonomousWordingStrategyV1(
+            opportunity_id=job.opportunity.opportunity_id,
+            action=plan.action,
+            lead_style="direct",
+            prompt_mode="retrieve",
+        )
+        prompt = {
+            "instruction": (
+                "Choose one lead style and one learner-prompt mode for a concise "
+                "in-app tutoring intervention. Do not write free text, repeat the "
+                "evidence, or change the action, scope, or opportunity_id."
+            ),
+            "opportunity_id": job.opportunity.opportunity_id,
+            "event_kind": job.opportunity.event_kind.value,
+            "action": plan.action.value,
+            "objective": (
+                job.goal.approved_course_objective
+                if job.goal is not None
+                else job.opportunity.concept_id or "approved course objective"
+            ),
+            "approved_evidence": evidence_quote,
+            "lead_styles": list(_AUTONOMOUS_LEAD_TEXT),
+            "prompt_modes": list(_AUTONOMOUS_PROMPT_TEXT),
+        }
+        try:
+            response = await self.strategy_client.chat(
+                [
+                    LlmMessage(
+                        role="system",
+                        content=(
+                            "Return only the requested bounded wording-strategy "
+                            "object. Never add academic facts or personal data."
+                        ),
+                    ),
+                    LlmMessage(
+                        role="user",
+                        content=json.dumps(prompt, sort_keys=True),
+                    ),
+                ],
+                task="autonomous_tutoring_wording_strategy",
+            )
+            strategy = AutonomousWordingStrategyV1.model_validate_json(
+                response.content
+            )
+            if (
+                strategy.opportunity_id != job.opportunity.opportunity_id
+                or strategy.action != plan.action
+            ):
+                raise ValueError("wording strategy changed identity or action")
+        except LlmIdentityDriftError:
+            raise
+        except (LlmError, ValueError):
+            strategy = fallback
+
+        hits = [
+            RetrievalHit(
+                chunk=chunk,
+                relevance_score=max(0.0, 1.0 - index * 0.05),
+                raw_score=max(0.0, 1.0 - index * 0.05),
+            )
+            for index, chunk in enumerate(chunks)
+        ]
+        claim = AtomicAnswerClaim(
+            claim_id="claim-proactive-evidence",
+            text=evidence_quote,
+            evidence_hit_ids=[primary.id],
+        )
+        try:
+            validation = self.claim_validator.validate([claim], hits)
+        except (RuntimeError, ValueError):
+            return _failed_grounded_response(plan.action)
+        if not validation.releasable:
+            return _failed_grounded_response(plan.action)
+        source_key = _source_range_key(primary)
+        return GroundedTutorResponseV2(
+            action=plan.action,
+            content=(
+                f'{_AUTONOMOUS_LEAD_TEXT[strategy.lead_style]} '
+                f'"{evidence_quote}" '
+                f'{_AUTONOMOUS_PROMPT_TEXT[strategy.prompt_mode]}'
+            ),
+            atomic_claims=[evidence_quote],
+            citation_ids=[f"citation:{source_key}"],
+            source_range_keys=[source_key],
             policy_action="answer",
         )
 
@@ -1184,6 +1322,16 @@ def _source_range_key(chunk) -> str:
             chunk.locator,
         )
     )
+
+
+def _bounded_literal_quote(text: str, *, maximum_characters: int = 480) -> str:
+    """Return a display-safe literal substring while preserving source lineage."""
+
+    stripped = text.strip()
+    if len(stripped) <= maximum_characters:
+        return stripped
+    boundary = stripped.rfind(" ", 0, maximum_characters + 1)
+    return stripped[: boundary if boundary > 0 else maximum_characters].rstrip()
 
 
 def _intent_for_action(action: AutonomousActionKind) -> str:

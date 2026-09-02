@@ -8,6 +8,7 @@ from scripts import (
 )
 from scripts.governed_full_autonomy_v2_1_actual_product_runtime import (
     build_runtime_factory,
+    selected_h_e1_engine_binding,
 )
 from scripts import (
     run_governed_full_autonomy_v2_1_actual_product_evaluation_002 as runner,
@@ -19,6 +20,11 @@ from src.digital_twin.evaluation import (
 )
 from src.digital_twin.evaluation.autonomy_product_adapter import (
     StudentProductAutonomyAdapterV1,
+)
+from src.digital_twin.clock import VirtualUtcClock
+from src.digital_twin.student import (
+    BoundedStrategyGroundedWordingGenerator,
+    GuardedPolicyValuePlanner,
 )
 
 
@@ -109,6 +115,33 @@ def test_actual_product_runner_is_blocked_after_authority_revocation() -> None:
     assert "paid-execution-not-authorized" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False
+
+
+def test_actual_product_factory_can_bind_selected_h_e1(tmp_path) -> None:
+    condition, case, _gold = next(
+        row
+        for row in builder.build_contract()
+        if row[0] == "t1-v2-autonomous"
+    )
+    runtime = build_runtime_factory(
+        tmp_path,
+        condition,
+        provider_backed=True,
+        engine_binding=selected_h_e1_engine_binding(),
+        hybrid_safe_generation=True,
+        autonomy_architecture_id="guarded-policy-value-planner-v2",
+        bounded_strategy_generation=True,
+    )(case, VirtualUtcClock(datetime(2026, 9, 1, 12, 0, tzinfo=UTC)))
+    try:
+        assert isinstance(runtime.autonomy.graph.planner, GuardedPolicyValuePlanner)
+        assert runtime.autonomy.graph.planner.model_id == "gpt-5.6-luna"
+        assert isinstance(
+            runtime.autonomy.graph.generator,
+            BoundedStrategyGroundedWordingGenerator,
+        )
+        assert runtime.autonomy.graph.generator.model_id == "gpt-5.6-luna"
+    finally:
+        runtime.repository.close()
 
 
 @pytest.mark.asyncio

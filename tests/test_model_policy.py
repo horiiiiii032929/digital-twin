@@ -13,6 +13,7 @@ from src.digital_twin.model_policy import (
     OPENAI_ROUTINE_REVIEW_LITELLM_MODEL,
     OPENAI_SEMANTIC_REVIEW_MODEL,
     OPENAI_SEMANTIC_REVIEW_LITELLM_MODEL,
+    OPENAI_GPT_5_6_SOL_MODEL,
     OPENAI_TEXT_EMBEDDING_LARGE_MODEL,
     OPENAI_TEXT_EMBEDDING_SMALL_MODEL,
     OPENROUTER_DEEPSEEK_MODEL,
@@ -87,6 +88,19 @@ def test_gpt_evidence_reviewer_openrouter_path_is_invalid_and_not_retried():
     assert binding.status == "reviews-006-007-invalid-openrouter-do-not-retry"
 
 
+def test_luna_is_selected_only_for_h_e1_whole_system_confirmation():
+    binding = next(
+        item
+        for item in CURRENT_MODEL_BINDINGS
+        if item.role == "autonomy-planner-and-bounded-wording-strategy"
+    )
+
+    assert binding.provider_model == "gpt-5.6-luna"
+    assert binding.status == (
+        "engine-comparison-006-selected-for-whole-system-confirmation"
+    )
+
+
 @pytest.mark.parametrize(
     "model",
     (
@@ -108,6 +122,7 @@ def test_openai_snapshots_are_the_only_active_r1_models(model):
         "deepseek-v4-flash",
         OPENROUTER_INDEPENDENT_REVIEW_MODEL,
         LOCAL_GENERAL_MODEL,
+        OPENAI_GPT_5_6_SOL_MODEL,
     ),
 )
 def test_historical_or_advisory_models_cannot_enter_active_r1(model):

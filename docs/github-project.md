@@ -90,6 +90,9 @@ revoked. Six findings `SE6-1`–`SE6-6` are closed, including the post-run share
 trace-clock correction. Project status remains `In Progress / Go Deeper`
 because H+E1 is not a release selection until fresh factual, autonomy, and local
 product qualification pass. T0 and bounded T1-v1 remain rollback controls.
+The selected allocation is now wired into both the API factory and the
+flow-independent actual-product adapter as a prospective runtime mode. Staging
+continues to reject it until the new whole-system qualification record exists.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

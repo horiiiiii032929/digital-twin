@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b3bf22d5b0ad0e1bc561c37ff48cd071c092011599624a4321b60ef80dd3782d",
+  "record_sha256": "21510be4346f2bfb94b4c380847245f6ada5fc26b792b6ab8e79b984c5cae913",
   "records": [
     {
       "audit": {
@@ -40,10 +40,10 @@
     {
       "audit": {
         "domain": "finite-evaluation-program",
-        "evidence": "Command-surface review verified build validation, six finite network-free terminal simulations, no-call preflight, authorized execution, and resume commands remain explicit and authority-gated.",
+        "evidence": "H+E1 product-binding review verified the candidate mode is documented without credentials, remains non-default, and preserves explicit qualification and release gates.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -51,7 +51,7 @@
       "package_commands": [],
       "path": ".env.example",
       "risk": "medium",
-      "sha256": "1a25d1f206d5c15e26a8e4dd7307ea1505edec3742b35710e9147d26ceec4e99"
+      "sha256": "9cea23246fb979e8bb962dd04b2194b3fc85b3c5e64d1ceca7899b52268246ef"
     },
     {
       "audit": {
@@ -7335,10 +7335,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
-        "evidence": "Cross-engine evaluation review verified typed immutable bindings, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
+        "evidence": "Actual-product factory review verified the selected H+E1 candidate can be injected through the flow-independent runtime while T0/T1-v1 and historical architecture controls remain unchanged.",
         "findings": [],
         "reviewed_at": "2026-09-01",
-        "reviewer": "Codex confirmation-013 root-cause audit"
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7346,7 +7346,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "b84cec3e7d75ecbbcb1e2acb822ac24c99401b840356fd92956e53376c0bd996"
+      "sha256": "2fdadc0c23faeb35d713e542b3f49a8c782654f6ddb44747d96faa86f1d5cf71"
     },
     {
       "audit": {
@@ -10423,10 +10423,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Configuration review verified Luna policy-value mode is explicit, OpenAI-only, qualification-bound, and fail-closed in staging until the exact H architecture and model identity pass confirmation.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10434,7 +10434,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "80214d33b53ddcee60e8e381e1019b7775c4b9168aa92182d364872789cb4d20"
+      "sha256": "dc23270dfb233c4f6804a9d454e63c8073ef82ebbd20fbe94ab37952f84e4b95"
     },
     {
       "audit": {
@@ -10455,10 +10455,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Factory composition review verified H uses Luna only for bounded perception, planning, and wording strategy; deterministic code retains policy, factual content, citations, persistence, delivery, and rollback authority.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10466,7 +10466,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "8cea9113f63ce8fb4a4c53e4be0683449226f3f28c11b0117297bd1c05a52456"
+      "sha256": "817d6990a879903adaee15443f775ac598fc51d5defffb228091f31805a2c1f4"
     },
     {
       "audit": {
@@ -10807,10 +10807,10 @@
     {
       "audit": {
         "domain": "provider-observability",
-        "evidence": "Live-contract audit SA1 found and fixed the post-response dispatcher mismatch. Direct transport tests now prove strict hierarchical proposal and reject-only verifier parsing while preserving exact identity, no-fallback, usage accounting, and provider error behavior.",
+        "evidence": "Provider contract review verified the new bounded wording-strategy task uses strict structured output, exact model identity, store-false transport, and deterministic semantic validation.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10818,7 +10818,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "018b39d5456644fc34cfa67a3c8fd7cdda472f2314dd5c2e004d812be15852ca"
+      "sha256": "0d21cc439587d66df5caff9e970cc6ae35ba657cbbcb98289ded377b4ab74b1a"
     },
     {
       "audit": {
@@ -12327,10 +12327,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Policy v9 preserves deterministic release selection and historical bindings while marking both OpenAI embedding candidates AFQC-100 quality-failed/not-selected after the valid comparison.",
+        "evidence": "Policy v10 records Luna as the selected H+E1 confirmation candidate, keeps historical results intact, and removes Sol from active release eligibility as explicitly required.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12338,7 +12338,7 @@
       "package_commands": [],
       "path": "src/digital_twin/model_policy.py",
       "risk": "high",
-      "sha256": "0cf8966fe10be462bc39cb27142c58ca65ed590e60f0962aa2ae3ee9099bb34d"
+      "sha256": "734c0d28fa6131e34ff58ce70193a9a4e1d72e012c5db72a6eadf75c1425142c"
     },
     {
       "audit": {
@@ -12599,10 +12599,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Public-export review plus focused import and architecture tests confirmed the guarded policy-value planner resolves without cycles and leaves the existing T0/T1-v1 and A/B/C public surfaces intact.",
+        "evidence": "Public-export review verified the bounded strategy contract and grounded generator are importable without cycles while historical T0/T1-v1 and architecture comparison surfaces remain intact.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12610,7 +12610,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "ef3b6799050cbcb530a77b710d546d0efd5672a0fc0745e5e500c97917c65880"
+      "sha256": "cb50996b0d2d8da72cebf0c24f9f5d6b74fc9b20c7a7821d100be713ac85f3be"
     },
     {
       "audit": {
@@ -12647,10 +12647,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-trace-clock-closure",
-        "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
+        "evidence": "Contract review verified the model-owned wording strategy is limited to two bounded enums and cannot carry factual claims, source lineage, delivery targets, policies, or state mutations.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex AFQC-161 result and finding-closure audit"
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12658,7 +12658,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_models.py",
       "risk": "high",
-      "sha256": "2fd320b2e1f6c8e3515523e637a7f05bd270a30e89d01aea49bc81ee01c63928"
+      "sha256": "9562a012019b382fb6a910546ce84876abdf503ac35bce4bf7e9cea75493479d"
     },
     {
       "audit": {
@@ -12679,10 +12679,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Grounded wording review verified literal authorized evidence and canonical citation lineage remain server-owned, provider and identity failures fail safely, and no free-text model output becomes authoritative content.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12690,7 +12690,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_service.py",
       "risk": "high",
-      "sha256": "d43bfbb1387642ed5b9f3bca3f73ef42d4f955f7766df9ef87e9f5d321ddc660"
+      "sha256": "51c7364b10c035dabaa3a473e67cbf16f342b7d03080681fa7d555aa0e5efd21"
     },
     {
       "audit": {
@@ -12935,10 +12935,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "API-factory regressions verify exact H+E1 composition, shared budget binding, qualification rejection before selection, deterministic student factual generation, and preserved rollback modes.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12946,7 +12946,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "ba1d96cea89c896f47dca708e096fc958cc0c6361959cf91674b73b57d79e9e2"
+      "sha256": "952d1e6e2592c78b5cf1138cb8420d9c0a7bf1eaca5168b74e695e8d3478f21a"
     },
     {
       "audit": {
@@ -13207,10 +13207,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-trace-clock-closure",
-        "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
+        "evidence": "Service regressions verify bounded strategy selection, deterministic factual rendering, source and citation ownership, provider fallback, and unchanged trace-clock invariants.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex AFQC-161 result and finding-closure audit"
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13218,7 +13218,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "1c4c2329aca94427adf74a328748864da0a0079d8eab9df78a578d1bef0a1f2c"
+      "sha256": "5670661d0a9187c1d3306f280571b38156d0f570bec198316510621a581857d8"
     },
     {
       "audit": {
@@ -13799,10 +13799,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+        "evidence": "Transport regressions verify the wording-strategy schema, task dispatch, strict enum parsing, exact identity, usage accounting, and privacy-safe failure behavior.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture live-contract audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13810,7 +13810,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "24292732a18a3e3f49461db0b2712c4c0c56f06d6655ae66570c52e8a3697cb9"
+      "sha256": "0b841e7865fa5d47f83b2618541eeb0450eea3d18d0aa696a6362107eb64ee10"
     },
     {
       "audit": {
@@ -15431,10 +15431,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Reviewed the lineage-aware frequency regression proving reactive turn deliveries do not count against proactive message limits.",
+        "evidence": "Flow-independent runtime regressions verify H+E1 can be bound through the actual-product factory without exposing graph-node names or changing the stable autonomy evaluation adapter contract.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15442,7 +15442,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "medium",
-      "sha256": "ac0b9c3ec95ab0d75732b91baab9189ad533140e1fcc428f964d4bf05dde93cf"
+      "sha256": "defcd08ec89114a8d3bf6523ac30d64b4817d3a6e79a854f6795f515486754d3"
     },
     {
       "audit": {
@@ -15735,10 +15735,10 @@
     {
       "audit": {
         "domain": "r1-openai-verification",
-        "evidence": "Focused OpenAI-only R1 code and contract review; exact-model, no-fallback, store-false, gold-separation, freeze, staging, network-free simulation, and targeted regression checks passed.",
+        "evidence": "Model-policy regressions verify Luna and Terra remain explicit active candidates, Sol and historical providers cannot enter active release execution, and historical records remain queryable.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 product-integration audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15746,7 +15746,7 @@
       "package_commands": [],
       "path": "tests/test_model_policy.py",
       "risk": "medium",
-      "sha256": "e5b722137d3ecc880aa9a0256c18e3f79d1bd1ea801f1b237201acdda6522f92"
+      "sha256": "ddc7f550e1460ad8011e9eeeed2db187e78f24d576e9be547a22717eedea20b4"
     },
     {
       "audit": {

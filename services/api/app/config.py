@@ -41,6 +41,7 @@ class StudentTutoringMode(StrEnum):
 class AutonomyPlannerMode(StrEnum):
     DETERMINISTIC = "deterministic"
     OPENAI_GPT_5_6_TERRA = "openai-gpt-5.6-terra"
+    OPENAI_GPT_5_6_LUNA_POLICY_VALUE = "openai-gpt-5.6-luna-policy-value"
 
 
 class EvidenceGateMode(StrEnum):
@@ -298,7 +299,10 @@ class AppSettings:
             )
         active_openai_planner = bool(
             self.autonomy_planner_mode
-            == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
+            in {
+                AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+                AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE,
+            }
             and self.student_tutoring_mode
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         )
@@ -408,10 +412,12 @@ def _validate_t1_qualification_result(
                 == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
                 and (
                     selected_configuration.get("planner")
-                    != (
-                        "gpt-5.6-terra"
-                        if planner_mode == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
-                        else "deterministic/autonomy-planner-v1"
+                    != _qualified_planner_model(planner_mode)
+                    or (
+                        planner_mode
+                        == AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+                        and selected_configuration.get("planner_architecture")
+                        != "guarded-policy-value-planner-v2"
                     )
                     or selected_configuration.get("evidence_gate")
                     != evidence_gate_mode.value
@@ -444,6 +450,14 @@ def _validate_t1_qualification_result(
         or result.get("content_sha256") != expected_hash
     ):
         raise ValueError("staging T1 qualification evidence does not bind this release")
+
+
+def _qualified_planner_model(planner_mode: AutonomyPlannerMode) -> str:
+    return {
+        AutonomyPlannerMode.DETERMINISTIC: "deterministic/autonomy-planner-v1",
+        AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA: "gpt-5.6-terra",
+        AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE: "gpt-5.6-luna",
+    }[planner_mode]
 
 
 def _boolean(name: str, *, default: bool) -> bool:

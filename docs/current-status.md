@@ -251,6 +251,15 @@ Repository correctness is 979/979 audited with zero pending or open findings.
 The terminal result/clock-fix gate passed all 1,678 Python tests, 50 frontend
 tests, lint, production build, evaluation-record validation, and freeze checks.
 
+The selected H+E1 candidate is now productized prospectively. The API factory
+can bind `guarded-policy-value-planner-v2` with Luna for hierarchical planning
+and for bounded proactive response-strategy selection. Luna cannot author
+facts: deterministic code renders the approved source quote, atomic claim,
+citation lineage, and learner prompt. The actual-product evaluation factory
+uses the same contracts. The normal student factual generator is intentionally
+unchanged. This closes the selection-to-runtime wiring gap but does not yet
+promote H+E1; fresh whole-system confirmation remains required.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

@@ -211,6 +211,41 @@ async def test_openai_responses_client_validates_reject_only_verifier_response(
 
 
 @pytest.mark.asyncio
+async def test_openai_responses_client_validates_bounded_wording_strategy(monkeypatch):
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return _response(
+            model="gpt-5.6-luna",
+            text=(
+                '{"opportunity_id":"opportunity-1",'
+                '"action":"issue-retrieval-practice",'
+                '"lead_style":"reflective","prompt_mode":"apply"}'
+            ),
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-luna", post=post)
+
+    result = await client.chat(
+        [LlmMessage(role="user", content="Choose bounded wording controls.")],
+        task="autonomous_tutoring_wording_strategy",
+    )
+
+    schema = captured["json"]["text"]["format"]["schema"]
+    assert set(schema["properties"]) == {
+        "schema_version",
+        "opportunity_id",
+        "action",
+        "lead_style",
+        "prompt_mode",
+    }
+    assert "content" not in schema["properties"]
+    assert result.provider_model == "gpt-5.6-luna"
+
+
+@pytest.mark.asyncio
 async def test_openai_responses_client_fails_closed_on_identity_drift(monkeypatch):
     async def post(**kwargs):
         del kwargs
