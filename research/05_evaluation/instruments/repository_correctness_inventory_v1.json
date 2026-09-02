@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9417d465cd277ed24430621b76e7042fe1cfc7d801bfcf7cc684edc6fe473a4e",
+  "record_sha256": "660f319705dae6a92cc925ee4e55315d4d8c0ef1339478ae48c42bf186f38f14",
   "records": [
     {
       "audit": {
@@ -5192,10 +5192,10 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Prospective instrument review confirmed a fresh 150-case fold, one-case strict schemas with exact case-ID enums, individual model-failure quarantine into the governed safe fallback, immutable invalidity boundaries for identity/budget/ledger/gold defects, 242-call and USD 2 ceilings, and no paid/provider authority.",
+        "evidence": "Prospective instrument review confirmed a fresh 150-case fold, one-case strict schemas with exact case-ID enums, individual model-failure quarantine into the governed safe fallback, immutable invalidity boundaries for identity/budget/ledger/gold defects, 242-call and USD 2 ceilings, and explicit one-checkpoint paid/provider authority.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture fold-002 audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex successor-architecture fold-002 authorization audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5203,7 +5203,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json",
       "risk": "high",
-      "sha256": "26e0389c2d7c3682804f0ff9585d2194908f55505e21c8c0df52f711a5e4f174"
+      "sha256": "11163b923dbfe7c82c4602e72d17170688b9d88c55110fd69deafea9e83a5211"
     },
     {
       "audit": {
@@ -12375,10 +12375,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active and both fold-001 attempts are terminal with authority revoked. No successor architecture paid stage is allowlisted. Registry and AST coverage agree exactly; every paid stage remains frozen.",
+        "evidence": "The global freeze remains active and both fold-001 attempts are terminal with authority revoked. Only the fresh fold-002 single-case successor is allowlisted for external-model evaluation and method-evaluation execution; its 242-call and USD 2 bounds remain instrument-enforced.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture invalid-attempt audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex successor-architecture fold-002 authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12386,7 +12386,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "sha256": "b3e2b4e6360ee50026393249e5ff1e8e4d3cdfc25c664734e124795d1a3b1430"
     },
     {
       "audit": {
@@ -13223,10 +13223,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, and prove both terminal successor-architecture attempts are blocked from external-model and method-evaluation operations.",
+        "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, prove both terminal fold-001 attempts remain blocked, and bind fold-002 only to external-model evaluation and method-evaluation execution.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture invalid-attempt audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex successor-architecture fold-002 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13234,7 +13234,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "03b91136183f800432e602257d2fc7cdee28d737bf67eac15164f288baa7e640"
+      "sha256": "1da04eef0db88477ed2cc6745f8f5788d8f59be279285df3bfe87d0f115e32ca"
     },
     {
       "audit": {
@@ -15993,8 +15993,8 @@
         "domain": "verification-evidence",
         "evidence": "Focused tests cover both fresh byte-stable and source-disjoint folds, gold isolation, terminal historical attempts, fold-002 authority and bounds, exact single-case schema identity, case-level safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, checkpoint separation, and provider-completion scoring.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture fold-002 audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex successor-architecture fold-002 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16002,7 +16002,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "risk": "medium",
-      "sha256": "36d267e4cb451aee21e15cdf0c71304a5fca263792e59c61a78afb7061912d1a"
+      "sha256": "fcbb4ff73ae7665f275a8d56b144be5d499292d27588091c2e2c4b8d117ce040"
     },
     {
       "audit": {
