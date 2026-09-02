@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 979
+    "audited": 983
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 240,
+    "active_or_unclassified_tooling": 242,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 258,
+    "evaluation_configuration": 259,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 220
+    "verification": 221
   },
-  "file_count": 979,
+  "file_count": 983,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "21510be4346f2bfb94b4c380847245f6ada5fc26b792b6ab8e79b984c5cae913",
+  "record_sha256": "a42526997843df7ddf8f606bb405a9a9040fe468988239122e52e374e041e05f",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison",
-        "evidence": "Reviewed command surface for deterministic build, validation, 48-cell network-free simulation, guarded preflight, bounded execute, resume, and focused verification commands.",
+        "domain": "selected-autonomy-release-confirmation",
+        "evidence": "Reviewed command surface for the selected H+E1 build, 820-case network-free simulation, guarded preflight, bounded execute/resume, and exact validation commands; historical commands remain available.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex architecture engine comparison audit"
+        "reviewer": "Codex H+E1 confirmation-014 audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "e17b11ef7f42bd91c83aa218f761aa6258222f682c1d699118855c394d66f5b7"
+      "sha256": "ffad1017c219222ccf54577862fdceb17914893fcb660bc84881cc9dbc99b5f2"
     },
     {
       "audit": {
@@ -4327,6 +4327,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-014",
+        "evidence": "Prospective instrument review verifies fresh 820-case hashes, H+E1 role separation, deterministic factual generation, exact Luna identity and current official pricing, finite call/cost limits, hidden-gold ordering, revoked build-only authority, and explicit non-claims.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 confirmation-014 audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_014.json",
+      "risk": "high",
+      "sha256": "a4e12839fd176f15345b1746f35c79a28a3b237183c7fcb389a323ed79de86ed"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Instrument review preserves the qualified 820-case network-free boundary while returning it to build-only status and revoking provider authority after its grounding dependency was not satisfied.",
         "findings": [],
@@ -6671,6 +6687,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-014",
+        "evidence": "Builder review verifies 820 unique cases, 50 source identities disjoint from confirmations 012/013, exact public/hidden-gold hashes, stable source mapping, and authority/status propagation.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 confirmation-014 audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "risk": "high",
+      "sha256": "f7aa16e4d2b89507618659053d09bda42fdbc0d74c892dc5f509577cbe494a32"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
         "findings": [],
@@ -8991,11 +9023,33 @@
     },
     {
       "audit": {
-        "domain": "evaluation-tooling",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "domain": "actual-product-autonomy-confirmation-014",
+        "evidence": "Runner review verifies selected H+E1 construction, deterministic factual generation, exact Luna canary identity, two-operation freeze guards, atomic ledgers, hidden-gold ordering, bounded cost/calls, and safe resume.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 confirmation-014 audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-confirmation-014",
+        "preflight:governed-autonomy-v2-1-actual-product-confirmation-014",
+        "resume:governed-autonomy-v2-1-actual-product-confirmation-014",
+        "simulate:governed-autonomy-v2-1-actual-product-confirmation-014",
+        "validate:governed-autonomy-v2-1-actual-product-confirmation-014"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "risk": "high",
+      "sha256": "4b4cb43413425075f1335a2db67cce339a2e48bc1f77981668d1fe6b7dffe30a"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-evaluation-framework",
+        "evidence": "Shared-runner review verifies successor context carries architecture and bounded-strategy identity through validation, manifests, run bindings, product factory construction, canaries, atomic execution, and independent scoring without changing historical default behavior.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewer": "Codex H+E1 confirmation-014 audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9009,7 +9063,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "a7b0ec19fd4aaec38fac9585c019913f0585ded4cfea5241386aaeffd0c9ce83"
+      "sha256": "bff50fd2b666e3fcfd681a8f75593d4dbb68e618fd2d8fc9c47504ca47ca763d"
     },
     {
       "audit": {
@@ -10212,11 +10266,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison",
-        "evidence": "Reviewed pure deterministic builder exemption while the provider-backed runner remains fully registered and fail-closed.",
+        "domain": "selected-autonomy-release-confirmation",
+        "evidence": "Reviewed confirmation-014 builder as pure deterministic contract construction while its provider-backed runner remains AST-detected and guarded by both bounded execution operations.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex architecture engine comparison audit"
+        "reviewer": "Codex H+E1 confirmation-014 audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10226,7 +10280,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "4c781e0276a5085ee4f45fc3bd70d54e055c25c4c3fe1603c514b88c5495659b"
+      "sha256": "3b3a640fb8fb996695ce9a2e65d30f745d4c7c7268694427666d2567fa2ae6b5"
     },
     {
       "audit": {
@@ -12582,11 +12636,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison-revocation",
-        "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
+        "domain": "selected-autonomy-release-confirmation",
+        "evidence": "Closed the confirmation-014 registry finding by registering its protected runner for external-model and method-evaluation operations; focused freeze tests now report 151 protected and 151 registered entrypoints with zero missing guards.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex AFQC-161 result and finding-closure audit"
+        "reviewer": "Codex H+E1 confirmation-014 audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12594,7 +12648,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
+      "sha256": "786d1c732f25faa206dda6875d64f853230876eab6b14359a6f91b07106eaebe"
     },
     {
       "audit": {
@@ -15430,6 +15484,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify fresh source disjointness, 820-case cardinality, build-only authority, H+E1 architecture and model bindings, deterministic factual generator separation, and fail-closed preflight.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex H+E1 confirmation-014 audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "risk": "medium",
+      "sha256": "96aa37310b0239a7137db5ef1becf8e5696e09ea2ccb4e8eacc66fac9e92bebd"
+    },
+    {
+      "audit": {
         "domain": "verification",
         "evidence": "Flow-independent runtime regressions verify H+E1 can be bound through the actual-product factory without exposing graph-node names or changing the stable autonomy evaluation adapter contract.",
         "findings": [],
@@ -16470,8 +16540,8 @@
     }
   ],
   "risk_counts": {
-    "high": 745,
-    "medium": 234
+    "high": 748,
+    "medium": 235
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

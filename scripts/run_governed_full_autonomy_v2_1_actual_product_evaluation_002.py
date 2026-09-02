@@ -82,6 +82,8 @@ class ActualProductEvaluationContext:
     generator_model_override: str | None = None
     expected_canary_models: dict[str, set[str]] | None = None
     dependency_aware_provider_failure: bool = False
+    autonomy_architecture_id: str = "legacy-live-planner"
+    bounded_strategy_generation: bool = False
 
     @property
     def case_count(self) -> int:
@@ -203,15 +205,20 @@ def _manifest(
             else (
                 {
                     "planner": context.engine_binding.planner_model,
-                    "generator": (
+                    "factual_generator": (
                         context.generator_model_override
                         or context.engine_binding.generator_model
+                    ),
+                    "proactive_strategy_model": (
+                        context.engine_binding.generator_model
+                        if context.bounded_strategy_generation
+                        else "not-selected"
                     ),
                 }
                 if context.engine_binding is not None
                 else {
                     "planner": "gpt-5.6-terra",
-                    "generator": (
+                    "factual_generator": (
                         context.generator_model_override or "gpt-5.4-mini-2026-03-17"
                     ),
                 }
@@ -247,6 +254,8 @@ def _run_binding(
         "runtime_grounding_architecture_id": (
             context.runtime_grounding_architecture_id
         ),
+        "autonomy_architecture_id": context.autonomy_architecture_id,
+        "bounded_strategy_generation": context.bounded_strategy_generation,
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_timezone": "UTC",
         "conditions": manifests,
@@ -425,13 +434,32 @@ def validate(
         "timing_assertion": "policy-derived-window",
     }:
         raise ActualProductEvaluationError("virtual-clock boundary drifted")
+    expected_planner = (
+        context.engine_binding.planner_model
+        if context.engine_binding is not None
+        else "gpt-5.6-terra"
+    )
+    expected_generator = (
+        context.engine_binding.generator_model
+        if context.engine_binding is not None
+        else "gpt-5.4-mini-2026-03-17"
+    )
     if (
-        instrument["models"]["planner"]["model"] != "gpt-5.6-terra"
-        or instrument["models"]["generator"]["model"] != "gpt-5.4-mini-2026-03-17"
+        instrument["models"]["planner"]["model"] != expected_planner
+        or instrument["models"]["generator"]["model"] != expected_generator
         or instrument["models"]["store"] is not False
         or instrument["models"]["maximum_transport_retries"] != 0
     ):
         raise ActualProductEvaluationError("provider model boundary drifted")
+    execution = instrument["execution"]
+    if context.autonomy_architecture_id != "legacy-live-planner" and execution.get(
+        "selected_autonomy_architecture"
+    ) != context.autonomy_architecture_id:
+        raise ActualProductEvaluationError("autonomy architecture boundary drifted")
+    if context.bounded_strategy_generation and execution.get(
+        "selected_proactive_generator"
+    ) != "bounded-strategy-grounded-wording-generator-v1":
+        raise ActualProductEvaluationError("bounded wording boundary drifted")
     return {
         **build,
         "status": build["status"],
@@ -575,6 +603,8 @@ async def _run_case(
             dependency_aware_provider_failure=(
                 context.dependency_aware_provider_failure
             ),
+            autonomy_architecture_id=context.autonomy_architecture_id,
+            bounded_strategy_generation=context.bounded_strategy_generation,
         ),
         clock_origin=CLOCK_ORIGIN,
     )

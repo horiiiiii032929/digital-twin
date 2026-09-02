@@ -961,13 +961,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison",
-      "evidence": "Reviewed command surface for deterministic build, validation, 48-cell network-free simulation, guarded preflight, bounded execute, resume, and focused verification commands.",
+      "domain": "selected-autonomy-release-confirmation",
+      "evidence": "Reviewed command surface for the selected H+E1 build, 820-case network-free simulation, guarded preflight, bounded execute/resume, and exact validation commands; historical commands remain available.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture engine comparison audit",
-      "sha256": "e17b11ef7f42bd91c83aa218f761aa6258222f682c1d699118855c394d66f5b7"
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "ffad1017c219222ccf54577862fdceb17914893fcb660bc84881cc9dbc99b5f2"
     },
     {
       "audit_status": "audited",
@@ -2963,6 +2963,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-014",
+      "evidence": "Prospective instrument review verifies fresh 820-case hashes, H+E1 role separation, deterministic factual generation, exact Luna identity and current official pricing, finite call/cost limits, hidden-gold ordering, revoked build-only authority, and explicit non-claims.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_014.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "a4e12839fd176f15345b1746f35c79a28a3b237183c7fcb389a323ed79de86ed"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-002",
       "evidence": "Instrument review preserves the qualified 820-case network-free boundary while returning it to build-only status and revoking provider authority after its grounding dependency was not satisfied.",
       "findings": [],
@@ -4503,6 +4514,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-014",
+      "evidence": "Builder review verifies 820 unique cases, 50 source identities disjoint from confirmations 012/013, exact public/hidden-gold hashes, stable source mapping, and authority/status propagation.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "f7aa16e4d2b89507618659053d09bda42fdbc0d74c892dc5f509577cbe494a32"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-002",
       "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
       "findings": [],
@@ -5779,13 +5801,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-tooling",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "actual-product-autonomy-confirmation-014",
+      "evidence": "Runner review verifies selected H+E1 construction, deterministic factual generation, exact Luna canary identity, two-operation freeze guards, atomic ledgers, hidden-gold ordering, bounded cost/calls, and safe resume.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "4b4cb43413425075f1335a2db67cce339a2e48bc1f77981668d1fe6b7dffe30a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-evaluation-framework",
+      "evidence": "Shared-runner review verifies successor context carries architecture and bounded-strategy identity through validation, manifests, run bindings, product factory construction, canaries, atomic execution, and independent scoring without changing historical default behavior.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "a7b0ec19fd4aaec38fac9585c019913f0585ded4cfea5241386aaeffd0c9ce83"
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "bff50fd2b666e3fcfd681a8f75593d4dbb68e618fd2d8fc9c47504ca47ca763d"
     },
     {
       "audit_status": "audited",
@@ -6483,13 +6516,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison",
-      "evidence": "Reviewed pure deterministic builder exemption while the provider-backed runner remains fully registered and fail-closed.",
+      "domain": "selected-autonomy-release-confirmation",
+      "evidence": "Reviewed confirmation-014 builder as pure deterministic contract construction while its provider-backed runner remains AST-detected and guarded by both bounded execution operations.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture engine comparison audit",
-      "sha256": "4c781e0276a5085ee4f45fc3bd70d54e055c25c4c3fe1603c514b88c5495659b"
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "3b3a640fb8fb996695ce9a2e65d30f745d4c7c7268694427666d2567fa2ae6b5"
     },
     {
       "audit_status": "audited",
@@ -8100,13 +8133,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison-revocation",
-      "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
+      "domain": "selected-autonomy-release-confirmation",
+      "evidence": "Closed the confirmation-014 registry finding by registering its protected runner for external-model and method-evaluation operations; focused freeze tests now report 151 protected and 151 registered entrypoints with zero missing guards.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex AFQC-161 result and finding-closure audit",
-      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "786d1c732f25faa206dda6875d64f853230876eab6b14359a6f91b07106eaebe"
     },
     {
       "audit_status": "audited",
@@ -10054,6 +10087,17 @@
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex V2.1 release-binding root-cause audit",
       "sha256": "ed91419250c80eb5b593f8664060166e443029e5894243d430b650b077393514"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests verify fresh source disjointness, 820-case cardinality, build-only authority, H+E1 architecture and model bindings, deterministic factual generator separation, and fail-closed preflight.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex H+E1 confirmation-014 audit",
+      "sha256": "96aa37310b0239a7137db5ef1becf8e5696e09ea2ccb4e8eacc66fac9e92bebd"
     },
     {
       "audit_status": "audited",
