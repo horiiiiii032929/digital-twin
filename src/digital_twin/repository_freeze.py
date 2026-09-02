@@ -251,6 +251,13 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py": (
             "method_evaluation_execution",
         ),
+        # Hidden-state learner extension of 010: --simulate is deterministic and
+        # network-free; --execute is registered here but has no bounded pilot
+        # authorization, so it fails closed until one is reviewed and added.
+        "scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py": (
             "external_model_evaluation",
             "method_evaluation_execution",

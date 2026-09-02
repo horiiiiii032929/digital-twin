@@ -70,8 +70,10 @@ def score_hidden_state_case(
     max_messages_per_7_days: int = 3,
     cooldown_hours: int = 24,
 ) -> HiddenStateCaseScoreV1:
-    # ----- perception: match product observations to hidden utterances by time
-    observations_by_time = {item.observed_at: item for item in evidence.observations}
+    # ----- perception: match product observations to hidden utterances by event id
+    observations_by_event = {
+        item.event_id: item for item in evidence.observations if item.event_id is not None
+    }
     attempts = [u for u in truth.utterances if u.kind == "attempt"]
     attribution_hits: list[bool] = []
     assessment_hits: list[bool] = []
@@ -79,7 +81,7 @@ def score_hidden_state_case(
     predictions: list[tuple[float, bool]] = []
     estimate_by_day = {snapshot.day: snapshot.product_estimates for snapshot in truth.days}
     for utterance in attempts:
-        observation = observations_by_time.get(utterance.observed_at)
+        observation = observations_by_event.get(utterance.event_id)
         recognised.append(observation is not None and observation.attempt_present)
         if observation is None:
             continue

@@ -123,6 +123,7 @@ class StudentProductAutonomyAdapterV1:
         self._restart_evidence: list[AutonomyRestartEvidenceV2] = []
         self._action_evidence: dict[str, AutonomyActionEvidenceV2] = {}
         self._citation_evidence: list[AutonomyCitationEvidenceV2] = []
+        self._event_by_observation: dict[str, str] = {}
 
     @property
     def _now(self) -> datetime:
@@ -162,6 +163,7 @@ class StudentProductAutonomyAdapterV1:
         self._restart_evidence = []
         self._action_evidence = {}
         self._citation_evidence = []
+        self._event_by_observation = {}
 
     async def submit_event(self, event: AutonomyEvaluationEventV1) -> None:
         runtime = self._require_runtime()
@@ -576,7 +578,19 @@ class StudentProductAutonomyAdapterV1:
         returned; no message text or internal state leaves the adapter.
         """
 
+        runtime = self._require_runtime()
+        before = {
+            item.observation_id
+            for item in runtime.repository.list_learner_observations_v2(
+                runtime.conversation_id
+            )
+        }
         await self.submit_event(event)
+        for item in runtime.repository.list_learner_observations_v2(
+            runtime.conversation_id
+        ):
+            if item.observation_id not in before:
+                self._event_by_observation[item.observation_id] = event.event_id
         expected_id = f"turn:{event.event_id}"
         for action in reversed(self._observed_actions):
             if action.action_id == expected_id:
@@ -609,7 +623,12 @@ class StudentProductAutonomyAdapterV1:
                         at=action.created_at,
                     )
                 )
-        return build_learner_evidence(belief, observations, deliveries)
+        return build_learner_evidence(
+            belief,
+            observations,
+            deliveries,
+            event_by_observation=self._event_by_observation,
+        )
 
     async def collect_diagnostic_trace(self) -> dict[str, object]:
         runtime = self._require_runtime()

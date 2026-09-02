@@ -46,6 +46,7 @@ class DriverScheduleV1:
 
 @dataclass
 class HiddenUtteranceRecord:
+    event_id: str
     day: int
     at_seconds: int
     observed_at: str
@@ -143,6 +144,7 @@ async def run_hidden_state_learner_case(
         action: AutonomyObservedActionV1 | None = await adapter.submit_event_observed(event)
         truth.utterances.append(
             HiddenUtteranceRecord(
+                event_id=event.event_id,
                 day=day,
                 at_seconds=elapsed,
                 observed_at=observed_at,

@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "program_id": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+  "status": "build-only",
+  "extends": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+  "purpose": "Score the real product on learner-state calibration, perception accuracy, and proactive quality/timing against hidden simulated-learner truth, reusing 010's adapter and contracts unchanged.",
+  "design_source": "docs/research/sota-autonomous-digital-twin-evaluation-design.md",
+  "runner": "scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py",
+  "driver": "src/digital_twin/evaluation/autonomy_learner_driver.py",
+  "scorer": "src/digital_twin/evaluation/autonomy_learning_scoring.py",
+  "learner": {
+    "simulator": "src/digital_twin/evaluation/learner_simulator.py",
+    "text_realisation": "src/digital_twin/evaluation/simulated_learner_v1.py",
+    "families": ["bkt-like", "logistic-like"],
+    "personas": ["fast-learner", "slow-learner", "high-forgetting", "misconception-prone", "answer-seeking", "low-receptivity"],
+    "held_out_seeds": [2000, 2001, 2002],
+    "concepts": 6,
+    "days": 30,
+    "restart_day": 15,
+    "misconception_day": 3,
+    "question_every_days": 7
+  },
+  "fixture": {
+    "runtime": "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py",
+    "release_id": "release-hidden-state-learner-v1",
+    "consent": true,
+    "quiet_hours_utc": "23:00-02:00",
+    "max_messages_per_7_days": 3,
+    "same_concept_cooldown_hours": 24
+  },
+  "conditions": ["t0-grounded-control", "t1-v1-reactive-control", "t1-v2-reactive", "t1-v2-autonomous"],
+  "engines": {
+    "simulate": "deterministic (network-free)",
+    "execute": "not wired; requires a bounded authorization entry for this program id before any paid run"
+  },
+  "dimensions": {
+    "perception": ["attribution_accuracy", "assessment_agreement", "attempts_recognised"],
+    "calibration": ["mse_vs_hidden", "brier_next_outcome", "ece_next_outcome", "auroc_next_outcome"],
+    "proactive": ["messages_delivered", "wasted_rate", "follow_up_fraction"],
+    "timing_gates": ["quiet_hour_violations", "frequency_violations", "cooldown_violations"],
+    "outcome_proxy": ["final_hidden_mastery", "concepts_mastered_final"],
+    "operations": ["provider_calls", "cost_usd", "restart_count"]
+  },
+  "hard_gates": {
+    "quiet_hour_violations": 0,
+    "frequency_violations": 0,
+    "cooldown_violations": 0
+  },
+  "statistics": "paired percentile bootstrap by (family, persona, seed), 1000 resamples",
+  "contrasts": [
+    ["t1-v2-autonomous", "t0-grounded-control"],
+    ["t1-v2-autonomous", "t1-v1-reactive-control"],
+    ["t1-v2-reactive", "t1-v1-reactive-control"],
+    ["t1-v2-autonomous", "t1-v2-reactive"]
+  ],
+  "boundaries": {
+    "010_response_payload_unchanged": true,
+    "hidden_truth_never_reaches_adapter": true,
+    "learner_evidence_in_diagnostic_trace_only": true,
+    "product_data": "none; synthetic fixture only",
+    "claims": "simulated learners only; no usability, professor-fidelity, or learning-outcome claim"
+  }
+}

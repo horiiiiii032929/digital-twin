@@ -48,6 +48,8 @@ class HypothesisEvidenceV1(_Contract):
 
 
 class ObservationEvidenceV1(_Contract):
+    observation_id: str = Field(min_length=1, max_length=128)
+    event_id: str | None = Field(default=None, max_length=128)
     observed_at: str = Field(min_length=1, max_length=64)
     concept_ids: list[str] = Field(default_factory=list, max_length=16)
     assessment_outcome: Literal["correct", "partial", "incorrect", "not-assessed"]
@@ -84,7 +86,10 @@ def build_learner_evidence(
     belief: LearnerBeliefStateV2 | None,
     observations: list[LearnerObservationV2],
     deliveries: list[ProactiveDeliveryEvidenceV1],
+    *,
+    event_by_observation: dict[str, str] | None = None,
 ) -> LearnerEvidenceV1:
+    event_by_observation = event_by_observation or {}
     concepts = [
         ConceptBeliefEvidenceV1(
             concept_id=item.concept_id,
@@ -109,6 +114,8 @@ def build_learner_evidence(
     ]
     observed = [
         ObservationEvidenceV1(
+            observation_id=item.observation_id,
+            event_id=event_by_observation.get(item.observation_id),
             observed_at=item.observed_at,
             concept_ids=list(item.concept_ids),
             assessment_outcome=_OUTCOME_LABEL[item.assessment_outcome],
