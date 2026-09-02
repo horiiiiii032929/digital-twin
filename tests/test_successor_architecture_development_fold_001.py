@@ -102,9 +102,9 @@ def test_fold_002_corrective_preserves_science_with_fresh_output_identity():
     validation = runner.validate(corrective)
     simulation = runner.simulate(corrective)
 
-    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
-    assert validation["provider_execution_authorized"] is False
-    assert validation["paid_execution_authorized"] is False
+    assert validation["instrument_status"] == "frozen-pending-execution"
+    assert validation["provider_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is True
     assert simulation["maximum_provider_calls"] == 242
     assert simulation["planner_batch_count"] == 120
     assert simulation["gold_loaded"] is False

@@ -530,6 +530,10 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "dataset_generation",
             "method_evaluation_execution",
         ),
+        "successor-architecture-development-fold-002-single-case-attempt-002": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
     }
 )
 

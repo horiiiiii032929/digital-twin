@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; both fold-001 attempts and fold-002 single-case attempt 001 are terminal with authority revoked. No successor-architecture provider execution is currently allowlisted.",
+      "evidence": "The global freeze remains active; all earlier architecture attempts are terminal with authority revoked. Only the sole fold-002 harness-corrective attempt is allowlisted for external-model and method-evaluation execution under its unchanged bounds.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex successor-architecture fold-002 invalid-attempt audit",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "reviewer": "Codex fold-002 corrective-authorization audit",
+      "sha256": "9385f8a421ef11b074a7740cdb4baf0e48a894572b8a3d508c181e8f1d860cd6"
     },
     {
       "audit_status": "audited",
@@ -8453,12 +8453,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, and prove the terminal fold-001 and fold-002 attempts are blocked from external-model and method-evaluation operations.",
+      "evidence": "Tests enumerate every exact bounded authorization, prove every terminal predecessor remains blocked, and bind only the sole fold-002 corrective attempt to external-model and method-evaluation operations.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex successor-architecture fold-002 invalid-attempt audit",
-      "sha256": "365226a8371df3ef9019be9fefb98c8262e316b964f02ed346aac1e49d48d4fb"
+      "reviewer": "Codex fold-002 corrective-authorization audit",
+      "sha256": "4c2a974675c1a747143b190132a6ef7f72ec3a4929804be6780c2d9c52bedd3c"
     },
     {
       "audit_status": "audited",
@@ -10609,23 +10609,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal attempts, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the corrective attempt's unchanged scientific inputs plus fresh output identity.",
+      "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the authorized corrective attempt's unchanged scientific inputs plus fresh output identity.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 runtime-boundary correction audit",
-      "sha256": "575d731fc9bc85a778bbe92b38def1c38aeb46b2b469d46c6af4de5713741576"
+      "reviewer": "Codex fold-002 corrective-authorization audit",
+      "sha256": "99720a2965f7d74b964450c1cb8c43d316553ffa403490ac905f4f3e87a3caa0"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Prospective audit confirms this is the sole fresh harness-only corrective attempt: public cases, hidden gold, prompts, Luna engine, quality dimensions, hard gates, 242-call ceiling, USD 2 stop, and zero-retry policy are unchanged; only composed reason-code bounding and exclusive output identity differ. Provider and paid authority remain false.",
+      "evidence": "Prospective audit confirms this is the sole fresh harness-only corrective attempt: public cases, hidden gold, prompts, Luna engine, quality dimensions, hard gates, 242-call ceiling, USD 2 stop, and zero-retry policy are unchanged. Provider and paid authority are now explicitly true for this checkpoint only.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 corrective-instrument audit",
-      "sha256": "7658351eed5da40e9ebb1d36bafe0cb0bacbf1be689970fbd12e8fa378bd3088"
+      "reviewer": "Codex fold-002 corrective-authorization audit",
+      "sha256": "f902125e7d9c41316b18bfe224fe14ccb746149efb5210fc8790ab2a2e29c91c"
     }
   ],
   "schema_version": 1
