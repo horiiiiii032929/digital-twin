@@ -599,7 +599,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness",
-      "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+      "evidence": "Dependency-path review traced the 2026-09-02 qs advisories through shadcn to MCP SDK, Express, and body-parser. The lockfile now resolves qs 6.16.0, npm ci succeeds, and npm audit reports zero vulnerabilities without adding a direct runtime dependency.",
       "findings": [],
       "path": "apps/web/src/lib/api/professor.test.ts",
       "reviewed_at": "2026-08-31",
@@ -955,19 +955,19 @@
       "findings": [],
       "path": "package-lock.json",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex dependency advisory closure audit",
-      "sha256": "8bd17271a534dc28983b45d60b3d3a72f848446c8fea956129d6b81480d81a11"
+      "reviewer": "Codex successor-architecture dependency audit",
+      "sha256": "c78981cccddd35657a64c2298ea6bd41f51ec452735bcbc8924a5b74ec075ca3"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review plus focused verification confirmed the A/B/C/C+V build, validation, network-free simulation, preflight, and guarded attempt-002 execution commands are explicit. Attempt 001 is terminal and attempt 002 remains provider-unauthorized; Browserslist remains fixed at advisory-free 4.28.8 and npm audit reports zero vulnerabilities.",
+      "evidence": "Manual command-surface review plus focused verification confirmed the historical fold-001 attempts and the fresh fold-002 single-case build, validation, network-free simulation, preflight, and guarded execution commands remain explicit. Both fold-001 attempts are terminal, fold-002 remains provider-unauthorized, and npm audit remains advisory-free.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "5f89296583b1c116046c45bd258ed528c17794eb4b47028beca055eee89a76d2"
+      "sha256": "afb75d2451c04f64961cc22e7233fa9f058919ba09072f41b1f7fb2ca8e2c266"
     },
     {
       "audit_status": "audited",
@@ -10576,34 +10576,45 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Manual builder review and byte-stability tests confirmed 150 fresh synthetic cases, 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in the public package.",
+      "evidence": "Prospective instrument review confirmed a fresh 150-case fold, one-case strict schemas with exact case-ID enums, individual model-failure quarantine into the governed safe fallback, immutable invalidity boundaries for identity/budget/ledger/gold defects, 242-call and USD 2 ceilings, and no paid/provider authority.",
       "findings": [],
-      "path": "scripts/build_successor_architecture_development_fold_001.py",
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture development audit",
-      "sha256": "c2e7ac6aaa075f9ef7bebc99f020a94feeac7d91fc962ce6d240b212dc51ac79"
+      "reviewer": "Codex successor-architecture fold-002 audit",
+      "sha256": "26e0389c2d7c3682804f0ff9585d2194908f55505e21c8c0df52f711a5e4f174"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review and network-free simulation confirmed immutable attempt contexts, fresh ledgers/results for attempt 002, a provider/local maximum-three-step contract, case-keyed schemas, exact identity and cost accounting, checkpoint isolation, late gold opening, atomic publication, and both execution guards.",
+      "evidence": "Manual builder review and byte-stability tests confirmed two source-disjoint 150-case folds, each with 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in either public package. The historical fold-001 bytes remain unchanged.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture fold-002 audit",
+      "sha256": "3799f62da9c3850e5384633c3c190b1316bf548eb52f0fab883229df140bad98"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Line-by-line runner review and network-free simulation confirmed immutable historical contexts plus a fresh fold-002 context, one-case exact-ID schemas, bounded concurrency, case-level malformed/provider-failure quarantine into actual no-action graph fallback, fatal identity/budget/ledger drift, completion and fallback gates, late gold opening, atomic publication, and both execution guards.",
       "findings": [],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture SA7 correction audit",
-      "sha256": "138a31f5872459c56ec860403913912486455475475b15cc90b9a8ac265e4954"
+      "reviewer": "Codex successor-architecture fold-002 audit",
+      "sha256": "02ba3eff4c66eaa92f06eb04d892e103c4fb4b65a12a6963a927a7fbb686240b"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover balanced construction, gold isolation, byte stability, both terminal and deauthorized attempts, separate output identity, bounded simulation, schema/local repeated-action alignment, ID validation, result exclusivity, checkpoint separation, and scoring validity.",
+      "evidence": "Focused tests cover both fresh byte-stable and source-disjoint folds, gold isolation, terminal historical attempts, fold-002 authority and bounds, exact single-case schema identity, case-level safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, checkpoint separation, and provider-completion scoring.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture SA7 correction audit",
-      "sha256": "1bbfde60cefd15dba13730674833ad905363a57f6b8eb5f8579d79235d53cef4"
+      "reviewer": "Codex successor-architecture fold-002 audit",
+      "sha256": "36d267e4cb451aee21e15cdf0c71304a5fca263792e59c61a78afb7061912d1a"
     }
   ],
   "schema_version": 1

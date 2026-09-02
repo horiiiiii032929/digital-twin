@@ -27,6 +27,7 @@ from src.digital_twin.evaluation.hidden_state_metrics import (
 from src.digital_twin.evaluation.provider_json import (
     DirectProviderJsonTransport,
     ProviderCallLedgerV1,
+    ProviderJsonError,
 )
 from src.digital_twin.repository_freeze import (
     require_bounded_pilot_operation_allowed,
@@ -85,6 +86,11 @@ def _run_context(attempt: str) -> DevelopmentRunContext:
         instrument_id = "successor-architecture-development-fold-001-attempt-002"
         instrument_name = (
             "successor_architecture_development_fold_001_attempt_002.json"
+        )
+    elif attempt == "fold-002":
+        instrument_id = "successor-architecture-development-fold-002-single-case-001"
+        instrument_name = (
+            "successor_architecture_development_fold_002_single_case_001.json"
         )
     else:
         raise ArchitectureDevelopmentError(f"unknown development attempt: {attempt}")
@@ -151,7 +157,7 @@ def _schema_string(nullable: bool = False) -> dict[str, Any]:
     return {"type": ["string", "null"] if nullable else "string"}
 
 
-def _proposal_schema() -> dict[str, Any]:
+def _proposal_schema(case_id: str | None = None) -> dict[str, Any]:
     action = {"type": "string", "enum": [item.value for item in AutonomousActionKind]}
     step = {
         "type": "object",
@@ -187,6 +193,12 @@ def _proposal_schema() -> dict[str, Any]:
             "episode_steps",
         ],
     }
+    if case_id is not None:
+        row["properties"]["case_id"] = {
+            "type": "string",
+            "enum": [case_id],
+        }
+        return row
     return {
         "type": "object",
         "additionalProperties": False,
@@ -195,7 +207,7 @@ def _proposal_schema() -> dict[str, Any]:
     }
 
 
-def _verifier_schema() -> dict[str, Any]:
+def _verifier_schema(case_id: str | None = None) -> dict[str, Any]:
     row = {
         "type": "object",
         "additionalProperties": False,
@@ -206,6 +218,12 @@ def _verifier_schema() -> dict[str, Any]:
         },
         "required": ["case_id", "accept", "reason_code"],
     }
+    if case_id is not None:
+        row["properties"]["case_id"] = {
+            "type": "string",
+            "enum": [case_id],
+        }
+        return row
     return {
         "type": "object",
         "additionalProperties": False,
@@ -367,30 +385,32 @@ def _job(row: dict[str, Any]) -> AutonomousJobInput:
 class _ProposalMap:
     model_id = "gpt-5.6-luna"
 
-    def __init__(self, values: dict[str, HierarchicalPlanningProposalV1]) -> None:
+    def __init__(
+        self, values: dict[str, HierarchicalPlanningProposalV1 | None]
+    ) -> None:
         self.values = values
 
     async def propose(self, **kwargs):
         case_id = _case_id_from_opportunity(
             kwargs["job"].opportunity.opportunity_id
         )
-        if case_id not in self.values:
-            raise ValueError("no persisted proposal for eligible case")
+        if case_id not in self.values or self.values[case_id] is None:
+            raise ValueError("no valid persisted proposal for eligible case")
         return self.values[case_id]
 
 
 class _VerifierMap:
     model_id = "gpt-5.6-luna"
 
-    def __init__(self, values: dict[str, PlannerVerificationV1]) -> None:
+    def __init__(self, values: dict[str, PlannerVerificationV1 | None]) -> None:
         self.values = values
 
     async def verify(self, **kwargs):
         case_id = _case_id_from_opportunity(
             kwargs["job"].opportunity.opportunity_id
         )
-        if case_id not in self.values:
-            raise ValueError("no persisted verifier decision for selected case")
+        if case_id not in self.values or self.values[case_id] is None:
+            raise ValueError("no valid persisted verifier decision for selected case")
         return self.values[case_id]
 
 
@@ -509,7 +529,9 @@ def validate(context: DevelopmentRunContext = DEFAULT_CONTEXT) -> dict[str, Any]
         raise ArchitectureDevelopmentError("architecture cell count drifted")
     if instrument["fixed_engine"]["provider_model"] != "gpt-5.6-luna":
         raise ArchitectureDevelopmentError("fixed engine drifted")
-    if instrument["execution"]["maximum_provider_calls"] != 62:
+    contract_mode = instrument["execution"].get("contract_mode", "four-case-batch")
+    expected_call_ceiling = 242 if contract_mode == "single-case-object" else 62
+    if instrument["execution"]["maximum_provider_calls"] != expected_call_ceiling:
         raise ArchitectureDevelopmentError("call ceiling drifted")
     if instrument["analysis"]["learner_state_is_shared_not_a_selection_dimension"] is not True:
         raise ArchitectureDevelopmentError("shared learner-state diagnostic drifted")
@@ -612,9 +634,74 @@ async def _call_planner_batches(
     return result
 
 
+def _provider_failure_is_run_invalid(error: Exception) -> bool:
+    message = str(error).lower()
+    return any(
+        marker in message
+        for marker in (
+            "identity drifted",
+            "cost limit",
+            "call limit",
+            "binding drifted",
+            "ledger is not running",
+        )
+    )
+
+
+async def _call_planner_single_cases(
+    *,
+    transport: DirectProviderJsonTransport,
+    ledger: ProviderCallLedgerV1,
+    public_rows: list[dict[str, Any]],
+    concurrency: int,
+) -> tuple[dict[str, HierarchicalPlanningProposalV1 | None], list[str]]:
+    result: dict[str, HierarchicalPlanningProposalV1 | None] = {}
+    failures: list[str] = []
+
+    async def call_one(source: dict[str, Any]) -> tuple[str, HierarchicalPlanningProposalV1 | None, str | None]:
+        case_id = str(source["case_id"])
+        try:
+            response = await transport.call_with_ledger(
+                ledger=ledger,
+                request_key=f"planner-{case_id}",
+                provider_role="shared-fixed-engine-planner",
+                system=(
+                    "Return one bounded pedagogical proposal for the supplied "
+                    "synthetic case. Do not include chain-of-thought or personal data."
+                ),
+                prompt=_planner_prompt([source]),
+                task="successor_architecture_planner_single_case",
+                schema=_proposal_schema(case_id),
+                quarantine_failures=True,
+            )
+            proposal = _proposal_from_row(response.content)
+            eligible = event_scoped_eligible_actions(
+                AutonomousEventKind(source["event_kind"]), ALL_ACTIONS
+            )
+            if proposal.selected_action not in eligible or any(
+                step.action not in eligible for step in proposal.episode_steps
+            ):
+                return case_id, None, "action-envelope-violation"
+            return case_id, proposal, None
+        except ProviderJsonError as error:
+            if _provider_failure_is_run_invalid(error):
+                raise
+            return case_id, None, type(error).__name__
+        except ValueError as error:
+            return case_id, None, type(error).__name__
+
+    for batch in _chunks(public_rows, concurrency):
+        completed = await asyncio.gather(*(call_one(source) for source in batch))
+        for case_id, proposal, failure in completed:
+            result[case_id] = proposal
+            if failure is not None:
+                failures.append(case_id)
+    return result, failures
+
+
 async def _selected_c_rows(
     public_rows: list[dict[str, Any]],
-    proposals: dict[str, HierarchicalPlanningProposalV1],
+    proposals: dict[str, HierarchicalPlanningProposalV1 | None],
 ) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     provider = _ProposalMap(proposals)
@@ -678,11 +765,65 @@ async def _call_verifier_batches(
     return result
 
 
+async def _call_verifier_single_cases(
+    *,
+    transport: DirectProviderJsonTransport,
+    ledger: ProviderCallLedgerV1,
+    selected_rows: list[dict[str, Any]],
+    concurrency: int,
+) -> tuple[dict[str, PlannerVerificationV1 | None], list[str]]:
+    result: dict[str, PlannerVerificationV1 | None] = {}
+    failures: list[str] = []
+
+    async def call_one(source: dict[str, Any]) -> tuple[str, PlannerVerificationV1 | None, str | None]:
+        case_id = str(source["case_id"])
+        try:
+            response = await transport.call_with_ledger(
+                ledger=ledger,
+                request_key=f"verifier-{case_id}",
+                provider_role="reject-only-verifier",
+                system=(
+                    "Return one reject-only decision for the supplied synthetic "
+                    "tutoring move. Do not propose a replacement or hidden reasoning."
+                ),
+                prompt=_verifier_prompt([source]),
+                task="successor_architecture_verifier_single_case",
+                schema=_verifier_schema(case_id),
+                quarantine_failures=True,
+            )
+            decision = PlannerVerificationV1.model_validate(
+                {
+                    key: value
+                    for key, value in response.content.items()
+                    if key != "case_id"
+                }
+            )
+            return case_id, decision, None
+        except ProviderJsonError as error:
+            if _provider_failure_is_run_invalid(error):
+                raise
+            return case_id, None, type(error).__name__
+        except ValueError as error:
+            return case_id, None, type(error).__name__
+
+    for batch in _chunks(selected_rows, concurrency):
+        completed = await asyncio.gather(*(call_one(source) for source in batch))
+        for case_id, decision, failure in completed:
+            result[case_id] = decision
+            if failure is not None:
+                failures.append(case_id)
+    return result, failures
+
+
 async def _canaries(
     transport: DirectProviderJsonTransport,
     ledger: ProviderCallLedgerV1,
     row: dict[str, Any],
+    *,
+    contract_mode: str = "four-case-batch",
 ) -> None:
+    single_case = contract_mode == "single-case-object"
+    case_id = str(row["case_id"])
     planner = await transport.call_with_ledger(
         ledger=ledger,
         request_key="canary-planner",
@@ -690,15 +831,25 @@ async def _canaries(
         system="Return one bounded synthetic pedagogical proposal.",
         prompt=_planner_prompt([row]),
         task="successor_architecture_planner_canary",
-        schema=_proposal_schema(),
+        schema=_proposal_schema(case_id if single_case else None),
     )
-    planner_rows = planner.content.get("rows")
-    if not isinstance(planner_rows, list):
-        raise ArchitectureDevelopmentError("planner canary rows are malformed")
-    _validate_id_set(planner_rows, [row["case_id"]])
-    proposal = _proposal_from_row(planner_rows[0])
+    if single_case:
+        proposal = _proposal_from_row(planner.content)
+    else:
+        planner_rows = planner.content.get("rows")
+        if not isinstance(planner_rows, list):
+            raise ArchitectureDevelopmentError("planner canary rows are malformed")
+        _validate_id_set(planner_rows, [case_id])
+        proposal = _proposal_from_row(planner_rows[0])
+    eligible = event_scoped_eligible_actions(
+        AutonomousEventKind(row["event_kind"]), ALL_ACTIONS
+    )
+    if proposal.selected_action not in eligible or any(
+        step.action not in eligible for step in proposal.episode_steps
+    ):
+        raise ArchitectureDevelopmentError("planner canary left deterministic envelope")
     verifier_input = {
-        "case_id": row["case_id"],
+        "case_id": case_id,
         "event_kind": row["event_kind"],
         "state_card": row["state_card"],
         "eligible_actions": [
@@ -724,22 +875,26 @@ async def _canaries(
         system="Return one reject-only synthetic tutoring decision.",
         prompt=_verifier_prompt([verifier_input]),
         task="successor_architecture_verifier_canary",
-        schema=_verifier_schema(),
+        schema=_verifier_schema(case_id if single_case else None),
     )
-    verifier_rows = verifier.content.get("rows")
-    if not isinstance(verifier_rows, list):
-        raise ArchitectureDevelopmentError("verifier canary rows are malformed")
-    _validate_id_set(verifier_rows, [row["case_id"]])
+    if single_case:
+        verifier_row = verifier.content
+    else:
+        verifier_rows = verifier.content.get("rows")
+        if not isinstance(verifier_rows, list):
+            raise ArchitectureDevelopmentError("verifier canary rows are malformed")
+        _validate_id_set(verifier_rows, [case_id])
+        verifier_row = verifier_rows[0]
     PlannerVerificationV1.model_validate(
-        {key: value for key, value in verifier_rows[0].items() if key != "case_id"}
+        {key: value for key, value in verifier_row.items() if key != "case_id"}
     )
 
 
 async def _run_graphs(
     *,
     public_rows: list[dict[str, Any]],
-    proposals: dict[str, HierarchicalPlanningProposalV1],
-    verifications: dict[str, PlannerVerificationV1],
+    proposals: dict[str, HierarchicalPlanningProposalV1 | None],
+    verifications: dict[str, PlannerVerificationV1 | None],
     response_ledger: _ResponseLedger,
     graph_ledger: Path,
 ) -> None:
@@ -801,7 +956,14 @@ def _score(
     public_rows: list[dict[str, Any]],
     gold_rows: list[dict[str, Any]],
     provider_snapshot: dict[str, Any],
+    provider_quality: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    provider_quality = provider_quality or {
+        "planner_case_count": 0,
+        "verifier_case_count": 0,
+        "planner_failure_case_ids": [],
+        "verifier_failure_case_ids": [],
+    }
     public_by_id = {row["case_id"]: row for row in public_rows}
     gold_by_id = {row["case_id"]: row for row in gold_rows}
     scored: list[dict[str, Any]] = []
@@ -901,6 +1063,41 @@ def _score(
         )
         for row in gold_rows
     ]
+    planner_failures = set(provider_quality["planner_failure_case_ids"])
+    verifier_failures = set(provider_quality["verifier_failure_case_ids"])
+    model_case_count = int(provider_quality["planner_case_count"]) + int(
+        provider_quality["verifier_case_count"]
+    )
+    model_failure_count = len(planner_failures) + len(verifier_failures)
+    provider_completion_rate = (
+        (model_case_count - model_failure_count) / model_case_count
+        if model_case_count
+        else 1.0
+    )
+    scored_by_cell = {
+        (row["architecture_id"], row["case_id"]): row for row in scored
+    }
+    safe_fallback_cells = [
+        scored_by_cell[(architecture.value, case_id)]["selected_action"]
+        == AutonomousActionKind.NO_ACTION.value
+        for case_id in planner_failures
+        for architecture in (
+            AutonomyArchitectureId.GOVERNED_SINGLE_PLANNER_B,
+            AutonomyArchitectureId.HIERARCHICAL_MODEL_BASED_C,
+            AutonomyArchitectureId.HIERARCHICAL_WITH_VERIFIER_CV,
+        )
+    ] + [
+        scored_by_cell[
+            (AutonomyArchitectureId.HIERARCHICAL_WITH_VERIFIER_CV.value, case_id)
+        ]["selected_action"]
+        == AutonomousActionKind.NO_ACTION.value
+        for case_id in verifier_failures
+    ]
+    provider_failure_safe_fallback_rate = (
+        sum(safe_fallback_cells) / len(safe_fallback_cells)
+        if safe_fallback_cells
+        else 1.0
+    )
     safety = {
         "zero_unauthorized_or_unsupported_actions": all(
             not row["unnecessary_intervention"] for row in scored
@@ -912,6 +1109,14 @@ def _score(
             {(row["architecture_id"], row["case_id"]) for row in scored}
         )
         == 600,
+        "provider_completion_at_least_0_995": provider_completion_rate >= 0.995,
+        "provider_failure_safe_fallback_rate_is_1": (
+            provider_failure_safe_fallback_rate == 1.0
+        ),
+        "all_architectures_valid_transition_at_least_0_95": all(
+            metrics["acceptable_move_accuracy"] >= 0.95
+            for metrics in aggregate.values()
+        ),
     }
     ranking = sorted(
         aggregate,
@@ -942,6 +1147,15 @@ def _score(
             "brier_score": brier_score(predictions),
             "expected_calibration_error": expected_calibration_error(predictions),
             "selection_dimension": False,
+        },
+        "provider_quality": {
+            **provider_quality,
+            "model_case_count": model_case_count,
+            "model_failure_count": model_failure_count,
+            "provider_completion_rate": provider_completion_rate,
+            "provider_failure_safe_fallback_rate": (
+                provider_failure_safe_fallback_rate
+            ),
         },
         "hard_gates": safety,
         "provider": provider_snapshot,
@@ -979,19 +1193,45 @@ async def execute(
         context.response_ledger, binding=binding, resume=resume
     )
     transport = DirectProviderJsonTransport(instrument["fixed_engine"])
+    contract_mode = instrument["execution"].get(
+        "contract_mode", "four-case-batch"
+    )
+    planner_failures: list[str] = []
+    verifier_failures: list[str] = []
     try:
-        await _canaries(transport, provider_ledger, eligible_rows[0])
-        proposals = await _call_planner_batches(
-            transport=transport,
-            ledger=provider_ledger,
-            public_rows=eligible_rows,
+        await _canaries(
+            transport,
+            provider_ledger,
+            eligible_rows[0],
+            contract_mode=contract_mode,
         )
+        if contract_mode == "single-case-object":
+            proposals, planner_failures = await _call_planner_single_cases(
+                transport=transport,
+                ledger=provider_ledger,
+                public_rows=eligible_rows,
+                concurrency=int(instrument["execution"]["concurrency"]),
+            )
+        else:
+            proposals = await _call_planner_batches(
+                transport=transport,
+                ledger=provider_ledger,
+                public_rows=eligible_rows,
+            )
         selected = await _selected_c_rows(eligible_rows, proposals)
-        verifications = await _call_verifier_batches(
-            transport=transport,
-            ledger=provider_ledger,
-            selected_rows=selected,
-        )
+        if contract_mode == "single-case-object":
+            verifications, verifier_failures = await _call_verifier_single_cases(
+                transport=transport,
+                ledger=provider_ledger,
+                selected_rows=selected,
+                concurrency=int(instrument["execution"]["concurrency"]),
+            )
+        else:
+            verifications = await _call_verifier_batches(
+                transport=transport,
+                ledger=provider_ledger,
+                selected_rows=selected,
+            )
         await _run_graphs(
             public_rows=public_rows,
             proposals=proposals,
@@ -1003,7 +1243,18 @@ async def execute(
         if len(responses) != 600:
             raise ArchitectureDevelopmentError("responses incomplete before gold opening")
         gold = _load_bound_package(instrument["dataset"], gold=True)
-        result = _score(responses, public_rows, list(gold["rows"]), provider_ledger.snapshot())
+        result = _score(
+            responses,
+            public_rows,
+            list(gold["rows"]),
+            provider_ledger.snapshot(),
+            {
+                "planner_case_count": len(eligible_rows),
+                "verifier_case_count": len(selected),
+                "planner_failure_case_ids": sorted(planner_failures),
+                "verifier_failure_case_ids": sorted(verifier_failures),
+            },
+        )
         result.update(
             {
                 "record_schema": "research-evaluation-run-v1",
@@ -1017,7 +1268,7 @@ async def execute(
                 "limitations": [
                     "Synthetic policy-oracle development cases do not establish real learning improvement.",
                     "Luna has no dated snapshot; one shared persisted proposal is reused across B, C, and C+V to prevent cross-condition proposal drift.",
-                    "This first development fold cannot select a final architecture or product model.",
+                    "A single fresh development fold cannot select a final architecture or product model.",
                 ],
             }
         )
@@ -1039,12 +1290,13 @@ async def execute(
 
 def _summary(result: dict[str, Any]) -> str:
     lines = [
-        "# Successor architecture development fold 001",
+        f"# {result['run_id']}",
         "",
         f"- **Status:** `{result['status']}`",
         "- **Decision:** no final architecture selected; continue only according to the frozen finite program.",
         f"- **Cases:** {result['case_count']} paired contexts / {result['architecture_cell_count']} graph cells.",
         f"- **Provider:** {result['provider']['provider_calls']} calls, USD {result['provider']['reported_cost_usd']:.6f}.",
+        f"- **Provider completion:** {result['provider_quality']['provider_completion_rate']:.1%}; safe fallback {result['provider_quality']['provider_failure_safe_fallback_rate']:.1%}.",
         "",
         "## Architecture metrics",
         "",
@@ -1075,14 +1327,22 @@ def simulate(context: DevelopmentRunContext = DEFAULT_CONTEXT) -> dict[str, Any]
     instrument = _load_json(context.instrument_path)
     public = _load_bound_package(instrument["dataset"], gold=False)
     eligible = _eligible_public_rows(list(public["rows"]))
+    contract_mode = instrument["execution"].get(
+        "contract_mode", "four-case-batch"
+    )
     batches = _chunks(eligible, instrument["execution"]["batch_size"])
+    maximum_provider_calls = (
+        2 + 2 * len(eligible)
+        if contract_mode == "single-case-object"
+        else 2 + 2 * len(batches)
+    )
     return {
         **validate(context),
         "status": "simulated-network-free",
         "eligible_case_count": len(eligible),
         "planner_batch_count": len(batches),
         "maximum_verifier_batch_count": len(batches),
-        "maximum_provider_calls": 2 + 2 * len(batches),
+        "maximum_provider_calls": maximum_provider_calls,
         "gold_loaded": False,
         "provider_calls": 0,
     }
@@ -1096,7 +1356,9 @@ def main() -> int:
     mode.add_argument("--simulate", action="store_true")
     mode.add_argument("--preflight", action="store_true")
     mode.add_argument("--execute", action="store_true")
-    parser.add_argument("--attempt", choices=("001", "002"), default="001")
+    parser.add_argument(
+        "--attempt", choices=("001", "002", "fold-002"), default="001"
+    )
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
     context = _run_context(args.attempt)

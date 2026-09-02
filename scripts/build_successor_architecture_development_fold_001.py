@@ -105,7 +105,9 @@ def _realized_action_utilities(
     return utilities
 
 
-def _choice_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _choice_rows(
+    *, fold_number: int = 1
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     public: list[dict[str, Any]] = []
     gold: list[dict[str, Any]] = []
     events = (
@@ -114,14 +116,16 @@ def _choice_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         AutonomousEventKind.REPEATED_CONFUSION,
         AutonomousEventKind.PRACTICE_INCOMPLETE,
     )
+    shift = 0 if fold_number == 1 else 7
     for event_index, event_kind in enumerate(events):
         for index in range(30):
-            case_id = f"fold-001-{event_kind.value}-{index + 1:03d}"
-            band = index % 5
+            case_id = f"fold-{fold_number:03d}-{event_kind.value}-{index + 1:03d}"
+            shifted_index = index + shift
+            band = shifted_index % 5
             mastery = (0.15, 0.35, 0.55, 0.75, 0.9)[band]
             uncertainty = (0.85, 0.7, 0.5, 0.3, 0.15)[band]
             incorrect_streak = (
-                (index % 3) + 1
+                (shifted_index % 3) + 1
                 if event_kind
                 in {
                     AutonomousEventKind.MISCONCEPTION,
@@ -130,14 +134,18 @@ def _choice_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
                 else 2 if event_kind == AutonomousEventKind.REPEATED_CONFUSION else 0
             )
             state = PlanningStateCardV1(
-                concept_id=f"concept-{event_index + 1:02d}-{index % 10:02d}",
+                concept_id=(
+                    f"concept-{event_index + 1:02d}-{index % 10:02d}"
+                    if fold_number == 1
+                    else f"fold-{fold_number:03d}-concept-{event_index + 1:02d}-{shifted_index % 10:02d}"
+                ),
                 mastery_probability=mastery,
                 uncertainty=uncertainty,
-                assessed_evidence_count=index % 6,
+                assessed_evidence_count=shifted_index % 6,
                 recent_incorrect_streak=incorrect_streak,
-                days_since_last_observation=float((index % 8) + 1),
-                goal_progress=min(0.9, (index % 10) / 10),
-                goal_attempts_remaining=max(1, 3 - (index % 3)),
+                days_since_last_observation=float((shifted_index % 8) + 1),
+                goal_progress=min(0.9, (shifted_index % 10) / 10),
+                goal_attempts_remaining=max(1, 3 - (shifted_index % 3)),
             )
             expected = _expected_action(event_kind, state)
             learner_knows = _hidden_knows(case_id, mastery)
@@ -157,6 +165,9 @@ def _choice_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
                     "objective": (
                         "Explain why a durable checkpoint prevents a committed "
                         f"action from repeating ({event_index + 1:02d}-{index % 10:02d})."
+                        if fold_number == 1
+                        else "Choose an evidence-grounded teaching move for "
+                        f"fold {fold_number:03d}, concept {event_index + 1:02d}-{shifted_index % 10:02d}."
                     ),
                 }
             )
@@ -177,7 +188,9 @@ def _choice_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     return public, gold
 
 
-def _boundary_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def _boundary_rows(
+    *, fold_number: int = 1
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     public: list[dict[str, Any]] = []
     gold: list[dict[str, Any]] = []
     guards = (
@@ -188,18 +201,27 @@ def _boundary_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         "frequency-or-cooldown",
         "evidence-incomplete",
     )
+    shift = 0 if fold_number == 1 else 2
     for guard_index, guard in enumerate(guards):
         for index in range(5):
-            case_id = f"fold-001-boundary-{guard_index + 1:02d}-{index + 1:02d}"
+            case_id = (
+                f"fold-{fold_number:03d}-boundary-"
+                f"{guard_index + 1:02d}-{index + 1:02d}"
+            )
+            shifted_index = index + shift
             state = PlanningStateCardV1(
-                concept_id=f"boundary-concept-{guard_index + 1:02d}",
-                mastery_probability=0.2 + index * 0.15,
-                uncertainty=0.8 - index * 0.12,
-                assessed_evidence_count=index,
+                concept_id=(
+                    f"boundary-concept-{guard_index + 1:02d}"
+                    if fold_number == 1
+                    else f"fold-{fold_number:03d}-boundary-concept-{guard_index + 1:02d}"
+                ),
+                mastery_probability=0.2 + (shifted_index % 5) * 0.15,
+                uncertainty=0.8 - (shifted_index % 5) * 0.12,
+                assessed_evidence_count=shifted_index % 5,
                 recent_incorrect_streak=2,
-                days_since_last_observation=float(index + 1),
-                goal_progress=index * 0.15,
-                goal_attempts_remaining=3 - min(index, 2),
+                days_since_last_observation=float((shifted_index % 5) + 1),
+                goal_progress=(shifted_index % 5) * 0.15,
+                goal_attempts_remaining=3 - min(shifted_index % 5, 2),
             )
             public.append(
                 {
@@ -217,6 +239,9 @@ def _boundary_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
                     "objective": (
                         "Explain why a durable checkpoint prevents a committed "
                         f"action from repeating (boundary-{guard_index + 1:02d})."
+                        if fold_number == 1
+                        else "Respect the deterministic authority boundary for "
+                        f"fold {fold_number:03d}, guard {guard_index + 1:02d}."
                     ),
                 }
             )
@@ -240,23 +265,29 @@ def _boundary_rows() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     return public, gold
 
 
-def build_packages() -> tuple[dict[str, Any], dict[str, Any]]:
-    choice_public, choice_gold = _choice_rows()
-    boundary_public, boundary_gold = _boundary_rows()
+def build_packages(
+    *, fold_number: int = 1
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    if fold_number not in {1, 2}:
+        raise ValueError("only preregistered development folds 001 and 002 are supported")
+    choice_public, choice_gold = _choice_rows(fold_number=fold_number)
+    boundary_public, boundary_gold = _boundary_rows(fold_number=fold_number)
     public_rows = choice_public + boundary_public
     gold_rows = choice_gold + boundary_gold
+    dataset_id = f"successor-architecture-development-fold-{fold_number:03d}"
+    fold_id = f"development-fold-{fold_number:03d}"
     public = {
         "schema_version": 1,
-        "dataset_id": DATASET_ID,
-        "fold_id": "development-fold-001",
+        "dataset_id": dataset_id,
+        "fold_id": fold_id,
         "case_count": len(public_rows),
         "model_visible_fields_exclude_gold": True,
         "rows": public_rows,
     }
     gold = {
         "schema_version": 1,
-        "dataset_id": DATASET_ID,
-        "fold_id": "development-fold-001",
+        "dataset_id": dataset_id,
+        "fold_id": fold_id,
         "case_count": len(gold_rows),
         "gold_opening_rule": "after-all-architecture-responses-are-durable",
         "rows": gold_rows,
@@ -266,8 +297,8 @@ def build_packages() -> tuple[dict[str, Any], dict[str, Any]]:
     return public, gold
 
 
-def validate() -> dict[str, Any]:
-    public, gold = build_packages()
+def validate(*, fold_number: int = 1) -> dict[str, Any]:
+    public, gold = build_packages(fold_number=fold_number)
     public_ids = [row["case_id"] for row in public["rows"]]
     gold_ids = [row["case_id"] for row in gold["rows"]]
     if public_ids != gold_ids or len(public_ids) != len(set(public_ids)):
@@ -286,7 +317,7 @@ def validate() -> dict[str, Any]:
     ):
         raise ValueError("public development package contains hidden gold")
     return {
-        "dataset_id": DATASET_ID,
+        "dataset_id": f"successor-architecture-development-fold-{fold_number:03d}",
         "case_count": 150,
         "choice_case_count": 120,
         "boundary_case_count": 30,
@@ -298,18 +329,39 @@ def validate() -> dict[str, Any]:
     }
 
 
-def write() -> dict[str, Any]:
-    public, gold = build_packages()
-    PUBLIC_PATH.write_text(json.dumps(public, indent=2, sort_keys=True) + "\n")
-    GOLD_PATH.write_text(json.dumps(gold, indent=2, sort_keys=True) + "\n")
-    return validate()
+def write(*, fold_number: int = 1) -> dict[str, Any]:
+    public, gold = build_packages(fold_number=fold_number)
+    public_path = (
+        PUBLIC_PATH
+        if fold_number == 1
+        else ROOT
+        / "research/05_evaluation/successor_architecture_development_fold_002_public.json"
+    )
+    gold_path = (
+        GOLD_PATH
+        if fold_number == 1
+        else ROOT
+        / "research/05_evaluation/successor_architecture_development_fold_002_gold.json"
+    )
+    public_path.write_text(json.dumps(public, indent=2, sort_keys=True) + "\n")
+    gold_path.write_text(json.dumps(gold, indent=2, sort_keys=True) + "\n")
+    return validate(fold_number=fold_number)
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--fold", choices=(1, 2), type=int, default=1)
     args = parser.parse_args()
-    print(json.dumps(write() if args.write else validate(), indent=2, sort_keys=True))
+    print(
+        json.dumps(
+            write(fold_number=args.fold)
+            if args.write
+            else validate(fold_number=args.fold),
+            indent=2,
+            sort_keys=True,
+        )
+    )
     return 0
 
 

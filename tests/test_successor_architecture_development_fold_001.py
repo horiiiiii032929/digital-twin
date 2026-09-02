@@ -5,6 +5,7 @@ import pytest
 
 from scripts import build_successor_architecture_development_fold_001 as builder
 from scripts import run_successor_architecture_development_fold_001 as runner
+from src.digital_twin.evaluation.provider_json import ProviderJsonError
 from src.digital_twin.student.planning_architectures import AutonomyArchitectureId
 
 
@@ -41,6 +42,20 @@ def test_development_fold_build_is_byte_stable():
     assert builder.validate()["status"] == "passed"
 
 
+def test_second_fold_is_fresh_disjoint_and_byte_stable():
+    first_public, first_gold = builder.build_packages()
+    second_public, second_gold = builder.build_packages(fold_number=2)
+
+    assert second_public == builder.build_packages(fold_number=2)[0]
+    assert second_gold == builder.build_packages(fold_number=2)[1]
+    assert {row["case_id"] for row in first_public["rows"]}.isdisjoint(
+        row["case_id"] for row in second_public["rows"]
+    )
+    assert second_public["content_sha256"] != first_public["content_sha256"]
+    assert second_gold["content_sha256"] != first_gold["content_sha256"]
+    assert builder.validate(fold_number=2)["status"] == "passed"
+
+
 def test_live_instrument_and_network_free_simulation_are_bounded():
     validation = runner.validate()
     simulation = runner.simulate()
@@ -68,6 +83,19 @@ def test_corrective_attempt_reuses_scientific_inputs_but_has_fresh_output_identi
     assert original.result_path != corrective.result_path
 
 
+def test_single_case_successor_is_bounded_and_provider_unauthorized():
+    context = runner._run_context("fold-002")
+    validation = runner.validate(context)
+    simulation = runner.simulate(context)
+
+    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
+    assert simulation["maximum_provider_calls"] == 242
+    assert simulation["planner_batch_count"] == 120
+    assert simulation["gold_loaded"] is False
+
+
 def test_preflight_rejects_reused_result_path(tmp_path):
     existing = tmp_path / "existing-result.json"
     existing.write_text("{}\n", encoding="utf-8")
@@ -93,6 +121,61 @@ def test_provider_batch_schemas_are_strict_and_case_keyed():
         "accept",
         "reason_code",
     ]
+
+
+def test_single_case_schemas_fix_the_exact_case_identity():
+    proposal = runner._proposal_schema("case-a")
+    verifier = runner._verifier_schema("case-a")
+
+    assert proposal["properties"]["case_id"] == {
+        "type": "string",
+        "enum": ["case-a"],
+    }
+    assert verifier["properties"]["case_id"] == {
+        "type": "string",
+        "enum": ["case-a"],
+    }
+    assert "rows" not in proposal["properties"]
+    assert "rows" not in verifier["properties"]
+
+
+@pytest.mark.asyncio
+async def test_single_case_model_failure_is_quarantined_for_safe_graph_fallback():
+    public, _gold = builder.build_packages(fold_number=2)
+    source = next(row for row in public["rows"] if row["guard"] == "eligible")
+
+    class FailingTransport:
+        async def call_with_ledger(self, **_kwargs):
+            raise ProviderJsonError("provider returned malformed content")
+
+    proposals, failures = await runner._call_planner_single_cases(
+        transport=FailingTransport(),
+        ledger=object(),
+        public_rows=[source],
+        concurrency=1,
+    )
+
+    assert proposals == {source["case_id"]: None}
+    assert failures == [source["case_id"]]
+    assert await runner._selected_c_rows([source], proposals) == []
+
+
+@pytest.mark.asyncio
+async def test_single_case_identity_drift_still_invalidates_the_run():
+    public, _gold = builder.build_packages(fold_number=2)
+    source = next(row for row in public["rows"] if row["guard"] == "eligible")
+
+    class IdentityDriftTransport:
+        async def call_with_ledger(self, **_kwargs):
+            raise ProviderJsonError("provider model identity drifted")
+
+    with pytest.raises(ProviderJsonError, match="identity drifted"):
+        await runner._call_planner_single_cases(
+            transport=IdentityDriftTransport(),
+            ledger=object(),
+            public_rows=[source],
+            concurrency=1,
+        )
 
 
 def test_provider_id_validation_rejects_duplicates_and_unknown_ids():
@@ -189,3 +272,58 @@ def test_scoring_keeps_shared_state_diagnostic_outside_selection():
         0 < metrics["mean_policy_utility"] <= 1
         for metrics in result["aggregate"].values()
     )
+
+
+def test_scoring_treats_case_failure_as_safe_quality_evidence_not_invalid_run():
+    public, gold = builder.build_packages(fold_number=2)
+    gold_by_id = {row["case_id"]: row for row in gold["rows"]}
+    failed_case_id = next(
+        row["case_id"]
+        for row in public["rows"]
+        if row["guard"] == "eligible"
+        and gold_by_id[row["case_id"]]["expected_action"] != "no-action"
+    )
+    responses = []
+    for architecture in AutonomyArchitectureId:
+        for row in public["rows"]:
+            case_id = row["case_id"]
+            selected = gold_by_id[case_id]["expected_action"]
+            if (
+                case_id == failed_case_id
+                and architecture
+                != AutonomyArchitectureId.DETERMINISTIC_WORKFLOW_A
+            ):
+                selected = "no-action"
+            responses.append(
+                {
+                    "architecture_id": architecture.value,
+                    "case_id": case_id,
+                    "selected_action": selected,
+                    "response": (
+                        None
+                        if selected == "no-action"
+                        else {"source_range_keys": [f"source-range-{case_id}"]}
+                    ),
+                    "trace": {"course_id": "synthetic-autonomy-course"},
+                }
+            )
+
+    result = runner._score(
+        responses,
+        public["rows"],
+        gold["rows"],
+        {"provider_calls": 121, "reported_cost_usd": 0.01},
+        {
+            "planner_case_count": 120,
+            "verifier_case_count": 0,
+            "planner_failure_case_ids": [failed_case_id],
+            "verifier_failure_case_ids": [],
+        },
+    )
+
+    assert result["status"] == "completed-refine"
+    assert result["provider_quality"]["provider_completion_rate"] == pytest.approx(
+        119 / 120
+    )
+    assert result["hard_gates"]["provider_completion_at_least_0_995"] is False
+    assert result["hard_gates"]["provider_failure_safe_fallback_rate_is_1"] is True

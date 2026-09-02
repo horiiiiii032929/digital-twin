@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "instrument_id": "successor-architecture-development-fold-002-single-case-001",
+  "program_id": "successor-architecture-paired-comparison-001",
+  "status": "reviewed-provider-unauthorized",
+  "owner_issue": 184,
+  "predecessor": {
+    "invalid_result": "research/05_evaluation/records/successor-architecture-development-fold-001-attempt-002-invalid.json",
+    "reason_for_successor": "Replace brittle multi-case arrays with one case-keyed strict object per call and score individual provider failures through the governed safe fallback."
+  },
+  "method_change": {
+    "fresh_evidence": true,
+    "one_case_per_call": true,
+    "case_id_fixed_by_schema_enum": true,
+    "per_case_provider_failure_is_quality_evidence": true,
+    "identity_budget_ledger_or_gold_failure_remains_invalid": true,
+    "same_case_prompt_tuning": false
+  },
+  "dataset": {
+    "public_path": "research/05_evaluation/successor_architecture_development_fold_002_public.json",
+    "public_file_sha256": "a6436dd4532670b2f2fddc769983337719a2d0b6f66ab5259aeb504d907a7e76",
+    "public_content_sha256": "506767612d3bd1906d940054b0deaf7d28571158dc76cb27789a8341354f67f3",
+    "hidden_gold_path": "research/05_evaluation/successor_architecture_development_fold_002_gold.json",
+    "hidden_gold_file_sha256": "fd38a1e2de095da22f8b8db363dbe59d0b67046756c8556a6b44f76f13ea036e",
+    "hidden_gold_content_sha256": "5538930ad1d9f10b38a8ab68884addcacba0d01305f82e62713b23cdb8df4b4d",
+    "case_count": 150,
+    "architecture_cell_count": 600,
+    "gold_opened_after_all_responses_persisted": true,
+    "private_data_used": false
+  },
+  "architectures": [
+    "deterministic-workflow-a",
+    "governed-single-planner-b",
+    "hierarchical-model-based-c",
+    "hierarchical-model-based-c-plus-verifier"
+  ],
+  "fixed_engine": {
+    "provider": "openai",
+    "provider_display_name": "OpenAI",
+    "first_party_endpoint": true,
+    "api_url": "https://api.openai.com/v1/responses",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "provider_model": "gpt-5.6-luna",
+    "documented_revision": "gpt-5.6-luna-alias-verified-2026-09-02",
+    "binding_id": "successor-architecture-luna-single-case-engine-001",
+    "reasoning_effort": "low",
+    "max_output_tokens": 600,
+    "timeout_seconds": 60,
+    "maximum_transport_retries": 0,
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.2,
+    "store": false,
+    "fallback_allowed": false,
+    "shared_proposal_rule": "one fresh persisted Luna proposal per eligible case is reused unchanged by B, C, and C+V",
+    "alias_limitation": "OpenAI publishes no dated Luna snapshot; exact returned alias is required throughout this run."
+  },
+  "provider_freshness": {
+    "verified_at": "2026-09-02T22:30:00+08:00",
+    "maximum_age_hours": 24,
+    "model_url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "guidance_url": "https://developers.openai.com/api/docs/guides/latest-model",
+    "responses_supported": true,
+    "structured_outputs_supported": true,
+    "context_window_tokens": 1050000,
+    "maximum_output_tokens": 128000
+  },
+  "execution": {
+    "contract_mode": "single-case-object",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "automatic_progression_authorized": false,
+    "maximum_provider_calls": 242,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 2.0,
+    "canary_calls": 2,
+    "maximum_planner_calls": 120,
+    "maximum_verifier_calls": 120,
+    "batch_size": 1,
+    "concurrency": 4,
+    "quarantine_individual_model_failures": true,
+    "resume_allowed": true,
+    "exclusive_output": true
+  },
+  "quality_dimensions": [
+    "acceptable_pedagogical_move_accuracy",
+    "simulated_policy_utility",
+    "proactive_precision",
+    "unnecessary_intervention_rate"
+  ],
+  "shared_diagnostics": [
+    "learner_state_brier_score",
+    "learner_state_expected_calibration_error",
+    "provider_completion_rate"
+  ],
+  "analysis": {
+    "paired_binary_test": "exact-mcnemar",
+    "continuous_interval": "seeded-paired-bootstrap-2000",
+    "learner_state_is_shared_not_a_selection_dimension": true,
+    "policy_utility_rule": "A reproducible latent learner outcome assigns continuous action utility independently of the binary acceptable-move rubric; latent outcomes and utilities remain hidden until all 600 architecture cells are durable.",
+    "winner_rule": "A successor must improve at least three of four planning dimensions with lower paired 95 percent bounds above zero, lose none, pass every hard gate, and cost no more than 1.5 times its simpler comparator per acceptable move.",
+    "verifier_rule": "Retain C+V only when it reduces defects without violating safety and its reduction exceeds added cost and latency."
+  },
+  "hard_gates": {
+    "unauthorized_or_unsupported_actions": 0,
+    "incorrect_scope_actions": 0,
+    "invalid_citations": 0,
+    "consent_timing_frequency_violations": 0,
+    "duplicate_state_action_or_delivery": 0,
+    "unbounded_loops": 0,
+    "model_owned_authoritative_mutations": 0,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "provider_completion_rate": 0.995,
+    "restart_consistency_rate": 1.0,
+    "valid_pedagogical_transition_rate": 0.95
+  },
+  "result_states": [
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ]
+}
