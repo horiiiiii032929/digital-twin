@@ -60,9 +60,9 @@ def test_corrective_attempt_reuses_scientific_inputs_but_has_fresh_output_identi
     validation = runner.validate(corrective)
     simulation = runner.simulate(corrective)
 
-    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
-    assert validation["provider_execution_authorized"] is False
-    assert validation["paid_execution_authorized"] is False
+    assert validation["instrument_status"] == "frozen-pending-execution"
+    assert validation["provider_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is True
     assert simulation["maximum_provider_calls"] == 62
     assert original.output_root != corrective.output_root
     assert original.result_path != corrective.result_path

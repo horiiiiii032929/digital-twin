@@ -94,8 +94,9 @@ permit repeated actions within a maximum three-step episode, while every step
 still passes the deterministic action envelope. The complete gate passed 1,650
 Python and 50 frontend tests, lint, production build, freeze validation, and a
 964/964 audit with zero open findings. Corrective attempt 002 is build-qualified
-with fresh ledgers and result paths; its paid/provider authority remains false
-until the separate authorization checkpoint.
+with fresh ledgers and result paths. Its one-time provider authority is now
+frozen separately for at most 62 calls, zero retries, and a USD 2 emergency
+stop; no other evaluation stage is authorized.
 
 ## Local R1 autonomy release selection
 
