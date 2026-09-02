@@ -86,6 +86,10 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # learners through pure-Python estimators and timing policies. It has no
     # provider, paid, execute, held-out, or product-data mode.
     "run_successor_learner_timing_simulation_001.py",
+    # The A/B/C/C+V tournament entrypoint exposes validation and network-free
+    # synthetic conformance only. A separate frozen successor must own any
+    # provider-backed or confirmation execution.
+    "run_successor_architecture_paired_comparison_001.py",
 }
 EXEMPT_SCRIPTS = {
     "validate_professor_fidelity_post_audit.py",

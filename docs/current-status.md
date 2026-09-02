@@ -27,6 +27,28 @@ The older sections below are retained as chronological evidence. Where they
 describe governed V2.1 as selected or qualified, this audit correction is the
 current decision.
 
+## Successor architecture implementation checkpoint
+
+Issue #184 now owns the prospective A/B/C comparison. The shared switchable
+runtime is implemented on draft PR #185:
+
+- A disables model planning and uses the deterministic event workflow;
+- B enables one typed planner proposal with lookahead depth zero;
+- C uses the same proposal and adds an analytic, replaceable forward model;
+- C+V adds only a reject-only verifier for the preregistered ablation.
+
+The candidates share the same deterministic action envelope, evidence and
+source-lineage checks, professor policy, consent/timing limits, persistence,
+delivery, and rollback boundary. The engine allocations are fixed as E1
+Luna/Luna, E2 Terra/Luna, E3 Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini.
+GPT-5.6 Sol, Gemma, Claude, DeepSeek, OpenRouter routing, and retired local
+general models are excluded from the active comparison.
+
+This is build-only work. The network-free conformance gate must pass before
+the three development rounds, and no architecture or model allocation is
+selected until the paired quality evidence is recorded. The active safe local
+release boundary remains bounded T1-v1 with deterministic T0 rollback.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

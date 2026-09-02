@@ -94,6 +94,19 @@ from src.digital_twin.student.autonomy_runtime import (
     GovernedAutonomousTutoringGraph,
     LiveAutonomousPlanner,
 )
+from src.digital_twin.student.planning_architectures import (
+    ActionValuePredictionV1,
+    AnalyticPedagogicalForwardModel,
+    ArchitecturePlanTraceV1,
+    AutonomyArchitectureId,
+    EpisodeStepProposalV1,
+    HierarchicalPlanningProposalV1,
+    LlmHierarchicalPlanningProvider,
+    LlmRejectOnlyPlanVerifier,
+    PlannerVerificationV1,
+    PlanningStateCardV1,
+    SwitchableAutonomyPlanner,
+)
 from src.digital_twin.student.autonomy_control import (
     AutonomousEvidenceAssessor,
     AutonomousEvidenceDecisionV1,
@@ -272,4 +285,15 @@ __all__ = [
     "ReactiveSemanticProposalV2",
     "ReactiveTurnArtifactsV2",
     "TurnPerceptionV2",
+    "ActionValuePredictionV1",
+    "AnalyticPedagogicalForwardModel",
+    "ArchitecturePlanTraceV1",
+    "AutonomyArchitectureId",
+    "EpisodeStepProposalV1",
+    "HierarchicalPlanningProposalV1",
+    "LlmHierarchicalPlanningProvider",
+    "LlmRejectOnlyPlanVerifier",
+    "PlannerVerificationV1",
+    "PlanningStateCardV1",
+    "SwitchableAutonomyPlanner",
 ]

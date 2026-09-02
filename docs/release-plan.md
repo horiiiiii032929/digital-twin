@@ -24,6 +24,17 @@ The common fixes are frozen before comparison. No architecture is promoted from
 the audit closure itself, and the historical 011–013 data are not reused for
 selection.
 
+The comparison is now implemented as one runtime rather than four unrelated
+systems. Disabling semantic planning recovers A; setting lookahead to zero
+recovers B; positive bounded lookahead enables C; a second reject-only call
+creates C+V. This makes architecture and engine effects identifiable while all
+deterministic safety and grounding authorities remain fixed. The build-only
+instrument is `successor-architecture-paired-comparison-001`; it freezes the
+E1–E4 Luna/Terra/GPT-5.4-Mini allocations, three finite development folds, one
+fresh 1,000-case confirmation, the labelled known 10,000+1,000 regression, the
+820-case autonomy portfolio, and local product qualification. Passing a
+network-free harness does not select a release.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,

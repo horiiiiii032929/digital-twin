@@ -9,6 +9,11 @@ accepted decision, not a release selection, and not an authorization for any
 provider, paid, private-data, human-study, or release activity; requires the
 experiment in section 6 before adoption
 
+Implementation checkpoint (2026-09-02): the shared switchable A/B/C runtime and
+the C+V reject-only ablation are now implemented prospectively under issue
+#184 and draft PR #185. This changes the recommendation from design-only to
+build-ready; it does not select candidate C or authorize a provider run.
+
 Companion documents:
 
 - [Independent study](sota-autonomous-digital-twin-independent-study.md)

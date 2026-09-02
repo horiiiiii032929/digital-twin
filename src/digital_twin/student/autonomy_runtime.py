@@ -543,7 +543,12 @@ class GovernedAutonomousTutoringGraph:
             **proposal.model_dump(mode="python"),
         )
         trace = state["trace"].model_copy(
-            update={"planning_calls": 1, "decision_reason": proposal.reason_code}
+            update={
+                "planning_calls": (
+                    0 if self.planner.model_id.startswith("deterministic/") else 1
+                ),
+                "decision_reason": proposal.reason_code,
+            }
         )
         return {"proposal": proposal, "plan": plan, "trace": trace}
 
