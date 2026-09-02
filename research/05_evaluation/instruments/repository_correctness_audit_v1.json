@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. The corrective instrument has been removed from the bounded authorization allowlist; no architecture evaluation execution is currently authorized.",
+      "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. Only fresh fold 003 is allowlisted for bounded external-model and method-evaluation execution under its 242-call, zero-retry, USD 2 limits.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 terminal-result audit",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "reviewer": "Codex fold-003 authorization audit",
+      "sha256": "96951d3b701ae70dbf70412e08f114f264cd26f3e358d109e2b77e4f44ea179a"
     },
     {
       "audit_status": "audited",
@@ -8453,12 +8453,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Tests enumerate every exact bounded authorization and prove both fold-002 terminal attempts are blocked from external-model and method-evaluation operations after authority revocation.",
+      "evidence": "Tests enumerate every exact bounded authorization, prove both fold-002 terminal attempts remain blocked, and bind only fresh fold 003 to the external-model and method-evaluation operations required by its frozen execution.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 terminal-result audit",
-      "sha256": "d4fdee14dc776758d8d77e46a91394ecea3e53d4e495339ca258d9b75d030b18"
+      "reviewer": "Codex fold-003 authorization audit",
+      "sha256": "d7003f213438bde63bd2aae0772a9c052fce1389464fb65b83d7326bd00dd128"
     },
     {
       "audit_status": "audited",
@@ -10631,12 +10631,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Prospective review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and leaves provider and paid execution unauthorized.",
+      "evidence": "Authorization review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and authorizes only this bounded execution.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-003 database-lifecycle audit",
-      "sha256": "0bf6dd0fc025a6a8c5e05b63e6dde98cce191e82a2e931bf2248671d59b88bf2"
+      "reviewer": "Codex fold-003 authorization audit",
+      "sha256": "8f206b2a41fc7585670f42ea16aee5c7ddd5d0dec23667794a35f3a7a3134f8f"
     }
   ],
   "schema_version": 1

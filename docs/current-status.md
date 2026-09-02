@@ -159,8 +159,10 @@ provider-backed graph using that database. The new package contains 150
 source-disjoint cases and 600 paired graph cells; hidden gold remains unopened.
 The complete gate passed 1,660 Python tests, 50 frontend tests, lint/build,
 147/147 freeze coverage, and 967/967 repository audits with zero open findings.
-Fold 003 remains provider-unauthorized and no architecture or engine is selected
-until its bounded execution produces valid paired evidence.
+Fold 003 is now separately frozen and authorized as the sole active architecture
+evaluation for at most 242 calls, zero retries, and a USD 2 emergency stop. No
+architecture or engine is selected until its bounded execution produces valid
+paired evidence.
 
 ## Local R1 autonomy release selection
 

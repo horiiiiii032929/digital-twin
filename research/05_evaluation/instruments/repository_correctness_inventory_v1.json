@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "d9b339df6f5d858ff5e94d5de5627ffceeb9f0c3d3885766d24fa914319d3c7f",
+  "record_sha256": "118e9386a791eb51829042b6bdc75f1e0cd65837cb0a4d69ce5164669cad1850",
   "records": [
     {
       "audit": {
@@ -5224,10 +5224,10 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Prospective review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and leaves provider and paid execution unauthorized.",
+        "evidence": "Authorization review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and authorizes only this bounded execution.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-003 database-lifecycle audit"
+        "reviewer": "Codex fold-003 authorization audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5235,7 +5235,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
       "risk": "high",
-      "sha256": "0bf6dd0fc025a6a8c5e05b63e6dde98cce191e82a2e931bf2248671d59b88bf2"
+      "sha256": "8f206b2a41fc7585670f42ea16aee5c7ddd5d0dec23667794a35f3a7a3134f8f"
     },
     {
       "audit": {
@@ -12416,10 +12416,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. The corrective instrument has been removed from the bounded authorization allowlist; no architecture evaluation execution is currently authorized.",
+        "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. Only fresh fold 003 is allowlisted for bounded external-model and method-evaluation execution under its 242-call, zero-retry, USD 2 limits.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 terminal-result audit"
+        "reviewer": "Codex fold-003 authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12427,7 +12427,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "sha256": "96951d3b701ae70dbf70412e08f114f264cd26f3e358d109e2b77e4f44ea179a"
     },
     {
       "audit": {
@@ -13264,10 +13264,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization and prove both fold-002 terminal attempts are blocked from external-model and method-evaluation operations after authority revocation.",
+        "evidence": "Tests enumerate every exact bounded authorization, prove both fold-002 terminal attempts remain blocked, and bind only fresh fold 003 to the external-model and method-evaluation operations required by its frozen execution.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 terminal-result audit"
+        "reviewer": "Codex fold-003 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13275,7 +13275,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "d4fdee14dc776758d8d77e46a91394ecea3e53d4e495339ca258d9b75d030b18"
+      "sha256": "d7003f213438bde63bd2aae0772a9c052fce1389464fb65b83d7326bd00dd128"
     },
     {
       "audit": {
