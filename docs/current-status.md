@@ -98,6 +98,15 @@ with fresh ledgers and result paths. Its one-time provider authority is now
 frozen separately for at most 62 calls, zero retries, and a USD 2 emergency
 stop; no other evaluation stage is authorized.
 
+Corrective attempt 002 is now terminal `invalid-execution` and its authority is
+revoked. Both canaries and all 30 planner batches completed, but Luna returned
+an empty row set for the first four-case reject-only verifier batch. The run
+recorded 33 calls and USD 0.037090; zero graph cells were persisted and hidden
+gold remained unopened. This is a model/batch-contract operational failure,
+not an SA7 recurrence or an architecture-quality result. The one corrective
+attempt is exhausted, so fold 001 will not be retried. A future comparison must
+be a prospectively registered method successor on fresh evidence.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

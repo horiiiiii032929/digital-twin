@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "successor-architecture-development-fold-001-attempt-002",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "owner_issue": 184,
   "predecessor": {
     "instrument_path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
@@ -70,8 +70,8 @@
     "maximum_output_tokens": 128000
   },
   "execution": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "automatic_progression_authorized": false,
     "maximum_provider_calls": 62,
     "maximum_transport_retries": 0,
@@ -113,6 +113,17 @@
     "provider_failure_safe_fallback_rate": 1.0,
     "restart_consistency_rate": 1.0,
     "valid_pedagogical_transition_rate": 0.95
+  },
+  "terminal_execution": {
+    "attempt_id": "successor-architecture-development-fold-001-attempt-002-invalid",
+    "execution_revision": "89bfb22",
+    "result_record": "research/05_evaluation/records/successor-architecture-development-fold-001-attempt-002-invalid.json",
+    "status": "invalid-execution",
+    "provider_calls": 33,
+    "reported_cost_usd": 0.03709,
+    "gold_opened": false,
+    "authorization_revoked": true,
+    "further_same_fold_attempt_allowed": false
   },
   "result_states": [
     "invalid-execution",

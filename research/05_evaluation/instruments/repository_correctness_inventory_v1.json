@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "855d1c0902bb43d3d83eed35dc9303b56f643de5c6ada0429e7a6ad824cc550c",
+  "record_sha256": "9c12c0f9e56c39397e42065b7804e5ac05c0a21c957f2adc1c61136b0b52552d",
   "records": [
     {
       "audit": {
@@ -5176,7 +5176,7 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Authorization review confirmed the exact public/gold hashes, model, prompts, metrics, gates, call and cost ceilings remain unchanged; prior calls cannot be imported; all output paths are fresh; and only attempt 002 is authorized for at most 62 calls, zero retries, and USD 2.",
+        "evidence": "Terminal-state review records 33 calls and USD 0.037090, confirms zero graph cells and unopened gold, classifies the empty four-case verifier batch as a model-contract operational failure, revokes authority, and prohibits a third fold-001 attempt.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture SA7 correction audit"
@@ -5187,7 +5187,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json",
       "risk": "high",
-      "sha256": "d5d9c3a4c0c64f2bbeb612edc80de2d4ee9da434436926e04bfa87c78fad8b48"
+      "sha256": "5dec6ec1e79098ff8987e5167677a1c527257685fc37d17d8a5a446eb2c31ebf"
     },
     {
       "audit": {
@@ -12354,7 +12354,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active, invalid fold-001 authority is revoked, and only fresh corrective attempt 002 is allowlisted for its exact external-model and method-evaluation operations. Registry and AST coverage agree exactly; every other paid stage remains frozen.",
+        "evidence": "The global freeze remains active and both fold-001 attempts are terminal with authority revoked. No successor architecture paid stage is allowlisted. Registry and AST coverage agree exactly; every paid stage remains frozen.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture invalid-attempt audit"
@@ -12365,7 +12365,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "3e75a3bf8b10491c831aa084f667e1786a48012995e872844291725df521baed"
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit": {
@@ -13202,7 +13202,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, prove invalid attempt 001 is blocked, and prove only fresh attempt 002 receives the two exact operations required for its bounded run.",
+        "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, and prove both terminal successor-architecture attempts are blocked from external-model and method-evaluation operations.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture invalid-attempt audit"
@@ -13213,7 +13213,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "08e2aa63468b10e936234a2dcf9581c9d8da1068c800b662517a8bab06cfc174"
+      "sha256": "03b91136183f800432e602257d2fc7cdee28d737bf67eac15164f288baa7e640"
     },
     {
       "audit": {
@@ -15970,7 +15970,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests cover balanced construction, gold isolation, byte stability, terminal attempt 001, separately authorized attempt 002, separate output identity, bounded simulation, schema/local repeated-action alignment, ID validation, result exclusivity, checkpoint separation, and scoring validity.",
+        "evidence": "Focused tests cover balanced construction, gold isolation, byte stability, both terminal and deauthorized attempts, separate output identity, bounded simulation, schema/local repeated-action alignment, ID validation, result exclusivity, checkpoint separation, and scoring validity.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture SA7 correction audit"
@@ -15981,7 +15981,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "risk": "medium",
-      "sha256": "06f629dbec0b4907a907b6489c6d298eb285d948e0e0035332e18131aa5e898e"
+      "sha256": "1bbfde60cefd15dba13730674833ad905363a57f6b8eb5f8579d79235d53cef4"
     },
     {
       "audit": {
