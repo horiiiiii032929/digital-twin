@@ -14,7 +14,7 @@ from collections.abc import Callable
 from enum import StrEnum
 from typing import Protocol
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field
 
 from src.digital_twin.llm import (
     LlmClient,
@@ -75,13 +75,6 @@ class HierarchicalPlanningProposalV1(_Contract):
     stop_condition: str = Field(min_length=1, max_length=500)
     replan_condition: str | None = Field(default=None, max_length=500)
     episode_steps: list[EpisodeStepProposalV1] = Field(default_factory=list, max_length=3)
-
-    @model_validator(mode="after")
-    def episode_is_bounded(self) -> "HierarchicalPlanningProposalV1":
-        actions = [step.action for step in self.episode_steps]
-        if len(actions) != len(set(actions)):
-            raise ValueError("episode proposal actions must be unique")
-        return self
 
 
 class PlannerVerificationV1(_Contract):

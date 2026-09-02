@@ -51,7 +51,8 @@ defects. Candidate A made zero planner calls, and C at lookahead depth zero
 produced byte-identical planner outputs to B. This validates the comparison
 mechanics only; it does not select an architecture or model allocation.
 
-Repository correctness is 959/959 audited with zero pending or open findings.
+Repository correctness was 963/963 audited with zero pending or open findings
+before the first paid architecture attempt.
 The additional npm advisory found during final qualification was closed by
 moving transitive Browserslist from 4.28.4 to 4.28.8; `npm audit` now reports
 zero vulnerabilities. The complete Python suite passed 1,637 tests and the
@@ -77,6 +78,16 @@ correctness is 963/963 and protected/frozen
 entrypoint coverage is 147/147, with zero open findings. The fold is now the
 only bounded provider-authorized stage (62 calls, zero retries, USD 2) and
 selects no architecture before execution.
+
+Paid attempt 001 is now preserved as `invalid-execution`, not as an unfavorable
+architecture result. Seventeen direct OpenAI calls completed for USD 0.018998,
+but zero architecture cells were persisted and hidden gold remained unopened.
+Finding SA7 identified a real harness defect: the provider strict schema allowed
+a bounded episode to repeat an action while the local Pydantic contract rejected
+it. Attempt 001 authority is revoked. The only permitted correction aligns those
+contracts, retains the three-step and deterministic action-envelope limits, and
+uses a fresh execution identity without changing the cases, gold, prompts,
+models, metrics, gates, or budget.
 
 ## Local R1 autonomy release selection
 

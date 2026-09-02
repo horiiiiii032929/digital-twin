@@ -300,3 +300,28 @@ def test_invalid_switch_combinations_fail_at_construction():
             architecture_id=AutonomyArchitectureId.HIERARCHICAL_WITH_VERIFIER_CV,
             proposal_provider=_ProposalProvider(),
         )
+
+
+def test_bounded_episode_can_repeat_an_action_without_widening_authority():
+    proposal = HierarchicalPlanningProposalV1(
+        selected_action=AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION,
+        reason_code="repeat-diagnostic-after-observation",
+        stop_condition="Stop after the bounded episode.",
+        episode_steps=[
+            EpisodeStepProposalV1(
+                action=AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION,
+                expected_observation="Observe the first explanation.",
+                stop_or_replan_predicate="Continue only if uncertainty remains.",
+            ),
+            EpisodeStepProposalV1(
+                action=AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION,
+                expected_observation="Observe the refined explanation.",
+                stop_or_replan_predicate="Stop after the second observation.",
+            ),
+        ],
+    )
+
+    assert len(proposal.episode_steps) == 2
+    assert {step.action for step in proposal.episode_steps} == {
+        AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
+    }

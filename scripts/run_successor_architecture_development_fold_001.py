@@ -9,6 +9,7 @@ import hashlib
 import json
 import math
 import os
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 import sqlite3
@@ -53,22 +54,6 @@ from src.digital_twin.student.planning_architectures import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-INSTRUMENT_ID = "successor-architecture-development-fold-001"
-INSTRUMENT_PATH = ROOT / (
-    "research/05_evaluation/instruments/"
-    "successor_architecture_development_fold_001.json"
-)
-OUTPUT_ROOT = ROOT / "reports/generated/successor-architecture-development-fold-001"
-PROVIDER_LEDGER = OUTPUT_ROOT / "provider.sqlite3"
-RESPONSE_LEDGER = OUTPUT_ROOT / "responses.sqlite3"
-GRAPH_LEDGER = OUTPUT_ROOT / "graph-checkpoints.sqlite3"
-RESULT_PATH = ROOT / (
-    "research/05_evaluation/records/"
-    "successor-architecture-development-fold-001.json"
-)
-SUMMARY_PATH = ROOT / (
-    "research/05_evaluation/successor-architecture-development-fold-001-results.md"
-)
 PROFILE_SHA = "b" * 64
 NOW = datetime(2026, 9, 2, 14, 30, tzinfo=UTC)
 ALL_ACTIONS = [
@@ -78,6 +63,51 @@ ALL_ACTIONS = [
 
 class ArchitectureDevelopmentError(RuntimeError):
     """A binding, transport, or execution invariant failed."""
+
+
+@dataclass(frozen=True)
+class DevelopmentRunContext:
+    instrument_id: str
+    instrument_path: Path
+    output_root: Path
+    provider_ledger: Path
+    response_ledger: Path
+    graph_ledger: Path
+    result_path: Path
+    summary_path: Path
+
+
+def _run_context(attempt: str) -> DevelopmentRunContext:
+    if attempt == "001":
+        instrument_id = "successor-architecture-development-fold-001"
+        instrument_name = "successor_architecture_development_fold_001.json"
+    elif attempt == "002":
+        instrument_id = "successor-architecture-development-fold-001-attempt-002"
+        instrument_name = (
+            "successor_architecture_development_fold_001_attempt_002.json"
+        )
+    else:
+        raise ArchitectureDevelopmentError(f"unknown development attempt: {attempt}")
+    output_root = ROOT / f"reports/generated/{instrument_id}"
+    return DevelopmentRunContext(
+        instrument_id=instrument_id,
+        instrument_path=(
+            ROOT / "research/05_evaluation/instruments" / instrument_name
+        ),
+        output_root=output_root,
+        provider_ledger=output_root / "provider.sqlite3",
+        response_ledger=output_root / "responses.sqlite3",
+        graph_ledger=output_root / "graph-checkpoints.sqlite3",
+        result_path=(
+            ROOT / "research/05_evaluation/records" / f"{instrument_id}.json"
+        ),
+        summary_path=(
+            ROOT / "research/05_evaluation" / f"{instrument_id}-results.md"
+        ),
+    )
+
+
+DEFAULT_CONTEXT = _run_context("001")
 
 
 def _git(*arguments: str) -> str:
@@ -144,7 +174,7 @@ def _proposal_schema() -> dict[str, Any]:
             "outcome_observation": _schema_string(nullable=True),
             "stop_condition": _schema_string(),
             "replan_condition": _schema_string(nullable=True),
-            "episode_steps": {"type": "array", "items": step},
+            "episode_steps": {"type": "array", "items": step, "maxItems": 3},
         },
         "required": [
             "case_id",
@@ -455,9 +485,11 @@ class _ResponseLedger:
         self.connection.close()
 
 
-def _binding(instrument: dict[str, Any]) -> dict[str, Any]:
+def _binding(
+    instrument: dict[str, Any], context: DevelopmentRunContext
+) -> dict[str, Any]:
     return {
-        "instrument_sha256": _file_sha256(INSTRUMENT_PATH),
+        "instrument_sha256": _file_sha256(context.instrument_path),
         "public_sha256": instrument["dataset"]["public_file_sha256"],
         "gold_sha256": instrument["dataset"]["hidden_gold_file_sha256"],
         "code_revision": _git("rev-parse", "HEAD"),
@@ -465,8 +497,10 @@ def _binding(instrument: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def validate() -> dict[str, Any]:
-    instrument = _load_json(INSTRUMENT_PATH)
+def validate(context: DevelopmentRunContext = DEFAULT_CONTEXT) -> dict[str, Any]:
+    instrument = _load_json(context.instrument_path)
+    if instrument["instrument_id"] != context.instrument_id:
+        raise ArchitectureDevelopmentError("instrument identity drifted")
     public = _load_bound_package(instrument["dataset"], gold=False)
     public_ids = [row["case_id"] for row in public["rows"]]
     if len(public_ids) != 150 or len(public_ids) != len(set(public_ids)):
@@ -495,9 +529,11 @@ def validate() -> dict[str, Any]:
     }
 
 
-def preflight(*, resume: bool) -> dict[str, Any]:
-    result = validate()
-    instrument = _load_json(INSTRUMENT_PATH)
+def preflight(
+    *, resume: bool, context: DevelopmentRunContext = DEFAULT_CONTEXT
+) -> dict[str, Any]:
+    result = validate(context)
+    instrument = _load_json(context.instrument_path)
     blockers: list[str] = []
     authority = instrument["execution"]
     if not authority["provider_execution_authorized"]:
@@ -512,13 +548,17 @@ def preflight(*, resume: bool) -> dict[str, Any]:
     age_hours = (datetime.now(UTC) - verified.astimezone(UTC)).total_seconds() / 3600
     if age_hours > instrument["provider_freshness"]["maximum_age_hours"]:
         blockers.append("provider-metadata-stale")
-    for path in (PROVIDER_LEDGER, RESPONSE_LEDGER, GRAPH_LEDGER):
+    for path in (
+        context.provider_ledger,
+        context.response_ledger,
+        context.graph_ledger,
+    ):
         if resume and not path.exists():
             blockers.append(f"resume-artifact-missing:{path.name}")
         if not resume and path.exists():
             blockers.append(f"exclusive-output-exists:{path.name}")
     if not resume:
-        for path in (RESULT_PATH, SUMMARY_PATH):
+        for path in (context.result_path, context.summary_path):
             if path.exists():
                 blockers.append(f"exclusive-output-exists:{path.name}")
     return {
@@ -701,6 +741,7 @@ async def _run_graphs(
     proposals: dict[str, HierarchicalPlanningProposalV1],
     verifications: dict[str, PlannerVerificationV1],
     response_ledger: _ResponseLedger,
+    graph_ledger: Path,
 ) -> None:
     proposal_provider = _ProposalMap(proposals)
     verifier_provider = _VerifierMap(verifications)
@@ -726,7 +767,7 @@ async def _run_graphs(
                 )
             graph = GovernedAutonomousTutoringGraph(
                 planner=planner,
-                checkpoint_database_path=str(GRAPH_LEDGER),
+                checkpoint_database_path=str(graph_ledger),
             )
             result = await graph.run(_architecture_scoped_job(row, architecture))
             response_ledger.record(
@@ -907,32 +948,36 @@ def _score(
     }
 
 
-async def execute(*, resume: bool) -> dict[str, Any]:
+async def execute(
+    *, resume: bool, context: DevelopmentRunContext = DEFAULT_CONTEXT
+) -> dict[str, Any]:
     require_bounded_pilot_operation_allowed(
-        INSTRUMENT_ID,
+        context.instrument_id,
         "external_model_evaluation",
     )
     require_bounded_pilot_operation_allowed(
-        INSTRUMENT_ID,
+        context.instrument_id,
         "method_evaluation_execution",
     )
-    ready = preflight(resume=resume)
+    ready = preflight(resume=resume, context=context)
     if ready["status"] != "ready":
         raise ArchitectureDevelopmentError(f"preflight blocked: {ready['blockers']}")
-    instrument = _load_json(INSTRUMENT_PATH)
+    instrument = _load_json(context.instrument_path)
     public = _load_bound_package(instrument["dataset"], gold=False)
     public_rows = list(public["rows"])
     eligible_rows = _eligible_public_rows(public_rows)
-    binding = _binding(instrument)
+    binding = _binding(instrument, context)
     provider_ledger = ProviderCallLedgerV1(
-        PROVIDER_LEDGER,
+        context.provider_ledger,
         run_binding=binding,
         maximum_calls=instrument["execution"]["maximum_provider_calls"],
         maximum_cost_usd=instrument["execution"]["emergency_cost_stop_usd"],
         maximum_transport_retries_total=0,
         resume=resume,
     )
-    response_ledger = _ResponseLedger(RESPONSE_LEDGER, binding=binding, resume=resume)
+    response_ledger = _ResponseLedger(
+        context.response_ledger, binding=binding, resume=resume
+    )
     transport = DirectProviderJsonTransport(instrument["fixed_engine"])
     try:
         await _canaries(transport, provider_ledger, eligible_rows[0])
@@ -952,6 +997,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             proposals=proposals,
             verifications=verifications,
             response_ledger=response_ledger,
+            graph_ledger=context.graph_ledger,
         )
         responses = response_ledger.rows()
         if len(responses) != 600:
@@ -965,7 +1011,7 @@ async def execute(*, resume: bool) -> dict[str, Any]:
                 "run_id": instrument["instrument_id"],
                 "code_revision": _git("rev-parse", "HEAD"),
                 "dirty_state": bool(_git("status", "--porcelain")),
-                "instrument_sha256": _file_sha256(INSTRUMENT_PATH),
+                "instrument_sha256": _file_sha256(context.instrument_path),
                 "public_sha256": instrument["dataset"]["public_file_sha256"],
                 "hidden_gold_sha256": instrument["dataset"]["hidden_gold_file_sha256"],
                 "limitations": [
@@ -976,10 +1022,10 @@ async def execute(*, resume: bool) -> dict[str, Any]:
             }
         )
         _atomic_write(
-            RESULT_PATH,
+            context.result_path,
             json.dumps(result, indent=2, sort_keys=True) + "\n",
         )
-        _atomic_write(SUMMARY_PATH, _summary(result))
+        _atomic_write(context.summary_path, _summary(result))
         response_ledger.complete()
         provider_ledger.mark_complete()
         return result
@@ -1025,13 +1071,13 @@ def _summary(result: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def simulate() -> dict[str, Any]:
-    instrument = _load_json(INSTRUMENT_PATH)
+def simulate(context: DevelopmentRunContext = DEFAULT_CONTEXT) -> dict[str, Any]:
+    instrument = _load_json(context.instrument_path)
     public = _load_bound_package(instrument["dataset"], gold=False)
     eligible = _eligible_public_rows(list(public["rows"]))
     batches = _chunks(eligible, instrument["execution"]["batch_size"])
     return {
-        **validate(),
+        **validate(context),
         "status": "simulated-network-free",
         "eligible_case_count": len(eligible),
         "planner_batch_count": len(batches),
@@ -1050,22 +1096,24 @@ def main() -> int:
     mode.add_argument("--simulate", action="store_true")
     mode.add_argument("--preflight", action="store_true")
     mode.add_argument("--execute", action="store_true")
+    parser.add_argument("--attempt", choices=("001", "002"), default="001")
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
+    context = _run_context(args.attempt)
     if args.execute:
         require_bounded_pilot_operation_allowed(
-            INSTRUMENT_ID, "external_model_evaluation"
+            context.instrument_id, "external_model_evaluation"
         )
         require_bounded_pilot_operation_allowed(
-            INSTRUMENT_ID, "method_evaluation_execution"
+            context.instrument_id, "method_evaluation_execution"
         )
-        result = asyncio.run(execute(resume=args.resume))
+        result = asyncio.run(execute(resume=args.resume, context=context))
     elif args.preflight:
-        result = preflight(resume=args.resume)
+        result = preflight(resume=args.resume, context=context)
     elif args.simulate:
-        result = simulate()
+        result = simulate(context)
     else:
-        result = validate()
+        result = validate(context)
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 

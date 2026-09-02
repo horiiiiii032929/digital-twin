@@ -1,4 +1,5 @@
 import json
+from dataclasses import replace
 
 import pytest
 
@@ -45,20 +46,34 @@ def test_live_instrument_and_network_free_simulation_are_bounded():
     simulation = runner.simulate()
 
     assert validation["status"] == "passed"
-    assert validation["instrument_status"] == "frozen-pending-execution"
-    assert validation["provider_execution_authorized"] is True
-    assert validation["paid_execution_authorized"] is True
+    assert validation["instrument_status"] == "invalid-execution-authorization-revoked"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
     assert simulation["gold_loaded"] is False
     assert simulation["maximum_provider_calls"] == 62
     assert simulation["planner_batch_count"] == 30
 
 
-def test_preflight_rejects_reused_result_path(monkeypatch, tmp_path):
+def test_corrective_attempt_reuses_scientific_inputs_but_has_fresh_output_identity():
+    original = runner.DEFAULT_CONTEXT
+    corrective = runner._run_context("002")
+    validation = runner.validate(corrective)
+    simulation = runner.simulate(corrective)
+
+    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
+    assert simulation["maximum_provider_calls"] == 62
+    assert original.output_root != corrective.output_root
+    assert original.result_path != corrective.result_path
+
+
+def test_preflight_rejects_reused_result_path(tmp_path):
     existing = tmp_path / "existing-result.json"
     existing.write_text("{}\n", encoding="utf-8")
-    monkeypatch.setattr(runner, "RESULT_PATH", existing)
+    context = replace(runner.DEFAULT_CONTEXT, result_path=existing)
 
-    result = runner.preflight(resume=False)
+    result = runner.preflight(resume=False, context=context)
 
     assert f"exclusive-output-exists:{existing.name}" in result["blockers"]
 
@@ -72,6 +87,7 @@ def test_provider_batch_schemas_are_strict_and_case_keyed():
     proposal_row = proposal["properties"]["rows"]["items"]
     assert "case_id" in proposal_row["required"]
     assert proposal_row["additionalProperties"] is False
+    assert proposal_row["properties"]["episode_steps"]["maxItems"] == 3
     assert verifier["properties"]["rows"]["items"]["required"] == [
         "case_id",
         "accept",
@@ -87,6 +103,34 @@ def test_provider_id_validation_rejects_duplicates_and_unknown_ids():
         )
     with pytest.raises(runner.ArchitectureDevelopmentError):
         runner._validate_id_set([{"case_id": "unknown"}], ["case-a"])
+
+
+def test_schema_valid_repeated_episode_actions_match_local_contract():
+    repeated = {
+        "case_id": "case-a",
+        "selected_action": "ask-diagnostic-question",
+        "reason_code": "observe-two-bounded-responses",
+        "expected_learner_action": "Explain and then refine the answer.",
+        "outcome_observation": "Observe both explanations.",
+        "stop_condition": "Stop after the bounded episode.",
+        "replan_condition": "Replan only after a durable response.",
+        "episode_steps": [
+            {
+                "action": "ask-diagnostic-question",
+                "expected_observation": "Observe the first explanation.",
+                "stop_or_replan_predicate": "Continue only if uncertainty remains.",
+            },
+            {
+                "action": "ask-diagnostic-question",
+                "expected_observation": "Observe the refined explanation.",
+                "stop_or_replan_predicate": "Stop after the second observation.",
+            },
+        ],
+    }
+
+    proposal = runner._proposal_from_row(repeated)
+
+    assert len(proposal.episode_steps) == 2
 
 
 def test_checkpoint_namespace_is_separate_without_changing_case_identity():

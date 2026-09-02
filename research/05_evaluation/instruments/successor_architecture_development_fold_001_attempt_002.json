@@ -1,16 +1,25 @@
 {
   "schema_version": 1,
-  "instrument_id": "successor-architecture-development-fold-001",
+  "instrument_id": "successor-architecture-development-fold-001-attempt-002",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "invalid-execution-authorization-revoked",
+  "status": "reviewed-provider-unauthorized",
   "owner_issue": 184,
-  "parent_instrument": {
-    "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
-    "sha256": "e8e1b4986c29c4ed2d7212eb3ff07a5d0152852b1dfee8bac00f59dda375abee"
+  "predecessor": {
+    "instrument_path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+    "invalid_result": "research/05_evaluation/records/successor-architecture-development-fold-001-attempt-001-invalid.json",
+    "execution_revision": "2dd2ba223856a12b90ed4e4cd569c18daae7dc84"
   },
-  "live_contract_audit": {
-    "run_id": "successor-architecture-live-contract-audit-001",
-    "fix_revision": "6bafa48ee2b404dfd431e946d104c9e7c3c558c3"
+  "harness_only_correction": {
+    "finding_id": "SA7",
+    "description": "Align the provider and local hierarchical-episode contracts: repeated actions are permitted inside a maximum three-step proposal, while every step must remain inside the deterministic action envelope.",
+    "cases_changed": false,
+    "gold_changed": false,
+    "prompts_changed": false,
+    "model_roles_changed": false,
+    "metrics_changed": false,
+    "gates_changed": false,
+    "budget_changed": false,
+    "prior_calls_imported": false
   },
   "dataset": {
     "public_path": "research/05_evaluation/successor_architecture_development_fold_001_public.json",
@@ -47,7 +56,7 @@
     "pricing_usd_per_million_output_tokens": 1.2,
     "store": false,
     "fallback_allowed": false,
-    "shared_proposal_rule": "one persisted Luna proposal per public case is reused unchanged by B, C, and C+V",
+    "shared_proposal_rule": "one fresh persisted Luna proposal per public case is reused unchanged by B, C, and C+V",
     "alias_limitation": "OpenAI publishes no dated Luna snapshot; exact returned alias is required and the shared proposal removes cross-condition model drift."
   },
   "provider_freshness": {
@@ -75,16 +84,6 @@
     "resume_allowed": true,
     "exclusive_output": true
   },
-  "terminal_execution": {
-    "attempt_id": "successor-architecture-development-fold-001-attempt-001-invalid",
-    "execution_revision": "2dd2ba223856a12b90ed4e4cd569c18daae7dc84",
-    "result_record": "research/05_evaluation/records/successor-architecture-development-fold-001-attempt-001-invalid.json",
-    "status": "invalid-execution",
-    "provider_calls": 17,
-    "reported_cost_usd": 0.018998,
-    "gold_opened": false,
-    "authorization_revoked": true
-  },
   "quality_dimensions": [
     "acceptable_pedagogical_move_accuracy",
     "simulated_policy_utility",
@@ -99,7 +98,7 @@
     "paired_binary_test": "exact-mcnemar",
     "continuous_interval": "seeded-paired-bootstrap-2000",
     "learner_state_is_shared_not_a_selection_dimension": true,
-    "policy_utility_rule": "A reproducible latent learner outcome assigns continuous action utility independently of the binary acceptable-move rubric; latent outcomes and utilities remain hidden until all cells are durable.",
+    "policy_utility_rule": "A reproducible latent learner outcome assigns continuous action utility independently of the binary acceptable-move rubric; latent outcomes and utilities remain hidden until all 600 architecture cells are durable.",
     "winner_rule": "A successor must improve at least three of four planning dimensions with lower paired 95 percent bounds above zero, lose none, pass every hard gate, and cost no more than 1.5 times its simpler comparator per acceptable move.",
     "verifier_rule": "Retain C+V only when it reduces defects without violating safety and its reduction exceeds added cost and latency."
   },

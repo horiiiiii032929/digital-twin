@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review plus focused verification confirmed the A/B/C/C+V build, validation, network-free simulation, preflight, and guarded execution commands are explicit. The executable path is repository-freeze guarded and the instrument retains false provider/paid authority; Browserslist remains fixed at advisory-free 4.28.8 and npm audit reports zero vulnerabilities.",
+      "evidence": "Manual command-surface review plus focused verification confirmed the A/B/C/C+V build, validation, network-free simulation, preflight, and guarded attempt-002 execution commands are explicit. Attempt 001 is terminal and attempt 002 remains provider-unauthorized; Browserslist remains fixed at advisory-free 4.28.8 and npm audit reports zero vulnerabilities.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "29a40ef360806984fa9dbfadc7f2d52b15b60fb2fd21227817fce9ac23a5f392"
+      "sha256": "5f89296583b1c116046c45bd258ed528c17794eb4b47028beca055eee89a76d2"
     },
     {
       "audit_status": "audited",
@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; only successor-architecture-development-fold-001 is temporarily allowlisted for external-model and method-evaluation operations under its 62-call/USD 2 instrument. Registry and AST coverage agree exactly in regression tests; every other stage remains frozen.",
+      "evidence": "The global freeze remains active and the invalid fold-001 authorization has been revoked. The fresh corrective attempt is not yet allowlisted. Registry and AST coverage agree exactly in regression tests; every paid stage remains frozen.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture development audit",
-      "sha256": "83fbf3bfb57a810cf9755109a03052fe5961576f8bbee2d2271250900d7cdd7f"
+      "reviewer": "Codex successor-architecture invalid-attempt audit",
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit_status": "audited",
@@ -8453,12 +8453,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Tests enumerate every exact bounded authorization and confirm the global freeze remains active; successor-architecture-development-fold-001 is the only newly authorized external-model comparison and is constrained by its reviewed instrument.",
+      "evidence": "Tests enumerate every exact bounded authorization, confirm the global freeze remains active, and prove the invalid successor-architecture-development-fold-001 execution can no longer pass an external-model guard.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture authorization audit",
-      "sha256": "caa443114c5a7fc5c4b67564be52d71864b07d6d435949d19c3168fd7dcdde5e"
+      "reviewer": "Codex successor-architecture invalid-attempt audit",
+      "sha256": "30408f7febf7e95912a9f523531dc70894c14e184bea0260b11ad5ba9ea2d817"
     },
     {
       "audit_status": "audited",
@@ -10521,23 +10521,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-architecture",
-      "evidence": "Line-by-line authority review plus focused tests confirmed A disables semantic planning, B is depth-zero C, C adds only bounded analytic lookahead, C+V is reject-only, identity drift fails closed, all other provider defects produce no-action, and model output cannot widen the action envelope.",
+      "evidence": "Line-by-line authority review plus focused tests confirmed A disables semantic planning, B is depth-zero C, C adds bounded analytic lookahead, C+V is reject-only, and repeated pedagogical actions may appear in a maximum three-step episode without widening the deterministic action envelope.",
       "findings": [],
       "path": "src/digital_twin/student/planning_architectures.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "56381b56444e6bd3195bf0df89bdadfb79bebda87aff761b6de43bec6c4d23ad"
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "614b67144ed4aa8480d5c40b08c687b685bd77ca575df65d6399106db85ddbde"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Eight focused tests cover deterministic zero-call behavior, exact B/depth-zero-C equivalence, bounded C lookahead, missing evidence, out-of-envelope proposals, reject-only verification, provider failure, and identity drift.",
+      "evidence": "Focused tests cover deterministic zero-call behavior, B/depth-zero-C equivalence, bounded C lookahead, missing evidence, action-envelope enforcement, reject-only verification, identity drift, and bounded repeated-action episode acceptance.",
       "findings": [],
       "path": "tests/digital_twin/test_planning_architectures.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "2308df727367e938097b6e2317ce31263bb20ec17665ccaa059c5f85178f41ba"
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "4c50d4b69fc1ecbd9682335626d6c7b5d9ff09ebcb945d9c545a1208abb00f96"
     },
     {
       "audit_status": "audited",
@@ -10554,12 +10554,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Prospective design audit confirmed physical public/gold separation, one shared Luna proposal across B/C/C+V, independent latent-outcome policy utility, paired statistics, finite 62-call/USD 2 ceilings, and exact model identity. One-time paid/provider authority now applies only to this fold; the shared learner-state diagnostic is explicitly excluded from architecture selection.",
+      "evidence": "Terminal-state review preserves attempt 001 as invalid execution, records 17 calls and USD 0.018998, confirms hidden gold remained unopened, revokes paid/provider authority, and links the one permitted harness-only correction.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture development audit",
-      "sha256": "d023033f43a69020b5d56b9e43bb692942024f0d1282d9aa2d98d4dda4cce2fc"
+      "reviewer": "Codex successor-architecture invalid-attempt audit",
+      "sha256": "1cfea7f064e36b4b0c7f9a7c9113e8b398244b84c4abd71745d399d669831f0e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Prospective corrective-attempt review confirmed the exact public/gold hashes, model, prompts, metrics, gates, call and cost ceilings remain unchanged; prior calls cannot be imported; paid/provider authority is false; and all output paths are fresh.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "2a1edf8e5797e84bf000491d6fd7df9980c4607f29eec94b24269147d7db83e4"
     },
     {
       "audit_status": "audited",
@@ -10576,23 +10587,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review plus network-free simulation confirmed case-keyed strict provider schemas, exact model identity and cost accounting, architecture-scoped checkpoint namespaces, gold opening only after 600 durable cells, atomic resume/publication, exclusive result paths, bounded calls, and repository freeze guards on both external-model and method-evaluation operations.",
+      "evidence": "Line-by-line runner review and network-free simulation confirmed immutable attempt contexts, fresh ledgers/results for attempt 002, a provider/local maximum-three-step contract, case-keyed schemas, exact identity and cost accounting, checkpoint isolation, late gold opening, atomic publication, and both execution guards.",
       "findings": [],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture development audit",
-      "sha256": "f65113b73faa9835242414eebc5f0ad37282ea4947b34a9182a2beff6dd2b09b"
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "138a31f5872459c56ec860403913912486455475475b15cc90b9a8ac265e4954"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Eight focused tests cover balanced construction, hidden-gold isolation, byte stability, bounded no-call simulation, strict case-keyed schemas, duplicate/unknown IDs, exclusive result paths, cross-condition checkpoint separation, independent utility scoring, and shared learner-state exclusion from selection.",
+      "evidence": "Focused tests cover balanced construction, gold isolation, byte stability, terminal attempt 001, unauthorized attempt 002, separate output identity, bounded simulation, schema/local repeated-action alignment, ID validation, result exclusivity, checkpoint separation, and scoring validity.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture development audit",
-      "sha256": "9f62d82cc508be56d01b22d5c2f35218029a2a2f86e4f430d5957d5a5a4aab07"
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "df42ca3dd88f67023953da96af36ffd92d5bdd34007f65412e424ebcdd5c90ea"
     }
   ],
   "schema_version": 1

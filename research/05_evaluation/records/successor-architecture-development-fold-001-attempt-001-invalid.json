@@ -1,0 +1,61 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-001-attempt-001-invalid",
+  "date": "2026-09-02",
+  "status": "invalid-execution",
+  "code_revision": "2dd2ba223856a12b90ed4e4cd569c18daae7dc84",
+  "decision": {
+    "outcome": "correct-harness-only",
+    "selected_architecture_id": null,
+    "rationale": "The direct OpenAI response satisfied the frozen provider JSON schema but failed a stricter local-only uniqueness invariant on repeated episode actions. No architecture-quality conclusion is valid. Preserve this attempt and make the single permitted contract-alignment correction without changing cases, gold, prompts, model roles, metrics, gates, or budget."
+  },
+  "execution_revision": "2dd2ba223856a12b90ed4e4cd569c18daae7dc84",
+  "dirty_state": false,
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-001",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+    "run_binding_sha256": "385e760d2ce7e010bf2c64cd8fb168a606be49909d9103fea728a383fcc0fbb4"
+  },
+  "dataset": {
+    "case_count": 150,
+    "planned_architecture_cells": 600,
+    "public_file_sha256": "8841d44212bf5a3a5885e1497ce3fddc381c55d354e1d93befaceb0f362a4076",
+    "hidden_gold_file_sha256": "5a81b7d92ef9cc4607116de47594fde890f038827e6dad488bc82fea19b27467",
+    "hidden_gold_opened": false,
+    "private_data_used": false
+  },
+  "failure": {
+    "classification": "provider-schema-and-local-contract-mismatch",
+    "finding_id": "SA7",
+    "message": "HierarchicalPlanningProposalV1 rejected repeated episode actions even though the frozen strict provider schema permitted them.",
+    "quality_failure": false,
+    "transport_failure": false,
+    "connectivity_failure": false,
+    "response_cells_persisted": 0,
+    "permitted_correction": "Remove the unsupported action-uniqueness invariant, keep the three-step episode bound explicit in both contracts, add regression coverage, and execute under a fresh attempt identity."
+  },
+  "operational": {
+    "provider": "OpenAI direct Responses API",
+    "model": "gpt-5.6-luna",
+    "provider_calls": 17,
+    "input_tokens": 16564,
+    "output_tokens": 13071,
+    "reported_cost_usd": 0.018998,
+    "latency_ms_total": 191506.897,
+    "completed_canary_calls": 2,
+    "completed_planner_batches": 15,
+    "completed_verifier_batches": 0,
+    "transport_retries": 0
+  },
+  "authorization": {
+    "revoked": true,
+    "attempt_may_resume": false,
+    "same_output_path_may_be_reused": false
+  },
+  "limitations": [
+    "No gold labels were opened and no architecture responses were scored.",
+    "The completed provider calls are operational evidence only and cannot be imported into the corrective attempt.",
+    "A valid development architecture comparison is still pending."
+  ]
+}
