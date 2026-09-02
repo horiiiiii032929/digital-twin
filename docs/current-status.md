@@ -74,8 +74,9 @@ utility is independent from binary move accuracy, each architecture has a
 separate checkpoint namespace, the provider runner is fully registered in the
 execution freeze, and result publication is exclusive/atomic. Repository
 correctness is 963/963 and protected/frozen
-entrypoint coverage is 147/147, with zero open findings. The fold remains
-provider-unauthorized and selects no architecture yet.
+entrypoint coverage is 147/147, with zero open findings. The fold is now the
+only bounded provider-authorized stage (62 calls, zero retries, USD 2) and
+selects no architecture before execution.
 
 ## Local R1 autonomy release selection
 

@@ -45,7 +45,9 @@ def test_live_instrument_and_network_free_simulation_are_bounded():
     simulation = runner.simulate()
 
     assert validation["status"] == "passed"
-    assert validation["provider_execution_authorized"] is False
+    assert validation["instrument_status"] == "frozen-pending-execution"
+    assert validation["provider_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is True
     assert simulation["gold_loaded"] is False
     assert simulation["maximum_provider_calls"] == 62
     assert simulation["planner_batch_count"] == 30

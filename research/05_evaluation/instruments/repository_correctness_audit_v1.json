@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; the new provider-backed successor architecture fold is explicitly registered for external-model and method-evaluation operations, while paid authorization remains false. Registry and AST coverage agree exactly in regression tests.",
+      "evidence": "The global freeze remains active; only successor-architecture-development-fold-001 is temporarily allowlisted for external-model and method-evaluation operations under its 62-call/USD 2 instrument. Registry and AST coverage agree exactly in regression tests; every other stage remains frozen.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture development audit",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "sha256": "83fbf3bfb57a810cf9755109a03052fe5961576f8bbee2d2271250900d7cdd7f"
     },
     {
       "audit_status": "audited",
@@ -8453,12 +8453,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Tests assert that confirmation 013 paid authority is revoked after its terminal result, the global freeze remains active, and only the immutable analysis command is permitted for zero-call reproduction.",
+      "evidence": "Tests enumerate every exact bounded authorization and confirm the global freeze remains active; successor-architecture-development-fold-001 is the only newly authorized external-model comparison and is constrained by its reviewed instrument.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex V2.1 release-binding root-cause audit",
-      "sha256": "848cb8ca62ff1025fa402807cda39866915671a6a8b490e2027d29cc0a632e95"
+      "reviewer": "Codex successor-architecture authorization audit",
+      "sha256": "caa443114c5a7fc5c4b67564be52d71864b07d6d435949d19c3168fd7dcdde5e"
     },
     {
       "audit_status": "audited",
@@ -10554,12 +10554,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Prospective design audit confirmed physical public/gold separation, one shared Luna proposal across B/C/C+V, independent latent-outcome policy utility, paired statistics, finite 62-call/USD 2 ceilings, exact model identity, and no paid authority. The shared learner-state diagnostic is explicitly excluded from architecture selection.",
+      "evidence": "Prospective design audit confirmed physical public/gold separation, one shared Luna proposal across B/C/C+V, independent latent-outcome policy utility, paired statistics, finite 62-call/USD 2 ceilings, and exact model identity. One-time paid/provider authority now applies only to this fold; the shared learner-state diagnostic is explicitly excluded from architecture selection.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture development audit",
-      "sha256": "87733c33ccc14c1df5312809d834237b026075bb9ffd913b257bd14bd76b2360"
+      "sha256": "d023033f43a69020b5d56b9e43bb692942024f0d1282d9aa2d98d4dda4cce2fc"
     },
     {
       "audit_status": "audited",
@@ -10592,7 +10592,7 @@
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture development audit",
-      "sha256": "03d8936395b9ad27c341084b99c79a53957a43d0e9e4952e7e521a91c8d3aee7"
+      "sha256": "9f62d82cc508be56d01b22d5c2f35218029a2a2f86e4f430d5957d5a5a4aab07"
     }
   ],
   "schema_version": 1

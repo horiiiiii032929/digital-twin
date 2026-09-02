@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "successor-architecture-development-fold-001",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "build-only",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "parent_instrument": {
     "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
@@ -61,8 +61,8 @@
     "maximum_output_tokens": 128000
   },
   "execution": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_progression_authorized": false,
     "maximum_provider_calls": 62,
     "maximum_transport_retries": 0,
