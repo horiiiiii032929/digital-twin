@@ -220,12 +220,12 @@ the selected architecture for the separate cross-engine comparison; it is not
 yet the release system. Confirmation authority is revoked. All audit findings
 remain terminally closed with none open.
 
-The next checkpoint is the fixed-H 2×2 engine allocation comparison
-`successor-architecture-engine-comparison-006-001`. It uses 300 fresh scenario
-clusters and 1,200 actual-graph cells across E1 Luna/Luna, E2 Terra/Luna, E3
-Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini. The planner effect is pooled
-across both generator levels and the generator effect across both planner
-levels, with scenario-cluster bootstrap intervals.
+The fixed-H 2×2 engine allocation comparison
+`successor-architecture-engine-comparison-006-001` is complete as `Keep`. It
+used 300 fresh scenario clusters and 1,200 actual-graph cells across E1
+Luna/Luna, E2 Terra/Luna, E3 Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini. The
+planner effect was pooled across both generator levels and the generator effect
+across both planner levels, with scenario-cluster bootstrap intervals.
 
 A pre-execution audit closed five additional findings (`SE6-1`–`SE6-5`):
 factorial pooling, free-form claim injection, allocation-level accounting,
@@ -233,9 +233,23 @@ global-gate selection clearing, and response/action revalidation. Models now
 choose bounded response strategies; deterministic code renders the only
 allowed source-grounded wording. The corrected build passed 1,677 Python and
 50 frontend tests, lint, production build, and 48/48 network-free actual-graph
-cells with zero provider use. No engine is selected and paid execution remains
-authorized only for one bounded execution after build commit `916c807`. The
-global freeze remains active; no other paid stage is opened.
+cells with zero provider use. The paid execution then made 1,444 calls for USD
+1.266516. E1 was selected under the frozen rule: Terra's pooled utility effect
+was `+0.000354` (95% CI `0.000000–0.001062`) and Mini's valid-strategy effect
+was `+0.00417` (95% CI `0.00000–0.01042`), so neither positive lower bound
+excluded zero. E2 also missed its generator-completion gate at 238/240; its two
+failures used the safe deterministic fallback.
+
+A post-run audit found and closed `SE6-6`: all 1,200 historical sanitized
+traces mixed wall-clock starts with virtual-clock completions. Trace time did
+not enter scoring or selection, so the E1 component decision is retained with
+the limitation disclosed. Both graph constructors now use the same injected
+clock and the shared trace contract rejects reversed or timezone-naive times.
+Execution authority is revoked. E1 is selected only for fresh whole-system
+confirmation, not for release, and the global freeze remains active.
+Repository correctness is 979/979 audited with zero pending or open findings.
+The terminal result/clock-fix gate passed all 1,678 Python tests, 50 frontend
+tests, lint, production build, evaluation-record validation, and freeze checks.
 
 ## Local R1 autonomy release selection
 

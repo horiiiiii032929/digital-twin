@@ -917,6 +917,7 @@ class GovernedReactiveTutoringGraphV2:
                     result["validation_passed"] and state_committed
                 ),
             },
+            started_at=graph_input.observed_at,
             completed_at=graph_input.observed_at,
         )
         artifacts = ReactiveTurnArtifactsV2(

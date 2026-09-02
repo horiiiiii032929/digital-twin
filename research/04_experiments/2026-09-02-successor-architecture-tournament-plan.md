@@ -76,6 +76,21 @@ it selects bounded response strategies and deterministic code renders the
 canonical evidence and citation. This amendment changes no historical result
 and does not make a release selection.
 
+### Engine allocation decision AFQC-161
+
+The valid 300-scenario/1,200-cell execution selected E1: guarded policy-value H
+with Luna for both bounded planning and response-strategy selection. Terra's
+pooled utility improvement (`+0.000354`, 95% CI
+`0.000000–0.001062`) and GPT-5.4 Mini's pooled valid-strategy improvement
+(`+0.00417`, 95% CI `0.00000–0.01042`) did not meet the preregistered
+positive-lower-bound rules. E2 was ineligible at 238/240 generator completions.
+
+Post-run audit `SE6-6` found that the historical diagnostic traces mixed wall
+and virtual clocks. Because time did not enter the allocation estimand, the E1
+decision is retained with the limitation disclosed; the shared runtime contract
+is corrected before confirmation. The next step is one fresh whole-system
+confirmation of H+E1, not another architecture or prompt-tuning loop.
+
 ## Primary analysis
 
 - acceptable pedagogical move: paired McNemar;

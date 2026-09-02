@@ -1,0 +1,44 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-engine-comparison-006-post-run-audit-001",
+  "status": "completed-keep",
+  "date": "2026-09-03",
+  "code_revision": "27ab487a1fbeda287f2ea663dd8959a1c7c5afce",
+  "execution_revision": "27ab487a1fbeda287f2ea663dd8959a1c7c5afce",
+  "dirty_state": true,
+  "decision": {
+    "outcome": "keep-result-fix-runtime-before-confirmation",
+    "rationale": "The trace-clock defect affected sanitized diagnostic timestamps only. It did not enter policy utility, allocation hard gates, provider accounting, response validation, or hidden gold. Preserve the immutable execution and E1 decision, disclose the limitation, and correct the shared runtime contract before any whole-system confirmation."
+  },
+  "finding": {
+    "id": "SE6-6",
+    "severity": "high",
+    "title": "Autonomous graph traces mixed wall and virtual clocks",
+    "observed_affected_traces": 1200,
+    "disposition": "fixed",
+    "root_cause": "AgentTraceV2 supplied started_at from a wall-clock default while graph finalization supplied completed_at from the injected job or event time.",
+    "resolution": "Pass the injected job/event timestamp as started_at in both graph constructors and reject invalid, timezone-naive, or reversed trace timestamps at the shared contract boundary."
+  },
+  "impact_assessment": {
+    "historical_responses_changed": false,
+    "historical_metrics_changed": false,
+    "historical_provider_accounting_changed": false,
+    "hidden_gold_changed": false,
+    "allocation_selection_changed": false,
+    "blocks_whole_system_confirmation_until_fixed": true
+  },
+  "verification": {
+    "execution_cells_rechecked": 1200,
+    "unique_execution_cells": 1200,
+    "generator_fallback_cells": 2,
+    "planner_failure_cells": 0,
+    "contract_regression_added": true,
+    "runtime_regression_added": true,
+    "open_findings": 0
+  },
+  "limitations": [
+    "The historical 1,200 generated trace payloads retain the disclosed inconsistent timestamps and are not rewritten.",
+    "This audit does not expand the component result into a whole-system, professor-fidelity, usability, or learning-outcome claim."
+  ]
+}

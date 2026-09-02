@@ -372,6 +372,7 @@ class GovernedAutonomousTutoringGraph:
                 generator_requested_model=self.generator.model_id,
                 generator_model=self.generator.model_id,
                 decision_reason="job-started",
+                started_at=job.now,
             ),
             "blocked_reason": None,
         }

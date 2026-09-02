@@ -83,12 +83,13 @@ parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
 Issue #184 is the active architecture/model selection item. Fresh Fold 004 and
-Confirmation 005 selected guarded policy-value H for the engine comparison,
-while retaining T0 and bounded T1-v1 rollback. The next build-only checkpoint
-is `successor-architecture-engine-comparison-006-001`: 300 fresh clusters and
-1,200 paired E1–E4 graph cells. Its five newly discovered design findings are
-closed with zero provider calls. Project status remains `In Progress / Go
-Deeper`; no release or engine allocation is selected before the paid result.
+Confirmation 005 selected guarded policy-value H, and the subsequent 300-case,
+1,200-cell E1–E4 comparison selected E1 (Luna/Luna) for whole-system
+confirmation. The paid run completed for USD 1.266516; its authority is
+revoked. Six findings `SE6-1`–`SE6-6` are closed, including the post-run shared
+trace-clock correction. Project status remains `In Progress / Go Deeper`
+because H+E1 is not a release selection until fresh factual, autonomy, and local
+product qualification pass. T0 and bounded T1-v1 remain rollback controls.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

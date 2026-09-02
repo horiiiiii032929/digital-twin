@@ -1,0 +1,248 @@
+{
+  "aggregate": {
+    "e1": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 300,
+      "estimated_p95_provider_latency_ms": 9617.71800002316,
+      "estimated_provider_cost_usd": 0.06714679999999999,
+      "event_action_validity": 1.0,
+      "generator_model": "gpt-5.6-luna",
+      "generator_provider_completion": 1.0,
+      "mean_policy_regret": 0.010900000000000002,
+      "mean_policy_utility": 0.7935166666666666,
+      "near_optimal_within_0_05": 0.92,
+      "p95_policy_regret": 0.10999999999999999,
+      "planner_model": "gpt-5.6-luna",
+      "planner_provider_completion": 1.0,
+      "preferred_action_agreement": 0.7466666666666667,
+      "valid_grounded_wording": 1.0
+    },
+    "e2": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 300,
+      "estimated_p95_provider_latency_ms": 9448.061958013568,
+      "estimated_provider_cost_usd": 0.4651366,
+      "event_action_validity": 1.0,
+      "generator_model": "gpt-5.6-luna",
+      "generator_provider_completion": 0.9916666666666667,
+      "mean_policy_regret": 0.010616666666666668,
+      "mean_policy_utility": 0.7938000000000001,
+      "near_optimal_within_0_05": 0.9233333333333333,
+      "p95_policy_regret": 0.10999999999999999,
+      "planner_model": "gpt-5.6-terra",
+      "planner_provider_completion": 1.0,
+      "preferred_action_agreement": 0.75,
+      "valid_grounded_wording": 1.0
+    },
+    "e3": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 300,
+      "estimated_p95_provider_latency_ms": 8322.987957973965,
+      "estimated_provider_cost_usd": 0.10052749999999999,
+      "event_action_validity": 1.0,
+      "generator_model": "gpt-5.4-mini-2026-03-17",
+      "generator_provider_completion": 1.0,
+      "mean_policy_regret": 0.010900000000000002,
+      "mean_policy_utility": 0.7935166666666666,
+      "near_optimal_within_0_05": 0.92,
+      "p95_policy_regret": 0.10999999999999999,
+      "planner_model": "gpt-5.6-luna",
+      "planner_provider_completion": 1.0,
+      "preferred_action_agreement": 0.7466666666666667,
+      "valid_grounded_wording": 1.0
+    },
+    "e4": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 300,
+      "estimated_p95_provider_latency_ms": 8207.889083016198,
+      "estimated_provider_cost_usd": 0.49875274999999997,
+      "event_action_validity": 1.0,
+      "generator_model": "gpt-5.4-mini-2026-03-17",
+      "generator_provider_completion": 1.0,
+      "mean_policy_regret": 0.010616666666666668,
+      "mean_policy_utility": 0.7938000000000001,
+      "near_optimal_within_0_05": 0.9233333333333333,
+      "p95_policy_regret": 0.10999999999999999,
+      "planner_model": "gpt-5.6-terra",
+      "planner_provider_completion": 1.0,
+      "preferred_action_agreement": 0.75,
+      "valid_grounded_wording": 1.0
+    }
+  },
+  "allocation_cell_count": 1200,
+  "allocation_hard_gates": {
+    "e1": {
+      "all_300_cells_durable": true,
+      "boundary_action_accuracy_is_1": true,
+      "event_action_validity_is_1": true,
+      "generator_provider_completion_at_least_0_995": true,
+      "grounded_wording_validity_is_1": true,
+      "planner_provider_completion_at_least_0_995": true,
+      "provider_failure_safe_fallback": true,
+      "scope_validity_is_1": true,
+      "zero_duplicate_intervention_wording": true
+    },
+    "e2": {
+      "all_300_cells_durable": true,
+      "boundary_action_accuracy_is_1": true,
+      "event_action_validity_is_1": true,
+      "generator_provider_completion_at_least_0_995": false,
+      "grounded_wording_validity_is_1": true,
+      "planner_provider_completion_at_least_0_995": true,
+      "provider_failure_safe_fallback": true,
+      "scope_validity_is_1": true,
+      "zero_duplicate_intervention_wording": true
+    },
+    "e3": {
+      "all_300_cells_durable": true,
+      "boundary_action_accuracy_is_1": true,
+      "event_action_validity_is_1": true,
+      "generator_provider_completion_at_least_0_995": true,
+      "grounded_wording_validity_is_1": true,
+      "planner_provider_completion_at_least_0_995": true,
+      "provider_failure_safe_fallback": true,
+      "scope_validity_is_1": true,
+      "zero_duplicate_intervention_wording": true
+    },
+    "e4": {
+      "all_300_cells_durable": true,
+      "boundary_action_accuracy_is_1": true,
+      "event_action_validity_is_1": true,
+      "generator_provider_completion_at_least_0_995": true,
+      "grounded_wording_validity_is_1": true,
+      "planner_provider_completion_at_least_0_995": true,
+      "provider_failure_safe_fallback": true,
+      "scope_validity_is_1": true,
+      "zero_duplicate_intervention_wording": true
+    }
+  },
+  "case_count": 300,
+  "code_revision": "27ab487a1fbeda287f2ea663dd8959a1c7c5afce",
+  "decision": {
+    "outcome": "keep",
+    "rationale": "Select E1 for whole-system confirmation under the preregistered factorial rule.",
+    "selected_allocation_id": "e1",
+    "selected_generator_model": "gpt-5.6-luna",
+    "selected_planner_model": "gpt-5.6-luna"
+  },
+  "dirty_state": false,
+  "factorial_effects": {
+    "mini_minus_luna_provider_origin_valid_strategy": {
+      "ci95": [
+        0.0,
+        0.010416666666666666
+      ],
+      "lower_bound_excludes_zero": false,
+      "mean_difference": 0.004166666666666667,
+      "n_pairs": 240
+    },
+    "terra_minus_luna_planner_policy_utility": {
+      "ci95": [
+        0.0,
+        0.0010624999999999996
+      ],
+      "lower_bound_excludes_zero": false,
+      "mean_difference": 0.00035416666666666653,
+      "n_pairs": 240
+    }
+  },
+  "global_hard_gates": {
+    "all_1200_cells_durable": true,
+    "generator_factor_cannot_change_action": true,
+    "zero_duplicate_cells": true
+  },
+  "hidden_gold_sha256": "287d77b6f5fc26608f940c1f193319ac2b293501a0c90b26456feca4d39a4ad9",
+  "instrument_sha256": "6df724b02655691449cffa281dc70b4ceb77512c14cad3cc70bc6f26a648bc15",
+  "limitations": [
+    "Synthetic scenario utility does not establish real learning improvement.",
+    "Structured wording tests contract adherence and safe lineage, not professor fidelity.",
+    "Luna and Terra are mutable aliases; exact returned identity was required throughout execution.",
+    "A post-run audit found that all 1,200 sanitized graph traces mixed wall-clock started_at with virtual-clock completed_at. The defect did not enter allocation scoring, provider accounting, or hidden gold, so the component decision is retained; the shared trace contract and both graph constructors were corrected before whole-system confirmation.",
+    "The selected allocation still requires fresh whole-system factual and autonomy confirmation before release."
+  ],
+  "post_run_audit": {
+    "audit_id": "successor-architecture-engine-comparison-006-post-run-audit-001",
+    "finding_id": "SE6-6",
+    "observed_affected_traces": 1200,
+    "scoring_or_selection_affected": false,
+    "disposition": "fixed-prospectively-before-confirmation",
+    "resolution": "AgentTraceV2 now rejects non-ISO, timezone-naive, and reversed timestamps; reactive and autonomous graph traces receive their start and completion times from the same injected job/event clock. Historical provider output, cells, metrics, and decision remain unchanged."
+  },
+  "provider": {
+    "failed_calls": 2,
+    "input_tokens": 517300,
+    "maximum_calls": "1444",
+    "maximum_cost_usd": "10.0",
+    "maximum_latency_ms": 36790.95850000158,
+    "maximum_transport_retries_total": "0",
+    "output_tokens": 171246,
+    "provider_attempts": 1444,
+    "provider_calls": 1444,
+    "recovered_transport_failures": 0,
+    "reported_cost_usd": 1.2665159,
+    "run_binding_sha256": "2939c0147285ae417c465428ac6be1103deb6c4f590ab9aa2cf293b296be6939",
+    "schema_version": "1",
+    "status": "completed"
+  },
+  "provider_roles": {
+    "generator:e1:gpt-5.6-luna": {
+      "calls": 240,
+      "completed_calls": 240,
+      "completion_rate": 1.0,
+      "cost_usd": 0.0316536,
+      "input_tokens": 67314,
+      "output_tokens": 15159,
+      "p95_latency_ms": 3132.969042053446
+    },
+    "generator:e2:gpt-5.6-luna": {
+      "calls": 240,
+      "completed_calls": 238,
+      "completion_rate": 0.9916666666666667,
+      "cost_usd": 0.0312172,
+      "input_tokens": 66752,
+      "output_tokens": 14889,
+      "p95_latency_ms": 3025.3115000086837
+    },
+    "generator:e3:gpt-5.4-mini-2026-03-17": {
+      "calls": 240,
+      "completed_calls": 240,
+      "completion_rate": 1.0,
+      "cost_usd": 0.098415,
+      "input_tokens": 67314,
+      "output_tokens": 10651,
+      "p95_latency_ms": 1838.2390000042506
+    },
+    "generator:e4:gpt-5.4-mini-2026-03-17": {
+      "calls": 240,
+      "completed_calls": 240,
+      "completion_rate": 1.0,
+      "cost_usd": 0.0984495,
+      "input_tokens": 67312,
+      "output_tokens": 10659,
+      "p95_latency_ms": 1785.1386250113137
+    },
+    "planner:gpt-5.6-luna": {
+      "calls": 240,
+      "completed_calls": 240,
+      "completion_rate": 1.0,
+      "cost_usd": 0.10264,
+      "input_tokens": 123530,
+      "output_tokens": 64945,
+      "p95_latency_ms": 6484.748957969714
+    },
+    "planner:gpt-5.6-terra": {
+      "calls": 240,
+      "completed_calls": 240,
+      "completion_rate": 1.0,
+      "cost_usd": 0.899056,
+      "input_tokens": 123530,
+      "output_tokens": 54333,
+      "p95_latency_ms": 6422.750458004884
+    }
+  },
+  "public_sha256": "9a74ccf23f24d297aceba68b32365c0df95df8de4f85784f4636d3a4e06a2e3f",
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-engine-comparison-006-001",
+  "schema_version": 1,
+  "status": "completed-keep"
+}

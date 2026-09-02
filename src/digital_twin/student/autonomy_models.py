@@ -484,6 +484,21 @@ class AgentTraceV2(_Contract):
             raise ValueError("trace output revision cannot precede its input")
         if len(self.checkpoint_ids) != len(set(self.checkpoint_ids)):
             raise ValueError("trace checkpoint IDs must be unique")
+        try:
+            started_at = datetime.fromisoformat(self.started_at)
+            completed_at = (
+                datetime.fromisoformat(self.completed_at)
+                if self.completed_at is not None
+                else None
+            )
+        except ValueError as error:
+            raise ValueError("trace timestamps must be ISO-8601") from error
+        if started_at.tzinfo is None or (
+            completed_at is not None and completed_at.tzinfo is None
+        ):
+            raise ValueError("trace timestamps must be timezone-aware")
+        if completed_at is not None and completed_at < started_at:
+            raise ValueError("trace completed_at cannot precede started_at")
         return self
 
 

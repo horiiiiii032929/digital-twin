@@ -53,12 +53,18 @@ release architecture until its finite result is published.
 
 The architecture track has now advanced beyond that earlier checkpoint.
 Fresh Fold 004 and the independent 1,000-case Confirmation 005 selected
-guarded policy-value H for engine allocation, not for release. The build-only
-successor `successor-architecture-engine-comparison-006-001` fixes H and
-compares E1–E4 over 300 new scenario clusters. A five-finding design audit
-closed factorial-estimand, free-form-claim, accounting, global-gate, and
-response-validation defects before provider use. One valid result will select
-an allocation for whole-system confirmation; it cannot itself authorize a
+guarded policy-value H for engine allocation, not for release. The fixed-H
+successor `successor-architecture-engine-comparison-006-001` compared E1–E4
+over 300 new scenario clusters and selected economical E1 (Luna planner and
+Luna bounded response-strategy generator). Neither the Terra planner nor
+GPT-5.4 Mini generator factor had a positive lower 95% paired-effect bound;
+E2 also missed its completion gate. The run cost USD 1.266516 and its authority
+is revoked.
+
+Post-run finding `SE6-6` identified mixed wall/virtual trace timestamps in all
+1,200 historical cells. The timestamps did not affect selection, and the
+shared runtime contract is corrected before confirmation. This component result
+selects H+E1 only for fresh whole-system confirmation; it does not authorize a
 release.
 
 ## Release goal

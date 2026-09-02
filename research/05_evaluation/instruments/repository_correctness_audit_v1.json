@@ -3601,13 +3601,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison-authorization",
-      "evidence": "Reviewed one-time authorization state: only engine comparison 006 is frozen for execution, automatic progression ends at its terminal result, USD 10 and 1,444-call ceilings remain unchanged, and hidden gold remains closed.",
+      "domain": "autonomy-architecture-engine-comparison-result",
+      "evidence": "Reviewed AFQC-161 result publication and post-run audit: E1 selection, effect intervals, two quarantined E2 failures, USD 1.266516 accounting, SE6-6 disclosure, limitations, and next confirmation boundary are consistent with durable evidence.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_engine_comparison_006_001.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex AFQC-160 authorization audit",
-      "sha256": "6df724b02655691449cffa281dc70b4ceb77512c14cad3cc70bc6f26a648bc15"
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "139f0e69bfae85dc4644f1478d2ab7b0b4bcc3d978d5950d3f245889e8203d38"
     },
     {
       "audit_status": "audited",
@@ -8100,13 +8100,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison-authorization",
-      "evidence": "Reviewed bounded allowlist change: only successor-architecture-engine-comparison-006-001 receives external-model and method-evaluation authority; the global freeze and every other stage remain blocked.",
+      "domain": "autonomy-architecture-engine-comparison-revocation",
+      "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex AFQC-160 authorization audit",
-      "sha256": "e9342f2671d438645ba6f0fe65e7483a1bdc0b1a86bd9e55f10378f1bea78704"
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
     },
     {
       "audit_status": "audited",
@@ -8144,24 +8144,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "governed-autonomy-trace-clock-closure",
+      "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
       "findings": [],
       "path": "src/digital_twin/student/autonomy_models.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "f678b1a3ea65c3280228ace14ab705fe7a2cdf95c1151b78851acd534b434af3"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "2fd320b2e1f6c8e3515523e637a7f05bd270a30e89d01aea49bc81ee01c63928"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Runtime trace review and focused graph tests confirmed deterministic candidate A records zero planning calls while provider-backed candidates record one; action, policy, evidence, persistence, and delivery guards are unchanged.",
+      "domain": "governed-autonomy-trace-clock-closure",
+      "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
       "findings": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "4c2988105ca572c546765ae1f704ddbe7a1af3b1675517c349d43c8da742325e"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "80310640779163679b0e35ce667723d5a2efb3e5ea0a025276ee89afbfa8a0bf"
     },
     {
       "audit_status": "audited",
@@ -8320,13 +8320,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "governed-autonomy-trace-clock-closure",
+      "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
       "findings": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "6dc6316c8b94854285f7d4a3a2afc2a34c128dedaa4fba986e61413ebedc1eb7"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "31534beda1717db80a68b858881347c638ab1e358507e8dfaba94aa6ffc7b169"
     },
     {
       "audit_status": "audited",
@@ -8529,13 +8529,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1-verification",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "governed-autonomy-trace-clock-closure",
+      "evidence": "Closed SE6-6 at the shared runtime boundary: one injected event/job clock now owns trace start and completion, invalid or reversed timestamps fail validation, and focused runtime regressions pass.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "8825d578c80aad0a105706f24b4a714cf99ce49b17a9844a69ee693fe6b52a6d"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "1c4c2329aca94427adf74a328748864da0a0079d8eab9df78a578d1bef0a1f2c"
     },
     {
       "audit_status": "audited",
@@ -8683,13 +8683,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison-authorization",
-      "evidence": "Reviewed exact bounded-authorization set assertion; it now names engine comparison 006 explicitly while preserving the fail-closed complete-set check.",
+      "domain": "autonomy-architecture-engine-comparison-revocation",
+      "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex AFQC-160 authorization audit",
-      "sha256": "e44e25978bf17fdc11f1155d7bb3618a39f5b7a2d88452405c69092d4a9b9ded"
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "f39f771c40cb6a7b58aeea01b2a6971a6bc5dd3016621ed7249216c64d2bb377"
     },
     {
       "audit_status": "audited",
@@ -10608,13 +10608,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison-authorization",
-      "evidence": "Reviewed authorization regression coverage alongside gold isolation, bounded deterministic rendering, pooled factor effects, hard gates, and network-free graph execution.",
+      "domain": "autonomy-architecture-engine-comparison-revocation",
+      "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
       "findings": [],
       "path": "tests/test_successor_architecture_engine_comparison_006.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex AFQC-160 authorization audit",
-      "sha256": "ef8e49dea9e4b7495409622f5fe5984d254ba4735f23d85ea8009196b31b38e1"
+      "reviewer": "Codex AFQC-161 result and finding-closure audit",
+      "sha256": "19f8045fd5fe17516529b8c0127eef692c5e5ef1b7f319397ecf12c0a6cbeae5"
     },
     {
       "audit_status": "audited",

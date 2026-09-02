@@ -37,6 +37,7 @@ from src.digital_twin.student import (
     seed_synthetic_student_workflow,
 )
 from src.digital_twin.student.autonomy_models import (
+    AgentTraceV2,
     AssessmentOutcome,
     AutonomousActionKind,
     AutonomousEventKind,
@@ -592,6 +593,35 @@ async def test_unapproved_or_incomplete_scope_resolves_to_no_action(tmp_path):
     assert result.action.kind == AutonomousActionKind.NO_ACTION
     assert result.outcome.kind.value == "no-action"
     assert result.trace.validation_results["evidence-complete"] is False
+    assert result.trace.started_at == result.trace.completed_at == NOW.isoformat()
+
+
+def test_agent_trace_rejects_mixed_or_reversed_clock_lineage() -> None:
+    trace = AgentTraceV2(
+        trace_id="trace-clock-consistency",
+        event_id="event-clock-consistency",
+        learner_key="a" * 64,
+        course_id="course-a",
+        release_id="release-a",
+        graph_version=GRAPH_VERSION,
+        policy_version=1,
+        profile_sha256="b" * 64,
+        decision_reason="test",
+        started_at=NOW.isoformat(),
+        completed_at=(NOW + timedelta(minutes=1)).isoformat(),
+    )
+
+    with pytest.raises(ValueError, match="cannot precede"):
+        AgentTraceV2.model_validate(
+            {
+                **trace.model_dump(mode="json"),
+                "completed_at": (NOW - timedelta(seconds=1)).isoformat(),
+            }
+        )
+    with pytest.raises(ValueError, match="timezone-aware"):
+        AgentTraceV2.model_validate(
+            {**trace.model_dump(mode="json"), "started_at": "2026-08-31T04:00:00"}
+        )
 
 
 @pytest.mark.asyncio
