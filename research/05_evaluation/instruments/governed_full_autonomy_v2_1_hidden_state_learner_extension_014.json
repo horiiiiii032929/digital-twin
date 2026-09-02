@@ -1,7 +1,8 @@
 {
   "schema_version": "1.0.0",
   "program_id": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
-  "status": "build-only",
+  "status": "completed-deterministic-arm",
+  "result": "research/05_evaluation/governed-full-autonomy-v2-1-hidden-state-learner-extension-014-results.md",
   "extends": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
   "purpose": "Score the real product on learner-state calibration, perception accuracy, and proactive quality/timing against hidden simulated-learner truth, reusing 010's adapter and contracts unchanged.",
   "design_source": "docs/research/sota-autonomous-digital-twin-evaluation-design.md",

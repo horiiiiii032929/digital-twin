@@ -116,6 +116,28 @@ Next steps in order, none started:
 5. Run the provider-backed pedagogy and grounding dimensions only when
    authorized.
 
+## 5a. Extension 014: the real product under a hidden-state learner
+
+After `origin/main` (program 010 result, grounding successor 011,
+confirmations 012 and 013, local release qualification) was merged into this
+branch, the hidden-state extension was completed and run once,
+network-free, against the real product services through the unchanged 010
+adapter contract. Results:
+[`governed-full-autonomy-v2-1-hidden-state-learner-extension-014-results.md`](../../research/05_evaluation/governed-full-autonomy-v2-1-hidden-state-learner-extension-014-results.md).
+
+| Fact | Value |
+| --- | --- |
+| Cases | 144 (4 conditions x 6 personas x 2 families x 3 seeds), 30 virtual days, restart on day 15 |
+| Provider calls | 0; 103 s |
+| Timing gates | 0 quiet-hour, frequency, or cooldown violations in every condition |
+| Perception | attribution accuracy 1.000 and attempts recognised 1.000 in both v2 conditions; assessment agreement 0.57 to 0.59 because every one of 566 hidden-correct attempts was graded `partial` and none `correct` |
+| Calibration | v2 belief MSE 0.057 to 0.067 versus the 0.082 constant baseline; count-derived estimate AUROC 0.38 for the next outcome |
+| Proactive | 11.1 messages per learner per 30 days; wasted rate 0.387; follow-up 0.412; final hidden mastery +0.042 [0.021, 0.065] over reactive and control conditions |
+
+The run quantifies the two product findings first seen in the smoke:
+multi-concept attribution dilutes attempt grading so `correct` never occurs,
+and learner observations carry wall-clock rather than virtual-clock time.
+
 ## 6. Traceability: audit finding to hypothesis to design to evidence
 
 Each row links one structural finding from the study's audit (section 2.9)
@@ -135,7 +157,7 @@ product-data or human evidence.
 | Three action vocabularies, two proactive stacks, triplicated eligibility (2.9) | none | One move enum, one opportunity ledger, one eligibility gate (5.6, 5.7) | Zero-violation gate under every policy | Simulated: the single gate held (0 violations in 2,640 learner-runs); product unification pending (stage 2) |
 | Engine allowlist is single vendor; prompts unhashed (2.8) | H7 | Task registry with content-hashed prompts (5.10) | Engine swap under identical conditions (7.2) | Not implemented; needs provider calls, which are not authorized |
 | Grounding is lexical; claim validator absent from default T0 (2.6) | H9 | Validator in every mode; semantic gate as separate candidate (5.5) | Paraphrase-case experiment (decision 6) | Not implemented; needs provider calls |
-| No simulated learner, no calibration instrument in the evaluation apparatus (audit of instruments) | none | Hidden-state simulator and calibration dimension (evaluation design 3.2, 4) | Built and used by simulation 001 | Built with two families; not yet integrated with the existing autonomy adapter contract |
+| No simulated learner, no calibration instrument in the evaluation apparatus (audit of instruments) | none | Hidden-state simulator and calibration dimension (evaluation design 3.2, 4) | Simulation 001 and extension 014 | Built with two families and integrated with the 010 adapter contract; 014 ran the real product deterministically (section 5a); provider arm not run |
 | Pedagogical action quality, profile adherence, multi-turn adaptivity, adversarial safety | H3, H8 | Policy envelope, verifier test (5.6, 4.4) | Evaluation design 3.3, 3.4, 3.7, 3.9 | Not started; requires provider calls or human labels |
 
 The honest reading: the branch has closed the loop for the learner-belief and

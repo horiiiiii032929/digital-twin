@@ -1,0 +1,65 @@
+{
+  "run_id": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+  "date": "2026-09-02",
+  "status": "complete-deterministic-arm",
+  "decision": "go-deeper",
+  "extends": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+  "branch": "claude/sota-autonomous-digital-twin-study",
+  "registry_entry": "deferred-to-merge",
+  "code_revision": "6a244cc4b67acd4f79dc3fe9b91862c1e171d5b8",
+  "dirty": false,
+  "command": "uv run python scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py --simulate",
+  "instrument": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_hidden_state_learner_extension_014.json",
+  "results": "research/05_evaluation/governed-full-autonomy-v2-1-hidden-state-learner-extension-014-results.md",
+  "evidence": {
+    "summary_json": "research/05_evaluation/records/governed-full-autonomy-v2-1-hidden-state-learner-extension-014-summary.json",
+    "summary_json_sha256": "21cf3f7c0be2c6b89d980438f59fbfa5997ba6400ec43c94429c479cdd9f8c45",
+    "scores_jsonl_sha256": "931bd3531a7eb8e565f5c519bbb9d580c1637affca45315e493d438baefb735c",
+    "truth_jsonl_sha256": "543f086a3504ad05736e01cdd4b4ac416bcc86c0300e23433061e6df2aca7c37",
+    "responses_jsonl_sha256": "2abae071568093a16b71ef24b223d5aeaf53f8e6b06e2da6feb646950f93136d",
+    "per_case_tracked": false,
+    "location": "reports/generated/governed-full-autonomy-v2-1-hidden-state-learner-extension-014/"
+  },
+  "system_under_test": "actual product services through StudentProductAutonomyAdapterV1; deterministic engine; six-concept release",
+  "dataset": {
+    "kind": "synthetic-hidden-state-learners-closed-loop",
+    "families": ["bkt-like", "logistic-like"],
+    "personas": ["fast-learner", "slow-learner", "high-forgetting", "misconception-prone", "answer-seeking", "low-receptivity"],
+    "held_out_seeds": [2000, 2001, 2002],
+    "days": 30,
+    "restart_day": 15,
+    "cases_per_condition": 36,
+    "cases_total": 144,
+    "permissions": "synthetic only; no course, professor, or student data"
+  },
+  "conditions": ["t0-grounded-control", "t1-v1-reactive-control", "t1-v2-reactive", "t1-v2-autonomous"],
+  "operational": {"provider_calls": 0, "cost_usd": 0.0, "network": "none", "elapsed_seconds": 103.41},
+  "hard_gates": {
+    "quiet_hour_violations": {"threshold": 0, "observed": 0, "pass": true},
+    "frequency_violations": {"threshold": 0, "observed": 0, "pass": true},
+    "cooldown_violations": {"threshold": 0, "observed": 0, "pass": true},
+    "restart_consistency": {"cases_restarted": 144, "pass": true}
+  },
+  "aggregate": {
+    "t0-grounded-control": {"attempts_recognised": 0.0, "mse_vs_hidden": 0.082, "messages_delivered": 0.0, "final_hidden_mastery": 0.318},
+    "t1-v1-reactive-control": {"attempts_recognised": 0.0, "mse_vs_hidden": 0.082, "messages_delivered": 0.0, "final_hidden_mastery": 0.318},
+    "t1-v2-reactive": {"attribution_accuracy": 1.0, "assessment_agreement": 0.590, "attempts_recognised": 1.0, "mse_vs_hidden": 0.057, "auroc_next_outcome": 0.382, "messages_delivered": 0.0, "final_hidden_mastery": 0.318},
+    "t1-v2-autonomous": {"attribution_accuracy": 1.0, "assessment_agreement": 0.566, "attempts_recognised": 1.0, "mse_vs_hidden": 0.067, "auroc_next_outcome": 0.377, "messages_delivered": 11.1, "wasted_rate": 0.387, "follow_up_fraction": 0.412, "final_hidden_mastery": 0.360}
+  },
+  "paired_contrasts": {
+    "t1-v2-autonomous vs t0-grounded-control": {"mse_vs_hidden": {"mean": -0.0158, "ci95": [-0.0319, 0.0011]}, "final_hidden_mastery": {"mean": 0.0419, "ci95": [0.0225, 0.0661]}, "messages_delivered": {"mean": 11.0556, "ci95": [10.6667, 11.4167]}},
+    "t1-v2-reactive vs t1-v1-reactive-control": {"mse_vs_hidden": {"mean": -0.0256, "ci95": [-0.0402, -0.0108]}},
+    "t1-v2-autonomous vs t1-v2-reactive": {"mse_vs_hidden": {"mean": 0.0099, "ci95": [0.0046, 0.0156]}, "final_hidden_mastery": {"mean": 0.0419, "ci95": [0.0212, 0.0646]}}
+  },
+  "findings": [
+    {"id": "perception-partial-grading", "class": "product-perception-defect", "detail": "566/566 hidden-correct attempts graded partial, 719/719 hidden-incorrect graded incorrect, zero graded correct; multi-concept attribution dilutes the assessment vocabulary"},
+    {"id": "observation-wall-clock", "class": "product-replayability-defect", "detail": "LearnerObservationV2.observed_at uses the process clock, not the injected virtual clock"},
+    {"id": "count-estimate-anti-predicts", "class": "estimator-mis-specification", "detail": "count-derived estimate AUROC 0.38 for the next assessed outcome"}
+  ],
+  "limitations": [
+    "deterministic engine only; provider arm not authorized or run",
+    "simulated learners only; no real-student, usability, or learning claim",
+    "36 pairs per contrast",
+    "fixed lexical attempt rendering"
+  ]
+}
