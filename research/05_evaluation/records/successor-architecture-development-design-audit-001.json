@@ -1,0 +1,60 @@
+{
+  "code_revision": "585f4c4a228aaf432999e18b5910b2dc4b7c916a",
+  "date": "2026-09-02",
+  "decision": {
+    "outcome": "keep-corrected-design",
+    "rationale": "All prospective comparison defects found before provider execution were corrected without changing a historical result or weakening a gate. The first development fold is now safe to freeze separately.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "findings": [
+    {
+      "disposition": "fixed",
+      "id": "SA2",
+      "severity": "medium",
+      "title": "Shared learner-state calibration was incorrectly counted as an architecture-selection dimension",
+      "resolution": "The successor instrument reports Brier score and ECE once as shared diagnostics and selects architectures only on four planning outcomes."
+    },
+    {
+      "disposition": "fixed",
+      "id": "SA3",
+      "severity": "high",
+      "title": "Architecture conditions could reuse the same LangGraph checkpoint thread",
+      "resolution": "Every architecture receives a separate checkpoint and idempotency namespace while retaining the same public case identity for paired scoring."
+    },
+    {
+      "disposition": "fixed",
+      "id": "SA4",
+      "severity": "high",
+      "title": "The new provider runner was absent from the authoritative execution-freeze registry",
+      "resolution": "The runner now carries main-level and execution-level guards and is registered for both external-model and method-evaluation operations."
+    },
+    {
+      "disposition": "fixed",
+      "id": "SA5",
+      "severity": "medium",
+      "title": "Simulated policy utility duplicated binary acceptable-move accuracy",
+      "resolution": "Continuous action utility now comes from a reproducible hidden simulated learner outcome and remains isolated until all 600 architecture cells are durable."
+    }
+  ],
+  "limitations": [
+    "The utility model is a preregistered synthetic policy oracle, not evidence of real student learning.",
+    "No architecture or model is selected by this audit."
+  ],
+  "operational": {
+    "cost_usd": 0,
+    "provider_calls": 0,
+    "tokens": 0
+  },
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-development-design-audit-001",
+  "schema_version": 1,
+  "status": "completed-keep",
+  "verification": {
+    "audit_file_count": 963,
+    "focused_tests_passed_after_freeze_correction": 18,
+    "full_suite_before_freeze_registry_correction": "1645/1646",
+    "open_findings": 0,
+    "protected_and_registered_entrypoints": 147
+  }
+}

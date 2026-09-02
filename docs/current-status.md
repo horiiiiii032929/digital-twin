@@ -65,6 +65,17 @@ biased every provider-backed B/C/C+V result toward safe `no_action`. Revision
 `successor-architecture-live-contract-audit-001` closes finding SA1 without a
 provider call or architecture selection.
 
+The first prospective development fold is now build-qualified at revision
+`585f4c4`. It contains 150 fresh public-synthetic contexts and 600 paired
+actual-graph cells, with hidden labels and latent outcomes isolated until all
+responses are durable. A design audit closed SA2–SA5 before provider use:
+learner-state calibration is no longer counted as an architecture win, policy
+utility is independent from binary move accuracy, each architecture has a
+separate checkpoint namespace, and the provider runner is fully registered in
+the execution freeze. Repository correctness is 963/963 and protected/frozen
+entrypoint coverage is 147/147, with zero open findings. The fold remains
+provider-unauthorized and selects no architecture yet.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed
