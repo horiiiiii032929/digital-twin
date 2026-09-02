@@ -72,6 +72,7 @@ class ActualProductEvaluationContext:
     grounding_result_path: Path
     grounding_result_id: str
     selected_grounding_architecture_id: str | None = None
+    grounding_result_expected_architecture_id: str | None = None
     runtime_grounding_architecture_id: str = "legacy-structured-lexical-v1"
     grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
     canary_case_ids: tuple[str, str] = CANARY_CASE_IDS
@@ -478,13 +479,17 @@ def _grounding_keep(
     result = state.get("terminal_result", state)
     if not isinstance(result, dict) or result.get("status") != "completed-keep":
         return False
-    if context.selected_grounding_architecture_id is None:
+    expected_architecture_id = (
+        context.grounding_result_expected_architecture_id
+        or context.selected_grounding_architecture_id
+    )
+    if expected_architecture_id is None:
         return True
     decision = result.get("decision")
     return (
         isinstance(decision, dict)
         and decision.get("selected_architecture_id")
-        == context.selected_grounding_architecture_id
+        == expected_architecture_id
     )
 
 

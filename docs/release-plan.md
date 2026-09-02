@@ -83,7 +83,8 @@ authority is revoked.
 The sole prospective release confirmation is now 016. It keeps H+E1 fixed and
 changes only grounding to `pedagogy-aware-source-semantic-evidence-atoms-v3`,
 with a fresh source/wording package and explicit 95% overall and per-condition
-reference-action gates. Staging remains fail-closed until 016, fresh factual
+reference-action gates. One bounded execution is authorized under AFQC-168;
+staging remains fail-closed until 016, fresh factual
 confirmation, known 10,000-case regression, and local product qualification all
 pass.
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "parent_issue": 8,
   "decision_question": "Does the selected H+E1 product with pedagogy-aware source-semantic grounding pass safety and expected-intervention gates on fresh actual-product cases?",
@@ -103,9 +103,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": null,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User standing authorization to execute the finite audited plan and all required model runs on 2026-09-03.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0

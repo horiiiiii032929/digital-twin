@@ -43,6 +43,9 @@ CONTEXT = shared.ActualProductEvaluationContext(
     selected_grounding_architecture_id=(
         "pedagogy-aware-source-semantic-evidence-atoms-v3"
     ),
+    grounding_result_expected_architecture_id=(
+        "ambiguity-safe-source-semantic-evidence-atoms-v2"
+    ),
     runtime_grounding_architecture_id=(
         "pedagogy-aware-source-semantic-evidence-atoms-v3"
     ),

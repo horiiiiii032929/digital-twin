@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6d3890fbc4ae990008b5d7d717f56939982eb7b54d6855a1a53c78f0f078431d",
+  "record_sha256": "818580e54777271a3347b8320a8801c89b9e10ccf7a7c0306957244222fef8e0",
   "records": [
     {
       "audit": {
@@ -4360,10 +4360,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-016",
-        "evidence": "Prospective fresh source/wording package, V3 grounding, action-accuracy gates, exact model roles, and provider-unauthorized boundary are explicit.",
+        "evidence": "Fresh V3 confirmation is frozen for one bounded paid execution under the standing user authority; automatic promotion remains disabled.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4371,7 +4371,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_016.json",
       "risk": "high",
-      "sha256": "ea649c80830e1d0dddfcf657960af6d97784b02b951f02ea2cac3b4f56916221"
+      "sha256": "f1c090b8a236bdff3932bb584d4df8255b75bc601ee64f48bbb37aa776e22a57"
     },
     {
       "audit": {
@@ -9132,10 +9132,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-016",
-        "evidence": "Runner binds H+E1, V3 grounding, deterministic factual generation, exact Luna identity, hidden-gold ordering, and both freeze guards.",
+        "evidence": "Runner binds V3 runtime to the immutable V2 predecessor decision, then requires both exact freeze operations before any provider call.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9149,15 +9149,15 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
       "risk": "high",
-      "sha256": "9e4617d2ab33f42824494e0acaea798736702ce1b6f7d7926392605dbc8ddcc2"
+      "sha256": "bd52a7b66f847bc479014eb63328f7e10c64a65e3b008349c35292ff1c226dce"
     },
     {
       "audit": {
         "domain": "actual-product-evaluation-runner",
-        "evidence": "Optional prospective overall and per-condition reference-action gates are evaluated without changing historical instruments.",
+        "evidence": "Preflight can independently verify the predecessor-selected grounding architecture while recording the prospective runtime successor architecture.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9171,7 +9171,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "506f619d107839e620798c15870d1347dab2074725517268df78a651b287322b"
+      "sha256": "5b5b925c29a6947e7d800ffa090ee8cb15ff4204d667671130d3db14ed8a5b97"
     },
     {
       "audit": {
@@ -12745,10 +12745,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Confirmation 015 authority is revoked and 016 provider entrypoint is protected but not authorized.",
+        "evidence": "Only confirmation 016 is added for external-model and method-evaluation execution; 015 remains revoked and the global freeze remains active.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12756,7 +12756,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "ad322d22e019aae51420cbd0c089a1eb124423da5618f5d3f2e8d8c778a56464"
+      "sha256": "ff196c721b16d205077c93463155271fabadcedf161c17a5d8e02814c10d0566"
     },
     {
       "audit": {
@@ -13593,10 +13593,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Regression verifies 015 and 016 are unauthorized and exact allowlist membership remains closed.",
+        "evidence": "Regression fixes exact allowlist membership to confirmation 016 and keeps every historical confirmation revoked.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13604,7 +13604,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "63891b9d259918427893347ec6d76df92a676cc2679516abd4543734da622f61"
+      "sha256": "9920cd497d925b0280d098b255be9030cd53c729b4fe4b6f3aeb123e02446f22"
     },
     {
       "audit": {
@@ -15625,10 +15625,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-016",
-        "evidence": "Tests verify fresh boundaries, V3 binding, explicit action gates, phrasing diversity, and fail-closed preflight.",
+        "evidence": "Tests verify fresh boundaries, predecessor/runtime architecture separation, explicit action gates, bounded authority, and zero-call preflight behavior.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03T00:00:00+00:00",
+        "reviewer": "Codex confirmation-016 bounded authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15636,7 +15636,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
       "risk": "medium",
-      "sha256": "1873581631a70de1e2d281c357f608e8373ad3ff534986188069665602d92436"
+      "sha256": "d92eedd73798d54efcdd644cfcf036279ed5697c2bc54f63aa63bfb6c0499b5d"
     },
     {
       "audit": {

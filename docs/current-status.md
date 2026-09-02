@@ -33,8 +33,9 @@ restored all 450 reactive trajectory cases to 100% expected-action matching;
 provider-backed autonomy remains unclaimed until the fresh execution.
 
 The complete repository audit currently covers 991/991 execution-relevant files
-with zero pending or open findings. Confirmation 016 remains provider-
-unauthorized at this build checkpoint.
+with zero pending or open findings. Confirmation 016 is now the sole bounded
+provider-authorized evaluation; every earlier whole-system confirmation remains
+revoked and the repository-wide freeze remains active.
 
 ## Audit correction superseding the governed V2.1 release claim
 

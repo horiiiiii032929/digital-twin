@@ -91,8 +91,9 @@ grounding treated pedagogical request language as factual target content.
 
 The original 015 Keep result is preserved, its authority is revoked, and no
 release is selected from it. The root-cause V3 grounding successor and fresh
-confirmation 016 are build-qualified. Project state remains `In Progress / Go
-Deeper`; the next finite checkpoint is 016, followed only on pass by fresh
+confirmation 016 are build-qualified, and only 016 now has a bounded execution
+authorization. Project state remains `In Progress / Go Deeper`; the next finite
+checkpoint is 016, followed only on pass by fresh
 factual confirmation, known 10,000-case regression, and complete local product
 qualification. T0 and bounded T1-v1 remain rollback controls. Repository audit
 state is 991/991 with zero open findings.
