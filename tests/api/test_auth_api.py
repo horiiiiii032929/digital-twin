@@ -7,6 +7,7 @@ from fastapi.testclient import TestClient
 
 from services.api.app.config import (
     AppSettings,
+    AutonomyPlannerMode,
     EvidenceGateMode,
     GeneratorMode,
     RuntimeMode,
@@ -25,6 +26,7 @@ from src.digital_twin.evaluation import (
 from src.digital_twin.identity import IdentityService, SQLiteIdentityRepository
 from src.digital_twin.grounding import (
     AmbiguitySafeEvidenceGateV1,
+    QuestionTargetedAtomicEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
 )
 from src.digital_twin.onboarding import create_session
@@ -49,6 +51,10 @@ CANDIDATE_PROFILE = (
 LOCAL_R1_PROFILE = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json"
+)
+LOCAL_R1_V2_PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json"
 )
 LOCAL_R1_RESULT = (
     Path(__file__).resolve().parents[2]
@@ -325,6 +331,18 @@ def test_ambiguity_safe_gate_is_available_without_selecting_it_by_default() -> N
     assert isinstance(gate.base, StructuredLexicalCoverageEvidenceGate)
 
 
+def test_question_targeted_ambiguity_safe_gate_is_explicit() -> None:
+    gate = _configured_evidence_gate(
+        AppSettings(
+            evidence_gate_mode=EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2
+        )
+    )
+
+    assert isinstance(gate, AmbiguitySafeEvidenceGateV1)
+    assert isinstance(gate.base, QuestionTargetedAtomicEvidenceGate)
+    assert isinstance(gate.base.base_gate, StructuredLexicalCoverageEvidenceGate)
+
+
 def test_staging_configuration_rejects_unselected_t1_graph(tmp_path):
     with pytest.raises(ValueError, match="T1_QUALIFICATION_RESULT_PATH"):
         AppSettings(
@@ -375,7 +393,7 @@ def test_staging_configuration_accepts_hash_bound_t1_qualification(tmp_path):
     ).validate()
 
 
-def test_staging_configuration_accepts_local_deterministic_t1_qualification(tmp_path):
+def test_staging_configuration_accepts_immutable_local_t1_v1_qualification(tmp_path):
     result_path = tmp_path / "local-t1-result.json"
     result_path.write_bytes(LOCAL_R1_RESULT.read_bytes())
 
@@ -390,6 +408,24 @@ def test_staging_configuration_accepts_local_deterministic_t1_qualification(tmp_
         student_profile_path=LOCAL_R1_PROFILE,
         t1_qualification_result_path=result_path,
     ).validate()
+
+
+def test_staging_configuration_rejects_v1_evidence_for_v2_profile(tmp_path):
+    result_path = tmp_path / "local-t1-result.json"
+    result_path.write_bytes(LOCAL_R1_RESULT.read_bytes())
+
+    with pytest.raises(ValueError, match="does not bind this release"):
+        AppSettings(
+            mode=RuntimeMode.STAGING,
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=(ORIGIN,),
+            secure_cookies=True,
+            student_tutoring_mode=StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+            learning_gap_hmac_secret=b"x" * 32,
+            student_profile_path=LOCAL_R1_V2_PROFILE,
+            t1_qualification_result_path=result_path,
+        ).validate()
 
 
 def test_staging_configuration_rejects_t1_v1_evidence_for_governed_v2(tmp_path):
@@ -461,6 +497,23 @@ def test_live_generator_configuration_requires_environment_credential(
         ).validate()
 
 
+def test_t0_rollback_ignores_inactive_openai_autonomy_planner(
+    tmp_path, monkeypatch
+):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        student_tutoring_mode=StudentTutoringMode.GROUNDED_ASSISTANT,
+        autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+        student_profile_path=CANDIDATE_PROFILE,
+    ).validate()
+
+
 def test_historical_deepseek_runtime_mode_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="historical"):
         AppSettings(
@@ -507,6 +560,7 @@ def test_governed_runtime_binds_planner_and_generator_identities(monkeypatch):
             student_tutoring_mode=(
                 StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
             ),
+            autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
         )
     )
 
@@ -517,6 +571,27 @@ def test_governed_runtime_binds_planner_and_generator_identities(monkeypatch):
     assert graph.generator.model_id == "gpt-5.4-mini-2026-03-17"
     assert tutoring.autonomy_planner_model == graph.planner.model_id
     assert tutoring.autonomy_generator_model == graph.generator.model_id
+
+
+def test_governed_runtime_decouples_live_planning_from_safe_generation(monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    app = create_app(
+        settings=AppSettings(
+            generator_mode=GeneratorMode.DETERMINISTIC,
+            evidence_gate_mode=EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
+            learning_gap_hmac_secret=b"x" * 32,
+            student_profile_path=LOCAL_R1_PROFILE,
+            student_tutoring_mode=(
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+            ),
+            autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+        )
+    )
+
+    graph = app.state.governed_autonomy_service.graph
+    assert graph.planner.model_id == "gpt-5.6-terra"
+    assert graph.generator.model_id == "deterministic/evidence-set-v2"
+    assert app.state.provider_budget is None
 
 
 def test_staging_upload_is_idempotent_async_and_professor_scoped(tmp_path):

@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-002",
+  "component": "conversation-orchestration",
+  "dataset_id": "local-r1-live-synthetic-journey-v2-1",
+  "corpus_id": "synthetic-https-security-open-demo-v1",
+  "code_revision": "b4d25faf317d90001376bfed843f26cac8aa390d",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "local-r1-qualified-compose-release",
+        "version": "c235e56",
+        "configuration": {
+          "tutoring_mode": "bounded-tutoring-graph",
+          "rollback_mode": "grounded-assistant",
+          "qualification_result": "local-r1-release-qualification-001"
+        }
+      },
+      "metrics": [
+        {"name": "live-https-journey-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "clean-restore-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "t0-rollback-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "selected-mode-restoration-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "browser-layout-and-basic-accessibility-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "repository-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "role-session-and-course-boundaries", "passed": true, "evidence": "Qualification 001 passed invite-only role, session, and course-boundary checks."},
+        {"name": "grounding-and-original-region-lineage", "passed": true, "evidence": "Qualification 001 passed its selected local grounding and citation-lineage checks."},
+        {"name": "governed-professor-and-autonomy-workflows", "passed": true, "evidence": "Qualification 001 passed its professor configuration and selected bounded-autonomy workflows."},
+        {"name": "restart-backup-and-clean-restore", "passed": true, "evidence": "Qualification 001 passed restart, checksum backup, and clean-restore checks."},
+        {"name": "one-setting-t0-rollback-and-selected-mode-restore", "passed": true, "evidence": "Qualification 001 passed one-setting T0 rollback and restoration of its selected T1 mode; V2.1 itself was not the historical mode."},
+        {"name": "desktop-mobile-and-accessibility-basics", "passed": true, "evidence": "Qualification 001 passed its local browser and responsive-layout checks."},
+        {"name": "repository-integrity", "passed": true, "evidence": "Qualification 001 passed its frozen repository gate."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "local-r1-governed-v2-1-compose-release",
+        "version": "b4d25fa",
+        "configuration": {
+          "https_origin": "https://localhost:8443",
+          "api_image": "sha256:a44ea7c9a6098b9340e63d82bee154d9ec8c7996a5c0581d7568ac8978545a9b",
+          "web_image": "sha256:4722c937e88fd4dd0635f60c14b3fe172818118e764cb46edc72ce9cedc59478",
+          "release_profile": "student-tutor-r1-local-candidate-v2",
+          "release_profile_sha256": "43da7e1bd1ae07343427e52f3e617ccdd5d49a1aa221fd6855d89d7ce527209d",
+          "generator": "deterministic-evidence-set-grounded-generator",
+          "planner": "gpt-5.6-terra-complex-turns-only",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "rollback_mode": "grounded-assistant",
+          "evidence_gate": "question-targeted-ambiguity-safe-v2",
+          "external_provider_calls": 0
+        }
+      },
+      "metrics": [
+        {"name": "live-https-journey-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "clean-restore-resume-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "t0-rollback-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "selected-mode-restoration-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "browser-layout-and-basic-accessibility-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "repository-gate-pass-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "role-session-and-course-boundaries", "passed": true, "evidence": "Invite-only administrator, professor, and student sessions passed through local HTTPS with course isolation."},
+        {"name": "grounding-and-original-region-lineage", "passed": true, "evidence": "The final V2.1 journey released the supported answer with complete original-region citation lineage."},
+        {"name": "governed-professor-and-autonomy-workflows", "passed": true, "evidence": "Profile approval, release-bound domain model, privacy-thresholded learning gaps, consent, and scheduled in-app outreach passed."},
+        {"name": "restart-backup-and-clean-restore", "passed": true, "evidence": "6/6 checks passed after restart and 6/6 against a checksum-verified clean restore in a separate Compose project."},
+        {"name": "one-setting-t0-rollback-and-selected-mode-restore", "passed": true, "evidence": "3/3 live checks passed in T0 and 3/3 after restoring governed V2.1."},
+        {"name": "desktop-mobile-and-accessibility-basics", "passed": true, "evidence": "Professor and student screens rendered at desktop and 390px with no console errors, horizontal overflow, or unlabeled controls."},
+        {"name": "repository-integrity", "passed": true, "evidence": "The complete local repository gate, freeze, inventory, Docker build, and diff checks passed for the qualification revision."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "local-r1-governed-v2-1-compose-release",
+    "rationale": "Keep the exact governed V2.1 local Compose release because its complete HTTPS journey, durable restart, checksum backup and clean restore, T0 rollback, V2 restoration, and responsive browser checks passed after root-cause corrections. Retain T0 as the immediate rollback.",
+    "limitations": [
+      "The release is local to the development Mac and uses an internal-CA HTTPS origin; it is not durable hosted production.",
+      "The qualification uses synthetic accounts and open demonstration material, not private course or real student data.",
+      "The browser workflow and autonomous confirmation are model-assisted or synthetic evidence and do not establish real-professor fidelity, real-student usability, or improved learning outcomes.",
+      "True visual reasoning, external human evaluation, and a trusted public-domain deployment remain outside this qualification."
+    ]
+  }
+}

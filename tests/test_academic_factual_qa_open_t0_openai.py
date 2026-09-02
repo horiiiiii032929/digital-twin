@@ -6,6 +6,8 @@ from pathlib import Path
 import pytest
 
 from scripts import run_academic_factual_qa_open_10000 as runner
+from src.digital_twin.evaluation.factual_qa_adapters import normalize_product_action
+from src.digital_twin.evaluation.factual_qa_contract import EvaluationAction
 
 
 CASES = Path(
@@ -86,3 +88,12 @@ def test_active_preflight_rejects_historical_non_openai_manifest(
 
     assert "active-generator-not-openai-gpt-5.4-mini" in result["blockers"]
     assert "active-generator-model-identity-drifted" in result["blockers"]
+
+
+def test_product_action_uses_code_owned_action_not_answer_wording() -> None:
+    assert normalize_product_action(
+        "answer", "Which of these cases occurs depends on the missing child."
+    ) == EvaluationAction.ANSWER
+    assert normalize_product_action(
+        "clarify-request", "Which concept do you mean?"
+    ) == EvaluationAction.CLARIFY

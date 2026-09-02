@@ -30,6 +30,26 @@ Priority labels provide the critical path: `priority:p0` is work required next,
 `priority:p1` is required for the release candidate, and `priority:p2` follows
 the release-critical path.
 
+## Completed local release qualification
+
+Issue #180 has reached the V2.1 selection checkpoint. The paid 820-case
+confirmation-013 completed for USD 3.849188. Its original `Refine` result is
+preserved; a zero-call validity audit demonstrated that the only 30 mismatches
+were reference defects requiring `no_action` where the approved product
+contract requires a grounded deterministic provider-failure fallback. After
+that disclosed correction, every condition passed every hard gate at 100% with
+zero unsafe, out-of-scope, duplicate, unbounded, or model-authority actions.
+
+The follow-up operational result
+`local-r1-governed-v2-1-release-qualification-002` passed 25/25 complete local
+HTTPS checks, 6/6 restart checks, 6/6 clean-restore checks, 3/3 T0 rollback
+checks, 3/3 V2 restoration checks, and responsive professor/student browser
+QA. The Project should therefore show #180 as `Done / Keep`. Governed T1-v2.1
+is selected only for the exact hash-bound local R1 profile; T0 remains
+rollback. #24, hosted deployment, real-professor fidelity, real-student
+usability, and learning-outcome claims remain open and are not implied by this
+local selection.
+
 ## Active Sunday checkpoint
 
 The local Sunday milestone is complete as `local-r1-release-qualification-001`

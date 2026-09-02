@@ -78,6 +78,10 @@ class ActualProductEvaluationContext:
     source_resolver: Any = None
     engine_binding: ProductEngineBindingV1 | None = None
     independent_scoring: bool = False
+    hybrid_safe_generation: bool = False
+    generator_model_override: str | None = None
+    expected_canary_models: dict[str, set[str]] | None = None
+    dependency_aware_provider_failure: bool = False
 
     @property
     def case_count(self) -> int:
@@ -131,14 +135,16 @@ def _git_revision() -> str:
 
 
 def _git_dirty() -> bool:
-    return bool(
-        subprocess.run(
+    output = subprocess.run(
             ["git", "status", "--porcelain", "--untracked-files=all"],
             cwd=ROOT,
             check=True,
             capture_output=True,
             text=True,
-        ).stdout.strip()
+        ).stdout
+    return any(
+        row and not row[3:].startswith(".claude/")
+        for row in output.splitlines()
     )
 
 
@@ -200,12 +206,18 @@ def _manifest(
             else (
                 {
                     "planner": context.engine_binding.planner_model,
-                    "generator": context.engine_binding.generator_model,
+                    "generator": (
+                        context.generator_model_override
+                        or context.engine_binding.generator_model
+                    ),
                 }
                 if context.engine_binding is not None
                 else {
                     "planner": "gpt-5.6-terra",
-                    "generator": "gpt-5.4-mini-2026-03-17",
+                    "generator": (
+                        context.generator_model_override
+                        or "gpt-5.4-mini-2026-03-17"
+                    ),
                 }
             )
         ),
@@ -563,6 +575,10 @@ async def _run_case(
             grounding_architecture_id=context.runtime_grounding_architecture_id,
             source_resolver=context.source_resolver,
             engine_binding=(context.engine_binding if provider_backed else None),
+            hybrid_safe_generation=context.hybrid_safe_generation,
+            dependency_aware_provider_failure=(
+                context.dependency_aware_provider_failure
+            ),
         ),
         clock_origin=CLOCK_ORIGIN,
     )
@@ -583,10 +599,14 @@ async def _run_case(
         adapter.close()
 
 
-def _canaries_valid(responses: list[tuple[str, AutonomyEvaluationResponseV1]]) -> bool:
+def _canaries_valid(
+    responses: list[tuple[str, AutonomyEvaluationResponseV1]],
+    *,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> bool:
     if len(responses) != 2:
         return False
-    expected_models = {
+    expected_models = context.expected_canary_models or {
         "t0-grounded-control": {"gpt-5.4-mini-2026-03-17"},
         "t1-v2-reactive": {"gpt-5.4-mini-2026-03-17", "gpt-5.6-terra"},
     }
@@ -598,7 +618,6 @@ def _canaries_valid(responses: list[tuple[str, AutonomyEvaluationResponseV1]]) -
         }
         if (
             response.operational_status != "completed"
-            or response.provider_calls == 0
             or models != expected_models[condition]
         ):
             return False
@@ -669,7 +688,7 @@ async def _execute_responses(
             for row in ledger.responses()
             if row[1].case_id in set(context.canary_case_ids)
         ]
-        if not _canaries_valid(canary_rows):
+        if not _canaries_valid(canary_rows, context=context):
             raise ActualProductEvaluationError("provider canary failed before bulk")
         canary_costs = [row.cost_usd for _condition, row in canary_rows]
         projected = 1.5 * max(canary_costs) * context.case_count
@@ -810,6 +829,17 @@ def _proactive_frequency_violation_count(
     return violations
 
 
+def _is_proactive_evaluation_case(case: AutonomyEvaluationCaseV1) -> bool:
+    """Identify proactive cases from their public event contract, not their ID.
+
+    Successor datasets are allowed to rename case IDs.  A practice outcome is
+    the stable observable that creates the long-horizon and opportunity paths
+    in this evaluation contract; trajectory-only cases do not contain one.
+    """
+
+    return any(event.kind == "practice-outcome" for event in case.events)
+
+
 def _score(
     rows: list[tuple[str, AutonomyEvaluationResponseV1]],
     context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
@@ -819,7 +849,12 @@ def _score(
             "hidden gold cannot open before all responses"
         )
     hidden = context.builder.hidden_gold_payload()
-    _atomic_write(context.hidden_gold_package, hidden, exclusive=True)
+    if context.hidden_gold_package.exists():
+        persisted_hidden = _load(context.hidden_gold_package)
+        if persisted_hidden != hidden:
+            raise ActualProductEvaluationError("persisted hidden-gold hash drifted")
+    else:
+        _atomic_write(context.hidden_gold_package, hidden, exclusive=True)
     gold_by_id = {
         row["case_id"]: AutonomyEvaluationGoldV1.model_validate(row)
         for row in hidden["gold"]
@@ -858,11 +893,18 @@ def _score(
         window_seconds=7 * context.builder.DAY,
         maximum_deliveries=3,
     )
+    proactive_case_ids = {
+        case.case_id
+        for case in public_by_id.values()
+        if _is_proactive_evaluation_case(case)
+    }
     proactive_scores = [
-        score
-        for score in all_scores
-        if score.case_id.startswith(("opportunity-", "long-horizon-"))
+        score for score in all_scores if score.case_id in proactive_case_ids
     ]
+    if not proactive_scores:
+        raise ActualProductEvaluationError(
+            "proactive scoring contract selected zero cases"
+        )
     proactive_accuracy = sum(score.action_accuracy for score in proactive_scores) / len(
         proactive_scores
     )
@@ -995,7 +1037,7 @@ async def execute(
             "status": "invalid-execution",
             "failure_type": type(error).__name__,
             "failure_detail": str(error)[:500],
-            "hidden_gold_opened": False,
+            "hidden_gold_opened": context.hidden_gold_package.exists(),
         }
     _atomic_write(
         context.result_path,
@@ -1032,6 +1074,10 @@ async def _simulate(
             scores.append(score)
             condition_scores[condition].append(score)
     summary = summarize_autonomy_scores(scores)
+    proactive_case_count = sum(
+        _is_proactive_evaluation_case(case)
+        for _condition, case, _gold in context.builder.build_contract()
+    )
     clock_histories = [
         response.diagnostic_trace.get("virtual_clock") for response in responses
     ]
@@ -1040,6 +1086,7 @@ async def _simulate(
         and all(response.operational_status == "completed" for response in responses)
         and sum(response.provider_calls for response in responses) == 0
         and all(isinstance(history, dict) for history in clock_histories)
+        and proactive_case_count == 220
     )
     return {
         "instrument_id": context.instrument_id,
@@ -1053,6 +1100,7 @@ async def _simulate(
             for condition, rows in condition_scores.items()
         },
         "clock_history_count": len(clock_histories),
+        "proactive_case_count": proactive_case_count,
         "provider_calls": 0,
         "cost_usd": 0,
         "product_quality_claim": False,

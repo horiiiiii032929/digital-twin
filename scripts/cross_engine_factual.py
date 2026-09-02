@@ -69,6 +69,9 @@ def factual_manifest(
     package_id: str = "development-500",
     retriever: str | None = None,
     known_benchmark: bool = True,
+    program_id: str = builder.PROGRAM_ID,
+    profile_sha256: str | None = None,
+    deterministic_generator: str = "deterministic-grounded-generator-v1",
 ) -> SystemUnderTestManifestV1:
     selected_retriever = retriever or (
         "source-semantic-evidence-atoms-v1"
@@ -77,16 +80,18 @@ def factual_manifest(
     )
     return SystemUnderTestManifestV1(
         flow_id=(
-            f"cross-engine-010-{package_id}-control-{engine.engine_id}"
+            f"{program_id}-{package_id}-control-{engine.engine_id}"
             if control
-            else f"cross-engine-010-{package_id}-candidate-{engine.engine_id}"
+            else f"{program_id}-{package_id}-candidate-{engine.engine_id}"
         ),
         adapter_version="v1",
         code_revision=code_revision,
-        profile_sha256=builder.load_program().shared_policy_sha256,
+        profile_sha256=(
+            profile_sha256 or builder.load_program().shared_policy_sha256
+        ),
         retriever=selected_retriever,
         generator=(
-            "deterministic-grounded-generator-v1"
+            deterministic_generator
             if engine.provider == "deterministic"
             else "cross-engine-live-extractive-boundary-v1"
         ),
@@ -135,6 +140,9 @@ async def execute_factual_package(
     known_benchmark: bool,
     retriever: str,
     maximum_concurrency: int = 4,
+    program_id: str = builder.PROGRAM_ID,
+    profile_sha256: str | None = None,
+    deterministic_generator: str = "deterministic-grounded-generator-v1",
 ) -> dict[str, Any]:
     condition = "control" if control else "candidate"
     root = output_root / "factual" / package_id / engine.engine_id / condition
@@ -150,6 +158,9 @@ async def execute_factual_package(
         package_id=package_id,
         retriever=retriever,
         known_benchmark=known_benchmark,
+        program_id=program_id,
+        profile_sha256=profile_sha256,
+        deterministic_generator=deterministic_generator,
     )
     case_hash = canonical_json_sha256(
         [row.model_dump(mode="json") for row in cases]
@@ -161,7 +172,7 @@ async def execute_factual_package(
             manifest=manifest,
             cases=cases,
             runtime={
-                "instrument_id": builder.PROGRAM_ID,
+                "instrument_id": program_id,
                 "cases_sha256": case_hash,
                 "code_revision": code_revision,
                 "provider_ledger_path": str(provider_path),
@@ -183,7 +194,7 @@ async def execute_factual_package(
             ),
             run_configuration_sha256=canonical_json_sha256(
                 {
-                    "program_id": builder.PROGRAM_ID,
+                    "program_id": program_id,
                     "package_id": package_id,
                     "engine": engine.model_dump(mode="json"),
                     "condition": condition,

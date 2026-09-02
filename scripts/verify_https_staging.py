@@ -24,6 +24,12 @@ PASSWORD_ENV = {
     "professor": "STAGING_PROFESSOR_PASSWORD",
     "student": "STAGING_STUDENT_PASSWORD",
 }
+TUTORING_MODES = (
+    "grounded-assistant",
+    "bounded-tutoring-graph",
+    "governed-autonomous-tutoring-graph-v2.1",
+)
+STATEFUL_TUTORING_MODES = frozenset(TUTORING_MODES) - {"grounded-assistant"}
 
 
 def main() -> None:
@@ -36,7 +42,7 @@ def main() -> None:
     parser.add_argument(
         "--expected-tutoring-mode",
         default="bounded-tutoring-graph",
-        choices=("grounded-assistant", "bounded-tutoring-graph"),
+        choices=TUTORING_MODES,
     )
     parser.add_argument("--output", type=Path)
     parser.add_argument(
@@ -72,9 +78,15 @@ def main() -> None:
                     passwords["student"],
                     expected_tutoring_mode=args.expected_tutoring_mode,
                     origin=origin,
+                    timeout_seconds=args.timeout_seconds,
                 )
                 if args.mode_check
-                else verify_resume(client, args.resume, passwords["student"])
+                else verify_resume(
+                    client,
+                    args.resume,
+                    passwords["student"],
+                    timeout_seconds=args.timeout_seconds,
+                )
             )
         else:
             if args.output is None:
@@ -89,6 +101,7 @@ def main() -> None:
                 profile_version=args.profile_version,
                 expected_tutoring_mode=args.expected_tutoring_mode,
             )
+        if args.output is not None:
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(
                 json.dumps(result, indent=2, sort_keys=True) + "\n",
@@ -116,7 +129,7 @@ def run_journey(
     run_token = uuid4().hex[:10]
     started_at = time.time()
 
-    readiness = _expect_json(client.get("/api/health/ready"), 200)
+    readiness = _wait_for_readiness(client, timeout_seconds=timeout_seconds)
     _record(
         checks,
         "https-readiness",
@@ -348,6 +361,58 @@ def run_journey(
         200,
     )
     _record(checks, "evaluated-release-published", published["status"] == "published")
+    domain_chunk = release["chunks"][0]
+    domain_model = _expect_json(
+        client.post(
+            f"/api/professor/courses/{course_id}/domain-model",
+            headers={"Origin": origin},
+            json={
+                "release_id": release["id"],
+                "version": 1,
+                "objectives": [
+                    {
+                        "objective_id": "objective-csrf-session-security",
+                        "statement": (
+                            "Explain how CSRF abuses an authenticated browser session."
+                        ),
+                        "concept_ids": ["concept-csrf-session-security"],
+                    }
+                ],
+                "concepts": [
+                    {
+                        "concept_id": "concept-csrf-session-security",
+                        "label": "CSRF and authenticated sessions",
+                        "description": (
+                            "How a forged request can use a browser's existing "
+                            "authenticated session."
+                        ),
+                        "prerequisite_concept_ids": [],
+                        "canonical_ranges": [
+                            {
+                                "source_artifact_id": domain_chunk[
+                                    "source_artifact_id"
+                                ],
+                                "source_version": domain_chunk["source_version"],
+                                "source_sha256": domain_chunk["source_checksum"],
+                                "locator": domain_chunk["locator"],
+                                "char_start": 0,
+                                "char_end": len(domain_chunk["text"]),
+                            }
+                        ],
+                    }
+                ],
+                "misconceptions": [],
+            },
+        ),
+        201,
+    )
+    _record(
+        checks,
+        "release-bound-course-domain-model-approved",
+        domain_model["release_id"] == release["id"]
+        and domain_model["approved_by"] == professor["account_id"]
+        and len(domain_model["concepts"]) == 1,
+    )
     _expect_status(client.post("/api/auth/logout", headers={"Origin": origin}), 204)
 
     _expect_status(_login(client, student_email, passwords["student"]), 200)
@@ -468,7 +533,7 @@ def run_journey(
     _record(
         checks,
         "bounded-tutoring-state-visible",
-        expected_tutoring_mode != "bounded-tutoring-graph"
+        expected_tutoring_mode not in STATEFUL_TUTORING_MODES
         or adaptive_turn["learner_state_revision"] == 2,
     )
     crop = client.get(
@@ -553,10 +618,12 @@ def verify_resume(
     client: httpx.Client,
     result_path: Path,
     student_password: str,
+    *,
+    timeout_seconds: float = 45.0,
 ) -> dict[str, Any]:
     recorded = json.loads(result_path.read_text(encoding="utf-8"))
     checks: list[dict[str, Any]] = []
-    readiness = _expect_json(client.get("/api/health/ready"), 200)
+    readiness = _wait_for_readiness(client, timeout_seconds=timeout_seconds)
     _record(checks, "restored-readiness", readiness["status"] == "ready")
     _expect_status(
         _login(client, recorded["accounts"]["student_email"], student_password),
@@ -591,7 +658,7 @@ def verify_resume(
         bool(tutor_messages)
         and all(message["tutoring_mode"] == expected_mode for message in tutor_messages)
         and (
-            expected_mode != "bounded-tutoring-graph"
+            expected_mode not in STATEFUL_TUTORING_MODES
             or tutor_messages[-1]["learner_state_revision"] == 2
         ),
     )
@@ -636,9 +703,11 @@ def verify_tutoring_mode(
     *,
     expected_tutoring_mode: str,
     origin: str,
+    timeout_seconds: float = 45.0,
 ) -> dict[str, Any]:
     recorded = json.loads(result_path.read_text(encoding="utf-8"))
     checks: list[dict[str, Any]] = []
+    _wait_for_readiness(client, timeout_seconds=timeout_seconds)
     _expect_status(
         _login(client, recorded["accounts"]["student_email"], student_password),
         200,
@@ -679,7 +748,7 @@ def verify_tutoring_mode(
             and turn["learner_state_revision"] is None
         )
         or (
-            expected_tutoring_mode == "bounded-tutoring-graph"
+            expected_tutoring_mode in STATEFUL_TUTORING_MODES
             and turn["learner_state_revision"] == 1
         ),
     )
@@ -738,6 +807,38 @@ def _wait_for_job(
             raise RuntimeError(f"ingestion job ended as {job['status']}")
         time.sleep(0.25)
     raise TimeoutError("ingestion job did not finish before the live HTTPS deadline")
+
+
+def _wait_for_readiness(
+    client: httpx.Client,
+    *,
+    timeout_seconds: float,
+) -> dict[str, Any]:
+    """Wait for the bounded origin startup window after restart or restore."""
+
+    deadline = time.monotonic() + timeout_seconds
+    last_status: int | None = None
+    last_error: str | None = None
+    while time.monotonic() < deadline:
+        try:
+            response = client.get("/api/health/ready")
+        except httpx.RequestError as error:
+            last_error = type(error).__name__
+        else:
+            last_status = response.status_code
+            if response.status_code == 200:
+                readiness = _expect_json(response, 200)
+                if readiness.get("status") == "ready" and all(
+                    readiness.get("checks", {}).values()
+                ):
+                    return readiness
+        time.sleep(0.25)
+    detail = (
+        f"last HTTP status {last_status}"
+        if last_status is not None
+        else f"last transport error {last_error or 'unknown'}"
+    )
+    raise TimeoutError(f"HTTPS origin did not become ready before deadline ({detail})")
 
 
 def _wait_for_outreach(

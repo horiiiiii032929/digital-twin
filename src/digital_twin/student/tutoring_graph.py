@@ -19,7 +19,12 @@ from langgraph.runtime import Runtime
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from src.digital_twin.generation import citation_matches_chunk
-from src.digital_twin.grounding.models import RetrievalHit, TutorAnswer
+from src.digital_twin.grounding.models import (
+    GenerationTrace,
+    GenerationUsage,
+    RetrievalHit,
+    TutorAnswer,
+)
 from src.digital_twin.grounding.protocols import PostGenerationClaimValidator
 from src.digital_twin.llm import LlmClient, LlmError, LlmIdentityDriftError, LlmMessage
 from src.digital_twin.student.models import (
@@ -105,6 +110,42 @@ def retrieval_boundary_intent(events: list[AuditEvent]) -> str | None:
         if recommendation == "abstain":
             return TutoringIntent.ABSTAIN_NO_EVIDENCE
     return None
+
+
+def deterministic_policy_boundary_answer(intent: str) -> TutorAnswer | None:
+    """Render a policy-owned response without invoking a model or fallback."""
+
+    responses = {
+        TutoringIntent.REFUSE_AND_REDIRECT: (
+            "I cannot complete graded work for you. Share what you have tried, "
+            "and I can help with one bounded next step.",
+            "redirect-graded-work",
+        ),
+        TutoringIntent.ABSTAIN_NO_EVIDENCE: (
+            "I do not have enough approved course evidence to support that "
+            "response. Please refine the question or ask the instructor.",
+            "no-evidence",
+        ),
+        TutoringIntent.CLARIFY_REQUEST: (
+            "Which concept or step would you like to work through?",
+            "clarify-request",
+        ),
+    }
+    selected = responses.get(intent)
+    if selected is None:
+        return None
+    content, action = selected
+    return TutorAnswer(
+        content=content,
+        trace=GenerationTrace(
+            generator_id="bounded-tutoring-graph-v1",
+            provider_model="not-called",
+            prompt_version="graph-policy-v1",
+            policy_action=action,
+            latency_ms=0,
+            usage=GenerationUsage(),
+        ),
+    )
 
 
 class TurnSignals(BaseModel):
@@ -848,7 +889,10 @@ class GovernedReactiveTutoringGraphV2:
             generator_model=provider_trace.provider_model if provider_trace else None,
             fast_path=bool(result["fast_path"]),
             planning_calls=result["planning_calls"],
-            generation_calls=int(provider_trace is not None),
+            generation_calls=int(
+                provider_trace is not None
+                and provider_trace.provider_model != "not-called"
+            ),
             repair_calls=result["repair_count"],
             provider_input_tokens=usage.input_tokens if usage else 0,
             provider_output_tokens=usage.output_tokens if usage else 0,
@@ -1305,7 +1349,9 @@ class GovernedReactiveTutoringGraphV2:
             TutoringIntent.CLARIFY_REQUEST,
             TutoringIntent.ABSTAIN_NO_EVIDENCE,
         }:
-            answer = runtime.context.fallback(graph_input, state["intent"], None)
+            answer = deterministic_policy_boundary_answer(state["intent"])
+            if answer is None:
+                raise RuntimeError("policy boundary intent has no deterministic response")
             events: list[AuditEvent] = []
         else:
             answer, events, failure_reason = await self._generate_once(

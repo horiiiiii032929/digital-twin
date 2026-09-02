@@ -166,6 +166,59 @@ def _authorized(chunk: DocumentChunk) -> bool:
     )
 
 
+def prefer_specific_source_regions(
+    chunks: Sequence[DocumentChunk],
+) -> list[DocumentChunk]:
+    """Remove explicit page-level ingestion fallbacks when regions are available.
+
+    Region-aware PDF ingestion intentionally persists both precise regions and a
+    selected-text page fallback. They are alternate representations of the same
+    source page, not independent claims. Treating the aggregate page text as a
+    competing answer class creates false ambiguity whenever it contains the
+    precise answer plus headings or captions.
+
+    The fallback is retained when no authorized, non-page region from the same
+    source page is present, so page-only ingestion remains usable.
+    """
+
+    rows = list(chunks)
+
+    def has_specific_sibling(aggregate: DocumentChunk) -> bool:
+        for candidate in rows:
+            if candidate.id == aggregate.id or not _authorized(candidate):
+                continue
+            if candidate.region_kind == "page":
+                continue
+            if (
+                candidate.source_artifact_id != aggregate.source_artifact_id
+                or candidate.source_version != aggregate.source_version
+            ):
+                continue
+            if (
+                candidate.page_start is None
+                or candidate.page_end is None
+                or aggregate.page_start is None
+                or aggregate.page_end is None
+            ):
+                continue
+            if (
+                candidate.page_start <= aggregate.page_end
+                and aggregate.page_start <= candidate.page_end
+            ):
+                return True
+        return False
+
+    return [
+        row
+        for row in rows
+        if not (
+            row.region_kind == "page"
+            and _metadata(row, "fallback") == "selected-text"
+            and has_specific_sibling(row)
+        )
+    ]
+
+
 def _scope(question: str, chunks: Sequence[DocumentChunk]) -> tuple[
     list[DocumentChunk], str | None, str | None
 ]:
@@ -212,7 +265,10 @@ def analyze_public_reference_uniqueness(
     if not 0 < minimum_target_coverage <= 1:
         raise ValueError("minimum target coverage must be in (0, 1]")
     plan = plan_public_source_ranges(question)
-    scoped, source_path, section = _scope(question, chunks)
+    scoped, source_path, section = _scope(
+        question,
+        prefer_specific_source_regions(chunks),
+    )
     target_results: list[ReferenceTargetUniquenessV1] = []
     for target in plan.evidence.targets:
         matching = [

@@ -6,6 +6,7 @@ from src.digital_twin.generation.citations import (
     resolve_atomic_claim_lineage,
 )
 from src.digital_twin.generation.generator import (
+    DeterministicEvidenceSetGroundedGenerator,
     DeterministicGroundedGenerator,
     LiveAtomicGroundedGenerator,
     LiveExtractiveBoundaryGroundedGenerator,
@@ -58,6 +59,7 @@ __all__ = [
     "ClarificationFirstGroundedPromptBuilder",
     "ConservativeGroundedPromptBuilder",
     "DeterministicCitationValidator",
+    "DeterministicEvidenceSetGroundedGenerator",
     "DeterministicActionRouterV1",
     "DeterministicActionRouterV2",
     "DeterministicGroundedGenerator",

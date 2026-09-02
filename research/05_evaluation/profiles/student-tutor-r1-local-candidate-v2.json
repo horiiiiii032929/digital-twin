@@ -1,0 +1,491 @@
+{
+  "schema_version": 2,
+  "profile_id": "student-tutor-r1-local-candidate",
+  "profile_version": "v2.1-grounding-011",
+  "stage": "experimental",
+  "components": [
+    {
+      "component": "source-adapter",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "local-files",
+        "version": "v1",
+        "configuration": {
+          "supported_formats": "txt,md,pdf"
+        }
+      },
+      "decision": "keep",
+      "result_ids": [
+        "ingestion-v1-clean"
+      ],
+      "evidence_paths": [
+        "docs/local-ingestion.md"
+      ],
+      "hard_gates": [
+        "professor-approval",
+        "sensitive-data-excluded",
+        "source-version-integrity"
+      ],
+      "candidate_ids": [
+        "canvas-adapter"
+      ],
+      "notes": "Local files remain the approved MVP source boundary; Canvas is optional and unevaluated."
+    },
+    {
+      "component": "parser",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "pymupdf-document-parser",
+        "version": "v1",
+        "configuration": {
+          "selectable_text_only": true,
+          "extract_embedded_raster_figures": true
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "synthetic-ingestion-v1",
+      "result_ids": [
+        "ingestion-v1-clean",
+        "cross-course-ingestion-v1"
+      ],
+      "evidence_paths": [
+        "docs/local-ingestion.md",
+        "research/04_experiments/2026-07-14-local-ingestion-learning-log.md"
+      ],
+      "hard_gates": [
+        "permission-before-processing",
+        "checksum-match",
+        "provenance-preserved"
+      ],
+      "candidate_ids": [
+        "layout-aware-parser",
+        "ocr-parser"
+      ],
+      "notes": "The baseline supports selectable-text PDF, Markdown, and UTF-8 text; OCR and layout reconstruction remain pending evidence."
+    },
+    {
+      "component": "chunker",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "page-bounded-heading-paragraph-chunker",
+        "version": "v1",
+        "configuration": {
+          "max_chars": 1200,
+          "overlap_chars": 160,
+          "page_bounded": true
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "cross-course-ingestion-v1",
+      "evaluation_record_path": "research/05_evaluation/records/cross-course-ingestion-v1.json",
+      "result_ids": [
+        "cross-course-ingestion-v1"
+      ],
+      "evidence_paths": [
+        "docs/local-ingestion.md",
+        "research/04_experiments/2026-07-28-cross-course-ingestion-v1-plan.md",
+        "research/05_evaluation/cross-course-ingestion-v1-results.md"
+      ],
+      "hard_gates": [
+        "manifest-integrity",
+        "deterministic-identity",
+        "page-locality",
+        "source-provenance",
+        "private-output-boundary"
+      ],
+      "candidate_ids": [
+        "heading-paragraph-chunker",
+        "fixed-token-chunker",
+        "semantic-chunker"
+      ],
+      "notes": "The page-bounded candidate replaces the document-wide control because it eliminated 591 cross-page chunks while preserving stable identifiers and complete provenance. Size tuning and visual-content handling remain future comparisons."
+    },
+    {
+      "component": "retriever",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "qwen3-hybrid-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "method": "M2",
+          "provider_pair": "local-qwen3-0-6b",
+          "embedding_provider": "local-huggingface",
+          "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+          "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "embedding_execution": "local",
+          "query_instruction": "Given a student question within one authorized university course, retrieve passages that directly support a grounded answer.",
+          "device": "mps",
+          "dtype": "float16",
+          "embedding_max_length": 2048,
+          "embedding_batch_size": 16,
+          "bm25_k1": 1.2,
+          "bm25_b": 0.75,
+          "tokenizer": "lowercase-alphanumeric",
+          "fusion_rank_constant": 60,
+          "fusion_candidate_limit": 20,
+          "result_limit": 10,
+          "reranker": "none"
+        }
+      },
+      "control": {
+        "implementation_id": "bm25-v1",
+        "version": "cross-course-retrieval-v1",
+        "configuration": {
+          "k1": 1.2,
+          "b": 0.75,
+          "tokenizer": "lowercase-alphanumeric"
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "cross-course-retrieval-v1-draft-6-heldout",
+      "evaluation_record_path": "research/05_evaluation/records/cross-course-retrieval-v1-heldout.json",
+      "result_ids": [
+        "cross-course-retrieval-v1-heldout-001",
+        "dependency-compatibility-python-ml-001",
+        "student-workflow-slice-v2-publication-synthetic"
+      ],
+      "evidence_paths": [
+        "docs/local-retrieval.md",
+        "research/04_experiments/2026-08-02-cross-course-retrieval-heldout-plan.md",
+        "research/05_evaluation/cross-course-retrieval-v1-heldout-results.md"
+      ],
+      "hard_gates": [
+        "complete_60_case_run",
+        "one_time_heldout_ledger_completed",
+        "zero_course_isolation_violations",
+        "zero_provider_failures",
+        "zero_retries",
+        "zero_external_calls",
+        "peak_process_memory_at_most_4_gib",
+        "deployment-latency"
+      ],
+      "candidate_ids": [
+        "qwen3-dense-v1",
+        "qwen3-hybrid-v1",
+        "qwen3-reranked-hybrid-v1",
+        "bm25-v1"
+      ],
+      "notes": "M2 hybrid BM25 plus Qwen3 dense RRF is selected from the one-time sealed cross-course held-out result for the experimental profile. BM25 remains the explicit rollback. M3 is retained as a quality reference but is deployment-ineligible at the frozen latency gate. Synthetic product activation, citation lineage, course isolation, and provider-failure fallback pass the registered student workflow v1/v2 architecture slices. The historical professor-fidelity C3 run did not use the selected chunker corpus and supplies no additional retrieval evidence. Bounded-capacity qualification remains open. This profile does not make image-only claims."
+    },
+    {
+      "component": "evidence-sufficiency",
+      "status": "selected",
+      "result_ids": [
+        "governed-full-autonomy-v2-1-grounding-successor-011"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/governed-full-autonomy-v2-1-grounding-successor-011-results.md"
+      ],
+      "hard_gates": [
+        "zero-false-answers",
+        "answerable-recall",
+        "balanced-accuracy",
+        "ranking-non-regression",
+        "latency-budget"
+      ],
+      "candidate_ids": [
+        "question-targeted-ambiguity-safe-evidence-gate-v2",
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
+        "structured-lexical-coverage-evidence-gate-v1"
+      ],
+      "notes": "Selected from fresh 500+100 grounding evidence. Runtime source chunks use the same ambiguity-safe, question-targeted cardinality and canonical source-claim authority while semantic atoms remain the evaluation/reference representation. The previous structured gate remains rollback.",
+      "implementation": {
+        "implementation_id": "question-targeted-ambiguity-safe-evidence-gate-v2",
+        "version": "r1-local-v2.1",
+        "configuration": {
+          "minimum_content_matching_terms": 2,
+          "evidence_limit": 5,
+          "maximum_atomic_claims": 2,
+          "clarify_non_unique_reference": true
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "governed-full-autonomy-v2-1-grounding-successor-011"
+    },
+    {
+      "component": "reranker",
+      "status": "pending",
+      "hard_gates": [
+        "source-evidence-preserved",
+        "latency-budget"
+      ],
+      "candidate_ids": [
+        "no-reranker",
+        "cross-encoder-reranker",
+        "llm-reranker"
+      ],
+      "notes": "No reranker will be selected until retrieval failures justify its cost."
+    },
+    {
+      "component": "figure-description",
+      "status": "pending",
+      "hard_gates": [
+        "figure-source-lineage",
+        "human-review-status",
+        "display-permission"
+      ],
+      "candidate_ids": [
+        "caption-context-description",
+        "vision-model-description"
+      ],
+      "notes": "Figure bytes and captions exist, but semantic description has not been evaluated."
+    },
+    {
+      "component": "generator",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "deterministic-evidence-set-grounded-generator",
+        "version": "v2",
+        "configuration": {
+          "provider_model": "deterministic/evidence-set-v2",
+          "provider_revision": "deterministic/evidence-set-v2",
+          "max_attempts": 1,
+          "canonical_source_claims": true,
+          "complete_selected_evidence_required": true
+        }
+      },
+      "control": {
+        "implementation_id": "openai-responses-gpt-5-4-mini-atomic-v1",
+        "version": "r1-openai-build-001",
+        "configuration": {
+          "provider_model": "gpt-5.4-mini-2026-03-17",
+          "provider_revision": "gpt-5.4-mini-2026-03-17",
+          "reasoning_effort": "none",
+          "max_output_tokens": 600,
+          "timeout_seconds": 30,
+          "max_attempts": 1,
+          "request_store": false,
+          "data_boundary": "public-evaluation-only-until-r1-selection"
+        }
+      },
+      "decision": "keep",
+      "evaluation_dataset": "governed-full-autonomy-v2-1-grounding-successor-011",
+      "result_ids": [
+        "governed-full-autonomy-v2-1-grounding-successor-011"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/governed-full-autonomy-v2-1-grounding-successor-011-results.md"
+      ],
+      "hard_gates": [
+        "governed-provider-boundary",
+        "provider-identity-and-revision",
+        "permission-and-version-isolation",
+        "unsupported-high-severity-claims",
+        "assessed-work-policy",
+        "budget-and-ledger"
+      ],
+      "candidate_ids": [
+        "openai-responses-gpt-5-4-mini-atomic-v1",
+        "deterministic-evidence-set-grounded-generator-v2",
+        "deterministic-grounded-generator-v1"
+      ],
+      "notes": "The source compiler owns factual wording, atomic claims, and citations. GPT-5.6 Terra is separately bounded to complex pedagogical planning; it cannot mutate source truth, policy, identity, state commit, or delivery."
+    },
+    {
+      "component": "prompt",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "strict-evidence-grounded-prompt-v3",
+        "version": "generator-qualification-v1-heldout-001",
+        "configuration": {
+          "max_words": 60,
+          "outside_facts": false,
+          "follow_up_when_answered": false
+        }
+      },
+      "control": {
+        "implementation_id": "direct-grounded-prompt-v1",
+        "version": "v1",
+        "configuration": {}
+      },
+      "decision": "keep",
+      "evaluation_dataset": "generator-qualification-v1.0.0-heldout",
+      "result_ids": [
+        "generator-qualification-v1-heldout-001"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/generator-qualification-v1-development-attempt-001-results.md",
+        "research/05_evaluation/generator-qualification-v1-development-attempt-002-results.md",
+        "research/05_evaluation/generator-qualification-v1-heldout-001-results.md"
+      ],
+      "hard_gates": [
+        "policy-included",
+        "evidence-included",
+        "prompt-version-recorded",
+        "citation-correctness",
+        "citation-completeness"
+      ],
+      "candidate_ids": [
+        "direct-grounded-prompt",
+        "guided-grounded-prompt",
+        "strict-evidence-grounded-prompt-v3"
+      ],
+      "notes": "Strict-evidence P2/v3 is selected after P0 and P1 failed development citation correctness and P2 passed development, stability, and one-time held-out review. The professor-fidelity action-schema integration prompt is a separate hash-frozen development binding and is not selected yet. Direct v1 remains the control."
+    },
+    {
+      "component": "tutor-policy",
+      "status": "selected",
+      "implementation": {
+        "implementation_id": "structured-professor-policy",
+        "version": "v1",
+        "configuration": {
+          "approval_required": true
+        }
+      },
+      "decision": "keep",
+      "result_ids": [
+        "student-workflow-slice-v2-publication-synthetic",
+        "professor-fidelity-v1-development-001-analysis-correction-001"
+      ],
+      "evidence_paths": [
+        "docs/onboarding-prototype.md",
+        "research/02_requirements/chat-led-tutor-policy-extraction.md",
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
+      ],
+      "hard_gates": [
+        "professor-approval",
+        "privacy-boundaries-explicit",
+        "integrity-boundaries-explicit"
+      ],
+      "candidate_ids": [
+        "versioned-professor-policy-v2"
+      ],
+      "notes": "The structured policy remains a requirements-selected foundation. The historical C2/C3 comparison leaked case gold labels and cannot estimate its effect; live enforcement quality remains pending."
+    },
+    {
+      "component": "policy-enforcement",
+      "status": "pending",
+      "hard_gates": [
+        "graded-work-boundary",
+        "no-evidence-response",
+        "policy-version-traceability"
+      ],
+      "candidate_ids": [
+        "deterministic-policy-rules",
+        "model-assisted-policy-check"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
+      ],
+      "notes": "The historical live path had one assessed-work action failure, but its case-label leakage invalidates condition-level policy evidence. Deterministic rules remain unselected until a corrected adversarial and live-path run is recorded."
+    },
+    {
+      "component": "citation-validation",
+      "status": "pending",
+      "hard_gates": [
+        "citation-maps-to-retrieved-hit",
+        "locator-present",
+        "source-version-active"
+      ],
+      "candidate_ids": [
+        "deterministic-citation-validator"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
+      ],
+      "notes": "The deterministic validator is implemented. Historical citation IDs were structurally valid, but C3 source/page correctness was 13/30 and semantic completeness is unresolved; corrected live malformed-output and semantic evidence are required before selection."
+    },
+    {
+      "component": "conversation-orchestration",
+      "status": "selected",
+      "hard_gates": [
+        "state-traceability",
+        "failure-recovery",
+        "student-data-minimization"
+      ],
+      "candidate_ids": [
+        "governed-autonomous-tutoring-graph-v2-1",
+        "bounded-tutoring-graph-v1",
+        "deterministic-turn-state"
+      ],
+      "notes": "Selected for the local R1 candidate after the fresh 820-case actual-product confirmation and reference-validity correction passed every action, grounding, authority, citation, consent, timing, persistence, restart, termination, and loop-boundedness gate. Complex perception and planning use GPT-5.6 Terra; factual response compilation and every authority boundary remain deterministic. T0 is the one-setting rollback.",
+      "implementation": {
+        "implementation_id": "governed-autonomous-tutoring-graph-v2-1",
+        "version": "r1-local-candidate-v2.1",
+        "configuration": {
+          "maximum_repairs_per_turn": 1,
+          "maximum_graph_steps_per_turn": 12,
+          "t0_rollback_available": true,
+          "planner": "gpt-5.6-terra",
+          "factual_generator": "deterministic/evidence-set-v2",
+          "provider_retries": 0
+        }
+      },
+      "control": {
+        "implementation_id": "deterministic-turn-state",
+        "version": "v1",
+        "configuration": {}
+      },
+      "decision": "keep",
+      "evaluation_dataset": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
+      "result_ids": [
+        "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001"
+      ],
+      "evidence_paths": [
+        "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001-results.md"
+      ]
+    },
+    {
+      "component": "proactive-trigger",
+      "status": "selected",
+      "hard_gates": [
+        "student-control",
+        "suppression-rules",
+        "privacy-safe-signals"
+      ],
+      "candidate_ids": [
+        "rule-based-trigger",
+        "classifier-trigger"
+      ],
+      "notes": "A0 professor-scheduled in-app outreach is the local release candidate. A1 remains shadow-only and Discord remains disabled.",
+      "implementation": {
+        "implementation_id": "professor-scheduled-a0-in-app-v1",
+        "version": "r1-local-candidate-v1",
+        "configuration": {
+          "channel": "in-app",
+          "a1_enabled": false,
+          "discord_enabled": false
+        }
+      },
+      "decision": "go-deeper",
+      "evaluation_dataset": "local-r1-workflow-qualification-v1",
+      "result_ids": [
+        "proactive-outreach-a1-shadow-confirmation-002"
+      ],
+      "evidence_paths": [
+        "docs/proactive-outreach.md",
+        "research/05_evaluation/proactive-outreach-a1-shadow-confirmation-002-results.md"
+      ]
+    },
+    {
+      "component": "learning-gap-analytics",
+      "status": "selected",
+      "hard_gates": [
+        "minimum-group-size",
+        "student-deidentification",
+        "uncertainty-visible"
+      ],
+      "candidate_ids": [
+        "rule-based-aggregation",
+        "clustered-gap-summary"
+      ],
+      "notes": "Selected prospectively for local workflow qualification with five-learner suppression, keyed pseudonyms, deletion, retention, deduplication, and professor review.",
+      "implementation": {
+        "implementation_id": "privacy-minimized-learning-gap-aggregation-v1",
+        "version": "r1-local-candidate-v1",
+        "configuration": {
+          "minimum_distinct_learners": 5,
+          "raw_transcripts_stored": false
+        }
+      },
+      "decision": "go-deeper",
+      "evaluation_dataset": "local-r1-workflow-qualification-v1",
+      "result_ids": [
+        "autonomous-tutoring-graph-development-001"
+      ],
+      "evidence_paths": [
+        "docs/autonomous-tutoring-graph.md"
+      ]
+    }
+  ]
+}

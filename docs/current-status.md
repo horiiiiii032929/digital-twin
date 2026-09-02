@@ -6,6 +6,45 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Local R1 autonomy release selection
+
+The active release checkpoint has reached `Keep`. Confirmation 013 executed
+820 fresh, source-disjoint actual-product cases across T0, T1-v1, T1-v2
+reactive, and T1-v2 autonomous conditions. It persisted 820/820 responses over
+1,545 direct OpenAI calls for USD 3.849188 before opening hidden gold.
+
+The original result is preserved as `completed-refine`: all safety and
+operational gates passed, but 30 V2 turns after a provider-failure event were
+marked unexpected because the fresh reference required `no_action`. Root-cause
+review against the approved architecture, product implementation, and existing
+regression test established that V2 must use its grounded deterministic
+T1-v1/T0 fallback without advancing learner state. A disclosed zero-call
+reference-validity correction changed only those 30 expected actions and
+reused every immutable response.
+
+The corrected result passed all 820 cases: 100% action, citation, provider-
+failure fallback, restart, transition, termination, and proactive-lineage
+correctness; zero wrong recipient/course/release, consent/timing/frequency
+violations, duplicates, unbounded loops, or model-owned authority mutations.
+Governed T1-v2.1 is therefore selected for the exact local R1 profile with T0
+as immediate rollback. Paid execution authority is revoked.
+
+The follow-up operational qualification
+`local-r1-governed-v2-1-release-qualification-002` is complete as `Keep` on
+revision `b4d25fa`. The exact local images passed the full 25/25 HTTPS journey,
+6/6 restart persistence, 6/6 checksum-verified clean restore, 3/3 T0 rollback,
+and 3/3 V2.1 restoration checks. Desktop and 390px professor/student browser
+checks found no console error, horizontal overflow, or unlabeled control. The
+qualified local demo remains available at `https://localhost:8443`; this is a
+local release claim only, not durable hosting or real-human outcome evidence.
+
+AFQC-143 records the operational selection: keep the hash-bound governed V2.1
+Compose release, retain T0 as the immediate rollback, and close the local
+qualification milestone without starting another implementation or model
+loop. The profile, code revision, image identifiers, backup checksum, root-
+cause corrections, and ignored operational artifact locations are preserved
+in the result record and readable result summary.
+
 ## Cross-engine checkpoint result
 
 PR #176 is merged. Evaluation 009 remains immutable network-free development

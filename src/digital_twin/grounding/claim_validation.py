@@ -136,6 +136,58 @@ class ContiguousQuoteAtomicClaimVerifier:
         return signals
 
 
+class CanonicalSourceAtomicClaimVerifier:
+    """Verify claims against server-owned canonical source atoms when present.
+
+    Registered semantic atoms may carry a normalized, display-safe claim that
+    is deterministically derived from the same immutable source range.  The
+    validator must use that contract consistently instead of asking an NLI
+    model to rediscover equivalence with authoring markup.  Ordinary chunks
+    remain on the normalized source-containment path.
+    """
+
+    implementation_id = "canonical-source-atomic-claim-verifier-v1"
+    version = "1.0.0"
+    semantic_atom_version = "source-semantic-evidence-atom-v1"
+
+    @classmethod
+    def _supported(cls, claim_text: str, hit: RetrievalHit) -> bool:
+        metadata = hit.chunk.metadata
+        if metadata.get("semantic_atom_version") == cls.semantic_atom_version:
+            canonical = metadata.get("semantic_atom_claim")
+            return (
+                isinstance(canonical, str)
+                and bool(canonical.strip())
+                and _normalized_text(claim_text) == _normalized_text(canonical)
+            )
+        return _normalized_text(claim_text) in _normalized_text(hit.chunk.text)
+
+    def verify(
+        self,
+        claims: Sequence[AtomicAnswerClaim],
+        hits: Sequence[RetrievalHit],
+    ) -> list[AtomicClaimSupportSignal]:
+        by_id = {hit.chunk.id: hit for hit in hits}
+        signals: list[AtomicClaimSupportSignal] = []
+        for claim in claims:
+            supporting_hit_ids = [
+                hit_id
+                for hit_id in claim.evidence_hit_ids
+                if self._supported(claim.text, by_id[hit_id])
+            ]
+            supported = bool(supporting_hit_ids)
+            signals.append(
+                AtomicClaimSupportSignal(
+                    claim_id=claim.claim_id,
+                    entailment=1.0 if supported else 0.0,
+                    contradiction=0.0,
+                    supporting_hit_ids=supporting_hit_ids,
+                    reason="canonical registered source-claim equivalence",
+                )
+            )
+        return signals
+
+
 class NliAtomicClaimVerifier:
     """Apply NLI in its intended evidence-premise, claim-hypothesis direction."""
 

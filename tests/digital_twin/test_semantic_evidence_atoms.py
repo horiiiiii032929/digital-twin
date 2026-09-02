@@ -3,7 +3,13 @@ from __future__ import annotations
 import hashlib
 import json
 
-from src.digital_twin.grounding.models import DocumentChunk
+from src.digital_twin.grounding.ambiguity_safe_evidence import (
+    AmbiguitySafeEvidenceGateV1,
+)
+from src.digital_twin.grounding.evidence_sufficiency import (
+    StructuredLexicalCoverageEvidenceGate,
+)
+from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
 from src.digital_twin.grounding.semantic_evidence_atoms import (
     ATOM_VERSION,
     SourceSemanticEvidenceAtomGateV1,
@@ -199,3 +205,51 @@ def test_v2_gate_accepts_equivalent_alternate_regions() -> None:
 
     assert decision.sufficient is True
     assert len(decision.selected_hit_ids) == 1
+
+
+def test_ambiguity_gate_ignores_page_fallback_when_precise_region_exists() -> None:
+    precise = _chunk(
+        "precise",
+        "CSRF abuses an authenticated browser session.",
+        title="CSRF",
+        cluster="csrf",
+        ordinal=0,
+    ).model_copy(
+        update={"page_start": 1, "page_end": 1, "region_kind": "text"}
+    )
+    aggregate = _chunk(
+        "aggregate",
+        (
+            "Synthetic network security notes. CSRF abuses an authenticated "
+            "browser session. Figure 1: request flow."
+        ),
+        title="CSRF",
+        cluster="csrf",
+        ordinal=1,
+    )
+    aggregate = aggregate.model_copy(
+        update={
+            "page_start": 1,
+            "page_end": 1,
+            "region_kind": "page",
+            "metadata": {**aggregate.metadata, "fallback": "selected-text"},
+        }
+    )
+    hits = [
+        RetrievalHit(chunk=precise, relevance_score=1.0),
+        RetrievalHit(chunk=aggregate, relevance_score=0.9),
+    ]
+    gate = AmbiguitySafeEvidenceGateV1(
+        StructuredLexicalCoverageEvidenceGate(
+            minimum_content_matching_terms=2,
+            evidence_limit=3,
+        )
+    )
+
+    decision = gate.assess(
+        "How does CSRF abuse an authenticated browser session?",
+        hits,
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["precise"]

@@ -9,6 +9,7 @@ from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.grounding.protocols import EvidenceSufficiencyGate
 from src.digital_twin.grounding.reference_uniqueness import (
     analyze_public_reference_uniqueness,
+    prefer_specific_source_regions,
 )
 
 
@@ -41,6 +42,13 @@ class AmbiguitySafeEvidenceGateV1:
         hits: Sequence[RetrievalHit],
     ) -> EvidenceSufficiencyDecision:
         bounded = list(hits[: self.evidence_limit])
+        preferred_ids = {
+            row.id
+            for row in prefer_specific_source_regions(
+                [hit.chunk for hit in bounded]
+            )
+        }
+        bounded = [hit for hit in bounded if hit.chunk.id in preferred_ids]
         if bounded:
             uniqueness = analyze_public_reference_uniqueness(
                 query,

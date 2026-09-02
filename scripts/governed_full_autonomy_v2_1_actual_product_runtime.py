@@ -21,9 +21,11 @@ from src.digital_twin.generation import (
     DeterministicGroundedGenerator,
     DeterministicPolicyEnforcer,
     LiveAtomicGroundedGenerator,
+    DeterministicEvidenceSetGroundedGenerator,
 )
 from src.digital_twin.grounding import (
     AtomicClaimEvidenceValidator,
+    CanonicalSourceAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     SourceSemanticEvidenceAtomGateV2,
     SourceSemanticEvidenceAtomRetrieverV1,
@@ -62,6 +64,7 @@ from src.digital_twin.student.autonomy_service import (
     RepositoryGroundedWordingGenerator,
 )
 from src.digital_twin.student.tutoring_graph import (
+    DeterministicReactiveSemanticPlanner,
     LiveReactiveSemanticPlanner,
     TutoringMode,
 )
@@ -167,6 +170,21 @@ class _SwitchableGenerator:
                 ]
             }
         )
+
+
+class _SwitchableReactivePlanner:
+    """Network-free stand-in that reproduces the provider failure boundary."""
+
+    model_id = "evaluation/gpt-5.6-terra-stand-in"
+
+    def __init__(self) -> None:
+        self.delegate = DeterministicReactiveSemanticPlanner()
+        self.failed = False
+
+    async def propose(self, **kwargs):
+        if self.failed:
+            raise LlmUnavailableError()
+        return await self.delegate.propose(**kwargs)
 
 
 @dataclass(slots=True)
@@ -406,6 +424,8 @@ def build_runtime_factory(
     grounding_architecture_id: str = "legacy-structured-lexical-v1",
     source_resolver: Callable[[str], dict[str, str]] | None = None,
     engine_binding: ProductEngineBindingV1 | None = None,
+    hybrid_safe_generation: bool = False,
+    dependency_aware_provider_failure: bool = False,
 ):
     """Return a per-case factory used only by the product evaluation adapter."""
 
@@ -447,7 +467,11 @@ def build_runtime_factory(
             )
         )
         validator = AtomicClaimEvidenceValidator(
-            ExactQuoteAtomicClaimVerifier(),
+            (
+                CanonicalSourceAtomicClaimVerifier()
+                if hybrid_safe_generation
+                else ExactQuoteAtomicClaimVerifier()
+            ),
             minimum_entailment=1.0,
             maximum_contradiction=0.0,
             maximum_claims=8,
@@ -500,19 +524,31 @@ def build_runtime_factory(
         deterministic_generator = _SwitchableGenerator() if bundle is None else None
         generator = deterministic_generator
         semantic_planner = None
+        switchable_semantic_planner = None
         if bundle is not None:
-            generator = LiveAtomicGroundedGenerator(
-                bundle.generator,
-                prompt_builder=BoundedPedagogicalPromptBuilder(),
-                policy_enforcer=DeterministicPolicyEnforcer(
-                    action_router=DeterministicActionRouterV2()
-                ),
+            generator = (
+                DeterministicEvidenceSetGroundedGenerator(
+                    policy_enforcer=DeterministicPolicyEnforcer(
+                        action_router=DeterministicActionRouterV2()
+                    )
+                )
+                if hybrid_safe_generation
+                else LiveAtomicGroundedGenerator(
+                    bundle.generator,
+                    prompt_builder=BoundedPedagogicalPromptBuilder(),
+                    policy_enforcer=DeterministicPolicyEnforcer(
+                        action_router=DeterministicActionRouterV2()
+                    ),
+                )
             )
             if mode == TutoringMode.T1_V2:
                 semantic_planner = LiveReactiveSemanticPlanner(
                     bundle.planner,
                     model_id=planner_model,
                 )
+        elif mode == TutoringMode.T1_V2:
+            switchable_semantic_planner = _SwitchableReactivePlanner()
+            semantic_planner = switchable_semantic_planner
 
         def services(open_repository):
             outreach = ProactiveOutreachService(open_repository, clock=clock)
@@ -577,15 +613,16 @@ def build_runtime_factory(
 
         async def apply_control(runtime, event, now):
             if event.kind == "provider-failure":
-                if bundle is not None:
-                    bundle.planner_switch.failed = True
-                    bundle.generator_switch.failed = True
-                else:
-                    if deterministic_generator is None:
-                        raise RuntimeError(
-                            "deterministic failure injector is unavailable"
-                        )
-                    deterministic_generator.failed = True
+                if not dependency_aware_provider_failure:
+                    if bundle is not None:
+                        bundle.planner_switch.failed = True
+                        bundle.generator_switch.failed = True
+                    else:
+                        if deterministic_generator is None:
+                            raise RuntimeError(
+                                "deterministic failure injector is unavailable"
+                            )
+                        deterministic_generator.failed = True
                     current = runtime.repository.get_autonomy_policy(runtime.course_id)
                     runtime.autonomy.set_policy(
                         runtime.professor_id,
@@ -595,6 +632,26 @@ def build_runtime_factory(
                         autonomy_enabled=current.autonomy_enabled,
                         paused=True,
                     )
+                    return
+                if mode != TutoringMode.T1_V2:
+                    return
+                if bundle is not None:
+                    bundle.planner_switch.failed = True
+                else:
+                    if switchable_semantic_planner is None:
+                        raise RuntimeError(
+                            "semantic planner failure injector is unavailable"
+                        )
+                    switchable_semantic_planner.failed = True
+                current = runtime.repository.get_autonomy_policy(runtime.course_id)
+                runtime.autonomy.set_policy(
+                    runtime.professor_id,
+                    runtime.course_id,
+                    approved_course_objectives=current.approved_course_objectives,
+                    allowed_actions=current.allowed_actions,
+                    autonomy_enabled=current.autonomy_enabled,
+                    paused=True,
+                )
                 return
             if event.kind == "membership-changed":
                 membership = runtime.repository.get_membership(

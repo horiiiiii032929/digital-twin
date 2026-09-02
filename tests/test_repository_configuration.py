@@ -51,6 +51,12 @@ def test_runtime_container_bases_are_digest_pinned_and_surface_is_minimal() -> N
         "research/05_evaluation/records/"
         "autonomous-tutoring-r1-confirmation-002.json"
     ) in dockerfile
+    assert (
+        "COPY research/05_evaluation/records/"
+        "governed-full-autonomy-v2-1-confirmation-001.json "
+        "research/05_evaluation/records/"
+        "governed-full-autonomy-v2-1-confirmation-001.json"
+    ) in dockerfile
 
 
 def test_historical_review_commands_do_not_bake_in_reproduction_confirmation() -> None:
