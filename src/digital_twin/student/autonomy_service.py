@@ -46,6 +46,7 @@ from src.digital_twin.student.models import (
     EvidenceRecoveryMode,
     MembershipRole,
     OutreachChannel,
+    ProactiveMessageStatus,
     ProactiveTriggerKind,
 )
 from src.digital_twin.student.proactive import ProactiveOutreachService
@@ -120,10 +121,14 @@ class RepositoryGroundedWordingGenerator:
         chunks = _resolve_evidence_chunks(release, job.evidence_chunk_ids)
         if release is None or not chunks:
             return _failed_grounded_response(plan.action)
+        # Evidence completeness was assessed against this authoritative query.
+        # Keep pedagogical intent in the dedicated intent/help arguments so the
+        # generator cannot silently re-derive a different claim count from
+        # synthesized wording.
         question = (
-            f"Create one concise in-app tutoring intervention for {job.opportunity.concept_id or 'the current objective'}. "
-            f"Pedagogical action: {plan.action.value}. Expected learner action: "
-            f"{plan.expected_learner_action or 'respond with the next learning step'}."
+            job.goal.approved_course_objective
+            if job.goal is not None
+            else job.opportunity.concept_id or "approved course objective"
         )
         hits = [
             RetrievalHit(
@@ -249,7 +254,11 @@ class GovernedAutonomyService:
         )
         policy = PedagogicalPolicyV2(
             course_id=course_id,
-            version=(current.version if boundary_unchanged and current else (current.version + 1 if current else 1)),
+            version=(
+                current.version
+                if boundary_unchanged and current
+                else (current.version + 1 if current else 1)
+            ),
             approved_by=professor_id,
             approved_profile_id=release.teaching_profile_id,
             approved_profile_sha256=release.teaching_profile_sha256,
@@ -364,7 +373,8 @@ class GovernedAutonomyService:
                     "goal_id": cancelled.goal_id,
                     "student_id": cancelled.student_id,
                     "previous_status": goal.status.value,
-                    "pending_work_cancelled": goal.status == AutonomousGoalStatus.ACTIVE,
+                    "pending_work_cancelled": goal.status
+                    == AutonomousGoalStatus.ACTIVE,
                 },
             )
         )
@@ -609,10 +619,15 @@ class GovernedAutonomyService:
                         else release.id
                     )
                     key_digest = hashlib.sha256(
-                        f"{event.value}:{goal.goal_id}:{observation_key}".encode("utf-8")
+                        f"{event.value}:{goal.goal_id}:{observation_key}".encode(
+                            "utf-8"
+                        )
                     ).hexdigest()
                     key = f"observer:{event.value}:{key_digest}"
-                    if self.repository.get_autonomous_opportunity_by_key(key) is not None:
+                    if (
+                        self.repository.get_autonomous_opportunity_by_key(key)
+                        is not None
+                    ):
                         continue
                     primary = evidence[0]
                     self.create_opportunity(
@@ -660,7 +675,9 @@ class GovernedAutonomyService:
         """Convert source-recovery findings into governed V2 opportunities."""
 
         if isinstance(limit, bool) or not 1 <= limit <= 500:
-            raise ValueError("evidence-recovery observer limit must be between 1 and 500")
+            raise ValueError(
+                "evidence-recovery observer limit must be between 1 and 500"
+            )
         instant = _utc(now or self.clock.now())
         scan = self.outreach.scan_evidence_recovery(
             professor_id,
@@ -729,9 +746,7 @@ class GovernedAutonomyService:
                     None,
                 )
                 learner_belief = (
-                    self.repository.get_learner_belief_state_v2(
-                        current_conversation.id
-                    )
+                    self.repository.get_learner_belief_state_v2(current_conversation.id)
                     if current_conversation is not None
                     else None
                 )
@@ -758,9 +773,7 @@ class GovernedAutonomyService:
                     course_id=course_id,
                     goal_id=goal.goal_id,
                     event_kind=AutonomousEventKind.EVIDENCE_RECOVERED,
-                    concept_id=(
-                        chunk.source_artifact_id or chunk.document_id
-                    )[:128],
+                    concept_id=(chunk.source_artifact_id or chunk.document_id)[:128],
                     source_chunk_id=chunk.id,
                     source_chunk_ids=[chunk.id],
                     supporting_observation_ids=[
@@ -902,9 +915,7 @@ class GovernedAutonomyService:
     ) -> list[AutonomousProcessResultV1]:
         instant = _utc(now or self.clock.now())
         self.repository.expire_autonomous_goals(expired_at=instant.isoformat())
-        self.repository.expire_autonomous_opportunities(
-            expired_at=instant.isoformat()
-        )
+        self.repository.expire_autonomous_opportunities(expired_at=instant.isoformat())
         self.materialize_due_wakeups(now=instant, limit=limit)
         results: list[AutonomousProcessResultV1] = []
         for opportunity in self.repository.list_due_autonomous_opportunities(
@@ -1004,7 +1015,9 @@ class GovernedAutonomyService:
             now=instant.isoformat(),
         )
         result = await self.graph.run(job)
-        result = await self._deliver(result, course.owner_professor_id if course else None, instant)
+        result = await self._deliver(
+            result, course.owner_professor_id if course else None, instant
+        )
         self.repository.commit_autonomous_job(result)
         return AutonomousProcessResultV1(
             opportunity_id=opportunity.opportunity_id,
@@ -1036,7 +1049,10 @@ class GovernedAutonomyService:
             student_id=result.opportunity.student_id,
             channel=OutreachChannel.IN_APP,
             kind=_trigger_kind(result.opportunity.event_kind),
-            scheduled_for=instant.isoformat(),
+            # Bind delivery to the immutable opportunity window.  Using the
+            # worker's retry time here would turn a crash-recovery retry into
+            # an idempotency conflict after the message had already committed.
+            scheduled_for=result.opportunity.earliest_action_at,
             expires_at=result.opportunity.latest_action_at,
             topic="Autonomous course-tutor follow-up",
             prompt=result.response.content,
@@ -1047,6 +1063,12 @@ class GovernedAutonomyService:
         status = (
             AutonomousActionStatus.DELIVERED
             if delivered.outcome == "delivered"
+            or (
+                delivered.outcome == "duplicate"
+                and delivered.message is not None
+                and delivered.message.message.status
+                in {ProactiveMessageStatus.DELIVERED, ProactiveMessageStatus.READ}
+            )
             else AutonomousActionStatus.SUPPRESSED
             if delivered.outcome in {"suppressed", "deferred-quiet-hours"}
             else AutonomousActionStatus.FAILED
@@ -1129,9 +1151,7 @@ def _failed_grounded_response(
     )
 
 
-def _policy_evidence(
-    policy: PedagogicalPolicyV2, release
-) -> list[DocumentChunk]:
+def _policy_evidence(policy: PedagogicalPolicyV2, release) -> list[DocumentChunk]:
     selected: dict[str, DocumentChunk] = {}
     for objective in policy.approved_course_objectives:
         for chunk in select_relevant_chunks(objective, release.chunks):
@@ -1180,7 +1200,10 @@ def _intent_for_action(action: AutonomousActionKind) -> str:
 def _trigger_kind(event: AutonomousEventKind) -> ProactiveTriggerKind:
     if event == AutonomousEventKind.EVIDENCE_RECOVERED:
         return ProactiveTriggerKind.EVIDENCE_RECOVERY
-    if event in {AutonomousEventKind.MISCONCEPTION, AutonomousEventKind.REPEATED_CONFUSION}:
+    if event in {
+        AutonomousEventKind.MISCONCEPTION,
+        AutonomousEventKind.REPEATED_CONFUSION,
+    }:
         return ProactiveTriggerKind.MISCONCEPTION_FOLLOW_UP
     if event in {
         AutonomousEventKind.SPACED_REVIEW_DUE,
@@ -1208,7 +1231,9 @@ def _instant(value: str) -> datetime:
     return _utc(datetime.fromisoformat(value))
 
 
-def _disabled_policy(opportunity: ProactiveOpportunityV1, course) -> PedagogicalPolicyV2:
+def _disabled_policy(
+    opportunity: ProactiveOpportunityV1, course
+) -> PedagogicalPolicyV2:
     return PedagogicalPolicyV2(
         course_id=opportunity.course_id,
         version=opportunity.policy_version,

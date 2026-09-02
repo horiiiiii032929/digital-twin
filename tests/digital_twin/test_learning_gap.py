@@ -177,17 +177,16 @@ def test_expired_signals_are_hidden_and_deletable(tmp_path):
     )
     repository.save_learning_gap_signal(signal)
 
-    assert repository.list_learning_gap_signals(
-        fixture.course_a_id,
-        fixture.release_a_id,
-        active_at="2026-08-29T00:00:00+00:00",
-    ) == []
-    assert repository.delete_expired_learning_gap_signals(
-        expired_at=EXPIRED_AT
-    ) == 1
-    assert repository.delete_expired_learning_gap_signals(
-        expired_at=EXPIRED_AT
-    ) == 0
+    assert (
+        repository.list_learning_gap_signals(
+            fixture.course_a_id,
+            fixture.release_a_id,
+            active_at="2026-08-29T00:00:00+00:00",
+        )
+        == []
+    )
+    assert repository.delete_expired_learning_gap_signals(expired_at=EXPIRED_AT) == 1
+    assert repository.delete_expired_learning_gap_signals(expired_at=EXPIRED_AT) == 0
     repository.close()
 
 
@@ -252,6 +251,19 @@ def test_visible_aggregate_and_draft_are_deterministic_and_non_executable():
     assert drafts[0].status == "draft-awaiting-professor-review"
     assert "publish" not in drafts[0].model_dump()
     assert "policy" not in drafts[0].model_dump()
+
+    later_result = aggregate_learning_gap_signals(
+        signals,
+        course_id="course-a",
+        release_id="release-a",
+        policy=policy,
+        computed_at="2026-09-01T13:00:00+00:00",
+    )
+    assert later_result.visible_aggregates[0].aggregate_id != aggregate.aggregate_id
+    assert (
+        build_course_improvement_drafts(later_result)[0].proposal_id
+        == drafts[0].proposal_id
+    )
 
 
 def test_aggregation_rejects_cross_scope_signals():

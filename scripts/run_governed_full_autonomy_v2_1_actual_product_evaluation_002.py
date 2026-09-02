@@ -136,16 +136,13 @@ def _git_revision() -> str:
 
 def _git_dirty() -> bool:
     output = subprocess.run(
-            ["git", "status", "--porcelain", "--untracked-files=all"],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout
-    return any(
-        row and not row[3:].startswith(".claude/")
-        for row in output.splitlines()
-    )
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    return bool(output.strip())
 
 
 def _hash_file(path: Path) -> str:
@@ -215,8 +212,7 @@ def _manifest(
                 else {
                     "planner": "gpt-5.6-terra",
                     "generator": (
-                        context.generator_model_override
-                        or "gpt-5.4-mini-2026-03-17"
+                        context.generator_model_override or "gpt-5.4-mini-2026-03-17"
                     ),
                 }
             )
@@ -233,9 +229,7 @@ def _run_binding(
     manifests = {
         condition: _manifest(
             condition, network_free=network_free, context=context
-        ).model_dump(
-            mode="json"
-        )
+        ).model_dump(mode="json")
         for condition in context.builder.CONDITIONS
     }
     instrument = _load(context.builder.INSTRUMENT)
@@ -459,9 +453,11 @@ def _grounding_keep(
     if context.selected_grounding_architecture_id is None:
         return True
     decision = result.get("decision")
-    return isinstance(decision, dict) and decision.get(
-        "selected_architecture_id"
-    ) == context.selected_grounding_architecture_id
+    return (
+        isinstance(decision, dict)
+        and decision.get("selected_architecture_id")
+        == context.selected_grounding_architecture_id
+    )
 
 
 def preflight(
@@ -642,12 +638,8 @@ async def _execute_responses(
     runtime_root = context.output_root / "runtime"
     instrument = _load(context.builder.INSTRUMENT)
     maximum_cost_usd = float(instrument["authority"]["maximum_cost_usd"])
-    maximum_provider_calls = int(
-        instrument["authority"]["maximum_provider_calls"]
-    )
-    maximum_concurrency = int(
-        instrument["execution"].get("maximum_concurrency", 1)
-    )
+    maximum_provider_calls = int(instrument["authority"]["maximum_provider_calls"])
+    maximum_concurrency = int(instrument["execution"].get("maximum_concurrency", 1))
     if not 1 <= maximum_concurrency <= 16:
         raise ActualProductEvaluationError(
             "maximum concurrency must be between one and sixteen"
@@ -771,9 +763,7 @@ def _load_completed_responses(
 ) -> list[tuple[str, AutonomyEvaluationResponseV1]]:
     if not context.response_ledger.is_file():
         raise ActualProductEvaluationError("completed response ledger is missing")
-    connection = sqlite3.connect(
-        f"file:{context.response_ledger}?mode=ro", uri=True
-    )
+    connection = sqlite3.connect(f"file:{context.response_ledger}?mode=ro", uri=True)
     try:
         metadata = dict(connection.execute("SELECT key,value FROM metadata"))
         if (
@@ -968,12 +958,9 @@ def _score(
         ),
         "cost_usd": sum(response.cost_usd for response in response_by_id.values()),
     }
-    operationally_valid = (
-        accounting["provider_calls"]
-        <= int(instrument["authority"]["maximum_provider_calls"])
-        and accounting["cost_usd"]
-        <= float(instrument["authority"]["maximum_cost_usd"])
-    )
+    operationally_valid = accounting["provider_calls"] <= int(
+        instrument["authority"]["maximum_provider_calls"]
+    ) and accounting["cost_usd"] <= float(instrument["authority"]["maximum_cost_usd"])
     status = (
         "invalid-execution"
         if not operationally_valid
@@ -1056,9 +1043,7 @@ async def _simulate(
         condition: [] for condition in context.builder.CONDITIONS
     }
     responses = []
-    with tempfile.TemporaryDirectory(
-        prefix=f"{context.instrument_id}-"
-    ) as directory:
+    with tempfile.TemporaryDirectory(prefix=f"{context.instrument_id}-") as directory:
         root = Path(directory)
         for condition, case, gold in context.builder.build_contract():
             response = await _run_case(

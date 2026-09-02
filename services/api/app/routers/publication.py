@@ -210,6 +210,24 @@ def review_learning_gap_proposal(
 ) -> dict[str, str]:
     try:
         publication.authorize_source_ingestion(account_id, course_id)
+        reviewed_at = _now()
+        signals = publication.repository.list_learning_gap_signals(
+            course_id, request.release_id, active_at=reviewed_at
+        )
+        aggregate = aggregate_learning_gap_signals(
+            signals,
+            course_id=course_id,
+            release_id=request.release_id,
+            policy=LearningGapPrivacyPolicyV1(),
+            computed_at=reviewed_at,
+        )
+        proposals = build_course_improvement_drafts(aggregate)
+        proposal = next(
+            (item for item in proposals if item.proposal_id == request.proposal_id),
+            None,
+        )
+        if proposal is None:
+            raise KeyError("learning_gap_proposal_not_found")
         publication.repository.save_audit_event(
             AuditEvent(
                 id=f"learning-gap-review-{request.proposal_id[:16]}-{request.decision}",
@@ -218,6 +236,8 @@ def review_learning_gap_proposal(
                 course_id=course_id,
                 details={
                     "proposal_id": request.proposal_id,
+                    "release_id": request.release_id,
+                    "aggregate_id": proposal.aggregate_id,
                     "decision": request.decision,
                     "rationale_supplied": bool(request.rationale.strip()),
                     "executable_change_created": False,
@@ -225,8 +245,22 @@ def review_learning_gap_proposal(
             )
         )
         return {"proposal_id": request.proposal_id, "decision": request.decision}
-    except PublicationError as error:
-        raise _http_error(error) from error
+    except (PublicationError, KeyError, ValueError) as error:
+        if isinstance(error, PublicationError):
+            raise _http_error(error) from error
+        code = (
+            "learning_gap_proposal_not_found"
+            if isinstance(error, KeyError)
+            else "learning_gap_review_invalid"
+        )
+        raise HTTPException(
+            status_code=(
+                status.HTTP_404_NOT_FOUND
+                if isinstance(error, KeyError)
+                else status.HTTP_422_UNPROCESSABLE_CONTENT
+            ),
+            detail={"code": code, "message": str(error)},
+        ) from error
 
 
 @router.get(
@@ -314,12 +348,14 @@ def list_autonomy_traces(
     account_id: ProfessorAccountDependency,
     publication: PublicationServiceDependency,
     conversation_id: str | None = None,
+    limit: int = Query(default=100, ge=1, le=500),
 ):
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         return publication.repository.list_agent_traces_v2(
             course_id,
             conversation_id=conversation_id,
+            limit=limit,
         )
     except PublicationError as error:
         raise _http_error(error) from error
@@ -351,6 +387,28 @@ def get_learner_belief_evidence(
             "belief_states": states,
             "claim": "observed-evidence-only",
         }
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
+@router.get("/courses/{course_id}/learner-belief-evidence")
+def list_course_learner_belief_evidence(
+    course_id: str,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        grouped = publication.repository.list_course_learner_belief_states(course_id)
+        return [
+            {
+                "student_id": student_id,
+                "course_id": course_id,
+                "belief_states": states,
+                "claim": "observed-evidence-only",
+            }
+            for student_id, states in sorted(grouped.items())
+        ]
     except PublicationError as error:
         raise _http_error(error) from error
 
@@ -472,16 +530,18 @@ def set_autonomy_policy(
 )
 def list_autonomous_goals(
     course_id: str,
-    student_account_id: str,
     account_id: ProfessorAccountDependency,
     autonomy: GovernedAutonomyServiceDependency,
     publication: PublicationServiceDependency,
+    student_account_id: str | None = None,
 ):
     try:
         publication.authorize_source_ingestion(account_id, course_id)
-        return autonomy.repository.list_autonomous_goals(
-            student_account_id, course_id
-        )
+        if student_account_id is not None:
+            return autonomy.repository.list_autonomous_goals(
+                student_account_id, course_id
+            )
+        return autonomy.repository.list_course_autonomous_goals(course_id, limit=100)
     except PublicationError as error:
         raise _http_error(error) from error
 
@@ -592,11 +652,12 @@ def list_autonomous_actions(
     autonomy: GovernedAutonomyServiceDependency,
     publication: PublicationServiceDependency,
     student_account_id: str | None = None,
+    limit: int = Query(default=100, ge=1, le=500),
 ):
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         return autonomy.repository.list_autonomous_actions(
-            course_id, student_id=student_account_id
+            course_id, student_id=student_account_id, limit=limit
         )
     except PublicationError as error:
         raise _http_error(error) from error
@@ -612,11 +673,12 @@ def list_autonomous_outcomes(
     autonomy: GovernedAutonomyServiceDependency,
     publication: PublicationServiceDependency,
     student_account_id: str | None = None,
+    limit: int = Query(default=100, ge=1, le=500),
 ):
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         return autonomy.repository.list_autonomous_outcomes(
-            course_id, student_id=student_account_id
+            course_id, student_id=student_account_id, limit=limit
         )
     except PublicationError as error:
         raise _http_error(error) from error
@@ -1026,7 +1088,9 @@ def create_release_draft(
                 teaching_profile.profile_id if teaching_profile is not None else None
             ),
             teaching_profile_sha256=(
-                teaching_profile.content_sha256 if teaching_profile is not None else None
+                teaching_profile.content_sha256
+                if teaching_profile is not None
+                else None
             ),
             release_id=request.release_id,
         )
@@ -1155,7 +1219,8 @@ def _proactive_http_error(error: ProactiveOutreachError) -> HTTPException:
         else status.HTTP_403_FORBIDDEN
         if error.code in {"professor_course_forbidden", "course_forbidden"}
         else status.HTTP_409_CONFLICT
-        if error.code in {
+        if error.code
+        in {
             "trigger_idempotency_conflict",
             "proactive_trigger_not_cancellable",
         }
@@ -1174,7 +1239,8 @@ def _teaching_profile_http_error(error: TeachingProfileError) -> HTTPException:
         else status.HTTP_403_FORBIDDEN
         if error.code == "course_forbidden"
         else status.HTTP_409_CONFLICT
-        if error.code in {
+        if error.code
+        in {
             "teaching_profile_not_draft",
             "teaching_profile_not_approved",
             "teaching_profile_not_withdrawable",
@@ -1193,7 +1259,8 @@ def _autonomy_http_error(error: GovernedAutonomyError) -> HTTPException:
         status.HTTP_404_NOT_FOUND
         if error.code == "autonomy_goal_not_found"
         else status.HTTP_403_FORBIDDEN
-        if error.code in {
+        if error.code
+        in {
             "approved_release_required",
             "objective_not_approved",
             "course_forbidden",

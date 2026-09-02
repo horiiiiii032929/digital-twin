@@ -66,7 +66,9 @@ class AutonomousJobInput(BaseModel):
     same_concept_cooldown_active: bool = False
     evidence_keys: list[str] = Field(default_factory=list, max_length=8)
     evidence_chunk_ids: list[str] = Field(default_factory=list, max_length=5)
-    evidence_decision_reason: str = Field(default="not-assessed", min_length=1, max_length=256)
+    evidence_decision_reason: str = Field(
+        default="not-assessed", min_length=1, max_length=256
+    )
     evidence_complete: bool = False
     evidence_unique: bool = False
     evidence_current: bool = False
@@ -290,7 +292,10 @@ class DeterministicAutonomousWordingGenerator:
             AutonomousActionKind.SUMMARIZE_PROGRESS: (
                 f"Your current focus is {concept}. Review the cited material and choose the next step."
             ),
-        }.get(plan.action, "A bounded tutoring follow-up is available in your course workspace.")
+        }.get(
+            plan.action,
+            "A bounded tutoring follow-up is available in your course workspace.",
+        )
         return GroundedTutorResponseV2(
             action=plan.action,
             content=wording,
@@ -354,8 +359,7 @@ class GovernedAutonomousTutoringGraph:
                 event_id=job.opportunity.opportunity_id,
                 learner_key=hashlib.sha256(
                     (
-                        f"{job.opportunity.course_id}:"
-                        f"{job.opportunity.student_id}"
+                        f"{job.opportunity.course_id}:{job.opportunity.student_id}"
                     ).encode("utf-8")
                 ).hexdigest(),
                 course_id=job.opportunity.course_id,
@@ -383,11 +387,17 @@ class GovernedAutonomousTutoringGraph:
                 ("src.digital_twin.student.autonomy_models", "AutonomousActionStatus"),
                 ("src.digital_twin.student.autonomy_models", "AutonomousOutcomeKind"),
                 ("src.digital_twin.student.autonomy_models", "AutonomousGoalStatus"),
-                ("src.digital_twin.student.autonomy_models", "AutonomousOpportunityStatus"),
+                (
+                    "src.digital_twin.student.autonomy_models",
+                    "AutonomousOpportunityStatus",
+                ),
                 ("src.digital_twin.student.autonomy_models", "AutonomousGoalV1"),
                 ("src.digital_twin.student.autonomy_models", "ProactiveOpportunityV1"),
                 ("src.digital_twin.student.autonomy_models", "PedagogicalPolicyV2"),
-                ("src.digital_twin.student.autonomy_models", "AutonomousPlannerOutputV1"),
+                (
+                    "src.digital_twin.student.autonomy_models",
+                    "AutonomousPlannerOutputV1",
+                ),
                 ("src.digital_twin.student.autonomy_models", "AutonomousPlanV1"),
                 ("src.digital_twin.student.autonomy_models", "AutonomousActionV1"),
                 ("src.digital_twin.student.autonomy_models", "AutonomousOutcomeV1"),
@@ -425,7 +435,9 @@ class GovernedAutonomousTutoringGraph:
                             checkpoint_nodes.append(str(node))
         required = (result["plan"], result["action"], result["outcome"])
         if any(item is None for item in required):
-            raise AutonomousRuntimeError("autonomous graph ended without durable records")
+            raise AutonomousRuntimeError(
+                "autonomous graph ended without durable records"
+            )
         trace = result["trace"].model_copy(
             update={
                 "checkpoint_ids": checkpoint_ids,
@@ -499,10 +511,7 @@ class GovernedAutonomousTutoringGraph:
             reason = "opportunity-expired"
         elif job.goal is not None and job.goal.status.value != "active":
             reason = "goal-not-active"
-        elif (
-            job.goal is not None
-            and job.goal.attempt_count >= job.goal.attempt_limit
-        ):
+        elif job.goal is not None and job.goal.attempt_count >= job.goal.attempt_limit:
             reason = "goal-attempt-limit-reached"
         return {"blocked_reason": reason}
 
@@ -726,7 +735,7 @@ class GovernedAutonomousTutoringGraph:
                 """INSERT INTO autonomous_model_calls_v2(
                        opportunity_id, stage, request_sha256, status, started_at
                    ) VALUES (?, ?, ?, 'started', ?)""",
-                (opportunity_id, stage, request_sha256, timestamp_now()),
+                (opportunity_id, stage, request_sha256, job.now),
             )
             await connection.commit()
         return None, True
@@ -744,7 +753,7 @@ class GovernedAutonomousTutoringGraph:
                    WHERE opportunity_id = ? AND stage = ?""",
                 (
                     output_json,
-                    timestamp_now(),
+                    job.now,
                     job.opportunity.opportunity_id,
                     stage,
                 ),
@@ -764,7 +773,7 @@ class GovernedAutonomousTutoringGraph:
                    WHERE opportunity_id = ? AND stage = ?""",
                 (
                     failure_code,
-                    timestamp_now(),
+                    job.now,
                     job.opportunity.opportunity_id,
                     stage,
                 ),
@@ -907,7 +916,12 @@ class GovernedAutonomousTutoringGraph:
                 "completed_at": job.now,
             }
         )
-        return {"action": action, "outcome": outcome, "wake_up": wake_up, "trace": trace}
+        return {
+            "action": action,
+            "outcome": outcome,
+            "wake_up": wake_up,
+            "trace": trace,
+        }
 
     @staticmethod
     def _action(

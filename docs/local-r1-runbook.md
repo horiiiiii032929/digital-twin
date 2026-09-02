@@ -43,6 +43,7 @@ For the qualified governed V2.1 local release, set these values in the ignored
 ```text
 APP_GENERATOR_MODE=deterministic
 APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2
+APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json
 APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
 APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-terra
 APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
@@ -169,9 +170,10 @@ npm run verify:staging-https -- \
   --mode-check --expected-tutoring-mode grounded-assistant
 ```
 
-Restore the default T1 selection by running the same `up -d --force-recreate`
-command without the environment override, then rerun `--mode-check` with
-`governed-autonomous-tutoring-graph-v2.1`.
+Restore governed V2.1 only with a qualification record that binds the exact
+profile, planner, and evidence gate. The historical confirmation-001 record
+does not contain the required evidence-gate binding and is not a current
+release authorization.
 
 ## Governed autonomy operating workflow
 

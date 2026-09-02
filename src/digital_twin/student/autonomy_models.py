@@ -155,7 +155,9 @@ class CourseDomainModelV1(_Contract):
     version: int = Field(ge=1)
     objectives: list[CourseObjectiveV1] = Field(min_length=1, max_length=64)
     concepts: list[CourseConceptV1] = Field(min_length=1, max_length=256)
-    misconceptions: list[CourseMisconceptionV1] = Field(default_factory=list, max_length=256)
+    misconceptions: list[CourseMisconceptionV1] = Field(
+        default_factory=list, max_length=256
+    )
     approved_by: str = Field(min_length=1, max_length=128)
     approved_at: str = Field(default_factory=timestamp_now)
 
@@ -335,7 +337,9 @@ class PedagogicalPolicyV2(_Contract):
 
     @field_validator("allowed_actions")
     @classmethod
-    def actions_must_be_unique(cls, value: list[AutonomousActionKind]) -> list[AutonomousActionKind]:
+    def actions_must_be_unique(
+        cls, value: list[AutonomousActionKind]
+    ) -> list[AutonomousActionKind]:
         if len(value) != len(set(value)):
             raise ValueError("autonomy policy actions must be unique")
         return value
@@ -380,9 +384,9 @@ class ReactiveSemanticProposalV2(_Contract):
         "abstain_no_evidence",
     ]
     concept_ids: list[str] = Field(default_factory=list, max_length=3)
-    hypothesis_kind: Literal[
-        "misconception", "knowledge-gap", "low-confidence", "inactive"
-    ] | None = None
+    hypothesis_kind: (
+        Literal["misconception", "knowledge-gap", "low-confidence", "inactive"] | None
+    ) = None
     hypothesis_concept_id: str | None = Field(default=None, max_length=128)
     hypothesis_confidence: float = Field(default=0, ge=0, le=1)
     reason_code: str = Field(min_length=1, max_length=128)
@@ -390,7 +394,9 @@ class ReactiveSemanticProposalV2(_Contract):
     @model_validator(mode="after")
     def hypothesis_fields_must_be_consistent(self) -> "ReactiveSemanticProposalV2":
         if (self.hypothesis_kind is None) != (self.hypothesis_concept_id is None):
-            raise ValueError("semantic hypothesis kind and concept must appear together")
+            raise ValueError(
+                "semantic hypothesis kind and concept must appear together"
+            )
         if self.hypothesis_kind is None and self.hypothesis_confidence != 0:
             raise ValueError("semantic hypothesis confidence requires a hypothesis")
         if len(self.concept_ids) != len(set(self.concept_ids)):
@@ -430,7 +436,9 @@ class GroundedTutorResponseV2(_Contract):
             or not self.citation_ids
             or not self.source_range_keys
         ):
-            raise ValueError("grounded answer requires claims, citations, and source ranges")
+            raise ValueError(
+                "grounded answer requires claims, citations, and source ranges"
+            )
         if self.policy_action != "answer" and (
             self.atomic_claims or self.citation_ids or self.source_range_keys
         ):
@@ -502,7 +510,9 @@ class ReactiveTurnArtifactsV2(_Contract):
             raise ValueError("reactive state commit requires both belief and delta")
         if not self.state_committed:
             if trace.input_state_revision != trace.output_state_revision:
-                raise ValueError("uncommitted reactive turn cannot advance state revision")
+                raise ValueError(
+                    "uncommitted reactive turn cannot advance state revision"
+                )
             return self
         assert belief is not None and delta is not None
         if (
@@ -516,7 +526,9 @@ class ReactiveTurnArtifactsV2(_Contract):
             or trace.input_state_revision != delta.previous_revision
             or trace.output_state_revision != delta.next_revision
         ):
-            raise ValueError("reactive turn artifacts have inconsistent scope or revision")
+            raise ValueError(
+                "reactive turn artifacts have inconsistent scope or revision"
+            )
         return self
 
 
@@ -578,11 +590,24 @@ class ProactiveOpportunityV1(_Contract):
 
     @model_validator(mode="after")
     def action_window_must_be_ordered(self) -> "ProactiveOpportunityV1":
-        _require_after(self.earliest_action_at, self.latest_action_at, "opportunity window")
+        _require_after(
+            self.earliest_action_at, self.latest_action_at, "opportunity window"
+        )
         if len(self.source_chunk_ids) != len(set(self.source_chunk_ids)):
             raise ValueError("opportunity source chunk IDs must be unique")
-        if self.source_chunk_id and self.source_chunk_ids and self.source_chunk_id not in self.source_chunk_ids:
-            raise ValueError("primary source chunk must be included in the evidence bundle")
+        if self.source_chunk_id is None and self.source_chunk_ids:
+            # Delivery currently cites one primary region while validation may
+            # require several.  Select that primary deterministically instead
+            # of allowing a valid evidence bundle to become undeliverable.
+            self.source_chunk_id = self.source_chunk_ids[0]
+        if (
+            self.source_chunk_id
+            and self.source_chunk_ids
+            and self.source_chunk_id not in self.source_chunk_ids
+        ):
+            raise ValueError(
+                "primary source chunk must be included in the evidence bundle"
+            )
         return self
 
 

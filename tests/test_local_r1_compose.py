@@ -15,21 +15,15 @@ def test_local_r1_defaults_safe_and_allows_hash_bound_v2_selection() -> None:
     runtime = compose["x-runtime-environment"]
 
     assert runtime["APP_MODE"] == "staging"
-    assert runtime["APP_GENERATOR_MODE"] == "${APP_GENERATOR_MODE:-deterministic}"
-    assert runtime["APP_EVIDENCE_GATE_MODE"] == (
-        "${APP_EVIDENCE_GATE_MODE:-structured-lexical-v1}"
-    )
-    assert runtime["APP_STUDENT_TUTORING_MODE"] == (
-        "${APP_STUDENT_TUTORING_MODE:-bounded-tutoring-graph}"
-    )
+    assert runtime["APP_GENERATOR_MODE"] == "deterministic"
+    assert runtime["APP_EVIDENCE_GATE_MODE"] == "structured-lexical-v1"
+    assert runtime["APP_STUDENT_TUTORING_MODE"] == "bounded-tutoring-graph"
     assert runtime["APP_PROACTIVE_OUTREACH_WORKER_ENABLED"] == "true"
     assert runtime["APP_STUDENT_PROFILE_PATH"] == (
-        "${APP_STUDENT_PROFILE_PATH:-/app/research/05_evaluation/profiles/"
-        "student-tutor-r1-local-candidate-v1.json}"
+        "/app/research/05_evaluation/profiles/"
+        "student-tutor-r1-local-candidate-v1.json"
     )
-    assert runtime["APP_AUTONOMY_PLANNER_MODE"] == (
-        "${APP_AUTONOMY_PLANNER_MODE:-deterministic}"
-    )
+    assert runtime["APP_AUTONOMY_PLANNER_MODE"] == "deterministic"
     assert "autonomous-tutoring-r1-confirmation-002.json" in runtime[
         "APP_T1_QUALIFICATION_RESULT_PATH"
     ]

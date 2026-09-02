@@ -52,6 +52,7 @@ from src.digital_twin.grounding import (
     AmbiguitySafeEvidenceGateV1,
     AtomicClaimEvidenceValidator,
     CanonicalSourceAtomicClaimVerifier,
+    ContiguousQuoteAtomicClaimVerifier,
     LocalCourseSourceIngestionService,
     RetrievalIndexStoreV1,
     StructuredLexicalCoverageEvidenceGate,
@@ -229,8 +230,13 @@ def create_app(
     )
     active_claim_validator = student_claim_evidence_validator
     if active_claim_validator is None and governed_v2:
+        verifier = (
+            CanonicalSourceAtomicClaimVerifier()
+            if isinstance(active_generator, DeterministicEvidenceSetGroundedGenerator)
+            else ContiguousQuoteAtomicClaimVerifier()
+        )
         active_claim_validator = AtomicClaimEvidenceValidator(
-            CanonicalSourceAtomicClaimVerifier(),
+            verifier,
             minimum_entailment=1.0,
             maximum_contradiction=0.0,
             maximum_claims=8,
@@ -251,7 +257,6 @@ def create_app(
             max_calls=runtime_settings.provider_max_calls_per_process,
             max_cost_usd=runtime_settings.provider_cost_cap_usd,
         )
-        app.state.autonomy_planner_budget = autonomy_planner_budget
         live_proactive_planner = LiveAutonomousPlanner(
             autonomy_planner_budget,
             model_id=OPENAI_GPT_5_6_TERRA_MODEL,
@@ -260,6 +265,7 @@ def create_app(
             autonomy_planner_budget,
             model_id=OPENAI_GPT_5_6_TERRA_MODEL,
         )
+    app.state.autonomy_planner_budget = autonomy_planner_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=resolved_student_profile_path,
@@ -420,7 +426,7 @@ def _configured_generator(
             settings.student_tutoring_mode
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         ):
-            return DeterministicEvidenceSetGroundedGenerator(), None
+            return _deterministic_governed_generator(), None
         return None, None
     if settings.generator_mode not in {
         GeneratorMode.OPENAI_GPT_5_4_MINI,
@@ -496,6 +502,16 @@ def _configured_generator(
             ),
         ),
         client,
+    )
+
+
+def _deterministic_governed_generator() -> DeterministicEvidenceSetGroundedGenerator:
+    """Build the one policy-bound deterministic generator used by governed R1."""
+
+    return DeterministicEvidenceSetGroundedGenerator(
+        policy_enforcer=DeterministicPolicyEnforcer(
+            action_router=DeterministicActionRouterV2()
+        )
     )
 
 

@@ -1,11 +1,13 @@
 from datetime import UTC, datetime, timedelta
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 
 from src.digital_twin.llm import FixtureLlmClient, LlmResponse
 from src.digital_twin.generation import authoritative_citation_for_chunk
+from src.digital_twin.generation import DeterministicEvidenceSetGroundedGenerator
 from src.digital_twin.grounding import (
     AtomicClaimEvidenceValidator,
     ExactQuoteAtomicClaimVerifier,
@@ -262,7 +264,10 @@ def test_withdrawing_in_app_consent_cancels_pending_autonomy_scope(tmp_path):
     )
 
     assert repository.get_autonomous_goal(goal.goal_id).status.value == "cancelled"
-    assert repository.get_autonomous_opportunity(opportunity.opportunity_id).status.value == "cancelled"
+    assert (
+        repository.get_autonomous_opportunity(opportunity.opportunity_id).status.value
+        == "cancelled"
+    )
 
 
 @pytest.mark.asyncio
@@ -293,6 +298,99 @@ async def test_due_opportunity_delivers_once_and_survives_restart(tmp_path):
 
 
 @pytest.mark.asyncio
+async def test_delivery_reconciles_after_crash_before_autonomous_commit(
+    tmp_path, monkeypatch
+):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _goal, opportunity = _goal_and_opportunity(service, fixture, release)
+    original_commit = repository.commit_autonomous_job
+    failed_once = False
+
+    def crash_once(result):
+        nonlocal failed_once
+        if not failed_once:
+            failed_once = True
+            raise RuntimeError("synthetic crash after in-app materialization")
+        original_commit(result)
+
+    monkeypatch.setattr(repository, "commit_autonomous_job", crash_once)
+    with pytest.raises(RuntimeError, match="synthetic crash"):
+        await service.process_due(worker_id="worker-before-crash", now=NOW)
+
+    assert len(service.outreach.list_inbox(fixture.student_a_id)) == 1
+    assert repository.list_autonomous_actions(fixture.course_a_id) == []
+
+    recovered = await service.process_due(
+        worker_id="worker-after-crash",
+        now=NOW + timedelta(seconds=service.lease_seconds + 1),
+    )
+
+    assert len(recovered) == 1
+    assert recovered[0].opportunity_id == opportunity.opportunity_id
+    assert recovered[0].outcome == "delivered"
+    assert len(service.outreach.list_inbox(fixture.student_a_id)) == 1
+    assert len(repository.list_autonomous_actions(fixture.course_a_id)) == 1
+
+
+@pytest.mark.asyncio
+async def test_multi_region_opportunity_selects_a_primary_citation(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    goal = service.create_goal(
+        student_id=fixture.student_a_id,
+        course_id=fixture.course_a_id,
+        approved_course_objective=OBJECTIVE,
+        learner_subgoal="Recall why replicated cache data needs coherence.",
+        success_condition="Explain the consistency purpose without a hint.",
+        expires_at=(NOW + timedelta(days=7)).isoformat(),
+    )
+    opportunity = service.create_opportunity(
+        student_id=fixture.student_a_id,
+        course_id=fixture.course_a_id,
+        goal_id=goal.goal_id,
+        event_kind=AutonomousEventKind.SPACED_REVIEW_DUE,
+        concept_id="cache-coherence",
+        source_chunk_ids=[release.chunks[0].id],
+        earliest_action_at=(NOW - timedelta(minutes=1)).isoformat(),
+        latest_action_at=(NOW + timedelta(hours=1)).isoformat(),
+        idempotency_key="autonomy-multi-region-primary",
+    )
+
+    result = await service.process_due(worker_id="worker", now=NOW)
+
+    assert opportunity.source_chunk_id == release.chunks[0].id
+    assert result[0].outcome == "delivered"
+    assert len(service.outreach.list_inbox(fixture.student_a_id)) == 1
+
+
+@pytest.mark.asyncio
+async def test_paused_course_wakeups_do_not_enter_due_work_queue(tmp_path):
+    repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
+    _goal, _opportunity = _goal_and_opportunity(service, fixture, release)
+    await service.process_due(worker_id="worker-day-0", now=NOW)
+    due_at = (NOW + timedelta(days=1)).isoformat()
+
+    service.set_policy(
+        fixture.professor_id,
+        fixture.course_a_id,
+        approved_course_objectives=[OBJECTIVE],
+        allowed_actions=ALLOWED_ACTIONS,
+        autonomy_enabled=True,
+        paused=True,
+    )
+    assert repository.list_due_autonomous_wakeups(due_at, limit=1) == []
+
+    service.set_policy(
+        fixture.professor_id,
+        fixture.course_a_id,
+        approved_course_objectives=[OBJECTIVE],
+        allowed_actions=ALLOWED_ACTIONS,
+        autonomy_enabled=True,
+        paused=False,
+    )
+    assert len(repository.list_due_autonomous_wakeups(due_at, limit=1)) == 1
+
+
+@pytest.mark.asyncio
 async def test_scheduled_wakeup_preserves_concept_and_evidence_lineage(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
     _, _ = _goal_and_opportunity(service, fixture, release)
@@ -306,9 +404,7 @@ async def test_scheduled_wakeup_preserves_concept_and_evidence_lineage(tmp_path)
     assert second[0].outcome == "delivered"
     opportunities = repository.list_autonomous_actions(fixture.course_a_id)
     assert len(opportunities) == 2
-    repeated = repository.get_autonomous_opportunity(
-        opportunities[-1].opportunity_id
-    )
+    repeated = repository.get_autonomous_opportunity(opportunities[-1].opportunity_id)
     assert repeated.concept_id == "cache-coherence"
     assert repeated.source_chunk_id == release.chunks[0].id
     assert len(service.outreach.list_inbox(fixture.student_a_id)) == 2
@@ -392,9 +488,7 @@ async def test_expired_goal_cancels_future_work(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
     goal, opportunity = _goal_and_opportunity(service, fixture, release)
 
-    results = await service.process_due(
-        worker_id="worker", now=NOW + timedelta(days=8)
-    )
+    results = await service.process_due(worker_id="worker", now=NOW + timedelta(days=8))
 
     assert results == []
     assert repository.get_autonomous_goal(goal.goal_id).status.value == "expired"
@@ -425,7 +519,9 @@ async def test_kill_switch_cancels_goal_and_pending_work(tmp_path):
         == "cancelled"
     )
     assert await service.process_due(worker_id="worker", now=NOW) == []
-    assert repository.get_teaching_profile(approved.profile_id).status.value == "approved"
+    assert (
+        repository.get_teaching_profile(approved.profile_id).status.value == "approved"
+    )
 
 
 @pytest.mark.asyncio
@@ -684,7 +780,9 @@ async def test_proactive_uncertain_generator_call_is_not_repeated(tmp_path):
     assert generator.calls == 1
     assert resumed.action.kind == AutonomousActionKind.NO_ACTION
     assert resumed.trace.restart_count == 1
-    assert resumed.trace.decision_reason == "operational-provider-call-outcome-uncertain"
+    assert (
+        resumed.trace.decision_reason == "operational-provider-call-outcome-uncertain"
+    )
 
 
 def test_policy_contract_enforces_governance_limits():
@@ -832,6 +930,56 @@ async def test_goal_attempt_limit_stops_additional_delivery(tmp_path):
 
 
 @pytest.mark.asyncio
+async def test_proactive_wording_uses_the_evidence_assessment_query(tmp_path):
+    repository, _, _, release, _ = _autonomy_fixture(tmp_path)
+    chunks = release.chunks[:2]
+    assert len(chunks) == 2
+    evidence_keys = [
+        ":".join(
+            (
+                chunk.source_artifact_id or chunk.document_id,
+                str(chunk.source_version),
+                chunk.content_hash,
+                chunk.locator,
+            )
+        )
+        for chunk in chunks
+    ]
+    wrapper = RepositoryGroundedWordingGenerator(
+        repository,
+        DeterministicEvidenceSetGroundedGenerator(),
+        model_id="deterministic/evidence-set-v2",
+        claim_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+    )
+    objective = (
+        "Which two statements explain the relationship between the approved concepts?"
+    )
+
+    response = await wrapper.generate(
+        SimpleNamespace(
+            opportunity=SimpleNamespace(
+                release_id=release.id,
+                concept_id="cache-coherence",
+            ),
+            goal=SimpleNamespace(approved_course_objective=objective),
+            evidence_chunk_ids=[chunk.id for chunk in chunks],
+            evidence_keys=evidence_keys,
+        ),
+        SimpleNamespace(
+            action=AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE,
+            expected_learner_action="Explain both approved concepts.",
+        ),
+    )
+
+    assert response.policy_action == "answer"
+    assert len(response.atomic_claims) == 2
+
+
+@pytest.mark.asyncio
 async def test_unsupported_live_atomic_claim_fails_closed_before_delivery(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
     _, _ = _goal_and_opportunity(service, fixture, release)
@@ -899,7 +1047,9 @@ async def test_two_grounded_attempts_complete_goal_and_cancel_follow_up(tmp_path
             maximum_contradiction=0.0,
         ),
         tutoring_mode=TutoringMode.T1_V2,
-        learning_gap_pseudonymizer=LearningGapPseudonymizer(b"v2-test-secret-32-bytes-minimum!!"),
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-test-secret-32-bytes-minimum!!"
+        ),
     )
     conversation = tutoring.create_conversation(
         fixture.student_a_id,
@@ -948,7 +1098,10 @@ async def test_two_grounded_attempts_complete_goal_and_cancel_follow_up(tmp_path
     assert belief.concepts[0].attribution_confidence >= 0.5
     assert len(goals) == 1
     assert goals[0].status.value == "completed"
-    assert repository.get_autonomous_opportunity(pending.opportunity_id).status.value == "cancelled"
+    assert (
+        repository.get_autonomous_opportunity(pending.opportunity_id).status.value
+        == "cancelled"
+    )
 
 
 def test_v2_evidence_contract_rejects_model_owned_mastery():
@@ -1066,7 +1219,14 @@ async def test_t1_v2_persists_every_reactive_runtime_plane(tmp_path):
         conversation_id=conversation.id,
     )
     assert turn.citations
-    assert len(observations) == len(deltas) == len(plans) == len(responses) == len(traces) == 1
+    assert (
+        len(observations)
+        == len(deltas)
+        == len(plans)
+        == len(responses)
+        == len(traces)
+        == 1
+    )
     assert observations[0].observation_id == traces[0].event_id
     assert deltas[0].next_revision == traces[0].output_state_revision == 1
     assert plans[0].required_evidence_keys == responses[0].source_range_keys
@@ -1109,12 +1269,14 @@ async def test_t1_v2_clarification_is_policy_response_not_graph_failure(tmp_path
         fixture.course_a_id,
         conversation_id=conversation.id,
     )[0]
+    response = repository.list_grounded_responses_v2(conversation.id)[0]
     assert turn.tutor_message.action == "clarify-request"
     assert (
         turn.tutor_message.content
         == "Which concept or step would you like to work through?"
     )
     assert trace.decision_reason == "intent-clarify-request"
+    assert response.policy_action == "clarify"
     assert trace.generation_calls == 0
     assert trace.validation_results["graph-validation"] is True
 
@@ -1187,9 +1349,7 @@ async def test_t1_v2_resumes_after_node_failure_without_duplicate_generation(tmp
         minimum_entailment=1.0,
         maximum_contradiction=0.0,
     )
-    pseudonymizer = LearningGapPseudonymizer(
-        b"v2-checkpoint-test-secret-32-bytes!!"
-    )
+    pseudonymizer = LearningGapPseudonymizer(b"v2-checkpoint-test-secret-32-bytes!!")
     service = StudentTutoringService(
         repository,
         profile_path=PROFILE,
@@ -1273,9 +1433,7 @@ async def test_t1_v2_uncertain_provider_call_fails_closed_without_retry(tmp_path
         minimum_entailment=1.0,
         maximum_contradiction=0.0,
     )
-    pseudonymizer = LearningGapPseudonymizer(
-        b"v2-uncertain-call-secret-32-bytes!!"
-    )
+    pseudonymizer = LearningGapPseudonymizer(b"v2-uncertain-call-secret-32-bytes!!")
     service = StudentTutoringService(
         repository,
         profile_path=PROFILE,
@@ -1334,7 +1492,9 @@ async def test_t1_v2_uncertain_provider_call_fails_closed_without_retry(tmp_path
     artifacts = resumed.reactive_v2_artifacts
     assert artifacts is not None and not artifacts.state_committed
     assert artifacts.trace.restart_count == 1
-    assert artifacts.trace.decision_reason == "operational-provider-call-outcome-uncertain"
+    assert (
+        artifacts.trace.decision_reason == "operational-provider-call-outcome-uncertain"
+    )
     assert artifacts.response.policy_action != "answer"
 
 
@@ -1432,6 +1592,7 @@ async def test_v2_provider_failure_falls_back_without_state_advance_or_retry(tmp
     assert len(repository.list_pedagogical_plans_v2(conversation.id)) == 1
     assert len(repository.list_grounded_responses_v2(conversation.id)) == 1
     assert len(traces) == 1
+    assert traces[0].generation_calls == 1
     assert traces[0].repair_calls == 0
     assert traces[0].input_state_revision == traces[0].output_state_revision == 0
     assert traces[0].validation_results["graph-validation"] is False

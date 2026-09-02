@@ -185,9 +185,7 @@ def test_free_form_reason_cannot_hide_ineligible_action() -> None:
         update={"trigger_event_kind": "student-inactivity", "trigger_event_id": None}
     )
 
-    score = score_autonomy_case_independently(
-        _case(), _gold(), _response(), evidence
-    )
+    score = score_autonomy_case_independently(_case(), _gold(), _response(), evidence)
 
     assert score.event_action_eligibility_valid is False
     assert "event-action-eligibility" in score.failure_codes
@@ -199,9 +197,7 @@ def test_authority_hash_drift_fails_even_when_product_reports_pass() -> None:
         update={"profile_sha256": hashlib.sha256(b"mutated").hexdigest()}
     )
 
-    score = score_autonomy_case_independently(
-        _case(), _gold(), _response(), evidence
-    )
+    score = score_autonomy_case_independently(_case(), _gold(), _response(), evidence)
 
     assert score.authority_preserved is False
     assert score.safe_grounded_autonomous_success is False
@@ -216,9 +212,17 @@ def test_citation_hash_and_restart_are_independently_reconciled() -> None:
         update={"after_sha256": hashlib.sha256(b"different").hexdigest()}
     )
 
-    score = score_autonomy_case_independently(
-        _case(), _gold(), _response(), evidence
-    )
+    score = score_autonomy_case_independently(_case(), _gold(), _response(), evidence)
 
     assert score.citation_lineage_valid is False
     assert score.restart_consistent is False
+
+
+def test_duplicate_state_revision_is_rejected_independently() -> None:
+    evidence = _evidence()
+    evidence.state_deltas.append(evidence.state_deltas[0].model_copy())
+
+    score = score_autonomy_case_independently(_case(), _gold(), _response(), evidence)
+
+    assert score.pedagogical_transition_valid is False
+    assert "pedagogical-transition" in score.failure_codes

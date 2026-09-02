@@ -70,6 +70,16 @@ def metrics(request: Request, account_id: AdminAccountDependency):
             "reported_cost_usd": 0.0,
         }
     )
+    planner_budget = getattr(request.app.state, "autonomy_planner_budget", None)
+    snapshot["autonomy_planner_budget"] = (
+        planner_budget.snapshot()
+        if planner_budget is not None
+        else {
+            "mode": "deterministic",
+            "calls": 0,
+            "reported_cost_usd": 0.0,
+        }
+    )
     return snapshot
 
 

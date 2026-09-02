@@ -873,6 +873,9 @@ class GovernedReactiveTutoringGraphV2:
         response = _grounded_response_v2(answer, plan)
         provider_trace = answer.trace
         usage = provider_trace.usage if provider_trace is not None else None
+        generation_calls = await self._provider_generation_call_count(
+            graph_input.event_id
+        )
         trace = AgentTraceV2(
             trace_id=f"trace-{graph_input.event_id}",
             event_id=graph_input.event_id,
@@ -889,10 +892,7 @@ class GovernedReactiveTutoringGraphV2:
             generator_model=provider_trace.provider_model if provider_trace else None,
             fast_path=bool(result["fast_path"]),
             planning_calls=result["planning_calls"],
-            generation_calls=int(
-                provider_trace is not None
-                and provider_trace.provider_model != "not-called"
-            ),
+            generation_calls=generation_calls,
             repair_calls=result["repair_count"],
             provider_input_tokens=usage.input_tokens if usage else 0,
             provider_output_tokens=usage.output_tokens if usage else 0,
@@ -940,6 +940,18 @@ class GovernedReactiveTutoringGraphV2:
             failure_reason=result["failure_reason"],
             reactive_v2_artifacts=artifacts,
         )
+
+    async def _provider_generation_call_count(self, event_id: str) -> int:
+        if self.generator_model_id.startswith("deterministic/"):
+            return 0
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            cursor = await connection.execute(
+                """SELECT COUNT(*) FROM tutoring_model_calls_v2
+                   WHERE event_id = ? AND stage IN ('generate', 'repair')""",
+                (event_id,),
+            )
+            row = await cursor.fetchone()
+        return min(1, int(row[0] if row is not None else 0))
 
     def _build_graph(self) -> StateGraph:
         graph = StateGraph(_V2GraphState, context_schema=_V2RuntimeContext)
@@ -1698,6 +1710,7 @@ def _grounded_response_v2(
     policy_action = {
         "answer": "answer",
         "clarify": "clarify",
+        "clarify-request": "clarify",
         "no-evidence": "abstain",
         "abstain": "abstain",
         "redirect-graded-work": "refuse",

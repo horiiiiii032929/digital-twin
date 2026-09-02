@@ -10,6 +10,9 @@ from src.digital_twin.grounding.evidence_sufficiency import (
     StructuredLexicalCoverageEvidenceGate,
 )
 from src.digital_twin.grounding.models import DocumentChunk, RetrievalHit
+from src.digital_twin.grounding.reference_uniqueness import (
+    prefer_specific_source_regions,
+)
 from src.digital_twin.grounding.semantic_evidence_atoms import (
     ATOM_VERSION,
     SourceSemanticEvidenceAtomGateV1,
@@ -253,3 +256,85 @@ def test_ambiguity_gate_ignores_page_fallback_when_precise_region_exists() -> No
 
     assert decision.sufficient is True
     assert decision.selected_hit_ids == ["precise"]
+
+
+def test_ambiguity_gate_removes_fallback_before_applying_evidence_limit() -> None:
+    aggregate = _chunk(
+        "aggregate",
+        "CSRF abuses an authenticated browser session. Page footer.",
+        title="CSRF",
+        cluster="csrf",
+        ordinal=0,
+    ).model_copy(
+        update={
+            "page_start": 1,
+            "page_end": 1,
+            "region_kind": "page",
+            "metadata": {"fallback": "selected-text"},
+        }
+    )
+    unrelated = _chunk(
+        "unrelated",
+        "Same-site cookies affect cross-site requests.",
+        title="Cookies",
+        cluster="cookies",
+        ordinal=1,
+    )
+    precise = _chunk(
+        "precise",
+        "CSRF abuses an authenticated browser session.",
+        title="CSRF",
+        cluster="csrf",
+        ordinal=2,
+    ).model_copy(
+        update={"page_start": 1, "page_end": 1, "region_kind": "text"}
+    )
+    gate = AmbiguitySafeEvidenceGateV1(
+        StructuredLexicalCoverageEvidenceGate(
+            minimum_content_matching_terms=2,
+            evidence_limit=2,
+        ),
+        evidence_limit=2,
+    )
+
+    decision = gate.assess(
+        "How does CSRF abuse an authenticated browser session?",
+        [
+            RetrievalHit(chunk=aggregate, relevance_score=1.0),
+            RetrievalHit(chunk=unrelated, relevance_score=0.9),
+            RetrievalHit(chunk=precise, relevance_score=0.8),
+        ],
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["precise"]
+
+
+def test_page_fallback_is_retained_for_unrelated_region_on_same_page() -> None:
+    aggregate = _chunk(
+        "aggregate",
+        "CSRF abuses an authenticated browser session.",
+        title="CSRF",
+        cluster="csrf",
+        ordinal=0,
+    ).model_copy(
+        update={
+            "page_start": 1,
+            "page_end": 1,
+            "region_kind": "page",
+            "metadata": {"fallback": "selected-text"},
+        }
+    )
+    unrelated = _chunk(
+        "unrelated",
+        "A completely different region on the same page.",
+        title="Other",
+        cluster="other",
+        ordinal=1,
+    ).model_copy(
+        update={"page_start": 1, "page_end": 1, "region_kind": "text"}
+    )
+
+    preferred = prefer_specific_source_regions([aggregate, unrelated])
+
+    assert [row.id for row in preferred] == ["aggregate", "unrelated"]

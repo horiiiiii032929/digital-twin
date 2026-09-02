@@ -437,19 +437,10 @@ class StudentProductAutonomyAdapterV1:
     @staticmethod
     def _durable_identity_snapshot(
         runtime: StudentProductAutonomyRuntimeV1,
-    ) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], int]:
-        goals = runtime.repository.list_autonomous_goals(
+    ) -> dict[str, tuple[tuple[str, ...], ...]]:
+        return runtime.repository.autonomy_durable_state_snapshot(
             runtime.student_id,
             runtime.course_id,
-        )
-        actions = runtime.repository.list_autonomous_actions(runtime.course_id)
-        messages = runtime.repository.list_messages(runtime.conversation_id)
-        belief = runtime.repository.get_learner_belief_state_v2(runtime.conversation_id)
-        return (
-            tuple(item.goal_id for item in goals),
-            tuple(item.action_id for item in actions),
-            tuple(item.id for item in messages),
-            belief.revision if belief is not None else 0,
         )
 
     async def collect_actions(self) -> list[AutonomyObservedActionV1]:

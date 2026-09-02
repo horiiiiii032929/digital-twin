@@ -26,6 +26,7 @@ from src.digital_twin.evaluation import (
 from src.digital_twin.identity import IdentityService, SQLiteIdentityRepository
 from src.digital_twin.grounding import (
     AmbiguitySafeEvidenceGateV1,
+    ContiguousQuoteAtomicClaimVerifier,
     QuestionTargetedAtomicEvidenceGate,
     StructuredLexicalCoverageEvidenceGate,
 )
@@ -448,6 +449,79 @@ def test_staging_configuration_rejects_t1_v1_evidence_for_governed_v2(tmp_path):
         ).validate()
 
 
+def test_governed_qualification_binds_planner_gate_and_profile(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    source = (
+        Path(__file__).resolve().parents[2]
+        / "research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json"
+    )
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    selected = next(
+        candidate
+        for candidate in payload["candidates"]
+        if candidate["role"] == "candidate"
+    )
+    selected["implementation"]["configuration"]["evidence_gate"] = (
+        EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2.value
+    )
+    result_path = tmp_path / "governed-result.json"
+    result_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        generator_mode=GeneratorMode.DETERMINISTIC,
+        evidence_gate_mode=EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
+        student_tutoring_mode=(
+            StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        ),
+        autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+        learning_gap_hmac_secret=b"x" * 32,
+        student_profile_path=LOCAL_R1_V2_PROFILE,
+        t1_qualification_result_path=result_path,
+    ).validate()
+
+    selected["implementation"]["configuration"]["evidence_gate"] = (
+        EvidenceGateMode.STRUCTURED_LEXICAL_V1.value
+    )
+    result_path.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="does not bind this release"):
+        AppSettings(
+            mode=RuntimeMode.STAGING,
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=(ORIGIN,),
+            secure_cookies=True,
+            generator_mode=GeneratorMode.DETERMINISTIC,
+            evidence_gate_mode=(
+                EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2
+            ),
+            student_tutoring_mode=(
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+            ),
+            autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+            learning_gap_hmac_secret=b"x" * 32,
+            student_profile_path=LOCAL_R1_V2_PROFILE,
+            t1_qualification_result_path=result_path,
+        ).validate()
+
+
+def test_governed_deterministic_generator_requires_compatible_gate(tmp_path):
+    with pytest.raises(ValueError, match="question-targeted-ambiguity-safe-v2"):
+        AppSettings(
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            generator_mode=GeneratorMode.DETERMINISTIC,
+            evidence_gate_mode=EvidenceGateMode.STRUCTURED_LEXICAL_V1,
+            student_tutoring_mode=(
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+            ),
+        ).validate()
+
+
 @pytest.mark.parametrize(
     "origin",
     (
@@ -571,6 +645,7 @@ def test_governed_runtime_binds_planner_and_generator_identities(monkeypatch):
     assert graph.generator.model_id == "gpt-5.4-mini-2026-03-17"
     assert tutoring.autonomy_planner_model == graph.planner.model_id
     assert tutoring.autonomy_generator_model == graph.generator.model_id
+    assert isinstance(graph.generator.claim_validator.verifier, ContiguousQuoteAtomicClaimVerifier)
 
 
 def test_governed_runtime_decouples_live_planning_from_safe_generation(monkeypatch):
@@ -591,6 +666,9 @@ def test_governed_runtime_decouples_live_planning_from_safe_generation(monkeypat
     graph = app.state.governed_autonomy_service.graph
     assert graph.planner.model_id == "gpt-5.6-terra"
     assert graph.generator.model_id == "deterministic/evidence-set-v2"
+    assert graph.generator.generator.policy_enforcer.action_router.implementation_id == (
+        "deterministic-tutor-action-router-v2"
+    )
     assert app.state.provider_budget is None
 
 
@@ -788,11 +866,20 @@ def test_metrics_require_administrator_and_upload_size_is_guarded(tmp_path):
     assert oversized.json()["detail"]["code"] == "source_too_large"
 
     client.cookies.clear()
+    client.app.state.autonomy_planner_budget = type(
+        "PlannerBudget",
+        (),
+        {"snapshot": lambda self: {"calls": 2, "reported_cost_usd": 0.25}},
+    )()
     assert _login(client, "admin@example.test", ADMIN_PASSWORD).status_code == 200
     metrics = client.get("/api/operations/metrics")
     assert metrics.status_code == 200
     assert metrics.json()["request_count"] >= 4
     assert "latency_p95_ms" in metrics.json()
+    assert metrics.json()["autonomy_planner_budget"] == {
+        "calls": 2,
+        "reported_cost_usd": 0.25,
+    }
 
 
 def test_readiness_reports_closed_durable_dependency_as_unavailable(tmp_path):

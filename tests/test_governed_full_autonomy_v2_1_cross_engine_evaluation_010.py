@@ -11,6 +11,8 @@ from scripts import (
 )
 from scripts import cross_engine_factual
 from scripts.academic_factual_qa_open_10000_t0_adapter import build_live_t0_adapter
+from scripts import academic_factual_qa_open_10000_t0_adapter as t0_adapter
+from src.digital_twin.generation import DeterministicPolicyEnforcer
 from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
 
 
@@ -72,6 +74,15 @@ def test_active_program_excludes_expensive_or_retired_engine_paths() -> None:
     assert instrument["engines"][4]["output_price_usd_per_million"] == 1.32
 
 
+def test_historical_e0_identity_keeps_its_original_single_hit_generator() -> None:
+    generator = t0_adapter._DeterministicAtomicGenerator(  # noqa: SLF001
+        policy_enforcer=DeterministicPolicyEnforcer()
+    )
+
+    assert generator.implementation_id == "deterministic-atomic-grounded-generator-v1"
+    assert generator.delegate.implementation_id == "deterministic-grounded-generator"
+
+
 def test_program_simulation_has_one_way_stage_progression() -> None:
     result = builder.simulate()
 
@@ -124,14 +135,15 @@ def test_cluster_conversations_cannot_alias_cross_course_boundary_cases(
             if key not in {"ranked_chunk_ids", "content_sha256"}
         },
         "ranked_chunk_ids": {
-            row.case_id: rankings["ranked_chunk_ids"][row.case_id]
-            for row in selected
+            row.case_id: rankings["ranked_chunk_ids"][row.case_id] for row in selected
         },
     }
     ranking_payload["content_sha256"] = canonical_json_sha256(ranking_payload)
     ranking_path = tmp_path / "rankings.json"
     ranking_path.write_text(json.dumps(ranking_payload), encoding="utf-8")
-    engine = next(row for row in builder.load_program().engines if row.engine_id == "e0")
+    engine = next(
+        row for row in builder.load_program().engines if row.engine_id == "e0"
+    )
     manifest = cross_engine_factual.factual_manifest(
         engine,
         control=False,

@@ -154,8 +154,16 @@ class StudentRepository(Protocol):
     ) -> list[GroundedTutorResponseV2]: ...
 
     def list_agent_traces_v2(
-        self, course_id: str, *, conversation_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        conversation_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AgentTraceV2]: ...
+
+    def list_course_learner_belief_states(
+        self, course_id: str
+    ) -> dict[str, list[LearnerBeliefStateV2]]: ...
 
     def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool: ...
 
@@ -165,7 +173,9 @@ class StudentRepository(Protocol):
 
     def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int: ...
 
-    def save_teaching_profile(self, profile: TeachingProfileV1) -> TeachingProfileV1: ...
+    def save_teaching_profile(
+        self, profile: TeachingProfileV1
+    ) -> TeachingProfileV1: ...
 
     def get_teaching_profile(self, profile_id: str) -> TeachingProfileV1 | None: ...
 
@@ -272,9 +282,7 @@ class StudentRepository(Protocol):
         audit_event: AuditEvent,
     ) -> bool: ...
 
-    def get_proactive_message(
-        self, message_id: str
-    ) -> ProactiveMessage | None: ...
+    def get_proactive_message(self, message_id: str) -> ProactiveMessage | None: ...
 
     def get_proactive_message_for_trigger(
         self, trigger_id: str
@@ -304,7 +312,9 @@ class StudentRepository(Protocol):
 
     def list_delivery_outbox(self) -> list[DeliveryOutboxItem]: ...
 
-    def save_autonomy_policy(self, policy: PedagogicalPolicyV2) -> PedagogicalPolicyV2: ...
+    def save_autonomy_policy(
+        self, policy: PedagogicalPolicyV2
+    ) -> PedagogicalPolicyV2: ...
 
     def get_autonomy_policy(self, course_id: str) -> PedagogicalPolicyV2 | None: ...
 
@@ -317,6 +327,14 @@ class StudentRepository(Protocol):
     def list_autonomous_goals(
         self, student_id: str, course_id: str, *, active_only: bool = False
     ) -> list[AutonomousGoalV1]: ...
+
+    def list_course_autonomous_goals(
+        self, course_id: str, *, limit: int = 100
+    ) -> list[AutonomousGoalV1]: ...
+
+    def autonomy_durable_state_snapshot(
+        self, student_id: str, course_id: str
+    ) -> dict[str, tuple[tuple[str, ...], ...]]: ...
 
     def set_autonomous_goal_status(
         self,
@@ -375,15 +393,21 @@ class StudentRepository(Protocol):
     ) -> AutonomousActionV1: ...
 
     def list_autonomous_actions(
-        self, course_id: str, *, student_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        student_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AutonomousActionV1]: ...
 
-    def get_autonomous_outcome(
-        self, action_id: str
-    ) -> AutonomousOutcomeV1 | None: ...
+    def get_autonomous_outcome(self, action_id: str) -> AutonomousOutcomeV1 | None: ...
 
     def list_autonomous_outcomes(
-        self, course_id: str, *, student_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        student_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AutonomousOutcomeV1]: ...
 
     def expire_autonomous_goals(self, *, expired_at: str) -> int: ...
@@ -498,9 +522,12 @@ class SQLiteStudentRepository:
             raise ValueError("course owner membership is inconsistent")
         with self._lock, self._connection:
             self._validate_course_owner(course)
-            if self._connection.execute(
-                "SELECT 1 FROM courses WHERE id = ?", (course.id,)
-            ).fetchone() is not None:
+            if (
+                self._connection.execute(
+                    "SELECT 1 FROM courses WHERE id = ?", (course.id,)
+                ).fetchone()
+                is not None
+            ):
                 raise ValueError("course identifier already exists")
             self._connection.execute(
                 """INSERT INTO courses(id, title, owner_professor_id)
@@ -536,7 +563,9 @@ class SQLiteStudentRepository:
                 MembershipRole.STUDENT: AccountRole.STUDENT.value,
             }[membership.role]
             if account is None or course is None or account["role"] != expected_role:
-                raise ValueError("membership account, course, and role are inconsistent")
+                raise ValueError(
+                    "membership account, course, and role are inconsistent"
+                )
             if (
                 membership.role == MembershipRole.PROFESSOR
                 and course["owner_professor_id"] != membership.account_id
@@ -761,7 +790,8 @@ class SQLiteStudentRepository:
                 "SELECT course_id FROM releases WHERE id = ?", (model.release_id,)
             ).fetchone()
             course = self._connection.execute(
-                "SELECT owner_professor_id FROM courses WHERE id = ?", (model.course_id,)
+                "SELECT owner_professor_id FROM courses WHERE id = ?",
+                (model.course_id,),
             ).fetchone()
             if release is None or course is None:
                 raise KeyError("domain_model_scope_not_found")
@@ -796,14 +826,14 @@ class SQLiteStudentRepository:
             )
         return model.model_copy(deep=True)
 
-    def get_course_domain_model(
-        self, release_id: str
-    ) -> CourseDomainModelV1 | None:
+    def get_course_domain_model(self, release_id: str) -> CourseDomainModelV1 | None:
         row = self._one(
             "SELECT model_json FROM course_domain_models WHERE release_id = ?",
             (release_id,),
         )
-        return CourseDomainModelV1.model_validate_json(row["model_json"]) if row else None
+        return (
+            CourseDomainModelV1.model_validate_json(row["model_json"]) if row else None
+        )
 
     def save_course_tutoring_runtime_profile(
         self, profile: CourseTutoringRuntimeProfileV1
@@ -868,7 +898,9 @@ class SQLiteStudentRepository:
             "SELECT state_json FROM learner_belief_states_v2 WHERE conversation_id = ?",
             (conversation_id,),
         )
-        return LearnerBeliefStateV2.model_validate_json(row["state_json"]) if row else None
+        return (
+            LearnerBeliefStateV2.model_validate_json(row["state_json"]) if row else None
+        )
 
     def list_learner_observations_v2(
         self, conversation_id: str
@@ -893,7 +925,9 @@ class SQLiteStudentRepository:
                    WHERE conversation_id = ? ORDER BY next_revision""",
                 (conversation_id,),
             ).fetchall()
-        return [LearnerStateDeltaV2.model_validate_json(row["delta_json"]) for row in rows]
+        return [
+            LearnerStateDeltaV2.model_validate_json(row["delta_json"]) for row in rows
+        ]
 
     def list_pedagogical_plans_v2(
         self, conversation_id: str
@@ -921,8 +955,14 @@ class SQLiteStudentRepository:
         ]
 
     def list_agent_traces_v2(
-        self, course_id: str, *, conversation_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        conversation_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AgentTraceV2]:
+        if limit is not None and (isinstance(limit, bool) or not 1 <= limit <= 10_000):
+            raise ValueError("agent trace limit must be between 1 and 10000")
         query = (
             """SELECT trace_json FROM tutoring_agent_traces_v2
                WHERE course_id = ? AND conversation_id = ? ORDER BY created_at DESC"""
@@ -935,9 +975,32 @@ class SQLiteStudentRepository:
             if conversation_id is not None
             else (course_id,)
         )
+        if limit is not None:
+            query += " LIMIT ?"
+            parameters = (*parameters, limit)
         with self._lock:
             rows = self._connection.execute(query, parameters).fetchall()
         return [AgentTraceV2.model_validate_json(row["trace_json"]) for row in rows]
+
+    def list_course_learner_belief_states(
+        self, course_id: str
+    ) -> dict[str, list[LearnerBeliefStateV2]]:
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT conversation.student_id, state.state_json
+                   FROM learner_belief_states_v2 AS state
+                   JOIN conversations AS conversation
+                     ON conversation.id = state.conversation_id
+                   WHERE conversation.course_id = ?
+                   ORDER BY conversation.student_id, state.updated_at DESC""",
+                (course_id,),
+            ).fetchall()
+        grouped: dict[str, list[LearnerBeliefStateV2]] = {}
+        for row in rows:
+            grouped.setdefault(str(row["student_id"]), []).append(
+                LearnerBeliefStateV2.model_validate_json(row["state_json"])
+            )
+        return grouped
 
     def save_learning_gap_signal(self, signal: LearningGapSignalV1) -> bool:
         """Persist an idempotent privacy-minimized signal within its release scope."""
@@ -1009,8 +1072,7 @@ class SQLiteStudentRepository:
                 (course_id, release_id, active_at),
             ).fetchall()
         return [
-            LearningGapSignalV1.model_validate_json(row["signal_json"])
-            for row in rows
+            LearningGapSignalV1.model_validate_json(row["signal_json"]) for row in rows
         ]
 
     def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int:
@@ -1065,7 +1127,9 @@ class SQLiteStudentRepository:
             "SELECT profile_json FROM teaching_profiles WHERE profile_id = ?",
             (profile_id,),
         )
-        return TeachingProfileV1.model_validate_json(row["profile_json"]) if row else None
+        return (
+            TeachingProfileV1.model_validate_json(row["profile_json"]) if row else None
+        )
 
     def list_teaching_profiles(self, course_id: str) -> list[TeachingProfileV1]:
         with self._lock:
@@ -1074,7 +1138,9 @@ class SQLiteStudentRepository:
                    WHERE course_id = ? ORDER BY version DESC""",
                 (course_id,),
             ).fetchall()
-        return [TeachingProfileV1.model_validate_json(row["profile_json"]) for row in rows]
+        return [
+            TeachingProfileV1.model_validate_json(row["profile_json"]) for row in rows
+        ]
 
     def set_teaching_profile_status(
         self,
@@ -1126,7 +1192,9 @@ class SQLiteStudentRepository:
                     ),
                 }
             )
-            updated = TeachingProfileV1.model_validate(updated.model_dump(mode="python"))
+            updated = TeachingProfileV1.model_validate(
+                updated.model_dump(mode="python")
+            )
             self._connection.execute(
                 """UPDATE teaching_profiles SET status = ?, preview_sha256 = ?,
                    profile_json = ?, approved_at = ?, withdrawn_at = ?
@@ -1260,7 +1328,9 @@ class SQLiteStudentRepository:
             ):
                 raise ValueError("autonomous opportunity has inconsistent turn scope")
         completed_autonomous_goal_ids = completed_autonomous_goal_ids or []
-        if len(completed_autonomous_goal_ids) != len(set(completed_autonomous_goal_ids)):
+        if len(completed_autonomous_goal_ids) != len(
+            set(completed_autonomous_goal_ids)
+        ):
             raise ValueError("completed autonomous goal IDs must be unique")
         completed_goals: list[AutonomousGoalV1] = []
         for goal_id in completed_autonomous_goal_ids:
@@ -1272,7 +1342,9 @@ class SQLiteStudentRepository:
                 or goal.release_id != conversation.release_id
                 or goal.status != AutonomousGoalStatus.ACTIVE
             ):
-                raise ValueError("completed autonomous goal has inconsistent turn scope")
+                raise ValueError(
+                    "completed autonomous goal has inconsistent turn scope"
+                )
             completed_goals.append(goal)
         if learner_state is not None:
             learner_state = LearnerState.model_validate(
@@ -1295,7 +1367,8 @@ class SQLiteStudentRepository:
             if (
                 reactive_v2_artifacts.conversation_id != conversation.id
                 or reactive_v2_artifacts.observation.course_id != conversation.course_id
-                or reactive_v2_artifacts.observation.release_id != conversation.release_id
+                or reactive_v2_artifacts.observation.release_id
+                != conversation.release_id
                 or reactive_v2_artifacts.trace.event_id
                 != reactive_v2_artifacts.observation.observation_id
             ):
@@ -1355,8 +1428,12 @@ class SQLiteStudentRepository:
                            WHERE conversation_id = ?""",
                         (conversation.id,),
                     ).fetchone()
-                    current_v2_revision = int(current_v2["revision"]) if current_v2 else 0
-                    expected_v2_revision = reactive_v2_artifacts.trace.input_state_revision
+                    current_v2_revision = (
+                        int(current_v2["revision"]) if current_v2 else 0
+                    )
+                    expected_v2_revision = (
+                        reactive_v2_artifacts.trace.input_state_revision
+                    )
                     if current_v2_revision != expected_v2_revision:
                         duplicate = self._connection.execute(
                             """SELECT 1 FROM messages
@@ -1556,7 +1633,9 @@ class SQLiteStudentRepository:
                     belief.updated_at,
                 ),
             )
-        recorded_at = belief.updated_at if belief is not None else observation.observed_at
+        recorded_at = (
+            belief.updated_at if belief is not None else observation.observed_at
+        )
         self._connection.execute(
             """INSERT INTO reactive_pedagogical_plans_v2
                (observation_id, conversation_id, plan_json, created_at)
@@ -1975,11 +2054,10 @@ class SQLiteStudentRepository:
                 ).fetchone()
                 if row is None:
                     raise KeyError("proactive_message_not_found")
-                raise ValueError("proactive message cannot change from its current state")
-            if (
-                status == ProactiveMessageStatus.DISMISSED
-                and message_row is not None
-            ):
+                raise ValueError(
+                    "proactive message cannot change from its current state"
+                )
+            if status == ProactiveMessageStatus.DISMISSED and message_row is not None:
                 action = self._autonomous_action_for_trigger(
                     str(message_row["trigger_id"])
                 )
@@ -2047,9 +2125,7 @@ class SQLiteStudentRepository:
             ).fetchall()
         return [DeliveryOutboxItem.model_validate(dict(row)) for row in rows]
 
-    def save_autonomy_policy(
-        self, policy: PedagogicalPolicyV2
-    ) -> PedagogicalPolicyV2:
+    def save_autonomy_policy(self, policy: PedagogicalPolicyV2) -> PedagogicalPolicyV2:
         policy = PedagogicalPolicyV2.model_validate(policy.model_dump(mode="python"))
         with self._lock, self._connection:
             course = self._connection.execute(
@@ -2079,10 +2155,10 @@ class SQLiteStudentRepository:
                 )
                 if policy.version < int(current["version"]):
                     raise ValueError("autonomy policy version cannot decrease")
-                if (
-                    policy.version == int(current["version"])
-                    and _autonomy_boundary_payload(policy)
-                    != _autonomy_boundary_payload(stored_policy)
+                if policy.version == int(
+                    current["version"]
+                ) and _autonomy_boundary_payload(policy) != _autonomy_boundary_payload(
+                    stored_policy
                 ):
                     raise ValueError(
                         "autonomy boundary changes require a new policy version"
@@ -2104,11 +2180,7 @@ class SQLiteStudentRepository:
             boundary_changed = bool(
                 current is not None and policy.version != int(current["version"])
             )
-            if (
-                boundary_changed
-                or policy.kill_switch
-                or not policy.autonomy_enabled
-            ):
+            if boundary_changed or policy.kill_switch or not policy.autonomy_enabled:
                 self._cancel_autonomy_scope_sql(
                     student_id=None,
                     course_id=policy.course_id,
@@ -2122,7 +2194,9 @@ class SQLiteStudentRepository:
             "SELECT policy_json FROM autonomy_policies WHERE course_id = ?",
             (course_id,),
         )
-        return PedagogicalPolicyV2.model_validate_json(row["policy_json"]) if row else None
+        return (
+            PedagogicalPolicyV2.model_validate_json(row["policy_json"]) if row else None
+        )
 
     def list_autonomy_policies(self) -> list[PedagogicalPolicyV2]:
         with self._lock:
@@ -2130,8 +2204,7 @@ class SQLiteStudentRepository:
                 "SELECT policy_json FROM autonomy_policies ORDER BY course_id"
             ).fetchall()
         return [
-            PedagogicalPolicyV2.model_validate_json(row["policy_json"])
-            for row in rows
+            PedagogicalPolicyV2.model_validate_json(row["policy_json"]) for row in rows
         ]
 
     def save_autonomous_goal(self, goal: AutonomousGoalV1) -> AutonomousGoalV1:
@@ -2173,10 +2246,17 @@ class SQLiteStudentRepository:
                 self._connection.execute(
                     """SELECT COUNT(*) FROM autonomous_goals
                        WHERE student_id = ? AND course_id = ? AND status = ?""",
-                    (goal.student_id, goal.course_id, AutonomousGoalStatus.ACTIVE.value),
+                    (
+                        goal.student_id,
+                        goal.course_id,
+                        AutonomousGoalStatus.ACTIVE.value,
+                    ),
                 ).fetchone()[0]
             )
-            if goal.status == AutonomousGoalStatus.ACTIVE and active_count >= policy.max_active_goals:
+            if (
+                goal.status == AutonomousGoalStatus.ACTIVE
+                and active_count >= policy.max_active_goals
+            ):
                 raise ValueError("active autonomous goal limit reached")
             self._insert_autonomous_goal(goal)
         return goal.model_copy(deep=True)
@@ -2201,6 +2281,207 @@ class SQLiteStudentRepository:
             rows = self._connection.execute(sql, tuple(parameters)).fetchall()
         return [AutonomousGoalV1.model_validate_json(row["goal_json"]) for row in rows]
 
+    def list_course_autonomous_goals(
+        self, course_id: str, *, limit: int = 100
+    ) -> list[AutonomousGoalV1]:
+        if isinstance(limit, bool) or not 1 <= limit <= 500:
+            raise ValueError("autonomous goal limit must be between 1 and 500")
+        with self._lock:
+            rows = self._connection.execute(
+                """SELECT goal_json FROM autonomous_goals
+                   WHERE course_id = ?
+                   ORDER BY updated_at DESC, goal_id LIMIT ?""",
+                (course_id, limit),
+            ).fetchall()
+        return [AutonomousGoalV1.model_validate_json(row["goal_json"]) for row in rows]
+
+    def autonomy_durable_state_snapshot(
+        self, student_id: str, course_id: str
+    ) -> dict[str, tuple[tuple[str, ...], ...]]:
+        """Return a complete, content-hashed autonomy restart fingerprint.
+
+        The evaluator needs to prove that restart preserves more than the
+        visible messages and goals.  Hash opaque JSON payloads so this method
+        can cover every durable control-loop entity without exporting learner
+        content into evaluation evidence.
+        """
+
+        def rows(
+            query: str, parameters: tuple[object, ...]
+        ) -> tuple[tuple[str, ...], ...]:
+            values = self._connection.execute(query, parameters).fetchall()
+            return tuple(
+                tuple(
+                    hashlib.sha256(str(value).encode("utf-8")).hexdigest()
+                    if column.endswith("_json")
+                    else str(value)
+                    for column, value in zip(item.keys(), item, strict=True)
+                )
+                for item in values
+            )
+
+        conversation_scope = (
+            "SELECT id FROM conversations WHERE student_id = ? AND course_id = ?"
+        )
+        opportunity_scope = (
+            "SELECT opportunity_id FROM autonomous_opportunities "
+            "WHERE student_id = ? AND course_id = ?"
+        )
+        with self._lock:
+            return {
+                "conversations": rows(
+                    """SELECT id, release_id, updated_at FROM conversations
+                       WHERE student_id = ? AND course_id = ? ORDER BY id""",
+                    (student_id, course_id),
+                ),
+                "messages": rows(
+                    f"""SELECT id, conversation_id, role, action, trace_json,
+                               client_request_id, response_to_message_id, created_at
+                        FROM messages WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY id""",
+                    (student_id, course_id),
+                ),
+                "belief_states": rows(
+                    f"""SELECT conversation_id, revision, state_json, updated_at
+                        FROM learner_belief_states_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY conversation_id, revision""",
+                    (student_id, course_id),
+                ),
+                "observations": rows(
+                    f"""SELECT observation_id, conversation_id, source_turn_key,
+                               observation_json, observed_at
+                        FROM learner_observations_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY observation_id""",
+                    (student_id, course_id),
+                ),
+                "attributions": rows(
+                    f"""SELECT conversation_id, revision, concept_id,
+                               attribution_json, updated_at
+                        FROM learner_concept_attributions_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY conversation_id, revision, concept_id""",
+                    (student_id, course_id),
+                ),
+                "state_deltas": rows(
+                    f"""SELECT conversation_id, next_revision, observation_id,
+                               delta_json, created_at
+                        FROM learner_state_deltas_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY conversation_id, next_revision""",
+                    (student_id, course_id),
+                ),
+                "reactive_plans": rows(
+                    f"""SELECT observation_id, conversation_id, plan_json, created_at
+                        FROM reactive_pedagogical_plans_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY observation_id""",
+                    (student_id, course_id),
+                ),
+                "grounded_responses": rows(
+                    f"""SELECT observation_id, conversation_id, response_json, created_at
+                        FROM grounded_tutor_responses_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                        ORDER BY observation_id""",
+                    (student_id, course_id),
+                ),
+                "agent_traces": rows(
+                    f"""SELECT trace_id, event_id, conversation_id, graph_version,
+                               input_state_revision, output_state_revision, trace_json,
+                               created_at, completed_at
+                        FROM tutoring_agent_traces_v2
+                        WHERE conversation_id IN ({conversation_scope})
+                           OR (conversation_id IS NULL AND learner_key = ? AND course_id = ?)
+                        ORDER BY trace_id""",
+                    (
+                        student_id,
+                        course_id,
+                        hashlib.sha256(
+                            f"{course_id}:{student_id}".encode()
+                        ).hexdigest(),
+                        course_id,
+                    ),
+                ),
+                "goals": rows(
+                    """SELECT goal_id, release_id, status, goal_json, updated_at
+                       FROM autonomous_goals WHERE student_id = ? AND course_id = ?
+                       ORDER BY goal_id""",
+                    (student_id, course_id),
+                ),
+                "opportunities": rows(
+                    """SELECT opportunity_id, goal_id, release_id, status,
+                              opportunity_json, updated_at
+                       FROM autonomous_opportunities
+                       WHERE student_id = ? AND course_id = ? ORDER BY opportunity_id""",
+                    (student_id, course_id),
+                ),
+                "autonomous_plans": rows(
+                    """SELECT plan_id, opportunity_id, plan_json, created_at
+                       FROM autonomous_plans WHERE student_id = ? AND course_id = ?
+                       ORDER BY plan_id""",
+                    (student_id, course_id),
+                ),
+                "actions": rows(
+                    """SELECT action_id, plan_id, opportunity_id, status,
+                              proactive_trigger_id, action_json, updated_at
+                       FROM autonomous_actions WHERE student_id = ? AND course_id = ?
+                       ORDER BY action_id""",
+                    (student_id, course_id),
+                ),
+                "outcomes": rows(
+                    """SELECT outcome_id, action_id, outcome_json, recorded_at
+                       FROM autonomous_outcomes WHERE student_id = ? AND course_id = ?
+                       ORDER BY outcome_id""",
+                    (student_id, course_id),
+                ),
+                "wakeups": rows(
+                    """SELECT wake_up_id, goal_id, release_id, due_at, status,
+                              wake_up_json, created_at
+                       FROM autonomous_wakeups WHERE student_id = ? AND course_id = ?
+                       ORDER BY wake_up_id""",
+                    (student_id, course_id),
+                ),
+                "graph_checkpoints": rows(
+                    f"""SELECT job_id, opportunity_id, binding_sha256, status,
+                               state_json, updated_at
+                        FROM autonomous_graph_checkpoints
+                        WHERE opportunity_id IN ({opportunity_scope}) ORDER BY job_id""",
+                    (student_id, course_id),
+                ),
+                "model_calls": rows(
+                    f"""SELECT opportunity_id, stage, request_sha256, status,
+                               output_json, failure_code, started_at, completed_at
+                        FROM autonomous_model_calls_v2
+                        WHERE opportunity_id IN ({opportunity_scope})
+                        ORDER BY opportunity_id, stage""",
+                    (student_id, course_id),
+                ),
+                "triggers": rows(
+                    """SELECT id, release_id, status, suppression_reason,
+                              scheduled_for, expires_at, updated_at
+                       FROM proactive_triggers WHERE student_id = ? AND course_id = ?
+                       ORDER BY id""",
+                    (student_id, course_id),
+                ),
+                "proactive_messages": rows(
+                    """SELECT id, trigger_id, release_id, channel, status, created_at,
+                              read_at, dismissed_at
+                       FROM proactive_messages WHERE student_id = ? AND course_id = ?
+                       ORDER BY id""",
+                    (student_id, course_id),
+                ),
+                "delivery_outbox": rows(
+                    """SELECT outbox.id, outbox.message_id, outbox.status, outbox.attempts,
+                              outbox.available_at, outbox.updated_at
+                       FROM proactive_delivery_outbox AS outbox
+                       JOIN proactive_messages AS message ON message.id = outbox.message_id
+                       WHERE message.student_id = ? AND message.course_id = ?
+                       ORDER BY outbox.id""",
+                    (student_id, course_id),
+                ),
+            }
+
     def set_autonomous_goal_status(
         self,
         goal_id: str,
@@ -2219,7 +2500,9 @@ class SQLiteStudentRepository:
             goal = AutonomousGoalV1.model_validate_json(row["goal_json"])
             if goal.status != AutonomousGoalStatus.ACTIVE:
                 return goal
-            updated = goal.model_copy(update={"status": status, "updated_at": changed_at})
+            updated = goal.model_copy(
+                update={"status": status, "updated_at": changed_at}
+            )
             self._connection.execute(
                 """UPDATE autonomous_goals SET status = ?, goal_json = ?, updated_at = ?
                    WHERE goal_id = ?""",
@@ -2258,7 +2541,9 @@ class SQLiteStudentRepository:
                     existing["opportunity_json"]
                 )
                 if stored != opportunity:
-                    raise ValueError("autonomous opportunity key has conflicting content")
+                    raise ValueError(
+                        "autonomous opportunity key has conflicting content"
+                    )
                 return stored
             self._validate_autonomous_opportunity_scope(opportunity)
             self._insert_autonomous_opportunity(opportunity)
@@ -2327,14 +2612,21 @@ class SQLiteStudentRepository:
             raise ValueError("autonomous wake-up limit must be between 1 and 500")
         with self._lock:
             rows = self._connection.execute(
-                """SELECT wake_up_json FROM autonomous_wakeups
-                   WHERE status = 'pending' AND due_at <= ?
-                   ORDER BY due_at, wake_up_id LIMIT ?""",
-                (due_at, limit),
+                """SELECT wake.wake_up_json
+                   FROM autonomous_wakeups AS wake
+                   JOIN autonomous_goals AS goal ON goal.goal_id = wake.goal_id
+                   JOIN autonomy_policies AS policy
+                     ON policy.course_id = wake.course_id
+                   WHERE wake.status = 'pending' AND wake.due_at <= ?
+                     AND goal.status = ?
+                     AND json_extract(policy.policy_json, '$.autonomy_enabled') = 1
+                     AND json_extract(policy.policy_json, '$.paused') = 0
+                     AND json_extract(policy.policy_json, '$.kill_switch') = 0
+                   ORDER BY wake.due_at, wake.wake_up_id LIMIT ?""",
+                (due_at, AutonomousGoalStatus.ACTIVE.value, limit),
             ).fetchall()
         return [
-            AutonomousWakeUpV1.model_validate_json(row["wake_up_json"])
-            for row in rows
+            AutonomousWakeUpV1.model_validate_json(row["wake_up_json"]) for row in rows
         ]
 
     def materialize_autonomous_wakeup(
@@ -2452,15 +2744,20 @@ class SQLiteStudentRepository:
         action = result.action
         outcome = result.outcome
         if not (
-            plan.opportunity_id == opportunity.opportunity_id
-            == action.opportunity_id
+            plan.opportunity_id == opportunity.opportunity_id == action.opportunity_id
             and plan.plan_id == action.plan_id
             and action.action_id == outcome.action_id
-            and plan.student_id == action.student_id == outcome.student_id
+            and plan.student_id
+            == action.student_id
+            == outcome.student_id
             == opportunity.student_id
-            and plan.course_id == action.course_id == outcome.course_id
+            and plan.course_id
+            == action.course_id
+            == outcome.course_id
             == opportunity.course_id
-            and plan.release_id == action.release_id == outcome.release_id
+            and plan.release_id
+            == action.release_id
+            == outcome.release_id
             == opportunity.release_id
         ):
             raise ValueError("autonomous job records have inconsistent lineage")
@@ -2470,7 +2767,7 @@ class SQLiteStudentRepository:
             else AutonomousOpportunityStatus.COMPLETED
         )
         terminal_opportunity = opportunity.model_copy(
-            update={"status": terminal_status, "updated_at": timestamp_now()}
+            update={"status": terminal_status, "updated_at": action.updated_at}
         )
         binding_payload = {
             "opportunity": opportunity.model_dump(mode="json"),
@@ -2479,7 +2776,9 @@ class SQLiteStudentRepository:
             "outcome": outcome.model_dump(mode="json"),
             "trace": result.trace.model_dump(mode="json"),
         }
-        binding_json = json.dumps(binding_payload, sort_keys=True, separators=(",", ":"))
+        binding_json = json.dumps(
+            binding_payload, sort_keys=True, separators=(",", ":")
+        )
         binding_sha256 = hashlib.sha256(binding_json.encode("utf-8")).hexdigest()
         with self._lock, self._connection:
             current = self._connection.execute(
@@ -2496,7 +2795,10 @@ class SQLiteStudentRepository:
                     "SELECT binding_sha256 FROM autonomous_graph_checkpoints WHERE opportunity_id = ?",
                     (opportunity.opportunity_id,),
                 ).fetchone()
-                if existing is not None and existing["binding_sha256"] == binding_sha256:
+                if (
+                    existing is not None
+                    and existing["binding_sha256"] == binding_sha256
+                ):
                     return
                 raise ValueError("autonomous opportunity is already terminal")
             self._connection.execute(
@@ -2662,21 +2964,30 @@ class SQLiteStudentRepository:
         return updated
 
     def list_autonomous_actions(
-        self, course_id: str, *, student_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        student_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AutonomousActionV1]:
+        if limit is not None and (isinstance(limit, bool) or not 1 <= limit <= 10_000):
+            raise ValueError("autonomous action limit must be between 1 and 10000")
         sql = "SELECT action_json FROM autonomous_actions WHERE course_id = ?"
         parameters: list[object] = [course_id]
         if student_id is not None:
             sql += " AND student_id = ?"
             parameters.append(student_id)
         sql += " ORDER BY created_at DESC, action_id"
+        if limit is not None:
+            sql += " LIMIT ?"
+            parameters.append(limit)
         with self._lock:
             rows = self._connection.execute(sql, tuple(parameters)).fetchall()
-        return [AutonomousActionV1.model_validate_json(row["action_json"]) for row in rows]
+        return [
+            AutonomousActionV1.model_validate_json(row["action_json"]) for row in rows
+        ]
 
-    def get_autonomous_outcome(
-        self, action_id: str
-    ) -> AutonomousOutcomeV1 | None:
+    def get_autonomous_outcome(self, action_id: str) -> AutonomousOutcomeV1 | None:
         row = self._one(
             "SELECT outcome_json FROM autonomous_outcomes WHERE action_id = ?",
             (action_id,),
@@ -2688,19 +2999,27 @@ class SQLiteStudentRepository:
         )
 
     def list_autonomous_outcomes(
-        self, course_id: str, *, student_id: str | None = None
+        self,
+        course_id: str,
+        *,
+        student_id: str | None = None,
+        limit: int | None = None,
     ) -> list[AutonomousOutcomeV1]:
+        if limit is not None and (isinstance(limit, bool) or not 1 <= limit <= 10_000):
+            raise ValueError("autonomous outcome limit must be between 1 and 10000")
         sql = "SELECT outcome_json FROM autonomous_outcomes WHERE course_id = ?"
         parameters: list[object] = [course_id]
         if student_id is not None:
             sql += " AND student_id = ?"
             parameters.append(student_id)
         sql += " ORDER BY recorded_at DESC, outcome_id"
+        if limit is not None:
+            sql += " LIMIT ?"
+            parameters.append(limit)
         with self._lock:
             rows = self._connection.execute(sql, tuple(parameters)).fetchall()
         return [
-            AutonomousOutcomeV1.model_validate_json(row["outcome_json"])
-            for row in rows
+            AutonomousOutcomeV1.model_validate_json(row["outcome_json"]) for row in rows
         ]
 
     def expire_autonomous_goals(self, *, expired_at: str) -> int:
@@ -2832,9 +3151,12 @@ class SQLiteStudentRepository:
                 ),
             )
             if cursor.rowcount != 1:
-                if self._connection.execute(
-                    "SELECT 1 FROM releases WHERE id = ?", (release_id,)
-                ).fetchone() is None:
+                if (
+                    self._connection.execute(
+                        "SELECT 1 FROM releases WHERE id = ?", (release_id,)
+                    ).fetchone()
+                    is None
+                ):
                     raise KeyError("release_not_found")
                 raise ValueError("published releases must retain passed evaluation")
 
@@ -2927,9 +3249,7 @@ class SQLiteStudentRepository:
         self, opportunity: ProactiveOpportunityV1
     ) -> None:
         policy = self.get_autonomy_policy(opportunity.course_id)
-        membership = self.get_membership(
-            opportunity.student_id, opportunity.course_id
-        )
+        membership = self.get_membership(opportunity.student_id, opportunity.course_id)
         release = self.get_published_release(opportunity.course_id)
         if (
             policy is None
@@ -3125,7 +3445,7 @@ class SQLiteStudentRepository:
             wake_parameters.append(release_id)
         self._connection.execute(
             f"""UPDATE autonomous_wakeups SET status = 'cancelled'
-                WHERE {' AND '.join(wake_filters)} AND status = 'pending'""",
+                WHERE {" AND ".join(wake_filters)} AND status = 'pending'""",
             tuple(wake_parameters),
         )
         return len(goal_rows) + len(opportunity_rows)
@@ -3279,7 +3599,11 @@ class SQLiteStudentRepository:
         if learner_state is not None and learner_state.mastery_by_concept:
             strongest = max(
                 learner_state.mastery_by_concept.values(),
-                key=lambda item: (item.estimate, item.confidence, item.observation_count),
+                key=lambda item: (
+                    item.estimate,
+                    item.confidence,
+                    item.observation_count,
+                ),
             )
             progress = max(
                 progress,

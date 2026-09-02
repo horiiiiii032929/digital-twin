@@ -316,6 +316,14 @@ export function getProfessorLearnerBeliefEvidence(
   )
 }
 
+export function listProfessorLearnerBeliefEvidence(
+  courseId: string,
+): Promise<ProfessorLearnerBeliefEvidence[]> {
+  return professorRequest(
+    `/api/professor/courses/${pathSegment(courseId)}/learner-belief-evidence`,
+  )
+}
+
 export function listProfessorProactiveTriggers(
   courseId: string,
 ): Promise<ProfessorProactiveTrigger[]> {
@@ -385,11 +393,13 @@ export function updateProfessorAutonomyPolicy(
 
 export function listProfessorAutonomousGoals(
   courseId: string,
-  studentAccountId: string,
+  studentAccountId?: string,
 ): Promise<AutonomousGoalV1[]> {
-  const query = new URLSearchParams({ student_account_id: studentAccountId })
+  const query = studentAccountId
+    ? `?${new URLSearchParams({ student_account_id: studentAccountId })}`
+    : ""
   return professorRequest(
-    `/api/professor/courses/${pathSegment(courseId)}/autonomous-goals?${query}`,
+    `/api/professor/courses/${pathSegment(courseId)}/autonomous-goals${query}`,
   )
 }
 

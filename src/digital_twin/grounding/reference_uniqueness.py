@@ -183,6 +183,25 @@ def prefer_specific_source_regions(
 
     rows = list(chunks)
 
+    def contains_specific_region(
+        aggregate: DocumentChunk,
+        candidate: DocumentChunk,
+    ) -> bool:
+        aggregate_text = " ".join(aggregate.text.split()).casefold()
+        candidate_text = " ".join(candidate.text.split()).casefold()
+        if candidate_text and candidate_text in aggregate_text:
+            return True
+        if aggregate.bounding_box is None or candidate.bounding_box is None:
+            return False
+        aggregate_x0, aggregate_y0, aggregate_x1, aggregate_y1 = aggregate.bounding_box
+        candidate_x0, candidate_y0, candidate_x1, candidate_y1 = candidate.bounding_box
+        return (
+            aggregate_x0 <= candidate_x0
+            and aggregate_y0 <= candidate_y0
+            and candidate_x1 <= aggregate_x1
+            and candidate_y1 <= aggregate_y1
+        )
+
     def has_specific_sibling(aggregate: DocumentChunk) -> bool:
         for candidate in rows:
             if candidate.id == aggregate.id or not _authorized(candidate):
@@ -204,6 +223,7 @@ def prefer_specific_source_regions(
             if (
                 candidate.page_start <= aggregate.page_end
                 and aggregate.page_start <= candidate.page_end
+                and contains_specific_region(aggregate, candidate)
             ):
                 return True
         return False

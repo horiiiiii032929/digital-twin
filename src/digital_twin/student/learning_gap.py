@@ -247,17 +247,13 @@ def build_learning_gap_signal(
 
     if not 0 <= confusion <= 1:
         raise ValueError("confusion must be between zero and one")
-    learner_key = pseudonymizer.learner_key(
-        course_id=course_id, account_id=account_id
-    )
+    learner_key = pseudonymizer.learner_key(course_id=course_id, account_id=account_id)
     source_turn_key = pseudonymizer.source_turn_key(
         release_id=release_id, tutor_message_id=tutor_message_id
     )
     observed = _parse_timestamp(observed_at)
     expires = observed + timedelta(days=policy.retention_days)
-    signal_id = _sha256(
-        "signal", source_turn_key, topic_key, signal_kind.value
-    )
+    signal_id = _sha256("signal", source_turn_key, topic_key, signal_kind.value)
     return LearningGapSignalV1(
         signal_id=signal_id,
         source_turn_key=source_turn_key,
@@ -297,9 +293,9 @@ def aggregate_learning_gap_signals(
             raise ValueError("learning-gap signal identifier has conflicting content")
         unique[signal.signal_id] = signal
 
-    grouped: dict[
-        tuple[str, LearningGapSignalKind], list[LearningGapSignalV1]
-    ] = defaultdict(list)
+    grouped: dict[tuple[str, LearningGapSignalKind], list[LearningGapSignalV1]] = (
+        defaultdict(list)
+    )
     for signal in unique.values():
         if _parse_timestamp(signal.expires_at) > now:
             grouped[(signal.topic_key, signal.signal_kind)].append(signal)
@@ -393,7 +389,20 @@ def build_course_improvement_drafts(
         }[aggregate.signal_kind]
         drafts.append(
             CourseImprovementDraftV1(
-                proposal_id=_sha256("proposal", aggregate.aggregate_id),
+                # Proposal identity is stable across repeated reads of the same
+                # active aggregate.  ``aggregate_id`` includes ``computed_at``
+                # and therefore cannot be used as a review capability token.
+                proposal_id=_sha256(
+                    "proposal",
+                    aggregate.course_id,
+                    aggregate.release_id,
+                    aggregate.topic_key,
+                    aggregate.signal_kind.value,
+                    aggregate.window_started_at,
+                    aggregate.window_ended_at,
+                    str(aggregate.distinct_learners),
+                    str(aggregate.signal_count),
+                ),
                 aggregate_id=aggregate.aggregate_id,
                 course_id=aggregate.course_id,
                 release_id=aggregate.release_id,
