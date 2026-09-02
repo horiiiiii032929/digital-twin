@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "12149526a20c0eafa4be21750a7dfba067b8f7d275e26fd7b7e83f6440023559",
+  "record_sha256": "78718a842657e73533d927a2846cf114ee2f6919b54796d30a06baab748a485b",
   "records": [
     {
       "audit": {
@@ -13430,11 +13430,11 @@
     },
     {
       "audit": {
-        "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization and prove terminal fold-001 through fold-004 and confirmation-005 runs remain blocked after one-time authority is revoked.",
+        "domain": "autonomy-architecture-engine-comparison-authorization",
+        "evidence": "Reviewed exact bounded-authorization set assertion; it now names engine comparison 006 explicitly while preserving the fail-closed complete-set check.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex AFQC-160 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13442,7 +13442,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "21599349afe08d0322826d6f4f253f8db4ce15a448195884678a6257b92a78a3"
+      "sha256": "e44e25978bf17fdc11f1155d7bb3618a39f5b7a2d88452405c69092d4a9b9ded"
     },
     {
       "audit": {
