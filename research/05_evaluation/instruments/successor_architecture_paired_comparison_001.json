@@ -175,6 +175,14 @@
       "original_development_folds_reopened": false,
       "successor_instrument": "successor-architecture-confirmation-005-001",
       "successor_implementation": "guarded-policy-value-planner-v2"
+    },
+    {
+      "decision_id": "AFQC-159",
+      "reason": "The source-disjoint 1,000-case confirmation selected guarded policy-value H before engine allocation so the E1-E4 comparison changes only planner and response-strategy models inside one replicated architecture.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-engine-comparison-006-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
     }
   ],
   "provider_freshness": {

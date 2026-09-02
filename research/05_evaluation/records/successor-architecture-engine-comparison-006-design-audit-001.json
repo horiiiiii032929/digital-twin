@@ -1,0 +1,64 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-engine-comparison-006-design-audit-001",
+  "status": "completed-keep",
+  "date": "2026-09-03",
+  "code_revision": "78baffdb9db458e8e0178d378ad9237b39fc111f",
+  "dirty_state": true,
+  "decision": {
+    "outcome": "keep-corrected-design",
+    "selected_allocation_id": null,
+    "rationale": "All five pre-execution design and scoring findings were closed without provider use or a model-selection claim. The corrected factorial comparison may proceed only after its complete build gate."
+  },
+  "findings": [
+    {
+      "id": "SE6-1",
+      "severity": "high",
+      "title": "Factor effects used only one cell of the 2x2 allocation design",
+      "disposition": "fixed",
+      "resolution": "Planner and generator effects are now pooled across both levels of the other factor and bootstrapped at the 300-scenario cluster grain."
+    },
+    {
+      "id": "SE6-2",
+      "severity": "high",
+      "title": "Free-form generator fields could introduce claims outside canonical evidence",
+      "disposition": "fixed",
+      "resolution": "Models now select only bounded lead-style and learner-prompt enums. Deterministic code renders the complete response and inserts the sole canonical evidence claim and citation."
+    },
+    {
+      "id": "SE6-3",
+      "severity": "medium",
+      "title": "Generator cost and latency were aggregated across allocations",
+      "disposition": "fixed",
+      "resolution": "Every generator call now records an allocation-scoped provider role, preserving exact call, completion, latency, token, and cost attribution."
+    },
+    {
+      "id": "SE6-4",
+      "severity": "high",
+      "title": "A preferred allocation could remain named after a global hard-gate failure",
+      "disposition": "fixed",
+      "resolution": "Any failed global gate now forces selected_allocation_id to null and produces Refine."
+    },
+    {
+      "id": "SE6-5",
+      "severity": "high",
+      "title": "Persisted response action and deterministic rendering were not revalidated during scoring",
+      "disposition": "fixed",
+      "resolution": "Scoring now requires exact response/action agreement, policy action, source range, citation, atomic claim, and one of the finite deterministic renderings. It also proves the generator factor cannot change the selected action."
+    }
+  ],
+  "verification": {
+    "focused_tests_passed": 57,
+    "engine_and_planner_tests_passed": 18,
+    "network_free_actual_graph_cells": 48,
+    "provider_calls": 0,
+    "reported_cost_usd": 0.0,
+    "open_findings": 0
+  },
+  "limitations": [
+    "This audit validates the prospective comparison design, not model quality.",
+    "Generator selection measures safe strategy production, reliability, latency, and cost; deterministic rendering intentionally prevents unconstrained prose from becoming an authoritative academic claim.",
+    "Synthetic policy utility cannot establish real student learning improvement."
+  ]
+}

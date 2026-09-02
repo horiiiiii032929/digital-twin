@@ -71,6 +71,7 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_successor_architecture_development_fold_001.py",
     "build_successor_architecture_policy_value_fold_004.py",
     "build_successor_architecture_confirmation_005.py",
+    "build_successor_architecture_engine_comparison_006.py",
     # This analysis-only module has no provider execution mode. Provider calls
     # live in the separately guarded execute_academic_* entrypoint.
     "run_academic_factual_qa_panel_review_v2.py",

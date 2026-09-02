@@ -82,6 +82,14 @@ and grounding architecture change on fresh development evidence. #105 remained `
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
+Issue #184 is the active architecture/model selection item. Fresh Fold 004 and
+Confirmation 005 selected guarded policy-value H for the engine comparison,
+while retaining T0 and bounded T1-v1 rollback. The next build-only checkpoint
+is `successor-architecture-engine-comparison-006-001`: 300 fresh clusters and
+1,200 paired E1–E4 graph cells. Its five newly discovered design findings are
+closed with zero provider calls. Project status remains `In Progress / Go
+Deeper`; no release or engine allocation is selected before the paid result.
+
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500
 fresh routing cases and seven simulated days with bounded cited delivery,

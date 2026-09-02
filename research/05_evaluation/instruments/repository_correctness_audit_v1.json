@@ -961,13 +961,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review confirmed explicit build, validate, simulate, preflight, guarded execute, resume, and focused verification commands for the terminal policy-value fold and fresh 1,000-case confirmation. Historical commands remain reproducible and terminal attempts remain blocked.",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed command surface for deterministic build, validation, 48-cell network-free simulation, guarded preflight, bounded execute, resume, and focused verification commands.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "1cc27f0a433fff692bcbbc6dfbb1960f22845bbf4602146041c578d6aa448105"
+      "reviewer": "Codex architecture engine comparison audit",
+      "sha256": "e17b11ef7f42bd91c83aa218f761aa6258222f682c1d699118855c394d66f5b7"
     },
     {
       "audit_status": "audited",
@@ -3535,6 +3535,105 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Instrument review confirms immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, the completed fixed-Luna execution, hidden-gold opening only after durable cells, and terminal authorization revocation without automatic progression.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_confirmation_005_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex architecture-confirmation audit",
+      "sha256": "b9696af77e3d5d09d5172edbc006c1dac78c862f85643a4ddaa0b75f91fe2710"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Terminal-state review preserves attempt 001 as invalid execution, records 17 calls and USD 0.018998, confirms hidden gold remained unopened, revokes paid/provider authority, and links the one permitted harness-only correction.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture invalid-attempt audit",
+      "sha256": "1cfea7f064e36b4b0c7f9a7c9113e8b398244b84c4abd71745d399d669831f0e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Terminal-state review records 33 calls and USD 0.037090, confirms zero graph cells and unopened gold, classifies the empty four-case verifier batch as a model-contract operational failure, revokes authority, and prohibits a third fold-001 attempt.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture SA7 correction audit",
+      "sha256": "5dec6ec1e79098ff8987e5167677a1c527257685fc37d17d8a5a446eb2c31ebf"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "The first fold-002 execution is terminal invalid evidence with authority revoked and no resume. It binds the runtime reason-code overflow record, confirms hidden gold stayed closed, and permits only one fresh harness-only corrective attempt.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex successor-architecture fold-002 invalid-attempt audit",
+      "sha256": "7de4fbb3ef8000365d56f693853eca4733c682e0781ace756ba1ff40248489da"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Terminal audit records the corrective attempt as invalid after the isolated graph database lacked the product model-call-ledger migration. Authority is revoked, hidden gold remained unopened, the output cannot resume, and the same fold cannot run again.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 terminal-result audit",
+      "sha256": "3d4c5ae5d66bea1e9beb211596ed6a7319507158dc443fc03c070691e27622f8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Terminal review confirms fold 003 bound 150 source-disjoint cases and 600 paired actual-graph cells, opened hidden gold only after all responses persisted, recorded a valid Refine result, disabled resume, and revoked provider and paid authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 authorization audit",
+      "sha256": "da00b7d6d2fe24dfe0a3cc08000e5a2f6a134d9279299c8cd0d7a73d90ef2567"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed corrected 2x2 estimands, scenario-cluster bootstrap grain, deterministic bounded response rendering, exact model identities, isolated gold, 1,444-call ceiling, zero retries, USD 10 stop, and global/allocation hard gates.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_engine_comparison_006_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE6 design and scoring audit",
+      "sha256": "e8074e7140095304b7ebd279a2c6268e85f9ebc680451db6f3d0a8b37d849c5f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed AFQC-159 progression amendment: fresh Confirmation 005 selects H before the fixed-H E1-E4 factor; historical folds/results remain unchanged and parent paid authority remains false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE6 design and scoring audit",
+      "sha256": "441d80962a9ba6ce6ade45de29b891aaaa7ff56fb48ceee8892ea44146f501d2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Instrument audit confirms immutable fresh case/hash bindings, deterministic A/B/C/H conditions, the completed 121-call execution, hidden-gold opening only after durable cells, and terminal authorization revocation with no automatic progression.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_policy_value_fold_004_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "0ffae82b8019bd78b5e55afe618ad6fad7af61b462f809a5de9f6e008d48d480"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
@@ -4565,6 +4664,50 @@
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
       "sha256": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Builder review and deterministic tests confirmed 1,000 byte-stable unique scenario clusters, 800 eligible and 200 balanced authority-boundary cases, historical-ID disjointness, and physical public/gold separation.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_confirmation_005.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex architecture-confirmation audit",
+      "sha256": "1bcda82ac844203c7d54e711e2425252258e73a0ee297835337dab708cf53f98"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Manual builder review and byte-stability tests confirmed three source-disjoint 150-case folds, each with 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in any public package. Historical fold bytes remain unchanged.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed deterministic byte-stable construction, public/gold separation, historical ID disjointness, exact quotas, and zero provider access.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_engine_comparison_006.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex architecture engine comparison audit",
+      "sha256": "b6b781f767108b1b039033243666616699f69f057618a337a1388e203464e123"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Builder review and deterministic tests confirmed 150 byte-stable fresh cases, disjoint identities from folds 001-003, 120 eligible and 30 boundary cases, and physical public/gold separation.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_policy_value_fold_004.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "6776b0b5fb064af2b88c46ce459acc2db8cddbf4c77e65810fda7a303abc95e4"
     },
     {
       "audit_status": "audited",
@@ -5900,6 +6043,61 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Runner review confirmed exact case/hash/model bindings, one proposal per eligible case, migrated actual-graph execution, atomic resume, hidden-gold opening only after 2,000 durable cells, safe provider fallback, paired bootstrap analysis, and a finite H-or-A decision.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_confirmation_005.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex architecture-confirmation audit",
+      "sha256": "58a7ff356c27dcc9037bb3bd5e80a13cf6ccd395778d73f172b8f98eee8dbfe7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Line-by-line runner review confirmed immutable historical contexts, production-migrated isolated graph databases, one-case schemas, bounded concurrency, late gold opening, and execution guards. Terminal ledger finalization now precedes result publication, and the rationale is fold-neutral.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "7cf227acf4d6e1c6641c606ed4aeec0a41e4e858444b409abe0247c4f604ae28"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed and regression-tested pooled planner/generator effects, bounded strategy schemas, deterministic source-grounded rendering, allocation-scoped accounting, action-factor invariance, terminal selection clearing, exact canaries, atomic ledgers, and hidden-gold order.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_engine_comparison_006.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE6 design and scoring audit",
+      "sha256": "feccd07a51ba6b988eb83cfdfbd431d105c5f1a9c0161a298a8da0b0bd3dde53"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Manual runner review plus 48-cell network-free execution confirmed all candidates traverse the actual governed graph, remain inside the shared action/evidence/delivery boundary, use no provider, and publish only build evidence bound to the current revision.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_paired_comparison_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "acf2c709016c76a0b9307bd0672cd92fbab40da18e1f13cb6426aad13cf9692e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Runner review confirmed one shared proposal per eligible case, real migrated graph execution for all 600 cells, hidden-gold opening only after durable completion, exact identity/cost/freeze checks, safe condition-specific fallback, and paired utility-based selection with preferred action retained as a diagnostic.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_policy_value_fold_004.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "ad95792479006c88c1b9309688786dd0e5c01ba2e710947a839908a6d35cc325"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "successor-architecture-simulation",
       "evidence": "Manual command-surface review and focused tests verified deterministic execution, explicit development/held-out seeds, revision and dirty-state capture, exclusive output creation, and zero provider usage.",
       "findings": [],
@@ -6285,13 +6483,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-correctness-controls",
-      "evidence": "Manual guard review confirmed deterministic synthetic architecture builders are explicitly exempt while both provider-backed policy-value entrypoints are registered and carry main-level plus execution-level bounded-operation guards; no unauthorized provider or held-out execution is enabled.",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed pure deterministic builder exemption while the provider-backed runner remains fully registered and fail-closed.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "27fe6ea13c167bfd699c81374acda9a340a36d98bed3006406a1ca60ef5d363f"
+      "reviewer": "Codex architecture engine comparison audit",
+      "sha256": "4c781e0276a5085ee4f45fc3bd70d54e055c25c4c3fe1603c514b88c5495659b"
     },
     {
       "audit_status": "audited",
@@ -6864,6 +7062,17 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
       "sha256": "e98289a7c54dd063e59a993c36a733c862cc16e77aed24a37dbe2f2d8977fe8f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Contract review and validation tests confirmed exact architecture cardinality, exact E1-E4 bindings, finite stage identities, no confirmation rerun, no active prohibited provider/model, advisory-only LLM review, and typed prospective amendments that prohibit historical-result changes and original-fold reopening.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/autonomy_architecture_tournament.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0"
     },
     {
       "audit_status": "audited",
@@ -7891,13 +8100,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; every fold-001 through fold-004 and confirmation-005 execution is terminal with authority revoked. No engine-comparison or release authority is present.",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed explicit provider/method execution registration; no bounded authorization is present in the build-only checkpoint.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "936b12f7b1df21aa4e469dc41e38172875d60bdb56ea79af2920f3d8d555c222"
+      "reviewer": "Codex architecture engine comparison audit",
+      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
     },
     {
       "audit_status": "audited",
@@ -8041,6 +8250,17 @@
       "reviewed_at": "2026-08-29",
       "reviewer": "Codex repository correctness sweep",
       "sha256": "68ad23b018181bfdd8eec2c669b4978e0fe9328ef6d6b90e86e036ee8c2d0ac6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-architecture",
+      "evidence": "Line-by-line authority review confirmed historical A/B/C/C+V semantics remain unchanged. Non-authoritative provider reasons are bounded before local validation, and the new guarded policy-value planner can replace deterministic A only on action-envelope, model/forward-model agreement, and the existing 0.04 predicted-utility margin; ordinary failures return A and identity drift remains fatal.",
+      "findings": [],
+      "path": "src/digital_twin/student/planning_architectures.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "0c4dba823be83314a780f8687770f5e57fb26f6c14a28fcbb95e13bb2051fd56"
     },
     {
       "audit_status": "audited",
@@ -8437,6 +8657,17 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
       "sha256": "0ab2fe57637d4938cb7814dd1075f4f1040e8b1ee0dd93b15d0f62978b2aa440"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests retain architecture, authority, identity, evidence, verifier, and repeated-action coverage; they also prove pre-validation reason normalization, guarded promotion only on model/value agreement, deterministic baseline retention, and fatal identity drift.",
+      "findings": [],
+      "path": "tests/digital_twin/test_planning_architectures.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "44c526e8e4e7f2e7e026ed8894d9eacd045de9d614187f85f3ed89e833fe0a1d"
     },
     {
       "audit_status": "audited",
@@ -10356,6 +10587,61 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
+      "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, terminal provider-authority revocation, and deterministic A selection when H has no incremental benefit.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_confirmation_005.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex architecture-confirmation audit",
+      "sha256": "e50f79fab117a64ed684d93231fdbb22315e4ac108d327d8cefcd948bf3eee37"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests cover three byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, terminal provider-state publication, and an actual provider-backed graph crossing the production-migrated isolated database boundary.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "9c39cd597e8155c5520d58fb3ced38f3f015ec417cc05f94b74b3f30c1e2f2a2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed 006 regression coverage for byte-stable gold isolation, build-only preflight, rejection of free-form wording, fixed grounded rendering, pooled factorial effects, tie-breaking, and all hard gates.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_engine_comparison_006.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE6 design and scoring audit",
+      "sha256": "c51d8784006288b52aec003792fd2e451fae84d19c54c55b6e8a967055168881"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-engine-comparison",
+      "evidence": "Reviewed tournament schema regression coverage including the prospective AFQC-159 fixed-H engine-comparison amendment and unchanged A/B/C/C+V plus E1-E4 bindings.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_paired_comparison.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE6 design and scoring audit",
+      "sha256": "6e5cd87658bd9f927581567700f22f6896db1f081517bbb05e476b1e279d7ac6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Focused tests prove fresh and isolated dataset construction, terminal authorization revocation, event-envelope transition validity independent of exact preference, and safe deterministic provider-failure fallback.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_policy_value_fold_004.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex policy-value successor audit",
+      "sha256": "0fac63bf63bdb157bf7f333dfcd9361fa1a512bade0e4709c684140c94267b2d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
       "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
       "findings": [],
       "path": "tests/test_technical_freeze.py",
@@ -10483,248 +10769,6 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Manual instrument review confirmed the exhausted folds remain terminal, AFQC-152/155 change no historical result, the H successor and fresh confirmation use deterministic event-envelope validity plus paired hidden utility, E1-E4 allocations remain explicit, and no parent-level paid authority is introduced.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "5e075208be8eec3e86fd7f199021aea8479b974de2ea04cbd2e1f059295e8cef"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Manual runner review plus 48-cell network-free execution confirmed all candidates traverse the actual governed graph, remain inside the shared action/evidence/delivery boundary, use no provider, and publish only build evidence bound to the current revision.",
-      "findings": [],
-      "path": "scripts/run_successor_architecture_paired_comparison_001.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "acf2c709016c76a0b9307bd0672cd92fbab40da18e1f13cb6426aad13cf9692e"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Contract review and validation tests confirmed exact architecture cardinality, exact E1-E4 bindings, finite stage identities, no confirmation rerun, no active prohibited provider/model, advisory-only LLM review, and typed prospective amendments that prohibit historical-result changes and original-fold reopening.",
-      "findings": [],
-      "path": "src/digital_twin/evaluation/autonomy_architecture_tournament.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "governed-autonomy-architecture",
-      "evidence": "Line-by-line authority review confirmed historical A/B/C/C+V semantics remain unchanged. Non-authoritative provider reasons are bounded before local validation, and the new guarded policy-value planner can replace deterministic A only on action-envelope, model/forward-model agreement, and the existing 0.04 predicted-utility margin; ordinary failures return A and identity drift remains fatal.",
-      "findings": [],
-      "path": "src/digital_twin/student/planning_architectures.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "0c4dba823be83314a780f8687770f5e57fb26f6c14a28fcbb95e13bb2051fd56"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused tests retain architecture, authority, identity, evidence, verifier, and repeated-action coverage; they also prove pre-validation reason normalization, guarded promotion only on model/value agreement, deterministic baseline retention, and fatal identity drift.",
-      "findings": [],
-      "path": "tests/digital_twin/test_planning_architectures.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "44c526e8e4e7f2e7e026ed8894d9eacd045de9d614187f85f3ed89e833fe0a1d"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, both typed immutable prospective amendments, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
-      "findings": [],
-      "path": "tests/test_successor_architecture_paired_comparison.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "038407fdeb1a088d7825343b728729746768e6d6bf6180a25f2c29f487ab7184"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Terminal-state review preserves attempt 001 as invalid execution, records 17 calls and USD 0.018998, confirms hidden gold remained unopened, revokes paid/provider authority, and links the one permitted harness-only correction.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture invalid-attempt audit",
-      "sha256": "1cfea7f064e36b4b0c7f9a7c9113e8b398244b84c4abd71745d399d669831f0e"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Terminal-state review records 33 calls and USD 0.037090, confirms zero graph cells and unopened gold, classifies the empty four-case verifier batch as a model-contract operational failure, revokes authority, and prohibits a third fold-001 attempt.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture SA7 correction audit",
-      "sha256": "5dec6ec1e79098ff8987e5167677a1c527257685fc37d17d8a5a446eb2c31ebf"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "The first fold-002 execution is terminal invalid evidence with authority revoked and no resume. It binds the runtime reason-code overflow record, confirms hidden gold stayed closed, and permits only one fresh harness-only corrective attempt.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex successor-architecture fold-002 invalid-attempt audit",
-      "sha256": "7de4fbb3ef8000365d56f693853eca4733c682e0781ace756ba1ff40248489da"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Manual builder review and byte-stability tests confirmed three source-disjoint 150-case folds, each with 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in any public package. Historical fold bytes remain unchanged.",
-      "findings": [],
-      "path": "scripts/build_successor_architecture_development_fold_001.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-003 database-lifecycle audit",
-      "sha256": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review confirmed immutable historical contexts, production-migrated isolated graph databases, one-case schemas, bounded concurrency, late gold opening, and execution guards. Terminal ledger finalization now precedes result publication, and the rationale is fold-neutral.",
-      "findings": [],
-      "path": "scripts/run_successor_architecture_development_fold_001.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-003 database-lifecycle audit",
-      "sha256": "7cf227acf4d6e1c6641c606ed4aeec0a41e4e858444b409abe0247c4f604ae28"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused tests cover three byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, terminal provider-state publication, and an actual provider-backed graph crossing the production-migrated isolated database boundary.",
-      "findings": [],
-      "path": "tests/test_successor_architecture_development_fold_001.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-003 database-lifecycle audit",
-      "sha256": "9c39cd597e8155c5520d58fb3ced38f3f015ec417cc05f94b74b3f30c1e2f2a2"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Terminal audit records the corrective attempt as invalid after the isolated graph database lacked the product model-call-ledger migration. Authority is revoked, hidden gold remained unopened, the output cannot resume, and the same fold cannot run again.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 terminal-result audit",
-      "sha256": "3d4c5ae5d66bea1e9beb211596ed6a7319507158dc443fc03c070691e27622f8"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Terminal review confirms fold 003 bound 150 source-disjoint cases and 600 paired actual-graph cells, opened hidden gold only after all responses persisted, recorded a valid Refine result, disabled resume, and revoked provider and paid authority.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-003 authorization audit",
-      "sha256": "da00b7d6d2fe24dfe0a3cc08000e5a2f6a134d9279299c8cd0d7a73d90ef2567"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Instrument audit confirms immutable fresh case/hash bindings, deterministic A/B/C/H conditions, the completed 121-call execution, hidden-gold opening only after durable cells, and terminal authorization revocation with no automatic progression.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_policy_value_fold_004_001.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "0ffae82b8019bd78b5e55afe618ad6fad7af61b462f809a5de9f6e008d48d480"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Builder review and deterministic tests confirmed 150 byte-stable fresh cases, disjoint identities from folds 001-003, 120 eligible and 30 boundary cases, and physical public/gold separation.",
-      "findings": [],
-      "path": "scripts/build_successor_architecture_policy_value_fold_004.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "6776b0b5fb064af2b88c46ce459acc2db8cddbf4c77e65810fda7a303abc95e4"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Runner review confirmed one shared proposal per eligible case, real migrated graph execution for all 600 cells, hidden-gold opening only after durable completion, exact identity/cost/freeze checks, safe condition-specific fallback, and paired utility-based selection with preferred action retained as a diagnostic.",
-      "findings": [],
-      "path": "scripts/run_successor_architecture_policy_value_fold_004.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "ad95792479006c88c1b9309688786dd0e5c01ba2e710947a839908a6d35cc325"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused tests prove fresh and isolated dataset construction, terminal authorization revocation, event-envelope transition validity independent of exact preference, and safe deterministic provider-failure fallback.",
-      "findings": [],
-      "path": "tests/test_successor_architecture_policy_value_fold_004.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex policy-value successor audit",
-      "sha256": "0fac63bf63bdb157bf7f333dfcd9361fa1a512bade0e4709c684140c94267b2d"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Instrument review confirms immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, the completed fixed-Luna execution, hidden-gold opening only after durable cells, and terminal authorization revocation without automatic progression.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/successor_architecture_confirmation_005_001.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "b9696af77e3d5d09d5172edbc006c1dac78c862f85643a4ddaa0b75f91fe2710"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Builder review and deterministic tests confirmed 1,000 byte-stable unique scenario clusters, 800 eligible and 200 balanced authority-boundary cases, historical-ID disjointness, and physical public/gold separation.",
-      "findings": [],
-      "path": "scripts/build_successor_architecture_confirmation_005.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "1bcda82ac844203c7d54e711e2425252258e73a0ee297835337dab708cf53f98"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "autonomy-architecture-evaluation",
-      "evidence": "Runner review confirmed exact case/hash/model bindings, one proposal per eligible case, migrated actual-graph execution, atomic resume, hidden-gold opening only after 2,000 durable cells, safe provider fallback, paired bootstrap analysis, and a finite H-or-A decision.",
-      "findings": [],
-      "path": "scripts/run_successor_architecture_confirmation_005.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "58a7ff356c27dcc9037bb3bd5e80a13cf6ccd395778d73f172b8f98eee8dbfe7"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, terminal provider-authority revocation, and deterministic A selection when H has no incremental benefit.",
-      "findings": [],
-      "path": "tests/test_successor_architecture_confirmation_005.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "e50f79fab117a64ed684d93231fdbb22315e4ac108d327d8cefcd948bf3eee37"
     }
   ],
   "schema_version": 1

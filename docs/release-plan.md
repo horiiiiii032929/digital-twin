@@ -51,6 +51,16 @@ scored through the actual governed fallback; only execution-integrity failures
 invalidate the run. The successor remains provider-unauthorized and selects no
 release architecture until its finite result is published.
 
+The architecture track has now advanced beyond that earlier checkpoint.
+Fresh Fold 004 and the independent 1,000-case Confirmation 005 selected
+guarded policy-value H for engine allocation, not for release. The build-only
+successor `successor-architecture-engine-comparison-006-001` fixes H and
+compares E1–E4 over 300 new scenario clusters. A five-finding design audit
+closed factorial-estimand, free-form-claim, accounting, global-gate, and
+response-validation defects before provider use. One valid result will select
+an allocation for whole-system confirmation; it cannot itself authorize a
+release.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,

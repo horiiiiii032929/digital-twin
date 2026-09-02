@@ -592,6 +592,13 @@
     "preflight:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --preflight",
     "execute:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --execute",
     "resume:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --execute --resume",
-    "verify:successor-architecture-confirmation-005": "uv run pytest tests/test_successor_architecture_confirmation_005.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-confirmation-005 && npm run simulate:successor-architecture-confirmation-005"
+    "verify:successor-architecture-confirmation-005": "uv run pytest tests/test_successor_architecture_confirmation_005.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-confirmation-005 && npm run simulate:successor-architecture-confirmation-005",
+    "build:successor-architecture-engine-comparison-006": "uv run python -m scripts.build_successor_architecture_engine_comparison_006 --write",
+    "validate:successor-architecture-engine-comparison-006": "uv run python -m scripts.run_successor_architecture_engine_comparison_006 --validate",
+    "simulate:successor-architecture-engine-comparison-006": "uv run python -m scripts.run_successor_architecture_engine_comparison_006 --simulate",
+    "preflight:successor-architecture-engine-comparison-006": "uv run python -m scripts.run_successor_architecture_engine_comparison_006 --preflight",
+    "execute:successor-architecture-engine-comparison-006": "uv run python -m scripts.run_successor_architecture_engine_comparison_006 --execute",
+    "resume:successor-architecture-engine-comparison-006": "uv run python -m scripts.run_successor_architecture_engine_comparison_006 --execute --resume",
+    "verify:successor-architecture-engine-comparison-006": "uv run pytest tests/test_successor_architecture_engine_comparison_006.py tests/digital_twin/test_planning_architectures.py -q && npm run validate:successor-architecture-engine-comparison-006 && npm run simulate:successor-architecture-engine-comparison-006"
   }
 }

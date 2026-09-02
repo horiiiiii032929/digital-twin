@@ -220,6 +220,22 @@ the selected architecture for the separate cross-engine comparison; it is not
 yet the release system. Confirmation authority is revoked. All audit findings
 remain terminally closed with none open.
 
+The next checkpoint is the fixed-H 2×2 engine allocation comparison
+`successor-architecture-engine-comparison-006-001`. It uses 300 fresh scenario
+clusters and 1,200 actual-graph cells across E1 Luna/Luna, E2 Terra/Luna, E3
+Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini. The planner effect is pooled
+across both generator levels and the generator effect across both planner
+levels, with scenario-cluster bootstrap intervals.
+
+A pre-execution audit closed five additional findings (`SE6-1`–`SE6-5`):
+factorial pooling, free-form claim injection, allocation-level accounting,
+global-gate selection clearing, and response/action revalidation. Models now
+choose bounded response strategies; deterministic code renders the only
+allowed source-grounded wording. The corrected build passed 1,677 Python and
+50 frontend tests, lint, production build, and 48/48 network-free actual-graph
+cells with zero provider use. No engine is selected and paid execution remains
+unauthorized until this build is committed and the clean preflight passes.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

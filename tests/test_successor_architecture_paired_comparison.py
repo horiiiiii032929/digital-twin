@@ -47,6 +47,7 @@ def test_tournament_binds_exact_a_b_c_cv_and_e1_e4_allocations():
     assert [item.decision_id for item in program.prospective_amendments] == [
         "AFQC-152",
         "AFQC-155",
+        "AFQC-159",
     ]
     assert all(
         not item.historical_results_changed

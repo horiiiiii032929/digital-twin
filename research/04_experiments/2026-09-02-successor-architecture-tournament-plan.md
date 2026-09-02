@@ -62,6 +62,20 @@ invalid execution, unfavorable result, and final decision receives a stable
 record, readable summary, registry entry, hashes, accounting, limitations, and
 GitHub checkpoint.
 
+### Prospective progression amendment AFQC-159
+
+The actual finite progression selected and confirmed one architecture before
+varying its engines: Fold 004 advanced H and fresh Confirmation 005 selected H
+over A. This order is more identifiable than varying architecture and engines
+together. The next comparison therefore fixes H and runs the complete E1–E4
+2×2 planner-by-response-strategy factor on 300 fresh scenario clusters.
+
+Both factor effects pool both levels of the other factor and bootstrap at the
+scenario-cluster grain. Model output cannot write authoritative academic prose;
+it selects bounded response strategies and deterministic code renders the
+canonical evidence and citation. This amendment changes no historical result
+and does not make a release selection.
+
 ## Primary analysis
 
 - acceptable pedagogical move: paired McNemar;

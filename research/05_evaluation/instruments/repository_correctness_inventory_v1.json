@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 975
+    "audited": 979
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 238,
+    "active_or_unclassified_tooling": 240,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 257,
+    "evaluation_configuration": 258,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 219
+    "verification": 220
   },
-  "file_count": 975,
+  "file_count": 979,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "72135c8d8b548c6939df3411b9c5f0e5274986c2d3effbd712b283325a3124be",
+  "record_sha256": "13a962b0b0e601f01f0224f2a5ee06314bcc4768a1cd24e489f3158d96f1a67c",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "configuration-and-deployment",
-        "evidence": "Manual command-surface review confirmed explicit build, validate, simulate, preflight, guarded execute, resume, and focused verification commands for the terminal policy-value fold and fresh 1,000-case confirmation. Historical commands remain reproducible and terminal attempts remain blocked.",
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed command surface for deterministic build, validation, 48-cell network-free simulation, guarded preflight, bounded execute, resume, and focused verification commands.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex architecture engine comparison audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "1cc27f0a433fff692bcbbc6dfbb1960f22845bbf4602146041c578d6aa448105"
+      "sha256": "e17b11ef7f42bd91c83aa218f761aa6258222f682c1d699118855c394d66f5b7"
     },
     {
       "audit": {
@@ -5255,11 +5255,27 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-evaluation",
-        "evidence": "Manual instrument review confirmed the exhausted folds remain terminal, AFQC-152/155 change no historical result, the H successor and fresh confirmation use deterministic event-envelope validity plus paired hidden utility, E1-E4 allocations remain explicit, and no parent-level paid authority is introduced.",
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed corrected 2x2 estimands, scenario-cluster bootstrap grain, deterministic bounded response rendering, exact model identities, isolated gold, 1,444-call ceiling, zero retries, USD 10 stop, and global/allocation hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex SE6 design and scoring audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_engine_comparison_006_001.json",
+      "risk": "high",
+      "sha256": "e8074e7140095304b7ebd279a2c6268e85f9ebc680451db6f3d0a8b37d849c5f"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed AFQC-159 progression amendment: fresh Confirmation 005 selects H before the fixed-H E1-E4 factor; historical folds/results remain unchanged and parent paid authority remains false.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex SE6 design and scoring audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5267,7 +5283,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
       "risk": "high",
-      "sha256": "5e075208be8eec3e86fd7f199021aea8479b974de2ea04cbd2e1f059295e8cef"
+      "sha256": "441d80962a9ba6ce6ade45de29b891aaaa7ff56fb48ceee8892ea44146f501d2"
     },
     {
       "audit": {
@@ -6937,6 +6953,24 @@
       "path": "scripts/build_successor_architecture_development_fold_001.py",
       "risk": "high",
       "sha256": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed deterministic byte-stable construction, public/gold separation, historical ID disjointness, exact quotas, and zero provider access.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex architecture engine comparison audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:successor-architecture-engine-comparison-006"
+      ],
+      "path": "scripts/build_successor_architecture_engine_comparison_006.py",
+      "risk": "high",
+      "sha256": "b6b781f767108b1b039033243666616699f69f057618a337a1388e203464e123"
     },
     {
       "audit": {
@@ -9487,6 +9521,28 @@
     },
     {
       "audit": {
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed and regression-tested pooled planner/generator effects, bounded strategy schemas, deterministic source-grounded rendering, allocation-scoped accounting, action-factor invariance, terminal selection clearing, exact canaries, atomic ledgers, and hidden-gold order.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex SE6 design and scoring audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:successor-architecture-engine-comparison-006",
+        "preflight:successor-architecture-engine-comparison-006",
+        "resume:successor-architecture-engine-comparison-006",
+        "simulate:successor-architecture-engine-comparison-006",
+        "validate:successor-architecture-engine-comparison-006"
+      ],
+      "path": "scripts/run_successor_architecture_engine_comparison_006.py",
+      "risk": "high",
+      "sha256": "feccd07a51ba6b988eb83cfdfbd431d105c5f1a9c0161a298a8da0b0bd3dde53"
+    },
+    {
+      "audit": {
         "domain": "autonomy-architecture-evaluation",
         "evidence": "Manual runner review plus 48-cell network-free execution confirmed all candidates traverse the actual governed graph, remain inside the shared action/evidence/delivery boundary, use no provider, and publish only build evidence bound to the current revision.",
         "findings": [],
@@ -10156,11 +10212,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "Manual guard review confirmed deterministic synthetic architecture builders are explicitly exempt while both provider-backed policy-value entrypoints are registered and carry main-level plus execution-level bounded-operation guards; no unauthorized provider or held-out execution is enabled.",
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed pure deterministic builder exemption while the provider-backed runner remains fully registered and fail-closed.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex architecture engine comparison audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10170,7 +10226,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "27fe6ea13c167bfd699c81374acda9a340a36d98bed3006406a1ca60ef5d363f"
+      "sha256": "4c781e0276a5085ee4f45fc3bd70d54e055c25c4c3fe1603c514b88c5495659b"
     },
     {
       "audit": {
@@ -12526,11 +12582,11 @@
     },
     {
       "audit": {
-        "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active; every fold-001 through fold-004 and confirmation-005 execution is terminal with authority revoked. No engine-comparison or release authority is present.",
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed explicit provider/method execution registration; no bounded authorization is present in the build-only checkpoint.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex architecture engine comparison audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12538,7 +12594,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "936b12f7b1df21aa4e469dc41e38172875d60bdb56ea79af2920f3d8d555c222"
+      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
     },
     {
       "audit": {
@@ -16174,11 +16230,27 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, both typed immutable prospective amendments, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed 006 regression coverage for byte-stable gold isolation, build-only preflight, rejection of free-form wording, fixed grounded rendering, pooled factorial effects, tie-breaking, and all hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex policy-value successor audit"
+        "reviewer": "Codex SE6 design and scoring audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_successor_architecture_engine_comparison_006.py",
+      "risk": "medium",
+      "sha256": "c51d8784006288b52aec003792fd2e451fae84d19c54c55b6e8a967055168881"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-engine-comparison",
+        "evidence": "Reviewed tournament schema regression coverage including the prospective AFQC-159 fixed-H engine-comparison amendment and unchanged A/B/C/C+V plus E1-E4 bindings.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex SE6 design and scoring audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16186,7 +16258,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_paired_comparison.py",
       "risk": "medium",
-      "sha256": "038407fdeb1a088d7825343b728729746768e6d6bf6180a25f2c29f487ab7184"
+      "sha256": "6e5cd87658bd9f927581567700f22f6896db1f081517bbb05e476b1e279d7ac6"
     },
     {
       "audit": {
@@ -16398,8 +16470,8 @@
     }
   ],
   "risk_counts": {
-    "high": 742,
-    "medium": 233
+    "high": 745,
+    "medium": 234
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
