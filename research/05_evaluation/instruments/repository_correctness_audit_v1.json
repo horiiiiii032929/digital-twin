@@ -863,7 +863,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
+      "evidence": "Minimal-image review verifies digest-pinned bases, explicit operational scripts, profiles, and only the qualified T1-v1 and governed V2.1 decision records are copied; broad scripts, records, and private data remain excluded.",
       "findings": [],
       "path": "compose.preview.yml",
       "reviewed_at": "2026-08-31",
@@ -921,9 +921,9 @@
       "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
       "findings": [],
       "path": "deploy/Dockerfile",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "2774448d8d7cc41873c08be43a928d6df55e71afbed695ea740dbbb569df9afa"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 Docker packaging root-cause audit",
+      "sha256": "0caf18b1d738bedd77e1efaa311449705f630a8b323aec34a85e771b4b83960d"
     },
     {
       "audit_status": "audited",
@@ -9762,12 +9762,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Configuration regressions require digest-pinned bases, the exact documented operational scripts without copying the broad scripts tree, interactive historical confirmation, Vite env binding, and security headers.",
+      "evidence": "Configuration regressions require digest-pinned bases, minimal operational scripts and evaluation records, explicit inclusion of both qualified rollback and V2.1 selection records, Vite root env binding, and security headers.",
       "findings": [],
       "path": "tests/test_repository_configuration.py",
-      "reviewed_at": "2026-08-21",
-      "reviewer": "codex-primary-review",
-      "sha256": "f08ad1c2436a79fc0f75e5d4d40649ca69f97b560a06cc9f32af58b7e9fd85d3"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 Docker packaging root-cause audit",
+      "sha256": "1be2e522a1c2c02ead41ad8eafd7c3283c4c4ef8ea48c26044d3511ead3f5f66"
     },
     {
       "audit_status": "audited",

@@ -30,6 +30,7 @@ COPY scripts/proactive_outreach_worker.py scripts/proactive_outreach_worker.py
 COPY scripts/autonomous_tutoring_worker.py scripts/autonomous_tutoring_worker.py
 COPY research/05_evaluation/profiles research/05_evaluation/profiles
 COPY research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
+COPY research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
 RUN uv sync --locked --no-dev \
     && useradd --create-home --uid 10001 app \
     && install -d -o app -g app /var/lib/digital-twin /var/lib/digital-twin-parent
