@@ -6,7 +6,7 @@
   "stage_id": "pedagogy-aware-h-e1-build-016",
   "status": "completed-go-deeper-build-only",
   "decision_question": "Is a fresh source- and wording-disjoint H+E1 confirmation with pedagogy-aware source-semantic grounding ready for one provider-backed execution?",
-  "code_revision": "e25563478da2b6c788022f4f71de50bec787d9e4",
+  "code_revision": "e25563493d9c2cd34445419fb4e4e48af4d204a7",
   "dirty_state": false,
   "bindings": [
     {
