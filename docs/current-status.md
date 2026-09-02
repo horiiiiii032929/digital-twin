@@ -138,6 +138,19 @@ tests, 50 frontend tests, lint/build, 147/147 freeze coverage, and 966/966
 repository audits. Provider and paid authority remain false until the separate
 execution checkpoint.
 
+The separately authorized execution at revision `54441fc` is now terminal
+`invalid-execution`, and its one-time authority is revoked. All 238 direct Luna
+calls completed with exact identity and zero retries for USD 0.0806882, and the
+reason-code correction held. The runner persisted all 150 deterministic A
+cells, then the first provider-backed B cell failed because the isolated graph
+database had LangGraph checkpoint tables but had not received the product
+`autonomous_model_calls_v2` migration. Hidden gold remained unopened, so no
+paired architecture metric or quality decision exists. This second harness
+failure closes fold 002; it cannot be resumed or retried. A fresh
+source-disjoint round may begin only after isolated evaluation databases are
+initialized through the production migration path and that behavior has a
+regression test.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

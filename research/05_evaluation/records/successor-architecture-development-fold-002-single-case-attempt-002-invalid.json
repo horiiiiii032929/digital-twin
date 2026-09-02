@@ -1,0 +1,67 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-002-single-case-attempt-002-invalid",
+  "code_revision": "54441fc",
+  "status": "invalid-execution",
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "The sole corrective attempt completed all required provider work and the 150 deterministic A cells, then the first provider-backed graph cell failed because the isolated checkpoint database had LangGraph tables but not the product autonomous_model_calls_v2 migration. This is a second harness defect before paired scoring. The fold is closed with no architecture selection and no further same-fold attempt."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-002-single-case-attempt-002",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
+    "run_binding_sha256": "6bd4eeb6f9e9df6c9abe6dcf6e43d35569ebd259bf926a37e0be94334a544ed0"
+  },
+  "dataset": {
+    "case_count": 150,
+    "planned_architecture_cells": 600,
+    "public_file_sha256": "a6436dd4532670b2f2fddc769983337719a2d0b6f66ab5259aeb504d907a7e76",
+    "hidden_gold_file_sha256": "fd38a1e2de095da22f8b8db363dbe59d0b67046756c8556a6b44f76f13ea036e",
+    "hidden_gold_opened": false,
+    "private_data_used": false
+  },
+  "failure": {
+    "classification": "isolated-product-database-migration-harness-defect",
+    "exception": "sqlite3.OperationalError",
+    "failure_detail": "no such table: autonomous_model_calls_v2",
+    "quality_failure": false,
+    "harness_failure": true,
+    "identity_drift": false,
+    "persisted_architecture_cells": 150,
+    "persisted_architecture_ids": [
+      "deterministic-workflow-a"
+    ],
+    "same_output_resume_allowed": false,
+    "same_fold_retry_allowed": false
+  },
+  "operational": {
+    "provider": "OpenAI direct Responses API",
+    "model": "gpt-5.6-luna",
+    "provider_calls": 238,
+    "completed_calls": 238,
+    "failed_calls": 0,
+    "input_tokens": 111283,
+    "output_tokens": 48693,
+    "reported_cost_usd": 0.0806882,
+    "latency_ms_total": 904807.2,
+    "completed_canary_calls": 2,
+    "completed_planner_calls": 120,
+    "completed_verifier_calls": 116,
+    "transport_retries": 0,
+    "langgraph_checkpoint_rows": 1173,
+    "langgraph_write_rows": 4333
+  },
+  "authorization": {
+    "revoked": true,
+    "attempt_may_resume": false,
+    "same_output_path_may_be_reused": false,
+    "same_fold_attempts_exhausted": true
+  },
+  "limitations": [
+    "Hidden gold was not opened and no paired architecture metric was calculated.",
+    "The 150 persisted A cells cannot be interpreted alone because B, C, and C+V were not completed.",
+    "The result demonstrates a missing isolated evaluation-database migration, not product architecture or Luna quality."
+  ]
+}

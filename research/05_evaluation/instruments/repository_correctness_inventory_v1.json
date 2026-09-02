@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "349010aa26d4d0af5faa70bb252108de5f89bbaf96b12bdf918e74d2b6715139",
+  "record_sha256": "6b21bac08ea546eab2d8f95a81dd185054944537d96f13fe694260924673932b",
   "records": [
     {
       "audit": {
@@ -5208,10 +5208,10 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Prospective audit confirms this is the sole fresh harness-only corrective attempt: public cases, hidden gold, prompts, Luna engine, quality dimensions, hard gates, 242-call ceiling, USD 2 stop, and zero-retry policy are unchanged. Provider and paid authority are now explicitly true for this checkpoint only.",
+        "evidence": "Terminal audit records the corrective attempt as invalid after the isolated graph database lacked the product model-call-ledger migration. Authority is revoked, hidden gold remained unopened, the output cannot resume, and the same fold cannot run again.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 corrective-authorization audit"
+        "reviewer": "Codex fold-002 terminal-result audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5219,7 +5219,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
       "risk": "high",
-      "sha256": "f902125e7d9c41316b18bfe224fe14ccb746149efb5210fc8790ab2a2e29c91c"
+      "sha256": "3d4c5ae5d66bea1e9beb211596ed6a7319507158dc443fc03c070691e27622f8"
     },
     {
       "audit": {
@@ -12395,10 +12395,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active; all earlier architecture attempts are terminal with authority revoked. Only the sole fold-002 harness-corrective attempt is allowlisted for external-model and method-evaluation execution under its unchanged bounds.",
+        "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. The corrective instrument has been removed from the bounded authorization allowlist; no architecture evaluation execution is currently authorized.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 corrective-authorization audit"
+        "reviewer": "Codex fold-002 terminal-result audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12406,7 +12406,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "9385f8a421ef11b074a7740cdb4baf0e48a894572b8a3d508c181e8f1d860cd6"
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit": {
@@ -13243,10 +13243,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, prove every terminal predecessor remains blocked, and bind only the sole fold-002 corrective attempt to external-model and method-evaluation operations.",
+        "evidence": "Tests enumerate every exact bounded authorization and prove both fold-002 terminal attempts are blocked from external-model and method-evaluation operations after authority revocation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 corrective-authorization audit"
+        "reviewer": "Codex fold-002 terminal-result audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13254,7 +13254,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "4c2a974675c1a747143b190132a6ef7f72ec3a4929804be6780c2d9c52bedd3c"
+      "sha256": "d4fdee14dc776758d8d77e46a91394ecea3e53d4e495339ca258d9b75d030b18"
     },
     {
       "audit": {
@@ -16011,10 +16011,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the authorized corrective attempt's unchanged scientific inputs plus fresh output identity.",
+        "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the corrective attempt's terminal authority revocation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 corrective-authorization audit"
+        "reviewer": "Codex fold-002 terminal-result audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16022,7 +16022,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "risk": "medium",
-      "sha256": "99720a2965f7d74b964450c1cb8c43d316553ffa403490ac905f4f3e87a3caa0"
+      "sha256": "cc668c405d37417a0cc271ec132903121ec4879b78bf47bb2372bc6170667c4c"
     },
     {
       "audit": {
