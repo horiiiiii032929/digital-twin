@@ -1,0 +1,53 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-003-single-case-001-build",
+  "code_revision": "0a24938",
+  "status": "completed-go-deeper",
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "Fresh fold 003 is build-qualified after the isolated actual-product graph database was initialized through the production migration chain and an actual provider-backed graph regression crossed the previously failing model-call-ledger boundary. No architecture or engine is selected before execution."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-003-single-case-001",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json"
+  },
+  "dataset": {
+    "case_count": 150,
+    "architecture_cell_count": 600,
+    "public_file_sha256": "d44c71501ec9c4a9e5e5cac4685583d69cb7e161af9a2659025ee1ff6727f888",
+    "hidden_gold_file_sha256": "c64470bc60e71b0c7e56443d2782a54c8ceadea174efa58e15c9a8d98b30c5c6",
+    "hidden_gold_opened": false,
+    "private_data_used": false,
+    "source_disjoint_from_prior_folds": true
+  },
+  "verification": {
+    "focused_test_count": 40,
+    "python_test_count": 1660,
+    "frontend_test_count": 50,
+    "repository_audit_count": 967,
+    "repository_open_finding_count": 0,
+    "freeze_registered_entrypoint_count": 147,
+    "lint_passed": true,
+    "production_build_passed": true,
+    "diff_check_passed": true,
+    "network_calls": 0,
+    "provider_calls": 0,
+    "paid_cost_usd": 0.0
+  },
+  "database_lifecycle": {
+    "production_migration_path_used": true,
+    "required_model_call_ledger_verified": true,
+    "provider_backed_graph_regression_passed": true
+  },
+  "authorization": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "limitations": [
+    "This is build and network-free qualification evidence, not architecture-quality evidence.",
+    "Luna is a mutable alias and must pass exact-identity canaries immediately before paid execution.",
+    "One fresh fold is not a final architecture or product-model selection."
+  ]
+}

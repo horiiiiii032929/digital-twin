@@ -151,6 +151,17 @@ source-disjoint round may begin only after isolated evaluation databases are
 initialized through the production migration path and that behavior has a
 regression test.
 
+Fresh fold 003 now satisfies that boundary at clean revision `0a24938`.
+The runner applies the complete product migration chain to each isolated graph
+database and verifies the opportunity/model-call ledger tables before graph
+execution. A focused regression drove all four architectures through an actual
+provider-backed graph using that database. The new package contains 150
+source-disjoint cases and 600 paired graph cells; hidden gold remains unopened.
+The complete gate passed 1,660 Python tests, 50 frontend tests, lint/build,
+147/147 freeze coverage, and 967/967 repository audits with zero open findings.
+Fold 003 remains provider-unauthorized and no architecture or engine is selected
+until its bounded execution produces valid paired evidence.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed
