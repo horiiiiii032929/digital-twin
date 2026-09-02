@@ -1,0 +1,228 @@
+{
+  "aggregate": {
+    "deterministic-workflow-a": {
+      "acceptable_move_accuracy": 0.7066666666666667,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "mean_policy_utility": 0.783,
+      "proactive_precision": 0.6333333333333333,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "governed-single-planner-b": {
+      "acceptable_move_accuracy": 0.44,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "mean_policy_utility": 0.7255666666666667,
+      "proactive_precision": 0.3130434782608696,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "hierarchical-model-based-c": {
+      "acceptable_move_accuracy": 0.74,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "mean_policy_utility": 0.7496333333333334,
+      "proactive_precision": 0.7043478260869566,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "hierarchical-model-based-c-plus-verifier": {
+      "acceptable_move_accuracy": 0.4,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "mean_policy_utility": 0.44036666666666674,
+      "proactive_precision": 0.5454545454545454,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    }
+  },
+  "architecture_cell_count": 600,
+  "case_count": 150,
+  "code_revision": "2e7c0ff772bb20b2a181723188a5763feafbe2a2",
+  "decision": {
+    "outcome": "refine",
+    "provisional_ranking": [
+      "hierarchical-model-based-c",
+      "deterministic-workflow-a",
+      "governed-single-planner-b",
+      "hierarchical-model-based-c-plus-verifier"
+    ],
+    "rationale": "Fold 003 is development evidence. It may rank candidates but cannot select the final architecture before a fresh successor and cross-engine comparison.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "finalization_corrections": {
+    "corrected_at": "2026-09-03",
+    "metrics_or_decision_changed": false,
+    "original_result_sha256": "5ad948e7df4853c40fcfac9a51c0bf93b23952e97c18283e0ec5a85ae5e85eeb",
+    "original_summary_sha256": "3670511456f64eb7049e121beb582af597f1f199ab377dad6132592dd52776f4",
+    "repairs": [
+      "Replaced the stale Fold 001 rationale label with Fold 003.",
+      "Changed the embedded provider-ledger status from running to completed after verifying the terminal SQLite ledger."
+    ]
+  },
+  "hard_gates": {
+    "all_600_cells_durable": true,
+    "all_architectures_valid_transition_at_least_0_95": false,
+    "provider_completion_at_least_0_995": false,
+    "provider_failure_safe_fallback_rate_is_1": true,
+    "zero_duplicate_cells": true,
+    "zero_incorrect_scope": true,
+    "zero_invalid_citations": true,
+    "zero_unauthorized_or_unsupported_actions": true
+  },
+  "hidden_gold_sha256": "c64470bc60e71b0c7e56443d2782a54c8ceadea174efa58e15c9a8d98b30c5c6",
+  "instrument_sha256": "8f206b2a41fc7585670f42ea16aee5c7ddd5d0dec23667794a35f3a7a3134f8f",
+  "limitations": [
+    "Synthetic policy-oracle development cases do not establish real learning improvement.",
+    "Luna has no dated snapshot; one shared persisted proposal is reused across B, C, and C+V to prevent cross-condition proposal drift.",
+    "A single fresh development fold cannot select a final architecture or product model."
+  ],
+  "paired_comparisons": {
+    "governed-single-planner-b-vs-deterministic-workflow-a": {
+      "acceptable_move_mcnemar": {
+        "a_only": 9,
+        "b_only": 49,
+        "p_value": 8.959402428981855e-08
+      },
+      "precision_difference": {
+        "ci95": [
+          -0.43478260869565216,
+          -0.20869565217391303
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.3217391304347826,
+        "n_pairs": 115
+      },
+      "unnecessary_intervention_reduction": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 150
+      },
+      "utility_difference": {
+        "ci95": [
+          -0.08598333333333333,
+          -0.03318333333333333
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.057433333333333336,
+        "n_pairs": 150
+      }
+    },
+    "hierarchical-model-based-c-plus-verifier-vs-hierarchical-model-based-c": {
+      "acceptable_move_mcnemar": {
+        "a_only": 0,
+        "b_only": 51,
+        "p_value": 8.881784197001252e-16
+      },
+      "precision_difference": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 55
+      },
+      "unnecessary_intervention_reduction": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 150
+      },
+      "utility_difference": {
+        "ci95": [
+          -0.3757333333333333,
+          -0.2489
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.3092666666666667,
+        "n_pairs": 150
+      }
+    },
+    "hierarchical-model-based-c-vs-governed-single-planner-b": {
+      "acceptable_move_mcnemar": {
+        "a_only": 52,
+        "b_only": 7,
+        "p_value": 1.3589917802203644e-09
+      },
+      "precision_difference": {
+        "ci95": [
+          0.2782608695652174,
+          0.5043478260869565
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.391304347826087,
+        "n_pairs": 115
+      },
+      "unnecessary_intervention_reduction": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 150
+      },
+      "utility_difference": {
+        "ci95": [
+          0.014450000000000003,
+          0.03311666666666666
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.02406666666666667,
+        "n_pairs": 150
+      }
+    }
+  },
+  "provider": {
+    "failed_calls": 0,
+    "input_tokens": 111093,
+    "maximum_calls": "242",
+    "maximum_cost_usd": "2.0",
+    "maximum_latency_ms": 11405.697959009558,
+    "maximum_transport_retries_total": "0",
+    "output_tokens": 48235,
+    "provider_attempts": 237,
+    "provider_calls": 237,
+    "recovered_transport_failures": 0,
+    "reported_cost_usd": 0.0801006,
+    "run_binding_sha256": "d60046ff3ac172a82b928d5ca6910494fce6828923a98f5cb983ff33e26224ba",
+    "schema_version": "1",
+    "status": "completed"
+  },
+  "provider_quality": {
+    "model_case_count": 235,
+    "model_failure_count": 5,
+    "planner_case_count": 120,
+    "planner_failure_case_ids": [
+      "fold-003-repeated-confusion-003",
+      "fold-003-repeated-confusion-017",
+      "fold-003-repeated-confusion-022",
+      "fold-003-student-message-004",
+      "fold-003-student-message-010"
+    ],
+    "provider_completion_rate": 0.9787234042553191,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "verifier_case_count": 115,
+    "verifier_failure_case_ids": []
+  },
+  "public_sha256": "d44c71501ec9c4a9e5e5cac4685583d69cb7e161af9a2659025ee1ff6727f888",
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-development-fold-003-single-case-001",
+  "schema_version": 1,
+  "shared_learner_state_diagnostic": {
+    "brier_score": 0.17220000000000002,
+    "expected_calibration_error": 0.034666666666666686,
+    "selection_dimension": false
+  },
+  "status": "completed-refine"
+}

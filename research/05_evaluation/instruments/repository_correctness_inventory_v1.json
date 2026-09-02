@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "118e9386a791eb51829042b6bdc75f1e0cd65837cb0a4d69ce5164669cad1850",
+  "record_sha256": "bf915fbdbebde1086ed15eaeb4680f7ef46208a09ddc2178ccd2f36bd4f50790",
   "records": [
     {
       "audit": {
@@ -5224,7 +5224,7 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Authorization review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and authorizes only this bounded execution.",
+        "evidence": "Terminal review confirms fold 003 bound 150 source-disjoint cases and 600 paired actual-graph cells, opened hidden gold only after all responses persisted, recorded a valid Refine result, disabled resume, and revoked provider and paid authority.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex fold-003 authorization audit"
@@ -5235,7 +5235,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
       "risk": "high",
-      "sha256": "8f206b2a41fc7585670f42ea16aee5c7ddd5d0dec23667794a35f3a7a3134f8f"
+      "sha256": "da00b7d6d2fe24dfe0a3cc08000e5a2f6a134d9279299c8cd0d7a73d90ef2567"
     },
     {
       "audit": {
@@ -9361,7 +9361,7 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Line-by-line runner review confirmed immutable historical contexts plus fresh fold 003. Every isolated graph database now runs the production migration chain and verifies the model-call ledger before actual graph execution; one-case schemas, bounded concurrency, late gold opening, and execution guards remain intact.",
+        "evidence": "Line-by-line runner review confirmed immutable historical contexts, production-migrated isolated graph databases, one-case schemas, bounded concurrency, late gold opening, and execution guards. Terminal ledger finalization now precedes result publication, and the rationale is fold-neutral.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex fold-003 database-lifecycle audit"
@@ -9393,7 +9393,7 @@
       ],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
       "risk": "high",
-      "sha256": "a84ca4c28d29da2bbffd9b62e812fe1ef44179f80fcbba89eff2b85e97bb436e"
+      "sha256": "7cf227acf4d6e1c6641c606ed4aeec0a41e4e858444b409abe0247c4f604ae28"
     },
     {
       "audit": {
@@ -12416,7 +12416,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active and both fold-002 attempts are terminal with authority revoked. Only fresh fold 003 is allowlisted for bounded external-model and method-evaluation execution under its 242-call, zero-retry, USD 2 limits.",
+        "evidence": "The global freeze remains active and every fold-001 through fold-003 execution is terminal with authority revoked. No architecture evaluation is currently allowlisted, and future evidence requires a separately reviewed fresh successor.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex fold-003 authorization audit"
@@ -12427,7 +12427,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "96951d3b701ae70dbf70412e08f114f264cd26f3e358d109e2b77e4f44ea179a"
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit": {
@@ -13264,7 +13264,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, prove both fold-002 terminal attempts remain blocked, and bind only fresh fold 003 to the external-model and method-evaluation operations required by its frozen execution.",
+        "evidence": "Tests enumerate every exact bounded authorization and prove all terminal fold-001 through fold-003 architecture runs remain blocked after the valid fold-003 Refine result.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex fold-003 authorization audit"
@@ -13275,7 +13275,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "d7003f213438bde63bd2aae0772a9c052fce1389464fb65b83d7326bd00dd128"
+      "sha256": "a1f00dfeadce4aef36f25d601bf39f6fd4e818eb0e13e0aba55f92856c532f38"
     },
     {
       "audit": {
@@ -16032,7 +16032,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests cover three byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and an actual provider-backed graph crossing the production-migrated isolated database boundary.",
+        "evidence": "Focused tests cover three byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, terminal provider-state publication, and an actual provider-backed graph crossing the production-migrated isolated database boundary.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex fold-003 database-lifecycle audit"
@@ -16043,7 +16043,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "risk": "medium",
-      "sha256": "9a8e0f18a2be6d4d1b398dde318076eef27d0723ef56354d56980bceb449e544"
+      "sha256": "9c39cd597e8155c5520d58fb3ced38f3f015ec417cc05f94b74b3f30c1e2f2a2"
     },
     {
       "audit": {

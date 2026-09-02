@@ -151,18 +151,35 @@ source-disjoint round may begin only after isolated evaluation databases are
 initialized through the production migration path and that behavior has a
 regression test.
 
-Fresh fold 003 now satisfies that boundary at clean revision `0a24938`.
+Fresh fold 003 satisfied that boundary at clean revision `0a24938`.
 The runner applies the complete product migration chain to each isolated graph
 database and verifies the opportunity/model-call ledger tables before graph
 execution. A focused regression drove all four architectures through an actual
-provider-backed graph using that database. The new package contains 150
-source-disjoint cases and 600 paired graph cells; hidden gold remains unopened.
+provider-backed graph using that database. The package contains 150
+source-disjoint cases and 600 paired graph cells.
 The complete gate passed 1,660 Python tests, 50 frontend tests, lint/build,
 147/147 freeze coverage, and 967/967 repository audits with zero open findings.
-Fold 003 is now separately frozen and authorized as the sole active architecture
-evaluation for at most 242 calls, zero retries, and a USD 2 emergency stop. No
-architecture or engine is selected until its bounded execution produces valid
-paired evidence.
+
+Its bounded execution is now a valid `completed-refine` result. All 600 cells
+were durable before hidden gold opened. The run made 237 direct Luna calls for
+USD 0.080101 with exact identity, zero transport failures, and 100% safe
+fallback for five over-length planner rationales. Every architecture preserved
+scope and citation validity with zero unauthorized or unsupported actions, but
+none met the 95% transition gate: C ranked first at 74.0% acceptable moves,
+followed by A at 70.7%, B at 44.0%, and C+V at 40.0%. C materially recovered B,
+while the reject-only verifier over-rejected valid interventions and made C+V
+worse than C. The five planner-contract failures reduced valid semantic
+completion to 97.9%, below the frozen 99.5% gate. No architecture or engine is
+selected, fold 003 will not be tuned or rerun, and its authority is revoked.
+
+Two output-finalization defects were corrected transparently after execution:
+the generated rationale said Fold 001 and the embedded provider snapshot was
+taken before the terminal ledger changed from `running` to `completed`. The
+machine record retains both original file hashes and states that no metric,
+gate, ranking, or decision changed. The runner now closes both ledgers before
+publishing their terminal state and has a regression test for that ordering.
+All 40 previously published audit findings remain terminally closed; no audit
+finding has been reopened by this result.
 
 ## Local R1 autonomy release selection
 

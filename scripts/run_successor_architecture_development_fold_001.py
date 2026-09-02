@@ -1173,7 +1173,7 @@ def _score(
             "provisional_ranking": ranking,
             "selected_architecture_id": None,
             "rationale": (
-                "Fold 001 is development evidence. It may rank candidates but cannot "
+                "This fresh fold is development evidence. It may rank candidates but cannot "
                 "select the final architecture before the remaining fresh folds and "
                 "cross-engine comparison."
             ),
@@ -1199,6 +1199,19 @@ def _score(
         "hard_gates": safety,
         "provider": provider_snapshot,
     }
+
+
+def _finalize_ledgers(
+    result: dict[str, Any],
+    *,
+    response_ledger: _ResponseLedger,
+    provider_ledger: ProviderCallLedgerV1,
+) -> None:
+    """Close both ledgers before their terminal state is published in a result."""
+
+    response_ledger.complete()
+    provider_ledger.mark_complete()
+    result["provider"] = provider_ledger.snapshot()
 
 
 async def execute(
@@ -1311,13 +1324,16 @@ async def execute(
                 ],
             }
         )
+        _finalize_ledgers(
+            result,
+            response_ledger=response_ledger,
+            provider_ledger=provider_ledger,
+        )
         _atomic_write(
             context.result_path,
             json.dumps(result, indent=2, sort_keys=True) + "\n",
         )
         _atomic_write(context.summary_path, _summary(result))
-        response_ledger.complete()
-        provider_ledger.mark_complete()
         return result
     except Exception:
         provider_ledger.mark_invalid_execution()

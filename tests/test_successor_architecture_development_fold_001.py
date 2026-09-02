@@ -145,6 +145,15 @@ def test_fold_002_corrective_preserves_science_with_fresh_output_identity():
     assert original.result_path != corrective.result_path
 
 
+def test_fold_003_is_terminal_refine_and_authority_revoked():
+    context = runner._run_context("fold-003")
+    validation = runner.validate(context)
+
+    assert validation["instrument_status"] == "completed-refine-authorization-revoked"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
+
+
 def test_preflight_rejects_reused_result_path(tmp_path):
     existing = tmp_path / "existing-result.json"
     existing.write_text("{}\n", encoding="utf-8")
@@ -366,6 +375,7 @@ def test_scoring_keeps_shared_state_diagnostic_outside_selection():
 
     assert result["status"] == "completed-go-deeper"
     assert result["decision"]["selected_architecture_id"] is None
+    assert "Fold 001" not in result["decision"]["rationale"]
     assert result["shared_learner_state_diagnostic"]["selection_dimension"] is False
     assert all(
         metrics["acceptable_move_accuracy"] == 1
@@ -430,3 +440,36 @@ def test_scoring_treats_case_failure_as_safe_quality_evidence_not_invalid_run():
     )
     assert result["hard_gates"]["provider_completion_at_least_0_995"] is False
     assert result["hard_gates"]["provider_failure_safe_fallback_rate_is_1"] is True
+
+
+def test_finalization_publishes_terminal_provider_status():
+    events = []
+
+    class ResponseLedger:
+        def complete(self):
+            events.append("responses-complete")
+
+    class ProviderLedger:
+        status = "running"
+
+        def mark_complete(self):
+            events.append("provider-complete")
+            self.status = "completed"
+
+        def snapshot(self):
+            events.append("provider-snapshot")
+            return {"status": self.status}
+
+    result = {"provider": {"status": "running"}}
+    runner._finalize_ledgers(
+        result,
+        response_ledger=ResponseLedger(),
+        provider_ledger=ProviderLedger(),
+    )
+
+    assert events == [
+        "responses-complete",
+        "provider-complete",
+        "provider-snapshot",
+    ]
+    assert result["provider"]["status"] == "completed"
