@@ -6682,12 +6682,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "provider-observability",
-      "evidence": "Manual schema/import review and focused OpenAI client tests confirmed strict structured shapes for the hierarchical proposal and reject-only verifier while preserving exact identity, no-fallback, and existing provider error behavior.",
+      "evidence": "Live-contract audit SA1 found and fixed the post-response dispatcher mismatch. Direct transport tests now prove strict hierarchical proposal and reject-only verifier parsing while preserving exact identity, no-fallback, usage accounting, and provider error behavior.",
       "findings": [],
       "path": "services/llm/openai_responses_client.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "006383ff23bdd07e1b7d7e8ea9b8a4ee8fbc5e831aca4b0de4dfec0c70346b91"
+      "sha256": "018b39d5456644fc34cfa67a3c8fd7cdda472f2314dd5c2e004d812be15852ca"
     },
     {
       "audit_status": "audited",
@@ -6869,7 +6869,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "provider-observability",
-      "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+      "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, and added direct live-shape regression coverage for hierarchical planning and reject-only verification.",
       "findings": [],
       "path": "src/digital_twin/evaluation/autonomy_contract.py",
       "reviewed_at": "2026-09-01",
@@ -8709,9 +8709,9 @@
       "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
       "findings": [],
       "path": "tests/services/test_openai_responses_client.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex #157 diagnosable evaluation audit",
-      "sha256": "79a01ad222045ea170a859d9dfe0a4f10fffafb3ffef8b4b69fc308736965e09"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture live-contract audit",
+      "sha256": "24292732a18a3e3f49461db0b2712c4c0c56f06d6655ae66570c52e8a3697cb9"
     },
     {
       "audit_status": "audited",

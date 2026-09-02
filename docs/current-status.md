@@ -58,6 +58,13 @@ zero vulnerabilities. The complete Python suite passed 1,637 tests and the
 frontend passed 50 tests, lint, and production build. The active safe local
 release boundary remains bounded T1-v1 with deterministic T0 rollback.
 
+A final live-path audit then found that valid hierarchical planner and verifier
+responses were being post-validated as legacy tutor answers. This would have
+biased every provider-backed B/C/C+V result toward safe `no_action`. Revision
+`6bafa48` corrects the dispatcher and adds direct transport regressions; result
+`successor-architecture-live-contract-audit-001` closes finding SA1 without a
+provider call or architecture selection.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed
