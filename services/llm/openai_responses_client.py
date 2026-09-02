@@ -397,6 +397,10 @@ class OpenAiResponsesClient:
                 validated = AutonomousPlannerOutputV1.model_validate(content)
             elif task == "reactive_tutoring_plan":
                 validated = ReactiveSemanticProposalV2.model_validate(content)
+            elif task == "hierarchical_autonomy_plan":
+                validated = HierarchicalPlanningProposalV1.model_validate(content)
+            elif task == "autonomy_plan_verifier":
+                validated = PlannerVerificationV1.model_validate(content)
             else:
                 validated = ModelTutorOutput.model_validate(content)
         except (TypeError, ValueError) as error:
