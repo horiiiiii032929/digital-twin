@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review plus the complete architecture-evolution verification confirmed the A/B/C/C+V build-only validator and simulation are part of the normal repository gate; a root override fixes Browserslist at advisory-free 4.28.8, npm audit reports zero vulnerabilities, and no paid execution command or authority was added.",
+      "evidence": "Manual command-surface review plus focused verification confirmed the A/B/C/C+V build, validation, network-free simulation, preflight, and guarded execution commands are explicit. The executable path is repository-freeze guarded and the instrument retains false provider/paid authority; Browserslist remains fixed at advisory-free 4.28.8 and npm audit reports zero vulnerabilities.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "354261dcb789632bc874d2e3db474f9dff6cec3e137e0dac978aff01eb8942bc"
+      "sha256": "29a40ef360806984fa9dbfadc7f2d52b15b60fb2fd21227817fce9ac23a5f392"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Manual guard review and execution-freeze regression confirmed the successor architecture entrypoint exposes only validation, network-free simulation, and build-result publication; provider and held-out execution remain blocked.",
+      "evidence": "Manual guard review and execution-freeze regression confirmed deterministic synthetic builders are explicitly exempt while the successor architecture provider entrypoint must carry a main-level and execution-level bounded-operation guard; no provider or held-out execution is enabled by this registry change.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "1ee81d16d98567f18476bd13e31879026ef544369047d1b87014910d769f9c19"
+      "sha256": "036f39a27bd3533858085fae469c116857dab8d657636926c564cc0175815667"
     },
     {
       "audit_status": "audited",
@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; paid authorization is revoked, the immutable zero-call analysis entrypoint remains registered, and the hidden-state extension is registered only as a network-free guarded evaluation runner.",
+      "evidence": "The global freeze remains active; the new provider-backed successor architecture fold is explicitly registered for external-model and method-evaluation operations, while paid authorization remains false. Registry and AST coverage agree exactly in regression tests.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-study integration audit",
-      "sha256": "b1329d170165e640025fbe643a6085b16b42d3129211c6fc898670885250296c"
+      "reviewer": "Codex successor-architecture development audit",
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit_status": "audited",
@@ -10549,6 +10549,50 @@
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
       "sha256": "d076057542d8445f5880fd72dad0735e2fbfe1e1183f687988c5f9bccc529881"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Prospective design audit confirmed physical public/gold separation, one shared Luna proposal across B/C/C+V, independent latent-outcome policy utility, paired statistics, finite 62-call/USD 2 ceilings, exact model identity, and no paid authority. The shared learner-state diagnostic is explicitly excluded from architecture selection.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture development audit",
+      "sha256": "87733c33ccc14c1df5312809d834237b026075bb9ffd913b257bd14bd76b2360"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Manual builder review and byte-stability tests confirmed 150 fresh synthetic cases, 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in the public package.",
+      "findings": [],
+      "path": "scripts/build_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture development audit",
+      "sha256": "c2e7ac6aaa075f9ef7bebc99f020a94feeac7d91fc962ce6d240b212dc51ac79"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Line-by-line runner review plus network-free simulation confirmed case-keyed strict provider schemas, exact model identity and cost accounting, architecture-scoped checkpoint namespaces, gold opening only after 600 durable cells, atomic resume, bounded calls, and repository freeze guards on both external-model and method-evaluation operations.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture development audit",
+      "sha256": "57ec7180fb729147f28e8e7a6117e14c5adfceabb10130ee3105653876093d28"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Seven focused tests cover balanced construction, hidden-gold isolation, byte stability, bounded no-call simulation, strict case-keyed schemas, duplicate/unknown IDs, cross-condition checkpoint separation, independent utility scoring, and shared learner-state exclusion from selection.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_development_fold_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture development audit",
+      "sha256": "14a772bd856eda12bee596641236d10659ff5c0b9ea7693b4818160d3d2b652a"
     }
   ],
   "schema_version": 1

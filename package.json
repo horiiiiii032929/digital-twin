@@ -551,6 +551,12 @@
     "execute:whole-system-architecture-round-3": "uv run python -m scripts.run_whole_system_architecture_round --execute --instrument research/05_evaluation/instruments/course_digital_twin_whole_system_architecture_round_3_001.json",
     "validate:successor-architecture-paired-comparison-001": "uv run python -m scripts.run_successor_architecture_paired_comparison_001 --validate",
     "simulate:successor-architecture-paired-comparison-001": "uv run python -m scripts.run_successor_architecture_paired_comparison_001 --simulate",
-    "verify:successor-architecture-paired-comparison-001": "uv run pytest tests/digital_twin/test_planning_architectures.py tests/test_successor_architecture_paired_comparison.py -q && npm run validate:successor-architecture-paired-comparison-001 && npm run simulate:successor-architecture-paired-comparison-001"
+    "verify:successor-architecture-paired-comparison-001": "uv run pytest tests/digital_twin/test_planning_architectures.py tests/test_successor_architecture_paired_comparison.py -q && npm run validate:successor-architecture-paired-comparison-001 && npm run simulate:successor-architecture-paired-comparison-001 && npm run verify:successor-architecture-development-fold-001",
+    "build:successor-architecture-development-fold-001": "uv run python -m scripts.build_successor_architecture_development_fold_001 --write",
+    "validate:successor-architecture-development-fold-001": "uv run python -m scripts.run_successor_architecture_development_fold_001 --validate",
+    "simulate:successor-architecture-development-fold-001": "uv run python -m scripts.run_successor_architecture_development_fold_001 --simulate",
+    "preflight:successor-architecture-development-fold-001": "uv run python -m scripts.run_successor_architecture_development_fold_001 --preflight",
+    "execute:successor-architecture-development-fold-001": "uv run python -m scripts.run_successor_architecture_development_fold_001 --execute",
+    "verify:successor-architecture-development-fold-001": "uv run pytest tests/test_successor_architecture_development_fold_001.py -q && npm run validate:successor-architecture-development-fold-001 && npm run simulate:successor-architecture-development-fold-001"
   }
 }

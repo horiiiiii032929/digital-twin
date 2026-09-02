@@ -1,0 +1,3010 @@
+{
+  "case_count": 150,
+  "content_sha256": "1e719c7c2a13631a85393a9a06b785d9810a100e97172ee2a1845ca53f96dbc0",
+  "dataset_id": "successor-architecture-development-fold-001",
+  "fold_id": "development-fold-001",
+  "gold_opening_rule": "after-all-architecture-responses-are-durable",
+  "rows": [
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.7050000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-001",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-002",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-003",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-004",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-005",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-006",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-007",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-008",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-009",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-010",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.7050000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-011",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-012",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-013",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-014",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-015",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-016",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-017",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-018",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-019",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-020",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-021",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-022",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-023",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-024",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-025",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.7050000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-026",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-027",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-028",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-029",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-student-message-030",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-001",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.89,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-002",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.83,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-003",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.62,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-004",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.725,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7250000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-005",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-006",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.74,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-007",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.83,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-008",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.62,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-009",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.575,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-010",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-011",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.89,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-012",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.83,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-013",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.62,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-014",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.575,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-015",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-016",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.89,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-017",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6799999999999999,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-018",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.77,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-019",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.575,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-020",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-021",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.89,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-022",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.83,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-023",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.62,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-024",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.575,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-025",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.935,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-026",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.74,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-027",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6799999999999999,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-028",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.62,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-029",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.575,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-misconception-030",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-001",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.66,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-002",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-003",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-004",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.655,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-005",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-006",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-007",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-008",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-009",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.655,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-010",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-011",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-012",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7424999999999999,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-013",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6900000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-014",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.645,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.805,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-015",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-016",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.66,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-017",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-018",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6900000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-019",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.655,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-020",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-021",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-022",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7424999999999999,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-023",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6900000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-024",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.655,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-025",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-026",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9425,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-027",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-028",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6925,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-029",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.655,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-repeated-confusion-030",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-001",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-002",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-003",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-004",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-005",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-006",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.66,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-007",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-008",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-009",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.42500000000000004,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-010",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-011",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-012",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-013",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-014",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-015",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.7625000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-016",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-017",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.6,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-018",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.4625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-019",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-020",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-021",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.66,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-022",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-023",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-024",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.645,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-025",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.8550000000000001,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.9125000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-026",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.81,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.8625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-027",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "ask-diagnostic-question"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.75,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6625,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-028",
+      "expected_action": "ask-diagnostic-question",
+      "hidden_learner_knows": false,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.54,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.6125,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-029",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "provide-hint-or-example"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": 0.495,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 0.0,
+        "provide-hint-or-example": 0.5750000000000001,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-practice-incomplete-030",
+      "expected_action": "provide-hint-or-example",
+      "hidden_learner_knows": true,
+      "reference_kind": "synthetic-pedagogical-policy-oracle-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-01-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-01-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-01-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-01-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-01-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-02-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-02-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-02-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-02-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-02-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-03-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-03-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-03-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-03-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-03-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-04-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-04-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-04-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-04-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-04-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-05-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-05-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-05-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-05-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-05-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-06-01",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-06-02",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-06-03",
+      "expected_action": "no-action",
+      "hidden_learner_knows": false,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-06-04",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    },
+    {
+      "acceptable_actions": [
+        "no-action"
+      ],
+      "action_utilities": {
+        "ask-diagnostic-question": -1.0,
+        "create-professor-insight-draft": -1.0,
+        "issue-retrieval-practice": -1.0,
+        "no-action": 1.0,
+        "provide-hint-or-example": -1.0,
+        "recommend-approved-source": -1.0,
+        "schedule-follow-up": -1.0,
+        "send-in-app-check-in": -1.0,
+        "summarize-progress": -1.0
+      },
+      "case_id": "fold-001-boundary-06-05",
+      "expected_action": "no-action",
+      "hidden_learner_knows": true,
+      "reference_kind": "deterministic-authority-boundary-v1"
+    }
+  ],
+  "schema_version": 1
+}

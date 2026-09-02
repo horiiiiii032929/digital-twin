@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 959
+    "audited": 963
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 232,
+    "active_or_unclassified_tooling": 234,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 250,
+    "evaluation_configuration": 251,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 216
+    "verification": 217
   },
-  "file_count": 959,
+  "file_count": 963,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6a97e664e93603b201747eaddf2ddc5ca232035b95ded1555a18544af9fce801",
+  "record_sha256": "77c3eee1df77a6aaf1ed02df0112bff62444c65d22bd80839ca5b89eb53b4824",
   "records": [
     {
       "audit": {
@@ -1416,7 +1416,7 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Manual command-surface review plus the complete architecture-evolution verification confirmed the A/B/C/C+V build-only validator and simulation are part of the normal repository gate; a root override fixes Browserslist at advisory-free 4.28.8, npm audit reports zero vulnerabilities, and no paid execution command or authority was added.",
+        "evidence": "Manual command-surface review plus focused verification confirmed the A/B/C/C+V build, validation, network-free simulation, preflight, and guarded execution commands are explicit. The executable path is repository-freeze guarded and the instrument retains false provider/paid authority; Browserslist remains fixed at advisory-free 4.28.8 and npm audit reports zero vulnerabilities.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture correctness audit"
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "354261dcb789632bc874d2e3db474f9dff6cec3e137e0dac978aff01eb8942bc"
+      "sha256": "29a40ef360806984fa9dbfadc7f2d52b15b60fb2fd21227817fce9ac23a5f392"
     },
     {
       "audit": {
@@ -5160,6 +5160,22 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
+        "evidence": "Prospective design audit confirmed physical public/gold separation, one shared Luna proposal across B/C/C+V, independent latent-outcome policy utility, paired statistics, finite 62-call/USD 2 ceilings, exact model identity, and no paid authority. The shared learner-state diagnostic is explicitly excluded from architecture selection.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-architecture development audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+      "risk": "high",
+      "sha256": "87733c33ccc14c1df5312809d834237b026075bb9ffd913b257bd14bd76b2360"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-evaluation",
         "evidence": "Manual instrument review confirmed a finite A/B/C/C+V one-factor comparison, exact E1-E4 economical model allocations, three development rounds, one sealed confirmation, deterministic hard gates, USD 50 ceiling, and no paid authority.",
         "findings": [],
         "reviewed_at": "2026-09-02",
@@ -6787,6 +6803,24 @@
       "path": "scripts/build_repository_correctness_inventory.py",
       "risk": "high",
       "sha256": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-evaluation",
+        "evidence": "Manual builder review and byte-stability tests confirmed 150 fresh synthetic cases, 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in the public package.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-architecture development audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:successor-architecture-development-fold-001"
+      ],
+      "path": "scripts/build_successor_architecture_development_fold_001.py",
+      "risk": "high",
+      "sha256": "c2e7ac6aaa075f9ef7bebc99f020a94feeac7d91fc962ce6d240b212dc51ac79"
     },
     {
       "audit": {
@@ -9261,6 +9295,27 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
+        "evidence": "Line-by-line runner review plus network-free simulation confirmed case-keyed strict provider schemas, exact model identity and cost accounting, architecture-scoped checkpoint namespaces, gold opening only after 600 durable cells, atomic resume, bounded calls, and repository freeze guards on both external-model and method-evaluation operations.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-architecture development audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:successor-architecture-development-fold-001",
+        "preflight:successor-architecture-development-fold-001",
+        "simulate:successor-architecture-development-fold-001",
+        "validate:successor-architecture-development-fold-001"
+      ],
+      "path": "scripts/run_successor_architecture_development_fold_001.py",
+      "risk": "high",
+      "sha256": "57ec7180fb729147f28e8e7a6117e14c5adfceabb10130ee3105653876093d28"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-evaluation",
         "evidence": "Manual runner review plus 48-cell network-free execution confirmed all candidates traverse the actual governed graph, remain inside the shared action/evidence/delivery boundary, use no provider, and publish only build evidence bound to the current revision.",
         "findings": [],
         "reviewed_at": "2026-09-02",
@@ -9909,7 +9964,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual guard review and execution-freeze regression confirmed the successor architecture entrypoint exposes only validation, network-free simulation, and build-result publication; provider and held-out execution remain blocked.",
+        "evidence": "Manual guard review and execution-freeze regression confirmed deterministic synthetic builders are explicitly exempt while the successor architecture provider entrypoint must carry a main-level and execution-level bounded-operation guard; no provider or held-out execution is enabled by this registry change.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex successor-architecture correctness audit"
@@ -9922,7 +9977,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "1ee81d16d98567f18476bd13e31879026ef544369047d1b87014910d769f9c19"
+      "sha256": "036f39a27bd3533858085fae469c116857dab8d657636926c564cc0175815667"
     },
     {
       "audit": {
@@ -12279,10 +12334,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active; paid authorization is revoked, the immutable zero-call analysis entrypoint remains registered, and the hidden-state extension is registered only as a network-free guarded evaluation runner.",
+        "evidence": "The global freeze remains active; the new provider-backed successor architecture fold is explicitly registered for external-model and method-evaluation operations, while paid authorization remains false. Registry and AST coverage agree exactly in regression tests.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex successor-architecture development audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12290,7 +12345,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "b1329d170165e640025fbe643a6085b16b42d3129211c6fc898670885250296c"
+      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
     },
     {
       "audit": {
@@ -15895,6 +15950,22 @@
     {
       "audit": {
         "domain": "verification-evidence",
+        "evidence": "Seven focused tests cover balanced construction, hidden-gold isolation, byte stability, bounded no-call simulation, strict case-keyed schemas, duplicate/unknown IDs, cross-condition checkpoint separation, independent utility scoring, and shared learner-state exclusion from selection.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-architecture development audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_successor_architecture_development_fold_001.py",
+      "risk": "medium",
+      "sha256": "14a772bd856eda12bee596641236d10659ff5c0b9ea7693b4818160d3d2b652a"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
         "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
         "findings": [],
         "reviewed_at": "2026-09-02",
@@ -16102,8 +16173,8 @@
     }
   ],
   "risk_counts": {
-    "high": 729,
-    "medium": 230
+    "high": 732,
+    "medium": 231
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

@@ -1,0 +1,1061 @@
+#!/usr/bin/env python3
+"""Run the first paired A/B/C/C+V development fold through the real graph."""
+
+from __future__ import annotations
+
+import argparse
+import asyncio
+import hashlib
+import json
+import math
+import os
+from datetime import UTC, datetime, timedelta
+from pathlib import Path
+import sqlite3
+import subprocess
+from typing import Any
+
+from dotenv import load_dotenv
+
+from scripts.build_successor_architecture_development_fold_001 import canonical_hash
+from src.digital_twin.evaluation.hidden_state_metrics import (
+    brier_score,
+    expected_calibration_error,
+    paired_bootstrap_difference,
+)
+from src.digital_twin.evaluation.provider_json import (
+    DirectProviderJsonTransport,
+    ProviderCallLedgerV1,
+)
+from src.digital_twin.repository_freeze import (
+    require_bounded_pilot_operation_allowed,
+)
+from src.digital_twin.student.autonomy_eligibility import event_scoped_eligible_actions
+from src.digital_twin.student.autonomy_models import (
+    AutonomousActionKind,
+    AutonomousEventKind,
+    AutonomousGoalV1,
+    PedagogicalPolicyV2,
+    ProactiveOpportunityV1,
+)
+from src.digital_twin.student.autonomy_runtime import (
+    GRAPH_VERSION,
+    AutonomousJobInput,
+    GovernedAutonomousTutoringGraph,
+)
+from src.digital_twin.student.planning_architectures import (
+    AutonomyArchitectureId,
+    HierarchicalPlanningProposalV1,
+    PlannerVerificationV1,
+    PlanningStateCardV1,
+    SwitchableAutonomyPlanner,
+)
+
+
+ROOT = Path(__file__).resolve().parents[1]
+INSTRUMENT_ID = "successor-architecture-development-fold-001"
+INSTRUMENT_PATH = ROOT / (
+    "research/05_evaluation/instruments/"
+    "successor_architecture_development_fold_001.json"
+)
+OUTPUT_ROOT = ROOT / "reports/generated/successor-architecture-development-fold-001"
+PROVIDER_LEDGER = OUTPUT_ROOT / "provider.sqlite3"
+RESPONSE_LEDGER = OUTPUT_ROOT / "responses.sqlite3"
+GRAPH_LEDGER = OUTPUT_ROOT / "graph-checkpoints.sqlite3"
+RESULT_PATH = ROOT / (
+    "research/05_evaluation/records/"
+    "successor-architecture-development-fold-001.json"
+)
+SUMMARY_PATH = ROOT / (
+    "research/05_evaluation/successor-architecture-development-fold-001-results.md"
+)
+PROFILE_SHA = "b" * 64
+NOW = datetime(2026, 9, 2, 14, 30, tzinfo=UTC)
+ALL_ACTIONS = [
+    action for action in AutonomousActionKind if action != AutonomousActionKind.NO_ACTION
+]
+
+
+class ArchitectureDevelopmentError(RuntimeError):
+    """A binding, transport, or execution invariant failed."""
+
+
+def _git(*arguments: str) -> str:
+    return subprocess.run(
+        ["git", *arguments], cwd=ROOT, check=True, capture_output=True, text=True
+    ).stdout.strip()
+
+
+def _file_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def _load_json(path: Path) -> dict[str, Any]:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ArchitectureDevelopmentError(f"JSON root is not an object: {path}")
+    return value
+
+
+def _load_bound_package(binding: dict[str, Any], *, gold: bool) -> dict[str, Any]:
+    prefix = "hidden_gold" if gold else "public"
+    path = ROOT / str(binding[f"{prefix}_path"])
+    if _file_sha256(path) != binding[f"{prefix}_file_sha256"]:
+        raise ArchitectureDevelopmentError(f"{prefix} file hash drifted")
+    value = _load_json(path)
+    if value.get("content_sha256") != binding[f"{prefix}_content_sha256"]:
+        raise ArchitectureDevelopmentError(f"{prefix} content binding drifted")
+    unhashed = {key: item for key, item in value.items() if key != "content_sha256"}
+    if canonical_hash(unhashed) != value["content_sha256"]:
+        raise ArchitectureDevelopmentError(f"{prefix} package content drifted")
+    return value
+
+
+def _schema_string(nullable: bool = False) -> dict[str, Any]:
+    return {"type": ["string", "null"] if nullable else "string"}
+
+
+def _proposal_schema() -> dict[str, Any]:
+    action = {"type": "string", "enum": [item.value for item in AutonomousActionKind]}
+    step = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "action": action,
+            "expected_observation": _schema_string(),
+            "stop_or_replan_predicate": _schema_string(),
+        },
+        "required": ["action", "expected_observation", "stop_or_replan_predicate"],
+    }
+    row = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "case_id": _schema_string(),
+            "selected_action": action,
+            "reason_code": _schema_string(),
+            "expected_learner_action": _schema_string(nullable=True),
+            "outcome_observation": _schema_string(nullable=True),
+            "stop_condition": _schema_string(),
+            "replan_condition": _schema_string(nullable=True),
+            "episode_steps": {"type": "array", "items": step},
+        },
+        "required": [
+            "case_id",
+            "selected_action",
+            "reason_code",
+            "expected_learner_action",
+            "outcome_observation",
+            "stop_condition",
+            "replan_condition",
+            "episode_steps",
+        ],
+    }
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {"rows": {"type": "array", "items": row}},
+        "required": ["rows"],
+    }
+
+
+def _verifier_schema() -> dict[str, Any]:
+    row = {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {
+            "case_id": _schema_string(),
+            "accept": {"type": "boolean"},
+            "reason_code": _schema_string(),
+        },
+        "required": ["case_id", "accept", "reason_code"],
+    }
+    return {
+        "type": "object",
+        "additionalProperties": False,
+        "properties": {"rows": {"type": "array", "items": row}},
+        "required": ["rows"],
+    }
+
+
+def _chunks(rows: list[dict[str, Any]], size: int) -> list[list[dict[str, Any]]]:
+    return [rows[index : index + size] for index in range(0, len(rows), size)]
+
+
+def _validate_id_set(rows: list[dict[str, Any]], expected: list[str]) -> None:
+    observed = [str(row.get("case_id", "")) for row in rows]
+    if len(observed) != len(set(observed)):
+        raise ArchitectureDevelopmentError("provider returned duplicate case IDs")
+    if set(observed) != set(expected):
+        raise ArchitectureDevelopmentError("provider returned missing or unknown case IDs")
+
+
+def _eligible_public_rows(public_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [row for row in public_rows if row["guard"] == "eligible"]
+
+
+def _planner_prompt(rows: list[dict[str, Any]]) -> str:
+    payload = []
+    for row in rows:
+        event = AutonomousEventKind(row["event_kind"])
+        eligible = event_scoped_eligible_actions(event, ALL_ACTIONS)
+        payload.append(
+            {
+                "case_id": row["case_id"],
+                "event_kind": event.value,
+                "state_card": row["state_card"],
+                "objective": row["objective"],
+                "eligible_actions": [item.value for item in eligible],
+                "evidence_ready": row["evidence_ready"],
+                "maximum_episode_steps": 3,
+            }
+        )
+    return json.dumps(
+        {
+            "instruction": (
+                "For each case choose one pedagogically appropriate action from that "
+                "case's eligible_actions. Use only observable state. Do not change scope, "
+                "policy, evidence, consent, learner state, or delivery. Return concise "
+                "structured reasons, not hidden reasoning. Preserve every case_id exactly."
+            ),
+            "cases": payload,
+        },
+        sort_keys=True,
+    )
+
+
+def _verifier_prompt(rows: list[dict[str, Any]]) -> str:
+    return json.dumps(
+        {
+            "instruction": (
+                "For each case reject only when the selected move is pedagogically "
+                "inappropriate for the observable state. Never amend an action and "
+                "preserve every case_id exactly."
+            ),
+            "cases": rows,
+        },
+        sort_keys=True,
+    )
+
+
+def _proposal_from_row(row: dict[str, Any]) -> HierarchicalPlanningProposalV1:
+    payload = {key: value for key, value in row.items() if key != "case_id"}
+    return HierarchicalPlanningProposalV1.model_validate(payload)
+
+
+def _job(row: dict[str, Any]) -> AutonomousJobInput:
+    case_id = str(row["case_id"])
+    state = PlanningStateCardV1.model_validate(row["state_card"])
+    evidence_ready = bool(row["evidence_ready"])
+    goal = AutonomousGoalV1(
+        goal_id=f"goal-{case_id}",
+        student_id=f"learner-{case_id}",
+        course_id="synthetic-autonomy-course",
+        release_id="release-a",
+        policy_version=1,
+        profile_id="profile-a",
+        profile_sha256=PROFILE_SHA,
+        graph_version=GRAPH_VERSION,
+        planner_model="gpt-5.6-luna",
+        generator_model="deterministic/autonomy-wording-v1",
+        approved_course_objective=row["objective"],
+        learner_subgoal="Choose one evidence-grounded next learning move.",
+        success_condition="Produce one assessed learner response.",
+        attempt_limit=3,
+        attempt_count=max(0, 3 - state.goal_attempts_remaining),
+        expires_at=(NOW + timedelta(days=7)).isoformat(),
+        created_at=NOW.isoformat(),
+        updated_at=NOW.isoformat(),
+    )
+    opportunity = ProactiveOpportunityV1(
+        opportunity_id=f"opportunity-{case_id}",
+        idempotency_key=f"idempotency-{case_id}",
+        event_kind=AutonomousEventKind(row["event_kind"]),
+        student_id=goal.student_id,
+        course_id=goal.course_id,
+        release_id=goal.release_id,
+        policy_version=1,
+        profile_id="profile-a",
+        profile_sha256=PROFILE_SHA,
+        graph_version=GRAPH_VERSION,
+        planner_model="gpt-5.6-luna",
+        generator_model="deterministic/autonomy-wording-v1",
+        goal_id=goal.goal_id,
+        supporting_observation_ids=[
+            f"observation-{case_id}-{index}"
+            for index in range(state.assessed_evidence_count)
+        ],
+        concept_id=state.concept_id,
+        source_chunk_id=f"chunk-{case_id}" if evidence_ready else None,
+        source_chunk_ids=[f"chunk-{case_id}"] if evidence_ready else [],
+        earliest_action_at=(NOW - timedelta(minutes=1)).isoformat(),
+        latest_action_at=(NOW + timedelta(hours=1)).isoformat(),
+        created_at=NOW.isoformat(),
+        updated_at=NOW.isoformat(),
+    )
+    policy = PedagogicalPolicyV2(
+        course_id=goal.course_id,
+        version=1,
+        approved_by="synthetic-professor",
+        approved_profile_id="profile-a",
+        approved_profile_sha256=PROFILE_SHA,
+        approved_course_objectives=[row["objective"]],
+        autonomy_enabled=True,
+        allowed_actions=ALL_ACTIONS,
+        updated_at=NOW.isoformat(),
+    )
+    return AutonomousJobInput(
+        opportunity=opportunity,
+        goal=goal,
+        policy=policy,
+        professor_id="synthetic-professor",
+        current_release_id=("release-a" if row["current_release_matches"] else "release-b"),
+        current_profile_id="profile-a",
+        current_profile_sha256=PROFILE_SHA,
+        membership_active=bool(row["membership_active"]),
+        consent_active=bool(row["consent_active"]),
+        within_quiet_hours=bool(row["within_quiet_hours"]),
+        recent_message_count=int(row["recent_message_count"]),
+        same_concept_cooldown_active=bool(row["same_concept_cooldown_active"]),
+        evidence_keys=[f"source-range-{case_id}"] if evidence_ready else [],
+        evidence_chunk_ids=[f"chunk-{case_id}"] if evidence_ready else [],
+        evidence_decision_reason="fresh-synthetic-authoritative-evidence",
+        evidence_complete=evidence_ready,
+        evidence_unique=evidence_ready,
+        evidence_current=evidence_ready,
+        evidence_authorized=evidence_ready,
+        now=NOW.isoformat(),
+    )
+
+
+class _ProposalMap:
+    model_id = "gpt-5.6-luna"
+
+    def __init__(self, values: dict[str, HierarchicalPlanningProposalV1]) -> None:
+        self.values = values
+
+    async def propose(self, **kwargs):
+        case_id = _case_id_from_opportunity(
+            kwargs["job"].opportunity.opportunity_id
+        )
+        if case_id not in self.values:
+            raise ValueError("no persisted proposal for eligible case")
+        return self.values[case_id]
+
+
+class _VerifierMap:
+    model_id = "gpt-5.6-luna"
+
+    def __init__(self, values: dict[str, PlannerVerificationV1]) -> None:
+        self.values = values
+
+    async def verify(self, **kwargs):
+        case_id = _case_id_from_opportunity(
+            kwargs["job"].opportunity.opportunity_id
+        )
+        if case_id not in self.values:
+            raise ValueError("no persisted verifier decision for selected case")
+        return self.values[case_id]
+
+
+def _case_id_from_opportunity(opportunity_id: str) -> str:
+    return opportunity_id.removeprefix("opportunity-").split(
+        "--architecture-", 1
+    )[0]
+
+
+def _architecture_scoped_job(
+    row: dict[str, Any], architecture: AutonomyArchitectureId
+) -> AutonomousJobInput:
+    job = _job(row)
+    suffix = f"--architecture-{architecture.value}"
+    return job.model_copy(
+        update={
+            "opportunity": job.opportunity.model_copy(
+                update={
+                    "opportunity_id": f"{job.opportunity.opportunity_id}{suffix}",
+                    "idempotency_key": f"{job.opportunity.idempotency_key}{suffix}",
+                }
+            )
+        }
+    )
+
+
+class _ResponseLedger:
+    def __init__(self, path: Path, *, binding: dict[str, Any], resume: bool) -> None:
+        if resume and not path.is_file():
+            raise ArchitectureDevelopmentError("response resume ledger is missing")
+        if not resume and path.exists():
+            raise ArchitectureDevelopmentError("exclusive response ledger exists")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.connection = sqlite3.connect(path)
+        self.connection.execute("PRAGMA journal_mode=WAL")
+        self.connection.execute("PRAGMA synchronous=FULL")
+        self.connection.execute(
+            "CREATE TABLE IF NOT EXISTS metadata(key TEXT PRIMARY KEY,value TEXT NOT NULL)"
+        )
+        self.connection.execute(
+            """CREATE TABLE IF NOT EXISTS responses(
+                   architecture_id TEXT NOT NULL,
+                   case_id TEXT NOT NULL,
+                   payload_json TEXT NOT NULL,
+                   PRIMARY KEY(architecture_id,case_id)
+               )"""
+        )
+        expected = canonical_hash(binding)
+        current = self.connection.execute(
+            "SELECT value FROM metadata WHERE key='binding_sha256'"
+        ).fetchone()
+        if resume:
+            if current is None or current[0] != expected:
+                raise ArchitectureDevelopmentError("response resume binding drifted")
+        else:
+            self.connection.execute(
+                "INSERT INTO metadata(key,value) VALUES('binding_sha256',?)", (expected,)
+            )
+            self.connection.execute(
+                "INSERT INTO metadata(key,value) VALUES('status','running')"
+            )
+            self.connection.commit()
+
+    def has(self, architecture_id: str, case_id: str) -> bool:
+        return self.connection.execute(
+            "SELECT 1 FROM responses WHERE architecture_id=? AND case_id=?",
+            (architecture_id, case_id),
+        ).fetchone() is not None
+
+    def record(self, architecture_id: str, case_id: str, payload: dict[str, Any]) -> None:
+        with self.connection:
+            self.connection.execute(
+                "INSERT INTO responses(architecture_id,case_id,payload_json) VALUES(?,?,?)",
+                (architecture_id, case_id, json.dumps(payload, sort_keys=True)),
+            )
+
+    def rows(self) -> list[dict[str, Any]]:
+        return [
+            json.loads(row[0])
+            for row in self.connection.execute(
+                "SELECT payload_json FROM responses ORDER BY architecture_id,case_id"
+            )
+        ]
+
+    def complete(self) -> None:
+        with self.connection:
+            self.connection.execute(
+                "UPDATE metadata SET value='completed' WHERE key='status'"
+            )
+
+    def close(self) -> None:
+        self.connection.close()
+
+
+def _binding(instrument: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "instrument_sha256": _file_sha256(INSTRUMENT_PATH),
+        "public_sha256": instrument["dataset"]["public_file_sha256"],
+        "gold_sha256": instrument["dataset"]["hidden_gold_file_sha256"],
+        "code_revision": _git("rev-parse", "HEAD"),
+        "engine": instrument["fixed_engine"],
+    }
+
+
+def validate() -> dict[str, Any]:
+    instrument = _load_json(INSTRUMENT_PATH)
+    public = _load_bound_package(instrument["dataset"], gold=False)
+    public_ids = [row["case_id"] for row in public["rows"]]
+    if len(public_ids) != 150 or len(public_ids) != len(set(public_ids)):
+        raise ArchitectureDevelopmentError("public fold identity drifted")
+    if instrument["dataset"]["architecture_cell_count"] != 600:
+        raise ArchitectureDevelopmentError("architecture cell count drifted")
+    if instrument["fixed_engine"]["provider_model"] != "gpt-5.6-luna":
+        raise ArchitectureDevelopmentError("fixed engine drifted")
+    if instrument["execution"]["maximum_provider_calls"] != 62:
+        raise ArchitectureDevelopmentError("call ceiling drifted")
+    if instrument["analysis"]["learner_state_is_shared_not_a_selection_dimension"] is not True:
+        raise ArchitectureDevelopmentError("shared learner-state diagnostic drifted")
+    return {
+        "instrument_id": instrument["instrument_id"],
+        "status": "passed",
+        "instrument_status": instrument["status"],
+        "case_count": len(public_ids),
+        "architecture_cell_count": 600,
+        "provider_execution_authorized": instrument["execution"][
+            "provider_execution_authorized"
+        ],
+        "paid_execution_authorized": instrument["execution"][
+            "paid_execution_authorized"
+        ],
+        "provider_calls": 0,
+    }
+
+
+def preflight(*, resume: bool) -> dict[str, Any]:
+    result = validate()
+    instrument = _load_json(INSTRUMENT_PATH)
+    blockers: list[str] = []
+    authority = instrument["execution"]
+    if not authority["provider_execution_authorized"]:
+        blockers.append("provider-execution-not-authorized")
+    if not authority["paid_execution_authorized"]:
+        blockers.append("paid-execution-not-authorized")
+    if not os.getenv("OPENAI_API_KEY", "").strip():
+        blockers.append("OPENAI_API_KEY-missing")
+    if _git("status", "--porcelain"):
+        blockers.append("working-tree-dirty")
+    verified = datetime.fromisoformat(instrument["provider_freshness"]["verified_at"])
+    age_hours = (datetime.now(UTC) - verified.astimezone(UTC)).total_seconds() / 3600
+    if age_hours > instrument["provider_freshness"]["maximum_age_hours"]:
+        blockers.append("provider-metadata-stale")
+    for path in (PROVIDER_LEDGER, RESPONSE_LEDGER, GRAPH_LEDGER):
+        if resume and not path.exists():
+            blockers.append(f"resume-artifact-missing:{path.name}")
+        if not resume and path.exists():
+            blockers.append(f"exclusive-output-exists:{path.name}")
+    return {
+        **result,
+        "status": "ready" if not blockers else "blocked",
+        "blockers": blockers,
+        "resume": resume,
+        "provider_calls": 0,
+    }
+
+
+async def _call_planner_batches(
+    *,
+    transport: DirectProviderJsonTransport,
+    ledger: ProviderCallLedgerV1,
+    public_rows: list[dict[str, Any]],
+) -> dict[str, HierarchicalPlanningProposalV1]:
+    result: dict[str, HierarchicalPlanningProposalV1] = {}
+    for batch_index, batch in enumerate(_chunks(public_rows, 4), start=1):
+        response = await transport.call_with_ledger(
+            ledger=ledger,
+            request_key=f"planner-{batch_index:03d}",
+            provider_role="shared-fixed-engine-planner",
+            system=(
+                "Return only bounded pedagogical proposals for the supplied synthetic "
+                "cases. Do not include chain-of-thought or personal data."
+            ),
+            prompt=_planner_prompt(batch),
+            task="successor_architecture_planner_batch",
+            schema=_proposal_schema(),
+        )
+        rows = response.content.get("rows")
+        if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+            raise ArchitectureDevelopmentError("planner batch rows are malformed")
+        expected = [row["case_id"] for row in batch]
+        _validate_id_set(rows, expected)
+        by_id = {str(row["case_id"]): row for row in rows}
+        for source in batch:
+            case_id = source["case_id"]
+            proposal = _proposal_from_row(by_id[case_id])
+            eligible = event_scoped_eligible_actions(
+                AutonomousEventKind(source["event_kind"]), ALL_ACTIONS
+            )
+            if proposal.selected_action not in eligible or any(
+                step.action not in eligible for step in proposal.episode_steps
+            ):
+                raise ArchitectureDevelopmentError(
+                    f"planner left deterministic envelope: {case_id}"
+                )
+            result[case_id] = proposal
+    return result
+
+
+async def _selected_c_rows(
+    public_rows: list[dict[str, Any]],
+    proposals: dict[str, HierarchicalPlanningProposalV1],
+) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    provider = _ProposalMap(proposals)
+    for row in public_rows:
+        case_id = row["case_id"]
+        state = PlanningStateCardV1.model_validate(row["state_card"])
+        planner = SwitchableAutonomyPlanner(
+            architecture_id=AutonomyArchitectureId.HIERARCHICAL_MODEL_BASED_C,
+            proposal_provider=provider,
+            state_card_resolver=lambda _job, state=state: state,
+        )
+        proposal, _trace = await planner.plan_with_trace(_job(row))
+        if proposal.action != AutonomousActionKind.NO_ACTION:
+            rows.append(
+                {
+                    "case_id": case_id,
+                    "event_kind": row["event_kind"],
+                    "state_card": row["state_card"],
+                    "eligible_actions": [
+                        item.value
+                        for item in event_scoped_eligible_actions(
+                            AutonomousEventKind(row["event_kind"]), ALL_ACTIONS
+                        )
+                    ],
+                    "proposal": proposal.model_dump(mode="json"),
+                }
+            )
+    return rows
+
+
+async def _call_verifier_batches(
+    *,
+    transport: DirectProviderJsonTransport,
+    ledger: ProviderCallLedgerV1,
+    selected_rows: list[dict[str, Any]],
+) -> dict[str, PlannerVerificationV1]:
+    result: dict[str, PlannerVerificationV1] = {}
+    for batch_index, batch in enumerate(_chunks(selected_rows, 4), start=1):
+        response = await transport.call_with_ledger(
+            ledger=ledger,
+            request_key=f"verifier-{batch_index:03d}",
+            provider_role="reject-only-verifier",
+            system=(
+                "Return only reject-only decisions for the supplied synthetic tutoring "
+                "moves. Do not propose replacements or include hidden reasoning."
+            ),
+            prompt=_verifier_prompt(batch),
+            task="successor_architecture_verifier_batch",
+            schema=_verifier_schema(),
+        )
+        rows = response.content.get("rows")
+        if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+            raise ArchitectureDevelopmentError("verifier batch rows are malformed")
+        expected = [row["case_id"] for row in batch]
+        _validate_id_set(rows, expected)
+        by_id = {str(row["case_id"]): row for row in rows}
+        for case_id in expected:
+            result[case_id] = PlannerVerificationV1.model_validate(
+                {key: value for key, value in by_id[case_id].items() if key != "case_id"}
+            )
+    return result
+
+
+async def _canaries(
+    transport: DirectProviderJsonTransport,
+    ledger: ProviderCallLedgerV1,
+    row: dict[str, Any],
+) -> None:
+    planner = await transport.call_with_ledger(
+        ledger=ledger,
+        request_key="canary-planner",
+        provider_role="planner-canary",
+        system="Return one bounded synthetic pedagogical proposal.",
+        prompt=_planner_prompt([row]),
+        task="successor_architecture_planner_canary",
+        schema=_proposal_schema(),
+    )
+    planner_rows = planner.content.get("rows")
+    if not isinstance(planner_rows, list):
+        raise ArchitectureDevelopmentError("planner canary rows are malformed")
+    _validate_id_set(planner_rows, [row["case_id"]])
+    proposal = _proposal_from_row(planner_rows[0])
+    verifier_input = {
+        "case_id": row["case_id"],
+        "event_kind": row["event_kind"],
+        "state_card": row["state_card"],
+        "eligible_actions": [
+            item.value
+            for item in event_scoped_eligible_actions(
+                AutonomousEventKind(row["event_kind"]), ALL_ACTIONS
+            )
+        ],
+        "proposal": {
+            "action": proposal.selected_action.value,
+            "reason_code": proposal.reason_code,
+            "expected_learner_action": proposal.expected_learner_action,
+            "required_evidence_keys": [],
+            "outcome_observation": proposal.outcome_observation,
+            "stop_condition": proposal.stop_condition,
+            "replan_condition": proposal.replan_condition,
+        },
+    }
+    verifier = await transport.call_with_ledger(
+        ledger=ledger,
+        request_key="canary-verifier",
+        provider_role="verifier-canary",
+        system="Return one reject-only synthetic tutoring decision.",
+        prompt=_verifier_prompt([verifier_input]),
+        task="successor_architecture_verifier_canary",
+        schema=_verifier_schema(),
+    )
+    verifier_rows = verifier.content.get("rows")
+    if not isinstance(verifier_rows, list):
+        raise ArchitectureDevelopmentError("verifier canary rows are malformed")
+    _validate_id_set(verifier_rows, [row["case_id"]])
+    PlannerVerificationV1.model_validate(
+        {key: value for key, value in verifier_rows[0].items() if key != "case_id"}
+    )
+
+
+async def _run_graphs(
+    *,
+    public_rows: list[dict[str, Any]],
+    proposals: dict[str, HierarchicalPlanningProposalV1],
+    verifications: dict[str, PlannerVerificationV1],
+    response_ledger: _ResponseLedger,
+) -> None:
+    proposal_provider = _ProposalMap(proposals)
+    verifier_provider = _VerifierMap(verifications)
+    for architecture in AutonomyArchitectureId:
+        for row in public_rows:
+            case_id = row["case_id"]
+            if response_ledger.has(architecture.value, case_id):
+                continue
+            state = PlanningStateCardV1.model_validate(row["state_card"])
+            if architecture == AutonomyArchitectureId.DETERMINISTIC_WORKFLOW_A:
+                planner = SwitchableAutonomyPlanner(architecture_id=architecture)
+            else:
+                planner = SwitchableAutonomyPlanner(
+                    architecture_id=architecture,
+                    proposal_provider=proposal_provider,
+                    verifier=(
+                        verifier_provider
+                        if architecture
+                        == AutonomyArchitectureId.HIERARCHICAL_WITH_VERIFIER_CV
+                        else None
+                    ),
+                    state_card_resolver=lambda _job, state=state: state,
+                )
+            graph = GovernedAutonomousTutoringGraph(
+                planner=planner,
+                checkpoint_database_path=str(GRAPH_LEDGER),
+            )
+            result = await graph.run(_architecture_scoped_job(row, architecture))
+            response_ledger.record(
+                architecture.value,
+                case_id,
+                {
+                    "architecture_id": architecture.value,
+                    "case_id": case_id,
+                    "selected_action": result.action.kind.value,
+                    "response": result.response.model_dump(mode="json")
+                    if result.response is not None
+                    else None,
+                    "trace": result.trace.model_dump(mode="json"),
+                },
+            )
+
+
+def _exact_mcnemar(a: list[bool], b: list[bool]) -> dict[str, Any]:
+    a_only = sum(left and not right for left, right in zip(a, b, strict=True))
+    b_only = sum(right and not left for left, right in zip(a, b, strict=True))
+    discordant = a_only + b_only
+    if discordant == 0:
+        return {"a_only": 0, "b_only": 0, "p_value": 1.0}
+    tail = sum(math.comb(discordant, index) for index in range(min(a_only, b_only) + 1))
+    p_value = min(1.0, 2 * tail / (2**discordant))
+    return {"a_only": a_only, "b_only": b_only, "p_value": p_value}
+
+
+def _score(
+    responses: list[dict[str, Any]],
+    public_rows: list[dict[str, Any]],
+    gold_rows: list[dict[str, Any]],
+    provider_snapshot: dict[str, Any],
+) -> dict[str, Any]:
+    public_by_id = {row["case_id"]: row for row in public_rows}
+    gold_by_id = {row["case_id"]: row for row in gold_rows}
+    scored: list[dict[str, Any]] = []
+    for response in responses:
+        case_id = response["case_id"]
+        gold = gold_by_id[case_id]
+        selected = response["selected_action"]
+        accepted = selected in gold["acceptable_actions"]
+        expected_no_action = gold["expected_action"] == AutonomousActionKind.NO_ACTION.value
+        intervention = selected != AutonomousActionKind.NO_ACTION.value
+        response_payload = response["response"]
+        citation_valid = (
+            not intervention
+            or (
+                isinstance(response_payload, dict)
+                and response_payload.get("source_range_keys")
+                == [f"source-range-{case_id}"]
+            )
+        )
+        scored.append(
+            {
+                **response,
+                "accepted": accepted,
+                "policy_utility": float(gold["action_utilities"][selected]),
+                "intervention": intervention,
+                "unnecessary_intervention": expected_no_action and intervention,
+                "citation_valid": citation_valid,
+                "scope_valid": response["trace"]["course_id"] == "synthetic-autonomy-course",
+            }
+        )
+    by_architecture: dict[str, list[dict[str, Any]]] = {}
+    for row in scored:
+        by_architecture.setdefault(row["architecture_id"], []).append(row)
+    aggregate: dict[str, Any] = {}
+    for architecture_id, rows in sorted(by_architecture.items()):
+        interventions = [row for row in rows if row["intervention"]]
+        aggregate[architecture_id] = {
+            "case_count": len(rows),
+            "acceptable_move_accuracy": sum(row["accepted"] for row in rows) / len(rows),
+            "mean_policy_utility": sum(row["policy_utility"] for row in rows) / len(rows),
+            "proactive_precision": (
+                sum(row["accepted"] for row in interventions) / len(interventions)
+                if interventions
+                else 1.0
+            ),
+            "unnecessary_intervention_rate": sum(
+                row["unnecessary_intervention"] for row in rows
+            )
+            / len(rows),
+            "citation_validity": sum(row["citation_valid"] for row in rows) / len(rows),
+            "scope_validity": sum(row["scope_valid"] for row in rows) / len(rows),
+        }
+    ordered_ids = [row["case_id"] for row in public_rows]
+    comparisons: dict[str, Any] = {}
+    for candidate, control in (
+        (AutonomyArchitectureId.GOVERNED_SINGLE_PLANNER_B.value, AutonomyArchitectureId.DETERMINISTIC_WORKFLOW_A.value),
+        (AutonomyArchitectureId.HIERARCHICAL_MODEL_BASED_C.value, AutonomyArchitectureId.GOVERNED_SINGLE_PLANNER_B.value),
+        (AutonomyArchitectureId.HIERARCHICAL_WITH_VERIFIER_CV.value, AutonomyArchitectureId.HIERARCHICAL_MODEL_BASED_C.value),
+    ):
+        candidate_rows = sorted(by_architecture[candidate], key=lambda row: ordered_ids.index(row["case_id"]))
+        control_rows = sorted(by_architecture[control], key=lambda row: ordered_ids.index(row["case_id"]))
+        key = f"{candidate}-vs-{control}"
+        comparisons[key] = {
+            "acceptable_move_mcnemar": _exact_mcnemar(
+                [row["accepted"] for row in candidate_rows],
+                [row["accepted"] for row in control_rows],
+            ),
+            "utility_difference": paired_bootstrap_difference(
+                candidate_rows,
+                control_rows,
+                value=lambda row: float(row["policy_utility"]),
+                key=lambda row: row["case_id"],
+                resamples=2000,
+                seed=f"{key}-utility",
+            ),
+            "precision_difference": paired_bootstrap_difference(
+                candidate_rows,
+                control_rows,
+                value=lambda row: float(row["accepted"]) if row["intervention"] else None,
+                key=lambda row: row["case_id"],
+                resamples=2000,
+                seed=f"{key}-precision",
+            ),
+            "unnecessary_intervention_reduction": paired_bootstrap_difference(
+                control_rows,
+                candidate_rows,
+                value=lambda row: float(row["unnecessary_intervention"]),
+                key=lambda row: row["case_id"],
+                resamples=2000,
+                seed=f"{key}-unnecessary",
+            ),
+        }
+    predictions = [
+        (
+            PlanningStateCardV1.model_validate(public_by_id[row["case_id"]]["state_card"]).mastery_probability,
+            bool(row["hidden_learner_knows"]),
+        )
+        for row in gold_rows
+    ]
+    safety = {
+        "zero_unauthorized_or_unsupported_actions": all(
+            not row["unnecessary_intervention"] for row in scored
+        ),
+        "zero_invalid_citations": all(row["citation_valid"] for row in scored),
+        "zero_incorrect_scope": all(row["scope_valid"] for row in scored),
+        "all_600_cells_durable": len(scored) == 600,
+        "zero_duplicate_cells": len(
+            {(row["architecture_id"], row["case_id"]) for row in scored}
+        )
+        == 600,
+    }
+    ranking = sorted(
+        aggregate,
+        key=lambda architecture_id: (
+            aggregate[architecture_id]["acceptable_move_accuracy"],
+            aggregate[architecture_id]["proactive_precision"],
+            -aggregate[architecture_id]["unnecessary_intervention_rate"],
+        ),
+        reverse=True,
+    )
+    return {
+        "status": "completed-go-deeper" if all(safety.values()) else "completed-refine",
+        "decision": {
+            "outcome": "go-deeper" if all(safety.values()) else "refine",
+            "provisional_ranking": ranking,
+            "selected_architecture_id": None,
+            "rationale": (
+                "Fold 001 is development evidence. It may rank candidates but cannot "
+                "select the final architecture before the remaining fresh folds and "
+                "cross-engine comparison."
+            ),
+        },
+        "case_count": 150,
+        "architecture_cell_count": 600,
+        "aggregate": aggregate,
+        "paired_comparisons": comparisons,
+        "shared_learner_state_diagnostic": {
+            "brier_score": brier_score(predictions),
+            "expected_calibration_error": expected_calibration_error(predictions),
+            "selection_dimension": False,
+        },
+        "hard_gates": safety,
+        "provider": provider_snapshot,
+    }
+
+
+async def execute(*, resume: bool) -> dict[str, Any]:
+    require_bounded_pilot_operation_allowed(
+        INSTRUMENT_ID,
+        "external_model_evaluation",
+    )
+    require_bounded_pilot_operation_allowed(
+        INSTRUMENT_ID,
+        "method_evaluation_execution",
+    )
+    ready = preflight(resume=resume)
+    if ready["status"] != "ready":
+        raise ArchitectureDevelopmentError(f"preflight blocked: {ready['blockers']}")
+    instrument = _load_json(INSTRUMENT_PATH)
+    public = _load_bound_package(instrument["dataset"], gold=False)
+    public_rows = list(public["rows"])
+    eligible_rows = _eligible_public_rows(public_rows)
+    binding = _binding(instrument)
+    provider_ledger = ProviderCallLedgerV1(
+        PROVIDER_LEDGER,
+        run_binding=binding,
+        maximum_calls=instrument["execution"]["maximum_provider_calls"],
+        maximum_cost_usd=instrument["execution"]["emergency_cost_stop_usd"],
+        maximum_transport_retries_total=0,
+        resume=resume,
+    )
+    response_ledger = _ResponseLedger(RESPONSE_LEDGER, binding=binding, resume=resume)
+    transport = DirectProviderJsonTransport(instrument["fixed_engine"])
+    try:
+        await _canaries(transport, provider_ledger, eligible_rows[0])
+        proposals = await _call_planner_batches(
+            transport=transport,
+            ledger=provider_ledger,
+            public_rows=eligible_rows,
+        )
+        selected = await _selected_c_rows(eligible_rows, proposals)
+        verifications = await _call_verifier_batches(
+            transport=transport,
+            ledger=provider_ledger,
+            selected_rows=selected,
+        )
+        await _run_graphs(
+            public_rows=public_rows,
+            proposals=proposals,
+            verifications=verifications,
+            response_ledger=response_ledger,
+        )
+        responses = response_ledger.rows()
+        if len(responses) != 600:
+            raise ArchitectureDevelopmentError("responses incomplete before gold opening")
+        gold = _load_bound_package(instrument["dataset"], gold=True)
+        result = _score(responses, public_rows, list(gold["rows"]), provider_ledger.snapshot())
+        result.update(
+            {
+                "record_schema": "research-evaluation-run-v1",
+                "schema_version": 1,
+                "run_id": instrument["instrument_id"],
+                "code_revision": _git("rev-parse", "HEAD"),
+                "dirty_state": bool(_git("status", "--porcelain")),
+                "instrument_sha256": _file_sha256(INSTRUMENT_PATH),
+                "public_sha256": instrument["dataset"]["public_file_sha256"],
+                "hidden_gold_sha256": instrument["dataset"]["hidden_gold_file_sha256"],
+                "limitations": [
+                    "Synthetic policy-oracle development cases do not establish real learning improvement.",
+                    "Luna has no dated snapshot; one shared persisted proposal is reused across B, C, and C+V to prevent cross-condition proposal drift.",
+                    "This first development fold cannot select a final architecture or product model.",
+                ],
+            }
+        )
+        provider_ledger.mark_complete()
+        response_ledger.complete()
+        RESULT_PATH.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+        SUMMARY_PATH.write_text(_summary(result), encoding="utf-8")
+        return result
+    except Exception:
+        provider_ledger.mark_invalid_execution()
+        raise
+    finally:
+        provider_ledger.close()
+        response_ledger.close()
+
+
+def _summary(result: dict[str, Any]) -> str:
+    lines = [
+        "# Successor architecture development fold 001",
+        "",
+        f"- **Status:** `{result['status']}`",
+        "- **Decision:** no final architecture selected; continue only according to the frozen finite program.",
+        f"- **Cases:** {result['case_count']} paired contexts / {result['architecture_cell_count']} graph cells.",
+        f"- **Provider:** {result['provider']['provider_calls']} calls, USD {result['provider']['reported_cost_usd']:.6f}.",
+        "",
+        "## Architecture metrics",
+        "",
+        "| Architecture | Acceptable move | Proactive precision | Unnecessary intervention |",
+        "| --- | ---: | ---: | ---: |",
+    ]
+    for architecture, metrics in result["aggregate"].items():
+        lines.append(
+            f"| `{architecture}` | {metrics['acceptable_move_accuracy']:.1%} | "
+            f"{metrics['proactive_precision']:.1%} | "
+            f"{metrics['unnecessary_intervention_rate']:.1%} |"
+        )
+    lines.extend(
+        [
+            "",
+            "## Interpretation",
+            "",
+            result["decision"]["rationale"],
+            "",
+            "Learner-state calibration is reported once as a shared diagnostic because this ablation holds the learner-state plane fixed. It is not counted as an architecture win.",
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def simulate() -> dict[str, Any]:
+    instrument = _load_json(INSTRUMENT_PATH)
+    public = _load_bound_package(instrument["dataset"], gold=False)
+    eligible = _eligible_public_rows(list(public["rows"]))
+    batches = _chunks(eligible, instrument["execution"]["batch_size"])
+    return {
+        **validate(),
+        "status": "simulated-network-free",
+        "eligible_case_count": len(eligible),
+        "planner_batch_count": len(batches),
+        "maximum_verifier_batch_count": len(batches),
+        "maximum_provider_calls": 2 + 2 * len(batches),
+        "gold_loaded": False,
+        "provider_calls": 0,
+    }
+
+
+def main() -> int:
+    load_dotenv(ROOT / ".env")
+    parser = argparse.ArgumentParser(description=__doc__)
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--validate", action="store_true")
+    mode.add_argument("--simulate", action="store_true")
+    mode.add_argument("--preflight", action="store_true")
+    mode.add_argument("--execute", action="store_true")
+    parser.add_argument("--resume", action="store_true")
+    args = parser.parse_args()
+    if args.execute:
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "external_model_evaluation"
+        )
+        require_bounded_pilot_operation_allowed(
+            INSTRUMENT_ID, "method_evaluation_execution"
+        )
+        result = asyncio.run(execute(resume=args.resume))
+    elif args.preflight:
+        result = preflight(resume=args.resume)
+    elif args.simulate:
+        result = simulate()
+    else:
+        result = validate()
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

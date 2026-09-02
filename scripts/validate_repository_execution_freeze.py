@@ -66,6 +66,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
     "build_factual_qa_v3_source_dispositions.py",
     "build_repository_correctness_inventory.py",
+    # This builder writes a deterministic synthetic public/gold package. The
+    # guarded run_* successor owns every provider-backed operation.
+    "build_successor_architecture_development_fold_001.py",
     # This analysis-only module has no provider execution mode. Provider calls
     # live in the separately guarded execute_academic_* entrypoint.
     "run_academic_factual_qa_panel_review_v2.py",
