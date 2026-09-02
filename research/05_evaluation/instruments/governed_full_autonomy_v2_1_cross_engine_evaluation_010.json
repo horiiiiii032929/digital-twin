@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "program_id": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
-  "status": "frozen-pending-authorization",
+  "status": "completed-refine",
   "factual_public_sha256": "04a4057ded8872afc87c958bd1c637a56b5e234f288ed2f57fecda4cc1b88363",
   "factual_gold_sha256": "15d6257dafd6d6730b605ca93e62d8514c812d55f03f1eff7482e7e73091caa2",
   "factual_source_sha256": "46e9bb78e8648f0e14fa335323964888b6e60568bfc0dc96ba427e70350b6217",
@@ -120,7 +120,7 @@
   "known_regression_candidate_cases": 10000,
   "known_regression_control_cases": 1000,
   "total_budget_usd": 50.0,
-  "paid_execution_authorized": true,
+  "paid_execution_authorized": false,
   "protocol": {
     "primary_kpi": "safe-grounded-autonomous-success",
     "same_cases_retrieval_policy_prompt_clock_seeds_scorer": true,

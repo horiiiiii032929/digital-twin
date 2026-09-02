@@ -6,7 +6,46 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-## Active cross-engine checkpoint
+## Local R1 autonomy release selection
+
+The active release checkpoint has reached `Keep`. Confirmation 013 executed
+820 fresh, source-disjoint actual-product cases across T0, T1-v1, T1-v2
+reactive, and T1-v2 autonomous conditions. It persisted 820/820 responses over
+1,545 direct OpenAI calls for USD 3.849188 before opening hidden gold.
+
+The original result is preserved as `completed-refine`: all safety and
+operational gates passed, but 30 V2 turns after a provider-failure event were
+marked unexpected because the fresh reference required `no_action`. Root-cause
+review against the approved architecture, product implementation, and existing
+regression test established that V2 must use its grounded deterministic
+T1-v1/T0 fallback without advancing learner state. A disclosed zero-call
+reference-validity correction changed only those 30 expected actions and
+reused every immutable response.
+
+The corrected result passed all 820 cases: 100% action, citation, provider-
+failure fallback, restart, transition, termination, and proactive-lineage
+correctness; zero wrong recipient/course/release, consent/timing/frequency
+violations, duplicates, unbounded loops, or model-owned authority mutations.
+Governed T1-v2.1 is therefore selected for the exact local R1 profile with T0
+as immediate rollback. Paid execution authority is revoked.
+
+The follow-up operational qualification
+`local-r1-governed-v2-1-release-qualification-002` is complete as `Keep` on
+revision `b4d25fa`. The exact local images passed the full 25/25 HTTPS journey,
+6/6 restart persistence, 6/6 checksum-verified clean restore, 3/3 T0 rollback,
+and 3/3 V2.1 restoration checks. Desktop and 390px professor/student browser
+checks found no console error, horizontal overflow, or unlabeled control. The
+qualified local demo remains available at `https://localhost:8443`; this is a
+local release claim only, not durable hosting or real-human outcome evidence.
+
+AFQC-143 records the operational selection: keep the hash-bound governed V2.1
+Compose release, retain T0 as the immediate rollback, and close the local
+qualification milestone without starting another implementation or model
+loop. The profile, code revision, image identifiers, backup checksum, root-
+cause corrections, and ignored operational artifact locations are preserved
+in the result record and readable result summary.
+
+## Cross-engine checkpoint result
 
 PR #176 is merged. Evaluation 009 remains immutable network-free development
 evidence and has been superseded before paid execution by
@@ -25,7 +64,7 @@ safe-grounded-autonomy rates were 100%, with zero calls, tokens, or cost. This
 selects the evaluation infrastructure only; it does not establish LLM product
 quality or promote T1-v2.1.
 
-The finite execution path is now implemented end to end. It runs the same
+The finite execution path was implemented end to end. It runs the same
 500+100 factual and 820-case autonomy evaluations for E0-E5, advances only the
 top two eligible engines to a new source-range-disjoint 1,000-case
 confirmation, and runs only the passing winner on the immutable known
@@ -36,16 +75,14 @@ source-family reuse is capped at five clusters, and the package is byte-stable.
 Its public questions, hidden gold, source package, and rankings are hash-bound;
 no provider saw the package during construction.
 
-The winner then receives the LLM/agent-only professor-profile, simulated
+An eligible winner would then receive the LLM/agent-only professor-profile, simulated
 learning, usability, and visual limitation synthesis before immutable local R1
 qualification. Those supplementary tracks are explicitly proxy evidence and
 cannot establish real-professor fidelity, real-student usability, or real
 learning improvement. The runner has a single USD 50 global stop, atomic resume,
 terminal quality stops, and no same-case tuning loop. PR #177 merged the
 complete build. Official OpenAI and DeepSeek metadata was refreshed on
-2026-09-02, and the user's single program-level authorization is now frozen.
-The next operation is a clean no-call preflight followed by the finite run; no
-intermediate stage requires another authorization.
+2026-09-02.
 
 Paid attempt 001 stopped as `invalid-execution` after E0-E3 completed their
 factual arms and before the first DeepSeek network call. The cross-engine
@@ -55,6 +92,40 @@ direct-DeepSeek binding omitted the shared transport's privacy-safe
 This is the single preregistered harness-only correction: add the fixed
 non-identifying field, preserve attempt 001, and run one final fresh attempt
 without changing cases, gold, methods, models, gates, or budget.
+
+Fresh attempt 002 is now terminal as `completed-refine`; its one-time authority
+is revoked. All six engines completed the 500+100 factual stage and all six
+completed the 820-case autonomy stage. The run recorded 8,520 product cases,
+22,348 provider calls, 10,925,698 input tokens, 2,105,815 output tokens, and USD
+12.538784948. No engine passed the combined factual and autonomy gates, so the
+fresh sealed 1,000, known 10,000+1,000, proxy, and release-qualification stages
+remained closed.
+
+The factual result is a valid system-level `Refine`, not evidence that every
+engine is intrinsically poor. A common retrieval integration failure produced
+100/500 `HierarchicalRetrievalError` outcomes for every engine. Even excluding
+that common 20% operational loss, however, the strongest factual condition
+(E5 Terra planner + GPT-5.4 mini generator) reached only 50.5% fully grounded
+success overall, far below the frozen 95% gate; claims and citations also
+failed. Boundary safety and source-version validity were 100%, with zero severe
+unsupported releases. The common defect and the residual answer-generation
+quality gap must both be addressed in a new architecture/dataset tranche, not
+by rerunning this benchmark.
+
+Autonomy results were more informative: deterministic E0 and GPT-5.4-mini E3
+passed every 820-case autonomy gate at 100%. E5 reached 99.878% safe grounded
+autonomous success but missed the exact gate by one case. Nano E1 and Luna E2
+were below the primary gate; direct DeepSeek E4 had repeated planner-contract
+configuration failures and reached 36.585%. These results retain E3 as the
+strongest provider-backed autonomy candidate, but no LLM-backed release is
+selected because factual grounding failed. The release decision remains **No
+Release / Redesign grounding integration**, with E0/T0 retained as the safe
+rollback.
+
+GitHub issue #157 is therefore complete as the immutable evaluation milestone.
+The finite successor is issue #180: repair the shared retrieval integration,
+redesign the evidence-to-answer boundary on fresh development data, and qualify
+one corrected autonomous release candidate without reopening attempt 002.
 
 The three-round whole-system architecture study under issue #165 and both
 fresh #153 method successors are complete as `Refine`. The strongest new

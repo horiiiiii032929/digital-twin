@@ -499,7 +499,7 @@ async def test_unapproved_or_incomplete_scope_resolves_to_no_action(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path):
+async def test_live_planner_failure_fails_closed_without_delivery(tmp_path):
     repository, fixture, service, release, _ = _autonomy_fixture(tmp_path)
     _, opportunity = _goal_and_opportunity(service, fixture, release)
     planner = LiveAutonomousPlanner(
@@ -542,7 +542,10 @@ async def test_live_planner_failure_uses_finite_deterministic_fallback(tmp_path)
 
     result = await graph.run(job)
 
-    assert result.plan.action == AutonomousActionKind.ISSUE_RETRIEVAL_PRACTICE
+    assert result.plan.action == AutonomousActionKind.NO_ACTION
+    assert result.action.kind == AutonomousActionKind.NO_ACTION
+    assert result.outcome.kind.value == "no-action"
+    assert result.plan.reason_code == "planner-failure-no-action"
     assert result.trace.planning_calls == 1
     assert result.trace.repair_calls == 0
     assert result.trace.graph_version == GRAPH_VERSION
@@ -1071,6 +1074,49 @@ async def test_t1_v2_persists_every_reactive_runtime_plane(tmp_path):
     assert len(traces[0].checkpoint_ids) >= 2
     assert traces[0].fast_path is True
     assert traces[0].planning_calls == 0
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_clarification_is_policy_response_not_graph_failure(tmp_path):
+    repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
+    tutoring = StudentTutoringService(
+        repository,
+        profile_path=PROFILE,
+        evidence_gate=StructuredLexicalCoverageEvidenceGate(),
+        claim_evidence_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        tutoring_mode=TutoringMode.T1_V2,
+        learning_gap_pseudonymizer=LearningGapPseudonymizer(
+            b"v2-policy-clarification-secret-32-bytes"
+        ),
+    )
+    conversation = tutoring.create_conversation(
+        fixture.student_a_id,
+        fixture.course_a_id,
+    )
+
+    turn = await tutoring.submit_message(
+        fixture.student_a_id,
+        conversation.id,
+        content="Explain that.",
+        client_request_id="policy-clarification-turn",
+    )
+
+    trace = repository.list_agent_traces_v2(
+        fixture.course_a_id,
+        conversation_id=conversation.id,
+    )[0]
+    assert turn.tutor_message.action == "clarify-request"
+    assert (
+        turn.tutor_message.content
+        == "Which concept or step would you like to work through?"
+    )
+    assert trace.decision_reason == "intent-clarify-request"
+    assert trace.generation_calls == 0
+    assert trace.validation_results["graph-validation"] is True
 
 
 @pytest.mark.asyncio

@@ -79,6 +79,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_cross_engine_sealed_confirmation_010.py": (
             "dataset_generation",
         ),
+        "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py": (
+            "dataset_generation",
+        ),
         "scripts/build_academic_factual_qa_open_mixed_wording_005.py": (
             "dataset_generation",
         ),
@@ -229,6 +232,23 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         ),
         "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_009.py": (
             "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py": (
             "method_evaluation_execution",
         ),
         "scripts/run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py": (
@@ -495,9 +515,8 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "course-digital-twin-whole-system-architecture-round-3-001": (
             "method_evaluation_execution",
         ),
-        "governed-full-autonomy-v2-1-cross-engine-evaluation-010": (
+        "governed-full-autonomy-v2-1-grounding-successor-011": (
             "dataset_generation",
-            "external_model_evaluation",
             "method_evaluation_execution",
         ),
     }

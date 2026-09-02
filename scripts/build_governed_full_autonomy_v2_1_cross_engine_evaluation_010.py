@@ -273,6 +273,9 @@ def validate() -> dict[str, Any]:
     if (program.status, program.paid_execution_authorized) not in {
         ("build-only", False),
         ("frozen-pending-authorization", True),
+        ("completed-keep", False),
+        ("completed-refine", False),
+        ("invalid-execution", False),
     }:
         raise ValueError("cross-engine authorization state is incoherent")
     expected_hashes = {
@@ -329,7 +332,12 @@ def validate() -> dict[str, Any]:
     return {
         "program_id": PROGRAM_ID,
         "status": (
-            "passed-build-only-provider-unauthorized"
+            (
+                f"passed-terminal-{program.status}-provider-unauthorized"
+                if program.status.startswith("completed-")
+                or program.status == "invalid-execution"
+                else "passed-build-only-provider-unauthorized"
+            )
             if not program.paid_execution_authorized
             else "passed-frozen-provider-authorized"
         ),

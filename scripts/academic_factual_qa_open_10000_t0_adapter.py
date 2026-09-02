@@ -27,7 +27,7 @@ from src.digital_twin.evaluation.provider_json import (
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
-    DeterministicGroundedGenerator,
+    DeterministicEvidenceSetGroundedGenerator,
     DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
@@ -45,6 +45,7 @@ from src.digital_twin.action_router import (
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
     AtomicClaimEvidenceValidator,
+    CanonicalSourceAtomicClaimVerifier,
     CaseBoundPrecomputedRetriever,
     ContiguousQuoteAtomicClaimVerifier,
     DocumentChunk,
@@ -60,7 +61,6 @@ from src.digital_twin.grounding import (
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.models import (
-    AtomicAnswerClaim,
     GenerationUsage,
     TutorAnswer,
 )
@@ -182,6 +182,27 @@ class LiveT0AdapterError(RuntimeError):
 _CURRENT_CASE_ID: ContextVar[str | None] = ContextVar(
     "academic_factual_qa_open_current_case", default=None
 )
+
+_ConversationKey = str | tuple[str, str]
+
+
+def _conversation_key(
+    case: EvaluationCaseV1, conversation_scope: str
+) -> _ConversationKey:
+    """Return a scope key that cannot alias a cross-course boundary case.
+
+    A benchmark cluster may contain four answerable questions for its source
+    course and one cross-course boundary question whose evaluated course is
+    intentionally different.  A cluster-only key therefore aliases two
+    product releases.  Course qualification is part of the external product
+    scope and must remain in the conversation identity.
+    """
+
+    if conversation_scope == "cluster":
+        return (case.course_id, case.cluster_id)
+    if conversation_scope == "course":
+        return case.course_id
+    raise LiveT0AdapterError("unsupported evaluation conversation scope")
 
 
 def _load(path: Path) -> dict[str, Any]:
@@ -503,7 +524,7 @@ class _DeterministicAtomicGenerator:
     version = "v1"
 
     def __init__(self, *, policy_enforcer: DeterministicPolicyEnforcer) -> None:
-        self.delegate = DeterministicGroundedGenerator(
+        self.delegate = DeterministicEvidenceSetGroundedGenerator(
             prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
             policy_enforcer=policy_enforcer,
         )
@@ -537,17 +558,7 @@ class _DeterministicAtomicGenerator:
             return answer
         if answer.trace.policy_action != "answer":
             return answer
-        return answer.model_copy(
-            update={
-                "atomic_claims": [
-                    AtomicAnswerClaim(
-                        claim_id="claim-deterministic-evidence",
-                        text=hits[0].chunk.text,
-                        evidence_hit_ids=[hits[0].chunk.id],
-                    )
-                ]
-            }
-        )
+        return answer
 
 class _ManagedAdapter(StudentTutoringServiceAdapterV1):
     def __init__(
@@ -622,8 +633,12 @@ def _setup_service(
     index_root: Path,
     claim_evidence_validator: Any,
     tutoring_mode: str = "grounded-assistant",
-    conversation_courses: dict[str, str] | None = None,
-) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
+    conversation_courses: dict[_ConversationKey, str] | None = None,
+) -> tuple[
+    SQLiteStudentRepository,
+    StudentTutoringService,
+    dict[_ConversationKey, str],
+]:
     repository = SQLiteStudentRepository(database_path)
     profile = _load(PROFILE_PATH)
     professor_id = "academic-open-professor"
@@ -734,8 +749,12 @@ def _setup_precomputed_service(
     database_path: Path,
     claim_evidence_validator: Any,
     tutoring_mode: str,
-    conversation_courses: dict[str, str] | None,
-) -> tuple[SQLiteStudentRepository, StudentTutoringService, dict[str, str]]:
+    conversation_courses: dict[_ConversationKey, str] | None,
+) -> tuple[
+    SQLiteStudentRepository,
+    StudentTutoringService,
+    dict[_ConversationKey, str],
+]:
     """Build a product service that consumes only precomputed retrieval rows."""
 
     repository = SQLiteStudentRepository(database_path)
@@ -885,6 +904,17 @@ def build_live_t0_adapter(
         == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         else DeterministicActionRouterV1()
     )
+    if manifest.evidence_gate in {
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
+        "source-semantic-evidence-atoms-v1",
+    }:
+        claim_evidence_validator = AtomicClaimEvidenceValidator(
+            CanonicalSourceAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+            maximum_claims=8,
+            evidence_limit=5,
+        )
     if deterministic_engine:
         generator_impl = _DeterministicAtomicGenerator(
             policy_enforcer=DeterministicPolicyEnforcer(action_router=action_router)
@@ -964,7 +994,10 @@ def build_live_t0_adapter(
     if conversation_scope not in {"course", "cluster"}:
         raise LiveT0AdapterError("unsupported evaluation conversation scope")
     conversation_courses = (
-        {case.cluster_id: case.course_id for case in cases}
+        {
+            _conversation_key(case, conversation_scope): case.course_id
+            for case in cases
+        }
         if conversation_scope == "cluster"
         else None
     )
@@ -1032,9 +1065,7 @@ def build_live_t0_adapter(
             )
 
     async def execute_turn(case: EvaluationCaseV1):
-        conversation_key = (
-            case.cluster_id if conversation_scope == "cluster" else case.course_id
-        )
+        conversation_key = _conversation_key(case, conversation_scope)
         if conversation_key not in conversations:
             raise LiveT0AdapterError("evaluation case references an unknown course")
         token = _CURRENT_CASE_ID.set(case.case_id)

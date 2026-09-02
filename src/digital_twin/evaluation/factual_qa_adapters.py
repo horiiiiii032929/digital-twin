@@ -31,18 +31,15 @@ _RetrievalResolver = Callable[
 
 
 def normalize_product_action(action: str, answer: str) -> EvaluationAction:
+    del answer
     normalized = action.strip().casefold()
     if normalized == "answer":
-        return (
-            EvaluationAction.CLARIFY
-            if answer.strip().casefold().startswith(("which ", "please clarify"))
-            else EvaluationAction.ANSWER
-        )
+        return EvaluationAction.ANSWER
     if normalized in {"no-evidence", "safe-claim-validation-failure", "safe-failure"}:
         return EvaluationAction.ABSTAIN
     if normalized in {"redirect-graded-work", "refuse"}:
         return EvaluationAction.REFUSE
-    if normalized == "clarify":
+    if normalized in {"clarify", "clarify-request"}:
         return EvaluationAction.CLARIFY
     return EvaluationAction.OPERATIONAL_FAILURE
 

@@ -38,10 +38,16 @@ class StudentTutoringMode(StrEnum):
     GOVERNED_AUTONOMOUS_TUTORING_GRAPH = "governed-autonomous-tutoring-graph-v2.1"
 
 
+class AutonomyPlannerMode(StrEnum):
+    DETERMINISTIC = "deterministic"
+    OPENAI_GPT_5_6_TERRA = "openai-gpt-5.6-terra"
+
+
 class EvidenceGateMode(StrEnum):
     UNSELECTED = "unselected"
     STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
     AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1 = "ambiguity-safe-structured-lexical-v1"
+    QUESTION_TARGETED_AMBIGUITY_SAFE_V2 = "question-targeted-ambiguity-safe-v2"
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,6 +73,7 @@ class AppSettings:
     student_tutoring_mode: StudentTutoringMode = (
         StudentTutoringMode.GROUNDED_ASSISTANT
     )
+    autonomy_planner_mode: AutonomyPlannerMode = AutonomyPlannerMode.DETERMINISTIC
     proactive_outreach_worker_enabled: bool = False
     learning_gap_hmac_secret: bytes | None = field(default=None, repr=False)
     t1_qualification_result_path: Path | None = None
@@ -132,6 +139,12 @@ class AppSettings:
                 os.getenv(
                     "APP_STUDENT_TUTORING_MODE",
                     StudentTutoringMode.GROUNDED_ASSISTANT.value,
+                )
+            ),
+            autonomy_planner_mode=AutonomyPlannerMode(
+                os.getenv(
+                    "APP_AUTONOMY_PLANNER_MODE",
+                    AutonomyPlannerMode.DETERMINISTIC.value,
                 )
             ),
             proactive_outreach_worker_enabled=_boolean(
@@ -270,17 +283,22 @@ class AppSettings:
                 "APP_GENERATOR_MODE=deepseek-v4-flash is historical and cannot "
                 "be selected by the prospective R1 runtime"
             )
+        active_openai_planner = bool(
+            self.autonomy_planner_mode
+            == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
+            and self.student_tutoring_mode
+            == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        )
         if (
-            self.generator_mode
-            in {
+            self.generator_mode in {
                 GeneratorMode.OPENAI_GPT_5_4_MINI,
                 GeneratorMode.OPENAI_PROFILE_SELECTED,
             }
-            and not os.getenv("OPENAI_API_KEY", "").strip()
-        ):
+            or active_openai_planner
+        ) and not os.getenv("OPENAI_API_KEY", "").strip():
             raise ValueError(
-                "OPENAI_API_KEY is required when "
-                "APP_GENERATOR_MODE selects an OpenAI profile model"
+                "OPENAI_API_KEY is required when the generator or autonomy "
+                "planner selects an OpenAI model"
             )
         if not self.student_profile_path.is_file():
             raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")

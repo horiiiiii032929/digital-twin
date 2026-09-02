@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.digital_twin.clock import SystemUtcClock, UtcClock
 from services.api.app.config import (
     AppSettings,
+    AutonomyPlannerMode,
     EvidenceGateMode,
     GeneratorMode,
     RuntimeMode,
@@ -42,6 +43,7 @@ from src.digital_twin.model_policy import (
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
     LiveAtomicGroundedGenerator,
+    DeterministicEvidenceSetGroundedGenerator,
     DeterministicActionRouterV2,
     DeterministicPolicyEnforcer,
     StrictEvidenceGroundedPromptBuilder,
@@ -49,10 +51,11 @@ from src.digital_twin.generation import (
 from src.digital_twin.grounding import (
     AmbiguitySafeEvidenceGateV1,
     AtomicClaimEvidenceValidator,
-    ExactQuoteAtomicClaimVerifier,
+    CanonicalSourceAtomicClaimVerifier,
     LocalCourseSourceIngestionService,
     RetrievalIndexStoreV1,
     StructuredLexicalCoverageEvidenceGate,
+    QuestionTargetedAtomicEvidenceGate,
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.protocols import (
@@ -206,24 +209,28 @@ def create_app(
         else _configured_evidence_gate(runtime_settings)
     )
     active_generator = student_generator or configured_generator
-    live_autonomy = bool(
+    governed_v2 = bool(
         runtime_settings.student_tutoring_mode
         == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
-        and runtime_settings.generator_mode
-        in {
-            GeneratorMode.OPENAI_GPT_5_4_MINI,
-            GeneratorMode.OPENAI_PROFILE_SELECTED,
-        }
+    )
+    live_autonomy_planner = bool(
+        governed_v2
+        and runtime_settings.autonomy_planner_mode
+        == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
     )
     active_generator_model = (
         provider_budget.client.model
-        if live_autonomy and provider_budget is not None
-        else DETERMINISTIC_GENERATOR_MODEL
+        if provider_budget is not None
+        else (
+            "deterministic/evidence-set-v2"
+            if isinstance(active_generator, DeterministicEvidenceSetGroundedGenerator)
+            else DETERMINISTIC_GENERATOR_MODEL
+        )
     )
     active_claim_validator = student_claim_evidence_validator
-    if active_claim_validator is None and live_autonomy:
+    if active_claim_validator is None and governed_v2:
         active_claim_validator = AtomicClaimEvidenceValidator(
-            ExactQuoteAtomicClaimVerifier(),
+            CanonicalSourceAtomicClaimVerifier(),
             minimum_entailment=1.0,
             maximum_contradiction=0.0,
             maximum_claims=8,
@@ -233,7 +240,7 @@ def create_app(
     autonomy_planner_budget = None
     live_proactive_planner = None
     reactive_semantic_planner = None
-    if live_autonomy:
+    if live_autonomy_planner:
         autonomy_planner_budget = BudgetedLlmClient(
             OpenAiResponsesClient(
                 OPENAI_GPT_5_6_TERRA_MODEL,
@@ -282,7 +289,7 @@ def create_app(
         ),
         autonomy_planner_model=(
             OPENAI_GPT_5_6_TERRA_MODEL
-            if live_autonomy
+            if live_autonomy_planner
             else DETERMINISTIC_PLANNER_MODEL
         ),
         autonomy_generator_model=active_generator_model,
@@ -294,7 +301,7 @@ def create_app(
         clock=runtime_clock,
     )
     autonomy_graph = None
-    if live_autonomy:
+    if governed_v2:
         autonomy_graph = GovernedAutonomousTutoringGraph(
             planner=live_proactive_planner,
             generator=RepositoryGroundedWordingGenerator(
@@ -409,6 +416,11 @@ def _configured_generator(
     profile: SystemReleaseProfile,
 ):
     if settings.generator_mode == GeneratorMode.DETERMINISTIC:
+        if (
+            settings.student_tutoring_mode
+            == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        ):
+            return DeterministicEvidenceSetGroundedGenerator(), None
         return None, None
     if settings.generator_mode not in {
         GeneratorMode.OPENAI_GPT_5_4_MINI,
@@ -503,6 +515,19 @@ def _configured_evidence_gate(settings: AppSettings):
             StructuredLexicalCoverageEvidenceGate(
                 minimum_content_matching_terms=2,
                 evidence_limit=3,
+            ),
+            evidence_limit=5,
+        )
+    if (
+        settings.evidence_gate_mode
+        == EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2
+    ):
+        return AmbiguitySafeEvidenceGateV1(
+            QuestionTargetedAtomicEvidenceGate(
+                base_gate=StructuredLexicalCoverageEvidenceGate(
+                    minimum_content_matching_terms=2,
+                    evidence_limit=5,
+                )
             ),
             evidence_limit=5,
         )

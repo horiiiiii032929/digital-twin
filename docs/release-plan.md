@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-08-31
+Status date: 2026-09-02
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -24,19 +24,38 @@ asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates
 pass.
 
-The current release-selection successor is the finite cross-engine program
+The exact local R1 V2.1 candidate is now evidence-selected. The immutable
+confirmation-013 execution covered 820 fresh actual-product cases and all four
+T0/T1 conditions. A disclosed reference-validity correction aligned 30
+provider-failure expectations with the pre-existing deterministic fallback
+contract; every product response and the original Refine record remain
+unchanged. The corrected result passed all safety, grounding, timing,
+persistence, restart, transition, termination, and bounded-loop gates. The
+release profile selects governed T1-v2.1 with Terra semantic planning,
+deterministic evidence-set response compilation, and one-setting T0 rollback.
+
+The local operational work is complete as
+`local-r1-governed-v2-1-release-qualification-002`: the immutable images passed
+the administrator/professor/student HTTPS journey, scheduled in-app outreach,
+learning-gap review, restart, checksum backup and clean restore, T0 rollback,
+V2.1 restoration, and responsive browser QA. This qualification does not
+establish durable hosting, real-professor fidelity, real-student usability, or
+learning improvement.
+
+The completed release-selection comparison is the finite cross-engine program
 `governed-full-autonomy-v2-1-cross-engine-evaluation-010`. It holds product and
 evaluation behavior constant while comparing deterministic E0, three economical
 OpenAI engines, direct DeepSeek V4 Flash, and the existing Terra/mini split.
-Its independent scorer has passed the complete 820-case network-free product
-path, but provider-backed model quality remains unmeasured. The complete finite
-runner is now built: E0-E5 receive identical 500+100 factual and 820 autonomy
-tests, the top two alone receive a fresh source-disjoint 1,000-case
-confirmation, and only the passing winner receives the known 10,000+1,000
-regression and local release qualification. The 1,000-case package is frozen
-and unopened by a provider. PR #177 published the build, provider metadata was
-refreshed on 2026-09-02, and one USD 50 program authorization is committed as
-the final pre-execution checkpoint.
+Its paid attempt 002 completed the identical 500+100 factual and 820 autonomy
+tests for E0-E5 for USD 12.538784948. No engine passed the combined eligibility
+gates. The fresh 1,000, known 10,000+1,000, proxy, and local release stages were
+therefore not opened. GPT-5.4 mini passed all autonomy gates, but the common
+factual path had 100/500 retrieval-integration failures and the best fully
+grounded score was only 50.5%. The one-time authority is revoked. The next
+release architecture must repair the shared retrieval case binding and improve
+evidence-to-answer generation on a new development tranche; this run must not
+be tuned or rerun. Issue #180 owns that finite successor; issue #157 closes as
+the completed `Refine` measurement milestone.
 
 The first release is a supervisor-reviewable hosted candidate. It becomes an
 invite-only pilot release only after the approval-gated real-workflow checks
@@ -214,9 +233,9 @@ compensate for a failed development prerequisite.
 
 | Gate | Release requirement | Current state | Owner issue |
 | --- | --- | --- | --- |
-| Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | Complete local HTTPS journey passed 24/24 on `c235e56`; external hosted journey remains pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
+| Product journeys | Administrator, professor, and student happy/failure paths pass on one revision | Governed V2.1 local HTTPS journey passed 25/25 on `b4d25fa`; desktop and 390px browser QA passed; external hosted journey remains pending | [#25](https://github.com/horiiiiii032929/digital-twin/issues/25) |
 | Autonomous tutoring | A bounded learner-state and pedagogical-intent graph adapts across turns without ungrounded claims, policy drift, unbounded execution, or silent state corruption | Confirmation 002 passed 50 trajectories and 200 turns per condition with every hard gate at 100%, zero provider calls, and zero cost. T1 is selected for the hash-bound local R1; T0 remains rollback | [#107](https://github.com/horiiiiii032929/digital-twin/issues/107) |
-| Governed full autonomy V2.1 | A durable event-driven tutor may initiate finite, cited actions inside professor policy and student consent without per-message approval | Merged PR #158 completes the software implementation checkpoint. Candidate `governed-full-autonomy-v2-1-release-candidate-001` freezes revision `adfc8bd7`, profile/source hashes, and local image digests. Provider integration completed Go Deeper with all 12 aggregate gates passing, two reactive turns, one delivered proactive message, five calls, and USD 0.0017055. The #157 successor injects a product-level `VirtualUtcClock` and drives 600 trajectories, 100 30-day learners, and 120 opportunities through the real services. Its final network-free 820-case qualification passed every action, termination, transition, fallback, restart, scope, citation, consent, duplicate, loop, and authority gate with zero provider use. This is infrastructure evidence only. The provider-backed run remains unauthorized and depends on #153 Keep. Local Compose remains on qualified T1-v1 with T0 rollback | [#153](https://github.com/horiiiiii032929/digital-twin/issues/153), [#155](https://github.com/horiiiiii032929/digital-twin/issues/155), [#156](https://github.com/horiiiiii032929/digital-twin/issues/156), [#157](https://github.com/horiiiiii032929/digital-twin/issues/157) |
+| Governed full autonomy V2.1 | A durable event-driven tutor may initiate finite, cited actions inside professor policy and student consent without per-message approval | Confirmation 013 evaluated 820 fresh actual-product cases and, after a disclosed zero-call reference correction, passed every frozen autonomy gate. `local-r1-governed-v2-1-release-qualification-002` then passed 25/25 live HTTPS, restart, clean restore, T0 rollback, V2 restoration, and responsive browser checks on `b4d25fa`. The exact governed V2.1 profile is selected locally with T0 rollback; hosted and real-human claims remain open | [#153](https://github.com/horiiiiii032929/digital-twin/issues/153), [#155](https://github.com/horiiiiii032929/digital-twin/issues/155), [#156](https://github.com/horiiiiii032929/digital-twin/issues/156), [#157](https://github.com/horiiiiii032929/digital-twin/issues/157), [#180](https://github.com/horiiiiii032929/digital-twin/issues/180) |
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | Local R1 verified A0 creation, worker delivery, student consent, citation, expiry, deduplication, and restart behavior. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The T0 service supports bounded evidence selection and optional post-generation atomic-claim validation. Issue #131 separately binds a build-only 30-cluster visual supplement with 10 tables, 10 equations, 10 diagrams, 60 paired cases, question-independent descriptions, and original-region citations. It remains `Go Deeper`; no multimodal profile is selected | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
 | Factual quality | The actual T0 product must retrieve and answer without receiving gold answers, claims, evidence, or citations | Program 011 completed the sealed 10,000+1,000 evaluation without gold leakage but validly failed every absolute gate: 44.16% grounded success, 72.9% boundary action, and 478 severe releases. Deterministic fallback remains selected; #153 owns the fresh-development replacement | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#153](https://github.com/horiiiiii032929/digital-twin/issues/153), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |

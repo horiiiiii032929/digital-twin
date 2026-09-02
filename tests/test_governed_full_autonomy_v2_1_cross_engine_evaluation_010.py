@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 
 from scripts import (
@@ -8,18 +9,23 @@ from scripts import (
 from scripts import (
     run_governed_full_autonomy_v2_1_cross_engine_evaluation_010 as runner,
 )
+from scripts import cross_engine_factual
+from scripts.academic_factual_qa_open_10000_t0_adapter import build_live_t0_adapter
+from src.digital_twin.evaluation.factual_qa_execution import canonical_json_sha256
 
 
-def test_cross_engine_program_is_finite_identical_and_authorized_once() -> None:
+def test_cross_engine_program_is_finite_identical_and_terminal() -> None:
     result = builder.validate()
 
-    assert result["status"] == "passed-frozen-provider-authorized"
+    assert result["status"] == (
+        "passed-terminal-completed-refine-provider-unauthorized"
+    )
     assert result["engine_ids"] == ["e0", "e1", "e2", "e3", "e4", "e5"]
     assert result["condition_count"] == 4
     assert result["development_factual_cases"] == 500
     assert result["development_control_cases"] == 100
     assert result["autonomy_cases_per_engine"] == 820
-    assert result["paid_execution_authorized"] is True
+    assert result["paid_execution_authorized"] is False
     assert result["provider_calls"] == 0
     assert result["factual_rankings"]["candidate_sha256"]
     assert result["factual_rankings"]["control_sha256"]
@@ -76,7 +82,7 @@ def test_program_simulation_has_one_way_stage_progression() -> None:
     assert result["quality_claim"] is False
 
 
-def test_live_preflight_accepts_the_frozen_authority(
+def test_live_preflight_rejects_revoked_terminal_authority(
     monkeypatch, tmp_path
 ) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key")
@@ -85,8 +91,9 @@ def test_live_preflight_accepts_the_frozen_authority(
     monkeypatch.setattr(runner, "PROGRAM_RESULT", tmp_path / "result.json")
     result = runner.preflight()
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked-not-authorized"
+    assert "program-paid-execution-not-authorized" in result["blockers"]
+    assert "program-not-frozen-for-execution" in result["blockers"]
     assert result["provider_calls"] == 0
 
 
@@ -97,3 +104,66 @@ def test_independent_actual_product_simulation_ignores_self_reported_flags() -> 
     assert result["case_count"] == 4
     assert result["summary"]["safe_grounded_autonomous_success"] == 1.0
     assert result["provider_calls"] == 0
+
+
+def test_cluster_conversations_cannot_alias_cross_course_boundary_cases(
+    tmp_path,
+) -> None:
+    cases, _gold, _chunks = builder.factual_inputs()
+    cluster_id = next(
+        cluster_id
+        for cluster_id in sorted({row.cluster_id for row in cases})
+        if len({row.course_id for row in cases if row.cluster_id == cluster_id}) > 1
+    )
+    selected = [row for row in cases if row.cluster_id == cluster_id]
+    rankings = builder.factual_rankings(control=False)
+    ranking_payload = {
+        **{
+            key: value
+            for key, value in rankings.items()
+            if key not in {"ranked_chunk_ids", "content_sha256"}
+        },
+        "ranked_chunk_ids": {
+            row.case_id: rankings["ranked_chunk_ids"][row.case_id]
+            for row in selected
+        },
+    }
+    ranking_payload["content_sha256"] = canonical_json_sha256(ranking_payload)
+    ranking_path = tmp_path / "rankings.json"
+    ranking_path.write_text(json.dumps(ranking_payload), encoding="utf-8")
+    engine = next(row for row in builder.load_program().engines if row.engine_id == "e0")
+    manifest = cross_engine_factual.factual_manifest(
+        engine,
+        control=False,
+        code_revision="0" * 40,
+    )
+    adapter = build_live_t0_adapter(
+        manifest=manifest,
+        cases=selected,
+        runtime={
+            "instrument_id": builder.PROGRAM_ID,
+            "cases_sha256": canonical_json_sha256(
+                [row.model_dump(mode="json") for row in selected]
+            ),
+            "code_revision": "0" * 40,
+            "state_path": str(tmp_path / "state.sqlite3"),
+            "resume": False,
+            "maximum_calls": len(selected),
+            "maximum_cost_usd": 0,
+            "product_engine_binding": engine.model_dump(mode="json"),
+            "source_package_path": str(builder.FACTUAL_SOURCES),
+            "precomputed_retrieval_path": str(ranking_path),
+            "conversation_scope": "cluster",
+        },
+    )
+
+    async def execute():
+        return [await adapter.evaluate(row) for row in selected]
+
+    try:
+        responses = asyncio.run(execute())
+    finally:
+        adapter.finalize()
+
+    assert {row.case_id for row in responses} == {row.case_id for row in selected}
+    assert all(row.operational_status == "completed" for row in responses)
