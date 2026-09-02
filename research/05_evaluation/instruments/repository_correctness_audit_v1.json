@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Terminal cross-engine result review verified the completed-refine state, immutable attempt-002 evidence, revoked paid authority, finite stage stop, and preserved unopened sealed stages.",
+      "evidence": "Manual command-surface review plus the complete architecture-evolution verification confirmed the A/B/C/C+V build-only validator and simulation are part of the normal repository gate; no paid execution command or authority was added.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex cross-engine final-program audit",
-      "sha256": "e57a147022e1b9699c6702160dd866ecad2da6d21f3c0fc19dfa8cadf9f8bde8"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "065b48b11cea006b116bad12b88fbebad591dc43330fe820514e4dcc4f5ec65f"
     },
     {
       "audit_status": "audited",
@@ -6286,12 +6286,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Cross-engine final-program review plus the successor-study integration audit verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and the additive network-free allowlist entry for the hidden-state evaluation runner.",
+      "evidence": "Manual guard review and execution-freeze regression confirmed the successor architecture entrypoint exposes only validation, network-free simulation, and build-result publication; provider and held-out execution remain blocked.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-study integration audit",
-      "sha256": "3088fa684be8899f408e98524a59f055e0776ecaf35de1a9cf0ceef97253d53c"
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "1ee81d16d98567f18476bd13e31879026ef544369047d1b87014910d769f9c19"
     },
     {
       "audit_status": "audited",
@@ -6682,12 +6682,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "provider-observability",
-      "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, frozen method equivalence, focused tests, and the 820-case network-free actual-product simulation.",
+      "evidence": "Manual schema/import review and focused OpenAI client tests confirmed strict structured shapes for the hierarchical proposal and reject-only verifier while preserving exact identity, no-fallback, and existing provider error behavior.",
       "findings": [],
       "path": "services/llm/openai_responses_client.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex #157 diagnosable evaluation audit",
-      "sha256": "0c7259e470ba5e0f0ece03abe2d14742ada9b1444894b0bb2e5e4acc4306fee0"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "006383ff23bdd07e1b7d7e8ea9b8a4ee8fbc5e831aca4b0de4dfec0c70346b91"
     },
     {
       "audit_status": "audited",
@@ -7903,12 +7903,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "T0 service review verifies ambiguity recommendations become deterministic clarify/abstain policy responses before generation, are included in sanitized evidence audit events, and preserve refusal precedence and existing provider boundaries.",
+      "evidence": "Public-export review plus focused import and architecture tests confirmed every newly exported planning contract resolves without cycles and does not change the existing T0/T1-v1 public surface.",
       "findings": [],
       "path": "src/digital_twin/student/__init__.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "56062187370a6128059a6777617fd65663dc98d4e27658530df15308da3b09a2"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "3223938719d0e83045c6ca404daee598200789d8603a9fad447cd054d1db9af0"
     },
     {
       "audit_status": "audited",
@@ -7947,12 +7947,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "evidence": "Runtime trace review and focused graph tests confirmed deterministic candidate A records zero planning calls while provider-backed candidates record one; action, policy, evidence, persistence, and delivery guards are unchanged.",
       "findings": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "e791ea70c5da507589566042d1393cf0fa9bad579e0236e9e9786cb32a62d76d"
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "4c2988105ca572c546765ae1f704ddbe7a1af3b1675517c349d43c8da742325e"
     },
     {
       "audit_status": "audited",
@@ -10483,6 +10483,72 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Manual instrument review confirmed a finite A/B/C/C+V one-factor comparison, exact E1-E4 economical model allocations, three development rounds, one sealed confirmation, deterministic hard gates, USD 50 ceiling, and no paid authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "e8e1b4986c29c4ed2d7212eb3ff07a5d0152852b1dfee8bac00f59dda375abee"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Manual runner review plus 48-cell network-free execution confirmed all candidates traverse the actual governed graph, remain inside the shared action/evidence/delivery boundary, use no provider, and publish only build evidence bound to the current revision.",
+      "findings": [],
+      "path": "scripts/run_successor_architecture_paired_comparison_001.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "acf2c709016c76a0b9307bd0672cd92fbab40da18e1f13cb6426aad13cf9692e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Contract review and validation tests confirmed exact architecture cardinality, exact E1-E4 bindings, finite stage identities, no confirmation rerun, no active prohibited provider/model, and advisory-only LLM review.",
+      "findings": [],
+      "path": "src/digital_twin/evaluation/autonomy_architecture_tournament.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "5357f1b4d725ef87d7c8ec3de76d7c61b8dc07607e4c4acb42ef4b0f9666b348"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "governed-autonomy-architecture",
+      "evidence": "Line-by-line authority review plus focused tests confirmed A disables semantic planning, B is depth-zero C, C adds only bounded analytic lookahead, C+V is reject-only, identity drift fails closed, all other provider defects produce no-action, and model output cannot widen the action envelope.",
+      "findings": [],
+      "path": "src/digital_twin/student/planning_architectures.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "56381b56444e6bd3195bf0df89bdadfb79bebda87aff761b6de43bec6c4d23ad"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Eight focused tests cover deterministic zero-call behavior, exact B/depth-zero-C equivalence, bounded C lookahead, missing evidence, out-of-envelope proposals, reject-only verification, provider failure, and identity drift.",
+      "findings": [],
+      "path": "tests/digital_twin/test_planning_architectures.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "2308df727367e938097b6e2317ce31263bb20ec17665ccaa059c5f85178f41ba"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
+      "findings": [],
+      "path": "tests/test_successor_architecture_paired_comparison.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex successor-architecture correctness audit",
+      "sha256": "d076057542d8445f5880fd72dad0735e2fbfe1e1183f687988c5f9bccc529881"
     }
   ],
   "schema_version": 1
