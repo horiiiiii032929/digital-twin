@@ -41,8 +41,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
-        "governed-full-autonomy-v2-1-actual-product-confirmation-012",
-        "governed-full-autonomy-v2-1-actual-product-confirmation-013",
     }
 
     for pilot_id in pilot_ids:
@@ -58,12 +56,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "governed-full-autonomy-v2-1-grounding-successor-011"
     ] == ("dataset_generation", "method_evaluation_execution")
-    assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "governed-full-autonomy-v2-1-actual-product-confirmation-012"
-    ] == ("external_model_evaluation", "method_evaluation_execution")
-    assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "governed-full-autonomy-v2-1-actual-product-confirmation-013"
-    ] == ("external_model_evaluation", "method_evaluation_execution")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",

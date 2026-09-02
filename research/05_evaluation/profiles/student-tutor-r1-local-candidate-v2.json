@@ -398,7 +398,7 @@
         "bounded-tutoring-graph-v1",
         "deterministic-turn-state"
       ],
-      "notes": "Prospective local R1 candidate. Complex perception and planning may use GPT-5.6 Terra, while factual response compilation and every authority boundary remain deterministic. T0 is the one-setting rollback; promotion requires a fresh hash-bound confirmation.",
+      "notes": "Selected for the local R1 candidate after the fresh 820-case actual-product confirmation and reference-validity correction passed every action, grounding, authority, citation, consent, timing, persistence, restart, termination, and loop-boundedness gate. Complex perception and planning use GPT-5.6 Terra; factual response compilation and every authority boundary remain deterministic. T0 is the one-setting rollback.",
       "implementation": {
         "implementation_id": "governed-autonomous-tutoring-graph-v2-1",
         "version": "r1-local-candidate-v2.1",
@@ -416,13 +416,13 @@
         "version": "v1",
         "configuration": {}
       },
-      "decision": "go-deeper",
-      "evaluation_dataset": "governed-full-autonomy-v2-1-actual-product-confirmation-012",
+      "decision": "keep",
+      "evaluation_dataset": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
       "result_ids": [
-        "governed-full-autonomy-v2-1-cross-engine-evaluation-010"
+        "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001"
       ],
       "evidence_paths": [
-        "research/05_evaluation/governed-full-autonomy-v2-1-cross-engine-evaluation-010-results.md"
+        "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001-results.md"
       ]
     },
     {

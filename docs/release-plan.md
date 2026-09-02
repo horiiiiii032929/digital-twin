@@ -24,6 +24,22 @@ asynchronous loop: deterministic code may initiate a private message only after
 professor-policy, student-consent, grounding, suppression, and delivery gates
 pass.
 
+The exact local R1 V2.1 candidate is now evidence-selected. The immutable
+confirmation-013 execution covered 820 fresh actual-product cases and all four
+T0/T1 conditions. A disclosed reference-validity correction aligned 30
+provider-failure expectations with the pre-existing deterministic fallback
+contract; every product response and the original Refine record remain
+unchanged. The corrected result passed all safety, grounding, timing,
+persistence, restart, transition, termination, and bounded-loop gates. The
+release profile selects governed T1-v2.1 with Terra semantic planning,
+deterministic evidence-set response compilation, and one-setting T0 rollback.
+
+The remaining local-release work is operational: build immutable images, run
+local HTTPS, verify administrator/professor/student journeys, scheduled in-app
+outreach, learning-gap views, restart, backup/restore, and rollback, then record
+browser evidence and image/profile hashes. This qualification does not establish
+real-professor fidelity, real-student usability, or learning improvement.
+
 The completed release-selection comparison is the finite cross-engine program
 `governed-full-autonomy-v2-1-cross-engine-evaluation-010`. It holds product and
 evaluation behavior constant while comparing deterministic E0, three economical

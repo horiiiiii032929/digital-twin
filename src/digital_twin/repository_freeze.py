@@ -245,6 +245,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": (
             "method_evaluation_execution",
         ),
+        "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py": (
             "method_evaluation_execution",
         ),
@@ -514,14 +517,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         ),
         "governed-full-autonomy-v2-1-grounding-successor-011": (
             "dataset_generation",
-            "method_evaluation_execution",
-        ),
-        "governed-full-autonomy-v2-1-actual-product-confirmation-012": (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
-        "governed-full-autonomy-v2-1-actual-product-confirmation-013": (
-            "external_model_evaluation",
             "method_evaluation_execution",
         ),
     }

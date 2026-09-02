@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
-  "status": "frozen-authorized",
+  "status": "completed-keep-authorization-revoked",
   "owner_issue": 180,
   "parent_issue": 8,
   "decision_question": "Does the final release-bound architecture preserve grounding and fail closed on provider-dependent planning while retaining safe deterministic controls on fresh cases?",
@@ -102,9 +102,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "authorization_source": "User explicitly authorized every previously discussed model run through the verified local demo on 2026-09-02; this final fresh confirmation remains bounded by its immutable call and cost limits.",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "The one-time execution completed on 2026-09-02 and is revoked after the registered Refine result and zero-call reference-validity Keep correction.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 15.0

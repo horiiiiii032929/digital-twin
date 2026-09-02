@@ -207,7 +207,13 @@ def validate() -> dict[str, Any]:
         raise ValueError("confirmation 013 source identities are not fresh")
     return {
         "instrument_id": INSTRUMENT_ID,
-        "status": "passed-frozen-authorized",
+        "status": instrument["status"],
+        "provider_execution_authorized": instrument["authority"][
+            "provider_execution_authorized"
+        ],
+        "paid_execution_authorized": instrument["authority"][
+            "paid_execution_authorized"
+        ],
         "case_count": 820,
         "source_family_count": 50,
         "source_disjoint_from_confirmation_012": True,

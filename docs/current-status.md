@@ -6,6 +6,31 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Local R1 autonomy release selection
+
+The active release checkpoint has reached `Keep`. Confirmation 013 executed
+820 fresh, source-disjoint actual-product cases across T0, T1-v1, T1-v2
+reactive, and T1-v2 autonomous conditions. It persisted 820/820 responses over
+1,545 direct OpenAI calls for USD 3.849188 before opening hidden gold.
+
+The original result is preserved as `completed-refine`: all safety and
+operational gates passed, but 30 V2 turns after a provider-failure event were
+marked unexpected because the fresh reference required `no_action`. Root-cause
+review against the approved architecture, product implementation, and existing
+regression test established that V2 must use its grounded deterministic
+T1-v1/T0 fallback without advancing learner state. A disclosed zero-call
+reference-validity correction changed only those 30 expected actions and
+reused every immutable response.
+
+The corrected result passed all 820 cases: 100% action, citation, provider-
+failure fallback, restart, transition, termination, and proactive-lineage
+correctness; zero wrong recipient/course/release, consent/timing/frequency
+violations, duplicates, unbounded loops, or model-owned authority mutations.
+Governed T1-v2.1 is therefore selected for the exact local R1 profile with T0
+as immediate rollback. Paid execution authority is being revoked. The next
+checkpoint is Docker/local-HTTPS qualification and complete browser journeys,
+not another model or evaluation loop.
+
 ## Cross-engine checkpoint result
 
 PR #176 is merged. Evaluation 009 remains immutable network-free development

@@ -852,12 +852,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
+      "evidence": "Release-binding review verifies that the local Compose profile can select the qualified V2.1 graph, ambiguity-safe evidence gate, approved profile, exact qualification record, and OpenAI planner while retaining safe V1 deterministic defaults in the committed example.",
       "findings": [],
       "path": "compose.local-r1.yml",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "b49d5765679ee695da39351cc441a89f4cddea5a1a6b4722fd9a35716ca4b651"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
     },
     {
       "audit_status": "audited",
@@ -929,12 +929,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-release",
-      "evidence": "Example local settings expose no credential and retain safe deterministic T1, budget, and localhost defaults.",
+      "evidence": "Committed example review verifies no credential exposure and safe deterministic V1 defaults while documenting the new explicit evidence-gate, profile-path, and autonomy-planner selectors.",
       "findings": [],
       "path": "deploy/local-r1.env.example",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex local R1 release qualification",
-      "sha256": "1975034dca3d56d9b1976414777dd5200febe0e6e59e4614e3a80fa891c3b040"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "bdbc00da92afe17a7d68631f86352c9e687100d15b64069ac8469293e3ca1681"
     },
     {
       "audit_status": "audited",
@@ -7650,12 +7650,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active while fresh successor 013 receives bounded external-model and method-evaluation operations; historical 012 remains registered for immutable analysis only.",
+      "evidence": "The global freeze remains active after terminal confirmation 013; paid authorization is revoked and only the immutable zero-call analysis entrypoint remains registered for evidence reproduction.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex confirmation-013 authorization audit",
-      "sha256": "81c3e62289c906a96e93e4ad3d59e922e7d5b6841e6353d171fdadaaa37164ff"
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "33642fe7e760ca619401c5418ab2198203eb9c6780012e9f13213ed1feac5676"
     },
     {
       "audit_status": "audited",
@@ -8167,12 +8167,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "The exact bounded-authorization set and fresh successor-013 external-model/method-evaluation tuple are asserted while historical and unknown executions remain blocked.",
+      "evidence": "Tests assert that confirmation 013 paid authority is revoked after its terminal result, the global freeze remains active, and only the immutable analysis command is permitted for zero-call reproduction.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex confirmation-013 authorization audit",
-      "sha256": "67bdb7bd6ea6fc8e6d1a1bdbe74f611b08d242833a9164f03cbc9c2ec46fb032"
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "848cb8ca62ff1025fa402807cda39866915671a6a8b490e2027d29cc0a632e95"
     },
     {
       "audit_status": "audited",
@@ -9674,12 +9674,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused Compose and runbook tests verify the qualified offline T1 profile, local-only HTTPS exposure, least-privileged restart-safe services, release headers, and durable host-mounted backup procedure.",
+      "evidence": "Focused Compose tests verify safe committed defaults plus explicit V2.1 release overrides, qualified profile and record mounts, local-only HTTPS exposure, least-privileged restart-safe services, and durable host-mounted backup procedure.",
       "findings": [],
       "path": "tests/test_local_r1_compose.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex local R1 release qualification",
-      "sha256": "c4995459420606202ca431119042cb38e824704c73d46adc081cc1db6be8cc37"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "be9498eed1abae2884397051dc8d2736d2546d08998bd9b4335dda42ab60a184"
     },
     {
       "audit_status": "audited",
@@ -10168,13 +10168,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "actual-product-autonomy-confirmation-012",
-      "evidence": "Profile review preserves immutable V1 qualification while the separate V2.1 candidate binds grounding 011, deterministic factual compilation, bounded Terra planning, and T0 rollback.",
+      "domain": "actual-product-autonomy-confirmation-013",
+      "evidence": "Profile review binds the passing corrected confirmation 013, grounding 011, deterministic evidence-set generation, bounded Terra planning, ambiguity-safe evidence gate, and one-setting T0 rollback for local qualification.",
       "findings": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex release-bound autonomy root-cause review",
-      "sha256": "2748bae3b72760f59cde0bc928c645265aaf39161c70bfa927e84e60ade11c66"
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "43da7e1bd1ae07343427e52f3e617ccdd5d49a1aa221fd6855d89d7ce527209d"
     },
     {
       "audit_status": "audited",
@@ -10246,23 +10246,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-confirmation-013",
-      "evidence": "The prospective instrument binds 820 fresh source-disjoint cases, dependency-aware provider-failure semantics, exact OpenAI identities, finite call and cost ceilings, immutable hashes, and the user's bounded authorization through the local demo.",
+      "evidence": "Terminal instrument review verifies completed-Keep status, revoked paid authority, immutable 820-case/data/model bindings, finite realized accounting, and preserved non-claims after the reference-validity correction.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_013.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex confirmation-013 root-cause audit",
-      "sha256": "e9b5d89a6a2f3ae4ea6c24cfab4c91f1361e718d9ec47049e55dfb973427ed3a"
+      "sha256": "6e7b551367d09364fbf540f43c7eeb6c562231c373d9d1cef0b7e97db4b80e2f"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-confirmation-013",
-      "evidence": "Builder review verifies fresh source identities 151-200, 820 unique cases, exact public and hidden-gold hashes, and prospective gold that distinguishes deterministic controls from provider-dependent V2 conditions.",
+      "evidence": "Builder review verifies fresh source identities 151-200, 820 unique cases, exact public and hidden-gold hashes, and reports the terminal instrument status and revoked authorization instead of a stale authorized state.",
       "findings": [],
       "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex confirmation-013 root-cause audit",
-      "sha256": "b88706963e42c7980675af238860fdc14b6b45112f88411f616c253c5ab8d941"
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "c3b6c9998612c7755afc3af10ac58fd9435aadcaf65fcbf0713ec01cba8db127"
     },
     {
       "audit_status": "audited",
@@ -10279,12 +10279,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Tests cover fresh source disjointness, exact 820-case cardinality, dependency-aware provider-failure gold, bounded authorization, and full 220-case proactive simulation without network calls.",
+      "evidence": "Tests cover fresh source disjointness, exact 820-case cardinality, preserved historical provider-failure gold, full proactive simulation, terminal status propagation, revoked paid authority, and fail-closed preflight after completion.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex confirmation-013 root-cause audit",
-      "sha256": "b63f0ccd08029abb8568d3a4a5aa4f2b8fef181c6f84df82f8ba8cbf83da270b"
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "ed91419250c80eb5b593f8664060166e443029e5894243d430b650b077393514"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-013",
+      "evidence": "Analysis-only review proves the immutable ledger and all 820 package hashes before correcting exactly the 30 provider-failure expectations that contradicted the approved safe-fallback contract; it makes no provider calls and preserves the original Refine result.",
+      "findings": [],
+      "path": "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "4ac4e6af0ccc5bfc5b187385d661211c8f619d52feb3377fea327ed37b2195ea"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "verification-evidence",
+      "evidence": "Regression tests prove strict ledger binding, exact 820-case coverage, stable selection of only the 30 contradictory reference cases, zero provider usage, and preservation of immutable inputs during corrected scoring.",
+      "findings": [],
+      "path": "tests/test_analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py",
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex V2.1 release-binding root-cause audit",
+      "sha256": "db6073be364cb8e08d3470250b2e7b8656e622bb67e5212c81e2758abae22612"
     }
   ],
   "schema_version": 1
