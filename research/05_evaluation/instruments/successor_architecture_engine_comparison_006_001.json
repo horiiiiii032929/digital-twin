@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "successor-architecture-engine-comparison-006-001",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "build-only",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "predecessor": {
     "confirmation_result": "research/05_evaluation/records/successor-architecture-confirmation-005-001.json",
@@ -135,9 +135,9 @@
     "alias_limitation": "Luna and Terra have no dated snapshots; exact returned aliases are required for every call."
   },
   "execution": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "automatic_progression_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "automatic_progression_authorized": true,
     "maximum_provider_calls": 1444,
     "maximum_transport_retries": 0,
     "emergency_cost_stop_usd": 10.0,

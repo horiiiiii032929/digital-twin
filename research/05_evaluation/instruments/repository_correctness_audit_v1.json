@@ -3601,13 +3601,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison",
-      "evidence": "Reviewed corrected 2x2 estimands, scenario-cluster bootstrap grain, deterministic bounded response rendering, exact model identities, isolated gold, 1,444-call ceiling, zero retries, USD 10 stop, and global/allocation hard gates.",
+      "domain": "autonomy-architecture-engine-comparison-authorization",
+      "evidence": "Reviewed one-time authorization state: only engine comparison 006 is frozen for execution, automatic progression ends at its terminal result, USD 10 and 1,444-call ceilings remain unchanged, and hidden gold remains closed.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_engine_comparison_006_001.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE6 design and scoring audit",
-      "sha256": "e8074e7140095304b7ebd279a2c6268e85f9ebc680451db6f3d0a8b37d849c5f"
+      "reviewer": "Codex AFQC-160 authorization audit",
+      "sha256": "6df724b02655691449cffa281dc70b4ceb77512c14cad3cc70bc6f26a648bc15"
     },
     {
       "audit_status": "audited",
@@ -8100,13 +8100,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison",
-      "evidence": "Reviewed explicit provider/method execution registration; no bounded authorization is present in the build-only checkpoint.",
+      "domain": "autonomy-architecture-engine-comparison-authorization",
+      "evidence": "Reviewed bounded allowlist change: only successor-architecture-engine-comparison-006-001 receives external-model and method-evaluation authority; the global freeze and every other stage remain blocked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex architecture engine comparison audit",
-      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
+      "reviewer": "Codex AFQC-160 authorization audit",
+      "sha256": "e9342f2671d438645ba6f0fe65e7483a1bdc0b1a86bd9e55f10378f1bea78704"
     },
     {
       "audit_status": "audited",
@@ -10608,13 +10608,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "autonomy-architecture-engine-comparison",
-      "evidence": "Reviewed 006 regression coverage for byte-stable gold isolation, build-only preflight, rejection of free-form wording, fixed grounded rendering, pooled factorial effects, tie-breaking, and all hard gates.",
+      "domain": "autonomy-architecture-engine-comparison-authorization",
+      "evidence": "Reviewed authorization regression coverage alongside gold isolation, bounded deterministic rendering, pooled factor effects, hard gates, and network-free graph execution.",
       "findings": [],
       "path": "tests/test_successor_architecture_engine_comparison_006.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE6 design and scoring audit",
-      "sha256": "c51d8784006288b52aec003792fd2e451fae84d19c54c55b6e8a967055168881"
+      "reviewer": "Codex AFQC-160 authorization audit",
+      "sha256": "ef8e49dea9e4b7495409622f5fe5984d254ba4735f23d85ea8009196b31b38e1"
     },
     {
       "audit_status": "audited",

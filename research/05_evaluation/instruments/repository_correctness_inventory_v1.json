@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "13a962b0b0e601f01f0224f2a5ee06314bcc4768a1cd24e489f3158d96f1a67c",
+  "record_sha256": "12149526a20c0eafa4be21750a7dfba067b8f7d275e26fd7b7e83f6440023559",
   "records": [
     {
       "audit": {
@@ -5255,11 +5255,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison",
-        "evidence": "Reviewed corrected 2x2 estimands, scenario-cluster bootstrap grain, deterministic bounded response rendering, exact model identities, isolated gold, 1,444-call ceiling, zero retries, USD 10 stop, and global/allocation hard gates.",
+        "domain": "autonomy-architecture-engine-comparison-authorization",
+        "evidence": "Reviewed one-time authorization state: only engine comparison 006 is frozen for execution, automatic progression ends at its terminal result, USD 10 and 1,444-call ceilings remain unchanged, and hidden gold remains closed.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE6 design and scoring audit"
+        "reviewer": "Codex AFQC-160 authorization audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5267,7 +5267,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_engine_comparison_006_001.json",
       "risk": "high",
-      "sha256": "e8074e7140095304b7ebd279a2c6268e85f9ebc680451db6f3d0a8b37d849c5f"
+      "sha256": "6df724b02655691449cffa281dc70b4ceb77512c14cad3cc70bc6f26a648bc15"
     },
     {
       "audit": {
@@ -12582,11 +12582,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison",
-        "evidence": "Reviewed explicit provider/method execution registration; no bounded authorization is present in the build-only checkpoint.",
+        "domain": "autonomy-architecture-engine-comparison-authorization",
+        "evidence": "Reviewed bounded allowlist change: only successor-architecture-engine-comparison-006-001 receives external-model and method-evaluation authority; the global freeze and every other stage remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex architecture engine comparison audit"
+        "reviewer": "Codex AFQC-160 authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12594,7 +12594,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1d2b63c9531531708f019b5081d2f45204d5d9d979d68c92acc673cffef77fe7"
+      "sha256": "e9342f2671d438645ba6f0fe65e7483a1bdc0b1a86bd9e55f10378f1bea78704"
     },
     {
       "audit": {
@@ -16230,11 +16230,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison",
-        "evidence": "Reviewed 006 regression coverage for byte-stable gold isolation, build-only preflight, rejection of free-form wording, fixed grounded rendering, pooled factorial effects, tie-breaking, and all hard gates.",
+        "domain": "autonomy-architecture-engine-comparison-authorization",
+        "evidence": "Reviewed authorization regression coverage alongside gold isolation, bounded deterministic rendering, pooled factor effects, hard gates, and network-free graph execution.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE6 design and scoring audit"
+        "reviewer": "Codex AFQC-160 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16242,7 +16242,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_engine_comparison_006.py",
       "risk": "medium",
-      "sha256": "c51d8784006288b52aec003792fd2e451fae84d19c54c55b6e8a967055168881"
+      "sha256": "ef8e49dea9e4b7495409622f5fe5984d254ba4735f23d85ea8009196b31b38e1"
     },
     {
       "audit": {

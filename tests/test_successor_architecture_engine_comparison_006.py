@@ -23,19 +23,19 @@ def test_engine_package_is_fresh_byte_stable_and_gold_isolated():
     assert "action_utilities" not in serialized
 
 
-def test_engine_runner_is_build_only_and_simulates_without_gold_or_calls():
+def test_engine_runner_is_frozen_authorized_and_simulates_without_gold_or_calls():
     validation = runner.validate()
     simulation = runner.simulate()
     preflight = runner.preflight(resume=False)
 
-    assert validation["instrument_status"] == "build-only"
-    assert validation["provider_execution_authorized"] is False
-    assert validation["paid_execution_authorized"] is False
+    assert validation["instrument_status"] == "frozen-pending-execution"
+    assert validation["provider_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is True
     assert simulation["maximum_provider_calls"] == 1444
     assert simulation["allocation_cell_count"] == 1200
     assert simulation["gold_loaded"] is False
-    assert "provider-execution-not-authorized" in preflight["blockers"]
-    assert "paid-execution-not-authorized" in preflight["blockers"]
+    assert "provider-execution-not-authorized" not in preflight["blockers"]
+    assert "paid-execution-not-authorized" not in preflight["blockers"]
 
 
 def test_wording_rejects_free_text_and_renders_only_fixed_grounded_strategies():

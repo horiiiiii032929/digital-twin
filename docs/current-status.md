@@ -234,7 +234,8 @@ choose bounded response strategies; deterministic code renders the only
 allowed source-grounded wording. The corrected build passed 1,677 Python and
 50 frontend tests, lint, production build, and 48/48 network-free actual-graph
 cells with zero provider use. No engine is selected and paid execution remains
-unauthorized until this build is committed and the clean preflight passes.
+authorized only for one bounded execution after build commit `916c807`. The
+global freeze remains active; no other paid stage is opened.
 
 ## Local R1 autonomy release selection
 
