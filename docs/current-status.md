@@ -89,6 +89,14 @@ contracts, retains the three-step and deterministic action-envelope limits, and
 uses a fresh execution identity without changing the cases, gold, prompts,
 models, metrics, gates, or budget.
 
+Revision `217bcfa` closes SA7. The corrected provider and local contracts both
+permit repeated actions within a maximum three-step episode, while every step
+still passes the deterministic action envelope. The complete gate passed 1,650
+Python and 50 frontend tests, lint, production build, freeze validation, and a
+964/964 audit with zero open findings. Corrective attempt 002 is build-qualified
+with fresh ledgers and result paths; its paid/provider authority remains false
+until the separate authorization checkpoint.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed
