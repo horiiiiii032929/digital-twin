@@ -4,231 +4,344 @@ Date: 2026-09-02
 
 Audit ID: `main-commit-audit-8786375-2bdfea9-001`
 
-Status: verification of ten prior candidates complete; the independent sweep
-for new defects did not run (usage limit) and is listed as open work; no code
-was changed by this audit
+Status: complete for the verified findings below; four verification agents and
+the automated report step were lost to session limits, so the items in
+"Unverified and open" remain outstanding. No code was changed by this audit.
 
 Scope: the seventeen commits between `8786375` and `2bdfea9` on `main`, which
 publish the cross-engine evaluation 010 result, the grounding successor 011,
-actual-product confirmations 012 and 013, the governed autonomy release
-profile selection, and the local release qualification 002. The audit was run
-on the isolated branch `claude/sota-autonomous-digital-twin-study` after
-merging `origin/main`.
+actual-product confirmations 012 and 013 with a reference-validity correction,
+the governed autonomy release-profile selection, and the local release
+qualification 002. The audit ran on the isolated branch
+`claude/sota-autonomous-digital-twin-study` after merging `origin/main`.
 
-Method: each candidate defect from an earlier finder pass was examined by
-three independent agents with different mandates (reproduce, refute, assess
-reachability in the shipped configuration), read-only and network-free, with
-reproduction scripts run in the worktree. A candidate is confirmed when at
-least two of three agree; severity is the median of the three. "Reachable"
-means reachable with the documented local R1 configuration
-(`docs/local-r1-runbook.md`, `compose.local-r1.yml`, `deploy/local-r1.env.example`)
-as judged by the reachability lens.
+Method: a fan-out review over four angles (product runtime, evaluation
+integrity, deployment and configuration, tests) looped until two consecutive
+rounds surfaced nothing new, and every candidate was then judged by three
+independent agents with different mandates: reproduce it, refute it, and
+assess reachability in the documented configuration. A finding is listed only
+when at least two of three agreed; severity is the median of the three. All
+agents worked read-only and network-free, running reproduction scripts in the
+worktree. 167 agents ran; 147 completed.
 
-## Summary table
+The four most consequential findings (A1, A2, B1, B4) were re-verified by hand
+against the repository before publication and are marked accordingly.
 
-| # | Location | Defect | Severity | Reachable in documented config | Votes |
-| --- | --- | --- | --- | --- | --- |
-| 1 | `services/api/app/factory.py:418-423` | Governed v2.1 + deterministic generator is built without `DeterministicActionRouterV2`; the evaluated runtime for confirmations 012/013 and the grounding successor used the router | high | yes | 3/3 |
-| 2 | `src/digital_twin/student/autonomy_service.py:118-157` | Proactive wording recomputes the required claim count on a synthesized question while the evidence set was sized by the objective text; mismatches turn a valid delivery into a silent `no-action` | high | yes | 3/3 |
-| 3 | `src/digital_twin/grounding/ambiguity_safe_evidence.py:44-51` | Hits are sliced to `evidence_limit` before page-fallback removal; a precise sibling just outside the window is never seen and an answerable question flips to `clarify` | medium | yes (majority) | 3/3 |
-| 4 | `services/api/app/factory.py:418-423` with `config.py` | No validation couples the evidence gate to the governed deterministic generator; with `structured-lexical-v1` the generator abstains on ordinary questions when two or three chunks match | medium | no (runbook pins the question-targeted gate; compose default mode is bounded graph) | 3/3 |
-| 5 | `services/api/app/config.py:248-252, 315-393` | The staging T1 qualification check binds profile hash and generator but not the planner; governed v2.1 with a deterministic planner passes as hash-bound qualified although the record names `gpt-5.6-terra` | medium | no by default, yes if the runbook line is omitted | 3/3 |
-| 6 | `compose.local-r1.yml:16-17` | Evidence gate became a shell-overridable interpolation with no startup binding to the profile or record; the profile-path half of the claim fails closed and is refuted | medium | no | 3/3 |
-| 7 | `scripts/academic_factual_qa_open_10000_t0_adapter.py:907-916` | Canonical claim verifier override keyed only on the gate replaces the manifest's verifier for live engines too, so a future cross-engine live run would fail claim validation on atom-bearing chunks | medium (evaluation instrument) | not a product path | 3/3 |
-| 8 | `services/api/app/factory.py:230-238` | Canonical verifier applied for every generator mode under governed v2.1, including live generators that quote raw chunk text | low | no (qualified release uses the deterministic generator) | 3/3 |
-| 9 | `src/digital_twin/generation/generator.py:33`, `grounding/claim_validation.py:151`, `grounding/reference_uniqueness.py:87` | Atom version literal duplicated in three modules instead of one accessor on `ATOM_VERSION`; not a defect at HEAD, but a version bump silently releases raw markup or fails all claims depending on which copy is missed | hygiene | n/a | rejected as a bug 1/2, duplication confirmed |
-| 10 | `scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py:137` | `.claude/` carve-out in the dirty-worktree gate, duplicated in the 011 runner | unverified | n/a | 0/3 (agents hit the usage limit) |
+## What the audit changes about the release story
 
-## Confirmed findings
+Two independent classes of problem emerged.
 
-### 1. Router-less generator in the shipped governed configuration (high)
+**The deployed governed configuration is not the configuration the evidence
+measured.** The factory builds the release's generator without the boundary
+router that every evaluation runtime used, the documented environment block
+cannot start the API as written, and the qualification record binds a profile
+hash that the confirmation runs did not load. Each is verified below.
 
-`_configured_generator` returns `DeterministicEvidenceSetGroundedGenerator()`
-with no `policy_enforcer` when `APP_GENERATOR_MODE=deterministic` and
-`APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1`
-(`services/api/app/factory.py:418-423`). The default enforcer has
-`action_router=None` (`src/digital_twin/generation/policy.py:36-40`), so only
-the narrow V1 graded-work regex applies. The live branch of the same function
-(`factory.py:492-496`) and the runtime that produced confirmations 012 and 013
-(`scripts/governed_full_autonomy_v2_1_actual_product_runtime.py:529-534`,
-`hybrid_safe_generation=True`) both wire `DeterministicActionRouterV2`. The
-grounding successor 011 evidence was also produced with the router
-(`scripts/academic_factual_qa_open_10000_t0_adapter.py:901-921`). The
-qualification record binds the generator id only, not the router. The V2
-graph's own perception regexes are narrower than the router's rules
-(submission-ready or graded requests, unresolved referents, cross-course and
-withdrawn-source probes), so those boundary cases are routed differently in
-the deployed app than in the evidence.
+**Two evaluation results were repaired after their outputs were seen.** The
+013 confirmation flipped from Refine to Keep by rewriting thirty
+pre-registered references to match what the product actually emitted, and the
+correction record names a code revision at which its own script does not
+exist. This does not make the underlying runs wrong, but it means the Keep
+that the local release selection rests on is a post-hoc rescoring, and the
+repository's own evaluation-first rules ask for that to be visible.
 
-Reproduction: build `AppSettings` for the documented governed configuration,
-call `_configured_generator`, and inspect `policy_enforcer.action_router`
-(`None`); run the five boundary questions through the shipped enforcer and
-through an enforcer with the V2 router and compare actions.
+## A. Product findings
 
-Fix direction: construct the governed deterministic generator with
+### A1. Governed generator ships without the boundary router (high, reachable, hand-verified)
+
+`services/api/app/factory.py:418-423` returns
+`DeterministicEvidenceSetGroundedGenerator()` with no `policy_enforcer` when
+`APP_GENERATOR_MODE=deterministic` and
+`APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1`. The
+default enforcer leaves `action_router=None`
+(`src/digital_twin/generation/policy.py:36-40`), so only the narrow V1
+graded-work regex applies. The live branch of the same function
+(`factory.py:492-496`), the runtime behind confirmations 012 and 013
+(`scripts/governed_full_autonomy_v2_1_actual_product_runtime.py:529-534`), and
+the grounding-successor adapter
+(`scripts/academic_factual_qa_open_10000_t0_adapter.py:901-921`) all wire
+`DeterministicActionRouterV2`. The V2 router's rules for submission-ready and
+graded requests, unresolved referents, cross-course probes, and withdrawn
+sources are therefore absent from the deployed app but present in every
+measurement. The qualification record binds the generator id only, not the
+router.
+
+Fix: construct the governed deterministic generator with
 `DeterministicPolicyEnforcer(action_router=DeterministicActionRouterV2())`,
-hoist one enforcer helper used by both branches, and add a factory test that
-asserts the router identity next to the existing model-id test
-(`tests/api/test_auth_api.py:571-586`).
+ideally through one shared helper, and assert the router identity in the
+factory test.
 
-### 2. Proactive deliveries dropped by a claim-count mismatch (high)
+### A2. Proactive deliveries dropped by a claim-count mismatch (high, reachable)
 
-The evidence assessor sizes the proactive evidence set from
-`goal.approved_course_objective` through `QuestionTargetedAtomicEvidenceGate`,
-which selects exactly `required_atomic_claim_count(query)` hits, 2 only when
-the objective matches the explicit multi-evidence pattern
-(`src/digital_twin/action_router.py:40-44, 181-184`). The wording generator
-then calls the generator with a synthesized instruction
-("Create one concise in-app tutoring intervention for ...") and passes all
-selected chunks (`autonomy_service.py:118-149`).
-`DeterministicEvidenceSetGroundedGenerator.generate` recomputes the required
-count on that synthesized text (`generator.py:133-140`) and returns
-`no-evidence` when the counts differ. The service converts that into
-`_failed_grounded_response`, the graph fails `claim-lineage-complete`, one
-repair repeats the identical failure, and the opportunity is recorded as
-`no-action` with a misleading reason; the goal attempt is not consumed and the
-observer's idempotency key prevents recreating the opportunity, so the
-intervention is permanently dropped for that event.
+The proactive evidence set is sized from `goal.approved_course_objective`
+through `QuestionTargetedAtomicEvidenceGate`, which selects exactly
+`required_atomic_claim_count(objective)` hits. The wording generator then calls
+the generator with a synthesized instruction ("Create one concise in-app
+tutoring intervention for ...") and passes all selected chunks
+(`src/digital_twin/student/autonomy_service.py:118-149`).
+`DeterministicEvidenceSetGroundedGenerator` recomputes the required count on
+that synthesized text (`src/digital_twin/generation/generator.py:133-140`) and
+returns `no-evidence` when the counts differ. The service converts that into a
+failed grounded response, the graph fails `claim-lineage-complete`, the single
+repair repeats the same failure, and the opportunity is recorded as
+`no-action`. The goal attempt is not consumed and the observer's idempotency
+key prevents recreating the opportunity, so the intervention is permanently
+lost. A two-evidence objective (any phrasing matching "relationship between",
+"which two", "both statements") triggers it.
 
-Reproduction: a pytest in the scratchpad using the existing autonomy fixture
-with objective "Explain the relationship between cache coherence ... and
-virtual memory ..." produced `no-action claim-lineage-complete` under the
-evidence-set generator and `delivered event-spaced-review-due` under the
-default generator; a single-chunk objective delivered under both.
+Reproduced with a pytest against the existing autonomy fixture: the
+evidence-set generator produced `no-action claim-lineage-complete` where the
+previous generator delivered.
 
-Fix direction: validate `len(approved_hits)` against the gate's own selection
-rather than re-deriving a count from prose; either pass the assessor's query as
-the `question` and carry intent separately, or add an explicit
-`required_evidence_count` parameter to the generator for the autonomy path.
+Fix: validate the hit count against the gate's own selection instead of
+re-deriving it from prose, or pass the assessor's query as the question and
+carry pedagogical intent separately.
 
-### 3. Page-fallback removal after truncation (medium)
+### A3. Evidence-set generator is only usable with one gate (medium, latent)
 
-`AmbiguitySafeEvidenceGateV1.assess` slices `hits[: evidence_limit]` and only
-then runs `prefer_specific_source_regions` on the window
-(`ambiguity_safe_evidence.py:44-51`; introduced in `b4d25fa`). A selected-text
-page fallback inside the window is kept when its precise sibling ranks just
-outside it, and the page aggregate then counts as a competing answer class.
-Reproduced with the exact shipped gate composition: six hits with the page-1
-fallback at rank 1 and its precise sibling at rank 6 yield `clarify` with the
-current ordering and a sufficient single selection when filtering precedes
-slicing. The same slice-before-filter shape exists in
-`SourceSemanticEvidenceAtomGateV2.assess`. Two of three lenses judged the
-scenario reachable through the product retriever, which caps at five hits;
-the third judged it unreachable in practice, so treat reachability as
-majority, not unanimous.
+The same count rule means the generator abstains whenever the gate approves
+more hits than required. `structured-lexical-v1` selects every matching hit up
+to three; the question-targeted gate trims to exactly the required count.
+Nothing in `AppSettings.validate` couples the gate to the tutoring or
+generator mode, so the mismatched pairing starts cleanly and then answers
+`no-evidence` on answerable questions, with the audit trail showing sufficient
+evidence selected. Two earlier claims were refuted: an unselected gate fails
+closed at construction rather than abstaining, and the compose default
+tutoring mode is the bounded graph, which never wires this generator.
 
-Fix direction: filter page fallbacks over the full hit sequence first, then
-slice; add a test with `evidence_limit + 1` hits where the precise sibling is
-last; consider collapsing page fallbacks at index time.
+Fix: require the question-targeted gate whenever the evidence-set generator is
+wired, and fail startup with a message naming the runbook pairing.
 
-### 4. No coupling between evidence gate and the evidence-set generator (medium, latent)
+### A4. Clarify turns persist as `no-action` (medium, reachable)
 
-The generator abstains whenever the selected hit count differs from the
-required count; `structured-lexical-v1` selects every matching hit up to three
-(`factory.py:505-509`; not five as first claimed). `AppSettings.validate` has
-no rule relating `evidence_gate_mode` to the tutoring or generator mode, and
-the mismatched pairing starts successfully. Reproduced end to end: three
-lexically matching hits, `sufficient=True selected=3`, then `no-evidence`
-released to the student with no audit event. The `unselected` half of the
-original claim is refuted: the service raises at construction for governed
-v2.1 with no gate. Not reachable with the documented configuration because the
-runbook pins `question-targeted-ambiguity-safe-v2` and the compose default
-mode is the bounded graph.
+The policy-boundary short-circuit feeds a `clarify-request` policy action into
+`_grounded_response_v2`, whose action map
+(`src/digital_twin/student/tutoring_graph.py:1698-1705`) knows only `clarify`.
+Every delivered clarification is therefore stored in the durable governed
+response table as `no-action` while the student sees a clarification and the
+trace reports success. The sibling intents (abstain, refuse) map correctly.
 
-Fix direction: require the question-targeted gate whenever the governed
-deterministic generator is wired, with a clear startup error naming the
-runbook pairing.
+Fix: add the missing map entry, or emit `clarify` from the boundary helper.
 
-### 5. Planner not bound by the qualification check (medium, latent)
+### A5. Failed provider calls report zero usage (medium, reachable)
 
-The range introduced `APP_AUTONOMY_PLANNER_MODE` and decoupled it from the
-generator mode, but `_validate_t1_qualification_result` still compares only
-run id, implementation id, generator model, gates, rollback flag, and profile
-hash (`config.py:315-393`). The confirmation-001 record names planner
-`gpt-5.6-terra`; a governed configuration with the default deterministic
-planner passes as hash-bound qualified and silently runs
-`DeterministicAutonomousPlanner`. The only planner-dependent guard is the API
-key presence check.
+`generation_calls` was changed to test `provider_model != "not-called"`
+(`tutoring_graph.py:892`). The safe fallback after a provider failure carries
+`not-called`, so a turn whose generator was called and raised now persists
+`generation_calls=0`. Because the evaluation adapter only demands an exact
+metrics collector when the call counts sum above zero, a run can silently
+report zero provider usage for a turn that made a billable call.
 
-Fix direction: pass the planner mode into the record check and require the
-record's `selected_configuration.planner` to equal the planner identity the
-runtime will use.
+### A6. Planner spend invisible to operators (high, reachable)
 
-### 6. Shell-overridable evidence gate in the R1 compose file (medium, latent)
+In the decoupled governed mode the live planner's budget client is stored in
+`app.state.autonomy_planner_budget` while `provider_budget` stays `None`, and
+`/api/operations/metrics` reports only the latter
+(`services/api/app/routers/operations.py:63`). An operator running the
+documented governed release sees zero calls and zero cost while paid planner
+calls are made and capped; budget exhaustion is invisible until it bites.
 
-`compose.local-r1.yml:16-17` changed pinned literals to `${VAR:-default}`
-interpolations in `547f2db`. Docker Compose lets an exported shell variable
-override `--env-file`, reproduced with Compose v2.40. The profile-path half
-fails closed (the app refuses a missing or wrong profile), so only the gate
-half stands: an exported `APP_EVIDENCE_GATE_MODE=unselected` with the
-compose-default bounded graph starts the app with no gate and every turn
-returns `no-evidence`. No startup validation binds the gate to the profile or
-the qualification record.
+### A7. Page-fallback removal after truncation (medium, reachable)
 
-Fix direction: bind the gate to the release like the profile hash and
-generator, or derive it from the profile's evidence-sufficiency component
-instead of a separate knob.
+`AmbiguitySafeEvidenceGateV1.assess` slices to `evidence_limit` and only then
+drops page fallbacks, so a precise sibling ranked just outside the window is
+never considered and the page aggregate survives as a competing answer class,
+flipping an answerable question to `clarify`. A related finding: the filter
+drops a page chunk whenever any other region merely overlaps the same page
+numbers rather than actually containing the page text
+(`src/digital_twin/grounding/reference_uniqueness.py:215`).
 
-### 7. Verifier override for live engines in the 10,000-case adapter (medium, instrument)
+### A8. Canonical claim verifier applied beyond its generator (low to medium)
 
-`scripts/academic_factual_qa_open_10000_t0_adapter.py:907-916`, added in
-`5747148`, rebinds the claim validator to
-`CanonicalSourceAtomicClaimVerifier` whenever the manifest's gate is one of the
-two semantic-atom gates, before the `deterministic_engine` branch, discarding
-the generator-keyed `ContiguousQuoteAtomicClaimVerifier` for
-`cross-engine-live-extractive-boundary-v1`. Live engines are prompted to copy
-raw chunk text, while the canonical verifier requires equality with the
-canonical atom claim, so a future live cross-engine run over atom-bearing
-sources would score every quoted claim unsupported. The 011 record correctly
-labels the verifier change prospective and not credited.
+The canonical verifier is now used for every governed generator mode
+(`factory.py:230-238`) and requires whole-atom equality, which contradicts the
+live prompt's instruction to quote the shortest contiguous span. Unreachable
+in the qualified release, which uses the deterministic generator, but it makes
+the live path unusable over atom-bearing sources without a change.
 
-Fix direction: scope the override to the deterministic evidence-set
-generator, or present canonical atoms to live engines and validate against
-them consistently; add a test asserting which verifier the adapter wires per
-engine.
+## B. Evaluation-integrity findings
 
-### 8. Canonical verifier for all governed generator modes (low)
+### B1. Confirmation 013 gold rewritten after the responses were seen (high, hand-verified)
 
-`factory.py:230-238` applies the canonical verifier under governed v2.1
-regardless of generator mode. With a live OpenAI generator over atom-bearing
-chunks, verbatim quotes of markup-bearing text fail (reproduced in isolation).
-Unreachable in the qualified release, which uses the deterministic generator.
+`scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py:63-121`
+rewrites, for exactly thirty V2 provider-failure cases, the pre-registered
+reference action from `no-action` to `provide-hint-or-example` and flips
+`must_have_valid_lineage` from false to true, then rescores the same immutable
+responses against the same frozen gates. The guards require exactly thirty
+corrections and require the original result to have exactly thirty unexpected
+actions, so the correction is defined to neutralise precisely the observed
+failures. The terminal outcome moves from Refine to Keep, and the release
+selection record and local R1 qualification rest on that rescoring. The frozen
+013 instrument still declares the provider-failure action as `no-action`, and
+the original test still asserts the old gold, so both the old and new
+expectations pass simultaneously.
 
-Fix direction: select the verifier by active generator, mirroring the
-evaluation runtime.
+I read the code and confirmed the mechanism and the guards.
 
-## Rejected and unverified candidates
+This is not automatically illegitimate: if the pre-registered reference was
+genuinely wrong about how the product should behave under provider failure,
+correcting it is defensible. But the correction was authored after seeing
+which cases failed, it is not visible in the instrument, and no
+pre-registration explains why a delivered hint is the correct behaviour when
+the design documents state that provider failures must fail closed. The
+accompanying gold flip also leaves the lineage requirement inconsistent across
+sibling cases (`build_...confirmation_013.py:132`).
 
-- Atom version literal duplication (`generator.py:33` and two siblings): the
-  duplication is real, but no defect exists at HEAD. The reproduced hazard is
-  prospective: bumping `ATOM_VERSION` without the generator copy silently
-  releases raw authoring markup, and bumping it with the verifier copy but not
-  the generator fails every claim. Recommended as hygiene: one accessor on
-  `ATOM_VERSION`.
-- `.claude/` carve-out in the dirty-worktree gate: all three verification
-  agents failed on the session usage limit; unverified.
+### B2. Correction record names a revision where its script does not exist (medium, hand-verified)
 
-## Implications for the release qualification Keep decision
+The correction record claims `code_revision`
+`27568e4379f5079493d08d0f633edfd85bc4f9fa`. The analyzer that produced it was
+first committed in `547f2db`. I confirmed both facts directly. The
+Keep-producing rescoring therefore cannot be reproduced at the revision it
+records, and the analyzer writes no revision or dirty-tree stamp of its own.
 
-The qualification record binds the release by profile hash and generator id.
-Findings 1 and 2 mean the deployed governed configuration is not the same
-behaviour that the confirmation and grounding evidence measured: boundary
-routing lacks the V2 router, and some proactive interventions the evaluated
-runtime would have delivered are dropped. Neither invalidates the recorded
-evidence, which is correct for the runtime that produced it, but the Keep
-decision's implicit claim that the local release reproduces that evidence is
-not established for those two paths. Findings 4, 5, and 6 are configuration
-hazards that the current validation does not catch. The remaining findings are
-instrument or hygiene items.
+### B3. The 012 analysis correction has no durable record (low)
 
-Recommended actions, in order: fix 1 and 2 with regression tests, re-run the
-network-free confirmation path against the fixed factory, then add the
-coupling checks from 4, 5, and 6.
+The 013 instrument names
+`governed-full-autonomy-v2-1-actual-product-confirmation-012-analysis-correction-001`
+as its predecessor, but no record, results page, or registry row exists for
+it; its output goes only to ignored generated files with no revision stamp.
+The chain from the 012 responses to the 013 gold design cannot be audited.
 
-## Open work
+### B4. Release record binds a profile the evidence run did not load (medium, hand-verified)
 
-- Independent sweep for new defects in the range (four angles: runtime,
-  evaluation integrity, deployment and configuration, tests) did not run; the
-  workflow can be resumed from its journal once the usage limit resets.
-- Verification of candidate 10.
-- Filing findings 1 through 7 as issues; this audit changed no code.
+`records/governed-full-autonomy-v2-1-confirmation-001.json` binds
+`profile_sha256` `43da7e1b…`, which is `student-tutor-r1-local-candidate-v2.json`.
+The actual-product runtime that produced confirmations 012 and 013 loads
+`student-tutor-r1-openai-candidate-v1.json`
+(`scripts/governed_full_autonomy_v2_1_actual_product_runtime.py:82-84`), whose
+hash is `10d6012e…`. I computed both hashes and read the constant. The record
+therefore binds the release to a profile that the run behind its evidence did
+not use.
+
+### B5. Network-free simulation diverges from the paid path (high for method, not reachable in production)
+
+The `--simulate` mode's provider-failure stand-ins behave differently from the
+live components: the reactive planner stand-in raises out of `propose()` and
+routes to the safe no-action path, while the live planner swallows the error
+and returns a deterministic fallback that delivers a hint
+(`runtime.py:175-188`). With `hybrid_safe_generation=True` the generator
+switch is a no-op because the provider-backed generator is deterministic
+(`runtime.py:616-635`). The consequence is that `--simulate` validated the
+`no-action` gold that the USD 3.85 paid run then contradicted on thirty
+trajectories, which is the undisclosed reason the references were rewritten in
+B1. A re-indentation in the same area also pauses the autonomy policy on
+provider-backed runs where it previously did not (`runtime.py:626`).
+
+### B6. Sealed 010 baseline changed behaviour under an unchanged identity (low to medium)
+
+The e0 deterministic generator in the 10,000-case adapter now delegates to the
+evidence-set generator while keeping `implementation_id`
+`deterministic-atomic-grounded-generator-v1` and the manifest identity
+`deterministic-grounded-generator-v1`
+(`scripts/academic_factual_qa_open_10000_t0_adapter.py:523-556`,
+`scripts/cross_engine_factual.py:74`). A read-only replay of the 500
+development cases flips 18 from abstain to answer. The terminal 010 e0 result
+cannot be reproduced by the code that still claims its identity, and no test
+notices.
+
+### B7. Weaker binding in the 011 and 012 harnesses (low to medium)
+
+The 011 runner injects `profile_sha256` as an unverified literal copied from
+its instrument, so the hash bound into the ledger is never checked against the
+policy actually executed; its network-free "no provider calls" assertion
+inspects an aggregate that is hard-coded to zero and so can never fire. The
+012 builder dropped the `selected_grounding.result_sha256` verification that
+every predecessor performed, and the hash its instrument pins matches no file
+in the repository.
+
+### B8. Claim-validator override reaches live engines (medium, instrument only)
+
+The canonical verifier override in the 10,000-case adapter is keyed only on
+the gate and sits before the deterministic-engine branch, so a future live
+cross-engine run over atom-bearing sources would have every quoted claim
+scored unsupported.
+
+## C. Configuration and documentation findings
+
+### C1. The documented governed configuration cannot start (high, hand-verified)
+
+The runbook's governed V2.1 block sets five variables and omits
+`APP_STUDENT_PROFILE_PATH`, while both `compose.local-r1.yml:17` and
+`deploy/local-r1.env.example:8` pin the v1 profile. The qualification record
+binds the v2 profile hash. I verified the block, both pins, and the three
+profile hashes: following the runbook as written leaves the runtime on v1
+(`1b3257e8…`) against a record binding `43da7e1b…`, and configuration
+validation rejects the pairing, so every container refuses to start. The same
+omission breaks the documented "restore governed V2.1 after T0 rollback" step.
+
+Fix: add the profile path to the runbook block, or default it to the v2
+profile in compose and the env example.
+
+### C2. Qualification check does not bind planner or gate (medium)
+
+`_validate_t1_qualification_result` binds run id, implementation id, generator
+model and profile hash, but never the planner mode or the evidence gate, even
+though the record it binds qualified one specific combination. A governed
+configuration with the default deterministic planner and the lexical gate
+passes as hash-bound qualified, and the staging verifier's mode check passes
+too, so an unqualified runtime is labelled as the qualified release. The
+runbook's claim that the API fails closed for any non-qualified governed
+pairing is not accurate.
+
+### C3. Release-critical settings are shell-overridable (medium)
+
+The R1 compose file moved the gate and profile path from pinned literals to
+`${VAR:-default}` interpolations, and an exported shell variable beats
+`--env-file`. The profile half fails closed; the gate half does not. Related:
+`compose.staging.yml` has no planner key at all, so the governed planner can
+never be enabled there while the tutoring mode and record still can be.
+
+### C4. `.claude/` carve-out in the dirty-worktree gate (low)
+
+The integrity gate drops porcelain rows beginning with `.claude/` by fixed
+slicing, duplicated across two runners. Session-tooling edits escape the gate,
+and renamed entries would be mis-parsed.
+
+## D. Test-coverage findings
+
+- No test pairs the evidence-set generator with a real gate, so the abstain
+  branch that A3 describes is uncovered (`tests/digital_twin/test_generation.py:526`).
+- Every governed staging-configuration test is a rejection test; nothing
+  asserts that the shipped pairing validates, which is why C1 escaped
+  (`tests/api/test_auth_api.py:431`).
+- The compose test was weakened from pinning the profile path to accepting any
+  env-overridable default (`tests/test_local_r1_compose.py:26`).
+- The provider-failure test pins generator call counts but never the persisted
+  trace field, hiding A5 (`tests/digital_twin/test_governed_autonomy.py:1435`).
+
+## Rejected candidates
+
+- Atom version literal duplicated across three modules: real duplication, but
+  no defect at HEAD. The hazard is prospective, and a single accessor keyed on
+  `ATOM_VERSION` is the hygiene fix.
+- Two parts of earlier claims were refuted outright: an unselected gate under
+  governed mode fails closed at startup rather than abstaining silently, and
+  the compose profile-path override also fails closed.
+
+## Unverified and open
+
+- Four verification agents (covering a config binding, a grounding-successor
+  runner check, an evaluation-002 item, and two test items) were lost to the
+  session limit; their candidates are recorded in the workflow journal and
+  have not been judged.
+- One agent's output could not be safety-reviewed because the classifier timed
+  out. Nothing from that agent is reported here except where another lens
+  independently reached the same conclusion.
+- The automated synthesis step never ran; this report was consolidated by hand
+  from the verdicts, with the four hand-verified items checked directly.
+
+## Recommended order of work
+
+1. Fix A1 and A2 with regression tests; they are the two places where the
+   deployed product diverges from its own evidence in a way a student would
+   see.
+2. Fix C1 so the documented release can start, and add the positive
+   configuration test that would have caught it.
+3. Decide how to record B1: either restore the pre-registered gold and let 013
+   stand as Refine, or publish the reference correction as its own decision
+   with a stated rationale, a correct revision, and an updated instrument.
+   Also record B3 and correct B2 and B4.
+4. Then the remaining medium items: A3 to A7, C2, C3, B5 to B8.
+
+None of this was applied. The audit changed no code and filed no issues.
