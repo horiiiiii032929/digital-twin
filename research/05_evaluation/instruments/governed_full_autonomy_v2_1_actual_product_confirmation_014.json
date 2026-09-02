@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-014",
-  "status": "reviewed-build-only-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "parent_issue": 8,
   "decision_question": "Does the selected H+E1 autonomy architecture preserve deterministic grounding, bounded policy authority, persistence, and safe proactive behavior on fresh actual-product cases?",
@@ -72,7 +72,7 @@
   },
   "models": {
     "metadata_status": "fresh",
-    "verified_at": "2026-09-02T20:35:21+00:00",
+    "verified_at": "2026-09-02T21:00:50+00:00",
     "freshness_hours": 24,
     "planner": {
       "provider": "openai",
@@ -106,9 +106,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "Build-only checkpoint. The user's standing execution direction does not bypass the repository freeze until the build gate and clean preflight pass.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User directed execution of the final audited plan on 2026-09-03 after the 1,687-test complete gate and 983/983 repository audit passed. Authority is limited to confirmation 014 and is revoked after any terminal outcome.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0

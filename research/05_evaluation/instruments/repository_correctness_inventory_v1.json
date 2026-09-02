@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a42526997843df7ddf8f606bb405a9a9040fe468988239122e52e374e041e05f",
+  "record_sha256": "963febd1969e0115f690e2db2a96224c54a9c0ec38f66ee6c03233940f1dad7b",
   "records": [
     {
       "audit": {
@@ -4328,7 +4328,7 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-014",
-        "evidence": "Prospective instrument review verifies fresh 820-case hashes, H+E1 role separation, deterministic factual generation, exact Luna identity and current official pricing, finite call/cost limits, hidden-gold ordering, revoked build-only authority, and explicit non-claims.",
+        "evidence": "Prospective instrument review verifies fresh 820-case hashes, H+E1 role separation, deterministic factual generation, exact Luna identity and current official pricing, finite call/cost limits, hidden-gold ordering, and explicit non-claims. The one-time 014 provider authority was enabled only after the complete build gate passed and must be revoked after any terminal outcome.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex H+E1 confirmation-014 audit"
@@ -4339,7 +4339,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_014.json",
       "risk": "high",
-      "sha256": "a4e12839fd176f15345b1746f35c79a28a3b237183c7fcb389a323ed79de86ed"
+      "sha256": "01b4a1e8885211477c491107e7073c13e2b85be14cdf833077cdee3506843aca"
     },
     {
       "audit": {
@@ -12637,7 +12637,7 @@
     {
       "audit": {
         "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Closed the confirmation-014 registry finding by registering its protected runner for external-model and method-evaluation operations; focused freeze tests now report 151 protected and 151 registered entrypoints with zero missing guards.",
+        "evidence": "Closed the confirmation-014 registry finding by registering its protected runner for external-model and method-evaluation operations. Added the exact 014 instrument as the sole new bounded authorization after the complete build gate; focused freeze tests require 151 protected and 151 registered entrypoints with zero missing guards.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex H+E1 confirmation-014 audit"
@@ -12648,7 +12648,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "786d1c732f25faa206dda6875d64f853230876eab6b14359a6f91b07106eaebe"
+      "sha256": "6a5bf73dc07ae42a4862703da2f02f14a1539a466520db8934c8e0a4946a8e18"
     },
     {
       "audit": {
@@ -13484,11 +13484,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-architecture-engine-comparison-revocation",
-        "evidence": "Reviewed terminal authorization revocation and regression coverage: engine comparison 006 is immutable completed-Keep evidence, no longer allowlisted, and paid/provider progression is false.",
+        "domain": "evaluation-authorization-boundaries",
+        "evidence": "Reviewed the complete exact bounded-authorization set. Historical engine comparison 006 remains revoked, and only confirmation 014 was added for external-model and method-evaluation execution after its complete build gate passed.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex AFQC-161 result and finding-closure audit"
+        "reviewer": "Codex H+E1 confirmation-014 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13496,7 +13496,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "f39f771c40cb6a7b58aeea01b2a6971a6bc5dd3016621ed7249216c64d2bb377"
+      "sha256": "f597fa3d7161d601691826c2607536068c20f7eee60ebd4779ded05ff4c1370d"
     },
     {
       "audit": {
@@ -15485,7 +15485,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify fresh source disjointness, 820-case cardinality, build-only authority, H+E1 architecture and model bindings, deterministic factual generator separation, and fail-closed preflight.",
+        "evidence": "Focused tests verify fresh source disjointness, 820-case cardinality, bounded one-time authority, H+E1 architecture and model bindings, deterministic factual generator separation, and fail-closed preflight without authorization leakage.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex H+E1 confirmation-014 audit"
@@ -15496,7 +15496,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
       "risk": "medium",
-      "sha256": "96aa37310b0239a7137db5ef1becf8e5696e09ea2ccb4e8eacc66fac9e92bebd"
+      "sha256": "36608e6d56069cbc4ae3b26753d9979d5ef46f387e698f67c91c11db6c621bdb"
     },
     {
       "audit": {
