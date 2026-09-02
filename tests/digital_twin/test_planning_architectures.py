@@ -16,8 +16,10 @@ from src.digital_twin.student.autonomy_runtime import (
     GovernedAutonomousTutoringGraph,
 )
 from src.digital_twin.student.planning_architectures import (
+    ActionValuePredictionV1,
     AutonomyArchitectureId,
     EpisodeStepProposalV1,
+    GuardedPolicyValuePlanner,
     HierarchicalPlanningProposalV1,
     PlannerVerificationV1,
     PlanningStateCardV1,
@@ -80,6 +82,26 @@ class _IdentityDriftProvider(_ProposalProvider):
         del kwargs
         raise LlmIdentityDriftError(
             provider_model="unexpected-model", provider_revision=None
+        )
+
+
+class _FixedForwardModel:
+    implementation_id = "fixed-forward-model-test"
+
+    def predict(self, *, action, **_kwargs):
+        utility = {
+            AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION: 0.2,
+            AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE: 0.5,
+            AutonomousActionKind.NO_ACTION: 0.0,
+        }.get(action, 0.1)
+        return ActionValuePredictionV1(
+            action=action,
+            immediate_learning_gain=max(0.0, utility),
+            observation_value=0.0,
+            future_value=0.0,
+            pedagogical_risk=0.0,
+            interruption_cost=0.0,
+            utility=utility,
         )
 
 
@@ -305,6 +327,67 @@ async def test_runtime_prefix_keeps_maximum_length_provider_reason_valid():
     assert output.reason_code.startswith("architecture-selected:")
     assert ":sha256-" in output.reason_code
     assert trace.reason_code == output.reason_code
+
+
+def test_provider_reason_is_normalized_before_local_contract_validation():
+    proposal = HierarchicalPlanningProposalV1.model_validate(
+        {
+            "selected_action": "ask-diagnostic-question",
+            "reason_code": "reason-" * 40,
+            "expected_learner_action": None,
+            "outcome_observation": None,
+            "stop_condition": "Stop after one move.",
+            "replan_condition": None,
+            "episode_steps": [],
+        }
+    )
+    verification = PlannerVerificationV1.model_validate(
+        {"accept": True, "reason_code": "verify-" * 40}
+    )
+
+    assert len(proposal.reason_code) <= 128
+    assert len(verification.reason_code) <= 128
+    assert ":sha256-" in proposal.reason_code
+    assert ":sha256-" in verification.reason_code
+
+
+@pytest.mark.asyncio
+async def test_policy_value_planner_promotes_only_with_model_value_agreement():
+    planner = GuardedPolicyValuePlanner(
+        proposal_provider=_ProposalProvider(
+            AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE
+        ),
+        forward_model=_FixedForwardModel(),
+    )
+
+    output, trace = await planner.plan_with_trace(
+        _job(event=AutonomousEventKind.STUDENT_MESSAGE)
+    )
+
+    assert output.action == AutonomousActionKind.PROVIDE_HINT_OR_EXAMPLE
+    assert trace.provider_proposal_used is True
+    assert trace.verifier_used is False
+
+
+@pytest.mark.asyncio
+async def test_policy_value_planner_retains_baseline_on_disagreement_or_failure():
+    disagreement = GuardedPolicyValuePlanner(
+        proposal_provider=_ProposalProvider(
+            AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
+        ),
+        forward_model=_FixedForwardModel(),
+    )
+    drift = GuardedPolicyValuePlanner(
+        proposal_provider=_IdentityDriftProvider(),
+        forward_model=_FixedForwardModel(),
+    )
+
+    output, _trace = await disagreement.plan_with_trace(
+        _job(event=AutonomousEventKind.STUDENT_MESSAGE)
+    )
+    assert output.action == AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
+    with pytest.raises(LlmIdentityDriftError):
+        await drift.plan(_job(event=AutonomousEventKind.STUDENT_MESSAGE))
 
 
 def test_invalid_switch_combinations_fail_at_construction():

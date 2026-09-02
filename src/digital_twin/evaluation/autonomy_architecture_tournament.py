@@ -39,6 +39,17 @@ class ArchitectureEvaluationStageV1(_Contract):
     requires_previous_pass: bool
 
 
+class ArchitectureProgramAmendmentV1(_Contract):
+    """Prospective method change that cannot rewrite historical evidence."""
+
+    decision_id: str = Field(min_length=1, max_length=64)
+    reason: str = Field(min_length=1, max_length=1000)
+    historical_results_changed: Literal[False]
+    original_development_folds_reopened: Literal[False]
+    successor_instrument: str = Field(min_length=1, max_length=160)
+    successor_implementation: str = Field(min_length=1, max_length=160)
+
+
 class AutonomyArchitectureTournamentProgramV1(_Contract):
     schema_version: Literal["1.0.0"] = "1.0.0"
     program_id: Literal["successor-architecture-paired-comparison-001"]
@@ -71,6 +82,9 @@ class AutonomyArchitectureTournamentProgramV1(_Contract):
     total_emergency_budget_usd: float = Field(gt=0, le=100)
     hard_gates: list[str] = Field(min_length=1)
     decision_rule: str = Field(min_length=1)
+    prospective_amendments: list[ArchitectureProgramAmendmentV1] = Field(
+        default_factory=list
+    )
     provider_freshness: dict[str, str | int | bool] = Field(min_length=1)
     prohibited_models: list[str] = Field(min_length=1)
 
@@ -121,5 +135,6 @@ class AutonomyArchitectureTournamentProgramV1(_Contract):
 __all__ = [
     "ArchitectureEngineAllocationV1",
     "ArchitectureEvaluationStageV1",
+    "ArchitectureProgramAmendmentV1",
     "AutonomyArchitectureTournamentProgramV1",
 ]

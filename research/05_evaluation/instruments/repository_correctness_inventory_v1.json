@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 967
+    "audited": 971
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 234,
+    "active_or_unclassified_tooling": 236,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 255,
+    "evaluation_configuration": 256,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 217
+    "verification": 218
   },
-  "file_count": 967,
+  "file_count": 971,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bf915fbdbebde1086ed15eaeb4680f7ef46208a09ddc2178ccd2f36bd4f50790",
+  "record_sha256": "ce6bf27a7bfecfa0015f475927c2159f8064731d499cebeca8cdf9a7f15859d6",
   "records": [
     {
       "audit": {
@@ -1416,10 +1416,10 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Manual command-surface review confirmed explicit build, validate, simulate, preflight, and guarded execute commands for fresh fold 003. Historical fold commands remain reproducible, terminal attempts remain blocked, and no automatic progression was introduced.",
+        "evidence": "Manual command-surface review confirmed explicit build, validate, simulate, preflight, guarded execute, and focused verification commands for the fresh policy-value successor. Historical fold commands remain reproducible and terminal attempts remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-003 database-lifecycle audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "5d73bc72825e3e88666ea09646d13ee8fbe77484a4f6b7f19ee1344085d42a27"
+      "sha256": "767c592f59159e6bf51c7c6a70132a61863928407c09ced7f0cbf9bfa7747f6f"
     },
     {
       "audit": {
@@ -5240,10 +5240,10 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Manual instrument review confirmed a finite A/B/C/C+V one-factor comparison, exact E1-E4 economical model allocations, three development rounds, one sealed confirmation, deterministic hard gates, USD 50 ceiling, and no paid authority.",
+        "evidence": "Manual instrument review confirmed the three original A/B/C/C+V folds remain terminal, AFQC-152 changes no historical result, the fresh H successor uses deterministic event-envelope validity plus paired hidden utility, E1-E4 allocations remain explicit, one sealed confirmation is required, the USD 50 ceiling remains, and no parent-level paid authority is introduced.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5251,7 +5251,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
       "risk": "high",
-      "sha256": "e8e1b4986c29c4ed2d7212eb3ff07a5d0152852b1dfee8bac00f59dda375abee"
+      "sha256": "019b773134e3f56285270921c0be970ad4d651b29e5d2b0b09d7665dd0fb6342"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-evaluation",
+        "evidence": "Instrument audit confirmed fresh case/hash bindings, deterministic A/B/C/H conditions, a planner-only 121-call ceiling, zero retries, a USD 2 stop, gold isolation, corrected validity semantics, and no provider authority in the build checkpoint.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_policy_value_fold_004_001.json",
+      "risk": "high",
+      "sha256": "40543a1e6d9cfea9d7f5ac10429a41f6cc2cf9d75834cd7a0829efee39260fc9"
     },
     {
       "audit": {
@@ -6887,6 +6903,24 @@
       "path": "scripts/build_successor_architecture_development_fold_001.py",
       "risk": "high",
       "sha256": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c"
+    },
+    {
+      "audit": {
+        "domain": "autonomy-architecture-evaluation",
+        "evidence": "Builder review and deterministic tests confirmed 150 byte-stable fresh cases, disjoint identities from folds 001-003, 120 eligible and 30 boundary cases, and physical public/gold separation.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:successor-architecture-policy-value-fold-004"
+      ],
+      "path": "scripts/build_successor_architecture_policy_value_fold_004.py",
+      "risk": "high",
+      "sha256": "6776b0b5fb064af2b88c46ce459acc2db8cddbf4c77e65810fda7a303abc95e4"
     },
     {
       "audit": {
@@ -9416,6 +9450,27 @@
     },
     {
       "audit": {
+        "domain": "autonomy-architecture-evaluation",
+        "evidence": "Runner review confirmed one shared proposal per eligible case, real migrated graph execution for all 600 cells, hidden-gold opening only after durable completion, exact identity/cost/freeze checks, safe condition-specific fallback, and paired utility-based selection with preferred action retained as a diagnostic.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:successor-architecture-policy-value-fold-004",
+        "preflight:successor-architecture-policy-value-fold-004",
+        "simulate:successor-architecture-policy-value-fold-004",
+        "validate:successor-architecture-policy-value-fold-004"
+      ],
+      "path": "scripts/run_successor_architecture_policy_value_fold_004.py",
+      "risk": "high",
+      "sha256": "ad95792479006c88c1b9309688786dd0e5c01ba2e710947a839908a6d35cc325"
+    },
+    {
+      "audit": {
         "domain": "successor-architecture-simulation",
         "evidence": "Manual command-surface review and focused tests verified deterministic execution, explicit development/held-out seeds, revision and dirty-state capture, exclusive output creation, and zero provider usage.",
         "findings": [],
@@ -10046,10 +10101,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Manual guard review and execution-freeze regression confirmed deterministic synthetic builders are explicitly exempt while the successor architecture provider entrypoint must carry a main-level and execution-level bounded-operation guard; no provider or held-out execution is enabled by this registry change.",
+        "evidence": "Manual guard review and execution-freeze regression confirmed both deterministic synthetic architecture builders are explicitly exempt while the fresh policy-value provider entrypoint is registered and carries main-level plus execution-level bounded-operation guards; no provider or held-out execution is enabled.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10059,7 +10114,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "036f39a27bd3533858085fae469c116857dab8d657636926c564cc0175815667"
+      "sha256": "6beb997425841218dec037f34564625fe902d91f6d27299270e08dabbbe480e2"
     },
     {
       "audit": {
@@ -10912,10 +10967,10 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Contract review and validation tests confirmed exact architecture cardinality, exact E1-E4 bindings, finite stage identities, no confirmation rerun, no active prohibited provider/model, and advisory-only LLM review.",
+        "evidence": "Contract review and validation tests confirmed exact architecture cardinality, exact E1-E4 bindings, finite stage identities, no confirmation rerun, no active prohibited provider/model, advisory-only LLM review, and typed prospective amendments that prohibit historical-result changes and original-fold reopening.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10923,7 +10978,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_architecture_tournament.py",
       "risk": "high",
-      "sha256": "5357f1b4d725ef87d7c8ec3de76d7c61b8dc07607e4c4acb42ef4b0f9666b348"
+      "sha256": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0"
     },
     {
       "audit": {
@@ -12416,10 +12471,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active and every fold-001 through fold-003 execution is terminal with authority revoked. No architecture evaluation is currently allowlisted, and future evidence requires a separately reviewed fresh successor.",
+        "evidence": "The global freeze remains active; every fold-001 through fold-003 execution is terminal with authority revoked, and the policy-value runner is explicitly registered but not allowlisted in the build checkpoint. Future paid evidence requires its separate authorization change.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-003 authorization audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12427,15 +12482,15 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a167f0b9de92eb050b8c9bd7588b6906739d2272836300a4d5270a8c736802c3"
+      "sha256": "868d9e682f5c33eaf04c5d0ae0777f1e7ed11f7c299a6cde3986684489ad00f2"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Public-export review plus focused import and architecture tests confirmed every newly exported planning contract resolves without cycles and does not change the existing T0/T1-v1 public surface.",
+        "evidence": "Public-export review plus focused import and architecture tests confirmed the guarded policy-value planner resolves without cycles and leaves the existing T0/T1-v1 and A/B/C public surfaces intact.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12443,7 +12498,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "3223938719d0e83045c6ca404daee598200789d8603a9fad447cd054d1db9af0"
+      "sha256": "ef3b6799050cbcb530a77b710d546d0efd5672a0fc0745e5e500c97917c65880"
     },
     {
       "audit": {
@@ -12640,10 +12695,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-architecture",
-        "evidence": "Line-by-line authority review confirmed A/B/C/C+V semantics remain unchanged. Composed provider diagnostics are now deterministically bounded to the output contract using a retained prefix and SHA-256 suffix, preventing runtime crashes without changing action, authority, evidence, or planning behavior.",
+        "evidence": "Line-by-line authority review confirmed historical A/B/C/C+V semantics remain unchanged. Non-authoritative provider reasons are bounded before local validation, and the new guarded policy-value planner can replace deterministic A only on action-envelope, model/forward-model agreement, and the existing 0.04 predicted-utility margin; ordinary failures return A and identity drift remains fatal.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 runtime-boundary correction audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12651,7 +12706,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/planning_architectures.py",
       "risk": "high",
-      "sha256": "be8df11bc5affc29f2c52e26b79a9ed07d48197ff6ff207c8ba35bf8108c5138"
+      "sha256": "0c4dba823be83314a780f8687770f5e57fb26f6c14a28fcbb95e13bb2051fd56"
     },
     {
       "audit": {
@@ -13232,10 +13287,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests retain architecture, authority, identity, evidence, verifier, and repeated-action coverage and now prove a maximum-length provider diagnostic remains a valid deterministic 128-character runtime reason after prefix composition.",
+        "evidence": "Focused tests retain architecture, authority, identity, evidence, verifier, and repeated-action coverage; they also prove pre-validation reason normalization, guarded promotion only on model/value agreement, deterministic baseline retention, and fatal identity drift.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-002 runtime-boundary correction audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13243,7 +13298,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_planning_architectures.py",
       "risk": "medium",
-      "sha256": "02dc3ebe3211acc58f2593a701d11a06d55922e3cb62da0f1a524b6c085ec896"
+      "sha256": "44c526e8e4e7f2e7e026ed8894d9eacd045de9d614187f85f3ed89e833fe0a1d"
     },
     {
       "audit": {
@@ -13264,10 +13319,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization and prove all terminal fold-001 through fold-003 architecture runs remain blocked after the valid fold-003 Refine result.",
+        "evidence": "Tests enumerate every exact bounded authorization and prove all terminal fold-001 through fold-003 runs plus the provider-unauthorized policy-value successor remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex fold-003 authorization audit"
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13275,7 +13330,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "a1f00dfeadce4aef36f25d601bf39f6fd4e818eb0e13e0aba55f92856c532f38"
+      "sha256": "411d8361cfff175f6214a1f9b8cdf6b5435828517e34b70311de262ae03a2224"
     },
     {
       "audit": {
@@ -16048,10 +16103,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
+        "evidence": "Six focused tests cover finite/no-paid instrument validation, exact A/B/C/C+V and E1-E4 bindings, typed immutable prospective amendments, prohibited model rejection, 48-cell actual-graph simulation, and strict planner/verifier response schemas.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture correctness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16059,7 +16114,23 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_paired_comparison.py",
       "risk": "medium",
-      "sha256": "d076057542d8445f5880fd72dad0735e2fbfe1e1183f687988c5f9bccc529881"
+      "sha256": "77cbe5a7f186efae6e19533e7b4fadf0bcce7c5bdda9ebf603c84c4a2000a327"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests prove fresh and isolated dataset construction, unauthorized bounded preflight, event-envelope transition validity independent of exact preference, and safe deterministic provider-failure fallback.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex policy-value successor audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_successor_architecture_policy_value_fold_004.py",
+      "risk": "medium",
+      "sha256": "f54e65995996a408e350ddec1ba1534d1d28d7adc41d471c73ad59ab55dfbcde"
     },
     {
       "audit": {
@@ -16255,8 +16326,8 @@
     }
   ],
   "risk_counts": {
-    "high": 736,
-    "medium": 231
+    "high": 739,
+    "medium": 232
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

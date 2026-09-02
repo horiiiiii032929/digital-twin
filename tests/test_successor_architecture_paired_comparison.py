@@ -41,6 +41,14 @@ def test_tournament_binds_exact_a_b_c_cv_and_e1_e4_allocations():
         "e4",
     ]
     assert all("gpt-5.6-sol" not in item.model_dump_json() for item in program.engine_allocations)
+    assert [item.decision_id for item in program.prospective_amendments] == [
+        "AFQC-152"
+    ]
+    assert all(
+        not item.historical_results_changed
+        and not item.original_development_folds_reopened
+        for item in program.prospective_amendments
+    )
 
 
 def test_engine_allocation_drift_is_rejected():

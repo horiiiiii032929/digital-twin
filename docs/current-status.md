@@ -181,6 +181,27 @@ publishing their terminal state and has a regression test for that ordering.
 All 40 previously published audit findings remain terminally closed; no audit
 finding has been reopened by this result.
 
+The zero-call causal audit `successor-architecture-fold-003-causal-audit-001`
+then closed findings SA8–SA10 without altering Fold 003. It established that
+deterministic A had the best mean hidden policy utility (`0.7830`) and lowest
+mean regret (`0.0057`); C improved over A in 11 cases but regressed in 30, and
+C+V's reject-only verifier suppressed valid interventions. Exact agreement
+with one preferred action is now a diagnostic rather than the hard transition
+gate. The hard gate is deterministic event/action-envelope validity, while
+paired policy utility and regret measure pedagogical choice quality.
+
+The fresh method successor
+`successor-architecture-policy-value-fold-004-001` is build-qualified but
+provider-unauthorized. Its guarded policy-value planner starts from
+deterministic A and accepts a Luna proposal only when it remains inside
+authority, agrees with the analytic forward model, and beats A by the existing
+`0.04` predicted-utility margin. Ordinary provider or semantic failure returns
+A; identity drift remains fatal. The successor contains 150 fresh cases and
+600 paired A/B/C/H cells, with one canary, at most 120 single-case planner
+calls, zero retries, and a USD 2 stop. It does not reopen or rescore the three
+exhausted folds. All earlier 40 findings and SA8–SA10 are terminally closed;
+there are no open audit findings.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

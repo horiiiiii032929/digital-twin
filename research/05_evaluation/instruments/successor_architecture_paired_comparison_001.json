@@ -158,7 +158,17 @@
     "factual grounding no more than 3 points below T0",
     "100 percent proactive action, reason, and source lineage"
   ],
-  "decision_rule": "Reject every hard-gate failure. Select C over B only when C wins at least three of four preregistered quality metrics with lower confidence bounds above zero, loses none, passes both simulator families and all engine allocations, and costs no more than 1.5 times B per acceptable move. Otherwise apply the same rule to B over A. Select C+V only when its defect reduction exceeds its added cost and latency. Freeze the winner before one fresh confirmation.",
+  "decision_rule": "Reject every authority, scope, citation, persistence, identity, or provider-completion hard-gate failure. The three original A/B/C/C+V folds are terminal and selected no architecture. Under AFQC-152, exact preferred-action agreement remains diagnostic, deterministic event/action-envelope validity is the hard transition gate, and continuous hidden policy utility/regret is the primary pedagogical comparison. The fresh H successor advances over A only when its paired preferred-action lower bound is at least -0.05, its paired utility lower bound is above zero, its utility is not below C, and every hard gate passes; otherwise A advances when the gates pass. Freeze the provisional winner before one fresh confirmation.",
+  "prospective_amendments": [
+    {
+      "decision_id": "AFQC-152",
+      "reason": "Valid Fold 003 evidence showed that exact agreement with one preferred action was not equivalent to authorized transition validity and that the provisional ordering omitted continuous policy utility.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-policy-value-fold-004-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
+    }
+  ],
   "provider_freshness": {
     "verified_at": "2026-09-02T00:00:00+08:00",
     "maximum_age_hours_before_paid_execution": 24,

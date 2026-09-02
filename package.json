@@ -579,6 +579,12 @@
     "simulate:successor-architecture-development-fold-003": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-003 --simulate",
     "preflight:successor-architecture-development-fold-003": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-003 --preflight",
     "execute:successor-architecture-development-fold-003": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-003 --execute",
-    "verify:successor-architecture-development-fold-003": "uv run pytest tests/test_successor_architecture_development_fold_001.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-development-fold-003 && npm run simulate:successor-architecture-development-fold-003"
+    "verify:successor-architecture-development-fold-003": "uv run pytest tests/test_successor_architecture_development_fold_001.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-development-fold-003 && npm run simulate:successor-architecture-development-fold-003",
+    "build:successor-architecture-policy-value-fold-004": "uv run python -m scripts.build_successor_architecture_policy_value_fold_004 --write",
+    "validate:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --validate",
+    "simulate:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --simulate",
+    "preflight:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --preflight",
+    "execute:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --execute",
+    "verify:successor-architecture-policy-value-fold-004": "uv run pytest tests/test_successor_architecture_policy_value_fold_004.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-policy-value-fold-004 && npm run simulate:successor-architecture-policy-value-fold-004"
   }
 }

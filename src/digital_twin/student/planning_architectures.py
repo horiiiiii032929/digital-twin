@@ -15,7 +15,7 @@ from collections.abc import Callable
 from enum import StrEnum
 from typing import Protocol
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from src.digital_twin.llm import (
     LlmClient,
@@ -80,10 +80,24 @@ class HierarchicalPlanningProposalV1(_Contract):
     replan_condition: str | None = Field(default=None, max_length=500)
     episode_steps: list[EpisodeStepProposalV1] = Field(default_factory=list, max_length=3)
 
+    @field_validator("reason_code", mode="before")
+    @classmethod
+    def normalize_non_authoritative_reason(cls, value: object) -> object:
+        if isinstance(value, str):
+            return _bounded_reason_code(value)
+        return value
+
 
 class PlannerVerificationV1(_Contract):
     accept: bool
     reason_code: str = Field(min_length=1, max_length=128)
+
+    @field_validator("reason_code", mode="before")
+    @classmethod
+    def normalize_non_authoritative_reason(cls, value: object) -> object:
+        if isinstance(value, str):
+            return _bounded_reason_code(value)
+        return value
 
 
 class ActionValuePredictionV1(_Contract):
@@ -537,6 +551,148 @@ class SwitchableAutonomyPlanner:
         )
 
 
+class GuardedPolicyValuePlanner:
+    """Fuse an observable policy baseline with model and forward-model agreement.
+
+    The deterministic event policy remains the rollback. A model-proposed move
+    replaces it only when the proposal is inside the authoritative envelope,
+    agrees with the inspectable value model, and clears the existing minimum
+    utility margin. Provider or semantic failure therefore cannot suppress an
+    otherwise eligible deterministic teaching action.
+    """
+
+    implementation_id = "guarded-policy-value-planner-v2"
+
+    def __init__(
+        self,
+        *,
+        proposal_provider: PlanningProposalProvider,
+        forward_model: PedagogicalForwardModel | None = None,
+        state_card_resolver: Callable[[AutonomousJobInput], PlanningStateCardV1]
+        | None = None,
+        lookahead_depth: int = 2,
+        minimum_utility_margin: float = 0.04,
+    ) -> None:
+        if lookahead_depth < 1 or lookahead_depth > 3:
+            raise ValueError("policy-value lookahead depth must be between one and three")
+        if not math.isfinite(minimum_utility_margin) or minimum_utility_margin < 0:
+            raise ValueError("minimum utility margin must be finite and non-negative")
+        self.proposal_provider = proposal_provider
+        self.forward_model = forward_model or AnalyticPedagogicalForwardModel()
+        self.state_card_resolver = state_card_resolver or default_planning_state_card
+        self.lookahead_depth = lookahead_depth
+        self.minimum_utility_margin = minimum_utility_margin
+        self.model_id = proposal_provider.model_id
+
+    async def plan(self, job: AutonomousJobInput) -> AutonomousPlannerOutputV1:
+        proposal, _trace = await self.plan_with_trace(job)
+        return proposal
+
+    async def plan_with_trace(
+        self, job: AutonomousJobInput
+    ) -> tuple[AutonomousPlannerOutputV1, ArchitecturePlanTraceV1]:
+        eligible = event_scoped_eligible_actions(
+            job.opportunity.event_kind, job.policy.allowed_actions
+        )
+        baseline = preferred_event_action(
+            job.opportunity.event_kind, job.policy.allowed_actions
+        )
+        state_card = self.state_card_resolver(job)
+        if not _evidence_ready(job):
+            output = _bounded_output(
+                job, AutonomousActionKind.NO_ACTION, "policy-value-evidence-incomplete"
+            )
+            return output, self._trace(
+                eligible=eligible,
+                candidate_values=[],
+                output=output,
+                provider_proposal_used=False,
+            )
+
+        candidate_values = [
+            self.forward_model.predict(
+                state_card=state_card,
+                action=action,
+                evidence_ready=True,
+                lookahead_depth=self.lookahead_depth,
+            )
+            for action in eligible
+        ]
+        by_action = {item.action: item for item in candidate_values}
+        ranked = sorted(
+            candidate_values,
+            key=lambda item: (
+                item.utility,
+                -list(eligible).index(item.action),
+            ),
+            reverse=True,
+        )
+        value_choice = ranked[0].action
+        try:
+            provider = await self.proposal_provider.propose(
+                job=job,
+                state_card=state_card,
+                eligible_actions=eligible,
+                maximum_episode_steps=self.lookahead_depth + 1,
+            )
+            if provider.selected_action not in eligible or any(
+                step.action not in eligible for step in provider.episode_steps
+            ):
+                raise ValueError("planner proposed an action outside the envelope")
+        except LlmIdentityDriftError:
+            raise
+        except (LlmError, ValueError):
+            output = _bounded_output(
+                job, baseline, "policy-value-provider-fallback"
+            )
+            return output, self._trace(
+                eligible=eligible,
+                candidate_values=candidate_values,
+                output=output,
+                provider_proposal_used=False,
+            )
+
+        promotes = (
+            value_choice == provider.selected_action
+            and value_choice != baseline
+            and by_action[value_choice].utility
+            >= by_action[baseline].utility + self.minimum_utility_margin
+        )
+        selected = value_choice if promotes else baseline
+        output = (
+            _proposal_to_output(job, provider, selected)
+            if selected == provider.selected_action
+            else _bounded_output(job, selected, "policy-value-baseline-retained")
+        )
+        return output, self._trace(
+            eligible=eligible,
+            candidate_values=candidate_values,
+            output=output,
+            provider_proposal_used=True,
+        )
+
+    def _trace(
+        self,
+        *,
+        eligible: tuple[AutonomousActionKind, ...],
+        candidate_values: list[ActionValuePredictionV1],
+        output: AutonomousPlannerOutputV1,
+        provider_proposal_used: bool,
+    ) -> ArchitecturePlanTraceV1:
+        return ArchitecturePlanTraceV1(
+            architecture_id=AutonomyArchitectureId.HIERARCHICAL_MODEL_BASED_C,
+            planner_enabled=True,
+            lookahead_depth=self.lookahead_depth,
+            planner_model=self.model_id,
+            provider_proposal_used=provider_proposal_used,
+            verifier_used=False,
+            eligible_actions=list(eligible),
+            candidate_values=candidate_values,
+            selected_action=output.action,
+            reason_code=output.reason_code,
+        )
+
+
 def default_planning_state_card(job: AutonomousJobInput) -> PlanningStateCardV1:
     """Derive a conservative observable state when no calibrated store is bound."""
 
@@ -650,6 +806,7 @@ __all__ = [
     "ArchitecturePlanTraceV1",
     "AutonomyArchitectureId",
     "EpisodeStepProposalV1",
+    "GuardedPolicyValuePlanner",
     "HierarchicalPlanningProposalV1",
     "LlmHierarchicalPlanningProvider",
     "LlmRejectOnlyPlanVerifier",
