@@ -96,6 +96,22 @@ def test_single_case_successor_is_terminal_and_authority_revoked():
     assert simulation["gold_loaded"] is False
 
 
+def test_fold_002_corrective_preserves_science_with_fresh_output_identity():
+    original = runner._run_context("fold-002")
+    corrective = runner._run_context("fold-002-corrective")
+    validation = runner.validate(corrective)
+    simulation = runner.simulate(corrective)
+
+    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
+    assert simulation["maximum_provider_calls"] == 242
+    assert simulation["planner_batch_count"] == 120
+    assert simulation["gold_loaded"] is False
+    assert original.output_root != corrective.output_root
+    assert original.result_path != corrective.result_path
+
+
 def test_preflight_rejects_reused_result_path(tmp_path):
     existing = tmp_path / "existing-result.json"
     existing.write_text("{}\n", encoding="utf-8")

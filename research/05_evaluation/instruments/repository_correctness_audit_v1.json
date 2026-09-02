@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review plus focused verification confirmed the historical fold-001 attempts and the fresh fold-002 single-case build, validation, network-free simulation, preflight, and guarded execution commands remain explicit. Both fold-001 attempts are terminal, fold-002 remains provider-unauthorized, and npm audit remains advisory-free.",
+      "evidence": "Manual command-surface review confirmed explicit validate, simulate, preflight, and guarded execute commands for the terminal fold-002 attempt and its sole fresh harness-only corrective attempt; historical commands remain reproducible and no automatic progression was introduced.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "afb75d2451c04f64961cc22e7233fa9f058919ba09072f41b1f7fb2ca8e2c266"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 runtime-boundary correction audit",
+      "sha256": "99177033249165a21295a6e3c15cf432514ac97be202e746f118b4b45e3aa731"
     },
     {
       "audit_status": "audited",
@@ -10521,23 +10521,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-architecture",
-      "evidence": "Line-by-line authority review plus focused tests confirmed A disables semantic planning, B is depth-zero C, C adds bounded analytic lookahead, C+V is reject-only, and repeated pedagogical actions may appear in a maximum three-step episode without widening the deterministic action envelope.",
+      "evidence": "Line-by-line authority review confirmed A/B/C/C+V semantics remain unchanged. Composed provider diagnostics are now deterministically bounded to the output contract using a retained prefix and SHA-256 suffix, preventing runtime crashes without changing action, authority, evidence, or planning behavior.",
       "findings": [],
       "path": "src/digital_twin/student/planning_architectures.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture SA7 correction audit",
-      "sha256": "614b67144ed4aa8480d5c40b08c687b685bd77ca575df65d6399106db85ddbde"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 runtime-boundary correction audit",
+      "sha256": "be8df11bc5affc29f2c52e26b79a9ed07d48197ff6ff207c8ba35bf8108c5138"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover deterministic zero-call behavior, B/depth-zero-C equivalence, bounded C lookahead, missing evidence, action-envelope enforcement, reject-only verification, identity drift, and bounded repeated-action episode acceptance.",
+      "evidence": "Focused tests retain architecture, authority, identity, evidence, verifier, and repeated-action coverage and now prove a maximum-length provider diagnostic remains a valid deterministic 128-character runtime reason after prefix composition.",
       "findings": [],
       "path": "tests/digital_twin/test_planning_architectures.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture SA7 correction audit",
-      "sha256": "4c50d4b69fc1ecbd9682335626d6c7b5d9ff09ebcb945d9c545a1208abb00f96"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 runtime-boundary correction audit",
+      "sha256": "02dc3ebe3211acc58f2593a701d11a06d55922e3cb62da0f1a524b6c085ec896"
     },
     {
       "audit_status": "audited",
@@ -10598,23 +10598,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review and network-free simulation confirmed immutable historical contexts plus a fresh fold-002 context, one-case exact-ID schemas, bounded concurrency, case-level malformed/provider-failure quarantine into actual no-action graph fallback, fatal identity/budget/ledger drift, completion and fallback gates, late gold opening, atomic publication, and both execution guards.",
+      "evidence": "Line-by-line runner review confirmed immutable historical contexts plus a fresh exclusive corrective context. The corrective attempt reuses the exact fold-002 cases, prompts, model, gold, gates, one-case schemas, bounded concurrency, late gold opening, and execution guards.",
       "findings": [],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture fold-002 audit",
-      "sha256": "02ba3eff4c66eaa92f06eb04d892e103c4fb4b65a12a6963a927a7fbb686240b"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 runtime-boundary correction audit",
+      "sha256": "ab10e6a7d656fb661380f29b969dfaddf7f6ca15b4fc9f498d5cf8235cdb2e8f"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover both fresh byte-stable and source-disjoint folds, gold isolation, all terminal attempts and revoked authority, exact single-case schema identity, case-level safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, checkpoint separation, and provider-completion scoring.",
+      "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal attempts, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the corrective attempt's unchanged scientific inputs plus fresh output identity.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex successor-architecture fold-002 invalid-attempt audit",
-      "sha256": "0650e7fa2303b3b59fd66bef8bb35c43e0298fc17761af6f27211b9285845046"
+      "reviewer": "Codex fold-002 runtime-boundary correction audit",
+      "sha256": "575d731fc9bc85a778bbe92b38def1c38aeb46b2b469d46c6af4de5713741576"
     }
   ],
   "schema_version": 1

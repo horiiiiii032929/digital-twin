@@ -8,6 +8,7 @@ delivery, and persistence remain deterministic authorities outside this module.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 from collections.abc import Callable
@@ -36,6 +37,9 @@ from src.digital_twin.student.autonomy_runtime import AutonomousJobInput
 
 class _Contract(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+
+_REASON_CODE_MAX_LENGTH = 128
 
 
 class AutonomyArchitectureId(StrEnum):
@@ -576,15 +580,16 @@ def _bounded_output(
     action: AutonomousActionKind,
     reason_code: str,
 ) -> AutonomousPlannerOutputV1:
+    bounded_reason_code = _bounded_reason_code(reason_code)
     if action == AutonomousActionKind.NO_ACTION:
         return AutonomousPlannerOutputV1(
             action=action,
-            reason_code=reason_code,
+            reason_code=bounded_reason_code,
             stop_condition="Stop without delivery; wait for a new durable event.",
         )
     return AutonomousPlannerOutputV1(
         action=action,
-        reason_code=reason_code,
+        reason_code=bounded_reason_code,
         expected_learner_action="Respond in the course workspace.",
         required_evidence_keys=list(job.evidence_keys),
         outcome_observation="Observe the next durable learner action.",
@@ -607,7 +612,9 @@ def _proposal_to_output(
     )
     return AutonomousPlannerOutputV1(
         action=selected,
-        reason_code=f"architecture-selected:{provider.reason_code}",
+        reason_code=_bounded_reason_code(
+            f"architecture-selected:{provider.reason_code}"
+        ),
         expected_learner_action=provider.expected_learner_action
         or "Respond in the course workspace.",
         required_evidence_keys=list(job.evidence_keys),
@@ -623,6 +630,18 @@ def _proposal_to_output(
             else provider.replan_condition
         ),
     )
+
+
+def _bounded_reason_code(value: str) -> str:
+    """Keep composed diagnostics valid without silently losing their identity."""
+
+    normalized = value.strip()
+    if len(normalized) <= _REASON_CODE_MAX_LENGTH:
+        return normalized
+    digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:12]
+    suffix = f":sha256-{digest}"
+    prefix = normalized[: _REASON_CODE_MAX_LENGTH - len(suffix)].rstrip(" :-")
+    return f"{prefix}{suffix}"
 
 
 __all__ = [

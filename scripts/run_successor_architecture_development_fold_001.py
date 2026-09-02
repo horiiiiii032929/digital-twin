@@ -92,6 +92,13 @@ def _run_context(attempt: str) -> DevelopmentRunContext:
         instrument_name = (
             "successor_architecture_development_fold_002_single_case_001.json"
         )
+    elif attempt == "fold-002-corrective":
+        instrument_id = (
+            "successor-architecture-development-fold-002-single-case-attempt-002"
+        )
+        instrument_name = (
+            "successor_architecture_development_fold_002_single_case_attempt_002.json"
+        )
     else:
         raise ArchitectureDevelopmentError(f"unknown development attempt: {attempt}")
     output_root = ROOT / f"reports/generated/{instrument_id}"
@@ -1357,7 +1364,9 @@ def main() -> int:
     mode.add_argument("--preflight", action="store_true")
     mode.add_argument("--execute", action="store_true")
     parser.add_argument(
-        "--attempt", choices=("001", "002", "fold-002"), default="001"
+        "--attempt",
+        choices=("001", "002", "fold-002", "fold-002-corrective"),
+        default="001",
     )
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()

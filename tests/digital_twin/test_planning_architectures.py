@@ -40,8 +40,10 @@ class _ProposalProvider:
     def __init__(
         self,
         action: AutonomousActionKind = AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION,
+        reason_code: str = "fixture-plan",
     ) -> None:
         self.action = action
+        self.reason_code = reason_code
         self.calls = 0
         self.maximum_steps: list[int] = []
 
@@ -50,7 +52,7 @@ class _ProposalProvider:
         self.maximum_steps.append(kwargs["maximum_episode_steps"])
         return HierarchicalPlanningProposalV1(
             selected_action=self.action,
-            reason_code="fixture-plan",
+            reason_code=self.reason_code,
             expected_learner_action="Explain one next step.",
             outcome_observation="Observe whether the next step is correct.",
             stop_condition="Stop after one move.",
@@ -286,6 +288,23 @@ async def test_identity_drift_is_never_converted_to_a_quality_decision():
 
     with pytest.raises(LlmIdentityDriftError):
         await planner.plan_with_trace(_job())
+
+
+@pytest.mark.asyncio
+async def test_runtime_prefix_keeps_maximum_length_provider_reason_valid():
+    provider_reason = "r" * 128
+    planner = SwitchableAutonomyPlanner(
+        architecture_id=AutonomyArchitectureId.GOVERNED_SINGLE_PLANNER_B,
+        proposal_provider=_ProposalProvider(reason_code=provider_reason),
+    )
+
+    output, trace = await planner.plan_with_trace(_job())
+
+    assert output.action == AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION
+    assert len(output.reason_code) == 128
+    assert output.reason_code.startswith("architecture-selected:")
+    assert ":sha256-" in output.reason_code
+    assert trace.reason_code == output.reason_code
 
 
 def test_invalid_switch_combinations_fail_at_construction():

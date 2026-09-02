@@ -568,6 +568,11 @@
     "simulate:successor-architecture-development-fold-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002 --simulate",
     "preflight:successor-architecture-development-fold-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002 --preflight",
     "execute:successor-architecture-development-fold-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002 --execute",
-    "verify:successor-architecture-development-fold-002": "uv run pytest tests/test_successor_architecture_development_fold_001.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-development-fold-002 && npm run simulate:successor-architecture-development-fold-002"
+    "verify:successor-architecture-development-fold-002": "uv run pytest tests/test_successor_architecture_development_fold_001.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-development-fold-002 && npm run simulate:successor-architecture-development-fold-002",
+    "validate:successor-architecture-development-fold-002-attempt-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002-corrective --validate",
+    "simulate:successor-architecture-development-fold-002-attempt-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002-corrective --simulate",
+    "preflight:successor-architecture-development-fold-002-attempt-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002-corrective --preflight",
+    "execute:successor-architecture-development-fold-002-attempt-002": "uv run python -m scripts.run_successor_architecture_development_fold_001 --attempt fold-002-corrective --execute",
+    "verify:successor-architecture-development-fold-002-attempt-002": "uv run pytest tests/test_successor_architecture_development_fold_001.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-development-fold-002-attempt-002 && npm run simulate:successor-architecture-development-fold-002-attempt-002"
   }
 }
