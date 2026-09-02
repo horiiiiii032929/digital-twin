@@ -4,11 +4,11 @@ Status: production-like local release candidate; no hosted-production claim
 
 This runbook starts the invite-only Course Digital Twin at
 `https://localhost:8443`. It runs the API, ingestion worker, scheduled-outreach
-worker, and Caddy-served web application in containers. It selects the exact
-network-free-qualified T1-v1 profile and retains T0 as a one-setting rollback.
-This is the safe default. The Compose contract can pass an OpenAI key for a
-future governed V2.1 candidate, but the default deterministic path neither
-requires nor calls a model provider.
+worker, and Caddy-served web application in containers. The committed example
+retains the historical T1-v1 safe default. The qualified private environment
+selects the exact governed V2.1 profile and retains T0 as a one-setting
+rollback. Deterministic fast paths do not call a provider; complex V2.1 turns
+require the locally configured OpenAI credential.
 
 ## One-time setup
 
@@ -36,6 +36,17 @@ APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/autonomous-
 Do not point governed V2.1 at that historical T1-v1 result. Staging fails
 closed unless the governed mode is bound to a separate passing record whose
 selected implementation is `governed-autonomous-tutoring-graph-v2-1`.
+
+For the qualified governed V2.1 local release, set these values in the ignored
+`.env.local-r1` file (and keep the credential itself local):
+
+```text
+APP_GENERATOR_MODE=deterministic
+APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2
+APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
+APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-terra
+APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
+```
 
 ## Build and start
 
@@ -89,7 +100,8 @@ npm run verify:staging-https -- \
   --base-url https://localhost:8443 \
   --ca-file reports/generated/local-r1-caddy-root.crt \
   --admin-email admin@foundation.local \
-  --expected-tutoring-mode bounded-tutoring-graph \
+  --profile-version v2.1-grounding-011 \
+  --expected-tutoring-mode governed-autonomous-tutoring-graph-v2.1 \
   --output reports/generated/local-r1-live-journey.json
 ```
 
@@ -100,7 +112,8 @@ docker compose --env-file .env.local-r1 -f compose.local-r1.yml restart
 npm run verify:staging-https -- \
   --base-url https://localhost:8443 \
   --ca-file reports/generated/local-r1-caddy-root.crt \
-  --resume reports/generated/local-r1-live-journey.json
+  --resume reports/generated/local-r1-live-journey.json \
+  --output reports/generated/local-r1-restart-journey.json
 ```
 
 ## Backup and clean restore
@@ -158,12 +171,12 @@ npm run verify:staging-https -- \
 
 Restore the default T1 selection by running the same `up -d --force-recreate`
 command without the environment override, then rerun `--mode-check` with
-`bounded-tutoring-graph`.
+`governed-autonomous-tutoring-graph-v2.1`.
 
 ## Governed autonomy operating workflow
 
-The V2.1 product implementation is complete for software review but is not
-promoted into this qualified local profile:
+The V2.1 product implementation and exact local profile are qualified for the
+development Mac. The governed workflow is:
 
 1. The professor creates and approves an explicit teaching profile.
 2. A release binds the approved profile and current evidence.
@@ -196,22 +209,10 @@ npm run preflight:governed-autonomy-v2-1-provider-integration
 ```
 
 The preflight performs OpenAI model-metadata checks but makes no inference
-call. The live checkpoint is limited to public synthetic data, 12 calls, zero
-retries, and USD 1. A pass proves provider integration only; it does not
-activate V2.1 or replace #157's full-autonomy evaluation.
-
-To qualify V2.1 later, first produce the dedicated passing result record and
-then set all three values explicitly in the private environment file:
-
-```text
-APP_GENERATOR_MODE=openai-profile-selected
-APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
-APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
-```
-
-At that point `OPENAI_API_KEY` is required locally. Until the dedicated record
-exists, the API must refuse to start in governed V2.1 staging mode. Never bypass
-that guard by reusing a T1-v1 result.
+call. Historical provider-integration limits remain evidence for that earlier
+checkpoint; the selected local profile is instead bound to the passing
+confirmation record above. The API continues to fail closed if the governed
+mode is paired with a missing, failing, or T1-v1-only qualification record.
 
 ## Stop without deleting evidence
 

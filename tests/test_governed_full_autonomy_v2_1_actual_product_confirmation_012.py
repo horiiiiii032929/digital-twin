@@ -45,10 +45,13 @@ def test_confirmation_012_classifies_proactive_cases_by_event_contract() -> None
     )
 
 
-def test_confirmation_012_preflight_reaches_environment_checks_after_activation() -> None:
+def test_confirmation_012_preflight_preserves_instrument_authority_but_honors_revocation() -> None:
     result = runner.preflight()
 
     assert "provider-execution-not-authorized" not in result["blockers"]
     assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    # The immutable instrument preserves its original authorization, while the
+    # repository allowlist is the revocable execution boundary. Confirmation
+    # 012 is terminal and must not become executable again.
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "dd0f2190f78114a2190ac0f0cafd93313f1e4e6401b548790d2849163e30e379",
+  "record_sha256": "24ee57bb8b5c7207edb04b48f85c524577feb0cfb1dffacc4181c01221c683ef",
   "records": [
     {
       "audit": {
@@ -14756,7 +14756,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, environment-only preflight checks, and prefix-independent identification of all 220 proactive cases.",
+        "evidence": "Tests cover source disjointness, immutable 820-case cardinality, hybrid authority binding, terminal repository-freeze revocation, and prefix-independent identification of all 220 proactive cases.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex release-bound autonomy root-cause review"
@@ -14767,7 +14767,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_012.py",
       "risk": "medium",
-      "sha256": "759638345f1a25ff3bf2b6f4a2f339c931075172f42aebec51a171d6366109d8"
+      "sha256": "11559d14b90efb26d0839dce471e8f9e6caa872bdfb1fbaaa38bd879325717c2"
     },
     {
       "audit": {

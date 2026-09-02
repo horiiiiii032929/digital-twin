@@ -27,9 +27,23 @@ failure fallback, restart, transition, termination, and proactive-lineage
 correctness; zero wrong recipient/course/release, consent/timing/frequency
 violations, duplicates, unbounded loops, or model-owned authority mutations.
 Governed T1-v2.1 is therefore selected for the exact local R1 profile with T0
-as immediate rollback. Paid execution authority is being revoked. The next
-checkpoint is Docker/local-HTTPS qualification and complete browser journeys,
-not another model or evaluation loop.
+as immediate rollback. Paid execution authority is revoked.
+
+The follow-up operational qualification
+`local-r1-governed-v2-1-release-qualification-002` is complete as `Keep` on
+revision `b4d25fa`. The exact local images passed the full 25/25 HTTPS journey,
+6/6 restart persistence, 6/6 checksum-verified clean restore, 3/3 T0 rollback,
+and 3/3 V2.1 restoration checks. Desktop and 390px professor/student browser
+checks found no console error, horizontal overflow, or unlabeled control. The
+qualified local demo remains available at `https://localhost:8443`; this is a
+local release claim only, not durable hosting or real-human outcome evidence.
+
+AFQC-143 records the operational selection: keep the hash-bound governed V2.1
+Compose release, retain T0 as the immediate rollback, and close the local
+qualification milestone without starting another implementation or model
+loop. The profile, code revision, image identifiers, backup checksum, root-
+cause corrections, and ignored operational artifact locations are preserved
+in the result record and readable result summary.
 
 ## Cross-engine checkpoint result
 
