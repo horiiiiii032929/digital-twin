@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "run_id": "main-commit-audit-resolution-001",
+  "date": "2026-09-02",
+  "status": "completed-refine",
+  "code_revision": "12658309356a82883232ff3b2be15b6e8514a418",
+  "audit_id": "main-commit-audit-8786375-2bdfea9-001",
+  "audit_path": "docs/research/main-commit-audit-8786375-2bdfea9.md",
+  "scope": "All 24 published A-D findings plus nine independently reproduced product findings discovered while closing the audit.",
+  "verification": {
+    "python_tests": 1623,
+    "frontend_tests": 50,
+    "frontend_lint": "passed",
+    "frontend_production_build": "passed",
+    "changed_python_ruff": "passed",
+    "provider_calls": 0,
+    "paid_cost_usd": 0
+  },
+  "decision": {
+    "outcome": "refine",
+    "selected_release_configuration": "student-tutor-r1-local-candidate-v1 with bounded T1-v1 and deterministic T0 rollback",
+    "revoked_release_evidence": [
+      "governed-full-autonomy-v2-1-confirmation-001",
+      "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001",
+      "local-r1-governed-v2-1-release-qualification-002"
+    ],
+    "rationale": "Runtime defects are corrected prospectively, but the post-hoc reference rewrite, false revision, missing predecessor record, and profile mismatch prevent confirmation 013 and its local qualification from supporting a current V2.1 release selection. Historical artifacts remain unchanged and visible.",
+    "next_step": "Compare the repaired common runtime under preregistered A/B/C autonomy architectures and economical engine allocations on fresh flow-independent evidence."
+  },
+  "findings": [
+    {"id": "A1", "disposition": "fixed", "evidence": "Governed deterministic construction now shares DeterministicActionRouterV2 and has a factory regression test."},
+    {"id": "A2", "disposition": "fixed", "evidence": "Proactive generation now evaluates the approved objective/evidence contract rather than a synthesized instruction."},
+    {"id": "A3", "disposition": "fixed", "evidence": "Configuration fails closed unless the evidence-set generator uses question-targeted-ambiguity-safe-v2."},
+    {"id": "A4", "disposition": "fixed", "evidence": "clarify-request is durably normalized to clarify."},
+    {"id": "A5", "disposition": "fixed", "evidence": "Attempted provider calls are read from the durable model-call ledger; failure fallback no longer reports zero calls."},
+    {"id": "A6", "disposition": "fixed", "evidence": "Operations metrics expose the separate autonomy planner budget snapshot."},
+    {"id": "A7", "disposition": "fixed", "evidence": "Page fallbacks are removed before limiting results and only when a precise region actually contains the fallback."},
+    {"id": "A8", "disposition": "fixed", "evidence": "Canonical-source verification is limited to the deterministic evidence-set generator; live generators use contiguous-quote verification."},
+    {"id": "B1", "disposition": "closed-by-invalidation", "evidence": "The post-hoc Keep remains historical but is revoked as release-selection evidence."},
+    {"id": "B2", "disposition": "closed-by-invalidation", "evidence": "The false execution revision is not repaired in place; the affected correction is revoked as current evidence."},
+    {"id": "B3", "disposition": "closed-by-invalidation", "evidence": "The missing 012 correction chain is disclosed and the dependent 013 selection is not reused."},
+    {"id": "B4", "disposition": "closed-by-invalidation", "evidence": "The mismatched profile-bound release record is superseded; local Compose returns to the hash-bound T1-v1/T0 configuration."},
+    {"id": "B5", "disposition": "fixed-and-prior-evidence-invalidated", "evidence": "Live planner failures now fail closed to no-action, matching the simulation safety contract; affected confirmation evidence is retired."},
+    {"id": "B6", "disposition": "fixed", "evidence": "The E0 implementation again delegates to the historical deterministic generator under its unchanged identity."},
+    {"id": "B7", "disposition": "closed-by-retirement", "evidence": "011/012 cannot authorize prospective selection; the successor uses typed, hash-verified manifests."},
+    {"id": "B8", "disposition": "fixed", "evidence": "The factual adapter applies canonical verification only to deterministic engines."},
+    {"id": "C1", "disposition": "fixed", "evidence": "The runbook names the profile explicitly and states that the historical governed record cannot authorize startup."},
+    {"id": "C2", "disposition": "fixed", "evidence": "Staging qualification now binds planner mode and evidence-gate identity in addition to profile and generator."},
+    {"id": "C3", "disposition": "fixed", "evidence": "Local R1 release-critical mode, gate, profile, planner, and qualification values are literal Compose pins."},
+    {"id": "C4", "disposition": "fixed", "evidence": "The .claude dirty-worktree carve-out was removed from both affected runners."},
+    {"id": "D1", "disposition": "fixed", "evidence": "A real question-targeted gate/evidence-set generator integration test covers the prior abstain path."},
+    {"id": "D2", "disposition": "fixed", "evidence": "A positive governed staging configuration test binds planner, gate, profile, and qualification."},
+    {"id": "D3", "disposition": "fixed", "evidence": "Compose tests require literal safe release pins rather than override expressions."},
+    {"id": "D4", "disposition": "fixed", "evidence": "Provider-failure tests assert the persisted trace records one attempted generation call."},
+    {"id": "I1", "disposition": "fixed", "evidence": "Crash recovery after inbox materialization recognizes the existing delivery and cannot duplicate it."},
+    {"id": "I2", "disposition": "fixed", "evidence": "Plural evidence regions receive a deterministic primary source_chunk_id."},
+    {"id": "I3", "disposition": "fixed", "evidence": "Paused/killed policy wake-ups are excluded before the due-work LIMIT and resume normally."},
+    {"id": "I4", "disposition": "fixed", "evidence": "Independent scoring rejects duplicate or non-contiguous state revisions."},
+    {"id": "I5", "disposition": "fixed", "evidence": "Restart comparison hashes every scoped durable entity, not four representative IDs."},
+    {"id": "I6", "disposition": "fixed", "evidence": "Learning-gap proposal IDs are stable and unknown/stale proposal reviews fail closed."},
+    {"id": "I7", "disposition": "fixed", "evidence": "Autonomous outcome and provider-accounting timestamps use the injected job clock."},
+    {"id": "I8", "disposition": "fixed", "evidence": "Professor course refreshes use a monotonic request sequence so stale responses cannot overwrite the active course."},
+    {"id": "I9", "disposition": "fixed", "evidence": "Professor autonomy history is bounded and learner evidence is fetched through course-batch endpoints instead of N+1 requests."}
+  ],
+  "limitations": [
+    "This closure verifies software and evidence integrity; it does not select a new autonomous architecture.",
+    "The audit report's unverified candidates were never accepted findings and are not silently promoted into this finding count.",
+    "No provider-backed, human, professor-fidelity, usability, or learning-outcome evaluation was performed."
+  ]
+}

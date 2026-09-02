@@ -6,6 +6,27 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Audit correction superseding the governed V2.1 release claim
+
+`main-commit-audit-resolution-001` closes every published finding from the
+8786375..2bdfea9 audit plus nine additional reproduced product defects. Runtime,
+configuration, persistence, evaluation-adapter, and professor-console fixes are
+implemented at `1265830`; 1,623 Python tests and 50 frontend tests pass, together
+with frontend lint and production build.
+
+The audit also established that confirmation 013's post-hoc 30-label rewrite,
+false execution revision, missing predecessor record, and profile mismatch make
+its Keep decision unsuitable as current release-selection evidence. Those
+historical artifacts remain unchanged, but the derived governed V2.1 selection
+and local qualification are revoked prospectively. The active safe local
+configuration is the literal Compose-pinned bounded T1-v1 profile with
+deterministic T0 rollback. V2.1 and its A/B/C successors are unselected pending
+a fresh, flow-independent comparison under issue #184.
+
+The older sections below are retained as chronological evidence. Where they
+describe governed V2.1 as selected or qualified, this audit correction is the
+current decision.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

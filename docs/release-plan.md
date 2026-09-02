@@ -8,6 +8,22 @@ defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
 
+## Current audit-safe release boundary
+
+`main-commit-audit-resolution-001` supersedes the earlier governed V2.1 release
+selection. It closes all published audit findings, repairs the shared runtime,
+and revokes confirmation 013 and its local qualification as current selection
+evidence because of post-hoc gold changes, provenance defects, and a profile
+mismatch. The active local configuration is therefore bounded T1-v1 with
+deterministic T0 rollback.
+
+The next release decision is issue #184: compare architectures A/B/C (plus the
+verifier-only ablation) on one fresh black-box evaluation contract, then compare
+economical planner/generator allocations only for the best two architectures.
+The common fixes are frozen before comparison. No architecture is promoted from
+the audit closure itself, and the historical 011–013 data are not reused for
+selection.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,

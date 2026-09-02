@@ -37,8 +37,9 @@ Do not point governed V2.1 at that historical T1-v1 result. Staging fails
 closed unless the governed mode is bound to a separate passing record whose
 selected implementation is `governed-autonomous-tutoring-graph-v2-1`.
 
-For the qualified governed V2.1 local release, set these values in the ignored
-`.env.local-r1` file (and keep the credential itself local):
+The historical governed V2.1 experiment used the following values. They are
+retained for diagnosis only and must not be treated as a current qualified
+release configuration:
 
 ```text
 APP_GENERATOR_MODE=deterministic
@@ -48,6 +49,12 @@ APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
 APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-terra
 APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json
 ```
+
+That historical qualification record does not bind the evidence gate and its
+release selection was revoked by `main-commit-audit-resolution-001`. Current
+startup therefore rejects this block by design. Keep the committed bounded
+T1-v1/T0 configuration until a fresh architecture comparison selects and binds
+a successor.
 
 ## Build and start
 

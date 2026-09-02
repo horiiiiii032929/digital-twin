@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3a936757933bfe7925801fc7ab4e02ca1d3ce77048818996523b272a03135bb6",
+  "record_sha256": "bb7a67962d8a8c5ed6325dcfed921ee3cf7cb117f46bb8c8a4b34dfa79b0bc23",
   "records": [
     {
       "audit": {
@@ -424,10 +424,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-ux",
-        "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; professor profile/policy, individual-goal cancellation, outcome audit, responsive tabs, and fail-closed status language were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -435,7 +435,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "622dfa55ea035fda79aa598ee8e4de737ed4c79c842b0fadbfffd24e6aac9b75"
+      "sha256": "0a3b526b097be1f3ba9eba3f0663af58a3a44dd434a7b4f2efc4f6a80291a055"
     },
     {
       "audit": {
@@ -904,10 +904,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-ux",
-        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -915,7 +915,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.ts",
       "risk": "high",
-      "sha256": "09adf7791d2ba6fdba76535c883dfa3fe1cd5d2bd1a3193b346407ceb73ddfb5"
+      "sha256": "7febeb7d05e40d23e54d0e2efa7f6655ec85ba00d27371b7a52b54c8e9b0c4e3"
     },
     {
       "audit": {
@@ -1256,10 +1256,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Release-binding review verifies that the local Compose profile can select the qualified V2.1 graph, ambiguity-safe evidence gate, approved profile, exact qualification record, and OpenAI planner while retaining safe V1 deterministic defaults in the committed example.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex V2.1 release-binding root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1267,7 +1267,7 @@
       "package_commands": [],
       "path": "compose.local-r1.yml",
       "risk": "high",
-      "sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
+      "sha256": "185594a54b8ff2d12bf3431931c3bba87225ea45dac75af5b7549d768238034a"
     },
     {
       "audit": {
@@ -1288,10 +1288,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1299,7 +1299,7 @@
       "package_commands": [],
       "path": "compose.staging.yml",
       "risk": "high",
-      "sha256": "700006b93681910b5dfe47119ed878c80966b7fb4593bce0eb3b916abccec716"
+      "sha256": "f505a8b5d0617c6783d92fb7ae13bc1a413c860741d55b77ae33f7385cd1bc5c"
     },
     {
       "audit": {
@@ -5528,10 +5528,10 @@
     {
       "audit": {
         "domain": "active-or-unclassified-tooling",
-        "evidence": "Case-bound precomputed retrieval now keys cluster conversations by course and cluster, preventing cross-course boundary cases from overwriting the answerable course binding; exact five-case regression and focused execution tests pass.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -5542,7 +5542,7 @@
       ],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
-      "sha256": "062a87cdd0d56ea6d16907f2453305480f0f6aff690d47efc322aaf550110f5b"
+      "sha256": "edd41275af5418156e365edabed7d9062cb20309ca50727334fad9881c8327fe"
     },
     {
       "audit": {
@@ -8774,10 +8774,10 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "The scorer now classifies proactive cases from the stable public practice-outcome event contract instead of mutable case-ID prefixes, validates a non-empty denominator, preserves existing hidden gold by hash on analysis resume, and reports its actual open state on failure.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex confirmation-012 root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8791,7 +8791,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "9e584c9a750ce9ae974f580cd006f8f39120668cd95979354392e33ab870b87c"
+      "sha256": "a7b0ec19fd4aaec38fac9585c019913f0585ded4cfea5241386aaeffd0c9ce83"
     },
     {
       "audit": {
@@ -9010,10 +9010,10 @@
     {
       "audit": {
         "domain": "evaluation-tooling",
-        "evidence": "Runner validates immutable package hashes, complete-cluster control sampling, scoped clean-worktree state, exact code binding, exclusive output, atomic ledgers, resume behavior, all preregistered factual/retrieval/paired gates, and zero provider usage.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding-successor root-cause review"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9021,7 +9021,7 @@
       "package_commands": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py",
       "risk": "high",
-      "sha256": "c92b8526f84c61081754486ff9fd3d06a0ec2f55a7b09cd44afbeb5194d05d77"
+      "sha256": "b517dc43e8e0265158928538b2e7393f592f6a003ed31a2fb416f8e2ed3d6955"
     },
     {
       "audit": {
@@ -10084,10 +10084,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Configuration review verifies the ambiguity-safe evidence gate is an explicit unselected mode, preserves the selected release default, and remains unavailable without intentional profile configuration.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10095,7 +10095,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "c40593cf928680a60f270868f770a59da70455ab841d6a9cd361ff6e5fdf55a6"
+      "sha256": "80214d33b53ddcee60e8e381e1019b7775c4b9168aa92182d364872789cb4d20"
     },
     {
       "audit": {
@@ -10116,10 +10116,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10127,7 +10127,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "8d599a79f6ed34f2c4373e4238c9fcf12e97a08bea55ba6f975b86633e0cdeba"
+      "sha256": "8cea9113f63ce8fb4a4c53e4be0683449226f3f28c11b0117297bd1c05a52456"
     },
     {
       "audit": {
@@ -10228,10 +10228,10 @@
     {
       "audit": {
         "domain": "api-security-and-operations",
-        "evidence": "Manual operations review plus readiness regressions verified liveness separation, all durable dependency checks, fail-closed 503 behavior, admin-only metrics, and provider-budget redaction.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10239,15 +10239,15 @@
       "package_commands": [],
       "path": "services/api/app/routers/operations.py",
       "risk": "high",
-      "sha256": "a7fd464775f7a7a7dd29ce80f4e48b06b4e4b7e86d2fabe7e9f4884c1f6fadc1"
+      "sha256": "5eb7160dcdd33b81c70814f0048214b5961d3c47f4e0636ab24cc3146beaa0fb"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10255,7 +10255,7 @@
       "package_commands": [],
       "path": "services/api/app/routers/publication.py",
       "risk": "high",
-      "sha256": "6ebe539f29b23f9c18b5e49c9ebacd43efccbbe4ba78665dba0543163c28b782"
+      "sha256": "35470bab7e48a197d7d73fb10f11cf6d6e22dea434b5d7c7b2b0e97c16c6e98c"
     },
     {
       "audit": {
@@ -10276,10 +10276,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10287,7 +10287,7 @@
       "package_commands": [],
       "path": "services/api/app/schemas.py",
       "risk": "high",
-      "sha256": "91e6c90f4eaecbfa9d1bda107a05ccaef23bb40218117d51638b4cb764d38ae6"
+      "sha256": "9d98ea21b9091f0c57d792308c5ec9afbb4e8b05545dfdf1b1066ea5b72eaee5"
     },
     {
       "audit": {
@@ -10756,10 +10756,10 @@
     {
       "audit": {
         "domain": "active-backend",
-        "evidence": "Cross-engine final-program review verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and fail-closed release decisions.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex cross-engine final-program audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10767,7 +10767,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_independent_scoring.py",
       "risk": "high",
-      "sha256": "b6fc9bbcb6c404b5faddfb8a086bb89901454dbc2ef31e5d136bbfcd7480212f"
+      "sha256": "cc4ff01925aee4b05b18fda0158844e6c3eed39ee2c5c7d017c6da81c801278f"
     },
     {
       "audit": {
@@ -10804,10 +10804,10 @@
     {
       "audit": {
         "domain": "full-autonomy-evaluation-boundary",
-        "evidence": "Manual adapter review plus successor-study integration verified public/internal scope mapping, actual service calls, sanitized learner-evidence hooks, restart equality, no duplicate action collection, citation lineage, fail-closed metrics collection, and no gold access.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10815,7 +10815,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_product_adapter.py",
       "risk": "high",
-      "sha256": "b09d7ac254311b9e2281c37701f1c57419c2b918d90baf017f7ff669b826c05c"
+      "sha256": "fce31a8c3b4e74d125962a2c4c03a3f86e0a562c6a60b4657642ce98b06e6cc7"
     },
     {
       "audit": {
@@ -11492,10 +11492,10 @@
     {
       "audit": {
         "domain": "ambiguity-safe-grounding",
-        "evidence": "Runtime wrapper review verifies public-question and approved-source-only ambiguity detection, fail-closed clarify/abstain recommendations, unchanged base evidence-gate behavior for unique targets, and no hidden-gold dependency.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11503,7 +11503,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/ambiguity_safe_evidence.py",
       "risk": "high",
-      "sha256": "1356687f1f4e563b5086d95c5b7c60b141db5e915d79f9ff8171a992ad9c2798"
+      "sha256": "b512ab26903d8437ec8e2026c95d14b235bd165dd152489b56df1e1071d82ce5"
     },
     {
       "audit": {
@@ -11684,10 +11684,10 @@
     {
       "audit": {
         "domain": "ambiguity-safe-grounding",
-        "evidence": "Reference-uniqueness review verifies deterministic unique, alternate-valid, partial, conflicting, unrelated, ambiguous, and unresolved classification; canonical-equivalent duplicate regions are accepted while decision-changing ambiguity fails closed.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11695,7 +11695,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/reference_uniqueness.py",
       "risk": "high",
-      "sha256": "034a6571f3a11cfe823c90b930930e9c63461182d541c04ed2e53c2dffe97c4d"
+      "sha256": "8ee6c604190b7cfcc1e23a57de7728f59e47be8943bbe07b5c6ee1ceb18f3b6b"
     },
     {
       "audit": {
@@ -12292,10 +12292,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "The trace contract now records the deterministic action-eligibility version without exposing raw reasoning or changing authoritative state ownership.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex event-scoped eligibility audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12303,15 +12303,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_models.py",
       "risk": "high",
-      "sha256": "cef1a764c6dd7bb1f3c83e5ea940e2c1facfd083dfd9c0f105276a54cad0c75f"
+      "sha256": "f678b1a3ea65c3280228ace14ab705fe7a2cdf95c1151b78851acd534b434af3"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Planner inputs and authorization enforce event-scoped action eligibility; provider, parsing, and schema failures now fail closed to no_action, while valid out-of-envelope proposals alone use the deterministic envelope fallback.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex confirmation-013 root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12319,15 +12319,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_runtime.py",
       "risk": "high",
-      "sha256": "3dfac7a5d5db6086440c3a0350d390631bcd6f12b4e6302aa280a98a8d0768c3"
+      "sha256": "e791ea70c5da507589566042d1393cf0fa9bad579e0236e9e9786cb32a62d76d"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12335,7 +12335,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_service.py",
       "risk": "high",
-      "sha256": "5bc508629267b0a66e73d4b77bbfba381a340e6eab3ad274c1778bff62feb153"
+      "sha256": "d43bfbb1387642ed5b9f3bca3f73ef42d4f955f7766df9ef87e9f5d321ddc660"
     },
     {
       "audit": {
@@ -12404,10 +12404,10 @@
     {
       "audit": {
         "domain": "privacy-preserving-course-improvement-loop",
-        "evidence": "Manual contract review and focused tests cover strong-secret HMAC pseudonymization, raw-content exclusion, UTC retention, cross-scope rejection, small-cell suppression, deterministic aggregation, and professor-review-only drafts.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12415,7 +12415,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/learning_gap.py",
       "risk": "high",
-      "sha256": "894af0f01e8baa96857836f91903fa8fc0fe472394e4cfba17f1fdbda994fe60"
+      "sha256": "42b13eee7fc1cd2f38cdd20042b31d37373d235c523b644d0a3e6adb593de3e6"
     },
     {
       "audit": {
@@ -12484,10 +12484,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12495,7 +12495,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "02222e04ef597194f33a3084059fcdac10f19e503599a0c69f4ba9946c743844"
+      "sha256": "f2584a54cdd26c8c669104c98dfcb440092265a7505c477d1f83e528a3bb84b2"
     },
     {
       "audit": {
@@ -12532,10 +12532,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12543,7 +12543,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "92e58c64098a46d66047786ea548772a9e251a97a8d9f05975d6d1de43897d7c"
+      "sha256": "6dc6316c8b94854285f7d4a3a2afc2a34c128dedaa4fba986e61413ebedc1eb7"
     },
     {
       "audit": {
@@ -12564,10 +12564,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12575,7 +12575,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "5af56319d2cac819a36be02e59c01bc61065a3969b05b64b28bdad995131e82f"
+      "sha256": "ba1d96cea89c896f47dca708e096fc958cc0c6361959cf91674b73b57d79e9e2"
     },
     {
       "audit": {
@@ -12644,10 +12644,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12655,7 +12655,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "d599ab60c7ab1fa2327afb784122de91b56701498878f920c0bf8d7d3357944f"
+      "sha256": "4fe21aadedcf5e1a1aad24f94a07ad08a90e63cbc951618fd3b26b496aa51879"
     },
     {
       "audit": {
@@ -12820,10 +12820,10 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests cover complete multi-evidence compilation, fail-closed cardinality, exact atom-version trust, and raw-source fallback.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12831,15 +12831,15 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_generation.py",
       "risk": "medium",
-      "sha256": "32bc6204dbd6109decf2f8c2bdb1e8042c4fdfcc1277c6aa2dc28440799e6319"
+      "sha256": "3ee985834f862f68304a479b6b17881b5e51630f6d405179725582858b5f6c16"
     },
     {
       "audit": {
         "domain": "governed-autonomy-v2-1-verification",
-        "evidence": "Focused tests verify provider-visible action envelopes, valid out-of-envelope replacement, trace lineage, and fail-closed no-action behavior for provider, parse, and schema failures.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex confirmation-013 root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12847,7 +12847,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "271c5d53a612275c4f9891eb6fd21f300666c8c8dd2f08f3a57dc9b27beb4d6e"
+      "sha256": "8825d578c80aad0a105706f24b4a714cf99ce49b17a9844a69ee693fe6b52a6d"
     },
     {
       "audit": {
@@ -12900,10 +12900,10 @@
     {
       "audit": {
         "domain": "privacy-preserving-course-improvement-loop",
-        "evidence": "Focused regressions cover strong-secret requirements, non-retention of raw IDs/content, timestamp normalization, idempotency, cross-scope isolation, expiry, minimum-cohort suppression, deterministic drafts, and duplicate resistance.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -12911,7 +12911,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_learning_gap.py",
       "risk": "medium",
-      "sha256": "ac71b5c5cadb19ed353212b93c8202bebad1d62e5001ebbbf3dbcd5fc1f7f79e"
+      "sha256": "e42152133d8fa8c2e98672d275d20fa957e341c1bb0de0b0f9aa4c8d5f984a94"
     },
     {
       "audit": {
@@ -13156,10 +13156,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify strict source scope, unique/alternate-valid/ambiguous classifications, V2 clarify behavior, V1 preservation, citable-text integrity, and related multi-evidence resolution.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13167,7 +13167,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_semantic_evidence_atoms.py",
       "risk": "medium",
-      "sha256": "fda3fdc482b571d808c428f597321feb6c926a70b9474371756e13faa9bc9fcf"
+      "sha256": "911b939278c6e5ff4b005264906c2079750b846f17ae9f224821fc3ffcb74d5d"
     },
     {
       "audit": {
@@ -14244,10 +14244,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Mutation tests prove self-reported flags and free-form reasons cannot hide ineligible actions, authority hash drift, citation hash drift, or restart mismatch.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex cross-engine evaluation audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14255,7 +14255,7 @@
       "package_commands": [],
       "path": "tests/test_autonomy_independent_scoring.py",
       "risk": "medium",
-      "sha256": "e8fe4ebfc795638a3dca2468f1c08b8f1fdcb1feee05bbe34cce02b15c791dfc"
+      "sha256": "82e5789aaeabfd057480f26b71908d73a0a68767f446450c3252d87165e6d7cd"
     },
     {
       "audit": {
@@ -15188,10 +15188,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Exact cross-course cluster regression executes four answerable and one boundary case without retrieval binding aliasing or operational failure.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex grounding root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15199,7 +15199,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
       "risk": "medium",
-      "sha256": "7185c938d22ca701dad478652d5bedea7ff2413bdcc30101b3f0fd7fa167c061"
+      "sha256": "cffb80a3cca2a8bd9230ec925fc84224708b9274181a6a01091a85000376819a"
     },
     {
       "audit": {
@@ -15316,10 +15316,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused Compose tests verify safe committed defaults plus explicit V2.1 release overrides, qualified profile and record mounts, local-only HTTPS exposure, least-privileged restart-safe services, and durable host-mounted backup procedure.",
+        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex V2.1 release-binding root-cause audit"
+        "reviewer": "Codex audit-closure cross-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15327,7 +15327,7 @@
       "package_commands": [],
       "path": "tests/test_local_r1_compose.py",
       "risk": "medium",
-      "sha256": "be9498eed1abae2884397051dc8d2736d2546d08998bd9b4335dda42ab60a184"
+      "sha256": "21b21eb8f2796378198d748a8d97f3008effa2e71c58f032f518bdd48027c832"
     },
     {
       "audit": {
