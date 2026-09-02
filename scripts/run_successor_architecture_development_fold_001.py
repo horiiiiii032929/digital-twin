@@ -45,6 +45,7 @@ from src.digital_twin.student.autonomy_runtime import (
     AutonomousJobInput,
     GovernedAutonomousTutoringGraph,
 )
+from src.digital_twin.student.migrations import apply_migrations
 from src.digital_twin.student.planning_architectures import (
     AutonomyArchitectureId,
     HierarchicalPlanningProposalV1,
@@ -64,6 +65,31 @@ ALL_ACTIONS = [
 
 class ArchitectureDevelopmentError(RuntimeError):
     """A binding, transport, or execution invariant failed."""
+
+
+def _initialize_graph_database(path: Path) -> None:
+    """Create an isolated graph database through the product migration path."""
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with sqlite3.connect(path) as connection:
+        apply_migrations(connection)
+        required_tables = {
+            "autonomous_model_calls_v2",
+            "autonomous_opportunities",
+            "schema_migrations",
+        }
+        observed_tables = {
+            str(row[0])
+            for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            ).fetchall()
+        }
+    missing = sorted(required_tables - observed_tables)
+    if missing:
+        raise ArchitectureDevelopmentError(
+            "isolated graph database is missing product migrations: "
+            + ", ".join(missing)
+        )
 
 
 @dataclass(frozen=True)
@@ -98,6 +124,11 @@ def _run_context(attempt: str) -> DevelopmentRunContext:
         )
         instrument_name = (
             "successor_architecture_development_fold_002_single_case_attempt_002.json"
+        )
+    elif attempt == "fold-003":
+        instrument_id = "successor-architecture-development-fold-003-single-case-001"
+        instrument_name = (
+            "successor_architecture_development_fold_003_single_case_001.json"
         )
     else:
         raise ArchitectureDevelopmentError(f"unknown development attempt: {attempt}")
@@ -905,6 +936,7 @@ async def _run_graphs(
     response_ledger: _ResponseLedger,
     graph_ledger: Path,
 ) -> None:
+    _initialize_graph_database(graph_ledger)
     proposal_provider = _ProposalMap(proposals)
     verifier_provider = _VerifierMap(verifications)
     for architecture in AutonomyArchitectureId:
@@ -1365,7 +1397,7 @@ def main() -> int:
     mode.add_argument("--execute", action="store_true")
     parser.add_argument(
         "--attempt",
-        choices=("001", "002", "fold-002", "fold-002-corrective"),
+        choices=("001", "002", "fold-002", "fold-002-corrective", "fold-003"),
         default="001",
     )
     parser.add_argument("--resume", action="store_true")

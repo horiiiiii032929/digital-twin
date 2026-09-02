@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review confirmed explicit validate, simulate, preflight, and guarded execute commands for the terminal fold-002 attempt and its sole fresh harness-only corrective attempt; historical commands remain reproducible and no automatic progression was introduced.",
+      "evidence": "Manual command-surface review confirmed explicit build, validate, simulate, preflight, and guarded execute commands for fresh fold 003. Historical fold commands remain reproducible, terminal attempts remain blocked, and no automatic progression was introduced.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 runtime-boundary correction audit",
-      "sha256": "99177033249165a21295a6e3c15cf432514ac97be202e746f118b4b45e3aa731"
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "5d73bc72825e3e88666ea09646d13ee8fbe77484a4f6b7f19ee1344085d42a27"
     },
     {
       "audit_status": "audited",
@@ -10587,34 +10587,34 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Manual builder review and byte-stability tests confirmed two source-disjoint 150-case folds, each with 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in either public package. The historical fold-001 bytes remain unchanged.",
+      "evidence": "Manual builder review and byte-stability tests confirmed three source-disjoint 150-case folds, each with 120 action-choice and 30 authority-boundary cases, deterministic latent outcomes, independent continuous action utilities, exact case identity, and no hidden gold in any public package. Historical fold bytes remain unchanged.",
       "findings": [],
       "path": "scripts/build_successor_architecture_development_fold_001.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-architecture fold-002 audit",
-      "sha256": "3799f62da9c3850e5384633c3c190b1316bf548eb52f0fab883229df140bad98"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review confirmed immutable historical contexts plus a fresh exclusive corrective context. The corrective attempt reuses the exact fold-002 cases, prompts, model, gold, gates, one-case schemas, bounded concurrency, late gold opening, and execution guards.",
+      "evidence": "Line-by-line runner review confirmed immutable historical contexts plus fresh fold 003. Every isolated graph database now runs the production migration chain and verifies the model-call ledger before actual graph execution; one-case schemas, bounded concurrency, late gold opening, and execution guards remain intact.",
       "findings": [],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 runtime-boundary correction audit",
-      "sha256": "ab10e6a7d656fb661380f29b969dfaddf7f6ca15b4fc9f498d5cf8235cdb2e8f"
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "a84ca4c28d29da2bbffd9b62e812fe1ef44179f80fcbba89eff2b85e97bb436e"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests cover fresh byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and the corrective attempt's terminal authority revocation.",
+      "evidence": "Focused tests cover three byte-stable/source-disjoint folds, gold isolation, terminal predecessors, exact schemas, safe fallback, fatal identity drift, repeated-action alignment, result exclusivity, and an actual provider-backed graph crossing the production-migrated isolated database boundary.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex fold-002 terminal-result audit",
-      "sha256": "cc668c405d37417a0cc271ec132903121ec4879b78bf47bb2372bc6170667c4c"
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "9a8e0f18a2be6d4d1b398dde318076eef27d0723ef56354d56980bceb449e544"
     },
     {
       "audit_status": "audited",
@@ -10626,6 +10626,17 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex fold-002 terminal-result audit",
       "sha256": "3d4c5ae5d66bea1e9beb211596ed6a7319507158dc443fc03c070691e27622f8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Prospective review confirms fresh fold 003 binds 150 source-disjoint synthetic cases and 600 paired actual-graph cells, requires production migrations for the isolated database, uses exact single-case Luna contracts, keeps hidden gold closed until all responses persist, and leaves provider and paid execution unauthorized.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_003_single_case_001.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-003 database-lifecycle audit",
+      "sha256": "0bf6dd0fc025a6a8c5e05b63e6dde98cce191e82a2e931bf2248671d59b88bf2"
     }
   ],
   "schema_version": 1

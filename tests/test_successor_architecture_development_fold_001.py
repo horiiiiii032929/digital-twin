@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from dataclasses import replace
 
 import pytest
@@ -6,7 +7,12 @@ import pytest
 from scripts import build_successor_architecture_development_fold_001 as builder
 from scripts import run_successor_architecture_development_fold_001 as runner
 from src.digital_twin.evaluation.provider_json import ProviderJsonError
-from src.digital_twin.student.planning_architectures import AutonomyArchitectureId
+from src.digital_twin.student.autonomy_models import AutonomousActionKind
+from src.digital_twin.student.planning_architectures import (
+    AutonomyArchitectureId,
+    HierarchicalPlanningProposalV1,
+    PlannerVerificationV1,
+)
 
 
 def test_development_fold_is_fresh_balanced_and_gold_isolated():
@@ -54,6 +60,33 @@ def test_second_fold_is_fresh_disjoint_and_byte_stable():
     assert second_public["content_sha256"] != first_public["content_sha256"]
     assert second_gold["content_sha256"] != first_gold["content_sha256"]
     assert builder.validate(fold_number=2)["status"] == "passed"
+
+
+def test_third_fold_is_fresh_disjoint_and_byte_stable():
+    first_public, _first_gold = builder.build_packages(fold_number=1)
+    second_public, _second_gold = builder.build_packages(fold_number=2)
+    third_public, third_gold = builder.build_packages(fold_number=3)
+
+    assert third_public == builder.build_packages(fold_number=3)[0]
+    assert third_gold == builder.build_packages(fold_number=3)[1]
+    prior_ids = {
+        row["case_id"]
+        for package in (first_public, second_public)
+        for row in package["rows"]
+    }
+    third_ids = {row["case_id"] for row in third_public["rows"]}
+    prior_concepts = {
+        row["state_card"]["concept_id"]
+        for package in (first_public, second_public)
+        for row in package["rows"]
+    }
+    third_concepts = {
+        row["state_card"]["concept_id"] for row in third_public["rows"]
+    }
+
+    assert not prior_ids & third_ids
+    assert not prior_concepts & third_concepts
+    assert builder.validate(fold_number=3)["status"] == "passed"
 
 
 def test_live_instrument_and_network_free_simulation_are_bounded():
@@ -246,6 +279,60 @@ def test_checkpoint_namespace_is_separate_without_changing_case_identity():
     assert a.opportunity.opportunity_id != c.opportunity.opportunity_id
     assert runner._case_id_from_opportunity(a.opportunity.opportunity_id) == row["case_id"]
     assert runner._case_id_from_opportunity(c.opportunity.opportunity_id) == row["case_id"]
+
+
+@pytest.mark.asyncio
+async def test_isolated_graph_database_uses_product_migrations_before_provider_graph(
+    tmp_path,
+):
+    public, _gold = builder.build_packages(fold_number=2)
+    row = next(item for item in public["rows"] if item["guard"] == "eligible")
+    case_id = row["case_id"]
+    proposal = HierarchicalPlanningProposalV1(
+        selected_action=AutonomousActionKind.ASK_DIAGNOSTIC_QUESTION,
+        reason_code="migration-regression",
+        expected_learner_action="Explain the current reasoning.",
+        outcome_observation="Observe the learner explanation.",
+        stop_condition="Stop after one bounded response.",
+        replan_condition="Replan after a durable learner reply.",
+        episode_steps=[],
+    )
+    ledger = runner._ResponseLedger(
+        tmp_path / "responses.sqlite3",
+        binding={"test": "product-migration"},
+        resume=False,
+    )
+    graph_database = tmp_path / "graph.sqlite3"
+    try:
+        await runner._run_graphs(
+            public_rows=[row],
+            proposals={case_id: proposal},
+            verifications={case_id: PlannerVerificationV1(
+                accept=True,
+                reason_code="accepted",
+            )},
+            response_ledger=ledger,
+            graph_ledger=graph_database,
+        )
+        assert len(ledger.rows()) == len(AutonomyArchitectureId)
+    finally:
+        ledger.close()
+
+    with sqlite3.connect(graph_database) as connection:
+        tables = {
+            str(item[0])
+            for item in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type = 'table'"
+            ).fetchall()
+        }
+        completed_model_calls = connection.execute(
+            "SELECT COUNT(*) FROM autonomous_model_calls_v2 "
+            "WHERE status = 'completed'"
+        ).fetchone()[0]
+
+    assert "schema_migrations" in tables
+    assert "autonomous_model_calls_v2" in tables
+    assert completed_model_calls >= 1
 
 
 def test_scoring_keeps_shared_state_diagnostic_outside_selection():

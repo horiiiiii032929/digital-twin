@@ -116,7 +116,7 @@ def _choice_rows(
         AutonomousEventKind.REPEATED_CONFUSION,
         AutonomousEventKind.PRACTICE_INCOMPLETE,
     )
-    shift = 0 if fold_number == 1 else 7
+    shift = 7 * (fold_number - 1)
     for event_index, event_kind in enumerate(events):
         for index in range(30):
             case_id = f"fold-{fold_number:03d}-{event_kind.value}-{index + 1:03d}"
@@ -201,7 +201,7 @@ def _boundary_rows(
         "frequency-or-cooldown",
         "evidence-incomplete",
     )
-    shift = 0 if fold_number == 1 else 2
+    shift = 2 * (fold_number - 1)
     for guard_index, guard in enumerate(guards):
         for index in range(5):
             case_id = (
@@ -268,8 +268,10 @@ def _boundary_rows(
 def build_packages(
     *, fold_number: int = 1
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    if fold_number not in {1, 2}:
-        raise ValueError("only preregistered development folds 001 and 002 are supported")
+    if fold_number not in {1, 2, 3}:
+        raise ValueError(
+            "only preregistered development folds 001, 002, and 003 are supported"
+        )
     choice_public, choice_gold = _choice_rows(fold_number=fold_number)
     boundary_public, boundary_gold = _boundary_rows(fold_number=fold_number)
     public_rows = choice_public + boundary_public
@@ -331,17 +333,13 @@ def validate(*, fold_number: int = 1) -> dict[str, Any]:
 
 def write(*, fold_number: int = 1) -> dict[str, Any]:
     public, gold = build_packages(fold_number=fold_number)
-    public_path = (
-        PUBLIC_PATH
-        if fold_number == 1
-        else ROOT
-        / "research/05_evaluation/successor_architecture_development_fold_002_public.json"
+    public_path = ROOT / (
+        "research/05_evaluation/"
+        f"successor_architecture_development_fold_{fold_number:03d}_public.json"
     )
-    gold_path = (
-        GOLD_PATH
-        if fold_number == 1
-        else ROOT
-        / "research/05_evaluation/successor_architecture_development_fold_002_gold.json"
+    gold_path = ROOT / (
+        "research/05_evaluation/"
+        f"successor_architecture_development_fold_{fold_number:03d}_gold.json"
     )
     public_path.write_text(json.dumps(public, indent=2, sort_keys=True) + "\n")
     gold_path.write_text(json.dumps(gold, indent=2, sort_keys=True) + "\n")
@@ -351,7 +349,7 @@ def write(*, fold_number: int = 1) -> dict[str, Any]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
-    parser.add_argument("--fold", choices=(1, 2), type=int, default=1)
+    parser.add_argument("--fold", choices=(1, 2, 3), type=int, default=1)
     args = parser.parse_args()
     print(
         json.dumps(
