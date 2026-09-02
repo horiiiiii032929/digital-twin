@@ -205,21 +205,20 @@ architecture. Fold 004 authority is revoked and no confirmation or
 engine-comparison authority is implied. All earlier 40 findings and SA8–SA10
 remain terminally closed; there are no open audit findings.
 
-The source-disjoint successor `successor-architecture-confirmation-005-001`
-is build-qualified and frozen for one bounded execution. It freezes 1,000 unique
-synthetic scenario clusters (800 eligible and 200 deterministic authority
-boundaries) and 2,000 paired A/H actual-graph cells. Hidden gold remains in a
-separate hash-bound package until every response is durable. The fixed Luna
-planner permits one canary and at most 800 single-case proposals, zero retries,
-atomic resume, and a USD 5 emergency stop. H is selected only if the positive
-paired utility improvement replicates while every authority, safety, citation,
-scope, fallback, and durability gate holds; otherwise safe deterministic A is
-selected when all hard gates pass. No engine or release selection is implied
-by build evidence. The complete build gate passed 1,672 Python and 50 frontend
-tests, frontend lint and production build, 975/975 repository audits, and
-149/149 freeze coverage. Only this confirmation is authorized for at most 801
-direct Luna calls, zero retries, and USD 5; engine comparison and release
-promotion remain unauthorized.
+The fresh scenario-disjoint successor
+`successor-architecture-confirmation-005-001` completed as `Keep`. All 2,000
+paired A/H actual-graph cells were durable before hidden gold opened and every
+authority, safety, citation, scope, fallback, duplicate, and durability gate
+passed. H improved mean utility over A by `0.004805` (paired 95% CI
+`0.003065–0.006760`), reduced mean regret from `0.01288` to `0.00807`, and
+improved the near-optimal rate from 91.0% to 94.2%. Its preferred-action rate
+was one point below A (paired 95% CI −2.2 to +0.1 points), within the frozen
+−5-point non-inferiority margin. Provider completion was exactly 99.5%:
+797/801 Luna calls completed, four were quarantined without retry, and every
+affected H case safely fell back to A. Total cost was USD 0.335790. H is now
+the selected architecture for the separate cross-engine comparison; it is not
+yet the release system. Confirmation authority is revoked. All audit findings
+remain terminally closed with none open.
 
 ## Local R1 autonomy release selection
 

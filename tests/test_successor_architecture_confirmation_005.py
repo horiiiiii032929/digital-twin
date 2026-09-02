@@ -21,19 +21,19 @@ def test_confirmation_is_fresh_byte_stable_and_gold_isolated():
     assert "action_utilities" not in serialized
 
 
-def test_confirmation_runner_is_bounded_and_frozen_for_one_execution():
+def test_confirmation_runner_is_terminal_and_authorization_is_revoked():
     validation = runner.validate()
     simulation = runner.simulate()
     preflight = runner.preflight(resume=False)
 
-    assert validation["instrument_status"] == "frozen-pending-execution"
-    assert validation["provider_execution_authorized"] is True
-    assert validation["paid_execution_authorized"] is True
+    assert validation["instrument_status"] == "completed-keep-authorization-revoked"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
     assert simulation["maximum_provider_calls"] == 801
     assert simulation["condition_cell_count"] == 2000
     assert simulation["gold_loaded"] is False
-    assert "provider-execution-not-authorized" not in preflight["blockers"]
-    assert "paid-execution-not-authorized" not in preflight["blockers"]
+    assert "provider-execution-not-authorized" in preflight["blockers"]
+    assert "paid-execution-not-authorized" in preflight["blockers"]
 
 
 def test_confirmation_selects_control_when_incremental_benefit_is_absent():

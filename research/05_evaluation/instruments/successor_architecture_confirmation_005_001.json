@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "successor-architecture-confirmation-005-001",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-keep-authorization-revoked",
   "owner_issue": 184,
   "predecessor": {
     "development_result": "research/05_evaluation/records/successor-architecture-policy-value-fold-004-001.json",
@@ -61,8 +61,8 @@
     "maximum_output_tokens": 128000
   },
   "execution": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "automatic_progression_authorized": false,
     "maximum_provider_calls": 801,
     "maximum_transport_retries": 0,
@@ -74,7 +74,9 @@
     "quarantine_individual_model_failures": true,
     "resume_allowed": true,
     "exclusive_output": true,
-    "hidden_gold_opened": false
+    "hidden_gold_opened": true,
+    "authorization_revoked_after_execution": true,
+    "terminal_result": "research/05_evaluation/records/successor-architecture-confirmation-005-001.json"
   },
   "analysis": {
     "paired_continuous_interval": "seeded-paired-bootstrap-5000",

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "c876d962c4fed46f94f6e6d788b41d278f5579c6c1548ebdea938db14201340e",
+  "record_sha256": "72135c8d8b548c6939df3411b9c5f0e5274986c2d3effbd712b283325a3124be",
   "records": [
     {
       "audit": {
@@ -5160,7 +5160,7 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Instrument review confirmed immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, a fixed Luna engine, a one-canary plus 800-call ceiling, zero retries, atomic resume, a USD 5 stop, prospective selection gates, and one bounded paid authorization without automatic progression.",
+        "evidence": "Instrument review confirms immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, the completed fixed-Luna execution, hidden-gold opening only after durable cells, and terminal authorization revocation without automatic progression.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex architecture-confirmation audit"
@@ -5171,7 +5171,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_confirmation_005_001.json",
       "risk": "high",
-      "sha256": "94456530047b2d820a2a98a00b458c4a35b3b6bdf2b48182d76c177a181e6e38"
+      "sha256": "b9696af77e3d5d09d5172edbc006c1dac78c862f85643a4ddaa0b75f91fe2710"
     },
     {
       "audit": {
@@ -12527,7 +12527,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active; every fold-001 through fold-004 execution is terminal with authority revoked, and only the fresh 1,000-case confirmation is allowlisted for external-model and method execution. No engine-comparison or release authority is present.",
+        "evidence": "The global freeze remains active; every fold-001 through fold-004 and confirmation-005 execution is terminal with authority revoked. No engine-comparison or release authority is present.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -12538,7 +12538,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "16cd8a6b0c7246b04958bb1867f8df1a56c4091b0e16bfeb4f84b93d1e601331"
+      "sha256": "936b12f7b1df21aa4e469dc41e38172875d60bdb56ea79af2920f3d8d555c222"
     },
     {
       "audit": {
@@ -13375,7 +13375,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, prove terminal fold-001 through fold-004 runs remain blocked, and bind only confirmation 005 to external-model and method execution.",
+        "evidence": "Tests enumerate every exact bounded authorization and prove terminal fold-001 through fold-004 and confirmation-005 runs remain blocked after one-time authority is revoked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -13386,7 +13386,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "713488574c1f345eaa0ba4ae6f46a23693b5f82a4c9cde987d7ffd890129c7f4"
+      "sha256": "21599349afe08d0322826d6f4f253f8db4ce15a448195884678a6257b92a78a3"
     },
     {
       "audit": {
@@ -16143,7 +16143,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, exact frozen provider authority, and deterministic A selection when H has no incremental benefit.",
+        "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, terminal provider-authority revocation, and deterministic A selection when H has no incremental benefit.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex architecture-confirmation audit"
@@ -16154,7 +16154,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_confirmation_005.py",
       "risk": "medium",
-      "sha256": "25783da23d3ca07df5d89fa426fa7e437022a9d1f6356ca1963f8d78975d52e4"
+      "sha256": "e50f79fab117a64ed684d93231fdbb22315e4ac108d327d8cefcd948bf3eee37"
     },
     {
       "audit": {

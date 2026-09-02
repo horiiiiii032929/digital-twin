@@ -1,0 +1,114 @@
+{
+  "aggregate": {
+    "deterministic-workflow-a": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 1000,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.012874999999999998,
+      "mean_policy_utility": 0.79537,
+      "near_optimal_within_0_05": 0.91,
+      "p95_policy_regret": 0.12,
+      "preferred_action_agreement": 0.74,
+      "proactive_precision": 0.675,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "guarded-policy-value-planner-v2": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 1000,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.00807,
+      "mean_policy_utility": 0.800175,
+      "near_optimal_within_0_05": 0.942,
+      "p95_policy_regret": 0.06499999999999995,
+      "preferred_action_agreement": 0.73,
+      "proactive_precision": 0.6625,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    }
+  },
+  "case_count": 1000,
+  "code_revision": "01ff697189ac3c7fa4e2d2ad47f224e69d462941",
+  "condition_cell_count": 2000,
+  "decision": {
+    "candidate_confirmed": true,
+    "outcome": "keep",
+    "rationale": "Select guarded policy-value H for cross-engine evaluation because its positive paired utility improvement replicated while every hard gate held.",
+    "selected_architecture_id": "guarded-policy-value-planner-v2"
+  },
+  "dirty_state": false,
+  "hard_gates": {
+    "all_2000_cells_durable": true,
+    "boundary_action_accuracy_is_1": true,
+    "citation_validity_is_1": true,
+    "event_scoped_action_validity_is_1": true,
+    "fallback_is_safe_and_deterministic": true,
+    "provider_completion_at_least_0_995": true,
+    "scope_validity_is_1": true,
+    "zero_duplicate_cells": true
+  },
+  "hidden_gold_sha256": "1dbab3a0848372b96602b3d45fb1a3cb8f2254c00781f41c58537916b7eb29fa",
+  "instrument_sha256": "94456530047b2d820a2a98a00b458c4a35b3b6bdf2b48182d76c177a181e6e38",
+  "limitations": [
+    "Synthetic policy-oracle cases do not establish real learning improvement.",
+    "Preferred-action agreement is diagnostic; the deterministic event/action envelope is authoritative.",
+    "Architecture is confirmed under one fixed planner engine; engine allocation is evaluated separately.",
+    "Luna has no dated snapshot; exact returned identity is required throughout execution."
+  ],
+  "paired_comparisons": {
+    "guarded-policy-value-h-vs-deterministic-a": {
+      "preferred_action_difference": {
+        "ci95": [
+          -0.022,
+          0.001
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.01,
+        "n_pairs": 1000
+      },
+      "utility_difference": {
+        "ci95": [
+          0.0030649999999999987,
+          0.006759999999999998
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.004804999999999998,
+        "n_pairs": 1000
+      }
+    }
+  },
+  "provider": {
+    "failed_calls": 4,
+    "input_tokens": 418182,
+    "maximum_calls": "801",
+    "maximum_cost_usd": "5.0",
+    "maximum_latency_ms": 30090.883625030983,
+    "maximum_transport_retries_total": "0",
+    "output_tokens": 210128,
+    "provider_attempts": 801,
+    "provider_calls": 801,
+    "recovered_transport_failures": 0,
+    "reported_cost_usd": 0.33579,
+    "run_binding_sha256": "b14caf9f4a54ef921eda52b5911ae18a8ca610e850ca47b090760378c4748977",
+    "schema_version": "1",
+    "status": "completed"
+  },
+  "provider_quality": {
+    "fallback_safe_and_deterministic_rate": 1.0,
+    "planner_case_count": 800,
+    "planner_failure_case_ids": [
+      "confirmation-005-misconception-0061",
+      "confirmation-005-practice-incomplete-0092",
+      "confirmation-005-practice-incomplete-0147",
+      "confirmation-005-repeated-confusion-0066"
+    ],
+    "provider_completion_rate": 0.995
+  },
+  "public_sha256": "1fd97aa5d9810823cfa3d5bff6ef54852ee7cf8fe3a59b682c4f59f263b58c9f",
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-confirmation-005-001",
+  "schema_version": 1,
+  "status": "completed-keep"
+}
