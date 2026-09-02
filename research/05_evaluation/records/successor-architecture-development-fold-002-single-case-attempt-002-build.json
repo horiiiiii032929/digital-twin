@@ -1,0 +1,40 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-002-single-case-attempt-002-build",
+  "code_revision": "c2fbdb8",
+  "status": "passed-build-only",
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The demonstrated reason-code composition defect is fixed at the shared runtime boundary and the sole corrective attempt preserves every scientific input while using fresh exclusive outputs. The complete repository gate passes, so one finite execution may be authorized separately."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-002-single-case-attempt-002",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "correction": {
+    "classification": "runtime-output-boundary-harness-defect",
+    "implementation": "Bound composed reason codes to 128 characters with a deterministic SHA-256 suffix.",
+    "method_changed": false,
+    "prompts_changed": false,
+    "cases_or_gold_changed": false,
+    "engine_changed": false,
+    "gates_changed": false
+  },
+  "verification": {
+    "focused_tests_passed": 38,
+    "python_tests_passed": 1658,
+    "frontend_tests_passed": 50,
+    "frontend_lint": "passed",
+    "frontend_production_build": "passed",
+    "repository_correctness_inventory": "966/966 audited; zero pending or open findings",
+    "execution_freeze": "147/147 protected entrypoints; passed",
+    "git_diff_check": "passed",
+    "provider_calls": 0,
+    "cost_usd": 0
+  },
+  "next_step": "Publish and freeze a separate one-time authorization for the sole corrective execution."
+}

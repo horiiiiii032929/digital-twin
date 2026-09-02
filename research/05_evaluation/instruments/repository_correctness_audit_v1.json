@@ -10615,6 +10615,17 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex fold-002 runtime-boundary correction audit",
       "sha256": "575d731fc9bc85a778bbe92b38def1c38aeb46b2b469d46c6af4de5713741576"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "autonomy-architecture-evaluation",
+      "evidence": "Prospective audit confirms this is the sole fresh harness-only corrective attempt: public cases, hidden gold, prompts, Luna engine, quality dimensions, hard gates, 242-call ceiling, USD 2 stop, and zero-retry policy are unchanged; only composed reason-code bounding and exclusive output identity differ. Provider and paid authority remain false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_attempt_002.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fold-002 corrective-instrument audit",
+      "sha256": "7658351eed5da40e9ebb1d36bafe0cb0bacbf1be689970fbd12e8fa378bd3088"
     }
   ],
   "schema_version": 1

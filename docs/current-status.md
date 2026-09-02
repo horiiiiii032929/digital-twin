@@ -128,6 +128,16 @@ Hidden gold remained unopened. Authority is revoked; one fresh harness-only
 correction may bound the composed diagnostic without changing the scientific
 inputs or method.
 
+That sole correction is now build-qualified at revision `c2fbdb8` as
+`successor-architecture-development-fold-002-single-case-attempt-002`.
+Composed reasons retain a readable prefix and deterministic hash within the
+runtime's 128-character contract. The same 150 cases, 600 paired cells, Luna
+engine, prompts, gold, gates, call/cost limits, and zero-retry policy are
+preserved under fresh exclusive outputs. The complete gate passed 1,658 Python
+tests, 50 frontend tests, lint/build, 147/147 freeze coverage, and 966/966
+repository audits. Provider and paid authority remain false until the separate
+execution checkpoint.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed
