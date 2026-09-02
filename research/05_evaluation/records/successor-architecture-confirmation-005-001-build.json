@@ -1,0 +1,55 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-confirmation-005-001-build",
+  "status": "completed-go-deeper",
+  "code_revision": "b2dced6",
+  "dirty_state": true,
+  "dataset": {
+    "dataset_id": "successor-architecture-confirmation-005",
+    "case_count": 1000,
+    "eligible_case_count": 800,
+    "boundary_case_count": 200,
+    "scenario_cluster_count": 1000,
+    "public_content_sha256": "dd1e0b1f8f50cf2eaceae54c7e4a3debcb77ba94ea409ff20f2ac173eb436a03",
+    "hidden_gold_content_sha256": "dd0d72b9a2dfe7cdbbd0aa707e28ee04277ffb64defbfdf0bde424c2ac5dddaf",
+    "historical_case_ids_disjoint": true,
+    "gold_isolated": true
+  },
+  "conditions": [
+    "deterministic-workflow-a",
+    "guarded-policy-value-planner-v2"
+  ],
+  "verification": {
+    "focused_tests_passed": 20,
+    "python_tests_passed": 1672,
+    "frontend_tests_passed": 50,
+    "frontend_lint_passed": true,
+    "frontend_production_build_passed": true,
+    "repository_audit_complete": "975/975",
+    "execution_freeze_complete": "149/149",
+    "condition_cell_count": 2000,
+    "network_free_simulation_passed": true,
+    "execution_freeze_passed": true,
+    "provider_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "execution_bounds": {
+    "maximum_provider_calls": 801,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 5.0,
+    "resume_allowed": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The fresh A-versus-H confirmation is reproducibly built and network-free qualified. No architecture is selected from build evidence."
+  },
+  "limitations": [
+    "No provider-backed confirmation has executed.",
+    "Synthetic policy-oracle outcomes do not establish real learning improvement.",
+    "Engine allocation remains fixed and is evaluated only after architecture confirmation."
+  ]
+}

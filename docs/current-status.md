@@ -205,6 +205,20 @@ architecture. Fold 004 authority is revoked and no confirmation or
 engine-comparison authority is implied. All earlier 40 findings and SA8–SA10
 remain terminally closed; there are no open audit findings.
 
+The source-disjoint successor `successor-architecture-confirmation-005-001`
+is now build-qualified but provider-unauthorized. It freezes 1,000 unique
+synthetic scenario clusters (800 eligible and 200 deterministic authority
+boundaries) and 2,000 paired A/H actual-graph cells. Hidden gold remains in a
+separate hash-bound package until every response is durable. The fixed Luna
+planner permits one canary and at most 800 single-case proposals, zero retries,
+atomic resume, and a USD 5 emergency stop. H is selected only if the positive
+paired utility improvement replicates while every authority, safety, citation,
+scope, fallback, and durability gate holds; otherwise safe deterministic A is
+selected when all hard gates pass. No engine or release selection is implied
+by build evidence. The complete build gate passed 1,672 Python and 50 frontend
+tests, frontend lint and production build, 975/975 repository audits, and
+149/149 freeze coverage.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

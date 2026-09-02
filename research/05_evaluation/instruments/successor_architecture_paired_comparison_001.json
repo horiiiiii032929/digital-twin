@@ -167,6 +167,14 @@
       "original_development_folds_reopened": false,
       "successor_instrument": "successor-architecture-policy-value-fold-004-001",
       "successor_implementation": "guarded-policy-value-planner-v2"
+    },
+    {
+      "decision_id": "AFQC-155",
+      "reason": "Valid Fold 004 evidence replicated every safety boundary and established a positive paired utility improvement for guarded policy-value H over deterministic A, but the 150-case development fold was not large enough for release selection.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-confirmation-005-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
     }
   ],
   "provider_freshness": {

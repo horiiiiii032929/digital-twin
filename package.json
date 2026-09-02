@@ -585,6 +585,13 @@
     "simulate:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --simulate",
     "preflight:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --preflight",
     "execute:successor-architecture-policy-value-fold-004": "uv run python -m scripts.run_successor_architecture_policy_value_fold_004 --execute",
-    "verify:successor-architecture-policy-value-fold-004": "uv run pytest tests/test_successor_architecture_policy_value_fold_004.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-policy-value-fold-004 && npm run simulate:successor-architecture-policy-value-fold-004"
+    "verify:successor-architecture-policy-value-fold-004": "uv run pytest tests/test_successor_architecture_policy_value_fold_004.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-policy-value-fold-004 && npm run simulate:successor-architecture-policy-value-fold-004",
+    "build:successor-architecture-confirmation-005": "uv run python -m scripts.build_successor_architecture_confirmation_005 --write",
+    "validate:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --validate",
+    "simulate:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --simulate",
+    "preflight:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --preflight",
+    "execute:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --execute",
+    "resume:successor-architecture-confirmation-005": "uv run python -m scripts.run_successor_architecture_confirmation_005 --execute --resume",
+    "verify:successor-architecture-confirmation-005": "uv run pytest tests/test_successor_architecture_confirmation_005.py tests/digital_twin/test_planning_architectures.py tests/services/test_openai_responses_client.py -q && npm run validate:successor-architecture-confirmation-005 && npm run simulate:successor-architecture-confirmation-005"
   }
 }
