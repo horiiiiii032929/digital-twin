@@ -90,13 +90,15 @@ multi-turn trajectories omitted the expected confusion intervention because V2
 grounding treated pedagogical request language as factual target content.
 
 The original 015 Keep result is preserved, its authority is revoked, and no
-release is selected from it. The root-cause V3 grounding successor and fresh
-confirmation 016 are build-qualified, and only 016 now has a bounded execution
-authorization. Project state remains `In Progress / Go Deeper`; the next finite
-checkpoint is 016, followed only on pass by fresh
+release is selected from it. Confirmation 016 was operationally invalid before
+bulk because its reactive canary no longer invoked Luna after the V3 fast-path
+fix; it made zero provider calls and opened no hidden gold. The only permitted
+harness correction is 017, which changes the canary but not the evaluation
+method or package. Project state remains `In Progress / Go Deeper`; the next
+finite checkpoint is 017, followed only on pass by fresh
 factual confirmation, known 10,000-case regression, and complete local product
 qualification. T0 and bounded T1-v1 remain rollback controls. Repository audit
-state is 991/991 with zero open findings.
+state is 994/994 with zero pending or open findings.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

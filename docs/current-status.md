@@ -32,10 +32,17 @@ overall and per-condition reference-action gates of 95%. Its network-free run
 restored all 450 reactive trajectory cases to 100% expected-action matching;
 provider-backed autonomy remains unclaimed until the fresh execution.
 
-The complete repository audit currently covers 991/991 execution-relevant files
-with zero pending or open findings. Confirmation 016 is now the sole bounded
-provider-authorized evaluation; every earlier whole-system confirmation remains
-revoked and the repository-wide freeze remains active.
+Confirmation 016 then stopped invalidly after two public canaries and zero
+provider calls. V3 correctly routed its reactive canary through the deterministic
+fast path, but the stale canary assertion required a Luna identity. Hidden gold
+stayed closed, so this is finding `SE7-4`, not a product-quality result.
+
+The single harness-only corrective attempt 017 reuses the exact 016 public and
+hidden packages, methods, prompts, cases, gold, gates, and models. Only its
+second canary is changed to an autonomous provider-path case. The complete
+repository audit covers 994/994 execution-relevant files with zero pending or
+open findings; 016 is revoked and only 017 has bounded execution authority
+under the active repository-wide freeze.
 
 ## Audit correction superseding the governed V2.1 release claim
 

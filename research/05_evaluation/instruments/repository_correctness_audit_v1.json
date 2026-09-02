@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "release-command-surface",
-      "evidence": "Confirmation 016 validate/simulate/preflight/execute/resume commands are explicit and preserve guarded execution.",
+      "evidence": "Validation, simulation, preflight, execute, and resume commands expose the single confirmation-017 harness correction.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-09-02T22:57:23+00:00",
-      "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit",
-      "sha256": "2f47308cc46577328593703769791e98aa62774c52db00df1bd832e845f2e873"
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "f73762c94bd58e1da0df6f16e3f19567798c85f5b82f51c0fa08118a15a7b0e3"
     },
     {
       "audit_status": "audited",
@@ -2986,12 +2986,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-confirmation-016",
-      "evidence": "Fresh V3 confirmation is frozen for one bounded paid execution under the standing user authority; automatic promotion remains disabled.",
+      "evidence": "Attempt 016 is preserved as invalid execution with both provider authorities revoked after two public canaries, zero calls, and unopened hidden gold.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_016.json",
-      "reviewed_at": "2026-09-03T00:00:00+00:00",
-      "reviewer": "Codex confirmation-016 bounded authorization audit",
-      "sha256": "f1c090b8a236bdff3932bb584d4df8255b75bc601ee64f48bbb37aa776e22a57"
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "cbb590bc0d873da2bc0a70bd7d3314d00040cfd206ea2c8d8be2cf5c42b57b3d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-017",
+      "evidence": "Instrument reuses the exact unopened 016 package and changes only the provider-path canary under one bounded corrective authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_017.json",
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "5f4917b8f7fe35edbd67335f12bfed613842386cfdb940407d151001edf34dbd"
     },
     {
       "audit_status": "audited",
@@ -5878,6 +5889,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-017",
+      "evidence": "Runner binds the unchanged 016 package and selected H+E1/V3 method while replacing only the stale reactive canary with an autonomous provider-path canary.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_017.py",
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "3f7688360102a18b56c8b85e59d363417a875d9c8b9f90064a12c2c7e8e8e9ff"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "actual-product-evaluation-runner",
       "evidence": "Preflight can independently verify the predecessor-selected grounding architecture while recording the prospective runtime successor architecture.",
       "findings": [],
@@ -8200,12 +8222,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Only confirmation 016 is added for external-model and method-evaluation execution; 015 remains revoked and the global freeze remains active.",
+      "evidence": "The new 017 runner is protected and only 017 is bounded for external-model and method-evaluation execution; 016 is revoked.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-09-03T00:00:00+00:00",
-      "reviewer": "Codex confirmation-016 bounded authorization audit",
-      "sha256": "ff196c721b16d205077c93463155271fabadcedf161c17a5d8e02814c10d0566"
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "6b0192410e8c80171dfcc2d59933fcadb4ae857d1de944f8936f836718fe9670"
     },
     {
       "audit_status": "audited",
@@ -8783,12 +8805,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Regression fixes exact allowlist membership to confirmation 016 and keeps every historical confirmation revoked.",
+      "evidence": "Exact allowlist regression permits only corrective attempt 017 and confirms 016 and all historical confirmations remain revoked.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-09-03T00:00:00+00:00",
-      "reviewer": "Codex confirmation-016 bounded authorization audit",
-      "sha256": "9920cd497d925b0280d098b255be9030cd53c729b4fe4b6f3aeb123e02446f22"
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "595564109678a8f4118da6c8e3b76e6e4ddce789595d33959151d9616c508f67"
     },
     {
       "audit_status": "audited",
@@ -10180,12 +10202,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-confirmation-016",
-      "evidence": "Tests verify fresh boundaries, predecessor/runtime architecture separation, explicit action gates, bounded authority, and zero-call preflight behavior.",
+      "evidence": "Regression verifies attempt 016 remains immutable, invalid, and provider-revoked after the canary defect.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
-      "reviewed_at": "2026-09-03T00:00:00+00:00",
-      "reviewer": "Codex confirmation-016 bounded authorization audit",
-      "sha256": "d92eedd73798d54efcdd644cfcf036279ed5697c2bc54f63aa63bfb6c0499b5d"
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "d1a9b8cd654afde7d0895f219e287ae854230821215bb1f2ee1ef9066643953c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-autonomy-confirmation-017",
+      "evidence": "Tests prove immutable package reuse, sole canary correction, exact Luna expectation, and bounded-authority preflight behavior.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_017.py",
+      "reviewed_at": "2026-09-03T00:20:00+00:00",
+      "reviewer": "Codex SE7-4 corrective-attempt audit",
+      "sha256": "ed6b7dae3030f7759693e584da08de1a4a58a4dbb36b8b2566b775169408e096"
     },
     {
       "audit_status": "audited",

@@ -80,11 +80,12 @@ expected confusion-turn intervention because instructional request language
 diluted V2 evidence coverage. The original result remains immutable and its
 authority is revoked.
 
-The sole prospective release confirmation is now 016. It keeps H+E1 fixed and
-changes only grounding to `pedagogy-aware-source-semantic-evidence-atoms-v3`,
-with a fresh source/wording package and explicit 95% overall and per-condition
-reference-action gates. One bounded execution is authorized under AFQC-168;
-staging remains fail-closed until 016, fresh factual
+Confirmation 016 was operationally invalid after its V3 reactive canary took
+the deterministic fast path and therefore made no Luna call. It made zero
+provider calls, opened no hidden gold, and supports no quality inference. The
+sole harness-only attempt 017 reuses every scientific input and changes only the
+second canary to a guaranteed autonomous provider path. Staging remains
+fail-closed until 017, fresh factual
 confirmation, known 10,000-case regression, and local product qualification all
 pass.
 

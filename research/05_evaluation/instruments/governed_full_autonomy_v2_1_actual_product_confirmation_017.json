@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016",
-  "status": "invalid-execution-authorization-revoked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-017",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "parent_issue": 8,
   "decision_question": "Does the selected H+E1 product with pedagogy-aware source-semantic grounding pass safety and expected-intervention gates on fresh actual-product cases?",
-  "successor_after": "governed-full-autonomy-v2-1-actual-product-confirmation-015-post-run-audit",
+  "successor_after": "governed-full-autonomy-v2-1-actual-product-confirmation-016-invalid-canary",
   "method": {
     "action_eligibility_version": "event-scoped-action-eligibility-v1",
     "provider_failure_reference_contract": "prospective-v2-deterministic-t1-v1-t0-fallback-v1",
@@ -42,6 +42,7 @@
     "t1-v2-autonomous"
   ],
   "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016",
     "case_count": 820,
     "trajectory_templates": 50,
     "trajectory_conditions": 4,
@@ -54,6 +55,8 @@
     "source_family_range": [301, 350],
     "source_disjoint_from_confirmations_012_through_015": true,
     "instructional_wording_family_disjoint_from_confirmation_015": true,
+    "reused_after_attempt_016_hidden_gold_open_count": 0,
+    "prior_public_canary_count": 2,
     "public_sha256": "c89acea189255f5fba2c13ad9d4ef7046fe9ac2b542124c5ca60cad759b27e18",
     "hidden_gold_sha256": "434da410429c51aaa2252fc648db033f3ba03a41479e2af8524a5bbbfb8f50de",
     "quality_results_previously_opened": 0
@@ -103,9 +106,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": null,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User standing authorization to execute the finite audited plan and all required model runs on 2026-09-03.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0
@@ -144,6 +147,11 @@
     "selected_autonomy_architecture": "guarded-policy-value-planner-v2",
     "selected_complex_planner": "gpt-5.6-luna",
     "selected_proactive_generator": "bounded-strategy-grounded-wording-generator-v1",
+    "canary_case_ids": [
+      "release-grounded-h-e1-trajectory-001-t0-grounded-control-seed-1",
+      "release-grounded-h-e1-trajectory-006-t1-v2-autonomous-seed-1"
+    ],
+    "canary_correction_only": true,
     "maximum_concurrency": 8,
     "atomic_response_ledger": true,
     "safe_resume": true,
@@ -152,7 +160,9 @@
     "same_cases_quality_rerun_allowed": false
   },
   "boundaries": [
-    "Confirmation 015 remains immutable and its post-run release-blocking finding is not rescored away.",
+    "Attempt 016 stopped after two public canaries and zero provider calls; hidden gold stayed closed.",
+    "Attempt 017 changes only the second canary from a newly deterministic reactive fast path to an autonomous case that necessarily exercises the provider path.",
+    "The 016 public and hidden packages, product methods, prompts, cases, gold, gates, and model roles are unchanged.",
     "V3 uses only student-visible wording plus approved public source titles and source-side atoms; it cannot access gold or author facts.",
     "Distinct canonical claim classes still force clarification before generation.",
     "Real professor fidelity, real student usability, and learning improvement are not established."
