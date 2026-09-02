@@ -7892,12 +7892,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "The global freeze remains active; every fold-001 through fold-004 execution is terminal with authority revoked, and the fresh confirmation entrypoint is registered but not allowlisted. No confirmation or engine-comparison authority is present.",
+      "evidence": "The global freeze remains active; every fold-001 through fold-004 execution is terminal with authority revoked, and only the fresh 1,000-case confirmation is allowlisted for external-model and method execution. No engine-comparison or release authority is present.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex policy-value successor audit",
-      "sha256": "936b12f7b1df21aa4e469dc41e38172875d60bdb56ea79af2920f3d8d555c222"
+      "sha256": "16cd8a6b0c7246b04958bb1867f8df1a56c4091b0e16bfeb4f84b93d1e601331"
     },
     {
       "audit_status": "audited",
@@ -8453,12 +8453,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification",
-      "evidence": "Tests enumerate every exact bounded authorization and prove all terminal fold-001 through fold-004 runs remain blocked after one-time execution authority is revoked.",
+      "evidence": "Tests enumerate every exact bounded authorization, prove terminal fold-001 through fold-004 runs remain blocked, and bind only confirmation 005 to external-model and method execution.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex policy-value successor audit",
-      "sha256": "411d8361cfff175f6214a1f9b8cdf6b5435828517e34b70311de262ae03a2224"
+      "sha256": "713488574c1f345eaa0ba4ae6f46a23693b5f82a4c9cde987d7ffd890129c7f4"
     },
     {
       "audit_status": "audited",
@@ -10686,12 +10686,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Instrument review confirmed immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, a fixed Luna engine, a one-canary plus 800-call ceiling, zero retries, atomic resume, a USD 5 stop, and prospective selection gates with provider authority false.",
+      "evidence": "Instrument review confirmed immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, a fixed Luna engine, a one-canary plus 800-call ceiling, zero retries, atomic resume, a USD 5 stop, prospective selection gates, and one bounded paid authorization without automatic progression.",
       "findings": [],
       "path": "research/05_evaluation/instruments/successor_architecture_confirmation_005_001.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "d1c43859be1c18722bd2fc68c970998c7ca258a5b1f17dbc0cc430f791ea9978"
+      "sha256": "94456530047b2d820a2a98a00b458c4a35b3b6bdf2b48182d76c177a181e6e38"
     },
     {
       "audit_status": "audited",
@@ -10719,12 +10719,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, blocked provider authority, and deterministic A selection when H has no incremental benefit.",
+      "evidence": "Focused tests prove byte stability, unique fresh scenario clusters, gold isolation, exact call/cell bounds, exact frozen provider authority, and deterministic A selection when H has no incremental benefit.",
       "findings": [],
       "path": "tests/test_successor_architecture_confirmation_005.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex architecture-confirmation audit",
-      "sha256": "b23529cb2f455a23629d9f6d182623cdedae770e17e6c5141ede87c9ed775abe"
+      "sha256": "25783da23d3ca07df5d89fa426fa7e437022a9d1f6356ca1963f8d78975d52e4"
     }
   ],
   "schema_version": 1
