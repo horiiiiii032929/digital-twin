@@ -1,6 +1,6 @@
 # Current project status
 
-Status date: 2026-09-02
+Status date: 2026-09-03
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
@@ -106,6 +106,18 @@ gold remained unopened. This is a model/batch-contract operational failure,
 not an SA7 recurrence or an architecture-quality result. The one corrective
 attempt is exhausted, so fold 001 will not be retried. A future comparison must
 be a prospectively registered method successor on fresh evidence.
+
+That method successor is now build-qualified as
+`successor-architecture-development-fold-002-single-case-001` at revision
+`37ab445`. It uses 150 fresh cases and 600 paired actual-graph cells. Each Luna
+request contains exactly one case and fixes its case ID in the strict schema;
+an individual malformed or missing decision becomes measurable safe-fallback
+quality evidence instead of invalidating the whole run. Identity, budget,
+ledger/hash, and gold-boundary failures remain execution-invalid. The complete
+gate passed 1,656 Python tests, 50 frontend tests, lint, production build,
+965/965 repository audits, 147/147 freeze registrations, and `npm audit` with
+zero vulnerabilities. Provider and paid execution remain unauthorized, and no
+architecture or engine is selected yet.
 
 ## Local R1 autonomy release selection
 

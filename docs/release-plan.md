@@ -1,6 +1,6 @@
 # Course Digital Twin release plan
 
-Status date: 2026-09-02
+Status date: 2026-09-03
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
@@ -40,6 +40,16 @@ all 48 network-free governed-graph cells. This qualifies the comparison
 boundary, not any architecture or engine. Repository correctness is 959/959
 audited, and the dependency advisory discovered during qualification is closed
 with a zero-vulnerability npm audit.
+
+The first provider-backed fold did not produce architecture evidence: both
+fold-001 executions are preserved as invalid, with gold unopened, after the
+batch response contract failed. The prospective successor now uses a fresh
+150-case fold and a one-case strict response contract. Revision `37ab445` is
+build-qualified with 965/965 audited files, 1,656 Python and 50 frontend tests,
+and zero dependency advisories. A single case-level model failure will be
+scored through the actual governed fallback; only execution-integrity failures
+invalidate the run. The successor remains provider-unauthorized and selects no
+release architecture until its finite result is published.
 
 ## Release goal
 

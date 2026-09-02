@@ -1,0 +1,53 @@
+{
+  "decision": {
+    "outcome": "go-deeper",
+    "rationale": "The prospectively changed single-case contract is build-qualified on a fresh source-disjoint development fold. Individual model or semantic failures will be measured through the governed no-action fallback, while identity, budget, ledger, hash, and gold-boundary failures remain execution-invalid. No architecture or engine is selected at build time.",
+    "selected_implementation_id": "successor-architecture-development-fold-002-single-case-001"
+  },
+  "execution_bounds": {
+    "concurrency": 4,
+    "emergency_cost_stop_usd": 2.0,
+    "maximum_planner_calls": 120,
+    "maximum_provider_calls": 242,
+    "maximum_transport_retries": 0,
+    "maximum_verifier_calls": 120,
+    "paid_execution_authorized": false,
+    "provider_execution_authorized": false
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-002-single-case-001",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json"
+  },
+  "limitations": [
+    "This is build-only evidence and does not select an architecture or product model.",
+    "The fold uses synthetic policy-oracle cases and cannot establish real learner benefit.",
+    "GPT-5.6 Luna has no dated snapshot; exact returned identity remains mandatory during execution."
+  ],
+  "method_change": {
+    "case_identity_fixed_in_schema": true,
+    "fresh_fold": true,
+    "historical_fold_001_changed": false,
+    "individual_model_failure_scored_as_safe_fallback": true,
+    "one_case_per_provider_call": true
+  },
+  "operational": {
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "provider_calls": 0,
+    "reported_cost_usd": 0
+  },
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-development-fold-002-single-case-001-build",
+  "schema_version": 1,
+  "status": "build-only-qualified",
+  "verification": {
+    "dependency_audit": "0 vulnerabilities",
+    "execution_freeze": "147/147 registered entrypoints",
+    "focused_tests": 36,
+    "frontend_tests": 50,
+    "network_free_simulation": "passed",
+    "python_tests": 1656,
+    "repository_inventory": "965/965 audited; zero pending or open findings"
+  },
+  "code_revision": "37ab445"
+}
