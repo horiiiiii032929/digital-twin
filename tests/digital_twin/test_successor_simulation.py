@@ -16,7 +16,6 @@ from src.digital_twin.evaluation.learner_simulator import (
 from src.digital_twin.evaluation.successor_simulation import (
     CONDITIONS,
     ProgramConfig,
-    paired_bootstrap,
     run_learner,
     run_program,
 )

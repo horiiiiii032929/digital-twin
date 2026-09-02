@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 937
+    "audited": 953
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 228,
-    "active_runtime": 149,
+    "active_or_unclassified_tooling": 231,
+    "active_runtime": 158,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 248,
+    "evaluation_configuration": 249,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 211
+    "verification": 214
   },
-  "file_count": 937,
+  "file_count": 953,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "24ee57bb8b5c7207edb04b48f85c524577feb0cfb1dffacc4181c01221c683ef",
+  "record_sha256": "3a936757933bfe7925801fc7ab4e02ca1d3ce77048818996523b272a03135bb6",
   "records": [
     {
       "audit": {
@@ -4551,6 +4551,22 @@
     },
     {
       "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual schema and binding review verified the immutable 144-case hidden-state extension, frozen simulator families, seeds, conditions, public-data boundary, zero-call mode, and explicit Go Deeper stopping rule.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_hidden_state_learner_extension_014.json",
+      "risk": "high",
+      "sha256": "5feb1c624dfcab0cbe977da2310c62aee8e6cc4500aca7730b7dc8148e956a83"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
         "findings": [],
@@ -5599,7 +5615,7 @@
     {
       "audit": {
         "domain": "tooling-and-execution-freeze",
-        "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+        "evidence": "Versioned result-dispatch review and full repository validation confirm component, architecture-evolution, and non-component research records are validated by the appropriate strict envelope; supporting summaries are checked against their durable parent records.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -7113,6 +7129,22 @@
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
       "sha256": "b84cec3e7d75ecbbcb1e2acb822ac24c99401b840356fd92956e53376c0bd996"
+    },
+    {
+      "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual runtime review and the 18-test focused suite verified synthetic-public fixture construction, actual-service adapter wiring, deterministic engine isolation, virtual-time driving, and no provider credential or hidden-gold access.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py",
+      "risk": "high",
+      "sha256": "716a6091483f371c43c7f44adb20a5563ae57aad208a43da687d2f1235167cd8"
     },
     {
       "audit": {
@@ -8993,6 +9025,22 @@
     },
     {
       "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual command-surface review and focused tests verified explicit validate/simulate/execute separation, freeze enforcement, exclusive output handling, revision capture, and fail-closed paid execution authority.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py",
+      "risk": "high",
+      "sha256": "0eb7b4f461ef1ac40cf587befc8439386d496f88744ce3a7a70a1dd560b62824"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Preflight status now prioritizes revoked authority over time-dependent metadata freshness while retaining every individual readiness check and fail-closed execution behavior.",
         "findings": [],
@@ -9193,6 +9241,22 @@
       "path": "scripts/run_r1_public_preview.py",
       "risk": "high",
       "sha256": "999f142d0df7799c9db417a8c0b89fe51c71fb1efcd18335a2357d5d6a8a0c3c"
+    },
+    {
+      "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual command-surface review and focused tests verified deterministic execution, explicit development/held-out seeds, revision and dirty-state capture, exclusive output creation, and zero provider usage.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_successor_learner_timing_simulation_001.py",
+      "risk": "high",
+      "sha256": "a22d5dfe6f6507acb444a53ad0436d6e897a97bb9cb86cebec1336c66990927e"
     },
     {
       "audit": {
@@ -9612,8 +9676,8 @@
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9623,7 +9687,7 @@
       ],
       "path": "scripts/validate_evaluation_results.py",
       "risk": "high",
-      "sha256": "d0ede8757a7d66356c129bb677080089dd957f33e1d35e2dcf66a9d475a24015"
+      "sha256": "44966535b88025d6d6fce0f8a43d1ce275ad781fdda8b5eff6b6aa792362815b"
     },
     {
       "audit": {
@@ -9810,10 +9874,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "Cross-engine final-program review plus confirmation-013 authorization review verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and fail-closed release decisions.",
+        "evidence": "Cross-engine final-program review plus the successor-study integration audit verified clean runtime imports, immutable bindings, source/gold isolation, independent scoring, finite stage progression, atomic resume, and the additive network-free allowlist entry for the hidden-state evaluation runner.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex confirmation-013 authorization audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9823,7 +9887,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "29feef704cfae4e6410b45f21d29880e8f0a5a405b61b81c5e604c1c82b7e03b"
+      "sha256": "3088fa684be8899f408e98524a59f055e0776ecaf35de1a9cf0ceef97253d53c"
     },
     {
       "audit": {
@@ -10707,11 +10771,43 @@
     },
     {
       "audit": {
-        "domain": "full-autonomy-evaluation-boundary",
-        "evidence": "Manual adapter review verified public/internal scope mapping, actual service calls, restart equality, no duplicate action collection, citation lineage, fail-closed metrics collection, and no gold access.",
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual driver review and focused tests verified event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and bounded closed-loop execution through the public adapter contract.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex #157 actual-product adapter audit"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/autonomy_learner_driver.py",
+      "risk": "high",
+      "sha256": "37ffa0f27c77649cd8cb1bc84fcf22480ee506a6e1fb1bdb19b0e3ef0723b3dd"
+    },
+    {
+      "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual scorer review and focused tests verified independent calculation of attribution, assessment, calibration, proactive, timing, restart, and failure metrics without trusting product-reported invariant flags.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/autonomy_learning_scoring.py",
+      "risk": "high",
+      "sha256": "0c3fefcf7d0ea4d2e36e9b2ccd904d8ed973b8ed5c7e1bc2c05770e859249fc0"
+    },
+    {
+      "audit": {
+        "domain": "full-autonomy-evaluation-boundary",
+        "evidence": "Manual adapter review plus successor-study integration verified public/internal scope mapping, actual service calls, sanitized learner-evidence hooks, restart equality, no duplicate action collection, citation lineage, fail-closed metrics collection, and no gold access.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -10719,7 +10815,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_product_adapter.py",
       "risk": "high",
-      "sha256": "7edb0fd35b87b44cf02945a8a21139d2353e1d55f1ab64f32e56a00fb085f465"
+      "sha256": "b09d7ac254311b9e2281c37701f1c57419c2b918d90baf017f7ff669b826c05c"
     },
     {
       "audit": {
@@ -11011,8 +11107,56 @@
     },
     {
       "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual numerical review and focused tests verified bounded probability inputs, deterministic Brier/ECE/AUROC calculations, defined degenerate-case behavior, and no dependency on product internals.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/hidden_state_metrics.py",
+      "risk": "high",
+      "sha256": "5a84fdce55ec96cdf0580bee86ea42a19d08615b92363afc3116cdb00388aa97"
+    },
+    {
+      "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual contract review and focused tests verified sanitized learner-evidence schemas, closed assessment labels, stable event/concept provenance, bounded public fields, and exclusion of raw transcripts and hidden learner state.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/learner_evidence.py",
+      "risk": "high",
+      "sha256": "aa5f880815c2a051dcc036eb23e4855aec7cf9c4c5f30adad493a5f4e9b1a46e"
+    },
+    {
+      "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual simulator review and focused tests verified seed determinism, six persona bounds, two distinct transition families, hidden-state isolation, receptivity/crowd-out behavior, and monotonic time advancement.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/learner_simulator.py",
+      "risk": "high",
+      "sha256": "b9e75f249533a9e37d40688e7cca12506d96012fc29fe4af6c89eaf2854e9413"
+    },
+    {
+      "audit": {
         "domain": "whole-system-architecture-evolution",
-        "evidence": "Loader review and focused regression tests confirm architecture-evolution records are dispatched by schema while legacy component records retain their previous validation path.",
+        "evidence": "Loader review and focused regression tests confirm architecture-evolution records are dispatched by schema, non-component research records retain strict shared provenance, and legacy component records retain their previous validation path.",
         "findings": [],
         "reviewed_at": "2026-09-01",
         "reviewer": "Codex whole-system architecture audit"
@@ -11023,7 +11167,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/models.py",
       "risk": "high",
-      "sha256": "d317fd04fa461510ed68cec548ccc7b239ac69b15f3f4f5ef8a9bdceaaeb076e"
+      "sha256": "bd73aaf9ec145fc136fd946a27c489c77baa58f542edbe58489cb1df3abecf30"
     },
     {
       "audit": {
@@ -11155,6 +11299,22 @@
     },
     {
       "audit": {
+        "domain": "successor-hidden-state-evaluation",
+        "evidence": "Manual learner review and focused tests verified deterministic text realization from hidden state, no hidden parameter leakage to the product adapter, bounded response generation, and stable event provenance.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/simulated_learner_v1.py",
+      "risk": "high",
+      "sha256": "68119305b986deb3cc7c43a1d7aae3b32a685ccad6fbeb5cf3a8b3b4ac69eb65"
+    },
+    {
+      "audit": {
         "domain": "source-aligned-wording",
         "evidence": "Assembly review verifies models cannot mutate authoritative truth, accepted wording retains semantic anchors and blind-review agreement, canonical-answer leakage fails, duplicates fall back deterministically, and every final question remains unique.",
         "findings": [],
@@ -11168,6 +11328,22 @@
       "path": "src/digital_twin/evaluation/source_aligned_wording.py",
       "risk": "high",
       "sha256": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49"
+    },
+    {
+      "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual harness review and focused tests verified development-only parameter fitting, held-out seeds, paired condition execution, deterministic bootstrap aggregation, oracle/never bounds, complete output accounting, and zero provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/successor_simulation.py",
+      "risk": "high",
+      "sha256": "ed7f8969282bad95b0f9d99aff6004651b0916cf452a84f0b0c84b4aefb2f4a8"
     },
     {
       "audit": {
@@ -12052,10 +12228,10 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active after terminal confirmation 013; paid authorization is revoked and only the immutable zero-call analysis entrypoint remains registered for evidence reproduction.",
+        "evidence": "The global freeze remains active; paid authorization is revoked, the immutable zero-call analysis entrypoint remains registered, and the hidden-state extension is registered only as a network-free guarded evaluation runner.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex V2.1 release-binding root-cause audit"
+        "reviewer": "Codex successor-study integration audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12063,7 +12239,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "33642fe7e760ca619401c5418ab2198203eb9c6780012e9f13213ed1feac5676"
+      "sha256": "b1329d170165e640025fbe643a6085b16b42d3129211c6fc898670885250296c"
     },
     {
       "audit": {
@@ -12179,6 +12355,22 @@
     },
     {
       "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual policy review and focused tests verified one deterministic eligibility gate for consent, quiet hours, frequency and cooldown, bounded analytic forward prediction, explicit no-action, and distinct constant/conditional/value/oracle/never policies.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/intervention_policies.py",
+      "risk": "high",
+      "sha256": "39f0f2cc694e68df18bf895e29f36b957a35e31971ff0a2d6279089bd1b27617"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Manual authority-boundary review and focused regressions verified deterministic assessed-evidence counts, reconciled attribution totals, bounded confidence/uncertainty, immutable provenance, monotonic revisions, and no model-written mastery field.",
         "findings": [],
@@ -12192,6 +12384,22 @@
       "path": "src/digital_twin/student/learner_belief.py",
       "risk": "high",
       "sha256": "7ff67977d1ead9f89f5fa55f4461e6d4bd25bdc15d4dbd576d439031f4f953a4"
+    },
+    {
+      "audit": {
+        "domain": "successor-architecture-simulation",
+        "evidence": "Manual estimator review and focused tests verified the shared interface, count baseline, bounded BKT/PFA updates, forgetting/decay behavior, deterministic registry selection, and absence of model-written protected learner state.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/learner_estimators.py",
+      "risk": "high",
+      "sha256": "c1f13dd23bd79af3dab52d8d1bc387e724d14b17a4d7c1b20f91f16c1419ff4b"
     },
     {
       "audit": {
@@ -12579,6 +12787,22 @@
     },
     {
       "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests reproduce the PR 183 result-record dispatch failure, verify valid non-component research records preserve domain-specific metrics, and reject invalid run identifiers and revisions.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_evaluation_record_dispatch.py",
+      "risk": "medium",
+      "sha256": "3f80d93ca9dd167dd535080a3c5f682e58a7105d7d3f2460858756417143507a"
+    },
+    {
+      "audit": {
         "domain": "evidence-sufficiency",
         "evidence": "Focused tests cover deterministic support IDs, advisory cross-encoder scores, pairwise supporting-evidence NLI, invalid score shapes, and malformed probability rejection.",
         "findings": [],
@@ -12640,6 +12864,22 @@
       "path": "tests/digital_twin/test_grounding_contracts.py",
       "risk": "medium",
       "sha256": "09f712dcfe6f01bdc72007024061e58537cf6f02ed1be1ff96c0ccbb30dd26da"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused integration tests exercise the actual product adapter across four modes, hidden-state separation, 30 virtual days, restart behavior, multi-concept assessment diagnosis, and stable serialized result shapes.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_hidden_state_learner_extension.py",
+      "risk": "medium",
+      "sha256": "5b2262d3d7167315bfcf4e4dacd5869a25171b5dbbb3b6cda236869ee02513b2"
     },
     {
       "audit": {
@@ -13008,6 +13248,22 @@
       "path": "tests/digital_twin/test_sqlite_repository_integrity.py",
       "risk": "medium",
       "sha256": "2604decaf92052be1dc5bceebd279983ff8990fe08b0f83d673ca9fece37a6ff"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Fourteen focused tests cover simulator determinism, family divergence, crowd-out, estimator monotonicity and decay, eligibility, policy contrasts, paired aggregation, and deterministic bootstrap output; the integration suite passed 18/18 with Ruff clean.",
+        "findings": [],
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex successor-study integration audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_successor_simulation.py",
+      "risk": "medium",
+      "sha256": "1b31c2b366c53eaeeba28a21411a8db2ad8b47713d022f6e4b6cccd06eaf8335"
     },
     {
       "audit": {
@@ -15747,8 +16003,8 @@
     }
   ],
   "risk_counts": {
-    "high": 712,
-    "medium": 225
+    "high": 725,
+    "medium": 228
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

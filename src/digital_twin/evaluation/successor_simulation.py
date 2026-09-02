@@ -31,7 +31,6 @@ from src.digital_twin.evaluation.learner_simulator import (
 from src.digital_twin.student.intervention_policies import (
     ConceptView,
     EligibilityConfig,
-    EligibilityGate,
     InterventionDecision,
     PolicyInputs,
     SentMessage,

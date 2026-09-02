@@ -5,7 +5,7 @@ from enum import StrEnum
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 _IDENTIFIER_PATTERN = re.compile(r"^[a-z0-9][a-z0-9-]*$")
@@ -193,6 +193,34 @@ class ComponentEvaluationRecord(BaseModel):
         return self
 
 
+class ResearchEvaluationRunRecordV1(BaseModel):
+    """Common envelope for durable non-component evaluation run records.
+
+    Whole-system and simulation evaluations intentionally have richer, domain-
+    specific payloads than ``ComponentEvaluationRecord``.  This envelope keeps
+    their shared provenance strict while preserving those versioned payloads.
+    """
+
+    model_config = ConfigDict(extra="allow")
+
+    run_id: str = Field(min_length=1)
+    code_revision: str
+    status: str = Field(min_length=1)
+    decision: str | dict[str, object]
+
+    @model_validator(mode="after")
+    def provenance_is_valid(self) -> "ResearchEvaluationRunRecordV1":
+        if not _IDENTIFIER_PATTERN.fullmatch(self.run_id):
+            raise ValueError("run_id must use lowercase kebab-case")
+        if not _REVISION_PATTERN.fullmatch(self.code_revision):
+            raise ValueError("code_revision must be a Git hexadecimal revision")
+        if isinstance(self.decision, str) and not self.decision.strip():
+            raise ValueError("decision cannot be empty")
+        if isinstance(self.decision, dict) and not self.decision:
+            raise ValueError("decision cannot be empty")
+        return self
+
+
 class ComponentProfileEntry(BaseModel):
     component: ComponentKind
     status: ComponentStatus
@@ -309,4 +337,11 @@ def load_evaluation_record(path: Path) -> BaseModel:
         )
 
         return ArchitectureEvolutionRunRecordV1.model_validate(payload)
+    if "component" not in payload and {
+        "run_id",
+        "code_revision",
+        "status",
+        "decision",
+    }.issubset(payload):
+        return ResearchEvaluationRunRecordV1.model_validate(payload)
     return ComponentEvaluationRecord.model_validate(payload)

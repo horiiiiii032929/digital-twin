@@ -11,7 +11,7 @@ import statistics
 from datetime import datetime, timedelta
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
 from src.digital_twin.evaluation.autonomy_contract import AutonomyEvaluationResponseV1
 from src.digital_twin.evaluation.autonomy_learner_driver import HiddenStateTruthV1
