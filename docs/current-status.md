@@ -6,6 +6,31 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## H+E1 whole-system confirmation reference correction
+
+The fresh 820-case confirmation 014 completed at clean revision `ba1cee9` with
+820/820 durable responses before hidden gold opened, 1,835 exact Luna calls,
+zero retries, and USD 0.4839428 cost. T0 and T1-v1 reached 100% action accuracy;
+T1-v2 reactive and autonomous reached 97.5% and 98.99%. Every safety,
+citation, scope, consent, timing, duplicate, loop, model-authority, restart,
+transition, termination, proactive-lineage, and grounding non-regression gate
+passed except the zero-unexpected-action gate.
+
+Post-run finding `SE7-1` showed that all 30 disagreements came from inherited
+gold labels that required `no_action` after a provider failure even though the
+approved runtime requires a grounded deterministic T1-v1/T0 fallback on a later
+student turn. The original `completed-refine` output is preserved and is not
+post-hoc rescored, but confirmation 014 is reference-defective and cannot select
+the product. Its authority is revoked.
+
+A single source-disjoint corrective confirmation 015 is build-qualified on
+fresh source families 251–300. Its fallback contract was corrected
+prospectively from public events and conditions before package hashing. The
+820-case network-free mechanics pass with zero unexpected or unsafe actions;
+that simulation makes no provider-quality claim. Confirmation 015 remains
+provider-unauthorized until the complete repository gate and audit inventory
+return clean. H+E1 remains a candidate, not a release-selected profile.
+
 ## Audit correction superseding the governed V2.1 release claim
 
 `main-commit-audit-resolution-001` closes every published finding from the

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 983
+    "audited": 987
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 242,
+    "active_or_unclassified_tooling": 244,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 259,
+    "evaluation_configuration": 260,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 221
+    "verification": 222
   },
-  "file_count": 983,
+  "file_count": 987,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "963febd1969e0115f690e2db2a96224c54a9c0ec38f66ee6c03233940f1dad7b",
+  "record_sha256": "9c4d6ece19868ae2dc6cc9e26d9c6a1040daa823e4670a3323e3f21a8a3d709a",
   "records": [
     {
       "audit": {
@@ -1416,10 +1416,10 @@
     {
       "audit": {
         "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Reviewed command surface for the selected H+E1 build, 820-case network-free simulation, guarded preflight, bounded execute/resume, and exact validation commands; historical commands remain available.",
+        "evidence": "Reviewed command surface after confirmation 014 termination and confirmation 015 construction. The fresh 015 validate, network-free simulation, guarded preflight, execute, and resume commands are explicit; historical commands remain available and no command bypasses the execution freeze.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewer": "Codex confirmation-014 reference and confirmation-015 build audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "ffad1017c219222ccf54577862fdceb17914893fcb660bc84881cc9dbc99b5f2"
+      "sha256": "bcd05516e430bfd49f6d58b34c565d049ccaf6e1dd13dfdb74c0a3018d34423c"
     },
     {
       "audit": {
@@ -4328,10 +4328,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-014",
-        "evidence": "Prospective instrument review verifies fresh 820-case hashes, H+E1 role separation, deterministic factual generation, exact Luna identity and current official pricing, finite call/cost limits, hidden-gold ordering, and explicit non-claims. The one-time 014 provider authority was enabled only after the complete build gate passed and must be revoked after any terminal outcome.",
+        "evidence": "Terminal instrument review preserves the original completed-refine result, revokes 014 authority, records finding SE7-1 and its exact 30-case reference defect, prohibits post-hoc Keep rescoring, and permits only one fresh source-disjoint prospectively corrected confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewer": "Codex confirmation-014 post-run reference audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4339,7 +4339,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_014.json",
       "risk": "high",
-      "sha256": "01b4a1e8885211477c491107e7073c13e2b85be14cdf833077cdee3506843aca"
+      "sha256": "8d734df1b0179a7d74bc4d2b2fc24c8e318db79aaf7acca1d562051a79c3c456"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-confirmation-015",
+        "evidence": "Prospective instrument review verifies fresh source families 251-300, exact public and hidden hashes, the public-event-derived provider-failure fallback contract, unchanged H+E1 roles and hard gates, deterministic factual generation, no prior quality opening, finite calls/cost, and provider/paid authority false.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-015 prospective reference audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_015.json",
+      "risk": "high",
+      "sha256": "3d01b31265bea47850bd2b6e4dd2dd45eb2fb13571d7558d91823a4241e659de"
     },
     {
       "audit": {
@@ -6703,6 +6719,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-015",
+        "evidence": "Builder review verifies 820 unique fresh cases, source families 251-300 disjoint from confirmations 012-014, deterministic byte-stable package generation, and exactly 30 prospective V2 fallback-reference corrections derived from public event and condition data before hidden-gold hashing.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-015 prospective reference audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_015.py",
+      "risk": "high",
+      "sha256": "68558024d45c66e7284316d60e3dde3e282cfc48967604848bb1abe4f9ba8579"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
         "findings": [],
@@ -9045,6 +9077,28 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-015",
+        "evidence": "Runner review verifies selected H+E1 construction, deterministic factual generation, fresh canaries, exact Luna identity, atomic ledger and exclusive output, hidden-gold ordering, safe resume, finite call/cost stops, and fail-closed execution while the instrument remains unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-015 execution-boundary audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-confirmation-015",
+        "preflight:governed-autonomy-v2-1-actual-product-confirmation-015",
+        "resume:governed-autonomy-v2-1-actual-product-confirmation-015",
+        "simulate:governed-autonomy-v2-1-actual-product-confirmation-015",
+        "validate:governed-autonomy-v2-1-actual-product-confirmation-015"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_015.py",
+      "risk": "high",
+      "sha256": "e4789e206e095d40cd0c1429ec20a6150cb4fe94ad5e4e11fa62cb7e8d8de8c3"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-framework",
         "evidence": "Shared-runner review verifies successor context carries architecture and bounded-strategy identity through validation, manifests, run bindings, product factory construction, canaries, atomic execution, and independent scoring without changing historical default behavior.",
         "findings": [],
@@ -10267,10 +10321,10 @@
     {
       "audit": {
         "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Reviewed confirmation-014 builder as pure deterministic contract construction while its provider-backed runner remains AST-detected and guarded by both bounded execution operations.",
+        "evidence": "Reviewed confirmation-015 builder as pure deterministic contract construction while both 014 and 015 provider-backed runners remain AST-detected and guarded by external-model and method-evaluation freeze operations.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewer": "Codex confirmation-015 execution-boundary audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10280,7 +10334,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "3b3a640fb8fb996695ce9a2e65d30f745d4c7c7268694427666d2567fa2ae6b5"
+      "sha256": "448192338ae811402ed648d45eb4cd7201357dfb14d82bc4ebe6da871af6a98a"
     },
     {
       "audit": {
@@ -12637,10 +12691,10 @@
     {
       "audit": {
         "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Closed the confirmation-014 registry finding by registering its protected runner for external-model and method-evaluation operations. Added the exact 014 instrument as the sole new bounded authorization after the complete build gate; focused freeze tests require 151 protected and 151 registered entrypoints with zero missing guards.",
+        "evidence": "Revoked terminal confirmation 014, registered confirmation 015 as protected for external-model and method-evaluation operations, and left every bounded authorization absent during the build checkpoint. The registry has no missing guarded entrypoint.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewer": "Codex confirmation-014/015 freeze audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12648,7 +12702,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "6a5bf73dc07ae42a4862703da2f02f14a1539a466520db8934c8e0a4946a8e18"
+      "sha256": "50866724903684104ecff66ab2b2e3806f0a7148887d315cc97c9f330e869990"
     },
     {
       "audit": {
@@ -13485,10 +13539,10 @@
     {
       "audit": {
         "domain": "evaluation-authorization-boundaries",
-        "evidence": "Reviewed the complete exact bounded-authorization set. Historical engine comparison 006 remains revoked, and only confirmation 014 was added for external-model and method-evaluation execution after its complete build gate passed.",
+        "evidence": "Reviewed the complete exact bounded-authorization set after confirmation 014 termination. Confirmation 014 is revoked and confirmation 015 is build-only; tests require both to be absent until a separate post-gate authorization checkpoint.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 authorization audit"
+        "reviewer": "Codex confirmation-014/015 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13496,7 +13550,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "f597fa3d7161d601691826c2607536068c20f7eee60ebd4779ded05ff4c1370d"
+      "sha256": "cf1838be5e8637de1357a60badc5403d85aac77051b3d3ea01c6e412a7ec4240"
     },
     {
       "audit": {
@@ -15485,10 +15539,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests verify fresh source disjointness, 820-case cardinality, bounded one-time authority, H+E1 architecture and model bindings, deterministic factual generator separation, and fail-closed preflight without authorization leakage.",
+        "evidence": "Focused tests preserve confirmation 014's terminal completed-refine reference-defect classification, finding SE7-1, revoked authority, H+E1 bindings, deterministic factual generator separation, and fail-closed preflight.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewer": "Codex confirmation-014 post-run reference audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15496,7 +15550,23 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_014.py",
       "risk": "medium",
-      "sha256": "36608e6d56069cbc4ae3b26753d9979d5ef46f387e698f67c91c11db6c621bdb"
+      "sha256": "e559095563acbff69b53b91ba2d39b3c2cca9365f3dc9738c3c1017f6bbb9806"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused tests verify fresh source disjointness, exact 820-case cardinality, exactly 30 prospective public-event-derived fallback references, unchanged H+E1 roles, network-free execution safety without a provider-quality claim, and fail-closed preflight while unauthorized.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-015 prospective reference audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_015.py",
+      "risk": "medium",
+      "sha256": "e446b8807c975e14dae11e4acce6fd69066bacf7e110dcb452682e4e2ae4fbe0"
     },
     {
       "audit": {
@@ -16540,8 +16610,8 @@
     }
   ],
   "risk_counts": {
-    "high": 748,
-    "medium": 235
+    "high": 751,
+    "medium": 236
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
