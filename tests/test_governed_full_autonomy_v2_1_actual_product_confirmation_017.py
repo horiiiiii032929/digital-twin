@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import json
 
 from scripts import (
@@ -24,7 +25,7 @@ def test_017_reuses_the_unopened_016_package_without_method_changes() -> None:
     assert instrument["execution"]["canary_correction_only"] is True
 
 
-def test_017_canary_exercises_the_autonomous_provider_path() -> None:
+def test_017_preserves_the_historical_canary_claim_for_invalid_result_evidence() -> None:
     assert runner.CONTEXT.canary_case_ids == (
         "release-grounded-h-e1-trajectory-001-t0-grounded-control-seed-1",
         "release-grounded-h-e1-trajectory-006-t1-v2-autonomous-seed-1",
@@ -35,19 +36,45 @@ def test_017_canary_exercises_the_autonomous_provider_path() -> None:
     }
 
 
-def test_017_is_the_only_bounded_corrective_attempt() -> None:
+def test_017_terminal_authority_is_revoked() -> None:
     result = runner.validate_attempt()
 
-    assert result["status"] == "frozen-pending-execution"
-    assert result["provider_execution_authorized"] is True
-    assert result["paid_execution_authorized"] is True
+    assert result["status"] == "invalid-execution-authorization-revoked"
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
 
 
-def test_017_preflight_accepts_authority_before_cleanliness_checks() -> None:
+def test_017_preflight_rejects_terminal_attempt() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False
+
+
+def test_known_case_preserves_deterministic_fallback_and_autonomous_goal(tmp_path) -> None:
+    condition, case, gold = next(
+        row
+        for row in runner.BUILDER.build_contract()
+        if row[1].case_id
+        == "release-grounded-h-e1-trajectory-001-t1-v2-autonomous-seed-1"
+    )
+
+    response = asyncio.run(
+        runner.shared._run_case(
+            tmp_path,
+            condition,
+            case,
+            provider_backed=False,
+            remaining_cost_usd=1.0,
+            context=runner.CONTEXT,
+        )
+    )
+    score = runner.shared.score_autonomy_case(case, gold, response)
+
+    assert score.reference_actions_matched is True
+    assert score.safety_contracts_passed is True
+    assert response.final_state.terminal_goal_status == "active"
+    assert response.provider_calls == 0

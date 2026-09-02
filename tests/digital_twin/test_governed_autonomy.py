@@ -68,10 +68,13 @@ from src.digital_twin.student.autonomy_service import (
     RepositoryGroundedWordingGenerator,
 )
 from src.digital_twin.student.tutoring_graph import (
+    DeterministicTurnInterpreter,
     GovernedReactiveTutoringGraphV2,
     LiveReactiveSemanticPlanner,
+    TutoringIntent,
     TutoringGraphInput,
     TutoringMode,
+    deterministic_policy_boundary_answer,
     initial_learner_state,
     resolve_policy_action,
 )
@@ -1441,6 +1444,67 @@ async def test_t1_v2_uses_one_semantic_proposal_only_for_complex_turn(tmp_path):
     assert belief is not None and len(belief.hypotheses) == 1
     assert belief.hypotheses[0].kind == "misconception"
     assert belief.hypotheses[0].status == "tentative"
+
+
+def test_v2_interpreter_recognizes_uncertainty_hint_and_explanation_language():
+    interpreter = DeterministicTurnInterpreter()
+
+    attempt = interpreter.interpret(
+        "My current explanation is that invalidation preserves one current copy."
+    )
+    hint = interpreter.interpret("I am still unsure and need a hint.")
+
+    assert attempt.attempt_present is True
+    assert hint.confusion >= 0.7
+
+
+@pytest.mark.asyncio
+async def test_t1_v2_observation_uses_the_injected_turn_timestamp(tmp_path):
+    repository, fixture, _, release, _ = _autonomy_fixture(tmp_path)
+    observed_at = "2035-06-07T08:09:10+00:00"
+    graph = GovernedReactiveTutoringGraphV2(
+        retrieve=lambda _graph_input: ([], []),
+        generate=lambda *_args, **_kwargs: None,
+        fallback=lambda _reason: deterministic_policy_boundary_answer(
+            TutoringIntent.ABSTAIN_NO_EVIDENCE
+        ),
+        evidence_gate_configured=True,
+        claim_validator=AtomicClaimEvidenceValidator(
+            ExactQuoteAtomicClaimVerifier(),
+            minimum_entailment=1.0,
+            maximum_contradiction=0.0,
+        ),
+        checkpoint_database_path=repository.path,
+    )
+    conversation = Conversation(
+        id="injected-clock-conversation",
+        student_id=fixture.student_a_id,
+        course_id=fixture.course_a_id,
+        release_id=release.id,
+    )
+    learner_key = "a" * 64
+    graph_input = TutoringGraphInput(
+        account_id=fixture.student_a_id,
+        conversation=conversation,
+        release=release,
+        student_message="Explain an unsupported concept.",
+        learner_state=initial_learner_state(conversation, observed_at=observed_at),
+        observed_at=observed_at,
+        event_id="injected-clock-event",
+        learner_key=learner_key,
+        domain_model=repository.get_course_domain_model(release.id),
+        learner_belief=DeterministicEvidenceCountBeliefEstimator().initial_state(
+            learner_key=learner_key,
+            course_id=fixture.course_a_id,
+            release_id=release.id,
+        ),
+    )
+
+    result = await graph.run(graph_input)
+
+    assert result.reactive_v2_artifacts is not None
+    assert result.reactive_v2_artifacts.observation.observed_at == observed_at
+    assert result.reactive_v2_artifacts.observation.perception.observed_at == observed_at
 
 
 @pytest.mark.asyncio

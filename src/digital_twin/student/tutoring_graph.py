@@ -423,11 +423,13 @@ class DeterministicTurnInterpreter:
     implementation_id = "deterministic-turn-interpreter-v1"
 
     _CONFUSION = re.compile(
-        r"\b(confused|confusing|don't understand|do not understand|lost|stuck|why)\b",
+        r"\b(confused|confusing|don't understand|do not understand|lost|stuck|why|"
+        r"unsure|uncertain|need (?:a )?hint|not clear|having trouble)\b",
         re.IGNORECASE,
     )
     _ATTEMPT = re.compile(
-        r"\b(i tried|my attempt|because|therefore|so i|i think|i got|=)\b",
+        r"\b(i tried|my attempt|my (?:current )?(?:explanation|reasoning)|because|"
+        r"therefore|so i|i think|i believe|i got|=)\b",
         re.IGNORECASE,
     )
     _MISCONCEPTION = re.compile(
@@ -1015,6 +1017,7 @@ class GovernedReactiveTutoringGraphV2:
         signals = self.interpreter.interpret(runtime.context.graph_input.student_message)
         perception = TurnPerceptionV2(
             event_kind="student-message",
+            observed_at=runtime.context.graph_input.observed_at,
             **signals.model_dump(mode="python"),
         )
         learner_state = state["learner_state"].model_copy(deep=True)
@@ -1068,6 +1071,7 @@ class GovernedReactiveTutoringGraphV2:
             assessment_outcome=assessment_outcome,
             assessment_confidence=assessment_confidence,
             source_turn_key=source_turn_key,
+            observed_at=graph_input.observed_at,
         )
         return {
             "concept_ids": concept_ids,

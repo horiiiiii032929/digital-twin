@@ -180,7 +180,7 @@ class _SwitchableGenerator:
 
 
 class _SwitchableReactivePlanner:
-    """Network-free stand-in that reproduces the provider failure boundary."""
+    """Network-free stand-in for the live planner's deterministic fallback."""
 
     model_id = "evaluation/gpt-5.6-terra-stand-in"
 
@@ -190,7 +190,11 @@ class _SwitchableReactivePlanner:
 
     async def propose(self, **kwargs):
         if self.failed:
-            raise LlmUnavailableError()
+            # LiveReactiveSemanticPlanner catches transport unavailability and
+            # delegates to this same deterministic planner.  The network-free
+            # product simulation must preserve that behavior rather than turn
+            # a recoverable provider outage into a graph failure.
+            return await self.delegate.propose(**kwargs)
         return await self.delegate.propose(**kwargs)
 
 

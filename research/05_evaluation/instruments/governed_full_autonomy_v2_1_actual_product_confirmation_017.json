@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-017",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution-authorization-revoked",
   "owner_issue": 184,
   "parent_issue": 8,
   "decision_question": "Does the selected H+E1 product with pedagogy-aware source-semantic grounding pass safety and expected-intervention gates on fresh actual-product cases?",
@@ -106,9 +106,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "authorization_source": "User standing authorization to execute the finite audited plan and all required model runs on 2026-09-03.",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "Revoked after the sole corrective attempt stopped before bulk. The selected autonomous canary also followed a deterministic product path and made zero provider calls; the full network-free audit then exposed an autonomy-lifecycle integration defect.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0
@@ -161,10 +161,11 @@
   },
   "boundaries": [
     "Attempt 016 stopped after two public canaries and zero provider calls; hidden gold stayed closed.",
-    "Attempt 017 changes only the second canary from a newly deterministic reactive fast path to an autonomous case that necessarily exercises the provider path.",
+    "Attempt 017 changed only the second canary, but the case did not necessarily exercise the provider path: the V3 fast path did not classify its uncertainty and attempt language, so no learner goal or due opportunity was created.",
     "The 016 public and hidden packages, product methods, prompts, cases, gold, gates, and model roles are unchanged.",
     "V3 uses only student-visible wording plus approved public source titles and source-side atoms; it cannot access gold or author facts.",
     "Distinct canonical claim classes still force clarification before generation.",
+    "The second invalid attempt exhausts the preregistered same-package harness-correction allowance; no third 016-package execution is permitted.",
     "Real professor fidelity, real student usability, and learning improvement are not established."
   ]
 }
