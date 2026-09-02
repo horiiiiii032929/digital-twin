@@ -191,16 +191,18 @@ gate. The hard gate is deterministic event/action-envelope validity, while
 paired policy utility and regret measure pedagogical choice quality.
 
 The fresh method successor
-`successor-architecture-policy-value-fold-004-001` is build-qualified but
-provider-unauthorized. Its guarded policy-value planner starts from
+`successor-architecture-policy-value-fold-004-001` is build-qualified and now
+separately frozen for one bounded execution. Its guarded policy-value planner starts from
 deterministic A and accepts a Luna proposal only when it remains inside
 authority, agrees with the analytic forward model, and beats A by the existing
 `0.04` predicted-utility margin. Ordinary provider or semantic failure returns
 A; identity drift remains fatal. The successor contains 150 fresh cases and
 600 paired A/B/C/H cells, with one canary, at most 120 single-case planner
 calls, zero retries, and a USD 2 stop. It does not reopen or rescore the three
-exhausted folds. All earlier 40 findings and SA8–SA10 are terminally closed;
-there are no open audit findings.
+exhausted folds. Only this successor is authorized for at most 121 direct Luna
+calls, zero retries, and USD 2; no confirmation or engine-comparison authority
+is implied. All earlier 40 findings and SA8–SA10 are terminally closed; there
+are no open audit findings.
 
 ## Local R1 autonomy release selection
 

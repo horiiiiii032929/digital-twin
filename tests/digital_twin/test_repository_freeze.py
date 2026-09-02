@@ -41,6 +41,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
+        "successor-architecture-policy-value-fold-004-001",
     }
 
     for pilot_id in pilot_ids:
@@ -74,7 +75,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "successor-architecture-development-fold-002-single-case-001",
         "successor-architecture-development-fold-002-single-case-attempt-002",
         "successor-architecture-development-fold-003-single-case-001",
-        "successor-architecture-policy-value-fold-004-001",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

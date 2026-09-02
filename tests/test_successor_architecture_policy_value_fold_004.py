@@ -21,18 +21,18 @@ def test_successor_fold_is_fresh_byte_stable_and_gold_isolated():
     assert gold["preferred_action_is_diagnostic_not_transition_validity"] is True
 
 
-def test_successor_runner_is_bounded_and_unauthorized():
+def test_successor_runner_is_bounded_and_authorized_for_one_frozen_execution():
     validation = runner.validate()
     simulation = runner.simulate()
     preflight = runner.preflight(resume=False)
 
-    assert validation["instrument_status"] == "reviewed-provider-unauthorized"
-    assert validation["provider_execution_authorized"] is False
-    assert validation["paid_execution_authorized"] is False
+    assert validation["instrument_status"] == "frozen-pending-execution"
+    assert validation["provider_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is True
     assert simulation["maximum_provider_calls"] == 121
     assert simulation["condition_cell_count"] == 600
     assert simulation["gold_loaded"] is False
-    assert "provider-execution-not-authorized" in preflight["blockers"]
+    assert "provider-execution-not-authorized" not in preflight["blockers"]
 
 
 def test_transition_validity_uses_authority_envelope_not_single_preference():

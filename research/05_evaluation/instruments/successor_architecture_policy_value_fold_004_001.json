@@ -2,7 +2,7 @@
   "schema_version": 1,
   "instrument_id": "successor-architecture-policy-value-fold-004-001",
   "program_id": "successor-architecture-paired-comparison-001",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "predecessor": {
     "terminal_result": "research/05_evaluation/records/successor-architecture-development-fold-003-single-case-001.json",
@@ -70,8 +70,8 @@
     "maximum_output_tokens": 128000
   },
   "execution": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "automatic_progression_authorized": false,
     "maximum_provider_calls": 121,
     "maximum_transport_retries": 0,
