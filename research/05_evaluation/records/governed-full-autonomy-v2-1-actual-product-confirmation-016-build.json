@@ -6,8 +6,8 @@
   "stage_id": "pedagogy-aware-h-e1-build-016",
   "status": "completed-go-deeper-build-only",
   "decision_question": "Is a fresh source- and wording-disjoint H+E1 confirmation with pedagogy-aware source-semantic grounding ready for one provider-backed execution?",
-  "code_revision": "2f9b299530c2b46b41417c69a086f481dce12be9",
-  "dirty_state": true,
+  "code_revision": "e25563478da2b6c788022f4f71de50bec787d9e4",
+  "dirty_state": false,
   "bindings": [
     {
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_016.json",
