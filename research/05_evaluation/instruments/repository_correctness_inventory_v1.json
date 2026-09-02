@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cd74fecd10e3ca2aaccc28e9ee60be5864e738420284d95cf38a621f4c6b3232",
+  "record_sha256": "9f9f63eb8b9723cb8ad859e0bc1f8a959212f0b20263a69c051555c6a1ebd6f5",
   "records": [
     {
       "audit": {
@@ -5256,7 +5256,7 @@
     {
       "audit": {
         "domain": "autonomy-architecture-evaluation",
-        "evidence": "Instrument audit confirmed fresh case/hash bindings, deterministic A/B/C/H conditions, a planner-only 121-call ceiling, zero retries, a USD 2 stop, gold isolation, corrected validity semantics, and one explicit frozen paid authorization with no automatic progression.",
+        "evidence": "Instrument audit confirms immutable fresh case/hash bindings, deterministic A/B/C/H conditions, the completed 121-call execution, hidden-gold opening only after durable cells, and terminal authorization revocation with no automatic progression.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -5267,7 +5267,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/successor_architecture_policy_value_fold_004_001.json",
       "risk": "high",
-      "sha256": "fa3484c2a32961b67f4c02f8a746f81554415b5f86bec38201858ffa4c15c530"
+      "sha256": "0ffae82b8019bd78b5e55afe618ad6fad7af61b462f809a5de9f6e008d48d480"
     },
     {
       "audit": {
@@ -12471,7 +12471,7 @@
     {
       "audit": {
         "domain": "repository-correctness-controls",
-        "evidence": "The global freeze remains active; every fold-001 through fold-003 execution is terminal with authority revoked, and only the separately reviewed policy-value Fold 004 is allowlisted for external model and method evaluation. No confirmation or engine-comparison authority is present.",
+        "evidence": "The global freeze remains active; every fold-001 through fold-004 execution is terminal with authority revoked. No confirmation or engine-comparison authority is present.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -12482,7 +12482,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "900c24eac3a1759cd8e3d91ceaa2ea0fc24247400abbc8b82035300e1757d590"
+      "sha256": "868d9e682f5c33eaf04c5d0ae0777f1e7ed11f7c299a6cde3986684489ad00f2"
     },
     {
       "audit": {
@@ -13319,7 +13319,7 @@
     {
       "audit": {
         "domain": "verification",
-        "evidence": "Tests enumerate every exact bounded authorization, prove all terminal fold-001 through fold-003 runs remain blocked, and bind the only fresh policy-value authorization to external model and method evaluation operations.",
+        "evidence": "Tests enumerate every exact bounded authorization and prove all terminal fold-001 through fold-004 runs remain blocked after one-time execution authority is revoked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -13330,7 +13330,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "d79b92a5687c3965b918a01f17281c0a7ab36b093ca933a04192c68eeee34a04"
+      "sha256": "411d8361cfff175f6214a1f9b8cdf6b5435828517e34b70311de262ae03a2224"
     },
     {
       "audit": {
@@ -16119,7 +16119,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused tests prove fresh and isolated dataset construction, exact frozen authorization state, event-envelope transition validity independent of exact preference, and safe deterministic provider-failure fallback.",
+        "evidence": "Focused tests prove fresh and isolated dataset construction, terminal authorization revocation, event-envelope transition validity independent of exact preference, and safe deterministic provider-failure fallback.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex policy-value successor audit"
@@ -16130,7 +16130,7 @@
       "package_commands": [],
       "path": "tests/test_successor_architecture_policy_value_fold_004.py",
       "risk": "medium",
-      "sha256": "085f1f1798cabe702b570f21b74c15abb261d759cdd9640b7f56b09a6926595d"
+      "sha256": "0fac63bf63bdb157bf7f333dfcd9361fa1a512bade0e4709c684140c94267b2d"
     },
     {
       "audit": {
