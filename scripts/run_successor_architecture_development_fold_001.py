@@ -97,6 +97,12 @@ def _load_json(path: Path) -> dict[str, Any]:
     return value
 
 
+def _atomic_write(path: Path, content: str) -> None:
+    temporary = path.with_name(f".{path.name}.tmp")
+    temporary.write_text(content, encoding="utf-8")
+    os.replace(temporary, path)
+
+
 def _load_bound_package(binding: dict[str, Any], *, gold: bool) -> dict[str, Any]:
     prefix = "hidden_gold" if gold else "public"
     path = ROOT / str(binding[f"{prefix}_path"])
@@ -511,6 +517,10 @@ def preflight(*, resume: bool) -> dict[str, Any]:
             blockers.append(f"resume-artifact-missing:{path.name}")
         if not resume and path.exists():
             blockers.append(f"exclusive-output-exists:{path.name}")
+    if not resume:
+        for path in (RESULT_PATH, SUMMARY_PATH):
+            if path.exists():
+                blockers.append(f"exclusive-output-exists:{path.name}")
     return {
         **result,
         "status": "ready" if not blockers else "blocked",
@@ -965,10 +975,13 @@ async def execute(*, resume: bool) -> dict[str, Any]:
                 ],
             }
         )
-        provider_ledger.mark_complete()
+        _atomic_write(
+            RESULT_PATH,
+            json.dumps(result, indent=2, sort_keys=True) + "\n",
+        )
+        _atomic_write(SUMMARY_PATH, _summary(result))
         response_ledger.complete()
-        RESULT_PATH.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
-        SUMMARY_PATH.write_text(_summary(result), encoding="utf-8")
+        provider_ledger.mark_complete()
         return result
     except Exception:
         provider_ledger.mark_invalid_execution()

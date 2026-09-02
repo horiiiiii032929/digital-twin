@@ -35,6 +35,13 @@
       "severity": "medium",
       "title": "Simulated policy utility duplicated binary acceptable-move accuracy",
       "resolution": "Continuous action utility now comes from a reproducible hidden simulated learner outcome and remains isolated until all 600 architecture cells are durable."
+    },
+    {
+      "disposition": "fixed",
+      "id": "SA6",
+      "severity": "medium",
+      "title": "Existing durable result paths were not rejected before a new execution",
+      "resolution": "Fresh execution now rejects reused result or summary paths, publishes both with atomic replacement, and can safely resume a pre-terminal finalization."
     }
   ],
   "limitations": [

@@ -10,6 +10,7 @@
 - `SA3` — each architecture now has its own LangGraph checkpoint and idempotency namespace.
 - `SA4` — the paid runner is registered in the authoritative freeze registry and guarded at both CLI and execution boundaries.
 - `SA5` — policy utility is now a continuous hidden-outcome measure rather than a duplicate of binary accuracy.
+- `SA6` — result publication is exclusive and atomic; interrupted finalization remains resumable.
 
 The repository inventory reports 963/963 audited files and zero open findings. The freeze registry and AST-discovered protected set both contain 147 entrypoints.
 

@@ -10576,23 +10576,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
-      "evidence": "Line-by-line runner review plus network-free simulation confirmed case-keyed strict provider schemas, exact model identity and cost accounting, architecture-scoped checkpoint namespaces, gold opening only after 600 durable cells, atomic resume, bounded calls, and repository freeze guards on both external-model and method-evaluation operations.",
+      "evidence": "Line-by-line runner review plus network-free simulation confirmed case-keyed strict provider schemas, exact model identity and cost accounting, architecture-scoped checkpoint namespaces, gold opening only after 600 durable cells, atomic resume/publication, exclusive result paths, bounded calls, and repository freeze guards on both external-model and method-evaluation operations.",
       "findings": [],
       "path": "scripts/run_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture development audit",
-      "sha256": "57ec7180fb729147f28e8e7a6117e14c5adfceabb10130ee3105653876093d28"
+      "sha256": "f65113b73faa9835242414eebc5f0ad37282ea4947b34a9182a2beff6dd2b09b"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Seven focused tests cover balanced construction, hidden-gold isolation, byte stability, bounded no-call simulation, strict case-keyed schemas, duplicate/unknown IDs, cross-condition checkpoint separation, independent utility scoring, and shared learner-state exclusion from selection.",
+      "evidence": "Eight focused tests cover balanced construction, hidden-gold isolation, byte stability, bounded no-call simulation, strict case-keyed schemas, duplicate/unknown IDs, exclusive result paths, cross-condition checkpoint separation, independent utility scoring, and shared learner-state exclusion from selection.",
       "findings": [],
       "path": "tests/test_successor_architecture_development_fold_001.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture development audit",
-      "sha256": "14a772bd856eda12bee596641236d10659ff5c0b9ea7693b4818160d3d2b652a"
+      "sha256": "03d8936395b9ad27c341084b99c79a53957a43d0e9e4952e7e521a91c8d3aee7"
     }
   ],
   "schema_version": 1

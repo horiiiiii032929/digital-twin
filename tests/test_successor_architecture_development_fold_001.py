@@ -51,6 +51,16 @@ def test_live_instrument_and_network_free_simulation_are_bounded():
     assert simulation["planner_batch_count"] == 30
 
 
+def test_preflight_rejects_reused_result_path(monkeypatch, tmp_path):
+    existing = tmp_path / "existing-result.json"
+    existing.write_text("{}\n", encoding="utf-8")
+    monkeypatch.setattr(runner, "RESULT_PATH", existing)
+
+    result = runner.preflight(resume=False)
+
+    assert f"exclusive-output-exists:{existing.name}" in result["blockers"]
+
+
 def test_provider_batch_schemas_are_strict_and_case_keyed():
     proposal = runner._proposal_schema()
     verifier = runner._verifier_schema()
