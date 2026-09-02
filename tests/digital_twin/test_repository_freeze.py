@@ -41,7 +41,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
-        "successor-architecture-development-fold-002-single-case-001",
     }
 
     for pilot_id in pilot_ids:
@@ -57,9 +56,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "governed-full-autonomy-v2-1-grounding-successor-011"
     ] == ("dataset_generation", "method_evaluation_execution")
-    assert BOUNDED_PILOT_AUTHORIZATIONS[
-        "successor-architecture-development-fold-002-single-case-001"
-    ] == ("external_model_evaluation", "method_evaluation_execution")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",
@@ -75,6 +71,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
         "successor-architecture-development-fold-001",
         "successor-architecture-development-fold-001-attempt-002",
+        "successor-architecture-development-fold-002-single-case-001",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

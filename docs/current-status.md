@@ -119,6 +119,15 @@ gate passed 1,656 Python tests, 50 frontend tests, lint, production build,
 zero vulnerabilities. Provider and paid execution remain unauthorized, and no
 architecture or engine is selected yet.
 
+Its first execution at revision `8eb9c39` is now immutable
+`invalid-execution` evidence. The direct single-case transport completed two
+canaries and 120 planner attempts, including two recorded connection failures,
+for 122 calls and USD 0.0506106. Before any graph cell was persisted, runtime
+composition prefixed a provider reason beyond the 128-character output limit.
+Hidden gold remained unopened. Authority is revoked; one fresh harness-only
+correction may bound the composed diagnostic without changing the scientific
+inputs or method.
+
 ## Local R1 autonomy release selection
 
 The active release checkpoint has reached `Keep`. Confirmation 013 executed

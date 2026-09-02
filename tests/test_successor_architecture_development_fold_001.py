@@ -83,14 +83,14 @@ def test_corrective_attempt_reuses_scientific_inputs_but_has_fresh_output_identi
     assert original.result_path != corrective.result_path
 
 
-def test_single_case_successor_is_frozen_and_bounded_for_execution():
+def test_single_case_successor_is_terminal_and_authority_revoked():
     context = runner._run_context("fold-002")
     validation = runner.validate(context)
     simulation = runner.simulate(context)
 
-    assert validation["instrument_status"] == "frozen-pending-execution"
-    assert validation["provider_execution_authorized"] is True
-    assert validation["paid_execution_authorized"] is True
+    assert validation["instrument_status"] == "invalid-execution-authorization-revoked"
+    assert validation["provider_execution_authorized"] is False
+    assert validation["paid_execution_authorized"] is False
     assert simulation["maximum_provider_calls"] == 242
     assert simulation["planner_batch_count"] == 120
     assert simulation["gold_loaded"] is False

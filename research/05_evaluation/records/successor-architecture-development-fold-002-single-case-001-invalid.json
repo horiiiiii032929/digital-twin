@@ -1,0 +1,64 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-002-single-case-001-invalid",
+  "code_revision": "8eb9c39",
+  "status": "invalid-execution",
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "The single-case transport completed the canaries and all 120 planner attempts, but actual-graph materialization raised a Pydantic validation error when an otherwise valid 128-character provider reason was prefixed into a 128-character runtime field. This is a demonstrated runtime/harness boundary defect, not architecture quality. One harness-only corrective attempt is permitted without changing cases, prompts, models, gold, gates, or scientific method."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-002-single-case-001",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_002_single_case_001.json",
+    "run_binding_sha256": "b2313f7e558a89dfc61425df0f859ce05647ca3a2281ad7fd73ac5d725329782"
+  },
+  "dataset": {
+    "case_count": 150,
+    "planned_architecture_cells": 600,
+    "public_file_sha256": "a6436dd4532670b2f2fddc769983337719a2d0b6f66ab5259aeb504d907a7e76",
+    "hidden_gold_file_sha256": "fd38a1e2de095da22f8b8db363dbe59d0b67046756c8556a6b44f76f13ea036e",
+    "hidden_gold_opened": false,
+    "private_data_used": false
+  },
+  "failure": {
+    "classification": "runtime-output-boundary-harness-defect",
+    "exception": "pydantic.ValidationError",
+    "failed_contract": "AutonomousPlannerOutputV1.reason_code max_length=128",
+    "cause": "The runtime added an architecture-selected prefix after validating the provider reason at the same 128-character ceiling.",
+    "quality_failure": false,
+    "harness_failure": true,
+    "identity_drift": false,
+    "response_cells_persisted": 0,
+    "same_output_resume_allowed": false,
+    "harness_only_corrective_attempt_allowed": true
+  },
+  "operational": {
+    "provider": "OpenAI direct Responses API",
+    "model": "gpt-5.6-luna",
+    "provider_calls": 122,
+    "completed_calls": 120,
+    "failed_transport_calls": 2,
+    "input_tokens": 62187,
+    "output_tokens": 31811,
+    "reported_cost_usd": 0.0506106,
+    "latency_ms_total": 500907.56,
+    "completed_canary_calls": 2,
+    "completed_planner_calls": 118,
+    "failed_planner_calls": 2,
+    "completed_verifier_calls": 0,
+    "transport_retries": 0
+  },
+  "authorization": {
+    "revoked": true,
+    "attempt_may_resume": false,
+    "same_output_path_may_be_reused": false,
+    "one_fresh_corrective_attempt_allowed": true
+  },
+  "limitations": [
+    "No hidden gold was opened and no architecture cell was scored.",
+    "The two transport failures were already designed to become safe no-action quality evidence and did not invalidate the run.",
+    "The result says nothing about the relative quality of A, B, C, or C+V."
+  ]
+}
