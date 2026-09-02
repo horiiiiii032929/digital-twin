@@ -511,7 +511,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness",
-      "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+      "evidence": "npm advisory triage identified GHSA-c83g-rgw3-j3cx and GHSA-73wf-gq98-2v4g in transitive Browserslist 4.28.4; the lock now resolves Browserslist 4.28.8 and related metadata packages, npm audit reports zero vulnerabilities, and 50 frontend tests, lint, and production build pass.",
       "findings": [],
       "path": "apps/web/src/hooks/use-onboarding-session.ts",
       "reviewed_at": "2026-08-20",
@@ -954,20 +954,20 @@
       "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
       "findings": [],
       "path": "package-lock.json",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "repository-maintenance",
-      "sha256": "896d0c74b3abbcefac64a3667f42f32640cb1605eee387feb9bdad1485a3cef4"
+      "reviewed_at": "2026-09-02",
+      "reviewer": "Codex dependency advisory closure audit",
+      "sha256": "8bd17271a534dc28983b45d60b3d3a72f848446c8fea956129d6b81480d81a11"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual command-surface review plus the complete architecture-evolution verification confirmed the A/B/C/C+V build-only validator and simulation are part of the normal repository gate; no paid execution command or authority was added.",
+      "evidence": "Manual command-surface review plus the complete architecture-evolution verification confirmed the A/B/C/C+V build-only validator and simulation are part of the normal repository gate; a root override fixes Browserslist at advisory-free 4.28.8, npm audit reports zero vulnerabilities, and no paid execution command or authority was added.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-architecture correctness audit",
-      "sha256": "065b48b11cea006b116bad12b88fbebad591dc43330fe820514e4dcc4f5ec65f"
+      "sha256": "354261dcb789632bc874d2e3db474f9dff6cec3e137e0dac978aff01eb8942bc"
     },
     {
       "audit_status": "audited",
