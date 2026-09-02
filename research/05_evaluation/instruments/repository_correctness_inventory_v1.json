@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0a358337a1e44e9d1cc29ec461d5eea8d273da2ea939eb6e42e99d77d54a7b9b",
+  "record_sha256": "dd0f2190f78114a2190ac0f0cafd93313f1e4e6401b548790d2849163e30e379",
   "records": [
     {
       "audit": {
@@ -1335,8 +1335,8 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "local-r1-release-qualification-v2-1",
+        "evidence": "HTTPS verifier review extends the credentialed professor/student journey to the qualified governed V2.1 runtime, including immutable release-bound course-domain approval before student turns, while preserving T0/T1-v1 restart and mode checks.",
         "findings": [],
         "reviewed_at": "2026-08-29",
         "reviewer": "Codex repository correctness sweep"
@@ -9920,8 +9920,8 @@
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex V2.1 live-qualification root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9931,7 +9931,7 @@
       ],
       "path": "scripts/verify_https_staging.py",
       "risk": "high",
-      "sha256": "b726e7be65083e72aa51e6d540fe0a0d3b64e3ee1f245cd1b79f6aeae29ae45f"
+      "sha256": "1cd8ef4c6fa710ff0d8b6b4c600d036053bdad151404116b331c785243fb8832"
     },
     {
       "audit": {
@@ -10031,7 +10031,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "fbe5cfe72dbf8ae017448fedacecae2085ddc52dfcfffaa58a1c4a5befe2e72b"
+      "sha256": "c40593cf928680a60f270868f770a59da70455ab841d6a9cd361ff6e5fdf55a6"
     },
     {
       "audit": {
@@ -11327,7 +11327,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/ambiguity_safe_evidence.py",
       "risk": "high",
-      "sha256": "ae308e0d88d1a59b17e7a205101943d30073b6ab8b2d8df344e9babc968ca900"
+      "sha256": "1356687f1f4e563b5086d95c5b7c60b141db5e915d79f9ff8171a992ad9c2798"
     },
     {
       "audit": {
@@ -11519,7 +11519,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/reference_uniqueness.py",
       "risk": "high",
-      "sha256": "6ba664e8b0399ee92879278ba23b6d48590ddee906b1dc92991e3aae657f55e5"
+      "sha256": "034a6571f3a11cfe823c90b930930e9c63461182d541c04ed2e53c2dffe97c4d"
     },
     {
       "audit": {
@@ -12303,7 +12303,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "9ea333851131880a86bf45f5b917988e308e36eabde2772a3d5a6a19ecafb036"
+      "sha256": "4ebf246f721e841c1e0baf00761462e051f07c8a134e818e274ba88e1a5578a0"
     },
     {
       "audit": {
@@ -12335,7 +12335,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "9f85dad0643badc87664481a8eaa45db2d74a732aac5c7dc1051ea53b16f0969"
+      "sha256": "92e58c64098a46d66047786ea548772a9e251a97a8d9f05975d6d1de43897d7c"
     },
     {
       "audit": {
@@ -12367,12 +12367,12 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "ef7aa1390059df816211daa21e4736f28377a9e820769a7490d0a7e71cae4418"
+      "sha256": "5af56319d2cac819a36be02e59c01bc61065a3969b05b64b28bdad995131e82f"
     },
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
+        "evidence": "Verifier tests cover HTTPS URL and secret boundaries, required course-domain workflow coverage, T1-v1 mode checks, and governed V2.1 as a stateful runtime with exact mode and learner-state assertions.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -12623,7 +12623,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "b6251b93fe226483a92a09f462c050c0b2a9b15089769da4d405c53523166b46"
+      "sha256": "271c5d53a612275c4f9891eb6fd21f300666c8c8dd2f08f3a57dc9b27beb4d6e"
     },
     {
       "audit": {
@@ -12927,7 +12927,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_semantic_evidence_atoms.py",
       "risk": "medium",
-      "sha256": "dbb72111b44e8c9bc20046da692325b98e039ecac452ea6415ca44b509c215c8"
+      "sha256": "fda3fdc482b571d808c428f597321feb6c926a70b9474371756e13faa9bc9fcf"
     },
     {
       "audit": {
@@ -15686,8 +15686,8 @@
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-09-02",
+        "reviewer": "Codex V2.1 live-qualification root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15695,7 +15695,7 @@
       "package_commands": [],
       "path": "tests/test_verify_https_staging.py",
       "risk": "medium",
-      "sha256": "1c2d523f09d1421585e82fdd84f21544405341c104c8cf20fecbde42e35c6e0b"
+      "sha256": "fd5de75d782ca5de2a3fe66fa72d0b7f1ccb20ec71076fcf244c8237df552e04"
     },
     {
       "audit": {

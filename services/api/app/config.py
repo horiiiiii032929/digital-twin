@@ -283,26 +283,22 @@ class AppSettings:
                 "APP_GENERATOR_MODE=deepseek-v4-flash is historical and cannot "
                 "be selected by the prospective R1 runtime"
             )
+        active_openai_planner = bool(
+            self.autonomy_planner_mode
+            == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
+            and self.student_tutoring_mode
+            == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        )
         if (
             self.generator_mode in {
                 GeneratorMode.OPENAI_GPT_5_4_MINI,
                 GeneratorMode.OPENAI_PROFILE_SELECTED,
             }
-            or self.autonomy_planner_mode
-            == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
+            or active_openai_planner
         ) and not os.getenv("OPENAI_API_KEY", "").strip():
             raise ValueError(
                 "OPENAI_API_KEY is required when the generator or autonomy "
                 "planner selects an OpenAI model"
-            )
-        if (
-            self.autonomy_planner_mode
-            == AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA
-            and self.student_tutoring_mode
-            != StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
-        ):
-            raise ValueError(
-                "the OpenAI autonomy planner requires governed T1-v2 mode"
             )
         if not self.student_profile_path.is_file():
             raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")

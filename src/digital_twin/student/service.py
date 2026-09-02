@@ -85,8 +85,8 @@ from src.digital_twin.student.tutoring_graph import (
     LearnerState,
     ReactiveSemanticPlanner,
     TutoringGraphInput,
-    TutoringIntent,
     TutoringMode,
+    deterministic_policy_boundary_answer,
     retrieval_boundary_intent,
     initial_learner_state,
 )
@@ -1224,37 +1224,7 @@ class StudentTutoringService:
 
     @staticmethod
     def _graph_policy_answer(intent: str) -> TutorAnswer | None:
-        responses = {
-            TutoringIntent.REFUSE_AND_REDIRECT: (
-                "I cannot complete graded work for you. Share what you have tried, "
-                "and I can help with one bounded next step.",
-                "redirect-graded-work",
-            ),
-            TutoringIntent.ABSTAIN_NO_EVIDENCE: (
-                "I do not have enough approved course evidence to support that "
-                "response. Please refine the question or ask the instructor.",
-                "no-evidence",
-            ),
-            TutoringIntent.CLARIFY_REQUEST: (
-                "Which concept or step would you like to work through?",
-                "clarify-request",
-            ),
-        }
-        selected = responses.get(intent)
-        if selected is None:
-            return None
-        content, action = selected
-        return TutorAnswer(
-            content=content,
-            trace=GenerationTrace(
-                generator_id="bounded-tutoring-graph-v1",
-                provider_model="not-called",
-                prompt_version="graph-policy-v1",
-                policy_action=action,
-                latency_ms=0,
-                usage=GenerationUsage(),
-            ),
-        )
+        return deterministic_policy_boundary_answer(intent)
 
     @staticmethod
     def _graph_fallback(

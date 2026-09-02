@@ -497,6 +497,23 @@ def test_live_generator_configuration_requires_environment_credential(
         ).validate()
 
 
+def test_t0_rollback_ignores_inactive_openai_autonomy_planner(
+    tmp_path, monkeypatch
+):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        student_tutoring_mode=StudentTutoringMode.GROUNDED_ASSISTANT,
+        autonomy_planner_mode=AutonomyPlannerMode.OPENAI_GPT_5_6_TERRA,
+        student_profile_path=CANDIDATE_PROFILE,
+    ).validate()
+
+
 def test_historical_deepseek_runtime_mode_is_rejected(tmp_path):
     with pytest.raises(ValueError, match="historical"):
         AppSettings(
