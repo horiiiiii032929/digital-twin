@@ -44,9 +44,18 @@ Luna/Luna, E2 Terra/Luna, E3 Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini.
 GPT-5.6 Sol, Gemma, Claude, DeepSeek, OpenRouter routing, and retired local
 general models are excluded from the active comparison.
 
-This is build-only work. The network-free conformance gate must pass before
-the three development rounds, and no architecture or model allocation is
-selected until the paired quality evidence is recorded. The active safe local
+Build result `successor-architecture-paired-comparison-001-build-001` now
+passes the network-free conformance gate: 48/48 actual governed-graph cells
+completed with zero action-envelope, authorization, source-lineage, or loop
+defects. Candidate A made zero planner calls, and C at lookahead depth zero
+produced byte-identical planner outputs to B. This validates the comparison
+mechanics only; it does not select an architecture or model allocation.
+
+Repository correctness is 959/959 audited with zero pending or open findings.
+The additional npm advisory found during final qualification was closed by
+moving transitive Browserslist from 4.28.4 to 4.28.8; `npm audit` now reports
+zero vulnerabilities. The complete Python suite passed 1,637 tests and the
+frontend passed 50 tests, lint, and production build. The active safe local
 release boundary remains bounded T1-v1 with deterministic T0 rollback.
 
 ## Local R1 autonomy release selection

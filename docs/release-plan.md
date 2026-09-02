@@ -35,6 +35,12 @@ fresh 1,000-case confirmation, the labelled known 10,000+1,000 regression, the
 820-case autonomy portfolio, and local product qualification. Passing a
 network-free harness does not select a release.
 
+Build result `successor-architecture-paired-comparison-001-build-001` passed
+all 48 network-free governed-graph cells. This qualifies the comparison
+boundary, not any architecture or engine. Repository correctness is 959/959
+audited, and the dependency advisory discovered during qualification is closed
+with a zero-vulnerability npm audit.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,

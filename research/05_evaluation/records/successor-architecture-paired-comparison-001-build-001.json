@@ -1,0 +1,52 @@
+{
+  "architecture_provider_calls_simulated": {
+    "deterministic-workflow-a": 0,
+    "governed-single-planner-b": 12,
+    "hierarchical-model-based-c": 12,
+    "hierarchical-model-based-c-plus-verifier": 12
+  },
+  "architecture_verifier_calls_simulated": {
+    "deterministic-workflow-a": 0,
+    "governed-single-planner-b": 0,
+    "hierarchical-model-based-c": 0,
+    "hierarchical-model-based-c-plus-verifier": 8
+  },
+  "case_count": 48,
+  "code_revision": "07ff7d1c89d15d72da54c267a37b5eb2211302f1",
+  "decision": {
+    "outcome": "go-deeper",
+    "rationale": "The shared A/B/C/C+V runtime and paired evaluation boundary pass network-free conformance. No architecture or engine is selected until the preregistered quality comparisons execute.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "hard_gates": {
+    "all_48_cells_executed": true,
+    "all_graphs_bounded": true,
+    "c_plus_verifier_is_reject_only_ablation": true,
+    "candidate_a_zero_model_planning": true,
+    "candidate_b_is_depth_zero_c": true,
+    "instrument_valid": true,
+    "no_paid_or_network_activity": true,
+    "zero_action_envelope_violations": true,
+    "zero_invalid_lineage": true,
+    "zero_unauthorized_deliveries": true
+  },
+  "instrument": {
+    "path": "research/05_evaluation/instruments/successor_architecture_paired_comparison_001.json",
+    "sha256": "e8e1b4986c29c4ed2d7212eb3ff07a5d0152852b1dfee8bac00f59dda375abee"
+  },
+  "limitations": [
+    "This is network-free runtime conformance, not an architecture quality result.",
+    "Fixture planner outputs cannot establish pedagogical quality or an engine effect.",
+    "The final 1,000, known 10,000, autonomy 820, and product qualification remain unopened."
+  ],
+  "operational": {
+    "cost_usd": 0,
+    "real_provider_calls": 0,
+    "tokens": 0
+  },
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-paired-comparison-001-build-001",
+  "schema_version": 1,
+  "status": "build-only-qualified"
+}
