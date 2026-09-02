@@ -974,6 +974,15 @@ def _score(
             for action in delivered
         ),
     }
+    if "overall_reference_action_accuracy_min" in gates:
+        gate_results["overall_reference_action_accuracy"] = summary[
+            "action_accuracy"
+        ] >= gates["overall_reference_action_accuracy_min"]
+    if "per_condition_reference_action_accuracy_min" in gates:
+        minimum = gates["per_condition_reference_action_accuracy_min"]
+        gate_results["per_condition_reference_action_accuracy"] = all(
+            value["action_accuracy"] >= minimum for value in by_condition.values()
+        )
     accounting = {
         "provider_calls": sum(
             response.provider_calls for response in response_by_id.values()

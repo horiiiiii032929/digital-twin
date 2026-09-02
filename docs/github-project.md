@@ -82,17 +82,20 @@ and grounding architecture change on fresh development evidence. #105 remained `
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
-Issue #184 is the active architecture/model selection item. Fresh Fold 004 and
-Confirmation 005 selected guarded policy-value H, and the subsequent 300-case,
-1,200-cell E1–E4 comparison selected E1 (Luna/Luna) for whole-system
-confirmation. The paid run completed for USD 1.266516; its authority is
-revoked. Six findings `SE6-1`–`SE6-6` are closed, including the post-run shared
-trace-clock correction. Project status remains `In Progress / Go Deeper`
-because H+E1 is not a release selection until fresh factual, autonomy, and local
-product qualification pass. T0 and bounded T1-v1 remain rollback controls.
-The selected allocation is now wired into both the API factory and the
-flow-independent actual-product adapter as a prospective runtime mode. Staging
-continues to reject it until the new whole-system qualification record exists.
+Issue #184 remains the active architecture/model selection item. Fold 004 and
+Confirmation 005 selected guarded policy-value H; the E1–E4 comparison selected
+economical E1 (Luna/Luna). Confirmation 015 then passed every registered safety
+and autonomy gate but exposed release-blocking finding `SE7-2`: 600/600
+multi-turn trajectories omitted the expected confusion intervention because V2
+grounding treated pedagogical request language as factual target content.
+
+The original 015 Keep result is preserved, its authority is revoked, and no
+release is selected from it. The root-cause V3 grounding successor and fresh
+confirmation 016 are build-qualified. Project state remains `In Progress / Go
+Deeper`; the next finite checkpoint is 016, followed only on pass by fresh
+factual confirmation, known 10,000-case regression, and complete local product
+qualification. T0 and bounded T1-v1 remain rollback controls. Repository audit
+state is 991/991 with zero open findings.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

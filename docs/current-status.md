@@ -6,31 +6,35 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-## H+E1 whole-system confirmation reference correction
+## H+E1 whole-system confirmation and grounding successor
 
-The fresh 820-case confirmation 014 completed at clean revision `ba1cee9` with
-820/820 durable responses before hidden gold opened, 1,835 exact Luna calls,
-zero retries, and USD 0.4839428 cost. T0 and T1-v1 reached 100% action accuracy;
-T1-v2 reactive and autonomous reached 97.5% and 98.99%. Every safety,
-citation, scope, consent, timing, duplicate, loop, model-authority, restart,
-transition, termination, proactive-lineage, and grounding non-regression gate
-passed except the zero-unexpected-action gate.
+Confirmation 015 completed all 820 fresh actual-product cases before hidden
+gold opened. Its immutable result is formally `completed-keep` under the sixteen
+preregistered aggregate safety/autonomy gates: zero unauthorized actions,
+invalid citations, scope/consent/timing/duplicate/loop defects, and 100% restart,
+provider-fallback, transition, termination, and proactive-lineage gates. It
+made 1,533 exact Luna calls with zero retries and cost USD 0.4235282.
 
-Post-run finding `SE7-1` showed that all 30 disagreements came from inherited
-gold labels that required `no_action` after a provider failure even though the
-approved runtime requires a grounded deterministic T1-v1/T0 fallback on a later
-student turn. The original `completed-refine` output is preserved and is not
-post-hoc rescored, but confirmation 014 is reference-defective and cannot select
-the product. Its authority is revoked.
+Release selection is nevertheless withheld. Post-run finding `SE7-2` found that
+all 600 multi-turn trajectories skipped the expected confusion-turn
+intervention. The V2 gate measured the entire instructional request as one
+factual target, so pedagogical framing diluted evidence coverage and produced a
+safe but unhelpful `no_action`. The original Keep artifact is not changed or
+rescored; its authority is revoked and it is explicitly insufficient for
+release.
 
-A single source-disjoint corrective confirmation 015 is build-qualified on
-fresh source families 251–300. Its fallback contract was corrected
-prospectively from public events and conditions before package hashing. The
-820-case network-free mechanics pass with zero unexpected or unsafe actions;
-that simulation makes no provider-quality claim. After the complete repository
-gate and audit inventory returned clean, confirmation 015 received a separate
-one-time authorization limited to its exact instrument. H+E1 remains a
-candidate, not a release-selected profile, until the paid result is terminal.
+The root-cause successor is `pedagogy-aware-source-semantic-evidence-atoms-v3`.
+It preserves V2 as history, uses only public source titles and source-side atoms,
+removes instructional framing from coverage, allows one canonical region to
+support multiple requested targets, and still clarifies competing claim classes.
+A source- and wording-disjoint confirmation 016 is build-qualified with explicit
+overall and per-condition reference-action gates of 95%. Its network-free run
+restored all 450 reactive trajectory cases to 100% expected-action matching;
+provider-backed autonomy remains unclaimed until the fresh execution.
+
+The complete repository audit currently covers 991/991 execution-relevant files
+with zero pending or open findings. Confirmation 016 remains provider-
+unauthorized at this build checkpoint.
 
 ## Audit correction superseding the governed V2.1 release claim
 

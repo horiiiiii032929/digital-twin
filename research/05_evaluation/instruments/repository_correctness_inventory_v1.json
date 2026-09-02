@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 987
+    "audited": 991
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 244,
+    "active_or_unclassified_tooling": 246,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 260,
+    "evaluation_configuration": 261,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 222
+    "verification": 223
   },
-  "file_count": 987,
+  "file_count": 991,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "4f9774b035fc8aae3b498e687c39160fd837c3726557e12165f13a13da1d8d46",
+  "record_sha256": "6d3890fbc4ae990008b5d7d717f56939982eb7b54d6855a1a53c78f0f078431d",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Reviewed command surface after confirmation 014 termination and confirmation 015 construction. The fresh 015 validate, network-free simulation, guarded preflight, execute, and resume commands are explicit; historical commands remain available and no command bypasses the execution freeze.",
+        "domain": "release-command-surface",
+        "evidence": "Confirmation 016 validate/simulate/preflight/execute/resume commands are explicit and preserve guarded execution.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-014 reference and confirmation-015 build audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "bcd05516e430bfd49f6d58b34c565d049ccaf6e1dd13dfdb74c0a3018d34423c"
+      "sha256": "2f47308cc46577328593703769791e98aa62774c52db00df1bd832e845f2e873"
     },
     {
       "audit": {
@@ -4344,10 +4344,10 @@
     {
       "audit": {
         "domain": "actual-product-autonomy-confirmation-015",
-        "evidence": "Prospective instrument review verifies fresh source families 251-300, exact public and hidden hashes, the public-event-derived provider-failure fallback contract, unchanged H+E1 roles and hard gates, deterministic factual generation, no prior quality opening, and finite calls/cost. One-time provider authority was enabled only after the complete 1,692-test and 987/987 audit gate passed.",
+        "evidence": "Terminal authority is revoked; original Keep output is immutable; SE7-2 and the release-blocking post-run interpretation are explicit.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-015 authorization audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4355,7 +4355,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_015.json",
       "risk": "high",
-      "sha256": "0bb63790542e7b4fcb70cb11abe18bb8f8cfc75b5c1bd67ef0a9e919f4eb64f1"
+      "sha256": "0f6366876bb75df188daeb4d348c41e18b577b2d294a879c8b02da6a1514f0ce"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-confirmation-016",
+        "evidence": "Prospective fresh source/wording package, V3 grounding, action-accuracy gates, exact model roles, and provider-unauthorized boundary are explicit.",
+        "findings": [],
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_016.json",
+      "risk": "high",
+      "sha256": "ea649c80830e1d0dddfcf657960af6d97784b02b951f02ea2cac3b4f56916221"
     },
     {
       "audit": {
@@ -6735,6 +6751,22 @@
     },
     {
       "audit": {
+        "domain": "actual-product-autonomy-confirmation-016",
+        "evidence": "Builder creates 820 unique source- and wording-disjoint public/gold cases, validates hashes, and makes no provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
+      "risk": "high",
+      "sha256": "0e23b944d8155bc83298499d30517bf10aacb27fcdf57d99c0308bdc4ac40a73"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
         "findings": [],
@@ -7398,11 +7430,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-evaluation-002",
-        "evidence": "Actual-product factory review verified the selected H+E1 candidate can be injected through the flow-independent runtime while T0/T1-v1 and historical architecture controls remain unchanged.",
+        "domain": "actual-product-grounding-runtime",
+        "evidence": "V3 is separately selectable, preserves V2, materializes only approved source atoms, and keeps deterministic generation and policy authority.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex H+E1 product-integration audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7410,7 +7442,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "2fdadc0c23faeb35d713e542b3f49a8c782654f6ddb44747d96faa86f1d5cf71"
+      "sha256": "a55f021f3e8041f93107fccb66cdb0a8433342bd1a2a2beb46b15b59f854e18b"
     },
     {
       "audit": {
@@ -9099,11 +9131,33 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-evaluation-framework",
-        "evidence": "Shared-runner review verifies successor context carries architecture and bounded-strategy identity through validation, manifests, run bindings, product factory construction, canaries, atomic execution, and independent scoring without changing historical default behavior.",
+        "domain": "actual-product-autonomy-confirmation-016",
+        "evidence": "Runner binds H+E1, V3 grounding, deterministic factual generation, exact Luna identity, hidden-gold ordering, and both freeze guards.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex H+E1 confirmation-014 audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-confirmation-016",
+        "preflight:governed-autonomy-v2-1-actual-product-confirmation-016",
+        "resume:governed-autonomy-v2-1-actual-product-confirmation-016",
+        "simulate:governed-autonomy-v2-1-actual-product-confirmation-016",
+        "validate:governed-autonomy-v2-1-actual-product-confirmation-016"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
+      "risk": "high",
+      "sha256": "9e4617d2ab33f42824494e0acaea798736702ce1b6f7d7926392605dbc8ddcc2"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-evaluation-runner",
+        "evidence": "Optional prospective overall and per-condition reference-action gates are evaluated without changing historical instruments.",
+        "findings": [],
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9117,7 +9171,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "bff50fd2b666e3fcfd681a8f75593d4dbb68e618fd2d8fc9c47504ca47ca763d"
+      "sha256": "506f619d107839e620798c15870d1347dab2074725517268df78a651b287322b"
     },
     {
       "audit": {
@@ -10320,11 +10374,11 @@
     },
     {
       "audit": {
-        "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Reviewed confirmation-015 builder as pure deterministic contract construction while both 014 and 015 provider-backed runners remain AST-detected and guarded by external-model and method-evaluation freeze operations.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Pure confirmation 016 builder is exempted while its provider-backed runner remains registered and guarded.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-015 execution-boundary audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10334,7 +10388,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "448192338ae811402ed648d45eb4cd7201357dfb14d82bc4ebe6da871af6a98a"
+      "sha256": "51d7b0c0927e819d408c1e40ea2d0c3a97893e502c0201325719477f5dc8bbec"
     },
     {
       "audit": {
@@ -11282,11 +11336,11 @@
     },
     {
       "audit": {
-        "domain": "full-autonomy-evaluation-boundary",
-        "evidence": "Deterministic scorer review verified action-window matching, recipient/course/release checks, citation lineage, consent chronology, duplicate detection, goal termination, restart, bounded-loop, provider-failure, and model-authority invariants without graph-internal dependencies.",
+        "domain": "autonomy-scoring",
+        "evidence": "Reference-action matching and safety-contract aggregation are now separately labelled while the historical combined field remains compatible.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex #157 harness audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11294,7 +11348,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_scoring.py",
       "risk": "high",
-      "sha256": "070fed21c74be386cd8b25d94e16fd775ba91b4d104ea1a93d4ca6726eb4f4e9"
+      "sha256": "8ba06f2b40ade8a40b03ae37acb81aacd99f3ac3d5b784b5c69ade92704adbed"
     },
     {
       "audit": {
@@ -11938,11 +11992,11 @@
     },
     {
       "audit": {
-        "domain": "source-semantic-evidence-atoms",
-        "evidence": "Grounding export review confirms the ambiguity-safe wrapper, reference-uniqueness contracts, source-semantic V2 gate, retained historical gates, and canonical source rendering are explicit with no provider or hidden-gold dependency.",
+        "domain": "grounding-public-api",
+        "evidence": "V3 evidence gate is exported without replacing historical V1/V2 interfaces.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11950,7 +12004,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "4cb61e7244dfc1078da2144f40ccc1278541df2d732ab20795bb0b5590e2a288"
+      "sha256": "671073b00fb38687c541440450ace5224aabb99c7e8fea7f76a554dc3b0c484a"
     },
     {
       "audit": {
@@ -12274,11 +12328,11 @@
     },
     {
       "audit": {
-        "domain": "source-semantic-evidence-atoms",
-        "evidence": "Semantic-gate review verifies strict public source scoping and V2 ambiguity-aware clarify/abstain behavior while retaining immutable citable text, canonical ranges, relation-aware atom selection, authorization checks, and V1 historical behavior.",
+        "domain": "pedagogy-aware-grounding",
+        "evidence": "V3 removes instructional framing, uses public title anchors, permits one canonical region to support multiple targets, and clarifies distinct claim classes.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex ambiguity-safe grounding audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12286,7 +12340,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/semantic_evidence_atoms.py",
       "risk": "high",
-      "sha256": "30b90179eaf8489b761f57171a033745a39096218f3f5a42b4343f7ce8b0a13b"
+      "sha256": "d42f9851fce512c58435ba8398436c3934d6b8cfbf0f70b7f4c76952502b7eca"
     },
     {
       "audit": {
@@ -12690,11 +12744,11 @@
     },
     {
       "audit": {
-        "domain": "selected-autonomy-release-confirmation",
-        "evidence": "Revoked terminal confirmation 014 and registered confirmation 015 as protected for external-model and method-evaluation operations. Added only confirmation 015 to the bounded allowlist after its complete clean build gate; the registry has no missing guarded entrypoint.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Confirmation 015 authority is revoked and 016 provider entrypoint is protected but not authorized.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-015 authorization audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12702,7 +12756,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "296a149d020b3853c0b956c314e2c1f07494dc78903026b081053ea6cdb0733c"
+      "sha256": "ad322d22e019aae51420cbd0c089a1eb124423da5618f5d3f2e8d8c778a56464"
     },
     {
       "audit": {
@@ -13538,11 +13592,11 @@
     },
     {
       "audit": {
-        "domain": "evaluation-authorization-boundaries",
-        "evidence": "Reviewed the complete exact bounded-authorization set after confirmation 014 termination. Confirmation 014 remains revoked; only confirmation 015 is newly authorized for external-model and method-evaluation operations after its separate clean build checkpoint.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Regression verifies 015 and 016 are unauthorized and exact allowlist membership remains closed.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-015 authorization audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13550,7 +13604,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "a9f9477407f5e4b26eac14a9d9bcecc294947ae74ebce80e732654fbe35456be"
+      "sha256": "63891b9d259918427893347ec6d76df92a676cc2679516abd4543734da622f61"
     },
     {
       "audit": {
@@ -13650,11 +13704,11 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "domain": "pedagogy-aware-grounding",
+        "evidence": "Tests cover named instructional questions, ambiguity, generic abstention, and one-region multi-target support.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13662,7 +13716,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_semantic_evidence_atoms.py",
       "risk": "medium",
-      "sha256": "911b939278c6e5ff4b005264906c2079750b846f17ae9f224821fc3ffcb74d5d"
+      "sha256": "4139dfd7c52e20384831136078f8556136f5b8a35edf92bd9c004820704af0bb"
     },
     {
       "audit": {
@@ -15554,11 +15608,11 @@
     },
     {
       "audit": {
-        "domain": "verification-evidence",
-        "evidence": "Focused tests verify fresh source disjointness, exact 820-case cardinality, exactly 30 prospective public-event-derived fallback references, unchanged H+E1 roles, network-free execution safety without a provider-quality claim, and that only the exact one-time confirmation 015 freeze authority satisfies preflight.",
+        "domain": "actual-product-autonomy-confirmation-015",
+        "evidence": "Regression verifies terminal revocation while preserving source/reference construction and H+E1 roles.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-015 authorization audit"
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15566,7 +15620,23 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_015.py",
       "risk": "medium",
-      "sha256": "169959537e17d65766971d7ecb2d210dc6a435f46efd2afb6a05e284caa83b7e"
+      "sha256": "e1cafbcc094b0166dafee117bdb09b4fa52dc9c6616afe8cd8c3b2134f66c1f2"
+    },
+    {
+      "audit": {
+        "domain": "actual-product-autonomy-confirmation-016",
+        "evidence": "Tests verify fresh boundaries, V3 binding, explicit action gates, phrasing diversity, and fail-closed preflight.",
+        "findings": [],
+        "reviewed_at": "2026-09-02T22:57:23+00:00",
+        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
+      "risk": "medium",
+      "sha256": "1873581631a70de1e2d281c357f608e8373ad3ff534986188069665602d92436"
     },
     {
       "audit": {
@@ -16610,8 +16680,8 @@
     }
   ],
   "risk_counts": {
-    "high": 751,
-    "medium": 236
+    "high": 754,
+    "medium": 237
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

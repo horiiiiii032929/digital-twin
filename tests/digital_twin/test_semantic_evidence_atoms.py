@@ -17,6 +17,7 @@ from src.digital_twin.grounding.semantic_evidence_atoms import (
     ATOM_VERSION,
     SourceSemanticEvidenceAtomGateV1,
     SourceSemanticEvidenceAtomGateV2,
+    SourceSemanticEvidenceAtomGateV3,
     SourceSemanticEvidenceAtomRetrieverV1,
     materialize_semantic_evidence_atoms,
 )
@@ -208,6 +209,105 @@ def test_v2_gate_accepts_equivalent_alternate_regions() -> None:
 
     assert decision.sufficient is True
     assert len(decision.selected_hit_ids) == 1
+
+
+def test_v3_gate_uses_named_public_title_without_instructional_dilution() -> None:
+    protocol = _chunk(
+        "protocol",
+        (
+            "Durable tutoring protocol 251 falls back to the approved grounded "
+            "tutoring path after a planning-service failure while preserving the "
+            "learner-state checkpoint."
+        ),
+        title="Durable tutoring protocol 251",
+        cluster="protocol-251",
+        ordinal=0,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([protocol])
+    question = (
+        "I am confused about how durable tutoring protocol 251 preserves state "
+        "during fallback. Can you give a grounded hint?"
+    )
+
+    decision = SourceSemanticEvidenceAtomGateV3().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["protocol"]
+    assert decision.features["public_title_anchor_used"] is True
+
+
+def test_v3_gate_keeps_distinct_named_claims_fail_closed() -> None:
+    first = _chunk(
+        "first",
+        "Protocol recovery preserves learner state in a checkpoint.",
+        title="Protocol recovery",
+        cluster="one",
+        ordinal=0,
+    )
+    second = _chunk(
+        "second",
+        "Protocol recovery discards learner state and starts again.",
+        title="Protocol recovery",
+        cluster="two",
+        ordinal=1,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([first, second])
+    question = "I am confused about Protocol recovery. Can you give a hint?"
+
+    decision = SourceSemanticEvidenceAtomGateV3().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is False
+    assert decision.recommended_action == "clarify"
+    assert "ambiguous" in decision.reason
+
+
+def test_v3_gate_rejects_generic_instruction_without_source_anchor() -> None:
+    protocol = _chunk(
+        "protocol",
+        "Protocol recovery preserves learner state in a checkpoint.",
+        title="Protocol recovery",
+        cluster="one",
+        ordinal=0,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([protocol])
+    question = "I am confused. Can you give me a hint?"
+
+    decision = SourceSemanticEvidenceAtomGateV3().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is False
+    assert decision.recommended_action == "abstain"
+
+
+def test_v3_gate_allows_one_canonical_region_to_support_two_targets() -> None:
+    protocol = _chunk(
+        "protocol",
+        (
+            "Protocol recovery uses an approved fallback and preserves learner "
+            "progress in a checkpoint."
+        ),
+        title="Protocol recovery",
+        cluster="one",
+        ordinal=0,
+    )
+    retriever = SourceSemanticEvidenceAtomRetrieverV1([protocol])
+    question = (
+        "Could you connect Protocol recovery's approved fallback with its saved "
+        "learner progress?"
+    )
+
+    decision = SourceSemanticEvidenceAtomGateV3().assess(
+        question, retriever.retrieve(question, limit=5)
+    )
+
+    assert decision.sufficient is True
+    assert decision.selected_hit_ids == ["protocol"]
+    assert decision.features["single_region_multi_target"] is True
 
 
 def test_ambiguity_gate_ignores_page_fallback_when_precise_region_exists() -> None:

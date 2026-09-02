@@ -28,6 +28,7 @@ from src.digital_twin.grounding import (
     CanonicalSourceAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     SourceSemanticEvidenceAtomGateV2,
+    SourceSemanticEvidenceAtomGateV3,
     SourceSemanticEvidenceAtomRetrieverV1,
     StructuredLexicalCoverageEvidenceGate,
     materialize_semantic_evidence_atoms,
@@ -386,7 +387,10 @@ def _install_release(
         },
         deep=True,
     )
-    if grounding_architecture_id == "ambiguity-safe-source-semantic-evidence-atoms-v2":
+    if grounding_architecture_id in {
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
+        "pedagogy-aware-source-semantic-evidence-atoms-v3",
+    }:
         chunk = materialize_semantic_evidence_atoms([chunk])[0]
     release = current.model_copy(
         update={
@@ -512,6 +516,18 @@ def build_runtime_factory(
             == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         ):
             evidence_gate = SourceSemanticEvidenceAtomGateV2()
+
+            def retriever_factory(chunks, _active_versions):
+                return SourceSemanticEvidenceAtomRetrieverV1(
+                    chunks,
+                    candidate_limit=30,
+                )
+
+        elif (
+            grounding_architecture_id
+            == "pedagogy-aware-source-semantic-evidence-atoms-v3"
+        ):
+            evidence_gate = SourceSemanticEvidenceAtomGateV3()
 
             def retriever_factory(chunks, _active_versions):
                 return SourceSemanticEvidenceAtomRetrieverV1(

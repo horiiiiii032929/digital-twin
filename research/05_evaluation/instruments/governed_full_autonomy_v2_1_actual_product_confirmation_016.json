@@ -1,22 +1,17 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-015",
-  "status": "completed-keep-post-run-release-blocked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016",
+  "status": "reviewed-provider-unauthorized",
   "owner_issue": 184,
   "parent_issue": 8,
-  "decision_question": "Does the selected H+E1 product pass the full autonomy gates on fresh actual-product cases after prospectively aligning provider-failure references with the approved deterministic fallback contract?",
-  "successor_after": "governed-full-autonomy-v2-1-actual-product-confirmation-014-reference-defect",
+  "decision_question": "Does the selected H+E1 product with pedagogy-aware source-semantic grounding pass safety and expected-intervention gates on fresh actual-product cases?",
+  "successor_after": "governed-full-autonomy-v2-1-actual-product-confirmation-015-post-run-audit",
   "method": {
     "action_eligibility_version": "event-scoped-action-eligibility-v1",
     "provider_failure_reference_contract": "prospective-v2-deterministic-t1-v1-t0-fallback-v1",
-    "reference_correction_timing": "before-provider-execution-and-before-hidden-gold-freeze",
-    "prospectively_corrected_reference_count": 30,
-    "professor_policy_remains_authoritative": true,
+    "pedagogical_query_contract": "public-title-anchor-plus-instructional-content-v1",
     "model_can_widen_envelope": false,
     "safe_no_action_always_available": true,
-    "planner_or_parse_failure_reactive_action": "grounded-deterministic-t1-v1-t0-fallback",
-    "planner_or_parse_failure_autonomous_action": "no-action",
-    "deterministic_control_provider_dependency": false,
     "event_action_contract": {
       "consent-changed": [],
       "evidence-recovered": ["recommend-approved-source"],
@@ -35,11 +30,10 @@
     }
   },
   "selected_grounding": {
-    "result_id": "governed-full-autonomy-v2-1-grounding-successor-011",
-    "result_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-grounding-successor-011.json",
-    "architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2",
+    "predecessor_result_id": "governed-full-autonomy-v2-1-grounding-successor-011",
+    "architecture_id": "pedagogy-aware-source-semantic-evidence-atoms-v3",
     "generator_id": "deterministic-evidence-set-grounded-generator-v2",
-    "rollback_architecture_id": "structured-lexical-coverage-evidence-gate-v1"
+    "rollback_architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2"
   },
   "conditions": [
     "t0-grounded-control",
@@ -57,11 +51,11 @@
     "long_horizon_days": 30,
     "proactive_opportunity_count": 120,
     "source_template_count": 50,
-    "source_family_range": [251, 300],
-    "source_disjoint_from_confirmations_012_013_014": true,
-    "template_matched_to_confirmation_014_except_prospective_reference_fix": true,
-    "public_sha256": "8beb1045f1ccb1380418dd0b1b8b09c19a611555f8331f98f63f96de8220b556",
-    "hidden_gold_sha256": "090185a8c7578e7f8c0bb6d4727c57c18f1e99a5b5d28fcdf9f524f48ddd9d32",
+    "source_family_range": [301, 350],
+    "source_disjoint_from_confirmations_012_through_015": true,
+    "instructional_wording_family_disjoint_from_confirmation_015": true,
+    "public_sha256": "c89acea189255f5fba2c13ad9d4ef7046fe9ac2b542124c5ca60cad759b27e18",
+    "hidden_gold_sha256": "434da410429c51aaa2252fc648db033f3ba03a41479e2af8524a5bbbfb8f50de",
     "quality_results_previously_opened": 0
   },
   "clock": {
@@ -76,7 +70,7 @@
   },
   "models": {
     "metadata_status": "fresh",
-    "verified_at": "2026-09-02T21:00:50+00:00",
+    "verified_at": "2026-09-02T22:54:18+00:00",
     "freshness_hours": 24,
     "planner": {
       "provider": "openai",
@@ -98,21 +92,20 @@
       "reasoning_effort": "low",
       "authoritative_factual_generator": "deterministic/evidence-set-v2"
     },
+    "api": "https://api.openai.com/v1/responses",
+    "store": false,
+    "retention_boundary": "Only public-synthetic evaluation inputs are allowed. store=false disables later response retrieval but is not represented as zero-data-retention enrollment.",
     "official_sources": [
       "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
       "https://developers.openai.com/api/reference/cli/resources/responses/methods/create"
     ],
-    "api": "https://api.openai.com/v1/responses",
-    "store": false,
-    "retention_boundary": "Only public-synthetic evaluation inputs are allowed. store=false disables response-object storage; organization-level API retention is not inferred from this setting.",
-    "structured_output": true,
     "fallback": false,
     "maximum_transport_retries": 0
   },
   "authority": {
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
-    "authorization_source": "Revoked after the terminal 820-case execution. The original scorer returned completed-keep under the preregistered aggregate gates, but post-run finding SE7-2 blocks release because all 600 multi-turn trajectories omitted the expected confusion-turn intervention.",
+    "authorization_source": null,
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0
@@ -133,7 +126,9 @@
     "valid_pedagogical_transition_rate_min": 0.95,
     "goal_termination_accuracy_min": 0.98,
     "grounding_regression_from_t0_min": -0.03,
-    "proactive_action_reason_lineage_accuracy_min": 1.0
+    "proactive_action_reason_lineage_accuracy_min": 1.0,
+    "overall_reference_action_accuracy_min": 0.95,
+    "per_condition_reference_action_accuracy_min": 0.95
   },
   "execution": {
     "actual_services": [
@@ -144,12 +139,11 @@
       "LangGraphCheckpoint"
     ],
     "selected_retriever": "source-semantic-evidence-atom-retriever-v1",
-    "selected_evidence_gate": "source-semantic-evidence-atom-gate-v2",
+    "selected_evidence_gate": "source-semantic-evidence-atom-gate-v3",
     "selected_factual_generator": "deterministic/evidence-set-v2",
     "selected_autonomy_architecture": "guarded-policy-value-planner-v2",
     "selected_complex_planner": "gpt-5.6-luna",
     "selected_proactive_generator": "bounded-strategy-grounded-wording-generator-v1",
-    "selected_proactive_strategy_model": "gpt-5.6-luna",
     "maximum_concurrency": 8,
     "atomic_response_ledger": true,
     "safe_resume": true,
@@ -157,22 +151,10 @@
     "hidden_gold_after_response_completion": true,
     "same_cases_quality_rerun_allowed": false
   },
-  "post_run_audit": {
-    "finding_id": "SE7-2",
-    "original_result_status": "completed-keep",
-    "original_result_sha256": "bbe9fea6fc485ef12a983c5d8615f3288c443b09855a663ecf366da2fca5134c",
-    "release_selection": "blocked",
-    "affected_cases": 600,
-    "failure_code": "missing-action",
-    "root_cause": "The V2 atom gate measured the entire instructional question as one evidence target, so pedagogical request language diluted coverage and produced no-action on every confusion turn.",
-    "remediation": "Preserve V2 and 015; add pedagogy-aware V3 with public title anchors, instructional-content coverage, single-region multi-target support, and a fresh source- and wording-disjoint confirmation 016.",
-    "post_hoc_rescore_allowed": false
-  },
   "boundaries": [
-    "Confirmation 014 and every earlier favorable, unfavorable, or invalid result remain immutable.",
-    "The 50 source identities are disjoint from confirmations 012–014; the provider-failure reference correction is specified and hashed before execution.",
-    "Luna proposes only bounded pedagogical strategy fields; deterministic code owns factual claims, quotes, citations, policy, identity, state, and delivery.",
-    "Ordinary factual T0/T1 answers use deterministic evidence-set generation.",
-    "Real professor fidelity, real student usability, and real learning improvement are not established by this synthetic actual-product evaluation."
+    "Confirmation 015 remains immutable and its post-run release-blocking finding is not rescored away.",
+    "V3 uses only student-visible wording plus approved public source titles and source-side atoms; it cannot access gold or author facts.",
+    "Distinct canonical claim classes still force clarification before generation.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
   ]
 }

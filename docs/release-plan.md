@@ -74,8 +74,18 @@ select bounded lead/prompt enums for proactive wording. Deterministic code
 still owns source quotes, claims, citations, policy, identity, persistence, and
 delivery. Reactive factual answers retain the selected deterministic evidence
 compiler; the engine comparison did not authorize replacing that component.
-Staging remains fail-closed until fresh whole-system evidence binds this exact
-profile and architecture.
+Confirmation 015 formally passed its registered safety/autonomy gates but cannot
+select a release: `SE7-2` found that every multi-turn trajectory omitted the
+expected confusion-turn intervention because instructional request language
+diluted V2 evidence coverage. The original result remains immutable and its
+authority is revoked.
+
+The sole prospective release confirmation is now 016. It keeps H+E1 fixed and
+changes only grounding to `pedagogy-aware-source-semantic-evidence-atoms-v3`,
+with a fresh source/wording package and explicit 95% overall and per-condition
+reference-action gates. Staging remains fail-closed until 016, fresh factual
+confirmation, known 10,000-case regression, and local product qualification all
+pass.
 
 ## Release goal
 

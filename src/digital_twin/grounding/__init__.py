@@ -190,6 +190,7 @@ from src.digital_twin.grounding.semantic_evidence_atoms import (
     SemanticEvidenceAtomTraceV1,
     SourceSemanticEvidenceAtomGateV1,
     SourceSemanticEvidenceAtomGateV2,
+    SourceSemanticEvidenceAtomGateV3,
     SourceSemanticEvidenceAtomRetrieverV1,
     materialize_semantic_evidence_atoms,
 )
@@ -342,6 +343,7 @@ __all__ = [
     "SemanticTargetResolutionV3",
     "SourceSemanticEvidenceAtomGateV1",
     "SourceSemanticEvidenceAtomGateV2",
+    "SourceSemanticEvidenceAtomGateV3",
     "SourceSemanticEvidenceAtomRetrieverV1",
     "materialize_semantic_evidence_atoms",
     "resolve_semantic_targets",

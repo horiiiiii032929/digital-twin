@@ -1,0 +1,129 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-015",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "h-e1-release-confirmation-015",
+  "status": "completed-keep-post-run-release-blocked",
+  "decision_question": "Does the selected H+E1 product pass the full autonomy gates on fresh actual-product cases after prospectively correcting provider-failure references?",
+  "code_revision": "2f9b299530c2b46b41417c69a086f481dce12be9",
+  "dirty_state": false,
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_015.json",
+      "sha256": "0bb63790542e7b4fcb70cb11abe18bb8f8cfc75b5c1bd67ef0a9e919f4eb64f1",
+      "role": "executed-authorization-instrument-at-revision"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-015/public-cases.json",
+      "sha256": "aba8ce690659512ff458291655945c5b4282d00c7046794035f9ff4ead7355be",
+      "content_sha256": "8beb1045f1ccb1380418dd0b1b8b09c19a611555f8331f98f63f96de8220b556",
+      "role": "ignored-public-input-package"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-015/hidden-gold.json",
+      "sha256": "df7b3798937921c5702388ec715913ce7ee9e4c99bef703277c9c1584835bf91",
+      "content_sha256": "090185a8c7578e7f8c0bb6d4727c57c18f1e99a5b5d28fcdf9f524f48ddd9d32",
+      "role": "ignored-hidden-gold-opened-after-all-responses"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-015/responses.sqlite3",
+      "sha256": "c17e536c4333fcf20c103f8ce51452fef7430427c6e8a41de46b48252f8430a1",
+      "role": "ignored-complete-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-015/result.json",
+      "sha256": "bbe9fea6fc485ef12a983c5d8615f3288c443b09855a663ecf366da2fca5134c",
+      "role": "ignored-original-terminal-completed-keep-result"
+    }
+  ],
+  "run_binding_sha256": "a561288689733428a27e2b992625024613f1f386895d276d16d8516f08444801",
+  "candidates": [
+    {
+      "architecture_id": "guarded-policy-value-planner-v2-plus-e1",
+      "version": "confirmation-015",
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "overall-reference-action-accuracy",
+          "value": 0.8253048780487805,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": null,
+          "passed": null
+        },
+        {
+          "name": "proactive-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "provider-failure-safe-fallback-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        },
+        {
+          "name": "restart-consistency-rate",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "all-preregistered-aggregate-gates",
+          "passed": true,
+          "evidence": "The immutable result gate map contains sixteen true values and returned completed-keep."
+        },
+        {
+          "name": "post-run-release-sufficiency",
+          "passed": false,
+          "evidence": "All 600 multi-turn trajectories omitted the expected confusion-turn intervention; exact action accuracy was not an aggregate release gate."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "response_count": 820,
+    "provider_calls": 1533,
+    "completed_provider_calls": 1533,
+    "failed_provider_calls": 0,
+    "retries": 0,
+    "input_tokens": 839995,
+    "output_tokens": 212941,
+    "reported_cost_usd": 0.4235282,
+    "hidden_gold_opened_after_all_responses": true,
+    "exact_model_identity": true
+  },
+  "findings": [
+    {
+      "finding_id": "SE7-2",
+      "severity": "release-blocking-method-and-reporting-defect",
+      "count": 600,
+      "evidence": "Every trajectory missed the confusion-turn reference action because instructional request terms diluted V2 atom coverage; the aggregate decision omitted a minimum expected-action rate while a generic summary field misleadingly called exact matching a hard gate.",
+      "closure": "Preserve 015 unchanged, add explicit scoring labels, implement V3 title-anchored instructional target resolution, and require fresh 016 to pass overall and per-condition action accuracy of at least 95%."
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "original_outcome": "keep",
+    "validity_assessment": "valid-for-preregistered-safety-gates-but-insufficient-for-release",
+    "selected_architecture_id": null,
+    "rationale": "Do not rewrite the original Keep result. Revoke authority and withhold release selection until a prospectively strengthened, source- and wording-disjoint 016 confirmation validates the V3 grounding successor."
+  },
+  "limitations": [
+    "Public synthetic sources and learners only.",
+    "No real-professor fidelity, real-student usability, or learning-outcome claim.",
+    "The original gate map did not include a minimum overall or per-condition reference-action rate."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-015-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-015.json"
+}

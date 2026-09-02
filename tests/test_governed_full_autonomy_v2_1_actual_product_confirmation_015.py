@@ -8,13 +8,13 @@ from scripts import (
 )
 
 
-def test_confirmation_015_is_fresh_corrected_and_bounded_for_execution() -> None:
+def test_confirmation_015_is_fresh_corrected_and_terminally_revoked() -> None:
     result = builder.validate()
     instrument = json.loads(builder.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert result["status"] == "frozen-pending-execution"
-    assert result["provider_execution_authorized"] is True
-    assert result["paid_execution_authorized"] is True
+    assert result["status"] == "completed-keep-post-run-release-blocked"
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
     assert result["case_count"] == 820
     assert result["source_family_count"] == 50
     assert result["prospectively_corrected_reference_count"] == 30
@@ -77,10 +77,11 @@ def test_confirmation_015_network_free_simulation_checks_safety_not_quality() ->
     assert result["provider_calls"] == 0
 
 
-def test_confirmation_015_preflight_accepts_only_its_bounded_authority() -> None:
+def test_confirmation_015_preflight_is_blocked_after_revocation() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    assert result["status"] == "blocked-not-authorized"
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0
