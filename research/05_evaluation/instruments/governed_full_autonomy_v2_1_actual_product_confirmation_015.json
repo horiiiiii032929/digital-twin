@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-015",
-  "status": "reviewed-build-only-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 184,
   "parent_issue": 8,
   "decision_question": "Does the selected H+E1 product pass the full autonomy gates on fresh actual-product cases after prospectively aligning provider-failure references with the approved deterministic fallback contract?",
@@ -110,9 +110,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "Build-only corrective checkpoint. Provider execution remains blocked until the reference fix, fresh hashes, tests, audit, and clean preflight pass.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User directed autonomous execution of the final audited plan and all already discussed model runs. The separate 015 build passed 1,692 Python tests, 50 frontend tests, 987/987 repository audits, and 152/152 freeze coverage. Authority is limited to confirmation 015 and is revoked after any terminal outcome.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5000,
     "maximum_cost_usd": 10.0

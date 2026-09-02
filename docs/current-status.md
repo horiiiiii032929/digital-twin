@@ -27,9 +27,10 @@ A single source-disjoint corrective confirmation 015 is build-qualified on
 fresh source families 251–300. Its fallback contract was corrected
 prospectively from public events and conditions before package hashing. The
 820-case network-free mechanics pass with zero unexpected or unsafe actions;
-that simulation makes no provider-quality claim. Confirmation 015 remains
-provider-unauthorized until the complete repository gate and audit inventory
-return clean. H+E1 remains a candidate, not a release-selected profile.
+that simulation makes no provider-quality claim. After the complete repository
+gate and audit inventory returned clean, confirmation 015 received a separate
+one-time authorization limited to its exact instrument. H+E1 remains a
+candidate, not a release-selected profile, until the paid result is terminal.
 
 ## Audit correction superseding the governed V2.1 release claim
 

@@ -2975,12 +2975,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-autonomy-confirmation-015",
-      "evidence": "Prospective instrument review verifies fresh source families 251-300, exact public and hidden hashes, the public-event-derived provider-failure fallback contract, unchanged H+E1 roles and hard gates, deterministic factual generation, no prior quality opening, finite calls/cost, and provider/paid authority false.",
+      "evidence": "Prospective instrument review verifies fresh source families 251-300, exact public and hidden hashes, the public-event-derived provider-failure fallback contract, unchanged H+E1 roles and hard gates, deterministic factual generation, no prior quality opening, and finite calls/cost. One-time provider authority was enabled only after the complete 1,692-test and 987/987 audit gate passed.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_015.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-015 prospective reference audit",
-      "sha256": "3d01b31265bea47850bd2b6e4dd2dd45eb2fb13571d7558d91823a4241e659de"
+      "reviewer": "Codex confirmation-015 authorization audit",
+      "sha256": "0bb63790542e7b4fcb70cb11abe18bb8f8cfc75b5c1bd67ef0a9e919f4eb64f1"
     },
     {
       "audit_status": "audited",
@@ -8167,12 +8167,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "selected-autonomy-release-confirmation",
-      "evidence": "Revoked terminal confirmation 014, registered confirmation 015 as protected for external-model and method-evaluation operations, and left every bounded authorization absent during the build checkpoint. The registry has no missing guarded entrypoint.",
+      "evidence": "Revoked terminal confirmation 014 and registered confirmation 015 as protected for external-model and method-evaluation operations. Added only confirmation 015 to the bounded allowlist after its complete clean build gate; the registry has no missing guarded entrypoint.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-014/015 freeze audit",
-      "sha256": "50866724903684104ecff66ab2b2e3806f0a7148887d315cc97c9f330e869990"
+      "reviewer": "Codex confirmation-015 authorization audit",
+      "sha256": "296a149d020b3853c0b956c314e2c1f07494dc78903026b081053ea6cdb0733c"
     },
     {
       "audit_status": "audited",
@@ -8750,12 +8750,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-authorization-boundaries",
-      "evidence": "Reviewed the complete exact bounded-authorization set after confirmation 014 termination. Confirmation 014 is revoked and confirmation 015 is build-only; tests require both to be absent until a separate post-gate authorization checkpoint.",
+      "evidence": "Reviewed the complete exact bounded-authorization set after confirmation 014 termination. Confirmation 014 remains revoked; only confirmation 015 is newly authorized for external-model and method-evaluation operations after its separate clean build checkpoint.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-014/015 authorization audit",
-      "sha256": "cf1838be5e8637de1357a60badc5403d85aac77051b3d3ea01c6e412a7ec4240"
+      "reviewer": "Codex confirmation-015 authorization audit",
+      "sha256": "a9f9477407f5e4b26eac14a9d9bcecc294947ae74ebce80e732654fbe35456be"
     },
     {
       "audit_status": "audited",
@@ -10136,12 +10136,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused tests verify fresh source disjointness, exact 820-case cardinality, exactly 30 prospective public-event-derived fallback references, unchanged H+E1 roles, network-free execution safety without a provider-quality claim, and fail-closed preflight while unauthorized.",
+      "evidence": "Focused tests verify fresh source disjointness, exact 820-case cardinality, exactly 30 prospective public-event-derived fallback references, unchanged H+E1 roles, network-free execution safety without a provider-quality claim, and that only the exact one-time confirmation 015 freeze authority satisfies preflight.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_015.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-015 prospective reference audit",
-      "sha256": "e446b8807c975e14dae11e4acce6fd69066bacf7e110dcb452682e4e2ae4fbe0"
+      "reviewer": "Codex confirmation-015 authorization audit",
+      "sha256": "169959537e17d65766971d7ecb2d210dc6a435f46efd2afb6a05e284caa83b7e"
     },
     {
       "audit_status": "audited",
