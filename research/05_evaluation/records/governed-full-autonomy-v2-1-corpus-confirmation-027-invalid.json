@@ -1,0 +1,43 @@
+{
+  "authority_revoked": true,
+  "case_count": 670,
+  "check_behaved_correctly": true,
+  "code_revision": "c89a6dd",
+  "corrections": [
+    "operational: no git operation while an evaluation is executing",
+    "operational: clean working tree and stable HEAD before execution"
+  ],
+  "decision": "Invalid",
+  "failure_detail": "direct transport canary binding drifted",
+  "failure_type": "ActualProductEvaluationError",
+  "harness_defect": false,
+  "hidden_gold_opened": false,
+  "instrument_id": "governed-full-autonomy-v2-1-corpus-confirmation-027",
+  "limitations": [
+    "Public synthetic sources and personas.",
+    "No release, quality, or safety conclusion is drawn from a partial ledger."
+  ],
+  "operational_summary": {
+    "cost_usd": 0.1701986,
+    "input_tokens": 396487,
+    "output_tokens": 75751,
+    "private_data_used": false,
+    "provider_calls": 793,
+    "returned_models": [
+      "gpt-5.6-luna"
+    ]
+  },
+  "persisted_response_count": 282,
+  "published_sources_per_release": 12,
+  "root_cause": "Operator committed while the run was executing. The run binding includes the git revision and is recomputed before every case, so the stored transport canary binding no longer matched.",
+  "run_id": "governed-full-autonomy-v2-1-corpus-confirmation-027-invalid",
+  "schema_version": 1,
+  "source_family_range": [
+    601,
+    650
+  ],
+  "status": "invalid-execution",
+  "successor": "governed-full-autonomy-v2-1-corpus-confirmation-028",
+  "successor_code_changes": [],
+  "successor_reuses_unopened_package": true
+}
