@@ -3019,12 +3019,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-instrument",
-      "evidence": "Prospective 019 instrument changes only canary responsibility, preserves the unopened 018 package and every scientific input and hard gate, and is the sole bounded provider-authorized confirmation after the clean build gate.",
+      "evidence": "Terminal 019 instrument preserves the raw completed-refine result, revokes authority, records the 820-case accounting and SE7-9/SE7-10 findings, and prohibits a same-package quality rerun.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_019.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex 019 authorization audit",
-      "sha256": "82a8d9d10fef7c3ae9671ff585464d957fd3f451a46664ceb4cdfe93e53a00ad"
+      "reviewer": "Codex 019 terminal-result audit",
+      "sha256": "3ddc416b9ad338aee58ee714b851c2578801e0972ae01955a143aca4ad8f8c43"
     },
     {
       "audit_status": "audited",
@@ -8288,12 +8288,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Confirmation 018 is revoked and only 019 is authorized for external-model and method-evaluation execution; the repository-wide freeze remains active.",
+      "evidence": "Confirmations 018 and 019 are revoked and no fresh H+E1/V3 provider run is authorized; the repository-wide freeze remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex 019 authorization audit",
-      "sha256": "6d2865a0d89322ad11169c1a35de58457cef66b64bb87dd6fdf241efad78c8ba"
+      "reviewer": "Codex 019 terminal-result audit",
+      "sha256": "8f8b7a84d617ee5e1343f3ddbef9edc4ecb103865a7c98ed9d5244f6c5b9a6b1"
     },
     {
       "audit_status": "audited",
@@ -8871,12 +8871,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze-tests",
-      "evidence": "Regression verifies only confirmation 019 is bounded for both required operations while confirmation 018 and every other historical paid instrument remain blocked.",
+      "evidence": "Regression verifies confirmations 018 and 019 and every other historical paid instrument are blocked after terminal result publication.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex 019 authorization audit",
-      "sha256": "025343fa9dd7ad81a505aab8f2f51ab548e2cbcb57e5cb3f58c286b237f5a7c5"
+      "reviewer": "Codex 019 terminal-result audit",
+      "sha256": "74300a5c424d7d11ba126d731d62a3b4461ff05232fa7ec4634c61cdc7e9596f"
     },
     {
       "audit_status": "audited",
@@ -10301,12 +10301,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-tests",
-      "evidence": "Tests prove 019 reuses only unopened gold, is explicitly authorized, accepts an exact-identity malformed provider attempt when the product safely completes, rejects missing/drifted identity, and has no authorization preflight blocker.",
+      "evidence": "Tests preserve the 019 canary-role correction while verifying the terminal completed-refine instrument is revoked and preflight is blocked after result publication.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex 019 authorization audit",
-      "sha256": "20bb9f503e76970f179f131fb89771b7548360724e5bb6ad7d27b55cb4906591"
+      "reviewer": "Codex 019 terminal-result audit",
+      "sha256": "b22b1bf084c7f02587ce03e5d328135d025b653f428b69e5a7c8adcb0cfbc5e3"
     },
     {
       "audit_status": "audited",

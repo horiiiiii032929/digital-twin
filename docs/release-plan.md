@@ -107,11 +107,14 @@ and safely fell back, while the canary contract misclassified that observed
 route as unexecuted. Its authority is revoked. The sole harness-only 019
 correction keeps the strict direct canary and tests product-route invocation,
 identity, and safe completion separately. The unchanged 820-case network-free
-run and complete repository gate pass. Confirmation 019 is now the sole
-bounded provider-authorized checkpoint and
-must pass a clean no-call preflight before execution. Until a provider-backed
-result is valid, T0 and bounded T1-v1 remain the selected controls and no
-H+E1/V3 release claim is permitted.
+run and complete repository gate pass. Its paid run completed all 820 cases and
+all safety contracts passed, but the raw decision was `completed-refine`.
+Post-run audit found the exact-action reference excluded a policy-valid
+diagnostic-question alternative (`SE7-9`) and observed 83 safely contained Luna
+schema failures (`SE7-10`). Authority is revoked, the opened package cannot be
+rerun, and H+E1/V3 is not selected. T0 and bounded T1-v1 remain the release
+controls until a fresh, action-equivalent and provider-reliable successor
+passes.
 
 ## Release goal
 

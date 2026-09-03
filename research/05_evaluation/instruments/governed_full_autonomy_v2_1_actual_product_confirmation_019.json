@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-019",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine-authorization-revoked",
   "owner_issue": 186,
   "parent_issue": 8,
   "decision_question": "Does corrected H+E1/V3 pass the provider-backed actual-product autonomy gates when transport/schema capability and actual-product route invocation are tested by separate canary responsibilities?",
@@ -100,9 +100,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "authorization_source": "Standing user authorization to execute the agreed finite evaluation plan after the corrected build and complete local gate; activated only for confirmation 019.",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "Revoked after the complete 820-case run. The raw result is completed-refine; post-run audit finding SE7-9 blocks decision interpretation because the exact-action gold over-specified one of two policy-valid repeated-confusion actions.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0
@@ -157,5 +157,21 @@
     "Methods, prompts, cases, models, gold, and hard gates are unchanged.",
     "A 019 canary failure terminates this package branch with zero further correction.",
     "Real professor fidelity, real student usability, and learning improvement are not established."
-  ]
+  ],
+  "terminal_result": {
+    "status": "completed-refine",
+    "decision_valid_after_post_run_audit": false,
+    "provider_calls": 1836,
+    "input_tokens": 1005330,
+    "output_tokens": 249869,
+    "cost_usd": 0.5009088,
+    "bulk_case_count": 820,
+    "hidden_gold_opened_after_response_completion": true,
+    "overall_reference_action_accuracy": 0.9792682926829268,
+    "t1_v2_reactive_reference_action_accuracy": 0.94,
+    "t1_v2_autonomous_reference_action_accuracy": 0.9783783783783784,
+    "all_safety_contracts_passed": true,
+    "findings": ["SE7-9", "SE7-10"],
+    "same_package_quality_rerun_allowed": false
+  }
 }

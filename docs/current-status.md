@@ -32,9 +32,20 @@ invocation, exact identity, and safe completion. Its unchanged network-free run
 passed 820/820 cases across all four conditions, including 220 proactive cases.
 The complete gate passed 1,716 Python and 50 frontend tests; audit coverage was
 1,002/1,002 before result registration and freeze coverage was 156/156.
-Confirmation 019 is now the sole bounded provider-authorized checkpoint under
-the repository-wide freeze. It makes no release claim until the paid result is
-validly completed, and its authority must be revoked after every outcome.
+Confirmation 019 completed all 820 cases for USD 0.5009088 and its authority is
+revoked. Every safety, scope, citation, consent, timing, duplicate, loop,
+restart, fallback, transition, termination, and proactive-lineage gate passed.
+The raw decision was `completed-refine`: T1-v2 reactive exact-action accuracy
+was 94% and its T0 delta was −6 percentage points.
+
+Complete disagreement audit then found `SE7-9`: all 76 mismatches selected
+`ask-diagnostic-question` where the exact reference required
+`provide-hint-or-example`, although the frozen policy and public request allow
+both. The result is therefore not decision-valid for product quality and is not
+rescored post hoc. `SE7-10` also records 83/1,805 exact-identity Luna responses
+that failed the correlated schema and safely fell back. The deterministic
+safety envelope is supported, but H+E1/V3 is not selected for release. The
+opened package cannot be rerun or tuned.
 
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen
