@@ -111,9 +111,11 @@ actual-product cases passed, its dataset is fresh, and its direct transport,
 reactive route, and autonomous route canaries are independently enforced.
 Issue #186 remains `In Progress / Go Deeper`. Confirmation 018 is preserved as
 invalid after five calls and zero bulk cases; hidden gold remained unopened and
-authority is revoked. Finding `SE7-8` permits one harness-only 019 correction to
-separate route invocation from semantic-output validity. The wider evaluation
-freeze remains active.
+authority is revoked. Confirmation 019 closes finding `SE7-8` in code by
+separating strict transport/schema proof from actual-route/safe-fallback proof.
+Its unchanged 820-case network-free run and complete repository gate pass, but
+provider execution remains unauthorized and no release is selected. The wider
+evaluation freeze remains active.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

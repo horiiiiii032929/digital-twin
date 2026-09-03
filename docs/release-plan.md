@@ -104,10 +104,12 @@ autonomous product-route canaries. The next release decision is one bounded
 provider-backed execution. Confirmation 018 became invalid before bulk because
 its autonomous product canary received an exact-identity malformed Luna output
 and safely fell back, while the canary contract misclassified that observed
-route as unexecuted. Its authority is revoked. One harness-only 019 correction
-may proceed with unchanged scientific inputs and gates. Until a result is
-valid, T0 and bounded T1-v1 remain the selected controls and no H+E1/V3 release
-claim is permitted.
+route as unexecuted. Its authority is revoked. The sole harness-only 019
+correction keeps the strict direct canary and tests product-route invocation,
+identity, and safe completion separately. The unchanged 820-case network-free
+run and complete repository gate pass; provider execution is still disabled.
+Until a provider-backed result is valid, T0 and bounded T1-v1 remain the
+selected controls and no H+E1/V3 release claim is permitted.
 
 ## Release goal
 

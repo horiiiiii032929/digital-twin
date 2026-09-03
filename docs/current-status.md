@@ -8,14 +8,11 @@ remain authoritative for the historical runs and claims they document.
 
 ## H+E1 whole-system confirmation and grounding successor
 
-Fresh confirmation 018 is now build-qualified on a source- and wording-disjoint
-820-case package using source families 351–400. The actual-product network-free
-run passed 820/820 reference actions and safety contracts across T0, T1-v1,
-T1-v2 reactive, and T1-v2 autonomous, including 220 proactive cases. The new
-runner independently requires a direct Luna transport/identity canary, a
-reactive product-route canary, and an autonomous product-route canary before
-bulk execution. A failure at any canary produces zero bulk cases and keeps
-hidden gold closed.
+Fresh confirmation 018 established the source- and wording-disjoint 820-case
+package using source families 351–400, but its paid run stopped invalidly before
+bulk. Confirmation 019 is the sole harness-only successor and reuses that
+unopened scientific package without changing cases, prompts, models, gold, or
+hard gates.
 
 The complete clean-revision gate passed 1,712 Python tests, 50 frontend tests,
 lint, TypeScript, and production build. Repository correctness is 998/998 and
@@ -29,8 +26,13 @@ Authority is revoked.
 Finding `SE7-8` is in the canary responsibility split: the direct canary already
 proved transport, identity, and valid structured output, while the product
 canary treated an observed exact-identity malformed response plus safe fallback
-as route non-execution. One harness-only confirmation 019 may correct that
-classification without changing cases, prompts, models, gold, or hard gates.
+as route non-execution. Confirmation 019 closes that finding in code by keeping
+the direct canary strict and requiring product canaries to prove route
+invocation, exact identity, and safe completion. Its unchanged network-free run
+passed 820/820 cases across all four conditions, including 220 proactive cases.
+The complete gate passed 1,716 Python and 50 frontend tests; audit coverage was
+1,002/1,002 before result registration and freeze coverage was 156/156. The
+build is provider-unauthorized and makes no release claim.
 
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen

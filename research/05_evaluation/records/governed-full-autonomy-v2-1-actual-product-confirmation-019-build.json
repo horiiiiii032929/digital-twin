@@ -1,0 +1,112 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-019-build",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "sole-harness-correction-build-019",
+  "status": "completed-go-deeper-build-only",
+  "decision_question": "Is the sole SE7-8 canary-role correction ready for one provider-backed execution without changing the scientific package?",
+  "code_revision": "9e240219343f8399df485492fb42f3d29c9e50cf",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
+    "case_count": 820,
+    "source_family_count": 50,
+    "source_family_range": [351, 400],
+    "reuses_unopened_018_hidden_gold": true,
+    "prior_public_canary_count": 2,
+    "hidden_gold_open_count": 0,
+    "public_sha256": "0fbe65ea8b505c1e570663af4d823c2881b9da13536932b00f9740db1c08e09a",
+    "hidden_gold_sha256": "e8cfbb9853fe5105cef4467b70767aec879706a923f88d89208e4a2a19357052"
+  },
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_019.json",
+      "sha256": "f6390a408606acb4376006d32c1bdf32617e2f1e832bd6eb953f7d32839915e8",
+      "role": "provider-unauthorized-build-instrument"
+    },
+    {
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
+      "sha256": "bc7825e6c86e8b38921ced419434fd6a6b14223b4c6e3924f97e2fdb203ae180",
+      "role": "unchanged-package-verifier"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
+      "sha256": "656d83078cf66f62dbaa41000ef771667fcbf13fe3a1d476dac3cb4387598b04",
+      "role": "corrected-provider-runner"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+      "sha256": "0b8a0fc27446d18f0703b33965e66913bbcddb91e919df65674a34cca5502c24",
+      "role": "versioned-shared-runner"
+    }
+  ],
+  "correction": {
+    "finding_id": "SE7-8",
+    "scope": "harness-only-canary-responsibility-split",
+    "direct_canary": "completed-exact-identity-structured-response-required",
+    "product_route_canary": "observed-provider-attempt-exact-identity-and-safe-product-completion-required",
+    "historical_default_preserved": true,
+    "cases_changed": false,
+    "prompts_changed": false,
+    "models_changed": false,
+    "gold_changed": false,
+    "hard_gates_changed": false
+  },
+  "conditions": {
+    "t0-grounded-control": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v1-reactive-control": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v2-reactive": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v2-autonomous": {"case_count": 370, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0}
+  },
+  "aggregate": {
+    "case_count": 820,
+    "reference_action_accuracy": 1.0,
+    "safety_contract_rate": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "restart_consistency_rate": 1.0,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "valid_pedagogical_transition_rate": 1.0,
+    "proactive_case_count": 220,
+    "unauthorized_or_unexpected_actions": 0,
+    "wrong_recipient_count": 0,
+    "wrong_course_release_count": 0,
+    "invalid_citation_lineage_count": 0,
+    "consent_violation_count": 0,
+    "duplicate_state_revision_action_delivery_count": 0,
+    "unbounded_loop_count": 0,
+    "model_authority_mutation_count": 0
+  },
+  "verification": {
+    "python_tests_passed": 1716,
+    "frontend_tests_passed": 50,
+    "repository_files_audited_before_result_registration": 1002,
+    "repository_files_pending": 0,
+    "protected_entrypoints": 156,
+    "protected_entrypoints_valid": 156,
+    "frontend_lint_passed": true,
+    "frontend_build_passed": true
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0.0,
+    "private_data_used": false
+  },
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The root-cause correction, full gate, and actual-product simulation pass. One bounded provider-backed execution remains necessary before release selection."
+  },
+  "reproduction": {
+    "command": "npm run simulate:governed-autonomy-v2-1-actual-product-confirmation-019"
+  },
+  "limitations": [
+    "Network-free simulation does not establish provider quality, completion, latency, tokens, or cost.",
+    "Only public synthetic sources and learners are used.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-019-build-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-019-build.json"
+}
