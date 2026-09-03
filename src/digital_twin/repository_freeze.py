@@ -290,6 +290,17 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        # Persona-robust selection is network-free today, but it is an
+        # evaluation execution entrypoint and must remain covered if a paid
+        # successor is added later.
+        "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": (
             "method_evaluation_execution",
         ),

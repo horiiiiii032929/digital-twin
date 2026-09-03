@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
+  "instrument_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
+  "status": "completed-keep",
+  "decision": "Keep",
+  "selected_condition": "t1-v2-autonomous",
+  "code_revision": "f59f8ffde0af9c03e253d6669f77ba2a754428d2",
+  "working_tree_dirty": false,
+  "network_free": true,
+  "provider_calls": 0,
+  "cost_usd": 0.0,
+  "matrix": {
+    "primary_histories_per_condition": 108,
+    "reactive_ablation_histories": 18,
+    "total_histories": 234,
+    "virtual_days": 30,
+    "persona_count": 6,
+    "wording_method_count": 3,
+    "transition_family_count": 2,
+    "seed_count": 3
+  },
+  "hard_safety": {
+    "evaluated_histories": 234,
+    "failed_histories": 0,
+    "all_passed": true
+  },
+  "primary_metrics": {
+    "t0_final_hidden_mastery": 0.2838737416435317,
+    "t1_v2_autonomous_final_hidden_mastery": 0.3336538163528064,
+    "paired_difference": 0.04978007470927465,
+    "paired_difference_ci95": [0.03508139614285034, 0.065761424006042],
+    "t0_worst_persona_final_mastery": 0.1461131400041546,
+    "t1_v2_autonomous_worst_persona_final_mastery": 0.18392002019500936,
+    "t1_v2_autonomous_attribution_accuracy": 0.9639653310334819,
+    "t1_v2_autonomous_wasted_intervention_rate": 0.39678497942386826,
+    "t1_v2_autonomous_follow_up_fraction": 0.3670992330714553,
+    "t1_v2_autonomous_mean_messages_per_30_days": 10.703703703703704,
+    "t1_v2_autonomous_realization_fallback_rate": 0.05106820546421722
+  },
+  "artifact_hashes": {
+    "summary_sha256": "883822cf5124dc751947d06de2dc58ad62f55356fba001005d6bdbe29fe176e1",
+    "scores_sha256": "ad5075e08814a64c4920e4326c59472882b0eb7f80d302ba9f2510c025516b19",
+    "truth_sha256": "312f120f21dbce7dfad5c722b1d97efffdabf182d6ea034ce1f82cbca824bc23",
+    "responses_sha256": "4c743718d0493a27aa547fb9fcac2692df2a13aca8c097e4c4b9a5dfb969b83f",
+    "hard_gates_sha256": "7646b8e026efb02fa7a5d8ccb7c39d000de3baa71b59447bff4519ab73f892de",
+    "frozen_wording_bank_sha256": "d4eb7d0aa6ba3419f2f83e9655afa41c19f4b72f3357adc65f243c0e5f9d0ebe"
+  },
+  "limitations": [
+    "Hidden mastery is a deterministic simulated outcome proxy, not observed student learning.",
+    "The comparison does not establish real-student usability or professor fidelity.",
+    "The selected autonomous condition wasted 39.68% of delivered interventions in the simulator.",
+    "Frozen LLM wording is non-authoritative and canonical fallback remained explicit.",
+    "A fresh provider-backed confirmation is required before release promotion."
+  ]
+}

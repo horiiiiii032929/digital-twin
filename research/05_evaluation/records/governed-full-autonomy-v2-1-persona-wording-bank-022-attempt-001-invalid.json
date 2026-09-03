@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-001-invalid",
+  "instrument_id": "governed-full-autonomy-v2-1-persona-wording-bank-022",
+  "code_revision": "8dc75becd1679a5bb6906c831faafd1f9559c4cd",
+  "status": "invalid-execution",
+  "decision": "Refine",
+  "cause_class": "harness-binding-defect",
+  "cause": "The provider binding omitted provider_display_name, causing a KeyError after the first response was received and before parsed usage could be durably recorded.",
+  "provider_attempts": 1,
+  "completed_provider_calls": 0,
+  "reported_cost_usd": 0.0,
+  "actual_first_attempt_cost": "unavailable-because-failure-preceded-usage-recording",
+  "bulk_calls_started": false,
+  "quality_interpretation_allowed": false,
+  "requirements_content_sha256": "2738cd87240ec2fde8f6f4f86f7d335e96106c26f3f8aaf6c29cce51c59e3764",
+  "model": "gpt-5.4-nano-2026-03-17",
+  "private_data_used": false,
+  "authorization_revoked": true,
+  "successor": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002"
+}

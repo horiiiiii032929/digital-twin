@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "instrument_id": "governed-full-autonomy-v2-1-persona-wording-bank-022",
+  "status": "invalid-execution-authorization-revoked",
+  "owner_issue": 194,
+  "selection_program_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
+  "requirements_id": "governed-full-autonomy-v2-1-persona-wording-requirements-022",
+  "requirements_content_sha256": "2738cd87240ec2fde8f6f4f86f7d335e96106c26f3f8aaf6c29cce51c59e3764",
+  "requirement_count": 1104,
+  "provider": {
+    "binding_id": "openai-gpt-5-4-nano-persona-wording-022",
+    "provider": "openai",
+    "first_party_endpoint": true,
+    "api_url": "https://api.openai.com/v1/responses",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "provider_model": "gpt-5.4-nano-2026-03-17",
+    "documented_revision": "gpt-5.4-nano-2026-03-17",
+    "returned_identity_must_equal": "gpt-5.4-nano-2026-03-17",
+    "request_store": false,
+    "reasoning_effort": "none",
+    "max_output_tokens": 4500,
+    "timeout_seconds": 120,
+    "maximum_transport_retries": 0,
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.25,
+    "verified_at": "2026-09-03T06:56:00Z",
+    "maximum_age_hours_for_execution": 24,
+    "model_source": "https://developers.openai.com/api/docs/models/gpt-5.4-nano"
+  },
+  "execution": {
+    "requirements_per_batch": 24,
+    "maximum_calls": 46,
+    "maximum_cost_usd": 1.0,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "zero_retries": true,
+    "exclusive_ledger_and_output": true,
+    "resume_supported": true
+  },
+  "authority": {
+    "model_may_change_public_wording_only": true,
+    "model_may_change_hidden_state": false,
+    "model_may_change_gold_or_expected_action": false,
+    "semantic_validation_is_deterministic": true,
+    "invalid_or_missing_output": "omit-entry-and-record-canonical-fallback"
+  },
+  "data_boundary": "public-synthetic-persona-utterances-only",
+  "private_data_used": false
+}
