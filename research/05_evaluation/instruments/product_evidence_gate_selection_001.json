@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "instrument_id": "product-evidence-gate-selection-001",
+  "status": "pre-registered-execution-pending",
+  "owner_issue": 198,
+  "parent_issue": 8,
+  "pre_registered_at": "2026-09-04",
+  "decision_question": "On one development corpus with everything except the evidence gate held fixed, does the confirmed `source-semantic-evidence-atom-gate-v4` outperform the gate the product actually ships, `structured-lexical-v1`?",
+  "why_this_is_needed": "Confirmation 028 recorded Keep for the v4 gate against its v3 predecessor. The product ships neither: `services/api/app/config.py` offers only unselected, structured-lexical-v1, ambiguity-safe-structured-lexical-v1, and question-targeted-ambiguity-safe-v2, and `deploy/local-r1.env.example` selects structured-lexical-v1. Promoting v4 into the product without comparing it to the incumbent would repeat the confirmation-024 error of shipping an architecture whose decisive behaviour was never measured against its alternative.",
+  "evidence_class": "development-split-method-selection",
+  "held_out": false,
+  "held_out_note": "The development split exists to select methods. No sealed or hidden-gold package is touched, opened, rerun, or rescored by this instrument.",
+  "dataset": {
+    "cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_cases_002.json",
+    "gold": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+    "sources": "data/processed/academic_factual_qa_open_10000_v1_development_sources_002.json",
+    "case_count": 500,
+    "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+    "disjoint_from_sealed_final_package": true
+  },
+  "design": {
+    "variable": "evidence gate only",
+    "held_fixed": [
+      "corpus and case identities",
+      "gold",
+      "retriever",
+      "authoritative factual generator (deterministic/evidence-set-v2)",
+      "request-intent contract (deterministic-tutor-action-router-v3)",
+      "tutoring mode",
+      "conversation scope (one conversation per case)"
+    ],
+    "arms": [
+      {
+        "arm_id": "incumbent",
+        "evidence_gate": "structured-lexical-v1",
+        "role": "what the product ships today"
+      },
+      {
+        "arm_id": "candidate",
+        "evidence_gate": "dominance-scoped-source-semantic-evidence-atoms-v4",
+        "role": "the architecture confirmation 028 recorded Keep for"
+      },
+      {
+        "arm_id": "reference",
+        "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+        "role": "the predecessor the sealed regression recorded No Release for; included so the three points are comparable on one corpus"
+      }
+    ],
+    "provider_backed": false,
+    "expected_cost_usd": 0
+  },
+  "decision_rule": {
+    "fixed_before_execution": true,
+    "promote_candidate_if": [
+      "candidate severe unsupported release count is less than or equal to the incumbent's",
+      "candidate fully grounded factual success is strictly greater than the incumbent's",
+      "candidate operational failure count is less than or equal to the incumbent's"
+    ],
+    "otherwise": "The product keeps `structured-lexical-v1`. The v4 gate is recorded as implemented but unpromoted, in the sense issue #8 already uses for #155.",
+    "if_unmeasurable": "No gate change ships.",
+    "no_post_hoc_threshold_selection": "Registered scoring is reused unchanged from scripts/score_academic_factual_qa_open_10000.py. This instrument selects no threshold of its own and may not add one after seeing results.",
+    "single_execution": "Each arm runs once. A losing arm is not retried with adjustments."
+  },
+  "scope_limits": [
+    "This selects a gate for the product; it does not re-open the sealed 10,000-case benchmark, which stands as No Release for the v3 gate.",
+    "The product retrieves with a dense published index while this comparison and confirmation 028 retrieve locally. A promotion here therefore carries an explicit transfer assumption that must be stated in the release record.",
+    "Development-split evidence selects a method. It is not a generalization claim.",
+    "Public synthetic sources only. No professor fidelity, student usability, or learning-outcome claim."
+  ],
+  "authority": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "maximum_cost_usd": 0
+  }
+}
