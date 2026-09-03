@@ -29,6 +29,7 @@ from src.digital_twin.grounding import (
     ExactQuoteAtomicClaimVerifier,
     SourceSemanticEvidenceAtomGateV2,
     SourceSemanticEvidenceAtomGateV3,
+    SourceSemanticEvidenceAtomGateV4,
     SourceSemanticEvidenceAtomRetrieverV1,
     StructuredLexicalCoverageEvidenceGate,
     materialize_semantic_evidence_atoms,
@@ -409,6 +410,44 @@ def _metrics(bundle: _ProviderBundle | None) -> AutonomyOperationalMetricsV1:
     )
 
 
+def _build_release_chunk(
+    template,
+    source: dict[str, str],
+    *,
+    course_id: str,
+    source_label: str,
+):
+    """Render one approved source into a citable, region-bearing chunk."""
+
+    source_sha = hashlib.sha256(source["statement"].encode("utf-8")).hexdigest()
+    return template.model_copy(
+        update={
+            "id": f"chunk-{source['source_id']}",
+            "document_id": f"document-{source['source_id']}",
+            "source_artifact_id": source["source_id"],
+            "text": source["statement"],
+            "content_hash": source_sha,
+            "source_checksum": source_sha,
+            "region_id": f"region-{source['source_id']}",
+            "retrieval_allowed": True,
+            "display_allowed": True,
+            "locator": f"{source['source_id']} paragraph 1",
+            "metadata": {
+                **template.metadata,
+                "course_id": course_id,
+                "source_template": source["source_id"],
+                "source_path": f"{source['source_id']}.md",
+                "title": source_label,
+                "parent_cluster_id": f"cluster-{source['source_id']}",
+                "modality": "text",
+                "char_start": "0",
+                "char_end": str(len(source["statement"])),
+            },
+        },
+        deep=True,
+    )
+
+
 def _install_release(
     repository,
     fixture,
@@ -417,7 +456,17 @@ def _install_release(
     now: datetime,
     grounding_architecture_id: str,
     source_resolver: Callable[[str], dict[str, str]],
+    distractor_resolver: Callable[[str], list[dict[str, str]]] | None = None,
 ):
+    """Publish the release a case is evaluated against.
+
+    ``distractor_resolver`` is optional and defaults to off, so confirmations
+    012 through 024 keep publishing exactly one chunk and their recorded
+    results stay reproducible. A successor may supply additional approved
+    sources so the release resembles a real course corpus, which is the regime
+    the single-chunk releases never exercised.
+    """
+
     source = source_resolver(case.case_id)
     source_label = source.get(
         "label", f"Protocol {source_template_number(case.case_id):03d}"
@@ -450,42 +499,42 @@ def _install_release(
     if current is None:
         raise RuntimeError("synthetic product fixture has no source release")
     source_sha = hashlib.sha256(source["statement"].encode("utf-8")).hexdigest()
-    chunk = current.chunks[0].model_copy(
-        update={
-            "id": f"chunk-{source['source_id']}",
-            "document_id": f"document-{source['source_id']}",
-            "source_artifact_id": source["source_id"],
-            "text": source["statement"],
-            "content_hash": source_sha,
-            "source_checksum": source_sha,
-            "region_id": f"region-{source['source_id']}",
-            "retrieval_allowed": True,
-            "display_allowed": True,
-            "locator": f"{source['source_id']} paragraph 1",
-            "metadata": {
-                **current.chunks[0].metadata,
-                "course_id": fixture.course_a_id,
-                "source_template": source["source_id"],
-                "source_path": f"{source['source_id']}.md",
-                "title": source_label,
-                "parent_cluster_id": f"cluster-{source['source_id']}",
-                "modality": "text",
-                "char_start": "0",
-                "char_end": str(len(source["statement"])),
-            },
-        },
-        deep=True,
+    chunk = _build_release_chunk(
+        current.chunks[0],
+        source,
+        course_id=fixture.course_a_id,
+        source_label=source_label,
     )
+    chunks = [chunk]
+    if distractor_resolver is not None:
+        seen = {chunk.id}
+        for extra in distractor_resolver(case.case_id):
+            row = _build_release_chunk(
+                current.chunks[0],
+                extra,
+                course_id=fixture.course_a_id,
+                source_label=extra.get(
+                    "label", f"Protocol {extra['source_id']}"
+                ),
+            )
+            if row.id in seen:
+                continue
+            seen.add(row.id)
+            chunks.append(row)
     if grounding_architecture_id in {
         "ambiguity-safe-source-semantic-evidence-atoms-v2",
         "pedagogy-aware-source-semantic-evidence-atoms-v3",
+        "dominance-scoped-source-semantic-evidence-atoms-v4",
     }:
-        chunk = materialize_semantic_evidence_atoms([chunk])[0]
+        materialized = materialize_semantic_evidence_atoms(chunks)
+        by_id = {row.id: row for row in materialized}
+        chunks = [by_id[row.id] for row in chunks]
+        chunk = chunks[0]
     release = current.model_copy(
         update={
             "id": "release-autonomy-product-evaluation-v2",
             "status": StudentReleaseStatus.DRAFT,
-            "chunks": [chunk],
+            "chunks": chunks,
             "teaching_profile_id": approved.profile_id,
             "teaching_profile_sha256": approved.content_sha256,
             "created_at": now.isoformat(),
@@ -541,6 +590,7 @@ def build_runtime_factory(
     maximum_case_cost_usd: float = 1.0,
     grounding_architecture_id: str = "legacy-structured-lexical-v1",
     source_resolver: Callable[[str], dict[str, str]] | None = None,
+    distractor_resolver: Callable[[str], list[dict[str, str]]] | None = None,
     engine_binding: ProductEngineBindingV1 | None = None,
     hybrid_safe_generation: bool = False,
     dependency_aware_provider_failure: bool = False,
@@ -575,6 +625,7 @@ def build_runtime_factory(
             now=clock.now(),
             grounding_architecture_id=grounding_architecture_id,
             source_resolver=resolve_source,
+            distractor_resolver=distractor_resolver,
         )
         repository.save_course_tutoring_runtime_profile(
             CourseTutoringRuntimeProfileV1(
@@ -617,6 +668,18 @@ def build_runtime_factory(
             == "pedagogy-aware-source-semantic-evidence-atoms-v3"
         ):
             evidence_gate = SourceSemanticEvidenceAtomGateV3()
+
+            def retriever_factory(chunks, _active_versions):
+                return SourceSemanticEvidenceAtomRetrieverV1(
+                    chunks,
+                    candidate_limit=30,
+                )
+
+        elif (
+            grounding_architecture_id
+            == "dominance-scoped-source-semantic-evidence-atoms-v4"
+        ):
+            evidence_gate = SourceSemanticEvidenceAtomGateV4()
 
             def retriever_factory(chunks, _active_versions):
                 return SourceSemanticEvidenceAtomRetrieverV1(

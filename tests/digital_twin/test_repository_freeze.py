@@ -36,6 +36,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "academic-factual-qa-open-10000-deterministic-development-001",
         "academic-factual-qa-open-10000-reference-aggregate-007",
+        "academic-factual-qa-open-10000-winner-regression-001",
+        "governed-full-autonomy-v2-1-corpus-confirmation-025",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
@@ -56,6 +58,20 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "governed-full-autonomy-v2-1-grounding-successor-011"
     ] == ("dataset_generation", "method_evaluation_execution")
+    # Issue #198: the winner regression may execute against the sealed held-out
+    # package and may call a provider only on its candidate-provider arm.
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "academic-factual-qa-open-10000-winner-regression-001"
+    ] == (
+        "external_model_evaluation",
+        "heldout_execution",
+        "method_evaluation_execution",
+    )
+    # Issue #198: the fresh multi-source-corpus successor may call a provider
+    # but never touches the sealed held-out package.
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "governed-full-autonomy-v2-1-corpus-confirmation-025"
+    ] == ("external_model_evaluation", "method_evaluation_execution")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",

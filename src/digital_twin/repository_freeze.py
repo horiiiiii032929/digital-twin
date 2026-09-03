@@ -294,6 +294,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_025.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_024.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
@@ -389,6 +393,15 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         ),
         "scripts/run_academic_factual_qa_open_10000.py": (
             "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_academic_factual_qa_open_10000_winner.py": (
+            "external_model_evaluation",
+            "heldout_execution",
+            "method_evaluation_execution",
+        ),
+        "scripts/score_academic_factual_qa_open_10000_winner.py": (
+            "heldout_execution",
             "method_evaluation_execution",
         ),
         "scripts/run_academic_factual_qa_api_retrieval_selection.py": (
@@ -591,6 +604,23 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         ),
         "governed-full-autonomy-v2-1-grounding-successor-011": (
             "dataset_generation",
+            "method_evaluation_execution",
+        ),
+        # Issue #198, authorized by the researcher on 2026-09-03. Runs the
+        # confirmation-024 selected candidate against the sealed Program 011
+        # 10,000+1,000 package as a known-benchmark regression. The
+        # deterministic arms reach no provider at all; only the
+        # candidate-provider arm may call one, under a USD 5 ceiling.
+        "academic-factual-qa-open-10000-winner-regression-001": (
+            "external_model_evaluation",
+            "heldout_execution",
+            "method_evaluation_execution",
+        ),
+        # Issue #198, authorized by the researcher on 2026-09-03. Fresh
+        # multi-source-corpus successor to persona confirmation 024, running
+        # the dominance-scoped v4 grounding architecture under a USD 5 ceiling.
+        "governed-full-autonomy-v2-1-corpus-confirmation-025": (
+            "external_model_evaluation",
             "method_evaluation_execution",
         ),
     }

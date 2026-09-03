@@ -84,6 +84,10 @@ class ActualProductEvaluationContext:
     grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
     canary_case_ids: tuple[str, str] = CANARY_CASE_IDS
     source_resolver: Any = None
+    # Optional extra approved sources published alongside the answering
+    # source. Defaults to off so confirmations 012-024 keep publishing a
+    # single-chunk release and stay reproducible.
+    distractor_resolver: Any = None
     engine_binding: ProductEngineBindingV1 | None = None
     independent_scoring: bool = False
     hybrid_safe_generation: bool = False
@@ -652,6 +656,7 @@ async def _run_case(
             maximum_case_cost_usd=max(0.02, min(2.0, remaining_cost_usd)),
             grounding_architecture_id=context.runtime_grounding_architecture_id,
             source_resolver=context.source_resolver,
+            distractor_resolver=context.distractor_resolver,
             engine_binding=(context.engine_binding if provider_backed else None),
             hybrid_safe_generation=context.hybrid_safe_generation,
             dependency_aware_provider_failure=(

@@ -579,6 +579,22 @@ class SourceSemanticEvidenceAtomGateV3(SourceSemanticEvidenceAtomGateV1):
     implementation_id = "source-semantic-evidence-atom-gate-v3"
     version = "v3"
 
+    def _contested_leaders(
+        self,
+        ranked: Sequence[RetrievalHit],
+        *,
+        query: str,
+        target: str,
+    ) -> list[RetrievalHit]:
+        """Return the atoms whose canonical claims must agree.
+
+        V3 contests every atom that cleared the target's coverage threshold.
+        The extension point exists so a successor can narrow the contest
+        without altering this class, whose decisions are recorded evidence.
+        """
+
+        return list(ranked)
+
     def assess(
         self,
         query: str,
@@ -636,9 +652,10 @@ class SourceSemanticEvidenceAtomGateV3(SourceSemanticEvidenceAtomGateV1):
                     selected_hit_ids=[],
                     recommended_action="abstain",
                 )
+            contested = self._contested_leaders(ranked, query=query, target=target)
             claim_classes = {
                 normalize_claim_class(_metadata(row.chunk, "semantic_atom_claim"))
-                for row in ranked
+                for row in contested
             }
             if len(claim_classes) > 1:
                 return EvidenceSufficiencyDecision(
@@ -648,7 +665,10 @@ class SourceSemanticEvidenceAtomGateV3(SourceSemanticEvidenceAtomGateV1):
                         "instructional target is ambiguous across canonical "
                         "evidence claims"
                     ),
-                    features={"canonical_claim_class_count": len(claim_classes)},
+                    features={
+                        "canonical_claim_class_count": len(claim_classes),
+                        "contested_leader_count": len(contested),
+                    },
                     selected_hit_ids=[],
                     recommended_action="clarify",
                 )
@@ -690,12 +710,54 @@ class SourceSemanticEvidenceAtomGateV3(SourceSemanticEvidenceAtomGateV1):
         )
 
 
+class SourceSemanticEvidenceAtomGateV4(SourceSemanticEvidenceAtomGateV3):
+    """Fail closed on a genuine tie, not on the presence of weaker regions.
+
+    V3 compares canonical claim classes across every atom that clears the
+    target's coverage threshold, yet it selects only the top-ranked atom.
+    Because ``normalize_claim_class`` is the token set of the claim text, two
+    distinct regions almost always carry distinct classes. On a single-chunk
+    release the contest therefore never fires; on a product-scale corpus it
+    fires on nearly every answerable question, and the tutor asks the learner
+    to clarify a question it had already grounded correctly.
+
+    V4 contests only the atoms that tie the leader on the dominance keys the
+    ranking itself uses -- an explicit public title anchor and instructional
+    coverage. When the leader strictly dominates there is no competing reading
+    to resolve, so the target resolves. When the leaders genuinely tie and
+    disagree, V4 fails closed exactly as V3 does.
+    """
+
+    implementation_id = "source-semantic-evidence-atom-gate-v4"
+    version = "v4"
+
+    def _contested_leaders(
+        self,
+        ranked: Sequence[RetrievalHit],
+        *,
+        query: str,
+        target: str,
+    ) -> list[RetrievalHit]:
+        if not ranked:
+            return []
+
+        def dominance(row: RetrievalHit) -> tuple[int, float]:
+            return (
+                int(_has_public_title_anchor(query, row.chunk)),
+                round(_instructional_coverage(target, row.chunk), 9),
+            )
+
+        leader = dominance(ranked[0])
+        return [row for row in ranked if dominance(row) == leader]
+
+
 __all__ = [
     "ATOM_VERSION",
     "SemanticEvidenceAtomTraceV1",
     "SourceSemanticEvidenceAtomGateV1",
     "SourceSemanticEvidenceAtomGateV2",
     "SourceSemanticEvidenceAtomGateV3",
+    "SourceSemanticEvidenceAtomGateV4",
     "SourceSemanticEvidenceAtomRetrieverV1",
     "materialize_semantic_evidence_atoms",
 ]
