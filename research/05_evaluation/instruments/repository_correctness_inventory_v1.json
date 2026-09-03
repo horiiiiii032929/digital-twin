@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 1016
+    "audited": 1018
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 256,
+    "active_or_unclassified_tooling": 257,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 231
+    "verification": 232
   },
-  "file_count": 1016,
+  "file_count": 1018,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "eb9a07a354733aad258ccc4f39d15818de8c0611b25f6990184415f6c770c825",
+  "record_sha256": "cccc59f697a932e2d6ca91f5bec415bc732fad4ef20c2fd973031aa93681f5cb",
   "records": [
     {
       "audit": {
@@ -7087,6 +7087,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Network-free builder review verifies that semantic frames are observed at the actual product boundary, keyed to their content, deduplicated, hash-bound, and emitted without provider calls or private data.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording requirements audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_persona_wording_requirements_022.py",
+      "risk": "high",
+      "sha256": "7081fec93933714da941e641abf96bdc603498ce1fcaf3deedf04b862c16b459"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -9692,7 +9708,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, and no release selection from build evidence.",
+        "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, an observation-only discovery hook, and no release selection from build evidence.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -9706,7 +9722,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py",
       "risk": "high",
-      "sha256": "dbecab13a3f14f169a7d2effc43c3016bdae25fb3fa1a7b6cba7f3b05fdc0f47"
+      "sha256": "9bbad17466f39058b588b52ea4db1107fb5d25fce3363d85e652e96c89751765"
     },
     {
       "audit": {
@@ -10663,11 +10679,11 @@
     },
     {
       "audit": {
-        "domain": "structured-request-intent-release-correction",
-        "evidence": "Freeze review classifies 021 as a pure in-memory builder while retaining the separately guarded provider runner and repository-wide execution freeze.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Freeze review classifies 021 and the persona-wording requirements builder as network-free builders while retaining guarded provider and evaluation runners.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-11 root-cause and confirmation audit"
+        "reviewer": "Codex persona-wording requirements audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10677,7 +10693,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "60fc5dd4a6fb36a072825c379c529f069845df0a2f02d9a0eb1463e8b16bb62f"
+      "sha256": "7fe90a4e72596f36c572caeaa32ba510b8e3f6129cc671d8a05e31a104dd10c4"
     },
     {
       "audit": {
@@ -11578,7 +11594,7 @@
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and semantic-keyed response-realization provenance through the public adapter contract.",
+        "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, semantic-keyed provenance, and an optional observation hook that cannot alter submitted utterances.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -11589,7 +11605,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_learner_driver.py",
       "risk": "high",
-      "sha256": "cb35ef73f66e539588265ee18ccab68a16b3bbb768ef2aaef977ba2f6ef1064d"
+      "sha256": "3b8e3488e94143a98bfc81704ba93ac44c3942e6ccd1fb806bcb278957171e9d"
     },
     {
       "audit": {
@@ -15353,6 +15369,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Focused tests verify real-boundary discovery, unique semantic keys, zero provider use, and fail-closed package hash validation.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording requirements audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_persona_wording_requirements_022.py",
+      "risk": "medium",
+      "sha256": "e712ad5facc6e241a2781c08fd3776745fa8b85e286b6638da3a626533304bbb"
+    },
+    {
+      "audit": {
         "domain": "repository-correctness-controls",
         "evidence": "Focused inventory regressions passed for expanded scope, stale hashes, and rejection of incomplete pending inventories.",
         "findings": [],
@@ -17113,8 +17145,8 @@
     }
   ],
   "risk_counts": {
-    "high": 771,
-    "medium": 245
+    "high": 772,
+    "medium": 246
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

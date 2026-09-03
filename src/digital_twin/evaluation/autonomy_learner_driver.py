@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime, timedelta
-from typing import Any
+from typing import Any, Callable
 
 from src.digital_twin.evaluation.autonomy_contract import (
     AutonomyEvaluationCaseV1,
@@ -114,6 +114,7 @@ async def run_hidden_state_learner_case(
     schedule: DriverScheduleV1 = DriverScheduleV1(),
     clock_origin: datetime,
     collect_independent_evidence: bool = True,
+    utterance_observer: Callable[[LearnerUtterance], None] | None = None,
 ) -> HiddenStateRunResult:
     if clock_origin.tzinfo is None:
         raise ValueError("driver clock origin must be timezone-aware")
@@ -141,6 +142,8 @@ async def run_hidden_state_learner_case(
 
     async def submit(utterance: LearnerUtterance, day: int) -> None:
         nonlocal event_counter
+        if utterance_observer is not None:
+            utterance_observer(utterance)
         event_counter += 1
         event = AutonomyEvaluationEventV1(
             event_id=f"{case.case_id}:d{day:02d}:u{event_counter:03d}",

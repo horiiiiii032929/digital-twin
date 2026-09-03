@@ -22,6 +22,7 @@ import json
 import subprocess
 import sys
 import time
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -65,6 +66,7 @@ from src.digital_twin.evaluation.simulated_learner_v2 import (  # noqa: E402
     TextRealisingLearnerV2,
     utterance_bank_sha256,
 )
+from src.digital_twin.evaluation.simulated_learner_v1 import LearnerUtterance  # noqa: E402
 from src.digital_twin.repository_freeze import (  # noqa: E402
     require_bounded_pilot_operation_allowed,
 )
@@ -204,6 +206,7 @@ async def run_case(
     days: int,
     bank: FrozenLearnerUtteranceBankV1 | None,
     code_revision: str,
+    utterance_observer: Callable[[LearnerUtterance], None] | None = None,
 ) -> tuple[HiddenStateRunResult, HiddenStateCaseScoreV1, dict[str, bool]]:
     case = build_case(
         persona=persona, family=family, method=method, seed=seed, days=days
@@ -233,6 +236,7 @@ async def run_case(
             learner,
             schedule=DriverScheduleV1(days=days),
             clock_origin=CLOCK_ORIGIN,
+            utterance_observer=utterance_observer,
         )
     finally:
         adapter.close()

@@ -6703,13 +6703,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "structured-request-intent-release-correction",
-      "evidence": "Freeze review classifies 021 as a pure in-memory builder while retaining the separately guarded provider runner and repository-wide execution freeze.",
+      "domain": "repository-execution-freeze",
+      "evidence": "Freeze review classifies 021 and the persona-wording requirements builder as network-free builders while retaining guarded provider and evaluation runners.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "60fc5dd4a6fb36a072825c379c529f069845df0a2f02d9a0eb1463e8b16bb62f"
+      "reviewer": "Codex persona-wording requirements audit",
+      "sha256": "7fe90a4e72596f36c572caeaa32ba510b8e3f6129cc671d8a05e31a104dd10c4"
     },
     {
       "audit_status": "audited",
@@ -7320,12 +7320,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "successor-hidden-state-evaluation",
-      "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and semantic-keyed response-realization provenance through the public adapter contract.",
+      "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, semantic-keyed provenance, and an optional observation hook that cannot alter submitted utterances.",
       "findings": [],
       "path": "src/digital_twin/evaluation/autonomy_learner_driver.py",
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "cb35ef73f66e539588265ee18ccab68a16b3bbb768ef2aaef977ba2f6ef1064d"
+      "sha256": "3b8e3488e94143a98bfc81704ba93ac44c3942e6ccd1fb806bcb278957171e9d"
     },
     {
       "audit_status": "audited",
@@ -11137,12 +11137,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "persona-robust-release-selection",
-      "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, and no release selection from build evidence.",
+      "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, an observation-only discovery hook, and no release selection from build evidence.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "dbecab13a3f14f169a7d2effc43c3016bdae25fb3fa1a7b6cba7f3b05fdc0f47"
+      "sha256": "9bbad17466f39058b588b52ea4db1107fb5d25fce3363d85e652e96c89751765"
     },
     {
       "audit_status": "audited",
@@ -11176,6 +11176,28 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
       "sha256": "3c45fce5d13917fcc2d432b5b250d195775f0a9f2e736442ff76d608cc5ade4f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-release-selection",
+      "evidence": "Network-free builder review verifies that semantic frames are observed at the actual product boundary, keyed to their content, deduplicated, hash-bound, and emitted without provider calls or private data.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_persona_wording_requirements_022.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex persona-wording requirements audit",
+      "sha256": "7081fec93933714da941e641abf96bdc603498ce1fcaf3deedf04b862c16b459"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-release-selection",
+      "evidence": "Focused tests verify real-boundary discovery, unique semantic keys, zero provider use, and fail-closed package hash validation.",
+      "findings": [],
+      "path": "tests/test_build_persona_wording_requirements_022.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex persona-wording requirements audit",
+      "sha256": "e712ad5facc6e241a2781c08fd3776745fa8b85e286b6638da3a626533304bbb"
     }
   ],
   "schema_version": 1
