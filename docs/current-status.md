@@ -31,8 +31,10 @@ the direct canary strict and requiring product canaries to prove route
 invocation, exact identity, and safe completion. Its unchanged network-free run
 passed 820/820 cases across all four conditions, including 220 proactive cases.
 The complete gate passed 1,716 Python and 50 frontend tests; audit coverage was
-1,002/1,002 before result registration and freeze coverage was 156/156. The
-build is provider-unauthorized and makes no release claim.
+1,002/1,002 before result registration and freeze coverage was 156/156.
+Confirmation 019 is now the sole bounded provider-authorized checkpoint under
+the repository-wide freeze. It makes no release claim until the paid result is
+validly completed, and its authority must be revoked after every outcome.
 
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen

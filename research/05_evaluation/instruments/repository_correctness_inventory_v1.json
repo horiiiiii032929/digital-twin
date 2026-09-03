@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "77f536bdbde0e60dde9ec8ec28d0aae6612f45fbf19131d0e3535733d68dee0d",
+  "record_sha256": "aa76365b119b4d8bde8e4d8e99965b5ad9fcb5202b9532dbedaff2f0ab185276",
   "records": [
     {
       "audit": {
@@ -4408,10 +4408,10 @@
     {
       "audit": {
         "domain": "actual-product-confirmation-instrument",
-        "evidence": "Prospective 019 instrument changes only canary responsibility, preserves the unopened 018 package and every scientific input and hard gate, and keeps provider authority false.",
+        "evidence": "Prospective 019 instrument changes only canary responsibility, preserves the unopened 018 package and every scientific input and hard gate, and is the sole bounded provider-authorized confirmation after the clean build gate.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex 019 authorization audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -4419,7 +4419,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_019.json",
       "risk": "high",
-      "sha256": "f6390a408606acb4376006d32c1bdf32617e2f1e832bd6eb953f7d32839915e8"
+      "sha256": "82a8d9d10fef7c3ae9671ff585464d957fd3f451a46664ceb4cdfe93e53a00ad"
     },
     {
       "audit": {
@@ -12891,10 +12891,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Confirmation 018 is revoked and 019 is registered under both blocked operations without authorization; the repository-wide freeze remains active.",
+        "evidence": "Confirmation 018 is revoked and only 019 is authorized for external-model and method-evaluation execution; the repository-wide freeze remains active.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex 019 authorization audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12902,7 +12902,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8f8b7a84d617ee5e1343f3ddbef9edc4ecb103865a7c98ed9d5244f6c5b9a6b1"
+      "sha256": "6d2865a0d89322ad11169c1a35de58457cef66b64bb87dd6fdf241efad78c8ba"
     },
     {
       "audit": {
@@ -13739,10 +13739,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze-tests",
-        "evidence": "Regression verifies confirmations 018 and 019 are blocked after 018 revocation and before the separate 019 authorization, while every historical paid instrument remains blocked.",
+        "evidence": "Regression verifies only confirmation 019 is bounded for both required operations while confirmation 018 and every other historical paid instrument remain blocked.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex 019 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13750,7 +13750,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "74300a5c424d7d11ba126d731d62a3b4461ff05232fa7ec4634c61cdc7e9596f"
+      "sha256": "025343fa9dd7ad81a505aab8f2f51ab548e2cbcb57e5cb3f58c286b237f5a7c5"
     },
     {
       "audit": {
@@ -15819,10 +15819,10 @@
     {
       "audit": {
         "domain": "actual-product-confirmation-tests",
-        "evidence": "Tests prove 019 reuses only unopened gold, accepts an exact-identity malformed provider attempt when the product safely completes, rejects missing/drifted identity, and remains unauthorized.",
+        "evidence": "Tests prove 019 reuses only unopened gold, is explicitly authorized, accepts an exact-identity malformed provider attempt when the product safely completes, rejects missing/drifted identity, and has no authorization preflight blocker.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex 019 authorization audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15830,7 +15830,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
       "risk": "medium",
-      "sha256": "5a1176ad05fb2d1a90b503265d89e42047212cb01d82f903445d370b8fb1b394"
+      "sha256": "20bb9f503e76970f179f131fb89771b7548360724e5bb6ad7d27b55cb4906591"
     },
     {
       "audit": {

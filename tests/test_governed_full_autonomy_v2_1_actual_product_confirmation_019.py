@@ -17,15 +17,15 @@ def _response(*, model: str | None, status: str) -> SimpleNamespace:
     )
 
 
-def test_019_reuses_only_the_unopened_018_package() -> None:
+def test_019_reuses_only_the_unopened_018_package_and_is_authorized() -> None:
     result = runner.validate_attempt()
 
     assert result["case_count"] == 820
     assert result["reuses_unopened_confirmation_018_hidden_gold"] is True
     assert result["prior_public_canary_count"] == 2
     assert result["product_route_canary_accepts_safe_fallback"] is True
-    assert result["provider_execution_authorized"] is False
-    assert result["paid_execution_authorized"] is False
+    assert result["provider_execution_authorized"] is True
+    assert result["paid_execution_authorized"] is True
 
 
 def test_019_route_canary_accepts_exact_identity_safe_fallback() -> None:
@@ -51,11 +51,11 @@ def test_019_route_canary_rejects_missing_or_drifted_identity() -> None:
     assert runner.shared._canaries_valid(drifted, context=runner.CONTEXT) is False
 
 
-def test_019_preflight_is_blocked_before_authorization() -> None:
+def test_019_preflight_has_no_authorization_blocker() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
-    assert "repository-freeze-authorization-missing" in result["blockers"]
+    assert "provider-execution-not-authorized" not in result["blockers"]
+    assert "paid-execution-not-authorized" not in result["blockers"]
+    assert "repository-freeze-authorization-missing" not in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False

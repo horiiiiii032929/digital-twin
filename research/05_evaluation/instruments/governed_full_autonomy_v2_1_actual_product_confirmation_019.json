@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-019",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 186,
   "parent_issue": 8,
   "decision_question": "Does corrected H+E1/V3 pass the provider-backed actual-product autonomy gates when transport/schema capability and actual-product route invocation are tested by separate canary responsibilities?",
@@ -100,9 +100,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "Build-only harness correction. Standing user authority activates only after the corrected build is committed and preflight is clean.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "Standing user authorization to execute the agreed finite evaluation plan after the corrected build and complete local gate; activated only for confirmation 019.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0
