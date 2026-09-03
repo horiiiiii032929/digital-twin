@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1018
+    "audited": 1021
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 257,
+    "active_or_unclassified_tooling": 258,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 267,
+    "evaluation_configuration": 268,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 232
+    "verification": 233
   },
-  "file_count": 1018,
+  "file_count": 1021,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "cccc59f697a932e2d6ca91f5bec415bc732fad4ef20c2fd973031aa93681f5cb",
+  "record_sha256": "519f8a533beccbb4a685778aa0a0f4b0d08a840527204cda2fef1d8df345fad4",
   "records": [
     {
       "audit": {
@@ -1416,7 +1416,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Package command review verifies the successor 022 validator and simulator are explicit entrypoints while historical commands remain unchanged.",
+        "evidence": "Package command review verifies successor 022 requirements, bank, selection, preflight, execution, and resume entrypoints are explicit while historical commands remain unchanged.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "ec2d38cd02220547422ad0183667c899325ea99e025a2205564fd93d73314332"
+      "sha256": "d704f2930d81ebcf2bbe64cd05e32536e38466793bc7f8da7b1ace5845cf6a32"
     },
     {
       "audit": {
@@ -4711,6 +4711,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Instrument review verifies an exact direct OpenAI snapshot, public-synthetic data boundary, 46-call and USD 1 ceilings, zero retries, immutable requirements binding, and model wording with no authority over hidden truth.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording bank audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022.json",
+      "risk": "high",
+      "sha256": "298badfa91d6982fe7cb5a752e3c3d7e0a32a9affca0a159a8c5f2724beefa88"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
         "findings": [],
@@ -7096,7 +7112,9 @@
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
       "disposition": "active_audited",
-      "package_commands": [],
+      "package_commands": [
+        "validate:governed-autonomy-v2-1-persona-wording-requirements-022"
+      ],
       "path": "scripts/build_governed_full_autonomy_v2_1_persona_wording_requirements_022.py",
       "risk": "high",
       "sha256": "7081fec93933714da941e641abf96bdc603498ce1fcaf3deedf04b862c16b459"
@@ -7606,8 +7624,8 @@
     },
     {
       "audit": {
-        "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Freeze registry review covers both selection 022 and its provider-backed wording-bank entrypoint; neither can bypass the bounded authorization guard.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -9723,6 +9741,27 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py",
       "risk": "high",
       "sha256": "9bbad17466f39058b588b52ea4db1107fb5d25fce3363d85e652e96c89751765"
+    },
+    {
+      "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Runner review verifies exact ID-set matching, deterministic semantic quarantine, first-party model identity checks, non-stored structured output, atomic accounting, exclusive outputs, resume binding, and fail-closed authorization.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording bank audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-persona-wording-bank-022",
+        "preflight:governed-autonomy-v2-1-persona-wording-bank-022",
+        "resume:governed-autonomy-v2-1-persona-wording-bank-022",
+        "validate:governed-autonomy-v2-1-persona-wording-bank-022"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py",
+      "risk": "high",
+      "sha256": "3725ece8855a12873fe85ea13f9b45b60ae7447bc08ef98bc2e86f1d8a2498fc"
     },
     {
       "audit": {
@@ -13077,7 +13116,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "679d556bc38fc576c0e29e1a5e000d3b1ebc7724086965d6b084c5e902a1befd"
+      "sha256": "a3cbba9de1f25b2b1ecc4f5396f7d706efb15bfc58aef0d04310dc024f1979d6"
     },
     {
       "audit": {
@@ -16425,6 +16464,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Focused tests verify 1,104-to-46 batching, wording-only prompts, absence of hidden labels, key-based parsing, semantic quarantine, and blocked pre-authorization state.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording bank audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_persona_wording_bank_022.py",
+      "risk": "medium",
+      "sha256": "23f87347222bc04c4acdb7d4b66cad9cc445c6744e1162146fa3915ea006b367"
+    },
+    {
+      "audit": {
         "domain": "evaluation-verification",
         "evidence": "Focused regressions prove historical, revoked, unauthorized, and synthetic authorized-state handling; packet binding, answer-key separation, clean/defect controls, semantic-drift rejection, strict judgment accounting, metadata-expiry blocking, and freeze-guarded writes.",
         "findings": [],
@@ -17145,8 +17200,8 @@
     }
   ],
   "risk_counts": {
-    "high": 772,
-    "medium": 246
+    "high": 774,
+    "medium": 247
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
