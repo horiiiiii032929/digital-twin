@@ -116,7 +116,7 @@ async def test_openai_responses_client_uses_bounded_autonomy_plan_schema(monkeyp
 
 
 @pytest.mark.asyncio
-async def test_openai_responses_client_uses_reactive_semantic_plan_schema(monkeypatch):
+async def test_openai_responses_client_uses_minimal_reactive_intent_schema(monkeypatch):
     captured = {}
 
     async def post(**kwargs):
@@ -125,9 +125,7 @@ async def test_openai_responses_client_uses_reactive_semantic_plan_schema(monkey
             model="gpt-5.6-terra",
             text=(
                 '{"proposed_intent":"give_hint",'
-                '"concept_ids":["cache-coherence"],'
-                '"hypothesis_kind":null,"hypothesis_concept_id":null,'
-                '"hypothesis_confidence":0,"reason_code":"bounded-hint"}'
+                '"reason_code":"bounded-hint"}'
             ),
         )
 
@@ -136,16 +134,44 @@ async def test_openai_responses_client_uses_reactive_semantic_plan_schema(monkey
 
     result = await client.chat(
         [LlmMessage(role="user", content="Plan one complex student turn.")],
-        task="reactive_tutoring_plan",
+        task="reactive_tutoring_intent",
     )
 
     schema = captured["json"]["text"]["format"]["schema"]
     assert "proposed_intent" in schema["properties"]
     assert set(schema["required"]) == set(schema["properties"])
     assert "default" not in schema["properties"]["schema_version"]
-    assert schema["properties"]["schema_version"]["enum"] == ["2.1.0"]
-    assert "maximum" not in schema["properties"]["hypothesis_confidence"]
+    assert schema["properties"]["schema_version"]["enum"] == ["3.0.0"]
+    assert set(schema["properties"]) == {
+        "schema_version",
+        "proposed_intent",
+        "reason_code",
+    }
+    assert "concept_ids" not in schema["properties"]
+    assert "hypothesis_kind" not in schema["properties"]
     assert result.provider_model == "gpt-5.6-terra"
+
+
+@pytest.mark.asyncio
+async def test_minimal_reactive_intent_rejects_model_owned_concept_fields(monkeypatch):
+    async def post(**kwargs):
+        del kwargs
+        return _response(
+            model="gpt-5.6-luna",
+            text=(
+                '{"proposed_intent":"give_hint","reason_code":"bounded-hint",'
+                '"concept_ids":["model-owned-concept"]}'
+            ),
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-luna", post=post)
+
+    with pytest.raises(LlmMalformedResponseError):
+        await client.chat(
+            [LlmMessage(role="user", content="Plan one complex student turn.")],
+            task="reactive_tutoring_intent",
+        )
 
 
 @pytest.mark.asyncio

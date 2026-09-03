@@ -29,12 +29,18 @@ from scripts.governed_full_autonomy_v2_1_actual_product_runtime import (
 from src.digital_twin.evaluation import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationGoldV1,
+    AutonomyEvaluationGoldV2,
     AutonomyEvaluationResponseV1,
+    AutonomyRawEvidenceV2,
     AutonomySystemManifestV1,
     ProductEngineBindingV1,
     run_autonomy_case,
+    score_autonomy_case_independently,
     score_autonomy_case,
+    score_autonomy_case_v2,
     summarize_autonomy_scores,
+    summarize_autonomy_scores_v2,
+    summarize_independent_autonomy_scores,
 )
 from src.digital_twin.evaluation.autonomy_product_adapter import (
     StudentProductAutonomyAdapterV1,
@@ -88,6 +94,7 @@ class ActualProductEvaluationContext:
     bounded_strategy_generation: bool = False
     require_separate_transport_canary: bool = False
     product_route_canary_accepts_safe_fallback: bool = False
+    set_valued_action_gold: bool = False
 
     @property
     def case_count(self) -> int:
@@ -190,6 +197,30 @@ def _load(path: Path) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise ActualProductEvaluationError(f"JSON root is not an object: {path.name}")
     return payload
+
+
+def _write_terminal_checkpoint(
+    result: dict[str, Any],
+    *,
+    context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
+) -> None:
+    """Atomically make the progress checkpoint agree with the durable result."""
+
+    checkpoint = _load(context.checkpoint_path) if context.checkpoint_path.exists() else {}
+    checkpoint.update(
+        {
+            "status": result["status"],
+            "terminal": True,
+            "completed_case_count": int(
+                result.get("summary", {}).get(
+                    "case_count",
+                    result.get("accounting", {}).get("persisted_response_count", 0),
+                )
+            ),
+            "result_sha256": _hash_file(context.result_path),
+        }
+    )
+    _atomic_write(context.checkpoint_path, checkpoint)
 
 
 def _manifest(
@@ -1039,9 +1070,23 @@ def _score(
             raise ActualProductEvaluationError("persisted hidden-gold hash drifted")
     else:
         _atomic_write(context.hidden_gold_package, hidden, exclusive=True)
+    gold_model = (
+        AutonomyEvaluationGoldV2
+        if context.set_valued_action_gold
+        else AutonomyEvaluationGoldV1
+    )
+    score_case = (
+        score_autonomy_case_v2
+        if context.set_valued_action_gold
+        else score_autonomy_case
+    )
+    summarize = (
+        summarize_autonomy_scores_v2
+        if context.set_valued_action_gold
+        else summarize_autonomy_scores
+    )
     gold_by_id = {
-        row["case_id"]: AutonomyEvaluationGoldV1.model_validate(row)
-        for row in hidden["gold"]
+        row["case_id"]: gold_model.model_validate(row) for row in hidden["gold"]
     }
     public_by_id = {
         case.case_id: case
@@ -1051,17 +1096,37 @@ def _score(
         condition: [] for condition in context.builder.CONDITIONS
     }
     all_scores = []
+    independent_scores = []
     response_by_id = {response.case_id: response for _condition, response in rows}
     for condition, response in rows:
         case = public_by_id[response.case_id]
-        score = score_autonomy_case(case, gold_by_id[response.case_id], response)
+        score = score_case(case, gold_by_id[response.case_id], response)
         all_scores.append(score)
         condition_scores[condition].append(score)
-    summary = summarize_autonomy_scores(all_scores)
+        if context.independent_scoring:
+            raw_evidence = response.diagnostic_trace.get("independent_evidence_v2")
+            if not isinstance(raw_evidence, dict):
+                raise ActualProductEvaluationError(
+                    "independent scoring evidence is missing"
+                )
+            independent_scores.append(
+                score_autonomy_case_independently(
+                    case,
+                    gold_by_id[response.case_id],
+                    response,
+                    AutonomyRawEvidenceV2.model_validate(raw_evidence),
+                )
+            )
+    summary = summarize(all_scores)
     by_condition = {
-        condition: summarize_autonomy_scores(scores)
+        condition: summarize(scores)
         for condition, scores in condition_scores.items()
     }
+    independent_summary = (
+        summarize_independent_autonomy_scores(independent_scores)
+        if independent_scores
+        else None
+    )
     delivered = [
         action
         for _condition, response in rows
@@ -1147,6 +1212,15 @@ def _score(
         gate_results["per_condition_reference_action_accuracy"] = all(
             value["action_accuracy"] >= minimum for value in by_condition.values()
         )
+    if "overall_valid_action_set_accuracy_min" in gates:
+        gate_results["overall_valid_action_set_accuracy"] = summary[
+            "action_accuracy"
+        ] >= gates["overall_valid_action_set_accuracy_min"]
+    if "per_condition_valid_action_set_accuracy_min" in gates:
+        minimum = gates["per_condition_valid_action_set_accuracy_min"]
+        gate_results["per_condition_valid_action_set_accuracy"] = all(
+            value["action_accuracy"] >= minimum for value in by_condition.values()
+        )
     transport_accounting = _transport_canary_totals(context)
     accounting = {
         "provider_calls": sum(
@@ -1169,6 +1243,33 @@ def _score(
             transport_accounting["provider_calls"]
         ),
     }
+    identity_bearing_calls = [
+        call
+        for response in response_by_id.values()
+        for call in response.operational_metrics.call_records
+        if call.provider_model is not None
+    ]
+    schema_completed_calls = [
+        call for call in identity_bearing_calls if call.status == "completed"
+    ]
+    provider_schema_completion_rate = (
+        len(schema_completed_calls) / len(identity_bearing_calls)
+        if identity_bearing_calls
+        else 1.0
+    )
+    malformed_schema_count = sum(
+        call.error_code == "malformed-response" for call in identity_bearing_calls
+    )
+    if "provider_schema_completion_rate_min" in gates:
+        gate_results["provider_schema_completion"] = (
+            provider_schema_completion_rate
+            >= gates["provider_schema_completion_rate_min"]
+        )
+    if gates.get("independent_hard_gates_required") is True:
+        gate_results["independent_hard_gates"] = bool(
+            independent_summary
+            and independent_summary["all_case_hard_gates_passed"]
+        )
     operationally_valid = (
         accounting["provider_calls"]
         <= int(instrument["authority"]["maximum_provider_calls"])
@@ -1200,16 +1301,23 @@ def _score(
         else None,
         "summary": summary,
         "condition_summaries": by_condition,
+        "independent_summary": independent_summary,
         "proactive_action_accuracy": proactive_accuracy,
         "grounding_delta_from_t0": grounding_delta,
         "quiet_hour_violation_count": quiet_violations,
         "frequency_violation_count": frequency_violations,
         "gates": gate_results,
         "accounting": accounting,
+        "provider_schema_completion_rate": provider_schema_completion_rate,
+        "identity_bearing_provider_call_count": len(identity_bearing_calls),
+        "malformed_schema_count": malformed_schema_count,
         "direct_transport_canary_passed": _transport_canary_valid(context),
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_advance_history_persisted_per_case": True,
         "hidden_gold_opened_after_response_completion": True,
+        "action_gold_contract": (
+            "set-valued-v2" if context.set_valued_action_gold else "single-action-v1"
+        ),
         "private_data_used": False,
         "limitations": [
             "Public synthetic sources and learners only.",
@@ -1293,6 +1401,7 @@ async def execute(
         result,
         exclusive=not context.result_path.exists(),
     )
+    _write_terminal_checkpoint(result, context=context)
     return result
 
 
@@ -1317,10 +1426,19 @@ async def _simulate(
                 context=context,
             )
             responses.append(response)
-            score = score_autonomy_case(case, gold, response)
+            score = (
+                score_autonomy_case_v2(case, gold, response)
+                if context.set_valued_action_gold
+                else score_autonomy_case(case, gold, response)
+            )
             scores.append(score)
             condition_scores[condition].append(score)
-    summary = summarize_autonomy_scores(scores)
+    summarize = (
+        summarize_autonomy_scores_v2
+        if context.set_valued_action_gold
+        else summarize_autonomy_scores
+    )
+    summary = summarize(scores)
     proactive_case_count = sum(
         _is_proactive_evaluation_case(case)
         for _condition, case, _gold in context.builder.build_contract()
@@ -1343,7 +1461,7 @@ async def _simulate(
         "case_count": len(responses),
         "summary": summary,
         "condition_summaries": {
-            condition: summarize_autonomy_scores(rows)
+            condition: summarize(rows)
             for condition, rows in condition_scores.items()
         },
         "clock_history_count": len(clock_histories),

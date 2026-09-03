@@ -404,6 +404,32 @@ class ReactiveSemanticProposalV2(_Contract):
         return self
 
 
+class ReactiveIntentProposalV3(_Contract):
+    """Minimal non-authoritative proposal for one complex reactive turn.
+
+    A provider may choose only a pedagogical intent and a bounded reason code.
+    Concept attribution, learner hypotheses, scope, policy, evidence, state, and
+    delivery remain deterministic server responsibilities. V2 remains the
+    internal enriched and historical contract.
+    """
+
+    schema_version: Literal["3.0.0"] = "3.0.0"
+    proposed_intent: Literal[
+        "diagnose_understanding",
+        "ask_next_step",
+        "prompt_self_explanation",
+        "give_hint",
+        "give_analogy_or_example",
+        "correct_misconception",
+        "explain_concept",
+        "check_understanding",
+        "give_retrieval_practice",
+        "summarize_progress",
+        "abstain_no_evidence",
+    ]
+    reason_code: str = Field(min_length=1, max_length=128)
+
+
 class LearnerStateDeltaV2(_Contract):
     schema_version: Literal["2.1.0"] = "2.1.0"
     previous_revision: int = Field(ge=0)

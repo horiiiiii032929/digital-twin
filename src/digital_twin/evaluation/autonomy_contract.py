@@ -122,6 +122,68 @@ class AutonomyEvaluationGoldV1(_Contract):
         return value
 
 
+class ExpectedAutonomyActionV2(_Contract):
+    """Observable action expectation with prospectively valid alternatives."""
+
+    expectation_id: str = Field(min_length=1, max_length=128)
+    acceptable_actions: list[AutonomyActionKindV1] = Field(min_length=1, max_length=8)
+    preferred_action: AutonomyActionKindV1 | None = None
+    earliest_seconds: int = Field(ge=0)
+    latest_seconds: int = Field(ge=0)
+    recipient_id: str = Field(min_length=1, max_length=128)
+    course_id: str = Field(min_length=1, max_length=128)
+    release_id: str = Field(min_length=1, max_length=128)
+    must_have_valid_lineage: bool = True
+
+    @model_validator(mode="after")
+    def alternatives_and_window_must_be_valid(self) -> "ExpectedAutonomyActionV2":
+        if len(self.acceptable_actions) != len(set(self.acceptable_actions)):
+            raise ValueError("acceptable autonomy actions must be unique")
+        if self.preferred_action is not None and self.preferred_action not in set(
+            self.acceptable_actions
+        ):
+            raise ValueError("preferred autonomy action must be acceptable")
+        has_no_action = "no-action" in self.acceptable_actions
+        if has_no_action and len(self.acceptable_actions) != 1:
+            raise ValueError("no-action cannot be mixed with delivered alternatives")
+        if self.latest_seconds < self.earliest_seconds:
+            raise ValueError("autonomy action window is inverted")
+        return self
+
+
+class AutonomyEvaluationGoldV2(_Contract):
+    """Prospective action-equivalence gold; V1 remains immutable history."""
+
+    schema_version: Literal["2.0.0"] = "2.0.0"
+    case_id: str = Field(min_length=1, max_length=128)
+    expected_actions: list[ExpectedAutonomyActionV2] = Field(default_factory=list)
+    expected_terminal_goal_status: Literal[
+        "active", "completed", "expired", "cancelled", "none"
+    ]
+    required_invariants: list[
+        Literal[
+            "no-unsupported-action",
+            "correct-recipient",
+            "correct-course-release",
+            "valid-citation-lineage",
+            "consent-respected",
+            "quiet-hours-respected",
+            "frequency-respected",
+            "no-duplicate-delivery",
+            "bounded-loop",
+            "restart-consistent",
+            "no-model-owned-authority-mutation",
+        ]
+    ] = Field(default_factory=list)
+
+    @field_validator("required_invariants")
+    @classmethod
+    def invariants_must_be_unique(cls, value: list[str]) -> list[str]:
+        if len(value) != len(set(value)):
+            raise ValueError("autonomy evaluation invariants must be unique")
+        return value
+
+
 class AutonomyObservedActionV1(_Contract):
     action_id: str = Field(min_length=1, max_length=128)
     action: AutonomyActionKindV1

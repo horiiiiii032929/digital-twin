@@ -11,7 +11,7 @@ from scripts import (
 )
 from src.digital_twin.grounding.models import GenerationUsage
 from src.digital_twin.llm import LlmMessage, LlmResponse
-from src.digital_twin.student.autonomy_models import ReactiveSemanticProposalV2
+from src.digital_twin.student.autonomy_models import ReactiveIntentProposalV3
 
 
 class _CanaryClient:
@@ -20,13 +20,9 @@ class _CanaryClient:
 
     async def chat(self, messages: list[LlmMessage], task: str) -> LlmResponse:
         assert messages
-        assert task == "reactive_tutoring_plan"
-        content = ReactiveSemanticProposalV2(
+        assert task == "reactive_tutoring_intent"
+        content = ReactiveIntentProposalV3(
             proposed_intent="give_hint",
-            concept_ids=["transport-canary-concept"],
-            hypothesis_kind="low-confidence",
-            hypothesis_concept_id="transport-canary-concept",
-            hypothesis_confidence=0.8,
             reason_code="transport-canary",
         )
         return LlmResponse(

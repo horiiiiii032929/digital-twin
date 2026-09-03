@@ -17,9 +17,13 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from src.digital_twin.evaluation.autonomy_contract import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationGoldV1,
+    AutonomyEvaluationGoldV2,
     AutonomyEvaluationResponseV1,
 )
-from src.digital_twin.evaluation.autonomy_scoring import score_autonomy_case
+from src.digital_twin.evaluation.autonomy_scoring import (
+    score_autonomy_case,
+    score_autonomy_case_v2,
+)
 
 
 class _Contract(BaseModel):
@@ -177,7 +181,7 @@ def _event_kind_for_action(
 
 def score_autonomy_case_independently(
     case: AutonomyEvaluationCaseV1,
-    gold: AutonomyEvaluationGoldV1,
+    gold: AutonomyEvaluationGoldV1 | AutonomyEvaluationGoldV2,
     response: AutonomyEvaluationResponseV1,
     evidence: AutonomyRawEvidenceV2,
 ) -> IndependentAutonomyCaseScoreV2:
@@ -189,7 +193,11 @@ def score_autonomy_case_independently(
         )
     from src.digital_twin.student.autonomy_eligibility import event_action_contract
 
-    base = score_autonomy_case(case, gold, response)
+    base = (
+        score_autonomy_case_v2(case, gold, response)
+        if isinstance(gold, AutonomyEvaluationGoldV2)
+        else score_autonomy_case(case, gold, response)
+    )
     contract = event_action_contract()
     observed = {item.action_id: item for item in response.actions}
     raw_actions = {item.action_id: item for item in evidence.actions}
@@ -306,6 +314,7 @@ def score_autonomy_case_independently(
     )
 
     checks = {
+        "action-validity": base.action_accuracy == 1.0,
         "observable-action-gates": base.unexpected_delivery_count == 0
         and base.wrong_recipient_count == 0
         and base.wrong_course_release_count == 0
@@ -321,7 +330,7 @@ def score_autonomy_case_independently(
         "provider-failure-safe": provider_safe,
         "goal-termination": base.goal_termination_correct,
     }
-    success = all(checks.values()) and base.action_accuracy == 1.0
+    success = all(checks.values())
     return IndependentAutonomyCaseScoreV2(
         case_id=case.case_id,
         action_accuracy=base.action_accuracy,

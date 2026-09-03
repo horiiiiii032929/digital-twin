@@ -178,14 +178,10 @@ class _TaskFixtureClient:
         if not messages:
             raise ValueError("fixture provider requires messages")
         self.calls += 1
-        if task == "reactive_tutoring_plan":
+        if task == "reactive_tutoring_intent":
             content = json.dumps(
                 {
                     "proposed_intent": "correct_misconception",
-                    "concept_ids": ["cache-coherence"],
-                    "hypothesis_kind": "misconception",
-                    "hypothesis_concept_id": "cache-coherence",
-                    "hypothesis_confidence": 0.8,
                     "reason_code": "cache-coherence-misconception",
                 }
             )

@@ -43,6 +43,7 @@ from src.digital_twin.student.autonomy_models import (
     LearnerObservationV2,
     LearnerStateDeltaV2,
     PedagogicalPlanV2,
+    ReactiveIntentProposalV3,
     ReactiveSemanticProposalV2,
     ReactiveTurnArtifactsV2,
     TurnPerceptionV2,
@@ -368,9 +369,9 @@ class LiveReactiveSemanticPlanner:
     ) -> ReactiveSemanticProposalV2:
         payload = {
             "instruction": (
-                "Propose one pedagogical intent and at most one tentative learner "
-                "hypothesis. Use only the supplied concept IDs. Do not change identity, "
-                "policy, evidence, citations, release, state revision, or delivery."
+                "Propose one pedagogical intent and a short machine-readable reason. "
+                "Do not return concepts, hypotheses, identity, policy, evidence, "
+                "citations, release, state revision, or delivery fields."
             ),
             "student_message": message,
             "deterministic_perception": perception.model_dump(mode="json"),
@@ -403,9 +404,23 @@ class LiveReactiveSemanticPlanner:
                         content=json.dumps(payload, sort_keys=True),
                     ),
                 ],
-                task="reactive_tutoring_plan",
+                task="reactive_tutoring_intent",
             )
-            return ReactiveSemanticProposalV2.model_validate_json(response.content)
+            intent = ReactiveIntentProposalV3.model_validate_json(response.content)
+            deterministic = await self.fallback.propose(
+                message=message,
+                perception=perception,
+                concept_ids=concept_ids,
+                belief=belief,
+                evidence_keys=evidence_keys,
+                candidate_intent=intent.proposed_intent,
+            )
+            return deterministic.model_copy(
+                update={
+                    "proposed_intent": intent.proposed_intent,
+                    "reason_code": intent.reason_code,
+                }
+            )
         except LlmIdentityDriftError:
             raise
         except (LlmError, ValueError):

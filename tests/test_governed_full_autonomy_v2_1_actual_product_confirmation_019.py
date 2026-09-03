@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from types import SimpleNamespace
+import json
 
 from scripts import (
     run_governed_full_autonomy_v2_1_actual_product_confirmation_019 as runner,
@@ -59,3 +60,29 @@ def test_019_preflight_is_blocked_after_revocation() -> None:
     assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False
+
+
+def test_terminal_result_atomically_updates_checkpoint(tmp_path) -> None:
+    result_path = tmp_path / "result.json"
+    checkpoint_path = tmp_path / "checkpoint.json"
+    result = {
+        "status": "completed-keep",
+        "summary": {"case_count": 820},
+    }
+    result_path.write_text(json.dumps(result), encoding="utf-8")
+    checkpoint_path.write_text(
+        json.dumps({"status": "canaries-passed", "completed_case_count": 2}),
+        encoding="utf-8",
+    )
+    context = SimpleNamespace(
+        result_path=result_path,
+        checkpoint_path=checkpoint_path,
+    )
+
+    runner.shared._write_terminal_checkpoint(result, context=context)
+
+    checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+    assert checkpoint["status"] == "completed-keep"
+    assert checkpoint["terminal"] is True
+    assert checkpoint["completed_case_count"] == 820
+    assert len(checkpoint["result_sha256"]) == 64

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1002
+    "audited": 1006
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 251,
+    "active_or_unclassified_tooling": 253,
     "active_runtime": 160,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 264,
+    "evaluation_configuration": 265,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 226
+    "verification": 227
   },
-  "file_count": 1002,
+  "file_count": 1006,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b22eadb36d8b3434742ba6339d09bb25b77b74192acfd4bc5117ab9668a7d39e",
+  "record_sha256": "58cf7babf82907e5bbc01e4388c4dbc9df67c6e053749ccc08cee3aa9bc0b163",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "release-command-surface",
-        "evidence": "Validation, simulation, preflight, execute, and resume commands expose confirmations 018 and 019 without bypassing the repository freeze.",
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d79addff47098c4b2cff0333213245f8800201fab68e0598a26c86caceadefbc"
+      "sha256": "1695c4cf74dc8f59f7193001e81ff2c83c86446e17a352e9fabf25aeb33df750"
     },
     {
       "audit": {
@@ -4423,6 +4423,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-configuration",
+        "evidence": "Prospective confirmation 020 was reviewed for fresh source-disjoint inputs, hidden-gold isolation, set-valued action equivalence, minimal provider authority, exact Luna identity, freshness, bounded calls/cost, and no same-package rerun.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_020.json",
+      "risk": "high",
+      "sha256": "cb0364e629d86899daf88ac0da72734f8beec5c7e548b015bb1fa0af414795d2"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Instrument review preserves the qualified 820-case network-free boundary while returning it to build-only status and revoking provider authority after its grounding dependency was not satisfied.",
         "findings": [],
@@ -6847,6 +6863,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
+      "risk": "high",
+      "sha256": "def47c0a409dbb4ed0f359fc31f7f03f653a720d062af93fd815c2e0c2df57c2"
+    },
+    {
+      "audit": {
         "domain": "actual-product-autonomy-evaluation-002",
         "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
         "findings": [],
@@ -7510,11 +7542,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-provider-canary",
-        "evidence": "Direct transport canary uses the production Responses client and schema, records exact identity and cost, retains no unrestricted model content, and is independent of product routing.",
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-018 build audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7522,7 +7554,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "011711a56493d427d55df71269d37ff298a4f58cb54b643b3d4e14813c2717e3"
+      "sha256": "a3230dd0a58e3c2de0fcebcdb6b4821fdf8894567e2ef86d88f03cd5ac3f7562"
     },
     {
       "audit": {
@@ -9299,11 +9331,33 @@
     },
     {
       "audit": {
-        "domain": "actual-product-evaluation-runner",
-        "evidence": "Shared runner supports separate transport and product-route canary responsibilities, preserves historical strict behavior by default, binds the correction into resume identity, and retains combined accounting and fail-closed bulk execution.",
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-actual-product-confirmation-020",
+        "preflight:governed-autonomy-v2-1-actual-product-confirmation-020",
+        "resume:governed-autonomy-v2-1-actual-product-confirmation-020",
+        "simulate:governed-autonomy-v2-1-actual-product-confirmation-020",
+        "validate:governed-autonomy-v2-1-actual-product-confirmation-020"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
+      "risk": "high",
+      "sha256": "4e93ffce7e84efe4a83ef293e4fcf1fdd3344609686a6edb2ebc746e312297b8"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9317,7 +9371,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "0b8a0fc27446d18f0703b33965e66913bbcddb91e919df65674a34cca5502c24"
+      "sha256": "c62c88c95838f1fe9a81a9366a759bfcf396ce58f07cdd8bdbf8b9f2951f0ced"
     },
     {
       "audit": {
@@ -9567,11 +9621,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Preflight status now prioritizes revoked authority over time-dependent metadata freshness while retaining every individual readiness check and fail-closed execution behavior.",
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex preflight stability audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9584,7 +9638,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
       "risk": "high",
-      "sha256": "c7ed35da0280bb42fc1ee5affd43c44065eb426e9b1df60bcc7a722b3562b7b7"
+      "sha256": "9e3ce859cf5b5421a4d531be9d8aacbcac14365d4b3c9b0931f72feba74d0f7e"
     },
     {
       "audit": {
@@ -10520,11 +10574,11 @@
     },
     {
       "audit": {
-        "domain": "repository-execution-freeze",
-        "evidence": "Pure confirmation 018/019 package builders are exempted while both paid runners remain registered and guarded.",
+        "domain": "evaluation-tooling",
+        "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 harness-correction audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10534,7 +10588,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "f9e9abc34b3b634cff991c82bcc5e0b20f481a6fd8888c708fbf06915ae1a045"
+      "sha256": "5be62d11c3128993df32fce8dba1b1a3ae2c2576910c0d125fce0ecffbb88eb6"
     },
     {
       "audit": {
@@ -11114,11 +11168,11 @@
     },
     {
       "audit": {
-        "domain": "provider-observability",
-        "evidence": "Provider contract review verified the new bounded wording-strategy task uses strict structured output, exact model identity, store-false transport, and deterministic semantic validation.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 product-integration audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11126,7 +11180,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "0d21cc439587d66df5caff9e970cc6ae35ba657cbbcb98289ded377b4ab74b1a"
+      "sha256": "7630ab6f13b47dcaaf2f3faefed58095543ea85bb02926c59454fdd93156e678"
     },
     {
       "audit": {
@@ -11354,11 +11408,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex whole-system architecture audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11366,7 +11420,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/__init__.py",
       "risk": "high",
-      "sha256": "af502748de4000a305cd1720629a0e103ff70e549ad4732c55409cb32289c8d9"
+      "sha256": "bf800441995b47ecab709b374da8d16962af89254bb8babcdd7437dbce755291"
     },
     {
       "audit": {
@@ -11402,11 +11456,11 @@
     },
     {
       "audit": {
-        "domain": "provider-observability",
-        "evidence": "Reviewed privacy-safe provider diagnostics, exact malformed-call accounting, authorization and freeze boundaries, raw-output exclusion, and added direct live-shape regression coverage for hierarchical planning and reject-only verification.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex #157 diagnosable evaluation audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11414,15 +11468,15 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_contract.py",
       "risk": "high",
-      "sha256": "525ec48ed791ff3cebcd66163d1870f9c1f026793eb736fd8f15f2b5b3281b86"
+      "sha256": "aa37977d3dd0e12ec61263c4e57740eb9b3376929bfd7e52c05d959c19ba028c"
     },
     {
       "audit": {
-        "domain": "active-backend",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11430,7 +11484,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_independent_scoring.py",
       "risk": "high",
-      "sha256": "cc4ff01925aee4b05b18fda0158844e6c3eed39ee2c5c7d017c6da81c801278f"
+      "sha256": "e6ec733aa9123b355b25aca2e2df649d1c2f01338372ed3c99133e87d0c8263d"
     },
     {
       "audit": {
@@ -11482,11 +11536,11 @@
     },
     {
       "audit": {
-        "domain": "autonomy-scoring",
-        "evidence": "Reference-action matching and safety-contract aggregation are now separately labelled while the historical combined field remains compatible.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
-        "reviewed_at": "2026-09-02T22:57:23+00:00",
-        "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11494,7 +11548,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_scoring.py",
       "risk": "high",
-      "sha256": "8ba06f2b40ade8a40b03ae37acb81aacd99f3ac3d5b784b5c69ade92704adbed"
+      "sha256": "b48a5e0ba0ef34d38c4fe3908e8c01791e6715cc4db03bd02d5e7d2bc7531739"
     },
     {
       "audit": {
@@ -12890,11 +12944,11 @@
     },
     {
       "audit": {
-        "domain": "repository-execution-freeze",
-        "evidence": "Confirmations 018 and 019 are revoked and no fresh H+E1/V3 provider run is authorized; the repository-wide freeze remains active.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex 019 terminal-result audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12902,15 +12956,15 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "8f8b7a84d617ee5e1343f3ddbef9edc4ecb103865a7c98ed9d5244f6c5b9a6b1"
+      "sha256": "72f1efc923f0eaf9655dab5126c70e004865188dbe8edf37c02de44168f828db"
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Public-export review verified the bounded strategy contract and grounded generator are importable without cycles while historical T0/T1-v1 and architecture comparison surfaces remain intact.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 product-integration audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12918,7 +12972,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
-      "sha256": "cb50996b0d2d8da72cebf0c24f9f5d6b74fc9b20c7a7821d100be713ac85f3be"
+      "sha256": "6b0661f6c19d24a077c85d4fe9a7569833650a62b01cf14411d18d6e76d0f0d6"
     },
     {
       "audit": {
@@ -12954,11 +13008,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-trace-clock-closure",
-        "evidence": "Contract review verified the model-owned wording strategy is limited to two bounded enums and cannot carry factual claims, source lineage, delivery targets, policies, or state mutations.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 product-integration audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12966,7 +13020,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_models.py",
       "risk": "high",
-      "sha256": "9562a012019b382fb6a910546ce84876abdf503ac35bce4bf7e9cea75493479d"
+      "sha256": "0b50cd599c9c08a9a05d58fba83c1e9c887289a37ef26f0f089d9842ed014575"
     },
     {
       "audit": {
@@ -13210,11 +13264,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-postmortem",
-        "evidence": "General uncertainty, hint-request, and explanation language enters semantic perception; V2 perception and observation timestamps are bound to the injected graph clock.",
+        "domain": "active-runtime",
+        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-5 through SE7-7 closure audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13222,7 +13276,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "029fef6cd44010519fabb27a756864f8149071cbb87c624956ae75083bd3b329"
+      "sha256": "b5310e31412810e239d6e8bbb83e0214182f6aa5bd7e9c71c396452f1c17c239"
     },
     {
       "audit": {
@@ -13514,11 +13568,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-autonomy-postmortem",
-        "evidence": "Focused regressions cover general uncertainty/attempt language and exact propagation of the injected virtual timestamp into V2 observation lineage.",
+        "domain": "verification-evidence",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-5 through SE7-7 closure audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13526,7 +13580,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "3d9e3a0811222552f08e1367d25bdb9ce40406bed9dd7e8c804bc980efae0f72"
+      "sha256": "bc15dbf9c9ed4ceaa6da5be7103112010cfcf380b078abdf3172085849333ee9"
     },
     {
       "audit": {
@@ -14107,10 +14161,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Transport regressions verify the wording-strategy schema, task dispatch, strict enum parsing, exact identity, usage accounting, and privacy-safe failure behavior.",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex H+E1 product-integration audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14118,7 +14172,7 @@
       "package_commands": [],
       "path": "tests/services/test_openai_responses_client.py",
       "risk": "medium",
-      "sha256": "0b841e7865fa5d47f83b2618541eeb0450eea3d18d0aa696a6362107eb64ee10"
+      "sha256": "f9ddb98fd7cd41cb9e2eb39d75d9fa69256c4a8d721e8555250031d08d009172"
     },
     {
       "audit": {
@@ -14939,10 +14993,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14950,15 +15004,15 @@
       "package_commands": [],
       "path": "tests/test_autonomy_independent_scoring.py",
       "risk": "medium",
-      "sha256": "82e5789aaeabfd057480f26b71908d73a0a68767f446450c3252d87165e6d7cd"
+      "sha256": "fda4d9e9aba7b3d4c8fdff4f537c739a6094b3f3da92c6361def83cb6f93d646"
     },
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused scoring regressions prove exact observable behavior passes and wrong-recipient and post-consent deliveries fail deterministically.",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex #157 harness audit"
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14966,7 +15020,7 @@
       "package_commands": [],
       "path": "tests/test_autonomy_scoring.py",
       "risk": "medium",
-      "sha256": "14f94c12375df416e7a767c45c54df219151293d411e94acbba583ee0433fa86"
+      "sha256": "fa4032d784b72115220808592448ad0f395dbb3797ab08b82c4a750df184de43"
     },
     {
       "audit": {
@@ -15802,11 +15856,11 @@
     },
     {
       "audit": {
-        "domain": "actual-product-confirmation-tests",
-        "evidence": "Tests preserve confirmation 018 as invalid with revoked authority while retaining fresh source lineage, exact direct-canary accounting, and identity-drift coverage.",
+        "domain": "verification-evidence",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-8 invalid-result audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15814,15 +15868,15 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_018.py",
       "risk": "medium",
-      "sha256": "c9080b939746d1de8bf0f3aa7038b9ff9b3f1c9c14513f7242f510744a8d1768"
+      "sha256": "c4ea00b37398884218c60fa7d77073ff9aa6f856a71aba33c3d997c653d10320"
     },
     {
       "audit": {
-        "domain": "actual-product-confirmation-tests",
-        "evidence": "Tests preserve the 019 canary-role correction while verifying the terminal completed-refine instrument is revoked and preflight is blocked after result publication.",
+        "domain": "verification-evidence",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex 019 terminal-result audit"
+        "reviewer": "Codex confirmation-020 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15830,7 +15884,23 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
       "risk": "medium",
-      "sha256": "b22b1bf084c7f02587ce03e5d328135d025b653f428b69e5a7c8adcb0cfbc5e3"
+      "sha256": "0f395145cd07ac8eca0a9bdfc7c9b3c71b651a024e295eba3238bfc911466350"
+    },
+    {
+      "audit": {
+        "domain": "verification-evidence",
+        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex confirmation-020 root-cause audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
+      "risk": "medium",
+      "sha256": "18d1b883b91afe3af00fa716211d15d9040fdc48c07888cd33cb6380d655ba58"
     },
     {
       "audit": {
@@ -16874,8 +16944,8 @@
     }
   ],
   "risk_counts": {
-    "high": 762,
-    "medium": 240
+    "high": 765,
+    "medium": 241
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
