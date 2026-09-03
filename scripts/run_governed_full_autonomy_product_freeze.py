@@ -9,7 +9,7 @@ import tempfile
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
-from src.digital_twin.action_router import DeterministicActionRouterV2
+from src.digital_twin.action_router import DeterministicActionRouterV3
 from src.digital_twin.student import (
     Conversation,
     Message,
@@ -81,7 +81,7 @@ def _action_router_result() -> dict:
         item["case_id"]: item
         for item in json.loads(GOLD_PATH.read_text())["gold"]
     }
-    router = DeterministicActionRouterV2()
+    router = DeterministicActionRouterV3()
     correct = 0
     by_action: dict[str, int] = {}
     for case in cases:

@@ -10,7 +10,7 @@ from pathlib import Path
 from collections.abc import Callable
 
 from services.llm import BudgetedLlmClient, LiteLlmClient, OpenAiResponsesClient
-from src.digital_twin.action_router import DeterministicActionRouterV2
+from src.digital_twin.action_router import DeterministicActionRouterV3
 from src.digital_twin.evaluation import (
     AutonomyOperationalMetricsV1,
     AutonomyProviderCallV1,
@@ -661,7 +661,7 @@ def build_runtime_factory(
             generator = (
                 DeterministicEvidenceSetGroundedGenerator(
                     policy_enforcer=DeterministicPolicyEnforcer(
-                        action_router=DeterministicActionRouterV2()
+                        action_router=DeterministicActionRouterV3()
                     )
                 )
                 if hybrid_safe_generation
@@ -669,7 +669,7 @@ def build_runtime_factory(
                     bundle.generator,
                     prompt_builder=BoundedPedagogicalPromptBuilder(),
                     policy_enforcer=DeterministicPolicyEnforcer(
-                        action_router=DeterministicActionRouterV2()
+                        action_router=DeterministicActionRouterV3()
                     ),
                 )
             )

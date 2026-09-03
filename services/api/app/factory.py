@@ -45,7 +45,7 @@ from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
     LiveAtomicGroundedGenerator,
     DeterministicEvidenceSetGroundedGenerator,
-    DeterministicActionRouterV2,
+    DeterministicActionRouterV3,
     DeterministicPolicyEnforcer,
     StrictEvidenceGroundedPromptBuilder,
 )
@@ -530,7 +530,7 @@ def _configured_generator(
             client,
             prompt_builder=prompt_builder,
             policy_enforcer=DeterministicPolicyEnforcer(
-                action_router=DeterministicActionRouterV2()
+                action_router=DeterministicActionRouterV3()
             ),
         ),
         client,
@@ -552,7 +552,7 @@ def _deterministic_governed_generator() -> DeterministicEvidenceSetGroundedGener
 
     return DeterministicEvidenceSetGroundedGenerator(
         policy_enforcer=DeterministicPolicyEnforcer(
-            action_router=DeterministicActionRouterV2()
+            action_router=DeterministicActionRouterV3()
         )
     )
 

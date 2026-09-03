@@ -22,7 +22,7 @@ from typing import Any
 import httpx
 
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
-from src.digital_twin.action_router import DeterministicActionRouterV2
+from src.digital_twin.action_router import DeterministicActionRouterV3
 from src.digital_twin.generation import (
     BoundedPedagogicalPromptBuilder,
     DeterministicPolicyEnforcer,
@@ -355,7 +355,7 @@ async def _execute_product(
             generator_budget,
             prompt_builder=BoundedPedagogicalPromptBuilder(),
             policy_enforcer=DeterministicPolicyEnforcer(
-                action_router=DeterministicActionRouterV2()
+                action_router=DeterministicActionRouterV3()
             ),
         )
         tutoring = StudentTutoringService(

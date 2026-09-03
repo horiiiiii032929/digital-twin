@@ -669,7 +669,7 @@ def test_governed_runtime_decouples_live_planning_from_safe_generation(monkeypat
     assert graph.planner.model_id == "gpt-5.6-terra"
     assert graph.generator.model_id == "deterministic/evidence-set-v2"
     assert graph.generator.generator.policy_enforcer.action_router.implementation_id == (
-        "deterministic-tutor-action-router-v2"
+        "deterministic-tutor-action-router-v3"
     )
     assert app.state.provider_budget is None
 
