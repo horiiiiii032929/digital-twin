@@ -1,0 +1,59 @@
+{
+  "case_count": 500,
+  "code_revision": "66f366d",
+  "corpus": "region granularity, 344 regions",
+  "cost_usd": 0.0,
+  "decision": "No change shipped; three mechanisms discarded before implementation",
+  "evidence_class": "pre-implementation-measurement",
+  "hypotheses": [
+    {
+      "best_measure": "shortest claim / coverage density",
+      "id": "secondary-measure-tiebreak",
+      "isolates_gold": 105,
+      "picks_wrong_region": 61,
+      "reason": "A 57%-accurate tiebreaker converts refusals into unsupported answers.",
+      "still_tied": 18,
+      "verdict": "discarded"
+    },
+    {
+      "id": "coarse-targets-manufacture-ties",
+      "mean_tied_at_one_term": 2.86,
+      "mean_tied_at_three_terms": 2.15,
+      "mean_tied_at_two_terms": 2.3,
+      "question_concept_terms_dropped": {
+        "2": 3,
+        "3": 15,
+        "4": 36,
+        "5": 19,
+        "6": 12,
+        "7": 5
+      },
+      "reason": "Real, and it motivated hypothesis 3 rather than a change of its own.",
+      "single_term_targets": 91,
+      "verdict": "confirmed-as-property"
+    },
+    {
+      "all_leaders_equally_anchored": 123,
+      "anchor_narrows_the_tie": 0,
+      "id": "public-title-anchor-discriminates",
+      "no_leader_anchored": 64,
+      "reason": "Tied regions are different sentences inside the same titled section, so the title matches all or none.",
+      "verdict": "discarded"
+    }
+  ],
+  "instrument_id": "tie-resolution-hypothesis-audit-001",
+  "limitations": [
+    "Development-split evidence; public synthetic sources only.",
+    "Bounds what these three mechanisms can do on this corpus; does not prove no mechanism exists."
+  ],
+  "provider_calls": 0,
+  "run_id": "tie-resolution-hypothesis-audit-001",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "status": "completed-no-change",
+  "unresolved_population": {
+    "gold_inside_tied_leader_set": 184,
+    "tie_targets": 187
+  },
+  "what_this_rules_out": "Any tiebreaker built from the question and candidate text alone. The tied candidates are equally covered, equally titled, and differ only in what they assert."
+}
