@@ -1,0 +1,42 @@
+{
+  "authority_revoked": true,
+  "case_count": 670,
+  "code_revision": "e1e00fb",
+  "corrections": [
+    "clear the per-case database before opening it",
+    "give each release chunk its own ordinal"
+  ],
+  "decision": "Invalid",
+  "defect_scope": "any confirmation killed mid-case; never previously exercised",
+  "failure_detail": "release content is immutable after creation",
+  "failure_type": "ValueError",
+  "hidden_gold_opened": false,
+  "instrument_id": "governed-full-autonomy-v2-1-corpus-confirmation-026",
+  "limitations": [
+    "Public synthetic sources and personas.",
+    "No release, quality, or safety conclusion is drawn from a partial ledger."
+  ],
+  "operational_summary": {
+    "cost_usd": 0.18567,
+    "direct_transport_canary_passed": true,
+    "input_tokens": 431928,
+    "output_tokens": 82737,
+    "private_data_used": false,
+    "provider_calls": 863,
+    "returned_models": [
+      "gpt-5.6-luna"
+    ]
+  },
+  "persisted_response_count": 305,
+  "published_sources_per_release": 12,
+  "root_cause": "Pre-existing shared-harness defect: resume skips cases already in the ledger, so the case killed mid-flight is re-run against the per-case product database it left behind, and save_release refuses a second release with the same identity regardless of content.",
+  "run_id": "governed-full-autonomy-v2-1-corpus-confirmation-026-invalid",
+  "schema_version": 1,
+  "source_family_range": [
+    601,
+    650
+  ],
+  "status": "invalid-execution",
+  "successor": "governed-full-autonomy-v2-1-corpus-confirmation-027",
+  "successor_reuses_unopened_package": true
+}
