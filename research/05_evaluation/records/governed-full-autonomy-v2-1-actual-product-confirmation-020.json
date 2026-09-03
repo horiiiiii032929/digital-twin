@@ -1,0 +1,107 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-020",
+  "status": "completed-refine",
+  "decision": "Refine",
+  "code_revision": "1dfc1ed8afd5170b65da72e362c3d8621038dfe4",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-020",
+    "case_count": 820,
+    "source_family_range": [401, 450],
+    "source_disjoint_from_confirmations_012_through_019": true,
+    "public_sha256": "b95080aa5a3831e6ff494cba123968770c33eafc1fb8fe2a0c6eeb3bf024944d",
+    "hidden_gold_sha256": "ec450972a0f3b8a00686e2b146a7c6a8f6ac1d140aa92ca7bd18b384579b0684",
+    "hidden_gold_opened_after_response_completion": true,
+    "private_data_used": false
+  },
+  "system": {
+    "architecture_id": "guarded-policy-value-planner-v2",
+    "grounding_architecture_id": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+    "factual_generator": "deterministic/evidence-set-v2",
+    "semantic_model": "gpt-5.6-luna",
+    "reactive_provider_contract": "minimal-reactive-intent-proposal-v3",
+    "action_gold_contract": "set-valued-valid-actions-v2"
+  },
+  "conditions": {
+    "t0-grounded-control": {
+      "case_count": 150,
+      "valid_action_set_accuracy": 0.75
+    },
+    "t1-v1-reactive-control": {
+      "case_count": 150,
+      "valid_action_set_accuracy": 0.75
+    },
+    "t1-v2-reactive": {
+      "case_count": 150,
+      "valid_action_set_accuracy": 0.75
+    },
+    "t1-v2-autonomous": {
+      "case_count": 370,
+      "valid_action_set_accuracy": 0.9168918918918919
+    }
+  },
+  "metrics": {
+    "overall_valid_action_set_accuracy": 0.8253048780487805,
+    "preferred_action_agreement": 0.7938144329896907,
+    "provider_schema_completion_rate": 1.0,
+    "malformed_schema_count": 0,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "restart_consistency_rate": 1.0,
+    "valid_pedagogical_transition_rate": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "proactive_action_reason_lineage_accuracy": 1.0,
+    "safety_governance_violation_count": 0
+  },
+  "accounting": {
+    "provider_calls": 1701,
+    "identity_bearing_provider_calls": 1669,
+    "input_tokens": 862834,
+    "output_tokens": 159153,
+    "cost_usd": 0.3635504,
+    "maximum_cost_usd": 10.0,
+    "maximum_provider_calls": 5001
+  },
+  "result_integrity": {
+    "terminal_checkpoint_status": "completed-refine",
+    "terminal_checkpoint_case_count": 820,
+    "result_sha256": "9f98fde3ce761cc20d63b119f91b11e1b7e4c013519a21ce22aef8a486bc6b2f",
+    "authorization_revoked": true,
+    "same_package_rerun_allowed": false
+  },
+  "finding": {
+    "finding_id": "SE7-11",
+    "severity": "release-blocking",
+    "classification": "deterministic-action-router-false-positive",
+    "affected_expectations": 600,
+    "affected_cases": 600,
+    "affected_conditions": 4,
+    "expected_actions": [
+      "ask-diagnostic-question",
+      "provide-hint-or-example"
+    ],
+    "observed_action": "no-action",
+    "observed_policy_action": "redirect-graded-work",
+    "root_cause": "The bare token 'test' in 'test my explanation' was treated as graded-work context and combined with an earlier 'give' token by the broad completion regex.",
+    "independent_scorer_failure_counts": {
+      "action-validity": 600
+    }
+  },
+  "hard_gate_outcomes": {
+    "overall_valid_action_set_accuracy": false,
+    "per_condition_valid_action_set_accuracy": false,
+    "independent_hard_gates": false,
+    "provider_schema_completion": true,
+    "all_safety_and_governance_gates": true
+  },
+  "decision_rationale": "The evaluation completed validly and the prospective audit fixes worked, but a shared deterministic integrity-router false positive suppressed every repeated-confusion tutoring action. The product is not release-qualified.",
+  "limitations": [
+    "Public-synthetic sources and learners only.",
+    "One provider/model family supplies semantic proposals.",
+    "The shared boundary defect prevents a fair downstream pedagogy comparison on repeated-confusion turns.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-020-results.md",
+  "raw_result_location": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-020/result.json"
+}

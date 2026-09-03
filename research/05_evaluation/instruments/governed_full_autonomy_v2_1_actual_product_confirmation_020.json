@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-020",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine-authorization-revoked",
   "owner_issue": 188,
   "parent_issue": 8,
   "decision_question": "Does the H+E1 governed-autonomy product pass one fresh release confirmation after prospectively separating valid pedagogical alternatives from preferences and minimizing the model-owned reactive schema?",
@@ -101,9 +101,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "authorization_source": "User standing authorization to proceed with already-agreed LLM runs, reaffirmed on 2026-09-03 by the instruction to execute the plan and close every audited finding; bounded to confirmation 020 and USD 10.",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "Revoked after the complete 820-case run. The valid completed-refine result found SE7-11: all 600 repeated-confusion turns were falsely routed as graded-work requests because the phrase 'test my explanation' collided with the deterministic integrity regex. The same package must not be tuned or rerun.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0

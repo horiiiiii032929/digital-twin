@@ -10,16 +10,21 @@ results.
 
 ## Current audit-safe release boundary
 
-The current finite successor is issue #188. Confirmation 020 prospectively
-closes `SE7-9` with set-valued valid-action gold and `SE7-10` with a minimal
-intent/reason provider contract; deterministic code retains all concept,
-hypothesis, scope, evidence, state, and delivery authority. It also binds the
-terminal checkpoint to the result hash and terminal status. The fresh 820-case
-network-free actual-product run passes, the complete repository gate passes,
-and all 1,006 execution-relevant files are audited with zero open findings.
-This is build qualification only. One fresh provider-backed 020 execution is
-the next release decision; its authority is currently false and no same-package
-quality rerun is allowed.
+Issue #188 completed its finite release decision. Confirmation 020 closes
+`SE7-9`, `SE7-10`, and terminal-checkpoint drift prospectively, then completes
+all 820 fresh provider-backed cases with 100% provider schema completion and
+zero safety/governance violations. Its valid decision is `Refine / No Release`:
+overall valid-action-set accuracy is 82.53%, below the 95% gate. Finding
+`SE7-11` identifies one shared deterministic integrity-router defect: all 600
+requests containing “test my explanation” were falsely treated as graded-test
+completion requests and suppressed. Authority is revoked and the package may
+not be rerun.
+
+The next release work is a method-level academic-integrity classifier successor
+on fresh contrastive development evidence. It must distinguish assessment nouns
+from pedagogical verbs, preserve the strict direct-completion boundary, and be
+confirmed on a new source-disjoint package. The known 10,000+1,000 regression
+and local HTTPS qualification remain blocked until that successor passes.
 
 `main-commit-audit-resolution-001` supersedes the earlier governed V2.1 release
 selection. It closes all published audit findings, repairs the shared runtime,

@@ -15,13 +15,23 @@ live model contract to intent plus reason while deterministic code owns all
 correlated and authoritative fields. Terminal results also bind the progress
 checkpoint to the final status, completed-case count, and result hash.
 
-Fresh confirmation 020 uses 820 source-disjoint cases from source families
-401–450. Its network-free actual-product run passed all valid-action, safety,
-scope, citation, timing, restart, termination, and proactive-lineage checks.
-The complete gate passed 1,726 Python and 50 frontend tests, with 1,006/1,006
-audited files and 157/157 freeze registrations. This closes the code findings,
-not the release decision: provider and paid authority remain false until the
-separate execution checkpoint, and H+E1 remains unselected.
+Fresh confirmation 020 then completed all 820 source-disjoint cases from source
+families 401–450 at clean revision `1dfc1ed`. The prospective audit corrections
+worked: provider schema completion was 100%, malformed responses were zero, the
+terminal checkpoint matched the final result, and all safety, scope, citation,
+timing, restart, termination, and proactive-lineage gates passed. The run used
+1,701 calls and USD 0.3635504; authority is revoked.
+
+The valid result is nevertheless `completed-refine`. Overall valid-action-set
+accuracy was 82.53%, below the 95% gate; all four conditions failed their 95%
+per-condition gate. Root-cause audit found `SE7-11`: all 600 repeated-confusion
+requests used the phrase “test my explanation,” which the deterministic
+integrity router misclassified as a request to complete a graded test. It
+returned `redirect-graded-work`/`no-action` instead of either frozen
+policy-valid tutoring action. This is a shared product defect, not a model or
+scorer failure. No release is selected, confirmation 020 cannot be rerun, and
+the known 10,000+1,000 regression and local release qualification remain
+blocked pending a fresh method-level integrity-router successor.
 
 Fresh confirmation 018 established the source- and wording-disjoint 820-case
 package using source families 351–400, but its paid run stopped invalidly before

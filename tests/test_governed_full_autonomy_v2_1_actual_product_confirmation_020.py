@@ -7,7 +7,7 @@ from scripts import (
 )
 
 
-def test_020_is_fresh_set_valued_and_bounded_for_execution() -> None:
+def test_020_is_terminal_and_provider_authority_is_revoked() -> None:
     result = runner.validate_attempt()
 
     assert result["case_count"] == 820
@@ -17,8 +17,9 @@ def test_020_is_fresh_set_valued_and_bounded_for_execution() -> None:
     assert result["reactive_provider_contract"] == (
         "minimal-reactive-intent-proposal-v3"
     )
-    assert result["provider_execution_authorized"] is True
-    assert result["paid_execution_authorized"] is True
+    assert result["status"] == "completed-refine-authorization-revoked"
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
 
 
 def test_020_public_inputs_do_not_expose_action_gold() -> None:
@@ -55,12 +56,12 @@ def test_020_preregisters_repeated_confusion_equivalence_only() -> None:
     assert counts["single"] > 0
 
 
-def test_020_preflight_recognizes_the_exact_bounded_authorization() -> None:
+def test_020_preflight_fails_closed_after_terminal_revocation() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["hidden_gold_loaded"] is False
 
 

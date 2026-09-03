@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a7810d445b9f2e9515d51d3c0dc69d8e7f3f62adfec414528d087607bc28920c",
+  "record_sha256": "f4ec5db6f221cec55266f4dceb224a04bdbbe11714d512ee68c1a1e8ead0c255",
   "records": [
     {
       "audit": {
@@ -4424,7 +4424,7 @@
     {
       "audit": {
         "domain": "evaluation-configuration",
-        "evidence": "Prospective confirmation 020 was reviewed for fresh source-disjoint inputs, hidden-gold isolation, set-valued action equivalence, minimal provider authority, exact Luna identity, fresh metadata, one-time user authority, bounded calls/cost, and no same-package rerun.",
+        "evidence": "Terminal confirmation 020 preserves its fresh source-disjoint bindings and valid Refine result, records SE7-11, revokes provider and paid authority, and prohibits same-package rescore or rerun.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex confirmation-020 root-cause audit"
@@ -4435,7 +4435,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_020.json",
       "risk": "high",
-      "sha256": "453465b35991b9dd7d6aa9bb6803f1059a6dda6936cb0ff12e29ae719fd35bdf"
+      "sha256": "f50842fd9f131ea06f0f39381c453342bad5a1fc4e2cb42999dc481d9d838d17"
     },
     {
       "audit": {
@@ -11409,7 +11409,7 @@
     {
       "audit": {
         "domain": "active-runtime",
-        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+        "evidence": "Terminal audit confirms confirmation 020 was removed from the bounded allowlist after execution; the repository freeze again blocks every provider-backed actual-product confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex confirmation-020 root-cause audit"
@@ -12956,7 +12956,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "5ae131517f4e39b56599c12181cffbfdc19018c38750de64a26c404815323bbf"
+      "sha256": "72f1efc923f0eaf9655dab5126c70e004865188dbe8edf37c02de44168f828db"
     },
     {
       "audit": {
@@ -13793,10 +13793,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze-tests",
-        "evidence": "Regression verifies only confirmation 020 receives the two bounded operations needed for its one-time run while confirmations 018/019 and every other historical paid instrument remain blocked.",
+        "evidence": "Regression verifies confirmation 020 joins confirmations 018/019 and every other historical paid confirmation in the blocked set after terminal result publication.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-020 authorization audit"
+        "reviewer": "Codex confirmation-020 terminal audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -13804,7 +13804,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "fa92199a8edec115a8638f821c2e5ea5f4533c7f329c0a03cd5bfac9425a8b7b"
+      "sha256": "296b126c27aa242a73a760f8bd0f613f0c32671e23a49884e0aced31589e7069"
     },
     {
       "audit": {
@@ -14161,7 +14161,7 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
+        "evidence": "Focused regressions cover the terminal confirmation-020 status, revoked authority, set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, and fresh 820-case network-free confirmation.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex confirmation-020 root-cause audit"
@@ -15900,7 +15900,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "risk": "medium",
-      "sha256": "4c49e0c159058b1f857207c3fdacc3b5ed66de834f8930fe4519bfff7883afab"
+      "sha256": "6a69edec41c49ddd539f3fe0911084fa063775accd0375879fec9cb9ab16fb61"
     },
     {
       "audit": {
