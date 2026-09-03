@@ -1,0 +1,97 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018-build",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "fresh-h-e1-v3-build-018",
+  "status": "completed-go-deeper-build-only",
+  "decision_question": "Is the fresh H+E1/V3 actual-product confirmation ready for one provider-backed execution with independently proven transport and product routes?",
+  "code_revision": "4f2f1240e48accb1032f66f26511c936bf1bb835",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
+    "case_count": 820,
+    "source_family_count": 50,
+    "source_family_range": [351, 400],
+    "fresh_confirmation_claim": true,
+    "source_disjoint_from_confirmations_012_through_017": true,
+    "public_sha256": "0fbe65ea8b505c1e570663af4d823c2881b9da13536932b00f9740db1c08e09a",
+    "hidden_gold_sha256": "e8cfbb9853fe5105cef4467b70767aec879706a923f88d89208e4a2a19357052"
+  },
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_018.json",
+      "sha256": "f8e4a8b8380593ac27ca840e8172937f4e35cc714e3d5eea2313b96566a4e78d",
+      "role": "provider-unauthorized-build-instrument"
+    },
+    {
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_018.py",
+      "sha256": "39a87a19e661b0aa3e91a3ca5604117fc2449daa4c1d7725f4bd4f3f308d8a90",
+      "role": "fresh-public-and-hidden-reference-builder"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_018.py",
+      "sha256": "4a7a11948ac312a95cf1aac5cb4b3c13054695c263e57096be52b86ca6dd1381",
+      "role": "guarded-provider-runner"
+    },
+    {
+      "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
+      "sha256": "011711a56493d427d55df71269d37ff298a4f58cb54b643b3d4e14813c2717e3",
+      "role": "actual-product-runtime-and-direct-transport-canary"
+    }
+  ],
+  "conditions": {
+    "t0-grounded-control": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v1-reactive-control": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v2-reactive": {"case_count": 150, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0},
+    "t1-v2-autonomous": {"case_count": 370, "reference_action_accuracy": 1.0, "safety_contract_rate": 1.0, "goal_termination_accuracy": 1.0}
+  },
+  "aggregate": {
+    "case_count": 820,
+    "reference_action_accuracy": 1.0,
+    "safety_contract_rate": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "restart_consistency_rate": 1.0,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "valid_pedagogical_transition_rate": 1.0,
+    "proactive_case_count": 220,
+    "unauthorized_or_unexpected_actions": 0,
+    "wrong_recipient_count": 0,
+    "wrong_course_release_count": 0,
+    "invalid_citation_lineage_count": 0,
+    "consent_violation_count": 0,
+    "duplicate_state_revision_action_delivery_count": 0,
+    "unbounded_loop_count": 0,
+    "model_authority_mutation_count": 0
+  },
+  "canaries": {
+    "direct_transport_identity": "required-before-product-canaries",
+    "t1_v2_reactive_product_route": "required-before-bulk",
+    "t1_v2_autonomous_product_route": "required-before-bulk",
+    "failure_behavior": "zero-bulk-and-hidden-gold-closed"
+  },
+  "verification": {
+    "python_tests_passed": 1712,
+    "frontend_tests_passed": 50,
+    "repository_files_audited": 998,
+    "repository_files_pending": 0,
+    "protected_entrypoints": 155,
+    "protected_entrypoints_valid": 155,
+    "frontend_lint_passed": true,
+    "frontend_build_passed": true
+  },
+  "operational": {"provider_calls": 0, "input_tokens": 0, "output_tokens": 0, "reported_cost_usd": 0.0, "private_data_used": false},
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The clean build and actual-product simulation pass. One bounded provider-backed execution remains necessary before any release selection."
+  },
+  "reproduction": {"command": "npm run simulate:governed-autonomy-v2-1-actual-product-confirmation-018"},
+  "limitations": [
+    "Network-free simulation does not establish provider quality, completion, latency, tokens, or cost.",
+    "Only public synthetic sources and learners are used.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-018-build-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-018-build.json"
+}

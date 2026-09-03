@@ -106,6 +106,20 @@ is `In Progress / Go Deeper` and requires a fresh source-disjoint confirmation
 with separate transport and product-route canaries before scaling or local
 release selection.
 
+Confirmation 018 now satisfies that build boundary: 820/820 network-free
+actual-product cases passed, its dataset is fresh, and its direct transport,
+reactive route, and autonomous route canaries are independently enforced.
+Issue #186 remains `In Progress / Go Deeper`. Confirmation 018 is preserved as
+invalid after five calls and zero bulk cases; hidden gold remained unopened and
+authority is revoked. Confirmation 019 closes finding `SE7-8` in code by
+separating strict transport/schema proof from actual-route/safe-fallback proof.
+Its unchanged 820-case network-free run and complete repository gate pass, but
+the paid 019 result is `completed-refine` and authority is revoked. All safety
+gates passed, but `SE7-9` found that every exact-action mismatch was a
+policy-valid alternative excluded by over-specified gold; `SE7-10` records 83
+safe schema fallbacks. No release is selected and the opened package cannot be
+rerun. The wider evaluation freeze remains active.
+
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500
 fresh routing cases and seven simulated days with bounded cited delivery,

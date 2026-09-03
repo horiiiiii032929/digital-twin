@@ -1076,6 +1076,34 @@ authorization is revoked; the opened cases must not be reused for confirmation.
   Validate, simulate, preflight, execute, and resume commands share the actual
   product runner. The network-free simulation passes all gates; provider
   execution remains fail-closed and unauthorized.
+- `build_governed_full_autonomy_v2_1_actual_product_confirmation_015.py`
+  through `016.py` and their runners preserve the selected H+E1 confirmation
+  lineage. Confirmation 015 is immutable formal Keep evidence whose release
+  interpretation was blocked by the later SE7-2 audit. Confirmation 016 is a
+  fresh pedagogy-aware package but ended invalid before bulk when its reactive
+  canary correctly used the deterministic fast path.
+- `run_governed_full_autonomy_v2_1_actual_product_confirmation_017.py` preserves
+  the sole same-package harness correction and its terminal invalid result. The
+  replacement canary also made no provider call. Authority is revoked and the
+  016/017 package must never be used for another confirmatory run.
+- `build_governed_full_autonomy_v2_1_actual_product_confirmation_018.py` and
+  `run_governed_full_autonomy_v2_1_actual_product_confirmation_018.py` create
+  the fresh source-disjoint successor over source families 351–400. A direct
+  transport/identity canary is persisted separately from reactive and
+  autonomous actual-product route canaries. Bulk execution cannot begin unless
+  each route records the exact returned Luna identity and complete accounting.
+  Validation, full network-free simulation, preflight, execute, and resume
+  commands use the `governed-autonomy-v2-1-actual-product-confirmation-018`
+  suffix. Paid execution remains unauthorized in the build checkpoint.
+- `build_governed_full_autonomy_v2_1_actual_product_confirmation_019.py` and
+  `run_governed_full_autonomy_v2_1_actual_product_confirmation_019.py` preserve
+  invalid 018 and make its sole harness-only canary-role correction. The direct
+  canary still requires a completed exact-identity structured response. The
+  product-route canaries instead require an observed exact-identity provider
+  attempt plus safe actual-product completion, so malformed semantic output is
+  measured through the production fallback rather than misclassified as an
+  unexecuted route. Cases, prompts, models, hidden gold, and hard gates are
+  unchanged; provider authority remains false in the build checkpoint.
 - `build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py` and
   `run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py`: freeze the
   six-engine whole-product comparison, verify exact public/gold/prompt/policy

@@ -81,6 +81,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-actual-product-confirmation-015",
         "governed-full-autonomy-v2-1-actual-product-confirmation-016",
         "governed-full-autonomy-v2-1-actual-product-confirmation-017",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-018",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-019",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

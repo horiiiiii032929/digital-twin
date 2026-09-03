@@ -8,6 +8,45 @@ remain authoritative for the historical runs and claims they document.
 
 ## H+E1 whole-system confirmation and grounding successor
 
+Fresh confirmation 018 established the source- and wording-disjoint 820-case
+package using source families 351–400, but its paid run stopped invalidly before
+bulk. Confirmation 019 is the sole harness-only successor and reuses that
+unopened scientific package without changing cases, prompts, models, gold, or
+hard gates.
+
+The complete clean-revision gate passed 1,712 Python tests, 50 frontend tests,
+lint, TypeScript, and production build. Repository correctness is 998/998 and
+execution-freeze coverage is 155/155 with zero open findings before execution.
+Confirmation 018 then stopped invalidly after the direct transport and reactive
+route passed but the autonomous Luna response failed a correlated schema
+invariant and safely fell back. It persisted two public canaries, made five
+calls for USD 0.0009184, ran zero bulk cases, and left hidden gold unopened.
+Authority is revoked.
+
+Finding `SE7-8` is in the canary responsibility split: the direct canary already
+proved transport, identity, and valid structured output, while the product
+canary treated an observed exact-identity malformed response plus safe fallback
+as route non-execution. Confirmation 019 closes that finding in code by keeping
+the direct canary strict and requiring product canaries to prove route
+invocation, exact identity, and safe completion. Its unchanged network-free run
+passed 820/820 cases across all four conditions, including 220 proactive cases.
+The complete gate passed 1,716 Python and 50 frontend tests; audit coverage was
+1,002/1,002 before result registration and freeze coverage was 156/156.
+Confirmation 019 completed all 820 cases for USD 0.5009088 and its authority is
+revoked. Every safety, scope, citation, consent, timing, duplicate, loop,
+restart, fallback, transition, termination, and proactive-lineage gate passed.
+The raw decision was `completed-refine`: T1-v2 reactive exact-action accuracy
+was 94% and its T0 delta was −6 percentage points.
+
+Complete disagreement audit then found `SE7-9`: all 76 mismatches selected
+`ask-diagnostic-question` where the exact reference required
+`provide-hint-or-example`, although the frozen policy and public request allow
+both. The result is therefore not decision-valid for product quality and is not
+rescored post hoc. `SE7-10` also records 83/1,805 exact-identity Luna responses
+that failed the correlated schema and safely fell back. The deterministic
+safety envelope is supported, but H+E1/V3 is not selected for release. The
+opened package cannot be rerun or tuned.
+
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen
 preregistered aggregate safety/autonomy gates: zero unauthorized actions,
