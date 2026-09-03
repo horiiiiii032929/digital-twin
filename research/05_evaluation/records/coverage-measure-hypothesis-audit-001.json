@@ -1,0 +1,85 @@
+{
+  "audit_id": "coverage-measure-hypothesis-audit-001",
+  "baseline": {
+    "gold_inside_tie": 185,
+    "single_leader": 238,
+    "single_leader_gold_not_retrieved": 1,
+    "single_leader_is_gold": 231,
+    "single_leader_is_wrong": 1,
+    "single_leader_on_boundary_case": 5,
+    "targets": 554,
+    "tied": 196,
+    "unresolved": 120
+  },
+  "case_count": 500,
+  "convergent_finding": {
+    "correct_single_leaders": {
+      "A_shipped": 231,
+      "B_locator": 226,
+      "C_narrowed": 227
+    },
+    "gold_inside_tie": {
+      "A_shipped": 185,
+      "B_locator": 208,
+      "C_narrowed": 189
+    },
+    "statement": "Three coverage definitions land within five correct single leaders of one another. The gold region is already inside the tied leader set in roughly 185 targets; the constraint is that the tie is unbreakable from public inputs, not detection and not scoring."
+  },
+  "converges_with": [
+    "tie-resolution-hypothesis-audit-001",
+    "wrong-region-selection-audit-001"
+  ],
+  "corrections": [
+    {
+      "id": "credit-locator-terms-from-provenance",
+      "label": "B",
+      "lifted_gold_over_threshold": 18,
+      "measurement": {
+        "gold_inside_tie": 208,
+        "single_leader": 226,
+        "single_leader_is_gold": 226,
+        "targets": 554,
+        "tied": 242,
+        "unresolved": 86
+      },
+      "reason": "Locator terms are shared across every region in a section, so crediting them raises gold and its siblings equally; lifted golds arrive inside ties.",
+      "verdict": "discarded"
+    },
+    {
+      "id": "drop-non-discriminating-terms-from-requirement",
+      "label": "C",
+      "measurement": {
+        "gold_inside_tie": 189,
+        "single_leader": 234,
+        "single_leader_gold_not_retrieved": 1,
+        "single_leader_is_gold": 227,
+        "single_leader_is_wrong": 1,
+        "single_leader_on_boundary_case": 5,
+        "targets": 554,
+        "tied": 197,
+        "unresolved": 123
+      },
+      "reason": "The scoped candidate set spans several documents, so almost no term is shared by all; where the requirement narrows it only dissolves correct decisions.",
+      "transitions": {
+        "single/gold -> tied/gold": 4,
+        "tied/no -> none/no": 3
+      },
+      "verdict": "discarded"
+    }
+  ],
+  "cost_usd": 0.0,
+  "date": "2026-09-04",
+  "decision": "No change shipped; both corrections to the coverage measure discarded before implementation",
+  "evidence_class": "pre-implementation-measurement",
+  "mechanism": {
+    "gold_below_threshold_targets": 32,
+    "id": "locator-terms-scored-as-claim-content",
+    "missing_required_terms_absent_everywhere": 40,
+    "missing_required_terms_carried_by_chunk_provenance": 68,
+    "statement": "Question-derived targets mix content terms with locator terms; _scope already enforces the locator half, and _coverage then requires the canonical claim text to repeat terms it cannot structurally contain."
+  },
+  "provider_calls": 0,
+  "release_effect": "none",
+  "sealed_package_touched": false,
+  "shipped_configuration": "dominance-scoped-ambiguity-safe-v3"
+}
