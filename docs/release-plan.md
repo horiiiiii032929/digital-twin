@@ -10,6 +10,16 @@ results.
 
 ## Current audit-safe release boundary
 
+The immediate P0 is #192. Its prospective correction evaluates provider
+failure by durable trigger-event lineage rather than elapsed time: safe
+deterministic tutoring on a later student turn is allowed, while an action
+caused directly by a provider-failure event remains invalid. Confirmation 021
+is preserved unchanged. The subsequent fresh release comparison uses six
+learner personas, three response-realization methods, and three seeds on paired
+conditions. Hard safety failures exclude a candidate; the best remaining
+candidate is selected by grounding, worst-persona robustness, autonomous
+utility, notification burden, latency, and cost before one fresh confirmation.
+
 Issue #190 prospectively closes `SE7-11` at clean implementation revision
 `9f09ea3`. Structured request intent now requires both an assessed artifact and
 an explicit submission-ready completion request before graded-work redirect;

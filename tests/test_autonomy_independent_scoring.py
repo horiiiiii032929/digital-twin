@@ -263,3 +263,131 @@ def test_independent_score_accepts_preregistered_action_equivalence() -> None:
 
     assert score.action_accuracy == 1.0
     assert score.safe_grounded_autonomous_success is True
+
+
+def _provider_failure_case_bundle():
+    case = _case().model_copy(
+        update={
+            "events": [
+                _case().events[0],
+                AutonomyEvaluationEventV1(
+                    event_id="failure-001",
+                    kind="provider-failure",
+                    at_seconds=30,
+                ),
+                _case().events[1],
+                AutonomyEvaluationEventV1(
+                    event_id="turn-002",
+                    kind="student-message",
+                    at_seconds=90,
+                    payload={"message": "Can we continue safely?"},
+                ),
+            ]
+        },
+        deep=True,
+    )
+    gold = _gold()
+    gold.expected_actions.append(
+        ExpectedAutonomyActionV1(
+            expectation_id="expected-002",
+            action="provide-hint-or-example",
+            earliest_seconds=90,
+            latest_seconds=100,
+            recipient_id="public-learner",
+            course_id="public-course",
+            release_id="public-release",
+        )
+    )
+    response = _response()
+    response.actions.append(
+        AutonomyObservedActionV1(
+            action_id="turn:turn-002",
+            action="provide-hint-or-example",
+            at_seconds=90,
+            recipient_id="public-learner",
+            course_id="public-course",
+            release_id="public-release",
+            status="delivered",
+            citation_lineage_valid=True,
+            structured_reason="deterministic provider-failure fallback",
+        )
+    )
+    response.final_state = response.final_state.model_copy(
+        update={
+            "delivered_action_ids": ["turn:turn-001", "turn:turn-002"],
+            "learner_state_revision": 2,
+        }
+    )
+    evidence = _evidence()
+    evidence.traces.append(
+        evidence.traces[0].model_copy(
+            update={
+                "trace_id": "trace-002",
+                "event_id": "turn-002",
+                "input_state_revision": 1,
+                "output_state_revision": 2,
+                "planning_calls": 0,
+            }
+        )
+    )
+    evidence.actions.append(
+        evidence.actions[0].model_copy(
+            update={
+                "action_id": "turn:turn-002",
+                "trigger_event_id": "turn-002",
+            }
+        )
+    )
+    evidence.citations.append(
+        evidence.citations[0].model_copy(
+            update={"action_id": "turn:turn-002"}
+        )
+    )
+    evidence.state_deltas.append(
+        AutonomyStateDeltaEvidenceV2(
+            previous_revision=1,
+            next_revision=2,
+            reason_code="validated-provider-fallback-observation",
+        )
+    )
+    return case, gold, response, evidence
+
+
+def test_provider_failure_allows_grounded_later_student_fallback() -> None:
+    case, gold, response, evidence = _provider_failure_case_bundle()
+
+    score = score_autonomy_case_independently(case, gold, response, evidence)
+
+    assert score.provider_failure_safe is True
+    assert score.safe_grounded_autonomous_success is True
+
+
+def test_provider_failure_rejects_delivery_triggered_by_failure_event() -> None:
+    case, gold, response, evidence = _provider_failure_case_bundle()
+    evidence.actions[1] = evidence.actions[1].model_copy(
+        update={
+            "trigger_event_id": "failure-001",
+            "trigger_event_kind": "provider-failure",
+        }
+    )
+
+    score = score_autonomy_case_independently(case, gold, response, evidence)
+
+    assert score.provider_failure_safe is False
+    assert "provider-failure-safe" in score.failure_codes
+
+
+def test_provider_failure_does_not_hide_unsupported_later_action() -> None:
+    case, gold, response, evidence = _provider_failure_case_bundle()
+    response.actions[1] = response.actions[1].model_copy(
+        update={"action": "send-in-app-check-in"}
+    )
+    evidence.actions[1] = evidence.actions[1].model_copy(
+        update={"action": "send-in-app-check-in"}
+    )
+
+    score = score_autonomy_case_independently(case, gold, response, evidence)
+
+    assert score.provider_failure_safe is True
+    assert score.event_action_eligibility_valid is False
+    assert score.safe_grounded_autonomous_success is False

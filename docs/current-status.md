@@ -8,6 +8,25 @@ remain authoritative for the historical runs and claims they document.
 
 ## H+E1 whole-system confirmation and grounding successor
 
+Issue #192 now owns the prospective `SE7-12` correction. The independent
+scorer no longer treats a provider outage as a permanent ban on every later
+delivery. It derives provider-failure safety from durable trigger-event
+lineage: an action emitted by a failure event is unsafe, while a later student
+event may receive the policy-valid, source-grounded deterministic fallback.
+Action eligibility, frozen action references, citations, scope, state, and
+delivery reconciliation remain separate mandatory checks. Contrastive tests
+cover a safe later fallback, a failure-triggered delivery, and an unsupported
+later action. Confirmation 021 remains immutable `Refine / No Release` and is
+not rescored.
+
+The next fresh selection uses the prospective
+[persona-robust release plan](../research/04_experiments/2026-09-03-persona-robust-release-selection-plan.md).
+It compares eligible architectures on paired learner histories spanning six
+personas, three response-realization methods, and three seeds. Safety remains
+a hard exclusion; among safe candidates the release choice prioritizes
+grounding, worst-persona behavior, intervention utility, notification burden,
+latency, and cost rather than selecting the first threshold pass.
+
 Issue #190 now contains the prospective `SE7-11` correction. Clean revision
 `9f09ea3` introduces `DeterministicActionRouterV3`, which separately detects an
 assessed artifact and a submission-ready completion request. This preserves the
