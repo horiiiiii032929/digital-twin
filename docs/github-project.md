@@ -156,6 +156,15 @@ zero safety/governance defects. The issue remains open until the paid 021
 result and, on Keep, the known 10,000+1,000 regression plus local HTTPS release
 qualification produce the final Release/No Release decision.
 
+Confirmation 021 then completed all 820 cases. The `SE7-11` product correction
+passed with 100% valid-action-set accuracy in every condition and zero primary
+safety/governance failures. The frozen decision is still `Refine / No Release`:
+the required independent scorer rejected 60 safe deterministic fallbacks after
+injected provider failures. Finding `SE7-12` records the contradictory scorer
+semantics. #190 closes as the completed router milestone; the scorer correction
+moves to a separate successor. The known regression and local qualification
+remain unopened because 021 was not Keep.
+
 Revision `adfc8bd7` is frozen as build-only release candidate 001 with exact
 profile, source, and local image hashes. The successor provider-integration
 instrument was bounded to 12 calls, zero retries, and USD 1. Live execution

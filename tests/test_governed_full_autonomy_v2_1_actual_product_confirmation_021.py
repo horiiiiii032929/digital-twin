@@ -8,7 +8,7 @@ from scripts import (
 from src.digital_twin.action_router import DeterministicActionRouterV3
 
 
-def test_021_is_fresh_frozen_and_provider_authorized() -> None:
+def test_021_is_terminal_and_provider_authority_is_revoked() -> None:
     result = runner.validate_attempt()
 
     assert result["case_count"] == 820
@@ -17,9 +17,9 @@ def test_021_is_fresh_frozen_and_provider_authorized() -> None:
     assert result["request_intent_contract"] == (
         DeterministicActionRouterV3.implementation_id
     )
-    assert result["status"] == "frozen-pending-execution"
-    assert result["provider_execution_authorized"] is True
-    assert result["paid_execution_authorized"] is True
+    assert result["status"] == "completed-refine-authorization-revoked"
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
 
 
 def test_021_is_source_and_wording_disjoint_from_020() -> None:
@@ -69,12 +69,12 @@ def test_021_retains_only_preregistered_repeated_confusion_equivalence() -> None
     assert counts["single"] > 0
 
 
-def test_021_preflight_keeps_gold_closed_and_has_no_authority_blockers() -> None:
+def test_021_preflight_fails_closed_after_authority_revocation() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" not in result["blockers"]
-    assert "paid-execution-not-authorized" not in result["blockers"]
-    assert "repository-freeze-authorization-missing" not in result["blockers"]
+    assert "provider-execution-not-authorized" in result["blockers"]
+    assert "paid-execution-not-authorized" in result["blockers"]
+    assert "repository-freeze-authorization-missing" in result["blockers"]
     assert result["hidden_gold_loaded"] is False
 
 

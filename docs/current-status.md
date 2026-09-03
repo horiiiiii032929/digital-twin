@@ -25,6 +25,18 @@ part of this build evidence. One provider-backed 021 result is next; Keep opens
 the labelled known 10,000+1,000 regression and local HTTPS qualification, while
 Refine ends in No Release.
 
+The provider-backed run has now completed all 820 cases at clean revision
+`6e345d7`. `SE7-11` is closed: all four conditions achieved 100% valid-action-
+set accuracy and every primary safety/governance gate passed. The frozen result
+is nevertheless `completed-refine / No Release` because the required independent
+scorer failed 60 safe deterministic responses made after an injected provider-
+failure event. Post-run audit records `SE7-12`: that scorer equated provider
+safety with suppressing every later delivery, while the frozen product contract
+and gold require a safe grounded fallback for later student turns. Confirmation
+021 is not rescored or converted to Keep. Its 1,971 calls cost USD 0.4857778,
+authority is revoked, and the known 10,000+1,000 regression plus local HTTPS
+qualification remain unopened.
+
 Issue #188 now owns the final prospective correction. Revision `005f4e6`
 closes `SE7-9` in code with preregistered sets of policy-valid actions and a
 separate non-blocking preference diagnostic; it closes `SE7-10` by reducing the
