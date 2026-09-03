@@ -23,7 +23,7 @@ def test_validate_binds_all_requirements_to_forty_six_calls() -> None:
     assert result["requirement_count"] == 1104
     assert result["batch_count"] == 46
     assert result["provider_calls"] == 0
-    assert not result["provider_execution_authorized"]
+    assert result["provider_execution_authorized"]
 
 
 def test_prompt_exposes_wording_only_and_schema_has_no_gold_fields() -> None:
@@ -75,7 +75,7 @@ def test_parser_matches_by_key_and_quarantines_semantic_drift() -> None:
     assert rejected[0]["reason"] == "missing-concept-anchor"
 
 
-def test_preflight_is_blocked_until_frozen_authorization(monkeypatch) -> None:
+def test_preflight_is_ready_after_frozen_authorization(monkeypatch) -> None:
     monkeypatch.setenv("OPENAI_API_KEY", "synthetic-only")
     monkeypatch.setattr(
         "scripts.run_governed_full_autonomy_v2_1_persona_wording_bank_022._dirty",
@@ -83,7 +83,5 @@ def test_preflight_is_blocked_until_frozen_authorization(monkeypatch) -> None:
     )
     result = preflight(resume=False)
 
-    assert result["status"] == "blocked"
-    assert "instrument-not-frozen" in result["blockers"]
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
+    assert result["status"] == "ready"
+    assert result["blockers"] == []

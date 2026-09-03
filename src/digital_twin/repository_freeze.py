@@ -585,6 +585,10 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "dataset_generation",
             "method_evaluation_execution",
         ),
+        "governed-full-autonomy-v2-1-persona-wording-bank-022": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
     }
 )
 

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-wording-bank-022",
-  "status": "reviewed-build-only-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 194,
   "selection_program_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
   "requirements_id": "governed-full-autonomy-v2-1-persona-wording-requirements-022",
@@ -31,8 +31,8 @@
     "requirements_per_batch": 24,
     "maximum_calls": 46,
     "maximum_cost_usd": 1.0,
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
     "zero_retries": true,
     "exclusive_ledger_and_output": true,
     "resume_supported": true

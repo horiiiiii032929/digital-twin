@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "519f8a533beccbb4a685778aa0a0f4b0d08a840527204cda2fef1d8df345fad4",
+  "record_sha256": "2b80e2a3a0f1f2dc09b4b73b0541ccea94dc8d80b69fb70589dfffc45cfdc594",
   "records": [
     {
       "audit": {
@@ -4712,7 +4712,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Instrument review verifies an exact direct OpenAI snapshot, public-synthetic data boundary, 46-call and USD 1 ceilings, zero retries, immutable requirements binding, and model wording with no authority over hidden truth.",
+        "evidence": "Authorization review verifies an exact direct OpenAI snapshot, public-synthetic data boundary, 46-call and USD 1 ceilings, zero retries, immutable requirements binding, and one-time wording-only authority.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-wording bank audit"
@@ -4723,7 +4723,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022.json",
       "risk": "high",
-      "sha256": "298badfa91d6982fe7cb5a752e3c3d7e0a32a9affca0a159a8c5f2724beefa88"
+      "sha256": "f87f5066f7ce6d8065d6e85861b60ea597cc3ba056be51b0b5924cbaeeba76a5"
     },
     {
       "audit": {
@@ -7625,7 +7625,7 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Freeze registry review covers both selection 022 and its provider-backed wording-bank entrypoint; neither can bypass the bounded authorization guard.",
+        "evidence": "Freeze registry review covers both selection 022 and its provider-backed wording-bank entrypoint; only the 46-call wording-bank stage has a bounded one-time authorization.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -13116,7 +13116,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a3cbba9de1f25b2b1ecc4f5396f7d706efb15bfc58aef0d04310dc024f1979d6"
+      "sha256": "2c0a8acab766a19b7700ea233018f14be807e757bb815d15d2deb74ccd46ae4d"
     },
     {
       "audit": {
@@ -16465,7 +16465,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Focused tests verify 1,104-to-46 batching, wording-only prompts, absence of hidden labels, key-based parsing, semantic quarantine, and blocked pre-authorization state.",
+        "evidence": "Focused tests verify 1,104-to-46 batching, wording-only prompts, absence of hidden labels, key-based parsing, semantic quarantine, and the exact frozen authorization state.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-wording bank audit"
@@ -16476,7 +16476,7 @@
       "package_commands": [],
       "path": "tests/test_persona_wording_bank_022.py",
       "risk": "medium",
-      "sha256": "23f87347222bc04c4acdb7d4b66cad9cc445c6744e1162146fa3915ea006b367"
+      "sha256": "ebaf5c3e910c7128f73f847ad5498daaa36c782658fe0dc396141ce0ff0de1c8"
     },
     {
       "audit": {
