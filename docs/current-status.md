@@ -17,8 +17,11 @@ termination, and proactive-lineage check with zero provider calls. The live
 run stopped operationally invalid after five calls and two persisted canary
 responses (USD 0.0006816), before bulk and before hidden gold opened. The
 instrument's USD 3 ceiling contradicted the shared runner's preregistered USD 5
-minimum projected-stop rounding. Authority is revoked. One harness-only
-successor may change only that ceiling to USD 5; a valid Keep opens only the
+minimum projected-stop rounding. Authority is revoked. Harness-only successor
+024 reuses the exact unopened package, raises only the ceiling to USD 5, and
+exports the existing virtual-day constant required by final scoring. Its
+670-case network-free simulation passes and it is frozen for one live run. A
+valid Keep opens only the
 labelled
 known 10,000+1,000 regression and local HTTPS qualification; a valid quality
 failure ends in No Release without same-package tuning.

@@ -17,8 +17,10 @@ network-free run passes all registered product and safety contracts with zero
 calls. The first live attempt is immutable `invalid-execution`: it stopped
 after five calls and two canary responses because a USD 3 instrument ceiling
 could never satisfy the shared runner's USD 5 minimum projected-stop rounding.
-Hidden gold remained closed and no bulk case ran. Authority is revoked. The
-sole harness-only successor may change only the ceiling to USD 5. Keep opens
+Hidden gold remained closed and no bulk case ran. Authority is revoked. Sole
+harness-only successor 024 retains the exact package and changes only the USD 5
+ceiling plus the missing shared-clock export. Its 670-case network-free run
+passes and it is frozen for one live execution. Keep opens
 the winner-only known 10,000+1,000 regression and
 local HTTPS qualification; Refine produces No Release. No same-package prompt
 or method tuning is allowed.

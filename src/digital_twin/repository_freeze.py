@@ -294,6 +294,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_024.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         # Persona-robust selection is network-free today, but it is an
         # evaluation execution entrypoint and must remain covered if a paid
         # successor is added later.
@@ -587,6 +591,10 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         ),
         "governed-full-autonomy-v2-1-grounding-successor-011": (
             "dataset_generation",
+            "method_evaluation_execution",
+        ),
+        "governed-full-autonomy-v2-1-persona-confirmation-024": (
+            "external_model_evaluation",
             "method_evaluation_execution",
         ),
     }

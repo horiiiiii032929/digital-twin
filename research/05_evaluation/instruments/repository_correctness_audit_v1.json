@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "9b6e8ab048fd81705f0e9d75ade208a9b21c067eab3fc6ced99bbe6ffe9bd54d"
+      "sha256": "53f9afe091d8ef8928019b49a4b9253d618d6256731032abb5d5446ccb8da63a"
     },
     {
       "audit_status": "audited",
@@ -6709,7 +6709,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording requirements audit",
-      "sha256": "3e3c782e6898474e06464fa782685b97040ee7439dace9f449ed47bf52cd4938"
+      "sha256": "2835ea8b20b89ea5dddc16e09b4268d1f15e435a91f5fadfe8f18be66c1e3f11"
     },
     {
       "audit_status": "audited",
@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "99fc47b81edf1ca64a17f2a0500fc64089aebda3a0eebe63603fd17c158da005"
+      "sha256": "6f0de221de22d390e894431660334fd4e65bd1d1eaa3da389d3bc4aaf9d69d00"
     },
     {
       "audit_status": "audited",
@@ -8909,7 +8909,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "379b4091fd923e9ed6060e3cf715c87dfd4daa19847aec0a16a407ec923bb70a"
+      "sha256": "f571ac471a4561bb63456cae6a56782e0ea95334c15acaf78df288e9f314cbbe"
     },
     {
       "audit_status": "audited",
@@ -11286,6 +11286,50 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex fresh-confirmation audit",
       "sha256": "02415de3b0b78705614916ca4f408ddcb2a8d41e7997555f1814d19343aa7199"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Harness-only builder review verifies the exact unopened 023 public/gold package is reused and exposes the shared virtual-day constant required by final scoring.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_persona_confirmation_024.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex confirmation-024 harness audit",
+      "sha256": "7b6f38717ddf38599d14404766777bc77beb31b5960ae31167fae985fd5d0e55"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Runner review verifies a fresh exclusive output identity, unchanged product/scoring context, exact Luna canaries, fail-closed freeze checks, and no scientific changes from 023.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_024.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex confirmation-024 harness audit",
+      "sha256": "7eaf39f36342c1703e2d44d9b4f4130f2c3edcdf5c24b594e8d360b3563ffd97"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Focused tests prove exact 023 package reuse, the USD 5 ceiling, virtual-day export, bounded authority, disabled auto-promotion, and prohibited same-package quality reruns.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_persona_confirmation_024.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex confirmation-024 harness audit",
+      "sha256": "041049bacb6907e592adbcaf832bd159d5475575404850fc6367e109e3450f7a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Prospective instrument review confirms that only the emergency ceiling and missing clock export change; public/gold hashes, models, prompts, methods, gates, calls, and decision rules remain frozen.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_confirmation_024.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex confirmation-024 harness audit",
+      "sha256": "5d278e0928f5755959d896389be3a3bcc538b9ac5c75af83ca09a7efa3cf83fa"
     }
   ],
   "schema_version": 1
