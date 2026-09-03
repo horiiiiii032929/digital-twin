@@ -225,6 +225,91 @@ def selected_h_e1_engine_binding() -> ProductEngineBindingV1:
     )
 
 
+async def run_engine_transport_identity_canary(
+    engine: ProductEngineBindingV1,
+    *,
+    maximum_cost_usd: float,
+) -> dict[str, object]:
+    """Exercise the direct provider transport independently of product routing.
+
+    The canary deliberately uses a production schema and public-synthetic input.
+    It persists only identity and accounting metadata; model content is reduced
+    to a hash so it cannot become evaluation truth.
+    """
+
+    client = BudgetedLlmClient(
+        _engine_client(engine, role="planner"),
+        max_calls=1,
+        max_cost_usd=maximum_cost_usd,
+    )
+    content_sha256 = None
+    failure_type = None
+    failure_code = None
+    try:
+        response = await client.chat(
+            [
+                LlmMessage(
+                    role="system",
+                    content=(
+                        "Return one conservative reactive tutoring proposal for "
+                        "the public-synthetic learner turn. Do not introduce facts."
+                    ),
+                ),
+                LlmMessage(
+                    role="user",
+                    content=(
+                        "The learner says: I understand the approved fallback, "
+                        "but I am still unsure why the saved progress checkpoint "
+                        "matters. The only concept ID is transport-canary-concept."
+                    ),
+                ),
+            ],
+            "reactive_tutoring_plan",
+        )
+        content_sha256 = hashlib.sha256(response.content.encode("utf-8")).hexdigest()
+    except Exception as error:  # noqa: BLE001 - result must retain failed accounting
+        failure_type = type(error).__name__
+        failure_code = getattr(error, "code", failure_type)
+    snapshot = client.snapshot()
+    records = snapshot["call_records"]
+    returned_models = sorted(
+        {
+            str(row["provider_model"])
+            for row in records
+            if row.get("provider_model")
+        }
+    )
+    passed = (
+        failure_type is None
+        and snapshot["calls"] == 1
+        and snapshot["completed_calls"] == 1
+        and snapshot["failed_calls"] == 0
+        and snapshot["unknown_cost_calls"] == 0
+        and returned_models == [engine.returned_identity_must_equal]
+    )
+    return {
+        "schema_version": 1,
+        "status": "passed" if passed else "failed",
+        "provider": engine.provider,
+        "requested_model": engine.planner_model,
+        "required_returned_identity": engine.returned_identity_must_equal,
+        "returned_models": returned_models,
+        "task": "reactive_tutoring_plan",
+        "public_synthetic_input": True,
+        "provider_calls": snapshot["calls"],
+        "completed_calls": snapshot["completed_calls"],
+        "failed_calls": snapshot["failed_calls"],
+        "input_tokens": snapshot["input_tokens"],
+        "output_tokens": snapshot["output_tokens"],
+        "cost_usd": snapshot["reported_cost_usd"],
+        "unknown_cost_calls": snapshot["unknown_cost_calls"],
+        "content_sha256": content_sha256,
+        "failure_type": failure_type,
+        "failure_code": failure_code,
+        "call_records": records,
+    }
+
+
 def _provider_bundle(*, maximum_cost_usd: float) -> _ProviderBundle:
     return _provider_bundle_for_engine(
         maximum_cost_usd=maximum_cost_usd,

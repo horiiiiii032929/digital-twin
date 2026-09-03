@@ -24,6 +24,7 @@ from scripts import (
 )
 from scripts.governed_full_autonomy_v2_1_actual_product_runtime import (
     build_runtime_factory,
+    run_engine_transport_identity_canary,
 )
 from src.digital_twin.evaluation import (
     AutonomyEvaluationCaseV1,
@@ -85,6 +86,7 @@ class ActualProductEvaluationContext:
     dependency_aware_provider_failure: bool = False
     autonomy_architecture_id: str = "legacy-live-planner"
     bounded_strategy_generation: bool = False
+    require_separate_transport_canary: bool = False
 
     @property
     def case_count(self) -> int:
@@ -113,6 +115,10 @@ class ActualProductEvaluationContext:
     @property
     def checkpoint_path(self) -> Path:
         return self.output_root / "checkpoint.json"
+
+    @property
+    def transport_canary_path(self) -> Path:
+        return self.output_root / "direct-transport-canary.json"
 
 
 DEFAULT_CONTEXT = ActualProductEvaluationContext(
@@ -257,6 +263,9 @@ def _run_binding(
         ),
         "autonomy_architecture_id": context.autonomy_architecture_id,
         "bounded_strategy_generation": context.bounded_strategy_generation,
+        "require_separate_transport_canary": (
+            context.require_separate_transport_canary
+        ),
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_timezone": "UTC",
         "conditions": manifests,
@@ -548,6 +557,11 @@ def preflight(
                 context.hidden_gold_package,
                 context.result_path,
                 context.checkpoint_path,
+                *(
+                    (context.transport_canary_path,)
+                    if context.require_separate_transport_canary
+                    else ()
+                ),
             )
             if path.exists()
         ]
@@ -635,7 +649,7 @@ def _canaries_valid(
     *,
     context: ActualProductEvaluationContext = DEFAULT_CONTEXT,
 ) -> bool:
-    if len(responses) != 2:
+    if len(responses) != len(context.canary_case_ids):
         return False
     expected_models = context.expected_canary_models or {
         "t0-grounded-control": {"gpt-5.4-mini-2026-03-17"},
@@ -649,10 +663,100 @@ def _canaries_valid(
         }
         if (
             response.operational_status != "completed"
+            or condition not in expected_models
             or models != expected_models[condition]
         ):
             return False
     return True
+
+
+def _transport_canary_totals(
+    context: ActualProductEvaluationContext,
+) -> dict[str, float | int | list[str]]:
+    if not context.require_separate_transport_canary:
+        return {
+            "provider_calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+            "returned_models": [],
+        }
+    if not context.transport_canary_path.is_file():
+        raise ActualProductEvaluationError("direct transport canary is missing")
+    record = _load(context.transport_canary_path)
+    expected_binding = _canonical_hash(
+        _run_binding(network_free=False, context=context)
+    )
+    if record.get("run_binding_sha256") != expected_binding:
+        raise ActualProductEvaluationError("direct transport canary binding drifted")
+    returned_models = record.get("returned_models")
+    if not isinstance(returned_models, list):
+        raise ActualProductEvaluationError("direct transport canary identity is malformed")
+    return {
+        "provider_calls": int(record.get("provider_calls", 0)),
+        "input_tokens": int(record.get("input_tokens", 0)),
+        "output_tokens": int(record.get("output_tokens", 0)),
+        "cost_usd": float(record.get("cost_usd", 0)),
+        "returned_models": [str(model) for model in returned_models],
+    }
+
+
+def _transport_canary_valid(
+    context: ActualProductEvaluationContext,
+) -> bool:
+    if not context.require_separate_transport_canary:
+        return True
+    record = _load(context.transport_canary_path)
+    expected_model = (
+        context.engine_binding.returned_identity_must_equal
+        if context.engine_binding is not None
+        else None
+    )
+    return (
+        expected_model is not None
+        and record.get("status") == "passed"
+        and record.get("provider_calls") == 1
+        and record.get("completed_calls") == 1
+        and record.get("failed_calls") == 0
+        and record.get("unknown_cost_calls") == 0
+        and record.get("returned_models") == [expected_model]
+        and isinstance(record.get("content_sha256"), str)
+        and len(str(record["content_sha256"])) == 64
+    )
+
+
+async def _execute_transport_canary(
+    *,
+    resume: bool,
+    context: ActualProductEvaluationContext,
+    maximum_cost_usd: float,
+) -> dict[str, Any]:
+    if not context.require_separate_transport_canary:
+        return {"status": "not-required", "provider_calls": 0, "cost_usd": 0}
+    if context.engine_binding is None:
+        raise ActualProductEvaluationError(
+            "direct transport canary requires an engine binding"
+        )
+    if resume:
+        if not context.transport_canary_path.is_file():
+            raise ActualProductEvaluationError(
+                "resume direct transport canary is missing"
+            )
+        record = _load(context.transport_canary_path)
+    else:
+        record = await run_engine_transport_identity_canary(
+            context.engine_binding,
+            maximum_cost_usd=maximum_cost_usd,
+        )
+        record["run_binding_sha256"] = _canonical_hash(
+            _run_binding(network_free=False, context=context)
+        )
+        _atomic_write(context.transport_canary_path, record, exclusive=True)
+    if not _transport_canary_valid(context):
+        raise ActualProductEvaluationError(
+            "direct provider transport/identity canary failed before product routing"
+        )
+    return record
 
 
 async def _execute_responses(
@@ -682,20 +786,36 @@ async def _execute_responses(
 
     def require_remaining_budget() -> tuple[float, dict[str, Any]]:
         totals = ledger.totals()
-        remaining_cost = maximum_cost_usd - float(totals["cost_usd"])
+        transport = _transport_canary_totals(context)
+        combined_calls = int(totals["provider_calls"]) + int(
+            transport["provider_calls"]
+        )
+        combined_cost = float(totals["cost_usd"]) + float(transport["cost_usd"])
+        remaining_cost = maximum_cost_usd - combined_cost
         if remaining_cost <= 0:
             raise ActualProductEvaluationError(
                 f"USD {maximum_cost_usd:g} emergency stop reached"
             )
-        if int(totals["provider_calls"]) >= maximum_provider_calls:
+        if combined_calls >= maximum_provider_calls:
             raise ActualProductEvaluationError(
                 f"{maximum_provider_calls} provider-call stop reached"
             )
-        return remaining_cost, totals
+        return remaining_cost, {
+            **totals,
+            "provider_calls": combined_calls,
+            "cost_usd": combined_cost,
+        }
 
     try:
+        if context.require_separate_transport_canary:
+            await _execute_transport_canary(
+                resume=resume,
+                context=context,
+                maximum_cost_usd=min(1.0, maximum_cost_usd),
+            )
         ordered = _ordered_contract(context)
-        for condition, case, _gold in ordered[:2]:
+        canary_count = len(context.canary_case_ids)
+        for condition, case, _gold in ordered[:canary_count]:
             if case.case_id in completed:
                 continue
             remaining_cost, _totals = require_remaining_budget()
@@ -718,10 +838,14 @@ async def _execute_responses(
         if not _canaries_valid(canary_rows, context=context):
             raise ActualProductEvaluationError("provider canary failed before bulk")
         canary_costs = [row.cost_usd for _condition, row in canary_rows]
-        projected = 1.5 * max(canary_costs) * context.case_count
+        transport_totals = _transport_canary_totals(context)
+        projected = float(transport_totals["cost_usd"]) + (
+            1.5 * max(canary_costs) * context.case_count
+        )
         projected_stop = max(5.0, math.ceil(projected / 5.0) * 5.0)
         projected_calls = (
-            max(row.provider_calls for _condition, row in canary_rows)
+            int(transport_totals["provider_calls"])
+            + max(row.provider_calls for _condition, row in canary_rows)
             * context.case_count
         )
         if projected_stop > maximum_cost_usd:
@@ -742,12 +866,19 @@ async def _execute_responses(
                     "projected_p99_cost_stop_usd": projected_stop,
                     "projected_provider_calls_upper_bound": projected_calls,
                     "maximum_concurrency": maximum_concurrency,
-                    "completed_case_count": 2,
+                    "completed_case_count": canary_count,
+                    "direct_transport_canary_passed": (
+                        _transport_canary_valid(context)
+                    ),
                 },
                 exclusive=True,
             )
 
-        pending = [row for row in ordered[2:] if row[1].case_id not in completed]
+        pending = [
+            row
+            for row in ordered[canary_count:]
+            if row[1].case_id not in completed
+        ]
         for offset in range(0, len(pending), maximum_concurrency):
             batch = pending[offset : offset + maximum_concurrency]
             remaining_cost, _totals = require_remaining_budget()
@@ -770,11 +901,18 @@ async def _execute_responses(
                     condition, response = await task
                     ledger.record(condition, response)
                     totals = ledger.totals()
-                    if float(totals["cost_usd"]) > maximum_cost_usd:
+                    transport = _transport_canary_totals(context)
+                    combined_cost = float(totals["cost_usd"]) + float(
+                        transport["cost_usd"]
+                    )
+                    combined_calls = int(totals["provider_calls"]) + int(
+                        transport["provider_calls"]
+                    )
+                    if combined_cost > maximum_cost_usd:
                         raise ActualProductEvaluationError(
                             f"USD {maximum_cost_usd:g} emergency stop exceeded"
                         )
-                    if int(totals["provider_calls"]) > maximum_provider_calls:
+                    if combined_calls > maximum_provider_calls:
                         raise ActualProductEvaluationError(
                             f"{maximum_provider_calls} provider-call stop exceeded"
                         )
@@ -988,23 +1126,35 @@ def _score(
         gate_results["per_condition_reference_action_accuracy"] = all(
             value["action_accuracy"] >= minimum for value in by_condition.values()
         )
+    transport_accounting = _transport_canary_totals(context)
     accounting = {
         "provider_calls": sum(
             response.provider_calls for response in response_by_id.values()
-        ),
+        )
+        + int(transport_accounting["provider_calls"]),
         "input_tokens": sum(
             response.operational_metrics.input_tokens
             for response in response_by_id.values()
-        ),
+        )
+        + int(transport_accounting["input_tokens"]),
         "output_tokens": sum(
             response.operational_metrics.output_tokens
             for response in response_by_id.values()
+        )
+        + int(transport_accounting["output_tokens"]),
+        "cost_usd": sum(response.cost_usd for response in response_by_id.values())
+        + float(transport_accounting["cost_usd"]),
+        "direct_transport_canary_calls": int(
+            transport_accounting["provider_calls"]
         ),
-        "cost_usd": sum(response.cost_usd for response in response_by_id.values()),
     }
-    operationally_valid = accounting["provider_calls"] <= int(
-        instrument["authority"]["maximum_provider_calls"]
-    ) and accounting["cost_usd"] <= float(instrument["authority"]["maximum_cost_usd"])
+    operationally_valid = (
+        accounting["provider_calls"]
+        <= int(instrument["authority"]["maximum_provider_calls"])
+        and accounting["cost_usd"]
+        <= float(instrument["authority"]["maximum_cost_usd"])
+        and _transport_canary_valid(context)
+    )
     status = (
         "invalid-execution"
         if not operationally_valid
@@ -1035,6 +1185,7 @@ def _score(
         "frequency_violation_count": frequency_violations,
         "gates": gate_results,
         "accounting": accounting,
+        "direct_transport_canary_passed": _transport_canary_valid(context),
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_advance_history_persisted_per_case": True,
         "hidden_gold_opened_after_response_completion": True,
@@ -1062,6 +1213,51 @@ async def execute(
         rows = _load_completed_responses(context)
         result = _score(rows, context)
     except Exception as error:
+        partial_accounting: dict[str, Any] = {
+            "provider_calls": 0,
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "cost_usd": 0.0,
+        }
+        if context.require_separate_transport_canary and context.transport_canary_path.is_file():
+            try:
+                partial_accounting.update(_transport_canary_totals(context))
+            except Exception:  # noqa: BLE001 - original failure remains authoritative
+                partial_accounting["transport_accounting_valid"] = False
+        if context.response_ledger.is_file():
+            try:
+                connection = sqlite3.connect(
+                    f"file:{context.response_ledger}?mode=ro", uri=True
+                )
+                payloads = list(
+                    connection.execute("SELECT payload_json FROM responses")
+                )
+                connection.close()
+                persisted = [
+                    AutonomyEvaluationResponseV1.model_validate_json(row[0])
+                    for row in payloads
+                ]
+                partial_accounting["provider_calls"] = int(
+                    partial_accounting["provider_calls"]
+                ) + sum(response.provider_calls for response in persisted)
+                partial_accounting["input_tokens"] = int(
+                    partial_accounting["input_tokens"]
+                ) + sum(
+                    response.operational_metrics.input_tokens
+                    for response in persisted
+                )
+                partial_accounting["output_tokens"] = int(
+                    partial_accounting["output_tokens"]
+                ) + sum(
+                    response.operational_metrics.output_tokens
+                    for response in persisted
+                )
+                partial_accounting["cost_usd"] = float(
+                    partial_accounting["cost_usd"]
+                ) + sum(response.cost_usd for response in persisted)
+                partial_accounting["persisted_response_count"] = len(persisted)
+            except Exception:  # noqa: BLE001 - preserve primary invalid reason
+                partial_accounting["response_accounting_valid"] = False
         result = {
             "schema_version": 1,
             "instrument_id": context.instrument_id,
@@ -1069,6 +1265,7 @@ async def execute(
             "failure_type": type(error).__name__,
             "failure_detail": str(error)[:500],
             "hidden_gold_opened": context.hidden_gold_package.exists(),
+            "accounting": partial_accounting,
         }
     _atomic_write(
         context.result_path,
