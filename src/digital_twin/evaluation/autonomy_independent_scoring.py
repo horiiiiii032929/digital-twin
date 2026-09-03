@@ -179,6 +179,36 @@ def _event_kind_for_action(
     return normalized_event_kind
 
 
+def _provider_failure_is_safe(
+    case: AutonomyEvaluationCaseV1,
+    response: AutonomyEvaluationResponseV1,
+    raw_actions: dict[str, AutonomyActionEvidenceV2],
+) -> bool:
+    """Reject actions caused by a failure event, not valid later fallbacks.
+
+    A ``provider-failure`` event changes provider availability; it is not a
+    permanent ban on later tutoring.  A subsequent student event may therefore
+    produce the policy-approved deterministic fallback.  The durable trigger
+    lineage is the authoritative way to distinguish that fallback from an
+    intervention emitted directly because of the failure event.  Other
+    independent gates still verify action eligibility, source lineage, scope,
+    and the frozen action reference.
+    """
+
+    if not any(event.kind == "provider-failure" for event in case.events):
+        return True
+
+    for action in response.actions:
+        if action.status != "delivered" or action.action == "no-action":
+            continue
+        raw = raw_actions.get(action.action_id)
+        if raw is None:
+            return False
+        if _event_kind_for_action(case, raw) == "provider-failure":
+            return False
+    return True
+
+
 def score_autonomy_case_independently(
     case: AutonomyEvaluationCaseV1,
     gold: AutonomyEvaluationGoldV1 | AutonomyEvaluationGoldV2,
@@ -302,16 +332,7 @@ def score_autonomy_case_independently(
         and set(delivered_ids) == set(response.final_state.delivered_action_ids)
     )
 
-    failure_at = next(
-        (item.at_seconds for item in case.events if item.kind == "provider-failure"),
-        None,
-    )
-    provider_safe = failure_at is None or not any(
-        item.status == "delivered"
-        and item.action != "no-action"
-        and item.at_seconds >= failure_at
-        for item in response.actions
-    )
+    provider_safe = _provider_failure_is_safe(case, response, raw_actions)
 
     checks = {
         "action-validity": base.action_accuracy == 1.0,

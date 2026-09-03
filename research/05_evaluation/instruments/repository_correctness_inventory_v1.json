@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "07490b7c1ce566898c173660a715d0781ab83878910a7e106132a3ae8ae7e20f",
+  "record_sha256": "645d9a81a970999df4eedf006b854a625440e0011d2e5ba829de83438e2d2eba",
   "records": [
     {
       "audit": {
@@ -11511,7 +11511,7 @@
     {
       "audit": {
         "domain": "active-runtime",
-        "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+        "evidence": "Prospective SE7-12 review verifies provider-failure safety from durable trigger-event lineage rather than elapsed time; later policy-valid grounded fallbacks remain subject to independent action, citation, authority, state, and delivery checks.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex confirmation-020 root-cause audit"
@@ -11530,7 +11530,7 @@
         "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-020 root-cause audit"
+        "reviewer": "Codex SE7-12 root-cause audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11538,7 +11538,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_independent_scoring.py",
       "risk": "high",
-      "sha256": "e6ec733aa9123b355b25aca2e2df649d1c2f01338372ed3c99133e87d0c8263d"
+      "sha256": "0460ce0e102360e4069cdbbbc0cd56a8c81ca72bf6249904caa3bd867bda18db"
     },
     {
       "audit": {
@@ -15047,10 +15047,10 @@
     {
       "audit": {
         "domain": "verification-evidence",
-        "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
+        "evidence": "Contrastive regressions verify a safe later student fallback, reject delivery caused by the failure event itself, and ensure an unsupported post-failure action still fails its independent eligibility and reference gates.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex confirmation-020 root-cause audit"
+        "reviewer": "Codex SE7-12 root-cause audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15058,7 +15058,7 @@
       "package_commands": [],
       "path": "tests/test_autonomy_independent_scoring.py",
       "risk": "medium",
-      "sha256": "fda4d9e9aba7b3d4c8fdff4f537c739a6094b3f3da92c6361def83cb6f93d646"
+      "sha256": "14529a391a326d7f9524649ef7cc757d40e2f81fbfce00467d5208c3390da683"
     },
     {
       "audit": {
