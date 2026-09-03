@@ -10,6 +10,23 @@ results.
 
 ## Current audit-safe release boundary
 
+Issue #196 is complete. Confirmation 023 froze
+670 actual-product cases across T0, T1-v2 reactive diagnostics, and the selected
+T1-v2 autonomous condition, using synthetic source families 501–550. Its
+network-free run passes all registered product and safety contracts with zero
+calls. The first live attempt is immutable `invalid-execution`: it stopped
+after five calls and two canary responses because a USD 3 instrument ceiling
+could never satisfy the shared runner's USD 5 minimum projected-stop rounding.
+Hidden gold remained closed and no bulk case ran. Sole harness-only successor
+024 retained the exact package and changed only the USD 5 ceiling plus the
+missing shared-clock export. It completed 670/670 actual-product cases with a
+`Keep` decision: every registered safety, action, fallback, persistence,
+transition, termination, and proactive-lineage gate passed. It made 1,836
+calls for USD 0.4216108 and its authority is revoked. T1-v2 autonomous remains
+the release candidate. The winner-only known 10,000+1,000 regression and local
+HTTPS qualification are now the remaining release-decision checkpoints; no
+same-package prompt or method tuning is allowed.
+
 Issue #192 is complete: provider-failure scoring now follows durable trigger
 lineage, and confirmation 021 remains immutable. The completed development
 successor under #194 is

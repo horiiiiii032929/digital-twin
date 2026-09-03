@@ -6,6 +6,25 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+Fresh confirmation issue #196 is complete. The
+`governed-full-autonomy-v2-1-persona-confirmation-023` package contained 670
+source- and wording-disjoint actual-product cases from synthetic source
+families 501–550: 150 T0 controls, 150 T1-v2 reactive paired diagnostics, and
+370 cases for the selected T1-v2 autonomous candidate. Attempt 023 stopped
+before bulk because its USD 3 ceiling contradicted the shared runner's USD 5
+minimum projected-stop rounding; hidden gold remained closed. Harness-only
+successor 024 reused the exact package and changed only that ceiling plus the
+missing virtual-day export. It completed all 670 cases and passed every
+registered hard gate: action-set accuracy, safety, fallback, restart,
+pedagogical transition, goal termination, and proactive lineage were all 100%,
+with zero unauthorized actions, scope errors, invalid citations, duplicate
+deliveries, or unbounded loops. The run made 1,836 calls and cost USD
+0.4216108. T1-v2 autonomous remains the selected release candidate; real
+professor fidelity, real student usability, and real learning improvement
+remain unproven. Execution authority is revoked. The remaining release-decision
+steps are the labelled known 10,000+1,000 regression and local HTTPS
+qualification.
+
 ## H+E1 whole-system confirmation and grounding successor
 
 Issue #192 now owns the prospective `SE7-12` correction. The independent
