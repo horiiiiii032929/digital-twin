@@ -961,13 +961,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-tooling",
-      "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "1695c4cf74dc8f59f7193001e81ff2c83c86446e17a352e9fabf25aeb33df750"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "acc77333c855ea202d65570b278fad8dc34d00e41c64a937eac89c3e9d8a4fe4"
     },
     {
       "audit_status": "audited",
@@ -3016,12 +3016,12 @@
       "sha256": "3ddc416b9ad338aee58ee714b851c2578801e0972ae01955a143aca4ad8f8c43"
     },
     {
-      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_020.json",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-configuration",
       "evidence": "Terminal confirmation 020 preserves its fresh source-disjoint bindings and valid Refine result, records SE7-11, revokes provider and paid authority, and prohibits same-package rescore or rerun.",
       "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_020.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
       "sha256": "f50842fd9f131ea06f0f39381c453342bad5a1fc4e2cb42999dc481d9d838d17"
@@ -3964,13 +3964,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "active-or-unclassified-tooling",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "edd41275af5418156e365edabed7d9062cb20309ca50727334fad9881c8327fe"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "96f161ee04443a6107de738a77fb72be4b884d6cdd327e60f8a32cdd69abd41e"
     },
     {
       "audit_status": "audited",
@@ -4633,12 +4633,12 @@
       "sha256": "bc7825e6c86e8b38921ced419434fd6a6b14223b4c6e3924f97e2fdb203ae180"
     },
     {
-      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
       "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
       "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
       "sha256": "def47c0a409dbb4ed0f359fc31f7f03f653a720d062af93fd815c2e0c2df57c2"
@@ -5064,24 +5064,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-tooling",
-      "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "a3230dd0a58e3c2de0fcebcdb6b4821fdf8894567e2ef86d88f03cd5ac3f7562"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "0daab68a032f044e62a952e47e17ea2fcfb353c51ecee96975c6a2e8724f8f29"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "successor-hidden-state-evaluation",
-      "evidence": "Manual runtime review and the 18-test focused suite verified synthetic-public fixture construction, actual-service adapter wiring, deterministic engine isolation, virtual-time driving, and no provider credential or hidden-gold access.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex successor-study integration audit",
-      "sha256": "716a6091483f371c43c7f44adb20a5563ae57aad208a43da687d2f1235167cd8"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "3e65b3545c8cf377b4ca2fd91d0092d1b00ed11fbfaf0fbbfefd407e9706cade"
     },
     {
       "audit_status": "audited",
@@ -5889,13 +5889,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Entrypoint, freeze, network, data-access, and termination review confirms the new actual-product smoke is deterministic synthetic-only and has no provider, execute, paid, or held-out path; freeze coverage passes.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_product_freeze.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "039237fd4fc115287442b184e1476b7c53fe3042facb462bb7f49efc6f4877ac"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "6daea4754b19bc3c2476246753c41d9da28881482c962f3909f4163caf6a3103"
     },
     {
       "audit_status": "audited",
@@ -5986,12 +5986,12 @@
       "sha256": "656d83078cf66f62dbaa41000ef771667fcbf13fe3a1d476dac3cb4387598b04"
     },
     {
-      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-tooling",
       "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
       "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
       "sha256": "4e93ffce7e84efe4a83ef293e4fcf1fdd3344609686a6edb2ebc746e312297b8"
@@ -6142,13 +6142,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-tooling",
-      "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "9e3ce859cf5b5421a4d531be9d8aacbcac14365d4b3c9b0931f72feba74d0f7e"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "243db47c5c8bdde76c673167a1d617f75db2dd686fed92e34d26120af5749a50"
     },
     {
       "audit_status": "audited",
@@ -6703,13 +6703,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-tooling",
-      "evidence": "Entrypoint and tooling review covers guarded execution, exact instrument binding, provider-unauthorized preflight, atomic result/checkpoint updates, package commands, and active repository-freeze registration.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Freeze review classifies 021 as a pure in-memory builder while retaining the separately guarded provider runner and repository-wide execution freeze.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "5be62d11c3128993df32fce8dba1b1a3ae2c2576910c0d125fce0ecffbb88eb6"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "60fc5dd4a6fb36a072825c379c529f069845df0a2f02d9a0eb1463e8b16bb62f"
     },
     {
       "audit_status": "audited",
@@ -6857,13 +6857,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Factory composition review verified H uses Luna only for bounded perception, planning, and wording strategy; deterministic code retains policy, factual content, citations, persistence, delivery, and rollback authority.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "services/api/app/factory.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex H+E1 product-integration audit",
-      "sha256": "817d6990a879903adaee15443f775ac598fc51d5defffb228091f31805a2c1f4"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "c00f5e51dfb2bfb6850e9cf7b5cc3f426846c5ddd6f503932abf079a648b98b3"
     },
     {
       "audit_status": "audited",
@@ -7242,13 +7242,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Root-cause review verifies V1/V2 remain historical while V3 separately classifies assessed artifacts and submission-ready completion requests; lexical proximity cannot trigger refusal.",
       "findings": [],
       "path": "src/digital_twin/action_router.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "c90729c80bccf4b067d5eeb39b8f758c7f619f4cdca373f41c39bdc0ff38a6b5"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "dc466041b54976d3840d47599094e54d5583931df7ca979b8d9da41c50389699"
     },
     {
       "audit_status": "audited",
@@ -7726,13 +7726,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Public export review confirms the evidence-set compiler is explicitly available without changing historical generator exports.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "src/digital_twin/generation/__init__.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex grounding root-cause audit",
-      "sha256": "1071a43c531e83436966e24acba62e432b1c3861ec06f09f949d23584daa3325"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "24683e34866f9fca58362c50ff0bc4146a3566d02b22beb465c068b554ab8d75"
     },
     {
       "audit_status": "audited",
@@ -7781,13 +7781,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Policy-boundary review verifies V3 owns its full integrity contract and cannot fall through to the legacy lexical matcher.",
       "findings": [],
       "path": "src/digital_twin/generation/policy.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "8a4faec295fbea35373636815d6dceb412c07c69d2c3dd4a09bbf96b212b5383"
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "9589122b3e7408f4319d49824db79efd0e236bbd9a15426f0fd15156fb9476c5"
     },
     {
       "audit_status": "audited",
@@ -8320,13 +8320,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "active-runtime",
-      "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "72f1efc923f0eaf9655dab5126c70e004865188dbe8edf37c02de44168f828db"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "2dbf9c817d32b7138c947a6aeb95a2de988a1451b6bddbd4e865bc5be9ee4248"
     },
     {
       "audit_status": "audited",
@@ -8562,13 +8562,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "API-factory regressions verify exact H+E1 composition, shared budget binding, qualification rejection before selection, deterministic student factual generation, and preserved rollback modes.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex H+E1 product-integration audit",
-      "sha256": "952d1e6e2592c78b5cf1138cb8420d9c0a7bf1eaca5168b74e695e8d3478f21a"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "5c3962d4737ee40b03355f1d9f8a822a56e303666d1c8b04350764e3a9b5c6d1"
     },
     {
       "audit_status": "audited",
@@ -8903,13 +8903,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-execution-freeze-tests",
-      "evidence": "Regression verifies confirmation 020 joins confirmations 018/019 and every other historical paid confirmation in the blocked set after terminal result publication.",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 terminal audit",
-      "sha256": "296b126c27aa242a73a760f8bd0f613f0c32671e23a49884e0aced31589e7069"
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "379b4091fd923e9ed6060e3cf715c87dfd4daa19847aec0a16a407ec923bb70a"
     },
     {
       "audit_status": "audited",
@@ -10342,12 +10342,12 @@
       "sha256": "0f395145cd07ac8eca0a9bdfc7c9b3c71b651a024e295eba3238bfc911466350"
     },
     {
-      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
       "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
       "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
       "sha256": "6a69edec41c49ddd539f3fe0911084fa063775accd0375879fec9cb9ab16fb61"
@@ -11066,6 +11066,61 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Prospective instrument review verifies fresh source and wording lineage, immutable 020 evidence, set-valued action gold, unchanged gates, bounded provider use, and no automatic promotion.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_021.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "9a21648ba0ef819cecccadd4a5c07d5993e3869d95ae2850d034be7ecd3dd288"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Builder review verifies 820 unique fresh cases, 50 source identities, 600 preregistered alternatives, hidden-gold isolation, and deterministic hashes.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_021.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "f31db4a42a6d18749c405ceffa01314c4c8e00ccff17224224478d9d70e4a88b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Runner review verifies exact 021 binding, H+E1 configuration, V3 routing identity, provider canaries, bounded execution, and fail-closed freeze guards.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_021.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "7d75d6a1995cc686f65ceaf213fdd225ddf9faa91c51d301cd0e8cf77cfbced9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Network-free actual-product tests verify package isolation, authorization blocking, fresh wording, set-valued gold, and all 820 service-path gates.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_021.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "9373821ae5f561ff72b4d8e38272996b7dd8938786a05d81cce684a51a80a3cc"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "structured-request-intent-release-correction",
+      "evidence": "Contrastive noun/verb, tutoring/completion, practice-assessment, and explicit graded-submission tests close SE7-11 without weakening refusal behavior.",
+      "findings": [],
+      "path": "tests/test_structured_request_intent_router_v3.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
+      "sha256": "5a39998f00dcec2dada1d58cd741927a3e492671a62fad29f44743512b51bcea"
     }
   ],
   "schema_version": 1

@@ -3,6 +3,7 @@ import re
 from src.digital_twin.action_router import (
     DeterministicActionRouterV1,
     DeterministicActionRouterV2,
+    DeterministicActionRouterV3,
 )
 from src.digital_twin.generation.models import PolicyAction, PolicyDecision
 from src.digital_twin.grounding.models import RetrievalHit
@@ -35,7 +36,12 @@ class DeterministicPolicyEnforcer:
     def __init__(
         self,
         *,
-        action_router: DeterministicActionRouterV1 | DeterministicActionRouterV2 | None = None,
+        action_router: (
+            DeterministicActionRouterV1
+            | DeterministicActionRouterV2
+            | DeterministicActionRouterV3
+            | None
+        ) = None,
     ) -> None:
         self.action_router = action_router
 
@@ -68,7 +74,11 @@ class DeterministicPolicyEnforcer:
                         route.matched_rule,
                     ],
                 )
-        if _GRADED_CONTEXT.search(question) and _DIRECT_COMPLETION.search(question):
+        if (
+            not getattr(self.action_router, "owns_academic_integrity", False)
+            and _GRADED_CONTEXT.search(question)
+            and _DIRECT_COMPLETION.search(question)
+        ):
             policy_field = next(
                 (
                     field

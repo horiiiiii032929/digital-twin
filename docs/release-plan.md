@@ -10,6 +10,25 @@ results.
 
 ## Current audit-safe release boundary
 
+Issue #190 prospectively closes `SE7-11` at clean implementation revision
+`9f09ea3`. Structured request intent now requires both an assessed artifact and
+an explicit submission-ready completion request before graded-work redirect;
+pedagogical uses of “test” remain tutor-eligible. Fresh confirmation 021 passes
+all 820 actual-product cases network-free across the four frozen conditions.
+The build is not release evidence: provider execution remains the next finite
+checkpoint. A valid Keep proceeds to the labelled known 10,000+1,000 regression
+and local HTTPS qualification; a valid Refine produces No Release.
+
+Confirmation 021 has now completed with a frozen `Refine / No Release` decision.
+The product correction itself passed: 820/820 cases and all primary action,
+safety, grounding, persistence, and autonomy gates passed. The required
+independent scorer failed 60 valid deterministic fallbacks because it forbids
+all deliveries after a provider-failure event, including later student turns
+that the gold explicitly expects to be answered safely. This new `SE7-12`
+scorer-semantics defect is recorded prospectively; 021 is not rescored. Because
+the required outcome was not Keep, the known 10,000+1,000 regression and local
+HTTPS qualification are not release-authorized from this branch.
+
 Issue #188 completed its finite release decision. Confirmation 020 closes
 `SE7-9`, `SE7-10`, and terminal-checkpoint drift prospectively, then completes
 all 820 fresh provider-backed cases with 100% provider schema completion and

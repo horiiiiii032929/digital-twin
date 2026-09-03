@@ -40,7 +40,7 @@ from src.digital_twin.generation import (
 )
 from src.digital_twin.action_router import (
     DeterministicActionRouterV1,
-    DeterministicActionRouterV2,
+    DeterministicActionRouterV3,
 )
 from src.digital_twin.grounding import (
     AnyHitEvidenceGate,
@@ -911,7 +911,7 @@ def build_live_t0_adapter(
         )
     provider_ledger = None
     action_router = (
-        DeterministicActionRouterV2()
+        DeterministicActionRouterV3()
         if manifest.evidence_gate == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         else DeterministicActionRouterV1()
     )
