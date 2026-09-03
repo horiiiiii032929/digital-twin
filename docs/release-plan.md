@@ -101,8 +101,11 @@ The #186 successor is now finite and build-qualified as confirmation 018. Its
 fresh 820-case actual-product package passed the complete network-free contract,
 and the runner separates the direct provider transport proof from reactive and
 autonomous product-route canaries. The next release decision is one bounded
-provider-backed execution. Confirmation 018 is now the sole bounded
-authorization and still requires a clean no-call preflight. Until its result is
+provider-backed execution. Confirmation 018 became invalid before bulk because
+its autonomous product canary received an exact-identity malformed Luna output
+and safely fell back, while the canary contract misclassified that observed
+route as unexecuted. Its authority is revoked. One harness-only 019 correction
+may proceed with unchanged scientific inputs and gates. Until a result is
 valid, T0 and bounded T1-v1 remain the selected controls and no H+E1/V3 release
 claim is permitted.
 

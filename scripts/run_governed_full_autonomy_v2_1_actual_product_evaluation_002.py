@@ -87,6 +87,7 @@ class ActualProductEvaluationContext:
     autonomy_architecture_id: str = "legacy-live-planner"
     bounded_strategy_generation: bool = False
     require_separate_transport_canary: bool = False
+    product_route_canary_accepts_safe_fallback: bool = False
 
     @property
     def case_count(self) -> int:
@@ -265,6 +266,9 @@ def _run_binding(
         "bounded_strategy_generation": context.bounded_strategy_generation,
         "require_separate_transport_canary": (
             context.require_separate_transport_canary
+        ),
+        "product_route_canary_accepts_safe_fallback": (
+            context.product_route_canary_accepts_safe_fallback
         ),
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_timezone": "UTC",
@@ -656,15 +660,32 @@ def _canaries_valid(
         "t1-v2-reactive": {"gpt-5.4-mini-2026-03-17", "gpt-5.6-terra"},
     }
     for condition, response in responses:
-        models = {
+        completed_models = {
             call.provider_model
             for call in response.operational_metrics.call_records
             if call.status == "completed" and call.provider_model
         }
+        observed_models = {
+            call.provider_model
+            for call in response.operational_metrics.call_records
+            if call.provider_model
+        }
+        models = (
+            observed_models
+            if context.product_route_canary_accepts_safe_fallback
+            else completed_models
+        )
+        invocation_valid = (
+            response.provider_calls > 0
+            and bool(response.operational_metrics.call_records)
+            if context.product_route_canary_accepts_safe_fallback
+            else True
+        )
         if (
             response.operational_status != "completed"
             or condition not in expected_models
             or models != expected_models[condition]
+            or not invocation_valid
         ):
             return False
     return True

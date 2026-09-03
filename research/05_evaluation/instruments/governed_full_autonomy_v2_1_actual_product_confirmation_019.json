@@ -1,14 +1,12 @@
 {
   "schema_version": 1,
-  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
-  "status": "invalid-execution-authorization-revoked",
+  "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-019",
+  "status": "reviewed-provider-unauthorized",
   "owner_issue": 186,
   "parent_issue": 8,
-  "decision_question": "Does corrected H+E1/V3 pass the complete provider-backed actual-product autonomy gates on a fresh source-disjoint package after transport and product-route canaries independently pass?",
+  "decision_question": "Does corrected H+E1/V3 pass the provider-backed actual-product autonomy gates when transport/schema capability and actual-product route invocation are tested by separate canary responsibilities?",
   "predecessors": [
-    "governed-full-autonomy-v2-1-actual-product-confirmation-016-invalid-canary",
-    "governed-full-autonomy-v2-1-actual-product-confirmation-017-invalid-canary",
-    "governed-full-autonomy-v2-1-confirmation-017-postmortem-regression-001"
+    "governed-full-autonomy-v2-1-actual-product-confirmation-018-invalid-canary-se7-8"
   ],
   "method": {
     "action_eligibility_version": "event-scoped-action-eligibility-v1",
@@ -48,18 +46,12 @@
   "dataset": {
     "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
     "case_count": 820,
-    "trajectory_templates": 50,
-    "trajectory_conditions": 4,
-    "trajectory_seeds": 3,
     "trajectory_case_count": 600,
     "long_horizon_learner_count": 100,
-    "long_horizon_days": 30,
     "proactive_opportunity_count": 120,
-    "source_template_count": 50,
     "source_family_range": [351, 400],
-    "source_disjoint_from_confirmations_012_through_017": true,
-    "instructional_wording_family_disjoint_from_confirmation_016": true,
-    "quality_results_previously_opened": 0,
+    "prior_public_canary_count": 2,
+    "hidden_gold_open_count": 0,
     "public_sha256": "0fbe65ea8b505c1e570663af4d823c2881b9da13536932b00f9740db1c08e09a",
     "hidden_gold_sha256": "e8cfbb9853fe5105cef4467b70767aec879706a923f88d89208e4a2a19357052"
   },
@@ -75,7 +67,7 @@
   },
   "models": {
     "metadata_status": "fresh",
-    "verified_at": "2026-09-03T00:14:03+00:00",
+    "verified_at": "2026-09-03T00:43:22+00:00",
     "freshness_hours": 24,
     "planner": {
       "provider": "openai",
@@ -110,7 +102,7 @@
   "authority": {
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
-    "authorization_source": "Revoked after invalid canary execution. Direct transport passed; the autonomous product route returned exact Luna identity but malformed semantic output, and the product completed through safe fallback. Hidden gold remained unopened.",
+    "authorization_source": "Build-only harness correction. Standing user authority activates only after the corrected build is committed and preflight is clean.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0
@@ -136,20 +128,17 @@
     "per_condition_reference_action_accuracy_min": 0.95
   },
   "execution": {
-    "actual_services": [
-      "StudentTutoringService",
-      "GovernedAutonomyService",
-      "ProactiveOutreachService",
-      "SQLiteStudentRepository",
-      "LangGraphCheckpoint"
-    ],
+    "actual_services": ["StudentTutoringService", "GovernedAutonomyService", "ProactiveOutreachService", "SQLiteStudentRepository", "LangGraphCheckpoint"],
     "selected_retriever": "source-semantic-evidence-atom-retriever-v1",
     "selected_evidence_gate": "source-semantic-evidence-atom-gate-v3",
     "selected_factual_generator": "deterministic/evidence-set-v2",
     "selected_autonomy_architecture": "guarded-policy-value-planner-v2",
     "selected_complex_planner": "gpt-5.6-luna",
     "selected_proactive_generator": "bounded-strategy-grounded-wording-generator-v1",
+    "harness_correction_only": true,
     "direct_transport_identity_canary_required": true,
+    "direct_transport_canary_contract": "completed-exact-identity-structured-response-v1",
+    "product_route_canary_contract": "observed-exact-identity-provider-attempt-plus-safe-product-completion-v1",
     "product_route_canary_case_ids": [
       "release-fresh-h-e1-trajectory-001-t1-v2-reactive-seed-1",
       "release-fresh-h-e1-long-horizon-001"
@@ -162,22 +151,11 @@
     "same_cases_quality_rerun_allowed": false
   },
   "boundaries": [
-    "Confirmation 018 uses source families 351-400 and fresh instructional wording; it does not reuse the known 016/017 package.",
-    "The direct transport/identity canary and executable actual-product route canary are separate persisted checks.",
-    "The product-route canary passes only after observed completed provider accounting contains the exact returned Luna identity.",
-    "V3 uses only student-visible wording plus approved public source titles and source-side atoms; it cannot access gold or author facts.",
-    "Distinct canonical claim classes force clarification before generation.",
-    "Any canary failure produces zero bulk execution and a durable invalid result.",
+    "The 018 hidden gold remains unopened; 019 is the sole harness-only correction allowed for this package.",
+    "The direct canary remains strict and proves transport, exact identity, and structured-response capability.",
+    "A product-route canary proves actual route invocation, exact returned identity when a response exists, and safe product completion; malformed semantic output remains a measured fallback event.",
+    "Methods, prompts, cases, models, gold, and hard gates are unchanged.",
+    "A 019 canary failure terminates this package branch with zero further correction.",
     "Real professor fidelity, real student usability, and learning improvement are not established."
-  ],
-  "terminal_result": {
-    "status": "invalid-execution",
-    "provider_calls": 5,
-    "cost_usd": 0.0009184,
-    "persisted_public_canary_count": 2,
-    "bulk_case_count": 0,
-    "hidden_gold_opened": false,
-    "finding_id": "SE7-8",
-    "successor": "governed-full-autonomy-v2-1-actual-product-confirmation-019"
-  }
+  ]
 }

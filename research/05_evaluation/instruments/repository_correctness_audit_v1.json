@@ -962,12 +962,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "release-command-surface",
-      "evidence": "Validation, simulation, preflight, execute, and resume commands expose confirmation 018 without bypassing the repository freeze.",
+      "evidence": "Validation, simulation, preflight, execute, and resume commands expose confirmations 018 and 019 without bypassing the repository freeze.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "4fd93d853f43525b11c767b889d2c2dd7cc27cb3e2f4edccfe2d1ea898ddd83e"
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "d79addff47098c4b2cff0333213245f8800201fab68e0598a26c86caceadefbc"
     },
     {
       "audit_status": "audited",
@@ -3008,12 +3008,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-instrument",
-      "evidence": "Prospective frozen instrument records fresh source lineage, unchanged hard gates, official model metadata, independent canaries, complete accounting, and the sole bounded provider authorization.",
+      "evidence": "Terminal instrument preserves the invalid canary result, exact accounting, unopened hidden gold, revoked authority, and SE7-8 successor boundary.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_018.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 authorization audit",
-      "sha256": "421e135583ab7b70ad4430fce72ef8bea860ebdd8870972fa6bb1b14aca9a8b4"
+      "reviewer": "Codex SE7-8 invalid-result audit",
+      "sha256": "7c5e59d4f3bb8b64941c3c8acad58e5a65094f7c0889f2723654c9d92ac56fcc"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-confirmation-instrument",
+      "evidence": "Prospective 019 instrument changes only canary responsibility, preserves the unopened 018 package and every scientific input and hard gate, and keeps provider authority false.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_019.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "f6390a408606acb4376006d32c1bdf32617e2f1e832bd6eb953f7d32839915e8"
     },
     {
       "audit_status": "audited",
@@ -4602,6 +4613,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "actual-product-confirmation-dataset",
+      "evidence": "Builder binds confirmation 019 to the unchanged unopened 018 public/gold hashes, records two known public canaries, and makes no provider call.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "bc7825e6c86e8b38921ced419434fd6a6b14223b4c6e3924f97e2fdb203ae180"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "actual-product-autonomy-evaluation-002",
       "evidence": "Portfolio builder review verified 600 trajectories, 100 30-day learners, 120 opportunities, 50 source fixtures, policy-derived gold, and real 24-hour windows.",
       "findings": [],
@@ -5933,13 +5955,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "actual-product-confirmation-runner",
+      "evidence": "Confirmation 019 binds the sole canary-role correction to the unchanged H+E1/V3 package and preserves separate direct, reactive, and autonomous checks before bulk.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "656d83078cf66f62dbaa41000ef771667fcbf13fe3a1d476dac3cb4387598b04"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "actual-product-evaluation-runner",
-      "evidence": "Shared runner supports a separate persisted transport canary, variable product-route canaries, combined budget accounting, fail-closed resume binding, and zero bulk calls after canary failure.",
+      "evidence": "Shared runner supports separate transport and product-route canary responsibilities, preserves historical strict behavior by default, binds the correction into resume identity, and retains combined accounting and fail-closed bulk execution.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "2a31c5d2a603cf04a426b1d5ed375996eccd08d34db035fe1a371f6eef86a68b"
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "0b8a0fc27446d18f0703b33965e66913bbcddb91e919df65674a34cca5502c24"
     },
     {
       "audit_status": "audited",
@@ -6638,12 +6671,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Pure confirmation 018 package builder is exempted while its paid runner remains registered and guarded.",
+      "evidence": "Pure confirmation 018/019 package builders are exempted while both paid runners remain registered and guarded.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "ab87cf7b7dcb718b64d89b5d7a543659d41c5594afd73a4b4ef90c622c7aa1d6"
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "f9e9abc34b3b634cff991c82bcc5e0b20f481a6fd8888c708fbf06915ae1a045"
     },
     {
       "audit_status": "audited",
@@ -8255,12 +8288,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Confirmation 018 runner remains registered under both blocked operations and is the only new bounded provider authorization; the repository-wide freeze remains active.",
+      "evidence": "Confirmation 018 is revoked and 019 is registered under both blocked operations without authorization; the repository-wide freeze remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 authorization audit",
-      "sha256": "6d3c49ef01ecd737bd6f334a522a12acdee1aa79bce9837b96b5a1c2c75a036b"
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "8f8b7a84d617ee5e1343f3ddbef9edc4ecb103865a7c98ed9d5244f6c5b9a6b1"
     },
     {
       "audit_status": "audited",
@@ -8838,12 +8871,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze-tests",
-      "evidence": "Regression verifies confirmation 018 is the sole added bounded provider authorization and that every historical paid instrument remains blocked.",
+      "evidence": "Regression verifies confirmations 018 and 019 are blocked after 018 revocation and before the separate 019 authorization, while every historical paid instrument remains blocked.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 authorization audit",
-      "sha256": "7b87de114b6d5a39be7d668b993aee6e43faa359e81f49c3e555367625619a4f"
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "74300a5c424d7d11ba126d731d62a3b4461ff05232fa7ec4634c61cdc7e9596f"
     },
     {
       "audit_status": "audited",
@@ -10257,12 +10290,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-tests",
-      "evidence": "Tests cover fresh source lineage, separated route canaries, exact transport identity and cost, identity drift, and absence of authorization blockers after the bounded freeze commit.",
+      "evidence": "Tests preserve confirmation 018 as invalid with revoked authority while retaining fresh source lineage, exact direct-canary accounting, and identity-drift coverage.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_018.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 authorization audit",
-      "sha256": "d345ef2c0e975c9c226910808d57e6615a97908437026ace7ce3606d78f06deb"
+      "reviewer": "Codex SE7-8 invalid-result audit",
+      "sha256": "c9080b939746d1de8bf0f3aa7038b9ff9b3f1c9c14513f7242f510744a8d1768"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "actual-product-confirmation-tests",
+      "evidence": "Tests prove 019 reuses only unopened gold, accepts an exact-identity malformed provider attempt when the product safely completes, rejects missing/drifted identity, and remains unauthorized.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_019.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex SE7-8 harness-correction audit",
+      "sha256": "5a1176ad05fb2d1a90b503265d89e42047212cb01d82f903445d370b8fb1b394"
     },
     {
       "audit_status": "audited",

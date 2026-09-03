@@ -19,10 +19,18 @@ hidden gold closed.
 
 The complete clean-revision gate passed 1,712 Python tests, 50 frontend tests,
 lint, TypeScript, and production build. Repository correctness is 998/998 and
-execution-freeze coverage is 155/155 with zero open findings. Confirmation 018
-is now the sole provider-authorized checkpoint under the repository-wide
-freeze. It is not release evidence until the paid run completes validly, and
-its authority must be revoked after every outcome.
+execution-freeze coverage is 155/155 with zero open findings before execution.
+Confirmation 018 then stopped invalidly after the direct transport and reactive
+route passed but the autonomous Luna response failed a correlated schema
+invariant and safely fell back. It persisted two public canaries, made five
+calls for USD 0.0009184, ran zero bulk cases, and left hidden gold unopened.
+Authority is revoked.
+
+Finding `SE7-8` is in the canary responsibility split: the direct canary already
+proved transport, identity, and valid structured output, while the product
+canary treated an observed exact-identity malformed response plus safe fallback
+as route non-execution. One harness-only confirmation 019 may correct that
+classification without changing cases, prompts, models, gold, or hard gates.
 
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen

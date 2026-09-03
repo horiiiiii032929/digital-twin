@@ -1,0 +1,79 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "fresh-h-e1-v3-provider-execution-018",
+  "status": "invalid-execution",
+  "decision_question": "Does corrected H+E1/V3 pass the complete provider-backed actual-product autonomy gates on a fresh source-disjoint package after separate transport and product-route canaries?",
+  "code_revision": "4e78ef052cc89b5ddc6c3edd0180091179a8c155",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
+    "planned_case_count": 820,
+    "persisted_public_canary_count": 2,
+    "bulk_case_count": 0,
+    "hidden_gold_opened": false,
+    "public_sha256": "0fbe65ea8b505c1e570663af4d823c2881b9da13536932b00f9740db1c08e09a",
+    "hidden_gold_sha256": "e8cfbb9853fe5105cef4467b70767aec879706a923f88d89208e4a2a19357052"
+  },
+  "canaries": {
+    "direct_transport": {
+      "status": "passed",
+      "provider_calls": 1,
+      "returned_models": ["gpt-5.6-luna"],
+      "content_sha256": "3ec6cc949e607e863206aceff4cc43735b624fcd524c7a566073d462353b1b53"
+    },
+    "reactive_product_route": {
+      "status": "completed-safe",
+      "provider_calls": 3,
+      "completed_exact_identity_calls": 2,
+      "injected_provider_failure_calls": 1
+    },
+    "autonomous_product_route": {
+      "status": "completed-safe-fallback",
+      "provider_calls": 1,
+      "returned_model": "gpt-5.6-luna",
+      "provider_response_status": "completed",
+      "failure_stage": "schema-validation",
+      "error_code": "malformed-response"
+    }
+  },
+  "operational": {
+    "provider_calls": 5,
+    "input_tokens": 1976,
+    "output_tokens": 436,
+    "reported_cost_usd": 0.0009184,
+    "maximum_cost_usd": 10.0,
+    "retries": 0,
+    "identity_drift_count": 0,
+    "response_ledger_status": "interrupted",
+    "private_data_used": false
+  },
+  "findings": [
+    {
+      "finding_id": "SE7-8",
+      "status": "open-harness-only-correction-permitted",
+      "evidence": "The product-route canary rejected an exact-identity malformed provider response even though the product invoked Luna and completed through its safe deterministic fallback; transport and schema capability had already passed independently."
+    }
+  ],
+  "artifacts": {
+    "raw_output_location": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-018",
+    "raw_output_committed": false,
+    "direct_canary_sha256": "1c422b3c20576942fedc79c03dd663b6f812e6f4342d600edc8ffff9e928ac09",
+    "public_package_sha256": "6bc74ff1065e073ca6d6fcd145190888b20c77068db4f51c12baea290d7b179b",
+    "terminal_result_sha256": "696bbbc9867e39813693a7d1e5254313c6f88402d60329d60fb6d7ccfb9439b5"
+  },
+  "decision": {
+    "outcome": "invalid-no-selection",
+    "selected_architecture_id": null,
+    "rationale": "No hidden-gold result exists. Revoke 018 and permit one harness-only canary-role correction without changing the evaluated method or hard gates."
+  },
+  "limitations": [
+    "No hidden-gold scoring or product-quality conclusion is available.",
+    "The two public canary inputs and outputs are known.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-018-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-018.json"
+}

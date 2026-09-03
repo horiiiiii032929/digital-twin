@@ -1095,6 +1095,15 @@ authorization is revoked; the opened cases must not be reused for confirmation.
   Validation, full network-free simulation, preflight, execute, and resume
   commands use the `governed-autonomy-v2-1-actual-product-confirmation-018`
   suffix. Paid execution remains unauthorized in the build checkpoint.
+- `build_governed_full_autonomy_v2_1_actual_product_confirmation_019.py` and
+  `run_governed_full_autonomy_v2_1_actual_product_confirmation_019.py` preserve
+  invalid 018 and make its sole harness-only canary-role correction. The direct
+  canary still requires a completed exact-identity structured response. The
+  product-route canaries instead require an observed exact-identity provider
+  attempt plus safe actual-product completion, so malformed semantic output is
+  measured through the production fallback rather than misclassified as an
+  unexecuted route. Cases, prompts, models, hidden gold, and hard gates are
+  unchanged; provider authority remains false in the build checkpoint.
 - `build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py` and
   `run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py`: freeze the
   six-engine whole-product comparison, verify exact public/gold/prompt/policy
