@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
-  "status": "reviewed-build-only-provider-unauthorized",
+  "status": "frozen-pending-network-free-execution",
   "owner_issue": 194,
   "parent_issue": 8,
   "predecessors": [
@@ -46,6 +46,15 @@
     "invalid_or_missing_wording_policy": "recorded-canonical-fallback",
     "fallback_rate_reported": true
   },
+  "frozen_wording_bank": {
+    "bank_id": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002-output-001",
+    "path": "research/05_evaluation/datasets/governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002.json",
+    "file_sha256": "0bd78599a15722f2aca0ebeec57f0da9ff75e62f3a69c20a52c3af6b0b5b17bb",
+    "canonical_content_sha256": "d4eb7d0aa6ba3419f2f83e9655afa41c19f4b72f3357adc65f243c0e5f9d0ebe",
+    "accepted_entries": 1008,
+    "canonical_fallback_entries": 96,
+    "fallback_rate": 0.08695652173913043
+  },
   "prospective_llm_wording_binding": {
     "provider": "openai",
     "api": "responses",
@@ -89,7 +98,7 @@
     "network_free_runner_available": true,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
-    "selection_authorized": false,
+    "selection_authorized": true,
     "external_calls_in_runner": 0,
     "exclusive_output": true,
     "bootstrap_resamples": 1000

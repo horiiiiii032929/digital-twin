@@ -1,0 +1,238 @@
+{
+  "accepted_count": 1008,
+  "analysis_correction": "The runner's raw 95% coverage decision was not preregistered. Coverage is descriptive because the frozen instrument explicitly requires rejected or missing wording to use a recorded canonical fallback. Provider outputs and the bank are unchanged.",
+  "canonical_fallback_count": 96,
+  "canonical_fallback_rate": 0.08695652173913043,
+  "code_revision": "5eff84f8301823978f388389a487f384602baf73",
+  "coverage": 0.9130434782608695,
+  "decision": "Go Deeper",
+  "instrument_id": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002",
+  "model_output_authoritative": false,
+  "private_data_used": false,
+  "provider_accounting": {
+    "failed_calls": 0,
+    "input_tokens": 128050,
+    "maximum_calls": "46",
+    "maximum_cost_usd": "1.0",
+    "maximum_latency_ms": 107389.90816700971,
+    "maximum_transport_retries_total": "0",
+    "output_tokens": 70994,
+    "provider_attempts": 46,
+    "provider_calls": 46,
+    "recovered_transport_failures": 0,
+    "reported_cost_usd": 0.1143525,
+    "run_binding_sha256": "1648ef4727ea36357dfb835b5031a4d948396d6287f1b7097283393a400b7249",
+    "schema_version": "1",
+    "status": "completed"
+  },
+  "raw_runner_content_sha256": "123dc3384cb9325d15786d8aee8b57a6d4b9725d87f9f7dca030a1b4f713bb4b",
+  "raw_runner_decision": "Refine",
+  "rejection_diagnostic_count": 50,
+  "rejections": [
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:false:false:0125c7c4b9f9ac6c:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:false:true:0125c7c4b9f9ac6c:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:002",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:003",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:004",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:true:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-lease-ordering:true:true:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-quorum-reads:true:false:ec6eee7f3f1ab34c:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3101:attempt:concept-vector-stamps:true:false:bc59fb636497435b:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:002",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:003",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3103:attempt:concept-vector-stamps:false:false:10350d155bc1492f:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3103:attempt:concept-vector-stamps:true:false:bc59fb636497435b:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3103:attempt:concept-vector-stamps:true:false:bc59fb636497435b:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3103:attempt:concept-vector-stamps:true:true:bc59fb636497435b:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "beginner:bkt-like:3103:misconception:concept-lease-ordering:na:false:871bcd94160a1051:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "batch",
+      "reason": "id-set-mismatch"
+    },
+    {
+      "key": "entrenched-misconception:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "entrenched-misconception:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "entrenched-misconception:bkt-like:3101:attempt:concept-lease-ordering:true:false:23f87acbda932bce:002",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "entrenched-misconception:bkt-like:3101:misconception:concept-lease-ordering:na:false:871bcd94160a1051:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "entrenched-misconception:bkt-like:3103:misconception:concept-lease-ordering:na:false:871bcd94160a1051:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "entrenched-misconception:logistic-like:3101:misconception:concept-lease-ordering:na:false:1fe502c227af5286:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "entrenched-misconception:logistic-like:3102:misconception:concept-lease-ordering:na:false:871bcd94160a1051:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3101:attempt:concept-quorum-reads:false:false:b2415520c716ebc6:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3101:attempt:concept-quorum-reads:true:false:ec6eee7f3f1ab34c:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3101:misconception:concept-lease-ordering:na:false:1fe502c227af5286:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3102:attempt:concept-lease-ordering:false:false:d5c266d9e1e059f1:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3102:attempt:concept-lease-ordering:true:true:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:bkt-like:3102:attempt:concept-vector-stamps:true:false:bc59fb636497435b:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "low-engagement:logistic-like:3101:misconception:concept-lease-ordering:na:false:1fe502c227af5286:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "low-engagement:logistic-like:3103:attempt:concept-lease-ordering:false:false:7df40f16911edc51:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "notification-ignoring:bkt-like:3102:misconception:concept-lease-ordering:na:false:871bcd94160a1051:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3101:attempt:concept-vector-stamps:true:false:bc59fb636497435b:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3101:attempt:concept-vector-stamps:true:false:bc59fb636497435b:002",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3101:attempt:concept-vector-stamps:true:false:bc59fb636497435b:003",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3101:misconception:concept-lease-ordering:na:false:e4a44307179aa94f:000",
+      "reason": "missing-misconception-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:002",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:false:23f87acbda932bce:003",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:true:23f87acbda932bce:000",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "overconfident:logistic-like:3102:attempt:concept-lease-ordering:true:true:23f87acbda932bce:001",
+      "reason": "missing-attempt-cue"
+    },
+    {
+      "key": "batch",
+      "reason": "duplicate-key"
+    }
+  ],
+  "requirement_count": 1104,
+  "requirements_content_sha256": "2738cd87240ec2fde8f6f4f86f7d335e96106c26f3f8aaf6c29cce51c59e3764",
+  "run_id": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002",
+  "schema_version": 1,
+  "status": "completed-go-deeper"
+}

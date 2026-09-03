@@ -72,6 +72,10 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 )
 
 PROGRAM_ID = "governed-full-autonomy-v2-1-persona-robust-release-selection-022"
+INSTRUMENT_PATH = REPOSITORY_ROOT / (
+    "research/05_evaluation/instruments/"
+    "governed_full_autonomy_v2_1_persona_robust_release_selection_022.json"
+)
 CLOCK_ORIGIN = datetime(2026, 9, 9, 0, 0, tzinfo=UTC)
 PRIMARY_CONDITIONS = ("t0-grounded-control", "t1-v2-autonomous")
 ABLATION_CONDITION = "t1-v2-reactive"
@@ -104,6 +108,110 @@ def load_bank(path: Path | None) -> FrozenLearnerUtteranceBankV1 | None:
     if path is None:
         return None
     return FrozenLearnerUtteranceBankV1.model_validate_json(path.read_text())
+
+
+def validate_frozen_bank_binding(
+    path: Path, bank: FrozenLearnerUtteranceBankV1
+) -> dict[str, Any]:
+    """Fail closed unless the supplied bank is the prospectively frozen bank."""
+
+    instrument = json.loads(INSTRUMENT_PATH.read_text())
+    execution = instrument["execution"]
+    if not execution.get("selection_authorized", False):
+        raise ValueError("persona-robust selection is not authorized")
+    if execution.get("external_calls_in_runner") != 0:
+        raise ValueError("network-free selection cannot authorize external calls")
+    binding = instrument.get("frozen_wording_bank")
+    if not isinstance(binding, dict):
+        raise ValueError("instrument has no frozen wording-bank binding")
+    expected_path = (REPOSITORY_ROOT / str(binding["path"])).resolve()
+    if path.resolve() != expected_path:
+        raise ValueError("supplied wording bank does not match frozen path")
+    file_sha256 = hashlib.sha256(path.read_bytes()).hexdigest()
+    if file_sha256 != binding["file_sha256"]:
+        raise ValueError("supplied wording-bank file hash drifted")
+    canonical_sha256 = utterance_bank_sha256(bank)
+    if canonical_sha256 != binding["canonical_content_sha256"]:
+        raise ValueError("supplied wording-bank canonical hash drifted")
+    if bank.bank_id != binding["bank_id"]:
+        raise ValueError("supplied wording-bank identity drifted")
+    if len(bank.entries) != binding["accepted_entries"]:
+        raise ValueError("supplied wording-bank entry count drifted")
+    return instrument
+
+
+def select_release_condition(
+    summary: dict[str, Any], hard_gate_rows: list[dict[str, Any]]
+) -> dict[str, Any]:
+    """Apply the frozen safety-first, lexicographic release-selection rule.
+
+    The reactive condition is an ablation and cannot be selected. No weighted
+    scalar is invented after observing results: hard safety excludes a method,
+    then the instrument's prospective ordering is applied directly.
+    """
+
+    aggregate = summary["aggregate"]
+    failures_by_condition: dict[str, list[dict[str, Any]]] = {
+        condition: [] for condition in PRIMARY_CONDITIONS
+    }
+    for row in hard_gate_rows:
+        if row["condition"] in failures_by_condition and not all(row["gates"].values()):
+            failures_by_condition[row["condition"]].append(row)
+
+    eligible: list[str] = []
+    exclusions: dict[str, dict[str, Any]] = {}
+    for condition in PRIMARY_CONDITIONS:
+        metric_gates = aggregate[condition]["hard_gates"]
+        failures = failures_by_condition[condition]
+        if failures or not all(metric_gates.values()):
+            exclusions[condition] = {
+                "observable_failure_count": len(failures),
+                "metric_gates": metric_gates,
+            }
+        else:
+            eligible.append(condition)
+
+    def value(row: dict[str, Any], key: str, *, missing: float) -> float:
+        raw = row.get(key)
+        return missing if raw is None else float(raw)
+
+    def rank_key(condition: str) -> tuple[float, ...]:
+        row = aggregate[condition]
+        # Ordered exactly after hard safety: worst-persona learning outcome,
+        # overall learning outcome, useful follow-up, fewer wasted messages,
+        # perception accuracy, lower notification burden, latency/cost proxy,
+        # then the simpler T0 rollback as the final exact-tie preference.
+        return (
+            value(row, "worst_persona_final_mastery", missing=-1.0),
+            value(row, "final_hidden_mastery", missing=-1.0),
+            value(row, "follow_up_fraction", missing=0.0),
+            -value(row, "wasted_rate", missing=0.0),
+            value(row, "attribution_accuracy", missing=-1.0),
+            -value(row, "messages_delivered", missing=0.0),
+            -value(row, "provider_calls", missing=0.0),
+            -value(row, "cost_usd", missing=0.0),
+            1.0 if condition == "t0-grounded-control" else 0.0,
+        )
+
+    ranked = sorted(eligible, key=rank_key, reverse=True)
+    selected = ranked[0] if ranked else None
+    return {
+        "status": "completed-keep" if selected else "completed-refine",
+        "decision": "Keep" if selected else "Refine",
+        "selected_condition": selected,
+        "eligible_conditions": eligible,
+        "excluded_conditions": exclusions,
+        "ranking": [
+            {
+                "condition": condition,
+                "rank": index + 1,
+                "ordered_values": list(rank_key(condition)),
+            }
+            for index, condition in enumerate(ranked)
+        ],
+        "reactive_ablation_selectable": False,
+        "rule": "hard safety exclusion followed by the prospectively frozen lexicographic order",
+    }
 
 
 def build_case(
@@ -346,10 +454,13 @@ async def run_program(
         "all_passed": not failures,
         "failed_cases": failures,
     }
+    summary["release_selection"] = select_release_condition(summary, hard_gate_rows)
     summary["run"] = {
         "program_id": PROGRAM_ID,
-        "status": "completed-development",
-        "selection_authorized": False,
+        "status": summary["release_selection"]["status"],
+        "decision": summary["release_selection"]["decision"],
+        "selected_condition": summary["release_selection"]["selected_condition"],
+        "selection_authorized": True,
         "code": code,
         "elapsed_seconds": round(time.perf_counter() - started, 2),
         "network": "none",
@@ -421,6 +532,11 @@ def main() -> int:
         * len(args.seeds)
     )
     if args.validate:
+        binding = (
+            None
+            if bank is None or args.frozen_bank is None
+            else validate_frozen_bank_binding(args.frozen_bank, bank)
+        )
         print(
             json.dumps(
                 {
@@ -428,13 +544,17 @@ def main() -> int:
                     "status": "valid",
                     "primary_histories_per_condition": primary_histories,
                     "frozen_bank": None if bank is None else bank.bank_id,
-                    "selection_authorized": False,
+                    "selection_authorized": bool(
+                        binding and binding["execution"]["selection_authorized"]
+                    ),
                 }
             )
         )
         return 0
     if bank is None:
         raise SystemExit("--simulate requires --frozen-bank; no implicit LLM surrogate")
+    assert args.frozen_bank is not None
+    validate_frozen_bank_binding(args.frozen_bank, bank)
     days = 5 if args.smoke else args.days
     seeds = (args.seeds[0],) if args.smoke else tuple(args.seeds)
     summary = asyncio.run(

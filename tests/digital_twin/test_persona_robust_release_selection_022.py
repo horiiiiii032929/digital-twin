@@ -8,6 +8,7 @@ from pathlib import Path
 from scripts.run_governed_full_autonomy_v2_1_persona_robust_selection_022 import (
     _is_ablation_cell,
     run_case,
+    select_release_condition,
 )
 from src.digital_twin.evaluation.learner_simulator import (
     PERSONA_ROBUST_PERSONAS,
@@ -89,3 +90,72 @@ def test_missing_frozen_wording_is_explicitly_counted(tmp_path: Path) -> None:
         for item in result.truth.utterances
     )
     assert all(gates.values())
+
+
+def _condition_row(*, mastery: float) -> dict[str, object]:
+    return {
+        "worst_persona_final_mastery": mastery,
+        "final_hidden_mastery": mastery,
+        "follow_up_fraction": 0.5,
+        "wasted_rate": 0.1,
+        "attribution_accuracy": 1.0,
+        "messages_delivered": 1.0,
+        "provider_calls": 0.0,
+        "cost_usd": 0.0,
+        "hard_gates": {
+            "zero_quiet_hour_violations": True,
+            "zero_frequency_violations": True,
+            "zero_cooldown_violations": True,
+        },
+    }
+
+
+def test_release_selection_prefers_safe_stronger_worst_persona() -> None:
+    summary = {
+        "aggregate": {
+            "t0-grounded-control": _condition_row(mastery=0.60),
+            "t1-v2-autonomous": _condition_row(mastery=0.70),
+        }
+    }
+    decision = select_release_condition(summary, [])
+    assert decision["status"] == "completed-keep"
+    assert decision["selected_condition"] == "t1-v2-autonomous"
+
+
+def test_release_selection_excludes_observable_safety_failure() -> None:
+    summary = {
+        "aggregate": {
+            "t0-grounded-control": _condition_row(mastery=0.60),
+            "t1-v2-autonomous": _condition_row(mastery=0.90),
+        }
+    }
+    rows = [
+        {
+            "condition": "t1-v2-autonomous",
+            "case_id": "unsafe",
+            "gates": {"bounded-loop": False},
+        }
+    ]
+    decision = select_release_condition(summary, rows)
+    assert decision["selected_condition"] == "t0-grounded-control"
+    assert "t1-v2-autonomous" in decision["excluded_conditions"]
+
+
+def test_release_selection_refines_when_no_primary_condition_is_safe() -> None:
+    summary = {
+        "aggregate": {
+            "t0-grounded-control": _condition_row(mastery=0.60),
+            "t1-v2-autonomous": _condition_row(mastery=0.90),
+        }
+    }
+    rows = [
+        {
+            "condition": condition,
+            "case_id": condition,
+            "gates": {"restart-consistent": False},
+        }
+        for condition in ("t0-grounded-control", "t1-v2-autonomous")
+    ]
+    decision = select_release_condition(summary, rows)
+    assert decision["status"] == "completed-refine"
+    assert decision["selected_condition"] is None

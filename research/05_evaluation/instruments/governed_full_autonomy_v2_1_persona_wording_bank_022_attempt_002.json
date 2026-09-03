@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-wording-bank-022-attempt-002",
-  "status": "frozen-pending-execution",
+  "status": "completed-go-deeper-authorization-revoked",
   "owner_issue": 194,
   "predecessor": "governed-full-autonomy-v2-1-persona-wording-bank-022",
   "correction_scope": "add-required-provider-display-name-only",
@@ -34,8 +34,8 @@
     "requirements_per_batch": 24,
     "maximum_calls": 46,
     "maximum_cost_usd": 1.0,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "zero_retries": true,
     "exclusive_ledger_and_output": true,
     "resume_supported": true

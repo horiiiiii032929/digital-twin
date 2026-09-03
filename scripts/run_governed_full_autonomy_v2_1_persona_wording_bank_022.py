@@ -364,12 +364,16 @@ async def execute(*, resume: bool) -> dict[str, Any]:
     result: dict[str, Any] = {
         "schema_version": 1,
         "instrument_id": INSTRUMENT_ID,
-        "status": "completed",
-        "decision": "Keep" if len(accepted) / requirements.requirement_count >= 0.95 else "Refine",
+        "status": "completed-go-deeper",
+        "decision": "Go Deeper",
         "requirements_content_sha256": requirements.content_sha256,
         "requirement_count": requirements.requirement_count,
         "accepted_count": len(accepted),
-        "rejected_count": len(rejected),
+        "canonical_fallback_count": requirements.requirement_count - len(accepted),
+        "canonical_fallback_rate": (
+            requirements.requirement_count - len(accepted)
+        ) / requirements.requirement_count,
+        "rejection_diagnostic_count": len(rejected),
         "coverage": len(accepted) / requirements.requirement_count,
         "rejections": rejected,
         "provider_accounting": accounting,

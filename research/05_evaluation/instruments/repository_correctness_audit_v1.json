@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "6cfaaf91fe8b89806a725057d6d6fd2b90b6afade5ac825508fa0def77e01251"
+      "sha256": "a3cbba9de1f25b2b1ecc4f5396f7d706efb15bfc58aef0d04310dc024f1979d6"
     },
     {
       "audit_status": "audited",
@@ -11142,7 +11142,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "9bbad17466f39058b588b52ea4db1107fb5d25fce3363d85e652e96c89751765"
+      "sha256": "fd78841fe8ca371f4d5a2db650249d2c6a0c3470819ffae97308d43ad7d2c6af"
     },
     {
       "audit_status": "audited",
@@ -11153,7 +11153,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_robust_release_selection_022.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "56e7816d91a7729277146ae4358d82bf4b583dcfe00999d2ef074800a37a360a"
+      "sha256": "626c6e415524f705de183f0b8f6c61e5f080df6cebd2c39e92182d64aa084782"
     },
     {
       "audit_status": "audited",
@@ -11175,7 +11175,7 @@
       "path": "tests/digital_twin/test_persona_robust_release_selection_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "3c45fce5d13917fcc2d432b5b250d195775f0a9f2e736442ff76d608cc5ade4f"
+      "sha256": "a5470758b929bbd7960d3e7d8f5ff9f97805d87b0b089b2bbacac0f8f19294c9"
     },
     {
       "audit_status": "audited",
@@ -11219,7 +11219,7 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank audit",
-      "sha256": "7b11b6ccdb1e13f1657b81c56ace5e2d61f3e921ec12dc0e5197792dc5f44966"
+      "sha256": "8c82215e56b6774fc8baea6d868ce5058b166fac5ecef0b105ea62ed109a2c1c"
     },
     {
       "audit_status": "audited",
@@ -11230,7 +11230,7 @@
       "path": "tests/test_persona_wording_bank_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank audit",
-      "sha256": "ebaf5c3e910c7128f73f847ad5498daaa36c782658fe0dc396141ce0ff0de1c8"
+      "sha256": "f3b80fac7e00303787ab44bef6e3c3d16e54343708fc321d7fc75dc076c2d455"
     },
     {
       "audit_status": "audited",
@@ -11241,7 +11241,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022_attempt_002.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank invalid-run audit",
-      "sha256": "37202b0811fca2a91de0b69194a0a705f42d0f016a85fd4278d4cf8d3550a348"
+      "sha256": "247565861cefd998989e90e936e4dc65204204a64680c62524404e61563cc9b4"
     }
   ],
   "schema_version": 1
