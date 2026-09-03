@@ -1,6 +1,6 @@
 {
   "audit_status_counts": {
-    "audited": 1021
+    "audited": 1022
   },
   "category_counts": {
     "active_frontend": 71,
@@ -9,17 +9,17 @@
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 268,
+    "evaluation_configuration": 269,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
     "verification": 233
   },
-  "file_count": 1021,
+  "file_count": 1022,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "2b80e2a3a0f1f2dc09b4b73b0541ccea94dc8d80b69fb70589dfffc45cfdc594",
+  "record_sha256": "69ceeea5463f296a8028630c53538238c1414b154f226b709dc7a5f220434d7d",
   "records": [
     {
       "audit": {
@@ -4712,7 +4712,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Authorization review verifies an exact direct OpenAI snapshot, public-synthetic data boundary, 46-call and USD 1 ceilings, zero retries, immutable requirements binding, and one-time wording-only authority.",
+        "evidence": "Historical-attempt review records invalid attempt 001 with its authorization revoked; its omitted provider-display field remains inspectable and no quality interpretation is permitted.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-wording bank audit"
@@ -4723,7 +4723,23 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022.json",
       "risk": "high",
-      "sha256": "f87f5066f7ce6d8065d6e85861b60ea597cc3ba056be51b0b5924cbaeeba76a5"
+      "sha256": "d561ab9e90a98afdd6896849d5e0538ca19d66bc0f080c8a0408102a1edea9e4"
+    },
+    {
+      "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Harness-only successor review confirms the sole scientific change is the transport-required provider display name; requirements, prompt, model, gates, call ceiling, retry policy, and cost ceiling are unchanged.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-wording bank invalid-run audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022_attempt_002.json",
+      "risk": "high",
+      "sha256": "37202b0811fca2a91de0b69194a0a705f42d0f016a85fd4278d4cf8d3550a348"
     },
     {
       "audit": {
@@ -7625,7 +7641,7 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Freeze registry review covers both selection 022 and its provider-backed wording-bank entrypoint; only the 46-call wording-bank stage has a bounded one-time authorization.",
+        "evidence": "Freeze registry review covers selection 022 and its provider-backed wording-bank entrypoint; invalid attempt 001 is revoked and only harness-corrected attempt 002 has bounded authority.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -9745,7 +9761,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Runner review verifies exact ID-set matching, deterministic semantic quarantine, first-party model identity checks, non-stored structured output, atomic accounting, exclusive outputs, resume binding, and fail-closed authorization.",
+        "evidence": "Runner review verifies attempt-specific immutable paths, exact ID-set matching, semantic quarantine, first-party model identity checks, atomic accounting, resume binding, and fail-closed authorization.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-wording bank audit"
@@ -9761,7 +9777,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py",
       "risk": "high",
-      "sha256": "3725ece8855a12873fe85ea13f9b45b60ae7447bc08ef98bc2e86f1d8a2498fc"
+      "sha256": "7b11b6ccdb1e13f1657b81c56ace5e2d61f3e921ec12dc0e5197792dc5f44966"
     },
     {
       "audit": {
@@ -13116,7 +13132,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2c0a8acab766a19b7700ea233018f14be807e757bb815d15d2deb74ccd46ae4d"
+      "sha256": "6cfaaf91fe8b89806a725057d6d6fd2b90b6afade5ac825508fa0def77e01251"
     },
     {
       "audit": {
@@ -17200,7 +17216,7 @@
     }
   ],
   "risk_counts": {
-    "high": 774,
+    "high": 775,
     "medium": 247
   },
   "schema_version": 1,

@@ -46,15 +46,30 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 )
 
 
-INSTRUMENT_ID = "governed-full-autonomy-v2-1-persona-wording-bank-022"
-INSTRUMENT_PATH = ROOT / "research/05_evaluation/instruments" / (
-    "governed_full_autonomy_v2_1_persona_wording_bank_022.json"
-)
-OUTPUT_PATH = ROOT / "research/05_evaluation/datasets" / (
-    "governed-full-autonomy-v2-1-persona-wording-bank-022.json"
-)
-LEDGER_PATH = ROOT / "reports/generated" / f"{INSTRUMENT_ID}.sqlite3"
-RESULT_PATH = ROOT / "research/05_evaluation/records" / f"{INSTRUMENT_ID}.json"
+ATTEMPTS = ("001", "002")
+INSTRUMENT_ID = ""
+INSTRUMENT_PATH = Path()
+OUTPUT_PATH = Path()
+LEDGER_PATH = Path()
+RESULT_PATH = Path()
+
+
+def _select_attempt(attempt: str) -> None:
+    if attempt not in ATTEMPTS:
+        raise ValueError(f"unknown persona wording-bank attempt: {attempt}")
+    global INSTRUMENT_ID, INSTRUMENT_PATH, OUTPUT_PATH, LEDGER_PATH, RESULT_PATH
+    suffix = "" if attempt == "001" else "-attempt-002"
+    file_suffix = "" if attempt == "001" else "_attempt_002"
+    INSTRUMENT_ID = f"governed-full-autonomy-v2-1-persona-wording-bank-022{suffix}"
+    INSTRUMENT_PATH = ROOT / "research/05_evaluation/instruments" / (
+        f"governed_full_autonomy_v2_1_persona_wording_bank_022{file_suffix}.json"
+    )
+    OUTPUT_PATH = ROOT / "research/05_evaluation/datasets" / f"{INSTRUMENT_ID}.json"
+    LEDGER_PATH = ROOT / "reports/generated" / f"{INSTRUMENT_ID}.sqlite3"
+    RESULT_PATH = ROOT / "research/05_evaluation/records" / f"{INSTRUMENT_ID}.json"
+
+
+_select_attempt("002")
 
 
 class WordingRowV1(BaseModel):
@@ -376,7 +391,9 @@ def main() -> int:
     mode.add_argument("--preflight-live", action="store_true")
     mode.add_argument("--execute", action="store_true")
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument("--attempt", choices=ATTEMPTS, default="002")
     arguments = parser.parse_args()
+    _select_attempt(arguments.attempt)
     if arguments.execute:
         require_bounded_pilot_operation_allowed(
             INSTRUMENT_ID, "external_model_evaluation"

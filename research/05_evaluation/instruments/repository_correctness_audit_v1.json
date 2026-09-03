@@ -5065,7 +5065,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Freeze registry review covers both selection 022 and its provider-backed wording-bank entrypoint; only the 46-call wording-bank stage has a bounded one-time authorization.",
+      "evidence": "Freeze registry review covers selection 022 and its provider-backed wording-bank entrypoint; invalid attempt 001 is revoked and only harness-corrected attempt 002 has bounded authority.",
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "reviewed_at": "2026-09-03",
@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "2c0a8acab766a19b7700ea233018f14be807e757bb815d15d2deb74ccd46ae4d"
+      "sha256": "6cfaaf91fe8b89806a725057d6d6fd2b90b6afade5ac825508fa0def77e01251"
     },
     {
       "audit_status": "audited",
@@ -11203,23 +11203,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "persona-robust-release-selection",
-      "evidence": "Authorization review verifies an exact direct OpenAI snapshot, public-synthetic data boundary, 46-call and USD 1 ceilings, zero retries, immutable requirements binding, and one-time wording-only authority.",
+      "evidence": "Historical-attempt review records invalid attempt 001 with its authorization revoked; its omitted provider-display field remains inspectable and no quality interpretation is permitted.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank audit",
-      "sha256": "f87f5066f7ce6d8065d6e85861b60ea597cc3ba056be51b0b5924cbaeeba76a5"
+      "sha256": "d561ab9e90a98afdd6896849d5e0538ca19d66bc0f080c8a0408102a1edea9e4"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "persona-robust-release-selection",
-      "evidence": "Runner review verifies exact ID-set matching, deterministic semantic quarantine, first-party model identity checks, non-stored structured output, atomic accounting, exclusive outputs, resume binding, and fail-closed authorization.",
+      "evidence": "Runner review verifies attempt-specific immutable paths, exact ID-set matching, semantic quarantine, first-party model identity checks, atomic accounting, resume binding, and fail-closed authorization.",
       "findings": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank audit",
-      "sha256": "3725ece8855a12873fe85ea13f9b45b60ae7447bc08ef98bc2e86f1d8a2498fc"
+      "sha256": "7b11b6ccdb1e13f1657b81c56ace5e2d61f3e921ec12dc0e5197792dc5f44966"
     },
     {
       "audit_status": "audited",
@@ -11231,6 +11231,17 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank audit",
       "sha256": "ebaf5c3e910c7128f73f847ad5498daaa36c782658fe0dc396141ce0ff0de1c8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-release-selection",
+      "evidence": "Harness-only successor review confirms the sole scientific change is the transport-required provider display name; requirements, prompt, model, gates, call ceiling, retry policy, and cost ceiling are unchanged.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_wording_bank_022_attempt_002.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex persona-wording bank invalid-run audit",
+      "sha256": "37202b0811fca2a91de0b69194a0a705f42d0f016a85fd4278d4cf8d3550a348"
     }
   ],
   "schema_version": 1

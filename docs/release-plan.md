@@ -22,6 +22,13 @@ grounding, worst-persona robustness, autonomous utility, notification burden,
 latency, and cost before one fresh confirmation. The current runner makes no
 external calls and makes no release claim.
 
+The 1,104 required wording frames are now frozen from 78 network-free
+actual-product discovery histories. Wording-bank attempt 001 is immutable
+`invalid-execution` evidence after a missing transport binding field stopped
+the first request before any wording was accepted. Harness-only attempt 002
+adds that field with unchanged prompts, requirements, model, gates, and cost
+ceiling. The persona comparison and release decision remain unopened.
+
 Issue #190 prospectively closes `SE7-11` at clean implementation revision
 `9f09ea3`. Structured request intent now requires both an assessed artifact and
 an explicit submission-ready completion request before graded-work redirect;

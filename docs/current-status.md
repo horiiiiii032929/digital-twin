@@ -39,6 +39,15 @@ the same histories; T1-v2 reactive is an 18-history balanced ablation. The
 runner is network-free and cannot select a release until a real frozen wording
 bank is generated, hash-bound, and the comparison is prospectively frozen.
 
+The network-free discovery now froze 1,104 semantic-keyed public utterance
+frames from 78 actual-product histories. Wording-bank attempt 001 stopped on
+its first request because the binding omitted the transport-required
+`provider_display_name`; no output was accepted and no quality conclusion was
+made. The failure is registered as immutable invalid evidence. Attempt 002
+changes only that binding field, uses a new exclusive ledger/output path, and
+is frozen for the same 46 calls, zero retries, exact GPT-5.4 nano snapshot, and
+USD 1 ceiling. Selection 022 itself remains unexecuted and unselected.
+
 Issue #190 now contains the prospective `SE7-11` correction. Clean revision
 `9f09ea3` introduces `DeterministicActionRouterV3`, which separately detects an
 assessed artifact and a submission-ready completion request. This preserves the
