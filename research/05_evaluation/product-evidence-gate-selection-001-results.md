@@ -38,8 +38,39 @@ Pre-registered checks:
 - operational failures not worse: **passed**
 - fully grounded factual success strictly better: **failed**
 
-All three arms score `completed-refine`; none clears the registered release
-gates on this corpus.
+All arms score `completed-refine`; none clears the registered release gates on
+this corpus.
+
+### What these absolute figures do and do not measure
+
+They rank the arms. They do not measure the product's grounding quality.
+
+The development source package supplies **cluster-level** spans while the
+development gold expects **sentence-level sub-spans**. The product cites the
+whole cluster it was handed, so on all 235 correctly answered cases the
+citation and atomic-claim scores are exactly `0.0`, while `answer_span_recall`
+averages **0.9234** with **217 of 235** perfect. The system is quoting the right
+text and being scored zero for quoting too much of it.
+
+Every arm saw the identical corpus and gold, so this ceiling applies equally and
+the ranking stands. The figures themselves are held down by it and must not be
+read as grounding quality.
+
+The sealed 10,000-case regression is not affected: its corpus is in region
+format, 3,816 regions for 2,000 clusters, so its 25.38% is measured against
+matching granularity.
+
+### Where the incumbent actually loses
+
+| Bucket | Cases | Nature |
+| --- | --- | --- |
+| Refused although answerable | **165 of 400** (99 abstain, 66 clarify) | A real product weakness |
+| Answered but not scored as grounded | 235 of 235 | The granularity ceiling above |
+| Boundary refusals | 25/25 correct | Already sound |
+| Boundary abstentions | 44/50 correct | Already sound |
+
+Safety is not the problem. The loss is concentrated in declining questions the
+system could answer.
 
 ## Why this instrument existed
 
