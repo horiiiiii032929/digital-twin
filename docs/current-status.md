@@ -27,6 +27,18 @@ a hard exclusion; among safe candidates the release choice prioritizes
 grounding, worst-persona behavior, intervention utility, notification burden,
 latency, and cost rather than selecting the first threshold pass.
 
+Issue #194 owns the build-only successor
+`governed-full-autonomy-v2-1-persona-robust-release-selection-022`. It preserves
+the historical simulator and adds six prospectively named personas, a separate
+seeded wording random stream, an immutable LLM-role-play bank contract,
+semantic validation, explicit canonical fallback accounting, realization
+slices, and worst-persona reporting. The 54 persona/wording/seed configurations
+are each repeated under two independently specified transition families, for
+108 paired histories per primary condition. T0 and T1-v2 autonomous receive
+the same histories; T1-v2 reactive is an 18-history balanced ablation. The
+runner is network-free and cannot select a release until a real frozen wording
+bank is generated, hash-bound, and the comparison is prospectively frozen.
+
 Issue #190 now contains the prospective `SE7-11` correction. Clean revision
 `9f09ea3` introduces `DeterministicActionRouterV3`, which separately detects an
 assessed artifact and a submission-ready completion request. This preserves the

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1011
+    "audited": 1016
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 255,
-    "active_runtime": 160,
+    "active_or_unclassified_tooling": 256,
+    "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 266,
+    "evaluation_configuration": 267,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 229
+    "verification": 231
   },
-  "file_count": 1011,
+  "file_count": 1016,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "645d9a81a970999df4eedf006b854a625440e0011d2e5ba829de83438e2d2eba",
+  "record_sha256": "76f2bde5494c5dbe61fcedb89221474bdd069763916df5b51a2943a6681721f1",
   "records": [
     {
       "audit": {
@@ -1415,11 +1415,11 @@
     },
     {
       "audit": {
-        "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "domain": "persona-robust-release-selection",
+        "evidence": "Package command review verifies the successor 022 validator and simulator are explicit entrypoints while historical commands remain unchanged.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-11 root-cause and confirmation audit"
+        "reviewer": "Codex persona-robust evaluation audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "acc77333c855ea202d65570b278fad8dc34d00e41c64a937eac89c3e9d8a4fe4"
+      "sha256": "ec2d38cd02220547422ad0183667c899325ea99e025a2205564fd93d73314332"
     },
     {
       "audit": {
@@ -4695,6 +4695,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Instrument review verifies prospective matrix, model role, hard exclusions, ranking, tie rule, progression, and external-validity limitations are frozen before execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-robust evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_robust_release_selection_022.json",
+      "risk": "high",
+      "sha256": "56e7816d91a7729277146ae4358d82bf4b583dcfe00999d2ef074800a37a360a"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Prospective instrument and machine-record review plus network-free validation and seven-day simulation; Program 011 sealed data remained unopened and provider use was zero.",
         "findings": [],
@@ -5799,8 +5815,8 @@
     },
     {
       "audit": {
-        "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "domain": "repository-execution-freeze",
+        "evidence": "Manual registry review added the persona-robust selection entrypoint to the authoritative freeze coverage set; focused freeze tests cover the changed boundary.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -9675,6 +9691,25 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, and no release selection from build evidence.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-robust evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:governed-autonomy-v2-1-persona-robust-selection-022",
+        "validate:governed-autonomy-v2-1-persona-robust-selection-022"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py",
+      "risk": "high",
+      "sha256": "dbecab13a3f14f169a7d2effc43c3016bdae25fb3fa1a7b6cba7f3b05fdc0f47"
+    },
+    {
+      "audit": {
         "domain": "structured-request-intent-release-correction",
         "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
         "findings": [],
@@ -11543,10 +11578,10 @@
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Manual driver review and focused tests verified event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and bounded closed-loop execution through the public adapter contract.",
+        "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and explicit response-realization provenance through the public adapter contract.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex persona-robust evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11554,15 +11589,15 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_learner_driver.py",
       "risk": "high",
-      "sha256": "37ffa0f27c77649cd8cb1bc84fcf22480ee506a6e1fb1bdb19b0e3ef0723b3dd"
+      "sha256": "c41de273bc4a3f6877150ee3d49bb77a496a4b28708dc9b3e65f4248f5baa8ef"
     },
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Manual scorer review and focused tests verified independent calculation of attribution, assessment, calibration, proactive, timing, restart, and failure metrics without trusting product-reported invariant flags.",
+        "evidence": "Scorer review verifies independent attribution, assessment, calibration, proactive, timing, restart, wording-fallback, realization-slice, and worst-persona metrics without trusting product-reported invariant flags.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex persona-robust evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11570,7 +11605,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_learning_scoring.py",
       "risk": "high",
-      "sha256": "0c3fefcf7d0ea4d2e36e9b2ccd904d8ed973b8ed5c7e1bc2c05770e859249fc0"
+      "sha256": "5490742d50b5e0c94ab608adbac09984aabdbbf0740ea878118b18bcef020bc2"
     },
     {
       "audit": {
@@ -11911,10 +11946,10 @@
     {
       "audit": {
         "domain": "successor-architecture-simulation",
-        "evidence": "Manual simulator review and focused tests verified seed determinism, six persona bounds, two distinct transition families, hidden-state isolation, receptivity/crowd-out behavior, and monotonic time advancement.",
+        "evidence": "Simulator review verifies historical personas remain unchanged, successor persona parameters are bounded, misconception persistence is persona-configurable, and hidden-state dynamics retain independent seeded transition families.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex persona-robust evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -11922,7 +11957,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/learner_simulator.py",
       "risk": "high",
-      "sha256": "b9e75f249533a9e37d40688e7cca12506d96012fc29fe4af6c89eaf2854e9413"
+      "sha256": "00614f1ed54820ae6ea8d8b1891692a8ba72b4f1f17b2f4b95f25ae66fb44967"
     },
     {
       "audit": {
@@ -12071,10 +12106,10 @@
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Manual learner review and focused tests verified deterministic text realization from hidden state, no hidden parameter leakage to the product adapter, bounded response generation, and stable event provenance.",
+        "evidence": "Historical learner review verifies added provenance defaults preserve V1 deterministic realization and do not expose hidden parameters to the product adapter.",
         "findings": [],
         "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-study integration audit"
+        "reviewer": "Codex persona-robust evaluation audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12082,7 +12117,23 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/simulated_learner_v1.py",
       "risk": "high",
-      "sha256": "68119305b986deb3cc7c43a1d7aae3b32a685ccad6fbeb5cf3a8b3b4ac69eb65"
+      "sha256": "1c2eaca34ce23816f0ad09943f28fd512226017955b985713c270b28dfa054d9"
+    },
+    {
+      "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Manual contract review and focused tests verify independent realization RNG, deterministic hidden dynamics, immutable unique bank keys, semantic validation, and explicit canonical fallback lineage.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-robust evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/simulated_learner_v2.py",
+      "risk": "high",
+      "sha256": "49ac3a6739d071105f4a932a0f4ef6fd715ee5c75b16b5e33f39d793ffc40001"
     },
     {
       "audit": {
@@ -13002,7 +13053,7 @@
         "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-11 root-cause and confirmation audit"
+        "reviewer": "Codex persona-robust selection freeze audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13010,7 +13061,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "2dbf9c817d32b7138c947a6aeb95a2de988a1451b6bddbd4e865bc5be9ee4248"
+      "sha256": "679d556bc38fc576c0e29e1a5e000d3b1ebc7724086965d6b084c5e902a1befd"
     },
     {
       "audit": {
@@ -13798,6 +13849,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Focused runner tests verify the exact balanced ablation, real product boundary execution, zero-call observable safety gates, wording provenance, and complete fallback accounting.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-robust evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_persona_robust_release_selection_022.py",
+      "risk": "medium",
+      "sha256": "3c45fce5d13917fcc2d432b5b250d195775f0a9f2e736442ff76d608cc5ade4f"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Focused tests cover deterministic query planning, bounded subqueries, stable reciprocal-rank fusion, empty-query handling, and complete unique retrieval output.",
         "findings": [],
@@ -13987,6 +14054,22 @@
       "path": "tests/digital_twin/test_semantic_target_resolution.py",
       "risk": "medium",
       "sha256": "c93500022eca9990101321a7333e3e18c1491b17fa2064f7449172a3bfd68eaf"
+    },
+    {
+      "audit": {
+        "domain": "persona-robust-release-selection",
+        "evidence": "Focused tests verify deterministic hidden-state equivalence across wording methods, reproducible templates, accepted and rejected bank entries, explicit missing-entry fallback, and duplicate-key rejection.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex persona-robust evaluation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_simulated_learner_v2.py",
+      "risk": "medium",
+      "sha256": "832340ce9f3d3a254983e729b12e95ae74c8a6cacae751e5bc7671d1192b4b6e"
     },
     {
       "audit": {
@@ -17030,8 +17113,8 @@
     }
   ],
   "risk_counts": {
-    "high": 768,
-    "medium": 243
+    "high": 771,
+    "medium": 245
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

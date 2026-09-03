@@ -44,6 +44,7 @@ class LearnerPersona:
     receptivity_probability: float
     crowd_out_days: int
     initial_mastery_mean: float
+    misconception_correction_probability: float = 0.60
 
 
 PERSONAS: tuple[LearnerPersona, ...] = (
@@ -53,6 +54,19 @@ PERSONAS: tuple[LearnerPersona, ...] = (
     LearnerPersona("misconception-prone", 0.25, 0.03, 0.55, 0.50, 0.70, 2, 0.30),
     LearnerPersona("answer-seeking", 0.20, 0.04, 0.20, 0.70, 0.60, 2, 0.30),
     LearnerPersona("low-receptivity", 0.30, 0.03, 0.15, 0.35, 0.30, 4, 0.35),
+)
+
+# Successor personas for the prospective persona-robust release comparison.
+# Keep PERSONAS unchanged: it is part of historical programs 009/014.
+PERSONA_ROBUST_PERSONAS: tuple[LearnerPersona, ...] = (
+    LearnerPersona("typical-engaged", 0.32, 0.03, 0.12, 0.65, 0.78, 1, 0.35),
+    LearnerPersona("beginner", 0.18, 0.04, 0.28, 0.55, 0.76, 2, 0.12),
+    LearnerPersona("overconfident", 0.24, 0.04, 0.45, 0.72, 0.62, 2, 0.32),
+    LearnerPersona("low-engagement", 0.24, 0.04, 0.22, 0.16, 0.48, 3, 0.28),
+    LearnerPersona(
+        "entrenched-misconception", 0.16, 0.03, 0.78, 0.52, 0.58, 3, 0.25, 0.15
+    ),
+    LearnerPersona("notification-ignoring", 0.28, 0.03, 0.18, 0.46, 0.05, 5, 0.33),
 )
 
 DEFAULT_CONCEPTS: tuple[str, ...] = tuple(f"concept-{index:02d}" for index in range(1, 9))
@@ -162,7 +176,7 @@ class LearnerSimulator:
             self.state.receptivity_blocked_until_day = self.day + self.persona.crowd_out_days
             return None
         if move is MoveKind.CORRECTIVE_FEEDBACK and concept.misconception:
-            if self._random.random() < 0.6:
+            if self._random.random() < self.persona.misconception_correction_probability:
                 concept.misconception = False
         return self._attempt(concept_id, prompted=True)
 

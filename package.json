@@ -263,6 +263,8 @@
     "preflight:governed-autonomy-v2-1-actual-product-confirmation-021": "uv run python -m scripts.run_governed_full_autonomy_v2_1_actual_product_confirmation_021 --preflight",
     "execute:governed-autonomy-v2-1-actual-product-confirmation-021": "uv run python -m scripts.run_governed_full_autonomy_v2_1_actual_product_confirmation_021 --execute",
     "resume:governed-autonomy-v2-1-actual-product-confirmation-021": "uv run python -m scripts.run_governed_full_autonomy_v2_1_actual_product_confirmation_021 --execute --resume",
+    "validate:governed-autonomy-v2-1-persona-robust-selection-022": "uv run python -m scripts.run_governed_full_autonomy_v2_1_persona_robust_selection_022 --validate",
+    "simulate:governed-autonomy-v2-1-persona-robust-selection-022": "uv run python -m scripts.run_governed_full_autonomy_v2_1_persona_robust_selection_022 --simulate",
     "execute:governed-autonomy-v2-1-cross-engine-evaluation-010": "uv run python -m scripts.run_governed_full_autonomy_v2_1_cross_engine_evaluation_010 --execute",
     "resume:governed-autonomy-v2-1-cross-engine-evaluation-010": "uv run python -m scripts.run_governed_full_autonomy_v2_1_cross_engine_evaluation_010 --execute --resume",
     "validate:autonomous-long-run-001": "uv run python -m scripts.run_course_digital_twin_autonomous_long_run_001 --validate",

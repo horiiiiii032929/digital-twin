@@ -55,6 +55,9 @@ class HiddenUtteranceRecord:
     hidden_correct: bool | None
     prompted: bool
     product_action: str | None
+    realization_method: str = "deterministic-semantic-frame"
+    realization_source: str = "canonical"
+    realization_fallback_reason: str | None = None
 
 
 @dataclass
@@ -84,6 +87,7 @@ class HiddenStateTruthV1:
     family: str
     seed: int
     concept_ids: list[str]
+    response_realization_method: str = "deterministic-semantic-frame"
     utterances: list[HiddenUtteranceRecord] = field(default_factory=list)
     deliveries: list[HiddenDeliveryRecord] = field(default_factory=list)
     days: list[HiddenDaySnapshot] = field(default_factory=list)
@@ -119,6 +123,9 @@ async def run_hidden_state_learner_case(
         family=str(learner.family),
         seed=learner.seed,
         concept_ids=[card.concept_id for card in learner.cards],
+        response_realization_method=str(
+            getattr(learner, "realization_method", "deterministic-semantic-frame")
+        ),
     )
     await adapter.reset(case)
     elapsed = 0
@@ -153,6 +160,9 @@ async def run_hidden_state_learner_case(
                 hidden_correct=utterance.hidden_correct,
                 prompted=utterance.prompted,
                 product_action=action.action if action is not None else None,
+                realization_method=utterance.realization_method,
+                realization_source=utterance.realization_source,
+                realization_fallback_reason=utterance.realization_fallback_reason,
             )
         )
 

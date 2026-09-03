@@ -42,7 +42,9 @@ The primary design uses six hidden-state personas:
 - notification ignoring.
 
 Each persona is exercised through three response-realization methods and three
-registered seeds, producing 54 base learner histories:
+registered seeds, producing 54 base configurations. Every configuration is run
+once with each of the two independently specified transition families, giving
+108 paired learner histories without confounding wording with learner dynamics:
 
 - deterministic semantic frames;
 - seeded stochastic templates;

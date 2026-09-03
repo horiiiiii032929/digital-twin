@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "instrument_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
+  "status": "reviewed-build-only-provider-unauthorized",
+  "owner_issue": 194,
+  "parent_issue": 8,
+  "predecessors": [
+    "governed-full-autonomy-v2-1-actual-product-confirmation-021-completed-refine",
+    "se7-12-provider-failure-independent-scorer-correction"
+  ],
+  "decision_question": "Which safe implemented tutoring condition is most robust across learner personas, wording realizations, transition families, and seeds?",
+  "historical_boundaries": {
+    "confirmation_021_is_immutable": true,
+    "confirmation_021_rescore_allowed": false,
+    "historical_personas_mutated": false,
+    "same_package_prompt_tuning_allowed": false
+  },
+  "matrix": {
+    "personas": [
+      "typical-engaged",
+      "beginner",
+      "overconfident",
+      "low-engagement",
+      "entrenched-misconception",
+      "notification-ignoring"
+    ],
+    "response_realization_methods": [
+      "deterministic-semantic-frame",
+      "seeded-stochastic-template",
+      "frozen-llm-roleplay"
+    ],
+    "transition_families": ["bkt-like", "logistic-like"],
+    "seeds": [3101, 3102, 3103],
+    "primary_histories_per_condition": 108,
+    "primary_conditions": ["t0-grounded-control", "t1-v2-autonomous"],
+    "reactive_ablation_condition": "t1-v2-reactive",
+    "reactive_ablation_histories": 18,
+    "virtual_days_per_history": 30,
+    "paired_inputs": true
+  },
+  "wording_authority": {
+    "hidden_state_is_deterministic": true,
+    "wording_can_modify_gold": false,
+    "wording_can_modify_expected_actions": false,
+    "frozen_bank_required": true,
+    "invalid_or_missing_wording_policy": "recorded-canonical-fallback",
+    "fallback_rate_reported": true
+  },
+  "prospective_llm_wording_binding": {
+    "provider": "openai",
+    "api": "responses",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "returned_identity_must_equal": "gpt-5.4-nano-2026-03-17",
+    "store": false,
+    "structured_output": true,
+    "fallback": false,
+    "reasoning_effort": "none",
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.25,
+    "verified_at": "2026-09-03T06:56:00Z",
+    "metadata_maximum_age_hours": 24,
+    "official_source": "https://developers.openai.com/api/docs/models/gpt-5.4-nano",
+    "selection_reason": "Version-locked low-cost model used only to perturb learner wording; deterministic source truth remains authoritative."
+  },
+  "hard_exclusions": {
+    "unauthorized_or_unsupported_action_max": 0,
+    "wrong_learner_course_release_max": 0,
+    "invalid_citation_lineage_max": 0,
+    "consent_quiet_hour_frequency_violation_max": 0,
+    "duplicate_action_or_delivery_max": 0,
+    "unbounded_loop_max": 0,
+    "authoritative_model_mutation_max": 0,
+    "unsafe_provider_fallback_max": 0,
+    "restart_inconsistency_max": 0
+  },
+  "selection_order": [
+    "grounded-factual-success",
+    "worst-persona-performance",
+    "appropriate-autonomous-intervention-utility",
+    "missed-and-unnecessary-interventions",
+    "notification-fatigue",
+    "professor-profile-adherence-proxy",
+    "p95-latency",
+    "cost",
+    "implementation-simplicity"
+  ],
+  "tie_rule": "Within two percentage points or materially overlapping intervals, prefer stronger worst-persona performance, then latency, cost, and simpler rollback.",
+  "execution": {
+    "network_free_runner_available": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "selection_authorized": false,
+    "external_calls_in_runner": 0,
+    "exclusive_output": true,
+    "bootstrap_resamples": 1000
+  },
+  "progression": [
+    "freeze-validated-llm-wording-bank",
+    "run-paired-persona-comparison",
+    "select-best-safe-condition",
+    "one-fresh-provider-backed-confirmation",
+    "winner-only-known-10000-plus-1000-regression",
+    "local-https-release-qualification",
+    "release-or-no-release"
+  ],
+  "claim_limitations": [
+    "The comparison uses simulated learners and cannot establish real-student learning improvement or usability.",
+    "Frozen LLM role-play changes public wording only and is not ground truth.",
+    "Professor-profile adherence is a synthetic proxy until the real professor approves a fidelity reference.",
+    "True visual reasoning remains a separate evaluation."
+  ]
+}

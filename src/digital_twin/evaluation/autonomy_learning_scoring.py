@@ -11,7 +11,7 @@ import statistics
 from datetime import datetime, timedelta
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from src.digital_twin.evaluation.autonomy_contract import AutonomyEvaluationResponseV1
 from src.digital_twin.evaluation.autonomy_learner_driver import HiddenStateTruthV1
@@ -34,6 +34,8 @@ class HiddenStateCaseScoreV1(BaseModel):
     persona: str
     family: str
     seed: int
+    response_realization_method: str = "deterministic-semantic-frame"
+    realization_fallback_rate: float = Field(default=0.0, ge=0, le=1)
     # perception
     attempt_turns: int
     attribution_accuracy: float | None
@@ -135,6 +137,16 @@ def score_hidden_state_case(
         persona=truth.persona,
         family=truth.family,
         seed=truth.seed,
+        response_realization_method=truth.response_realization_method,
+        realization_fallback_rate=(
+            sum(
+                item.realization_source == "canonical-fallback"
+                for item in truth.utterances
+            )
+            / len(truth.utterances)
+            if truth.utterances
+            else 0.0
+        ),
         attempt_turns=len(attempts),
         attribution_accuracy=_mean_bool(attribution_hits),
         assessment_agreement=_mean_bool(assessment_hits),
@@ -179,6 +191,7 @@ SUMMARY_METRICS: tuple[str, ...] = (
     "concepts_mastered_final",
     "provider_calls",
     "cost_usd",
+    "realization_fallback_rate",
 )
 
 CONTRAST_METRICS: tuple[str, ...] = (
@@ -211,6 +224,29 @@ def summarize_hidden_state_scores(
             subset = [item for item in items if item.family == family]
             row[f"mse_vs_hidden[{family}]"] = _mean_or_none([i.mse_vs_hidden for i in subset])
             row[f"wasted_rate[{family}]"] = _mean_or_none([i.wasted_rate for i in subset])
+        row["worst_persona_final_mastery"] = min(
+            statistics.fmean(i.final_hidden_mastery for i in items if i.persona == persona)
+            for persona in {i.persona for i in items}
+        )
+        row["realization_slices"] = {
+            method: {
+                "n_cases": len(subset),
+                "attribution_accuracy": _mean_or_none(
+                    [item.attribution_accuracy for item in subset]
+                ),
+                "assessment_agreement": _mean_or_none(
+                    [item.assessment_agreement for item in subset]
+                ),
+                "final_hidden_mastery": statistics.fmean(
+                    item.final_hidden_mastery for item in subset
+                ),
+                "realization_fallback_rate": statistics.fmean(
+                    item.realization_fallback_rate for item in subset
+                ),
+            }
+            for method in sorted({item.response_realization_method for item in items})
+            for subset in [[i for i in items if i.response_realization_method == method]]
+        }
         row["hard_gates"] = {
             "zero_quiet_hour_violations": all(i.quiet_hour_violations == 0 for i in items),
             "zero_frequency_violations": all(i.frequency_violations == 0 for i in items),
@@ -226,7 +262,12 @@ def summarize_hidden_state_scores(
                 by_condition[candidate],
                 by_condition[control],
                 value=lambda item, m=metric: getattr(item, m),
-                key=lambda item: (item.family, item.persona, item.seed),
+                key=lambda item: (
+                    item.family,
+                    item.persona,
+                    item.seed,
+                    item.response_realization_method,
+                ),
                 resamples=resamples,
                 seed=f"hidden-state:{metric}:{candidate}:{control}",
             )
