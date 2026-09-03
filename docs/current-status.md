@@ -8,6 +8,21 @@ remain authoritative for the historical runs and claims they document.
 
 ## H+E1 whole-system confirmation and grounding successor
 
+Fresh confirmation 018 is now build-qualified on a source- and wording-disjoint
+820-case package using source families 351–400. The actual-product network-free
+run passed 820/820 reference actions and safety contracts across T0, T1-v1,
+T1-v2 reactive, and T1-v2 autonomous, including 220 proactive cases. The new
+runner independently requires a direct Luna transport/identity canary, a
+reactive product-route canary, and an autonomous product-route canary before
+bulk execution. A failure at any canary produces zero bulk cases and keeps
+hidden gold closed.
+
+The complete clean-revision gate passed 1,712 Python tests, 50 frontend tests,
+lint, TypeScript, and production build. Repository correctness is 998/998 and
+execution-freeze coverage is 155/155 with zero open findings. Confirmation 018
+remains provider-unauthorized at this build checkpoint; it is not release
+evidence until the separately frozen paid run completes validly.
+
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen
 preregistered aggregate safety/autonomy gates: zero unauthorized actions,

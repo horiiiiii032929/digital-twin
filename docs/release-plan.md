@@ -97,6 +97,14 @@ work is isolated in [#186](https://github.com/horiiiiii032929/digital-twin/issue
 #184 terminates with the audit findings closed and a `Refine / No Release`
 decision.
 
+The #186 successor is now finite and build-qualified as confirmation 018. Its
+fresh 820-case actual-product package passed the complete network-free contract,
+and the runner separates the direct provider transport proof from reactive and
+autonomous product-route canaries. The next release decision is one bounded
+provider-backed execution after a clean authorization commit and no-call
+preflight. Until that result is valid, T0 and bounded T1-v1 remain the selected
+controls and no H+E1/V3 release claim is permitted.
+
 ## Release goal
 
 Ship an invite-only Course Digital Twin that a professor can configure, review,
