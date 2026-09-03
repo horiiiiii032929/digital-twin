@@ -197,12 +197,14 @@ from src.digital_twin.grounding.semantic_evidence_atoms import (
 )
 from src.digital_twin.grounding.ambiguity_safe_evidence import (
     AmbiguitySafeEvidenceGateV1,
+    DominanceScopedAmbiguitySafeEvidenceGateV3,
 )
 
 
 __all__ = [
     "AnyHitEvidenceGate",
     "AmbiguitySafeEvidenceGateV1",
+    "DominanceScopedAmbiguitySafeEvidenceGateV3",
     "ApiRetrievalIndexBindingV2",
     "ApiRetrievalIndexManifestV2",
     "AtomicAnswerClaim",

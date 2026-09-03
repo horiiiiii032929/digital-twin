@@ -300,6 +300,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/recover_governed_full_autonomy_confirmation_score.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_product_evidence_gate_selection_003.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_product_evidence_gate_selection_002.py": (
             "method_evaluation_execution",
         ),
@@ -668,6 +671,9 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "product-evidence-gate-selection-002": (
+            "method_evaluation_execution",
+        ),
+        "product-evidence-gate-selection-003": (
             "method_evaluation_execution",
         ),
         # Issue #198. Deterministic re-materialization of the committed

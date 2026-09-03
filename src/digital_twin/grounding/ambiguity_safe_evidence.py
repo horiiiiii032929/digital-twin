@@ -36,6 +36,10 @@ class AmbiguitySafeEvidenceGateV1:
         self.minimum_target_coverage = minimum_target_coverage
         self.evidence_limit = evidence_limit
 
+    # V1 contests every candidate that clears the coverage threshold. The
+    # successor below narrows that to the candidates which tie the leader.
+    dominance_scoped = False
+
     def assess(
         self,
         query: str,
@@ -60,6 +64,7 @@ class AmbiguitySafeEvidenceGateV1:
                 query,
                 [row.chunk for row in bounded],
                 minimum_target_coverage=self.minimum_target_coverage,
+                dominance_scoped=self.dominance_scoped,
             )
             if uniqueness.status == "ambiguous":
                 return EvidenceSufficiencyDecision(
@@ -79,3 +84,25 @@ class AmbiguitySafeEvidenceGateV1:
 
 
 __all__ = ["AmbiguitySafeEvidenceGateV1"]
+
+
+class DominanceScopedAmbiguitySafeEvidenceGateV3(AmbiguitySafeEvidenceGateV1):
+    """Contest only the candidates that actually tie the leading coverage.
+
+    V1 lets any candidate clearing the coverage threshold veto a target, so a
+    strictly weaker passage carrying a different canonical claim refuses a
+    question its leading passage answers outright. Measured on 263 ambiguous
+    targets at region granularity, 76 had a strictly dominant leader and in all
+    76 that leader was the region the gold cites.
+
+    The remaining 187 are genuine ties and stay refused. Gold sits inside the
+    tied leader set in 184 of them, but no available secondary measure
+    separates it reliably -- the best isolates gold in 105 and picks a wrong
+    region in 61 -- so resolving ties would buy coverage with unsupported
+    releases. This gate declines that trade and keeps V1's fail-closed
+    behaviour wherever the tie is real.
+    """
+
+    implementation_id = "dominance-scoped-ambiguity-safe-v3"
+    version = "v3"
+    dominance_scoped = True
