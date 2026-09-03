@@ -1,12 +1,101 @@
 # Course Digital Twin release plan
 
-Status date: 2026-09-02
+Status date: 2026-09-03
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
+
+## Current audit-safe release boundary
+
+`main-commit-audit-resolution-001` supersedes the earlier governed V2.1 release
+selection. It closes all published audit findings, repairs the shared runtime,
+and revokes confirmation 013 and its local qualification as current selection
+evidence because of post-hoc gold changes, provenance defects, and a profile
+mismatch. The active local configuration is therefore bounded T1-v1 with
+deterministic T0 rollback.
+
+The next release decision is issue #184: compare architectures A/B/C (plus the
+verifier-only ablation) on one fresh black-box evaluation contract, then compare
+economical planner/generator allocations only for the best two architectures.
+The common fixes are frozen before comparison. No architecture is promoted from
+the audit closure itself, and the historical 011–013 data are not reused for
+selection.
+
+The comparison is now implemented as one runtime rather than four unrelated
+systems. Disabling semantic planning recovers A; setting lookahead to zero
+recovers B; positive bounded lookahead enables C; a second reject-only call
+creates C+V. This makes architecture and engine effects identifiable while all
+deterministic safety and grounding authorities remain fixed. The build-only
+instrument is `successor-architecture-paired-comparison-001`; it freezes the
+E1–E4 Luna/Terra/GPT-5.4-Mini allocations, three finite development folds, one
+fresh 1,000-case confirmation, the labelled known 10,000+1,000 regression, the
+820-case autonomy portfolio, and local product qualification. Passing a
+network-free harness does not select a release.
+
+Build result `successor-architecture-paired-comparison-001-build-001` passed
+all 48 network-free governed-graph cells. This qualifies the comparison
+boundary, not any architecture or engine. Repository correctness is 959/959
+audited, and the dependency advisory discovered during qualification is closed
+with a zero-vulnerability npm audit.
+
+The first provider-backed fold did not produce architecture evidence: both
+fold-001 executions are preserved as invalid, with gold unopened, after the
+batch response contract failed. The prospective successor now uses a fresh
+150-case fold and a one-case strict response contract. Revision `37ab445` is
+build-qualified with 965/965 audited files, 1,656 Python and 50 frontend tests,
+and zero dependency advisories. A single case-level model failure will be
+scored through the actual governed fallback; only execution-integrity failures
+invalidate the run. The successor remains provider-unauthorized and selects no
+release architecture until its finite result is published.
+
+The architecture track has now advanced beyond that earlier checkpoint.
+Fresh Fold 004 and the independent 1,000-case Confirmation 005 selected
+guarded policy-value H for engine allocation, not for release. The fixed-H
+successor `successor-architecture-engine-comparison-006-001` compared E1–E4
+over 300 new scenario clusters and selected economical E1 (Luna planner and
+Luna bounded response-strategy generator). Neither the Terra planner nor
+GPT-5.4 Mini generator factor had a positive lower 95% paired-effect bound;
+E2 also missed its completion gate. The run cost USD 1.266516 and its authority
+is revoked.
+
+Post-run finding `SE6-6` identified mixed wall/virtual trace timestamps in all
+1,200 historical cells. The timestamps did not affect selection, and the
+shared runtime contract is corrected before confirmation. This component result
+selects H+E1 only for fresh whole-system confirmation; it does not authorize a
+release.
+
+The selected candidate is now implemented in the actual API factory and the
+flow-independent actual-product runtime. The new planner mode binds
+`guarded-policy-value-planner-v2` to exact Luna proposals and uses Luna only to
+select bounded lead/prompt enums for proactive wording. Deterministic code
+still owns source quotes, claims, citations, policy, identity, persistence, and
+delivery. Reactive factual answers retain the selected deterministic evidence
+compiler; the engine comparison did not authorize replacing that component.
+Confirmation 015 formally passed its registered safety/autonomy gates but cannot
+select a release: `SE7-2` found that every multi-turn trajectory omitted the
+expected confusion-turn intervention because instructional request language
+diluted V2 evidence coverage. The original result remains immutable and its
+authority is revoked.
+
+Confirmation 016 was operationally invalid after its V3 reactive canary took
+the deterministic fast path and therefore made no Luna call. It made zero
+provider calls, opened no hidden gold, and supports no quality inference.
+Corrective attempt 017 also stopped after its autonomous canary made no provider
+call; its case label did not guarantee route execution. The second invalid
+attempt exhausts the same-package correction allowance.
+
+Revision `49952b1` repairs the underlying lifecycle, simulation-fallback, and
+virtual-clock defects and passes a 820/820 known-set network-free regression.
+That evidence keeps the correction but cannot authorize release. Staging stays
+fail-closed. A future confirmation must use a fresh package and separate direct
+transport and executable product-route canaries before factual confirmation,
+known 10,000-case regression, and local product qualification can resume. This
+work is isolated in [#186](https://github.com/horiiiiii032929/digital-twin/issues/186);
+#184 terminates with the audit findings closed and a `Refine / No Release`
+decision.
 
 ## Release goal
 

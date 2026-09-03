@@ -149,6 +149,103 @@ async def test_openai_responses_client_uses_reactive_semantic_plan_schema(monkey
 
 
 @pytest.mark.asyncio
+async def test_openai_responses_client_validates_hierarchical_plan_response(monkeypatch):
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return _response(
+            model="gpt-5.6-luna",
+            text=(
+                '{"selected_action":"ask-diagnostic-question",'
+                '"reason_code":"check-understanding",'
+                '"expected_learner_action":"Explain the next step.",'
+                '"outcome_observation":"Observe the learner response.",'
+                '"stop_condition":"Stop after one action.",'
+                '"replan_condition":"Replan after a durable reply.",'
+                '"episode_steps":[{"action":"ask-diagnostic-question",'
+                '"expected_observation":"Observe the learner response.",'
+                '"stop_or_replan_predicate":"Replan after a durable reply."}]}'
+            ),
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-luna", post=post)
+
+    result = await client.chat(
+        [LlmMessage(role="user", content="Plan one bounded episode.")],
+        task="hierarchical_autonomy_plan",
+    )
+
+    schema = captured["json"]["text"]["format"]["schema"]
+    assert "selected_action" in schema["properties"]
+    assert result.provider_model == "gpt-5.6-luna"
+    assert '"selected_action":"ask-diagnostic-question"' in result.content
+
+
+@pytest.mark.asyncio
+async def test_openai_responses_client_validates_reject_only_verifier_response(
+    monkeypatch,
+):
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return _response(
+            model="gpt-5.6-luna",
+            text='{"accept":true,"reason_code":"inside-envelope"}',
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-luna", post=post)
+
+    result = await client.chat(
+        [LlmMessage(role="user", content="Verify one bounded proposal.")],
+        task="autonomy_plan_verifier",
+    )
+
+    schema = captured["json"]["text"]["format"]["schema"]
+    assert set(schema["properties"]) == {"accept", "reason_code"}
+    assert result.provider_model == "gpt-5.6-luna"
+    assert result.content == '{"accept":true,"reason_code":"inside-envelope"}'
+
+
+@pytest.mark.asyncio
+async def test_openai_responses_client_validates_bounded_wording_strategy(monkeypatch):
+    captured = {}
+
+    async def post(**kwargs):
+        captured.update(kwargs)
+        return _response(
+            model="gpt-5.6-luna",
+            text=(
+                '{"opportunity_id":"opportunity-1",'
+                '"action":"issue-retrieval-practice",'
+                '"lead_style":"reflective","prompt_mode":"apply"}'
+            ),
+        )
+
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    client = OpenAiResponsesClient("gpt-5.6-luna", post=post)
+
+    result = await client.chat(
+        [LlmMessage(role="user", content="Choose bounded wording controls.")],
+        task="autonomous_tutoring_wording_strategy",
+    )
+
+    schema = captured["json"]["text"]["format"]["schema"]
+    assert set(schema["properties"]) == {
+        "schema_version",
+        "opportunity_id",
+        "action",
+        "lead_style",
+        "prompt_mode",
+    }
+    assert "content" not in schema["properties"]
+    assert result.provider_model == "gpt-5.6-luna"
+
+
+@pytest.mark.asyncio
 async def test_openai_responses_client_fails_closed_on_identity_drift(monkeypatch):
     async def post(**kwargs):
         del kwargs

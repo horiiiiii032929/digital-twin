@@ -39,7 +39,13 @@ from src.digital_twin.action_router import (
     DeterministicActionRouterV1,
     DeterministicActionRouterV2,
 )
-from src.digital_twin.grounding import DocumentChunk, GenerationUsage, RetrievalHit
+from src.digital_twin.grounding import (
+    DocumentChunk,
+    GenerationUsage,
+    QuestionTargetedAtomicEvidenceGate,
+    RetrievalHit,
+    StructuredLexicalCoverageEvidenceGate,
+)
 from src.digital_twin.llm import (
     LlmClient,
     LlmMessage,
@@ -534,6 +540,35 @@ async def test_evidence_set_generator_fails_closed_on_incomplete_evidence_set():
     assert answer.citations == []
     assert answer.trace is not None
     assert answer.trace.policy_action == "no-evidence"
+
+
+@pytest.mark.asyncio
+async def test_evidence_set_generator_consumes_real_gate_selection():
+    first = approved_hit()
+    second = approved_hit().model_copy(deep=True)
+    second.chunk.id = "chunk-csrf-2"
+    second.chunk.text = "Browser sessions use SameSite cookies as a CSRF defense."
+    second.chunk.locator = "page 2, paragraph 2"
+    question = "Which two statements connect CSRF with browser sessions?"
+    hits = [first, second]
+    gate = QuestionTargetedAtomicEvidenceGate(
+        base_gate=StructuredLexicalCoverageEvidenceGate(
+            minimum_content_matching_terms=1,
+            evidence_limit=5,
+        )
+    )
+    decision = gate.assess(question, hits)
+    selected = [hit for hit in hits if hit.chunk.id in decision.selected_hit_ids]
+
+    answer = await DeterministicEvidenceSetGroundedGenerator().generate(
+        question,
+        selected,
+        approved_policy(),
+    )
+
+    assert decision.sufficient is True
+    assert len(answer.atomic_claims) == 2
+    assert len(answer.citations) == 2
 
 
 @pytest.mark.asyncio

@@ -1,0 +1,84 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-017",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "pedagogy-aware-h-e1-release-confirmation-017-corrective",
+  "status": "invalid-execution",
+  "decision_question": "Does the selected H+E1 product with pedagogy-aware source-semantic grounding pass safety and expected-intervention gates on fresh actual-product cases?",
+  "code_revision": "591d4a6dbed501cab29ba49a0bdb9b564e24d294",
+  "dirty_state": false,
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_017.json",
+      "sha256": "5f4917b8f7fe35edbd67335f12bfed613842386cfdb940407d151001edf34dbd",
+      "role": "executed-authorization-instrument-at-revision"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-017/public-cases.json",
+      "sha256": "406868d7dfe5336fa6b6e1dd1b0490310edfb1bab566fade6087e84c01987169",
+      "content_sha256": "c89acea189255f5fba2c13ad9d4ef7046fe9ac2b542124c5ca60cad759b27e18",
+      "role": "ignored-public-package-two-canaries-persisted"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-017/responses.sqlite3",
+      "sha256": "bc44955740ad4649d29a48dca441ace5edfffb7c5d2e4297b532ac7197747ece",
+      "role": "ignored-interrupted-two-response-ledger"
+    },
+    {
+      "path": "reports/generated/governed-full-autonomy-v2-1-actual-product-confirmation-017/result.json",
+      "sha256": "1ec10a8a47c07f5f8479151a3de257f3170673dcfe71a1eaf1c268e7732f3b13",
+      "role": "ignored-original-terminal-invalid-result"
+    }
+  ],
+  "run_binding_sha256": "ce98cded4937a5d7d4ded9ba729649b9363dad25c67e13093e996537ca7e3d5b",
+  "operational": {
+    "response_count": 2,
+    "provider_calls": 0,
+    "completed_provider_calls": 0,
+    "failed_provider_calls": 0,
+    "retries": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0.0,
+    "hidden_gold_opened_after_all_responses": false,
+    "bulk_calls_started": false
+  },
+  "findings": [
+    {
+      "finding_id": "SE7-5",
+      "severity": "operational-invalidating-harness-defect",
+      "count": 1,
+      "evidence": "The configured autonomous canary produced four deterministic student actions, zero active goals or opportunities, and zero provider calls; the test asserted configuration rather than observed route use.",
+      "closure": "Revoke 017, prohibit a third same-package attempt, and require separate direct-transport and executable product-route canaries for any fresh successor."
+    },
+    {
+      "finding_id": "SE7-6",
+      "severity": "release-blocking-product-integration-defect",
+      "count": 1,
+      "evidence": "Before correction, the full network-free audit reported overall action accuracy 0.698780, T1-v2-autonomous action accuracy 0.332432, and autonomous goal termination 0 because ordinary uncertainty and attempt language did not create the intended learner lifecycle.",
+      "closure": "Expand general deterministic perception and align the network-free provider-failure stand-in with the live deterministic semantic fallback; verify separately as known-set regression evidence."
+    },
+    {
+      "finding_id": "SE7-7",
+      "severity": "trace-lineage-defect",
+      "count": 1,
+      "evidence": "Persisted V2 perception and observation timestamps used wall-clock defaults instead of the injected graph timestamp.",
+      "closure": "Bind both records to TutoringGraphInput.observed_at and add a clock-injection regression."
+    }
+  ],
+  "decision": {
+    "outcome": "invalid-execution",
+    "validity_assessment": "second-terminal-canary-and-product-lifecycle-defect",
+    "selected_architecture_id": null,
+    "rationale": "No provider-backed quality inference is valid. The same-package correction allowance is exhausted, all 017 authority is revoked, and release selection remains blocked pending fresh evidence."
+  },
+  "limitations": [
+    "No provider call or bulk evaluation occurred.",
+    "Hidden gold remained unopened.",
+    "The postmortem regression uses a now-known package and cannot establish fresh confirmation.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-017-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-017.json"
+}

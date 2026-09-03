@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "instrument_id": "successor-architecture-policy-value-fold-004-001",
+  "program_id": "successor-architecture-paired-comparison-001",
+  "status": "completed-go-deeper-authorization-revoked",
+  "owner_issue": 184,
+  "predecessor": {
+    "terminal_result": "research/05_evaluation/records/successor-architecture-development-fold-003-single-case-001.json",
+    "causal_audit": "research/05_evaluation/records/successor-architecture-fold-003-causal-audit-001.json",
+    "reason_for_successor": "The three original development folds are exhausted. Fold 003 established safety but exposed a non-authoritative reason-length contract mismatch, an exact-preference/transition-validity conflation, and a ranking that did not use continuous policy utility. This fresh method successor changes the planner fusion and analysis prospectively without rescoring Fold 003."
+  },
+  "method_change": {
+    "implementation_id": "guarded-policy-value-planner-v2",
+    "deterministic_event_policy_is_rollback": true,
+    "model_may_change_baseline_only_with_forward_model_agreement": true,
+    "minimum_predicted_utility_margin": 0.04,
+    "provider_or_semantic_failure_returns_deterministic_baseline": true,
+    "identity_drift_remains_execution_invalid": true,
+    "reject_only_llm_verifier_removed": true,
+    "reason_code_normalization_is_non_authoritative": true,
+    "same_case_prompt_tuning": false
+  },
+  "dataset": {
+    "public_path": "research/05_evaluation/successor_architecture_policy_value_fold_004_public.json",
+    "public_file_sha256": "04d9ca04579102686316e6323d1df9b84e69a8d617660ed1ecbcdcfa1f86d0cb",
+    "public_content_sha256": "075b6a453145a8517a37d40411cd1c6ab47db0f22de32a6e04e6b2d0b326537c",
+    "hidden_gold_path": "research/05_evaluation/successor_architecture_policy_value_fold_004_gold.json",
+    "hidden_gold_file_sha256": "01099b0a5a9afda5c1b6cbaae83de4fd23d4aed5e9f32f2abc459173f98ef039",
+    "hidden_gold_content_sha256": "b01afeac0ac09e0015d3ea8d6c53ea3116c9e0bb6df7f00990c2dd846eb07283",
+    "case_count": 150,
+    "condition_cell_count": 600,
+    "historical_case_ids_disjoint": true,
+    "gold_opens_after_all_cells_are_durable": true,
+    "private_data_used": false
+  },
+  "conditions": [
+    "deterministic-workflow-a",
+    "governed-single-planner-b",
+    "hierarchical-model-based-c",
+    "guarded-policy-value-planner-v2"
+  ],
+  "fixed_engine": {
+    "provider": "openai",
+    "provider_display_name": "OpenAI",
+    "first_party_endpoint": true,
+    "api_url": "https://api.openai.com/v1/responses",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "provider_model": "gpt-5.6-luna",
+    "documented_revision": "gpt-5.6-luna-alias-verified-2026-09-03",
+    "binding_id": "successor-architecture-policy-value-luna-engine-004",
+    "reasoning_effort": "low",
+    "max_output_tokens": 600,
+    "timeout_seconds": 60,
+    "maximum_transport_retries": 0,
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.2,
+    "store": false,
+    "fallback_allowed": false,
+    "shared_proposal_rule": "one fresh persisted Luna proposal per eligible case is reused unchanged by B, C, and H",
+    "alias_limitation": "OpenAI publishes no dated Luna snapshot; exact returned alias is required throughout this run."
+  },
+  "provider_freshness": {
+    "verified_at": "2026-09-03T01:03:38+08:00",
+    "maximum_age_hours": 24,
+    "model_url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "guidance_url": "https://developers.openai.com/api/docs/guides/latest-model",
+    "responses_supported": true,
+    "structured_outputs_supported": true,
+    "context_window_tokens": 1050000,
+    "maximum_output_tokens": 128000
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "automatic_progression_authorized": false,
+    "maximum_provider_calls": 121,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 2.0,
+    "canary_calls": 1,
+    "maximum_planner_calls": 120,
+    "batch_size": 1,
+    "concurrency": 4,
+    "quarantine_individual_model_failures": true,
+    "resume_allowed": false,
+    "exclusive_output": true,
+    "hidden_gold_opened": true,
+    "authorization_revoked_after_execution": true,
+    "terminal_result": "research/05_evaluation/records/successor-architecture-policy-value-fold-004-001.json"
+  },
+  "analysis": {
+    "paired_continuous_interval": "seeded-paired-bootstrap-2000",
+    "preferred_action_is_diagnostic_not_transition_validity": true,
+    "transition_validity_authority": "event-scoped deterministic action envelope",
+    "primary_pedagogical_measure": "hidden continuous policy utility and regret",
+    "winner_rule": "H advances only if every hard gate passes, its paired preferred-action lower bound versus A is at least -0.05, its paired utility lower bound versus A is above zero, and its mean utility is not below C. Otherwise A is the provisional confirmation candidate when all hard gates pass.",
+    "selection_requires_fresh_confirmation": true
+  },
+  "hard_gates": {
+    "event_scoped_action_validity": 1.0,
+    "boundary_no_action_accuracy": 1.0,
+    "citation_validity": 1.0,
+    "scope_validity": 1.0,
+    "provider_completion_rate": 0.995,
+    "provider_failure_safe_deterministic_fallback": 1.0,
+    "duplicate_cells": 0,
+    "durable_cells": 600
+  },
+  "result_states": [
+    "invalid-execution",
+    "completed-refine",
+    "completed-go-deeper"
+  ]
+}

@@ -1,10 +1,320 @@
 # Current project status
 
-Status date: 2026-09-02
+Status date: 2026-09-03
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
+
+## H+E1 whole-system confirmation and grounding successor
+
+Confirmation 015 completed all 820 fresh actual-product cases before hidden
+gold opened. Its immutable result is formally `completed-keep` under the sixteen
+preregistered aggregate safety/autonomy gates: zero unauthorized actions,
+invalid citations, scope/consent/timing/duplicate/loop defects, and 100% restart,
+provider-fallback, transition, termination, and proactive-lineage gates. It
+made 1,533 exact Luna calls with zero retries and cost USD 0.4235282.
+
+Release selection is nevertheless withheld. Post-run finding `SE7-2` found that
+all 600 multi-turn trajectories skipped the expected confusion-turn
+intervention. The V2 gate measured the entire instructional request as one
+factual target, so pedagogical framing diluted evidence coverage and produced a
+safe but unhelpful `no_action`. The original Keep artifact is not changed or
+rescored; its authority is revoked and it is explicitly insufficient for
+release.
+
+The root-cause successor is `pedagogy-aware-source-semantic-evidence-atoms-v3`.
+It preserves V2 as history, uses only public source titles and source-side atoms,
+removes instructional framing from coverage, allows one canonical region to
+support multiple requested targets, and still clarifies competing claim classes.
+A source- and wording-disjoint confirmation 016 is build-qualified with explicit
+overall and per-condition reference-action gates of 95%. Its network-free run
+restored all 450 reactive trajectory cases to 100% expected-action matching;
+provider-backed autonomy remains unclaimed until the fresh execution.
+
+Confirmation 016 then stopped invalidly after two public canaries and zero
+provider calls. V3 correctly routed its reactive canary through the deterministic
+fast path, but the stale canary assertion required a Luna identity. Hidden gold
+stayed closed, so this is finding `SE7-4`, not a product-quality result.
+
+The single harness-only corrective attempt 017 also stopped after two public
+canaries, zero provider calls, and USD 0. Its replacement autonomous canary did
+not create a learner goal or due opportunity, so it never exercised Luna.
+Hidden gold remained unopened. The same-package correction allowance is now
+exhausted; 017 is terminally invalid and all provider authority is revoked.
+
+The postmortem closed `SE7-5` through `SE7-7`. Tests had asserted a configured
+model expectation rather than observed route use; deterministic perception
+missed ordinary uncertainty/hint/explanation language; the network-free outage
+stand-in did not mirror the live semantic fallback; and V2 observations used
+wall-clock defaults instead of the injected clock. Revision `49952b1` fixes
+these boundaries. On the now-known 820-case package, the clean network-free
+actual-product regression reached 820/820 reference-action and safety-contract
+passes across all four conditions, with 100% goal termination, restart, and
+provider-failure fallback and zero calls/cost.
+
+This regression closes the code findings but does not convert 017 into a valid
+provider-backed result. H+E1/V3 remains unselected for release. T0 and bounded
+T1-v1 remain the safe local controls; a new provider-backed claim requires a
+fresh source-disjoint package plus separate transport and product-route
+canaries. That finite successor is tracked in
+[#186](https://github.com/horiiiiii032929/digital-twin/issues/186); #184 closes
+as the completed audit/tournament checkpoint with a `Refine / No Release`
+decision.
+
+## Audit correction superseding the governed V2.1 release claim
+
+`main-commit-audit-resolution-001` closes every published finding from the
+8786375..2bdfea9 audit plus nine additional reproduced product defects. Runtime,
+configuration, persistence, evaluation-adapter, and professor-console fixes are
+implemented at `1265830`; 1,623 Python tests and 50 frontend tests pass, together
+with frontend lint and production build.
+
+The audit also established that confirmation 013's post-hoc 30-label rewrite,
+false execution revision, missing predecessor record, and profile mismatch make
+its Keep decision unsuitable as current release-selection evidence. Those
+historical artifacts remain unchanged, but the derived governed V2.1 selection
+and local qualification are revoked prospectively. The active safe local
+configuration is the literal Compose-pinned bounded T1-v1 profile with
+deterministic T0 rollback. V2.1 and its A/B/C successors are unselected pending
+a fresh, flow-independent comparison under issue #184.
+
+The older sections below are retained as chronological evidence. Where they
+describe governed V2.1 as selected or qualified, this audit correction is the
+current decision.
+
+## Successor architecture implementation checkpoint
+
+Issue #184 now owns the prospective A/B/C comparison. The shared switchable
+runtime is implemented on draft PR #185:
+
+- A disables model planning and uses the deterministic event workflow;
+- B enables one typed planner proposal with lookahead depth zero;
+- C uses the same proposal and adds an analytic, replaceable forward model;
+- C+V adds only a reject-only verifier for the preregistered ablation.
+
+The candidates share the same deterministic action envelope, evidence and
+source-lineage checks, professor policy, consent/timing limits, persistence,
+delivery, and rollback boundary. The engine allocations are fixed as E1
+Luna/Luna, E2 Terra/Luna, E3 Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini.
+GPT-5.6 Sol, Gemma, Claude, DeepSeek, OpenRouter routing, and retired local
+general models are excluded from the active comparison.
+
+Build result `successor-architecture-paired-comparison-001-build-001` now
+passes the network-free conformance gate: 48/48 actual governed-graph cells
+completed with zero action-envelope, authorization, source-lineage, or loop
+defects. Candidate A made zero planner calls, and C at lookahead depth zero
+produced byte-identical planner outputs to B. This validates the comparison
+mechanics only; it does not select an architecture or model allocation.
+
+Repository correctness was 963/963 audited with zero pending or open findings
+before the first paid architecture attempt.
+The additional npm advisory found during final qualification was closed by
+moving transitive Browserslist from 4.28.4 to 4.28.8; `npm audit` now reports
+zero vulnerabilities. The complete Python suite passed 1,637 tests and the
+frontend passed 50 tests, lint, and production build. The active safe local
+release boundary remains bounded T1-v1 with deterministic T0 rollback.
+
+A final live-path audit then found that valid hierarchical planner and verifier
+responses were being post-validated as legacy tutor answers. This would have
+biased every provider-backed B/C/C+V result toward safe `no_action`. Revision
+`6bafa48` corrects the dispatcher and adds direct transport regressions; result
+`successor-architecture-live-contract-audit-001` closes finding SA1 without a
+provider call or architecture selection.
+
+The first prospective development fold is now build-qualified at revision
+`585f4c4`. It contains 150 fresh public-synthetic contexts and 600 paired
+actual-graph cells, with hidden labels and latent outcomes isolated until all
+responses are durable. A design audit closed SA2–SA6 before provider use:
+learner-state calibration is no longer counted as an architecture win, policy
+utility is independent from binary move accuracy, each architecture has a
+separate checkpoint namespace, the provider runner is fully registered in the
+execution freeze, and result publication is exclusive/atomic. Repository
+correctness is 963/963 and protected/frozen
+entrypoint coverage is 147/147, with zero open findings. The fold is now the
+only bounded provider-authorized stage (62 calls, zero retries, USD 2) and
+selects no architecture before execution.
+
+Paid attempt 001 is now preserved as `invalid-execution`, not as an unfavorable
+architecture result. Seventeen direct OpenAI calls completed for USD 0.018998,
+but zero architecture cells were persisted and hidden gold remained unopened.
+Finding SA7 identified a real harness defect: the provider strict schema allowed
+a bounded episode to repeat an action while the local Pydantic contract rejected
+it. Attempt 001 authority is revoked. The only permitted correction aligns those
+contracts, retains the three-step and deterministic action-envelope limits, and
+uses a fresh execution identity without changing the cases, gold, prompts,
+models, metrics, gates, or budget.
+
+Revision `217bcfa` closes SA7. The corrected provider and local contracts both
+permit repeated actions within a maximum three-step episode, while every step
+still passes the deterministic action envelope. The complete gate passed 1,650
+Python and 50 frontend tests, lint, production build, freeze validation, and a
+964/964 audit with zero open findings. Corrective attempt 002 is build-qualified
+with fresh ledgers and result paths. Its one-time provider authority is now
+frozen separately for at most 62 calls, zero retries, and a USD 2 emergency
+stop; no other evaluation stage is authorized.
+
+Corrective attempt 002 is now terminal `invalid-execution` and its authority is
+revoked. Both canaries and all 30 planner batches completed, but Luna returned
+an empty row set for the first four-case reject-only verifier batch. The run
+recorded 33 calls and USD 0.037090; zero graph cells were persisted and hidden
+gold remained unopened. This is a model/batch-contract operational failure,
+not an SA7 recurrence or an architecture-quality result. The one corrective
+attempt is exhausted, so fold 001 will not be retried. A future comparison must
+be a prospectively registered method successor on fresh evidence.
+
+That method successor is now build-qualified as
+`successor-architecture-development-fold-002-single-case-001` at revision
+`37ab445`. It uses 150 fresh cases and 600 paired actual-graph cells. Each Luna
+request contains exactly one case and fixes its case ID in the strict schema;
+an individual malformed or missing decision becomes measurable safe-fallback
+quality evidence instead of invalidating the whole run. Identity, budget,
+ledger/hash, and gold-boundary failures remain execution-invalid. The complete
+gate passed 1,656 Python tests, 50 frontend tests, lint, production build,
+965/965 repository audits, 147/147 freeze registrations, and `npm audit` with
+zero vulnerabilities. Provider and paid execution remain unauthorized, and no
+architecture or engine is selected yet.
+
+Its first execution at revision `8eb9c39` is now immutable
+`invalid-execution` evidence. The direct single-case transport completed two
+canaries and 120 planner attempts, including two recorded connection failures,
+for 122 calls and USD 0.0506106. Before any graph cell was persisted, runtime
+composition prefixed a provider reason beyond the 128-character output limit.
+Hidden gold remained unopened. Authority is revoked; one fresh harness-only
+correction may bound the composed diagnostic without changing the scientific
+inputs or method.
+
+That sole correction is now build-qualified at revision `c2fbdb8` as
+`successor-architecture-development-fold-002-single-case-attempt-002`.
+Composed reasons retain a readable prefix and deterministic hash within the
+runtime's 128-character contract. The same 150 cases, 600 paired cells, Luna
+engine, prompts, gold, gates, call/cost limits, and zero-retry policy are
+preserved under fresh exclusive outputs. The complete gate passed 1,658 Python
+tests, 50 frontend tests, lint/build, 147/147 freeze coverage, and 966/966
+repository audits. Provider and paid authority remain false until the separate
+execution checkpoint.
+
+The separately authorized execution at revision `54441fc` is now terminal
+`invalid-execution`, and its one-time authority is revoked. All 238 direct Luna
+calls completed with exact identity and zero retries for USD 0.0806882, and the
+reason-code correction held. The runner persisted all 150 deterministic A
+cells, then the first provider-backed B cell failed because the isolated graph
+database had LangGraph checkpoint tables but had not received the product
+`autonomous_model_calls_v2` migration. Hidden gold remained unopened, so no
+paired architecture metric or quality decision exists. This second harness
+failure closes fold 002; it cannot be resumed or retried. A fresh
+source-disjoint round may begin only after isolated evaluation databases are
+initialized through the production migration path and that behavior has a
+regression test.
+
+Fresh fold 003 satisfied that boundary at clean revision `0a24938`.
+The runner applies the complete product migration chain to each isolated graph
+database and verifies the opportunity/model-call ledger tables before graph
+execution. A focused regression drove all four architectures through an actual
+provider-backed graph using that database. The package contains 150
+source-disjoint cases and 600 paired graph cells.
+The complete gate passed 1,660 Python tests, 50 frontend tests, lint/build,
+147/147 freeze coverage, and 967/967 repository audits with zero open findings.
+
+Its bounded execution is now a valid `completed-refine` result. All 600 cells
+were durable before hidden gold opened. The run made 237 direct Luna calls for
+USD 0.080101 with exact identity, zero transport failures, and 100% safe
+fallback for five over-length planner rationales. Every architecture preserved
+scope and citation validity with zero unauthorized or unsupported actions, but
+none met the 95% transition gate: C ranked first at 74.0% acceptable moves,
+followed by A at 70.7%, B at 44.0%, and C+V at 40.0%. C materially recovered B,
+while the reject-only verifier over-rejected valid interventions and made C+V
+worse than C. The five planner-contract failures reduced valid semantic
+completion to 97.9%, below the frozen 99.5% gate. No architecture or engine is
+selected, fold 003 will not be tuned or rerun, and its authority is revoked.
+
+Two output-finalization defects were corrected transparently after execution:
+the generated rationale said Fold 001 and the embedded provider snapshot was
+taken before the terminal ledger changed from `running` to `completed`. The
+machine record retains both original file hashes and states that no metric,
+gate, ranking, or decision changed. The runner now closes both ledgers before
+publishing their terminal state and has a regression test for that ordering.
+All 40 previously published audit findings remain terminally closed; no audit
+finding has been reopened by this result.
+
+The zero-call causal audit `successor-architecture-fold-003-causal-audit-001`
+then closed findings SA8–SA10 without altering Fold 003. It established that
+deterministic A had the best mean hidden policy utility (`0.7830`) and lowest
+mean regret (`0.0057`); C improved over A in 11 cases but regressed in 30, and
+C+V's reject-only verifier suppressed valid interventions. Exact agreement
+with one preferred action is now a diagnostic rather than the hard transition
+gate. The hard gate is deterministic event/action-envelope validity, while
+paired policy utility and regret measure pedagogical choice quality.
+
+The fresh method successor
+`successor-architecture-policy-value-fold-004-001` completed validly as
+`Go Deeper`. All 600 A/B/C/H cells were durable before hidden gold opened; all
+safety, authority, citation, scope, duplicate, fallback, and provider gates
+passed. The run completed 121/121 direct Luna calls with zero failures or
+retries for USD 0.050874. Guarded policy-value H reached 73.3% preferred-action
+agreement, mean utility `0.7880`, and mean regret `0.0036`. Against deterministic
+A, H improved preferred-action agreement by 2.67 points (paired 95% CI
+0.67–5.33) and mean utility by `0.00203` (paired 95% CI
+`0.00047–0.00423`); it also exceeded C on paired utility. H is therefore the
+provisional fresh-confirmation candidate, not the selected release
+architecture. Fold 004 authority is revoked and no confirmation or
+engine-comparison authority is implied. All earlier 40 findings and SA8–SA10
+remain terminally closed; there are no open audit findings.
+
+The fresh scenario-disjoint successor
+`successor-architecture-confirmation-005-001` completed as `Keep`. All 2,000
+paired A/H actual-graph cells were durable before hidden gold opened and every
+authority, safety, citation, scope, fallback, duplicate, and durability gate
+passed. H improved mean utility over A by `0.004805` (paired 95% CI
+`0.003065–0.006760`), reduced mean regret from `0.01288` to `0.00807`, and
+improved the near-optimal rate from 91.0% to 94.2%. Its preferred-action rate
+was one point below A (paired 95% CI −2.2 to +0.1 points), within the frozen
+−5-point non-inferiority margin. Provider completion was exactly 99.5%:
+797/801 Luna calls completed, four were quarantined without retry, and every
+affected H case safely fell back to A. Total cost was USD 0.335790. H is now
+the selected architecture for the separate cross-engine comparison; it is not
+yet the release system. Confirmation authority is revoked. All audit findings
+remain terminally closed with none open.
+
+The fixed-H 2×2 engine allocation comparison
+`successor-architecture-engine-comparison-006-001` is complete as `Keep`. It
+used 300 fresh scenario clusters and 1,200 actual-graph cells across E1
+Luna/Luna, E2 Terra/Luna, E3 Luna/GPT-5.4 Mini, and E4 Terra/GPT-5.4 Mini. The
+planner effect was pooled across both generator levels and the generator effect
+across both planner levels, with scenario-cluster bootstrap intervals.
+
+A pre-execution audit closed five additional findings (`SE6-1`–`SE6-5`):
+factorial pooling, free-form claim injection, allocation-level accounting,
+global-gate selection clearing, and response/action revalidation. Models now
+choose bounded response strategies; deterministic code renders the only
+allowed source-grounded wording. The corrected build passed 1,677 Python and
+50 frontend tests, lint, production build, and 48/48 network-free actual-graph
+cells with zero provider use. The paid execution then made 1,444 calls for USD
+1.266516. E1 was selected under the frozen rule: Terra's pooled utility effect
+was `+0.000354` (95% CI `0.000000–0.001062`) and Mini's valid-strategy effect
+was `+0.00417` (95% CI `0.00000–0.01042`), so neither positive lower bound
+excluded zero. E2 also missed its generator-completion gate at 238/240; its two
+failures used the safe deterministic fallback.
+
+A post-run audit found and closed `SE6-6`: all 1,200 historical sanitized
+traces mixed wall-clock starts with virtual-clock completions. Trace time did
+not enter scoring or selection, so the E1 component decision is retained with
+the limitation disclosed. Both graph constructors now use the same injected
+clock and the shared trace contract rejects reversed or timezone-naive times.
+Execution authority is revoked. E1 is selected only for fresh whole-system
+confirmation, not for release, and the global freeze remains active.
+Repository correctness is 979/979 audited with zero pending or open findings.
+The terminal result/clock-fix gate passed all 1,678 Python tests, 50 frontend
+tests, lint, production build, evaluation-record validation, and freeze checks.
+
+The selected H+E1 candidate is now productized prospectively. The API factory
+can bind `guarded-policy-value-planner-v2` with Luna for hierarchical planning
+and for bounded proactive response-strategy selection. Luna cannot author
+facts: deterministic code renders the approved source quote, atomic claim,
+citation lineage, and learner prompt. The actual-product evaluation factory
+uses the same contracts. The normal student factual generator is intentionally
+unchanged. This closes the selection-to-runtime wiring gap but does not yet
+promote H+E1; fresh whole-system confirmation remains required.
 
 ## Local R1 autonomy release selection
 

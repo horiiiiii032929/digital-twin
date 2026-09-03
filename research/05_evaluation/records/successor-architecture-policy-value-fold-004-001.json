@@ -1,0 +1,148 @@
+{
+  "aggregate": {
+    "deterministic-workflow-a": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.0056666666666666705,
+      "mean_policy_utility": 0.786,
+      "near_optimal_within_0_05": 0.9333333333333333,
+      "p95_policy_regret": 0.06999999999999995,
+      "preferred_action_agreement": 0.7066666666666667,
+      "proactive_precision": 0.6333333333333333,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "governed-single-planner-b": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.0353,
+      "mean_policy_utility": 0.7563666666666666,
+      "near_optimal_within_0_05": 0.7,
+      "p95_policy_regret": 0.15249999999999997,
+      "preferred_action_agreement": 0.47333333333333333,
+      "proactive_precision": 0.3416666666666667,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "guarded-policy-value-planner-v2": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.0036333333333333374,
+      "mean_policy_utility": 0.7880333333333334,
+      "near_optimal_within_0_05": 0.96,
+      "p95_policy_regret": 1.1102230246251565e-16,
+      "preferred_action_agreement": 0.7333333333333333,
+      "proactive_precision": 0.6666666666666666,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    },
+    "hierarchical-model-based-c": {
+      "boundary_action_accuracy": 1.0,
+      "case_count": 150,
+      "citation_validity": 1.0,
+      "event_action_validity": 1.0,
+      "mean_policy_regret": 0.010916666666666665,
+      "mean_policy_utility": 0.7807499999999999,
+      "near_optimal_within_0_05": 0.9266666666666666,
+      "p95_policy_regret": 0.08000000000000007,
+      "preferred_action_agreement": 0.76,
+      "proactive_precision": 0.7,
+      "scope_validity": 1.0,
+      "unnecessary_intervention_rate": 0.0
+    }
+  },
+  "case_count": 150,
+  "code_revision": "e1ec94c1e74e9b0b452bf72a567bb7aee4217d75",
+  "condition_cell_count": 600,
+  "decision": {
+    "outcome": "go-deeper",
+    "provisional_confirmation_candidate": "guarded-policy-value-planner-v2",
+    "rationale": "Advance guarded policy-value fusion to fresh confirmation because it passed the safety gates, was non-inferior on preferred-action agreement, and established a positive paired utility improvement over A.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "hard_gates": {
+    "all_600_cells_durable": true,
+    "boundary_action_accuracy_is_1": true,
+    "citation_validity_is_1": true,
+    "event_scoped_action_validity_is_1": true,
+    "fallback_is_safe_and_deterministic": true,
+    "provider_completion_at_least_0_995": true,
+    "scope_validity_is_1": true,
+    "zero_duplicate_cells": true
+  },
+  "hidden_gold_sha256": "01099b0a5a9afda5c1b6cbaae83de4fd23d4aed5e9f32f2abc459173f98ef039",
+  "instrument_sha256": "fa3484c2a32961b67f4c02f8a746f81554415b5f86bec38201858ffa4c15c530",
+  "limitations": [
+    "Synthetic policy-oracle cases do not establish real learning improvement.",
+    "Preferred-action agreement is diagnostic, while the deterministic event/action envelope is authoritative.",
+    "One development successor cannot select the final release architecture without fresh confirmation.",
+    "Luna has no dated snapshot; exact returned identity is required throughout execution."
+  ],
+  "paired_comparisons": {
+    "guarded-policy-value-h-vs-deterministic-a": {
+      "preferred_action_difference": {
+        "ci95": [
+          0.006666666666666667,
+          0.05333333333333334
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.02666666666666667,
+        "n_pairs": 150
+      },
+      "utility_difference": {
+        "ci95": [
+          0.00046666666666666634,
+          0.004233333333333334
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.0020333333333333327,
+        "n_pairs": 150
+      }
+    },
+    "guarded-policy-value-h-vs-hierarchical-c": {
+      "utility_difference": {
+        "ci95": [
+          0.001449999999999995,
+          0.013383333333333329
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.007283333333333329,
+        "n_pairs": 150
+      }
+    }
+  },
+  "provider": {
+    "failed_calls": 0,
+    "input_tokens": 62842,
+    "maximum_calls": "121",
+    "maximum_cost_usd": "2.0",
+    "maximum_latency_ms": 25543.173416983336,
+    "maximum_transport_retries_total": "0",
+    "output_tokens": 31921,
+    "provider_attempts": 121,
+    "provider_calls": 121,
+    "recovered_transport_failures": 0,
+    "reported_cost_usd": 0.0508736,
+    "run_binding_sha256": "23fb09afd575d513a5b4a0bcef2a0dca110e8edde5748506be8f97239572830c",
+    "schema_version": "1",
+    "status": "completed"
+  },
+  "provider_quality": {
+    "fallback_safe_and_deterministic_rate": 1.0,
+    "planner_case_count": 120,
+    "planner_failure_case_ids": [],
+    "provider_completion_rate": 1.0
+  },
+  "public_sha256": "04d9ca04579102686316e6323d1df9b84e69a8d617660ed1ecbcdcfa1f86d0cb",
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-policy-value-fold-004-001",
+  "schema_version": 1,
+  "status": "completed-go-deeper"
+}

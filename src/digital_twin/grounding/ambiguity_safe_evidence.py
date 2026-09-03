@@ -41,14 +41,20 @@ class AmbiguitySafeEvidenceGateV1:
         query: str,
         hits: Sequence[RetrievalHit],
     ) -> EvidenceSufficiencyDecision:
-        bounded = list(hits[: self.evidence_limit])
+        # Page-level selected-text fallbacks and precise regions are alternate
+        # representations of the same source content.  Remove the aggregate
+        # fallback across the complete candidate set before applying the
+        # evidence limit; otherwise a fallback inside the window can displace
+        # its precise sibling immediately outside it.
         preferred_ids = {
             row.id
             for row in prefer_specific_source_regions(
-                [hit.chunk for hit in bounded]
+                [hit.chunk for hit in hits]
             )
         }
-        bounded = [hit for hit in bounded if hit.chunk.id in preferred_ids]
+        bounded = [
+            hit for hit in hits if hit.chunk.id in preferred_ids
+        ][: self.evidence_limit]
         if bounded:
             uniqueness = analyze_public_reference_uniqueness(
                 query,

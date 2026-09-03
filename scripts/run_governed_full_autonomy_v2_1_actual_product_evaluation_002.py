@@ -72,6 +72,7 @@ class ActualProductEvaluationContext:
     grounding_result_path: Path
     grounding_result_id: str
     selected_grounding_architecture_id: str | None = None
+    grounding_result_expected_architecture_id: str | None = None
     runtime_grounding_architecture_id: str = "legacy-structured-lexical-v1"
     grounding_missing_blocker: str = "grounding-selection-002-keep-missing"
     canary_case_ids: tuple[str, str] = CANARY_CASE_IDS
@@ -82,6 +83,8 @@ class ActualProductEvaluationContext:
     generator_model_override: str | None = None
     expected_canary_models: dict[str, set[str]] | None = None
     dependency_aware_provider_failure: bool = False
+    autonomy_architecture_id: str = "legacy-live-planner"
+    bounded_strategy_generation: bool = False
 
     @property
     def case_count(self) -> int:
@@ -136,16 +139,13 @@ def _git_revision() -> str:
 
 def _git_dirty() -> bool:
     output = subprocess.run(
-            ["git", "status", "--porcelain", "--untracked-files=all"],
-            cwd=ROOT,
-            check=True,
-            capture_output=True,
-            text=True,
-        ).stdout
-    return any(
-        row and not row[3:].startswith(".claude/")
-        for row in output.splitlines()
-    )
+        ["git", "status", "--porcelain", "--untracked-files=all"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout
+    return bool(output.strip())
 
 
 def _hash_file(path: Path) -> str:
@@ -206,17 +206,21 @@ def _manifest(
             else (
                 {
                     "planner": context.engine_binding.planner_model,
-                    "generator": (
+                    "factual_generator": (
                         context.generator_model_override
                         or context.engine_binding.generator_model
+                    ),
+                    "proactive_strategy_model": (
+                        context.engine_binding.generator_model
+                        if context.bounded_strategy_generation
+                        else "not-selected"
                     ),
                 }
                 if context.engine_binding is not None
                 else {
                     "planner": "gpt-5.6-terra",
-                    "generator": (
-                        context.generator_model_override
-                        or "gpt-5.4-mini-2026-03-17"
+                    "factual_generator": (
+                        context.generator_model_override or "gpt-5.4-mini-2026-03-17"
                     ),
                 }
             )
@@ -233,9 +237,7 @@ def _run_binding(
     manifests = {
         condition: _manifest(
             condition, network_free=network_free, context=context
-        ).model_dump(
-            mode="json"
-        )
+        ).model_dump(mode="json")
         for condition in context.builder.CONDITIONS
     }
     instrument = _load(context.builder.INSTRUMENT)
@@ -253,6 +255,8 @@ def _run_binding(
         "runtime_grounding_architecture_id": (
             context.runtime_grounding_architecture_id
         ),
+        "autonomy_architecture_id": context.autonomy_architecture_id,
+        "bounded_strategy_generation": context.bounded_strategy_generation,
         "clock_origin": CLOCK_ORIGIN.isoformat(),
         "clock_timezone": "UTC",
         "conditions": manifests,
@@ -431,13 +435,32 @@ def validate(
         "timing_assertion": "policy-derived-window",
     }:
         raise ActualProductEvaluationError("virtual-clock boundary drifted")
+    expected_planner = (
+        context.engine_binding.planner_model
+        if context.engine_binding is not None
+        else "gpt-5.6-terra"
+    )
+    expected_generator = (
+        context.engine_binding.generator_model
+        if context.engine_binding is not None
+        else "gpt-5.4-mini-2026-03-17"
+    )
     if (
-        instrument["models"]["planner"]["model"] != "gpt-5.6-terra"
-        or instrument["models"]["generator"]["model"] != "gpt-5.4-mini-2026-03-17"
+        instrument["models"]["planner"]["model"] != expected_planner
+        or instrument["models"]["generator"]["model"] != expected_generator
         or instrument["models"]["store"] is not False
         or instrument["models"]["maximum_transport_retries"] != 0
     ):
         raise ActualProductEvaluationError("provider model boundary drifted")
+    execution = instrument["execution"]
+    if context.autonomy_architecture_id != "legacy-live-planner" and execution.get(
+        "selected_autonomy_architecture"
+    ) != context.autonomy_architecture_id:
+        raise ActualProductEvaluationError("autonomy architecture boundary drifted")
+    if context.bounded_strategy_generation and execution.get(
+        "selected_proactive_generator"
+    ) != "bounded-strategy-grounded-wording-generator-v1":
+        raise ActualProductEvaluationError("bounded wording boundary drifted")
     return {
         **build,
         "status": build["status"],
@@ -456,12 +479,18 @@ def _grounding_keep(
     result = state.get("terminal_result", state)
     if not isinstance(result, dict) or result.get("status") != "completed-keep":
         return False
-    if context.selected_grounding_architecture_id is None:
+    expected_architecture_id = (
+        context.grounding_result_expected_architecture_id
+        or context.selected_grounding_architecture_id
+    )
+    if expected_architecture_id is None:
         return True
     decision = result.get("decision")
-    return isinstance(decision, dict) and decision.get(
-        "selected_architecture_id"
-    ) == context.selected_grounding_architecture_id
+    return (
+        isinstance(decision, dict)
+        and decision.get("selected_architecture_id")
+        == expected_architecture_id
+    )
 
 
 def preflight(
@@ -579,6 +608,8 @@ async def _run_case(
             dependency_aware_provider_failure=(
                 context.dependency_aware_provider_failure
             ),
+            autonomy_architecture_id=context.autonomy_architecture_id,
+            bounded_strategy_generation=context.bounded_strategy_generation,
         ),
         clock_origin=CLOCK_ORIGIN,
     )
@@ -642,12 +673,8 @@ async def _execute_responses(
     runtime_root = context.output_root / "runtime"
     instrument = _load(context.builder.INSTRUMENT)
     maximum_cost_usd = float(instrument["authority"]["maximum_cost_usd"])
-    maximum_provider_calls = int(
-        instrument["authority"]["maximum_provider_calls"]
-    )
-    maximum_concurrency = int(
-        instrument["execution"].get("maximum_concurrency", 1)
-    )
+    maximum_provider_calls = int(instrument["authority"]["maximum_provider_calls"])
+    maximum_concurrency = int(instrument["execution"].get("maximum_concurrency", 1))
     if not 1 <= maximum_concurrency <= 16:
         raise ActualProductEvaluationError(
             "maximum concurrency must be between one and sixteen"
@@ -771,9 +798,7 @@ def _load_completed_responses(
 ) -> list[tuple[str, AutonomyEvaluationResponseV1]]:
     if not context.response_ledger.is_file():
         raise ActualProductEvaluationError("completed response ledger is missing")
-    connection = sqlite3.connect(
-        f"file:{context.response_ledger}?mode=ro", uri=True
-    )
+    connection = sqlite3.connect(f"file:{context.response_ledger}?mode=ro", uri=True)
     try:
         metadata = dict(connection.execute("SELECT key,value FROM metadata"))
         if (
@@ -954,6 +979,15 @@ def _score(
             for action in delivered
         ),
     }
+    if "overall_reference_action_accuracy_min" in gates:
+        gate_results["overall_reference_action_accuracy"] = summary[
+            "action_accuracy"
+        ] >= gates["overall_reference_action_accuracy_min"]
+    if "per_condition_reference_action_accuracy_min" in gates:
+        minimum = gates["per_condition_reference_action_accuracy_min"]
+        gate_results["per_condition_reference_action_accuracy"] = all(
+            value["action_accuracy"] >= minimum for value in by_condition.values()
+        )
     accounting = {
         "provider_calls": sum(
             response.provider_calls for response in response_by_id.values()
@@ -968,12 +1002,9 @@ def _score(
         ),
         "cost_usd": sum(response.cost_usd for response in response_by_id.values()),
     }
-    operationally_valid = (
-        accounting["provider_calls"]
-        <= int(instrument["authority"]["maximum_provider_calls"])
-        and accounting["cost_usd"]
-        <= float(instrument["authority"]["maximum_cost_usd"])
-    )
+    operationally_valid = accounting["provider_calls"] <= int(
+        instrument["authority"]["maximum_provider_calls"]
+    ) and accounting["cost_usd"] <= float(instrument["authority"]["maximum_cost_usd"])
     status = (
         "invalid-execution"
         if not operationally_valid
@@ -1056,9 +1087,7 @@ async def _simulate(
         condition: [] for condition in context.builder.CONDITIONS
     }
     responses = []
-    with tempfile.TemporaryDirectory(
-        prefix=f"{context.instrument_id}-"
-    ) as directory:
+    with tempfile.TemporaryDirectory(prefix=f"{context.instrument_id}-") as directory:
         root = Path(directory)
         for condition, case, gold in context.builder.build_contract():
             response = await _run_case(

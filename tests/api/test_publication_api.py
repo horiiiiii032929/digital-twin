@@ -145,17 +145,24 @@ def _publish_profile_bound_release(client, repository, fixture) -> None:
         },
     )
     assert response.status_code == 201
-    assert _set_evaluation(
-        client, fixture, "release-autonomy-api-controls"
-    ).status_code == 200
-    assert client.post(
-        "/api/professor/releases/release-autonomy-api-controls/preflight",
-        headers=_headers(fixture.professor_id),
-    ).status_code == 200
-    assert client.post(
-        "/api/professor/releases/release-autonomy-api-controls/publish",
-        headers=_headers(fixture.professor_id),
-    ).status_code == 200
+    assert (
+        _set_evaluation(client, fixture, "release-autonomy-api-controls").status_code
+        == 200
+    )
+    assert (
+        client.post(
+            "/api/professor/releases/release-autonomy-api-controls/preflight",
+            headers=_headers(fixture.professor_id),
+        ).status_code
+        == 200
+    )
+    assert (
+        client.post(
+            "/api/professor/releases/release-autonomy-api-controls/publish",
+            headers=_headers(fixture.professor_id),
+        ).status_code
+        == 200
+    )
 
 
 def test_approved_teaching_profile_is_hash_bound_to_release(tmp_path):
@@ -284,9 +291,7 @@ def test_autonomy_recipient_index_explains_ineligible_students(tmp_path):
     )
 
     assert response.status_code == 200
-    recipients = {
-        item["student_account_id"]: item for item in response.json()
-    }
+    recipients = {item["student_account_id"]: item for item in response.json()}
     active = recipients[fixture.student_a_id]
     assert active["account_active"] is True
     assert active["membership_active"] is True
@@ -874,9 +879,7 @@ def test_professor_can_pin_one_immutable_domain_model_to_a_release(tmp_path):
     )
     changed_payload = {
         **payload,
-        "concepts": [
-            {**payload["concepts"][0], "label": "Changed after approval"}
-        ],
+        "concepts": [{**payload["concepts"][0], "label": "Changed after approval"}],
     }
     changed = client.post(
         f"/api/professor/courses/{fixture.course_a_id}/domain-model",
@@ -933,3 +936,23 @@ def test_professor_can_select_course_runtime_and_roll_back_to_t0(tmp_path):
     assert denied.status_code == 403
     stored = repository.get_course_tutoring_runtime_profile(fixture.course_a_id)
     assert stored is not None and stored.mode == "grounded-assistant"
+
+
+def test_learning_gap_review_rejects_unknown_or_unscoped_proposal(tmp_path):
+    client, repository, _, fixture = _client(tmp_path, approved=True)
+    release = repository.get_published_release(fixture.course_a_id)
+    assert release is not None
+
+    response = client.post(
+        f"/api/professor/courses/{fixture.course_a_id}/learning-gaps/review",
+        headers=_headers(fixture.professor_id),
+        json={
+            "release_id": release.id,
+            "proposal_id": "f" * 64,
+            "decision": "dismissed",
+            "rationale": "Synthetic negative check.",
+        },
+    )
+
+    assert response.status_code == 404
+    assert response.json()["detail"]["code"] == "learning_gap_proposal_not_found"

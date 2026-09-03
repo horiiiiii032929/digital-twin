@@ -1,0 +1,60 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-engine-comparison-006-001-build",
+  "status": "completed-go-deeper",
+  "code_revision": "78baffdb9db458e8e0178d378ad9237b39fc111f",
+  "dirty_state": true,
+  "dataset": {
+    "dataset_id": "successor-architecture-engine-comparison-006",
+    "case_count": 300,
+    "eligible_case_count": 240,
+    "boundary_case_count": 60,
+    "scenario_cluster_count": 300,
+    "allocation_cell_count": 1200,
+    "public_content_sha256": "28a40a6d80fb526d157b5e28cebac75a08d91f0c80e7d6514e8ed70b73578c83",
+    "hidden_gold_content_sha256": "48bea1e7c45805b7e35aeb426c985352c6e6cb59f4c587b65e907dacce63c713",
+    "gold_isolated": true,
+    "historical_case_ids_disjoint": true
+  },
+  "architecture": "guarded-policy-value-planner-v2",
+  "conditions": [
+    "e1-luna-luna",
+    "e2-terra-luna",
+    "e3-luna-gpt-5.4-mini",
+    "e4-terra-gpt-5.4-mini"
+  ],
+  "verification": {
+    "design_findings_closed": 5,
+    "open_findings": 0,
+    "focused_tests_passed": 57,
+    "python_tests_passed": 1677,
+    "frontend_tests_passed": 50,
+    "frontend_lint_passed": true,
+    "frontend_production_build_passed": true,
+    "repository_audit_complete": "979/979",
+    "execution_freeze_complete": "150/150",
+    "network_free_actual_graph_cells": 48,
+    "provider_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "execution_bounds": {
+    "maximum_provider_calls": 1444,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 10.0,
+    "resume_allowed": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_allocation_id": null,
+    "rationale": "The corrected fixed-H E1–E4 comparison is reproducibly built and network-free qualified. No engine allocation is selected from build evidence."
+  },
+  "limitations": [
+    "No provider-backed engine comparison has executed.",
+    "Luna and Terra are mutable aliases and require exact returned-identity checks throughout execution.",
+    "Synthetic policy utility does not establish real learning improvement.",
+    "A selected allocation still requires whole-system factual, autonomy, and local product confirmation before release."
+  ]
+}

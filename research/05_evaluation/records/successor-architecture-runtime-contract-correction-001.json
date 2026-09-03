@@ -1,0 +1,39 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-runtime-contract-correction-001",
+  "code_revision": "217bcfa",
+  "status": "completed-keep",
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "bounded-hierarchical-proposal-contract-v1",
+    "rationale": "Finding SA7 is closed. The provider and local contracts now both permit repeated actions inside a maximum three-step proposal, while deterministic action-envelope validation remains authoritative. Attempt identity and every output path are explicit, so invalid attempt 001 cannot be resumed or imported into attempt 002."
+  },
+  "finding": {
+    "id": "SA7",
+    "severity": "high",
+    "disposition": "fixed",
+    "root_cause": "A local-only action-uniqueness validator rejected output accepted by the frozen provider JSON schema.",
+    "resolution": "Remove the unsupported uniqueness rule, add maxItems=3 to the provider schema, retain Pydantic max_length=3 and deterministic per-step action-envelope validation, and add repeated-action regression coverage."
+  },
+  "verification": {
+    "focused_tests": 30,
+    "python_tests": 1650,
+    "frontend_tests": 50,
+    "frontend_lint": "passed",
+    "frontend_production_build": "passed",
+    "execution_freeze": "passed",
+    "repository_inventory": "964/964 audited; zero pending or open findings",
+    "git_diff_check": "passed"
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0
+  },
+  "limitations": [
+    "This record validates a harness correction, not architecture quality.",
+    "Attempt 002 remains a fresh synthetic development comparison and cannot establish real student learning."
+  ]
+}

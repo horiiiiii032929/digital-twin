@@ -1,0 +1,62 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-001-attempt-002-invalid",
+  "code_revision": "89bfb22",
+  "status": "invalid-execution",
+  "decision": {
+    "outcome": "refine",
+    "selected_architecture_id": null,
+    "rationale": "The sole corrective attempt passed both canaries and all 30 planner batches, but Luna returned an empty rows array for the first four-case reject-only verifier batch. This is a valid model/batch-contract operational failure, not a harness defect or architecture-quality result. The preregistered same-fold correction allowance is exhausted; do not run a third attempt."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-001-attempt-002",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json",
+    "run_binding_sha256": "b230b1e3242c15facd222f3287edda21a7d393ca9f027739f82412d7dfd44e2b"
+  },
+  "dataset": {
+    "case_count": 150,
+    "planned_architecture_cells": 600,
+    "public_file_sha256": "8841d44212bf5a3a5885e1497ce3fddc381c55d354e1d93befaceb0f362a4076",
+    "hidden_gold_file_sha256": "5a81b7d92ef9cc4607116de47594fde890f038827e6dad488bc82fea19b27467",
+    "hidden_gold_opened": false,
+    "private_data_used": false
+  },
+  "failure": {
+    "classification": "model-batch-contract-failure",
+    "provider_content_shape": "schema-valid object with an empty rows array",
+    "expected_case_count": 4,
+    "observed_case_count": 0,
+    "quality_failure": false,
+    "harness_failure": false,
+    "transport_failure": false,
+    "connectivity_failure": false,
+    "identity_drift": false,
+    "response_cells_persisted": 0,
+    "same_fold_retry_allowed": false
+  },
+  "operational": {
+    "provider": "OpenAI direct Responses API",
+    "model": "gpt-5.6-luna",
+    "provider_calls": 33,
+    "input_tokens": 33578,
+    "output_tokens": 25312,
+    "reported_cost_usd": 0.03709,
+    "latency_ms_total": 321149.64,
+    "completed_canary_calls": 2,
+    "completed_planner_batches": 30,
+    "completed_verifier_batches": 1,
+    "transport_retries": 0
+  },
+  "authorization": {
+    "revoked": true,
+    "attempt_may_resume": false,
+    "same_output_path_may_be_reused": false,
+    "same_fold_attempts_exhausted": true
+  },
+  "limitations": [
+    "No hidden gold was opened and no architecture cell was scored.",
+    "The result establishes that Luna did not reliably satisfy this four-case reject-only batch contract; it does not compare A, B, C, or C+V quality.",
+    "A future comparison requires a prospectively designed method-level successor on fresh evidence, not another fold-001 retry."
+  ]
+}

@@ -28,6 +28,7 @@ from src.digital_twin.grounding import (
     CanonicalSourceAtomicClaimVerifier,
     ExactQuoteAtomicClaimVerifier,
     SourceSemanticEvidenceAtomGateV2,
+    SourceSemanticEvidenceAtomGateV3,
     SourceSemanticEvidenceAtomRetrieverV1,
     StructuredLexicalCoverageEvidenceGate,
     materialize_semantic_evidence_atoms,
@@ -35,6 +36,7 @@ from src.digital_twin.grounding import (
 from src.digital_twin.grounding.models import AtomicAnswerClaim
 from src.digital_twin.llm import LlmClient, LlmMessage, LlmResponse, LlmUnavailableError
 from src.digital_twin.model_policy import (
+    OPENAI_GPT_5_6_LUNA_MODEL,
     OPENAI_GPT_5_6_TERRA_MODEL,
     OPENAI_HIGH_VOLUME_MODEL,
 )
@@ -60,8 +62,13 @@ from src.digital_twin.student.autonomy_runtime import (
     LiveAutonomousPlanner,
 )
 from src.digital_twin.student.autonomy_service import (
+    BoundedStrategyGroundedWordingGenerator,
     GovernedAutonomyService,
     RepositoryGroundedWordingGenerator,
+)
+from src.digital_twin.student.planning_architectures import (
+    GuardedPolicyValuePlanner,
+    LlmHierarchicalPlanningProvider,
 )
 from src.digital_twin.student.tutoring_graph import (
     DeterministicReactiveSemanticPlanner,
@@ -173,7 +180,7 @@ class _SwitchableGenerator:
 
 
 class _SwitchableReactivePlanner:
-    """Network-free stand-in that reproduces the provider failure boundary."""
+    """Network-free stand-in for the live planner's deterministic fallback."""
 
     model_id = "evaluation/gpt-5.6-terra-stand-in"
 
@@ -183,7 +190,11 @@ class _SwitchableReactivePlanner:
 
     async def propose(self, **kwargs):
         if self.failed:
-            raise LlmUnavailableError()
+            # LiveReactiveSemanticPlanner catches transport unavailability and
+            # delegates to this same deterministic planner.  The network-free
+            # product simulation must preserve that behavior rather than turn
+            # a recoverable provider outage into a graph failure.
+            return await self.delegate.propose(**kwargs)
         return await self.delegate.propose(**kwargs)
 
 
@@ -193,6 +204,25 @@ class _ProviderBundle:
     generator_switch: _SwitchableClient
     planner: BudgetedLlmClient
     generator: BudgetedLlmClient
+
+
+def selected_h_e1_engine_binding() -> ProductEngineBindingV1:
+    """Return the exact allocation selected by engine comparison 006."""
+
+    return ProductEngineBindingV1(
+        engine_id="h-e1",
+        provider="openai-direct",
+        planner_model=OPENAI_GPT_5_6_LUNA_MODEL,
+        generator_model=OPENAI_GPT_5_6_LUNA_MODEL,
+        planner_reasoning_effort="low",
+        generator_reasoning_effort="low",
+        maximum_output_tokens=500,
+        input_price_usd_per_million=0.2,
+        output_price_usd_per_million=1.2,
+        credential_environment_variable="OPENAI_API_KEY",
+        returned_identity_must_equal=OPENAI_GPT_5_6_LUNA_MODEL,
+        dated_snapshot=False,
+    )
 
 
 def _provider_bundle(*, maximum_cost_usd: float) -> _ProviderBundle:
@@ -361,7 +391,10 @@ def _install_release(
         },
         deep=True,
     )
-    if grounding_architecture_id == "ambiguity-safe-source-semantic-evidence-atoms-v2":
+    if grounding_architecture_id in {
+        "ambiguity-safe-source-semantic-evidence-atoms-v2",
+        "pedagogy-aware-source-semantic-evidence-atoms-v3",
+    }:
         chunk = materialize_semantic_evidence_atoms([chunk])[0]
     release = current.model_copy(
         update={
@@ -426,6 +459,8 @@ def build_runtime_factory(
     engine_binding: ProductEngineBindingV1 | None = None,
     hybrid_safe_generation: bool = False,
     dependency_aware_provider_failure: bool = False,
+    autonomy_architecture_id: str = "legacy-live-planner",
+    bounded_strategy_generation: bool = False,
 ):
     """Return a per-case factory used only by the product evaluation adapter."""
 
@@ -485,6 +520,18 @@ def build_runtime_factory(
             == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         ):
             evidence_gate = SourceSemanticEvidenceAtomGateV2()
+
+            def retriever_factory(chunks, _active_versions):
+                return SourceSemanticEvidenceAtomRetrieverV1(
+                    chunks,
+                    candidate_limit=30,
+                )
+
+        elif (
+            grounding_architecture_id
+            == "pedagogy-aware-source-semantic-evidence-atoms-v3"
+        ):
+            evidence_gate = SourceSemanticEvidenceAtomGateV3()
 
             def retriever_factory(chunks, _active_versions):
                 return SourceSemanticEvidenceAtomRetrieverV1(
@@ -554,17 +601,38 @@ def build_runtime_factory(
             outreach = ProactiveOutreachService(open_repository, clock=clock)
             proactive_graph = None
             if bundle is not None and condition == "t1-v2-autonomous":
-                proactive_graph = GovernedAutonomousTutoringGraph(
-                    planner=LiveAutonomousPlanner(
+                proactive_planner = (
+                    GuardedPolicyValuePlanner(
+                        proposal_provider=LlmHierarchicalPlanningProvider(
+                            bundle.planner,
+                            model_id=planner_model,
+                        )
+                    )
+                    if autonomy_architecture_id
+                    == "guarded-policy-value-planner-v2"
+                    else LiveAutonomousPlanner(
                         bundle.planner,
                         model_id=planner_model,
-                    ),
-                    generator=RepositoryGroundedWordingGenerator(
+                    )
+                )
+                proactive_generator = (
+                    BoundedStrategyGroundedWordingGenerator(
+                        open_repository,
+                        bundle.generator,
+                        model_id=generator_model,
+                        claim_validator=validator,
+                    )
+                    if bounded_strategy_generation
+                    else RepositoryGroundedWordingGenerator(
                         open_repository,
                         generator,
                         model_id=generator_model,
                         claim_validator=validator,
-                    ),
+                    )
+                )
+                proactive_graph = GovernedAutonomousTutoringGraph(
+                    planner=proactive_planner,
+                    generator=proactive_generator,
                     checkpoint_database_path=str(database_path),
                 )
             autonomy = GovernedAutonomyService(

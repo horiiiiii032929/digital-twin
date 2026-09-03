@@ -27,7 +27,7 @@ from src.digital_twin.evaluation.provider_json import (
     ProviderCallLedgerV1,
 )
 from src.digital_twin.generation import (
-    DeterministicEvidenceSetGroundedGenerator,
+    DeterministicGroundedGenerator,
     DeterministicPolicyEnforcer,
     ExtractiveBoundaryGroundedPromptBuilder,
     LiveAtomicGroundedGenerator,
@@ -61,6 +61,7 @@ from src.digital_twin.grounding import (
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.models import (
+    AtomicAnswerClaim,
     GenerationUsage,
     TutorAnswer,
 )
@@ -524,7 +525,7 @@ class _DeterministicAtomicGenerator:
     version = "v1"
 
     def __init__(self, *, policy_enforcer: DeterministicPolicyEnforcer) -> None:
-        self.delegate = DeterministicEvidenceSetGroundedGenerator(
+        self.delegate = DeterministicGroundedGenerator(
             prompt_builder=ExtractiveBoundaryGroundedPromptBuilder(),
             policy_enforcer=policy_enforcer,
         )
@@ -558,7 +559,18 @@ class _DeterministicAtomicGenerator:
             return answer
         if answer.trace.policy_action != "answer":
             return answer
-        return answer
+        return answer.model_copy(
+            update={
+                "atomic_claims": [
+                    AtomicAnswerClaim(
+                        claim_id="claim-deterministic-evidence",
+                        text=hits[0].chunk.text,
+                        evidence_hit_ids=[hits[0].chunk.id],
+                    )
+                ]
+            }
+        )
+
 
 class _ManagedAdapter(StudentTutoringServiceAdapterV1):
     def __init__(
@@ -900,11 +912,10 @@ def build_live_t0_adapter(
     provider_ledger = None
     action_router = (
         DeterministicActionRouterV2()
-        if manifest.evidence_gate
-        == "ambiguity-safe-source-semantic-evidence-atoms-v2"
+        if manifest.evidence_gate == "ambiguity-safe-source-semantic-evidence-atoms-v2"
         else DeterministicActionRouterV1()
     )
-    if manifest.evidence_gate in {
+    if deterministic_engine and manifest.evidence_gate in {
         "ambiguity-safe-source-semantic-evidence-atoms-v2",
         "source-semantic-evidence-atoms-v1",
     }:
@@ -994,10 +1005,7 @@ def build_live_t0_adapter(
     if conversation_scope not in {"course", "cluster"}:
         raise LiveT0AdapterError("unsupported evaluation conversation scope")
     conversation_courses = (
-        {
-            _conversation_key(case, conversation_scope): case.course_id
-            for case in cases
-        }
+        {_conversation_key(case, conversation_scope): case.course_id for case in cases}
         if conversation_scope == "cluster"
         else None
     )

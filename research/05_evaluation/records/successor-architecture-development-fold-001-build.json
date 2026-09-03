@@ -1,0 +1,39 @@
+{
+  "case_count": 150,
+  "architecture_cell_count": 600,
+  "code_revision": "585f4c4a228aaf432999e18b5910b2dc4b7c916a",
+  "decision": {
+    "outcome": "go-deeper",
+    "rationale": "The fresh, gold-isolated A/B/C/C+V development fold and guarded direct-OpenAI runner pass deterministic validation and network-free simulation. Provider execution remains a separate frozen checkpoint.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "hard_gates": {
+    "public_gold_isolated": true,
+    "case_ids_unique": true,
+    "architecture_checkpoints_isolated": true,
+    "shared_proposal_rule_enforced": true,
+    "policy_utility_independent_of_binary_accuracy": true,
+    "provider_execution_unauthorized": true,
+    "freeze_guard_complete": true
+  },
+  "instrument": {
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001.json",
+    "sha256": "87733c33ccc14c1df5312809d834237b026075bb9ffd913b257bd14bd76b2360"
+  },
+  "limitations": [
+    "This is build and simulation evidence, not an architecture-quality result.",
+    "The 150 cases and latent outcomes are synthetic.",
+    "Luna is an alias without a dated snapshot; the exact returned identity must remain stable during execution."
+  ],
+  "operational": {
+    "cost_usd": 0,
+    "maximum_provider_calls": 62,
+    "provider_calls": 0,
+    "tokens": 0
+  },
+  "record_schema": "research-evaluation-run-v1",
+  "run_id": "successor-architecture-development-fold-001-build",
+  "schema_version": 1,
+  "status": "build-only-qualified"
+}

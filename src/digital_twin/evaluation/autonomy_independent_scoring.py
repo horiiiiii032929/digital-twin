@@ -162,7 +162,9 @@ def _event_kind_for_action(
 ) -> str | None:
     if row.trigger_event_id is None:
         return row.trigger_event_kind
-    event = next((item for item in case.events if item.event_id == row.trigger_event_id), None)
+    event = next(
+        (item for item in case.events if item.event_id == row.trigger_event_id), None
+    )
     if event is None:
         return None
     normalized_event_kind = {
@@ -182,7 +184,9 @@ def score_autonomy_case_independently(
     """Derive hard gates without trusting product-computed pass/fail flags."""
 
     if len({case.case_id, gold.case_id, response.case_id, evidence.case_id}) != 1:
-        raise ValueError("autonomy case, gold, response, and evidence identities differ")
+        raise ValueError(
+            "autonomy case, gold, response, and evidence identities differ"
+        )
     from src.digital_twin.student.autonomy_eligibility import event_action_contract
 
     base = score_autonomy_case(case, gold, response)
@@ -235,16 +239,23 @@ def score_autonomy_case_independently(
     revisions = sorted(
         (item.previous_revision, item.next_revision) for item in evidence.state_deltas
     )
-    revisions_valid = all(
-        current[1] <= following[1]
-        for current, following in zip(revisions, revisions[1:], strict=False)
+    revisions_valid = (
+        len(revisions) == len(set(revisions))
+        and len({next_revision for _previous, next_revision in revisions})
+        == len(revisions)
+        and all(
+            current[1] == following[0]
+            for current, following in zip(revisions, revisions[1:], strict=False)
+        )
     )
     pedagogical_transition_valid = event_action_valid and revisions_valid
 
     restart_expected = sum(event.kind == "runtime-restart" for event in case.events)
     restart_consistent = (
         len(evidence.restart_checks) == restart_expected
-        and all(item.before_sha256 == item.after_sha256 for item in evidence.restart_checks)
+        and all(
+            item.before_sha256 == item.after_sha256 for item in evidence.restart_checks
+        )
         and response.final_state.restart_count == restart_expected
     )
 

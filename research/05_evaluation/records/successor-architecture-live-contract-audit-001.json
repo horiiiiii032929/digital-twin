@@ -1,0 +1,33 @@
+{
+  "code_revision": "6bafa48ee2b404dfd431e946d104c9e7c3c558c3",
+  "date": "2026-09-02",
+  "decision": {
+    "outcome": "keep",
+    "rationale": "The live OpenAI response path now validates hierarchical planner and reject-only verifier payloads against their own versioned contracts before returning them to the autonomy runtime.",
+    "selected_architecture_id": null
+  },
+  "dirty_state": false,
+  "finding": {
+    "disposition": "fixed",
+    "evidence": "Added explicit post-response validation branches and two transport-level regression tests covering valid hierarchical and verifier payloads.",
+    "id": "SA1",
+    "severity": "high",
+    "title": "Live A/B/C provider responses were validated as legacy tutor answers"
+  },
+  "limitations": [
+    "This result closes a software-contract defect; it does not establish provider availability or architecture quality.",
+    "No provider request was made."
+  ],
+  "operational": {
+    "cost_usd": 0,
+    "provider_calls": 0,
+    "tokens": 0
+  },
+  "run_id": "successor-architecture-live-contract-audit-001",
+  "schema_version": 1,
+  "status": "completed-keep",
+  "verification": {
+    "focused_tests_passed": 25,
+    "ruff": "passed"
+  }
+}

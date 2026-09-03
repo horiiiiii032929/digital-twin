@@ -15,7 +15,12 @@ from src.digital_twin.generation.models import ModelTutorOutput, ModelTutorOutpu
 from src.digital_twin.grounding.models import GenerationUsage
 from src.digital_twin.student.autonomy_models import (
     AutonomousPlannerOutputV1,
+    AutonomousWordingStrategyV1,
     ReactiveSemanticProposalV2,
+)
+from src.digital_twin.student.planning_architectures import (
+    HierarchicalPlanningProposalV1,
+    PlannerVerificationV1,
 )
 from src.digital_twin.llm import (
     LlmAuthenticationError,
@@ -159,6 +164,12 @@ class OpenAiResponsesClient:
             schema = AutonomousPlannerOutputV1.model_json_schema()
         elif task == "reactive_tutoring_plan":
             schema = ReactiveSemanticProposalV2.model_json_schema()
+        elif task == "hierarchical_autonomy_plan":
+            schema = HierarchicalPlanningProposalV1.model_json_schema()
+        elif task == "autonomy_plan_verifier":
+            schema = PlannerVerificationV1.model_json_schema()
+        elif task == "autonomous_tutoring_wording_strategy":
+            schema = AutonomousWordingStrategyV1.model_json_schema()
         else:
             raise LlmConfigurationError()
         return _openai_strict_schema(schema)
@@ -389,6 +400,12 @@ class OpenAiResponsesClient:
                 validated = AutonomousPlannerOutputV1.model_validate(content)
             elif task == "reactive_tutoring_plan":
                 validated = ReactiveSemanticProposalV2.model_validate(content)
+            elif task == "hierarchical_autonomy_plan":
+                validated = HierarchicalPlanningProposalV1.model_validate(content)
+            elif task == "autonomy_plan_verifier":
+                validated = PlannerVerificationV1.model_validate(content)
+            elif task == "autonomous_tutoring_wording_strategy":
+                validated = AutonomousWordingStrategyV1.model_validate(content)
             else:
                 validated = ModelTutorOutput.model_validate(content)
         except (TypeError, ValueError) as error:

@@ -1,0 +1,52 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-development-fold-001-attempt-002-build",
+  "code_revision": "217bcfa",
+  "status": "build-only-qualified",
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "successor-architecture-development-fold-001-attempt-002",
+    "rationale": "The only permitted harness correction passes the complete local gate. Attempt 002 reuses the exact cases, gold, prompts, model role, metrics, gates, call ceiling, and budget under fresh ledgers and result paths. Paid/provider execution remains unauthorized at build time."
+  },
+  "instrument": {
+    "instrument_id": "successor-architecture-development-fold-001-attempt-002",
+    "path": "research/05_evaluation/instruments/successor_architecture_development_fold_001_attempt_002.json"
+  },
+  "scientific_input_changes": {
+    "cases": false,
+    "gold": false,
+    "prompts": false,
+    "model_roles": false,
+    "metrics": false,
+    "gates": false,
+    "budget": false
+  },
+  "execution_bounds": {
+    "maximum_provider_calls": 62,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 2.0,
+    "prior_calls_imported": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "verification": {
+    "focused_tests": 30,
+    "python_tests": 1650,
+    "frontend_tests": 50,
+    "network_free_simulation": "passed",
+    "execution_freeze": "passed",
+    "repository_inventory": "964/964 audited; zero pending or open findings"
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0
+  },
+  "limitations": [
+    "This is build-only evidence and does not select an architecture.",
+    "Luna is a mutable alias; exact returned identity remains mandatory during execution.",
+    "Synthetic policy utility is not real learning-outcome evidence."
+  ]
+}

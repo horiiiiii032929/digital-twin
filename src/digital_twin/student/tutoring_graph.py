@@ -423,11 +423,13 @@ class DeterministicTurnInterpreter:
     implementation_id = "deterministic-turn-interpreter-v1"
 
     _CONFUSION = re.compile(
-        r"\b(confused|confusing|don't understand|do not understand|lost|stuck|why)\b",
+        r"\b(confused|confusing|don't understand|do not understand|lost|stuck|why|"
+        r"unsure|uncertain|need (?:a )?hint|not clear|having trouble)\b",
         re.IGNORECASE,
     )
     _ATTEMPT = re.compile(
-        r"\b(i tried|my attempt|because|therefore|so i|i think|i got|=)\b",
+        r"\b(i tried|my attempt|my (?:current )?(?:explanation|reasoning)|because|"
+        r"therefore|so i|i think|i believe|i got|=)\b",
         re.IGNORECASE,
     )
     _MISCONCEPTION = re.compile(
@@ -873,6 +875,9 @@ class GovernedReactiveTutoringGraphV2:
         response = _grounded_response_v2(answer, plan)
         provider_trace = answer.trace
         usage = provider_trace.usage if provider_trace is not None else None
+        generation_calls = await self._provider_generation_call_count(
+            graph_input.event_id
+        )
         trace = AgentTraceV2(
             trace_id=f"trace-{graph_input.event_id}",
             event_id=graph_input.event_id,
@@ -889,10 +894,7 @@ class GovernedReactiveTutoringGraphV2:
             generator_model=provider_trace.provider_model if provider_trace else None,
             fast_path=bool(result["fast_path"]),
             planning_calls=result["planning_calls"],
-            generation_calls=int(
-                provider_trace is not None
-                and provider_trace.provider_model != "not-called"
-            ),
+            generation_calls=generation_calls,
             repair_calls=result["repair_count"],
             provider_input_tokens=usage.input_tokens if usage else 0,
             provider_output_tokens=usage.output_tokens if usage else 0,
@@ -917,6 +919,7 @@ class GovernedReactiveTutoringGraphV2:
                     result["validation_passed"] and state_committed
                 ),
             },
+            started_at=graph_input.observed_at,
             completed_at=graph_input.observed_at,
         )
         artifacts = ReactiveTurnArtifactsV2(
@@ -940,6 +943,18 @@ class GovernedReactiveTutoringGraphV2:
             failure_reason=result["failure_reason"],
             reactive_v2_artifacts=artifacts,
         )
+
+    async def _provider_generation_call_count(self, event_id: str) -> int:
+        if self.generator_model_id.startswith("deterministic/"):
+            return 0
+        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            cursor = await connection.execute(
+                """SELECT COUNT(*) FROM tutoring_model_calls_v2
+                   WHERE event_id = ? AND stage IN ('generate', 'repair')""",
+                (event_id,),
+            )
+            row = await cursor.fetchone()
+        return min(1, int(row[0] if row is not None else 0))
 
     def _build_graph(self) -> StateGraph:
         graph = StateGraph(_V2GraphState, context_schema=_V2RuntimeContext)
@@ -1002,6 +1017,7 @@ class GovernedReactiveTutoringGraphV2:
         signals = self.interpreter.interpret(runtime.context.graph_input.student_message)
         perception = TurnPerceptionV2(
             event_kind="student-message",
+            observed_at=runtime.context.graph_input.observed_at,
             **signals.model_dump(mode="python"),
         )
         learner_state = state["learner_state"].model_copy(deep=True)
@@ -1055,6 +1071,7 @@ class GovernedReactiveTutoringGraphV2:
             assessment_outcome=assessment_outcome,
             assessment_confidence=assessment_confidence,
             source_turn_key=source_turn_key,
+            observed_at=graph_input.observed_at,
         )
         return {
             "concept_ids": concept_ids,
@@ -1698,6 +1715,7 @@ def _grounded_response_v2(
     policy_action = {
         "answer": "answer",
         "clarify": "clarify",
+        "clarify-request": "clarify",
         "no-evidence": "abstain",
         "abstain": "abstain",
         "redirect-graded-work": "refuse",

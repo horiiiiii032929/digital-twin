@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "instrument_id": "successor-architecture-engine-comparison-006-001",
+  "program_id": "successor-architecture-paired-comparison-001",
+  "status": "completed-keep-authorization-revoked",
+  "owner_issue": 184,
+  "predecessor": {
+    "confirmation_result": "research/05_evaluation/records/successor-architecture-confirmation-005-001.json",
+    "selected_architecture": "guarded-policy-value-planner-v2",
+    "historical_results_changed": false
+  },
+  "decision_question": "With guarded policy-value architecture H fixed, which planner and generator allocation gives the best safe pedagogical utility, provider reliability, latency, and cost under the same 300 scenarios?",
+  "design": {
+    "factorial": "2x2 planner-by-generator",
+    "architecture_fixed": "guarded-policy-value-planner-v2",
+    "conditions": ["e1", "e2", "e3", "e4"],
+    "planner_factor": ["gpt-5.6-luna", "gpt-5.6-terra"],
+    "generator_factor": ["gpt-5.6-luna", "gpt-5.4-mini-2026-03-17"],
+    "shared_case_policy_evidence_graph": true,
+    "planner_proposal_reused_across_generator_factor": true,
+    "planner_factor_effect_pooled_across_both_generator_levels": true,
+    "generator_factor_effect_pooled_across_both_planner_levels": true,
+    "factorial_inference_grain": "scenario-cluster",
+    "generator_output_authority": "The model selects bounded lead-style and learner-prompt strategy enums; deterministic code renders the only allowed response text and inserts the canonical evidence quote.",
+    "gold_opens_after_all_1200_cells_are_durable": true,
+    "llm_review_used": false,
+    "deterministic_truth_authoritative": true
+  },
+  "dataset": {
+    "public_path": "research/05_evaluation/successor_architecture_engine_comparison_006_public.json",
+    "public_file_sha256": "9a74ccf23f24d297aceba68b32365c0df95df8de4f85784f4636d3a4e06a2e3f",
+    "public_content_sha256": "28a40a6d80fb526d157b5e28cebac75a08d91f0c80e7d6514e8ed70b73578c83",
+    "hidden_gold_path": "research/05_evaluation/successor_architecture_engine_comparison_006_gold.json",
+    "hidden_gold_file_sha256": "287d77b6f5fc26608f940c1f193319ac2b293501a0c90b26456feca4d39a4ad9",
+    "hidden_gold_content_sha256": "48bea1e7c45805b7e35aeb426c985352c6e6cb59f4c587b65e907dacce63c713",
+    "case_count": 300,
+    "eligible_case_count": 240,
+    "boundary_case_count": 60,
+    "scenario_cluster_count": 300,
+    "engine_allocation_cell_count": 1200,
+    "historical_case_ids_disjoint": true,
+    "private_data_used": false
+  },
+  "engine_allocations": [
+    {
+      "allocation_id": "e1",
+      "planner_model": "gpt-5.6-luna",
+      "generator_model": "gpt-5.6-luna"
+    },
+    {
+      "allocation_id": "e2",
+      "planner_model": "gpt-5.6-terra",
+      "generator_model": "gpt-5.6-luna"
+    },
+    {
+      "allocation_id": "e3",
+      "planner_model": "gpt-5.6-luna",
+      "generator_model": "gpt-5.4-mini-2026-03-17"
+    },
+    {
+      "allocation_id": "e4",
+      "planner_model": "gpt-5.6-terra",
+      "generator_model": "gpt-5.4-mini-2026-03-17"
+    }
+  ],
+  "provider_bindings": {
+    "gpt-5.6-luna": {
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "first_party_endpoint": true,
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "provider_model": "gpt-5.6-luna",
+      "documented_revision": "gpt-5.6-luna-alias-verified-2026-09-03",
+      "binding_id": "successor-engine-comparison-luna-006",
+      "reasoning_effort": "low",
+      "max_output_tokens": 420,
+      "timeout_seconds": 60,
+      "maximum_transport_retries": 0,
+      "pricing_usd_per_million_input_tokens": 0.2,
+      "pricing_usd_per_million_output_tokens": 1.2,
+      "store": false,
+      "fallback_allowed": false
+    },
+    "gpt-5.6-terra": {
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "first_party_endpoint": true,
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "provider_model": "gpt-5.6-terra",
+      "documented_revision": "gpt-5.6-terra-alias-verified-2026-09-03",
+      "binding_id": "successor-engine-comparison-terra-006",
+      "reasoning_effort": "low",
+      "max_output_tokens": 420,
+      "timeout_seconds": 60,
+      "maximum_transport_retries": 0,
+      "pricing_usd_per_million_input_tokens": 2.0,
+      "pricing_usd_per_million_output_tokens": 12.0,
+      "store": false,
+      "fallback_allowed": false
+    },
+    "gpt-5.4-mini-2026-03-17": {
+      "provider": "openai",
+      "provider_display_name": "OpenAI",
+      "first_party_endpoint": true,
+      "api_url": "https://api.openai.com/v1/responses",
+      "credential_environment_variable": "OPENAI_API_KEY",
+      "provider_model": "gpt-5.4-mini-2026-03-17",
+      "documented_revision": "gpt-5.4-mini-2026-03-17",
+      "binding_id": "successor-engine-comparison-mini-006",
+      "reasoning_effort": "none",
+      "max_output_tokens": 260,
+      "timeout_seconds": 60,
+      "maximum_transport_retries": 0,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5,
+      "store": false,
+      "fallback_allowed": false
+    }
+  },
+  "provider_freshness": {
+    "verified_at": "2026-09-03T01:03:38+08:00",
+    "maximum_age_hours": 24,
+    "responses_supported": true,
+    "structured_outputs_supported": true,
+    "store_false_required": true,
+    "exact_returned_identity_required": true,
+    "official_sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+      "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+      "https://developers.openai.com/api/docs/guides/latest-model"
+    ],
+    "alias_limitation": "Luna and Terra have no dated snapshots; exact returned aliases are required for every call."
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "automatic_progression_authorized": false,
+    "maximum_provider_calls": 1444,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 10.0,
+    "canary_calls": 4,
+    "maximum_planner_calls": 480,
+    "maximum_generator_calls": 960,
+    "concurrency": 8,
+    "quarantine_individual_model_failures": true,
+    "resume_allowed": true,
+    "exclusive_output": true,
+    "hidden_gold_opened": true
+  },
+  "analysis": {
+    "planner_selection_rule": "Select Terra only when pooled paired utility improvement over Luna has a positive lower 95% bootstrap bound; otherwise prefer Luna.",
+    "generator_selection_rule": "Select GPT-5.4 Mini only when its pooled paired provider-origin valid strategy advantage over Luna has a positive lower 95% scenario-cluster bootstrap bound; otherwise prefer Luna. Deterministic fallback wording remains safe but is not counted as provider success.",
+    "allocation_tie_break": "Among eligible allocations use higher mean utility, then higher valid wording rate, then lower p95 estimated end-to-end provider latency, then lower estimated cost.",
+    "preferred_action_is_diagnostic_not_transition_validity": true,
+    "same_case_prompt_tuning": false,
+    "selection_is_for_whole_system_confirmation_not_release": true
+  },
+  "hard_gates": {
+    "all_1200_cells_durable": true,
+    "duplicate_cells": 0,
+    "event_scoped_action_validity": 1.0,
+    "boundary_no_action_accuracy": 1.0,
+    "citation_and_source_range_validity": 1.0,
+    "scope_validity": 1.0,
+    "duplicate_intervention_wording": 0,
+    "provider_role_completion_rate": 0.995,
+    "provider_failure_safe_deterministic_fallback": 1.0,
+    "generator_factor_cannot_change_selected_action": true,
+    "free_form_generator_claims_allowed": false
+  },
+  "result_states": [
+    "invalid-execution",
+    "completed-refine",
+    "completed-keep"
+  ]
+}

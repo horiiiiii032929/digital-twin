@@ -24,6 +24,7 @@ from src.digital_twin.grounding.retrieval import (
 )
 from src.digital_twin.grounding.reference_uniqueness import (
     analyze_public_reference_uniqueness,
+    normalize_claim_class,
 )
 from src.digital_twin.grounding.source_range_evidence import (
     canonicalize_source_claim,
@@ -33,6 +34,40 @@ from src.digital_twin.grounding.source_registration import semantic_anchors
 
 
 ATOM_VERSION = "source-semantic-evidence-atom-v1"
+
+_INSTRUCTIONAL_WRAPPER_TERMS = frozenset(
+    {
+        "about",
+        "according",
+        "am",
+        "attempt",
+        "can",
+        "confused",
+        "could",
+        "detail",
+        "does",
+        "during",
+        "explain",
+        "give",
+        "guide",
+        "help",
+        "hint",
+        "inspect",
+        "key",
+        "next",
+        "please",
+        "point",
+        "question",
+        "reading",
+        "restate",
+        "source",
+        "step",
+        "still",
+        "stuck",
+        "understand",
+        "unclear",
+    }
+)
 
 
 @dataclass(frozen=True)
@@ -159,6 +194,36 @@ def _coverage(needle: str, haystack: str) -> float:
     if not required:
         return 0.0
     return len(required & concept_tokens(haystack)) / len(required)
+
+
+def _instructional_terms(value: str) -> set[str]:
+    """Keep source-bearing terms while removing pedagogical request framing."""
+
+    return concept_tokens(value) - _INSTRUCTIONAL_WRAPPER_TERMS
+
+
+def _instructional_coverage(target: str, chunk: DocumentChunk) -> float:
+    required = _instructional_terms(target)
+    if not required:
+        return 0.0
+    observed = concept_tokens(
+        " ".join(
+            (
+                _metadata(chunk, "semantic_atom_claim"),
+                _metadata(chunk, "title"),
+                _metadata(chunk, "semantic_atom_anchors"),
+            )
+        )
+    )
+    return len(required & observed) / len(required)
+
+
+def _has_public_title_anchor(question: str, chunk: DocumentChunk) -> bool:
+    """Return whether a non-generic public title is explicitly named."""
+
+    title_terms = _instructional_terms(_metadata(chunk, "title"))
+    question_terms = _instructional_terms(question)
+    return len(title_terms) >= 2 and title_terms <= question_terms
 
 
 def _scope(
@@ -503,11 +568,134 @@ class SourceSemanticEvidenceAtomGateV2(SourceSemanticEvidenceAtomGateV1):
         return super().assess(query, bounded)
 
 
+class SourceSemanticEvidenceAtomGateV3(SourceSemanticEvidenceAtomGateV1):
+    """Resolve instructional questions through explicit public source anchors.
+
+    V2 deliberately remains unchanged as historical evidence. V3 prevents
+    pedagogical request language from diluting target coverage while preserving
+    fail-closed ambiguity handling across distinct canonical claim classes.
+    """
+
+    implementation_id = "source-semantic-evidence-atom-gate-v3"
+    version = "v3"
+
+    def assess(
+        self,
+        query: str,
+        hits: Sequence[RetrievalHit],
+    ) -> EvidenceSufficiencyDecision:
+        plan = plan_public_source_ranges(query)
+        bounded = list(hits[:5])
+        if not bounded or any(
+            not _authorized(row.chunk)
+            or _metadata(row.chunk, "semantic_atom_version") != ATOM_VERSION
+            for row in bounded
+        ):
+            return EvidenceSufficiencyDecision(
+                sufficient=False,
+                score=0.0,
+                reason="semantic evidence atoms are missing or unauthorized",
+                features={"hit_count": len(bounded)},
+                selected_hit_ids=[],
+            )
+        scoped, _, _ = _scope(
+            [row.chunk for row in bounded],
+            source_path_anchor=plan.source_path_anchor,
+            cluster_anchor=plan.cluster_anchor,
+            context=plan.evidence.context,
+            modality=plan.evidence.modality,
+        )
+        scoped_ids = {row.id for row in scoped}
+        selected: list[RetrievalHit] = []
+        for target in plan.evidence.targets:
+            ranked = sorted(
+                [
+                    row
+                    for row in bounded
+                    if row.chunk.id in scoped_ids
+                    and (
+                        _has_public_title_anchor(query, row.chunk)
+                        or _instructional_coverage(target, row.chunk)
+                        >= self.minimum_target_coverage
+                    )
+                ],
+                key=lambda row: (
+                    -int(_has_public_title_anchor(query, row.chunk)),
+                    -_instructional_coverage(target, row.chunk),
+                    -row.relevance_score,
+                    _range_start(row.chunk),
+                    row.chunk.id,
+                ),
+            )
+            if not ranked:
+                return EvidenceSufficiencyDecision(
+                    sufficient=False,
+                    score=len(selected) / plan.evidence.requested_cardinality,
+                    reason="instructional target does not resolve to canonical evidence",
+                    features={"resolved_cardinality": len(selected)},
+                    selected_hit_ids=[],
+                    recommended_action="abstain",
+                )
+            claim_classes = {
+                normalize_claim_class(_metadata(row.chunk, "semantic_atom_claim"))
+                for row in ranked
+            }
+            if len(claim_classes) > 1:
+                return EvidenceSufficiencyDecision(
+                    sufficient=False,
+                    score=0.0,
+                    reason=(
+                        "instructional target is ambiguous across canonical "
+                        "evidence claims"
+                    ),
+                    features={"canonical_claim_class_count": len(claim_classes)},
+                    selected_hit_ids=[],
+                    recommended_action="clarify",
+                )
+            selected.append(ranked[0])
+        unique_selected = list(dict.fromkeys(row.chunk.id for row in selected))
+        selected_by_id = {row.chunk.id: row for row in selected}
+        if len(unique_selected) > 1:
+            first_related = set(
+                _json_ids(selected[0].chunk, "semantic_related_atom_ids")
+            )
+            if any(identifier not in first_related for identifier in unique_selected[1:]):
+                return EvidenceSufficiencyDecision(
+                    sufficient=False,
+                    score=0.0,
+                    reason="multi-atom evidence lacks an explicit source relation",
+                    features={"resolved_cardinality": len(selected)},
+                    selected_hit_ids=[],
+                )
+        return EvidenceSufficiencyDecision(
+            sufficient=len(selected) == plan.evidence.requested_cardinality,
+            score=1.0,
+            reason=(
+                "every instructional target resolves to one canonical source claim"
+            ),
+            features={
+                "requested_cardinality": plan.evidence.requested_cardinality,
+                "resolved_cardinality": len(selected),
+                "selected_region_count": len(unique_selected),
+                "single_region_multi_target": (
+                    len(selected) > 1 and len(unique_selected) == 1
+                ),
+                "public_title_anchor_used": any(
+                    _has_public_title_anchor(query, row.chunk) for row in selected
+                ),
+            },
+            selected_hit_ids=[
+                selected_by_id[identifier].chunk.id for identifier in unique_selected
+            ],
+        )
+
+
 __all__ = [
     "ATOM_VERSION",
     "SemanticEvidenceAtomTraceV1",
     "SourceSemanticEvidenceAtomGateV1",
     "SourceSemanticEvidenceAtomGateV2",
+    "SourceSemanticEvidenceAtomGateV3",
     "SourceSemanticEvidenceAtomRetrieverV1",
     "materialize_semantic_evidence_atoms",
 ]

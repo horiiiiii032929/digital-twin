@@ -1,0 +1,120 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-fold-003-causal-audit-001",
+  "code_revision": "2ff9498",
+  "dirty_state": true,
+  "date": "2026-09-03",
+  "status": "completed-keep",
+  "decision": {
+    "outcome": "keep-corrections-go-deeper-to-fresh-successor",
+    "selected_architecture_id": null,
+    "rationale": "Fold 003 remains immutable completed-refine evidence. The audit closes three prospective defects and registers a coherent guarded policy-value successor on fresh evidence. It does not rescore Fold 003 or select a release architecture."
+  },
+  "source_result": {
+    "path": "research/05_evaluation/records/successor-architecture-development-fold-003-single-case-001.json",
+    "run_id": "successor-architecture-development-fold-003-single-case-001",
+    "status": "completed-refine",
+    "cells": 600,
+    "provider_calls": 237,
+    "reported_cost_usd": 0.0801006,
+    "hidden_gold_opened_after_all_cells_durable": true
+  },
+  "causal_analysis": {
+    "exact_preferred_action_failures": {
+      "deterministic-workflow-a": 44,
+      "governed-single-planner-b": 84,
+      "hierarchical-model-based-c": 39,
+      "hierarchical-model-based-c-plus-verifier": 90
+    },
+    "mean_policy_utility": {
+      "deterministic-workflow-a": 0.783,
+      "governed-single-planner-b": 0.7255666666666667,
+      "hierarchical-model-based-c": 0.7496333333333334,
+      "hierarchical-model-based-c-plus-verifier": 0.44036666666666674
+    },
+    "near_optimal_within_0_05": {
+      "deterministic-workflow-a": 0.9333333333333333,
+      "governed-single-planner-b": 0.6533333333333333,
+      "hierarchical-model-based-c": 0.8933333333333333,
+      "hierarchical-model-based-c-plus-verifier": 0.52
+    },
+    "mean_policy_regret": {
+      "deterministic-workflow-a": 0.005666666666666667,
+      "governed-single-planner-b": 0.0631,
+      "hierarchical-model-based-c": 0.03903333333333333,
+      "hierarchical-model-based-c-plus-verifier": 0.3482666666666667
+    },
+    "hierarchical_c_vs_deterministic_a": {
+      "c_higher_utility_cases": 11,
+      "a_higher_utility_cases": 30,
+      "ties": 109,
+      "mean_utility_difference_c_minus_a": -0.03336666666666667
+    },
+    "provider_semantic_failures": {
+      "count": 5,
+      "cause": "Schema-valid non-authoritative reason_code values exceeded the local 128-character contract.",
+      "safe_fallback_rate": 1.0,
+      "case_ids": [
+        "fold-003-repeated-confusion-003",
+        "fold-003-repeated-confusion-017",
+        "fold-003-repeated-confusion-022",
+        "fold-003-student-message-004",
+        "fold-003-student-message-010"
+      ]
+    },
+    "interpretation": [
+      "C repaired much of B's model-only collapse but did not outperform deterministic A on continuous hidden utility.",
+      "C+V's reject-only verifier suppressed valid interventions and should not advance.",
+      "The exact single preferred action is a useful agreement diagnostic but is not equivalent to whether a transition is authorized and pedagogically valid.",
+      "A safe successor should begin from deterministic A and permit a model-assisted change only when an inspectable value model independently agrees and predicts a material utility gain."
+    ]
+  },
+  "findings": [
+    {
+      "id": "SA8",
+      "severity": "P1",
+      "title": "Non-authoritative provider rationale exceeded the local contract",
+      "status": "closed-prospectively",
+      "closure": "HierarchicalPlanningProposalV1 and PlannerVerificationV1 now normalize over-length reason codes into a readable bounded prefix plus deterministic SHA-256 suffix before local validation. Authoritative action, evidence, and policy fields are unchanged.",
+      "regression_test": "tests/digital_twin/test_planning_architectures.py::test_provider_reason_is_normalized_before_local_contract_validation"
+    },
+    {
+      "id": "SA9",
+      "severity": "P1",
+      "title": "Fold 003 provisional ranking omitted continuous policy utility",
+      "status": "closed-prospectively-no-past-decision-impact",
+      "closure": "No architecture was selected from Fold 003, so the ordering caused no release decision. The successor runner reports utility and regret and applies the complete preregistered paired rule before naming a confirmation candidate.",
+      "regression_test": "tests/test_successor_architecture_policy_value_fold_004.py::test_transition_validity_uses_authority_envelope_not_single_preference"
+    },
+    {
+      "id": "SA10",
+      "severity": "P1",
+      "title": "Exact preferred-action agreement was conflated with transition validity",
+      "status": "closed-prospectively",
+      "closure": "The fresh successor defines deterministic event/action-envelope validity as the hard transition gate, retains exact preferred-action agreement as a diagnostic, and uses hidden continuous utility/regret as the primary pedagogical comparison.",
+      "regression_test": "tests/test_successor_architecture_policy_value_fold_004.py::test_transition_validity_uses_authority_envelope_not_single_preference"
+    }
+  ],
+  "successor": {
+    "implementation_id": "guarded-policy-value-planner-v2",
+    "instrument_id": "successor-architecture-policy-value-fold-004-001",
+    "fresh_cases": 150,
+    "paired_cells": 600,
+    "provider_calls_authorized": false,
+    "same_fold_rescore": false
+  },
+  "audit_state": {
+    "historical_findings_reopened": 0,
+    "new_findings": 3,
+    "new_findings_closed": 3,
+    "open_findings": 0
+  },
+  "limitations": [
+    "The hidden utility oracle is synthetic and does not establish real learning improvement.",
+    "The post-hoc diagnostic analysis explains Fold 003 but cannot change its metrics, gates, or decision.",
+    "The successor requires fresh execution and confirmation before release selection."
+  ],
+  "provider_calls": 0,
+  "private_data_used": false
+}

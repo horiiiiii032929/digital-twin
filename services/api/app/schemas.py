@@ -61,7 +61,9 @@ class PolicyFieldUpdateRequest(BaseModel):
 
 class SourceInventoryCreateRequest(BaseModel):
     name: str = Field(min_length=1, max_length=255)
-    mime_type: str = Field(default="application/octet-stream", min_length=1, max_length=255)
+    mime_type: str = Field(
+        default="application/octet-stream", min_length=1, max_length=255
+    )
     size_bytes: int = Field(default=0, ge=0, le=1_099_511_627_776)
     permission_status: SourcePermissionStatus = SourcePermissionStatus.PENDING
     source_label: SourceLabel = SourceLabel.COURSE_APPROVED
@@ -115,11 +117,7 @@ class StudentMessageRequest(BaseModel):
     @field_validator("request_id", "responding_to_outreach_message_id")
     @classmethod
     def required_text_must_be_nonblank(cls, value: str | None) -> str | None:
-        return (
-            None
-            if value is None
-            else _nonblank(value, "student request identifier")
-        )
+        return None if value is None else _nonblank(value, "student request identifier")
 
 
 class OutreachPreferenceRequest(BaseModel):
@@ -174,6 +172,7 @@ class TeachingProfileApprovalRequest(BaseModel):
 
 
 class LearningGapReviewRequest(BaseModel):
+    release_id: str = Field(min_length=1, max_length=128)
     proposal_id: str = Field(pattern=r"^[0-9a-f]{64}$")
     decision: str = Field(pattern=r"^(consider-for-next-release|dismissed)$")
     rationale: str = Field(default="", max_length=1_000)

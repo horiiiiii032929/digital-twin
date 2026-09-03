@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0.0",
+  "program_id": "successor-architecture-paired-comparison-001",
+  "owner_issue": 184,
+  "status": "build-only",
+  "architectures": [
+    "deterministic-workflow-a",
+    "governed-single-planner-b",
+    "hierarchical-model-based-c",
+    "hierarchical-model-based-c-plus-verifier"
+  ],
+  "historical_controls": [
+    "t0-grounded-control",
+    "t1-v1-reactive-control",
+    "governed-autonomous-tutoring-graph-v2.1"
+  ],
+  "simulator_bounds": [
+    "oracle",
+    "never-intervene"
+  ],
+  "engine_allocations": [
+    {
+      "allocation_id": "e1",
+      "provider": "openai-direct",
+      "planner_model": "gpt-5.6-luna",
+      "generator_model": "gpt-5.6-luna",
+      "verifier_model": "gpt-5.6-luna",
+      "planner_reasoning_effort": "low",
+      "generator_reasoning_effort": "none",
+      "store": false,
+      "fallback_allowed": false,
+      "exact_returned_identity_required": true
+    },
+    {
+      "allocation_id": "e2",
+      "provider": "openai-direct",
+      "planner_model": "gpt-5.6-terra",
+      "generator_model": "gpt-5.6-luna",
+      "verifier_model": "gpt-5.6-luna",
+      "planner_reasoning_effort": "low",
+      "generator_reasoning_effort": "none",
+      "store": false,
+      "fallback_allowed": false,
+      "exact_returned_identity_required": true
+    },
+    {
+      "allocation_id": "e3",
+      "provider": "openai-direct",
+      "planner_model": "gpt-5.6-luna",
+      "generator_model": "gpt-5.4-mini-2026-03-17",
+      "verifier_model": "gpt-5.6-luna",
+      "planner_reasoning_effort": "low",
+      "generator_reasoning_effort": "none",
+      "store": false,
+      "fallback_allowed": false,
+      "exact_returned_identity_required": true
+    },
+    {
+      "allocation_id": "e4",
+      "provider": "openai-direct",
+      "planner_model": "gpt-5.6-terra",
+      "generator_model": "gpt-5.4-mini-2026-03-17",
+      "verifier_model": "gpt-5.6-luna",
+      "planner_reasoning_effort": "low",
+      "generator_reasoning_effort": "none",
+      "store": false,
+      "fallback_allowed": false,
+      "exact_returned_identity_required": true
+    }
+  ],
+  "shared_authorities": [
+    "event-scoped-action-eligibility-v1",
+    "approved-course-release-and-profile-binding",
+    "question-targeted-evidence-sufficiency",
+    "canonical-source-range-claim-and-citation-validation",
+    "consent-quiet-hours-frequency-and-cooldown-enforcement",
+    "commit-then-relay-exactly-once-delivery",
+    "virtual-utc-clock",
+    "t0-one-setting-rollback"
+  ],
+  "stages": [
+    {
+      "stage_id": "common-defect-closure",
+      "case_count": 33,
+      "maximum_executions": 1,
+      "may_influence_development": true,
+      "requires_previous_pass": false
+    },
+    {
+      "stage_id": "network-free-runtime-conformance",
+      "case_count": 48,
+      "maximum_executions": 1,
+      "may_influence_development": true,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "three-fold-architecture-development",
+      "case_count": 1800,
+      "maximum_executions": 3,
+      "may_influence_development": true,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "top-two-cross-engine-comparison",
+      "case_count": 1200,
+      "maximum_executions": 1,
+      "may_influence_development": true,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "fresh-sealed-confirmation-1000",
+      "case_count": 1000,
+      "maximum_executions": 1,
+      "may_influence_development": false,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "known-regression-10000-plus-1000",
+      "case_count": 11000,
+      "maximum_executions": 1,
+      "may_influence_development": false,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "actual-product-autonomy-820",
+      "case_count": 820,
+      "maximum_executions": 1,
+      "may_influence_development": false,
+      "requires_previous_pass": true
+    },
+    {
+      "stage_id": "local-product-qualification",
+      "case_count": 45,
+      "maximum_executions": 1,
+      "may_influence_development": false,
+      "requires_previous_pass": true
+    }
+  ],
+  "maximum_improvement_rounds": 3,
+  "same_confirmation_quality_rerun_allowed": false,
+  "deterministic_truth_authoritative": true,
+  "llm_review_advisory_only": true,
+  "human_participants_required": false,
+  "paid_execution_authorized": false,
+  "automatic_progression_after_pass": true,
+  "total_emergency_budget_usd": 50,
+  "hard_gates": [
+    "zero unauthorized or unsupported action",
+    "zero incorrect learner, course, release, or profile",
+    "zero invalid citation or source-version release",
+    "zero consent, quiet-hour, frequency, or cooldown violation",
+    "zero duplicate state revision, action, or delivery",
+    "zero unbounded loop or model-owned authoritative mutation",
+    "100 percent provider-failure safe fallback",
+    "100 percent restart consistency",
+    "at least 95 percent valid pedagogical transitions",
+    "at least 98 percent correct goal termination",
+    "factual grounding no more than 3 points below T0",
+    "100 percent proactive action, reason, and source lineage"
+  ],
+  "decision_rule": "Reject every authority, scope, citation, persistence, identity, or provider-completion hard-gate failure. The three original A/B/C/C+V folds are terminal and selected no architecture. Under AFQC-152, exact preferred-action agreement remains diagnostic, deterministic event/action-envelope validity is the hard transition gate, and continuous hidden policy utility/regret is the primary pedagogical comparison. The fresh H successor advances over A only when its paired preferred-action lower bound is at least -0.05, its paired utility lower bound is above zero, its utility is not below C, and every hard gate passes; otherwise A advances when the gates pass. Freeze the provisional winner before one fresh confirmation.",
+  "prospective_amendments": [
+    {
+      "decision_id": "AFQC-152",
+      "reason": "Valid Fold 003 evidence showed that exact agreement with one preferred action was not equivalent to authorized transition validity and that the provisional ordering omitted continuous policy utility.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-policy-value-fold-004-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
+    },
+    {
+      "decision_id": "AFQC-155",
+      "reason": "Valid Fold 004 evidence replicated every safety boundary and established a positive paired utility improvement for guarded policy-value H over deterministic A, but the 150-case development fold was not large enough for release selection.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-confirmation-005-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
+    },
+    {
+      "decision_id": "AFQC-159",
+      "reason": "The source-disjoint 1,000-case confirmation selected guarded policy-value H before engine allocation so the E1-E4 comparison changes only planner and response-strategy models inside one replicated architecture.",
+      "historical_results_changed": false,
+      "original_development_folds_reopened": false,
+      "successor_instrument": "successor-architecture-engine-comparison-006-001",
+      "successor_implementation": "guarded-policy-value-planner-v2"
+    }
+  ],
+  "provider_freshness": {
+    "verified_at": "2026-09-02T00:00:00+08:00",
+    "maximum_age_hours_before_paid_execution": 24,
+    "aliases_require_canary_identity_freeze": true,
+    "exact_snapshot_required_when_available": true,
+    "recheck_pricing_limits_retention_and_availability": true
+  },
+  "prohibited_models": [
+    "gpt-5.6-sol",
+    "Gemma",
+    "Claude",
+    "DeepSeek",
+    "OpenRouter-routed models",
+    "retired local general models"
+  ]
+}

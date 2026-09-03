@@ -1090,6 +1090,16 @@ authorization is revoked; the opened cases must not be reused for confirmation.
   source-range-disjoint 1,000-case confirmation. Execute/resume commands are
   implemented but fail closed until the program instrument and bounded freeze
   both carry the one-time USD 50 authorization.
+- `run_successor_architecture_paired_comparison_001.py`: validates the finite
+  A/B/C/C+V tournament manifest and runs 48 network-free actual-graph
+  conformance cells. It proves that A makes zero model-planning calls, C at
+  depth zero recovers B, all candidates stay inside the same deterministic
+  action/evidence/authority envelope, and C+V can only reject. Use
+  `npm run validate:successor-architecture-paired-comparison-001`,
+  `npm run simulate:successor-architecture-paired-comparison-001`, or the
+  combined `npm run verify:successor-architecture-paired-comparison-001`.
+  These commands never perform provider calls and cannot select an
+  architecture.
 - `run_course_digital_twin_autonomous_long_run_001.py`: provides the one-
   authority finite controller for the #153/#157 path. Both permitted attempts
   are terminal invalid evidence before provider I/O; authority is revoked and

@@ -1,0 +1,81 @@
+{
+  "run_id": "successor-learner-timing-simulation-001",
+  "date": "2026-09-02",
+  "status": "complete",
+  "decision": "go-deeper",
+  "branch": "claude/sota-autonomous-digital-twin-study",
+  "registry_entry": "deferred-to-merge",
+  "code_revision": "07e4902e890c1f4ce7f0d856892a07dec0f78a5e",
+  "dirty": false,
+  "command": "uv run python scripts/run_successor_learner_timing_simulation_001.py",
+  "plan": "research/04_experiments/2026-09-02-successor-learner-model-and-timing-simulation-plan.md",
+  "results": "research/05_evaluation/successor-learner-timing-simulation-001-results.md",
+  "evidence": {
+    "summary_json": "research/05_evaluation/records/successor-learner-timing-simulation-001-summary.json",
+    "summary_json_sha256": "d54f84c24af08d254bfdd4a491f480ff520dba56abe87e5acd1c4ea919b1f7df",
+    "per_learner_jsonl": "reports/generated/successor-learner-timing-simulation-001/per_learner.jsonl",
+    "per_learner_jsonl_sha256": "739ba58ec7c2377721ecb331c87fd6b5b7533c7b9bc5670535724ad6dab17bf5",
+    "per_learner_tracked": false
+  },
+  "dataset": {
+    "kind": "synthetic-hidden-state-learners",
+    "generator": "src/digital_twin/evaluation/learner_simulator.py",
+    "families": ["bkt-like", "logistic-like"],
+    "personas": ["fast-learner", "slow-learner", "high-forgetting", "misconception-prone", "answer-seeking", "low-receptivity"],
+    "concepts": 8,
+    "days": 30,
+    "development_seeds": [1000, 1001, 1002, 1003, 1004, 1005],
+    "held_out_seeds": [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019],
+    "learners_per_condition": 240,
+    "permissions": "synthetic; no course, professor, or student data",
+    "corpus": "none"
+  },
+  "conditions": {
+    "baseline": "count+constant",
+    "candidates": ["bkt+constant", "pfa+constant", "count+conditional", "count+value", "bkt+conditional", "bkt+value", "pfa+conditional", "pfa+value"],
+    "bounds": ["count+oracle", "count+never"],
+    "eligibility": {"consent": true, "quiet_hours_local": "22:00-08:00", "max_messages_per_7_days": 3, "same_concept_cooldown_hours": 24}
+  },
+  "fitted_parameters": {
+    "count": {},
+    "bkt": {"p_init": 0.3, "p_learn": 0.3, "p_forget_per_day": 0.05},
+    "pfa": {"beta": -0.4, "gamma": 0.5, "rho": 0.3, "decay_per_day": 0.08}
+  },
+  "sample_size_rationale": "240 paired learners per contrast gives bootstrap intervals narrower than the registered minimum effects (0.02 MSE, 5 points waste) for every primary contrast",
+  "primary_metrics": ["mse_vs_hidden", "wasted_rate"],
+  "secondary_metrics": ["brier_next_outcome", "ece_next_outcome", "auroc_next_outcome", "follow_up_fraction", "final_hidden_mastery", "messages_sent"],
+  "hard_gates": {"eligibility_violations": {"threshold": 0, "observed_max": 0, "pass": true}},
+  "uncertainty": "paired percentile bootstrap by learner, 1000 resamples, seed 20260902",
+  "aggregate": {
+    "count+constant": {"mse_vs_hidden": 0.084, "brier_next_outcome": 0.259, "auroc_next_outcome": 0.435, "messages_sent": 14.0, "wasted_rate": 0.506, "follow_up_fraction": 0.320, "final_hidden_mastery": 0.314},
+    "bkt+constant": {"mse_vs_hidden": 0.035, "brier_next_outcome": 0.259, "auroc_next_outcome": 0.569, "messages_sent": 14.0, "wasted_rate": 0.464, "follow_up_fraction": 0.351, "final_hidden_mastery": 0.317},
+    "pfa+constant": {"mse_vs_hidden": 0.052, "brier_next_outcome": 0.249, "auroc_next_outcome": 0.500, "messages_sent": 14.0, "wasted_rate": 0.508, "follow_up_fraction": 0.319, "final_hidden_mastery": 0.313},
+    "count+conditional": {"mse_vs_hidden": 0.084, "brier_next_outcome": 0.254, "auroc_next_outcome": 0.430, "messages_sent": 7.0, "wasted_rate": 0.388, "follow_up_fraction": 0.423, "final_hidden_mastery": 0.302},
+    "count+value": {"mse_vs_hidden": 0.084, "brier_next_outcome": 0.261, "auroc_next_outcome": 0.447, "messages_sent": 10.2, "wasted_rate": 0.341, "follow_up_fraction": 0.439, "final_hidden_mastery": 0.317},
+    "bkt+conditional": {"mse_vs_hidden": 0.035, "brier_next_outcome": 0.250, "auroc_next_outcome": 0.562, "messages_sent": 8.9, "wasted_rate": 0.366, "follow_up_fraction": 0.433, "final_hidden_mastery": 0.309},
+    "bkt+value": {"mse_vs_hidden": 0.037, "brier_next_outcome": 0.256, "auroc_next_outcome": 0.567, "messages_sent": 12.3, "wasted_rate": 0.301, "follow_up_fraction": 0.451, "final_hidden_mastery": 0.328},
+    "pfa+conditional": {"mse_vs_hidden": 0.051, "brier_next_outcome": 0.244, "auroc_next_outcome": 0.481, "messages_sent": 7.3, "wasted_rate": 0.415, "follow_up_fraction": 0.400, "final_hidden_mastery": 0.303},
+    "pfa+value": {"mse_vs_hidden": 0.051, "brier_next_outcome": 0.247, "auroc_next_outcome": 0.511, "messages_sent": 10.5, "wasted_rate": 0.347, "follow_up_fraction": 0.433, "final_hidden_mastery": 0.313},
+    "count+oracle": {"mse_vs_hidden": 0.086, "messages_sent": 12.2, "wasted_rate": 0.0, "follow_up_fraction": 0.639, "final_hidden_mastery": 0.345},
+    "count+never": {"mse_vs_hidden": 0.083, "messages_sent": 0.0, "final_hidden_mastery": 0.288}
+  },
+  "paired_contrasts": {
+    "bkt+constant vs count+constant": {"mse_vs_hidden": {"mean": -0.0497, "ci95": [-0.0529, -0.0466]}, "wasted_rate": {"mean": -0.0417, "ci95": [-0.0512, -0.0321]}},
+    "pfa+constant vs count+constant": {"mse_vs_hidden": {"mean": -0.0322, "ci95": [-0.0343, -0.0298]}, "brier_next_outcome": {"mean": -0.0104, "ci95": [-0.0133, -0.0077]}},
+    "count+value vs count+constant": {"wasted_rate": {"mean": -0.1646, "ci95": [-0.1874, -0.1411]}, "follow_up_fraction": {"mean": 0.1187, "ci95": [0.0930, 0.1452]}},
+    "bkt+value vs count+constant": {"mse_vs_hidden": {"mean": -0.0473, "ci95": [-0.0506, -0.0440]}, "wasted_rate": {"mean": -0.2048, "ci95": [-0.2275, -0.1829]}, "follow_up_fraction": {"mean": 0.1306, "ci95": [0.1056, 0.1561]}, "final_hidden_mastery": {"mean": 0.0140, "ci95": [0.0073, 0.0208]}},
+    "bkt+value vs bkt+conditional": {"wasted_rate": {"mean": -0.0655, "ci95": [-0.0888, -0.0428]}, "final_hidden_mastery": {"mean": 0.0185, "ci95": [0.0115, 0.0250]}, "mse_vs_hidden": {"mean": 0.0020, "ci95": [0.0005, 0.0033]}},
+    "pfa+value vs pfa+conditional": {"wasted_rate": {"mean": -0.0676, "ci95": [-0.0922, -0.0429]}, "final_hidden_mastery": {"mean": 0.0108, "ci95": [0.0048, 0.0170]}}
+  },
+  "attempts": [
+    {"attempt": 1, "code_revision": "2b2b3c8b5c5694e8df61d783e6b6a44c5fa25c34", "dirty": true, "status": "invalid", "reason": "simulator defect: logistic-family forgetting overwhelmed learning; corrected before analysis"},
+    {"attempt": 2, "code_revision": "07e4902e890c1f4ce7f0d856892a07dec0f78a5e", "dirty": false, "status": "valid"}
+  ],
+  "limitations": [
+    "simulated learners only; no real-student, usability, or learning-outcome claim",
+    "estimator parameters chosen on development seeds of the same simulator",
+    "small oracle-to-never gap (0.057) makes final-mastery differences secondary",
+    "count baseline has no decay variant",
+    "no text, retrieval, generation, or policy-envelope behaviour measured"
+  ]
+}

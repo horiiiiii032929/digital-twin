@@ -68,11 +68,7 @@ def _relevant_worktree_changes() -> list[str]:
         capture_output=True,
         text=True,
     ).stdout
-    return [
-        row
-        for row in output.splitlines()
-        if row and not row[3:].startswith(".claude/")
-    ]
+    return [row for row in output.splitlines() if row]
 
 
 def _implementation_revision_matches(bound_revision: str) -> bool:
@@ -271,9 +267,7 @@ async def _run(*, output_root: Path, resume: bool) -> dict[str, Any]:
             "canonical_all_evidence_at_3"
         ]
         >= 0.90,
-        "evidence_recall_at_5": candidate["summary"]["metrics"][
-            "evidence_recall_at_5"
-        ]
+        "evidence_recall_at_5": candidate["summary"]["metrics"]["evidence_recall_at_5"]
         >= 0.95,
         "source_family_lower_95": interval_passed,
     }

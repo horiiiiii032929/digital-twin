@@ -1,0 +1,104 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016-build",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "pedagogy-aware-h-e1-build-016",
+  "status": "completed-go-deeper-build-only",
+  "decision_question": "Is a fresh source- and wording-disjoint H+E1 confirmation with pedagogy-aware source-semantic grounding ready for one provider-backed execution?",
+  "code_revision": "e25563493d9c2cd34445419fb4e4e48af4d204a7",
+  "dirty_state": false,
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_016.json",
+      "sha256": "ea649c80830e1d0dddfcf657960af6d97784b02b951f02ea2cac3b4f56916221",
+      "role": "provider-unauthorized-build-instrument"
+    },
+    {
+      "path": "src/digital_twin/grounding/semantic_evidence_atoms.py",
+      "sha256": "d42f9851fce512c58435ba8398436c3934d6b8cfbf0f70b7f4c76952502b7eca",
+      "role": "versioned-v3-grounding-implementation"
+    },
+    {
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
+      "sha256": "0e23b944d8155bc83298499d30517bf10aacb27fcdf57d99c0308bdc4ac40a73",
+      "role": "fresh-public-and-hidden-reference-builder"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_016.py",
+      "sha256": "9e4617d2ab33f42824494e0acaea798736702ce1b6f7d7926392605dbc8ddcc2",
+      "role": "guarded-provider-runner"
+    }
+  ],
+  "candidates": [
+    {
+      "architecture_id": "pedagogy-aware-source-semantic-evidence-atoms-v3-plus-h-e1",
+      "version": "confirmation-016-build",
+      "role": "candidate",
+      "metrics": [
+        {
+          "name": "network-free-reactive-reference-action-accuracy",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 0.95,
+          "passed": true
+        },
+        {
+          "name": "repository-audit-completeness",
+          "value": 1.0,
+          "unit": "ratio",
+          "direction": "higher-is-better",
+          "threshold": 1.0,
+          "passed": true
+        }
+      ],
+      "hard_gates": [
+        {
+          "name": "build-and-freeze",
+          "passed": true,
+          "evidence": "820-case package, focused regressions, 153/153 freeze coverage, and 991/991 repository audits pass without provider use."
+        },
+        {
+          "name": "provider-backed-autonomy-quality",
+          "passed": null,
+          "evidence": "Not measured in the network-free build checkpoint."
+        }
+      ]
+    }
+  ],
+  "operational": {
+    "case_count": 820,
+    "reactive_trajectory_case_count": 450,
+    "source_family_count": 50,
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0,
+    "private_data_used": false
+  },
+  "findings": [
+    {
+      "finding_id": "SE7-2",
+      "status": "remediation-implemented-confirmation-pending",
+      "evidence": "V3 corrects instructional target dilution and makes reference-action accuracy an explicit aggregate gate."
+    },
+    {
+      "finding_id": "SE7-3",
+      "status": "closed-before-paid-execution",
+      "evidence": "Network-free simulation exposed a false distinct-region requirement for a two-target relation supported by one canonical atom; V3 now permits one canonical region to support both targets while retaining ambiguity checks."
+    }
+  ],
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "Keep the build for one provider-backed confirmation; no release selection follows from network-free evidence."
+  },
+  "limitations": [
+    "Network-free autonomous cases do not establish provider-backed planner or proactive quality.",
+    "Public synthetic sources and learners only.",
+    "Luna has no dated snapshot; exact returned identity must remain stable during execution."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-016-build-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-016-build.json"
+}

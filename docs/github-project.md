@@ -82,6 +82,30 @@ and grounding architecture change on fresh development evidence. #105 remained `
 parent release goal remains open. Program 011 paid authority is revoked; the
 qualified local deterministic R1 is unchanged.
 
+Issue #184 remains the active architecture/model selection item. Fold 004 and
+Confirmation 005 selected guarded policy-value H; the E1–E4 comparison selected
+economical E1 (Luna/Luna). Confirmation 015 then passed every registered safety
+and autonomy gate but exposed release-blocking finding `SE7-2`: 600/600
+multi-turn trajectories omitted the expected confusion intervention because V2
+grounding treated pedagogical request language as factual target content.
+
+The original 015 Keep result is preserved, its authority is revoked, and no
+release is selected from it. Confirmations 016 and 017 both stopped before bulk
+after their selected product canaries made no Luna call. Each persisted two
+public responses, spent USD 0, and left hidden gold unopened. The same-package
+correction allowance is exhausted and all authority is revoked.
+
+Postmortem revision `49952b1` closes the canary, lifecycle, fallback-parity, and
+virtual-clock findings. Its known-set network-free regression passed 820/820
+reference actions and safety contracts across T0, T1-v1, T1-v2 reactive, and
+T1-v2 autonomous. This is regression evidence, not provider-backed release
+evidence. Issue #184 therefore closes as `Done / Refine` with a `No Release`
+decision for H+E1/V3 at this checkpoint. T0 and bounded T1-v1 remain the safe
+controls. Successor [#186](https://github.com/horiiiiii032929/digital-twin/issues/186)
+is `In Progress / Go Deeper` and requires a fresh source-disjoint confirmation
+with separate transport and product-route canaries before scaling or local
+release selection.
+
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500
 fresh routing cases and seven simulated days with bounded cited delivery,

@@ -1,0 +1,68 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "successor-architecture-policy-value-fold-004-001-build",
+  "code_revision": "2ff9498",
+  "dirty_state": true,
+  "status": "completed-go-deeper",
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_implementation_id": "guarded-policy-value-planner-v2",
+    "rationale": "The causal corrections and fresh successor harness pass the complete build gate. Proceed only through a separate bounded authorization; this build does not select the release architecture."
+  },
+  "dataset": {
+    "dataset_id": "successor-architecture-policy-value-fold-004",
+    "case_count": 150,
+    "condition_cell_count": 600,
+    "eligible_case_count": 120,
+    "boundary_case_count": 30,
+    "historical_case_ids_disjoint": true,
+    "public_file_sha256": "04d9ca04579102686316e6323d1df9b84e69a8d617660ed1ecbcdcfa1f86d0cb",
+    "hidden_gold_file_sha256": "01099b0a5a9afda5c1b6cbaae83de4fd23d4aed5e9f32f2abc459173f98ef039",
+    "gold_opened": false,
+    "private_data_used": false
+  },
+  "conditions": [
+    "deterministic-workflow-a",
+    "governed-single-planner-b",
+    "hierarchical-model-based-c",
+    "guarded-policy-value-planner-v2"
+  ],
+  "execution_bounds": {
+    "provider_model": "gpt-5.6-luna",
+    "maximum_calls": 121,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 2.0,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "verification": {
+    "focused_successor_and_transport_tests": 28,
+    "focused_freeze_and_schema_tests": 34,
+    "python_tests": 1669,
+    "frontend_tests": 50,
+    "frontend_lint": "passed",
+    "frontend_production_build": "passed",
+    "execution_freeze": "148/148 protected entrypoints; passed",
+    "repository_inventory": "971/971 audited; zero pending or open findings",
+    "evaluation_registry": "passed",
+    "git_diff_check": "passed"
+  },
+  "audit_findings": {
+    "historical_terminal": 40,
+    "new_closed": [
+      "SA8",
+      "SA9",
+      "SA10"
+    ],
+    "open": 0
+  },
+  "provider_calls": 0,
+  "reported_cost_usd": 0,
+  "limitations": [
+    "Build and simulation evidence do not establish architecture quality.",
+    "Synthetic hidden utility does not establish real student learning improvement.",
+    "Luna has no dated snapshot and requires a fresh exact-identity check before paid execution.",
+    "A fresh confirmation remains mandatory before final release selection."
+  ]
+}

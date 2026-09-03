@@ -32,6 +32,11 @@ from src.digital_twin.evaluation.autonomy_independent_scoring import (
     AutonomyStateDeltaEvidenceV2,
     AutonomyTraceEvidenceV2,
 )
+from src.digital_twin.evaluation.learner_evidence import (
+    LearnerEvidenceV1,
+    ProactiveDeliveryEvidenceV1,
+    build_learner_evidence,
+)
 from src.digital_twin.student.autonomy_models import AutonomousGoalStatus
 from src.digital_twin.student.autonomy_service import GovernedAutonomyService
 from src.digital_twin.student.models import OutreachChannel, TutorTurn
@@ -118,6 +123,7 @@ class StudentProductAutonomyAdapterV1:
         self._restart_evidence: list[AutonomyRestartEvidenceV2] = []
         self._action_evidence: dict[str, AutonomyActionEvidenceV2] = {}
         self._citation_evidence: list[AutonomyCitationEvidenceV2] = []
+        self._event_by_observation: dict[str, str] = {}
 
     @property
     def _now(self) -> datetime:
@@ -157,6 +163,7 @@ class StudentProductAutonomyAdapterV1:
         self._restart_evidence = []
         self._action_evidence = {}
         self._citation_evidence = []
+        self._event_by_observation = {}
 
     async def submit_event(self, event: AutonomyEvaluationEventV1) -> None:
         runtime = self._require_runtime()
@@ -430,19 +437,10 @@ class StudentProductAutonomyAdapterV1:
     @staticmethod
     def _durable_identity_snapshot(
         runtime: StudentProductAutonomyRuntimeV1,
-    ) -> tuple[tuple[str, ...], tuple[str, ...], tuple[str, ...], int]:
-        goals = runtime.repository.list_autonomous_goals(
+    ) -> dict[str, tuple[tuple[str, ...], ...]]:
+        return runtime.repository.autonomy_durable_state_snapshot(
             runtime.student_id,
             runtime.course_id,
-        )
-        actions = runtime.repository.list_autonomous_actions(runtime.course_id)
-        messages = runtime.repository.list_messages(runtime.conversation_id)
-        belief = runtime.repository.get_learner_belief_state_v2(runtime.conversation_id)
-        return (
-            tuple(item.goal_id for item in goals),
-            tuple(item.action_id for item in actions),
-            tuple(item.id for item in messages),
-            belief.revision if belief is not None else 0,
         )
 
     async def collect_actions(self) -> list[AutonomyObservedActionV1]:
@@ -559,6 +557,68 @@ class StudentProductAutonomyAdapterV1:
                 for item in deltas
             ],
             restart_checks=list(self._restart_evidence),
+        )
+
+    async def submit_event_observed(
+        self, event: AutonomyEvaluationEventV1
+    ) -> AutonomyObservedActionV1 | None:
+        """Submit one event and return the reactive action it produced, if any.
+
+        Closed-loop learner drivers need the tutor's observable reaction to
+        decide the learner's next message. Only the public observed action is
+        returned; no message text or internal state leaves the adapter.
+        """
+
+        runtime = self._require_runtime()
+        before = {
+            item.observation_id
+            for item in runtime.repository.list_learner_observations_v2(
+                runtime.conversation_id
+            )
+        }
+        await self.submit_event(event)
+        for item in runtime.repository.list_learner_observations_v2(
+            runtime.conversation_id
+        ):
+            if item.observation_id not in before:
+                self._event_by_observation[item.observation_id] = event.event_id
+        expected_id = f"turn:{event.event_id}"
+        for action in reversed(self._observed_actions):
+            if action.action_id == expected_id:
+                return action
+        return None
+
+    async def collect_learner_evidence(self) -> LearnerEvidenceV1:
+        """Sanitized belief, observation, and proactive-delivery evidence."""
+
+        runtime = self._require_runtime()
+        self._collect_new_autonomous_actions()
+        belief = runtime.repository.get_learner_belief_state_v2(runtime.conversation_id)
+        observations = runtime.repository.list_learner_observations_v2(
+            runtime.conversation_id
+        )
+        deliveries: list[ProactiveDeliveryEvidenceV1] = []
+        if runtime.autonomy is not None:
+            for action in runtime.repository.list_autonomous_actions(runtime.course_id):
+                opportunity = runtime.repository.get_autonomous_opportunity(
+                    action.opportunity_id
+                )
+                deliveries.append(
+                    ProactiveDeliveryEvidenceV1(
+                        action_id=f"autonomous:{action.action_id}",
+                        action_kind=action.kind.value,
+                        concept_id=(
+                            opportunity.concept_id if opportunity is not None else None
+                        ),
+                        status=action.status.value,
+                        at=action.created_at,
+                    )
+                )
+        return build_learner_evidence(
+            belief,
+            observations,
+            deliveries,
+            event_by_observation=self._event_by_observation,
         )
 
     async def collect_diagnostic_trace(self) -> dict[str, object]:

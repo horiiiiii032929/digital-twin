@@ -69,6 +69,18 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-ambiguity-safe-comparison-001",
         "academic-factual-qa-ambiguity-safe-comparison-002",
         "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+        "successor-architecture-development-fold-001",
+        "successor-architecture-development-fold-001-attempt-002",
+        "successor-architecture-development-fold-002-single-case-001",
+        "successor-architecture-development-fold-002-single-case-attempt-002",
+        "successor-architecture-development-fold-003-single-case-001",
+        "successor-architecture-policy-value-fold-004-001",
+        "successor-architecture-confirmation-005-001",
+        "successor-architecture-engine-comparison-006-001",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-014",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-015",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-016",
+        "governed-full-autonomy-v2-1-actual-product-confirmation-017",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

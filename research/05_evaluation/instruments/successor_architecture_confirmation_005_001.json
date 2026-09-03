@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "instrument_id": "successor-architecture-confirmation-005-001",
+  "program_id": "successor-architecture-paired-comparison-001",
+  "status": "completed-keep-authorization-revoked",
+  "owner_issue": 184,
+  "predecessor": {
+    "development_result": "research/05_evaluation/records/successor-architecture-policy-value-fold-004-001.json",
+    "development_decision": "guarded-policy-value-planner-v2 advances as the provisional confirmation candidate",
+    "historical_results_changed": false
+  },
+  "decision_question": "Does guarded policy-value H replicate its incremental pedagogical-utility benefit over deterministic A on 1,000 fresh scenario clusters while preserving every deterministic authority and safety boundary?",
+  "dataset": {
+    "public_path": "research/05_evaluation/successor_architecture_confirmation_005_public.json",
+    "public_file_sha256": "1fd97aa5d9810823cfa3d5bff6ef54852ee7cf8fe3a59b682c4f59f263b58c9f",
+    "public_content_sha256": "dd1e0b1f8f50cf2eaceae54c7e4a3debcb77ba94ea409ff20f2ac173eb436a03",
+    "hidden_gold_path": "research/05_evaluation/successor_architecture_confirmation_005_gold.json",
+    "hidden_gold_file_sha256": "1dbab3a0848372b96602b3d45fb1a3cb8f2254c00781f41c58537916b7eb29fa",
+    "hidden_gold_content_sha256": "dd0d72b9a2dfe7cdbbd0aa707e28ee04277ffb64defbfdf0bde424c2ac5dddaf",
+    "case_count": 1000,
+    "eligible_case_count": 800,
+    "boundary_case_count": 200,
+    "scenario_cluster_count": 1000,
+    "condition_cell_count": 2000,
+    "historical_case_ids_disjoint": true,
+    "gold_opens_after_all_cells_are_durable": true,
+    "private_data_used": false
+  },
+  "conditions": [
+    "deterministic-workflow-a",
+    "guarded-policy-value-planner-v2"
+  ],
+  "fixed_engine": {
+    "provider": "openai",
+    "provider_display_name": "OpenAI",
+    "first_party_endpoint": true,
+    "api_url": "https://api.openai.com/v1/responses",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "provider_model": "gpt-5.6-luna",
+    "documented_revision": "gpt-5.6-luna-alias-verified-2026-09-03",
+    "binding_id": "successor-architecture-confirmation-luna-engine-005",
+    "reasoning_effort": "low",
+    "max_output_tokens": 600,
+    "timeout_seconds": 60,
+    "maximum_transport_retries": 0,
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.2,
+    "store": false,
+    "fallback_allowed": false,
+    "shared_proposal_rule": "one fresh persisted Luna proposal per eligible case is evaluated by H while A remains deterministic",
+    "alias_limitation": "OpenAI publishes no dated Luna snapshot; exact returned alias is required throughout this run."
+  },
+  "provider_freshness": {
+    "verified_at": "2026-09-03T01:03:38+08:00",
+    "maximum_age_hours": 24,
+    "model_url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "guidance_url": "https://developers.openai.com/api/docs/guides/latest-model",
+    "responses_supported": true,
+    "structured_outputs_supported": true,
+    "context_window_tokens": 1050000,
+    "maximum_output_tokens": 128000
+  },
+  "execution": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "automatic_progression_authorized": false,
+    "maximum_provider_calls": 801,
+    "maximum_transport_retries": 0,
+    "emergency_cost_stop_usd": 5.0,
+    "canary_calls": 1,
+    "maximum_planner_calls": 800,
+    "batch_size": 1,
+    "concurrency": 8,
+    "quarantine_individual_model_failures": true,
+    "resume_allowed": true,
+    "exclusive_output": true,
+    "hidden_gold_opened": true,
+    "authorization_revoked_after_execution": true,
+    "terminal_result": "research/05_evaluation/records/successor-architecture-confirmation-005-001.json"
+  },
+  "analysis": {
+    "paired_continuous_interval": "seeded-paired-bootstrap-5000",
+    "preferred_action_is_diagnostic_not_transition_validity": true,
+    "transition_validity_authority": "event-scoped deterministic action envelope",
+    "primary_pedagogical_measure": "hidden continuous policy utility and regret",
+    "h_selection_rule": "Select H only if every hard gate passes, preferred-action lower 95% bound versus A is at least -0.05, utility lower 95% bound is above zero, mean regret is no worse than A, and near-optimal rate is within one point of A. Otherwise select A when every hard gate passes.",
+    "engine_comparison_requires_completed_keep": true,
+    "same_case_prompt_tuning": false
+  },
+  "hard_gates": {
+    "event_scoped_action_validity": 1.0,
+    "boundary_no_action_accuracy": 1.0,
+    "citation_validity": 1.0,
+    "scope_validity": 1.0,
+    "provider_completion_rate": 0.995,
+    "provider_failure_safe_deterministic_fallback": 1.0,
+    "duplicate_cells": 0,
+    "durable_cells": 2000
+  },
+  "result_states": [
+    "invalid-execution",
+    "completed-refine",
+    "completed-keep"
+  ]
+}

@@ -1,0 +1,337 @@
+{
+  "aggregate": {
+    "t0-grounded-control": {
+      "assessment_agreement": null,
+      "attempts_recognised": 0.0,
+      "attribution_accuracy": null,
+      "auroc_next_outcome": null,
+      "brier_next_outcome": null,
+      "concepts_mastered_final": 0.5555555555555556,
+      "cooldown_violations": 0.0,
+      "cost_usd": 0.0,
+      "ece_next_outcome": null,
+      "final_hidden_mastery": 0.3177062853875899,
+      "follow_up_fraction": null,
+      "frequency_violations": 0.0,
+      "hard_gates": {
+        "zero_cooldown_violations": true,
+        "zero_frequency_violations": true,
+        "zero_quiet_hour_violations": true
+      },
+      "messages_delivered": 0.0,
+      "mse_vs_hidden": 0.08232535348609665,
+      "mse_vs_hidden[bkt-like]": 0.10203225090395386,
+      "mse_vs_hidden[logistic-like]": 0.06261845606823942,
+      "n_cases": 36,
+      "provider_calls": 0.0,
+      "quiet_hour_violations": 0.0,
+      "wasted_rate": null,
+      "wasted_rate[bkt-like]": null,
+      "wasted_rate[logistic-like]": null
+    },
+    "t1-v1-reactive-control": {
+      "assessment_agreement": null,
+      "attempts_recognised": 0.0,
+      "attribution_accuracy": null,
+      "auroc_next_outcome": null,
+      "brier_next_outcome": null,
+      "concepts_mastered_final": 0.5555555555555556,
+      "cooldown_violations": 0.0,
+      "cost_usd": 0.0,
+      "ece_next_outcome": null,
+      "final_hidden_mastery": 0.3177062853875899,
+      "follow_up_fraction": null,
+      "frequency_violations": 0.0,
+      "hard_gates": {
+        "zero_cooldown_violations": true,
+        "zero_frequency_violations": true,
+        "zero_quiet_hour_violations": true
+      },
+      "messages_delivered": 0.0,
+      "mse_vs_hidden": 0.08232535348609665,
+      "mse_vs_hidden[bkt-like]": 0.10203225090395386,
+      "mse_vs_hidden[logistic-like]": 0.06261845606823942,
+      "n_cases": 36,
+      "provider_calls": 0.0,
+      "quiet_hour_violations": 0.0,
+      "wasted_rate": null,
+      "wasted_rate[bkt-like]": null,
+      "wasted_rate[logistic-like]": null
+    },
+    "t1-v2-autonomous": {
+      "assessment_agreement": 0.5660056752408967,
+      "attempts_recognised": 1.0,
+      "attribution_accuracy": 1.0,
+      "auroc_next_outcome": 0.37694266341461335,
+      "brier_next_outcome": 0.2709588457069183,
+      "concepts_mastered_final": 0.9444444444444444,
+      "cooldown_violations": 0.0,
+      "cost_usd": 0.0,
+      "ece_next_outcome": 0.24882865118606368,
+      "final_hidden_mastery": 0.3596529230589321,
+      "follow_up_fraction": 0.4117344075677409,
+      "frequency_violations": 0.0,
+      "hard_gates": {
+        "zero_cooldown_violations": true,
+        "zero_frequency_violations": true,
+        "zero_quiet_hour_violations": true
+      },
+      "messages_delivered": 11.055555555555555,
+      "mse_vs_hidden": 0.06656958980111655,
+      "mse_vs_hidden[bkt-like]": 0.06222820370602214,
+      "mse_vs_hidden[logistic-like]": 0.07091097589621095,
+      "n_cases": 36,
+      "provider_calls": 0.0,
+      "quiet_hour_violations": 0.0,
+      "wasted_rate": 0.3871873496873497,
+      "wasted_rate[bkt-like]": 0.41817380150713485,
+      "wasted_rate[logistic-like]": 0.35620089786756454
+    },
+    "t1-v2-reactive": {
+      "assessment_agreement": 0.5898427512528502,
+      "attempts_recognised": 1.0,
+      "attribution_accuracy": 1.0,
+      "auroc_next_outcome": 0.3815762692869701,
+      "brier_next_outcome": 0.2546048327820078,
+      "concepts_mastered_final": 0.5555555555555556,
+      "cooldown_violations": 0.0,
+      "cost_usd": 0.0,
+      "ece_next_outcome": 0.2471538961899281,
+      "final_hidden_mastery": 0.3177062853875899,
+      "follow_up_fraction": null,
+      "frequency_violations": 0.0,
+      "hard_gates": {
+        "zero_cooldown_violations": true,
+        "zero_frequency_violations": true,
+        "zero_quiet_hour_violations": true
+      },
+      "messages_delivered": 0.0,
+      "mse_vs_hidden": 0.05668039033307812,
+      "mse_vs_hidden[bkt-like]": 0.05556101888503859,
+      "mse_vs_hidden[logistic-like]": 0.05779976178111765,
+      "n_cases": 36,
+      "provider_calls": 0.0,
+      "quiet_hour_violations": 0.0,
+      "wasted_rate": null,
+      "wasted_rate[bkt-like]": null,
+      "wasted_rate[logistic-like]": null
+    }
+  },
+  "paired_contrasts": {
+    "t1-v2-autonomous vs t0-grounded-control": {
+      "attribution_accuracy": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.022485313990698766,
+          0.06607323209525262
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.041946637671342234,
+        "n_pairs": 36
+      },
+      "follow_up_fraction": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "messages_delivered": {
+        "ci95": [
+          10.666666666666666,
+          11.416666666666666
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 11.055555555555555,
+        "n_pairs": 36
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.031871142391229935,
+          0.0010989245294666687
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.015755763684980092,
+        "n_pairs": 36
+      },
+      "wasted_rate": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      }
+    },
+    "t1-v2-autonomous vs t1-v1-reactive-control": {
+      "attribution_accuracy": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.021057446873181243,
+          0.06471513263807038
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.041946637671342234,
+        "n_pairs": 36
+      },
+      "follow_up_fraction": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "messages_delivered": {
+        "ci95": [
+          10.694444444444445,
+          11.416666666666666
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 11.055555555555555,
+        "n_pairs": 36
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.03293545903000263,
+          0.0017749124859949893
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": -0.015755763684980092,
+        "n_pairs": 36
+      },
+      "wasted_rate": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      }
+    },
+    "t1-v2-autonomous vs t1-v2-reactive": {
+      "attribution_accuracy": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 36
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.021187467655888966,
+          0.06461948763474923
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.041946637671342234,
+        "n_pairs": 36
+      },
+      "follow_up_fraction": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "messages_delivered": {
+        "ci95": [
+          10.694444444444445,
+          11.416666666666666
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 11.055555555555555,
+        "n_pairs": 36
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          0.004553112921211199,
+          0.015641970088611172
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": 0.009889199468038422,
+        "n_pairs": 36
+      },
+      "wasted_rate": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      }
+    },
+    "t1-v2-reactive vs t1-v1-reactive-control": {
+      "attribution_accuracy": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "final_hidden_mastery": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 36
+      },
+      "follow_up_fraction": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      },
+      "messages_delivered": {
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "lower_bound_excludes_zero": false,
+        "mean_difference": 0.0,
+        "n_pairs": 36
+      },
+      "mse_vs_hidden": {
+        "ci95": [
+          -0.04015924141481103,
+          -0.010836867264458969
+        ],
+        "lower_bound_excludes_zero": true,
+        "mean_difference": -0.025644963153018518,
+        "n_pairs": 36
+      },
+      "wasted_rate": {
+        "ci95": null,
+        "mean_difference": null,
+        "n_pairs": 0
+      }
+    }
+  },
+  "run": {
+    "bootstrap_resamples": 1000,
+    "cases": 144,
+    "code": {
+      "dirty": false,
+      "revision": "6a244cc4b67acd4f79dc3fe9b91862c1e171d5b8"
+    },
+    "conditions": [
+      "t0-grounded-control",
+      "t1-v1-reactive-control",
+      "t1-v2-reactive",
+      "t1-v2-autonomous"
+    ],
+    "days": 30,
+    "elapsed_seconds": 103.41,
+    "families": [
+      "bkt-like",
+      "logistic-like"
+    ],
+    "network": "none",
+    "personas": [
+      "fast-learner",
+      "slow-learner",
+      "high-forgetting",
+      "misconception-prone",
+      "answer-seeking",
+      "low-receptivity"
+    ],
+    "program_id": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+    "seeds": [
+      2000,
+      2001,
+      2002
+    ]
+  }
+}

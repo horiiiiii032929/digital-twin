@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type FormEvent } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState, type FormEvent } from "react"
 import {
   Activity,
   BellRing,
@@ -31,7 +31,6 @@ import {
   createProfessorTeachingProfile,
   getProfessorAutonomyPolicy,
   getProfessorCourseDomainModel,
-  getProfessorLearnerBeliefEvidence,
   getProfessorTutoringRuntimeProfile,
   listProfessorAutonomousActions,
   listProfessorAutonomousGoals,
@@ -39,6 +38,7 @@ import {
   listProfessorAutonomyTraces,
   listProfessorAutonomyRecipients,
   listProfessorLearningGaps,
+  listProfessorLearnerBeliefEvidence,
   listProfessorProactiveTriggers,
   listProfessorTeachingProfiles,
   previewProfessorTeachingProfile,
@@ -104,16 +104,16 @@ export function ProfessorAutonomyPanel({
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
+  const refreshSequence = useRef(0)
 
   const refresh = useCallback(async () => {
+    const sequence = ++refreshSequence.current
     const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients, nextDomainModel, nextRuntimeProfile, nextLearnerEvidence, nextTraces] = await Promise.all([
       listProfessorTeachingProfiles(course.course_id),
       listProfessorProactiveTriggers(course.course_id),
       releaseId ? listProfessorLearningGaps(course.course_id, releaseId) : Promise.resolve(null),
       getProfessorAutonomyPolicy(course.course_id),
-      Promise.all(course.student_account_ids.map((studentId) =>
-        listProfessorAutonomousGoals(course.course_id, studentId),
-      )).then((items) => items.flat()),
+      listProfessorAutonomousGoals(course.course_id),
       listProfessorAutonomousActions(course.course_id),
       listProfessorAutonomousOutcomes(course.course_id),
       listProfessorAutonomyRecipients(course.course_id),
@@ -121,11 +121,10 @@ export function ProfessorAutonomyPanel({
         ? getProfessorCourseDomainModel(course.course_id, releaseId)
         : Promise.resolve(null),
       getProfessorTutoringRuntimeProfile(course.course_id),
-      Promise.all(course.student_account_ids.map((studentId) =>
-        getProfessorLearnerBeliefEvidence(course.course_id, studentId),
-      )),
+      listProfessorLearnerBeliefEvidence(course.course_id),
       listProfessorAutonomyTraces(course.course_id),
     ])
+    if (sequence !== refreshSequence.current) return
     setProfiles(nextProfiles)
     setTriggers(nextTriggers)
     setLearningGaps(nextGaps)
@@ -139,7 +138,7 @@ export function ProfessorAutonomyPanel({
     setLearnerEvidence(nextLearnerEvidence)
     setTraces(nextTraces)
     onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null)
-  }, [course.course_id, course.student_account_ids, onApprovedProfileChange, releaseId])
+  }, [course.course_id, onApprovedProfileChange, releaseId])
 
   useEffect(() => {
     let active = true
@@ -152,6 +151,7 @@ export function ProfessorAutonomyPanel({
     })
     return () => {
       active = false
+      refreshSequence.current += 1
     }
   }, [refresh])
 
