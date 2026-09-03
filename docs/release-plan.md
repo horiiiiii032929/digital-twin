@@ -10,6 +10,15 @@ results.
 
 ## Current audit-safe release boundary
 
+Issue #196 owns the sole fresh release confirmation. Confirmation 023 freezes
+670 actual-product cases across T0, T1-v2 reactive diagnostics, and the selected
+T1-v2 autonomous condition, using synthetic source families 501–550. Its
+network-free run passes all registered product and safety contracts with zero
+calls. The next finite step is one bounded provider-backed execution after a
+clean preflight. Keep opens the winner-only known 10,000+1,000 regression and
+local HTTPS qualification; Refine produces No Release. No same-package prompt
+or method tuning is allowed.
+
 Issue #192 is complete: provider-failure scoring now follows durable trigger
 lineage, and confirmation 021 remains immutable. The completed development
 successor under #194 is

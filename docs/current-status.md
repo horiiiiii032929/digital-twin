@@ -6,6 +6,19 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+Fresh confirmation issue #196 is now in build qualification. The prospective
+`governed-full-autonomy-v2-1-persona-confirmation-023` package contains 670
+source- and wording-disjoint actual-product cases from synthetic source
+families 501–550: 150 T0 controls, 150 T1-v2 reactive paired diagnostics, and
+370 cases for the selected T1-v2 autonomous candidate. Public inputs and hidden
+gold are hash-bound and physically separated. The complete network-free
+simulation passed every action, safety, fallback, persistence, transition,
+termination, and proactive-lineage check with zero provider calls. Provider
+execution remains unauthorized until the build-only checkpoint is committed
+and the clean live preflight succeeds. A valid Keep opens only the labelled
+known 10,000+1,000 regression and local HTTPS qualification; a valid quality
+failure ends in No Release without same-package tuning.
+
 ## H+E1 whole-system confirmation and grounding successor
 
 Issue #192 now owns the prospective `SE7-12` correction. The independent

@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1022
+    "audited": 1026
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 258,
+    "active_or_unclassified_tooling": 260,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 269,
+    "evaluation_configuration": 270,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 233
+    "verification": 234
   },
-  "file_count": 1022,
+  "file_count": 1026,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "ebbbad8377f1ca1e336c5770e50c19ff0e9972897fb71696c07185ddfd449e76",
+  "record_sha256": "d1c41abd31edd399764f83e8337757dadd21aebf0b8d505ce2f24bc3ad995cbe",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "d704f2930d81ebcf2bbe64cd05e32536e38466793bc7f8da7b1ace5845cf6a32"
+      "sha256": "9b6e8ab048fd81705f0e9d75ade208a9b21c067eab3fc6ced99bbe6ffe9bd54d"
     },
     {
       "audit": {
@@ -4695,6 +4695,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-fresh-confirmation",
+        "evidence": "Prospective instrument review verifies source-disjoint inputs, selected architecture and engine, exact pricing and identity checks, registered hard gates, bounded calls/cost, immutable progression, and explicit external-validity limitations.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex fresh-confirmation audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_confirmation_023.json",
+      "risk": "high",
+      "sha256": "4785ecea69a9dec7b32ea1703a109b9136406a5b2d8aea1493bad6efbe510162"
+    },
+    {
+      "audit": {
         "domain": "persona-robust-release-selection",
         "evidence": "Instrument review verifies prospective matrix, model role, hard exclusions, ranking, tie rule, progression, and external-validity limitations are frozen before execution.",
         "findings": [],
@@ -7116,6 +7132,24 @@
       "path": "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py",
       "risk": "high",
       "sha256": "4d7477d48e8fc3483d8368510c5eeb02abc8cf6f9ac79640b58a5bbb4b807f9e"
+    },
+    {
+      "audit": {
+        "domain": "persona-robust-fresh-confirmation",
+        "evidence": "Manual builder review and focused tests verify 670 unique cases, exact condition allocation, 50 fresh source families, new wording, stable public/gold hashes, and no gold fields in public inputs.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex fresh-confirmation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:governed-autonomy-v2-1-persona-confirmation-023"
+      ],
+      "path": "scripts/build_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "risk": "high",
+      "sha256": "bf05ed085dfed5dfc87de8bfd2ee12e5f5c8ef0267a97bf69a5cbc4feefd8b9b"
     },
     {
       "audit": {
@@ -9741,6 +9775,28 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-fresh-confirmation",
+        "evidence": "Runner review verifies actual-service execution, selected T1-v2 binding, paired T0/reactive diagnostics, strict direct-transport identity canary, atomic resume, hidden-gold ordering, and fail-closed bounded execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex fresh-confirmation audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:governed-autonomy-v2-1-persona-confirmation-023",
+        "preflight:governed-autonomy-v2-1-persona-confirmation-023",
+        "resume:governed-autonomy-v2-1-persona-confirmation-023",
+        "simulate:governed-autonomy-v2-1-persona-confirmation-023",
+        "validate:governed-autonomy-v2-1-persona-confirmation-023"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "risk": "high",
+      "sha256": "0724889e689d793569daf74b5320633e90cf900ee57893ebcb528783aa33c9f2"
+    },
+    {
+      "audit": {
         "domain": "persona-robust-release-selection",
         "evidence": "Runner review verifies 108 paired histories per primary condition, an 18-cell balanced reactive ablation, exclusive outputs, no provider calls, explicit bank binding, observable safety checks, an observation-only discovery hook, and no release selection from build evidence.",
         "findings": [],
@@ -10748,7 +10804,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "7fe90a4e72596f36c572caeaa32ba510b8e3f6129cc671d8a05e31a104dd10c4"
+      "sha256": "3e3c782e6898474e06464fa782685b97040ee7439dace9f449ed47bf52cd4938"
     },
     {
       "audit": {
@@ -13132,7 +13188,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a3cbba9de1f25b2b1ecc4f5396f7d706efb15bfc58aef0d04310dc024f1979d6"
+      "sha256": "99fc47b81edf1ca64a17f2a0500fc64089aebda3a0eebe63603fd17c158da005"
     },
     {
       "audit": {
@@ -16336,6 +16392,22 @@
     },
     {
       "audit": {
+        "domain": "persona-robust-fresh-confirmation",
+        "evidence": "Focused tests verify selected-condition bindings, exact distributions, fresh source identities, absence of hidden gold, autonomous canary coverage, and provider execution blocked before authorization.",
+        "findings": [],
+        "reviewed_at": "2026-09-03",
+        "reviewer": "Codex fresh-confirmation audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "risk": "medium",
+      "sha256": "761b9ddb8d18c2f4b6ef89578b3c81c98dae3b28bf7a6434ed369e9114676ea8"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Focused tests prove the terminal candidate remains unselected and hash-bound to its immutable revision, network-free simulation still crosses actual services, revoked authority blocks preflight, and blocked execution constructs no provider request.",
         "findings": [],
@@ -17216,8 +17288,8 @@
     }
   ],
   "risk_counts": {
-    "high": 775,
-    "medium": 247
+    "high": 778,
+    "medium": 248
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

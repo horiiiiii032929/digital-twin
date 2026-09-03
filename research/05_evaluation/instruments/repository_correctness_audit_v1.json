@@ -967,7 +967,7 @@
       "path": "package.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "d704f2930d81ebcf2bbe64cd05e32536e38466793bc7f8da7b1ace5845cf6a32"
+      "sha256": "9b6e8ab048fd81705f0e9d75ade208a9b21c067eab3fc6ced99bbe6ffe9bd54d"
     },
     {
       "audit_status": "audited",
@@ -6709,7 +6709,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording requirements audit",
-      "sha256": "7fe90a4e72596f36c572caeaa32ba510b8e3f6129cc671d8a05e31a104dd10c4"
+      "sha256": "3e3c782e6898474e06464fa782685b97040ee7439dace9f449ed47bf52cd4938"
     },
     {
       "audit_status": "audited",
@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "a3cbba9de1f25b2b1ecc4f5396f7d706efb15bfc58aef0d04310dc024f1979d6"
+      "sha256": "99fc47b81edf1ca64a17f2a0500fc64089aebda3a0eebe63603fd17c158da005"
     },
     {
       "audit_status": "audited",
@@ -11242,6 +11242,50 @@
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-wording bank invalid-run audit",
       "sha256": "247565861cefd998989e90e936e4dc65204204a64680c62524404e61563cc9b4"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Manual builder review and focused tests verify 670 unique cases, exact condition allocation, 50 fresh source families, new wording, stable public/gold hashes, and no gold fields in public inputs.",
+      "findings": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fresh-confirmation audit",
+      "sha256": "bf05ed085dfed5dfc87de8bfd2ee12e5f5c8ef0267a97bf69a5cbc4feefd8b9b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Runner review verifies actual-service execution, selected T1-v2 binding, paired T0/reactive diagnostics, strict direct-transport identity canary, atomic resume, hidden-gold ordering, and fail-closed bounded execution.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fresh-confirmation audit",
+      "sha256": "0724889e689d793569daf74b5320633e90cf900ee57893ebcb528783aa33c9f2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Focused tests verify selected-condition bindings, exact distributions, fresh source identities, absence of hidden gold, autonomous canary coverage, and provider execution blocked before authorization.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_persona_confirmation_023.py",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fresh-confirmation audit",
+      "sha256": "761b9ddb8d18c2f4b6ef89578b3c81c98dae3b28bf7a6434ed369e9114676ea8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "persona-robust-fresh-confirmation",
+      "evidence": "Prospective instrument review verifies source-disjoint inputs, selected architecture and engine, exact pricing and identity checks, registered hard gates, bounded calls/cost, immutable progression, and explicit external-validity limitations.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_confirmation_023.json",
+      "reviewed_at": "2026-09-03",
+      "reviewer": "Codex fresh-confirmation audit",
+      "sha256": "4785ecea69a9dec7b32ea1703a109b9136406a5b2d8aea1493bad6efbe510162"
     }
   ],
   "schema_version": 1

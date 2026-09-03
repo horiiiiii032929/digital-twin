@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-persona-confirmation-023-build",
+  "instrument_id": "governed-full-autonomy-v2-1-persona-confirmation-023",
+  "status": "completed-go-deeper",
+  "decision": "Go Deeper",
+  "code_revision": "2f1b3cd44e75f25217c8abdf42a5981e58ba1414",
+  "working_tree_dirty": true,
+  "network_free": true,
+  "provider_calls": 0,
+  "cost_usd": 0.0,
+  "case_count": 670,
+  "condition_counts": {
+    "t0-grounded-control": 150,
+    "t1-v2-reactive": 150,
+    "t1-v2-autonomous": 370
+  },
+  "source_family_range": [501, 550],
+  "proactive_case_count": 220,
+  "simulation": {
+    "all_valid_action_sets_matched": true,
+    "all_case_safety_contracts_passed": true,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "restart_consistency_rate": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "valid_pedagogical_transition_rate": 1.0
+  },
+  "artifact_hashes": {
+    "public_sha256": "96a2b26f3aed4d7e0379c16509368c42dc924d43c51e01178a13b85bf3e02286",
+    "hidden_gold_sha256": "2f4d5f45b8b2f0a40ad10b3fea94efdfb7d292cef2be7695a8a461c970a2b724"
+  },
+  "model_metadata": {
+    "model": "gpt-5.6-luna",
+    "verified_at": "2026-09-03T09:01:26+00:00",
+    "official_source": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "pricing_usd_per_million_input_tokens": 0.2,
+    "pricing_usd_per_million_output_tokens": 1.2,
+    "returned_identity_check_required": true
+  },
+  "authority": {
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "limitations": [
+    "This is network-free build evidence and cannot support release promotion.",
+    "The sources and learners are synthetic; real learning, usability, and professor fidelity remain unproven.",
+    "GPT-5.6 Luna has no dated snapshot, so returned identity must be frozen by live canary."
+  ]
+}
