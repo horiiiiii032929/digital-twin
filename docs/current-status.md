@@ -27,7 +27,7 @@ a hard exclusion; among safe candidates the release choice prioritizes
 grounding, worst-persona behavior, intervention utility, notification burden,
 latency, and cost rather than selecting the first threshold pass.
 
-Issue #194 owns the build-only successor
+Issue #194 owns the completed development successor
 `governed-full-autonomy-v2-1-persona-robust-release-selection-022`. It preserves
 the historical simulator and adds six prospectively named personas, a separate
 seeded wording random stream, an immutable LLM-role-play bank contract,
@@ -36,8 +36,7 @@ slices, and worst-persona reporting. The 54 persona/wording/seed configurations
 are each repeated under two independently specified transition families, for
 108 paired histories per primary condition. T0 and T1-v2 autonomous receive
 the same histories; T1-v2 reactive is an 18-history balanced ablation. The
-runner is network-free and cannot select a release until a real frozen wording
-bank is generated, hash-bound, and the comparison is prospectively frozen.
+runner is network-free and uses only a generated, hash-bound wording bank.
 
 The network-free discovery now froze 1,104 semantic-keyed public utterance
 frames from 78 actual-product histories. Wording-bank attempt 001 stopped on
@@ -46,8 +45,15 @@ its first request because the binding omitted the transport-required
 made. The failure is registered as immutable invalid evidence. Harness-only
 attempt 002 then completed 46/46 calls for USD 0.1143525 with zero retries and
 accepted 1,008/1,104 variants. The remaining 96 are explicit canonical
-fallbacks. Provider authority is revoked. Selection 022 itself remains
-unexecuted and unselected.
+fallbacks. Provider authority is revoked. Selection 022 then completed all 234
+30-day histories at clean revision `f59f8ff`: 108 paired histories per primary
+condition and 18 reactive-ablation histories. Every observable hard-safety gate
+passed. T1-v2 autonomous improved mean final hidden-mastery proxy by 4.98 points
+over T0 (paired 95% CI 3.51–6.58) and improved the worst-persona mean from
+0.1461 to 0.1839, so it is the selected candidate for one fresh provider-backed
+confirmation. This is simulated-learner development evidence, not a release,
+real learning-improvement, usability, or professor-fidelity claim. Its 39.68%
+wasted-intervention rate is a material limitation to carry into confirmation.
 
 Issue #190 now contains the prospective `SE7-11` correction. Clean revision
 `9f09ea3` introduces `DeterministicActionRouterV3`, which separately detects an

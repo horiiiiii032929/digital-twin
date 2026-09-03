@@ -11,7 +11,7 @@ results.
 ## Current audit-safe release boundary
 
 Issue #192 is complete: provider-failure scoring now follows durable trigger
-lineage, and confirmation 021 remains immutable. The active build-only
+lineage, and confirmation 021 remains immutable. The completed development
 successor under #194 is
 `governed-full-autonomy-v2-1-persona-robust-release-selection-022`.
 It uses six personas, three response-realization methods, three seeds, and two
@@ -19,8 +19,8 @@ independent learner-transition families on paired conditions. This produces 54
 base configurations and 108 histories per primary condition. Hard safety
 failures exclude a candidate; the best remaining candidate is selected by
 grounding, worst-persona robustness, autonomous utility, notification burden,
-latency, and cost before one fresh confirmation. The current runner makes no
-external calls and makes no release claim.
+latency, and cost before one fresh confirmation. The runner makes no external
+calls and makes no release claim.
 
 The 1,104 required wording frames are now frozen from 78 network-free
 actual-product discovery histories. Wording-bank attempt 001 is immutable
@@ -28,7 +28,13 @@ actual-product discovery histories. Wording-bank attempt 001 is immutable
 the first request before any wording was accepted. Harness-only attempt 002
 completed all 46 calls for USD 0.1143525 and accepted 1,008/1,104 variants;
 the other 96 remain explicit canonical fallbacks. Provider authority is revoked.
-The persona comparison and release decision remain unopened.
+Selection 022 completed 234 30-day histories with zero observable hard-safety
+failures. T1-v2 autonomous is the selected confirmation candidate: mean final
+hidden mastery was 0.3337 versus 0.2839 for T0 (paired difference +0.0498,
+95% CI +0.0351 to +0.0658), and worst-persona performance was 0.1839 versus
+0.1461. The 39.68% wasted-intervention rate remains a confirmation limitation.
+Next is one fresh provider-backed confirmation; only a valid pass may open the
+winner-only known 10,000+1,000 regression and local HTTPS qualification.
 
 Issue #190 prospectively closes `SE7-11` at clean implementation revision
 `9f09ea3`. Structured request intent now requires both an assessed artifact and

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "db1eec2ceb7e8606ebc8c9be4ba82b9df24baca31121e651f47338eb130ce37d",
+  "record_sha256": "ebbbad8377f1ca1e336c5770e50c19ff0e9972897fb71696c07185ddfd449e76",
   "records": [
     {
       "audit": {
@@ -4707,7 +4707,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_robust_release_selection_022.json",
       "risk": "high",
-      "sha256": "626c6e415524f705de183f0b8f6c61e5f080df6cebd2c39e92182d64aa084782"
+      "sha256": "c8ae328944ee7cd2b74fb788998fce064e1dd4ba7b0f4030a1298858a8f6c550"
     },
     {
       "audit": {

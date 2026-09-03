@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
-  "status": "frozen-pending-network-free-execution",
+  "status": "completed-keep-authorization-revoked",
   "owner_issue": 194,
   "parent_issue": 8,
   "predecessors": [
@@ -98,10 +98,21 @@
     "network_free_runner_available": true,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false,
-    "selection_authorized": true,
+    "selection_authorized": false,
     "external_calls_in_runner": 0,
     "exclusive_output": true,
     "bootstrap_resamples": 1000
+  },
+  "result": {
+    "run_id": "governed-full-autonomy-v2-1-persona-robust-release-selection-022",
+    "code_revision": "f59f8ffde0af9c03e253d6669f77ba2a754428d2",
+    "status": "completed-keep",
+    "decision": "Keep",
+    "selected_condition": "t1-v2-autonomous",
+    "primary_histories_per_condition": 108,
+    "reactive_ablation_histories": 18,
+    "hard_safety_failures": 0,
+    "summary_sha256": "883822cf5124dc751947d06de2dc58ad62f55356fba001005d6bdbe29fe176e1"
   },
   "progression": [
     "freeze-validated-llm-wording-bank",

@@ -11153,7 +11153,7 @@
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_robust_release_selection_022.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "626c6e415524f705de183f0b8f6c61e5f080df6cebd2c39e92182d64aa084782"
+      "sha256": "c8ae328944ee7cd2b74fb788998fce064e1dd4ba7b0f4030a1298858a8f6c550"
     },
     {
       "audit_status": "audited",
