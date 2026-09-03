@@ -79,6 +79,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_cross_engine_sealed_confirmation_010.py": (
             "dataset_generation",
         ),
+        "scripts/build_academic_factual_qa_development_region_corpus.py": (
+            "dataset_generation",
+        ),
         "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py": (
             "dataset_generation",
         ),
@@ -660,6 +663,12 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # product; touches no sealed or held-out package.
         "product-evidence-gate-selection-001": (
             "method_evaluation_execution",
+        ),
+        # Issue #198. Deterministic re-materialization of the committed
+        # development clusters at the granularity their gold cites. No
+        # provider call and no new source.
+        "academic-factual-qa-development-region-corpus-001": (
+            "dataset_generation",
         ),
     }
 )
