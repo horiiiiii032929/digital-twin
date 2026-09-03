@@ -1,0 +1,63 @@
+{
+  "arms": {
+    "candidate": {
+      "evidence_gate": "dominance-scoped-source-semantic-evidence-atoms-v4",
+      "fully_grounded_factual_success": 0.126,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "incumbent": {
+      "evidence_gate": "structured-lexical-v1",
+      "fully_grounded_factual_success": 0.162,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "reference": {
+      "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+      "fully_grounded_factual_success": 0.126,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    }
+  },
+  "case_count": 500,
+  "code_revision": "9f0ab7d",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "decision": "Keep structured-lexical-v1; v4 implemented but unpromoted",
+  "decision_rule_fixed_before_execution": true,
+  "decision_rule_source": "research/05_evaluation/instruments/product_evidence_gate_selection_001.json",
+  "evidence_class": "development-split-method-selection",
+  "finding": {
+    "candidate_success": 0.126,
+    "id": "v4-and-v3-are-indistinguishable-on-factual-grounding",
+    "incumbent_success": 0.162,
+    "statement": "v4 and v3 both score 12.60%. The dominance-scoping correction does not bind on this corpus, so confirmation 028's Keep is evidence about the governed autonomy contract and about nothing else.",
+    "would_have_regressed_the_product": true
+  },
+  "held_out": false,
+  "instrument_id": "product-evidence-gate-selection-001",
+  "limitations": [
+    "Development-split evidence selects a method; it is not a generalization claim.",
+    "The product retrieves with a dense published index while this comparison retrieves locally.",
+    "Public synthetic sources only; no professor fidelity, usability, or learning claim."
+  ],
+  "operational_summary": {
+    "cost_usd": 0.0,
+    "private_data_used": false,
+    "provider_calls": 0,
+    "thresholds_changed": false
+  },
+  "pre_registered_checks": {
+    "grounded_success_strictly_better": false,
+    "operational_failures_not_worse": true,
+    "severe_unsupported_not_worse": true
+  },
+  "promote_candidate": false,
+  "run_id": "product-evidence-gate-selection-001",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "selected_gate": "structured-lexical-v1",
+  "status": "completed-keep-incumbent"
+}

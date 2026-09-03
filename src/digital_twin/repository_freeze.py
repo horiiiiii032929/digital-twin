@@ -297,6 +297,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/recover_governed_full_autonomy_confirmation_score.py": (
             "method_evaluation_execution",
         ),
+        "scripts/run_product_evidence_gate_selection.py": (
+            "method_evaluation_execution",
+        ),
         "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_028.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
@@ -651,6 +654,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # Issue #198. Operator-only successor; identical unopened package.
         "governed-full-autonomy-v2-1-corpus-confirmation-028": (
             "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        # Issue #198. Provider-free development-split gate selection for the
+        # product; touches no sealed or held-out package.
+        "product-evidence-gate-selection-001": (
             "method_evaluation_execution",
         ),
     }

@@ -41,6 +41,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-corpus-confirmation-026",
         "governed-full-autonomy-v2-1-corpus-confirmation-027",
         "governed-full-autonomy-v2-1-corpus-confirmation-028",
+        "product-evidence-gate-selection-001",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
@@ -84,6 +85,10 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "governed-full-autonomy-v2-1-corpus-confirmation-028"
     ] == ("external_model_evaluation", "method_evaluation_execution")
+    # Issue #198: development-split gate selection reaches no provider.
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "product-evidence-gate-selection-001"
+    ] == ("method_evaluation_execution",)
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",

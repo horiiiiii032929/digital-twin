@@ -60,6 +60,7 @@ from src.digital_twin.grounding import (  # noqa: E402
     SourceSemanticEvidenceAtomGateV3,
     SourceSemanticEvidenceAtomGateV4,
     SourceSemanticEvidenceAtomRetrieverV1,
+    StructuredLexicalCoverageEvidenceGate,
 )
 from src.digital_twin.action_router import DeterministicActionRouterV3  # noqa: E402
 from src.digital_twin.student import (  # noqa: E402
@@ -90,6 +91,9 @@ CANDIDATE_EVIDENCE_GATE = "pedagogy-aware-source-semantic-evidence-atoms-v3"
 # tests/test_source_semantic_evidence_atom_gate_v4.py.
 SUCCESSOR_EVIDENCE_GATE = "dominance-scoped-source-semantic-evidence-atoms-v4"
 CONTROL_EVIDENCE_GATE = "any-hit-evidence-gate-v1"
+# What services/api/app/factory.py actually ships today, so a gate selection can
+# compare the evaluated line against the incumbent rather than against itself.
+PRODUCT_STRUCTURED_LEXICAL_GATE = "structured-lexical-v1"
 WINNER_GENERATOR_ID = "deterministic-evidence-set-grounded-generator-v2"
 WINNER_RETRIEVER_ID = "source-semantic-evidence-atom-retriever-v1"
 WINNER_POLICY_ID = "deterministic-tutor-action-router-v3"
@@ -331,6 +335,48 @@ def _install_courses(
         )
 
 
+def load_corpus_with_atom_lineage(
+    source_path: Path | None = None,
+) -> tuple[dict[str, list[Any]], dict[str, Any]]:
+    """Load a corpus and fill in whatever atom lineage it does not already carry.
+
+    The sealed package ships regions that already declare ``region_id``,
+    ``parent_cluster_id``, and ``source_family_id``. The older cluster format
+    declares none of them, so the semantic atom line cannot read it at all.
+    Each cluster span is itself the citable region, so the cluster identity is
+    the region identity and its own relation group, and its recorded character
+    span is the range.
+
+    A corpus that already supplies a field keeps it. This defers to
+    ``_chunks_by_course`` for parsing so the frozen adapter stays the single
+    reader of both corpus formats.
+    """
+
+    grouped, by_id = _chunks_by_course(source_path)
+    repaired_groups: dict[str, list[Any]] = {}
+    repaired_by_id: dict[str, Any] = {}
+    for course_id, chunks in grouped.items():
+        rows = []
+        for chunk in chunks:
+            metadata = dict(chunk.metadata)
+            metadata.setdefault("parent_cluster_id", chunk.id)
+            metadata.setdefault("source_family_id", chunk.source_artifact_id or chunk.document_id)
+            if "char_start" not in metadata or "char_end" not in metadata:
+                start = int(metadata.get("char_start", 0))
+                metadata["char_start"] = str(start)
+                metadata["char_end"] = str(start + len(chunk.text))
+            row = chunk.model_copy(
+                update={
+                    "metadata": metadata,
+                    "region_id": chunk.region_id or chunk.id,
+                }
+            )
+            rows.append(row)
+            repaired_by_id[row.id] = row
+        repaired_groups[course_id] = rows
+    return repaired_groups, repaired_by_id
+
+
 def build_winner_adapter(
     *,
     manifest: SystemUnderTestManifestV1,
@@ -358,6 +404,12 @@ def build_winner_adapter(
     elif manifest.evidence_gate == SUCCESSOR_EVIDENCE_GATE:
         condition = "successor"
         evidence_gate = SourceSemanticEvidenceAtomGateV4()
+    elif manifest.evidence_gate == PRODUCT_STRUCTURED_LEXICAL_GATE:
+        condition = "incumbent"
+        evidence_gate = StructuredLexicalCoverageEvidenceGate(
+            minimum_content_matching_terms=2,
+            evidence_limit=3,
+        )
     elif manifest.evidence_gate == CONTROL_EVIDENCE_GATE:
         condition = "control"
         evidence_gate = AnyHitEvidenceGate()
@@ -370,7 +422,7 @@ def build_winner_adapter(
 
     source_value = runtime.get("source_package_path")
     source_path = Path(str(source_value)) if source_value else None
-    chunks_by_course, chunks_by_id = _chunks_by_course(source_path)
+    chunks_by_course, chunks_by_id = load_corpus_with_atom_lineage(source_path)
 
     counter = _ProviderCallCounter()
     reactive_planner = counter.wrap(runtime.get("reactive_semantic_planner"))
