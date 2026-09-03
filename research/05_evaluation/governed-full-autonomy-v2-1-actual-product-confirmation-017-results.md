@@ -40,6 +40,9 @@ simulation, and binds V2 observations to the injected clock. A separate
 network-free known-set regression is required to verify the correction, but it
 cannot replace a fresh provider-backed confirmation.
 
+That regression passed 820/820 at clean revision `49952b1`; it is registered
+separately as corrective evidence and makes no release claim.
+
 Any future evaluation must use distinct canaries:
 
 1. a direct provider transport/identity canary; and

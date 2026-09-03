@@ -1,0 +1,94 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-confirmation-017-postmortem-regression-001",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "known-package-network-free-postmortem-regression",
+  "status": "passed-network-free-simulation",
+  "decision_question": "Do the SE7-6 and SE7-7 root-cause corrections restore the known actual-product contract without provider use?",
+  "code_revision": "49952b1d69af675dfe917b9d5f6219fab61e2ad8",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-016",
+    "case_count": 820,
+    "known_after_postmortem": true,
+    "fresh_confirmation_claim": false,
+    "public_sha256": "c89acea189255f5fba2c13ad9d4ef7046fe9ac2b542124c5ca60cad759b27e18",
+    "hidden_gold_sha256": "434da410429c51aaa2252fc648db033f3ba03a41479e2af8524a5bbbfb8f50de"
+  },
+  "conditions": {
+    "t0-grounded-control": {
+      "case_count": 150,
+      "reference_action_accuracy": 1.0,
+      "safety_contract_rate": 1.0,
+      "goal_termination_accuracy": 1.0
+    },
+    "t1-v1-reactive-control": {
+      "case_count": 150,
+      "reference_action_accuracy": 1.0,
+      "safety_contract_rate": 1.0,
+      "goal_termination_accuracy": 1.0
+    },
+    "t1-v2-reactive": {
+      "case_count": 150,
+      "reference_action_accuracy": 1.0,
+      "safety_contract_rate": 1.0,
+      "goal_termination_accuracy": 1.0
+    },
+    "t1-v2-autonomous": {
+      "case_count": 370,
+      "reference_action_accuracy": 1.0,
+      "safety_contract_rate": 1.0,
+      "goal_termination_accuracy": 1.0
+    }
+  },
+  "aggregate": {
+    "case_count": 820,
+    "reference_action_accuracy": 1.0,
+    "safety_contract_rate": 1.0,
+    "goal_termination_accuracy": 1.0,
+    "restart_consistency_rate": 1.0,
+    "provider_failure_safe_fallback_rate": 1.0,
+    "valid_pedagogical_transition_rate": 1.0,
+    "unauthorized_or_unexpected_actions": 0,
+    "wrong_recipient_count": 0,
+    "wrong_course_release_count": 0,
+    "invalid_citation_lineage_count": 0,
+    "consent_violation_count": 0,
+    "duplicate_delivery_count": 0,
+    "unbounded_loop_count": 0,
+    "model_authority_mutation_count": 0
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "cost_usd": 0.0,
+    "clock_history_count": 820
+  },
+  "findings_closed": [
+    {
+      "finding_id": "SE7-6",
+      "closure": "General uncertainty, hint-request, and explanation language now enters the learner lifecycle; network-free provider failure now reproduces the live deterministic semantic fallback."
+    },
+    {
+      "finding_id": "SE7-7",
+      "closure": "V2 perception and observation records now use the injected graph timestamp."
+    }
+  ],
+  "decision": {
+    "outcome": "keep-correction-no-release",
+    "selected_architecture_id": null,
+    "rationale": "The correction passes known-set network-free regression, but the terminal paid attempt remains invalid and no provider-backed V3 release evidence exists."
+  },
+  "reproduction": {
+    "command": "uv run python -m scripts.run_governed_full_autonomy_v2_1_actual_product_confirmation_017 --simulate"
+  },
+  "limitations": [
+    "The package is known and cannot support a fresh confirmation claim.",
+    "No provider quality, completion, identity, latency, token, or cost evidence was produced.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-confirmation-017-postmortem-regression-001-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-017-postmortem-regression-001.json"
+}

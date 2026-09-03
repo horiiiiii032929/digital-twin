@@ -37,12 +37,30 @@ provider calls. V3 correctly routed its reactive canary through the deterministi
 fast path, but the stale canary assertion required a Luna identity. Hidden gold
 stayed closed, so this is finding `SE7-4`, not a product-quality result.
 
-The single harness-only corrective attempt 017 reuses the exact 016 public and
-hidden packages, methods, prompts, cases, gold, gates, and models. Only its
-second canary is changed to an autonomous provider-path case. The complete
-repository audit covers 994/994 execution-relevant files with zero pending or
-open findings; 016 is revoked and only 017 has bounded execution authority
-under the active repository-wide freeze.
+The single harness-only corrective attempt 017 also stopped after two public
+canaries, zero provider calls, and USD 0. Its replacement autonomous canary did
+not create a learner goal or due opportunity, so it never exercised Luna.
+Hidden gold remained unopened. The same-package correction allowance is now
+exhausted; 017 is terminally invalid and all provider authority is revoked.
+
+The postmortem closed `SE7-5` through `SE7-7`. Tests had asserted a configured
+model expectation rather than observed route use; deterministic perception
+missed ordinary uncertainty/hint/explanation language; the network-free outage
+stand-in did not mirror the live semantic fallback; and V2 observations used
+wall-clock defaults instead of the injected clock. Revision `49952b1` fixes
+these boundaries. On the now-known 820-case package, the clean network-free
+actual-product regression reached 820/820 reference-action and safety-contract
+passes across all four conditions, with 100% goal termination, restart, and
+provider-failure fallback and zero calls/cost.
+
+This regression closes the code findings but does not convert 017 into a valid
+provider-backed result. H+E1/V3 remains unselected for release. T0 and bounded
+T1-v1 remain the safe local controls; a new provider-backed claim requires a
+fresh source-disjoint package plus separate transport and product-route
+canaries. That finite successor is tracked in
+[#186](https://github.com/horiiiiii032929/digital-twin/issues/186); #184 closes
+as the completed audit/tournament checkpoint with a `Refine / No Release`
+decision.
 
 ## Audit correction superseding the governed V2.1 release claim
 

@@ -82,12 +82,20 @@ authority is revoked.
 
 Confirmation 016 was operationally invalid after its V3 reactive canary took
 the deterministic fast path and therefore made no Luna call. It made zero
-provider calls, opened no hidden gold, and supports no quality inference. The
-sole harness-only attempt 017 reuses every scientific input and changes only the
-second canary to a guaranteed autonomous provider path. Staging remains
-fail-closed until 017, fresh factual
-confirmation, known 10,000-case regression, and local product qualification all
-pass.
+provider calls, opened no hidden gold, and supports no quality inference.
+Corrective attempt 017 also stopped after its autonomous canary made no provider
+call; its case label did not guarantee route execution. The second invalid
+attempt exhausts the same-package correction allowance.
+
+Revision `49952b1` repairs the underlying lifecycle, simulation-fallback, and
+virtual-clock defects and passes a 820/820 known-set network-free regression.
+That evidence keeps the correction but cannot authorize release. Staging stays
+fail-closed. A future confirmation must use a fresh package and separate direct
+transport and executable product-route canaries before factual confirmation,
+known 10,000-case regression, and local product qualification can resume. This
+work is isolated in [#186](https://github.com/horiiiiii032929/digital-twin/issues/186);
+#184 terminates with the audit findings closed and a `Refine / No Release`
+decision.
 
 ## Release goal
 

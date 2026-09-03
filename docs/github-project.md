@@ -90,15 +90,21 @@ multi-turn trajectories omitted the expected confusion intervention because V2
 grounding treated pedagogical request language as factual target content.
 
 The original 015 Keep result is preserved, its authority is revoked, and no
-release is selected from it. Confirmation 016 was operationally invalid before
-bulk because its reactive canary no longer invoked Luna after the V3 fast-path
-fix; it made zero provider calls and opened no hidden gold. The only permitted
-harness correction is 017, which changes the canary but not the evaluation
-method or package. Project state remains `In Progress / Go Deeper`; the next
-finite checkpoint is 017, followed only on pass by fresh
-factual confirmation, known 10,000-case regression, and complete local product
-qualification. T0 and bounded T1-v1 remain rollback controls. Repository audit
-state is 994/994 with zero pending or open findings.
+release is selected from it. Confirmations 016 and 017 both stopped before bulk
+after their selected product canaries made no Luna call. Each persisted two
+public responses, spent USD 0, and left hidden gold unopened. The same-package
+correction allowance is exhausted and all authority is revoked.
+
+Postmortem revision `49952b1` closes the canary, lifecycle, fallback-parity, and
+virtual-clock findings. Its known-set network-free regression passed 820/820
+reference actions and safety contracts across T0, T1-v1, T1-v2 reactive, and
+T1-v2 autonomous. This is regression evidence, not provider-backed release
+evidence. Issue #184 therefore closes as `Done / Refine` with a `No Release`
+decision for H+E1/V3 at this checkpoint. T0 and bounded T1-v1 remain the safe
+controls. Successor [#186](https://github.com/horiiiiii032929/digital-twin/issues/186)
+is `In Progress / Go Deeper` and requires a fresh source-disjoint confirmation
+with separate transport and product-route canaries before scaling or local
+release selection.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500
