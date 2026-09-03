@@ -1,4 +1,4 @@
-name: digital-twin-r1-local
+name: digital-twin-r1-gate-verify
 
 x-runtime-environment: &runtime-environment
   APP_MODE: staging
@@ -12,14 +12,14 @@ x-runtime-environment: &runtime-environment
   APP_LOGIN_ATTEMPTS_PER_MINUTE: ${APP_LOGIN_ATTEMPTS_PER_MINUTE:-10}
   APP_AUTHENTICATED_REQUESTS_PER_MINUTE: ${APP_AUTHENTICATED_REQUESTS_PER_MINUTE:-120}
   APP_LOG_LEVEL: ${APP_LOG_LEVEL:-INFO}
-  APP_GENERATOR_MODE: deterministic
-  APP_EVIDENCE_GATE_MODE: structured-lexical-v1
-  APP_STUDENT_PROFILE_PATH: /app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json
-  APP_STUDENT_TUTORING_MODE: bounded-tutoring-graph
-  APP_AUTONOMY_PLANNER_MODE: deterministic
+  APP_GENERATOR_MODE: ${APP_GENERATOR_MODE:-deterministic}
+  APP_EVIDENCE_GATE_MODE: ${APP_EVIDENCE_GATE_MODE:-structured-lexical-v1}
+  APP_STUDENT_PROFILE_PATH: ${APP_STUDENT_PROFILE_PATH:-/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json}
+  APP_STUDENT_TUTORING_MODE: ${APP_STUDENT_TUTORING_MODE:-bounded-tutoring-graph}
+  APP_AUTONOMY_PLANNER_MODE: ${APP_AUTONOMY_PLANNER_MODE:-deterministic}
   APP_PROACTIVE_OUTREACH_WORKER_ENABLED: "true"
   APP_LEARNING_GAP_HMAC_SECRET: ${APP_LEARNING_GAP_HMAC_SECRET:?APP_LEARNING_GAP_HMAC_SECRET is required}
-  APP_T1_QUALIFICATION_RESULT_PATH: /app/research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json
+  APP_T1_QUALIFICATION_RESULT_PATH: ${APP_T1_QUALIFICATION_RESULT_PATH:-/app/research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json}
   APP_PROVIDER_MAX_CALLS_PER_PROCESS: ${APP_PROVIDER_MAX_CALLS_PER_PROCESS:-250}
   APP_PROVIDER_COST_CAP_USD: ${APP_PROVIDER_COST_CAP_USD:-5.0}
   OPENAI_API_KEY: ${OPENAI_API_KEY:-}

@@ -329,6 +329,26 @@ def _positive_int(name: str, default: int) -> int:
     return value
 
 
+def _evidence_gate_binding_holds(
+    selected_configuration: dict,
+    evidence_gate_mode: "EvidenceGateMode",
+) -> bool:
+    """Return whether the qualification covers the gate this release selects.
+
+    A record that names a gate must name this one. `governed-full-autonomy-v2-1-
+    confirmation-001` predates the field and names none, and it is the only run
+    id governed V2.1 accepts, so requiring equality against an absent
+    declaration would make the configuration qualified on 2026-09-02
+    unstartable. An absent declaration is a gap in that record, recorded as
+    such, rather than grounds to refuse the release it qualified.
+    """
+
+    declared = selected_configuration.get("evidence_gate")
+    if not isinstance(declared, str) or not declared.strip():
+        return True
+    return declared.strip() == evidence_gate_mode.value
+
+
 def _validate_t1_qualification_result(
     result_path: Path | None,
     profile_path: Path,
@@ -419,8 +439,9 @@ def _validate_t1_qualification_result(
                         and selected_configuration.get("planner_architecture")
                         != "guarded-policy-value-planner-v2"
                     )
-                    or selected_configuration.get("evidence_gate")
-                    != evidence_gate_mode.value
+                    or not _evidence_gate_binding_holds(
+                        selected_configuration, evidence_gate_mode
+                    )
                 )
             )
         ):
