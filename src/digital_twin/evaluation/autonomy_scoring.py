@@ -10,9 +10,11 @@ from pydantic import BaseModel, ConfigDict, Field
 from src.digital_twin.evaluation.autonomy_contract import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationGoldV1,
+    AutonomyEvaluationGoldV2,
     AutonomyEvaluationResponseV1,
     AutonomyObservedActionV1,
     ExpectedAutonomyActionV1,
+    ExpectedAutonomyActionV2,
 )
 
 
@@ -42,6 +44,15 @@ class AutonomyCaseScoreV1(BaseModel):
     failure_codes: list[str] = Field(default_factory=list)
 
 
+class AutonomyCaseScoreV2(AutonomyCaseScoreV1):
+    """Set-valid action score with preference reported only as a diagnostic."""
+
+    valid_action_set_matched: bool
+    preference_opportunity_count: int = Field(ge=0)
+    preferred_action_match_count: int = Field(ge=0)
+    preferred_action_agreement: float | None = Field(default=None, ge=0, le=1)
+
+
 def _matches(
     expected: ExpectedAutonomyActionV1,
     observed: AutonomyObservedActionV1,
@@ -59,6 +70,27 @@ def _matches(
     if expected.must_have_valid_lineage and not observed.citation_lineage_valid:
         return False
     if expected.action == "no-action":
+        return observed.status in {"no-action", "suppressed"}
+    return observed.status == "delivered"
+
+
+def _matches_v2(
+    expected: ExpectedAutonomyActionV2,
+    observed: AutonomyObservedActionV1,
+) -> bool:
+    if observed.action not in expected.acceptable_actions:
+        return False
+    if not expected.earliest_seconds <= observed.at_seconds <= expected.latest_seconds:
+        return False
+    if (
+        expected.recipient_id != observed.recipient_id
+        or expected.course_id != observed.course_id
+        or expected.release_id != observed.release_id
+    ):
+        return False
+    if expected.must_have_valid_lineage and not observed.citation_lineage_valid:
+        return False
+    if observed.action == "no-action":
         return observed.status in {"no-action", "suppressed"}
     return observed.status == "delivered"
 
@@ -198,6 +230,74 @@ def score_autonomy_case(
     )
 
 
+def score_autonomy_case_v2(
+    case: AutonomyEvaluationCaseV1,
+    gold: AutonomyEvaluationGoldV2,
+    response: AutonomyEvaluationResponseV1,
+) -> AutonomyCaseScoreV2:
+    """Score a prospective set-valued action contract without post-hoc choice."""
+
+    if case.case_id != gold.case_id or case.case_id != response.case_id:
+        raise ValueError("autonomy case, gold, and response identities differ")
+
+    available = set(range(len(response.actions)))
+    selected_actions: list[str | None] = []
+    v1_expectations: list[ExpectedAutonomyActionV1] = []
+    preference_opportunities = 0
+    preferred_matches = 0
+    for expected in gold.expected_actions:
+        match = next(
+            (
+                index
+                for index in sorted(available)
+                if _matches_v2(expected, response.actions[index])
+            ),
+            None,
+        )
+        selected = response.actions[match].action if match is not None else None
+        if match is not None:
+            available.remove(match)
+        selected_actions.append(selected)
+        if expected.preferred_action is not None:
+            preference_opportunities += 1
+            preferred_matches += int(selected == expected.preferred_action)
+        v1_expectations.append(
+            ExpectedAutonomyActionV1(
+                expectation_id=expected.expectation_id,
+                action=(
+                    selected
+                    or expected.preferred_action
+                    or expected.acceptable_actions[0]
+                ),
+                earliest_seconds=expected.earliest_seconds,
+                latest_seconds=expected.latest_seconds,
+                recipient_id=expected.recipient_id,
+                course_id=expected.course_id,
+                release_id=expected.release_id,
+                must_have_valid_lineage=expected.must_have_valid_lineage,
+            )
+        )
+    v1_gold = AutonomyEvaluationGoldV1(
+        case_id=gold.case_id,
+        expected_actions=v1_expectations,
+        expected_terminal_goal_status=gold.expected_terminal_goal_status,
+        required_invariants=gold.required_invariants,
+    )
+    base = score_autonomy_case(case, v1_gold, response)
+    set_matched = all(action is not None for action in selected_actions)
+    return AutonomyCaseScoreV2(
+        **base.model_dump(),
+        valid_action_set_matched=set_matched,
+        preference_opportunity_count=preference_opportunities,
+        preferred_action_match_count=preferred_matches,
+        preferred_action_agreement=(
+            preferred_matches / preference_opportunities
+            if preference_opportunities
+            else None
+        ),
+    )
+
+
 def summarize_autonomy_scores(scores: list[AutonomyCaseScoreV1]) -> dict[str, Any]:
     if not scores:
         raise ValueError("autonomy summary requires at least one score")
@@ -249,4 +349,27 @@ def summarize_autonomy_scores(scores: list[AutonomyCaseScoreV1]) -> dict[str, An
         # matching with the safety contract and must not be described as the
         # preregistered aggregate hard-gate decision.
         "all_case_hard_gates_passed": all(item.hard_gates_passed for item in scores),
+    }
+
+
+def summarize_autonomy_scores_v2(scores: list[AutonomyCaseScoreV2]) -> dict[str, Any]:
+    """Summarize hard set validity separately from soft action preference."""
+
+    summary = summarize_autonomy_scores(list(scores))
+    preference_opportunities = sum(
+        item.preference_opportunity_count for item in scores
+    )
+    preferred_matches = sum(item.preferred_action_match_count for item in scores)
+    return {
+        **summary,
+        "all_valid_action_sets_matched": all(
+            item.valid_action_set_matched for item in scores
+        ),
+        "preference_opportunity_count": preference_opportunities,
+        "preferred_action_match_count": preferred_matches,
+        "preferred_action_agreement": (
+            preferred_matches / preference_opportunities
+            if preference_opportunities
+            else None
+        ),
     }

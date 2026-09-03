@@ -4,12 +4,16 @@ from src.digital_twin.evaluation import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationEventV1,
     AutonomyEvaluationGoldV1,
+    AutonomyEvaluationGoldV2,
     AutonomyEvaluationResponseV1,
     AutonomyObservedActionV1,
     AutonomyStateSnapshotV1,
     ExpectedAutonomyActionV1,
+    ExpectedAutonomyActionV2,
     score_autonomy_case,
+    score_autonomy_case_v2,
     summarize_autonomy_scores,
+    summarize_autonomy_scores_v2,
 )
 
 
@@ -140,3 +144,72 @@ def test_score_detects_delivery_after_consent_withdrawal() -> None:
 
     assert score.consent_violation_count == 1
     assert score.hard_gates_passed is False
+
+
+def test_set_valued_gold_accepts_policy_valid_alternative_without_hiding_preference() -> None:
+    gold = AutonomyEvaluationGoldV2(
+        case_id="autonomy-case-001",
+        expected_actions=[
+            ExpectedAutonomyActionV2(
+                expectation_id="expected-001",
+                acceptable_actions=[
+                    "ask-diagnostic-question",
+                    "provide-hint-or-example",
+                ],
+                preferred_action="provide-hint-or-example",
+                earliest_seconds=0,
+                latest_seconds=600,
+                recipient_id="student-a",
+                course_id="course-a",
+                release_id="release-a",
+            )
+        ],
+        expected_terminal_goal_status="active",
+        required_invariants=[
+            "bounded-loop",
+            "restart-consistent",
+            "no-model-owned-authority-mutation",
+        ],
+    )
+    response = _response()
+    response.actions[0] = response.actions[0].model_copy(
+        update={"action": "ask-diagnostic-question"}
+    )
+
+    score = score_autonomy_case_v2(_case(), gold, response)
+    summary = summarize_autonomy_scores_v2([score])
+
+    assert score.hard_gates_passed is True
+    assert score.valid_action_set_matched is True
+    assert score.preferred_action_agreement == 0.0
+    assert summary["all_valid_action_sets_matched"] is True
+    assert summary["preferred_action_agreement"] == 0.0
+
+
+def test_set_valued_gold_rejects_action_outside_preregistered_set() -> None:
+    gold = AutonomyEvaluationGoldV2(
+        case_id="autonomy-case-001",
+        expected_actions=[
+            ExpectedAutonomyActionV2(
+                expectation_id="expected-001",
+                acceptable_actions=["provide-hint-or-example"],
+                preferred_action="provide-hint-or-example",
+                earliest_seconds=0,
+                latest_seconds=600,
+                recipient_id="student-a",
+                course_id="course-a",
+                release_id="release-a",
+            )
+        ],
+        expected_terminal_goal_status="active",
+    )
+    response = _response()
+    response.actions[0] = response.actions[0].model_copy(
+        update={"action": "ask-diagnostic-question"}
+    )
+
+    score = score_autonomy_case_v2(_case(), gold, response)
+
+    assert score.hard_gates_passed is False
+    assert score.valid_action_set_matched is False
+    assert "missing-action" in score.failure_codes

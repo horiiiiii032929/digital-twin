@@ -1,0 +1,103 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-020-build",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "set-valued-minimal-schema-build-020",
+  "status": "completed-go-deeper-build-only",
+  "decision_question": "Are SE7-9, SE7-10, and terminal-checkpoint drift prospectively closed on a fresh, fair, provider-unauthorized actual-product confirmation?",
+  "code_revision": "005f4e6a7c756e4d1ba2006faa23ad93ec9c8b28",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-020",
+    "case_count": 820,
+    "source_family_count": 50,
+    "source_family_range": [401, 450],
+    "source_disjoint_from_confirmations_012_through_019": true,
+    "hidden_gold_open_count": 0,
+    "public_sha256": "b95080aa5a3831e6ff494cba123968770c33eafc1fb8fe2a0c6eeb3bf024944d",
+    "hidden_gold_sha256": "ec450972a0f3b8a00686e2b146a7c6a8f6ac1d140aa92ca7bd18b384579b0684",
+    "set_valued_expectation_count": 600
+  },
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_020.json",
+      "sha256": "cb0364e629d86899daf88ac0da72734f8beec5c7e548b015bb1fa0af414795d2",
+      "role": "provider-unauthorized-instrument"
+    },
+    {
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
+      "sha256": "def47c0a409dbb4ed0f359fc31f7f03f653a720d062af93fd815c2e0c2df57c2",
+      "role": "fresh-package-builder"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_020.py",
+      "sha256": "4e93ffce7e84efe4a83ef293e4fcf1fdd3344609686a6edb2ebc746e312297b8",
+      "role": "bounded-confirmation-runner"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
+      "sha256": "c62c88c95838f1fe9a81a9366a759bfcf396ce58f07cdd8bdbf8b9f2951f0ced",
+      "role": "versioned-shared-runner"
+    }
+  ],
+  "finding_closure": {
+    "SE7-9": "Prospective set-valued valid-action gold with separate non-blocking preference diagnostic.",
+    "SE7-10": "Minimal provider-owned intent/reason schema with deterministic concept, hypothesis, scope, evidence, state, and delivery enrichment.",
+    "terminal-checkpoint-drift": "Terminal checkpoint records result status, completed-case count, and result SHA-256."
+  },
+  "conditions": {
+    "t0-grounded-control": {"case_count": 150, "valid_action_accuracy": 1.0, "safety_contract_rate": 1.0},
+    "t1-v1-reactive-control": {"case_count": 150, "valid_action_accuracy": 1.0, "safety_contract_rate": 1.0},
+    "t1-v2-reactive": {"case_count": 150, "valid_action_accuracy": 1.0, "safety_contract_rate": 1.0},
+    "t1-v2-autonomous": {"case_count": 370, "valid_action_accuracy": 1.0, "safety_contract_rate": 1.0}
+  },
+  "verification": {
+    "python_tests_passed": 1726,
+    "frontend_tests_passed": 50,
+    "repository_files_audited": 1006,
+    "repository_files_pending": 0,
+    "repository_open_findings": 0,
+    "protected_entrypoints": 157,
+    "protected_entrypoints_valid": 157,
+    "frontend_lint_passed": true,
+    "frontend_build_passed": true,
+    "network_free_case_count": 820
+  },
+  "provider_metadata": {
+    "verified_at": "2026-09-03T02:27:55+00:00",
+    "provider": "openai",
+    "model": "gpt-5.6-luna",
+    "dated_snapshot": false,
+    "input_price_usd_per_million": 0.2,
+    "output_price_usd_per_million": 1.2,
+    "store": false,
+    "exact_returned_identity_required": true,
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+      "https://developers.openai.com/api/reference/cli/resources/responses/methods/create"
+    ]
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0.0,
+    "private_data_used": false
+  },
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The root-cause corrections, complete repository gate, and fresh actual-product simulation pass. A single fresh provider-backed result is still required for release selection."
+  },
+  "reproduction": {
+    "command": "npm run simulate:governed-autonomy-v2-1-actual-product-confirmation-020"
+  },
+  "limitations": [
+    "Network-free simulation does not establish live provider reliability, semantic quality, latency, tokens, or cost.",
+    "Only public synthetic sources and learners are used.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-020-build-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-020-build.json"
+}

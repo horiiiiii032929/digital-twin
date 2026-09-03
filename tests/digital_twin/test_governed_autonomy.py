@@ -1393,10 +1393,6 @@ async def test_t1_v2_uses_one_semantic_proposal_only_for_complex_turn(tmp_path):
         FixtureLlmClient(
             response_content=(
                 '{"proposed_intent":"correct_misconception",'
-                '"concept_ids":["cache-coherence"],'
-                '"hypothesis_kind":"misconception",'
-                '"hypothesis_concept_id":"cache-coherence",'
-                '"hypothesis_confidence":0.8,'
                 '"reason_code":"misconception-repair"}'
             )
         ),
@@ -1442,7 +1438,12 @@ async def test_t1_v2_uses_one_semantic_proposal_only_for_complex_turn(tmp_path):
     assert trace.planning_calls == 1
     assert trace.planner_model == "gpt-5.6-terra"
     assert belief is not None and len(belief.hypotheses) == 1
-    assert belief.hypotheses[0].kind == "misconception"
+    # The provider may choose the pedagogical move, but it cannot author the
+    # learner hypothesis. Deterministic perception owns this low-confidence
+    # inference because the message does not match the explicit misconception
+    # cue contract.
+    assert belief.hypotheses[0].kind == "low-confidence"
+    assert belief.hypotheses[0].probability == 0.55
     assert belief.hypotheses[0].status == "tentative"
 
 

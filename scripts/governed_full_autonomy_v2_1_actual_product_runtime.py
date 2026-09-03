@@ -264,7 +264,7 @@ async def run_engine_transport_identity_canary(
                     ),
                 ),
             ],
-            "reactive_tutoring_plan",
+            "reactive_tutoring_intent",
         )
         content_sha256 = hashlib.sha256(response.content.encode("utf-8")).hexdigest()
     except Exception as error:  # noqa: BLE001 - result must retain failed accounting
@@ -294,7 +294,7 @@ async def run_engine_transport_identity_canary(
         "requested_model": engine.planner_model,
         "required_returned_identity": engine.returned_identity_must_equal,
         "returned_models": returned_models,
-        "task": "reactive_tutoring_plan",
+        "task": "reactive_tutoring_intent",
         "public_synthetic_input": True,
         "provider_calls": snapshot["calls"],
         "completed_calls": snapshot["completed_calls"],

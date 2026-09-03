@@ -8,6 +8,7 @@ from src.digital_twin.evaluation import (
     AutonomyEvaluationCaseV1,
     AutonomyEvaluationEventV1,
     AutonomyEvaluationGoldV1,
+    AutonomyEvaluationGoldV2,
     AutonomyEvaluationResponseV1,
     AutonomyObservedActionV1,
     AutonomyRawEvidenceV2,
@@ -16,6 +17,7 @@ from src.digital_twin.evaluation import (
     AutonomyStateSnapshotV1,
     AutonomyTraceEvidenceV2,
     ExpectedAutonomyActionV1,
+    ExpectedAutonomyActionV2,
     score_autonomy_case_independently,
 )
 
@@ -226,3 +228,38 @@ def test_duplicate_state_revision_is_rejected_independently() -> None:
 
     assert score.pedagogical_transition_valid is False
     assert "pedagogical-transition" in score.failure_codes
+
+
+def test_independent_score_accepts_preregistered_action_equivalence() -> None:
+    gold = AutonomyEvaluationGoldV2(
+        case_id="independent-001",
+        expected_actions=[
+            ExpectedAutonomyActionV2(
+                expectation_id="expected-001",
+                acceptable_actions=[
+                    "ask-diagnostic-question",
+                    "provide-hint-or-example",
+                ],
+                preferred_action="provide-hint-or-example",
+                earliest_seconds=0,
+                latest_seconds=30,
+                recipient_id="public-learner",
+                course_id="public-course",
+                release_id="public-release",
+            )
+        ],
+        expected_terminal_goal_status="active",
+    )
+    response = _response()
+    response.actions[0] = response.actions[0].model_copy(
+        update={"action": "ask-diagnostic-question"}
+    )
+    evidence = _evidence()
+    evidence.actions[0] = evidence.actions[0].model_copy(
+        update={"action": "ask-diagnostic-question"}
+    )
+
+    score = score_autonomy_case_independently(_case(), gold, response, evidence)
+
+    assert score.action_accuracy == 1.0
+    assert score.safe_grounded_autonomous_success is True
