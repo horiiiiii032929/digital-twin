@@ -2,7 +2,7 @@
 
 ## Outcome
 
-The product **keeps `structured-lexical-v1`**. The v4 gate that corpus
+The product **keeps `question-targeted-ambiguity-safe-v2`**. The v4 gate that corpus
 confirmation 028 recorded Keep for is recorded as **implemented but
 unpromoted**, the disposition issue #8 already uses for #155.
 
@@ -15,9 +15,22 @@ evidence gate. Provider calls 0, cost USD 0.
 
 | Arm | Gate | Fully grounded factual success | Severe unsupported releases | Operational failures |
 | --- | --- | --- | --- | --- |
-| Incumbent | `structured-lexical-v1` | **16.20%** | 0 | 0 |
+| **Incumbent** | `question-targeted-ambiguity-safe-v2` | **15.80%** | 0 | 0 |
+| Template default | `structured-lexical-v1` | 16.20% | 0 | 0 |
 | Candidate | `dominance-scoped-source-semantic-evidence-atoms-v4` | 12.60% | 0 | 0 |
 | Reference | `pedagogy-aware-source-semantic-evidence-atoms-v3` | 12.60% | 0 | 0 |
+
+### A correction to this instrument
+
+The incumbent arm was first bound to `structured-lexical-v1`, read from
+`deploy/local-r1.env.example`. That file is a template. The deployment runs
+`.env.local-r1`, which selects `question-targeted-ambiguity-safe-v2`, and that
+is the gate the 2026-09-02 local R1 qualification actually ran.
+
+The arm identity was corrected and every arm re-run. No threshold and no
+decision rule moved. The template default is retained as a fourth arm rather
+than deleted, so the mistake stays visible. **The conclusion is unchanged: the
+candidate does not clear the incumbent under either reading.**
 
 Pre-registered checks:
 
@@ -38,7 +51,7 @@ neither v3 nor v4: `services/api/app/config.py` offers only `unselected`,
 selects the first of those. The evaluated line had never been compared with the
 line that actually ships.
 
-Promoting on 028 alone would have made the product worse, from 16.20% to
+Promoting on 028 alone would have made the product worse, from 15.80% to
 12.60%.
 
 ## The finding this produced
@@ -84,7 +97,7 @@ claim.
 
 ## Decision
 
-Keep `structured-lexical-v1` in the product. Record
+Keep `question-targeted-ambiguity-safe-v2` in the product. Record
 `dominance-scoped-source-semantic-evidence-atoms-v4` as implemented, confirmed
 for the governed autonomy contract by 028, and unpromoted for factual
 grounding. Any future promotion needs evidence on the axis being changed.

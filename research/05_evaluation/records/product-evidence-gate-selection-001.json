@@ -8,8 +8,8 @@
       "status": "completed-refine"
     },
     "incumbent": {
-      "evidence_gate": "structured-lexical-v1",
-      "fully_grounded_factual_success": 0.162,
+      "evidence_gate": "question-targeted-ambiguity-safe-v2",
+      "fully_grounded_factual_success": 0.158,
       "operational_failure_count": 0,
       "severe_unsupported_release_count": 0,
       "status": "completed-refine"
@@ -20,19 +20,31 @@
       "operational_failure_count": 0,
       "severe_unsupported_release_count": 0,
       "status": "completed-refine"
+    },
+    "template-default": {
+      "evidence_gate": "structured-lexical-v1",
+      "fully_grounded_factual_success": 0.162,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
     }
   },
+  "arms_correction": {
+    "conclusion_unchanged": true,
+    "what_changed": "The incumbent arm identity only; no threshold or decision rule moved.",
+    "what_was_wrong": "The incumbent was first read from deploy/local-r1.env.example, a template, rather than .env.local-r1, the deployment env."
+  },
   "case_count": 500,
-  "code_revision": "9f0ab7d",
+  "code_revision": "0d4ae7f",
   "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
-  "decision": "Keep structured-lexical-v1; v4 implemented but unpromoted",
+  "decision": "Keep question-targeted-ambiguity-safe-v2; v4 implemented but unpromoted",
   "decision_rule_fixed_before_execution": true,
   "decision_rule_source": "research/05_evaluation/instruments/product_evidence_gate_selection_001.json",
   "evidence_class": "development-split-method-selection",
   "finding": {
     "candidate_success": 0.126,
     "id": "v4-and-v3-are-indistinguishable-on-factual-grounding",
-    "incumbent_success": 0.162,
+    "incumbent_success": 0.158,
     "statement": "v4 and v3 both score 12.60%. The dominance-scoping correction does not bind on this corpus, so confirmation 028's Keep is evidence about the governed autonomy contract and about nothing else.",
     "would_have_regressed_the_product": true
   },
@@ -58,6 +70,6 @@
   "run_id": "product-evidence-gate-selection-001",
   "schema_version": 1,
   "sealed_package_touched": false,
-  "selected_gate": "structured-lexical-v1",
+  "selected_gate": "question-targeted-ambiguity-safe-v2",
   "status": "completed-keep-incumbent"
 }

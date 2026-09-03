@@ -64,8 +64,12 @@ SOURCES_ENVIRONMENT_VARIABLE = "DEVELOPMENT_SOURCES_PATH"
 
 ARMS: dict[str, dict[str, Any]] = {
     "incumbent": {
+        "evidence_gate": winner.PRODUCT_SHIPPED_GATE,
+        "role": "what .env.local-r1 actually selects and the 2026-09-02 qualification ran",
+    },
+    "template-default": {
         "evidence_gate": winner.PRODUCT_STRUCTURED_LEXICAL_GATE,
-        "role": "what the product ships today",
+        "role": "the deploy/local-r1.env.example default, first mistaken for the incumbent",
     },
     "candidate": {
         "evidence_gate": winner.SUCCESSOR_EVIDENCE_GATE,

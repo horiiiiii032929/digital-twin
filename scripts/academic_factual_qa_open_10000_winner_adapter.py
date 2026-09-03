@@ -61,6 +61,8 @@ from src.digital_twin.grounding import (  # noqa: E402
     SourceSemanticEvidenceAtomGateV4,
     SourceSemanticEvidenceAtomRetrieverV1,
     StructuredLexicalCoverageEvidenceGate,
+    AmbiguitySafeEvidenceGateV1,
+    QuestionTargetedAtomicEvidenceGate,
 )
 from src.digital_twin.action_router import DeterministicActionRouterV3  # noqa: E402
 from src.digital_twin.student import (  # noqa: E402
@@ -94,6 +96,9 @@ CONTROL_EVIDENCE_GATE = "any-hit-evidence-gate-v1"
 # What services/api/app/factory.py actually ships today, so a gate selection can
 # compare the evaluated line against the incumbent rather than against itself.
 PRODUCT_STRUCTURED_LEXICAL_GATE = "structured-lexical-v1"
+# What .env.local-r1 actually selects, and what the 2026-09-02 local R1
+# qualification ran. deploy/local-r1.env.example is only a template.
+PRODUCT_SHIPPED_GATE = "question-targeted-ambiguity-safe-v2"
 WINNER_GENERATOR_ID = "deterministic-evidence-set-grounded-generator-v2"
 WINNER_RETRIEVER_ID = "source-semantic-evidence-atom-retriever-v1"
 WINNER_POLICY_ID = "deterministic-tutor-action-router-v3"
@@ -404,6 +409,17 @@ def build_winner_adapter(
     elif manifest.evidence_gate == SUCCESSOR_EVIDENCE_GATE:
         condition = "successor"
         evidence_gate = SourceSemanticEvidenceAtomGateV4()
+    elif manifest.evidence_gate == PRODUCT_SHIPPED_GATE:
+        condition = "incumbent"
+        evidence_gate = AmbiguitySafeEvidenceGateV1(
+            QuestionTargetedAtomicEvidenceGate(
+                base_gate=StructuredLexicalCoverageEvidenceGate(
+                    minimum_content_matching_terms=2,
+                    evidence_limit=5,
+                )
+            ),
+            evidence_limit=5,
+        )
     elif manifest.evidence_gate == PRODUCT_STRUCTURED_LEXICAL_GATE:
         condition = "incumbent"
         evidence_gate = StructuredLexicalCoverageEvidenceGate(
