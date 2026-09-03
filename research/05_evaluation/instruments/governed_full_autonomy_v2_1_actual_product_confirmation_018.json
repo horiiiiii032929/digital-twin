@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-018",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 186,
   "parent_issue": 8,
   "decision_question": "Does corrected H+E1/V3 pass the complete provider-backed actual-product autonomy gates on a fresh source-disjoint package after transport and product-route canaries independently pass?",
@@ -108,9 +108,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "Build-only checkpoint. Standing user authority is not activated until the clean freeze commit and live no-call preflight pass.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "Standing user authorization to execute the agreed finite evaluation plan after the clean build gate; activated only for confirmation 018.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0

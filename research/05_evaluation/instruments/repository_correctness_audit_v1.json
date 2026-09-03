@@ -3008,12 +3008,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-instrument",
-      "evidence": "Prospective frozen instrument records fresh source lineage, unchanged hard gates, official model metadata, independent canaries, complete accounting, and provider authority false.",
+      "evidence": "Prospective frozen instrument records fresh source lineage, unchanged hard gates, official model metadata, independent canaries, complete accounting, and the sole bounded provider authorization.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_018.json",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "f8e4a8b8380593ac27ca840e8172937f4e35cc714e3d5eea2313b96566a4e78d"
+      "reviewer": "Codex confirmation-018 authorization audit",
+      "sha256": "421e135583ab7b70ad4430fce72ef8bea860ebdd8870972fa6bb1b14aca9a8b4"
     },
     {
       "audit_status": "audited",
@@ -8255,12 +8255,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Confirmation 018 runner is registered under both blocked operations and has no bounded authorization in the build checkpoint.",
+      "evidence": "Confirmation 018 runner remains registered under both blocked operations and is the only new bounded provider authorization; the repository-wide freeze remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "e49d5987ce64ed19b6b85960f8fc343e4a399cd7cfe33a1b345f3d55d5f4b1b0"
+      "reviewer": "Codex confirmation-018 authorization audit",
+      "sha256": "6d3c49ef01ecd737bd6f334a522a12acdee1aa79bce9837b96b5a1c2c75a036b"
     },
     {
       "audit_status": "audited",
@@ -8838,12 +8838,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze-tests",
-      "evidence": "Regression verifies confirmation 018 remains outside the bounded authorization allowlist before its separate freeze commit.",
+      "evidence": "Regression verifies confirmation 018 is the sole added bounded provider authorization and that every historical paid instrument remains blocked.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "e815faea033739ea6008c52c0db5a11414e778d472ea688a4a5750affd368724"
+      "reviewer": "Codex confirmation-018 authorization audit",
+      "sha256": "7b87de114b6d5a39be7d668b993aee6e43faa359e81f49c3e555367625619a4f"
     },
     {
       "audit_status": "audited",
@@ -10257,12 +10257,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "actual-product-confirmation-tests",
-      "evidence": "Tests cover fresh source lineage, separated route canaries, exact transport identity and cost, identity drift, and unauthorized preflight.",
+      "evidence": "Tests cover fresh source lineage, separated route canaries, exact transport identity and cost, identity drift, and absence of authorization blockers after the bounded freeze commit.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_actual_product_confirmation_018.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-018 build audit",
-      "sha256": "091597a6aee5c311698bfd00aedb1e09456549f2e807555d0869e794b065a73f"
+      "reviewer": "Codex confirmation-018 authorization audit",
+      "sha256": "d345ef2c0e975c9c226910808d57e6615a97908437026ace7ce3606d78f06deb"
     },
     {
       "audit_status": "audited",

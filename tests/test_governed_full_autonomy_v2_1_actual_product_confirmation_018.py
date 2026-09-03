@@ -42,7 +42,7 @@ class _CanaryClient:
         )
 
 
-def test_018_is_fresh_frozen_and_provider_unauthorized() -> None:
+def test_018_is_fresh_frozen_and_provider_authorized() -> None:
     result = runner.validate_attempt()
     instrument = json.loads(runner.INSTRUMENT.read_text(encoding="utf-8"))
 
@@ -50,8 +50,8 @@ def test_018_is_fresh_frozen_and_provider_unauthorized() -> None:
     assert result["source_family_count"] == 50
     assert result["source_disjoint_from_confirmations_012_through_017"] is True
     assert result["instructional_wording_family_disjoint_from_confirmation_016"] is True
-    assert result["provider_execution_authorized"] is False
-    assert result["paid_execution_authorized"] is False
+    assert result["provider_execution_authorized"] is True
+    assert result["paid_execution_authorized"] is True
     assert instrument["dataset"]["source_family_range"] == [351, 400]
     assert instrument["dataset"]["quality_results_previously_opened"] == 0
 
@@ -121,11 +121,11 @@ def test_direct_transport_canary_rejects_identity_drift(monkeypatch) -> None:
     assert result["provider_calls"] == 1
 
 
-def test_018_preflight_is_blocked_before_authorization() -> None:
+def test_018_preflight_has_no_authorization_blocker() -> None:
     result = runner.shared.preflight(context=runner.CONTEXT)
 
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
-    assert "repository-freeze-authorization-missing" in result["blockers"]
+    assert "provider-execution-not-authorized" not in result["blockers"]
+    assert "paid-execution-not-authorized" not in result["blockers"]
+    assert "repository-freeze-authorization-missing" not in result["blockers"]
     assert result["provider_calls"] == 0
     assert result["hidden_gold_loaded"] is False

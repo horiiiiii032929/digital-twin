@@ -110,7 +110,8 @@ Confirmation 018 now satisfies that build boundary: 820/820 network-free
 actual-product cases passed, its dataset is fresh, and its direct transport,
 reactive route, and autonomous route canaries are independently enforced.
 Issue #186 remains `In Progress / Go Deeper` until the provider-backed result is
-published. Provider execution is still disabled at the build checkpoint.
+published. Confirmation 018 is the sole bounded provider-authorized checkpoint;
+the wider evaluation freeze remains active.
 
 The V2.1 governed-autonomy implementation is now a `Go Deeper` candidate, not a
 new release selection. Its network-free development checkpoint passed 500/500

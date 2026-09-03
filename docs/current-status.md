@@ -20,8 +20,9 @@ hidden gold closed.
 The complete clean-revision gate passed 1,712 Python tests, 50 frontend tests,
 lint, TypeScript, and production build. Repository correctness is 998/998 and
 execution-freeze coverage is 155/155 with zero open findings. Confirmation 018
-remains provider-unauthorized at this build checkpoint; it is not release
-evidence until the separately frozen paid run completes validly.
+is now the sole provider-authorized checkpoint under the repository-wide
+freeze. It is not release evidence until the paid run completes validly, and
+its authority must be revoked after every outcome.
 
 Confirmation 015 completed all 820 fresh actual-product cases before hidden
 gold opened. Its immutable result is formally `completed-keep` under the sixteen
