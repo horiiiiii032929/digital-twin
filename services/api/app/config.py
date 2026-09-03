@@ -49,6 +49,7 @@ class EvidenceGateMode(StrEnum):
     STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
     AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1 = "ambiguity-safe-structured-lexical-v1"
     QUESTION_TARGETED_AMBIGUITY_SAFE_V2 = "question-targeted-ambiguity-safe-v2"
+    DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3 = "dominance-scoped-ambiguity-safe-v3"
 
 
 @dataclass(frozen=True, slots=True)
