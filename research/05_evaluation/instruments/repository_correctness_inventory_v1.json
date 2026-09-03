@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "51a169f9cfdee8f125c965e6d49b9c84cd1ba11a1db61fa8c057951d9607dcb3",
+  "record_sha256": "321076ce475866405d994e4f10b2b2751db05c0698decaeb91b9681b8d429400",
   "records": [
     {
       "audit": {
@@ -4707,7 +4707,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_confirmation_023.json",
       "risk": "high",
-      "sha256": "a14db105943f39a5b2eac9a12b03b1224d3bfa7f52e9fb24a59b088f753c183f"
+      "sha256": "02415de3b0b78705614916ca4f408ddcb2a8d41e7997555f1814d19343aa7199"
     },
     {
       "audit": {
@@ -13188,7 +13188,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "dd78b83fa78ff71cc0febaba2bffaa04cb1e658ced47dbe39419ff12149c8fb8"
+      "sha256": "99fc47b81edf1ca64a17f2a0500fc64089aebda3a0eebe63603fd17c158da005"
     },
     {
       "audit": {
@@ -14052,7 +14052,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "4ec0fee9808ec5699ad27f6dd264ba334ef745fa7a375eb1deb6f358a98a04eb"
+      "sha256": "379b4091fd923e9ed6060e3cf715c87dfd4daa19847aec0a16a407ec923bb70a"
     },
     {
       "audit": {
@@ -16404,7 +16404,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_persona_confirmation_023.py",
       "risk": "medium",
-      "sha256": "c9575c48f2d5f9a16ecf2fb87e1e4348278acadc5ac091f2a5ec225d2e67952d"
+      "sha256": "7074640e320f0b45c2ccea19fbca8f674626caa8448911fa960087dcaaeac044"
     },
     {
       "audit": {

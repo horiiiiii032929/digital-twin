@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-persona-confirmation-023",
+  "instrument_id": "governed-full-autonomy-v2-1-persona-confirmation-023",
+  "status": "invalid-execution",
+  "decision": "No quality conclusion",
+  "code_revision": "5ebbd0f",
+  "provider_calls": 5,
+  "persisted_response_count": 2,
+  "input_tokens": 1770,
+  "output_tokens": 273,
+  "cost_usd": 0.0006816,
+  "returned_models": ["gpt-5.6-luna"],
+  "hidden_gold_opened": false,
+  "bulk_started": false,
+  "failure_type": "ActualProductEvaluationError",
+  "failure_detail": "projected p99 cost $5.00 exceeds $3.00",
+  "artifact_hashes": {
+    "raw_result_sha256": "06acbb328097d399cac204150147b3a6265c3a9f476981e9bc52809c4556a472",
+    "checkpoint_sha256": "8d8e67f0258bc4e00b7497e0e6f38158f685e3887da5bf362af0eb26d8e6f53f",
+    "direct_transport_canary_sha256": "23430511dd20b36a464781f9e18e65af766177fa0c61308df922120824bba184",
+    "response_database_sha256": "2ed869cfb36721ff7d25476e7ea1d4d4aba23bfb8787d8800882cf9b297af6f1"
+  },
+  "authority_revoked": true,
+  "quality_interpretation_allowed": false,
+  "harness_only_successor_allowed": true
+}
