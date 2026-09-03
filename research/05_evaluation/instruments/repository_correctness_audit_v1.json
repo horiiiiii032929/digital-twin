@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "6f0de221de22d390e894431660334fd4e65bd1d1eaa3da389d3bc4aaf9d69d00"
+      "sha256": "62d8563d0eaa7bb9bd48254455df8066bf8db81a4f31566d5102ab8a63dd1867"
     },
     {
       "audit_status": "audited",
@@ -8909,7 +8909,7 @@
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "f571ac471a4561bb63456cae6a56782e0ea95334c15acaf78df288e9f314cbbe"
+      "sha256": "fb455f3f8f6101a9970cc07dac535131e86c6a44996fab07ff52a57fb606b6b5"
     },
     {
       "audit_status": "audited",
@@ -11313,23 +11313,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "persona-robust-fresh-confirmation",
-      "evidence": "Focused tests prove exact 023 package reuse, the USD 5 ceiling, virtual-day export, bounded authority, disabled auto-promotion, and prohibited same-package quality reruns.",
+      "evidence": "Focused tests prove exact 023 package reuse, the USD 5 ceiling, virtual-day export, terminal authority revocation, disabled auto-promotion, and prohibited same-package quality reruns.",
       "findings": [],
       "path": "tests/test_governed_full_autonomy_v2_1_persona_confirmation_024.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-024 harness audit",
-      "sha256": "041049bacb6907e592adbcaf832bd159d5475575404850fc6367e109e3450f7a"
+      "sha256": "971431da83b5d1d5c6b451d2e40d18635101e3fa7aa175d5c660cfe4ce0b27c5"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "persona-robust-fresh-confirmation",
-      "evidence": "Prospective instrument review confirms that only the emergency ceiling and missing clock export change; public/gold hashes, models, prompts, methods, gates, calls, and decision rules remain frozen.",
+      "evidence": "Prospective and terminal review confirms that only the emergency ceiling and missing clock export changed, the Keep result is immutable, and paid/provider authority is revoked.",
       "findings": [],
       "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_persona_confirmation_024.json",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-024 harness audit",
-      "sha256": "5d278e0928f5755959d896389be3a3bcc538b9ac5c75af83ca09a7efa3cf83fa"
+      "sha256": "b8394ca8bc890a806a1d00db2f8f9e9ffb657881a8791fbb67e57f5c06829704"
     }
   ],
   "schema_version": 1

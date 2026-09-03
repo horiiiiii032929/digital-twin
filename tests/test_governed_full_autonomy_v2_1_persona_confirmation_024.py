@@ -9,9 +9,9 @@ def test_024_reuses_023_scientific_package_and_only_changes_harness() -> None:
     result = runner.validate_attempt()
 
     assert result["case_count"] == 670
-    assert result["status"] == "frozen-pending-execution"
-    assert result["provider_execution_authorized"] is True
-    assert result["paid_execution_authorized"] is True
+    assert result["status"] == "completed-keep-authorization-revoked"
+    assert result["provider_execution_authorized"] is False
+    assert result["paid_execution_authorized"] is False
     assert result["harness_only_changes"] == [
         "cost-ceiling-3-to-5",
         "clock-day-export",

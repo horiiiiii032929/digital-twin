@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-confirmation-024",
-  "status": "frozen-pending-execution",
+  "status": "completed-keep-authorization-revoked",
   "owner_issue": 196,
   "parent_issue": 8,
   "decision_question": "Does the selected T1-v2 autonomous condition pass the unchanged fresh package after correcting only confirmation 023's harness ceiling and clock export?",
@@ -70,9 +70,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
-    "authorization_source": "Existing user authorization for the finite evaluation program applies to the sole harness-only successor after invalid pre-gold attempt 023; only confirmation 024 is authorized.",
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "Revoked after the terminal completed-keep execution on 2026-09-03; confirmation 024 cannot be rerun.",
     "automatic_promotion": false,
     "maximum_provider_calls": 4100,
     "maximum_cost_usd": 5.0
