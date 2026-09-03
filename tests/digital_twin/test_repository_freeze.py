@@ -44,6 +44,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "product-evidence-gate-selection-001",
         "product-evidence-gate-selection-002",
         "product-evidence-gate-selection-003",
+        "product-evidence-gate-selection-004",
         "academic-factual-qa-development-region-corpus-001",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
@@ -97,6 +98,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     ] == ("method_evaluation_execution",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "product-evidence-gate-selection-003"
+    ] == ("method_evaluation_execution",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "product-evidence-gate-selection-004"
     ] == ("method_evaluation_execution",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-development-region-corpus-001"

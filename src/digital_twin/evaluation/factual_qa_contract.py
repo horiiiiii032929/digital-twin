@@ -188,7 +188,12 @@ def evidence_ranges_overlap(
         return False
     if expected.source_sha256 != observed.source_sha256:
         return False
-    if observed.region_id is not None or expected.region_id is not None:
+    # A region identity is additional provenance: it refines a match the
+    # canonical range already establishes, so it decides only when both sides
+    # declare one. Comparing it when only one side does made a citation that
+    # agrees on artifact, version, sha256 and character range score a miss for
+    # carrying more provenance than the gold.
+    if observed.region_id is not None and expected.region_id is not None:
         return observed.region_id == expected.region_id
     if observed.char_start is None or observed.char_end is None:
         return False
