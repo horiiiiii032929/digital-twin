@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-actual-product-confirmation-021",
-  "status": "reviewed-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 190,
   "parent_issue": 8,
   "decision_question": "Does the H+E1 product pass one fresh release confirmation after replacing lexical integrity routing with structured request-intent classification?",
@@ -72,7 +72,7 @@
   },
   "models": {
     "metadata_status": "fresh",
-    "verified_at": "2026-09-03T02:27:55+00:00",
+    "verified_at": "2026-09-03T04:42:06+00:00",
     "freshness_hours": 24,
     "official_sources": [
       "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
@@ -100,9 +100,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": "Not authorized. Build-only review and complete local gate are required first.",
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User explicitly requested continuous execution through confirmation 021 and, on Keep, the known regression and local qualification on 2026-09-03; this checkpoint authorizes only confirmation 021.",
     "automatic_promotion": false,
     "maximum_provider_calls": 5001,
     "maximum_cost_usd": 10.0
