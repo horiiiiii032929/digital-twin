@@ -95,6 +95,7 @@ def test_frozen_bank_accepts_valid_wording_and_falls_back_on_missing_entry() -> 
         concept_id=card.concept_id,
         hidden_correct=None,
         prompted=False,
+        canonical=f"How does {card.label} work according to the course source?",
         ordinal=0,
     )
     bank = FrozenLearnerUtteranceBankV1(
@@ -113,6 +114,7 @@ def test_frozen_bank_accepts_valid_wording_and_falls_back_on_missing_entry() -> 
     second = learner.question(card.concept_id)
     assert first.text == f"Could you help me understand {card.label}?"
     assert first.realization_source == "frozen-bank:bank-test-001"
+    assert first.realization_key == key
     assert second.realization_source == "canonical-fallback"
     assert second.realization_fallback_reason is not None
     assert second.realization_fallback_reason.startswith("missing:")
@@ -131,6 +133,10 @@ def test_invalid_frozen_semantics_fall_back_without_changing_hidden_truth() -> N
         concept_id=card.concept_id,
         hidden_correct=None,
         prompted=False,
+        canonical=(
+            f"I thought {card.label} must always keeps every copy stale forever "
+            "and never checks anything."
+        ),
         ordinal=0,
     )
     bank = FrozenLearnerUtteranceBankV1(

@@ -102,7 +102,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
     def question(self, concept_id: str) -> LearnerUtterance:
         card = self._card(concept_id)
         canonical = _QUESTION_TEMPLATES[0].format(label=card.label)
-        text, source, fallback = self._realize(
+        text, source, fallback, key = self._realize(
             kind="question",
             card=card,
             hidden_correct=None,
@@ -120,6 +120,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
             realization_method=str(self.realization_method),
             realization_source=source,
             realization_fallback_reason=fallback,
+            realization_key=key,
         )
 
     def misconception_statement(self, concept_id: str) -> LearnerUtterance:
@@ -128,7 +129,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
         canonical = _MISCONCEPTION_TEMPLATES[0].format(
             label=card.label, distractor=distractor
         )
-        text, source, fallback = self._realize(
+        text, source, fallback, key = self._realize(
             kind="misconception",
             card=card,
             hidden_correct=None,
@@ -146,6 +147,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
             realization_method=str(self.realization_method),
             realization_source=source,
             realization_fallback_reason=fallback,
+            realization_key=key,
         )
 
     def _render(self, attempt: AssessedAttempt, *, prompted: bool) -> LearnerUtterance:
@@ -158,7 +160,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
             "distractor": distractor,
         }
         canonical = templates[0].format(**values)
-        text, source, fallback = self._realize(
+        text, source, fallback, key = self._realize(
             kind="attempt",
             card=card,
             hidden_correct=attempt.correct,
@@ -176,6 +178,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
             realization_method=str(self.realization_method),
             realization_source=source,
             realization_fallback_reason=fallback,
+            realization_key=key,
         )
 
     def _realize(
@@ -188,23 +191,28 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
         canonical: str,
         templates: tuple[str, ...],
         values: dict[str, str],
-    ) -> tuple[str, str, str | None]:
-        if self.realization_method is ResponseRealizationMethod.DETERMINISTIC_FRAME:
-            return canonical, "canonical", None
-        if self.realization_method is ResponseRealizationMethod.SEEDED_TEMPLATE:
-            return self._realization_random.choice(templates).format(**values), "template", None
-
+    ) -> tuple[str, str, str | None, str]:
         key = self._next_key(
             kind=kind,
             concept_id=card.concept_id,
             hidden_correct=hidden_correct,
             prompted=prompted,
+            canonical=canonical,
         )
+        if self.realization_method is ResponseRealizationMethod.DETERMINISTIC_FRAME:
+            return canonical, "canonical", None, key
+        if self.realization_method is ResponseRealizationMethod.SEEDED_TEMPLATE:
+            return (
+                self._realization_random.choice(templates).format(**values),
+                "template",
+                None,
+                key,
+            )
         entry = self.frozen_bank.by_key().get(key) if self.frozen_bank is not None else None
         if entry is None:
             reason = f"missing:{key}"
             self.realization_fallbacks.append(reason)
-            return canonical, "canonical-fallback", reason
+            return canonical, "canonical-fallback", reason, key
         failure = validate_frozen_utterance(
             text=entry.text,
             kind=kind,
@@ -214,8 +222,8 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
         if failure is not None:
             reason = f"invalid:{failure}:{key}"
             self.realization_fallbacks.append(reason)
-            return canonical, "canonical-fallback", reason
-        return entry.text, f"frozen-bank:{self.frozen_bank.bank_id}", None
+            return canonical, "canonical-fallback", reason, key
+        return entry.text, f"frozen-bank:{self.frozen_bank.bank_id}", None, key
 
     def _next_key(
         self,
@@ -224,7 +232,9 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
         concept_id: str,
         hidden_correct: bool | None,
         prompted: bool,
+        canonical: str,
     ) -> str:
+        semantic_sha256 = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
         signature = ":".join(
             (
                 self.persona.name,
@@ -234,6 +244,7 @@ class TextRealisingLearnerV2(TextRealisingLearnerV1):
                 concept_id,
                 "na" if hidden_correct is None else str(hidden_correct).lower(),
                 str(prompted).lower(),
+                semantic_sha256[:16],
             )
         )
         ordinal = self._realization_counts.get(signature, 0)
@@ -286,14 +297,16 @@ def frozen_utterance_key(
     concept_id: str,
     hidden_correct: bool | None,
     prompted: bool,
+    canonical: str,
     ordinal: int,
 ) -> str:
     """Public key constructor for offline bank generation and validation."""
 
     correct = "na" if hidden_correct is None else str(hidden_correct).lower()
+    semantic_sha256 = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
     return (
         f"{persona}:{family}:{seed}:{kind}:{concept_id}:{correct}:"
-        f"{str(prompted).lower()}:{ordinal:03d}"
+        f"{str(prompted).lower()}:{semantic_sha256[:16]}:{ordinal:03d}"
     )
 
 

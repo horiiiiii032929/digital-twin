@@ -60,6 +60,7 @@ class LearnerUtterance:
     realization_method: str = "deterministic-semantic-frame"
     realization_source: str = "canonical"
     realization_fallback_reason: str | None = None
+    realization_key: str | None = None
 
 
 @dataclass

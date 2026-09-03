@@ -58,6 +58,7 @@ class HiddenUtteranceRecord:
     realization_method: str = "deterministic-semantic-frame"
     realization_source: str = "canonical"
     realization_fallback_reason: str | None = None
+    realization_key: str | None = None
 
 
 @dataclass
@@ -163,6 +164,7 @@ async def run_hidden_state_learner_case(
                 realization_method=utterance.realization_method,
                 realization_source=utterance.realization_source,
                 realization_fallback_reason=utterance.realization_fallback_reason,
+                realization_key=utterance.realization_key,
             )
         )
 

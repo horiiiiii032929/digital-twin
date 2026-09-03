@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "76f2bde5494c5dbe61fcedb89221474bdd069763916df5b51a2943a6681721f1",
+  "record_sha256": "eb9a07a354733aad258ccc4f39d15818de8c0611b25f6990184415f6c770c825",
   "records": [
     {
       "audit": {
@@ -11578,7 +11578,7 @@
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and explicit response-realization provenance through the public adapter contract.",
+        "evidence": "Driver review verifies event-id joins, hidden-state separation, deterministic learner advancement, restart handling, and semantic-keyed response-realization provenance through the public adapter contract.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -11589,7 +11589,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/autonomy_learner_driver.py",
       "risk": "high",
-      "sha256": "c41de273bc4a3f6877150ee3d49bb77a496a4b28708dc9b3e65f4248f5baa8ef"
+      "sha256": "cb35ef73f66e539588265ee18ccab68a16b3bbb768ef2aaef977ba2f6ef1064d"
     },
     {
       "audit": {
@@ -12106,7 +12106,7 @@
     {
       "audit": {
         "domain": "successor-hidden-state-evaluation",
-        "evidence": "Historical learner review verifies added provenance defaults preserve V1 deterministic realization and do not expose hidden parameters to the product adapter.",
+        "evidence": "Historical learner review verifies added provenance and optional realization-key defaults preserve V1 deterministic realization and do not expose hidden parameters to the product adapter.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -12117,12 +12117,12 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/simulated_learner_v1.py",
       "risk": "high",
-      "sha256": "1c2eaca34ce23816f0ad09943f28fd512226017955b985713c270b28dfa054d9"
+      "sha256": "d1da103aacd95aa9953a39a5afa0171c9718b397975a25d30af633e2e9528b9a"
     },
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Manual contract review and focused tests verify independent realization RNG, deterministic hidden dynamics, immutable unique bank keys, semantic validation, and explicit canonical fallback lineage.",
+        "evidence": "Manual contract review and focused tests verify independent realization RNG, deterministic hidden dynamics, semantic-hash-bound immutable bank keys, semantic validation, and explicit canonical fallback lineage.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -12133,7 +12133,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/simulated_learner_v2.py",
       "risk": "high",
-      "sha256": "49ac3a6739d071105f4a932a0f4ef6fd715ee5c75b16b5e33f39d793ffc40001"
+      "sha256": "7cf0e4ea9d6f444d2b2aa6e1985a2c014f2723754dfd67c7f6562ae6e4fd2ee3"
     },
     {
       "audit": {
@@ -14058,7 +14058,7 @@
     {
       "audit": {
         "domain": "persona-robust-release-selection",
-        "evidence": "Focused tests verify deterministic hidden-state equivalence across wording methods, reproducible templates, accepted and rejected bank entries, explicit missing-entry fallback, and duplicate-key rejection.",
+        "evidence": "Focused tests verify deterministic hidden-state equivalence across wording methods, reproducible templates, semantic-key lookup, accepted and rejected bank entries, explicit missing-entry fallback, and duplicate-key rejection.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex persona-robust evaluation audit"
@@ -14069,7 +14069,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_simulated_learner_v2.py",
       "risk": "medium",
-      "sha256": "832340ce9f3d3a254983e729b12e95ae74c8a6cacae751e5bc7671d1192b4b6e"
+      "sha256": "8570a4d90b8030765f7bf2170f383118d50b62cf2e7b29ea52207bfda8edaf71"
     },
     {
       "audit": {
