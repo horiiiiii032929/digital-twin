@@ -8,6 +8,21 @@ remain authoritative for the historical runs and claims they document.
 
 ## H+E1 whole-system confirmation and grounding successor
 
+Issue #188 now owns the final prospective correction. Revision `005f4e6`
+closes `SE7-9` in code with preregistered sets of policy-valid actions and a
+separate non-blocking preference diagnostic; it closes `SE7-10` by reducing the
+live model contract to intent plus reason while deterministic code owns all
+correlated and authoritative fields. Terminal results also bind the progress
+checkpoint to the final status, completed-case count, and result hash.
+
+Fresh confirmation 020 uses 820 source-disjoint cases from source families
+401–450. Its network-free actual-product run passed all valid-action, safety,
+scope, citation, timing, restart, termination, and proactive-lineage checks.
+The complete gate passed 1,726 Python and 50 frontend tests, with 1,006/1,006
+audited files and 157/157 freeze registrations. This closes the code findings,
+not the release decision: provider and paid authority remain false until the
+separate execution checkpoint, and H+E1 remains unselected.
+
 Fresh confirmation 018 established the source- and wording-disjoint 820-case
 package using source families 351–400, but its paid run stopped invalidly before
 bulk. Confirmation 019 is the sole harness-only successor and reuses that

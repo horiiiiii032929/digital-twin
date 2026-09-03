@@ -10,6 +10,17 @@ results.
 
 ## Current audit-safe release boundary
 
+The current finite successor is issue #188. Confirmation 020 prospectively
+closes `SE7-9` with set-valued valid-action gold and `SE7-10` with a minimal
+intent/reason provider contract; deterministic code retains all concept,
+hypothesis, scope, evidence, state, and delivery authority. It also binds the
+terminal checkpoint to the result hash and terminal status. The fresh 820-case
+network-free actual-product run passes, the complete repository gate passes,
+and all 1,006 execution-relevant files are audited with zero open findings.
+This is build qualification only. One fresh provider-backed 020 execution is
+the next release decision; its authority is currently false and no same-package
+quality rerun is allowed.
+
 `main-commit-audit-resolution-001` supersedes the earlier governed V2.1 release
 selection. It closes all published audit findings, repairs the shared runtime,
 and revokes confirmation 013 and its local qualification as current selection
