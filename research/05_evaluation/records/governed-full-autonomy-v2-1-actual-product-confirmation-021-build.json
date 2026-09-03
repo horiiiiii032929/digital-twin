@@ -1,0 +1,81 @@
+{
+  "record_schema": "research-evaluation-run-v1",
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-actual-product-confirmation-021-build",
+  "program_id": "governed-full-autonomy-v2-1-actual-product-confirmation",
+  "stage_id": "structured-request-intent-build-021",
+  "status": "completed-go-deeper-build-only",
+  "decision_question": "Does structured assessed-artifact plus completion-intent classification close SE7-11 on fresh actual-product evidence?",
+  "code_revision": "9f09ea360caa1f5d3db0c8690662cf3e6d1db26f",
+  "dirty_state": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-actual-product-confirmation-021",
+    "case_count": 820,
+    "source_family_count": 50,
+    "source_family_range": [451, 500],
+    "source_disjoint_from_confirmations_012_through_020": true,
+    "wording_disjoint_from_confirmation_020": true,
+    "hidden_gold_open_count": 0,
+    "public_sha256": "889bf6cf5b892f0cbb6ca4584ad61d8ec670db38ccf5a67e30eacfa8f461c276",
+    "hidden_gold_sha256": "3eae5710fc356efef5b8f9b5619870c436f147cc666180d6f7b28ad34112d648",
+    "set_valued_expectation_count": 600
+  },
+  "bindings": [
+    {
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_actual_product_confirmation_021.json",
+      "sha256": "c1d5430171a4c3d7dd346fd5c2d1d37b040bbd733c88138112d9eed12bd812f3",
+      "role": "provider-unauthorized-instrument"
+    },
+    {
+      "path": "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_021.py",
+      "sha256": "f31db4a42a6d18749c405ceffa01314c4c8e00ccff17224224478d9d70e4a88b",
+      "role": "fresh-package-builder"
+    },
+    {
+      "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_021.py",
+      "sha256": "7d75d6a1995cc686f65ceaf213fdd225ddf9faa91c51d301cd0e8cf77cfbced9",
+      "role": "bounded-confirmation-runner"
+    }
+  ],
+  "finding_closure": {
+    "SE7-11": "Redirect requires both an assessed artifact and an explicit submission-ready completion request; pedagogical uses of test remain tutor-eligible."
+  },
+  "conditions": {
+    "t0-grounded-control": {"case_count": 150, "valid_action_accuracy": 1.0},
+    "t1-v1-reactive-control": {"case_count": 150, "valid_action_accuracy": 1.0},
+    "t1-v2-reactive": {"case_count": 150, "valid_action_accuracy": 1.0},
+    "t1-v2-autonomous": {"case_count": 370, "valid_action_accuracy": 1.0}
+  },
+  "verification": {
+    "python_tests_passed": 1755,
+    "frontend_tests_passed": 50,
+    "repository_files_audited_before_registration": 1011,
+    "repository_files_pending": 0,
+    "repository_open_findings": 0,
+    "protected_entrypoints": 158,
+    "protected_entrypoints_valid": 158,
+    "network_free_case_count": 820
+  },
+  "operational": {
+    "provider_calls": 0,
+    "input_tokens": 0,
+    "output_tokens": 0,
+    "reported_cost_usd": 0.0,
+    "private_data_used": false
+  },
+  "decision": {
+    "outcome": "go-deeper",
+    "selected_architecture_id": null,
+    "rationale": "The correction and fresh network-free actual-product package pass; one provider-backed confirmation remains required."
+  },
+  "reproduction": {
+    "command": "npm run simulate:governed-autonomy-v2-1-actual-product-confirmation-021"
+  },
+  "limitations": [
+    "Network-free simulation does not establish live provider reliability or semantic quality.",
+    "Only public synthetic sources and learners are used.",
+    "Real professor fidelity, real student usability, and learning improvement are not established."
+  ],
+  "summary_path": "research/05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-021-build-results.md",
+  "record_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-actual-product-confirmation-021-build.json"
+}

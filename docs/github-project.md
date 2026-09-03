@@ -148,6 +148,14 @@ explanation” was treated as a graded-test completion request in all 600
 repeated-confusion cases. No release is selected; a fresh method-level router
 successor owns the next decision.
 
+Successor #190 is now `In Progress / Go Deeper`. Revision `9f09ea3` replaces
+the lexical collision with structured assessed-artifact plus completion-intent
+classification and wires it through all active product/evaluation routes.
+Fresh confirmation 021 passes 820/820 network-free actual-product cases with
+zero safety/governance defects. The issue remains open until the paid 021
+result and, on Keep, the known 10,000+1,000 regression plus local HTTPS release
+qualification produce the final Release/No Release decision.
+
 Revision `adfc8bd7` is frozen as build-only release candidate 001 with exact
 profile, source, and local image hashes. The successor provider-integration
 instrument was bounded to 12 calls, zero retries, and USD 1. Live execution
