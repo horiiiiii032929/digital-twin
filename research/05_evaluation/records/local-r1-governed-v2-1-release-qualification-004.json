@@ -1,0 +1,57 @@
+{
+  "artifact_hashes": {
+    "live_journey_sha256": "82877f136ece2d6b04e448f2040dfaa82f8810ee897494bdd5df2e8514153818",
+    "restart_sha256": "7f3374f12d0251ebd736102a455e75e07cb6a99fb57379c5728f496b438d3203",
+    "t0_rollback_sha256": "7f3374f12d0251ebd736102a455e75e07cb6a99fb57379c5728f496b438d3203",
+    "v2_restore_sha256": "7f3374f12d0251ebd736102a455e75e07cb6a99fb57379c5728f496b438d3203"
+  },
+  "code_revision": "696132925436c4fc7ada009d83f93a114a8e7ab0",
+  "date": "2026-09-04",
+  "decision": "Keep",
+  "gate_promotion_evidence": {
+    "candidate": 0.5,
+    "incumbent": 0.368,
+    "instrument_id": "product-evidence-gate-selection-004",
+    "required_this_qualification_before_shipping": true,
+    "severe_unsupported_release_count": 0
+  },
+  "image_digests": {
+    "api": "sha256:c3ee2d4e07de903495aa139eb5c14ac1fc51f5a425501deb2b8f647cda51d4bf",
+    "web": "sha256:675c2e1d6fda3a1853ec50c6b9915de3929a6dd109d82271077085dfdc4833f2"
+  },
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-004",
+  "limitations": [
+    "Qualified only on the development Mac through internal-CA HTTPS.",
+    "Synthetic identities and open demonstration material only.",
+    "Establishes no real-professor fidelity, real-student usability, or learning improvement.",
+    "Durable public hosting remains separate work.",
+    "The promoted gate's evidence is a development-split method selection, not a generalization claim."
+  ],
+  "private_data_used": false,
+  "release_scope": "qualified local release on the development Mac through internal-CA HTTPS; not hosted production and not a learning claim",
+  "results": {
+    "governed_v2_1_restoration": "6/6",
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "t0_rollback": "6/6"
+  },
+  "run_id": "local-r1-governed-v2-1-release-qualification-004",
+  "runtime": {
+    "autonomy_planner_mode": "openai-gpt-5.6-terra",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "generator_mode": "deterministic",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_version": "v2.1-grounding-011",
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-confirmation-001"
+  },
+  "runtime_binding_widened": {
+    "name": "GOVERNED_DETERMINISTIC_EVIDENCE_GATES",
+    "narrowed_not_removed": true,
+    "now": "a qualified set of two gates; any other gate is still refused",
+    "was": "literal equality on question-targeted-ambiguity-safe-v2"
+  },
+  "schema_version": 1,
+  "status": "completed-keep",
+  "supersedes": "local-r1-governed-v2-1-release-qualification-003"
+}

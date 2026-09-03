@@ -52,6 +52,19 @@ class EvidenceGateMode(StrEnum):
     DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3 = "dominance-scoped-ambiguity-safe-v3"
 
 
+# Governed deterministic generation is qualified against these gates only.
+# The v3 successor was added by product-evidence-gate-selection-004, which
+# measured it at 50.00% fully grounded factual success against the v2 gate's
+# 36.80% with severe unsupported releases and operational failures zero in both
+# arms. Any other gate is still refused.
+GOVERNED_DETERMINISTIC_EVIDENCE_GATES = frozenset(
+    {
+        EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
+        EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3,
+    }
+)
+
+
 @dataclass(frozen=True, slots=True)
 class AppSettings:
     mode: RuntimeMode = RuntimeMode.DEMO
@@ -292,7 +305,7 @@ class AppSettings:
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
             and self.generator_mode == GeneratorMode.DETERMINISTIC
             and self.evidence_gate_mode
-            != EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2
+            not in GOVERNED_DETERMINISTIC_EVIDENCE_GATES
         ):
             raise ValueError(
                 "governed deterministic generation requires "
