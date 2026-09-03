@@ -3020,11 +3020,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-configuration",
-      "evidence": "Prospective confirmation 020 was reviewed for fresh source-disjoint inputs, hidden-gold isolation, set-valued action equivalence, minimal provider authority, exact Luna identity, freshness, bounded calls/cost, and no same-package rerun.",
+      "evidence": "Prospective confirmation 020 was reviewed for fresh source-disjoint inputs, hidden-gold isolation, set-valued action equivalence, minimal provider authority, exact Luna identity, fresh metadata, one-time user authority, bounded calls/cost, and no same-package rerun.",
       "findings": [],
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "cb0364e629d86899daf88ac0da72734f8beec5c7e548b015bb1fa0af414795d2"
+      "sha256": "453465b35991b9dd7d6aa9bb6803f1059a6dda6936cb0ff12e29ae719fd35bdf"
     },
     {
       "audit_status": "audited",
@@ -7100,7 +7100,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "active-runtime",
-      "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+      "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively and confirms the active freeze grants only confirmation 020 external-model and method-evaluation operations; every other provider-backed successor remains blocked.",
       "findings": [],
       "path": "services/llm/openai_responses_client.py",
       "reviewed_at": "2026-09-03",
@@ -8326,7 +8326,7 @@
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "72f1efc923f0eaf9655dab5126c70e004865188dbe8edf37c02de44168f828db"
+      "sha256": "5ae131517f4e39b56599c12181cffbfdc19018c38750de64a26c404815323bbf"
     },
     {
       "audit_status": "audited",
@@ -8750,7 +8750,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
-      "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
+      "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, exact bounded authorization recognition, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "reviewed_at": "2026-09-03",
@@ -8904,12 +8904,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze-tests",
-      "evidence": "Regression verifies confirmations 018 and 019 and every other historical paid instrument are blocked after terminal result publication.",
+      "evidence": "Regression verifies only confirmation 020 receives the two bounded operations needed for its one-time run while confirmations 018/019 and every other historical paid instrument remain blocked.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex 019 terminal-result audit",
-      "sha256": "74300a5c424d7d11ba126d731d62a3b4461ff05232fa7ec4634c61cdc7e9596f"
+      "reviewer": "Codex confirmation-020 authorization audit",
+      "sha256": "fa92199a8edec115a8638f821c2e5ea5f4533c7f329c0a03cd5bfac9425a8b7b"
     },
     {
       "audit_status": "audited",
@@ -10350,7 +10350,7 @@
       "findings": [],
       "reviewed_at": "2026-09-03",
       "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "18d1b883b91afe3af00fa716211d15d9040fdc48c07888cd33cb6380d655ba58"
+      "sha256": "4c49e0c159058b1f857207c3fdacc3b5ed66de834f8930fe4519bfff7883afab"
     },
     {
       "audit_status": "audited",
