@@ -410,18 +410,36 @@ def _metrics(bundle: _ProviderBundle | None) -> AutonomyOperationalMetricsV1:
     )
 
 
+def _reset_case_database(database_path: Path) -> None:
+    """Remove a per-case database left behind by a killed attempt.
+
+    Each case is an isolated product instance, so its database is scratch
+    state: the durable evidence is the response ledger. A leftover database
+    would already hold the case's immutable release, and ``save_release``
+    refuses a second release with the same identity regardless of content, so
+    a resumed attempt would fail on the one case that was mid-flight when the
+    process died. This is a no-op for a case that has never run.
+    """
+
+    for suffix in ("", "-wal", "-shm"):
+        candidate = database_path.with_name(database_path.name + suffix)
+        candidate.unlink(missing_ok=True)
+
+
 def _build_release_chunk(
     template,
     source: dict[str, str],
     *,
     course_id: str,
     source_label: str,
+    ordinal: int = 0,
 ):
     """Render one approved source into a citable, region-bearing chunk."""
 
     source_sha = hashlib.sha256(source["statement"].encode("utf-8")).hexdigest()
     return template.model_copy(
         update={
+            "ordinal": ordinal,
             "id": f"chunk-{source['source_id']}",
             "document_id": f"document-{source['source_id']}",
             "source_artifact_id": source["source_id"],
@@ -504,6 +522,7 @@ def _install_release(
         source,
         course_id=fixture.course_a_id,
         source_label=source_label,
+        ordinal=0,
     )
     chunks = [chunk]
     if distractor_resolver is not None:
@@ -516,6 +535,7 @@ def _install_release(
                 source_label=extra.get(
                     "label", f"Protocol {extra['source_id']}"
                 ),
+                ordinal=len(chunks),
             )
             if row.id in seen:
                 continue
@@ -610,6 +630,7 @@ def build_runtime_factory(
             hashlib.sha256(f"{condition}:{case.case_id}".encode()).hexdigest()[:20]
             + ".sqlite3"
         )
+        _reset_case_database(database_path)
         repository = SQLiteStudentRepository(database_path)
         profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
         fixture = seed_synthetic_student_workflow(

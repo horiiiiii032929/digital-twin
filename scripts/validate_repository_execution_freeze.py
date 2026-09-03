@@ -74,6 +74,7 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     "build_governed_full_autonomy_v2_1_persona_confirmation_024.py",
     "build_governed_full_autonomy_v2_1_corpus_confirmation_025.py",
     "build_governed_full_autonomy_v2_1_corpus_confirmation_026.py",
+    "build_governed_full_autonomy_v2_1_corpus_confirmation_027.py",
     "build_governed_full_autonomy_v2_1_persona_wording_requirements_022.py",
     "build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
     "build_factual_qa_v3_source_dispositions.py",
