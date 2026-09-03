@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the fresh multi-source-corpus confirmation 025.
+"""Build the fresh multi-source-corpus confirmation 026.
 
 Confirmations 012 through 024 published exactly one approved chunk per release,
 so the selected evidence gate never had to choose between competing approved
@@ -14,7 +14,7 @@ distractors are sibling protocols whose wording differs only by number, so the
 grounding architecture is measured on a harder identification task than real
 course prose would present.
 
-Sources are drawn from family range 551-600, disjoint from every earlier
+Sources are drawn from family range 601-650, disjoint from every earlier
 confirmation (051-550).
 """
 
@@ -26,7 +26,7 @@ from pathlib import Path
 from typing import Any
 
 from scripts import (
-    build_governed_full_autonomy_v2_1_persona_confirmation_023 as predecessor,
+    build_governed_full_autonomy_v2_1_corpus_confirmation_025 as predecessor,
 )
 from scripts import (
     build_governed_full_autonomy_v2_1_actual_product_evaluation_009 as source_base,
@@ -39,26 +39,26 @@ from src.digital_twin.student.autonomy_eligibility import (
 
 
 ROOT = Path(__file__).resolve().parents[1]
-INSTRUMENT_ID = "governed-full-autonomy-v2-1-corpus-confirmation-025"
+INSTRUMENT_ID = "governed-full-autonomy-v2-1-corpus-confirmation-026"
 INSTRUMENT = ROOT / (
     "research/05_evaluation/instruments/"
-    "governed_full_autonomy_v2_1_corpus_confirmation_025.json"
+    "governed_full_autonomy_v2_1_corpus_confirmation_026.json"
 )
 CONDITIONS = predecessor.CONDITIONS
 SELECTED_CONDITIONS = set(CONDITIONS)
 canonical_hash = predecessor.canonical_hash
 # The shared runner reads the clock day length from the package it is given.
 # 023 derives its cases from 021, which is where DAY is defined.
-DAY = predecessor.predecessor.DAY
+DAY = predecessor.DAY
 
-SOURCE_FAMILY_START = 551
+SOURCE_FAMILY_START = 601
 SOURCE_FAMILY_COUNT = 50
 # Each release publishes the answering source plus this many sibling sources.
 DISTRACTOR_COUNT = 11
 
 
 def fresh_source_number(case_id: str) -> int:
-    """Map the fresh package to source identities 551-600."""
+    """Map the fresh package to source identities 601-650."""
 
     return SOURCE_FAMILY_START + (
         (source_base._base_number(case_id) - 1) % SOURCE_FAMILY_COUNT  # noqa: SLF001
@@ -67,7 +67,7 @@ def fresh_source_number(case_id: str) -> int:
 
 def _source(number: int) -> dict[str, str]:
     return {
-        "source_id": f"synthetic-corpus-confirmation-source-{number:03d}",
+        "source_id": f"synthetic-corpus2-confirmation-source-{number:03d}",
         "concept_id": f"adaptive-review-{number:03d}",
         "objective": (
             f"Explain how adaptive review protocol {number:03d} preserves a "
@@ -112,8 +112,9 @@ def distractor_fixtures_for_case(case_id: str) -> list[dict[str, str]]:
 
 
 def _replace(value: str) -> str:
+    # 026 derives from 025, whose identities already carry the corpus prefix.
     return value.replace(
-        "release-persona-confirm-h-e1-", "release-corpus-confirm-h-e1-", 1
+        "release-corpus-confirm-h-e1-", "release-corpus2-confirm-h-e1-", 1
     )
 
 
@@ -206,7 +207,7 @@ def public_payload() -> dict[str, Any]:
             SOURCE_FAMILY_START,
             SOURCE_FAMILY_START + SOURCE_FAMILY_COUNT - 1,
         ],
-        "source_disjoint_from_confirmations_012_through_024": True,
+        "source_disjoint_from_confirmations_012_through_025": True,
         "published_sources_per_release": DISTRACTOR_COUNT + 1,
         "conditions": list(CONDITIONS),
         "rows": [
@@ -237,15 +238,15 @@ def validate() -> dict[str, Any]:
     hidden = hidden_gold_payload()
     rows = build_contract()
     if public["content_sha256"] != instrument["dataset"]["public_sha256"]:
-        raise ValueError("confirmation 025 public hash drifted")
+        raise ValueError("confirmation 026 public hash drifted")
     if hidden["content_sha256"] != instrument["dataset"]["hidden_gold_sha256"]:
-        raise ValueError("confirmation 025 hidden-gold hash drifted")
+        raise ValueError("confirmation 026 hidden-gold hash drifted")
     if instrument["method"]["action_eligibility_version"] != ACTION_ELIGIBILITY_VERSION:
-        raise ValueError("confirmation 025 eligibility version drifted")
+        raise ValueError("confirmation 026 eligibility version drifted")
     if instrument["method"]["event_action_contract"] != event_action_contract():
-        raise ValueError("confirmation 025 event-action contract drifted")
+        raise ValueError("confirmation 026 event-action contract drifted")
     if len(rows) != 670 or len({row[1].case_id for row in rows}) != 670:
-        raise ValueError("confirmation 025 requires 670 unique cases")
+        raise ValueError("confirmation 026 requires 670 unique cases")
     counts = {
         condition: sum(row[0] == condition for row in rows)
         for condition in SELECTED_CONDITIONS
@@ -255,17 +256,17 @@ def validate() -> dict[str, Any]:
         "t1-v2-reactive": 150,
         "t1-v2-autonomous": 370,
     }:
-        raise ValueError(f"confirmation 025 condition distribution drifted: {counts}")
+        raise ValueError(f"confirmation 026 condition distribution drifted: {counts}")
     identities = {source_fixture_for_case(row[1].case_id)["source_id"] for row in rows}
     if len(identities) != SOURCE_FAMILY_COUNT:
-        raise ValueError("confirmation 025 requires 50 fresh source identities")
+        raise ValueError("confirmation 026 requires 50 fresh source identities")
     for _condition, case, _gold in rows:
         answer = source_fixture_for_case(case.case_id)["source_id"]
         published = {row["source_id"] for row in distractor_fixtures_for_case(case.case_id)}
         if answer in published:
-            raise ValueError("confirmation 025 distractors must exclude the answer")
+            raise ValueError("confirmation 026 distractors must exclude the answer")
         if len(published) != DISTRACTOR_COUNT:
-            raise ValueError("confirmation 025 distractor count drifted")
+            raise ValueError("confirmation 026 distractor count drifted")
     authority = instrument["authority"]
     return {
         "instrument_id": INSTRUMENT_ID,

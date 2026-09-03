@@ -38,6 +38,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "academic-factual-qa-open-10000-reference-aggregate-007",
         "academic-factual-qa-open-10000-winner-regression-001",
         "governed-full-autonomy-v2-1-corpus-confirmation-025",
+        "governed-full-autonomy-v2-1-corpus-confirmation-026",
         "course-digital-twin-whole-system-architecture-development-freeze-001",
         "course-digital-twin-whole-system-architecture-round-1-001",
         "course-digital-twin-whole-system-architecture-round-2-001",
@@ -71,6 +72,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     # but never touches the sealed held-out package.
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "governed-full-autonomy-v2-1-corpus-confirmation-025"
+    ] == ("external_model_evaluation", "method_evaluation_execution")
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "governed-full-autonomy-v2-1-corpus-confirmation-026"
     ] == ("external_model_evaluation", "method_evaluation_execution")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",

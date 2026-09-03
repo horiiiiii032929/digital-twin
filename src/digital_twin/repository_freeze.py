@@ -294,6 +294,13 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/recover_governed_full_autonomy_confirmation_score.py": (
+            "method_evaluation_execution",
+        ),
+        "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_026.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_025.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
@@ -620,6 +627,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # multi-source-corpus successor to persona confirmation 024, running
         # the dominance-scoped v4 grounding architecture under a USD 5 ceiling.
         "governed-full-autonomy-v2-1-corpus-confirmation-025": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        # Issue #198. Fresh package successor to the invalid 025 attempt.
+        "governed-full-autonomy-v2-1-corpus-confirmation-026": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
