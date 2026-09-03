@@ -13,9 +13,10 @@ families 501–550: 150 T0 controls, 150 T1-v2 reactive paired diagnostics, and
 370 cases for the selected T1-v2 autonomous candidate. Public inputs and hidden
 gold are hash-bound and physically separated. The complete network-free
 simulation passed every action, safety, fallback, persistence, transition,
-termination, and proactive-lineage check with zero provider calls. Provider
-execution remains unauthorized until the build-only checkpoint is committed
-and the clean live preflight succeeds. A valid Keep opens only the labelled
+termination, and proactive-lineage check with zero provider calls. A separate
+one-time authorization now permits only confirmation 023, bounded to 4,100
+calls and USD 3; the live preflight must still pass from a clean revision. A
+valid Keep opens only the labelled
 known 10,000+1,000 regression and local HTTPS qualification; a valid quality
 failure ends in No Release without same-package tuning.
 

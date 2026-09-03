@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "governed-full-autonomy-v2-1-persona-confirmation-023",
-  "status": "reviewed-build-only-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 196,
   "parent_issue": 8,
   "decision_question": "Does the selected T1-v2 autonomous condition pass one fresh provider-backed actual-product confirmation before known regression and local release qualification?",
@@ -98,9 +98,9 @@
     "maximum_transport_retries": 0
   },
   "authority": {
-    "provider_execution_authorized": false,
-    "paid_execution_authorized": false,
-    "authorization_source": null,
+    "provider_execution_authorized": true,
+    "paid_execution_authorized": true,
+    "authorization_source": "User explicitly authorized continuous execution of the previously discussed bounded evaluation program and instructed Codex to continue on 2026-09-03; this one-time checkpoint authorizes only confirmation 023.",
     "automatic_promotion": false,
     "maximum_provider_calls": 4100,
     "maximum_cost_usd": 3.0

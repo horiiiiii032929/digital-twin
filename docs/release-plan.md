@@ -14,8 +14,9 @@ Issue #196 owns the sole fresh release confirmation. Confirmation 023 freezes
 670 actual-product cases across T0, T1-v2 reactive diagnostics, and the selected
 T1-v2 autonomous condition, using synthetic source families 501–550. Its
 network-free run passes all registered product and safety contracts with zero
-calls. The next finite step is one bounded provider-backed execution after a
-clean preflight. Keep opens the winner-only known 10,000+1,000 regression and
+calls. One-time provider execution is now authorized with 4,100-call and USD 3
+ceilings, but can start only after a clean live preflight. Keep opens the
+winner-only known 10,000+1,000 regression and
 local HTTPS qualification; Refine produces No Release. No same-package prompt
 or method tuning is allowed.
 

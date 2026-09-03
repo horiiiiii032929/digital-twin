@@ -8,7 +8,7 @@ from scripts import (
 from src.digital_twin.action_router import DeterministicActionRouterV3
 
 
-def test_023_binds_the_fresh_selected_condition_package() -> None:
+def test_023_binds_the_frozen_selected_condition_package() -> None:
     result = runner.validate_attempt()
 
     assert result["case_count"] == 670
@@ -18,9 +18,9 @@ def test_023_binds_the_fresh_selected_condition_package() -> None:
     assert result["request_intent_contract"] == (
         DeterministicActionRouterV3.implementation_id
     )
-    assert result["status"] == "reviewed-build-only-provider-unauthorized"
-    assert result["provider_execution_authorized"] is False
-    assert result["paid_execution_authorized"] is False
+    assert result["status"] == "frozen-pending-execution"
+    assert result["provider_execution_authorized"] is True
+    assert result["paid_execution_authorized"] is True
 
 
 def test_023_distribution_and_sources_are_fresh() -> None:
@@ -60,10 +60,10 @@ def test_023_canaries_exist_in_selected_autonomous_condition() -> None:
         assert public_rows[case_id] == "t1-v2-autonomous"
 
 
-def test_023_preflight_fails_closed_before_authorization() -> None:
-    result = runner.shared.preflight(context=runner.CONTEXT)
+def test_023_authority_is_bounded_and_cannot_auto_promote() -> None:
+    instrument = runner.json.loads(runner.INSTRUMENT.read_text(encoding="utf-8"))
 
-    assert "provider-execution-not-authorized" in result["blockers"]
-    assert "paid-execution-not-authorized" in result["blockers"]
-    assert "repository-freeze-authorization-missing" in result["blockers"]
-    assert result["hidden_gold_loaded"] is False
+    assert instrument["authority"]["automatic_promotion"] is False
+    assert instrument["authority"]["maximum_provider_calls"] == 4100
+    assert instrument["authority"]["maximum_cost_usd"] == 3.0
+    assert instrument["execution"]["same_cases_quality_rerun_allowed"] is False
