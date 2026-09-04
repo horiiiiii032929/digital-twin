@@ -704,7 +704,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # later actual-product answer/citation checkpoint.
         "true-visual-colpali-confirmation-001": (
             "dataset_generation",
-            "external_model_evaluation",
         ),
     }
 )

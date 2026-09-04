@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "run_id": "true-visual-colpali-confirmation-001",
+  "status": "completed-go-deeper",
+  "decision": "Go Deeper: retain the Jina v4 multi-vector late-interaction retriever for a separate actual-product visual checkpoint; do not yet select a representative multimodal product capability.",
+  "component": "visual-retrieval",
+  "dataset_id": "true-visual-colpali-confirmation-001",
+  "code_revision": "949e7223cd25299238cb755817d91d15e1e777ec",
+  "completed_at": "2026-09-04T13:56:42Z",
+  "instrument_sha256": "c92f0564d582c8d9ef781827bf385eaf0cc1c9626b542c38fe25ddef0e72d401",
+  "dataset_sha256": "2395b3231bc055899a826cc24485fa1625dd9567e405b33d0262a359a9bcba13",
+  "raw_result_content_sha256": "94dedf3dafb71a987e6af2f1f86fe40bb32cf968cb5b72fafe4d9e02b02912ea",
+  "implementation": {
+    "implementation_id": "jina-embeddings-v4-multivector-api-v1-plus-visual-late-interaction-maxsim-v1",
+    "provider": "jina-ai-first-party",
+    "model": "jina-embeddings-v4",
+    "endpoint": "https://api.jina.ai/v1/embeddings",
+    "return_multivector": true,
+    "truncate": false,
+    "answerable_visual_assets": 30,
+    "paired_boundary_cases_reserved": 30,
+    "maximum_calls": 60,
+    "maximum_retries": 0,
+    "maximum_cost_usd": 1.0
+  },
+  "metrics": {
+    "candidate_complete_visual_evidence_at_3": 0.9333333333333333,
+    "candidate_complete_visual_evidence_at_3_count": 28,
+    "candidate_visual_evidence_recall_at_5": 1.0,
+    "candidate_visual_evidence_recall_at_5_count": 30,
+    "candidate_table_evidence_at_3": 1.0,
+    "candidate_equation_evidence_at_3": 1.0,
+    "candidate_diagram_evidence_at_3": 0.8,
+    "control_complete_visual_evidence_at_3": 0.6,
+    "control_visual_evidence_recall_at_5": 0.6,
+    "control_table_evidence_at_3": 1.0,
+    "control_equation_evidence_at_3": 0.5,
+    "control_diagram_evidence_at_3": 0.3,
+    "candidate_diagram_improvement_over_control": 0.5,
+    "candidate_original_region_lineage": 1.0,
+    "candidate_exact_course_isolation": 1.0
+  },
+  "quality_gates": {
+    "candidate_complete_visual_evidence_at_3": true,
+    "candidate_visual_evidence_recall_at_5": true,
+    "candidate_per_modality_evidence_at_3": true,
+    "candidate_original_region_lineage": true,
+    "candidate_exact_course_isolation": true,
+    "candidate_diagram_improvement_over_control": true,
+    "all_passed": true
+  },
+  "provider_accounting": {
+    "calls": 60,
+    "failed_calls": 0,
+    "retries": 0,
+    "input_tokens": 144639,
+    "output_tokens": 0,
+    "reported_cost_usd": 0.00723195,
+    "maximum_latency_ms": 6058.042000004207,
+    "run_binding_sha256": "ff4525580e8aecf96b3d7f2429114adc506e547eeaa445259c6294ffd87729c1",
+    "account_total_token_limit": 10000000,
+    "account_limit_usage_rate": 0.0144639,
+    "account_limit_tokens_remaining": 9855361
+  },
+  "failures_by_category": {
+    "candidate_top_3_retrieval_miss": 2,
+    "candidate_top_5_retrieval_miss": 0,
+    "provider_failure": 0,
+    "course_isolation_failure": 0,
+    "original_region_lineage_failure": 0
+  },
+  "limitations": [
+    "The fresh 30-asset public educational sample is not representative professor-material evidence.",
+    "Retrieval and original-region lineage are evaluated here; answer generation and boundary behavior require a separate actual-product checkpoint.",
+    "The 30 paired boundary labels remained unopened during this retrieval-only run.",
+    "Jina embeddings are non-authoritative ranking features; deterministic source regions remain authoritative.",
+    "No private course, student, or participant data was processed."
+  ],
+  "authorization_revoked": true,
+  "private_data_used": false,
+  "representative_visual_capability_claim": false
+}
