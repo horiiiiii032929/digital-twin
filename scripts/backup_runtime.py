@@ -11,7 +11,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    settings = AppSettings.from_env()
+    # Backup is an offline data operation and must remain available during a
+    # provider outage or credential rotation.
+    settings = AppSettings.from_env(require_provider_credentials=False)
     if settings.mode != RuntimeMode.STAGING:
         raise SystemExit("APP_MODE=staging is required for runtime backup")
     manifest = create_runtime_backup(

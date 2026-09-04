@@ -29,6 +29,15 @@ R1.2 requalification; R1.1 remains the rollback until that passes. The claim is
 limited to mechanism correctness; real-student interpretation choice, learning
 improvement, and professor fidelity remain unproven.
 
+The first exact R1.2 qualification attempt is preserved as
+`invalid-execution`. Its fresh HTTPS and restart checks passed 25/25 and 6/6,
+but backup startup incorrectly required an inference credential even though the
+offline command does not construct a provider client. Restore and rollback were
+therefore not claimed. One root-cause correction now separates offline
+administrative credential validation from runtime/provider validation; all
+other staging, profile, source, and qualification checks remain fail closed.
+The successor must run from a fresh clean revision and isolated stack.
+
 ## Final local R1.1 technical checkpoint
 
 Issue #210 owns one finite post-release checkpoint. The professor-feedback

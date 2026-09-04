@@ -34,7 +34,9 @@ def main() -> None:
     commands.add_parser("drain-deletions")
     args = parser.parse_args()
 
-    settings = AppSettings.from_env()
+    # Retention/export/deletion must remain operable independently of external
+    # provider credentials.
+    settings = AppSettings.from_env(require_provider_credentials=False)
     if settings.mode != RuntimeMode.STAGING:
         raise SystemExit("APP_MODE=staging is required for lifecycle operations")
     store = FileSystemObjectStore(settings.object_root)

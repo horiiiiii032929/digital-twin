@@ -4526,12 +4526,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/backup_runtime.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "5497fba675fc5ffada2cf38d25fa316b90d369409ed1e2570005c7caf16fd40d"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "d53f47ad85554190ec15379032772bdda856ad7eb1641f34c5f6b8c9403b3739"
     },
     {
       "audit_status": "audited",
@@ -4559,12 +4559,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/bootstrap_admin.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "f5c4d5232466648ae65c374c6448141b5986fe6fce9d84dc0955dffef357fae9"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "2e9f1896058b887bd7f9519e188b48fda38a29ee5e7c3fd9e24ae7f6305e731b"
     },
     {
       "audit_status": "audited",
@@ -5582,12 +5582,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-lifecycle",
-      "evidence": "CLI reviewed for staging-only mode, exact destructive confirmation, durable deletion retry, and configured storage roots; covered by lifecycle tests and full check.",
+      "evidence": "Lifecycle CLI and the credential-independent offline-administration boundary were reviewed with staging-only, exact destructive-confirmation, runtime credential, lifecycle, and Ruff tests; no provider call or safety validation is bypassed.",
       "findings": [],
       "path": "scripts/manage_runtime_data.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "9d972ee8efc0357e3f52acc2def3543b3f05dc395227255033028b41ef1980ce"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "205a7250ea63f1e8677e1d125ac0aa88b45653fcbbf50a6b16c577229f861e03"
     },
     {
       "audit_status": "audited",
@@ -5758,12 +5758,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/restore_runtime.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "6a277a6d000acd66aa48743945aa6ea577e3ebb4838dbf4663fef94c9fbe2920"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "de0c0920a0853447ef012d84f8b9bc632a93bd84623a3dc506151b1cdf05769d"
     },
     {
       "audit_status": "audited",
@@ -7562,12 +7562,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "evidence": "Root-cause review separates provider credential checks from offline administration while preserving all staging/profile/qualification validation; focused configuration, API, backup/restore, and runtime fail-closed tests pass.",
       "findings": [],
       "path": "services/api/app/config.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "b6b6968f4cb126bdcac1776083138cc8f388357f654287a7516acc51ad4420f6"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "353f8e5931c8d2033dbed3b51d28274bd0a3862f34fedb00c8f3dd9c19920365"
     },
     {
       "audit_status": "audited",
@@ -9344,12 +9344,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "evidence": "Configuration tests prove runtime provider credentials still fail closed, offline administration may omit them, and the bypass does not relax staging origin or other safety validation; the full focused API suite passes.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "0e7acadc4b7b33294c7a7f6403fbb77b3dcb5294833c09bb2a3649526cee9854"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "ec56dd03a5bfe79d40167daa33828d303387b53134a650f26b1e2238b0ca3fcb"
     },
     {
       "audit_status": "audited",

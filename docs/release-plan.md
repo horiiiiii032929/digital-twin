@@ -20,6 +20,13 @@ therefore advances once to local R1.2 requalification. Until that
 requalification passes, R1.1 remains the released rollback and no
 academic-grounding threshold claim changes.
 
+Qualification 008 attempt 001 passed 31 operational checks before exposing a
+real backup-operations defect: offline administrative commands depended on an
+otherwise valid inference credential. The invalid attempt is preserved. One
+successor may change only this shared settings boundary, retain normal runtime
+credential enforcement, and repeat the exact qualification from a fresh
+revision and isolated stack.
+
 ## Local R1.1 completion checkpoint
 
 Issue #210 adds two bounded post-release decisions without reopening the known

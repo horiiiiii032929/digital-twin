@@ -38,6 +38,11 @@ unpredictable value of at least 32 bytes. The three staging passwords are used
 only by the local bootstrap and acceptance verifier. Leave
 `OPENAI_API_KEY` empty for the default deterministic qualification.
 
+Offline bootstrap, backup, restore, and lifecycle commands validate the release
+configuration but do not require provider credentials because they never
+construct a provider client. API and worker startup still fail closed when the
+selected generator or autonomy planner requires one.
+
 The committed example intentionally selects:
 
 ```text

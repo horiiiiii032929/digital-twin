@@ -102,7 +102,9 @@ class AppSettings:
     provider_cost_cap_usd: float = 5.0
 
     @classmethod
-    def from_env(cls) -> "AppSettings":
+    def from_env(
+        cls, *, require_provider_credentials: bool = True
+    ) -> "AppSettings":
         mode = RuntimeMode(os.getenv("APP_MODE", RuntimeMode.DEMO.value))
         default_root = ROOT / "data/interim/runtime"
         data_root = Path(os.getenv("APP_DATA_ROOT", str(default_root))).expanduser()
@@ -199,7 +201,7 @@ class AppSettings:
             ),
             provider_cost_cap_usd=_positive_float("APP_PROVIDER_COST_CAP_USD", 5.0),
         )
-        settings.validate()
+        settings.validate(require_provider_credentials=require_provider_credentials)
         return settings
 
     @property
@@ -230,7 +232,7 @@ class AppSettings:
     def visual_quota_database_path(self) -> Path:
         return self.data_root / "provider-ledgers/jina-visual-quota.sqlite3"
 
-    def validate(self) -> None:
+    def validate(self, *, require_provider_credentials: bool = True) -> None:
         if (
             not self.session_cookie_name
             or self.session_cookie_name.strip() != self.session_cookie_name
@@ -342,7 +344,7 @@ class AppSettings:
             and self.student_tutoring_mode
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         )
-        if (
+        if require_provider_credentials and (
             self.generator_mode
             in {
                 GeneratorMode.OPENAI_GPT_5_4_MINI,
@@ -357,6 +359,8 @@ class AppSettings:
         if not self.student_profile_path.is_file():
             raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")
         if (
+            require_provider_credentials
+            and
             self.visual_retrieval_mode == VisualRetrievalMode.JINA_V4_LATE_INTERACTION
             and not os.getenv("JINA_API_KEY", "").strip()
         ):
