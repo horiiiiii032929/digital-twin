@@ -1,0 +1,907 @@
+{
+  "cases": [
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-001-1",
+          "evidence_ids": [
+            "tvcp001-region-001-full"
+          ],
+          "text": "Kernel mode is privileged and typically runs kernel code and drivers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Kernel mode is privileged and typically runs kernel code and drivers.",
+      "case_id": "tvcp001-cluster-001-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-001"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-001-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-001-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-002-1",
+          "evidence_ids": [
+            "tvcp001-region-002-full"
+          ],
+          "text": "A system call typically causes a mode switch."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A system call typically causes a mode switch.",
+      "case_id": "tvcp001-cluster-002-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-002"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-002-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-002-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-003-1",
+          "evidence_ids": [
+            "tvcp001-region-003-full"
+          ],
+          "text": "Software is configurable, while hardware is unmodifiable."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Software is configurable, while hardware is unmodifiable.",
+      "case_id": "tvcp001-cluster-003-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-003"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-003-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-003-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-004-1",
+          "evidence_ids": [
+            "tvcp001-region-004-full"
+          ],
+          "text": "A library exposes an interface or API, while an application has an entry point."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A library exposes an interface or API, while an application has an entry point.",
+      "case_id": "tvcp001-cluster-004-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-004"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-004-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-004-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-005-1",
+          "evidence_ids": [
+            "tvcp001-region-005-full"
+          ],
+          "text": "The read() system call corresponds to fread()."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The read() system call corresponds to fread().",
+      "case_id": "tvcp001-cluster-005-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-005"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-005-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-005-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-006-1",
+          "evidence_ids": [
+            "tvcp001-region-006-full"
+          ],
+          "text": "Mode a+ corresponds to O_RDWR, O_CREAT, and O_APPEND."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Mode a+ corresponds to O_RDWR, O_CREAT, and O_APPEND.",
+      "case_id": "tvcp001-cluster-006-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-006"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-006-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-006-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-007-1",
+          "evidence_ids": [
+            "tvcp001-region-007-full"
+          ],
+          "text": "Process P3 has a running time of 5."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Process P3 has a running time of 5.",
+      "case_id": "tvcp001-cluster-007-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-007"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-007-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-007-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-008-1",
+          "evidence_ids": [
+            "tvcp001-region-008-full"
+          ],
+          "text": "A thread shares the virtual address space with other threads."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A thread shares the virtual address space with other threads.",
+      "case_id": "tvcp001-cluster-008-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-008"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-008-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-008-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-009-1",
+          "evidence_ids": [
+            "tvcp001-region-009-full"
+          ],
+          "text": "The recorded memory size for my_vm is 2147483648 bytes."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The recorded memory size for my_vm is 2147483648 bytes.",
+      "case_id": "tvcp001-cluster-009-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-009"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-009-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-009-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-010-1",
+          "evidence_ids": [
+            "tvcp001-region-010-full"
+          ],
+          "text": "Disk 1 uses template ubuntu_22.04 and has size 10737418240 bytes."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Disk 1 uses template ubuntu_22.04 and has size 10737418240 bytes.",
+      "case_id": "tvcp001-cluster-010-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-010"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-010-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-010-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-011-1",
+          "evidence_ids": [
+            "tvcp001-region-011-full"
+          ],
+          "text": "The invariant is n <= q <= 2n."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The invariant is n <= q <= 2n.",
+      "case_id": "tvcp001-cluster-011-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-011"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-011-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-011-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-012-1",
+          "evidence_ids": [
+            "tvcp001-region-012-full"
+          ],
+          "text": "Height is at most log base 3/2 of q."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Height is at most log base 3/2 of q.",
+      "case_id": "tvcp001-cluster-012-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-012"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-012-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-012-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-013-1",
+          "evidence_ids": [
+            "tvcp001-region-013-full"
+          ],
+          "text": "e is the limit as n approaches infinity of (1 + 1/n)^n."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "e is the limit as n approaches infinity of (1 + 1/n)^n.",
+      "case_id": "tvcp001-cluster-013-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-013"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-013-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-013-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-014-1",
+          "evidence_ids": [
+            "tvcp001-region-014-full"
+          ],
+          "text": "The identity is b raised to log base b of k equals k."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The identity is b raised to log base b of k equals k.",
+      "case_id": "tvcp001-cluster-014-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-014"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-014-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-014-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-015-1",
+          "evidence_ids": [
+            "tvcp001-region-015-full"
+          ],
+          "text": "log base b of k equals log base a of k divided by log base a of b."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "log base b of k equals log base a of k divided by log base a of b.",
+      "case_id": "tvcp001-cluster-015-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-015"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-015-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-015-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-016-1",
+          "evidence_ids": [
+            "tvcp001-region-016-full"
+          ],
+          "text": "n choose k equals n factorial divided by k factorial times (n-k) factorial."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "n choose k equals n factorial divided by k factorial times (n-k) factorial.",
+      "case_id": "tvcp001-cluster-016-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-016"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-016-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-016-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-017-1",
+          "evidence_ids": [
+            "tvcp001-region-017-full"
+          ],
+          "text": "H_k is 1 + 1/2 + 1/3 + ... + 1/k."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "H_k is 1 + 1/2 + 1/3 + ... + 1/k.",
+      "case_id": "tvcp001-cluster-017-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-017"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-017-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-017-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-018-1",
+          "evidence_ids": [
+            "tvcp001-region-018-full"
+          ],
+          "text": "The left child is at 2i+1 and the right child is at 2i+2."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The left child is at 2i+1 and the right child is at 2i+2.",
+      "case_id": "tvcp001-cluster-018-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-018"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-018-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-018-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-019-1",
+          "evidence_ids": [
+            "tvcp001-region-019-full"
+          ],
+          "text": "A 2-4 tree of height h has at least 2^h leaves, so n >= 2^h."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A 2-4 tree of height h has at least 2^h leaves, so n >= 2^h.",
+      "case_id": "tvcp001-cluster-019-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-019"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-019-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-019-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-020-1",
+          "evidence_ids": [
+            "tvcp001-region-020-full"
+          ],
+          "text": "The ratio size(w.child) / size(w) is greater than 2/3."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The ratio size(w.child) / size(w) is greater than 2/3.",
+      "case_id": "tvcp001-cluster-020-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-020"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-020-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-020-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-021-1",
+          "evidence_ids": [
+            "tvcp001-region-021-full"
+          ],
+          "text": "The full-mesh diagram shows five hosts."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The full-mesh diagram shows five hosts.",
+      "case_id": "tvcp001-cluster-021-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-021"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-021-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-021-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-022-1",
+          "evidence_ids": [
+            "tvcp001-region-022-full"
+          ],
+          "text": "Each host has one physical link to the center of the star."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Each host has one physical link to the center of the star.",
+      "case_id": "tvcp001-cluster-022-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-022"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-022-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-022-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-023-1",
+          "evidence_ids": [
+            "tvcp001-region-023-full"
+          ],
+          "text": "The hosts are attached to a ring."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The hosts are attached to a ring.",
+      "case_id": "tvcp001-cluster-023-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-023"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-023-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-023-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-024-1",
+          "evidence_ids": [
+            "tvcp001-region-024-full"
+          ],
+          "text": "H3 is the parent of H4 and H5."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "H3 is the parent of H4 and H5.",
+      "case_id": "tvcp001-cluster-024-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-024"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-024-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-024-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-025-1",
+          "evidence_ids": [
+            "tvcp001-region-025-full"
+          ],
+          "text": "The OSI reference model has seven layers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The OSI reference model has seven layers.",
+      "case_id": "tvcp001-cluster-025-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-025"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-025-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-025-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-026-1",
+          "evidence_ids": [
+            "tvcp001-region-026-full"
+          ],
+          "text": "The request uses source port 1234 and destination port 5678."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The request uses source port 1234 and destination port 5678.",
+      "case_id": "tvcp001-cluster-026-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-026"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-026-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-026-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-027-1",
+          "evidence_ids": [
+            "tvcp001-region-027-full"
+          ],
+          "text": "The two devices cannot receive each other's signal even though both can receive the third host."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The two devices cannot receive each other's signal even though both can receive the third host.",
+      "case_id": "tvcp001-cluster-027-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-027"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-027-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-027-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-028-1",
+          "evidence_ids": [
+            "tvcp001-region-028-full"
+          ],
+          "text": "The bound is the minimum of swin and rwin."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The bound is the minimum of swin and rwin.",
+      "case_id": "tvcp001-cluster-028-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-028"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-028-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-028-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-029-1",
+          "evidence_ids": [
+            "tvcp001-region-029-full"
+          ],
+          "text": "R1 and R2 are directly connected BGP peers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "R1 and R2 are directly connected BGP peers.",
+      "case_id": "tvcp001-cluster-029-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-029"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-029-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-029-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-030-1",
+          "evidence_ids": [
+            "tvcp001-region-030-full"
+          ],
+          "text": "R2 has BGP sessions with R1 and R3."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "R2 has BGP sessions with R1 and R3.",
+      "case_id": "tvcp001-cluster-030-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvcp001-asset-030"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-030-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-030-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    }
+  ],
+  "content_sha256": "3aa731a506705e38cb9ce2bdb76e579ff92a0f1e4992af8e39c05a246c087ce8",
+  "dataset_id": "true-visual-product-checkpoint-001",
+  "schema_version": "1.0.0"
+}

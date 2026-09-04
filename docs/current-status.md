@@ -6,6 +6,32 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Final local R1.1 technical checkpoint
+
+Issue #210 owns one finite post-release checkpoint. The professor-feedback
+workflow now persists immutable pending, confirmed, discarded, and superseded
+revision decisions, detects multi-category conflicts, rejects stale or duplicate
+confirmation, invalidates prior preview approval after a confirmed change, and
+leaves the published release unchanged until reapproval and republication.
+
+The qualified Jina v4 late-interaction retriever is now integrated behind an
+explicit product mode. General text questions retain the existing text/OCR
+path. Visual questions use a release-, profile-, source-, region-, crop-, and
+render-hash-bound local index; only transient provider failure may fall back to
+text/OCR. Model identity or lineage drift fails closed. Persistent accounting
+imports the historical 144,639 tokens and enforces the researcher-supplied
+10,000,000-token account ceiling across restarts. Runtime startup is bound to
+the public component-ledger SHA-256 and does not require the ignored raw ledger
+inside a release image.
+
+`true-visual-product-checkpoint-001` freezes 30 answerable and 30 boundary
+actual-product cases. `professor-fidelity-proxy-c0-c3-002` freezes the existing
+12-case synthetic C0-C3 packet with GPT-5.4 Mini generation and blinded GPT-5.4
+Nano/GPT-5.4 advisory review. Both network-free simulations pass. Provider
+execution remains unauthorized; the known 10,000+1,000 package has not been
+read, rerun, or rescored. A passing proxy remains `Go Deeper` and cannot prove
+real-professor fidelity.
+
 ## Post-release multi-concept correction
 
 The final professor-level audit reproduced one product defect left open by

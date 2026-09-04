@@ -12,6 +12,7 @@ from services.api.app.config import (
     GeneratorMode,
     RuntimeMode,
     StudentTutoringMode,
+    VisualRetrievalMode,
 )
 from services.api.app.factory import (
     _configured_evidence_gate,
@@ -307,6 +308,26 @@ def test_staging_configuration_cannot_exceed_proxy_upload_cap(tmp_path):
             secure_cookies=True,
             max_upload_bytes=65 * 1024 * 1024,
         ).validate()
+
+
+def test_visual_candidate_requires_credential_and_frozen_component_hash(
+    monkeypatch,
+) -> None:
+    monkeypatch.delenv("JINA_API_KEY", raising=False)
+    settings = AppSettings(
+        visual_retrieval_mode=VisualRetrievalMode.JINA_V4_LATE_INTERACTION,
+    )
+    with pytest.raises(ValueError, match="JINA_API_KEY"):
+        settings.validate()
+
+    monkeypatch.setenv("JINA_API_KEY", "synthetic-test-key")
+    with pytest.raises(ValueError, match="APP_VISUAL_COMPONENT_LEDGER_SHA256"):
+        settings.validate()
+
+    AppSettings(
+        visual_retrieval_mode=VisualRetrievalMode.JINA_V4_LATE_INTERACTION,
+        visual_component_ledger_sha256="a" * 64,
+    ).validate()
 
 
 def test_conservative_local_release_gate_is_explicit_and_deterministic() -> None:

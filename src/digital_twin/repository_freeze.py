@@ -94,6 +94,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_true_visual_colpali_confirmation.py": (
             "dataset_generation",
         ),
+        "scripts/build_true_visual_product_checkpoint.py": (
+            "dataset_generation",
+        ),
         "scripts/build_whole_system_architecture_tranches.py": (
             "dataset_generation",
         ),
@@ -209,6 +212,18 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_true_visual_colpali_confirmation.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_true_visual_product_checkpoint.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_professor_fidelity_proxy_c0_c3_002.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_local_r1_final_technical_completion_001.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
@@ -703,6 +718,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # first-party Jina retrieval confirmation. This does not authorize the
         # later actual-product answer/citation checkpoint.
         "true-visual-colpali-confirmation-001": (
+            "dataset_generation",
+        ),
+        # Issue #210. Deterministic public/gold/source package construction is
+        # authorized separately from the later actual-product provider run.
+        "true-visual-product-checkpoint-001": (
             "dataset_generation",
         ),
     }

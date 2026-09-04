@@ -52,6 +52,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
         "true-visual-colpali-confirmation-001",
+        "true-visual-product-checkpoint-001",
     }
 
     for pilot_id in pilot_ids:

@@ -108,6 +108,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # The professor-fidelity proxy exposes only contract validation and a
     # deterministic two-reviewer simulation; it has no provider execution.
     "run_professor_fidelity_proxy_harness.py",
+    # This release-local utility copies already-qualified vectors into a
+    # release-bound index. It makes no provider call and opens no held-out set.
+    "materialize_visual_retrieval_index.py",
     "run_ingestion_worker.py",
     # This successor-study simulation drives only synthetic hidden-state
     # learners through pure-Python estimators and timing policies. It has no

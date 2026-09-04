@@ -7,8 +7,9 @@ revision that the professor must explicitly confirm or discard.
 
 ## Current status
 
-Prototype. Feedback classification is deterministic and supports academic
-integrity, source/citation, and tone revisions.
+Implemented. Feedback classification is deterministic and supports academic
+integrity, source/citation, tone, depth, examples, misconception handling, and
+outreach-policy revisions. Decisions and conflicts persist across restarts.
 
 ## Inputs
 
@@ -27,7 +28,9 @@ integrity, source/citation, and tone revisions.
 ## Guardrails
 
 - Do not apply a revision without explicit professor confirmation.
-- Preserve discarded revisions as non-applied decisions in session behavior.
+- Preserve discarded and superseded revisions as immutable non-applied records.
+- Require explicit field selection when feedback matches multiple categories.
+- Reject stale and duplicate confirmation against the base policy version.
 - Reset affected preview decisions to pending after regeneration.
 - Mark resolved rejected previews when a confirmed revision addresses them.
 
@@ -37,9 +40,9 @@ integrity, source/citation, and tone revisions.
 - Confirm/discard API tests.
 - Policy version increment tests.
 - Preview regeneration tests.
+- Restart, concurrent update, stale confirmation, and duplicate-submit tests.
 
 ## Open work
 
-- Add structured reason categories for rejection.
-- Track revision history beyond the current in-memory session.
-- Add conflict detection when feedback maps to multiple policy fields.
+- Real-professor review of the proposed category vocabulary and workflow.
+- Representative usability evidence for conflict resolution and history views.

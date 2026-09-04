@@ -1,0 +1,58 @@
+{
+  "component_ledger": "reports/generated/true-visual-colpali-confirmation-001/provider-ledger.sqlite3",
+  "component_ledger_sha256": "a2e59f3d00b25827e3a6e4c0c97ca69a155e44b809ecdc768941a1d4fd30e184",
+  "conditions": {
+    "candidate": "jina-v4-late-interaction",
+    "control": "text-ocr-fallback"
+  },
+  "content_sha256": "3cc54491632743fa8bf4cecf42937e0bee1e3521229745230c68419d389f92fb",
+  "gold_opening_rule": "score only after all control and candidate responses are durable",
+  "gold_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_gold.json",
+  "gold_sha256": "3aa731a506705e38cb9ce2bdb76e579ff92a0f1e4992af8e39c05a246c087ce8",
+  "hard_gates": {
+    "boundary_releases": {
+      "maximum": 0
+    },
+    "fully_grounded_visual_success": {
+      "minimum": 0.9
+    },
+    "invalid_or_wrong_version_citations": {
+      "maximum": 0
+    },
+    "original_region_lineage": {
+      "minimum": 1.0
+    },
+    "text_path_regressions": {
+      "maximum": 0
+    },
+    "unsupported_claims": {
+      "maximum": 0
+    },
+    "visual_retrieval_p95_seconds": {
+      "maximum": 8.0
+    },
+    "wrong_course_retrieval": {
+      "maximum": 0
+    }
+  },
+  "instrument_id": "true-visual-product-checkpoint-001",
+  "owner_issue": 210,
+  "paid_execution_authorized": false,
+  "provider": {
+    "account_token_limit": 10000000,
+    "imported_tokens": 144639,
+    "max_query_calls": 60,
+    "model": "jina-embeddings-v4",
+    "name": "Jina AI",
+    "retries": 0
+  },
+  "provider_execution_authorized": false,
+  "public_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_public.json",
+  "public_sha256": "a9d3497e3f0e2587ecb0593cf0ff2b17215829de97ea70a2fee0d50ed2d0d70a",
+  "related_issue": 131,
+  "same_case_tuning_allowed": false,
+  "schema_version": "1.0.0",
+  "sources_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_sources.json",
+  "sources_sha256": "1f47dfe2ccdc8934209234a314ec108d3c7d54e1a035d2eafcb960f04f9c628c",
+  "status": "built-provider-unauthorized"
+}

@@ -8,6 +8,24 @@ defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
 
+## Local R1.1 completion checkpoint
+
+Issue #210 adds two bounded post-release decisions without reopening the known
+10,000+1,000 benchmark. First, a 60-case actual-product comparison decides
+whether the qualified Jina v4 visual retriever may replace text/OCR fallback in
+R1.1. Second, a 12-case synthetic C0-C3 proxy checks whether the implemented
+profile changes observable tutoring behavior while deterministic source and
+policy gates remain authoritative. The profile result is diagnostic only and
+does not close the real-professor approval boundary in #24.
+
+The implementation and network-free simulations must merge before one combined
+paid authorization. A visual quality failure selects text/OCR fallback and does
+not block completion; a synthetic proxy failure is preserved as a limitation.
+Security/privacy failure, provider identity drift, corrupted bindings, or the
+Jina/OpenAI ceilings remain hard stops. After both results are registered, the
+exact selected/fallback composition receives local HTTPS qualification 007,
+Docker/restart/restore/rollback verification, and one immutable release tag.
+
 ## Final correctness and exact-binding checkpoint
 
 Before release consolidation, the selected configuration is being qualified as
