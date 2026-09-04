@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "governed-full-autonomy-v2-1-release-binding-correction-001",
+  "component": "conversation-orchestration",
+  "dataset_id": "governed-full-autonomy-v2-1-persona-confirmation-024-plus-product-evidence-gate-selection-004",
+  "corpus_id": "public-synthetic-release-source-families-651-700-plus-development-region-corpus-002",
+  "code_revision": "1f36adbb837e637520dd0d75d0c6c200dc20119f",
+  "candidates": [
+    {
+      "role": "control",
+      "implementation": {
+        "implementation_id": "deterministic-grounded-assistant-t0",
+        "version": "r1-local-candidate-v2.1",
+        "configuration": {
+          "mode": "grounded-assistant",
+          "cases": 150,
+          "generator": "deterministic/evidence-set-v2",
+          "profile_id": "student-tutor-r1-local-candidate",
+          "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+          "t0_rollback_available": true
+        }
+      },
+      "metrics": [
+        {"name": "action-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-failure-safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "pedagogical-transition-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "goal-termination-correctness", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-or-unexpected-actions", "passed": true, "evidence": "The immutable confirmation-024 T0 control reported zero unsupported or unexpected actions."},
+        {"name": "zero-recipient-course-release-or-citation-violations", "passed": true, "evidence": "The immutable confirmation-024 scope and citation gates passed."},
+        {"name": "consent-timing-and-frequency", "passed": true, "evidence": "The non-autonomous control produced no consent, timing, or frequency violation."},
+        {"name": "bounded-idempotent-persistence", "passed": true, "evidence": "Confirmation 024 reported restart consistency with no duplicate delivery or unbounded loop."},
+        {"name": "zero-authoritative-model-mutations", "passed": true, "evidence": "Confirmation 024 reported no model-owned authority mutation."},
+        {"name": "provider-failure-safe-fallback", "passed": true, "evidence": "The control remained safely grounded after provider-failure events."}
+      ],
+      "failures_by_category": {}
+    },
+    {
+      "role": "candidate",
+      "implementation": {
+        "implementation_id": "governed-autonomous-tutoring-graph-v2-1",
+        "version": "r1-local-candidate-v2.1-h-e1",
+        "configuration": {
+          "mode": "governed-autonomous-tutoring-graph-v2.1",
+          "cases": 520,
+          "planner": "gpt-5.6-luna",
+          "planner_architecture": "guarded-policy-value-planner-v2",
+          "generator": "deterministic/evidence-set-v2",
+          "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+          "profile_id": "student-tutor-r1-local-candidate",
+          "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+          "maximum_repairs_per_turn": 1,
+          "maximum_graph_steps_per_turn": 12,
+          "t0_rollback_available": true,
+          "provider_retries": 0,
+          "source_autonomy_result": "governed-full-autonomy-v2-1-persona-confirmation-024",
+          "source_grounding_result": "product-evidence-gate-selection-004"
+        }
+      },
+      "metrics": [
+        {"name": "action-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "citation-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "provider-failure-safe-fallback-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "restart-consistency-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 1.0, "passed": true},
+        {"name": "pedagogical-transition-validity-rate", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.95, "passed": true},
+        {"name": "goal-termination-correctness", "value": 1.0, "unit": "ratio", "direction": "higher-is-better", "threshold": 0.98, "passed": true}
+      ],
+      "hard_gates": [
+        {"name": "zero-unsupported-or-unexpected-actions", "passed": true, "evidence": "Immutable confirmation 024 reported zero unsupported or unexpected actions for exact H+E1."},
+        {"name": "zero-recipient-course-release-or-citation-violations", "passed": true, "evidence": "Confirmation 024 reported all recipient, course, release, and citation-lineage checks passed."},
+        {"name": "consent-timing-and-frequency", "passed": true, "evidence": "Confirmation 024 reported no consent, quiet-hour, or frequency violation."},
+        {"name": "bounded-idempotent-persistence", "passed": true, "evidence": "Confirmation 024 reported 100% restart and goal termination with no duplicate delivery or unbounded loop."},
+        {"name": "zero-authoritative-model-mutations", "passed": true, "evidence": "Confirmation 024 reported no model-owned identity, scope, policy, release, state, or delivery mutation."},
+        {"name": "provider-failure-safe-fallback", "passed": true, "evidence": "Confirmation 024 reported 100% provider-failure safe fallback without authoritative state advance."}
+      ],
+      "failures_by_category": {}
+    }
+  ],
+  "decision": {
+    "outcome": "keep",
+    "selected_implementation_id": "governed-autonomous-tutoring-graph-v2-1",
+    "rationale": "Normalize the exact local qualification binding by composing immutable confirmation-024 evidence for the Luna H+E1 autonomous allocation with development selection-004 evidence for dominance-scoped-ambiguity-safe-v3. This record authorizes no provider run and requires a fresh exact local HTTPS qualification before release use.",
+    "limitations": [
+      "This is a provenance and configuration binding correction, not a new whole-system evaluation.",
+      "Selection 004 is development-split relative evidence and fails the absolute factual-quality gates.",
+      "The corrected selection-004 factual metric is 42.50% versus 26.00%, not the originally reported overall task rates of 50.00% versus 36.80%.",
+      "Public synthetic sources and learners only; no real-professor fidelity, real-student usability, or learning-improvement claim."
+    ]
+  }
+}

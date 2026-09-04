@@ -279,8 +279,18 @@ def analyze_public_reference_uniqueness(
     chunks: Sequence[DocumentChunk],
     *,
     minimum_target_coverage: float = 0.5,
+    dominance_scoped: bool = False,
 ) -> QuestionReferenceUniquenessV1:
-    """Classify whether every public target resolves to one answer class."""
+    """Classify whether every public target resolves to one answer class.
+
+    Every candidate clearing ``minimum_target_coverage`` votes on ambiguity by
+    default, which lets a strictly weaker passage carrying a different claim
+    class refuse a target its leader dominates outright. ``dominance_scoped``
+    narrows the contest to the candidates that tie the top coverage, so a
+    genuine tie still fails closed while a dominated candidate no longer
+    vetoes. The default is off, so callers that do not ask for it are
+    unchanged.
+    """
 
     if not 0 < minimum_target_coverage <= 1:
         raise ValueError("minimum target coverage must be in (0, 1]")
@@ -296,7 +306,14 @@ def analyze_public_reference_uniqueness(
             for row in scoped
             if target and _coverage(target, _claim(row)) >= minimum_target_coverage
         ]
-        classes = sorted({normalize_claim_class(_claim(row)) for row in matching})
+        contested = matching
+        if dominance_scoped and matching:
+            coverages = {
+                id(row): round(_coverage(target, _claim(row)), 9) for row in matching
+            }
+            leading = max(coverages.values())
+            contested = [row for row in matching if coverages[id(row)] == leading]
+        classes = sorted({normalize_claim_class(_claim(row)) for row in contested})
         identifiers = sorted(row.region_id or row.id for row in matching)
         if not matching:
             status: ReferenceUniquenessStatus = "unresolved"

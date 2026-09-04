@@ -1,10 +1,50 @@
 # Current project status
 
-Status date: 2026-09-03
+Status date: 2026-09-04
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
+
+## Release-binding correctness checkpoint
+
+The end-of-project correctness audit found two release-relevant defects before
+merging PR #199. First, selection 004 labelled overall task success as fully
+grounded factual success. Hash-verified re-scoring of the immutable
+selection-003 response ledgers gives 42.50% versus 26.00% answerable factual
+success, while the previously published 50.00% versus 36.80% values are the
+overall task rates. The relative +16.50-point selection and zero severe-release
+result remain unchanged, but both arms fail twelve absolute quality gates.
+The selected evidence gate is therefore the best tested development gate, not
+an absolute grounding pass.
+
+Second, local qualification 004 used Terra and a historical qualification
+record, while the selected confirmation-024 architecture uses Luna H+E1. The
+runtime now fails closed on any missing or mismatched evidence-gate binding.
+The exact profile and provenance composition are normalized in
+`student-tutor-r1-local-candidate-v3` and
+`governed-full-autonomy-v2-1-release-binding-correction-001`. Fresh local HTTPS
+qualification 005 passed all 43 checks: 25 live journey, six restart, six clean
+restore, three T0 rollback, and three governed restoration. T0 remains the
+rollback. The journey used deterministic fast paths and made zero Luna calls,
+so it qualifies the local composition while relying on immutable confirmation
+024 for live Luna behavior.
+
+The four later grounding-floor audits retain their negative mechanism
+decisions, but their exact historical totals were not reproducible because the
+original calculation commands were not committed and the summaries disagree
+internally. A new provider-free reproduction verifies the central safety
+finding while narrowing the claim: these are development-only tests of bounded
+mechanisms, not proof of a universal task ceiling. The sealed 10,000-case
+package was not touched. The exact operational composition is now qualified as
+a local research demo, but the academic factual-grounding decision remains
+`No Release`.
+
+The same audit also found a newly published high-severity advisory affecting
+transitive frontend development dependency `fast-uri` 3.1.5. The lockfile now
+uses patched 3.1.7 within the existing compatible range; frontend tests, lint,
+and production build pass, and the refreshed offline audit reports zero
+findings.
 
 Fresh confirmation issue #196 is complete. The
 `governed-full-autonomy-v2-1-persona-confirmation-023` package contained 670
@@ -21,9 +61,12 @@ with zero unauthorized actions, scope errors, invalid citations, duplicate
 deliveries, or unbounded loops. The run made 1,836 calls and cost USD
 0.4216108. T1-v2 autonomous remains the selected release candidate; real
 professor fidelity, real student usability, and real learning improvement
-remain unproven. Execution authority is revoked. The remaining release-decision
-steps are the labelled known 10,000+1,000 regression and local HTTPS
-qualification.
+remain unproven. Execution authority is revoked. The subsequent labelled known
+10,000+1,000 regression completed as `No Release`: the selected candidate
+reached 25.38% fully grounded factual success against T0's 44.16%, while severe
+unsupported releases fell from 478 to 4. That known package is immutable and
+must not be rerun or rescored. Exact local HTTPS qualification 005 now supports
+a local research-demo claim, not factual-quality or durable-production release.
 
 ## H+E1 whole-system confirmation and grounding successor
 

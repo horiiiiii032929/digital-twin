@@ -54,7 +54,17 @@ The project's technical standard, learning commitments, and strengthened Sprint
 - `npm ci`: install the locked frontend workspace dependencies.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
-- `npm run check`: run the complete local and CI verification suite.
+- `npm run check`: run the reproducible local and CI verification suite using
+  committed code and evidence.
+- `npm run verify:historical-generated-artifacts`: explicitly revalidate older
+  ignored run products when their bound local artifacts are present. This is
+  intentionally separate from `check` so a fresh clone does not access sealed
+  or machine-local evaluation output.
+
+Historical tests that require ignored ledgers, prior generated indexes, or the
+known sealed package are also excluded from the default API suite. Their source
+tests remain unchanged and can be run only as an explicit historical evidence
+operation with the correctly bound artifacts available.
 - `npm run audit:dependencies`: audit npm plus the complete Python lock and
   reject any unreviewed or drifted vulnerability finding.
 - `npm run verify:technical-freeze`: validate the frozen experimental profile,

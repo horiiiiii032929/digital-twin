@@ -30,6 +30,30 @@ Priority labels provide the critical path: `priority:p0` is work required next,
 `priority:p1` is required for the release candidate, and `priority:p2` follows
 the release-critical path.
 
+## Endgame repository checkpoint
+
+PR #199 is the active consolidation PR. The endgame correctness audit corrected
+the selection-004 metric label, hardened prior-ledger validation, fixed the
+evaluation-record dispatcher, made the default repository gate independent of
+ignored/sealed artifacts, and normalized the exact Luna H+E1 release binding.
+The complete local gate passes with 1,845 Python/API tests and 50 frontend
+tests. The detailed record is in
+[the endgame correctness audit](../reports/repository-endgame-correctness-audit-2026-09-04.md).
+
+The project state must distinguish the two current conclusions:
+
+- Academic factual grounding: `No Release`. The known 10,000+1,000 result is
+  immutable and was not reopened.
+- Local operational candidate: `Keep` for a local research demo. Exact HTTPS
+  qualification 005 passed 43/43 checks for Luna H+E1 with the dominance-scoped
+  gate and deterministic generator. Its fast-path journey made zero Luna calls,
+  and it creates no academic factual-quality or durable-hosting claim.
+
+Merge #199, then merge #200 and rebuild the final-report evidence inventory.
+Only after both merges may the seven old, clean, already-merged worktrees and
+their local branches be removed. Preserve the primary worktree's untracked
+`tmp/` handoff and report material.
+
 ## Completed local release qualification
 
 Issue #180 has reached the V2.1 selection checkpoint. The paid 820-case

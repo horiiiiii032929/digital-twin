@@ -1,0 +1,95 @@
+{
+  "absolute_value_ceiling": {
+    "decision_unchanged": true,
+    "discovered_at": "2026-09-04",
+    "not_affected": "The sealed 10,000-case regression. Its corpus is in region format (3,816 regions for 2,000 clusters), so its 25.38% is measured against matching granularity.",
+    "statement": "The development source package supplies cluster-level spans while the development gold expects sentence-level sub-spans. The product cites the whole cluster it was given, so citation and atomic-claim scores are exactly 0.0 on all 235 correctly answered cases while answer span recall averages 0.9234 with 217 of 235 perfect.",
+    "what_is_not_valid": "The absolute figures. 15.80% and 12.60% are held down by the granularity mismatch and must not be read as the product's grounding quality.",
+    "what_remains_valid": "The ranking between arms. Every arm saw the identical corpus and gold, so the granularity ceiling applies equally and the comparison still answers which gate is better on this corpus."
+  },
+  "arms": {
+    "candidate": {
+      "evidence_gate": "dominance-scoped-source-semantic-evidence-atoms-v4",
+      "fully_grounded_factual_success": 0.126,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "incumbent": {
+      "evidence_gate": "question-targeted-ambiguity-safe-v2",
+      "fully_grounded_factual_success": 0.158,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "reference": {
+      "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+      "fully_grounded_factual_success": 0.126,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "template-default": {
+      "evidence_gate": "structured-lexical-v1",
+      "fully_grounded_factual_success": 0.162,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    }
+  },
+  "arms_correction": {
+    "conclusion_unchanged": true,
+    "what_changed": "The incumbent arm identity only; no threshold or decision rule moved.",
+    "what_was_wrong": "The incumbent was first read from deploy/local-r1.env.example, a template, rather than .env.local-r1, the deployment env."
+  },
+  "case_count": 500,
+  "code_revision": "0d4ae7f",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "decision": "Keep question-targeted-ambiguity-safe-v2; v4 implemented but unpromoted",
+  "decision_rule_fixed_before_execution": true,
+  "decision_rule_source": "research/05_evaluation/instruments/product_evidence_gate_selection_001.json",
+  "evidence_class": "development-split-method-selection",
+  "finding": {
+    "candidate_success": 0.126,
+    "id": "v4-and-v3-are-indistinguishable-on-factual-grounding",
+    "incumbent_success": 0.158,
+    "statement": "v4 and v3 both score 12.60%. The dominance-scoping correction does not bind on this corpus, so confirmation 028's Keep is evidence about the governed autonomy contract and about nothing else.",
+    "would_have_regressed_the_product": true
+  },
+  "held_out": false,
+  "instrument_id": "product-evidence-gate-selection-001",
+  "limitations": [
+    "Development-split evidence selects a method; it is not a generalization claim.",
+    "The product retrieves with a dense published index while this comparison retrieves locally.",
+    "Public synthetic sources only; no professor fidelity, usability, or learning claim."
+  ],
+  "loss_decomposition_incumbent": {
+    "answer_span_recall_mean": 0.9234,
+    "answer_span_recall_perfect": "217/235",
+    "answered_correctly": 235,
+    "boundary_abstain_correct": "44/50",
+    "boundary_refuse_correct": "25/25",
+    "citation_and_claim_scores": "0.0 on all 235, attributable to the granularity ceiling",
+    "expected_answer_cases": 400,
+    "refused_as_abstain": 99,
+    "refused_as_clarify": 66,
+    "refused_when_answerable": 165
+  },
+  "operational_summary": {
+    "cost_usd": 0.0,
+    "private_data_used": false,
+    "provider_calls": 0,
+    "thresholds_changed": false
+  },
+  "pre_registered_checks": {
+    "grounded_success_strictly_better": false,
+    "operational_failures_not_worse": true,
+    "severe_unsupported_not_worse": true
+  },
+  "promote_candidate": false,
+  "run_id": "product-evidence-gate-selection-001",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "selected_gate": "question-targeted-ambiguity-safe-v2",
+  "status": "completed-keep-incumbent"
+}

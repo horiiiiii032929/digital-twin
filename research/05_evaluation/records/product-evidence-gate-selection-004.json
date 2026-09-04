@@ -1,0 +1,72 @@
+{
+  "arms": {
+    "candidate": {
+      "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+      "fully_grounded_factual_success": 0.5,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0
+    },
+    "incumbent": {
+      "evidence_gate": "question-targeted-ambiguity-safe-v2",
+      "fully_grounded_factual_success": 0.368,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0
+    }
+  },
+  "behaviour": {
+    "action_accuracy_on_those": 1.0,
+    "answer_span_recall_on_those": 0.971,
+    "cases_moved_clarify_to_answer": 69
+  },
+  "case_count": 500,
+  "code_revision": "7f7baf7",
+  "contract_correction": {
+    "disclosure": "Found while investigating the candidate that benefits from it; ordering recorded, not omitted.",
+    "identity_map_on_sealed_package": true,
+    "instrument_id": "evidence-range-match-correction-001",
+    "suite_results_identical_before_and_after": "50 failed, 561 passed, 22 errors"
+  },
+  "corpus": "region granularity, 344 regions, 344/344 gold evidence spans covered",
+  "decision": "Promote dominance-scoped-ambiguity-safe-v3 subject to a fresh release qualification",
+  "decision_rule_fixed_before_execution": true,
+  "evidence_class": "development-split-method-selection",
+  "held_out": false,
+  "improvement_points": 13.2,
+  "instrument_id": "product-evidence-gate-selection-004",
+  "limitations": [
+    "Development-split evidence selects a method; it is not a generalization claim.",
+    "The product retrieves through a dense published index while this comparison retrieves locally.",
+    "Public synthetic sources only; no professor fidelity, usability, or learning claim."
+  ],
+  "measured_before_building": {
+    "ambiguous_targets": 263,
+    "best_tiebreaker_isolates_gold": 105,
+    "best_tiebreaker_picks_wrong": 61,
+    "dominant_leader_is_gold": 76,
+    "dominant_leader_is_wrong": 0,
+    "genuine_tie_targets": 187,
+    "gold_inside_tied_leader_set": 184,
+    "strict_dominance_targets": 76
+  },
+  "operational_summary": {
+    "cost_usd": 0.0,
+    "private_data_used": false,
+    "provider_calls": 0,
+    "thresholds_changed": false
+  },
+  "pre_registered_checks": {
+    "grounded_success_strictly_better": true,
+    "operational_failures_not_worse": true,
+    "severe_unsupported_not_worse": true
+  },
+  "promote_candidate": true,
+  "promotion_blocked_until": "a fresh local HTTPS release qualification passes",
+  "reuses_selection_003_response_ledgers": true,
+  "run_id": "product-evidence-gate-selection-004",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "selected_gate": "dominance-scoped-ambiguity-safe-v3",
+  "selection_003_amended": false,
+  "status": "completed-promote",
+  "supersedes": "product-evidence-gate-selection-003"
+}

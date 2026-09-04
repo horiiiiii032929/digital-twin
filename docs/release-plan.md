@@ -1,12 +1,32 @@
 # Course Digital Twin release plan
 
-Status date: 2026-09-03
+Status date: 2026-09-04
 
 This is the operational plan for releasing the system. The
 [real-world product scope](../research/00_admin/2026-08-18-real-world-product-scope.md)
 defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
+
+## Final correctness and exact-binding checkpoint
+
+Before release consolidation, the selected configuration is being qualified as
+one exact composition rather than inferred from separate records. The active
+candidate is Luna H+E1 (`guarded-policy-value-planner-v2`) with deterministic
+generation, `dominance-scoped-ambiguity-safe-v3`, and profile version
+`v2.1-floor-004-h-e1`. Startup now rejects absent as well as conflicting
+evidence-gate bindings. Local qualification 004 is retained as historical
+operational evidence because it used Terra and a historical qualification
+record. Qualification 005 exercised the exact composition and passed 43/43
+live, restart, clean-restore, rollback, and restoration checks.
+
+Selection 004 remains the relative development winner after correcting its
+metric label: answerable factual success is 42.50% versus 26.00%, not the
+overall task rates of 50.00% versus 36.80%. Both arms fail the absolute product
+quality gates. Qualification 005 therefore permits an accurately labelled local
+research demo, not a claim that the grounding problem or sealed benchmark has
+been solved. Its deterministic fast-path journey made zero Luna calls; Luna
+behavior remains bound to immutable confirmation 024.
 
 ## Current audit-safe release boundary
 
@@ -23,9 +43,13 @@ missing shared-clock export. It completed 670/670 actual-product cases with a
 `Keep` decision: every registered safety, action, fallback, persistence,
 transition, termination, and proactive-lineage gate passed. It made 1,836
 calls for USD 0.4216108 and its authority is revoked. T1-v2 autonomous remains
-the release candidate. The winner-only known 10,000+1,000 regression and local
-HTTPS qualification are now the remaining release-decision checkpoints; no
-same-package prompt or method tuning is allowed.
+the operational candidate. The later winner-only known 10,000+1,000 regression
+completed as `No Release`: 25.38% fully grounded factual success versus T0's
+44.16%, with severe unsupported releases reduced from 478 to 4. That package is
+now known and immutable. Exact local HTTPS qualification 005 establishes a
+usable local research demo at 43/43 operational checks, but cannot override the
+unfavorable academic grounding result; no same-package tuning or rerun is
+allowed.
 
 Issue #192 is complete: provider-failure scoring now follows durable trigger
 lineage, and confirmation 021 remains immutable. The completed development
