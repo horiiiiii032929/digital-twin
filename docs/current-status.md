@@ -55,19 +55,22 @@ Issue #131 now has one preregistered method-level successor:
 description retrieval with direct multi-vector visual embeddings and MaxSim
 late interaction, while keeping original regions, course isolation, boundary
 policy, and source/version lineage authoritative. A fresh source-disjoint
-30-asset/60-case package has been deterministically built and its network-free
-validation and simulation pass. The simulation is harness evidence only; no
-Jina model-quality result exists yet. The bounded retrieval confirmation is
-authorized and frozen, but execution still requires a local `JINA_API_KEY`.
-The account allowance supplied by the researcher is capped at 10,000,000
-tokens; the complete 60-call checkpoint reserves at most 1,966,080 tokens
-under the provider's per-input limit and fails closed above that quota.
-Until the live retrieval gates and a
-separate actual-product answer/citation checkpoint pass, the qualified local
-R1 continues to expose text/OCR fallback and makes no representative true-
-visual capability claim. The 30 paired boundary cases are reserved for that
-actual-product checkpoint; this retrieval-only run does not claim boundary
-accuracy by reading their hidden labels.
+30-asset/60-case package was built and the live first-party Jina confirmation
+completed all 60 calls without retry or failure. The candidate reached 28/30
+complete visual evidence@3 and 30/30 recall@5, against 18/30 and 18/30 for the
+text BM25 control. Tables reached 10/10, equations 10/10, and diagrams 8/10 at
+top three; the control retrieved only 3/10 diagrams. Original-region lineage
+and course isolation were both 30/30, so every preregistered retrieval gate
+passed. Usage was 144,639 tokens and USD 0.00723195. This is 1.45% of the
+researcher-supplied 10,000,000-token account ceiling; the one-time execution
+authority is now revoked.
+
+The decision remains `Go Deeper`, not product selection. The qualified local
+R1 continues to expose text/OCR fallback until a separate actual-product
+checkpoint evaluates answer generation, atomic claims, boundary behavior, and
+citations resolving to original visual regions. The paired 30 boundary labels
+remained unopened in this retrieval-only run, and no representative true-
+visual product capability is claimed.
 
 Exact local requalification 006 is now `completed-keep` after the
 multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,

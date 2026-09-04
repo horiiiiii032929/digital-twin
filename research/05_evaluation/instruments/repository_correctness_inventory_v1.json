@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "210f74efbf4abf6b07f55e59788b856052f1d97f0b2b8ca08a83585db310b3f5",
+  "record_sha256": "34164e49cfbc7c6a5d0e54e15b9038c3737c68242a112e762f4f6de315380257",
   "records": [
     {
       "audit": {
@@ -5720,10 +5720,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current limits and pricing, a 10M-token account ceiling, preregistered gates, explicit claim deferral, and bounded authorization.",
+        "evidence": "Post-result review verifies the completed-go-deeper terminal state, exact first-party Jina v4 binding, passed preregistered retrieval gates, 10M-token account ceiling accounting, explicit product-claim deferral, and revoked provider authorization.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-token-quota-audit"
+        "reviewer": "codex-colpali-result-publication-audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5731,7 +5731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
       "risk": "high",
-      "sha256": "76d65da4d51cc40c173c309b4d116777a60f30577390e3d4e05de8bdfeb17bc9"
+      "sha256": "0903fcaec87e56e77f68591af415e86ac7d3ebcbe26e527472f5443a47ed20ea"
     },
     {
       "audit": {
@@ -9768,7 +9768,7 @@
     {
       "audit": {
         "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "evidence": "Freeze regression now verifies that the completed visual run retains deterministic dataset generation only and no longer carries provider authority.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -13943,10 +13943,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Manual review confirmed the build paths and the separately authorized first-party Jina confirmation are the only operations registered; the later actual-product checkpoint remains fail-closed.",
+        "evidence": "Manual post-run review confirms the completed Jina provider operation was removed while deterministic dataset generation remains registered; any later actual-product checkpoint stays fail-closed.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-execution-authorization-audit"
+        "reviewer": "codex-colpali-result-publication-audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13954,7 +13954,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "1926456af4541fdba5dfcf1ddfca5d0a1c416d3279fa12293f4a9d151906f4a7"
+      "sha256": "a369b5a1b69bb6e560a804c081389a02d8823a1c7ca14a8585c390d20ddd0191"
     },
     {
       "audit": {
@@ -14810,7 +14810,7 @@
         "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-execution-authorization-audit"
+        "reviewer": "codex-colpali-result-publication-audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14818,7 +14818,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "c08eeffa1d005d07ad8f6b7997100abf9a066f6ad99cb5525e1ecce587f9bf6f"
+      "sha256": "a3b8cf190fcbe23eb3afcad3aa94f62f47003ead731641c96a203dcb2c4bdc5b"
     },
     {
       "audit": {
@@ -18183,10 +18183,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Focused tests cover deterministic reconstruction, zero-call simulation, credential fail-closed behavior, the exact 10M-token quota calculation, excessive-reservation rejection, render hashes, and boundary deferral.",
+        "evidence": "Focused tests cover deterministic reconstruction, simulation, isolated preflight reasons, exact 10M-token quota calculation, excessive-reservation rejection, render hashes, boundary deferral, and terminal provider-authority revocation.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-token-quota-audit"
+        "reviewer": "codex-colpali-result-publication-audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -18194,7 +18194,7 @@
       "package_commands": [],
       "path": "tests/test_true_visual_colpali_confirmation.py",
       "risk": "medium",
-      "sha256": "aa7756252e0e0f98235ee4d735f9129a13fd646f944340442750ecd8a759d1a1"
+      "sha256": "a7bb670416ddb887fe7004311f8555013bc6c5acc7c44e0ac1797fe04b9343da"
     },
     {
       "audit": {

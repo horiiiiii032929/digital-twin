@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "true-visual-colpali-confirmation-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-go-deeper-authorization-revoked",
   "owner_issue": 131,
   "dataset_id": "true-visual-colpali-confirmation-001",
   "decision_question": "Does direct multi-vector visual late-interaction retrieval correct the fine-grained visual evidence failures of the whole-image description plus BM25 method?",
@@ -50,7 +50,14 @@
     "candidate_diagram_improvement_over_control_min": 0.1
   },
   "result_scope": "fresh 30-cluster visual retrieval confirmation; 30 paired boundary cases are reserved for the later actual-product checkpoint and are not scored here",
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
-  "private_data_authorized": false
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "private_data_authorized": false,
+  "authorization_revoked_at": "2026-09-04T13:56:42Z",
+  "result": {
+    "status": "completed-go-deeper",
+    "record": "research/05_evaluation/records/true-visual-colpali-confirmation-001.json",
+    "summary": "research/05_evaluation/true-visual-colpali-confirmation-001-results.md",
+    "raw_result_sha256": "94dedf3dafb71a987e6af2f1f86fe40bb32cf968cb5b72fafe4d9e02b02912ea"
+  }
 }
