@@ -7,6 +7,7 @@ from src.digital_twin.tutor_policy import (
     PreviewCase,
     PreviewDecisionRecord,
     RevisionProposal,
+    RevisionDecisionRecordV1,
     SourceInventoryItem,
     TutorPolicy,
     WorkflowTraceItem,
@@ -28,6 +29,7 @@ class OnboardingSession(BaseModel):
     preview_decisions: dict[str, PreviewDecisionRecord] = Field(default_factory=dict)
     evidence_snapshots: list[EvidenceSnapshot] = Field(default_factory=list)
     revision_proposal: RevisionProposal | None = None
+    revision_history: list[RevisionDecisionRecordV1] = Field(default_factory=list)
     approval_checklist: list[ApprovalItem] = Field(default_factory=list)
     release_blockers: dict[str, list[str]] = Field(
         default_factory=lambda: {

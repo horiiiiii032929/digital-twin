@@ -52,6 +52,7 @@ function approvedSession(): OnboardingSession {
     preview_decisions: {},
     evidence_snapshots: [],
     revision_proposal: null,
+    revision_history: [],
     approval_checklist: [
       {
         id: "approval-1",

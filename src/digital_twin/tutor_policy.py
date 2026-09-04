@@ -69,7 +69,9 @@ class ChatMessage(BaseModel):
 class SourceInventoryItem(BaseModel):
     id: str = Field(min_length=1, max_length=128)
     name: str = Field(min_length=1, max_length=255)
-    mime_type: str = Field(default="application/octet-stream", min_length=1, max_length=255)
+    mime_type: str = Field(
+        default="application/octet-stream", min_length=1, max_length=255
+    )
     size_bytes: int = Field(default=0, ge=0, le=1_099_511_627_776)
     permission_status: SourcePermissionStatus = SourcePermissionStatus.PENDING
     source_label: SourceLabel = SourceLabel.COURSE_APPROVED
@@ -222,15 +224,43 @@ class EvidenceSnapshot(BaseModel):
     timestamp: str = Field(default_factory=timestamp_now)
 
 
+class RevisionAlternative(BaseModel):
+    id: str = Field(min_length=1)
+    category: Literal["academic_integrity", "source_grounding", "tone"]
+    affected_policy_fields: list[str] = Field(min_length=1)
+    proposed_value: str | list[str] | dict
+    rationale: str = Field(min_length=1)
+
+
 class RevisionProposal(BaseModel):
     id: str
     preview_case_id: str | None = None
     feedback: str
     affected_policy_fields: list[str]
-    proposed_value: str
+    proposed_value: str | list[str] | dict
     rationale: str
-    status: Literal["pending", "confirmed", "discarded"] = "pending"
+    status: Literal["pending", "confirmed", "discarded", "superseded"] = "pending"
     created_at: str = Field(default_factory=timestamp_now)
+    base_policy_version: int = Field(default=1, ge=1)
+    review_artifact_sha256: str | None = None
+    alternatives: list[RevisionAlternative] = Field(default_factory=list)
+    selected_alternative_id: str | None = None
+
+
+class RevisionDecisionRecordV1(BaseModel):
+    proposal_id: str = Field(min_length=1)
+    preview_case_id: str | None = None
+    feedback: str = Field(min_length=1)
+    affected_policy_fields: list[str] = Field(default_factory=list)
+    proposed_value: str | list[str] | dict = ""
+    rationale: str = ""
+    status: Literal["confirmed", "discarded", "superseded"]
+    base_policy_version: int = Field(ge=1)
+    target_policy_version: int = Field(ge=1)
+    review_artifact_sha256: str | None = None
+    selected_alternative_id: str | None = None
+    created_at: str
+    resolved_at: str = Field(default_factory=timestamp_now)
 
 
 class ApprovalItem(BaseModel):
