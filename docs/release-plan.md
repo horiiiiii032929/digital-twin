@@ -10,14 +10,15 @@ results.
 
 ## R1.2 stateful clarification candidate
 
-Issue #212 is the only prospective grounding mechanism in the final finite
-improvement window. It preserves the selected R1.1 gate and replaces terminal
-clarification for a genuine source tie with one persisted, source-bound choice.
-The gate is not relaxed and the product does not infer a selection from
-ambiguous free text. A frozen 200-case network-free actual-service
-confirmation decides whether the mechanism advances to exact local
-requalification. Until that result and requalification pass, R1.1 remains the
-released rollback and no academic-grounding threshold claim changes.
+Issue #212 preserves the selected R1.1 gate and replaces terminal clarification
+for a genuine source tie with one persisted, source-bound choice. The gate is
+not relaxed and the product does not infer a selection from ambiguous free
+text. The frozen 200-case network-free actual-service confirmation completed
+Keep at 100% candidate grounded completion versus 25% for the fail-closed
+control, with every safety and persistence gate passing. The exact composition
+therefore advances once to local R1.2 requalification. Until that
+requalification passes, R1.1 remains the released rollback and no
+academic-grounding threshold claim changes.
 
 ## Local R1.1 completion checkpoint
 

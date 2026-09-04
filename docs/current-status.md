@@ -19,11 +19,15 @@ cancels pending requests.
 
 The implementation includes the SQLite lifecycle, restart-safe service path,
 student quick replies, and a frozen 200-case network-free product confirmation.
-Its current status is build-only: the diagnostic simulation passes, but no
-Keep claim is made until the same instrument executes from a clean committed
-revision and the result is registered. The claim is limited to mechanism
-correctness; real-student interpretation choice, learning improvement, and
-professor fidelity remain unproven.
+`stateful-clarification-confirmation-001` executed once from clean revision
+`b683183` and is `completed-keep`: candidate grounded completion was 100%
+versus 25% for the fail-closed control (+75 percentage points), with 100%
+boundary safety, invalid-reply safety, source-version validity, restart, and
+idempotency checks. Unsafe releases, duplicates, clarification-loop violations,
+and provider calls were all zero. The mechanism now proceeds to exact local
+R1.2 requalification; R1.1 remains the rollback until that passes. The claim is
+limited to mechanism correctness; real-student interpretation choice, learning
+improvement, and professor fidelity remain unproven.
 
 ## Final local R1.1 technical checkpoint
 
