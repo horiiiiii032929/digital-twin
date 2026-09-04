@@ -5,6 +5,7 @@ description = "Research and prototype workspace for an instructor digital twin t
 requires-python = ">=3.12,<3.13"
 dependencies = [
   "fastapi>=0.141.1,<1.0",
+  "httpx>=0.28,<1.0",
   "jsonschema>=4.26,<5.0",
   "langgraph>=1.2.11,<2.0",
   "langgraph-checkpoint-sqlite==3.1.1",

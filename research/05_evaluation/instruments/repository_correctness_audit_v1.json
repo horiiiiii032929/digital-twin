@@ -15,13 +15,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "finite-evaluation-program",
-      "evidence": "H+E1 product-binding review verified the candidate mode is documented without credentials, remains non-default, and preserves explicit qualification and release gates.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Configuration review verified that only the JINA_API_KEY variable name is documented; no credential is committed and provider execution remains unauthorized.",
       "findings": [],
       "path": ".env.example",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex H+E1 product-integration audit",
-      "sha256": "9cea23246fb979e8bb962dd04b2194b3fc85b3c5e64d1ceca7899b52268246ef"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "2b2fbe77008334985c277ffa3df8ca77761c076f52f1b30e6f2f2201adf5d46d"
     },
     {
       "audit_status": "audited",
@@ -972,24 +972,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "active-tooling",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Package command review verified explicit build, validate, network-free simulation, no-call preflight, and separately frozen execution entrypoints for the visual successor.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "6ef3b2f105e845fae07f5e4266595dc8bca2aae1d26eb6ef849b770664d5a61a"
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "b9400292f340ec3c7d07b1594393ecebfe7b4f5d3a0c2fc17912f3038c851fd0"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Current package metadata review, secure optional retrieval upgrades, locked resolution, zero-vulnerability audit, and complete Python suite. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Dependency review made the existing runtime httpx transport explicit rather than relying on a transitive dependency; locked resolution and focused transport tests passed.",
       "findings": [],
       "path": "pyproject.toml",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "305e912bc57960d1af6d612a01701f08fc577f2361ae524cda1d0732086b6e4c"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "9bd8e90089005d618c671e081a63f9367649971d1e3e46b7048dbb7332be7d32"
     },
     {
       "audit_status": "audited",
@@ -5439,7 +5439,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "evidence": "Manual SE7-11 review plus the ColPali successor freeze-registry regression confirmed the test enumerates every bounded authorization and keeps provider execution unauthorized.",
       "findings": [],
       "path": "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py",
       "reviewed_at": "2026-09-03",
@@ -8408,13 +8408,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "grounding-public-api",
-      "evidence": "V3 evidence gate is exported without replacing historical V1/V2 interfaces.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Public API review verified that the hash-bound visual region, provider, MaxSim, size, token, and pricing contracts are exported without replacing historical grounding interfaces.",
       "findings": [],
       "path": "src/digital_twin/grounding/__init__.py",
-      "reviewed_at": "2026-09-02T22:57:23+00:00",
-      "reviewer": "Codex SE7-2 root-cause and confirmation-016 build audit",
-      "sha256": "12dd016c72742f23dc914729d3078dca79fadf3661bffa0ce19fc7ef18094902"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "eb6d1d92e3030ae8867815196df51d33347d43aa10b6483d66703b4e626fff84"
     },
     {
       "audit_status": "audited",
@@ -8925,13 +8925,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual review confirmed the active repository freeze remains fail-closed after removing the consumed true-visual-supplement-003 authorization.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual review confirmed the new builder and runner are registered while only network-free dataset generation is allowed; external model execution remains fail-closed.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "453b5f0d5f24d5fe32c1cc12065e14f20e2d083053c5c8c663b7c022830f7c15"
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "3f0274d27a65dc438b57bca89e7167332e7a8e0318b55b62b086840e3527a9b4"
     },
     {
       "audit_status": "audited",
@@ -9523,9 +9523,9 @@
       "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "69af416f41df56a455187cd5f5ae90c83558caee1b3a63ce2f16d779b3cbaef5"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "Codex ColPali build-only checkpoint audit",
+      "sha256": "a3b8cf190fcbe23eb3afcad3aa94f62f47003ead731641c96a203dcb2c4bdc5b"
     },
     {
       "audit_status": "audited",
@@ -11950,13 +11950,79 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "uv locked resolution passed; complete dependency audit reported zero known vulnerabilities and zero exceptions. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current OpenAPI limits and pricing, preregistered retrieval gates, and explicit deferral of boundary and product-quality claims.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "6a4e0723310212146a101944aa1a2aca9ed3deea6d52b55b3b9b3c412f5a9fd2"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual builder review plus reconstruction tests verify pinned-source extraction, deterministic SVG-to-PNG rendering, interval-based source-disjointness, balanced cases, no private data, and fail-closed hash validation.",
+      "findings": [],
+      "path": "scripts/build_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "6f7e210ef0eea73c350af56199ceeada4027ab38bd18e22a240e614ebba73df0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual runner review plus validation and simulation verify exact case-ID ranking, course isolation, original-region lineage, hidden-boundary deferral, image/query canaries, atomic ledger resume, token-derived cost accounting, fresh metadata, and fail-closed execution authorization.",
+      "findings": [],
+      "path": "scripts/run_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "0cf49a90a2ba46d32375440e239b9507d4f5d0e026a00f773ca339c2312f4370"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual runtime review and focused tests verify bounded finite multi-vectors, normalized MaxSim, exact course filtering, immutable source-region lineage, 8 MB input enforcement, exact request tasks, returned index/model checks, and no-retry first-party transport.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/visual_late_interaction.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Focused unit tests cover MaxSim semantics, zero/ragged/non-finite vectors, course isolation, lineage, exact payloads, 8 MB bounds, first-party headers, response identity, index, and accounting validation.",
+      "findings": [],
+      "path": "tests/digital_twin/test_visual_late_interaction.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "cdd37158d54a7fe8e889cab166460b5988e529f12377968a108742d60e2a787c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Focused integration tests cover deterministic dataset reconstruction, modality balance, zero-call simulation, provider-unauthorized preflight, empty boundary lineage, render hashes, and explicit boundary-evaluation deferral.",
+      "findings": [],
+      "path": "tests/test_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "72061d507b53b7e7e4d043c6e67cbc283273de1bed7f9e25eb440dc0f8c531ac"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "uv lock completed after making the runtime httpx dependency explicit; focused provider and retrieval tests passed with the locked environment.",
       "findings": [],
       "path": "uv.lock",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "85994fe843c7828d3d8531b4192223debb2032fc96c0db93d114bc80d930589a"
     }
   ],
   "schema_version": 1

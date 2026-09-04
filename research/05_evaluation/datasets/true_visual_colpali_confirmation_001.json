@@ -1,0 +1,2061 @@
+{
+  "answerable_case_count": 30,
+  "assets": [
+    {
+      "asset_id": "tvcp001-asset-001",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-001-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-001.png",
+      "render_sha256": "74c7a3810d5e2daaf030548c2f59f973f260c9d8cf2388d4c8f6c40b91133d0b",
+      "source_artifact_id": "tvcp001-source-001",
+      "source_char_end": 2288,
+      "source_char_start": 1777,
+      "source_document_path": "content/software-stack/operating-system/slides/operating-system.md",
+      "source_excerpt_sha256": "48daca31445294150ee481cb308c1a90f3cffc01e09ecfd7788ce6369f00caf2",
+      "source_sha256": "7e905c29741017aed614e192a1c1fd2387a8fe5bb0531598d697a604ba16fc5c",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-002",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-002-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-002.png",
+      "render_sha256": "cce53d568b07fa94681814c34fc65a140d65cd91d528fb43a43a3bb710ac683a",
+      "source_artifact_id": "tvcp001-source-002",
+      "source_char_end": 4478,
+      "source_char_start": 3966,
+      "source_document_path": "content/software-stack/operating-system/slides/operating-system.md",
+      "source_excerpt_sha256": "a0aeb24ae6ae0eafa6b80bf7ed192d9e9c765034f10243498f375bf764dff58a",
+      "source_sha256": "7e905c29741017aed614e192a1c1fd2387a8fe5bb0531598d697a604ba16fc5c",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-003",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-003-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-003.png",
+      "render_sha256": "9dbf04b1ab1540470c01a99809cecca5a1aa8cc6c90ed39e285926805ad5657b",
+      "source_artifact_id": "tvcp001-source-003",
+      "source_char_end": 1177,
+      "source_char_start": 591,
+      "source_document_path": "content/software-stack/overview/slides/software-stack.md",
+      "source_excerpt_sha256": "cd02811316f7467439eb3acce5795b6573210bb6a23dbb1e367ee887594d55b7",
+      "source_sha256": "c374f644a41841096d14aed67366e68c3bcf249e7b6c8af3376a2159a97534cc",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-004",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-004-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-004.png",
+      "render_sha256": "0f7f77f0f35d53a1b728e63ec608f8d0df2885c0a3f82f728a45f9c3bb6f861e",
+      "source_artifact_id": "tvcp001-source-004",
+      "source_char_end": 1554,
+      "source_char_start": 1119,
+      "source_document_path": "content/software-stack/software-types/slides/types-of-software.md",
+      "source_excerpt_sha256": "18cff070caccd4096c434570cc6507b87608df03cffde1020585d07a1e44416f",
+      "source_sha256": "8e92e8b3e8aa6872a7754cab7174833995f113afdd758a4aec3b37ded4797827",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-005",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-005-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-005.png",
+      "render_sha256": "107c52a2bed913fad78725880e234fee310fe786aff4ad0008f4d054c663a5f5",
+      "source_artifact_id": "tvcp001-source-005",
+      "source_char_end": 10414,
+      "source_char_start": 10240,
+      "source_document_path": "content/io/lab/content/file-descriptors.md",
+      "source_excerpt_sha256": "2fbdfc728846a8d93447227cf107362500eeb9ed57e727aeae2a703dd5d39e68",
+      "source_sha256": "f355141e486d7bbc7aadab1f088358efc15fb46e8261a9bc74cdc675b5d0c977",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-006",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-006-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-006.png",
+      "render_sha256": "da6da537df97267c94acb210cc8c5dc817e79dc00907582d2a0bafd4318c63b3",
+      "source_artifact_id": "tvcp001-source-006",
+      "source_char_end": 11175,
+      "source_char_start": 10792,
+      "source_document_path": "content/io/lab/content/file-descriptors.md",
+      "source_excerpt_sha256": "f7916cf37743d974ad35a93577fedf5885faae59a85e9ec2445ceac65ad2937d",
+      "source_sha256": "f355141e486d7bbc7aadab1f088358efc15fb46e8261a9bc74cdc675b5d0c977",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-007",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-007-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-007.png",
+      "render_sha256": "a8ff9f1bf50e7c62a28ad10ee5394a86488cb275bedd74519618e5715bf08232",
+      "source_artifact_id": "tvcp001-source-007",
+      "source_char_end": 1690,
+      "source_char_start": 1569,
+      "source_document_path": "content/compute/lecture/slides/scheduling-algorithms.md",
+      "source_excerpt_sha256": "9e5f80574c7cb6d656cd708e2fc1f13f46785ac92edcaf11fc5a30160781d757",
+      "source_sha256": "4d518516a453cd5b90cc4b53f54ec085b53b2fde2609037ca66d6b80d7594020",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-008",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-008-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-008.png",
+      "render_sha256": "fc6b1823d4902c655a851507649165c366b4c356c4b6e70737e19ddc02c36c4d",
+      "source_artifact_id": "tvcp001-source-008",
+      "source_char_end": 3482,
+      "source_char_start": 2663,
+      "source_document_path": "content/compute/lab/content/threads.md",
+      "source_excerpt_sha256": "edbad0536fe7a5a8e98a2a9000b47897f8fe985e8696a2a9364084d9a95032bf",
+      "source_sha256": "36ec020a8457e744e18ce7764be62c555dfb787599d07dbd15051d35567a92bc",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-009",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-009-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-009.png",
+      "render_sha256": "124e122fe9e8b7d65406399ad36cde63466989a8d9702f8bbd1efc29c507f2f1",
+      "source_artifact_id": "tvcp001-source-009",
+      "source_char_end": 12151,
+      "source_char_start": 11855,
+      "source_document_path": "content/app-interact/lab/content/os-cloud.md",
+      "source_excerpt_sha256": "80a2a1324238c7f530e3eaee3742ae3defe333c034c8174eefb315e2b50e0cac",
+      "source_sha256": "1b85cde8bc245c67a22e312c2902c2faa005ff530d971c81fbd62a8ca67ab893",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-010",
+      "attribution": "Open Education Hub contributors, Operating Systems",
+      "course_id": "operating-systems",
+      "license_spdx": "CC-BY-NC-SA-4.0",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-010-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-010.png",
+      "render_sha256": "bdd95c427655adfb035a5b7baf44cecc49bdc4ae61b782041b43a5ddbd03081b",
+      "source_artifact_id": "tvcp001-source-010",
+      "source_char_end": 12633,
+      "source_char_start": 12526,
+      "source_document_path": "content/app-interact/lab/content/os-cloud.md",
+      "source_excerpt_sha256": "de7bdd296d27055ddadc8487d8a58ae596b17a83036438043d7b4ad356189c50",
+      "source_sha256": "1b85cde8bc245c67a22e312c2902c2faa005ff530d971c81fbd62a8ca67ab893",
+      "source_version": "25cac6dfb7bca4335337ea81866899e2f61213d6"
+    },
+    {
+      "asset_id": "tvcp001-asset-011",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-011-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-011.png",
+      "render_sha256": "e8c2e21cf4093c16dec3606593cd9281f6e471dbac97f65081b683db12e68a5d",
+      "source_artifact_id": "tvcp001-source-011",
+      "source_char_end": 1123,
+      "source_char_start": 1085,
+      "source_document_path": "latex/rebuilding.tex",
+      "source_excerpt_sha256": "10efdf4c4755a561befea05d24e4ba051aba90bfe18f9f64b7cae1e2ce42fed8",
+      "source_sha256": "01aa4c8074b78a73f12eb197b9baf757cdab7de19d878813c44c496e0913461a",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-012",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-012-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-012.png",
+      "render_sha256": "8e92e5478359e18c926d1628f6b3fe43f7dddd18050c6b054019cf42b20a8cda",
+      "source_artifact_id": "tvcp001-source-012",
+      "source_char_end": 1224,
+      "source_char_start": 1194,
+      "source_document_path": "latex/rebuilding.tex",
+      "source_excerpt_sha256": "8377aed5cbf922e19976742d53b4b1e1149f254ee1f8f74335e78d1a39b72620",
+      "source_sha256": "01aa4c8074b78a73f12eb197b9baf757cdab7de19d878813c44c496e0913461a",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-013",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-013-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-013.png",
+      "render_sha256": "52eefd7058a70d0ee3d032f280e5ab07c7e85d15c4a1ca3544b14115608516fa",
+      "source_artifact_id": "tvcp001-source-013",
+      "source_char_end": 20723,
+      "source_char_start": 20645,
+      "source_document_path": "latex/intro.tex",
+      "source_excerpt_sha256": "52802b466575a4b0aedd9e38481e7caca1a015c39e706d167cc0949afea229f8",
+      "source_sha256": "a91d11ecc6d37e0ea0a5c248da5c9160a52aa7ca401e1fbe6176182527010e7e",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-014",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-014-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-014.png",
+      "render_sha256": "067b53d5c4239fb1fd8a70fc99bab853313c94a2484f5147e27046bf562b8488",
+      "source_artifact_id": "tvcp001-source-014",
+      "source_char_end": 21017,
+      "source_char_start": 21001,
+      "source_document_path": "latex/intro.tex",
+      "source_excerpt_sha256": "a8761a387d78916647efaac58d572acf1faded52107600a312236642c0315100",
+      "source_sha256": "a91d11ecc6d37e0ea0a5c248da5c9160a52aa7ca401e1fbe6176182527010e7e",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-015",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-015-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-015.png",
+      "render_sha256": "798a54d52032fd1cfd734a90f9de5e4cfbe04476b1db93e3255e88faf78f5da3",
+      "source_artifact_id": "tvcp001-source-015",
+      "source_char_end": 21113,
+      "source_char_start": 21066,
+      "source_document_path": "latex/intro.tex",
+      "source_excerpt_sha256": "778e02061408277e9b2f26b845ed6e70ec97ca11c0dd4427a40b0b794479af60",
+      "source_sha256": "a91d11ecc6d37e0ea0a5c248da5c9160a52aa7ca401e1fbe6176182527010e7e",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-016",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-016-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-016.png",
+      "render_sha256": "2358c54feb8eeff642fb0aef5d45c2c6c7160364cea7f64f3835f761998923c6",
+      "source_artifact_id": "tvcp001-source-016",
+      "source_char_end": 22657,
+      "source_char_start": 22612,
+      "source_document_path": "latex/intro.tex",
+      "source_excerpt_sha256": "a44a15587323c3d53a507086da3a054e4ad9f067c18ff84912aa45f216e9266a",
+      "source_sha256": "a91d11ecc6d37e0ea0a5c248da5c9160a52aa7ca401e1fbe6176182527010e7e",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-017",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-017-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-017.png",
+      "render_sha256": "39edb3d4a624f114dd3a8295c47f3658e726ec75cd9bbe5f5fa0591a7e390ece",
+      "source_artifact_id": "tvcp001-source-017",
+      "source_char_end": 3308,
+      "source_char_start": 3263,
+      "source_document_path": "latex/rbs.tex",
+      "source_excerpt_sha256": "2574b9b996e9eb1b2e13b56879740d16d72091d643c17b7244e552f47775959a",
+      "source_sha256": "17a3340403671b4b5f6c5e6d8ef23ab7a1049fc8857d6849b89981b0b0b41b53",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-018",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-018-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-018.png",
+      "render_sha256": "6126601f5c04897aee531efd8821fad4dd942d0195b2a6d6000296fbdfdfe475",
+      "source_artifact_id": "tvcp001-source-018",
+      "source_char_end": 1914,
+      "source_char_start": 1821,
+      "source_document_path": "latex/heaps.tex",
+      "source_excerpt_sha256": "aef0dcf2b5887935f457d37ffe003ad1b5e1016ce43cbdfba27808ad92b89e91",
+      "source_sha256": "5080f605525e77f5951313c99c9bfdb529723e087942d45db00616d8ab799798",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-019",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-019-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-019.png",
+      "render_sha256": "931974bf2c45ee333968fc18bd431a69a82b6f87b9f26d35ff67e0ff49c3f72d",
+      "source_artifact_id": "tvcp001-source-019",
+      "source_char_end": 3157,
+      "source_char_start": 3146,
+      "source_document_path": "latex/redblack.tex",
+      "source_excerpt_sha256": "bcca024562f8ff28b5334a203a7294e24cc744e3916be1425a5b2ef066c2b3fc",
+      "source_sha256": "55bd7701edb6e10bf55ee0bb1df6a417aea0f15db1f657a54a609f6755193bf1",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-020",
+      "attribution": "Pat Morin, Open Data Structures",
+      "course_id": "data-structures",
+      "license_spdx": "CC-BY-2.5-CA",
+      "mime_type": "image/png",
+      "modality": "equation",
+      "original_asset_path": null,
+      "original_asset_sha256": null,
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-020-full"
+        }
+      ],
+      "render_path": "reports/generated/true-visual-colpali-confirmation-001/assets/tvcp001-asset-020.png",
+      "render_sha256": "5c07e05f031b5e70b50044723f54d245b851f1cd824d9a8dd11012db02cd194a",
+      "source_artifact_id": "tvcp001-source-020",
+      "source_char_end": 3636,
+      "source_char_start": 3589,
+      "source_document_path": "latex/scapegoat.tex",
+      "source_excerpt_sha256": "4a5587db873f8e4fe96274254fa4a620e1db046355ca1d0b4f003a3177ca330a",
+      "source_sha256": "75090c723c10d68e32eff4fbe797164bb55367948b9dbd86eb3eab1f645f04b8",
+      "source_version": "9d22c44906dda2017b2ef0c762025bee644b58aa"
+    },
+    {
+      "asset_id": "tvcp001-asset-021",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/fullmesh.png",
+      "original_asset_sha256": "29b72810263ea9198eb5def8fb29bdbc84002c0b8bcdf348a4ad563ff0340974",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-021-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/fullmesh.png",
+      "render_sha256": "29b72810263ea9198eb5def8fb29bdbc84002c0b8bcdf348a4ad563ff0340974",
+      "source_artifact_id": "tvcp001-source-021",
+      "source_char_end": 1271,
+      "source_char_start": 1083,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "83ec7b71bdb2d9f000e42d8c1c95ace59ff11dc93d8ffd8ecc36baf5abf2f75b",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-022",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/star.png",
+      "original_asset_sha256": "2004f5b4eb8cf17019b1cfa2a21168e554bd4b0a5460794a364df01d857e22a0",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-022-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/star.png",
+      "render_sha256": "2004f5b4eb8cf17019b1cfa2a21168e554bd4b0a5460794a364df01d857e22a0",
+      "source_artifact_id": "tvcp001-source-022",
+      "source_char_end": 4403,
+      "source_char_start": 4207,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "1eba5203b9fecff142a00ce5ee901127f2cf41f92a116fc9c3f0c218282410b1",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-023",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/ring.png",
+      "original_asset_sha256": "faf27ea1036bc9571445d058307c9b09ebb116319667193f7efb47cf73934cf5",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-023-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/ring.png",
+      "render_sha256": "faf27ea1036bc9571445d058307c9b09ebb116319667193f7efb47cf73934cf5",
+      "source_artifact_id": "tvcp001-source-023",
+      "source_char_end": 6027,
+      "source_char_start": 5866,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "a373f890ba046f3a5af6aebe21242c4d55557757951b5ac4b989bedf349af952",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-024",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/tree.png",
+      "original_asset_sha256": "d4671b3ee3bddcf44489ff4fd9e451ed25ed2026349b9d1da104203af49d5031",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-024-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/tree.png",
+      "render_sha256": "d4671b3ee3bddcf44489ff4fd9e451ed25ed2026349b9d1da104203af49d5031",
+      "source_artifact_id": "tvcp001-source-024",
+      "source_char_end": 7947,
+      "source_char_start": 7768,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "b1dd0789718f0c77fea6e9ab8761117d10101554aca9ec1f769455b88bac4ca1",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-025",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/ref-model-osi.png",
+      "original_asset_sha256": "0b9c6799b939535ed45be8ee26c8c0381c047fe0140e9708ed830a547d9c4406",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-025-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/ref-model-osi.png",
+      "render_sha256": "0b9c6799b939535ed45be8ee26c8c0381c047fe0140e9708ed830a547d9c4406",
+      "source_artifact_id": "tvcp001-source-025",
+      "source_char_end": 12874,
+      "source_char_start": 12686,
+      "source_document_path": "principles/referencemodels.rst",
+      "source_excerpt_sha256": "f7bfa89ccc83c93d604c9871426f983b95aba6ae7e97d7409fd555edf473f357",
+      "source_sha256": "fc934a232eb2883176dec530837648a5b37f2cc728db7e158bc6b6e00b2d6308",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-026",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/udp-ports.png",
+      "original_asset_sha256": "a10ad1f00dddd3821546b7cbab0912d1524472dfb6921950254acf54f58248b4",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-026-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/udp-ports.png",
+      "render_sha256": "a10ad1f00dddd3821546b7cbab0912d1524472dfb6921950254acf54f58248b4",
+      "source_artifact_id": "tvcp001-source-026",
+      "source_char_end": 1923,
+      "source_char_start": 1604,
+      "source_document_path": "protocols/udp.rst",
+      "source_excerpt_sha256": "db81091b943b3dfc96ce40a4831f2af08896c7011ae70fa65186bff108f1ce24",
+      "source_sha256": "d3ee163cb60979c842a9a3fd0588ef92ae78eed964fdf83bb4b345dc093bd947",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-027",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/csmaca-hidden.png",
+      "original_asset_sha256": "1c5e8ca272bbf430773d4e7355ded47ac2b87556d26cd8fbeaf42744fac858f4",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-027-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/csmaca-hidden.png",
+      "render_sha256": "1c5e8ca272bbf430773d4e7355ded47ac2b87556d26cd8fbeaf42744fac858f4",
+      "source_artifact_id": "tvcp001-source-027",
+      "source_char_end": 75515,
+      "source_char_start": 75172,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "f3cf1aff7d5c5f5b180c6e8fd26e3f1c1b80ddd0fb56af40da1b6abeff288152",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-028",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/transport-dwin.png",
+      "original_asset_sha256": "1b7a5d249e73d6b39fe971cbb1451856cc487ba6f3740c2d8b4d48010aba9f0c",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-028-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/transport-dwin.png",
+      "render_sha256": "1b7a5d249e73d6b39fe971cbb1451856cc487ba6f3740c2d8b4d48010aba9f0c",
+      "source_artifact_id": "tvcp001-source-028",
+      "source_char_end": 63768,
+      "source_char_start": 63481,
+      "source_document_path": "principles/transport.rst",
+      "source_excerpt_sha256": "bbf16e2163c2cfeb8c9efb8fae3275b3845919413ab567564abadcec3ea587f5",
+      "source_sha256": "34e66b65a3f180e480cdc1f67c37e8d1b8edc9b1551c10160e5cb1b68941243f",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-029",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/bgp-peering.png",
+      "original_asset_sha256": "f2672d070d0757da97aaef385dfbe4a6ae502119a4c9fab2b450e6c67128860d",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-029-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bgp-peering.png",
+      "render_sha256": "f2672d070d0757da97aaef385dfbe4a6ae502119a4c9fab2b450e6c67128860d",
+      "source_artifact_id": "tvcp001-source-029",
+      "source_char_end": 14817,
+      "source_char_start": 13931,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "95aff8675af391f294fced5d3d44355c5cda76a4f43820150028523308fafb9f",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    },
+    {
+      "asset_id": "tvcp001-asset-030",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/bgp-nexthop.png",
+      "original_asset_sha256": "49f9476203e8b5d8654005c15ff7ac6eb1608f091a96c438a4a3fba51e9044e9",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvcp001-region-030-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bgp-nexthop.png",
+      "render_sha256": "49f9476203e8b5d8654005c15ff7ac6eb1608f091a96c438a4a3fba51e9044e9",
+      "source_artifact_id": "tvcp001-source-030",
+      "source_char_end": 27821,
+      "source_char_start": 27594,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "91f5e7b9628b3b4356c7080f24e4c5594fad557874fbe6ce3835f74c26bf90d2",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66"
+    }
+  ],
+  "boundary_case_count": 30,
+  "case_count": 60,
+  "cases": [
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-001-1",
+          "evidence_ids": [
+            "tvcp001-region-001-full"
+          ],
+          "text": "Kernel mode is privileged and typically runs kernel code and drivers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Kernel mode is privileged and typically runs kernel code and drivers.",
+      "case_id": "tvcp001-cluster-001-a",
+      "cluster_id": "tvcp001-cluster-001",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "In the table, which mode is privileged and what code typically runs there?",
+      "required_asset_ids": [
+        "tvcp001-asset-001"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-001-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-001-b",
+      "cluster_id": "tvcp001-cluster-001",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Using tvcp001-asset-001, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-002-1",
+          "evidence_ids": [
+            "tvcp001-region-002-full"
+          ],
+          "text": "A system call typically causes a mode switch."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A system call typically causes a mode switch.",
+      "case_id": "tvcp001-cluster-002-a",
+      "cluster_id": "tvcp001-cluster-002",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Which call type typically causes a mode switch?",
+      "required_asset_ids": [
+        "tvcp001-asset-002"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-002-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-002-b",
+      "cluster_id": "tvcp001-cluster-002",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Use tvcp001-asset-002 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-003-1",
+          "evidence_ids": [
+            "tvcp001-region-003-full"
+          ],
+          "text": "Software is configurable, while hardware is unmodifiable."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Software is configurable, while hardware is unmodifiable.",
+      "case_id": "tvcp001-cluster-003-a",
+      "cluster_id": "tvcp001-cluster-003",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "According to the table, which side is configurable?",
+      "required_asset_ids": [
+        "tvcp001-asset-003"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-003-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-003-b",
+      "cluster_id": "tvcp001-cluster-003",
+      "course_id": "operating-systems",
+      "expected_action": "clarify",
+      "modality": "table",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-003?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-004-1",
+          "evidence_ids": [
+            "tvcp001-region-004-full"
+          ],
+          "text": "A library exposes an interface or API, while an application has an entry point."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A library exposes an interface or API, while an application has an entry point.",
+      "case_id": "tvcp001-cluster-004-a",
+      "cluster_id": "tvcp001-cluster-004",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "What interface characteristic distinguishes a library from an application?",
+      "required_asset_ids": [
+        "tvcp001-asset-004"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-004-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-004-b",
+      "cluster_id": "tvcp001-cluster-004",
+      "course_id": "operating-systems",
+      "expected_action": "refuse",
+      "modality": "table",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-004.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-005-1",
+          "evidence_ids": [
+            "tvcp001-region-005-full"
+          ],
+          "text": "The read() system call corresponds to fread()."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The read() system call corresponds to fread().",
+      "case_id": "tvcp001-cluster-005-a",
+      "cluster_id": "tvcp001-cluster-005",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Which system call corresponds to fread()?",
+      "required_asset_ids": [
+        "tvcp001-asset-005"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-005-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-005-b",
+      "cluster_id": "tvcp001-cluster-005",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Why does tvcp001-asset-005 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-006-1",
+          "evidence_ids": [
+            "tvcp001-region-006-full"
+          ],
+          "text": "Mode a+ corresponds to O_RDWR, O_CREAT, and O_APPEND."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Mode a+ corresponds to O_RDWR, O_CREAT, and O_APPEND.",
+      "case_id": "tvcp001-cluster-006-a",
+      "cluster_id": "tvcp001-cluster-006",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Which open() flags correspond to fopen() mode a+?",
+      "required_asset_ids": [
+        "tvcp001-asset-006"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-006-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-006-b",
+      "cluster_id": "tvcp001-cluster-006",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Using tvcp001-asset-006, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-007-1",
+          "evidence_ids": [
+            "tvcp001-region-007-full"
+          ],
+          "text": "Process P3 has a running time of 5."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Process P3 has a running time of 5.",
+      "case_id": "tvcp001-cluster-007-a",
+      "cluster_id": "tvcp001-cluster-007",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "What running time is listed for process P3?",
+      "required_asset_ids": [
+        "tvcp001-asset-007"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-007-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-007-b",
+      "cluster_id": "tvcp001-cluster-007",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Use tvcp001-asset-007 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-008-1",
+          "evidence_ids": [
+            "tvcp001-region-008-full"
+          ],
+          "text": "A thread shares the virtual address space with other threads."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A thread shares the virtual address space with other threads.",
+      "case_id": "tvcp001-cluster-008-a",
+      "cluster_id": "tvcp001-cluster-008",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Which execution unit shares a virtual address space with peers?",
+      "required_asset_ids": [
+        "tvcp001-asset-008"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-008-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-008-b",
+      "cluster_id": "tvcp001-cluster-008",
+      "course_id": "operating-systems",
+      "expected_action": "clarify",
+      "modality": "table",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-008?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-009-1",
+          "evidence_ids": [
+            "tvcp001-region-009-full"
+          ],
+          "text": "The recorded memory size for my_vm is 2147483648 bytes."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The recorded memory size for my_vm is 2147483648 bytes.",
+      "case_id": "tvcp001-cluster-009-a",
+      "cluster_id": "tvcp001-cluster-009",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "What memory size is recorded for my_vm?",
+      "required_asset_ids": [
+        "tvcp001-asset-009"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-009-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-009-b",
+      "cluster_id": "tvcp001-cluster-009",
+      "course_id": "operating-systems",
+      "expected_action": "refuse",
+      "modality": "table",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-009.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-010-1",
+          "evidence_ids": [
+            "tvcp001-region-010-full"
+          ],
+          "text": "Disk 1 uses template ubuntu_22.04 and has size 10737418240 bytes."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Disk 1 uses template ubuntu_22.04 and has size 10737418240 bytes.",
+      "case_id": "tvcp001-cluster-010-a",
+      "cluster_id": "tvcp001-cluster-010",
+      "course_id": "operating-systems",
+      "expected_action": "answer",
+      "modality": "table",
+      "question": "Which template and size are listed for disk 1?",
+      "required_asset_ids": [
+        "tvcp001-asset-010"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-010-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-010-b",
+      "cluster_id": "tvcp001-cluster-010",
+      "course_id": "operating-systems",
+      "expected_action": "abstain",
+      "modality": "table",
+      "question": "Why does tvcp001-asset-010 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-011-1",
+          "evidence_ids": [
+            "tvcp001-region-011-full"
+          ],
+          "text": "The invariant is n <= q <= 2n."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The invariant is n <= q <= 2n.",
+      "case_id": "tvcp001-cluster-011-a",
+      "cluster_id": "tvcp001-cluster-011",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What bounds relate n and q in the displayed invariant?",
+      "required_asset_ids": [
+        "tvcp001-asset-011"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-011-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-011-b",
+      "cluster_id": "tvcp001-cluster-011",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Using tvcp001-asset-011, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-012-1",
+          "evidence_ids": [
+            "tvcp001-region-012-full"
+          ],
+          "text": "Height is at most log base 3/2 of q."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Height is at most log base 3/2 of q.",
+      "case_id": "tvcp001-cluster-012-a",
+      "cluster_id": "tvcp001-cluster-012",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What upper bound on height is shown?",
+      "required_asset_ids": [
+        "tvcp001-asset-012"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-012-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-012-b",
+      "cluster_id": "tvcp001-cluster-012",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Use tvcp001-asset-012 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-013-1",
+          "evidence_ids": [
+            "tvcp001-region-013-full"
+          ],
+          "text": "e is the limit as n approaches infinity of (1 + 1/n)^n."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "e is the limit as n approaches infinity of (1 + 1/n)^n.",
+      "case_id": "tvcp001-cluster-013-a",
+      "cluster_id": "tvcp001-cluster-013",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "How is Euler's constant defined in the display?",
+      "required_asset_ids": [
+        "tvcp001-asset-013"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-013-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-013-b",
+      "cluster_id": "tvcp001-cluster-013",
+      "course_id": "data-structures",
+      "expected_action": "clarify",
+      "modality": "equation",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-013?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-014-1",
+          "evidence_ids": [
+            "tvcp001-region-014-full"
+          ],
+          "text": "The identity is b raised to log base b of k equals k."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The identity is b raised to log base b of k equals k.",
+      "case_id": "tvcp001-cluster-014-a",
+      "cluster_id": "tvcp001-cluster-014",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What identity removes the logarithm from the exponent?",
+      "required_asset_ids": [
+        "tvcp001-asset-014"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-014-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-014-b",
+      "cluster_id": "tvcp001-cluster-014",
+      "course_id": "data-structures",
+      "expected_action": "refuse",
+      "modality": "equation",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-014.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-015-1",
+          "evidence_ids": [
+            "tvcp001-region-015-full"
+          ],
+          "text": "log base b of k equals log base a of k divided by log base a of b."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "log base b of k equals log base a of k divided by log base a of b.",
+      "case_id": "tvcp001-cluster-015-a",
+      "cluster_id": "tvcp001-cluster-015",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What change-of-base identity is displayed?",
+      "required_asset_ids": [
+        "tvcp001-asset-015"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-015-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-015-b",
+      "cluster_id": "tvcp001-cluster-015",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Why does tvcp001-asset-015 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-016-1",
+          "evidence_ids": [
+            "tvcp001-region-016-full"
+          ],
+          "text": "n choose k equals n factorial divided by k factorial times (n-k) factorial."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "n choose k equals n factorial divided by k factorial times (n-k) factorial.",
+      "case_id": "tvcp001-cluster-016-a",
+      "cluster_id": "tvcp001-cluster-016",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "How is n choose k expressed using factorials?",
+      "required_asset_ids": [
+        "tvcp001-asset-016"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-016-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-016-b",
+      "cluster_id": "tvcp001-cluster-016",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Using tvcp001-asset-016, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-017-1",
+          "evidence_ids": [
+            "tvcp001-region-017-full"
+          ],
+          "text": "H_k is 1 + 1/2 + 1/3 + ... + 1/k."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "H_k is 1 + 1/2 + 1/3 + ... + 1/k.",
+      "case_id": "tvcp001-cluster-017-a",
+      "cluster_id": "tvcp001-cluster-017",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "How is the kth harmonic number defined?",
+      "required_asset_ids": [
+        "tvcp001-asset-017"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-017-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-017-b",
+      "cluster_id": "tvcp001-cluster-017",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Use tvcp001-asset-017 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-018-1",
+          "evidence_ids": [
+            "tvcp001-region-018-full"
+          ],
+          "text": "The left child is at 2i+1 and the right child is at 2i+2."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The left child is at 2i+1 and the right child is at 2i+2.",
+      "case_id": "tvcp001-cluster-018-a",
+      "cluster_id": "tvcp001-cluster-018",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What are the array indices of a node's left and right children?",
+      "required_asset_ids": [
+        "tvcp001-asset-018"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-018-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-018-b",
+      "cluster_id": "tvcp001-cluster-018",
+      "course_id": "data-structures",
+      "expected_action": "clarify",
+      "modality": "equation",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-018?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-019-1",
+          "evidence_ids": [
+            "tvcp001-region-019-full"
+          ],
+          "text": "A 2-4 tree of height h has at least 2^h leaves, so n >= 2^h."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A 2-4 tree of height h has at least 2^h leaves, so n >= 2^h.",
+      "case_id": "tvcp001-cluster-019-a",
+      "cluster_id": "tvcp001-cluster-019",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "What lower bound connects the number of leaves n and height h?",
+      "required_asset_ids": [
+        "tvcp001-asset-019"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-019-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-019-b",
+      "cluster_id": "tvcp001-cluster-019",
+      "course_id": "data-structures",
+      "expected_action": "refuse",
+      "modality": "equation",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-019.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-020-1",
+          "evidence_ids": [
+            "tvcp001-region-020-full"
+          ],
+          "text": "The ratio size(w.child) / size(w) is greater than 2/3."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The ratio size(w.child) / size(w) is greater than 2/3.",
+      "case_id": "tvcp001-cluster-020-a",
+      "cluster_id": "tvcp001-cluster-020",
+      "course_id": "data-structures",
+      "expected_action": "answer",
+      "modality": "equation",
+      "question": "Which ratio identifies the scapegoat node?",
+      "required_asset_ids": [
+        "tvcp001-asset-020"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-020-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-020-b",
+      "cluster_id": "tvcp001-cluster-020",
+      "course_id": "data-structures",
+      "expected_action": "abstain",
+      "modality": "equation",
+      "question": "Why does tvcp001-asset-020 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-021-1",
+          "evidence_ids": [
+            "tvcp001-region-021-full"
+          ],
+          "text": "The full-mesh diagram shows five hosts."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The full-mesh diagram shows five hosts.",
+      "case_id": "tvcp001-cluster-021-a",
+      "cluster_id": "tvcp001-cluster-021",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "How many hosts are shown in the full-mesh diagram?",
+      "required_asset_ids": [
+        "tvcp001-asset-021"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-021-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-021-b",
+      "cluster_id": "tvcp001-cluster-021",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Using tvcp001-asset-021, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-022-1",
+          "evidence_ids": [
+            "tvcp001-region-022-full"
+          ],
+          "text": "Each host has one physical link to the center of the star."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Each host has one physical link to the center of the star.",
+      "case_id": "tvcp001-cluster-022-a",
+      "cluster_id": "tvcp001-cluster-022",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Where does each host's physical link terminate in the star diagram?",
+      "required_asset_ids": [
+        "tvcp001-asset-022"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-022-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-022-b",
+      "cluster_id": "tvcp001-cluster-022",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Use tvcp001-asset-022 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-023-1",
+          "evidence_ids": [
+            "tvcp001-region-023-full"
+          ],
+          "text": "The hosts are attached to a ring."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The hosts are attached to a ring.",
+      "case_id": "tvcp001-cluster-023-a",
+      "cluster_id": "tvcp001-cluster-023",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "How are the hosts arranged in this topology?",
+      "required_asset_ids": [
+        "tvcp001-asset-023"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-023-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-023-b",
+      "cluster_id": "tvcp001-cluster-023",
+      "course_id": "computer-networking",
+      "expected_action": "clarify",
+      "modality": "diagram",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-023?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-024-1",
+          "evidence_ids": [
+            "tvcp001-region-024-full"
+          ],
+          "text": "H3 is the parent of H4 and H5."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "H3 is the parent of H4 and H5.",
+      "case_id": "tvcp001-cluster-024-a",
+      "cluster_id": "tvcp001-cluster-024",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Which host is the parent of H4 and H5 in the diagram?",
+      "required_asset_ids": [
+        "tvcp001-asset-024"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-024-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-024-b",
+      "cluster_id": "tvcp001-cluster-024",
+      "course_id": "computer-networking",
+      "expected_action": "refuse",
+      "modality": "diagram",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-024.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-025-1",
+          "evidence_ids": [
+            "tvcp001-region-025-full"
+          ],
+          "text": "The OSI reference model has seven layers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The OSI reference model has seven layers.",
+      "case_id": "tvcp001-cluster-025-a",
+      "cluster_id": "tvcp001-cluster-025",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "How many layers are shown in the OSI reference model?",
+      "required_asset_ids": [
+        "tvcp001-asset-025"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-025-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-025-b",
+      "cluster_id": "tvcp001-cluster-025",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Why does tvcp001-asset-025 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-026-1",
+          "evidence_ids": [
+            "tvcp001-region-026-full"
+          ],
+          "text": "The request uses source port 1234 and destination port 5678."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The request uses source port 1234 and destination port 5678.",
+      "case_id": "tvcp001-cluster-026-a",
+      "cluster_id": "tvcp001-cluster-026",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "For the client request, what are the source and destination ports?",
+      "required_asset_ids": [
+        "tvcp001-asset-026"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-026-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-026-b",
+      "cluster_id": "tvcp001-cluster-026",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Using tvcp001-asset-026, what is the measured lunar network latency?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-027-1",
+          "evidence_ids": [
+            "tvcp001-region-027-full"
+          ],
+          "text": "The two devices cannot receive each other's signal even though both can receive the third host."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The two devices cannot receive each other's signal even though both can receive the third host.",
+      "case_id": "tvcp001-cluster-027-a",
+      "cluster_id": "tvcp001-cluster-027",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What communication limitation is depicted between the two separated devices?",
+      "required_asset_ids": [
+        "tvcp001-asset-027"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-027-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-027-b",
+      "cluster_id": "tvcp001-cluster-027",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Use tvcp001-asset-027 to state the molecular biology grading rule.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-028-1",
+          "evidence_ids": [
+            "tvcp001-region-028-full"
+          ],
+          "text": "The bound is the minimum of swin and rwin."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The bound is the minimum of swin and rwin.",
+      "case_id": "tvcp001-cluster-028-a",
+      "cluster_id": "tvcp001-cluster-028",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Which two window sizes bound the number of unacknowledged segments?",
+      "required_asset_ids": [
+        "tvcp001-asset-028"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-028-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-028-b",
+      "cluster_id": "tvcp001-cluster-028",
+      "course_id": "computer-networking",
+      "expected_action": "clarify",
+      "modality": "diagram",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-028?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-029-1",
+          "evidence_ids": [
+            "tvcp001-region-029-full"
+          ],
+          "text": "R1 and R2 are directly connected BGP peers."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "R1 and R2 are directly connected BGP peers.",
+      "case_id": "tvcp001-cluster-029-a",
+      "cluster_id": "tvcp001-cluster-029",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "What relationship is shown between R1 and R2?",
+      "required_asset_ids": [
+        "tvcp001-asset-029"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-029-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-029-b",
+      "cluster_id": "tvcp001-cluster-029",
+      "course_id": "computer-networking",
+      "expected_action": "refuse",
+      "modality": "diagram",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-029.",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvcp001-claim-030-1",
+          "evidence_ids": [
+            "tvcp001-region-030-full"
+          ],
+          "text": "R2 has BGP sessions with R1 and R3."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "R2 has BGP sessions with R1 and R3.",
+      "case_id": "tvcp001-cluster-030-a",
+      "cluster_id": "tvcp001-cluster-030",
+      "course_id": "computer-networking",
+      "expected_action": "answer",
+      "modality": "diagram",
+      "question": "Which routers have BGP sessions with R2 in the diagram?",
+      "required_asset_ids": [
+        "tvcp001-asset-030"
+      ],
+      "required_region_ids": [
+        "tvcp001-region-030-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvcp001-cluster-030-b",
+      "cluster_id": "tvcp001-cluster-030",
+      "course_id": "computer-networking",
+      "expected_action": "abstain",
+      "modality": "diagram",
+      "question": "Why does tvcp001-asset-030 prove that every algorithm is constant time?",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    }
+  ],
+  "cluster_count": 30,
+  "content_sha256": "2395b3231bc055899a826cc24485fa1625dd9567e405b33d0262a359a9bcba13",
+  "dataset_id": "true-visual-colpali-confirmation-001",
+  "method_family": "colpali-style-multivector-late-interaction",
+  "private_data_used": false,
+  "provider_embeddings_authoritative": false,
+  "raw_assets_committed": false,
+  "schema_version": 1,
+  "source_section_disjoint_from_visual_supplement_001": true,
+  "status": "frozen-build-only-provider-unauthorized",
+  "supersedes_method_result": "true-visual-supplement-003",
+  "truth_method": "deterministic-original-region-lineage"
+}

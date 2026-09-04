@@ -91,6 +91,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/build_academic_factual_qa_visual_supplement.py": (
             "dataset_generation",
         ),
+        "scripts/build_true_visual_colpali_confirmation.py": (
+            "dataset_generation",
+        ),
         "scripts/build_whole_system_architecture_tranches.py": (
             "dataset_generation",
         ),
@@ -202,6 +205,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "method_evaluation_execution",
         ),
         "scripts/run_true_visual_supplement_003.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        "scripts/run_true_visual_colpali_confirmation.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
@@ -690,6 +697,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # development clusters at the granularity their gold cites. No
         # provider call and no new source.
         "academic-factual-qa-development-region-corpus-001": (
+            "dataset_generation",
+        ),
+        # Issue #131. Fresh public-source visual package only; provider-backed
+        # execution remains unauthorized until a separate reviewed checkpoint.
+        "true-visual-colpali-confirmation-001": (
             "dataset_generation",
         ),
     }

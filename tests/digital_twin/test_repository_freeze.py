@@ -51,6 +51,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-2-001",
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
+        "true-visual-colpali-confirmation-001",
     }
 
     for pilot_id in pilot_ids:
@@ -104,6 +105,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     ] == ("method_evaluation_execution",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-development-region-corpus-001"
+    ] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "true-visual-colpali-confirmation-001"
     ] == ("dataset_generation",)
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
