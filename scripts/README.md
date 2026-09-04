@@ -1006,6 +1006,17 @@ Current utilities:
   not a verified hallucination count, and the result supports no representative
   visual-capability claim. Use network-free package commands ending in
   `true-visual-supplement-003`.
+- `build_true_visual_colpali_confirmation.py` and
+  `run_true_visual_colpali_confirmation.py`: implement the fresh method-level
+  successor to supplement 003. The builder creates a source-disjoint
+  30-asset/60-case public package with ten tables, ten diagrams, ten equations,
+  paired boundary cases, and hash-bound original-region lineage. The runner
+  compares source-visible-text BM25 with first-party Jina Embeddings v4
+  multi-vector image/query representations ranked by MaxSim. Use package
+  commands ending in `true-visual-colpali-confirmation` to validate, simulate,
+  or inspect the no-call preflight. The simulation verifies contracts only and
+  is not model-quality evidence. Provider execution remains unauthorized and
+  requires `JINA_API_KEY` plus a separate freeze checkpoint.
 - `run_course_digital_twin_evaluation_program.py`: owns the finite factual,
   visual, synthetic-profile, and autonomous-tutoring evaluation dispatcher.
   Historical programs 002 and 003 are immutable invalid executions. Program

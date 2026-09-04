@@ -50,6 +50,21 @@ its one-time authority is revoked. The reported 219 "unsupported" segments are
 a conservative lexical-reference proxy against one non-exhaustive canonical
 answer, not 219 independently verified hallucinations.
 
+Issue #131 now has one preregistered method-level successor:
+`true-visual-colpali-confirmation-001`. It replaces whole-image free-text
+description retrieval with direct multi-vector visual embeddings and MaxSim
+late interaction, while keeping original regions, course isolation, boundary
+policy, and source/version lineage authoritative. A fresh source-disjoint
+30-asset/60-case package has been deterministically built and its network-free
+validation and simulation pass. The simulation is harness evidence only; no
+Jina model-quality result exists yet. Provider execution is unauthorized and
+also requires a local `JINA_API_KEY`. Until the live retrieval gates and a
+separate actual-product answer/citation checkpoint pass, the qualified local
+R1 continues to expose text/OCR fallback and makes no representative true-
+visual capability claim. The 30 paired boundary cases are reserved for that
+actual-product checkpoint; this retrieval-only run does not claim boundary
+accuracy by reading their hidden labels.
+
 Exact local requalification 006 is now `completed-keep` after the
 multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,
 3/3 T0 rollback, and 3/3 governed V2.1 restoration checks passed. Desktop and

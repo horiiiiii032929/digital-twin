@@ -13,6 +13,14 @@ The prospective visual study-material comparison is defined in
 It is independent of the sealed text benchmark and does not authorize a model
 run by itself.
 
+The method-level successor to the completed visual-description `Refine`
+result is
+[`2026-09-04-colpali-visual-retrieval-successor-plan.md`](2026-09-04-colpali-visual-retrieval-successor-plan.md).
+It compares the visible-text BM25 control with direct multi-vector visual
+late-interaction retrieval on a fresh 30-asset/60-case package. Its current
+build-only state does not authorize provider execution or select a visual
+release component.
+
 The active factual-evaluation plan is
 [`2026-08-30-api-first-retrieval-successor-v1-plan.md`](2026-08-30-api-first-retrieval-successor-v1-plan.md).
 It replaces local retrieval-model execution with a finite direct-API method

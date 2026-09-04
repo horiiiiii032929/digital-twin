@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "true-visual-colpali-confirmation-001",
+  "status": "reviewed-build-only-provider-unauthorized",
+  "owner_issue": 131,
+  "dataset_id": "true-visual-colpali-confirmation-001",
+  "decision_question": "Does direct multi-vector visual late-interaction retrieval correct the fine-grained visual evidence failures of the whole-image description plus BM25 method?",
+  "baseline": "source-visible-text-bm25-v1",
+  "candidate": "jina-embeddings-v4-multivector-api-v1-plus-visual-late-interaction-maxsim-v1",
+  "single_changed_factor": "visual retrieval representation and ranking",
+  "unchanged_factors": [
+    "pinned public source snapshots",
+    "course isolation",
+    "original-region citation authority",
+    "deterministic boundary policy",
+    "30 clusters and paired answerable/boundary structure"
+  ],
+  "provider_binding": {
+    "provider": "jina-ai-first-party",
+    "api_url": "https://api.jina.ai/v1/embeddings",
+    "model": "jina-embeddings-v4",
+    "credential_environment_variable": "JINA_API_KEY",
+    "task_query": "retrieval.query",
+    "task_passage": "retrieval.passage",
+    "return_multivector": true,
+    "truncate": false,
+    "maximum_calls": 60,
+    "maximum_transport_retries": 0,
+    "maximum_cost_usd": 1.0,
+    "maximum_input_bytes": 8388608,
+    "maximum_input_tokens": 32768,
+    "input_price_usd_per_token": 0.00000005,
+    "metadata_schema_version": "2026.07.27.1603",
+    "metadata_verified_at": "2026-09-04T11:52:07Z",
+    "metadata_sources": [
+      "https://jina.ai/models/jina-embeddings-v4/",
+      "https://api.jina.ai/v1/embeddings",
+      "https://api.jina.ai/openapi.json",
+      "https://api.jina.ai/v1/models/jina-embeddings-v4",
+      "https://arxiv.org/abs/2407.01449"
+    ]
+  },
+  "quality_gates": {
+    "candidate_complete_visual_evidence_at_3_min": 0.9,
+    "candidate_visual_evidence_recall_at_5_min": 0.9666666667,
+    "candidate_per_modality_evidence_at_3_min": 0.8,
+    "candidate_original_region_lineage_min": 1.0,
+    "candidate_exact_course_isolation_min": 1.0,
+    "candidate_diagram_improvement_over_control_min": 0.1
+  },
+  "result_scope": "fresh 30-cluster visual retrieval confirmation; 30 paired boundary cases are reserved for the later actual-product checkpoint and are not scored here",
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "private_data_authorized": false
+}
