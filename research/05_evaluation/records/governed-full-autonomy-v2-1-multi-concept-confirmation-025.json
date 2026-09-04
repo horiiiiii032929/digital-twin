@@ -1,0 +1,82 @@
+{
+  "run_id": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+  "date": "2026-09-04",
+  "status": "completed-keep",
+  "decision": "keep-assessment-correction-for-local-requalification",
+  "issue": 203,
+  "code_revision": "f4c244983c5b6482924e51e62b774d52f506423e",
+  "dirty": false,
+  "instrument": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_multi_concept_confirmation_025.json",
+  "results": "research/05_evaluation/governed-full-autonomy-v2-1-multi-concept-confirmation-025-results.md",
+  "command": "npm run simulate:multi-concept-confirmation-025",
+  "dataset": {
+    "kind": "fresh-synthetic-hidden-state-learners-closed-loop",
+    "cases": 72,
+    "conditions": ["t1-v2-reactive", "t1-v2-autonomous"],
+    "personas": 6,
+    "simulator_families": ["bkt-like", "logistic-like"],
+    "seeds": [3101, 3102, 3103],
+    "concepts": 6,
+    "days": 30,
+    "source_overlap_with_014": 0,
+    "seed_overlap_with_014": 0
+  },
+  "aggregate": {
+    "t1-v2-reactive": {
+      "attribution_accuracy": 1.0,
+      "assessment_agreement": 1.0,
+      "attempts_recognised": 1.0,
+      "mse_vs_hidden": 0.0833693724,
+      "auroc_next_outcome": 0.3630875002,
+      "messages_delivered": 0.0,
+      "final_hidden_mastery": 0.3324935981
+    },
+    "t1-v2-autonomous": {
+      "attribution_accuracy": 1.0,
+      "assessment_agreement": 1.0,
+      "attempts_recognised": 1.0,
+      "mse_vs_hidden": 0.0847350967,
+      "auroc_next_outcome": 0.4659948139,
+      "messages_delivered": 9.6944444444,
+      "wasted_rate": 0.3291245791,
+      "follow_up_fraction": 0.4452160494,
+      "final_hidden_mastery": 0.3649283094
+    }
+  },
+  "paired_autonomous_minus_reactive": {
+    "final_hidden_mastery": {
+      "mean_difference": 0.0324347113,
+      "ci95": [0.0040211924, 0.0617423621],
+      "n_pairs": 36
+    }
+  },
+  "hard_gates": {
+    "attribution_accuracy_each_condition": true,
+    "assessment_agreement_each_condition": true,
+    "attempts_recognised_each_condition": true,
+    "zero_quiet_hour_violations": true,
+    "zero_frequency_violations": true,
+    "zero_cooldown_violations": true,
+    "zero_provider_calls": true
+  },
+  "operational": {
+    "network": "none",
+    "provider_calls": 0,
+    "tokens": 0,
+    "cost_usd": 0.0,
+    "elapsed_seconds": 95.83
+  },
+  "evidence": {
+    "location": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/",
+    "summary_json_sha256": "5e882bfc5dde5ec255c011d4295ffc565ece5ead3eb9cddac5809c2cb446bf4c",
+    "scores_jsonl_sha256": "c9fc2b26961b011d99d05f4e0be55bd7f800984ee9368fb0245d9faec5c6ed51",
+    "truth_jsonl_sha256": "8be74dbbd9e8df3b03468e39917909f6248138ea30523fad8dde0715d878308f",
+    "responses_jsonl_sha256": "9cffa68a654f98828feaa58e1852fcf68b2beb016ec4702fed889c516846c189"
+  },
+  "limitations": [
+    "Synthetic deterministic wording and learner dynamics only.",
+    "No real professor, student, usability, or learning evidence.",
+    "The count-based next-outcome predictor remains weak and autonomous interventions remain partly wasted.",
+    "The known 10,000+1,000 package was not read, rerun, or rescored."
+  ]
+}
