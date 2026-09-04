@@ -1,17 +1,4 @@
-"""Governed V2.1 may start on a qualification record that predates the gate field.
-
-Commit `1265830` added an evidence-gate binding to the V2.1 startup check, so a
-release may only run a gate its qualification covered. That control is right,
-but it compares against `selected_configuration["evidence_gate"]` with no
-allowance for a record written before the field existed.
-
-`governed-full-autonomy-v2-1-confirmation-001` is such a record. It is the only
-run id V2.1 accepts, and it declares no evidence gate, so after `1265830` the
-configuration qualified on 2026-09-02 could not start at all.
-
-Enforce the binding when the record declares a gate, and record the gap when it
-does not. A record that declares a different gate must still be refused.
-"""
+"""Governed V2.1 staging requires an exact evidence-gate declaration."""
 
 from __future__ import annotations
 
@@ -36,18 +23,13 @@ def test_a_record_that_declares_a_different_gate_is_refused() -> None:
     )
 
 
-@pytest.mark.parametrize("configuration", [{}, {"evidence_gate": None}])
-def test_a_record_that_predates_the_field_does_not_block_startup(
+@pytest.mark.parametrize(
+    "configuration", [{}, {"evidence_gate": None}, {"evidence_gate": "  "}]
+)
+def test_a_record_that_predates_the_field_fails_closed(
     configuration: dict[str, object],
 ) -> None:
-    assert _evidence_gate_binding_holds(
+    assert not _evidence_gate_binding_holds(
         configuration,
-        EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
-    )
-
-
-def test_a_blank_declaration_is_treated_as_absent() -> None:
-    assert _evidence_gate_binding_holds(
-        {"evidence_gate": "  "},
         EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
     )

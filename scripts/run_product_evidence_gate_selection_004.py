@@ -18,8 +18,10 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import hashlib
 import json
 from pathlib import Path
+import sqlite3
 import sys
 import time
 from typing import Any
@@ -33,6 +35,7 @@ from scripts import academic_factual_qa_open_10000_winner_adapter as winner  # n
 from scripts.score_academic_factual_qa_open_10000 import score_packages  # noqa: E402
 from src.digital_twin.evaluation.factual_qa_contract import (  # noqa: E402
     EvaluationCaseV1,
+    EvaluationResponseV1,
     SystemUnderTestManifestV1,
 )
 from src.digital_twin.evaluation.factual_qa_execution import (  # noqa: E402
@@ -46,6 +49,7 @@ from src.digital_twin.repository_freeze import (  # noqa: E402
 
 
 INSTRUMENT_ID = "product-evidence-gate-selection-004"
+LEDGER_SOURCE_INSTRUMENT_ID = "product-evidence-gate-selection-003"
 INSTRUMENT_PATH = (
     ROOT / "research/05_evaluation/instruments/product_evidence_gate_selection_004.json"
 )
@@ -111,33 +115,124 @@ def _manifest(arm_id: str) -> SystemUnderTestManifestV1:
     )
 
 
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for block in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
+
+
+def _expected_ledger_metadata(
+    arm_id: str,
+    cases: list[EvaluationCaseV1],
+    manifest: SystemUnderTestManifestV1,
+    *,
+    source_instrument_id: str = INSTRUMENT_ID,
+) -> dict[str, str]:
+    package = json.loads(CASES_PATH.read_text(encoding="utf-8"))
+    return {
+        "schema_version": "1",
+        "cases_sha256": package["content_sha256"],
+        "system_manifest_sha256": canonical_json_sha256(
+            manifest.model_dump(mode="json")
+        ),
+        "run_configuration_sha256": canonical_json_sha256(
+            {
+                # Selection 004 prospectively reuses the immutable response
+                # ledgers produced by selection 003 after a scoring-contract
+                # correction. Bind reuse to that original execution identity,
+                # not to the later analysis identifier.
+                "instrument_id": source_instrument_id,
+                "arm_id": arm_id,
+                "case_count": len(cases),
+            }
+        ),
+        "status": "completed",
+        "response_count": str(len(cases)),
+    }
+
+
+def _validate_completed_ledger(
+    *,
+    arm_id: str,
+    path: Path,
+    cases: list[EvaluationCaseV1],
+    manifest: SystemUnderTestManifestV1,
+) -> dict[str, Any]:
+    expected_metadata = _expected_ledger_metadata(
+        arm_id,
+        cases,
+        manifest,
+        source_instrument_id=LEDGER_SOURCE_INSTRUMENT_ID,
+    )
+    connection = sqlite3.connect(f"file:{path}?mode=ro", uri=True)
+    try:
+        metadata = dict(connection.execute("SELECT key, value FROM metadata"))
+        rows = connection.execute(
+            "SELECT case_id, payload_json, payload_sha256 FROM responses "
+            "ORDER BY sequence"
+        ).fetchall()
+    finally:
+        connection.close()
+    drift = {
+        key: {"expected": value, "actual": metadata.get(key)}
+        for key, value in expected_metadata.items()
+        if metadata.get(key) != value
+    }
+    if drift:
+        raise GateSelectionError(
+            f"{arm_id} completed-ledger binding drifted: {json.dumps(drift, sort_keys=True)}"
+        )
+    expected_case_ids = {case.case_id for case in cases}
+    actual_case_ids: set[str] = set()
+    for case_id, payload_json, payload_sha256 in rows:
+        actual_sha256 = hashlib.sha256(payload_json.encode("utf-8")).hexdigest()
+        if actual_sha256 != payload_sha256:
+            raise GateSelectionError(f"{arm_id} response payload hash drifted: {case_id}")
+        response = EvaluationResponseV1.model_validate_json(payload_json)
+        if response.case_id != case_id:
+            raise GateSelectionError(
+                f"{arm_id} response row/payload identity drifted: {case_id}"
+            )
+        if case_id in actual_case_ids:
+            raise GateSelectionError(f"{arm_id} has duplicate response: {case_id}")
+        actual_case_ids.add(case_id)
+    if actual_case_ids != expected_case_ids:
+        missing = sorted(expected_case_ids - actual_case_ids)
+        unknown = sorted(actual_case_ids - expected_case_ids)
+        raise GateSelectionError(
+            f"{arm_id} response identity set drifted: missing={missing[:5]}, "
+            f"unknown={unknown[:5]}"
+        )
+    return {
+        "ledger_sha256": _sha256_file(path),
+        "verified_metadata": expected_metadata,
+        "verified_response_count": len(rows),
+    }
+
+
 def _run_arm(arm_id: str) -> dict[str, Any]:
-    import sqlite3
 
     cases = _cases()
+    manifest = _manifest(arm_id)
     existing = OUTPUT_ROOT / arm_id / "responses.sqlite3"
     if existing.is_file():
-        connection = sqlite3.connect(f"file:{existing}?mode=ro", uri=True)
-        try:
-            metadata = dict(connection.execute("SELECT key, value FROM metadata"))
-            rows = connection.execute("SELECT COUNT(*) FROM responses").fetchone()[0]
-        finally:
-            connection.close()
-        if metadata.get("status") == "completed" and rows == len(cases):
-            return {
-                "arm_id": arm_id,
-                "evidence_gate": ARMS[arm_id]["evidence_gate"],
-                "case_count": rows,
-                "provider_calls": 0,
-                "ledger_status": "completed",
-                "ledger_path": str(existing),
-                "reused_completed_ledger": True,
-            }
-        raise GateSelectionError(
-            f"{arm_id} has an incomplete ledger at {existing}; remove it to re-run"
+        verification = _validate_completed_ledger(
+            arm_id=arm_id, path=existing, cases=cases, manifest=manifest
         )
+        return {
+            "arm_id": arm_id,
+            "evidence_gate": ARMS[arm_id]["evidence_gate"],
+            "case_count": len(cases),
+            "provider_calls": 0,
+            "ledger_status": "completed",
+            "ledger_path": str(existing),
+            "ledger_source_instrument_id": LEDGER_SOURCE_INSTRUMENT_ID,
+            "reused_completed_ledger": True,
+            **verification,
+        }
 
-    manifest = _manifest(arm_id)
     root = OUTPUT_ROOT / arm_id
     root.mkdir(parents=True, exist_ok=True)
     adapter = winner.build_winner_adapter(
@@ -179,6 +274,9 @@ def _run_arm(arm_id: str) -> dict[str, Any]:
         "provider_calls": 0,
         "ledger_status": snapshot["status"],
         "ledger_path": str(root / "responses.sqlite3"),
+        "ledger_sha256": _sha256_file(root / "responses.sqlite3"),
+        "verified_metadata": _expected_ledger_metadata(arm_id, cases, manifest),
+        "verified_response_count": len(cases),
     }
 
 
@@ -230,7 +328,10 @@ def _score_arm(arm_id: str) -> dict[str, Any]:
     return {
         "arm_id": arm_id,
         "evidence_gate": ARMS[arm_id]["evidence_gate"],
-        "fully_grounded_factual_success": summary["overall_grounded_task_success"],
+        "fully_grounded_factual_success": summary["metrics"][
+            "fully_grounded_factual_success"
+        ],
+        "overall_grounded_task_success": summary["overall_grounded_task_success"],
         "severe_unsupported_release_count": summary["severe_unsupported_release_count"],
         "operational_failure_count": summary["operational_failure_count"],
         "case_count": summary["case_count"],
@@ -266,9 +367,9 @@ def _decide(scores: dict[str, dict[str, Any]]) -> dict[str, Any]:
             candidate["evidence_gate"] if promote else incumbent["evidence_gate"]
         ),
         "disposition": (
-            "promote v4 into the product"
+            "promote dominance-scoped-ambiguity-safe-v3 into the product"
             if promote
-            else "keep structured-lexical-v1; record v4 as implemented but unpromoted"
+            else "keep question-targeted-ambiguity-safe-v2; record the dominance-scoped candidate as unpromoted"
         ),
     }
 

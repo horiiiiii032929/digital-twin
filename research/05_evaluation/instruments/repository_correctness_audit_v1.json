@@ -280,7 +280,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-ux",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "evidence": "Rechecked the committed local-R1 Compose topology during the release-binding audit; service, volume, worker, health-check, and environment boundaries remain active and intentional.",
       "findings": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "reviewed_at": "2026-09-02",
@@ -855,9 +855,9 @@
       "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
       "findings": [],
       "path": "compose.local-r1.yml",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "185594a54b8ff2d12bf3431931c3bba87225ea45dac75af5b7549d768238034a"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "Codex release-binding audit",
+      "sha256": "ed5b736ae6d8a04b552e36234aea20f8a88678e14658e3b0d74d1da562890541"
     },
     {
       "audit_status": "audited",

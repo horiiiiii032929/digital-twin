@@ -309,7 +309,7 @@ class AppSettings:
         ):
             raise ValueError(
                 "governed deterministic generation requires "
-                "APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2"
+                "an evidence gate from GOVERNED_DETERMINISTIC_EVIDENCE_GATES"
             )
         active_openai_planner = bool(
             self.autonomy_planner_mode
@@ -347,20 +347,15 @@ def _evidence_gate_binding_holds(
     selected_configuration: dict,
     evidence_gate_mode: "EvidenceGateMode",
 ) -> bool:
-    """Return whether the qualification covers the gate this release selects.
+    """Return whether the qualification names the exact selected gate.
 
-    A record that names a gate must name this one. `governed-full-autonomy-v2-1-
-    confirmation-001` predates the field and names none, and it is the only run
-    id governed V2.1 accepts, so requiring equality against an absent
-    declaration would make the configuration qualified on 2026-09-02
-    unstartable. An absent declaration is a gap in that record, recorded as
-    such, rather than grounds to refuse the release it qualified.
+    Missing or blank declarations fail closed. Historical records that predate
+    this field remain valid evidence, but they cannot authorize a new staging
+    configuration whose evidence gate they did not bind.
     """
 
     declared = selected_configuration.get("evidence_gate")
-    if not isinstance(declared, str) or not declared.strip():
-        return True
-    return declared.strip() == evidence_gate_mode.value
+    return isinstance(declared, str) and declared.strip() == evidence_gate_mode.value
 
 
 def _validate_t1_qualification_result(
@@ -394,7 +389,10 @@ def _validate_t1_qualification_result(
     )
     profile_sha256 = hashlib.sha256(profile_path.read_bytes()).hexdigest()
     allowed_run_ids = (
-        {"governed-full-autonomy-v2-1-confirmation-001"}
+        {
+            "governed-full-autonomy-v2-1-confirmation-001",
+            "governed-full-autonomy-v2-1-release-binding-correction-001",
+        }
         if tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         else {
             "autonomous-tutoring-r1-confirmation-001",
