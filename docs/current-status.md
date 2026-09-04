@@ -6,6 +6,25 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Prospective R1.2 clarification checkpoint
+
+Issue #212 owns one finite successor to the measured grounding floor. It does
+not reopen or rescore the known 10,000+1,000 benchmark. The selected
+`dominance-scoped-ambiguity-safe-v3` gate remains authoritative; its genuine
+ties now carry bounded candidate-region lineage into one persistent,
+source-derived clarification turn. A student selection is revalidated against
+the active release, source version, checksum, region, and claim fingerprint
+before generation. Invalid replies remain `clarify`, and release withdrawal
+cancels pending requests.
+
+The implementation includes the SQLite lifecycle, restart-safe service path,
+student quick replies, and a frozen 200-case network-free product confirmation.
+Its current status is build-only: the diagnostic simulation passes, but no
+Keep claim is made until the same instrument executes from a clean committed
+revision and the result is registered. The claim is limited to mechanism
+correctness; real-student interpretation choice, learning improvement, and
+professor fidelity remain unproven.
+
 ## Final local R1.1 technical checkpoint
 
 Issue #210 owns one finite post-release checkpoint. The professor-feedback

@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0.0",
+  "evaluation_id": "stateful-clarification-confirmation-001",
+  "status": "frozen-pending-network-free-execution",
+  "decision_question": "Does one persistent, source-derived clarification turn improve grounded task completion without weakening the shipped fail-closed boundary?",
+  "baseline": "dominance-scoped-ambiguity-safe-v3-terminal-clarify",
+  "candidate": "stateful-source-clarification-v1",
+  "dataset": {
+    "kind": "fresh-public-synthetic-product-simulation",
+    "case_count": 200,
+    "resolvable_ambiguity": 120,
+    "unambiguous_answerable": 40,
+    "no_evidence_boundary": 20,
+    "invalid_clarification_reply": 20,
+    "source_reuse": "zero across scenario IDs"
+  },
+  "execution": {
+    "product_service": "StudentTutoringService",
+    "provider_calls": 0,
+    "maximum_clarification_turns": 1,
+    "persistence": "SQLite migration 17",
+    "restart_schedule": "every tenth resolvable case",
+    "idempotency_schedule": "every eleventh resolvable case"
+  },
+  "hard_gates": {
+    "candidate_grounded_completion": ">=0.95",
+    "clarification_resolution_accuracy": ">=0.95",
+    "boundary_safety": "1.0",
+    "invalid_reply_safety": "1.0",
+    "citation_source_version_validity": "1.0",
+    "restart_consistency": "1.0",
+    "idempotency_consistency": "1.0",
+    "unsupported_or_wrong_scope_releases": 0,
+    "duplicate_deliveries": 0,
+    "unbounded_loops": 0,
+    "unambiguous_control_regression": 0
+  },
+  "finite_rule": "One execution and no tuning or rerun against these 200 cases after a valid quality result.",
+  "claim_boundary": "Synthetic mixed-initiative mechanism evidence only; not real-student usability, learning improvement, or professor fidelity."
+}

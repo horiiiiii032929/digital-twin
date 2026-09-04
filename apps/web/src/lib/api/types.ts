@@ -228,6 +228,36 @@ export type StudentCitation = {
 export type StudentConversationView = {
   conversation: StudentConversation
   messages: StudentChatMessage[]
+  pending_clarification?: ClarificationRequestV1 | null
+}
+
+export type ClarificationOptionV1 = {
+  option_id: string
+  label: string
+  source_chunk_id: string
+  source_artifact_id: string
+  source_version: number
+  source_checksum?: string | null
+  region_id?: string | null
+  locator: string
+  claim_class_sha256: string
+}
+
+export type ClarificationRequestV1 = {
+  request_id: string
+  conversation_id: string
+  student_id: string
+  course_id: string
+  release_id: string
+  original_student_message_id: string
+  original_question_sha256: string
+  options: ClarificationOptionV1[]
+  status: "pending" | "resolved" | "expired" | "cancelled"
+  selected_option_id?: string | null
+  resolved_by_message_id?: string | null
+  created_at: string
+  expires_at: string
+  resolved_at?: string | null
 }
 
 export type StudentTutorTurn = {
@@ -235,6 +265,7 @@ export type StudentTutorTurn = {
   tutor_message: StudentChatMessage
   citations: StudentCitation[]
   duplicate: boolean
+  pending_clarification?: ClarificationRequestV1 | null
 }
 
 export type OutreachChannel = "in-app" | "discord"

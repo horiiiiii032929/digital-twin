@@ -8,6 +8,17 @@ defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
 
+## R1.2 stateful clarification candidate
+
+Issue #212 is the only prospective grounding mechanism in the final finite
+improvement window. It preserves the selected R1.1 gate and replaces terminal
+clarification for a genuine source tie with one persisted, source-bound choice.
+The gate is not relaxed and the product does not infer a selection from
+ambiguous free text. A frozen 200-case network-free actual-service
+confirmation decides whether the mechanism advances to exact local
+requalification. Until that result and requalification pass, R1.1 remains the
+released rollback and no academic-grounding threshold claim changes.
+
 ## Local R1.1 completion checkpoint
 
 Issue #210 adds two bounded post-release decisions without reopening the known

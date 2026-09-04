@@ -98,7 +98,9 @@ def current_schema_version(connection: sqlite3.Connection) -> int:
     return int(row[0] or 0)
 
 
-def _execute_statements(connection: sqlite3.Connection, statements: tuple[str, ...]) -> None:
+def _execute_statements(
+    connection: sqlite3.Connection, statements: tuple[str, ...]
+) -> None:
     for statement in statements:
         connection.execute(statement)
 
@@ -751,13 +753,41 @@ V2_MODEL_CALL_LEDGER_STATEMENTS = (
 )
 
 
+STATEFUL_CLARIFICATION_SCHEMA_STATEMENTS = (
+    """CREATE TABLE IF NOT EXISTS clarification_requests (
+           request_id TEXT PRIMARY KEY,
+           conversation_id TEXT NOT NULL
+               REFERENCES conversations(id) ON DELETE CASCADE,
+           student_id TEXT NOT NULL REFERENCES accounts(id) ON DELETE CASCADE,
+           course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
+           release_id TEXT NOT NULL REFERENCES releases(id) ON DELETE CASCADE,
+           original_student_message_id TEXT NOT NULL UNIQUE
+               REFERENCES messages(id) ON DELETE CASCADE,
+           status TEXT NOT NULL CHECK(status IN
+               ('pending', 'resolved', 'expired', 'cancelled')),
+           selected_option_id TEXT,
+           resolved_by_message_id TEXT REFERENCES messages(id),
+           request_json TEXT NOT NULL,
+           created_at TEXT NOT NULL,
+           expires_at TEXT NOT NULL,
+           resolved_at TEXT
+       )""",
+    """CREATE UNIQUE INDEX IF NOT EXISTS clarification_one_pending_per_conversation
+       ON clarification_requests(conversation_id) WHERE status = 'pending'""",
+    """CREATE INDEX IF NOT EXISTS clarification_scope_idx
+       ON clarification_requests(course_id, release_id, status, expires_at)""",
+)
+
+
 def _add_teaching_profiles(connection: sqlite3.Connection) -> None:
     _execute_statements(connection, TEACHING_PROFILE_SCHEMA_STATEMENTS)
     columns = {str(row[1]) for row in connection.execute("PRAGMA table_info(releases)")}
     if "teaching_profile_id" not in columns:
         connection.execute("ALTER TABLE releases ADD COLUMN teaching_profile_id TEXT")
     if "teaching_profile_sha256" not in columns:
-        connection.execute("ALTER TABLE releases ADD COLUMN teaching_profile_sha256 TEXT")
+        connection.execute(
+            "ALTER TABLE releases ADD COLUMN teaching_profile_sha256 TEXT"
+        )
 
 
 DEFAULT_MIGRATIONS = (
@@ -826,9 +856,7 @@ DEFAULT_MIGRATIONS = (
     SQLiteMigration(
         version=9,
         name="bounded-tutoring-learner-state",
-        definition=(
-            "add message tutoring metadata and conversation_learner_states"
-        ),
+        definition=("add message tutoring metadata and conversation_learner_states"),
         operation=_add_bounded_tutoring_state,
     ),
     SQLiteMigration(
@@ -885,6 +913,14 @@ DEFAULT_MIGRATIONS = (
         definition="\n".join(V2_MODEL_CALL_LEDGER_STATEMENTS),
         operation=lambda connection: _execute_statements(
             connection, V2_MODEL_CALL_LEDGER_STATEMENTS
+        ),
+    ),
+    SQLiteMigration(
+        version=17,
+        name="bounded-stateful-evidence-clarification",
+        definition="\n".join(STATEFUL_CLARIFICATION_SCHEMA_STATEMENTS),
+        operation=lambda connection: _execute_statements(
+            connection, STATEFUL_CLARIFICATION_SCHEMA_STATEMENTS
         ),
     ),
 )

@@ -8,6 +8,10 @@ from threading import RLock
 from typing import Protocol
 
 from src.digital_twin.grounding.models import DocumentChunk, GenerationTrace
+from src.digital_twin.student.clarification import (
+    ClarificationRequestV1,
+    ClarificationStatus,
+)
 from src.digital_twin.student.learning_gap import (
     LearningGapSignalV1,
     normalize_learning_gap_timestamp,
@@ -72,6 +76,10 @@ class DuplicateTurnError(RuntimeError):
 
 class LearnerStateConflictError(RuntimeError):
     """The durable learner state advanced before this turn could commit."""
+
+
+class ClarificationConflictError(RuntimeError):
+    """A pending clarification changed before its resolution could commit."""
 
 
 class StudentRepository(Protocol):
@@ -192,6 +200,14 @@ class StudentRepository(Protocol):
 
     def list_messages(self, conversation_id: str) -> list[Message]: ...
 
+    def get_pending_clarification(
+        self, conversation_id: str
+    ) -> ClarificationRequestV1 | None: ...
+
+    def expire_clarification(
+        self, request_id: str, *, expired_at: str
+    ) -> ClarificationRequestV1: ...
+
     def list_no_evidence_turns(
         self,
         course_id: str,
@@ -220,6 +236,8 @@ class StudentRepository(Protocol):
         responding_to_outreach_message_id: str | None = None,
         completed_autonomous_goal_ids: list[str] | None = None,
         reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
+        clarification_request: ClarificationRequestV1 | None = None,
+        resolved_clarification: ClarificationRequestV1 | None = None,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -1219,6 +1237,46 @@ class SQLiteStudentRepository:
             ).fetchall()
         return [self._message(row) for row in rows]
 
+    def get_pending_clarification(
+        self, conversation_id: str
+    ) -> ClarificationRequestV1 | None:
+        row = self._one(
+            """SELECT request_json FROM clarification_requests
+               WHERE conversation_id = ? AND status = 'pending'""",
+            (conversation_id,),
+        )
+        return (
+            ClarificationRequestV1.model_validate_json(row["request_json"])
+            if row is not None
+            else None
+        )
+
+    def expire_clarification(
+        self, request_id: str, *, expired_at: str
+    ) -> ClarificationRequestV1:
+        with self._lock, self._connection:
+            row = self._connection.execute(
+                "SELECT request_json FROM clarification_requests WHERE request_id = ?",
+                (request_id,),
+            ).fetchone()
+            if row is None:
+                raise KeyError("clarification_not_found")
+            current = ClarificationRequestV1.model_validate_json(row["request_json"])
+            if current.status != ClarificationStatus.PENDING:
+                return current
+            if expired_at < current.expires_at:
+                raise ValueError("clarification has not reached its expiry")
+            expired = current.model_copy(update={"status": ClarificationStatus.EXPIRED})
+            changed = self._connection.execute(
+                """UPDATE clarification_requests
+                   SET status = ?, request_json = ?
+                   WHERE request_id = ? AND status = 'pending'""",
+                (expired.status.value, expired.model_dump_json(), request_id),
+            )
+            if changed.rowcount != 1:
+                raise ClarificationConflictError
+        return expired
+
     def get_message(self, message_id: str) -> Message | None:
         row = self._one("SELECT * FROM messages WHERE id = ?", (message_id,))
         return self._message(row) if row else None
@@ -1292,6 +1350,8 @@ class SQLiteStudentRepository:
         responding_to_outreach_message_id: str | None = None,
         completed_autonomous_goal_ids: list[str] | None = None,
         reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
+        clarification_request: ClarificationRequestV1 | None = None,
+        resolved_clarification: ClarificationRequestV1 | None = None,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -1308,6 +1368,33 @@ class SQLiteStudentRepository:
             AuditEvent.model_validate(event.model_dump(mode="python"))
             for event in audit_events
         ]
+        if clarification_request is not None:
+            clarification_request = ClarificationRequestV1.model_validate(
+                clarification_request.model_dump(mode="python")
+            )
+            if (
+                clarification_request.status != ClarificationStatus.PENDING
+                or clarification_request.conversation_id != conversation.id
+                or clarification_request.student_id != conversation.student_id
+                or clarification_request.course_id != conversation.course_id
+                or clarification_request.release_id != conversation.release_id
+                or clarification_request.original_student_message_id
+                != student_message.id
+            ):
+                raise ValueError("clarification request has inconsistent turn scope")
+        if resolved_clarification is not None:
+            resolved_clarification = ClarificationRequestV1.model_validate(
+                resolved_clarification.model_dump(mode="python")
+            )
+            if (
+                resolved_clarification.status != ClarificationStatus.RESOLVED
+                or resolved_clarification.conversation_id != conversation.id
+                or resolved_clarification.student_id != conversation.student_id
+                or resolved_clarification.course_id != conversation.course_id
+                or resolved_clarification.release_id != conversation.release_id
+                or resolved_clarification.resolved_by_message_id != student_message.id
+            ):
+                raise ValueError("clarification resolution has inconsistent turn scope")
         if learning_gap_signal is not None:
             learning_gap_signal = LearningGapSignalV1.model_validate(
                 learning_gap_signal.model_dump(mode="python")
@@ -1479,6 +1566,48 @@ class SQLiteStudentRepository:
                 )
                 for event in audit_events:
                     self._insert_audit_event(event)
+                if clarification_request is not None:
+                    self._connection.execute(
+                        """INSERT INTO clarification_requests
+                           (request_id, conversation_id, student_id, course_id,
+                            release_id, original_student_message_id, status,
+                            selected_option_id, resolved_by_message_id, request_json,
+                            created_at, expires_at, resolved_at)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                        (
+                            clarification_request.request_id,
+                            clarification_request.conversation_id,
+                            clarification_request.student_id,
+                            clarification_request.course_id,
+                            clarification_request.release_id,
+                            clarification_request.original_student_message_id,
+                            clarification_request.status.value,
+                            clarification_request.selected_option_id,
+                            clarification_request.resolved_by_message_id,
+                            clarification_request.model_dump_json(),
+                            clarification_request.created_at,
+                            clarification_request.expires_at,
+                            clarification_request.resolved_at,
+                        ),
+                    )
+                if resolved_clarification is not None:
+                    changed = self._connection.execute(
+                        """UPDATE clarification_requests
+                           SET status = ?, selected_option_id = ?,
+                               resolved_by_message_id = ?, request_json = ?,
+                               resolved_at = ?
+                           WHERE request_id = ? AND status = 'pending'""",
+                        (
+                            resolved_clarification.status.value,
+                            resolved_clarification.selected_option_id,
+                            resolved_clarification.resolved_by_message_id,
+                            resolved_clarification.model_dump_json(),
+                            resolved_clarification.resolved_at,
+                            resolved_clarification.request_id,
+                        ),
+                    )
+                    if changed.rowcount != 1:
+                        raise ClarificationConflictError
                 if learner_state is not None:
                     self._connection.execute(
                         """INSERT INTO conversation_learner_states
@@ -3714,6 +3843,20 @@ class SQLiteStudentRepository:
                ) AND status = ?""",
             ("cancelled", changed_at, release_id, "pending"),
         )
+        rows = self._connection.execute(
+            """SELECT request_id, request_json FROM clarification_requests
+               WHERE release_id = ? AND status = 'pending'""",
+            (release_id,),
+        ).fetchall()
+        for row in rows:
+            request = ClarificationRequestV1.model_validate_json(
+                row["request_json"]
+            ).model_copy(update={"status": ClarificationStatus.CANCELLED})
+            self._connection.execute(
+                """UPDATE clarification_requests
+                   SET status = ?, request_json = ? WHERE request_id = ?""",
+                (request.status.value, request.model_dump_json(), row["request_id"]),
+            )
 
     def _insert_audit_event(self, event: AuditEvent) -> None:
         self._connection.execute(

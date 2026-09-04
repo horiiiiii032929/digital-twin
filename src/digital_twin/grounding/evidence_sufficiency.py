@@ -5,7 +5,7 @@ import time
 from collections.abc import Sequence
 from typing import Literal, Protocol
 
-from pydantic import BaseModel, Field, ValidationInfo, field_validator
+from pydantic import BaseModel, Field, ValidationInfo, field_validator, model_validator
 
 from src.digital_twin.grounding.models import RetrievalHit
 from src.digital_twin.action_router import required_atomic_claim_count
@@ -76,6 +76,7 @@ class EvidenceSufficiencyDecision(BaseModel):
     reason: str = Field(min_length=1)
     features: dict[str, float | int | bool] = Field(default_factory=dict)
     selected_hit_ids: list[str] = Field(default_factory=list)
+    clarification_candidate_hit_ids: list[str] = Field(default_factory=list)
     recommended_action: Literal["clarify", "abstain"] | None = None
 
     @field_validator("recommended_action")
@@ -95,6 +96,29 @@ class EvidenceSufficiencyDecision(BaseModel):
         if len(values) != len(set(values)):
             raise ValueError("selected_hit_ids must be unique")
         return values
+
+    @field_validator("clarification_candidate_hit_ids")
+    @classmethod
+    def clarification_candidate_hit_ids_must_be_unique(
+        cls, values: list[str]
+    ) -> list[str]:
+        if any(not value.strip() for value in values):
+            raise ValueError("clarification candidate hit IDs cannot contain blanks")
+        if len(values) != len(set(values)):
+            raise ValueError("clarification candidate hit IDs must be unique")
+        return values
+
+    @model_validator(mode="after")
+    def clarification_candidates_require_clarification(
+        self,
+    ) -> "EvidenceSufficiencyDecision":
+        if self.clarification_candidate_hit_ids and (
+            self.sufficient or self.recommended_action != "clarify"
+        ):
+            raise ValueError(
+                "clarification candidates require a rejected clarification decision"
+            )
+        return self
 
 
 class EvidenceSufficiencyCaseResult(BaseModel):
@@ -248,9 +272,7 @@ class CalibratedOpenSetEvidenceGate:
             "direct_support_passed": (
                 signals.direct_support >= self.minimum_direct_support
             ),
-            "completeness_passed": (
-                signals.completeness >= self.minimum_completeness
-            ),
+            "completeness_passed": (signals.completeness >= self.minimum_completeness),
             "contradiction_passed": (
                 signals.contradiction <= self.maximum_contradiction
             ),
@@ -304,11 +326,7 @@ class CalibratedOpenSetEvidenceGate:
 
     @staticmethod
     def _validate_probability(value: float, name: str) -> None:
-        if (
-            isinstance(value, bool)
-            or not math.isfinite(value)
-            or not 0 <= value <= 1
-        ):
+        if isinstance(value, bool) or not math.isfinite(value) or not 0 <= value <= 1:
             raise ValueError(f"{name} must be between 0 and 1")
 
     def _rejected(
@@ -602,9 +620,7 @@ class QuestionTargetedAtomicEvidenceGate:
 
         def rank_key(row: tuple[int, RetrievalHit]) -> tuple[int, int, float, int, str]:
             index, hit = row
-            content_overlap = len(
-                query_ranking_terms & ranking_terms(hit.chunk.text)
-            )
+            content_overlap = len(query_ranking_terms & ranking_terms(hit.chunk.text))
             alias_overlap = len(
                 query_ranking_terms
                 & ranking_terms(hit.chunk.metadata.get("search_description", ""))
