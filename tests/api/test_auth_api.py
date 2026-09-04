@@ -59,6 +59,10 @@ LOCAL_R1_V2_PROFILE = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json"
 )
+LOCAL_R1_V3_PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json"
+)
 LOCAL_R1_RESULT = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json"
@@ -511,8 +515,66 @@ def test_governed_qualification_binds_planner_gate_and_profile(tmp_path, monkeyp
         ).validate()
 
 
+def test_release_binding_correction_binds_luna_dominance_gate_and_v3_profile(
+    tmp_path, monkeypatch
+):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    source = (
+        Path(__file__).resolve().parents[2]
+        / "research/05_evaluation/records/governed-full-autonomy-v2-1-confirmation-001.json"
+    )
+    payload = json.loads(source.read_text(encoding="utf-8"))
+    payload["run_id"] = (
+        "governed-full-autonomy-v2-1-release-binding-correction-001"
+    )
+    selected = next(
+        candidate
+        for candidate in payload["candidates"]
+        if candidate["role"] == "candidate"
+    )
+    configuration = selected["implementation"]["configuration"]
+    configuration.update(
+        {
+            "planner": "gpt-5.6-luna",
+            "planner_architecture": "guarded-policy-value-planner-v2",
+            "generator": "deterministic/evidence-set-v2",
+            "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+            "profile_sha256": hashlib.sha256(
+                LOCAL_R1_V3_PROFILE.read_bytes()
+            ).hexdigest(),
+        }
+    )
+    result_path = tmp_path / "governed-release-binding.json"
+    result_path.write_text(json.dumps(payload), encoding="utf-8")
+
+    settings = AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        generator_mode=GeneratorMode.DETERMINISTIC,
+        evidence_gate_mode=EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3,
+        student_tutoring_mode=(
+            StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        ),
+        autonomy_planner_mode=(
+            AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+        ),
+        learning_gap_hmac_secret=b"x" * 32,
+        student_profile_path=LOCAL_R1_V3_PROFILE,
+        t1_qualification_result_path=result_path,
+    )
+    settings.validate()
+
+    configuration.pop("evidence_gate")
+    result_path.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="does not bind this release"):
+        settings.validate()
+
+
 def test_governed_deterministic_generator_requires_compatible_gate(tmp_path):
-    with pytest.raises(ValueError, match="question-targeted-ambiguity-safe-v2"):
+    with pytest.raises(ValueError, match="GOVERNED_DETERMINISTIC_EVIDENCE_GATES"):
         AppSettings(
             database_path=tmp_path / "db.sqlite3",
             data_root=tmp_path,

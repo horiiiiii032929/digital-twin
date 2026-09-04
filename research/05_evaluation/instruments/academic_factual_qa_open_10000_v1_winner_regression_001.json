@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "instrument_id": "academic-factual-qa-open-10000-winner-regression-001",
+  "status": "built-execution-pending",
+  "owner_issue": 198,
+  "parent_issue": 8,
+  "decision_question": "Does the confirmation-024 selected release candidate hold its factual grounding, action, claim, and citation gates on the sealed Program 011 known benchmark, and is it non-inferior to the any-hit rollback control?",
+  "evidence_class": "known-benchmark-regression",
+  "known_benchmark": true,
+  "not_fresh_confirmation_evidence": "The 10,000+1,000 package was constructed and consumed by Program 011. A pass here is regression evidence for the selected architecture, never a fresh confirmation of generalization.",
+  "predecessors": [
+    {
+      "result_id": "course-digital-twin-evaluation-program-011",
+      "role": "sealed package origin and recorded T0 baseline",
+      "decision": "refine"
+    },
+    {
+      "result_id": "governed-full-autonomy-v2-1-persona-confirmation-024",
+      "role": "selected release candidate and bound system manifest",
+      "decision": "keep"
+    }
+  ],
+  "dataset": {
+    "dataset_id": "academic-factual-qa-open-10000-v1-final-mixed-wording-001",
+    "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+    "candidate_case_count": 10000,
+    "control_case_count": 1000,
+    "control_is_paired_subset_of_candidate": true,
+    "course_ids": [
+      "computer-networking",
+      "data-structures",
+      "operating-systems",
+      "python-programming"
+    ],
+    "source_family_count_by_course": {
+      "computer-networking": 98,
+      "data-structures": 80,
+      "operating-systems": 150,
+      "python-programming": 195
+    },
+    "sealed_package_resolution": "read-only reference verified against the committed Program 011 record",
+    "chain_of_custody": [
+      "research/05_evaluation/records/course-digital-twin-evaluation-program-011.json -> ignored_artifacts.construction_result_sha256",
+      "construction-result.json -> packages[*].sha256",
+      "the five sealed package files"
+    ],
+    "construction_result_sha256": "9c18a734eb17279b3750665a975913557166729d0f0ee354f62a5b1f7d48f205",
+    "package_sha256": {
+      "control_cases": "f9d6614136e74458672728c1b69d5512dd5fd5635d596f113a37c0feb30e266b",
+      "control_gold": "c1c547002553e50803cf5f531ec3b2dc398331d4bdaf965951a019d08a71d04d",
+      "hidden_gold": "fbc7799322dfcf1e54915a7d5aab0c3fcf11a6bb29812f5b86b57618ac557e71",
+      "public_cases": "5455ab5611379aa6d01fdeda2f05559ecddf8117165db622d4d15455356f8bf8",
+      "source_corpus": "6692f7900276a948151583e4031e2ff957d3d9640a302265e972da17f093ee46"
+    }
+  },
+  "selected_binding": {
+    "predecessor_result_id": "governed-full-autonomy-v2-1-persona-confirmation-024",
+    "grounding_architecture_id": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+    "evidence_gate_implementation_id": "source-semantic-evidence-atom-gate-v3",
+    "retriever_implementation_id": "source-semantic-evidence-atom-retriever-v1",
+    "retrieval_substrate": "BM25 over immutable atom projections; local, no embedder and no query-vector cache",
+    "authoritative_factual_generator": "deterministic-evidence-set-grounded-generator-v2",
+    "request_intent_contract": "deterministic-tutor-action-router-v3",
+    "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "rollback_architecture_id": "ambiguity-safe-source-semantic-evidence-atoms-v2"
+  },
+  "arms": [
+    {
+      "arm_id": "candidate-deterministic",
+      "role": "primary release candidate",
+      "case_source": "public_cases",
+      "case_count": 10000,
+      "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+      "reactive_semantic_planner": "deterministic/reactive-semantic-planner",
+      "provider_backed": false,
+      "expected_provider_calls": 0,
+      "expected_cost_usd": 0
+    },
+    {
+      "arm_id": "control",
+      "role": "fixed any-hit / T0 rollback control for paired non-inferiority",
+      "case_source": "control_cases",
+      "case_count": 1000,
+      "evidence_gate": "any-hit-evidence-gate-v1",
+      "reactive_semantic_planner": "deterministic/reactive-semantic-planner",
+      "provider_backed": false,
+      "expected_provider_calls": 0,
+      "expected_cost_usd": 0,
+      "deviation_from_program_011_control": "Program 011 ran its any-hit control on a dense retriever with a live provider generator. This control keeps the any-hit evidence gate but shares the candidate's local retrieval substrate and deterministic generator, so the paired contrast isolates the evidence gate that is actually being released. Program 011 control numbers are therefore not directly comparable and are not reused."
+    },
+    {
+      "arm_id": "candidate-provider",
+      "role": "secondary diagnostic; live reactive planner over the same factual path",
+      "case_source": "control_cases",
+      "case_count": 1000,
+      "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+      "reactive_semantic_planner": "openai/gpt-5.6-luna",
+      "provider_backed": true,
+      "authoritative_factual_generator_unchanged": true,
+      "maximum_cost_usd": 5.0,
+      "authorized_by": "researcher, 2026-09-03",
+      "stop_rule": "Measure per-case cost on a 100-case canary. If the projected arm cost exceeds the ceiling, stop before bulk and publish the revised projection."
+    }
+  ],
+  "gates": {
+    "source": "scripts/score_academic_factual_qa_open_10000.py",
+    "thresholds_changed": false,
+    "note": "Factual grounding, action, claim, citation, retrieval, completion, severe-release, and paired non-inferiority gates are applied exactly as registered. This instrument selects no threshold of its own."
+  },
+  "execution": {
+    "ledger": "ResponseLedgerV1 with WAL, synchronous=FULL, exclusive creation, and case-bound resume",
+    "per_case_failure_persistence": true,
+    "gold_isolation": "Product execution loads course ID and question only. Hidden gold is opened only after every arm ledger reports status=completed with a matching response count.",
+    "same_set_tuning": "prohibited",
+    "preflight_requirement": "The deterministic arms must complete a sample with zero provider calls. Any provider call on a deterministic arm stops the run before bulk."
+  },
+  "authority": {
+    "paid_execution_authorized": true,
+    "maximum_total_cost_usd": 5.0,
+    "scope": "candidate-provider arm only; the deterministic arms must remain at USD 0",
+    "authority_revoked": false
+  },
+  "pre_execution_findings": [
+    {
+      "finding_id": "v3-ambiguity-branch-unexercised-by-confirmation-024",
+      "observed_at": "2026-09-03",
+      "statement": "Confirmation 024 published every case against a release holding exactly one chunk, so the selected V3 gate's fail-closed claim-class ambiguity branch could not fire. Its Keep decision therefore contains no evidence about that branch.",
+      "repository_evidence": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py sets \"chunks\": [chunk] when installing the evaluation release.",
+      "benchmark_measurement": {
+        "sample_case_count": 100,
+        "target_cluster_in_top_5": 94,
+        "target_cluster_at_rank_1": 84,
+        "gate_clarify": 70,
+        "gate_sufficient": 19,
+        "gate_abstain": 11,
+        "clarify_despite_correct_rank_1_retrieval": 69
+      },
+      "mechanism": "Several near-duplicate regions clear the same instructional target's coverage threshold while carrying different canonical claims. plan_public_source_ranges recognises only 'source cluster \"X\"' and a 'using source \"X\" in section \"Y\",' prefix, and the sealed questions use neither, so the candidate set is not narrowed before claim classes are compared.",
+      "retrieval_is_not_the_cause": true,
+      "action_taken": "None. The V3 gate is the frozen selected architecture; changing it to reduce clarify would be same-set tuning against the sealed package and is prohibited.",
+      "characterization_test": "tests/test_academic_factual_qa_open_10000_winner_gate_regime.py"
+    },
+    {
+      "finding_id": "t1-v2-requires-per-case-conversation-isolation",
+      "observed_at": "2026-09-03",
+      "statement": "Program 011 shared one conversation per course, which is sound for stateless T0. T1-v2 keeps a learner belief state per conversation, so the same arrangement makes each case depend on every earlier case in its course.",
+      "evidence": "Under course-scoped conversations, per-case latency grew steadily through the run. Under case-scoped conversations it stayed flat at about 72 ms across a 200-case canary.",
+      "action_taken": "Every arm runs one conversation per case. The conversation scope is part of the ledger run-configuration binding, so a ledger cannot be resumed under a different scope. A course-scoped partial ledger produced before this change was discarded rather than scored.",
+      "clarify_rate_unchanged_by_scope": "Course-scoped and case-scoped canaries both produced roughly 70 percent clarify, so the gate finding above is independent of conversation scope.",
+      "characterization_test": "tests/test_academic_factual_qa_open_10000_winner_adapter.py"
+    }
+  ],
+  "boundaries": [
+    "Sources and cases are public and synthetic; this is not real course material.",
+    "A pass is regression evidence on a known benchmark, not fresh generalization evidence.",
+    "This instrument establishes no professor fidelity, student usability, or learning-outcome claim.",
+    "A valid quality failure ends in No Release; it is not grounds for re-running the sealed set."
+  ]
+}

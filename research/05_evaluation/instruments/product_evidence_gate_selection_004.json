@@ -1,0 +1,92 @@
+{
+  "authority": {
+    "maximum_cost_usd": 0,
+    "paid_execution_authorized": false,
+    "provider_execution_authorized": false
+  },
+  "dataset": {
+    "case_count": 500,
+    "cases": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_cases_002.json",
+    "corpus": "reports/generated/academic-factual-qa-development-region-corpus-001/development-region-corpus.json",
+    "gold": "research/05_evaluation/datasets/academic_factual_qa_open_10000_v1_development_gold_002.json",
+    "gold_evidence_span_coverage": 1.0,
+    "registered_region_count": 344
+  },
+  "decision_question": "With the evidence range match corrected, does scoping the shipped gate's ambiguity contest to the leaders that actually tie improve grounding without costing safety?",
+  "decision_rule": {
+    "fixed_before_execution": true,
+    "no_post_hoc_threshold_selection": "Registered scoring reused unchanged. This instrument adds no threshold.",
+    "otherwise": "The product keeps question-targeted-ambiguity-safe-v2 and the candidate stays unpromoted.",
+    "promote_candidate_if": [
+      "candidate severe unsupported release count is less than or equal to the incumbent's",
+      "candidate operational failure count is less than or equal to the incumbent's",
+      "candidate fully grounded factual success is strictly greater than the incumbent's"
+    ],
+    "promotion_requires_requalification": "A promoted gate must pass a fresh local HTTPS release qualification before it ships.",
+    "registered_scoring_version": "with evidence-range-match-correction-001 adopted",
+    "single_execution": "Each arm runs once. A losing arm is not retried with adjustments.",
+    "v1_must_be_unchanged": "AmbiguitySafeEvidenceGateV1 keeps its behaviour; the successor is a separate implementation id and the regression must be proven before and after."
+  },
+  "design": {
+    "arms": [
+      {
+        "arm_id": "incumbent",
+        "evidence_gate": "question-targeted-ambiguity-safe-v2",
+        "known_result": 0.16,
+        "role": "what the product ships; release qualification 003 ran it"
+      },
+      {
+        "arm_id": "candidate",
+        "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+        "role": "the incumbent with the ambiguity contest scoped to tied leaders"
+      }
+    ],
+    "expected_cost_usd": 0,
+    "held_fixed": [
+      "corpus",
+      "gold",
+      "retriever",
+      "deterministic/evidence-set-v2 generator",
+      "deterministic-tutor-action-router-v3",
+      "tutoring mode",
+      "one conversation per case"
+    ],
+    "provider_backed": false,
+    "variable": "evidence gate only"
+  },
+  "instrument_id": "product-evidence-gate-selection-004",
+  "measured_before_building": {
+    "ambiguous_targets_on_answerable_cases": 263,
+    "dominant_leader_is_the_gold_region": 76,
+    "dominant_leader_is_wrong": 0,
+    "genuine_tie_targets": 187,
+    "gold_inside_the_tied_leader_set": 184,
+    "note": "Measured before any code was written. The 187 genuine ties are left refused: the best secondary tiebreaker isolated gold in only 105 of 184 and chose a wrong region in 61, which would trade unsupported releases for coverage and fail this instrument's first promotion condition by construction.",
+    "strict_dominance_targets": 76
+  },
+  "mechanism": {
+    "correction": "Contest only the candidates tied with the top coverage. A genuine tie still fails closed.",
+    "defect": "Every candidate clearing minimum_target_coverage votes equally on whether the reference is ambiguous. There is no ranking, so a strictly weaker candidate with a different claim class refuses a target whose leader dominates it outright.",
+    "location": "src/digital_twin/grounding/reference_uniqueness.py :: analyze_public_reference_uniqueness",
+    "precedent": "The same correction distinguishes SourceSemanticEvidenceAtomGateV4 from V3."
+  },
+  "owner_issue": 198,
+  "parent_issue": 8,
+  "pre_registered_at": "2026-09-04",
+  "reuses_selection_003_response_ledgers": true,
+  "schema_version": 1,
+  "scope_limits": [
+    "Development-split evidence selects a method; it is not a generalization claim.",
+    "The product retrieves with a dense published index while this comparison retrieves locally.",
+    "The sealed 10,000-case benchmark is not read, rerun, or rescored.",
+    "Public synthetic sources only. No professor fidelity, usability, or learning claim."
+  ],
+  "status": "pre-registered-execution-pending",
+  "supersedes": "product-evidence-gate-selection-003",
+  "why_this_rerun_exists": {
+    "disclosure": "The contract defect was found while investigating this same candidate, which benefits from the correction. That ordering is recorded in evidence-range-match-correction-001 and is not hidden by re-running here.",
+    "selection_003_not_amended": true,
+    "selection_003_verdict": "not promoted; both arms 16.00% under the uncorrected matcher",
+    "what_changed": "Only the measurement contract. evidence-range-match-correction-001 was pre-registered, proven to be the identity map on the sealed package, and adopted under its own rule. The responses being scored are byte-identical to 003's."
+  }
+}

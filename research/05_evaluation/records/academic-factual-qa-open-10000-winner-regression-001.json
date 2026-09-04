@@ -1,0 +1,145 @@
+{
+  "artifact_hashes": {
+    "construction_result_sha256": "9c18a734eb17279b3750665a975913557166729d0f0ee354f62a5b1f7d48f205",
+    "hidden_gold_sha256": "540ff6d5071ca1e25b3a07e0cc7d569af7d698cfbe740be29348e018da589380",
+    "package_sha256": {
+      "control_cases": "f9d6614136e74458672728c1b69d5512dd5fd5635d596f113a37c0feb30e266b",
+      "control_gold": "c1c547002553e50803cf5f531ec3b2dc398331d4bdaf965951a019d08a71d04d",
+      "hidden_gold": "fbc7799322dfcf1e54915a7d5aab0c3fcf11a6bb29812f5b86b57618ac557e71",
+      "public_cases": "5455ab5611379aa6d01fdeda2f05559ecddf8117165db622d4d15455356f8bf8",
+      "source_corpus": "6692f7900276a948151583e4031e2ff957d3d9640a302265e972da17f093ee46"
+    },
+    "pairing_manifest_sha256": "979315f203212cc602ff933224022dbc4b34584f4eb66a1a6506805836e7379c",
+    "public_cases_sha256": "44ab7f7b8ea02076efb61d1f1a074991c87193213ed7e700b3fe7d0d31498f8f",
+    "response_ledger_sha256": "6a80d7f26e4f1b2363bf9bfd69e12aeacc0340e9a2d299c228a71422d832c2ac"
+  },
+  "authority_revoked": true,
+  "candidate": {
+    "action_counts": {
+      "abstain": 1342,
+      "answer": 1669,
+      "clarify": 6973,
+      "refuse": 16
+    },
+    "answerable_count": 8000,
+    "boundary_count": 2000,
+    "case_count": 10000,
+    "fully_grounded_factual_success": 0.2538,
+    "operational_failure_count": 0,
+    "severe_unsupported_release_count": 4,
+    "source_family_count": 523
+  },
+  "code_revision": "e1e00fb",
+  "component": "conversation-orchestration",
+  "control": {
+    "case_count": 1000,
+    "fully_grounded_factual_success": 0.208,
+    "severe_unsupported_release_count": 0
+  },
+  "corpus_id": "academic-factual-qa-open-10000-v1-public-sources",
+  "dataset_id": "academic-factual-qa-open-10000-v1-final-mixed-wording-001",
+  "decision": "No Release",
+  "decisive_finding": {
+    "characterization_test": "tests/test_academic_factual_qa_open_10000_winner_gate_regime.py",
+    "id": "v3-ambiguity-branch-unexercised-by-confirmation-024",
+    "retrieval_probe": {
+      "clarify_despite_correct_rank_1_retrieval": 69,
+      "sample_case_count": 100,
+      "target_cluster_at_rank_1": 84,
+      "target_cluster_in_top_5": 94
+    },
+    "statement": "Confirmation 024 published one approved chunk per release, so the selected v3 gate's claim-class ambiguity branch could not fire. At product corpus scale it refuses 69.7% of cases, including 69 of 100 probed cases whose correct source was retrieved at rank one.",
+    "successor": "dominance-scoped-source-semantic-evidence-atoms-v4"
+  },
+  "evidence_class": "known-benchmark-regression",
+  "failed_gates": [
+    "action_accuracy_answerable",
+    "action_accuracy_overall",
+    "atomic_claim_precision",
+    "atomic_claim_recall",
+    "boundary_action_accuracy",
+    "citation_precision",
+    "citation_recall",
+    "fully_grounded_factual_success",
+    "source_family_lower_95",
+    "source_version_validity",
+    "zero_severe_unsupported_releases"
+  ],
+  "gate_results": {
+    "action_accuracy_answerable": false,
+    "action_accuracy_overall": false,
+    "atomic_claim_precision": false,
+    "atomic_claim_recall": false,
+    "boundary_action_accuracy": false,
+    "canonical_all_evidence_at_3": true,
+    "citation_precision": false,
+    "citation_recall": false,
+    "evidence_recall_at_5": true,
+    "fully_grounded_factual_success": false,
+    "malformed_output": true,
+    "provider_completion": true,
+    "source_family_lower_95": false,
+    "source_version_validity": false,
+    "zero_exact_duplicates": true,
+    "zero_severe_unsupported_releases": false
+  },
+  "instrument_id": "academic-factual-qa-open-10000-winner-regression-001",
+  "known_benchmark": true,
+  "limitations": [
+    "Public synthetic sources from a package Program 011 already consumed.",
+    "Deterministic source truth only; no independent external human annotation.",
+    "Establishes no real professor fidelity, student usability, or learning outcome.",
+    "Regression evidence on a known benchmark, not fresh generalization evidence."
+  ],
+  "operational_summary": {
+    "cost_usd": 0.0,
+    "gold_leakage_detected": false,
+    "hidden_gold_opened_after_response_completion": true,
+    "input_tokens": 0,
+    "latency_ms_p95": 0.1544170081615448,
+    "output_tokens": 0,
+    "private_data_used": false,
+    "provider_calls": 0,
+    "same_set_tuning": false,
+    "sealed_package_rerun_or_rescored": false,
+    "thresholds_changed": false
+  },
+  "paired_comparison": {
+    "boundary_safety": {
+      "candidate": 0.52,
+      "control": 1.0,
+      "delta": -0.48
+    },
+    "case_count": 1000,
+    "gate_results": {
+      "boundary_safety_not_worse": false,
+      "supported_answer_retention_lower_95": true
+    },
+    "supported_answer_retention": {
+      "estimate": 0.20447976878612717,
+      "lower_95": 0.16979768786127167,
+      "replicates": 10000,
+      "seed": 20260826,
+      "source_family_count": 173,
+      "upper_95": 0.2398843930635838
+    }
+  },
+  "program_011_t0_reference": {
+    "cost_usd": 39.14017165,
+    "fully_grounded_factual_success": 0.4416,
+    "operational_failure_count": 594,
+    "severe_unsupported_release_count": 478
+  },
+  "run_id": "academic-factual-qa-open-10000-winner-regression-001",
+  "schema_version": 1,
+  "selected_binding": {
+    "authoritative_factual_generator": "deterministic-evidence-set-grounded-generator-v2",
+    "conversation_scope": "case",
+    "evidence_gate_implementation_id": "source-semantic-evidence-atom-gate-v3",
+    "grounding_architecture_id": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+    "request_intent_contract": "deterministic-tutor-action-router-v3",
+    "retriever_implementation_id": "source-semantic-evidence-atom-retriever-v1",
+    "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+  },
+  "status": "completed-no-release"
+}

@@ -10,23 +10,44 @@ def _compose() -> dict:
     return yaml.safe_load((ROOT / "compose.local-r1.yml").read_text(encoding="utf-8"))
 
 
+def _default(declaration: str) -> str:
+    """Return the default from a ``${VAR:-default}`` compose declaration."""
+
+    if declaration.startswith("${") and ":-" in declaration:
+        return declaration.split(":-", 1)[1].rstrip("}")
+    return declaration
+
+
 def test_local_r1_defaults_safe_and_allows_hash_bound_v2_selection() -> None:
     compose = _compose()
     runtime = compose["x-runtime-environment"]
 
+    # The runtime selectors carry safe defaults and stay overridable, which is
+    # what "allows hash bound v2 selection" in this test's name requires. A
+    # literal here would mean .env.local-r1 could not reach the containers and
+    # the configuration qualified on 2026-09-02 could not be started at all.
     assert runtime["APP_MODE"] == "staging"
-    assert runtime["APP_GENERATOR_MODE"] == "deterministic"
-    assert runtime["APP_EVIDENCE_GATE_MODE"] == "structured-lexical-v1"
-    assert runtime["APP_STUDENT_TUTORING_MODE"] == "bounded-tutoring-graph"
+    assert _default(runtime["APP_GENERATOR_MODE"]) == "deterministic"
+    assert _default(runtime["APP_EVIDENCE_GATE_MODE"]) == "structured-lexical-v1"
+    assert _default(runtime["APP_STUDENT_TUTORING_MODE"]) == "bounded-tutoring-graph"
     assert runtime["APP_PROACTIVE_OUTREACH_WORKER_ENABLED"] == "true"
-    assert runtime["APP_STUDENT_PROFILE_PATH"] == (
+    assert _default(runtime["APP_STUDENT_PROFILE_PATH"]) == (
         "/app/research/05_evaluation/profiles/"
         "student-tutor-r1-local-candidate-v1.json"
     )
-    assert runtime["APP_AUTONOMY_PLANNER_MODE"] == "deterministic"
+    assert _default(runtime["APP_AUTONOMY_PLANNER_MODE"]) == "deterministic"
     assert "autonomous-tutoring-r1-confirmation-002.json" in runtime[
         "APP_T1_QUALIFICATION_RESULT_PATH"
     ]
+    for key in (
+        "APP_GENERATOR_MODE",
+        "APP_EVIDENCE_GATE_MODE",
+        "APP_STUDENT_TUTORING_MODE",
+        "APP_AUTONOMY_PLANNER_MODE",
+        "APP_STUDENT_PROFILE_PATH",
+        "APP_T1_QUALIFICATION_RESULT_PATH",
+    ):
+        assert runtime[key].startswith("${"), f"{key} must stay overridable"
     assert runtime["OPENAI_API_KEY"] == "${OPENAI_API_KEY:-}"
 
 

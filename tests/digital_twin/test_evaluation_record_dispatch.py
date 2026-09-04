@@ -43,3 +43,25 @@ def test_rejects_non_component_record_with_invalid_provenance(tmp_path) -> None:
 
     with pytest.raises(ValidationError):
         load_evaluation_record(path)
+
+
+def test_loads_whole_system_record_with_component_label(tmp_path) -> None:
+    path = tmp_path / "whole-system.json"
+    path.write_text(
+        json.dumps(
+            {
+                "run_id": "whole-system-result-001",
+                "code_revision": "abcdef0",
+                "status": "completed-no-release",
+                "decision": "No Release",
+                "component": "whole-system-grounding",
+                "gate_results": {"grounded": False},
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    record = load_evaluation_record(path)
+
+    assert record.run_id == "whole-system-result-001"
+    assert record.component == "whole-system-grounding"

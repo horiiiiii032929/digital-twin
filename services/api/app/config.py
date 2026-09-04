@@ -49,6 +49,20 @@ class EvidenceGateMode(StrEnum):
     STRUCTURED_LEXICAL_V1 = "structured-lexical-v1"
     AMBIGUITY_SAFE_STRUCTURED_LEXICAL_V1 = "ambiguity-safe-structured-lexical-v1"
     QUESTION_TARGETED_AMBIGUITY_SAFE_V2 = "question-targeted-ambiguity-safe-v2"
+    DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3 = "dominance-scoped-ambiguity-safe-v3"
+
+
+# Governed deterministic generation is qualified against these gates only.
+# The v3 successor was added by product-evidence-gate-selection-004, which
+# measured it at 50.00% fully grounded factual success against the v2 gate's
+# 36.80% with severe unsupported releases and operational failures zero in both
+# arms. Any other gate is still refused.
+GOVERNED_DETERMINISTIC_EVIDENCE_GATES = frozenset(
+    {
+        EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2,
+        EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3,
+    }
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -291,11 +305,11 @@ class AppSettings:
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
             and self.generator_mode == GeneratorMode.DETERMINISTIC
             and self.evidence_gate_mode
-            != EvidenceGateMode.QUESTION_TARGETED_AMBIGUITY_SAFE_V2
+            not in GOVERNED_DETERMINISTIC_EVIDENCE_GATES
         ):
             raise ValueError(
                 "governed deterministic generation requires "
-                "APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2"
+                "an evidence gate from GOVERNED_DETERMINISTIC_EVIDENCE_GATES"
             )
         active_openai_planner = bool(
             self.autonomy_planner_mode
@@ -329,6 +343,21 @@ def _positive_int(name: str, default: int) -> int:
     return value
 
 
+def _evidence_gate_binding_holds(
+    selected_configuration: dict,
+    evidence_gate_mode: "EvidenceGateMode",
+) -> bool:
+    """Return whether the qualification names the exact selected gate.
+
+    Missing or blank declarations fail closed. Historical records that predate
+    this field remain valid evidence, but they cannot authorize a new staging
+    configuration whose evidence gate they did not bind.
+    """
+
+    declared = selected_configuration.get("evidence_gate")
+    return isinstance(declared, str) and declared.strip() == evidence_gate_mode.value
+
+
 def _validate_t1_qualification_result(
     result_path: Path | None,
     profile_path: Path,
@@ -360,7 +389,10 @@ def _validate_t1_qualification_result(
     )
     profile_sha256 = hashlib.sha256(profile_path.read_bytes()).hexdigest()
     allowed_run_ids = (
-        {"governed-full-autonomy-v2-1-confirmation-001"}
+        {
+            "governed-full-autonomy-v2-1-confirmation-001",
+            "governed-full-autonomy-v2-1-release-binding-correction-001",
+        }
         if tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         else {
             "autonomous-tutoring-r1-confirmation-001",
@@ -419,8 +451,9 @@ def _validate_t1_qualification_result(
                         and selected_configuration.get("planner_architecture")
                         != "guarded-policy-value-planner-v2"
                     )
-                    or selected_configuration.get("evidence_gate")
-                    != evidence_gate_mode.value
+                    or not _evidence_gate_binding_holds(
+                        selected_configuration, evidence_gate_mode
+                    )
                 )
             )
         ):

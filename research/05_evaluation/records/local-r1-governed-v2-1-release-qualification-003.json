@@ -1,0 +1,57 @@
+{
+  "artifact_hashes": {
+    "live_journey_sha256": "57493541846cdcfee7fc288f1fb4b1164e7f6e750b251333a3c6c643eef3e078",
+    "restart_sha256": "0d569eb4c5b70badfa884c2d34e8bc25d06c51517bf4ae33b5bda8e654ce67f7",
+    "t0_rollback_sha256": "0d569eb4c5b70badfa884c2d34e8bc25d06c51517bf4ae33b5bda8e654ce67f7",
+    "v2_restore_sha256": "0d569eb4c5b70badfa884c2d34e8bc25d06c51517bf4ae33b5bda8e654ce67f7"
+  },
+  "code_revision": "e02aa9e6d98c24727897fa8795f52d13582775fc",
+  "date": "2026-09-04",
+  "decision": "Keep",
+  "defects_this_qualification_closed": [
+    {
+      "fix": "Restored override capability with every default unchanged; pinned by tests/test_local_r1_compose_runtime_selection.py.",
+      "id": "compose-runtime-selectors-pinned-to-literals",
+      "statement": "Commit 1265830 replaced every ${VAR:-default} runtime selector in compose.local-r1.yml with a literal, so .env.local-r1 could not reach the containers and the configuration qualified on 2026-09-02 could not be started."
+    },
+    {
+      "fix": "Enforce the binding when the record declares a gate and record the gap when it does not; a record declaring a different gate is still refused. Pinned by tests/test_v21_qualification_gate_binding.py.",
+      "id": "v2-1-startup-required-a-gate-field-its-only-record-lacks",
+      "residual_gap": "governed-full-autonomy-v2-1-confirmation-001 does not bind an evidence gate. The running gate is therefore covered by the 2026-09-02 qualification and by this one, not by that record.",
+      "statement": "The same commit added an evidence-gate binding to the V2.1 startup check. governed-full-autonomy-v2-1-confirmation-001 is the only run id V2.1 accepts and declares no evidence gate, so the check refused every V2.1 start."
+    }
+  ],
+  "gate_selection_evidence": "product-evidence-gate-selection-001 kept question-targeted-ambiguity-safe-v2 over the v4 candidate on a pre-registered comparison.",
+  "image_digests": {
+    "api": "sha256:01e3dd76850689f74adda955a9c29e712bd69451c802e81325f9e7411ac626c2",
+    "web": "sha256:f9e423ac8624128d26a49300a7809d85e8f7b8aa2e4bfc137c90b6f32849de41"
+  },
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-003",
+  "limitations": [
+    "Qualified only on the development Mac through internal-CA HTTPS.",
+    "Synthetic identities and open demonstration material only.",
+    "Establishes no real-professor fidelity, real-student usability, or learning improvement.",
+    "Durable public hosting remains separate work."
+  ],
+  "private_data_used": false,
+  "release_scope": "qualified local release on the development Mac through internal-CA HTTPS; not hosted production and not a learning claim",
+  "results": {
+    "governed_v2_1_restoration": "6/6",
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "t0_rollback": "6/6"
+  },
+  "run_id": "local-r1-governed-v2-1-release-qualification-003",
+  "runtime": {
+    "autonomy_planner_mode": "openai-gpt-5.6-terra",
+    "evidence_gate_mode": "question-targeted-ambiguity-safe-v2",
+    "generator_mode": "deterministic",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_sha256": "43da7e1bd1ae07343427e52f3e617ccdd5d49a1aa221fd6855d89d7ce527209d",
+    "profile_version": "v2.1-grounding-011",
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-confirmation-001"
+  },
+  "schema_version": 1,
+  "status": "completed-keep"
+}

@@ -51,6 +51,7 @@ from src.digital_twin.generation import (
 )
 from src.digital_twin.grounding import (
     AmbiguitySafeEvidenceGateV1,
+    DominanceScopedAmbiguitySafeEvidenceGateV3,
     AtomicClaimEvidenceValidator,
     CanonicalSourceAtomicClaimVerifier,
     ContiguousQuoteAtomicClaimVerifier,
@@ -573,6 +574,22 @@ def _configured_evidence_gate(settings: AppSettings):
             StructuredLexicalCoverageEvidenceGate(
                 minimum_content_matching_terms=2,
                 evidence_limit=3,
+            ),
+            evidence_limit=5,
+        )
+    if (
+        settings.evidence_gate_mode
+        == EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3
+    ):
+        # Selected by product-evidence-gate-selection-004: 50.00% fully
+        # grounded factual success against the v2 gate's 36.80%, with severe
+        # unsupported releases and operational failures zero in both arms.
+        return DominanceScopedAmbiguitySafeEvidenceGateV3(
+            QuestionTargetedAtomicEvidenceGate(
+                base_gate=StructuredLexicalCoverageEvidenceGate(
+                    minimum_content_matching_terms=2,
+                    evidence_limit=5,
+                )
             ),
             evidence_limit=5,
         )

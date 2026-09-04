@@ -13,7 +13,7 @@ from collections import Counter
 from collections.abc import Callable, Iterable
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class ModelCandidateManifestV2(BaseModel):

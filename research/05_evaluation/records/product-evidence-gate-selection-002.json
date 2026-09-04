@@ -1,0 +1,82 @@
+{
+  "arms": {
+    "candidate": {
+      "evidence_gate": "dominance-scoped-source-semantic-evidence-atoms-v4",
+      "fully_grounded_factual_success": 0.094,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "incumbent": {
+      "evidence_gate": "question-targeted-ambiguity-safe-v2",
+      "fully_grounded_factual_success": 0.16,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "reference": {
+      "evidence_gate": "pedagogy-aware-source-semantic-evidence-atoms-v3",
+      "fully_grounded_factual_success": 0.094,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    },
+    "template-default": {
+      "evidence_gate": "structured-lexical-v1",
+      "fully_grounded_factual_success": 0.162,
+      "operational_failure_count": 0,
+      "severe_unsupported_release_count": 0,
+      "status": "completed-refine"
+    }
+  },
+  "case_count": 500,
+  "code_revision": "7eb2ccb",
+  "comparison_with_selection_001": {
+    "artifacts_removed": "47 multi-evidence abstentions and 52 structured-support abstentions",
+    "candidate_cluster_granularity": 0.126,
+    "candidate_region_granularity": 0.094,
+    "gap_widened_from_points": 3.2,
+    "gap_widened_to_points": 6.6,
+    "incumbent_cluster_granularity": 0.158,
+    "incumbent_region_granularity": 0.16,
+    "multi_evidence_resolution": "1 of 56 -> 22 of 56",
+    "same_decision": true
+  },
+  "corpus": "region granularity, 344 regions, 344/344 gold evidence spans covered",
+  "dataset_id": "academic-factual-qa-open-10000-v1-development-002",
+  "decision": "Keep question-targeted-ambiguity-safe-v2; candidate remains unpromoted",
+  "decision_rule_fixed_before_execution": true,
+  "evidence_class": "development-split-method-selection",
+  "finding": {
+    "id": "dominance-scoping-does-not-bind-on-either-corpus",
+    "incumbent_over_refusal": "148 of 400 answerable cases answered, 252 clarified",
+    "matches_sealed_finding": "the sealed regression measured 69.7% clarify for v3 at region granularity",
+    "statement": "The candidate and the predecessor it corrects score identically on both corpora and both granularities: 12.60% each on clusters, 9.40% each on regions. The correction is real and fires on the sealed benchmark, but it is not what limits grounding here. Confirmation 028's Keep covers the governed autonomy contract and nothing else."
+  },
+  "held_out": false,
+  "instrument_id": "product-evidence-gate-selection-002",
+  "limitations": [
+    "Development-split evidence selects a method; it is not a generalization claim.",
+    "The product retrieves with a dense published index while this comparison retrieves locally.",
+    "Public synthetic sources only; no professor fidelity, usability, or learning claim."
+  ],
+  "operational_summary": {
+    "cost_usd": 0.0,
+    "private_data_used": false,
+    "provider_calls": 0,
+    "thresholds_changed": false
+  },
+  "pre_registered_checks": {
+    "grounded_success_strictly_better": false,
+    "operational_failures_not_worse": true,
+    "severe_unsupported_not_worse": true
+  },
+  "promote_candidate": false,
+  "requalification_reason": "The gate release qualification 003 ran is the gate this selection confirms.",
+  "requalification_required": false,
+  "run_id": "product-evidence-gate-selection-002",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "selected_gate": "question-targeted-ambiguity-safe-v2",
+  "status": "completed-keep-incumbent"
+}

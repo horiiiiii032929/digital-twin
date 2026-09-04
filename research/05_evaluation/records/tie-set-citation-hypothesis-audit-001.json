@@ -1,0 +1,56 @@
+{
+  "audit_id": "tie-set-citation-hypothesis-audit-001",
+  "run_id": "tie-set-citation-hypothesis-audit-001",
+  "code_revision": "b4f747471e41e4e83179ce64708f82b5c3591c07",
+  "status": "completed-no-change",
+  "case_count": 500,
+  "closes": "grounding-selection line of work on the development region corpus",
+  "converges_with": [
+    "tie-resolution-hypothesis-audit-001",
+    "wrong-region-selection-audit-001",
+    "coverage-measure-hypothesis-audit-001"
+  ],
+  "cost_usd": 0.0,
+  "date": "2026-09-04",
+  "decision": "No change shipped; the grounding-selection line of work is closed at its measured floor",
+  "discard_reasons": [
+    {
+      "id": "scores-zero",
+      "measured_gain_cases": 0,
+      "statement": "fully_grounded requires citation_precision == 1.0 (src/digital_twin/evaluation/factual_qa_scoring.py:186). Emitting 2.61 citations against a gold declaring one gives precision near 0.38, so all 181 cases gain complete evidence and lose full grounding in the same move."
+    },
+    {
+      "id": "releases-contradictions",
+      "statement": "194 of 196 tied leader sets contain candidates asserting different claim classes about the same target; releasing the set as one answer is releasing a contradiction as fact.",
+      "ties_agreeing": 2,
+      "ties_disagreeing": 194
+    }
+  ],
+  "evidence_class": "pre-implementation-measurement",
+  "hypothesis": {
+    "id": "cite-the-tied-set-instead-of-choosing-inside-it",
+    "measurement": {
+      "answerable_cases_with_a_tie": 185,
+      "boundary_cases_with_a_tie": 7,
+      "cases_with_a_tie": 192,
+      "every_tie_covers_gold": 181,
+      "tie_size_max": 5,
+      "tie_size_mean_x100": 261,
+      "ties_whose_leaders_all_agree": 2,
+      "ties_whose_leaders_disagree": 194
+    },
+    "premise": "In 181 of 185 answerable cases with a tie, every tie in the case contains the gold region; mean tie size 2.61, maximum 5.",
+    "premise_holds": true
+  },
+  "independence": "The two discard reasons are independent; removing the scoring objection would not touch the safety objection.",
+  "provider_calls": 0,
+  "release_effect": "none",
+  "sealed_package_touched": false,
+  "shipped_configuration": "dominance-scoped-ambiguity-safe-v3",
+  "stated_remainder": {
+    "boundary_abstain_should_clarify": 7,
+    "boundary_clarify_should_abstain": 13,
+    "ceiling_if_all_fixed_percent": 54.6,
+    "claim_mismatch": 3
+  }
+}

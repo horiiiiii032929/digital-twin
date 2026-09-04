@@ -1,0 +1,81 @@
+{
+  "bucket_analysis": {
+    "cases": 44,
+    "citation_recall": 0.0,
+    "citations_per_case": 1,
+    "different_document": 2,
+    "gold_refs_per_case": 1,
+    "note": "Genuine selection errors: source, version and checksum right, sentence wrong.",
+    "right_document_wrong_region": 42,
+    "structural_mismatch": false
+  },
+  "case_count": 500,
+  "code_revision": "49c7e82",
+  "converges_with": "tie-resolution-hypothesis-audit-001",
+  "cost_usd": 0.0,
+  "decision": "No change shipped; the coverage-threshold mechanism discarded before implementation",
+  "evidence_class": "pre-implementation-measurement",
+  "hypothesis": {
+    "id": "lower-the-coverage-threshold",
+    "measurements": [
+      {
+        "boundary_entered": 5,
+        "leader_is_gold": 231,
+        "leader_is_wrong": 2,
+        "single_leader": 238,
+        "threshold": 0.5
+      },
+      {
+        "boundary_entered": 5,
+        "leader_is_gold": 231,
+        "leader_is_wrong": 2,
+        "single_leader": 238,
+        "threshold": 0.4
+      },
+      {
+        "boundary_entered": 5,
+        "leader_is_gold": 231,
+        "leader_is_wrong": 2,
+        "single_leader": 238,
+        "threshold": 0.34
+      },
+      {
+        "boundary_entered": 8,
+        "leader_is_gold": 231,
+        "leader_is_wrong": 4,
+        "single_leader": 243,
+        "threshold": 0.25
+      }
+    ],
+    "reason": "Nothing moves between 0.50 and 0.34. At 0.25 gold is unchanged while wrong leaders double and boundary entries rise, so it is strictly worse on both axes.",
+    "verdict": "discarded"
+  },
+  "instrument_id": "wrong-region-selection-audit-001",
+  "limitations": [
+    "Development-split evidence; public synthetic sources only.",
+    "Bounds one mechanism on this corpus; does not prove no fix exists."
+  ],
+  "loss_decomposition": {
+    "answerable_refused_as_clarify": 183,
+    "answered_claim_mismatch": 3,
+    "answered_evidence_incomplete": 44,
+    "boundary_abstain_to_clarify": 7,
+    "boundary_clarify_to_abstain": 13,
+    "boundary_correct": 80,
+    "fully_grounded": 170
+  },
+  "provider_calls": 0,
+  "run_id": "wrong-region-selection-audit-001",
+  "schema_version": 1,
+  "sealed_package_touched": false,
+  "shipped_gate": "dominance-scoped-ambiguity-safe-v3",
+  "status": "completed-no-change",
+  "what_this_locates": "The loss is upstream of the gate. _coverage scores the gold region below a competitor on 31 of 44 wrongly answered questions, and admitting it does not promote it. A fix must change how regions are scored against a target, not which scored regions are eligible.",
+  "where_gold_is_lost": {
+    "below_coverage_threshold": 31,
+    "cleared_threshold_but_outranked": 0,
+    "dropped_by_scope": 0,
+    "gold_not_retrieved": 3,
+    "gold_retrieved": 41
+  }
+}

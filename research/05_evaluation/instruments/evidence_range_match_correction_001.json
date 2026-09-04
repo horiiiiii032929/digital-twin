@@ -1,0 +1,55 @@
+{
+  "authority": {
+    "maximum_cost_usd": 0,
+    "paid_execution_authorized": false,
+    "provider_execution_authorized": false
+  },
+  "decision_question": "Should evidence_ranges_overlap consult the canonical character range when one side declares no region identity?",
+  "decision_rule": {
+    "adopt_correction_if": [
+      "every pair present in the sealed package receives an identical decision under both matchers",
+      "the grounding and evaluation test suites return the same failures before and after"
+    ],
+    "fixed_before_execution": true,
+    "otherwise": "The contract is left unchanged and selection 003's verdict stands as the final word.",
+    "rerun_registered_separately_as": "product-evidence-gate-selection-004",
+    "selection_003_not_amended": true
+  },
+  "defect": {
+    "correction": "Compare region identities only when both sides declare one; otherwise fall through to the canonical character range.",
+    "current": "if observed.region_id is not None or expected.region_id is not None: return observed.region_id == expected.region_id",
+    "location": "src/digital_twin/evaluation/factual_qa_contract.py :: evidence_ranges_overlap",
+    "statement": "If either side carries a region identity the canonical character range is never consulted. A citation whose source artifact, version, sha256 and character range all match the gold reference exactly is scored as a miss whenever exactly one of the two declares a region.",
+    "why_wrong_independent_of_any_result": "The comparison is asymmetric in a way nothing justifies. Two references to the same bytes of the same version of the same artifact are the same evidence. A region identity is additional provenance, so it can only refine a match that the range already establishes, never contradict one that neither side disputes. As written, supplying more provenance than the gold declares makes a correct citation score worse than supplying less, which no evaluation contract should reward."
+  },
+  "disclosure": {
+    "consequence": "Selection 003's verdict is not amended. The re-run is registered separately as selection 004 so the original verdict and the corrected one are both readable.",
+    "required_by": "the loop's rule for changing the instrument itself",
+    "statement": "This defect was found while investigating dominance-scoped-ambiguity-safe-v3, a candidate that benefits from the correction. Under registered scoring that candidate ties the incumbent at 16.00%; under range matching it reaches 50.00% against the incumbent's 36.80%. The correction was not sought in order to promote it, but it was found in the course of trying to, and that ordering is recorded here rather than omitted."
+  },
+  "instrument_id": "evidence-range-match-correction-001",
+  "kind": "measurement-contract-correction",
+  "no_recorded_result_changes": {
+    "conclusion": "The correction is the identity map on the sealed package. No recorded result moves.",
+    "control_gold_evidence_refs": 902,
+    "control_gold_without_region_id": 0,
+    "matcher_decision_differences_on_sealed_shapes": 0,
+    "proven_before_registration": true,
+    "sealed_candidate_citations": 1738,
+    "sealed_candidate_citations_without_region_id": 0,
+    "sealed_control_citations": 17,
+    "sealed_control_citations_without_region_id": 0,
+    "sealed_gold_evidence_refs": 9000,
+    "sealed_gold_without_region_id": 0
+  },
+  "owner_issue": 198,
+  "parent_issue": 8,
+  "pre_registered_at": "2026-09-04",
+  "schema_version": 1,
+  "scope_limits": [
+    "This corrects a measurement contract, not the product.",
+    "The sealed 10,000-case benchmark is not read, rerun, or rescored.",
+    "Adopting the correction licenses no promotion by itself; a promotion still needs its own registered comparison."
+  ],
+  "status": "pre-registered-execution-pending"
+}
