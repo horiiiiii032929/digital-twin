@@ -1003,6 +1003,13 @@ Current utilities:
   a real-professor fidelity reference without professor approval. Use
   `npm run verify:professor-fidelity-proxy-harness` and
   `npm run simulate:professor-fidelity-proxy-harness`.
+- `run_professor_fidelity_proxy_c0_c3_003.py`: is the single-change successor
+  to invalid attempt 002. It moves unsupported array/string assertions out of
+  the provider-facing schemas and retains the same deterministic post-parse
+  validation. The 12 cases, C0-C3 conditions, models,
+  prompts, seed, gates, USD 3 ceiling, and synthetic-only claim boundary remain
+  fixed. Commands ending in `professor-fidelity-proxy-c0-c3-003` validate,
+  simulate, preflight, execute, or resume the exclusive successor ledger.
 - `run_true_visual_supplement_003.py`: provides the method-level successor to
   the two immutable invalid visual attempts. It preserves question-independent
   visual descriptions and original-region citation authority, but normalizes
