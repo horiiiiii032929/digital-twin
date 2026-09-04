@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "run_id": "true-visual-supplement-003",
+  "status": "completed-refine",
+  "decision": "Refine: do not select the visual-description retrieval candidate; retain text/OCR fallback.",
+  "component": "figure-description",
+  "dataset_id": "academic-factual-qa-visual-supplement-001",
+  "code_revision": "9474e64adbf2895329e807b9a787a1013ddc03a4",
+  "completed_at": "2026-09-04T10:43:26.352940+00:00",
+  "instrument_sha256": "f8b300841700944731de1db6fb72512f43a89599b18697553a08734c6df8b4f4",
+  "dataset_sha256": "7263ae7d61d43b82d24cddd1073daeb821ad9c70f4dbe40786a1e7bb9beb7916",
+  "raw_result_content_sha256": "852c09d9e36acf510135c714e87ff03664ac75bf26edf4c636d32a91dec9d723",
+  "implementation": {
+    "implementation_id": "openai-nano-question-independent-visual-description-v1",
+    "provider": "openai",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "request_store": false,
+    "reasoning_effort": "low",
+    "visual_assets": 30,
+    "paired_cases": 60,
+    "maximum_calls": 30,
+    "maximum_retries": 0,
+    "maximum_cost_usd": 2.0
+  },
+  "metrics": {
+    "complete_visual_evidence_at_3": 0.9,
+    "complete_visual_evidence_at_3_count": 27,
+    "visual_fact_complete_count": 19,
+    "mean_visual_fact_recall": 0.7321681038483822,
+    "mean_visual_fact_precision_proxy": 0.3504227324043408,
+    "reference_unmatched_description_segment_count": 219,
+    "boundary_policy_accuracy": 1.0,
+    "boundary_answer_release_count": 0,
+    "original_region_lineage_rate": 1.0,
+    "original_region_lineage_count": 30,
+    "semantic_list_duplicate_removal_count": 6,
+    "assets_with_duplicate_removals": 3
+  },
+  "quality_gates": {
+    "complete_visual_evidence_at_3": true,
+    "visual_fact_complete_count": false,
+    "mean_visual_fact_recall": false,
+    "mean_visual_fact_precision_proxy": false,
+    "reference_unmatched_description_segments": false,
+    "boundary_policy_accuracy": true,
+    "boundary_answer_releases": true,
+    "original_region_lineage": true,
+    "all_passed": false
+  },
+  "provider_accounting": {
+    "calls": 30,
+    "failed_calls": 0,
+    "retries": 0,
+    "input_tokens": 54749,
+    "output_tokens": 11610,
+    "reported_cost_usd": 0.0254623,
+    "maximum_latency_ms": 6666.100165995886,
+    "run_binding_sha256": "79c8afd69dbd1c14c2c97c438a93dfa521c9cc6873a60f7b201593956d184225"
+  },
+  "failures_by_category": {
+    "top_3_retrieval_miss": 3,
+    "visual_fact_incomplete": 11,
+    "reference_unmatched_description_segment": 219
+  },
+  "limitations": [
+    "The frozen lexical precision and unsupported-segment metrics compare a whole-asset description with one non-exhaustive question answer; unmatched segments are not independently verified hallucinations.",
+    "This small public/synthetic development supplement is not representative multimodal evidence.",
+    "The run does not evaluate the complete student answer-generation product path.",
+    "No private course, student, or participant data was processed."
+  ],
+  "authorization_revoked": true,
+  "private_data_used": false,
+  "representative_visual_capability_claim": false
+}

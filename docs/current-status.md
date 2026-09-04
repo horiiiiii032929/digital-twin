@@ -36,15 +36,19 @@ distinguishes mandatory runtime policy/citation safeguards from independent
 component-selection evidence instead of treating an active safeguard as a
 comparative quality result.
 
-Two post-release evidence successors are build-complete and make zero provider
-calls in this checkpoint. `professor-fidelity-proxy-harness-001` supplies a
-12-case blinded C0-C3 packet with deterministic hard gates and a minimum
-two-LLM advisory review contract; it explicitly cannot establish real-professor
-fidelity without professor approval. `true-visual-supplement-003` preserves the
-30-asset/60-case question-independent visual design and original-region
-authority while deterministically canonicalizing duplicate semantic-list
-values that invalidated attempt 002. Its paid execution remains unauthorized,
-so no visual quality result is claimed yet.
+Two post-release evidence successors were prepared.
+`professor-fidelity-proxy-harness-001` supplies a 12-case blinded C0-C3 packet
+with deterministic hard gates and a minimum two-LLM advisory review contract;
+it explicitly cannot establish real-professor fidelity without professor
+approval. `true-visual-supplement-003` then executed the 30-asset/60-case
+question-independent visual design. It completed all 30 exact-model calls for
+USD 0.0254623 and preserved 30/30 original-region lineage and 30/30 boundary
+safety, but only 27/30 answerable assets were retrieved in the top three and
+19/30 met the frozen visual-fact completeness rule. Diagram recall was the
+principal failure. The result is `Refine`, no visual component is selected, and
+its one-time authority is revoked. The reported 219 "unsupported" segments are
+a conservative lexical-reference proxy against one non-exhaustive canonical
+answer, not 219 independently verified hallucinations.
 
 Exact local requalification 006 is now `completed-keep` after the
 multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,
@@ -54,7 +58,7 @@ advanced Email → Password → Sign in. Attempt 001 is retained as invalid beca
 the API correctly rejected a documentation-only edit that changed the frozen
 profile hash. The corrected run restored the immutable profile bytes and did
 not change the selected method or thresholds. The result qualifies a local
-research demo only; the grounding floor and unexecuted true-visual/fidelity
+research demo only; the grounding floor and true-visual/fidelity
 claim boundaries remain unchanged.
 
 ## Release-binding correctness checkpoint
@@ -99,16 +103,16 @@ findings.
 
 ## Endgame repository and Project state
 
-PRs #199, #200, and #201 are merged. The refreshed final-report evidence
-inventory contains 2,019 tracked report-relevant files and 311 registered
-results with zero broken local links. The final local gate passed 1,850
-Python/API tests and 50 frontend tests; repository correctness is 1,075/1,075
-and the execution freeze covers 174/174 guarded entrypoints.
+PRs #199 through #204 are merged. The refreshed final-report evidence
+inventory and exact gate totals are regenerated after each terminal result.
+Qualification 006 passed 1,867 Python/API tests and 50 frontend tests;
+repository correctness was 1,087/1,087 and the execution freeze covered
+175/175 guarded entrypoints.
 
 The exact evaluated local release revision
-`cbdfca679f9622e3674e6e4c26bb9d7afd17d865` is preserved by annotated tag
-`local-r1-governed-v2.1-qualification-005` and published as the Course Digital
-Twin R1 research release. Issues #8, #157, #105, #88, #9, #25, and #198 are
+`7901c9e8b19aa4ba9ccc5cc2dfa8efc55008c491` is preserved by annotated tag
+`local-r1-governed-v2.1-qualification-006` and published as the Course Digital
+Twin R1 research release. Issues #8, #157, #105, #88, #9, #25, #198, and #203 are
 closed and their Project cards are `Done`. Product release is `Keep`; the
 separate academic factual result remains `No Release` for a high grounding
 claim. The active post-release deliverables are the professor checkpoint #44

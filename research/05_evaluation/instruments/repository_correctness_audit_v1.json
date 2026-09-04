@@ -3922,11 +3922,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Post-result review verified the completed-refine terminal state, preserved exact snapshot and public-only binding, recorded the frozen metric limitation, and revoked the one-time 30-call/USD 2 authorization.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "fe7301c3d383e7fbf5a45614e37f547592d0cbf50cb7a7bf3fb1b215c609745a"
+      "sha256": "1fbc15ffbe68f035073efeff3108075b49527bbd38316d2a75133842490ec767"
     },
     {
       "audit_status": "audited",
@@ -8926,7 +8926,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "evidence": "Manual review confirmed the active repository freeze remains fail-closed after removing the consumed true-visual-supplement-003 authorization.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
@@ -11831,11 +11831,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Focused review verifies the revoked terminal state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and fail-closed post-run preflight behavior.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "1178252896375c674485d5b62c33f853116f419d6fac735911928f4b950adaf0"
+      "sha256": "71289030988a436e30e9c0b599e7d042ff010e8deb3fcbfc8f28a618ed2b85c4"
     },
     {
       "audit_status": "audited",
