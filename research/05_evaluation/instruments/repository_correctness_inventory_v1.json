@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "a76a2110e41d7b11bcd58450ba0b67430f564ccbff007c48fa4b374d641db23c",
+  "record_sha256": "76c5030f108676868476bb55328affa9684f2d1cb52692d6242e2dc2c72e48ab",
   "records": [
     {
       "audit": {
@@ -6024,7 +6024,7 @@
     {
       "audit": {
         "domain": "release-profile-correctness",
-        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "evidence": "Release-binding failure analysis restored the exact immutable candidate-v3 bytes and expected SHA-256; explanatory status updates remain outside the frozen profile.",
         "findings": [],
         "reviewed_at": "2026-09-04",
         "reviewer": "codex-post-release-technical-closure"
@@ -6035,7 +6035,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json",
       "risk": "high",
-      "sha256": "a8e306d2b4e418a6cd97b3612fdc611674a97f714ff601beddbede940b568d9d"
+      "sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
     },
     {
       "audit": {

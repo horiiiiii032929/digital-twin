@@ -238,7 +238,7 @@
         "caption-context-description",
         "vision-model-description"
       ],
-      "notes": "Figure bytes and captions exist. Two historical provider attempts were invalid rather than quality results; true-visual-supplement-003 is the built, provider-unauthorized method successor. No figure-description implementation is selected."
+      "notes": "Figure bytes and captions exist, but semantic description has not been evaluated."
     },
     {
       "component": "generator",
@@ -377,7 +377,7 @@
       "evidence_paths": [
         "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
       ],
-      "notes": "Deterministic policy rules are mandatory runtime safeguards and passed local workflow checks, but the component remains pending as an independently selected academic-quality mechanism because the historical condition-level evidence leaked case labels. Runtime activation is not being misrepresented as a comparative Keep decision."
+      "notes": "The historical live path had one assessed-work action failure, but its case-label leakage invalidates condition-level policy evidence. Deterministic rules remain unselected until a corrected adversarial and live-path run is recorded."
     },
     {
       "component": "citation-validation",
@@ -393,7 +393,7 @@
       "evidence_paths": [
         "research/05_evaluation/professor-fidelity-v1-development-001-analysis-correction-001-results.md"
       ],
-      "notes": "The deterministic validator is a mandatory runtime safeguard and local workflow citations resolved correctly, but the component remains pending as an independent quality selection because historical C3 source/page correctness was 13/30 and semantic completeness remains unresolved. Runtime activation is not being misrepresented as a comparative Keep decision."
+      "notes": "The deterministic validator is implemented. Historical citation IDs were structurally valid, but C3 source/page correctness was 13/30 and semantic completeness is unresolved; corrected live malformed-output and semantic evidence are required before selection."
     },
     {
       "component": "conversation-orchestration",
@@ -409,7 +409,7 @@
         "bounded-tutoring-graph-v1",
         "deterministic-turn-state"
       ],
-      "notes": "Confirmation 024 selected governed T1-v2 autonomous with guarded-policy-value-planner-v2 and exact GPT-5.6 Luna planning/bounded strategy generation. Deterministic code owns academic claims, citations, action authority, policy, persistence, and delivery. The separately measured dominance-scoped gate and this exact profile passed local qualification 005. Fresh multi-concept confirmation 025 keeps the assessment-scope correction for requalification; T0 remains rollback.",
+      "notes": "Confirmation 024 selected governed T1-v2 autonomous with guarded-policy-value-planner-v2 and exact GPT-5.6 Luna planning/bounded strategy generation. Deterministic code owns academic claims, citations, action authority, policy, persistence, and delivery. The dominance-scoped gate is a separately measured composition and this profile remains a local candidate until qualification 005 passes.",
       "implementation": {
         "implementation_id": "governed-autonomous-tutoring-graph-v2-1",
         "version": "r1-local-candidate-v2.1-h-e1",

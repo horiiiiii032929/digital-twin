@@ -4130,12 +4130,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "release-profile-correctness",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Release-binding failure analysis restored the exact immutable candidate-v3 bytes and expected SHA-256; explanatory status updates remain outside the frozen profile.",
       "findings": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "a8e306d2b4e418a6cd97b3612fdc611674a97f714ff601beddbede940b568d9d"
+      "sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
     },
     {
       "audit_status": "audited",
