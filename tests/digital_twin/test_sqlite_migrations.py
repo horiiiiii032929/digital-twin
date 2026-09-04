@@ -41,6 +41,7 @@ def test_clean_database_applies_all_ordered_migrations(tmp_path):
         "autonomous_graph_checkpoints",
         "autonomous_wakeups",
         "autonomy_execution_leases",
+        "clarification_requests",
         "schema_migrations",
     }
     repository.close()
@@ -97,9 +98,12 @@ def test_failed_migration_rolls_back_and_is_not_recorded():
         apply_migrations(connection, (failing,))
 
     assert current_schema_version(connection) == 0
-    assert connection.execute(
-        "SELECT 1 FROM sqlite_master WHERE name = 'should_rollback'"
-    ).fetchone() is None
+    assert (
+        connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE name = 'should_rollback'"
+        ).fetchone()
+        is None
+    )
 
 
 def test_applied_migration_checksum_change_fails_closed():
@@ -121,9 +125,12 @@ def test_explicit_empty_migration_set_does_not_apply_defaults():
 
     assert apply_migrations(connection, ()) == 0
     assert current_schema_version(connection) == 0
-    assert connection.execute(
-        "SELECT 1 FROM sqlite_master WHERE name = 'accounts'"
-    ).fetchone() is None
+    assert (
+        connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE name = 'accounts'"
+        ).fetchone()
+        is None
+    )
 
 
 def test_database_with_newer_unknown_migration_fails_closed():

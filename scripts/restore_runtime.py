@@ -11,7 +11,9 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--archive", type=Path, required=True)
     args = parser.parse_args()
-    settings = AppSettings.from_env()
+    # Restore verifies local archive and runtime bindings only; it does not
+    # construct or call a provider client.
+    settings = AppSettings.from_env(require_provider_credentials=False)
     if settings.mode != RuntimeMode.STAGING:
         raise SystemExit("APP_MODE=staging is required for runtime restore")
     manifest = restore_runtime_backup(

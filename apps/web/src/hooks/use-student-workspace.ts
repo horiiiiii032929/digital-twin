@@ -18,6 +18,7 @@ import {
 } from "@/lib/api"
 import type {
   AutonomousGoalV1,
+  ClarificationRequestV1,
   StudentChatMessage,
   StudentCitation,
   StudentConversation,
@@ -58,6 +59,7 @@ export type StudentWorkspaceController = {
   outreachMessages: StudentProactiveMessageView[]
   autonomousGoals: AutonomousGoalV1[]
   learnerEvidence: StudentLearnerEvidence | null
+  pendingClarification: ClarificationRequestV1 | null
   inAppOutreachEnabled: boolean
   outreachSnoozedUntil: string | null
   isLoadingOutreach: boolean
@@ -70,6 +72,7 @@ export type StudentWorkspaceController = {
   startNewConversation: () => Promise<void>
   startCurrentRelease: () => Promise<void>
   sendMessage: () => Promise<void>
+  chooseClarification: (optionId: string) => Promise<void>
   refreshOutreach: () => Promise<void>
   setInAppOutreachEnabled: (enabled: boolean) => Promise<void>
   snoozeOutreach: (days: number | null) => Promise<void>
@@ -109,6 +112,8 @@ export function useStudentWorkspace(
   const [autonomousGoals, setAutonomousGoals] = useState<AutonomousGoalV1[]>([])
   const [learnerEvidence, setLearnerEvidence] =
     useState<StudentLearnerEvidence | null>(null)
+  const [pendingClarification, setPendingClarification] =
+    useState<ClarificationRequestV1 | null>(null)
   const [outreachPreferences, setOutreachPreferences] = useState<
     StudentOutreachPreference[]
   >([])
@@ -153,6 +158,7 @@ export function useStudentWorkspace(
       setCitationsByMessage({})
       setSelectedCitation(null)
       setLearnerEvidence(null)
+      setPendingClarification(null)
       setError(null)
       setIsLoadingConversation(true)
       pendingRequestRef.current = null
@@ -197,6 +203,7 @@ export function useStudentWorkspace(
             setCitationsByMessage(nextCitations)
             setSelectedCitation(latestCitation ?? null)
             setLearnerEvidence(nextLearnerEvidence)
+            setPendingClarification(view.pending_clarification ?? null)
             setIsLoadingConversation(false)
             return
           }
@@ -227,6 +234,7 @@ export function useStudentWorkspace(
         )
         setConversation(created)
         setLearnerEvidence(null)
+        setPendingClarification(null)
         setIsLoadingConversation(false)
       } catch (caught) {
         if (operation !== operationRef.current) return
@@ -384,8 +392,8 @@ export function useStudentWorkspace(
     }
   }, [accountId, activeCourse, loadConversation, saveIndex])
 
-  const sendMessage = useCallback(async () => {
-    const content = draft.trim()
+  const sendContent = useCallback(async (rawContent: string) => {
+    const content = rawContent.trim()
     if (!content || !conversation || isSubmitting) return
 
     const pending = pendingRequestRef.current
@@ -421,6 +429,7 @@ export function useStudentWorkspace(
         [turn.tutor_message.id]: turn.citations,
       }))
       setSelectedCitation(turn.citations[0] ?? null)
+      setPendingClarification(turn.pending_clarification ?? null)
       try {
         setLearnerEvidence(
           await getStudentLearnerEvidence(conversation.id, accountId),
@@ -438,7 +447,20 @@ export function useStudentWorkspace(
     } finally {
       setIsSubmitting(false)
     }
-  }, [accountId, conversation, draft, isSubmitting])
+  }, [accountId, conversation, isSubmitting])
+
+  const sendMessage = useCallback(
+    async () => sendContent(draft),
+    [draft, sendContent],
+  )
+
+  const chooseClarification = useCallback(
+    async (optionId: string) => {
+      setDraft(optionId)
+      await sendContent(optionId)
+    },
+    [sendContent],
+  )
 
   const selectCitation = useCallback(
     (messageId: string, citationId: string) => {
@@ -559,6 +581,7 @@ export function useStudentWorkspace(
     outreachMessages,
     autonomousGoals,
     learnerEvidence,
+    pendingClarification,
     inAppOutreachEnabled:
       outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
       false,
@@ -576,6 +599,7 @@ export function useStudentWorkspace(
     startNewConversation,
     startCurrentRelease,
     sendMessage,
+    chooseClarification,
     refreshOutreach,
     setInAppOutreachEnabled,
     snoozeOutreach,

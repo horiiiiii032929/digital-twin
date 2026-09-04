@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "run_id": "stateful-clarification-confirmation-001",
+  "instrument_id": "stateful-clarification-confirmation-001",
+  "date": "2026-09-05",
+  "status": "completed-keep",
+  "decision": "Keep the one-turn source-bound clarification mechanism for exact local R1.2 requalification; retain R1.1 as rollback until that qualification passes.",
+  "code_revision": "b68318380600509424864e5763cdce5d544c8bd4",
+  "dirty": false,
+  "instrument_sha256": "81d8c9708a2390ed3489a1a1e360073df8b4b084639e22e002063bc52eea85f6",
+  "generated_result_sha256": "2b6dd36e61a0227db28d054745802cc0af0b0b77144462d36bb2e05115c244c7",
+  "baseline": "selected dominance-scoped-ambiguity-safe-v3 evidence gate with terminal fail-closed clarification",
+  "candidate": "the same gate plus one persistent, source-derived, explicitly resolved clarification turn",
+  "dataset": {
+    "kind": "fresh public-synthetic actual-service confirmation",
+    "case_count": 200,
+    "answerable_case_count": 160,
+    "known_10000_plus_1000_touched": false,
+    "private_data_used": false
+  },
+  "results": {
+    "candidate_grounded_completion": 1.0,
+    "control_grounded_completion": 0.25,
+    "paired_completion_delta": 0.75,
+    "unambiguous_control_success": 1.0,
+    "clarification_resolution_accuracy": 1.0,
+    "boundary_safety": 1.0,
+    "invalid_reply_safety": 1.0,
+    "source_version_validity": 1.0,
+    "restart_consistency": 1.0,
+    "idempotency_consistency": 1.0,
+    "unsupported_or_wrong_scope_releases": 0,
+    "duplicate_deliveries": 0,
+    "clarification_turn_ceiling_violations": 0,
+    "provider_calls": 0,
+    "failed_gates": []
+  },
+  "profile_binding": {
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+    "clarification_implementation": "stateful-source-clarification-v1",
+    "rollback": "local-r1-governed-v2.1-qualification-007"
+  },
+  "limitations": [
+    "Public-synthetic source pairs test mechanism correctness, not real-student usability.",
+    "Student clarification replies are scripted and do not estimate natural-language response rates.",
+    "The run does not establish learning improvement or real-professor fidelity.",
+    "The immutable known 10,000+1,000 benchmark was not read, rerun, or rescored."
+  ]
+}

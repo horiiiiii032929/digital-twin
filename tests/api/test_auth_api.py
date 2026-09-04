@@ -656,6 +656,37 @@ def test_live_generator_configuration_requires_environment_credential(
         ).validate()
 
 
+def test_offline_administration_can_validate_without_provider_credentials(
+    tmp_path, monkeypatch
+):
+    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("JINA_API_KEY", raising=False)
+
+    AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        generator_mode=GeneratorMode.OPENAI_GPT_5_4_MINI,
+        visual_retrieval_mode=VisualRetrievalMode.JINA_V4_LATE_INTERACTION,
+        visual_component_ledger_sha256="a" * 64,
+        student_profile_path=CANDIDATE_PROFILE,
+    ).validate(require_provider_credentials=False)
+
+
+def test_offline_credential_bypass_does_not_relax_runtime_safety(tmp_path):
+    with pytest.raises(ValueError, match="staging origins"):
+        AppSettings(
+            mode=RuntimeMode.STAGING,
+            database_path=tmp_path / "db.sqlite3",
+            data_root=tmp_path,
+            allowed_origins=("http://unsafe.example.test",),
+            secure_cookies=True,
+            student_profile_path=CANDIDATE_PROFILE,
+        ).validate(require_provider_credentials=False)
+
+
 def test_t0_rollback_ignores_inactive_openai_autonomy_planner(
     tmp_path, monkeypatch
 ):

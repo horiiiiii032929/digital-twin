@@ -16,7 +16,10 @@ def main() -> None:
     parser.add_argument("--display-name", required=True)
     parser.add_argument("--account-id", default="admin-primary")
     args = parser.parse_args()
-    settings = AppSettings.from_env()
+    # Bootstrap never constructs a provider client. Validate the complete
+    # runtime binding without coupling this offline administrative command to
+    # inference credentials.
+    settings = AppSettings.from_env(require_provider_credentials=False)
     if settings.mode != RuntimeMode.STAGING:
         raise SystemExit("APP_MODE=staging is required for administrator bootstrap")
     password = os.getenv("BOOTSTRAP_ADMIN_PASSWORD", "")

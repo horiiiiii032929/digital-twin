@@ -52,13 +52,11 @@ class AmbiguitySafeEvidenceGateV1:
         # its precise sibling immediately outside it.
         preferred_ids = {
             row.id
-            for row in prefer_specific_source_regions(
-                [hit.chunk for hit in hits]
-            )
+            for row in prefer_specific_source_regions([hit.chunk for hit in hits])
         }
-        bounded = [
-            hit for hit in hits if hit.chunk.id in preferred_ids
-        ][: self.evidence_limit]
+        bounded = [hit for hit in hits if hit.chunk.id in preferred_ids][
+            : self.evidence_limit
+        ]
         if bounded:
             uniqueness = analyze_public_reference_uniqueness(
                 query,
@@ -67,6 +65,17 @@ class AmbiguitySafeEvidenceGateV1:
                 dominance_scoped=self.dominance_scoped,
             )
             if uniqueness.status == "ambiguous":
+                region_ids = {
+                    region_id
+                    for target in uniqueness.targets
+                    if target.status == "ambiguous"
+                    for region_id in target.candidate_region_ids
+                }
+                candidate_hit_ids = [
+                    hit.chunk.id
+                    for hit in bounded
+                    if (hit.chunk.region_id or hit.chunk.id) in region_ids
+                ]
                 return EvidenceSufficiencyDecision(
                     sufficient=False,
                     score=0.0,
@@ -78,6 +87,7 @@ class AmbiguitySafeEvidenceGateV1:
                         "base_gate_called": False,
                     },
                     selected_hit_ids=[],
+                    clarification_candidate_hit_ids=candidate_hit_ids,
                     recommended_action="clarify",
                 )
         return self.base.assess(query, bounded)

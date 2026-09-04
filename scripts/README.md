@@ -5,6 +5,13 @@ data validation, or project automation scripts.
 
 Current utilities:
 
+- `run_stateful_clarification_confirmation.py`: validates and executes the
+  frozen, network-free 200-case R1.2 mixed-initiative clarification
+  confirmation. It drives the actual student service and SQLite persistence,
+  checks restart and idempotency, and never reads the known 10,000+1,000
+  package or calls a provider. Use `npm run verify:stateful-clarification`,
+  `npm run simulate:stateful-clarification`, or—once from a clean committed
+  revision—`npm run execute:stateful-clarification`.
 - `evaluate_ml_dependency_compatibility.py` and
   `compare_ml_dependency_compatibility.py`: run and compare a three-trial,
   development-only selected-M2 compatibility check before and after ML-library

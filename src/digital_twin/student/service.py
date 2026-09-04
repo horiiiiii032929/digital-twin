@@ -52,6 +52,13 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
     TutorTurn,
 )
+from src.digital_twin.student.clarification import (
+    ClarificationRequestV1,
+    ClarificationStatus,
+    build_clarification_request,
+    render_clarification_prompt,
+    resolve_clarification_option,
+)
 from src.digital_twin.student.learning_gap import (
     LearningGapEvidenceStatus,
     LearningGapPrivacyPolicyV1,
@@ -76,7 +83,11 @@ from src.digital_twin.student.autonomy_runtime import (
     DETERMINISTIC_PLANNER_MODEL,
     GRAPH_VERSION,
 )
-from src.digital_twin.student.repository import DuplicateTurnError, StudentRepository
+from src.digital_twin.student.repository import (
+    ClarificationConflictError,
+    DuplicateTurnError,
+    StudentRepository,
+)
 from src.digital_twin.student.repository import LearnerStateConflictError
 from src.digital_twin.student.tutoring_graph import (
     BoundedTutoringGraph,
@@ -84,6 +95,7 @@ from src.digital_twin.student.tutoring_graph import (
     LearnerState,
     ReactiveSemanticPlanner,
     TutoringGraphInput,
+    TutoringIntent,
     TutoringMode,
     deterministic_policy_boundary_answer,
     retrieval_boundary_intent,
@@ -259,6 +271,9 @@ class StudentTutoringService:
         return ConversationView(
             conversation=conversation,
             messages=self.repository.list_messages(conversation.id),
+            pending_clarification=self.repository.get_pending_clarification(
+                conversation.id
+            ),
         )
 
     async def submit_message(
@@ -297,6 +312,9 @@ class StudentTutoringService:
                 tutoring_mode=tutor_message.tutoring_mode,
                 tutoring_intent=tutor_message.tutoring_intent,
                 learner_state_revision=tutor_message.learner_state_revision,
+                pending_clarification=self.repository.get_pending_clarification(
+                    conversation.id
+                ),
             )
         release = self._require_current_release(conversation, account_id)
         turn_timestamp = utc_timestamp(self.clock.now())
@@ -306,7 +324,126 @@ class StudentTutoringService:
         learner_state: LearnerState | None = None
         reactive_v2_artifacts = None
         expected_learner_state_revision: int | None = None
-        if tutoring_graph is None:
+        pending_clarification = self.repository.get_pending_clarification(
+            conversation.id
+        )
+        if (
+            pending_clarification is not None
+            and self.clock.now()
+            >= datetime.fromisoformat(pending_clarification.expires_at)
+        ):
+            self.repository.expire_clarification(
+                pending_clarification.request_id,
+                expired_at=turn_timestamp,
+            )
+            pending_clarification = None
+        resolved_option = (
+            resolve_clarification_option(pending_clarification, content)
+            if pending_clarification is not None
+            else None
+        )
+        resolved_clarification: ClarificationRequestV1 | None = None
+        if pending_clarification is not None:
+            learner_state = None
+            expected_learner_state_revision = None
+            reactive_v2_artifacts = None
+            if resolved_option is None:
+                hits = []
+                retrieval_events = [
+                    self._event(
+                        "clarification-reply-unresolved",
+                        account_id=account_id,
+                        course_id=conversation.course_id,
+                        release_id=release.id,
+                        conversation_id=conversation.id,
+                        details={"request_id": pending_clarification.request_id},
+                    )
+                ]
+                answer = self._clarification_policy_answer(
+                    render_clarification_prompt(pending_clarification)
+                )
+                generation_events = []
+                tutoring_intent = "clarification-pending"
+            else:
+                original = self.repository.get_message(
+                    pending_clarification.original_student_message_id
+                )
+                if (
+                    original is None
+                    or original.conversation_id != conversation.id
+                    or original.role != "student"
+                    or hashlib.sha256(
+                        original.content.strip().encode("utf-8")
+                    ).hexdigest()
+                    != pending_clarification.original_question_sha256
+                ):
+                    raise StudentWorkflowError(
+                        "clarification_lineage_invalid",
+                        "The pending clarification no longer matches its original turn.",
+                    )
+                chunk = next(
+                    (
+                        candidate
+                        for candidate in release.chunks
+                        if candidate.id == resolved_option.source_chunk_id
+                        and (candidate.source_artifact_id or candidate.document_id)
+                        == resolved_option.source_artifact_id
+                        and candidate.source_version == resolved_option.source_version
+                        and candidate.region_id == resolved_option.region_id
+                        and (
+                            resolved_option.source_checksum is None
+                            or candidate.source_checksum
+                            == resolved_option.source_checksum
+                        )
+                        and hashlib.sha256(
+                            str(
+                                candidate.metadata.get(
+                                    "semantic_atom_claim", candidate.text
+                                )
+                            )
+                            .strip()
+                            .casefold()
+                            .encode("utf-8")
+                        ).hexdigest()
+                        == resolved_option.claim_class_sha256
+                        and candidate.retrieval_allowed
+                    ),
+                    None,
+                )
+                if chunk is None:
+                    raise StudentWorkflowError(
+                        "clarification_source_unavailable",
+                        "The selected interpretation is no longer in the active release.",
+                    )
+                hits = [RetrievalHit(chunk=chunk, relevance_score=1.0, raw_score=1.0)]
+                retrieval_events = [
+                    self._event(
+                        "clarification-option-selected",
+                        account_id=account_id,
+                        course_id=conversation.course_id,
+                        release_id=release.id,
+                        conversation_id=conversation.id,
+                        details={
+                            "request_id": pending_clarification.request_id,
+                            "option_id": resolved_option.option_id,
+                            "source_chunk_id": resolved_option.source_chunk_id,
+                        },
+                    )
+                ]
+                answer, generation_events = await self._generate(
+                    release,
+                    hits,
+                    original.content,
+                    account_id=account_id,
+                    conversation=conversation,
+                )
+                answer = self._ensure_v2_atomic_claims(
+                    answer,
+                    hits,
+                    tutoring_mode=tutoring_mode,
+                )
+                tutoring_intent = "clarification-resolved"
+        elif tutoring_graph is None:
             hits, retrieval_events = self._retrieve(
                 release,
                 account_id=account_id,
@@ -438,6 +575,40 @@ class StudentTutoringService:
             tutoring_mode=tutoring_mode,
             created_at=now,
         )
+        clarification_request: ClarificationRequestV1 | None = None
+        clarification_candidate_ids = self._clarification_candidate_ids(
+            [*retrieval_events, *generation_events]
+        )
+        if pending_clarification is None and len(clarification_candidate_ids) >= 2:
+            chunks_by_id = {chunk.id: chunk for chunk in release.chunks}
+            candidates = [
+                chunks_by_id[hit_id]
+                for hit_id in clarification_candidate_ids
+                if hit_id in chunks_by_id
+            ]
+            clarification_request = build_clarification_request(
+                conversation_id=conversation.id,
+                student_id=account_id,
+                course_id=conversation.course_id,
+                release_id=release.id,
+                original_student_message_id=student_message.id,
+                original_question=content,
+                chunks=candidates,
+                created_at=now,
+            )
+            answer = self._clarification_policy_answer(
+                render_clarification_prompt(clarification_request)
+            )
+            tutoring_intent = "clarification-request"
+        elif pending_clarification is not None and resolved_option is not None:
+            resolved_clarification = pending_clarification.model_copy(
+                update={
+                    "status": ClarificationStatus.RESOLVED,
+                    "selected_option_id": resolved_option.option_id,
+                    "resolved_by_message_id": student_message.id,
+                    "resolved_at": now,
+                }
+            )
         tutor_message = Message(
             id=f"message-{uuid4()}",
             conversation_id=conversation.id,
@@ -533,6 +704,8 @@ class StudentTutoringService:
                 responding_to_outreach_message_id,
                 completed_autonomous_goal_ids,
                 reactive_v2_artifacts,
+                clarification_request,
+                resolved_clarification,
             )
         except DuplicateTurnError:
             existing = self.repository.find_turn(conversation.id, client_request_id)
@@ -559,8 +732,11 @@ class StudentTutoringService:
                 tutoring_mode=stored_tutor.tutoring_mode,
                 tutoring_intent=stored_tutor.tutoring_intent,
                 learner_state_revision=stored_tutor.learner_state_revision,
+                pending_clarification=self.repository.get_pending_clarification(
+                    conversation.id
+                ),
             )
-        except LearnerStateConflictError as error:
+        except (LearnerStateConflictError, ClarificationConflictError) as error:
             raise StudentWorkflowError(
                 "learner_state_conflict",
                 "Another tutoring turn advanced this conversation. Please resend.",
@@ -573,6 +749,10 @@ class StudentTutoringService:
             tutoring_intent=tutoring_intent,
             learner_state_revision=(
                 learner_state.revision if learner_state is not None else None
+            ),
+            pending_clarification=(
+                clarification_request
+                or (pending_clarification if resolved_option is None else None)
             ),
         )
 
@@ -1122,6 +1302,40 @@ class StudentTutoringService:
                 },
             )
         )
+        eligible_hit_ids = {hit.chunk.id for hit in hits}
+        for rank, hit_id in enumerate(
+            decision.clarification_candidate_hit_ids,
+            start=1,
+        ):
+            if hit_id not in eligible_hit_ids:
+                events.append(
+                    self._event(
+                        "evidence-sufficiency-failure",
+                        account_id=account_id,
+                        course_id=conversation.course_id,
+                        release_id=release.id,
+                        conversation_id=conversation.id,
+                        details={
+                            "implementation": getattr(
+                                self.evidence_gate,
+                                "implementation_id",
+                                "evidence-gate",
+                            ),
+                            "failure_type": "unknown-clarification-candidate",
+                        },
+                    )
+                )
+                continue
+            events.append(
+                self._event(
+                    "evidence-clarification-candidate",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                    details={"hit_id": hit_id, "rank": rank},
+                )
+            )
         if not decision.sufficient:
             return [], events
         if not decision.selected_hit_ids:
@@ -1157,6 +1371,25 @@ class StudentTutoringService:
             conversation=graph_input.conversation,
             question=graph_input.student_message,
         )
+
+    @staticmethod
+    def _clarification_candidate_ids(events: Sequence[AuditEvent]) -> list[str]:
+        candidates: list[tuple[int, str]] = []
+        for event in events:
+            if event.event_type != "evidence-clarification-candidate":
+                continue
+            hit_id = event.details.get("hit_id")
+            rank = event.details.get("rank")
+            if isinstance(hit_id, str) and isinstance(rank, int):
+                candidates.append((rank, hit_id))
+        return list(dict.fromkeys(hit_id for _, hit_id in sorted(candidates)))
+
+    @staticmethod
+    def _clarification_policy_answer(content: str) -> TutorAnswer:
+        answer = deterministic_policy_boundary_answer(TutoringIntent.CLARIFY_REQUEST)
+        if answer is None:  # pragma: no cover - fixed policy mapping
+            raise RuntimeError("clarification policy response is unavailable")
+        return answer.model_copy(update={"content": content})
 
     async def _graph_generate(
         self,

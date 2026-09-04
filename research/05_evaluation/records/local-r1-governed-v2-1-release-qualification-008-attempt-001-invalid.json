@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-008-attempt-001-invalid",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-008",
+  "date": "2026-09-05",
+  "status": "invalid-execution",
+  "code_revision": "660381f0d198cf3cc27ead7e39791041a14fb2e0",
+  "decision": "Preserve the invalid attempt and permit one fresh root-cause successor that decouples offline administration from provider credentials without relaxing runtime validation.",
+  "results": {
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "backup": "not-started-configuration-rejected",
+    "clean_restore": "not-started",
+    "t0_rollback": "not-started",
+    "governed_v2_1_restoration": "not-started",
+    "provider_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "root_cause": "Offline bootstrap, backup, restore, and lifecycle commands invoked full runtime provider-credential validation despite never constructing a provider client.",
+  "permitted_correction": "Add an explicit credential-independent settings-validation mode for offline administrative commands only; retain all other safety validation and default runtime credential enforcement.",
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false
+}

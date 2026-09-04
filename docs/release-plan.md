@@ -8,6 +8,27 @@ defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
 
+## R1.2 stateful clarification candidate
+
+Issue #212 preserves the selected R1.1 gate and replaces terminal clarification
+for a genuine source tie with one persisted, source-bound choice. The gate is
+not relaxed and the product does not infer a selection from ambiguous free
+text. The frozen 200-case network-free actual-service confirmation completed
+Keep at 100% candidate grounded completion versus 25% for the fail-closed
+control, with every safety and persistence gate passing. The exact composition
+therefore advances once to local R1.2 requalification. Until that
+requalification passes, R1.1 remains the released rollback and no
+academic-grounding threshold claim changes.
+
+Qualification 008 attempt 001 passed 31 operational checks before exposing a
+real backup-operations defect: offline administrative commands depended on an
+otherwise valid inference credential. The invalid attempt is preserved. One
+successor changed only this shared settings boundary, retained normal runtime
+credential enforcement, and repeated the exact qualification from a fresh
+revision and isolated stack. Qualification 008 then passed all 43 machine
+checks plus desktop and exact 390x844 browser smoke. Local R1.2 is the selected
+research-demo composition; R1.1 and T0 remain documented rollbacks.
+
 ## Local R1.1 completion checkpoint
 
 Issue #210 adds two bounded post-release decisions without reopening the known
@@ -64,9 +85,11 @@ calls; Luna behavior remains bound to immutable confirmation 024.
 
 ## Released R1 product
 
-The best evaluated working design is published as
-[Course Digital Twin R1.1 — Governed Autonomy V2.1](https://github.com/horiiiiii032929/digital-twin/releases/tag/local-r1-governed-v2.1-qualification-007).
-The product decision is `Keep` for the exact local research-release scope. The
+The best evaluated working design is local R1.2: the R1.1 governed-autonomy
+composition plus `stateful-source-clarification-v1`, qualified by
+`local-r1-governed-v2-1-release-qualification-008`. R1.1 remains published as
+the historical rollback until the R1.2 evidence PR is merged and tagged. The
+product decision is `Keep` for this exact local research-release scope. The
 known 10,000+1,000 `No Release` outcome is retained separately as the academic
 factual-grounding decision and limits the claims made about this release.
 

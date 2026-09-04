@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.digital_twin.generation.policy import policy_is_approved_for_generation
 from src.digital_twin.grounding.models import DocumentChunk, GenerationTrace
+from src.digital_twin.student.clarification import ClarificationRequestV1
 from src.digital_twin.tutor_policy import TutorPolicy, timestamp_now
 
 
@@ -66,9 +67,7 @@ class DigitalTwinRelease(BaseModel):
     policy_version: int = Field(ge=1)
     policy: TutorPolicy
     teaching_profile_id: str | None = None
-    teaching_profile_sha256: str | None = Field(
-        default=None, pattern=r"^[0-9a-f]{64}$"
-    )
+    teaching_profile_sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$")
     chunks: list[DocumentChunk]
     status: StudentReleaseStatus = StudentReleaseStatus.DRAFT
     evaluation_status: ReleaseEvaluationStatus = ReleaseEvaluationStatus.PENDING
@@ -87,9 +86,7 @@ class DigitalTwinRelease(BaseModel):
             raise ValueError(
                 "published releases require passed evaluation, evidence, and policy"
             )
-        if (self.teaching_profile_id is None) != (
-            self.teaching_profile_sha256 is None
-        ):
+        if (self.teaching_profile_id is None) != (self.teaching_profile_sha256 is None):
             raise ValueError("release teaching-profile ID and hash must be paired")
         return self
 
@@ -228,6 +225,7 @@ class ReleasePreflightResult(BaseModel):
 class ConversationView(BaseModel):
     conversation: Conversation
     messages: list[Message]
+    pending_clarification: ClarificationRequestV1 | None = None
 
 
 class TutorTurn(BaseModel):
@@ -238,6 +236,7 @@ class TutorTurn(BaseModel):
     tutoring_mode: str = "grounded-assistant"
     tutoring_intent: str | None = None
     learner_state_revision: int | None = Field(default=None, ge=0)
+    pending_clarification: ClarificationRequestV1 | None = None
 
 
 class OutreachChannel(StrEnum):
@@ -328,8 +327,10 @@ class OutreachPreference(BaseModel):
     def enabled_channel_must_have_safe_destination(self) -> "OutreachPreference":
         if self.channel == OutreachChannel.IN_APP and self.destination_ref is not None:
             raise ValueError("in-app outreach cannot use an external destination")
-        if self.channel == OutreachChannel.DISCORD and self.enabled and (
-            not self.destination_ref or not self.private_destination
+        if (
+            self.channel == OutreachChannel.DISCORD
+            and self.enabled
+            and (not self.destination_ref or not self.private_destination)
         ):
             raise ValueError(
                 "enabled Discord outreach requires a linked private destination"

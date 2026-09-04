@@ -6,6 +6,43 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Prospective R1.2 clarification checkpoint
+
+Issue #212 owns one finite successor to the measured grounding floor. It does
+not reopen or rescore the known 10,000+1,000 benchmark. The selected
+`dominance-scoped-ambiguity-safe-v3` gate remains authoritative; its genuine
+ties now carry bounded candidate-region lineage into one persistent,
+source-derived clarification turn. A student selection is revalidated against
+the active release, source version, checksum, region, and claim fingerprint
+before generation. Invalid replies remain `clarify`, and release withdrawal
+cancels pending requests.
+
+The implementation includes the SQLite lifecycle, restart-safe service path,
+student quick replies, and a frozen 200-case network-free product confirmation.
+`stateful-clarification-confirmation-001` executed once from clean revision
+`b683183` and is `completed-keep`: candidate grounded completion was 100%
+versus 25% for the fail-closed control (+75 percentage points), with 100%
+boundary safety, invalid-reply safety, source-version validity, restart, and
+idempotency checks. Unsafe releases, duplicates, clarification-loop violations,
+and provider calls were all zero. The mechanism now proceeds to exact local
+R1.2 requalification; R1.1 remains the rollback until that passes. The claim is
+limited to mechanism correctness; real-student interpretation choice, learning
+improvement, and professor fidelity remain unproven.
+
+The first exact R1.2 qualification attempt is preserved as
+`invalid-execution`. Its fresh HTTPS and restart checks passed 25/25 and 6/6,
+but backup startup incorrectly required an inference credential even though the
+offline command does not construct a provider client. Restore and rollback were
+therefore not claimed. One root-cause correction now separates offline
+administrative credential validation from runtime/provider validation; all
+other staging, profile, source, and qualification checks remain fail closed.
+The successor ran from clean revision `e86d664` and a fresh isolated stack. It
+is `completed-keep`: 25/25 HTTPS, 6/6 restart, 6/6 clean restore, 3/3 T0
+rollback, and 3/3 governed V2.1 restoration checks passed. The exact 390x844
+browser smoke had no horizontal overflow and all login controls were labelled.
+Local R1.2 is therefore operationally qualified with bounded stateful
+clarification, text/OCR visual fallback, and T0/R1.1 rollback boundaries.
+
 ## Final local R1.1 technical checkpoint
 
 Issue #210 owns one finite post-release checkpoint. The professor-feedback

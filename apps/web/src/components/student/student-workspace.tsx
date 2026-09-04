@@ -49,6 +49,7 @@ import {
 import type { StudentWorkspaceController } from "@/hooks/use-student-workspace"
 import type {
   AutonomousGoalV1,
+  ClarificationRequestV1,
   StudentChatMessage,
   StudentCitation,
   StudentCourse,
@@ -88,6 +89,7 @@ export function StudentWorkspace({
     outreachMessages,
     autonomousGoals,
     learnerEvidence,
+    pendingClarification,
     inAppOutreachEnabled,
     outreachSnoozedUntil,
     isLoadingOutreach,
@@ -100,6 +102,7 @@ export function StudentWorkspace({
     startNewConversation,
     startCurrentRelease,
     sendMessage,
+    chooseClarification,
     refreshOutreach,
     setInAppOutreachEnabled,
     snoozeOutreach,
@@ -195,6 +198,9 @@ export function StudentWorkspace({
                 citationsByMessage={citationsByMessage}
                 selectedCitation={selectedCitation}
                 isLoading={isLoadingConversation}
+                pendingClarification={pendingClarification}
+                isSubmitting={isSubmitting}
+                onChooseClarification={chooseClarification}
                 onOpenCitation={openCitation}
               />
               <Composer
@@ -888,6 +894,9 @@ function Conversation({
   citationsByMessage,
   selectedCitation,
   isLoading,
+  pendingClarification,
+  isSubmitting,
+  onChooseClarification,
   onOpenCitation,
 }: {
   course: StudentCourse | null
@@ -895,6 +904,9 @@ function Conversation({
   citationsByMessage: Record<string, StudentCitation[]>
   selectedCitation: StudentCitation | null
   isLoading: boolean
+  pendingClarification: ClarificationRequestV1 | null
+  isSubmitting: boolean
+  onChooseClarification: (optionId: string) => Promise<void>
   onOpenCitation: (
     messageId: string,
     citationId: string,
@@ -918,9 +930,59 @@ function Conversation({
             onOpenCitation={onOpenCitation}
           />
         ))}
+        {pendingClarification ? (
+          <ClarificationOptions
+            request={pendingClarification}
+            disabled={isSubmitting}
+            onChoose={onChooseClarification}
+          />
+        ) : null}
         <ChatContainerScrollAnchor />
       </ChatContainerContent>
     </ChatContainerRoot>
+  )
+}
+
+function ClarificationOptions({
+  request,
+  disabled,
+  onChoose,
+}: {
+  request: ClarificationRequestV1
+  disabled: boolean
+  onChoose: (optionId: string) => Promise<void>
+}) {
+  return (
+    <section
+      className="ml-12 max-w-[70ch] rounded-xl border border-[var(--accent)]/20 bg-[var(--accent-soft)]/45 p-3.5"
+      aria-labelledby={`clarification-${request.request_id}`}
+    >
+      <h3
+        id={`clarification-${request.request_id}`}
+        className="text-sm font-semibold text-foreground"
+      >
+        Choose the meaning you intended
+      </h3>
+      <p className="mt-1 text-xs leading-5 text-muted-foreground">
+        The tutor will use only the selected approved source passage.
+      </p>
+      <div className="mt-3 flex flex-col gap-2">
+        {request.options.map((option, index) => (
+          <button
+            key={option.option_id}
+            type="button"
+            disabled={disabled}
+            className="flex min-h-11 w-full items-start gap-3 rounded-lg border bg-white px-3 py-2.5 text-left text-sm leading-5 outline-none transition-colors hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] focus-visible:ring-2 focus-visible:ring-ring/40 disabled:cursor-not-allowed disabled:opacity-60"
+            onClick={() => void onChoose(option.option_id)}
+          >
+            <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-[var(--accent-soft)] text-xs font-semibold text-[var(--accent-strong)]">
+              {index + 1}
+            </span>
+            <span>{option.label}</span>
+          </button>
+        ))}
+      </div>
+    </section>
   )
 }
 

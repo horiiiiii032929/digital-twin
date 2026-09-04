@@ -32,7 +32,7 @@ from src.digital_twin.grounding.reference_uniqueness import (
 from src.digital_twin.tutor_policy import SourceLabel
 
 
-QUESTION = 'What does the source state about the approved evidence version recorded before an interruption?'
+QUESTION = "What does the source state about the approved evidence version recorded before an interruption?"
 
 LEADER = (
     "The approved evidence version is recorded before an interruption and the "
@@ -95,16 +95,22 @@ TIED = (_chunk("leader", LEADER), _chunk("rival", RIVAL))
 def test_v1_refuses_when_a_weaker_candidate_disagrees() -> None:
     """The behaviour being corrected, pinned so the successor is comparable."""
 
-    decision = AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).assess(QUESTION, _hits(*DOMINATED))
+    decision = AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).assess(
+        QUESTION, _hits(*DOMINATED)
+    )
 
     assert decision.sufficient is False
     assert "ambiguous" in decision.reason
+    assert decision.clarification_candidate_hit_ids == [
+        "region-leader",
+        "region-weaker",
+    ]
 
 
 def test_successor_resolves_when_the_leader_dominates() -> None:
-    decision = DominanceScopedAmbiguitySafeEvidenceGateV3(_base(), evidence_limit=5).assess(
-        QUESTION, _hits(*DOMINATED)
-    )
+    decision = DominanceScopedAmbiguitySafeEvidenceGateV3(
+        _base(), evidence_limit=5
+    ).assess(QUESTION, _hits(*DOMINATED))
 
     assert decision.sufficient is True
 
@@ -112,18 +118,24 @@ def test_successor_resolves_when_the_leader_dominates() -> None:
 def test_successor_still_refuses_a_genuine_tie() -> None:
     """The safety property: equal coverage plus disagreement stays closed."""
 
-    decision = DominanceScopedAmbiguitySafeEvidenceGateV3(_base(), evidence_limit=5).assess(
-        QUESTION, _hits(*TIED)
-    )
+    decision = DominanceScopedAmbiguitySafeEvidenceGateV3(
+        _base(), evidence_limit=5
+    ).assess(QUESTION, _hits(*TIED))
 
     assert decision.sufficient is False
     assert "ambiguous" in decision.reason
+    assert decision.clarification_candidate_hit_ids == [
+        "region-leader",
+        "region-rival",
+    ]
 
 
 def test_v1_also_refuses_the_genuine_tie() -> None:
     """Both gates agree wherever the tie is real; only the veto case differs."""
 
-    decision = AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).assess(QUESTION, _hits(*TIED))
+    decision = AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).assess(
+        QUESTION, _hits(*TIED)
+    )
 
     assert decision.sufficient is False
 
@@ -148,4 +160,7 @@ def test_the_successor_declares_its_own_identity() -> None:
     gate = DominanceScopedAmbiguitySafeEvidenceGateV3(_base(), evidence_limit=5)
 
     assert gate.implementation_id == "dominance-scoped-ambiguity-safe-v3"
-    assert AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).implementation_id != gate.implementation_id
+    assert (
+        AmbiguitySafeEvidenceGateV1(_base(), evidence_limit=5).implementation_id
+        != gate.implementation_id
+    )

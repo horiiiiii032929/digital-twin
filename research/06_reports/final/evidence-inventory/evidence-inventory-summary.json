@@ -1,18 +1,18 @@
 {
-  "code_revision": "60495ec5018c791fe591151a8f3c67a6ee1a0f17",
+  "code_revision": "e86d664075728f44387b518c121a2ce6e1f401a2",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
       "drop": 7,
       "go-deeper": 44,
-      "invalid": 95,
-      "keep": 95,
+      "invalid": 97,
+      "keep": 96,
       "no-release": 27,
       "other": 8,
       "refine": 46
     },
-    "machine_record_count": 248,
-    "result_count": 322,
+    "machine_record_count": 251,
+    "result_count": 325,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -37,12 +37,12 @@
       "valid_json": 20
     },
     "evaluation-instrument": {
-      "files": 257,
-      "valid_json": 257
+      "files": 258,
+      "valid_json": 258
     },
     "machine-result-record": {
-      "files": 249,
-      "valid_json": 249
+      "files": 252,
+      "valid_json": 252
     }
   },
   "local_evidence_aggregates": [
@@ -78,9 +78,9 @@
     },
     {
       "directory": "reports/generated",
-      "file_count": 8885,
+      "file_count": 9814,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 8566479618
+      "total_bytes": 8580294879
     }
   ],
   "record_join_quality": {
@@ -136,37 +136,37 @@
         "run_id": ""
       }
     ],
-    "without_component_count": 104,
-    "without_corpus_id_count": 109,
-    "without_dataset_id_count": 103
+    "without_component_count": 107,
+    "without_corpus_id_count": 112,
+    "without_dataset_id_count": 106
   },
   "repository_files": {
     "by_category": {
       "architecture-or-operations-documentation": 43,
-      "automated-or-manual-verification": 277,
-      "backend-implementation": 165,
+      "automated-or-manual-verification": 279,
+      "backend-implementation": 166,
       "committed-evaluation-dataset": 69,
       "component-or-release-profile": 20,
       "data-governance-or-schema": 6,
       "deployment-configuration": 8,
-      "evaluation-instrument": 262,
+      "evaluation-instrument": 263,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 404,
-      "experiment-plan-or-learning-log": 82,
+      "evaluation-summary-or-rubric": 407,
+      "experiment-plan-or-learning-log": 83,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 249,
+      "machine-result-record": 252,
       "project-governance-or-ci": 5,
       "report-or-figure": 66,
       "repository-configuration": 7,
-      "reproduction-or-analysis-tool": 302,
+      "reproduction-or-analysis-tool": 303,
       "requirement-or-user-research": 6,
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2079
+      "tracked": 2091
     },
-    "count": 2079
+    "count": 2091
   },
   "schema_version": 1
 }

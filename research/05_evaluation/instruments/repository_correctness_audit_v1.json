@@ -312,13 +312,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-ux",
-      "evidence": "Impeccable cross-review plus desktop and 390px mobile rendered QA; student consent, seven-day snooze, immediate resume, goals, inbox, and responsive chat behavior were inspected. Oxlint, 50 Vitest tests, TypeScript, production Vite build, and the 1,389-test Python gate passed.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "90b578997718aee2b0eeb8646e556475272a294208338483fdbabe92f59ccb92"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "9253b67fc42f3ca37168c2dee9b7937f155f9960348ec260de9ac1968d2e1ec4"
     },
     {
       "audit_status": "audited",
@@ -521,13 +521,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-ux",
-      "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "3eed6109bbd1ef10f9acd0be963167380f6eb29d3ff087a669dc73cbb2384aa3"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "4003f9210524e1880c7b5dca3dda06155ce5a57bbfe2ac6150752fc215e3c7e2"
     },
     {
       "audit_status": "audited",
@@ -642,13 +642,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "professor-feedback-revision-workflow",
-      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "apps/web/src/lib/api/types.ts",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "799d34480b11beefc92211c0a1d70a5a7a79412a8390f816503e38cc6230702a"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "14064cfe12a95acd711ba4dd2e56cd8842a8aa800ced4d4b9e433c8802d0f158"
     },
     {
       "audit_status": "audited",
@@ -972,13 +972,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "c7c40177d2da5f5466bf4c480749082385bd5c95f640ec24f92acaed57586c4f"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "a63aea6a30a9089d0fd883de60d07743531b1fff7e0c2206004260d12563d08c"
     },
     {
       "audit_status": "audited",
@@ -3843,6 +3843,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/stateful_clarification_confirmation_001.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "81d8c9708a2390ed3489a1a1e360073df8b4b084639e22e002063bc52eea85f6"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
       "evidence": "Instrument review confirms immutable 1,000-case public/gold hashes, 2,000 paired A/H graph cells, the completed fixed-Luna execution, hidden-gold opening only after durable cells, and terminal authorization revocation without automatic progression.",
       "findings": [],
@@ -4515,12 +4526,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/backup_runtime.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "5497fba675fc5ffada2cf38d25fa316b90d369409ed1e2570005c7caf16fd40d"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "d53f47ad85554190ec15379032772bdda856ad7eb1641f34c5f6b8c9403b3739"
     },
     {
       "audit_status": "audited",
@@ -4548,12 +4559,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/bootstrap_admin.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "f5c4d5232466648ae65c374c6448141b5986fe6fce9d84dc0955dffef357fae9"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "2e9f1896058b887bd7f9519e188b48fda38a29ee5e7c3fd9e24ae7f6305e731b"
     },
     {
       "audit_status": "audited",
@@ -5571,12 +5582,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "runtime-lifecycle",
-      "evidence": "CLI reviewed for staging-only mode, exact destructive confirmation, durable deletion retry, and configured storage roots; covered by lifecycle tests and full check.",
+      "evidence": "Lifecycle CLI and the credential-independent offline-administration boundary were reviewed with staging-only, exact destructive-confirmation, runtime credential, lifecycle, and Ruff tests; no provider call or safety validation is bypassed.",
       "findings": [],
       "path": "scripts/manage_runtime_data.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "9d972ee8efc0357e3f52acc2def3543b3f05dc395227255033028b41ef1980ce"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "205a7250ea63f1e8677e1d125ac0aa88b45653fcbbf50a6b16c577229f861e03"
     },
     {
       "audit_status": "audited",
@@ -5747,12 +5758,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
+      "evidence": "Root-cause review after qualification-008 attempt 001, offline-administration credential-boundary regression tests, runtime credential fail-closed tests, Ruff, backup/restore tests, and active execution-freeze validation found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/restore_runtime.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "6a277a6d000acd66aa48743945aa6ea577e3ebb4838dbf4663fef94c9fbe2920"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "de0c0920a0853447ef012d84f8b9bc632a93bd84623a3dc506151b1cdf05769d"
     },
     {
       "audit_status": "audited",
@@ -6923,6 +6934,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "findings": [],
+      "path": "scripts/run_stateful_clarification_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "0c27bd74c003174648275bfbd16d7b05e232c738be96086268571c3d0604cd05"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "autonomy-architecture-evaluation",
       "evidence": "Runner review confirmed exact case/hash/model bindings, one proposal per eligible case, migrated actual-graph execution, atomic resume, hidden-gold opening only after 2,000 durable cells, safe provider fallback, paired bootstrap analysis, and a finite H-or-A decision.",
       "findings": [],
@@ -7407,13 +7429,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "19ac69b26e586e6a8447afc95b693b08eab0b912cb7a80efa588e4b2e7b8cadb"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "8de383ee89d723d8476b44b6845b003c98bd1bec0b66015449b72db7bfbb2165"
     },
     {
       "audit_status": "audited",
@@ -7540,12 +7562,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "evidence": "Root-cause review separates provider credential checks from offline administration while preserving all staging/profile/qualification validation; focused configuration, API, backup/restore, and runtime fail-closed tests pass.",
       "findings": [],
       "path": "services/api/app/config.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "b6b6968f4cb126bdcac1776083138cc8f388357f654287a7516acc51ad4420f6"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "353f8e5931c8d2033dbed3b51d28274bd0a3862f34fedb00c8f3dd9c19920365"
     },
     {
       "audit_status": "audited",
@@ -8540,13 +8562,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "ambiguity-safe-grounding",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/grounding/ambiguity_safe_evidence.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "df27719ffac8bcb879faa909f41d58602bc0ef0c3c773f9ea680d56f70cb5294"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "2f5f4bc6831621c87b092178124a18ce9d6dfc52f9c288bd70619697de31d822"
     },
     {
       "audit_status": "audited",
@@ -8584,13 +8606,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "grounding-and-retrieval-correctness",
-      "evidence": "Decision-contract review verifies a sufficient decision cannot carry a boundary recommendation and that insufficient evidence may recommend only clarify or abstain; authoritative sufficiency and all existing fail-closed semantics remain unchanged.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/grounding/evidence_sufficiency.py",
-      "reviewed_at": "2026-09-01",
-      "reviewer": "Codex ambiguity-safe grounding audit",
-      "sha256": "b840c01a37776dc9d39003417799757bc4df8a05ea7d660e8bee8872be2ab27e"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "e959cd2c998c61c69f6d6afb7e931f1db58cf87b094b86866ccf44c2d14d2ab3"
     },
     {
       "audit_status": "audited",
@@ -9079,13 +9101,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "active-runtime",
-      "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/__init__.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "6b0661f6c19d24a077c85d4fe9a7569833650a62b01cf14411d18d6e76d0f0d6"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "12905f9cc0ade6f5b87ed1953557553fccd409cb02a7da9acb66dbb20ff29d0f"
     },
     {
       "audit_status": "audited",
@@ -9145,6 +9167,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "findings": [],
+      "path": "src/digital_twin/student/clarification.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "de8537161cefd17e044cdec51e17ed2dd3db93b28ed3e883deca0a305aabfeeb"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "runtime-student",
       "evidence": "Synthetic-only fixture reviewed for explicit course scope, citation checksum lineage, memberships, releases, and no real user/source data.",
       "findings": [],
@@ -9200,24 +9233,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/migrations.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "93fba2c6e50f2ec775fcf3158f63a48ff3d543c91b118c41bc68f2b00bbf78ef"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "189dcc26b16298a4fc45c86acec76f2bec261f6aa77af4131de265236a54b4ef"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "finite-evaluation-program",
-      "evidence": "Adapter regression review verified precomputed retrieval binding, public-question-only execution, and hierarchical evidence-gate selection while retaining the historical adapter behaviors.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/models.py",
-      "reviewed_at": "2026-08-29",
-      "reviewer": "Codex repository correctness sweep",
-      "sha256": "68ad23b018181bfdd8eec2c669b4978e0fe9328ef6d6b90e86e036ee8c2d0ac6"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "5f45063dd52d588bfb816049532d7dfe68777203f45fd0525c0252dd6381cef8"
     },
     {
       "audit_status": "audited",
@@ -9255,24 +9288,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/repository.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "f2584a54cdd26c8c669104c98dfcb440092265a7505c477d1f83e528a3bb84b2"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "5e05d2dcb791c47e243772b4f02b5befff3cf2c588291ca5b504b1b653e85581"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/service.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "102218ecf035f06d67d4b181f63d209e276ea33420be898f8e57b990abf47e92"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "47267adb43cb31f031cea8d7ee97adf9f43aa113c75a48e981ff147cc4fc844a"
     },
     {
       "audit_status": "audited",
@@ -9311,12 +9344,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "evidence": "Configuration tests prove runtime provider credentials still fail closed, offline administration may omit them, and the bypass does not relax staging origin or other safety validation; the full focused API suite passes.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "0e7acadc4b7b33294c7a7f6403fbb77b3dcb5294833c09bb2a3649526cee9854"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-r1-2-root-cause-review",
+      "sha256": "ec56dd03a5bfe79d40167daa33828d303387b53134a650f26b1e2238b0ca3fcb"
     },
     {
       "audit_status": "audited",
@@ -9794,13 +9827,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "tests/digital_twin/test_sqlite_migrations.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "a203af5cae3b018a6bd29b755b0fcd0a1b49780c3a5ec3f04478315af91bdd15"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "0b6633c82d89f50fc38171aa950a1496495c9b81205220cc23587f7d26045bad"
     },
     {
       "audit_status": "audited",
@@ -9812,6 +9845,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "2604decaf92052be1dc5bceebd279983ff8990fe08b0f83d673ca9fece37a6ff"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "findings": [],
+      "path": "tests/digital_twin/test_stateful_clarification.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "29df8bb9a302a7ff4fc396796693dfc5e1ab51bd3e699c263eb2c03c46b8c234"
     },
     {
       "audit_status": "audited",
@@ -10861,13 +10905,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "verification-correctness",
-      "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
       "findings": [],
       "path": "tests/test_dominance_scoped_reference_uniqueness.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "d031a79ccf11ff1e501ad04aab9671272d14861aa87fb3d568747085456f3e30"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "839cd6bc031fe42c48e09cadb05f2956e86675a1e6701a4681fd6743e6a07089"
     },
     {
       "audit_status": "audited",
@@ -11924,6 +11968,17 @@
       "reviewed_at": "2026-08-19",
       "reviewer": "codex-primary-review",
       "sha256": "4196c7bccf26bbbd4c3f0ed06bb3525dab76b52b67aa3f2be919909ad319c467"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "stateful-clarification-r1-2",
+      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "findings": [],
+      "path": "tests/test_stateful_clarification_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex stateful-clarification correctness review",
+      "sha256": "804db91d0d326c52076a9374c01295a6d73adb1b7ac9780ebcaf8f4cd1fe0a23"
     },
     {
       "audit_status": "audited",

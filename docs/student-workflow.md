@@ -94,6 +94,14 @@ does not construct the professor controller. It provides:
 - responsive 1440px, 768px, and 390px layouts with text-labelled state and
   44-pixel coarse-pointer targets.
 
+The prospective R1.2 interaction adds one persistent clarification turn for a
+genuine tie between approved source interpretations. The tutor shows two to
+five source-derived choices, stores the request with its course, release,
+source-version, region, checksum, and original-turn lineage, and answers only
+after an explicit selection. Ambiguous free text does not resolve the request.
+Expiry, release withdrawal, restart, and duplicate request handling all fail
+closed. The choices never expose ingestion or local filesystem paths.
+
 Only the active course ID and conversation IDs are stored in versioned browser
 storage. Messages, answers, and citations are reloaded from the API and remain
 authoritative there. Browser storage failure therefore removes convenience,
