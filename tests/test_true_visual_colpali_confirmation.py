@@ -45,6 +45,38 @@ def test_preflight_is_blocked_when_credential_is_missing(monkeypatch: pytest.Mon
     assert result["reasons"] == ["JINA_API_KEY is missing"]
 
 
+def test_account_token_quota_bounds_the_complete_run() -> None:
+    quota = runner._quota_status(runner._instrument())
+
+    assert quota == {
+        "account_total_token_limit": 10_000_000,
+        "run_worst_case_token_reservation": 1_966_080,
+        "account_token_headroom_after_reservation": 8_033_920,
+        "reservation_within_account_limit": True,
+    }
+
+
+def test_preflight_blocks_when_worst_case_reservation_exceeds_account_limit(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
+    instrument = json.loads(json.dumps(runner._instrument()))
+    instrument["provider_binding"]["maximum_calls"] = 400
+    monkeypatch.setattr(runner, "_instrument", lambda: instrument)
+    monkeypatch.setattr(runner, "_metadata_is_fresh", lambda _: True)
+    monkeypatch.setattr(runner, "_git_clean", lambda: True)
+    monkeypatch.setattr(runner, "_git_revision", lambda: "a" * 40)
+    monkeypatch.setattr(runner, "DEFAULT_OUTPUT_ROOT", tmp_path)
+    monkeypatch.setenv("JINA_API_KEY", "test-only")
+
+    result = runner.preflight()
+
+    assert result["status"] == "blocked"
+    assert result["reasons"] == [
+        "run worst-case token reservation exceeds the account limit"
+    ]
+    assert result["network_calls_made"] == 0
+
+
 def test_dataset_rejects_boundary_lineage() -> None:
     dataset = json.loads(json.dumps(builder.build_dataset(write_assets=False)))
     boundary = next(case for case in dataset["cases"] if case["expected_action"] != "answer")

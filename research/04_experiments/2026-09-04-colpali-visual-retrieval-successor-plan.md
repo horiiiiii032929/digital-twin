@@ -99,7 +99,9 @@ Primary retrieval gates:
 The network-free simulation proves contracts and accounting only. It is not a
 quality result. A live provider run must be separately frozen, use an exact
 first-party model binding, make at most 60 calls with zero retries, and retain
-the USD 1 emergency stop.
+the USD 1 emergency stop. The researcher-reported account allowance is
+10,000,000 tokens; this run reserves at most 1,966,080 tokens and enforces
+cumulative pre/post-call accounting.
 
 ## Progression rule
 

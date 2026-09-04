@@ -84,6 +84,7 @@ def _instrument() -> dict[str, Any]:
         or float(binding.get("maximum_cost_usd", -1)) != 1.0
         or int(binding.get("maximum_input_bytes", -1)) != JINA_MAX_INPUT_BYTES
         or int(binding.get("maximum_input_tokens", -1)) != JINA_MAX_INPUT_TOKENS
+        or int(binding.get("account_total_token_limit", -1)) != 10_000_000
         or float(binding.get("input_price_usd_per_token", -1))
         != JINA_INPUT_TOKEN_PRICE_USD
         or binding.get("metadata_schema_version") != "2026.07.27.1603"
@@ -91,6 +92,21 @@ def _instrument() -> dict[str, Any]:
     ):
         raise TrueVisualColpaliError("ColPali visual instrument drifted")
     return value
+
+
+def _quota_status(instrument: dict[str, Any]) -> dict[str, int | bool]:
+    binding = instrument["provider_binding"]
+    token_limit = int(binding["account_total_token_limit"])
+    worst_case_reservation = int(binding["maximum_calls"]) * int(
+        binding["maximum_input_tokens"]
+    )
+    return {
+        "account_total_token_limit": token_limit,
+        "run_worst_case_token_reservation": worst_case_reservation,
+        "account_token_headroom_after_reservation": token_limit
+        - worst_case_reservation,
+        "reservation_within_account_limit": worst_case_reservation <= token_limit,
+    }
 
 
 def _metadata_is_fresh(instrument: dict[str, Any]) -> bool:
@@ -321,6 +337,7 @@ def validate() -> dict[str, Any]:
         "dataset_sha256": dataset["content_sha256"],
         "provider_calls": 0,
         "paid_execution_authorized": instrument["paid_execution_authorized"],
+        "token_quota": _quota_status(instrument),
     }
 
 
@@ -350,6 +367,7 @@ def preflight() -> dict[str, Any]:
     validation = validate()
     instrument = _instrument()
     reasons: list[str] = []
+    quota = _quota_status(instrument)
     if not instrument["paid_execution_authorized"] or not instrument["provider_execution_authorized"]:
         reasons.append("checkpoint is not provider-authorized")
     if not _metadata_is_fresh(instrument):
@@ -358,6 +376,8 @@ def preflight() -> dict[str, Any]:
         reasons.append("JINA_API_KEY is missing")
     if not _git_clean():
         reasons.append("git worktree is not clean")
+    if not quota["reservation_within_account_limit"]:
+        reasons.append("run worst-case token reservation exceeds the account limit")
     if (DEFAULT_OUTPUT_ROOT / "provider-ledger.sqlite3").exists():
         reasons.append("exclusive provider ledger path already exists")
     return {
@@ -366,6 +386,7 @@ def preflight() -> dict[str, Any]:
         "reasons": reasons,
         "network_calls_made": 0,
         "code_revision": _git_revision(),
+        "token_quota": quota,
     }
 
 
@@ -376,11 +397,15 @@ async def _call_and_record(
     request_key: str,
     payload: dict[str, Any],
     call: Callable[[], Awaitable[VisualEmbeddingResultV1]],
+    maximum_total_tokens: int,
 ) -> MultiVector:
     request_sha256 = canonical_sha256(payload)
     replayed = ledger.replay(request_key=request_key, request_sha256=request_sha256)
     if replayed is not None:
         return tuple(tuple(float(value) for value in row) for row in replayed.content["vectors"])
+    used_tokens = int(ledger.snapshot()["input_tokens"])
+    if used_tokens + JINA_MAX_INPUT_TOKENS > maximum_total_tokens:
+        raise ProviderJsonError("provider token limit reached before request")
     ledger.reserve(
         estimated_cost_usd=JINA_MAX_INPUT_TOKENS * JINA_INPUT_TOKEN_PRICE_USD
     )
@@ -412,6 +437,9 @@ async def _call_and_record(
             latency_ms=latency,
         ),
     )
+    if int(ledger.snapshot()["input_tokens"]) > maximum_total_tokens:
+        ledger.mark_invalid_execution()
+        raise ProviderJsonError("provider token limit exceeded after request")
     return result.vectors
 
 
@@ -431,6 +459,9 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
     if not resolved.is_relative_to(GENERATED_ROOT):
         raise TrueVisualColpaliError("output must remain under reports/generated")
     dataset = _dataset()
+    maximum_total_tokens = int(
+        instrument["provider_binding"]["account_total_token_limit"]
+    )
     binding = {
         "run_id": RUN_ID,
         "instrument_sha256": canonical_sha256(instrument),
@@ -439,6 +470,7 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
         "provider": "jina-ai-first-party",
         "model": JINA_VISUAL_MODEL,
         "endpoint": JINA_EMBEDDING_ENDPOINT,
+        "account_total_token_limit": maximum_total_tokens,
     }
     ledger = ProviderCallLedgerV1(
         resolved / "provider-ledger.sqlite3",
@@ -464,6 +496,7 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
             request_key=f"image:{first_asset['asset_id']}",
             payload=first_image_payload,
             call=lambda: provider.embed_image(first_raw, mime_type="image/png"),
+            maximum_total_tokens=maximum_total_tokens,
         )
         query_vectors: dict[str, MultiVector] = {}
         first_query_payload = provider.query_payload(first_case["question"])
@@ -473,6 +506,7 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
             request_key=f"query:{first_case['case_id']}",
             payload=first_query_payload,
             call=lambda: provider.embed_query(first_case["question"]),
+            maximum_total_tokens=maximum_total_tokens,
         )
         for asset in dataset["assets"][1:]:
             path = _render_path(asset)
@@ -484,6 +518,7 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
                 request_key=f"image:{asset['asset_id']}",
                 payload=payload,
                 call=lambda raw=raw: provider.embed_image(raw, mime_type="image/png"),
+                maximum_total_tokens=maximum_total_tokens,
             )
         for case in answerable_cases[1:]:
             payload = provider.query_payload(case["question"])
@@ -493,6 +528,7 @@ async def execute(*, resume: bool, output_root: Path) -> dict[str, Any]:
                 request_key=f"query:{case['case_id']}",
                 payload=payload,
                 call=lambda question=case["question"]: provider.embed_query(question),
+                maximum_total_tokens=maximum_total_tokens,
             )
         rankings, lineage = _candidate_rankings(dataset, image_vectors, query_vectors)
         quality = _quality(dataset, rankings, lineage, instrument)
