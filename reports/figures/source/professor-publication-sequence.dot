@@ -1,0 +1,64 @@
+// Suggested caption: Sequence for preflighting and publishing a professor-owned course release.
+digraph ProfessorPublicationSequence {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.55,
+    ranksep=0.34,
+    splines=polyline,
+    newrank=true
+  ];
+  node [fontname="Helvetica", fontsize=9, color="#475569"];
+  edge [fontname="Helvetica", fontsize=8.2, color="#475569", arrowsize=0.6];
+
+  professor [group="p", shape=box, style="rounded,filled", fillcolor="#eef2ff", label="Professor"];
+  presentation [group="w", shape=box, style="rounded,filled", fillcolor="#e0f2fe", label="Presentation layer\nWeb UI and API handler"];
+  lifecycle [group="s", shape=box, style="rounded,filled", fillcolor="#dcfce7", label="ReleaseLifecycleService"];
+  index [group="i", shape=box, style="rounded,filled", fillcolor="#f1f5f9", label="Retrieval-index adapter"];
+  repository [group="r", shape=box, style="rounded,filled", fillcolor="#f1f5f9", label="StudentRepository"];
+  {rank=same; professor; presentation; lifecycle; index; repository;}
+  professor -> presentation -> lifecycle -> index -> repository [style=invis, weight=100];
+
+  node [shape=point, width=0.045, fixedsize=true, label="", color="#94a3b8"];
+  p1 [group="p"]; w1 [group="w"]; s1 [group="s"]; i1 [group="i"]; r1 [group="r"]; {rank=same; p1; w1; s1; i1; r1;}
+  p2 [group="p"]; w2 [group="w"]; s2 [group="s"]; i2 [group="i"]; r2 [group="r"]; {rank=same; p2; w2; s2; i2; r2;}
+  p3 [group="p"]; w3 [group="w"]; s3 [group="s"]; i3 [group="i"]; r3 [group="r"]; {rank=same; p3; w3; s3; i3; r3;}
+  p4 [group="p"]; w4 [group="w"]; s4 [group="s"]; i4 [group="i"]; r4 [group="r"]; {rank=same; p4; w4; s4; i4; r4;}
+  p5 [group="p"]; w5 [group="w"]; s5 [group="s"]; i5 [group="i"]; r5 [group="r"]; {rank=same; p5; w5; s5; i5; r5;}
+  p6 [group="p"]; w6 [group="w"]; s6 [group="s"]; i6 [group="i"]; r6 [group="r"]; {rank=same; p6; w6; s6; i6; r6;}
+  p7 [group="p"]; w7 [group="w"]; s7 [group="s"]; i7 [group="i"]; r7 [group="r"]; {rank=same; p7; w7; s7; i7; r7;}
+  p8 [group="p"]; w8 [group="w"]; s8 [group="s"]; i8 [group="i"]; r8 [group="r"]; {rank=same; p8; w8; s8; i8; r8;}
+  p9 [group="p"]; w9 [group="w"]; s9 [group="s"]; i9 [group="i"]; r9 [group="r"]; {rank=same; p9; w9; s9; i9; r9;}
+  p10 [group="p"]; w10 [group="w"]; s10 [group="s"]; i10 [group="i"]; r10 [group="r"]; {rank=same; p10; w10; s10; i10; r10;}
+  p11 [group="p"]; w11 [group="w"]; s11 [group="s"]; i11 [group="i"]; r11 [group="r"]; {rank=same; p11; w11; s11; i11; r11;}
+  p12 [group="p"]; w12 [group="w"]; s12 [group="s"]; i12 [group="i"]; r12 [group="r"]; {rank=same; p12; w12; s12; i12; r12;}
+  p13 [group="p"]; w13 [group="w"]; s13 [group="s"]; i13 [group="i"]; r13 [group="r"]; {rank=same; p13; w13; s13; i13; r13;}
+  p14 [group="p"]; w14 [group="w"]; s14 [group="s"]; i14 [group="i"]; r14 [group="r"]; {rank=same; p14; w14; s14; i14; r14;}
+  p15 [group="p"]; w15 [group="w"]; s15 [group="s"]; i15 [group="i"]; r15 [group="r"]; {rank=same; p15; w15; s15; i15; r15;}
+
+  edge [style=dashed, arrowhead=none, color="#94a3b8", weight=20];
+  professor -> p1 -> p2 -> p3 -> p4 -> p5 -> p6 -> p7 -> p8 -> p9 -> p10 -> p11 -> p12 -> p13 -> p14 -> p15;
+  presentation -> w1 -> w2 -> w3 -> w4 -> w5 -> w6 -> w7 -> w8 -> w9 -> w10 -> w11 -> w12 -> w13 -> w14 -> w15;
+  lifecycle -> s1 -> s2 -> s3 -> s4 -> s5 -> s6 -> s7 -> s8 -> s9 -> s10 -> s11 -> s12 -> s13 -> s14 -> s15;
+  index -> i1 -> i2 -> i3 -> i4 -> i5 -> i6 -> i7 -> i8 -> i9 -> i10 -> i11 -> i12 -> i13 -> i14 -> i15;
+  repository -> r1 -> r2 -> r3 -> r4 -> r5 -> r6 -> r7 -> r8 -> r9 -> r10 -> r11 -> r12 -> r13 -> r14 -> r15;
+
+  edge [style=solid, arrowhead=normal, color="#475569", weight=1, constraint=false];
+  p1 -> w1 [label="1: Request release preflight"];
+  w2 -> s2 [label="1.1: run_preflight(release_id)"];
+  s3 -> r3 [label="1.2: Load owned draft and governed inputs"];
+  r4 -> s4 [style=dashed, label="Release, profile, policy, sources, evidence"];
+  s5 -> i5 [label="1.3: Verify current retrieval index"];
+  i6 -> s6 [style=dashed, label="Index status"];
+  s7 -> r7 [label="1.4: Persist gate outcome and audit event"];
+  s8 -> w8 [style=dashed, label="Preflight result"];
+  w9 -> p9 [style=dashed, label="[failed] Display blockers; release stays draft"];
+  p10 -> w10 [label="[passed] 2: Confirm publication"];
+  w11 -> s11 [label="2.1: publish(release_id)"];
+  s12 -> i12 [label="2.2: Prepare immutable retrieval index"];
+  s13 -> r13 [label="2.3: Atomically publish and audit"];
+  r14 -> w14 [style=dashed, label="Published release"];
+  w15 -> p15 [style=dashed, label="2.4: Display publication confirmation"];
+}

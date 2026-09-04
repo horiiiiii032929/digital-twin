@@ -1,0 +1,91 @@
+% Modular report components. Review before including from report.tex.
+% Requires: booktabs, tabularx, array.
+
+\subsubsection{Use-case description: publish a course release}
+\label{uc:publish-release}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{>{\bfseries}p{0.24\textwidth}X}
+    \toprule
+    Use case & Publish a course release \\
+    \midrule
+    Trigger & The professor selects \emph{Publish} for an evaluated release draft. \\
+    Primary actor & Professor \\
+    Preconditions & The professor is authenticated, owns the course, and has a release draft. The selected source versions, teaching profile, tutor policy, component profile, and evaluation evidence exist. \\
+    Success postcondition & An immutable release becomes the course's published release, its retrieval index is ready, and the publication action is auditable. \\
+    Minimal guarantee & If authorization, a gate, index preparation, or persistence fails, no new release becomes available to students. \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Summary description of the professor-publication use case.}
+  \label{tab:publication-use-case-summary}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{p{0.08\textwidth}X X}
+    \toprule
+    Step & Professor action & System response \\
+    \midrule
+    1 & Requests preflight for a selected draft. & Loads the professor-owned release and its selected profile, policy, sources, evidence, and evaluation state. \\
+    2 & Waits for the preflight result. & Checks evidence sufficiency, approvals, course scope, active source versions, source policy, citation lineage, and retrieval-index readiness; records the result and audit event. \\
+    3 & Reviews the returned result. & If any gate fails, returns actionable blockers while keeping the release in draft state. \\
+    4 & Confirms publication after all gates pass. & Rechecks publishability, prepares the immutable retrieval index, publishes atomically, and records the resulting state. \\
+    5 & Receives confirmation. & Returns the published release; students assigned to the course may subsequently access it. \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Normal and gate-recovery flow for publication. A professor may resolve the blockers at Step 3 and repeat the preflight.}
+  \label{tab:publication-use-case-flow}
+\end{table}
+
+\subsubsection{Tutoring action decision table}
+\label{sec:tutoring-decision-table}
+
+\begin{table}[htbp]
+  \centering
+  \scriptsize
+  \setlength{\tabcolsep}{3.5pt}
+  \begin{tabularx}{\textwidth}{Xcccccc}
+    \toprule
+    Condition or action & R1 & R2 & R3 & R4 & R5 & R6 \\
+    \midrule
+    Authorized account, course, and published release & N & Y & Y & Y & Y & Y \\
+    Runtime and required provider available & -- & N & Y & Y & Y & Y \\
+    Approved evidence sufficient and unambiguous & -- & -- & N & Y & Y & Y \\
+    Request permitted by academic-integrity policy & -- & -- & -- & N & Y & Y \\
+    Complex pedagogical planning required & -- & -- & -- & -- & N & Y \\
+    \midrule
+    Deny access without course disclosure & X & & & & & \\
+    Return explicit operational failure or bounded recovery & & X & & & & \\
+    Clarify or abstain & & & X & & & \\
+    Refuse or redirect the prohibited request & & & & X & & \\
+    Compile a deterministic cited response & & & & & X & \\
+    Request a bounded model proposal, constrain it, then compile and validate & & & & & & X \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Decision table for the application-owned tutoring action policy. ``--'' denotes a condition that is not evaluated after a higher-priority rule decides the outcome.}
+  \label{tab:tutoring-action-decision}
+\end{table}
+
+\subsubsection{Publication exception table}
+\label{sec:publication-exceptions}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabularx}{\textwidth}{p{0.10\textwidth}p{0.25\textwidth}X}
+    \toprule
+    Flow step & Exception & Required system response \\
+    \midrule
+    1 & Professor does not own the course or release. & Deny the command, disclose no cross-course content, preserve release state, and record the authorized audit information. \\
+    2 & A source, policy, profile, evidence, evaluation, citation-lineage, or index gate fails. & Return the failed gates as blockers, record a failed preflight, and leave the release as a draft so the professor can correct and retry. \\
+    4 & Retrieval-index preparation fails. & Abort publication, report an operational error, and retain the previously published release if one exists. \\
+    4 & The atomic persistence operation fails. & Roll back the transaction; do not expose a partly published release or unmatched audit state. \\
+    5 & Post-publication presentation refresh fails. & Return a recoverable presentation error and reload the authoritative release state before permitting another mutation. \\
+    \bottomrule
+  \end{tabularx}
+  \caption{Step-linked exceptions and fail-safe outcomes for the publication use case.}
+  \label{tab:publication-exception-flow}
+\end{table}

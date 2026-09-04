@@ -38,12 +38,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual exclusion review plus git check-ignore probes for environment secrets, private data, run outputs, and generated reports.",
+      "evidence": "Manual exclusion review plus git check-ignore probes for environment secrets, private data, run outputs, generated reports, and local handoff/probe material under tmp/.",
       "findings": [],
       "path": ".gitignore",
-      "reviewed_at": "2026-08-19",
-      "reviewer": "codex-primary-review",
-      "sha256": "acb89553cb79fce1b215708799ae2f576cf5d44ec9fa99aabdd8ddee263f1e4e"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "3fda63cd627ab641625553e5b62c8c29227a2e19fd30eedb1c45477aa4801f1a"
     },
     {
       "audit_status": "audited",
@@ -5108,6 +5108,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "final-report-evidence-inventory",
+      "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+      "findings": [],
+      "path": "scripts/build_final_report_evidence_inventory.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "finite-evaluation-program",
       "evidence": "Public API review verified the finite program contracts are explicitly exported without changing historical evaluation interfaces.",
       "findings": [],
@@ -7202,9 +7213,9 @@
       "evidence": "Freeze review classifies 021 and the persona-wording requirements builder as network-free builders while retaining guarded provider and evaluation runners.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex persona-wording requirements audit",
-      "sha256": "b393a5385296dcfdff0d32e639804b10505cbaa2ea1a32986006666f80439f55"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "87b07e6f43bed0fff18784f2cc3927024c6fb3340efd154046f753c156d00e38"
     },
     {
       "audit_status": "audited",
@@ -9086,6 +9097,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "9ffbad379d9c20980780c15f8cefd09f9de226306940995bbe51a5c105a29acf"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-report-evidence-inventory",
+      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+      "findings": [],
+      "path": "tests/test_build_final_report_evidence_inventory.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
     },
     {
       "audit_status": "audited",

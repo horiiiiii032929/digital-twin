@@ -110,6 +110,10 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # synthetic conformance only. A separate frozen successor must own any
     # provider-backed or confirmation execution.
     "run_successor_architecture_paired_comparison_001.py",
+    # This report builder only reads the committed result registry and its
+    # linked records, and shells out to git for read-only revision facts. It
+    # is network-free and has no provider, paid, execute, or held-out mode.
+    "build_final_report_evidence_inventory.py",
 }
 EXEMPT_SCRIPTS = {
     "validate_professor_fidelity_post_audit.py",

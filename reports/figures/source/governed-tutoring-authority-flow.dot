@@ -1,0 +1,44 @@
+// Suggested caption: Governed tutoring flow: model proposals remain inside deterministic authority.
+digraph GovernedTutoringAuthorityFlow {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.3,
+    ranksep=0.45,
+    splines=polyline
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#475569", fillcolor="#f8fafc", margin="0.13,0.08"];
+  edge [fontname="Helvetica", fontsize=9, color="#475569", arrowsize=0.7];
+
+  input [label="Student turn or scheduled opportunity", fillcolor="#e0f2fe"];
+  authorize [label="Authorize account, course, release,\nconsent, timing, and policy", fillcolor="#dcfce7"];
+  retrieve [label="Retrieve only approved, active\ncourse evidence", fillcolor="#dcfce7"];
+  sufficient [shape=diamond, label="Evidence complete\nand reference unique?", fillcolor="#fef3c7"];
+  safe_action [label="Deterministic action lattice\noperational failure > refuse >\nclarify > abstain > answer", fillcolor="#dcfce7"];
+  complex [shape=diamond, label="Complex pedagogical\nplanning needed?", fillcolor="#fef3c7"];
+  planner [label="GPT-5.6 Terra proposes\na bounded teaching move", fillcolor="#ffedd5"];
+  eligibility [label="Intersect proposal with event-scoped\nand professor-approved actions", fillcolor="#dcfce7"];
+  compiler [label="Deterministic evidence-set compiler\ncreates factual claims and citations", fillcolor="#dcfce7"];
+  validate [shape=diamond, label="Claims, citations, scope,\nand policy valid?", fillcolor="#fef3c7"];
+  fallback [label="Clarify, refuse, abstain,\nor deterministic fallback", fillcolor="#fee2e2"];
+  commit [label="Atomic commit of response, state delta,\ntrace, and delivery outbox", fillcolor="#dcfce7"];
+  output [label="Cited response or explicit safe action", fillcolor="#e0f2fe"];
+
+  input -> authorize -> retrieve -> sufficient;
+  sufficient -> fallback [label="no"];
+  sufficient -> safe_action [label="yes"];
+  safe_action -> complex;
+  complex -> planner [label="yes"];
+  complex -> compiler [label="no"];
+  planner -> eligibility -> compiler;
+  compiler -> validate;
+  validate -> fallback [label="no"];
+  validate -> commit [label="yes"];
+  fallback -> commit;
+  commit -> output;
+
+  authority_note [shape=note, label="Application code owns identity, evidence,\nsource truth, policy, state commit,\ndelivery, cost limits, and rollback.", fillcolor="#f1f5f9"];
+  authority_note -> eligibility [style=dashed, arrowhead=none, constraint=false];
+}

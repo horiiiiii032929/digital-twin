@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" modified="2026-09-02T16:40:00.000Z" agent="Codex" version="30.0.4">
+  <diagram id="course-use-cases" name="Actor-organized system use cases">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="Course Digital Twin - Actor-organized System Use Cases" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=22;" vertex="1" parent="1"><mxGeometry x="535" y="16" width="530" height="32" as="geometry"/></mxCell>
+        <mxCell id="subtitle" value="Each view applies the same system boundary while organizing the real-world scope by its primary actor." style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#444444;" vertex="1" parent="1"><mxGeometry x="440" y="50" width="720" height="24" as="geometry"/></mxCell>
+
+        <mxCell id="admin-boundary" value="Course Digital Twin (Administrator view)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;spacingTop=8;fontStyle=1;fontSize=16;fillColor=none;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="90" y="105" width="405" height="720" as="geometry"/></mxCell>
+        <mxCell id="prof-boundary" value="Course Digital Twin (Professor view)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;spacingTop=8;fontStyle=1;fontSize=16;fillColor=none;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="600" y="105" width="405" height="720" as="geometry"/></mxCell>
+        <mxCell id="student-boundary" value="Course Digital Twin (Student view)" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;align=center;spacingTop=8;fontStyle=1;fontSize=16;fillColor=none;strokeColor=#000000;strokeWidth=1.5;" vertex="1" parent="1"><mxGeometry x="1110" y="105" width="405" height="720" as="geometry"/></mxCell>
+
+        <mxCell id="admin" value="Administrator" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;" vertex="1" parent="1"><mxGeometry x="15" y="405" width="55" height="105" as="geometry"/></mxCell>
+        <mxCell id="professor" value="Professor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;" vertex="1" parent="1"><mxGeometry x="525" y="405" width="55" height="105" as="geometry"/></mxCell>
+        <mxCell id="student" value="Student" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fontSize=15;" vertex="1" parent="1"><mxGeometry x="1035" y="405" width="55" height="105" as="geometry"/></mxCell>
+
+        <mxCell id="admin-login" value="Sign in/out as Administrator" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="170" y="166" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="manage-accounts" value="Invite and manage accounts" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="170" y="286" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="assign-membership" value="Assign course membership" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="170" y="406" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="inspect-operations" value="Inspect system operations" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="170" y="526" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="backup-restore" value="Back up and restore&lt;br&gt;application state" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="170" y="646" width="250" height="68" as="geometry"/></mxCell>
+
+        <mxCell id="prof-login" value="Sign in/out as Professor" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="142" width="250" height="60" as="geometry"/></mxCell>
+        <mxCell id="govern-sources" value="Govern source versions" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="232" width="250" height="60" as="geometry"/></mxCell>
+        <mxCell id="configure-policy" value="Configure teaching profile&lt;br&gt;and policy" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="322" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="preview-evaluate" value="Preview and evaluate&lt;br&gt;release candidate" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="412" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="publish" value="Publish course release" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="504" width="250" height="60" as="geometry"/></mxCell>
+        <mxCell id="withdraw" value="Withdraw or roll back release" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="700" width="250" height="60" as="geometry"/></mxCell>
+        <mxCell id="preflight" value="Run publication preflight" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="680" y="610" width="250" height="60" as="geometry"/></mxCell>
+
+        <mxCell id="student-login" value="Sign in/out as Student" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="1190" y="166" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="access-course" value="Access an assigned course" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="1190" y="286" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="ask-tutor" value="Ask a course question and receive&lt;br&gt;tutoring or a safe action" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="1190" y="402" width="250" height="74" as="geometry"/></mxCell>
+        <mxCell id="inspect-citation" value="Inspect supporting&lt;br&gt;source citation" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="1190" y="526" width="250" height="64" as="geometry"/></mxCell>
+        <mxCell id="manage-consent" value="Manage proactive&lt;br&gt;outreach consent" style="ellipse;whiteSpace=wrap;html=1;fontSize=14;fillColor=none;strokeColor=#000000;" vertex="1" parent="1"><mxGeometry x="1190" y="646" width="250" height="68" as="geometry"/></mxCell>
+
+        <mxCell id="a1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="admin" target="admin-login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="admin" target="manage-accounts"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="admin" target="assign-membership"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="admin" target="inspect-operations"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="a5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="admin" target="backup-restore"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="prof-login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="govern-sources"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="configure-policy"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="preview-evaluate"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="publish"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p6" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="professor" target="withdraw"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="p7" style="edgeStyle=orthogonalEdgeStyle;html=1;dashed=1;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="publish" target="preflight"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="include-label" value="&lt;&lt;include&gt;&gt;" style="text;html=0;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=#ffffff;fontSize=13;" vertex="1" parent="1"><mxGeometry x="820" y="574" width="90" height="22" as="geometry"/></mxCell>
+        <mxCell id="s1" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="student" target="student-login"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="s2" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="student" target="access-course"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="s3" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="student" target="ask-tutor"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="s4" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="student" target="inspect-citation"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="s5" style="edgeStyle=none;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;endFill=0;" edge="1" parent="1" source="student" target="manage-consent"><mxGeometry relative="1" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
