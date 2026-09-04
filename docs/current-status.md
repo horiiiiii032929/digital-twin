@@ -43,8 +43,9 @@ two-LLM advisory review contract; it explicitly cannot establish real-professor
 fidelity without professor approval. `true-visual-supplement-003` preserves the
 30-asset/60-case question-independent visual design and original-region
 authority while deterministically canonicalizing duplicate semantic-list
-values that invalidated attempt 002. Its paid execution remains unauthorized,
-so no visual quality result is claimed yet.
+values that invalidated attempt 002. Official OpenAI metadata was refreshed on
+2026-09-04 and the bounded 30-call/USD 2 execution is now frozen and
+authorized. No visual quality result is claimed until that execution finishes.
 
 Exact local requalification 006 is now `completed-keep` after the
 multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,

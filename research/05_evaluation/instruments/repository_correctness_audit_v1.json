@@ -3922,11 +3922,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Pre-execution review verified current official GPT-5.4 nano image/structured-output support and pricing, exact snapshot binding, public-only inputs, deterministic duplicate accounting, 30-call/USD 2 bounds, and fresh scoped authorization.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "fe7301c3d383e7fbf5a45614e37f547592d0cbf50cb7a7bf3fb1b215c609745a"
+      "sha256": "13f5238f98e5acaa3c68b74bb09929342a72f78f39ccee9ed25870de07d63f71"
     },
     {
       "audit_status": "audited",
@@ -8926,12 +8926,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "evidence": "Manual review confirmed the active repository freeze remains fail-closed while granting only true-visual-supplement-003 external/model execution under its instrument-specific bounds.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "453b5f0d5f24d5fe32c1cc12065e14f20e2d083053c5c8c663b7c022830f7c15"
+      "sha256": "920359467626f55715618eaa98ec5546447a4cf168d7116d34378d2b94f48530"
     },
     {
       "audit_status": "audited",
@@ -11831,11 +11831,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Focused review verifies frozen authorized state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and clean live-preflight behavior.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "1178252896375c674485d5b62c33f853116f419d6fac735911928f4b950adaf0"
+      "sha256": "92a29090fe5f009d5a607c8787c0adc20d3f8aadea2f2c61cc4282b8bc1b312b"
     },
     {
       "audit_status": "audited",
