@@ -1,0 +1,69 @@
+// Suggested caption: Proposed managed AWS target (not implemented, migrated, costed, or evaluated).
+digraph AwsManagedTargetProposal {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.32,
+    ranksep=0.6,
+    splines=polyline
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#475569", fillcolor="#f8fafc", margin="0.13,0.08"];
+  edge [fontname="Helvetica", fontsize=9, color="#475569", arrowsize=0.7];
+
+  users [label="Invited professors\nand students", fillcolor="#e0f2fe"];
+  route [label="Route 53", fillcolor="#ede9fe"];
+  edge_security [label="ACM HTTPS + ALB\noptional CloudFront/WAF", fillcolor="#ede9fe"];
+
+  subgraph cluster_vpc {
+    label="VPC across at least two Availability Zones";
+    color="#94a3b8";
+    style="rounded";
+
+    subgraph cluster_compute {
+      label="Private application subnets";
+      color="#64748b";
+      style="rounded";
+      webapi [label="ECS Fargate service\nweb + FastAPI", fillcolor="#e0f2fe"];
+      worker [label="ECS Fargate worker\ningestion + outreach", fillcolor="#e0f2fe"];
+      {rank=same; webapi; worker;}
+    }
+
+    rds [label="RDS PostgreSQL\ntransactional state + PITR", fillcolor="#dcfce7"];
+    sqs [label="SQS queue + DLQ\nat-least-once jobs", fillcolor="#dcfce7"];
+    s3 [label="Versioned encrypted S3\nsource and derived objects", fillcolor="#dcfce7"];
+    {rank=same; rds; sqs; s3;}
+  }
+
+  subgraph cluster_controls {
+    label="Cross-cutting operations and trust controls";
+    color="#94a3b8";
+    style="rounded,dashed";
+    secrets [label="Secrets Manager + KMS\nleast-privilege task roles", fillcolor="#fff7ed"];
+    observe [label="CloudWatch logs, metrics,\ntraces, dashboards, alarms", fillcolor="#fff7ed"];
+    backup [label="RDS automated backup +\nAWS Backup / recovery vault", fillcolor="#fff7ed"];
+    providers [label="Approved model providers\nthrough explicit egress policy", fillcolor="#ffedd5"];
+    {rank=same; secrets; observe;}
+    {rank=same; backup; providers;}
+    secrets -> backup [style=invis, weight=5];
+    observe -> providers [style=invis, weight=5];
+  }
+  {rank=same; users; route; edge_security;}
+
+  users -> route -> edge_security -> webapi;
+  webapi -> rds;
+  webapi -> s3;
+  webapi -> sqs [label="enqueue"];
+  sqs -> worker [label="consume"];
+  worker -> rds;
+  worker -> s3;
+  webapi -> providers [style=dashed];
+  secrets -> webapi [style=dashed, constraint=false];
+  webapi -> observe [style=dashed];
+  rds -> backup [style=dashed];
+  s3 -> backup [style=dashed];
+
+  migration [shape=note, label="PROPOSAL — NOT IMPLEMENTED OR EVALUATED\nRequires new adapters and migration evidence:\nSQLite -> PostgreSQL; filesystem -> S3;\nleased job table -> SQS/DLQ; Caddy -> ALB/ACM.", fillcolor="#fee2e2"];
+  migration -> rds [style=dashed, arrowhead=none, constraint=false];
+}

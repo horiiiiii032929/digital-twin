@@ -1,0 +1,83 @@
+// Suggested caption: Course Digital Twin system context and responsibility boundaries.
+digraph CourseDigitalTwinSystemContext {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.35,
+    ranksep=0.65,
+    splines=polyline
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=11, color="#4b5563", fillcolor="#f8fafc", margin="0.14,0.09"];
+  edge [fontname="Helvetica", fontsize=9, color="#4b5563", arrowsize=0.7];
+
+  subgraph cluster_people {
+    label="People and authority";
+    color="#94a3b8";
+    style="rounded,dashed";
+    admin [label="Administrator\ninvites, assigns, operates", fillcolor="#eef2ff"];
+    professor [label="Professor\ngoverns sources, policy, release", fillcolor="#eef2ff"];
+    student [label="Student\nuses assigned published release", fillcolor="#eef2ff"];
+    {rank=same; admin; professor; student;}
+  }
+
+  subgraph cluster_product {
+    label="Course Digital Twin application";
+    color="#64748b";
+    style="rounded";
+
+    web [label="Web application\nprofessor, student, administrator", fillcolor="#e0f2fe"];
+    api [label="FastAPI boundary\nsessions, schemas, commands", fillcolor="#e0f2fe"];
+
+    subgraph cluster_domain {
+      label="Provider-neutral domain";
+      color="#94a3b8";
+      style="rounded";
+      identity [label="Identity and\ncourse membership"];
+      configuration [label="Professor profile,\ntutor policy, sources"];
+      grounding [label="Approved evidence,\nclaims, citations"];
+      tutoring [label="Governed tutoring,\nlearner state, outreach"];
+      publication [label="Evaluation, publication,\nwithdrawal, rollback"];
+      {rank=same; identity; configuration;}
+    }
+
+    ports [label="Explicit persistence, retrieval,\nworker, and model ports", fillcolor="#f1f5f9"];
+  }
+
+  subgraph cluster_adapters {
+    label="Infrastructure and provider adapters";
+    color="#94a3b8";
+    style="rounded,dashed";
+    database [label="SQLite persistence\nand checkpoints", fillcolor="#ecfdf5"];
+    objects [label="Content-addressed\nsource storage", fillcolor="#ecfdf5"];
+    worker [label="Leased ingestion and\noutreach worker", fillcolor="#ecfdf5"];
+    retrieval [label="BM25 + selected\nretrieval adapters", fillcolor="#fff7ed"];
+    models [label="Bounded model calls\nwith cost ledger", fillcolor="#fff7ed"];
+    {rank=same; database; objects; worker;}
+    {rank=same; retrieval; models;}
+    database -> retrieval [style=invis, weight=4];
+    objects -> models [style=invis, weight=4];
+  }
+
+  admin -> web;
+  professor -> web;
+  student -> web;
+  web -> api [label="HTTPS / same origin"];
+  api -> identity;
+  api -> configuration;
+  identity -> grounding;
+  configuration -> grounding;
+  grounding -> tutoring;
+  tutoring -> publication [label="evaluated release state"];
+  publication -> configuration [label="new draft", style=dashed, constraint=false];
+
+  grounding -> ports;
+  tutoring -> ports;
+  publication -> ports;
+  ports -> database;
+  ports -> objects;
+  ports -> worker;
+  ports -> retrieval;
+  ports -> models;
+}

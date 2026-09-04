@@ -1,0 +1,100 @@
+// Suggested caption: System use cases for the Course Digital Twin, grouped by primary actor responsibility.
+digraph CourseDigitalTwinUseCases {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.28,
+    nodesep=0.38,
+    ranksep=0.42,
+    splines=polyline,
+    compound=true,
+    newrank=true
+  ];
+  node [fontname="Helvetica", fontsize=9.5, color="#475569"];
+  edge [fontname="Helvetica", fontsize=8.5, color="#64748b", arrowsize=0.65];
+
+  administrator [shape=plaintext, label="<<actor>>\nAdministrator"];
+  professor [shape=plaintext, label="<<actor>>\nProfessor"];
+  student [shape=plaintext, label="<<actor>>\nStudent"];
+  {rank=same; administrator; professor; student;}
+  administrator -> professor -> student [style=invis, weight=100];
+
+  subgraph cluster_system {
+    label="Course Digital Twin";
+    labelloc="t";
+    fontsize=12;
+    fontname="Helvetica-Bold";
+    color="#475569";
+    penwidth=1.2;
+    style="rounded";
+
+    subgraph cluster_administration {
+      label="Administration and operations";
+      color="#94a3b8";
+      style="rounded,dashed";
+      node [shape=ellipse, style=filled, fillcolor="#eef2ff"];
+      administer [label="Administer identity and\ncourse access"];
+      operate [label="Operate and recover\nthe system"];
+      invite [label="Invite and manage\naccounts"];
+      assign [label="Assign course\nmembership"];
+      observe [label="Inspect system\noperations"];
+      recover [label="Back up and restore\napplication state"];
+      administer -> operate -> invite -> assign -> observe -> recover [style=invis, weight=100];
+    }
+
+    subgraph cluster_release {
+      label="Professor configuration and release";
+      color="#94a3b8";
+      style="rounded,dashed";
+      node [shape=ellipse, style=filled, fillcolor="#e0f2fe"];
+      manage_release [label="Manage course configuration\nand release"];
+      govern [label="Govern source\nversions"];
+      configure [label="Configure teaching\nprofile and policy"];
+      preview [label="Preview draft\nbehaviour"];
+      evaluate [label="Evaluate release\ncandidate"];
+      publish [label="Publish course\nrelease"];
+      withdraw [label="Withdraw or roll\nback release"];
+      manage_release -> govern -> configure -> preview -> evaluate -> publish -> withdraw [style=invis, weight=100];
+    }
+
+    subgraph cluster_tutoring {
+      label="Student access and tutoring";
+      color="#94a3b8";
+      style="rounded,dashed";
+      node [shape=ellipse, style=filled, fillcolor="#ecfdf5"];
+      use_tutor [label="Use the published\ncourse tutor"];
+      access [label="Access an assigned\ncourse"];
+      consent [label="Manage proactive\noutreach consent"];
+      ask [label="Ask a course\nquestion"];
+      response [label="Receive cited tutoring\nor a safe action"];
+      inspect [label="Inspect supporting\nsource citation"];
+      use_tutor -> access -> consent -> ask -> response -> inspect [style=invis, weight=100];
+    }
+
+    {rank=same; administer; manage_release; use_tutor;}
+  }
+
+  administrator -> administer [dir=none, weight=40];
+
+  professor -> manage_release [dir=none, weight=40];
+
+  student -> use_tutor [dir=none, weight=40];
+
+  administer -> invite [style=dashed, label="<<include>>", constraint=false];
+  administer -> assign [style=dashed, label="<<include>>", constraint=false];
+  administer -> operate [style=dashed, label="<<include>>", constraint=false];
+  operate -> observe [style=dashed, label="<<include>>", constraint=false];
+  operate -> recover [style=dashed, label="<<include>>", constraint=false];
+  manage_release -> govern [style=dashed, label="<<include>>", constraint=false];
+  manage_release -> configure [style=dashed, label="<<include>>", constraint=false];
+  manage_release -> preview [style=dashed, label="<<include>>", constraint=false];
+  manage_release -> publish [style=dashed, label="<<include>>", constraint=false];
+  manage_release -> withdraw [style=dashed, label="<<include>>", constraint=false];
+  use_tutor -> access [style=dashed, label="<<include>>", constraint=false];
+  use_tutor -> consent [style=dashed, label="<<include>>", constraint=false];
+  use_tutor -> ask [style=dashed, label="<<include>>", constraint=false];
+  ask -> response [style=dashed, label="<<include>>", constraint=false];
+  ask -> inspect [style=dashed, label="<<include>>", constraint=false];
+  publish -> evaluate [style=dashed, label="<<include>>", constraint=false];
+}

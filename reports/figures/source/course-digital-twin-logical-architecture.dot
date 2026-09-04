@@ -1,0 +1,108 @@
+// Suggested caption: Logical multi-tier architecture and external-system boundaries of the implemented prototype.
+digraph CourseDigitalTwinLogicalArchitecture {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.28,
+    nodesep=0.28,
+    ranksep=0.5,
+    splines=polyline,
+    compound=true,
+    newrank=true
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=9.5, color="#475569", fillcolor="#f8fafc", margin="0.12,0.07"];
+  edge [fontname="Helvetica", fontsize=8.5, color="#64748b", arrowsize=0.65];
+
+  subgraph cluster_clients {
+    label="Client actors";
+    color="#94a3b8";
+    style="rounded,dashed";
+    administrator [label="Administrator", fillcolor="#eef2ff"];
+    professor [label="Professor", fillcolor="#eef2ff"];
+    student [label="Student", fillcolor="#eef2ff"];
+    {rank=same; administrator; professor; student;}
+    administrator -> professor -> student [style=invis, weight=100];
+  }
+
+  subgraph cluster_presentation {
+    label="Presentation tier";
+    color="#64748b";
+    style="rounded";
+    router [label="Caddy\nHTTPS and same-origin routing", fillcolor="#e0f2fe"];
+    web [label="Web application\nprofessor, student, and administrator views", fillcolor="#e0f2fe"];
+    api [label="FastAPI transport boundary\nsessions, request schemas, and commands", fillcolor="#e0f2fe"];
+    {rank=same; router; web; api;}
+  }
+
+  subgraph cluster_business {
+    label="Application and business-logic tier";
+    color="#64748b";
+    style="rounded";
+    identity [label="Identity and\ncourse membership"];
+    governance [label="Source, profile, and\npolicy governance"];
+    tutor [label="Grounded tutoring and\nlearner-state authority"];
+    release [label="Evaluation, publication,\nwithdrawal, and rollback"];
+    operations [label="Audit, recovery, cost,\nand delivery controls"];
+    {rank=same; identity; governance; tutor; release; operations;}
+    identity -> governance -> tutor -> release -> operations [style=invis, weight=100];
+  }
+
+  subgraph cluster_access {
+    label="Data-access and infrastructure-adapter tier";
+    color="#64748b";
+    style="rounded";
+    repositories [label="Repositories and\nunit of work", fillcolor="#f1f5f9"];
+    retrieval [label="Retrieval-index adapter\nBM25 and selected candidate", fillcolor="#f1f5f9"];
+    object_adapter [label="Source-object adapter\ncontent-addressed storage", fillcolor="#f1f5f9"];
+    worker [label="Durable-job adapter\ningestion and outreach", fillcolor="#f1f5f9"];
+    provider [label="Model-provider gateway\nbounded calls and cost ledger", fillcolor="#fff7ed"];
+    {rank=same; repositories; retrieval; object_adapter; worker; provider;}
+    repositories -> retrieval -> object_adapter -> worker -> provider [style=invis, weight=100];
+  }
+
+  subgraph cluster_resources {
+    label="Persistent resources and external systems";
+    color="#94a3b8";
+    style="rounded,dashed";
+    database [label="SQLite WAL\ntransactional state and audit", fillcolor="#dcfce7"];
+    objects [label="Versioned source objects\nand derived retrieval data", fillcolor="#dcfce7"];
+    jobs [label="Leased job and outbox\nrecords", fillcolor="#dcfce7"];
+    model [label="Approved model provider\nexternal system", fillcolor="#ffedd5"];
+    notification [label="Notification channel\nexternal system", fillcolor="#ffedd5"];
+    {rank=same; database; objects; jobs; model; notification;}
+    database -> objects -> jobs -> model -> notification [style=invis, weight=100];
+  }
+
+  administrator -> router;
+  professor -> router;
+  student -> router;
+  router -> web [label="static application"];
+  router -> api [label="/api"];
+  web -> api [label="authenticated HTTPS", constraint=false];
+
+  api -> identity;
+  api -> governance;
+  api -> tutor;
+  api -> release;
+  api -> operations;
+
+  identity -> repositories;
+  governance -> repositories;
+  governance -> object_adapter;
+  tutor -> repositories;
+  tutor -> retrieval;
+  tutor -> provider;
+  release -> repositories;
+  release -> retrieval;
+  operations -> repositories;
+  operations -> worker;
+
+  repositories -> database;
+  retrieval -> objects;
+  object_adapter -> objects;
+  worker -> jobs;
+  worker -> notification [style=dashed];
+  provider -> model [style=dashed];
+
+}

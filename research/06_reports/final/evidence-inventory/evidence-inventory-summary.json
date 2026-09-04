@@ -1,0 +1,157 @@
+{
+  "code_revision": "2bdfea9ffecd78f41bf564efd343ade59b4db7dd",
+  "evaluation_registry": {
+    "broken_local_link_count": 0,
+    "decision_classes": {
+      "drop": 7,
+      "go-deeper": 32,
+      "invalid": 75,
+      "keep": 76,
+      "no-release": 10,
+      "other": 3,
+      "refine": 42
+    },
+    "machine_record_count": 171,
+    "result_count": 245,
+    "without_machine_record_count": 74
+  },
+  "inventory_boundary": {
+    "aggregate_only": [
+      "data/raw",
+      "data/interim",
+      "data/processed",
+      "data/external",
+      "experiments/runs",
+      "reports/generated"
+    ],
+    "excluded_from_local_aggregate_detail": "ignored filenames, hashes, and contents",
+    "listed_individually": "tracked and ordinary untracked report-relevant repository files"
+  },
+  "json_validation": {
+    "committed-evaluation-dataset": {
+      "files": 55,
+      "valid_json": 55
+    },
+    "component-or-release-profile": {
+      "files": 19,
+      "valid_json": 19
+    },
+    "evaluation-instrument": {
+      "files": 217,
+      "valid_json": 217
+    },
+    "machine-result-record": {
+      "files": 171,
+      "valid_json": 171
+    }
+  },
+  "local_evidence_aggregates": [
+    {
+      "directory": "data/raw",
+      "file_count": 24,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 24610359
+    },
+    {
+      "directory": "data/interim",
+      "file_count": 266,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 24397850
+    },
+    {
+      "directory": "data/processed",
+      "file_count": 794,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 13779806
+    },
+    {
+      "directory": "data/external",
+      "file_count": 2829,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 5137929524
+    },
+    {
+      "directory": "experiments/runs",
+      "file_count": 34,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 4703668
+    },
+    {
+      "directory": "reports/generated",
+      "file_count": 8740,
+      "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
+      "total_bytes": 7859837767
+    }
+  ],
+  "record_join_quality": {
+    "interpretation": "Use the registry link and record run_id rather than assuming the filename is the result ID. Missing optional fields reflect legacy/program schemas and require result-summary context.",
+    "run_id_filename_mismatch_count": 8,
+    "run_id_filename_mismatches": [
+      {
+        "file": "research/05_evaluation/records/course-digital-twin-evaluation-program-006-invalid.json",
+        "run_id": "course-digital-twin-evaluation-program-006"
+      },
+      {
+        "file": "research/05_evaluation/records/cross-course-retrieval-deployability-v1.json",
+        "run_id": "cross-course-retrieval-deployability-v1-batch8-context1024"
+      },
+      {
+        "file": "research/05_evaluation/records/cross-course-retrieval-pilot-v1.json",
+        "run_id": "cross-course-retrieval-pilot-v1-development-attempt-002"
+      },
+      {
+        "file": "research/05_evaluation/records/cross-course-retrieval-v1-heldout.json",
+        "run_id": "cross-course-retrieval-v1-heldout-001"
+      },
+      {
+        "file": "research/05_evaluation/records/evidence-sufficiency-v1.json",
+        "run_id": "evidence-sufficiency-v1-clean"
+      },
+      {
+        "file": "research/05_evaluation/records/generation-v1-gemma3-4b.json",
+        "run_id": "generation-v1-gemma3-4b-exploratory"
+      },
+      {
+        "file": "research/05_evaluation/records/retrieval-v1.json",
+        "run_id": "retrieval-v1-clean"
+      },
+      {
+        "file": "research/05_evaluation/records/retrieval-v2.json",
+        "run_id": "retrieval-v2-clean"
+      }
+    ],
+    "without_component_count": 32,
+    "without_corpus_id_count": 33,
+    "without_dataset_id_count": 32
+  },
+  "repository_files": {
+    "by_category": {
+      "architecture-or-operations-documentation": 38,
+      "automated-or-manual-verification": 231,
+      "backend-implementation": 150,
+      "committed-evaluation-dataset": 62,
+      "component-or-release-profile": 19,
+      "data-governance-or-schema": 6,
+      "deployment-configuration": 7,
+      "evaluation-instrument": 222,
+      "evaluation-registry": 1,
+      "evaluation-summary-or-rubric": 318,
+      "experiment-plan-or-learning-log": 74,
+      "frontend-implementation": 82,
+      "literature-note": 9,
+      "machine-result-record": 171,
+      "project-governance-or-ci": 5,
+      "report-or-figure": 28,
+      "repository-configuration": 7,
+      "reproduction-or-analysis-tool": 239,
+      "requirement-or-user-research": 6,
+      "scope-or-decision-history": 16
+    },
+    "by_git_state": {
+      "tracked": 1686,
+      "untracked": 5
+    },
+    "count": 1691
+  },
+  "schema_version": 1
+}

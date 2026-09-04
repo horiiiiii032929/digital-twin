@@ -1,0 +1,140 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[margin=25mm]{geometry}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+
+\title{Course Digital Twin: An Evaluation-First Approach to Governed, Evidence-Grounded Tutoring}
+\author{Author details to be confirmed}
+\date{September 2026}
+
+% Working draft 0.1. Target: 10--15 pages.
+% This file is intentionally incomplete. Draft and review one section at a time.
+% Add the required bibliography style only after the submission guidance is known.
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+% Write the abstract after the results and discussion are provisionally accepted.
+\emph{Abstract intentionally deferred.}
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Large language models can generate explanations, examples, and questions on
+demand, but a course tutor has obligations that a general-purpose assistant
+does not. It must answer from the correct course and source version, respect an
+instructor's source permissions and teaching policy, avoid completing
+prohibited assessed work, preserve the separation between students and
+courses, and fail safely when the available evidence is incomplete. Fluency is
+therefore insufficient: the authority for each action and the evidence for
+each factual claim must remain inspectable.
+
+This report investigates a Course Digital Twin, defined here as a
+professor-configurable tutoring system grounded in approved course material
+and constrained by explicit pedagogical and academic-integrity policies. The
+intended product allows a professor to govern the sources and behaviour of a
+course-specific tutor, evaluate it before publication, and withdraw or roll
+back a release. Students interact only with an assigned published release and
+receive either a grounded tutoring response or an explicit safe action such as
+clarification, refusal, or abstention.
+
+The main engineering difficulty is that these requirements cross several
+system boundaries. Ingestion and retrieval must preserve permission,
+provenance, and version identity. Generation must transform retrieved evidence
+into claims with citations to the exact supporting source ranges. Tutoring
+logic must adapt to a learner without allowing a language model to control
+identity, policy, delivery, cost, publication, or learner-state authority.
+Persistence, recovery, and rollback must preserve the same constraints after a
+restart or provider failure. An evaluation limited to an isolated model or a
+successful demonstration would not detect failures across these boundaries.
+
+The project consequently uses an evaluation-first method. Baselines and
+candidate methods are compared on versioned datasets using predefined quality
+metrics, hard safety gates, operational measurements, and explicit
+\emph{Keep}, \emph{Refine}, \emph{Go Deeper}, \emph{Drop}, or
+\emph{No Release} decisions. Favorable results are retained alongside
+unfavorable, corrected, and invalid runs. This makes it possible to distinguish
+the local and component-level controls that passed their gates from integrated
+LLM-backed candidates that remained below the required standard.
+
+\subsection{Research questions and contribution}
+\label{sec:research-questions}
+
+The report addresses four questions:
+
+\begin{enumerate}
+  \item How can source permission, teaching policy, academic-integrity rules,
+        and publication authority be converted into enforceable controls for a
+        professor-configurable Course Digital Twin?
+  \item Which retrieval and evidence-representation approaches best support
+        course-isolated, fully grounded factual answers under predefined
+        quality and operational gates?
+  \item Can a governed tutoring runtime preserve safe actions, citation
+        lineage, learner-state authority, persistence, recovery, and rollback
+        across reactive and proactive tutoring flows?
+  \item Why can an integrated autonomous LLM-backed candidate remain
+        ineligible for release even when deterministic, component-level, and
+        local operational controls succeed?
+\end{enumerate}
+
+The provisional contribution is twofold. First, the project provides an
+inspectable architecture that separates model proposals from application-owned
+authority over evidence, policy, state, publication, delivery, and rollback.
+Second, it provides comparative evidence showing that successful governance
+and operational controls do not compensate for failures in factual grounding,
+academic-integrity action, or exact claim-to-citation lineage. The resulting
+release decision is treated as an academic result rather than hidden behind a
+successful demonstration.
+
+% TODO after reviewing the introduction with Hikaru:
+% - Add primary literature citations to motivate the gap.
+% - Replace the provisional contribution with the final evidence-backed wording.
+
+\section{Related Work and Research Gap}
+\label{sec:related-work}
+% Next drafting unit after the introduction is accepted.
+
+\section{Evaluation-First Methodology}
+\label{sec:methodology}
+% Controls, frozen datasets, gates, failure classes, and decision rules.
+
+\section{System Design and Implementation}
+\label{sec:system-design}
+% Professor governance, source pipeline, evidence/claim/citation boundary,
+% tutoring state, publication, persistence, recovery, and rollback.
+
+\section{Evaluation Design}
+\label{sec:evaluation-design}
+% Datasets, conditions, metrics, operational checks, and claim boundaries.
+
+\section{Comparative Results}
+\label{sec:results}
+% Compare rather than collapse the outcomes:
+% 1. accepted deterministic/local controls and component decisions;
+% 2. factual grounding and evidence-lineage Refine/No Release results;
+% 3. governed autonomy and operational qualification results;
+% 4. invalid runs, permitted corrections, and what they do not establish.
+
+\section{Discussion}
+\label{sec:discussion}
+% Interpret why high retrieval coverage and passing controls did not guarantee
+% release-quality claims, citations, or academic-integrity actions.
+
+\section{Security, Limitations, and Future Work}
+\label{sec:limitations}
+% Separate evaluated safeguards from missing human-usability, learning-outcome,
+% multimodal, durable-hosting, and production-scale evidence.
+
+\section{Conclusion}
+\label{sec:conclusion}
+% Write last and answer each research question at the supported claim boundary.
+
+\end{document}

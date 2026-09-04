@@ -1,0 +1,59 @@
+// Suggested caption: Proposed low-divergence AWS R1 pilot (not implemented or evaluated).
+digraph AwsLowDivergenceProposal {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.35,
+    ranksep=0.6,
+    splines=polyline
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#475569", fillcolor="#f8fafc", margin="0.14,0.09"];
+  edge [fontname="Helvetica", fontsize=9, color="#475569", arrowsize=0.7];
+
+  users [label="Invited professors\nand students", fillcolor="#e0f2fe"];
+  dns [label="Route 53\nDNS", fillcolor="#ede9fe"];
+
+  subgraph cluster_vpc {
+    label="AWS VPC / one Availability Zone";
+    color="#94a3b8";
+    style="rounded";
+
+    subgraph cluster_ec2 {
+      label="EC2 instance";
+      color="#64748b";
+      style="rounded";
+      caddy [label="Caddy\nHTTPS + same-origin routing", fillcolor="#e0f2fe"];
+      web [label="Web container", fillcolor="#f8fafc"];
+      api [label="FastAPI container", fillcolor="#f8fafc"];
+      worker [label="Ingestion/outreach\nworker container", fillcolor="#f8fafc"];
+      {rank=same; web; api;}
+      caddy -> web;
+      caddy -> api;
+      api -> worker [label="durable jobs"];
+    }
+
+    ebs [label="Encrypted EBS volume\nSQLite WAL + source objects", fillcolor="#dcfce7"];
+  }
+
+  s3 [label="Versioned, encrypted S3\noff-host backup archive", fillcolor="#dcfce7"];
+  backup [label="EBS snapshots /\nAWS Backup", fillcolor="#dcfce7"];
+  secrets [label="Secrets Manager + KMS\nruntime secrets", fillcolor="#fff7ed"];
+  logs [label="CloudWatch\nlogs, metrics, alarms", fillcolor="#fff7ed"];
+  {rank=same; s3; backup;}
+  {rank=same; secrets; logs;}
+
+  users -> dns -> caddy;
+  api -> ebs;
+  worker -> ebs;
+  ebs -> s3 [label="verified application backup"];
+  ebs -> backup [label="volume recovery"];
+  secrets -> api [style=dashed];
+  secrets -> worker [style=dashed];
+  api -> logs [style=dashed];
+  worker -> logs [style=dashed];
+
+  limitation [shape=note, label="PROPOSAL — NOT IMPLEMENTED OR EVALUATED\nClosest to qualified Compose topology.\nStill single-host: no horizontal scale\nor managed database failover.", fillcolor="#fee2e2"];
+  limitation -> ebs [style=dashed, arrowhead=none, constraint=false];
+}

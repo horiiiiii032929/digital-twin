@@ -1,0 +1,76 @@
+// Suggested caption: Swimlane activity diagram for one governed student-tutoring turn.
+digraph GovernedTutoringActivity {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.25,
+    nodesep=0.3,
+    ranksep=0.42,
+    splines=ortho,
+    compound=true,
+    newrank=true
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=9, color="#475569", fillcolor="#f8fafc", margin="0.11,0.07"];
+  edge [fontname="Helvetica", fontsize=8.5, color="#475569", arrowsize=0.65];
+
+  subgraph cluster_student {
+    label="Student";
+    color="#94a3b8";
+    style="rounded,dashed";
+    start [shape=circle, label="", width=0.18, fixedsize=true, fillcolor="#334155", color="#334155"];
+    submit [label="Submit question with\ncourse and release context", fillcolor="#eef2ff"];
+    receive [label="Receive cited response\nor explicit safe action", fillcolor="#eef2ff"];
+    finish [shape=doublecircle, label="", width=0.2, fixedsize=true, fillcolor="#ffffff", color="#334155"];
+  }
+
+  subgraph cluster_presentation {
+    label="Presentation layer";
+    color="#94a3b8";
+    style="rounded,dashed";
+    dispatch [label="Validate request shape and\ndispatch tutoring command", fillcolor="#e0f2fe"];
+    display [label="Display response, citations,\nwarnings, or recovery message", fillcolor="#e0f2fe"];
+  }
+
+  subgraph cluster_business {
+    label="Application and business-logic layer";
+    color="#64748b";
+    style="rounded";
+    authorize [label="Authorize account, membership,\nand published release", fillcolor="#dcfce7"];
+    authorized [shape=diamond, label="Authorized?", fillcolor="#fef3c7", margin="0.06"];
+    validate_evidence [label="Validate approved scope,\ncompleteness, and reference identity", fillcolor="#dcfce7"];
+    sufficient [shape=diamond, label="Evidence sufficient\nand unambiguous?", fillcolor="#fef3c7", margin="0.05"];
+    route [label="Apply deterministic action policy\nand professor constraints", fillcolor="#dcfce7"];
+    complex [shape=diamond, label="Complex teaching\nmove needed?", fillcolor="#fef3c7", margin="0.05"];
+    constrain [label="Intersect proposal with allowed\nevent-scoped actions", fillcolor="#dcfce7"];
+    compile [label="Compile evidence set into\nclaims and exact citations", fillcolor="#dcfce7"];
+    valid [shape=diamond, label="Claims, citations,\nscope, and policy valid?", fillcolor="#fef3c7", margin="0.05"];
+    fallback [label="Select refusal, clarification,\nabstention, or recovery response", fillcolor="#fee2e2"];
+    commit [label="Commit response, learner-state delta,\ntrace, usage, and outbox atomically", fillcolor="#dcfce7"];
+  }
+
+  subgraph cluster_adapters {
+    label="Data-access and provider adapters";
+    color="#94a3b8";
+    style="rounded,dashed";
+    retrieve [label="Retrieve only approved, active\ncourse evidence", fillcolor="#f1f5f9"];
+    propose [label="Approved provider proposes a\nbounded pedagogical move", fillcolor="#ffedd5"];
+    persist [label="Persist transaction and\nreturn durable outcome", fillcolor="#f1f5f9"];
+  }
+
+  start -> submit -> dispatch -> authorize -> authorized;
+  authorized -> fallback [xlabel="no"];
+  authorized -> retrieve [xlabel="yes"];
+  retrieve -> validate_evidence -> sufficient;
+  sufficient -> fallback [xlabel="no"];
+  sufficient -> route [xlabel="yes"];
+  route -> complex;
+  complex -> propose [xlabel="yes"];
+  complex -> compile [xlabel="no"];
+  propose -> constrain -> compile;
+  compile -> valid;
+  valid -> fallback [xlabel="no"];
+  valid -> commit [xlabel="yes"];
+  fallback -> commit;
+  commit -> persist -> display -> receive -> finish;
+}

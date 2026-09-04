@@ -1,0 +1,37 @@
+// Suggested caption: Negative results drove fresh successors and a narrower local selection.
+digraph EvaluationEvolution {
+  graph [
+    fontname="Helvetica",
+    rankdir=TB,
+    bgcolor="#ffffff",
+    pad=0.3,
+    nodesep=0.35,
+    ranksep=0.5,
+    splines=polyline
+  ];
+  node [shape=box, style="rounded,filled", fontname="Helvetica", fontsize=10, color="#475569", margin="0.14,0.1"];
+  edge [fontname="Helvetica", fontsize=9, color="#64748b", arrowsize=0.7];
+
+  retrieval [label="Text retrieval held-out\nM2 85.0% vs BM25 80.0%\nKEEP M2 (text-only)", fillcolor="#dcfce7"];
+  program011 [label="Program 011\n44.16% fully grounded;\n72.9% boundary; 478 severe\nREFINE / NO FACTUAL RELEASE", fillcolor="#fee2e2"];
+  crossengine [label="Cross-engine 010\nNo engine passed combined gates;\nshared retrieval failure exposed\nREFINE / NO RELEASE", fillcolor="#fee2e2"];
+  sourceatoms [label="Source semantic atoms\n96.0% grounded, but exact\nclaim/citation/version gates failed\nREFINE", fillcolor="#fef3c7"];
+  ambiguity [label="Ambiguity-safe V2\n97.75% grounded; all frozen\ndevelopment gates passed\nKEEP METHOD", fillcolor="#dcfce7"];
+  grounding011 [label="Grounding successor 011\n99.25% grounded; 100% boundary;\n99.25% claim/citation\nKEEP METHOD", fillcolor="#dcfce7"];
+  confirmation [label="Actual-product confirmation 013\n820 immutable responses\noriginal REFINE; 30-reference\nzero-call correction -> KEEP", fillcolor="#dbeafe"];
+  qualification [label="Local qualification 002\nHTTPS, restart, clean restore,\nT0 rollback, V2 restoration\nKEEP EXACT LOCAL PROFILE", fillcolor="#dbeafe"];
+  boundary [shape=note, label="Final boundary: experimental local profile;\nnot hosted production, professor fidelity,\nstudent usability, or learning improvement", fillcolor="#f1f5f9"];
+
+  {rank=same; retrieval; program011;}
+  {rank=same; crossengine; sourceatoms;}
+  {rank=same; ambiguity; grounding011;}
+
+  retrieval -> program011 [label="integrated product test"];
+  program011 -> crossengine [label="whole-system comparison"];
+  crossengine -> sourceatoms [label="fresh architecture tranche"];
+  sourceatoms -> ambiguity [label="fresh ambiguity-safe successor"];
+  ambiguity -> grounding011 [label="fresh release-grounding successor"];
+  grounding011 -> confirmation [label="exact product confirmation"];
+  confirmation -> qualification [label="operational qualification"];
+  qualification -> boundary [style=dashed];
+}
