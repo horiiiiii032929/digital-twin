@@ -57,6 +57,12 @@ def test_runtime_container_bases_are_digest_pinned_and_surface_is_minimal() -> N
         "research/05_evaluation/records/"
         "governed-full-autonomy-v2-1-confirmation-001.json"
     ) in dockerfile
+    assert (
+        "COPY research/05_evaluation/records/"
+        "governed-full-autonomy-v2-1-release-binding-correction-001.json "
+        "research/05_evaluation/records/"
+        "governed-full-autonomy-v2-1-release-binding-correction-001.json"
+    ) in dockerfile
 
 
 def test_historical_review_commands_do_not_bake_in_reproduction_confirmation() -> None:
@@ -67,6 +73,21 @@ def test_historical_review_commands_do_not_bake_in_reproduction_confirmation() -
         "historical:finalize:professor-fidelity-anchor-review",
     ):
         assert "--confirm-historical-reproduction" not in scripts[command_name]
+
+
+def test_default_check_does_not_implicitly_open_machine_local_run_artifacts() -> None:
+    scripts = json.loads((ROOT / "package.json").read_text())["scripts"]
+
+    assert "precheck" not in scripts
+    assert "verify:historical-generated-artifacts" in scripts
+    assert "reports/generated" not in scripts["check"]
+    for historical_test in (
+        "test_academic_factual_qa_open_10000_sealed_package.py",
+        "test_academic_factual_qa_atomic_m2_product_checkpoint.py",
+        "test_audit_academic_factual_qa_source_semantic_atom_failures.py",
+        "test_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py",
+    ):
+        assert f"--ignore=tests/{historical_test}" in scripts["test:api"]
 
 
 def test_vite_reads_the_documented_repository_root_environment() -> None:

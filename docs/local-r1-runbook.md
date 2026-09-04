@@ -57,19 +57,22 @@ T1-v1/T0 configuration until a fresh architecture comparison selects and binds
 a successor.
 
 The architecture and engine comparisons have now selected the following
-candidate for fresh whole-system confirmation:
+candidate for exact local qualification:
 
 ```text
 APP_GENERATOR_MODE=deterministic
-APP_EVIDENCE_GATE_MODE=question-targeted-ambiguity-safe-v2
-APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json
+APP_EVIDENCE_GATE_MODE=dominance-scoped-ambiguity-safe-v3
+APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json
 APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
 APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-luna-policy-value
+APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-release-binding-correction-001.json
 ```
 
-This is not yet a staging-ready block. Startup must continue to reject it until
-the fresh H+E1 whole-system qualification record binds the profile hash,
-`guarded-policy-value-planner-v2`, Luna identity, and selected evidence gate.
+The normalized binding record composes the immutable confirmation-024 H+E1
+result with development selection 004 and binds the exact profile hash. It does
+not itself qualify the composed release. Use this block only for the fresh
+local HTTPS qualification 005; keep the previous local candidate as rollback
+until 005 passes and is registered.
 
 ## Build and start
 
@@ -120,10 +123,10 @@ set -a
 source .env.local-r1
 set +a
 npm run verify:staging-https -- \
-  --base-url https://localhost:8443 \
+  --base-url "https://localhost:${LOCAL_R1_HTTPS_PORT:-8443}" \
   --ca-file reports/generated/local-r1-caddy-root.crt \
   --admin-email admin@foundation.local \
-  --profile-version v2.1-grounding-011 \
+  --profile-version v2.1-floor-004-h-e1 \
   --expected-tutoring-mode governed-autonomous-tutoring-graph-v2.1 \
   --output reports/generated/local-r1-live-journey.json
 ```
@@ -133,7 +136,7 @@ After restarting all services, verify the same durable workflow:
 ```bash
 docker compose --env-file .env.local-r1 -f compose.local-r1.yml restart
 npm run verify:staging-https -- \
-  --base-url https://localhost:8443 \
+  --base-url "https://localhost:${LOCAL_R1_HTTPS_PORT:-8443}" \
   --ca-file reports/generated/local-r1-caddy-root.crt \
   --resume reports/generated/local-r1-live-journey.json \
   --output reports/generated/local-r1-restart-journey.json
@@ -186,7 +189,7 @@ docker compose --env-file .env.local-r1 -f compose.local-r1.yml up -d \
   --force-recreate api ingestion-worker outreach-worker
 
 npm run verify:staging-https -- \
-  --base-url https://localhost:8443 \
+  --base-url "https://localhost:${LOCAL_R1_HTTPS_PORT:-8443}" \
   --ca-file reports/generated/local-r1-caddy-root.crt \
   --resume reports/generated/local-r1-live-journey.json \
   --mode-check --expected-tutoring-mode grounded-assistant

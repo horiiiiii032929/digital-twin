@@ -1,4 +1,4 @@
-name: digital-twin-r1-gate-verify
+name: digital-twin-r1-local
 
 x-runtime-environment: &runtime-environment
   APP_MODE: staging

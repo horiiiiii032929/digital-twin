@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1030
+    "audited": 1073
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 262,
+    "active_or_unclassified_tooling": 281,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 271,
+    "evaluation_configuration": 282,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 235
+    "verification": 248
   },
-  "file_count": 1030,
+  "file_count": 1073,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "fe5831ba585c70b9f832b950d48c0f86f938b179cf47517f3e05d366e275fe19",
+  "record_sha256": "9465b7bdad1221aca882e6625f45edf7cd01277878ec78b0ffc4131b23c969b6",
   "records": [
     {
       "audit": {
@@ -424,7 +424,7 @@
     {
       "audit": {
         "domain": "governed-autonomy-ux",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Rechecked the committed local-R1 Compose topology during the release-binding audit; service, volume, worker, health-check, and environment boundaries remain active and intentional.",
         "findings": [],
         "reviewed_at": "2026-09-02",
         "reviewer": "Codex audit-closure cross-review"
@@ -1258,8 +1258,8 @@
         "domain": "governed-autonomy-v2-1",
         "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-04",
+        "reviewer": "Codex release-binding audit"
       },
       "audit_status": "audited",
       "category": "deployment_configuration",
@@ -1267,7 +1267,7 @@
       "package_commands": [],
       "path": "compose.local-r1.yml",
       "risk": "high",
-      "sha256": "185594a54b8ff2d12bf3431931c3bba87225ea45dac75af5b7549d768238034a"
+      "sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
     },
     {
       "audit": {
@@ -1363,7 +1363,7 @@
       "package_commands": [],
       "path": "deploy/Dockerfile",
       "risk": "high",
-      "sha256": "0caf18b1d738bedd77e1efaa311449705f630a8b323aec34a85e771b4b83960d"
+      "sha256": "f7213c52f2f9680565ad3f779496316fcb427eaa66f835904d4158c513b2d5af"
     },
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "53f9afe091d8ef8928019b49a4b9253d618d6256731032abb5d5446ccb8da63a"
+      "sha256": "0a563f4d0e973519c65cad1bca6a39f6e00dd70f0dc3d7771cb888009199c115"
     },
     {
       "audit": {
@@ -2871,6 +2871,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/academic_factual_qa_open_10000_v1_winner_regression_001.json",
+      "risk": "high",
+      "sha256": "9e10d662049a5506f590bb3e7dd95094783bea9b741d231290686869db370b1c"
+    },
+    {
+      "audit": {
         "domain": "flow-independent-factual-qa",
         "evidence": "Manual AFQC-047 binding review verifies exact first-party OpenAI and Mistral endpoints, dated/release model identities, official pricing and limits checked on 2026-08-27, OpenAI store=false, public-only inputs, moving-alias rejection rationale, runtime-only credentials, two global transport retries, and all execution authority false.",
         "findings": [],
@@ -3636,6 +3652,22 @@
       "path": "research/05_evaluation/instruments/evaluation_run_v2_synthetic_example.json",
       "risk": "high",
       "sha256": "61e228f44e44a21d00a386fe5b76f792df4defebc90d64dd054bae6c8dd9a213"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/evidence_range_match_correction_001.json",
+      "risk": "high",
+      "sha256": "f8da7de7bc5f6b73fd670adc9f7bcebc062c4e1f7a480601d7afa3d59db3c2af"
     },
     {
       "audit": {
@@ -4599,6 +4631,70 @@
     },
     {
       "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_corpus_confirmation_025.json",
+      "risk": "high",
+      "sha256": "6c0cfe7683e5fac3a72bc886403949cd02044147d9513aa9400297aef59df864"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_corpus_confirmation_026.json",
+      "risk": "high",
+      "sha256": "dd74c6d163fbef27331adb8380a621a338f50032ee835b55bf07fb013b1ad9c6"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_corpus_confirmation_027.json",
+      "risk": "high",
+      "sha256": "9b9e291e5c457342f11fa48865dcd9515fd23631948a053ee46e987a921779f1"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_corpus_confirmation_028.json",
+      "risk": "high",
+      "sha256": "e9f583050ae9f2653576e8eeaf5fda2f8fa601b3acfb5028667d27d3eca2e574"
+    },
+    {
+      "audit": {
         "domain": "evaluation-configuration",
         "evidence": "Cross-engine evaluation review plus confirmation-013 root-cause review verified typed immutable bindings, dependency-aware provider-failure simulation, finite stage progression, exact provider identity and budget controls, independent deterministic scoring, resume safety, and fail-closed execution boundaries.",
         "findings": [],
@@ -5060,6 +5156,70 @@
       "path": "research/05_evaluation/instruments/proactive_outreach_a1_shadow_confirmation_002.json",
       "risk": "high",
       "sha256": "f18d30050dd392d83e649a0185b97c652029092b851659bf47b9e1a36f25d65a"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/product_evidence_gate_selection_001.json",
+      "risk": "high",
+      "sha256": "7fa6dec2a9f4b07b88f51e007c4d33356b57efc3e9688d8623a23492d6cb4b63"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/product_evidence_gate_selection_002.json",
+      "risk": "high",
+      "sha256": "826ca82ec85d5be26199764024559a875ecd2381c1f4b69c86aac762b88ea954"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/product_evidence_gate_selection_003.json",
+      "risk": "high",
+      "sha256": "45268ae5d19243c17592e40a50166110ed1c7fb28453ebc0118665670e69d972"
+    },
+    {
+      "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/product_evidence_gate_selection_004.json",
+      "risk": "high",
+      "sha256": "7bcda633276cec460f44c7bb1be2e269b0f6e2f9a49e346e9bba310738491aaf"
     },
     {
       "audit": {
@@ -5799,6 +5959,22 @@
     },
     {
       "audit": {
+        "domain": "evaluation-evidence-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json",
+      "risk": "high",
+      "sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
+    },
+    {
+      "audit": {
         "domain": "r1-openai-evaluation-contracts",
         "evidence": "Focused current-policy validator review verified the active direct-OpenAI mini, nano, and bounded full-model identities, prohibited historical providers, exact registration, and network-free execution.",
         "findings": [],
@@ -5879,6 +6055,24 @@
     },
     {
       "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [
+        "test:api"
+      ],
+      "path": "scripts/academic_factual_qa_open_10000_sealed_package.py",
+      "risk": "high",
+      "sha256": "5979229ee73601e839d15438109bd0e24660c0fd430cbd531697a36289c9efc3"
+    },
+    {
+      "audit": {
         "domain": "repository-execution-freeze",
         "evidence": "Manual registry review added the persona-robust selection entrypoint to the authoritative freeze coverage set; focused freeze tests cover the changed boundary.",
         "findings": [],
@@ -5895,6 +6089,22 @@
       "path": "scripts/academic_factual_qa_open_10000_t0_adapter.py",
       "risk": "high",
       "sha256": "96f161ee04443a6107de738a77fb72be4b884d6cdd327e60f8a32cdd69abd41e"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/academic_factual_qa_open_10000_winner_adapter.py",
+      "risk": "high",
+      "sha256": "20cddcfb949632782446dc376acfa3e5733a523a9d85bb44f0518306ca39ff20"
     },
     {
       "audit": {
@@ -6182,6 +6392,7 @@
       "disposition": "active_audited",
       "package_commands": [
         "execute:source-semantic-atom-failure-audit",
+        "test:api",
         "verify:source-semantic-atom-failure-audit"
       ],
       "path": "scripts/audit_academic_factual_qa_source_semantic_atom_failures.py",
@@ -6457,6 +6668,22 @@
       "path": "scripts/build_academic_factual_qa_confirmation_v2.py",
       "risk": "high",
       "sha256": "c85bbc8daad72039428af51eade1ddc6a39d50274f6af28b93b757d04c406120"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/build_academic_factual_qa_development_region_corpus.py",
+      "risk": "high",
+      "sha256": "9856dd62777a813379c17162545984f82d9b3dfbe50bc890369ab6add502d54f"
     },
     {
       "audit": {
@@ -7119,6 +7346,70 @@
     },
     {
       "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_025.py",
+      "risk": "high",
+      "sha256": "7d1bf5c53bf41919d407b92f5f1e5f6460d98a4f99218269a33a09c0cff9ff58"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_026.py",
+      "risk": "high",
+      "sha256": "cffe25b2fa03c9c99df4e5585fab0c30e884eb47860715a42744b85ff7272880"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_027.py",
+      "risk": "high",
+      "sha256": "8a62fb89eac6ede725c77f536d2f13c81309fa6f262ed99161630107a771c5ce"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_028.py",
+      "risk": "high",
+      "sha256": "b102a9abf7eff3bf0ba1b27a55ce68d20edd919bf20b147491e5340f82fbbf5d"
+    },
+    {
+      "audit": {
         "domain": "active-or-unclassified-tooling",
         "evidence": "Terminal-state builder review verified immutable bindings, revoked authority handling, completed-refine validation, finite progression, and preserved historical result hashes.",
         "findings": [],
@@ -7720,7 +8011,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py",
       "risk": "high",
-      "sha256": "0daab68a032f044e62a952e47e17ea2fcfb353c51ecee96975c6a2e8724f8f29"
+      "sha256": "db28f3360938f392a782a928078f2109a39edf415b62a10de5ec81e78e941832"
     },
     {
       "audit": {
@@ -8034,6 +8325,22 @@
     },
     {
       "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/recover_governed_full_autonomy_confirmation_score.py",
+      "risk": "high",
+      "sha256": "40b652422cd048acfd4b87c15288b7e42a08fbdc708eba92c480f4afa753fec2"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -8065,6 +8372,22 @@
       "path": "scripts/render_generator_qualification_second_review.py",
       "risk": "high",
       "sha256": "2c96923d76e18c71ed221565d31c70b617895517451917c5c0200c1ddb3278df"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/reproduce_grounding_floor_audits.py",
+      "risk": "high",
+      "sha256": "043ac6e0a72b29d6312365f6e7c181b246d3ed4e6198b4b90ce3d0f0aa628ce2"
     },
     {
       "audit": {
@@ -8297,6 +8620,22 @@
       "path": "scripts/run_academic_factual_qa_open_10000.py",
       "risk": "high",
       "sha256": "ed3a53c9bbefe17a9157982fde0f041f9c9bfc3c2630037f7e3dc0569c8d408e"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_academic_factual_qa_open_10000_winner.py",
+      "risk": "high",
+      "sha256": "360960782a4947449979aed1b55cdda6e0d714696d5cfff206a39b7dd53513fb"
     },
     {
       "audit": {
@@ -9559,7 +9898,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
       "risk": "high",
-      "sha256": "c62c88c95838f1fe9a81a9366a759bfcf396ce58f07cdd8bdbf8b9f2951f0ced"
+      "sha256": "1ef757d414dd6b0af5ebe9f3d5749e386a6d2ce6430415c404cc88a04d78095c"
     },
     {
       "audit": {
@@ -9733,6 +10072,70 @@
       "path": "scripts/run_governed_full_autonomy_v2_1_actual_product_smoke.py",
       "risk": "high",
       "sha256": "9e1a1b8535d0e624d6b9427e344d49b8804c8e457ec5b58348f3d82f391b2a7a"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_025.py",
+      "risk": "high",
+      "sha256": "e209e41288a2c271ce65713cdfb37ea6aaa51612ac4ce2fe3f475dfd49335c74"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_026.py",
+      "risk": "high",
+      "sha256": "01a4ab2ac7d8055cd226ff9db2ef0689725feed9be2af22ce9fd7cad8fa8a167"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_027.py",
+      "risk": "high",
+      "sha256": "22cfb85ac6f05eb974cb58f8df8f2d172aca0fdc110cdd6f4d60b4145cf29224"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_028.py",
+      "risk": "high",
+      "sha256": "3b98e8eb0b3216f6d8415518f24d5b4f6132f6e6766ff001b6bca9eb36865632"
     },
     {
       "audit": {
@@ -10058,6 +10461,70 @@
     },
     {
       "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_product_evidence_gate_selection.py",
+      "risk": "high",
+      "sha256": "4fb6127cb1b429513d9f46d401ce0afc58ae8e0c8e13998083e27b5e819840f7"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_product_evidence_gate_selection_002.py",
+      "risk": "high",
+      "sha256": "2f5b374bedb4ac673072a34a0dd860624289c29e1efd6350411b3b45f1714aba"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_product_evidence_gate_selection_003.py",
+      "risk": "high",
+      "sha256": "6aca21a21e0ed9dad6d1f46b80f86ba8391ae1632259bbcf195cf71cf5ed905c"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/run_product_evidence_gate_selection_004.py",
+      "risk": "high",
+      "sha256": "76caf84e71ed038fafc9a434d09a73700ba845d59bbc72e87e827b08bf355d14"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -10293,6 +10760,22 @@
       "path": "scripts/score_academic_factual_qa_open_10000.py",
       "risk": "high",
       "sha256": "a2c3e59dc59746912734a4b5b183382cf01f94bac95e86b8feccc028401219c8"
+    },
+    {
+      "audit": {
+        "domain": "tooling-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "scripts/score_academic_factual_qa_open_10000_winner.py",
+      "risk": "high",
+      "sha256": "df3ddb04b72c1ad1afc50be31d9417461ad120599c4c51bcd37f7a9f45afbe14"
     },
     {
       "audit": {
@@ -10860,7 +11343,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "2835ea8b20b89ea5dddc16e09b4268d1f15e435a91f5fadfe8f18be66c1e3f11"
+      "sha256": "b393a5385296dcfdff0d32e639804b10505cbaa2ea1a32986006666f80439f55"
     },
     {
       "audit": {
@@ -11068,7 +11551,7 @@
       "package_commands": [],
       "path": "services/api/app/config.py",
       "risk": "high",
-      "sha256": "dc23270dfb233c4f6804a9d454e63c8073ef82ebbd20fbe94ab37952f84e4b95"
+      "sha256": "a506319d8e57bd1c9b78a0ffcb1dca8d47a14a935d6a4e8357aae041a547e164"
     },
     {
       "audit": {
@@ -11100,7 +11583,7 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "c00f5e51dfb2bfb6850e9cf7b5cc3f426846c5ddd6f503932abf079a648b98b3"
+      "sha256": "e1ecc652c1b7434f2bc89722e734cf3d5a48ad82d9938b9907c9e9cd0231f03f"
     },
     {
       "audit": {
@@ -11836,7 +12319,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/cascade_v2.py",
       "risk": "high",
-      "sha256": "e83ece0ea983b5e2a2d3b8d327f6b8687901ec497b14c3413ffe83f142635fc7"
+      "sha256": "f8d68d0161aa9ff289e7f75709cdf691443868ad78d12bdc4ae3116cfcf09d03"
     },
     {
       "audit": {
@@ -11900,7 +12383,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/factual_qa_contract.py",
       "risk": "high",
-      "sha256": "e82ee8042f390c23b90c144522846c89256cdf9640a380d1e835431ab1de1ba2"
+      "sha256": "30b5265a009a312d36829f8235c84b164dff33bb9e9614710d88639894784852"
     },
     {
       "audit": {
@@ -12156,7 +12639,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/models.py",
       "risk": "high",
-      "sha256": "bd73aaf9ec145fc136fd946a27c489c77baa58f542edbe58489cb1df3abecf30"
+      "sha256": "1a5177d7f5ca855d2341690acb96423fd58670d5270bdc590c93f7db8e91aed2"
     },
     {
       "audit": {
@@ -12492,7 +12975,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "671073b00fb38687c541440450ace5224aabb99c7e8fea7f76a554dc3b0c484a"
+      "sha256": "12dd016c72742f23dc914729d3078dca79fadf3661bffa0ce19fc7ef18094902"
     },
     {
       "audit": {
@@ -12508,7 +12991,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/ambiguity_safe_evidence.py",
       "risk": "high",
-      "sha256": "b512ab26903d8437ec8e2026c95d14b235bd165dd152489b56df1e1071d82ce5"
+      "sha256": "df27719ffac8bcb879faa909f41d58602bc0ef0c3c773f9ea680d56f70cb5294"
     },
     {
       "audit": {
@@ -12700,7 +13183,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/reference_uniqueness.py",
       "risk": "high",
-      "sha256": "8ee6c604190b7cfcc1e23a57de7728f59e47be8943bbe07b5c6ee1ceb18f3b6b"
+      "sha256": "67032f74884233740fc1a367078d16319e0b02e8526b71cb5c229fb87187b109"
     },
     {
       "audit": {
@@ -12828,7 +13311,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/semantic_evidence_atoms.py",
       "risk": "high",
-      "sha256": "d42f9851fce512c58435ba8398436c3934d6b8cfbf0f70b7f4c76952502b7eca"
+      "sha256": "f42b8b430f2d36c660bc3ef4cb698b4aaff7601c8a1ea6bb9d16d93f8f01030c"
     },
     {
       "audit": {
@@ -13244,7 +13727,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "62d8563d0eaa7bb9bd48254455df8066bf8db81a4f31566d5102ab8a63dd1867"
+      "sha256": "07ad6171a68ededdd9eb48005bafdd2b1f5752bc7f4f7e0edae9f2e299fa9242"
     },
     {
       "audit": {
@@ -13596,7 +14079,7 @@
       "package_commands": [],
       "path": "tests/api/test_auth_api.py",
       "risk": "medium",
-      "sha256": "5c3962d4737ee40b03355f1d9f8a822a56e303666d1c8b04350764e3a9b5c6d1"
+      "sha256": "63a74add5708942c4bad76502acef0c930f67fcea624422e0f56615188233a83"
     },
     {
       "audit": {
@@ -13820,7 +14303,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_evaluation_record_dispatch.py",
       "risk": "medium",
-      "sha256": "3f80d93ca9dd167dd535080a3c5f682e58a7105d7d3f2460858756417143507a"
+      "sha256": "b3c047efb64f7179b4417843e8f93b3446033e1e927d905e3fcd7cdda86217fd"
     },
     {
       "audit": {
@@ -14108,7 +14591,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "fb455f3f8f6101a9970cc07dac535131e86c6a44996fab07ff52a57fb606b6b5"
+      "sha256": "69af416f41df56a455187cd5f5ae90c83558caee1b3a63ce2f16d779b3cbaef5"
     },
     {
       "audit": {
@@ -14592,6 +15075,22 @@
     },
     {
       "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_cluster_corpus_atoms.py",
+      "risk": "medium",
+      "sha256": "7c0b7fb07ef149655fc39a73fb087a89a8e46b3da91b777aeba66efcaf383046"
+    },
+    {
+      "audit": {
         "domain": "academic-factual-qa-confirmation",
         "evidence": "Focused tests cover frozen allocation, independent-label authority, private-source closure, provider and execution closure, decision-memory completeness, and the exact sample-precision calculations.",
         "findings": [],
@@ -14669,6 +15168,54 @@
       "path": "tests/test_academic_factual_qa_grounding_selection_002.py",
       "risk": "medium",
       "sha256": "f0d1e23dc01c1f5eb9cbafeb0697762e50e9b7bfa9347a573137a9a5fe3c3e68"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_10000_sealed_package.py",
+      "risk": "medium",
+      "sha256": "56acace871ff274a72a4ff3cd5ebcb7ae9770155b3717d9c20bf42616709a4d2"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_10000_winner_adapter.py",
+      "risk": "medium",
+      "sha256": "a9f3eb6cdbb0b7c2c4582c7f49043d7cf4fec4461ea6982359fc759a8eb1148b"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "tests/test_academic_factual_qa_open_10000_winner_gate_regime.py",
+      "risk": "medium",
+      "sha256": "9692c96fecde63e4819406d92d4bd09cc15ccdcc4a13b02cc7b2653e167b0f06"
     },
     {
       "audit": {
@@ -15728,6 +16275,22 @@
     },
     {
       "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_dominance_scoped_reference_uniqueness.py",
+      "risk": "medium",
+      "sha256": "d031a79ccf11ff1e501ad04aab9671272d14861aa87fb3d568747085456f3e30"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -15757,6 +16320,22 @@
       "path": "tests/test_evaluation_cascade_v2.py",
       "risk": "medium",
       "sha256": "75b0fbaf65e912c5eaefda9fccd34847a954d3e041c09ce032d52bbea31203a7"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "historical_guarded",
+      "package_commands": [],
+      "path": "tests/test_evidence_range_match_correction.py",
+      "risk": "medium",
+      "sha256": "6b4e57458284bf451e2038f68bf17d391b53c3ad03beb2ae7642393cea5b96d3"
     },
     {
       "audit": {
@@ -16093,6 +16672,38 @@
       "path": "tests/test_generator_qualification_runner.py",
       "risk": "medium",
       "sha256": "9c4597d857c84838d823211b4e2e7faec9ed657ee9b274bc5e449c82e4eade48"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_case_runtime_is_fresh.py",
+      "risk": "medium",
+      "sha256": "7af9ce94f62441eba34cd2184297d52036816d681e0a05f25ae8d5e2e752058a"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_multi_source_release.py",
+      "risk": "medium",
+      "sha256": "561e8e37227ba2e34fab78f63a374732def40bd507dc8821f0299ba5be0f89d5"
     },
     {
       "audit": {
@@ -16496,6 +17107,22 @@
     },
     {
       "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_generation_gate_binding.py",
+      "risk": "medium",
+      "sha256": "343926b6c35553f2c57aefe2d2c48e6d51a278c5eb9dfba03aa213e89888bd76"
+    },
+    {
+      "audit": {
         "domain": "governed-autonomy-v2-1",
         "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
         "findings": [],
@@ -16572,7 +17199,23 @@
       "package_commands": [],
       "path": "tests/test_local_r1_compose.py",
       "risk": "medium",
-      "sha256": "21b21eb8f2796378198d748a8d97f3008effa2e71c58f032f518bdd48027c832"
+      "sha256": "83c7034cbc1a781c553a2e5fc00fe8434bdf01861557e2ca2c4962e97fb2d63a"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_local_r1_compose_runtime_selection.py",
+      "risk": "medium",
+      "sha256": "f269fce9044f3fa1195ee73c3b8c65c0922d24784866a2b6bf5d7a5c20808366"
     },
     {
       "audit": {
@@ -16656,6 +17299,22 @@
     },
     {
       "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against immutable run bindings, freeze guards, result records, focused regression tests, and the no-rerun/no-rescore boundary; unfavorable evidence is preserved.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_product_evidence_gate_selection_004.py",
+      "risk": "medium",
+      "sha256": "f895fa3c3433ed19e545965621cbdf9f0bde3b1568468e0cad1b1fd0e09ff8bf"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Focused regressions cover profile schema compliance, approval eligibility, prohibited private content, C0-C3 invariants, hard-versus-fidelity separation, and the bounded empty calibration packet.",
         "findings": [],
@@ -16716,7 +17375,7 @@
       "package_commands": [],
       "path": "tests/test_repository_configuration.py",
       "risk": "medium",
-      "sha256": "1be2e522a1c2c02ead41ad8eafd7c3283c4c4ef8ea48c26044d3511ead3f5f66"
+      "sha256": "f28f17a5dfa20ab89f3679e9a9a3a5e3c76a8d43d8deda30a8ecea524e108030"
     },
     {
       "audit": {
@@ -17056,6 +17715,22 @@
     },
     {
       "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_source_semantic_evidence_atom_gate_v4.py",
+      "risk": "medium",
+      "sha256": "d6593c98f7d08c1781ec64646d7811796298d082cfac6f8caaa6fd2cfa041a2a"
+    },
+    {
+      "audit": {
         "domain": "configuration-and-deployment",
         "evidence": "Focused least-privilege Compose regression tests and complete test suite passed.",
         "findings": [],
@@ -17197,6 +17872,22 @@
       "path": "tests/test_triage_factual_qa_v3_semantic_roles.py",
       "risk": "medium",
       "sha256": "f00863701a1396007e8b2d8f06ed27ad56e577f9ab40b34040980b77decdfe07"
+    },
+    {
+      "audit": {
+        "domain": "verification-correctness",
+        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_v21_qualification_gate_binding.py",
+      "risk": "medium",
+      "sha256": "57e92cde40ce3b87e3de7630f443b067d273df7f5788ed0e0b5ea54def264924"
     },
     {
       "audit": {
@@ -17360,8 +18051,8 @@
     }
   ],
   "risk_counts": {
-    "high": 781,
-    "medium": 249
+    "high": 811,
+    "medium": 262
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

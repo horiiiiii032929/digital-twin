@@ -1,5 +1,8 @@
 {
   "audit_id": "tie-set-citation-hypothesis-audit-001",
+  "run_id": "tie-set-citation-hypothesis-audit-001",
+  "code_revision": "b4f747471e41e4e83179ce64708f82b5c3591c07",
+  "status": "completed-no-change",
   "case_count": 500,
   "closes": "grounding-selection line of work on the development region corpus",
   "converges_with": [

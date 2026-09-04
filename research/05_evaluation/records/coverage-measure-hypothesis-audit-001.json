@@ -1,5 +1,8 @@
 {
   "audit_id": "coverage-measure-hypothesis-audit-001",
+  "run_id": "coverage-measure-hypothesis-audit-001",
+  "code_revision": "7eff1a0b26ba857caa65b9ff68637436f059a354",
+  "status": "completed-no-change",
   "baseline": {
     "gold_inside_tie": 185,
     "single_leader": 238,

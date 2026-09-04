@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "run_id": "grounding-floor-audit-reproduction-001",
+  "code_revision": "1f36adbb837e637520dd0d75d0c6c200dc20119f",
+  "working_tree_dirty": false,
+  "status": "completed-corrected",
+  "decision": "Keep the relative selection of dominance-scoped-ambiguity-safe-v3; correct the reported factual metric and treat the historical floor narrative as development-only mechanism evidence, not a proven task floor.",
+  "evidence_class": "development-split-reproduction-and-correction",
+  "sealed_package_touched": false,
+  "provider_calls": 0,
+  "cost_usd": 0.0,
+  "inputs": {
+    "case_count": 500,
+    "cases_file_sha256": "c4266cc1e7fd0c838124b2c626cd2cd46e73008b440e0b2a93b6c033ef84f2f9",
+    "cases_content_sha256": "fcc535fc857aceaaedea6b7e88093fc61937d8edb26666480154551ad58ff298",
+    "gold_file_sha256": "84fd9b50547af309e526863c19c0c52c9d7ab6f86a62d9e96375b70a77950fb7",
+    "corpus_sha256": "d1cf7ff16bc669995de0a7cdc00ca2c1ae282660ddf20a41c43b3d555fe4e835",
+    "candidate_ledger_sha256": "3b32c756768f8c03fbe5843e78608de16b7f451ca88c6072dc414f43faabdecd",
+    "incumbent_ledger_sha256": "d996f2ec2c849674b939413e31c5ebc8b00448023deabadbaf30e88f9815048d"
+  },
+  "ledger_binding": {
+    "source_instrument_id": "product-evidence-gate-selection-003",
+    "candidate_manifest_sha256": "ef652104712eb9b1b8f6c2382a02dcd7b9116c32bd531bb24d6afb0476c8fceb",
+    "candidate_configuration_sha256": "760804f43107cef669e047d2cb6ee9cb360321e995b75adefddf26e49f38ac27",
+    "incumbent_manifest_sha256": "eed1e5978a62d5caf78f63cb302913c7a801291db25100dbdbe030a56ae513f8",
+    "incumbent_configuration_sha256": "cff075512e0a1fd77a2b611740312cd9dd999ba85380861d3d66cb888bf6dfa1",
+    "response_count_per_arm": 500,
+    "payload_hashes_verified": true,
+    "case_identity_sets_verified": true
+  },
+  "corrected_selection_metrics": {
+    "candidate": {
+      "fully_grounded_factual_success": 0.425,
+      "overall_grounded_task_success": 0.5,
+      "boundary_action_accuracy": 0.8,
+      "severe_unsupported_release_count": 0,
+      "operational_failure_count": 0,
+      "failed_absolute_gate_count": 12
+    },
+    "incumbent": {
+      "fully_grounded_factual_success": 0.26,
+      "overall_grounded_task_success": 0.368,
+      "boundary_action_accuracy": 0.8,
+      "severe_unsupported_release_count": 0,
+      "operational_failure_count": 0,
+      "failed_absolute_gate_count": 12
+    },
+    "corrected_factual_improvement_points": 16.5,
+    "relative_promotion_rule_still_passes": true
+  },
+  "reference_surface": {
+    "current_parsed_target_count": 556,
+    "historical_reported_target_count": 554,
+    "shipped_single_leader": 238,
+    "shipped_single_leader_is_gold": 231,
+    "shipped_single_leader_is_wrong": 2,
+    "shipped_tied_leader_sets": 196,
+    "shipped_unresolved_targets": 122,
+    "answerable_cases_with_a_tie": 185,
+    "answerable_cases_where_every_tie_covers_gold": 181,
+    "ties_whose_leaders_agree": 2,
+    "ties_whose_leaders_disagree": 194,
+    "locator_credited_correct_single_leaders": 226,
+    "requirement_narrowed_correct_single_leaders": 226
+  },
+  "historical_audit_assessment": {
+    "convergent_safety_finding_reproduced": true,
+    "exact_numeric_reproduction": false,
+    "reason": "The historical ad hoc audit calculations were not committed as executable commands and their records disagree internally on target and wrong-leader counts. The current source-defined rerun reproduces the central tie-set counts and the no-safe-gain conclusion, but not every historical number.",
+    "claim_boundary": "The four audits are bounded development mechanism evidence. They do not prove that the benchmark task has a universal 50% ceiling or that every clarify action is semantically correct."
+  },
+  "limitations": [
+    "Development-split evidence only; the sealed package was not accessed.",
+    "This reproduces current committed code and immutable response ledgers, not an unavailable historical scratch script.",
+    "The audits compare bounded deterministic mechanisms and do not prove a universal task ceiling.",
+    "Public synthetic sources only; no professor fidelity, usability, or learning claim."
+  ]
+}

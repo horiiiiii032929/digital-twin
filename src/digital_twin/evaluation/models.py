@@ -337,7 +337,7 @@ def load_evaluation_record(path: Path) -> BaseModel:
         )
 
         return ArchitectureEvolutionRunRecordV1.model_validate(payload)
-    if "component" not in payload and {
+    if ("component" not in payload or "candidates" not in payload) and {
         "run_id",
         "code_revision",
         "status",
