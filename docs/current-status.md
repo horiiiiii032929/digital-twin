@@ -46,6 +46,17 @@ authority while deterministically canonicalizing duplicate semantic-list
 values that invalidated attempt 002. Its paid execution remains unauthorized,
 so no visual quality result is claimed yet.
 
+Exact local requalification 006 is now `completed-keep` after the
+multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,
+3/3 T0 rollback, and 3/3 governed V2.1 restoration checks passed. Desktop and
+exact 390-pixel browser smoke found no critical defect, and keyboard focus
+advanced Email → Password → Sign in. Attempt 001 is retained as invalid because
+the API correctly rejected a documentation-only edit that changed the frozen
+profile hash. The corrected run restored the immutable profile bytes and did
+not change the selected method or thresholds. The result qualifies a local
+research demo only; the grounding floor and unexecuted true-visual/fidelity
+claim boundaries remain unchanged.
+
 ## Release-binding correctness checkpoint
 
 The end-of-project correctness audit found two release-relevant defects before

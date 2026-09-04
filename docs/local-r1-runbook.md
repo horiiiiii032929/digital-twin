@@ -84,10 +84,13 @@ APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-fu
 
 The normalized binding record composes the immutable confirmation-024 H+E1
 result with development selection 004 and binds the exact profile hash. It does
-not itself qualify the composed release. Use this block only for the fresh
-local HTTPS qualification 005. Qualification 005 passed 43/43 operational
-checks on revision `cbdfca6`; keep T0 as the rollback because this does not
-create an academic factual-quality pass.
+not itself qualify the composed release. Qualification 006 rechecked the exact
+composition after the multi-concept assessment-scope correction and passed
+43/43 operational checks on revision `7901c9e`, plus desktop/390-pixel browser
+smoke with no critical defect. Keep T0 as the rollback because this does not
+create an academic factual-quality pass. Do not edit explanatory notes inside
+the hash-bound profile; place status updates in this runbook or
+`docs/current-status.md`.
 
 ## Build and start
 
