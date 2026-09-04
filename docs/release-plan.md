@@ -23,9 +23,11 @@ academic-grounding threshold claim changes.
 Qualification 008 attempt 001 passed 31 operational checks before exposing a
 real backup-operations defect: offline administrative commands depended on an
 otherwise valid inference credential. The invalid attempt is preserved. One
-successor may change only this shared settings boundary, retain normal runtime
-credential enforcement, and repeat the exact qualification from a fresh
-revision and isolated stack.
+successor changed only this shared settings boundary, retained normal runtime
+credential enforcement, and repeated the exact qualification from a fresh
+revision and isolated stack. Qualification 008 then passed all 43 machine
+checks plus desktop and exact 390x844 browser smoke. Local R1.2 is the selected
+research-demo composition; R1.1 and T0 remain documented rollbacks.
 
 ## Local R1.1 completion checkpoint
 
@@ -83,9 +85,11 @@ calls; Luna behavior remains bound to immutable confirmation 024.
 
 ## Released R1 product
 
-The best evaluated working design is published as
-[Course Digital Twin R1.1 — Governed Autonomy V2.1](https://github.com/horiiiiii032929/digital-twin/releases/tag/local-r1-governed-v2.1-qualification-007).
-The product decision is `Keep` for the exact local research-release scope. The
+The best evaluated working design is local R1.2: the R1.1 governed-autonomy
+composition plus `stateful-source-clarification-v1`, qualified by
+`local-r1-governed-v2-1-release-qualification-008`. R1.1 remains published as
+the historical rollback until the R1.2 evidence PR is merged and tagged. The
+product decision is `Keep` for this exact local research-release scope. The
 known 10,000+1,000 `No Release` outcome is retained separately as the academic
 factual-grounding decision and limits the claims made about this release.
 

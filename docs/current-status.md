@@ -36,7 +36,12 @@ offline command does not construct a provider client. Restore and rollback were
 therefore not claimed. One root-cause correction now separates offline
 administrative credential validation from runtime/provider validation; all
 other staging, profile, source, and qualification checks remain fail closed.
-The successor must run from a fresh clean revision and isolated stack.
+The successor ran from clean revision `e86d664` and a fresh isolated stack. It
+is `completed-keep`: 25/25 HTTPS, 6/6 restart, 6/6 clean restore, 3/3 T0
+rollback, and 3/3 governed V2.1 restoration checks passed. The exact 390x844
+browser smoke had no horizontal overflow and all login controls were labelled.
+Local R1.2 is therefore operationally qualified with bounded stateful
+clarification, text/OCR visual fallback, and T0/R1.1 rollback boundaries.
 
 ## Final local R1.1 technical checkpoint
 

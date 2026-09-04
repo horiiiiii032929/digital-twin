@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-008",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-008",
+  "date": "2026-09-05",
+  "status": "completed-keep",
+  "code_revision": "e86d664c8b261320ac2b7005720673f17266c6da",
+  "corrective_predecessor": "local-r1-governed-v2-1-release-qualification-008-attempt-001-invalid",
+  "decision": "Keep the local R1.2 research demo with bounded stateful clarification, text/OCR visual fallback, and T0 rollback.",
+  "runtime": {
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "generator_mode": "deterministic",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "clarification_implementation": "stateful-source-clarification-v1",
+    "visual_retrieval_mode": "text-ocr-fallback",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_version": "v2.1-floor-004-h-e1",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-release-binding-correction-001",
+    "clarification_confirmation": "stateful-clarification-confirmation-001",
+    "t0_rollback_available": true
+  },
+  "results": {
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "clean_restore": "6/6",
+    "t0_rollback": "3/3",
+    "governed_v2_1_restoration": "3/3",
+    "total_machine_checks": "43/43",
+    "desktop_render": "passed",
+    "mobile_390x844_render": "passed",
+    "horizontal_overflow": false,
+    "labelled_login_controls": "3/3",
+    "critical_browser_defects": 0,
+    "live_api_p95_ms": 5.129,
+    "backup_schema_version": 17,
+    "backup_data_files": 7,
+    "offline_operations_without_provider_credential": "passed"
+  },
+  "browser_method": {
+    "tool": "Chrome DevTools Protocol against headless Chromium",
+    "surface": "actual local internal-CA HTTPS application",
+    "viewports": ["1440x1000", "390x844"],
+    "desktop_document_width_matches_viewport": true,
+    "mobile_document_width_matches_viewport": true,
+    "accessible_names": ["Email", "Password", "Sign in"]
+  },
+  "provider_usage": {
+    "autonomy_planner_calls": 0,
+    "generator_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "image_digests": {
+    "api": "sha256:dba9843aac110b751018b0c2ea529fe552a92acf3971cf2bb1af635d2ebb9c5e",
+    "web": "sha256:ffa9725c40d47654fd03475798280259edeaf1b232e6fbf86dd6ec3a0f404dcc"
+  },
+  "binding_hashes": {
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "t1_binding_record_sha256": "c5bd05cc0e763492aadd6e3effdc8211175302ff3208568123cd435e111c5e94",
+    "clarification_result_sha256": "3d4030e6b8315f0ed10ffbbbddf60e26f88d32c2eb0983488f96ff109e798f39",
+    "qualified_environment_example_sha256": "eaa6c57fc1390f78034d965ea57efe46588c1a3fe3266acdfb26ba4275826249",
+    "compose_sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
+  },
+  "artifact_hashes": {
+    "live_journey_sha256": "5e842bebc69fc2537efa257b9b980fb25cac827c2f2a58e3baeb40d37c706872",
+    "restart_sha256": "50fd789971c10ab7dfc3e623225d84cc7d3933dfdb9d72fab743f9a361882446",
+    "clean_restore_sha256": "50fd789971c10ab7dfc3e623225d84cc7d3933dfdb9d72fab743f9a361882446",
+    "t0_rollback_sha256": "b56097173dad54add36977db64c96fcf18d3595480245c0d451f99bb315025d2",
+    "v2_restore_sha256": "3301014d37e0d7591ab45288293d73e8146e01b43f4a31c5f87969b935cfa2d9",
+    "runtime_backup_sha256": "6530c5fb1091d77b2f3b6e726817f705dd20bfde82b05254fa8be0b702eb952b",
+    "desktop_screenshot_sha256": "af62fba5348c6c42c5f307bfa2b0b91d21ee3492681e2345b7d9a43f173e267d",
+    "mobile_screenshot_sha256": "8d2daf064dd241b4a783e94da25badee4d719d26bd196bf17c042d5386e2bdb8",
+    "browser_smoke_sha256": "282af477317f499dd38cb2f2ecceecc124dff9e5e8eeb1f29cf25e0edb84d481"
+  },
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false,
+  "release_scope": "qualified local R1.2 research demo on the development Mac through internal-CA HTTPS",
+  "limitations": [
+    "The selected evidence gate remains a measured development floor; clarification does not establish an absolute academic factual-quality pass.",
+    "The release retains text/OCR fallback and makes no representative true-visual capability claim.",
+    "Real-student interpretation choice, usability, learning improvement, real-professor fidelity, durable hosting, and broad accessibility remain unproven.",
+    "Provider-backed autonomy remains supported by immutable confirmation 024; this journey used deterministic fast paths.",
+    "The immutable known 10,000+1,000 package was not read, rerun, or rescored."
+  ]
+}
