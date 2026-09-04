@@ -51,9 +51,13 @@ Docker/restart/restore/rollback verification, and one immutable release tag.
 
 Execution is now closed. The actual-product visual result was `Refine` at
 20/30 fully grounded answers for both candidate and control, so qualification
-007 must use `text-ocr-fallback`. The C0-C3 proxy was invalid before inference
-because its response schema used an unsupported keyword; it is not retried
-under the finite correction rule and contributes no professor-fidelity claim.
+007 uses `text-ocr-fallback`. C0-C3 proxy 002 was invalid before inference
+because its response schema used an unsupported keyword. Separately frozen
+successor 003 completed all 48 generation calls, but three C0 `abstain`
+responses were empty and violated the response contract. Its raw invalid status
+and zero-call `Refine` interpretation are both preserved. Advisory review did
+not begin, so no profile-uplift or professor-fidelity claim is available and
+the same packet will not be rerun.
 
 Exact local qualification 007 then passed all 43 operational checks on source
 revision `60495ec`: 25 live HTTPS, six restart, six clean restore, three T0
@@ -88,8 +92,9 @@ calls; Luna behavior remains bound to immutable confirmation 024.
 The best evaluated working design is local R1.2: the R1.1 governed-autonomy
 composition plus `stateful-source-clarification-v1`, qualified by
 `local-r1-governed-v2-1-release-qualification-008`. R1.1 remains published as
-the historical rollback until the R1.2 evidence PR is merged and tagged. The
-product decision is `Keep` for this exact local research-release scope. The
+the historical rollback. The R1.2 evidence PR is merged and immutable tag
+`local-r1-governed-v2.1-qualification-008` is published. The product decision
+is `Keep` for this exact local research-release scope. The
 known 10,000+1,000 `No Release` outcome is retained separately as the academic
 factual-grounding decision and limits the claims made about this release.
 
@@ -514,7 +519,7 @@ compensate for a failed development prerequisite.
 | Proactive tutoring | The published Digital Twin can initiate useful private check-ins without violating consent, quiet hours, frequency, course scope, grounding, withdrawal, or duplicate-delivery rules | Local R1 verified A0 creation, worker delivery, student consent, citation, expiry, deduplication, and restart behavior. A1 remains shadow-only and Discord disabled | [#134](https://github.com/horiiiiii032929/digital-twin/issues/134) |
 | Grounding | Text path remains a qualified fallback; generated claims must be supported before an answer is released; multimodal inputs either pass prospective gates or fail closed | The dominance-scoped ambiguity-safe V3 gate is bound as the safest tested local profile. Its corrected development result is 50.00% overall task success and 42.50% answerable fully grounded success, so #105 closes as `Done / Refine`, not an absolute pass. The actual-product visual comparison also Refined, so qualification 007 explicitly retains text/OCR fallback and #131 remains a future representative-visual boundary | [#105](https://github.com/horiiiiii032929/digital-twin/issues/105), [#86](https://github.com/horiiiiii032929/digital-twin/issues/86), [#131](https://github.com/horiiiiii032929/digital-twin/issues/131) |
 | Factual quality | The actual product must retrieve and answer without receiving gold answers, claims, evidence, or citations | The immutable known 10,000+1,000 regression is `No Release`: the selected candidate achieved 25.38% fully grounded factual success versus T0's 44.16%, while reducing severe unsupported releases from 478 to 4. The package must not be tuned, rerun, or rescored | [#127](https://github.com/horiiiiii032929/digital-twin/issues/127), [#157](https://github.com/horiiiiii032929/digital-twin/issues/157), [#105](https://github.com/horiiiiii032929/digital-twin/issues/105) |
-| Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Draft/preview/approval/withdrawal plus immutable revision history and conflict handling are implemented. The C0–C3 proxy was invalid before inference because its schema was unsupported, and synthetic demo approval is not the real professor-fidelity reference; #24 remains open | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
+| Professor behavior | Factual/citation hard gates remain separate from professor-specific behavior; the profile and evaluator are approved and calibrated | Draft/preview/approval/withdrawal plus immutable revision history and conflict handling are implemented. Proxy 002 was invalid before inference; schema-corrected proxy 003 then Refined because 3/12 C0 responses were empty and no blinded review ran. Synthetic demo approval is not the real professor-fidelity reference; #24 remains open | [#24](https://github.com/horiiiiii032929/digital-twin/issues/24) |
 | Deployment | Public host, trusted TLS, credentialed roles, durable storage, migrations, jobs, and exact release binding work | The local Compose foundation, internal HTTPS, roles, workers, and exact result binding passed and #88 is complete for the local scope. Durable public hosting was deliberately not claimed | [#88](https://github.com/horiiiiii032929/digital-twin/issues/88) |
 | Operations | Isolation, observability, rate/cost limits, backup, restore, deletion, incident handling, and rollback pass on the target host | Local restart, checksum backup, clean restore, readiness, and T0/T1 rollback passed and #9 is complete for the local scope. Target-host operations remain outside the claim | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |
 | Privacy and security | No credentials or unrestricted private data enter Git; source rights, retention, access, deletion, and incident boundaries are reviewed | Repository controls active; production review pending | [#9](https://github.com/horiiiiii032929/digital-twin/issues/9) |

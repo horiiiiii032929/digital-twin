@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "run_id": "professor-fidelity-proxy-c0-c3-003-analysis-correction-001",
+  "source_run_id": "professor-fidelity-proxy-c0-c3-003",
+  "status": "completed-refine",
+  "decision": "Refine",
+  "component": "synthetic-professor-profile-proxy",
+  "completed_at": "2026-09-04T19:34:29Z",
+  "code_revision": "4ee5f7e247c0067a4f3dc0be65007905492abe13",
+  "analysis_type": "zero-call-post-run-classification-correction",
+  "source_code_revision": "4ee5f7e247c0067a4f3dc0be65007905492abe13",
+  "source_run_binding_sha256": "49b63706183ef52e55a287a7003c02469382143922214b753686639c036ffc0f",
+  "source_instrument_sha256_at_execution": "7309fb82e3a78353f190c4c692d72253438116098952da0306412b04e8ff660e",
+  "dataset_sha256": "20b7b20c4c2fbab7bab177d54a1e984fc04ff224f43c5e3caf056418f68df965",
+  "profile_sha256": "7a1363e04da02235659b7fc37754b0d4dca1240bf9bb35a30085bec166837d82",
+  "classification": {
+    "raw_runner_status": "invalid-execution",
+    "corrected_scientific_decision": "Refine",
+    "failure_class": "model-output-contract-quality",
+    "rationale": "All 48 provider calls completed with valid transport, identity, and accounting, but three C0 abstain outputs violated the preregistered non-empty response contract."
+  },
+  "metrics": {
+    "response_completeness": 0.9375,
+    "response_completeness_numerator": 45,
+    "response_completeness_denominator": 48,
+    "c0_response_completeness": 0.75,
+    "c0_response_completeness_numerator": 9,
+    "c0_response_completeness_denominator": 12,
+    "c1_c3_response_completeness": 1.0,
+    "c1_c3_response_completeness_numerator": 36,
+    "c1_c3_response_completeness_denominator": 36,
+    "advisory_reviews_completed": 0,
+    "provider_failures": 0,
+    "identity_drift_events": 0,
+    "private_data_calls": 0,
+    "input_tokens": 18196,
+    "output_tokens": 6233,
+    "cost_usd": 0.0416955
+  },
+  "raw_artifacts": {
+    "location": "reports/generated/professor-fidelity-proxy-c0-c3-003/",
+    "result_sha256": "47f6e1aac9ef7f49f354bf0a34d1fbc873a98ea24cd145aed35c77840dc6e73a",
+    "provider_ledger_sha256": "d0fe275c6ef4a7525591724c214ad7862e95265a79fa65a601b71095e88c1a84"
+  },
+  "scientific_inputs_changed": false,
+  "additional_provider_calls": 0,
+  "same_packet_rerun_allowed": false,
+  "limitations": [
+    "Aggregate C0-C3 hard gates were not computed because the raw runner stopped after generation.",
+    "Advisory reviewers did not run, so professor-profile adherence and uplift remain unmeasured.",
+    "Synthetic profile evidence cannot establish fidelity to the real professor.",
+    "The same 12-case packet will not be tuned or rerun."
+  ],
+  "authorization_revoked": true,
+  "real_professor_fidelity_claim": false
+}

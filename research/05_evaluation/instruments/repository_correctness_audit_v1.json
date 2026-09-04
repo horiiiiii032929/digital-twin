@@ -312,8 +312,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "stateful-clarification-r1-2",
-      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Reviewed package commands bind validation, network-free simulation, preflight, execute, and resume to the schema-corrected successor; focused tests and simulation passed with zero provider calls.",
       "findings": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "reviewed_at": "2026-09-05",
@@ -977,8 +977,8 @@
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex stateful-clarification correctness review",
-      "sha256": "a63aea6a30a9089d0fd883de60d07743531b1fff7e0c2206004260d12563d08c"
+      "reviewer": "Codex synthetic-fidelity successor review",
+      "sha256": "3acad93c094366168ba60605b2c95124f942058505de7c4fda39202c9c03839a"
     },
     {
       "audit_status": "audited",
@@ -3707,6 +3707,17 @@
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
       "sha256": "23ec0cdc19ee4b7b92259bfa596c3cfe531003d088f242bf3a76d6c20c4e3ca9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Post-run review verified all 48 generation calls completed with exact identity and accounting, preserved the three empty C0 responses as a model-output contract failure, recorded the zero-call Refine interpretation, and revoked provider authority without tuning or rerunning the packet.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_003.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex synthetic-fidelity result audit",
+      "sha256": "396d324fbdaa89f54ac4f97139bdec905e2f46cb733f09a9709486d3654788ea"
     },
     {
       "audit_status": "audited",
@@ -6912,6 +6923,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Manual code review plus focused tests and a full network-free simulation verified that only provider-unsupported schema assertions move to deterministic post-parse validation; historical attempt 002 remains unchanged and provider execution stays guarded.",
+      "findings": [],
+      "path": "scripts/run_professor_fidelity_proxy_c0_c3_003.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex synthetic-fidelity successor review",
+      "sha256": "d1c53dd62420717f6fcb15a016c81e56f92cf05ae74ac16724d77fdd252aca6c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "professor-fidelity-proxy",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
@@ -9090,13 +9112,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Post-execution review verified issue-210 provider/method authority is revoked, only deterministic visual package generation remains allowed, and the global freeze plus held-out restrictions remain active.",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Post-run freeze review removes the completed successor from bounded authorizations and restores the repository-wide provider and method-evaluation block.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "d14ebe35556f06b1c3cfb380a0f9e87b3437a4f0262662c001124cb7e60a3df7"
+      "reviewer": "Codex synthetic-fidelity result audit",
+      "sha256": "3b7885109d12ce0d41226574dd250544e3f5914231c38cd68a2cb250c4fdf697"
     },
     {
       "audit_status": "audited",
@@ -9695,13 +9717,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Focused regression verifies the completed issue-210 parent and C0-C3 child are denied, the visual child retains package-generation only, and unrelated or held-out instruments remain denied.",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Focused freeze regression verifies the completed successor is no longer authorized and historical and unrelated instruments retain their prior boundaries.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "fdc47879dd5831dbb185e3c8e83563bfcf2d53bef13a41a6a9b30f2153f6aaef"
+      "reviewer": "Codex synthetic-fidelity result audit",
+      "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
     },
     {
       "audit_status": "audited",
@@ -11671,6 +11693,17 @@
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
       "sha256": "ca095ed3fe184b3c5921cf4402ed1b42e2afe1f7f60b5f1b4dfbcc3d008268b8"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy-c0-c3-003",
+      "evidence": "Focused regression covers historical schema preservation, conservative provider schema translation, deterministic uniqueness and length enforcement, and a zero-network passing simulation.",
+      "findings": [],
+      "path": "tests/test_professor_fidelity_proxy_c0_c3_003.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex synthetic-fidelity successor review",
+      "sha256": "7564a7385163f95f6a7eacdde5907b1ec95f8d3c153b97f706756ca7d516a99e"
     },
     {
       "audit_status": "audited",
