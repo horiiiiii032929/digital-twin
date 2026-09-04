@@ -940,12 +940,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Qualification-007 configuration review verified the exact selected Local R1.1 selectors remain unchanged except for the immutable image tag; text/OCR fallback, governed V2.1, profile, evidence gate, rollback binding, budgets, and secret placeholders remain explicit.",
       "findings": [],
       "path": "deploy/local-r1.qualified.env.example",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "f41006d9adf142909d297765ae5e17de4e566896a876196aa8cd51b95d71eff0"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "eaa6c57fc1390f78034d965ea57efe46588c1a3fe3266acdfb26ba4275826249"
     },
     {
       "audit_status": "audited",
