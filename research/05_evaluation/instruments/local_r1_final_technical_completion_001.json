@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0.0",
   "program_id": "local-r1-final-technical-completion-001",
-  "status": "built-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 210,
   "purpose": "Finish the bounded visual actual-product checkpoint and synthetic C0-C3 professor-profile proxy before local R1.1 qualification.",
   "children": [
     {
       "run_id": "true-visual-product-checkpoint-001",
       "instrument_path": "research/05_evaluation/instruments/true_visual_product_checkpoint_001.json",
-      "instrument_file_sha256": "cd9ec7e06b31a56bb0b575ce057fa28b98e35903d4952b6f157c0332d30ada98",
+      "instrument_file_sha256": "833f32cd0844ef6c34b70d65e6482ae65010f3fd87e256307fab61279d5411c3",
       "failure_policy": "record-and-continue-to-independent-profile-proxy"
     },
     {
       "run_id": "professor-fidelity-proxy-c0-c3-002",
       "instrument_path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_002.json",
-      "instrument_file_sha256": "b2d0a7ff8af658f3a1a3ac53f94b258b028e5892158ab421d51d5b60e45fe6e7",
+      "instrument_file_sha256": "e26e3247edb6e109d2a4fa2b76cf37e664a389a88aefe1c87bafba2c207d3ed5",
       "failure_policy": "record-and-preserve-professor-approval-boundary"
     }
   ],
@@ -35,8 +35,13 @@
     "openai-cost-ceiling-exhaustion"
   ],
   "known_benchmark_10000_touched": false,
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
+  "authorization": {
+    "authorized_at": "2026-09-04T16:29:31Z",
+    "authorization_text": "Authorize local-r1-final-technical-completion-001.",
+    "scope": "true-visual-product-checkpoint-001 then professor-fidelity-proxy-c0-c3-002"
+  },
   "private_data_authorized": false,
   "automatic_child_progression": true
 }

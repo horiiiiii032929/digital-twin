@@ -27,10 +27,12 @@ inside a release image.
 `true-visual-product-checkpoint-001` freezes 30 answerable and 30 boundary
 actual-product cases. `professor-fidelity-proxy-c0-c3-002` freezes the existing
 12-case synthetic C0-C3 packet with GPT-5.4 Mini generation and blinded GPT-5.4
-Nano/GPT-5.4 advisory review. Both network-free simulations pass. Provider
-execution remains unauthorized; the known 10,000+1,000 package has not been
-read, rerun, or rescored. A passing proxy remains `Go Deeper` and cannot prove
-real-professor fidelity.
+Nano/GPT-5.4 advisory review. Both network-free simulations pass. On
+2026-09-05 SGT the researcher authorized the one-shot parent program
+`local-r1-final-technical-completion-001`; its two children are frozen pending
+execution under the Jina 10M-token and OpenAI USD 3 ceilings. The known
+10,000+1,000 package has not been read, rerun, or rescored. A passing proxy
+remains `Go Deeper` and cannot prove real-professor fidelity.
 
 ## Post-release multi-concept correction
 

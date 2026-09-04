@@ -18,9 +18,11 @@ profile changes observable tutoring behavior while deterministic source and
 policy gates remain authoritative. The profile result is diagnostic only and
 does not close the real-professor approval boundary in #24.
 
-The implementation and network-free simulations must merge before one combined
-paid authorization. A visual quality failure selects text/OCR fallback and does
-not block completion; a synthetic proxy failure is preserved as a limitation.
+The implementation and network-free simulations must be committed, pass the
+complete local gate, and reach a clean preflight before one combined paid
+authorization. That one-shot authorization was granted on 2026-09-05 SGT. A
+visual quality failure selects text/OCR fallback and does not block completion;
+a synthetic proxy failure is preserved as a limitation.
 Security/privacy failure, provider identity drift, corrupted bindings, or the
 Jina/OpenAI ceilings remain hard stops. After both results are registered, the
 exact selected/fallback composition receives local HTTPS qualification 007,

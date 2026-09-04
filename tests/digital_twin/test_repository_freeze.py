@@ -53,6 +53,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-grounding-successor-011",
         "true-visual-colpali-confirmation-001",
         "true-visual-product-checkpoint-001",
+        "professor-fidelity-proxy-c0-c3-002",
+        "local-r1-final-technical-completion-001",
     }
 
     for pilot_id in pilot_ids:
@@ -110,6 +112,19 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "true-visual-colpali-confirmation-001"
     ] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "true-visual-product-checkpoint-001"
+    ] == (
+        "dataset_generation",
+        "external_model_evaluation",
+        "method_evaluation_execution",
+    )
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "professor-fidelity-proxy-c0-c3-002"
+    ] == ("external_model_evaluation", "method_evaluation_execution")
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "local-r1-final-technical-completion-001"
+    ] == ("external_model_evaluation", "method_evaluation_execution")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",

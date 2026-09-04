@@ -720,10 +720,26 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "true-visual-colpali-confirmation-001": (
             "dataset_generation",
         ),
-        # Issue #210. Deterministic public/gold/source package construction is
-        # authorized separately from the later actual-product provider run.
+        # Issue #210. The researcher authorized the bounded final technical
+        # completion program on 2026-09-05 SGT. Dataset generation remains
+        # available and the same frozen run may now call Jina exactly once per
+        # product case before deterministic scoring.
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        # Issue #210 / #24. Public synthetic inputs only; the result remains a
+        # proxy and cannot establish real-professor fidelity.
+        "professor-fidelity-proxy-c0-c3-002": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
+        # Parent one-shot orchestration authority. It cannot touch the known
+        # 10,000+1,000 package or any private source.
+        "local-r1-final-technical-completion-001": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
         ),
     }
 )

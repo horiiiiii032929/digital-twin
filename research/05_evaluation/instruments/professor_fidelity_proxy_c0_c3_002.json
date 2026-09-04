@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "professor-fidelity-proxy-c0-c3-002",
-  "status": "built-provider-unauthorized",
+  "status": "frozen-pending-execution",
   "owner_issue": 24,
   "technical_integration_issue": 210,
   "successor_of": "professor-fidelity-proxy-harness-001",
@@ -26,7 +26,7 @@
     "rating_scale": [1, 2, 3, 4, 5]
   },
   "provider_binding": {
-    "verified_at": "2026-09-04T15:32:15Z",
+    "verified_at": "2026-09-04T16:26:43Z",
     "maximum_age_hours_for_execution": 24,
     "api_url": "https://api.openai.com/v1/responses",
     "credential_environment_variable": "OPENAI_API_KEY",
@@ -89,7 +89,12 @@
     "synthetic_profile_diagnostic_only": true,
     "professor_approval_required_for_reference": true
   },
-  "provider_execution_authorized": false,
-  "paid_execution_authorized": false,
+  "provider_execution_authorized": true,
+  "paid_execution_authorized": true,
+  "authorization": {
+    "authorized_at": "2026-09-04T16:29:31Z",
+    "authorization_text": "Authorize local-r1-final-technical-completion-001.",
+    "scope": "one bounded execution through the parent completion program"
+  },
   "private_data_authorized": false
 }
