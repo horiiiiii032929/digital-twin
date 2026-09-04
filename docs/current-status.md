@@ -35,6 +35,12 @@ finding while narrowing the claim: these are development-only tests of bounded
 mechanisms, not proof of a universal task ceiling. The sealed 10,000-case
 package was not touched.
 
+The same audit also found a newly published high-severity advisory affecting
+transitive frontend development dependency `fast-uri` 3.1.5. The lockfile now
+uses patched 3.1.7 within the existing compatible range; frontend tests, lint,
+and production build pass, and the refreshed offline audit reports zero
+findings.
+
 Fresh confirmation issue #196 is complete. The
 `governed-full-autonomy-v2-1-persona-confirmation-023` package contained 670
 source- and wording-disjoint actual-product cases from synthetic source

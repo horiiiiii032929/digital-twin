@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "9465b7bdad1221aca882e6625f45edf7cd01277878ec78b0ffc4131b23c969b6",
+  "record_sha256": "17c5d8cb965621e4768b46a1b804dabf6f22c66b6d148681667f968ddcf3b272",
   "records": [
     {
       "audit": {
@@ -1400,10 +1400,10 @@
     {
       "audit": {
         "domain": "repository-correctness",
-        "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+        "evidence": "Endgame live advisory review identified fast-uri 3.1.5 through the shadcn/MCP/ajv development chain; the lock was updated within the existing semver range to patched 3.1.7, followed by npm ci, zero-finding offline audit, frontend tests, lint, and production build.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex successor-architecture dependency audit"
+        "reviewed_at": "2026-09-04",
+        "reviewer": "Codex endgame dependency audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1411,7 +1411,7 @@
       "package_commands": [],
       "path": "package-lock.json",
       "risk": "medium",
-      "sha256": "c78981cccddd35657a64c2298ea6bd41f51ec452735bcbc8924a5b74ec075ca3"
+      "sha256": "57e94b3d6644ee63a3bb2ceb4c93b252bf59d73a0d86f080bf9af6d82a9328f2"
     },
     {
       "audit": {

@@ -21,6 +21,7 @@ The known 10,000-candidate plus 1,000-control package remains immutable
 | Selection 004 accepted prior ledgers from status and row count alone. | Added instrument, manifest, configuration, case-ID-set, and payload-hash verification. | Prevents a valid-looking but unrelated ledger from influencing a future selection. |
 | Generic evaluation-record dispatch misclassified some whole-system records when a component label was present without candidate rows. | Corrected dispatch and added regression coverage. | The machine-readable registry now validates all 235 records and 307 summaries. |
 | The default repository gate implicitly depended on ignored historical/generated artifacts and could open sealed material. | Moved those operations to `verify:historical-generated-artifacts`; the default API suite excludes only four artifact-bound historical tests. | `npm run check` is self-contained for committed code and does not touch the sealed package. Historical source tests remain available explicitly. |
+| A fresh live npm advisory identified high-severity issues in transitive development dependency `fast-uri` 3.1.5. | Updated the lockfile within the parent dependency's existing semver range to patched `fast-uri` 3.1.7 and rebuilt the workspace. | No application contract changed. Offline audit after the update reports zero vulnerabilities and all frontend checks pass. |
 | Four post-selection floor audits were not exactly reproducible from committed commands and their summaries disagreed on some counts. | Added a provider-free reproduction command and narrowed the claim. | The convergent safety/no-safe-gain finding is reproduced for the bounded mechanisms; a universal task floor is not claimed. |
 | Two active evaluation modules had unused imports. | Removed the imports and ran focused Ruff checks. | No metric or result changed. Frozen historical scripts were not rewritten. |
 
@@ -34,15 +35,17 @@ The known 10,000-candidate plus 1,000-control package remains immutable
 - Execution freeze: active, 174/174 entrypoints guarded, zero provider calls and zero held-out reads.
 - Focused correction tests: 19 passed.
 - Focused Ruff check: passed.
+- `fast-uri`: 3.1.7; post-update offline npm audit: zero findings.
 - `git diff --check`: passed.
 
 ## Non-blocking limitations
 
 - The frontend production bundle emits a 506.69 kB chunk-size warning. This is
   a performance optimization item, not a correctness failure.
-- The live npm registry audit endpoint timed out during this checkpoint.
-  Cached offline npm audit data reports zero vulnerabilities, but a fresh live
-  registry audit should be rerun when the endpoint is responsive.
+- The live npm audit endpoint returned the original `fast-uri` finding, but a
+  later post-fix request stalled. The patched version is installed and the
+  refreshed local advisory cache reports zero findings; rerun the live audit
+  when the endpoint is consistently responsive.
 - Thirty-nine Ruff findings remain in frozen historical scripts. They are not
   active runtime defects and are preserved to avoid rewriting historical
   evidence tooling.
