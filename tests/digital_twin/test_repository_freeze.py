@@ -108,7 +108,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     ] == ("dataset_generation",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "true-visual-colpali-confirmation-001"
-    ] == ("dataset_generation",)
+    ] == ("dataset_generation", "external_model_evaluation")
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",
