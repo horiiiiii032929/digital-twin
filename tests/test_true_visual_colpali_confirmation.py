@@ -32,7 +32,7 @@ def test_network_free_simulation_passes_without_provider_calls() -> None:
     assert result["boundary_evaluation_status"] == "deferred-to-actual-product-checkpoint"
 
 
-def test_preflight_is_blocked_before_provider_authorization(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_preflight_is_blocked_when_credential_is_missing(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(runner, "_git_clean", lambda: True)
     monkeypatch.setattr(runner, "_git_revision", lambda: "a" * 40)
     monkeypatch.delenv("JINA_API_KEY", raising=False)
@@ -41,8 +41,8 @@ def test_preflight_is_blocked_before_provider_authorization(monkeypatch: pytest.
 
     assert result["network_calls_made"] == 0
     assert result["status"] == "blocked"
-    assert "checkpoint is not provider-authorized" in result["reasons"]
     assert "JINA_API_KEY is missing" in result["reasons"]
+    assert result["reasons"] == ["JINA_API_KEY is missing"]
 
 
 def test_dataset_rejects_boundary_lineage() -> None:

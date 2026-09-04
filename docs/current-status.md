@@ -57,8 +57,9 @@ late interaction, while keeping original regions, course isolation, boundary
 policy, and source/version lineage authoritative. A fresh source-disjoint
 30-asset/60-case package has been deterministically built and its network-free
 validation and simulation pass. The simulation is harness evidence only; no
-Jina model-quality result exists yet. Provider execution is unauthorized and
-also requires a local `JINA_API_KEY`. Until the live retrieval gates and a
+Jina model-quality result exists yet. The bounded retrieval confirmation is
+authorized and frozen, but execution still requires a local `JINA_API_KEY`.
+Until the live retrieval gates and a
 separate actual-product answer/citation checkpoint pass, the qualified local
 R1 continues to expose text/OCR fallback and makes no representative true-
 visual capability claim. The 30 paired boundary cases are reserved for that

@@ -699,10 +699,12 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "academic-factual-qa-development-region-corpus-001": (
             "dataset_generation",
         ),
-        # Issue #131. Fresh public-source visual package only; provider-backed
-        # execution remains unauthorized until a separate reviewed checkpoint.
+        # Issue #131. Fresh public-source visual package and its bounded,
+        # first-party Jina retrieval confirmation. This does not authorize the
+        # later actual-product answer/citation checkpoint.
         "true-visual-colpali-confirmation-001": (
             "dataset_generation",
+            "external_model_evaluation",
         ),
     }
 )

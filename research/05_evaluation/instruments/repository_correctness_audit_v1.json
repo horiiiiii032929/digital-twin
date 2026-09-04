@@ -8926,12 +8926,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "visual-late-interaction-successor",
-      "evidence": "Manual review confirmed the new builder and runner are registered while only network-free dataset generation is allowed; external model execution remains fail-closed.",
+      "evidence": "Manual review confirmed the build paths and the separately authorized first-party Jina confirmation are the only operations registered; the later actual-product checkpoint remains fail-closed.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "3f0274d27a65dc438b57bca89e7167332e7a8e0318b55b62b086840e3527a9b4"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-execution-authorization-audit",
+      "sha256": "1926456af4541fdba5dfcf1ddfca5d0a1c416d3279fa12293f4a9d151906f4a7"
     },
     {
       "audit_status": "audited",
@@ -9168,7 +9168,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "evidence": "The exact bounded-authorization registry test covers the ColPali build and first-party Jina execution operations while preserving fail-closed behavior for unknown checkpoints.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-09-03",
@@ -9524,8 +9524,8 @@
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "Codex ColPali build-only checkpoint audit",
-      "sha256": "a3b8cf190fcbe23eb3afcad3aa94f62f47003ead731641c96a203dcb2c4bdc5b"
+      "reviewer": "codex-colpali-execution-authorization-audit",
+      "sha256": "c08eeffa1d005d07ad8f6b7997100abf9a066f6ad99cb5525e1ecce587f9bf6f"
     },
     {
       "audit_status": "audited",
@@ -11951,12 +11951,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "visual-late-interaction-successor",
-      "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current OpenAPI limits and pricing, preregistered retrieval gates, and explicit deferral of boundary and product-quality claims.",
+      "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current limits and pricing, preregistered gates, explicit claim deferral, and the bounded paid execution authorization.",
       "findings": [],
       "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "6a4e0723310212146a101944aa1a2aca9ed3deea6d52b55b3b9b3c412f5a9fd2"
+      "reviewer": "codex-colpali-execution-authorization-audit",
+      "sha256": "6f8ed19c79acb0a3f0fcb923010aa317d45a42bc5ad0ef826ecc013583994bb6"
     },
     {
       "audit_status": "audited",
@@ -12006,12 +12006,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "visual-late-interaction-successor",
-      "evidence": "Focused integration tests cover deterministic dataset reconstruction, modality balance, zero-call simulation, provider-unauthorized preflight, empty boundary lineage, render hashes, and explicit boundary-evaluation deferral.",
+      "evidence": "Focused integration tests cover deterministic reconstruction, modality balance, zero-call simulation, credential-missing fail-closed preflight after authorization, empty boundary lineage, render hashes, and boundary-evaluation deferral.",
       "findings": [],
       "path": "tests/test_true_visual_colpali_confirmation.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "72061d507b53b7e7e4d043c6e67cbc283273de1bed7f9e25eb440dc0f8c531ac"
+      "reviewer": "codex-colpali-execution-authorization-audit",
+      "sha256": "4d0cef069dfce44f21ab5cb035cf013b4597f7dd857f2e10de9e7eef828109e5"
     },
     {
       "audit_status": "audited",
