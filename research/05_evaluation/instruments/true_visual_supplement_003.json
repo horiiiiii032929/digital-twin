@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "true-visual-supplement-003",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine",
   "owner_issue": 131,
   "dataset_id": "academic-factual-qa-visual-supplement-001",
   "supersedes_method_only": "course-digital-twin-nonhuman-visual-002-invalid",
@@ -44,9 +44,11 @@
     "original_region_lineage_min": 1.0
   },
   "result_scope": "development true-visual supplement only; never a representative visual-capability claim",
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
   "authorization_basis": "The researcher previously authorized autonomous LLM execution for the agreed final technical program; this successor remains bounded to 30 calls and USD 2.",
   "authorized_at": "2026-09-04T10:37:58Z",
+  "authorization_revoked_at": "2026-09-04T10:43:26Z",
+  "authorization_revocation_reason": "The one-time run completed with a valid Refine result; no additional provider execution is authorized.",
   "private_data_authorized": false
 }

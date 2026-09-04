@@ -692,12 +692,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "academic-factual-qa-development-region-corpus-001": (
             "dataset_generation",
         ),
-        # Issue #131. Final technical-program authority is narrowed to this
-        # public-synthetic, 30-call/USD 2 true-visual successor only.
-        "true-visual-supplement-003": (
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
     }
 )
 

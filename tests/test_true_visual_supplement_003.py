@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from scripts import run_true_visual_supplement_003 as runner
 from src.digital_twin.evaluation.provider_json import ProviderJsonResponse
 
@@ -10,7 +12,7 @@ def test_frozen_successor_validation_and_simulation_remain_network_free() -> Non
 
     assert validation["asset_count"] == 30
     assert validation["case_count"] == 60
-    assert validation["paid_execution_authorized"] is True
+    assert validation["paid_execution_authorized"] is False
     assert validation["provider_calls"] == 0
     assert simulation["status"] == "completed-go-deeper"
     assert simulation["provider_calls"] == 0
@@ -50,11 +52,19 @@ def test_description_preserves_original_region_lineage_after_deduplication() -> 
     assert row["description_segments"] == ["A visible fact", "router", "A points to B"]
 
 
-def test_preflight_is_ready_after_fresh_metadata_and_bounded_authority(monkeypatch) -> None:
+def test_preflight_is_blocked_after_one_time_authority_is_revoked(monkeypatch) -> None:
     monkeypatch.setattr(runner, "_repo_dirty", lambda: False)
     monkeypatch.setattr(runner.shutil, "which", lambda _name: "/usr/bin/rsvg-convert")
     monkeypatch.setenv("OPENAI_API_KEY", "configured")
     result = runner.preflight(output_root=runner.ROOT / "reports/generated/unused-visual-003")
 
-    assert result["status"] == "ready"
-    assert result["blockers"] == []
+    assert result["status"] == "blocked"
+    assert result["blockers"] == [
+        "execution-freeze-authorization-missing",
+        "paid-execution-not-authorized",
+    ]
+
+
+def test_execute_guard_rejects_any_additional_run() -> None:
+    with pytest.raises(Exception, match="not a bounded authorization"):
+        runner.require_bounded_pilot_operation_allowed(runner.RUN_ID)

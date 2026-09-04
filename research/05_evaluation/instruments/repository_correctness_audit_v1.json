@@ -3922,11 +3922,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Pre-execution review verified current official GPT-5.4 nano image/structured-output support and pricing, exact snapshot binding, public-only inputs, deterministic duplicate accounting, 30-call/USD 2 bounds, and fresh scoped authorization.",
+      "evidence": "Post-result review verified the completed-refine terminal state, preserved exact snapshot and public-only binding, recorded the frozen metric limitation, and revoked the one-time 30-call/USD 2 authorization.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "13f5238f98e5acaa3c68b74bb09929342a72f78f39ccee9ed25870de07d63f71"
+      "sha256": "1fbc15ffbe68f035073efeff3108075b49527bbd38316d2a75133842490ec767"
     },
     {
       "audit_status": "audited",
@@ -8926,12 +8926,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual review confirmed the active repository freeze remains fail-closed while granting only true-visual-supplement-003 external/model execution under its instrument-specific bounds.",
+      "evidence": "Manual review confirmed the active repository freeze remains fail-closed after removing the consumed true-visual-supplement-003 authorization.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "920359467626f55715618eaa98ec5546447a4cf168d7116d34378d2b94f48530"
+      "sha256": "453b5f0d5f24d5fe32c1cc12065e14f20e2d083053c5c8c663b7c022830f7c15"
     },
     {
       "audit_status": "audited",
@@ -11831,11 +11831,11 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
-      "evidence": "Focused review verifies frozen authorized state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and clean live-preflight behavior.",
+      "evidence": "Focused review verifies the revoked terminal state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and fail-closed post-run preflight behavior.",
       "findings": [],
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
-      "sha256": "92a29090fe5f009d5a607c8787c0adc20d3f8aadea2f2c61cc4282b8bc1b312b"
+      "sha256": "71289030988a436e30e9c0b599e7d042ff010e8deb3fcbfc8f28a618ed2b85c4"
     },
     {
       "audit_status": "audited",

@@ -1000,9 +1000,11 @@ Current utilities:
   the two immutable invalid visual attempts. It preserves question-independent
   visual descriptions and original-region citation authority, but normalizes
   whitespace and removes only exact case-insensitive duplicate semantic-list
-  values per asset while accounting for every removal. The 30-asset/60-case
-  run remains provider-unauthorized and can only support a development
-  `Go Deeper` decision. Use package commands ending in
+  values per asset while accounting for every removal. The completed
+  30-asset/60-case run is `Refine`; its one-time authority is revoked. The
+  frozen unsupported-segment metric is a conservative lexical-reference proxy,
+  not a verified hallucination count, and the result supports no representative
+  visual-capability claim. Use network-free package commands ending in
   `true-visual-supplement-003`.
 - `run_course_digital_twin_evaluation_program.py`: owns the finite factual,
   visual, synthetic-profile, and autonomous-tutoring evaluation dispatcher.

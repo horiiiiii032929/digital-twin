@@ -1,7 +1,7 @@
 # Final report evidence map
 
 Status: evidence-gathering checkpoint 0.1  
-Inventory revision: `2bdfea9ffecd78f41bf564efd343ade59b4db7dd`  
+Inventory revision: `9474e64adbf2895329e807b9a787a1013ddc03a4`
 Purpose: understand the complete evidence archive before drafting the report
 
 ## What this map does
@@ -14,7 +14,7 @@ conflicting outcomes coexist, and what the final report can and cannot claim.
 The exhaustive inventories are:
 
 - [All report-relevant repository files](evidence-inventory/evidence-file-inventory.csv)
-- [All 245 registered evaluation results](evidence-inventory/evaluation-result-inventory.csv)
+- [All 315 registered evaluation results](evidence-inventory/evaluation-result-inventory.csv)
 - [Aggregate inventory of ignored local evidence](evidence-inventory/local-evidence-aggregates.csv)
 - [Inventory validation summary](evidence-inventory/evidence-inventory-summary.json)
 
@@ -48,30 +48,30 @@ selection. A successful test or build does not replace a failed quality result.
 
 ### Individually inventoried repository artifacts
 
-The generated manifest contains 1,690 report-relevant files: 1,686 tracked
-files and four ordinary untracked working files. Important evidence families
+The generated manifest contains 2,041 report-relevant files. After this result
+is committed, all 2,041 are tracked. Important evidence families
 include:
 
 | Evidence family | Files | Role in the report |
 | --- | ---: | --- |
-| Evaluation summaries, corrections, and rubrics | 318 | Human-readable interpretation of individual runs |
-| Evaluation instruments | 222 | Frozen questions, gates, models, budgets, and execution rules |
-| Machine-readable result records | 171 | Primary source for metrics, configurations, decisions, and limitations |
-| Committed evaluation-dataset artifacts | 62 | Public or sanitized cases, schemas, and manifests |
-| Experiment plans and learning logs | 74 | Predictions, alternatives, and prospective methods |
-| Component and release profiles | 19 | Current and historical implementation selections |
+| Evaluation summaries, corrections, and rubrics | 398 | Human-readable interpretation of individual runs |
+| Evaluation instruments | 258 | Frozen questions, gates, models, budgets, and execution rules |
+| Machine-readable result records | 242 | Primary source for metrics, configurations, decisions, and limitations |
+| Committed evaluation-dataset artifacts | 65 | Public or sanitized cases, schemas, and manifests |
+| Experiment plans and learning logs | 79 | Predictions, alternatives, and prospective methods |
+| Component and release profiles | 20 | Current and historical implementation selections |
 | Literature notes | 9 | Starting point for academic related work; primary papers must still be cited |
-| Architecture and operations documentation | 38 | System boundaries, deployment, security, and recovery design |
-| Automated and manual verification files | 231 | Regression and acceptance evidence; not automatically research results |
-| Reproduction and analysis tools | 239 | Commands and code used to construct or evaluate evidence |
-| Backend and frontend implementation | 232 | Inspectable implementation of the claimed system boundaries |
+| Architecture and operations documentation | 43 | System boundaries, deployment, security, and recovery design |
+| Automated and manual verification files | 272 | Regression and acceptance evidence; not automatically research results |
+| Reproduction and analysis tools | 295 | Commands and code used to construct or evaluate evidence |
+| Backend and frontend implementation | 245 | Inspectable implementation of the claimed system boundaries |
 
 The complete file-level path, category, size, Git state, and SHA-256 hash are in
 the file inventory rather than repeated here.
 
 ### Ignored local evidence
 
-There are 12,687 ignored local files occupying approximately 12.17 GiB across
+There are 12,776 ignored local files occupying approximately 12.81 GiB across
 the approved data and generated-output boundaries:
 
 | Directory | Files | Approx. size | Handling rule |
@@ -81,7 +81,7 @@ the approved data and generated-output boundaries:
 | `data/processed/` | 794 | 13.14 MiB | Local evaluation products; use registered records for claims |
 | `data/external/` | 2,829 | 4.79 GiB | External/public or approved local source copies; permissions still govern use |
 | `experiments/runs/` | 34 | 4.49 MiB | Local run outputs; durable decisions belong in the registry |
-| `reports/generated/` | 8,740 | 7.32 GiB | Bulky generated evidence; cite recorded hashes and durable summaries |
+| `reports/generated/` | 8,829 | 7.96 GiB | Bulky generated evidence; cite recorded hashes and durable summaries |
 
 These directories cannot be treated as one dataset. They contain overlapping
 source copies, intermediate transformations, databases, indexes, checkpoints,
@@ -106,8 +106,9 @@ The current project outcome is mixed but coherent.
 4. The exact successor then passed an 820-case actual-product confirmation
    after a disclosed correction to 30 contradictory expected fallback actions.
    The original `Refine` result remains preserved.
-5. A local HTTPS, restart, clean-restore, rollback, and responsive-browser
-   qualification subsequently selected the exact governed V2.1 local profile.
+5. Local qualification 006 then re-established HTTPS, restart, clean-restore,
+   rollback, governed restoration, and responsive-browser operation for the
+   exact post-correction V2.1 profile.
 6. The selection remains experimental and local. It does not establish durable
    hosted production, real-professor fidelity, real-student usability, or
    improved learning outcomes.
@@ -129,7 +130,7 @@ the backbone of the academic report.
 | Actual-product confirmation | [`confirmation-013` correction](../../05_evaluation/governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001-results.md) | Keep exact governed V2.1 profile | All 820 immutable responses passed action, citation, fallback, restart, transition, termination, scope, and authority gates after correcting 30 expected provider-failure actions without another model call | That the correction can be hidden, or that real-user outcomes were measured |
 | Local operational qualification | [`local-r1-governed-v2-1-release-qualification-006`](../../05_evaluation/local-r1-governed-v2-1-release-qualification-006-results.md) | Keep local release | After the multi-concept correction, the exact candidate-v3, dominance-gate, Luna H+E1 composition passed 25/25 live HTTPS, 6/6 restart, 6/6 clean restore, 3/3 T0 rollback, 3/3 governed restoration, and browser-critical checks | Durable public hosting, institutional production readiness, broad accessibility certification, or an absolute factual-quality pass |
 | Multi-concept learner-state correction | [`governed-full-autonomy-v2-1-multi-concept-confirmation-025`](../../05_evaluation/governed-full-autonomy-v2-1-multi-concept-confirmation-025-results.md) | Keep correction | 72 fresh 30-day histories passed concept attribution, assessment scope, and attempt recognition at 100%, with zero policy violations or provider use | Real learning improvement; the simulated next-outcome AUROC remained weak and 32.9% of autonomous interventions were classified as wasted |
-| Multimodal grounding | [`multimodal-product-grounding-v2-development-attempt-003`](../../05_evaluation/multimodal-product-grounding-v2-development-attempt-003-results.md) | Refine; no profile selected | Region-aware product foundations passed 13/14 development gates and retained source/crop lineage | Representative multimodal quality or a selected multimodal release; the relative latency gate failed |
+| Multimodal grounding | [`true-visual-supplement-003`](../../05_evaluation/true-visual-supplement-003-results.md) | Refine; no profile selected | On 30 public/synthetic visual assets, 27/30 answerable assets were retrieved at three, boundary safety and original-region lineage were 30/30, and all 30 provider calls completed | Representative multimodal quality; only 19/30 cases met visual-fact completeness, diagram recall was weak, and the lexical unsupported-segment proxy is not an independently verified hallucination count |
 | Professor fidelity | [`professor-fidelity` corrected closeout](../../05_evaluation/professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001-results.md) | Refine / Paused | The automated evaluator and anchor work are ineligible for condition selection; negative and invalid evidence is preserved | Measurable professor fidelity, a calibrated human-equivalent judge, or professor approval |
 | Human outcomes | [Claim boundary](../../../reports/claim-to-evidence-matrix.md) | Not established | The repository explicitly distinguishes technical and synthetic evidence from human claims | Usability, satisfaction, adoption, trust, engagement, or learning improvement |
 
@@ -158,17 +159,17 @@ factual answers.
 
 ## Why `Keep`, `Refine`, `Invalid`, and `No Release` all appear
 
-The registry contains 245 named results:
+The registry contains 315 named results:
 
 | Report-oriented classification | Results | Interpretation |
 | --- | ---: | --- |
-| Keep | 76 | A method, control, dataset step, infrastructure boundary, or exact profile passed its own decision gate |
-| Refine | 42 | A valid run produced usable evidence but did not justify selection |
-| No Release | 10 | The evaluated integrated candidate did not meet release eligibility at that checkpoint |
-| Invalid | 75 | The execution or instrument could not support its planned quality conclusion; the failure remains part of the audit trail |
-| Go Deeper | 32 | The build, instrument, or development result justified a bounded next evaluation, not selection |
+| Keep | 94 | A method, control, dataset step, infrastructure boundary, or exact profile passed its own decision gate |
+| Refine | 45 | A valid run produced usable evidence but did not justify selection |
+| No Release | 27 | The evaluated integrated candidate did not meet release eligibility at that checkpoint |
+| Invalid | 91 | The execution or instrument could not support its planned quality conclusion; the failure remains part of the audit trail |
+| Go Deeper | 43 | The build, instrument, or development result justified a bounded next evaluation, not selection |
 | Drop | 7 | The candidate or approach was rejected |
-| Other | 3 | Results whose wording does not map cleanly to those report-level classes |
+| Other | 8 | Results whose wording does not map cleanly to those report-level classes |
 
 These counts must not be interpreted as a success rate. The rows have different
 grains: a build check, dataset audit, provider canary, component comparison,
@@ -226,13 +227,13 @@ local profile with T0 rollback.
 
 | Finding | Evidence | Risk to the report | Severity |
 | --- | --- | --- | --- |
-| The registry is link-complete and its machine artifacts parse successfully | 245 unique result IDs, zero broken local links; 171/171 result records, 55/55 dataset JSON files, 217/217 instrument JSON files, and 19/19 profile JSON files are valid JSON | Low structural risk when paths are followed explicitly | Pass |
+| The registry is link-complete and its machine artifacts parse successfully | 315 unique result IDs, zero broken local links; 242/242 result records, 58/58 dataset JSON files, 253/253 instrument JSON files, and 20/20 profile JSON files are valid JSON | Low structural risk when paths are followed explicitly | Pass |
 | The current claim matrix is stale by design | `reports/claim-to-evidence-matrix.md` is frozen to the 18 August `student-tutor-v1` baseline, before the 2 September grounding, autonomy, and local-release selections | It can incorrectly label newer supported claims as unsupported or preserve superseded model selections | High |
 | `docs/current-status.md` contains older snapshots below newer opening sections | Its older “Evidence state” table says autonomous LLM-backed R1 is No Release, while the newest 2 September records select a narrower V2.1 local profile | Quoting the middle of the status document without following newer records can reverse the current interpretation | High |
-| Not every registry row has a machine-readable record | 171 of 245 rows have linked JSON records; 74 rely on summaries or other artifacts | Numeric comparisons should prefer rows with records, or explicitly disclose summary-only provenance | Medium |
-| Record filenames cannot always be treated as result IDs | Eight legacy record filenames differ from their internal `run_id` | Automated joins by filename can attach the wrong label; use the registry link and internal `run_id` | Low |
-| Committed dataset case counts overlap | The 55 JSON datasets contain reused controls, corrections, transforms, and nested packages | Summing their `case_count` values would overstate the number of independent evaluation cases | High if summed; otherwise low |
-| Most detailed run data is intentionally ignored | 12.17 GiB of local data and generated outputs is represented by durable summaries, selected hashes, and aggregate inventory only | Claims remain reproducible only where the result record preserves exact revisions, hashes, configurations, and output locations | Medium |
+| Not every registry row has a machine-readable record | 241 of 315 rows have linked JSON records; 74 rely on summaries or other artifacts | Numeric comparisons should prefer rows with records, or explicitly disclose summary-only provenance | Medium |
+| Record filenames cannot always be treated as result IDs | Eleven legacy record filenames differ from their internal `run_id` | Automated joins by filename can attach the wrong label; use the registry link and internal `run_id` | Low |
+| Committed dataset case counts overlap | The 58 JSON datasets contain reused controls, corrections, transforms, and nested packages | Summing their `case_count` values would overstate the number of independent evaluation cases | High if summed; otherwise low |
+| Most detailed run data is intentionally ignored | 12.81 GiB of local data and generated outputs is represented by durable summaries, selected hashes, and aggregate inventory only | Claims remain reproducible only where the result record preserves exact revisions, hashes, configurations, and output locations | Medium |
 
 The next claims artifact should be a new final-report claim matrix rather than an
 edit to the frozen August 18 matrix. Historical evidence must remain unchanged.
