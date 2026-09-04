@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "8367e3a4a5bc2e58a4f5045379a8ab6b845ab0a1216d035f916d9439e72d5797",
+  "record_sha256": "210f74efbf4abf6b07f55e59788b856052f1d97f0b2b8ca08a83585db310b3f5",
   "records": [
     {
       "audit": {
@@ -5720,10 +5720,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current limits and pricing, preregistered gates, explicit claim deferral, and the bounded paid execution authorization.",
+        "evidence": "Prospective review verifies one changed retrieval factor, exact first-party Jina v4 binding, current limits and pricing, a 10M-token account ceiling, preregistered gates, explicit claim deferral, and bounded authorization.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-execution-authorization-audit"
+        "reviewer": "codex-colpali-token-quota-audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5731,7 +5731,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
       "risk": "high",
-      "sha256": "6f8ed19c79acb0a3f0fcb923010aa317d45a42bc5ad0ef826ecc013583994bb6"
+      "sha256": "76d65da4d51cc40c173c309b4d116777a60f30577390e3d4e05de8bdfeb17bc9"
     },
     {
       "audit": {
@@ -10854,10 +10854,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Manual runner review plus validation and simulation verify exact case-ID ranking, course isolation, original-region lineage, hidden-boundary deferral, image/query canaries, atomic ledger resume, token-derived cost accounting, fresh metadata, and fail-closed execution authorization.",
+        "evidence": "Manual runner review plus validation and simulation verify case-ID ranking, course isolation, original-region lineage, canaries, atomic resume, cost accounting, and cumulative pre/post-call enforcement of the 10M-token ceiling.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-successor-audit"
+        "reviewer": "codex-colpali-token-quota-audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10870,7 +10870,7 @@
       ],
       "path": "scripts/run_true_visual_colpali_confirmation.py",
       "risk": "high",
-      "sha256": "0cf49a90a2ba46d32375440e239b9507d4f5d0e026a00f773ca339c2312f4370"
+      "sha256": "a4ac19fdfe3b9f0d22ce7ce80c58e60413ca777a7629ae76bd03ca5a57522a6c"
     },
     {
       "audit": {
@@ -18183,10 +18183,10 @@
     {
       "audit": {
         "domain": "visual-late-interaction-successor",
-        "evidence": "Focused integration tests cover deterministic reconstruction, modality balance, zero-call simulation, credential-missing fail-closed preflight after authorization, empty boundary lineage, render hashes, and boundary-evaluation deferral.",
+        "evidence": "Focused tests cover deterministic reconstruction, zero-call simulation, credential fail-closed behavior, the exact 10M-token quota calculation, excessive-reservation rejection, render hashes, and boundary deferral.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-colpali-execution-authorization-audit"
+        "reviewer": "codex-colpali-token-quota-audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -18194,7 +18194,7 @@
       "package_commands": [],
       "path": "tests/test_true_visual_colpali_confirmation.py",
       "risk": "medium",
-      "sha256": "4d0cef069dfce44f21ab5cb035cf013b4597f7dd857f2e10de9e7eef828109e5"
+      "sha256": "aa7756252e0e0f98235ee4d735f9129a13fd646f944340442750ecd8a759d1a1"
     },
     {
       "audit": {

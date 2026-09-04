@@ -59,6 +59,9 @@ policy, and source/version lineage authoritative. A fresh source-disjoint
 validation and simulation pass. The simulation is harness evidence only; no
 Jina model-quality result exists yet. The bounded retrieval confirmation is
 authorized and frozen, but execution still requires a local `JINA_API_KEY`.
+The account allowance supplied by the researcher is capped at 10,000,000
+tokens; the complete 60-call checkpoint reserves at most 1,966,080 tokens
+under the provider's per-input limit and fails closed above that quota.
 Until the live retrieval gates and a
 separate actual-product answer/citation checkpoint pass, the qualified local
 R1 continues to expose text/OCR fallback and makes no representative true-

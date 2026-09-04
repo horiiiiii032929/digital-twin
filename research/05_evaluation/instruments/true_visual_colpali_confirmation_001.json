@@ -29,6 +29,7 @@
     "maximum_cost_usd": 1.0,
     "maximum_input_bytes": 8388608,
     "maximum_input_tokens": 32768,
+    "account_total_token_limit": 10000000,
     "input_price_usd_per_token": 0.00000005,
     "metadata_schema_version": "2026.07.27.1603",
     "metadata_verified_at": "2026-09-04T11:52:07Z",
