@@ -32,12 +32,14 @@ the release-critical path.
 
 ## Endgame repository checkpoint
 
-PR #199 is the active consolidation PR. The endgame correctness audit corrected
+PRs #199 and #200 are merged. The endgame correctness audit corrected
 the selection-004 metric label, hardened prior-ledger validation, fixed the
 evaluation-record dispatcher, made the default repository gate independent of
 ignored/sealed artifacts, and normalized the exact Luna H+E1 release binding.
-The complete local gate passes with 1,845 Python/API tests and 50 frontend
-tests. The detailed record is in
+The final local gate passes with 1,850 Python/API tests and 50 frontend tests,
+1,075/1,075 audited execution-relevant files, and 174/174 guarded execution
+entrypoints. The refreshed report inventory contains 2,019 tracked files and
+311 registered results with zero broken local links. The detailed record is in
 [the endgame correctness audit](../reports/repository-endgame-correctness-audit-2026-09-04.md).
 
 The project state must distinguish the two current conclusions:
@@ -49,10 +51,15 @@ The project state must distinguish the two current conclusions:
   gate and deterministic generator. Its fast-path journey made zero Luna calls,
   and it creates no academic factual-quality or durable-hosting claim.
 
-Merge #199, then merge #200 and rebuild the final-report evidence inventory.
-Only after both merges may the seven old, clean, already-merged worktrees and
-their local branches be removed. Preserve the primary worktree's untracked
-`tmp/` handoff and report material.
+The exact evaluated revision is tagged
+`local-r1-governed-v2.1-qualification-005`. All merged endgame worktrees and
+branches have been removed after ancestry and cleanliness checks. Two unique
+unmerged historical branches remain preserved remotely:
+`codex/hosted-retrieval-eval` and `codex/professor-result-format`. Local `tmp/`
+handoff material remains preserved and ignored. There are no open pull
+requests. Issues #157, #105, #88, #9, #25, and #198 are closed as completed;
+#8 remains the open release/no-release parent, with #44 and #13 as the active
+reporting deliverables.
 
 ## Completed local release qualification
 
@@ -74,18 +81,17 @@ rollback. #24, hosted deployment, real-professor fidelity, real-student
 usability, and learning-outcome claims remain open and are not implied by this
 local selection.
 
-## Active Sunday checkpoint
+## Completed local release checkpoint
 
-The local Sunday milestone is complete as `local-r1-release-qualification-001`
-on immutable revision `c235e56`. The exact local images passed 24/24 clean HTTPS
-journey checks, restart and clean-restore checks, and both the T0 rollback and
-T1 restoration checks. #107, #132, and #134 are therefore `Done / Keep` for
-their local R1 scopes. #88, #9, #25, and parent #8 remain open only for durable
-hosting, target-host operations, and external workflow evidence. #105 remains
-`Refine` because the four-model factual screen did not select an LLM path; the
-qualified local release explicitly uses the deterministic fail-closed fallback
-and makes no LLM-quality claim. #24 remains open because the synthetic demo
-professor is not the fidelity reference.
+The final local milestone is complete as
+`local-r1-governed-v2-1-release-qualification-005` on immutable revision
+`cbdfca679f9622e3674e6e4c26bb9d7afd17d865`. It passed 43/43 clean HTTPS,
+restart, clean-restore, T0 rollback, and governed-restoration checks. #107,
+#132, #134, #157, #88, #9, and #25 are `Done` for their recorded local scopes.
+#105 is `Done / Refine`: the qualified local release uses the safest tested
+deterministic fail-closed gate, but the known 10,000+1,000 evaluation prevents
+an academic factual-release claim. #24 remains open because the synthetic demo
+professor is not the real professor-fidelity reference.
 
 Program 011 has completed the post-demo actual-product milestone in #127. All
 10,000 candidate and 1,000 paired control responses were persisted before

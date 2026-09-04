@@ -9,7 +9,7 @@ remain authoritative for the historical runs and claims they document.
 ## Release-binding correctness checkpoint
 
 The end-of-project correctness audit found two release-relevant defects before
-merging PR #199. First, selection 004 labelled overall task success as fully
+PR #199, which is now merged. First, selection 004 labelled overall task success as fully
 grounded factual success. Hash-verified re-scoring of the immutable
 selection-003 response ledgers gives 42.50% versus 26.00% answerable factual
 success, while the previously published 50.00% versus 36.80% values are the
@@ -45,6 +45,24 @@ transitive frontend development dependency `fast-uri` 3.1.5. The lockfile now
 uses patched 3.1.7 within the existing compatible range; frontend tests, lint,
 and production build pass, and the refreshed offline audit reports zero
 findings.
+
+## Endgame repository and Project state
+
+PRs #199 and #200 are merged. The refreshed final-report evidence inventory
+contains 2,019 tracked report-relevant files and 311 registered results with
+zero broken local links. The final local gate passed 1,850 Python/API tests and
+50 frontend tests; repository correctness is 1,075/1,075 and the execution
+freeze covers 174/174 guarded entrypoints.
+
+The exact evaluated local release revision
+`cbdfca679f9622e3674e6e4c26bb9d7afd17d865` is preserved by annotated tag
+`local-r1-governed-v2.1-qualification-005`. Issues #157, #105, #88, #9, #25,
+and #198 are closed and their Project cards are `Done`. The release parent #8
+remains `In Progress / Refine` because the academic factual result is `No
+Release`; the active endgame deliverables are the professor checkpoint #44 and
+final report/demo package #13. Professor fidelity #24, external human evidence
+#10, true-visual confirmation #131, and the private real-source pilot #102 stay
+open as explicitly unclaimed future evidence, not unfinished local engineering.
 
 Fresh confirmation issue #196 is complete. The
 `governed-full-autonomy-v2-1-persona-confirmation-023` package contained 670
@@ -2532,13 +2550,13 @@ operations, professor fidelity, and real-user evidence remain future work.
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |
-| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | In Progress / Go Deeper | Preserve 003–007 as invalid and 008 as valid Refine; successor 009 passes 820/820 fresh network-free cases and awaits a frozen provider-backed confirmation |
-| 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | In Progress / Refine | Bind the deterministic, fail-closed release configuration only after product confirmation; do not infer a release claim from development evidence |
+| 5 | [#157 Full-autonomy product evaluation](https://github.com/horiiiiii032929/digital-twin/issues/157) | Done / Refine | Preserve every historical attempt and confirmation; confirmation 024 passed 670/670 autonomy cases, while the known 10,000+1,000 regression produced the final academic `No Release` decision |
+| 6 | [#105 Conservative release grounding](https://github.com/horiiiiii032929/digital-twin/issues/105) | Done / Refine | The dominance-scoped ambiguity-safe V3 gate is bound as the safest tested local profile; it is not an absolute factual-quality pass |
 | 7 | [#107 Autonomous tutoring graph](https://github.com/horiiiiii032929/digital-twin/issues/107) | Done / Keep | Confirmation 002 passed every local graph, grounding, citation, state, persistence, restart, duplicate, and fallback gate; bind T1 to the exact local profile and retain T0 rollback |
 | 8 | [#132 Learning-gap loop](https://github.com/horiiiiii032929/digital-twin/issues/132) and [#134 A0 outreach](https://github.com/horiiiiii032929/digital-twin/issues/134) | Done / Keep for local R1 | Preserve the qualified local aggregate and A0 workflows; keep A1 and Discord disabled |
-| 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | In Progress / local milestone Keep | Local Docker and HTTPS qualification passed on one revision; domain and durable host remain open |
-| 10 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | In Progress / local milestone Keep | Local isolation, persistence, backup/restore, restart, and rollback passed; durable-host operations remain open |
-| 11 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | In Progress / local milestone Keep | The complete local professor/student journey passed; external workflow evidence remains open |
+| 9 | [#88 Deployable product foundation](https://github.com/horiiiiii032929/digital-twin/issues/88) | Done / Keep for local scope | Exact local Docker and HTTPS qualification 005 passed; durable public hosting is outside the completed local scope and is not claimed |
+| 10 | [#9 Operations](https://github.com/horiiiiii032929/digital-twin/issues/9) | Done / Keep for local scope | Local isolation, persistence, backup/restore, restart, rollback, and readiness passed; target-host operations are not claimed |
+| 11 | [#25 End-to-end release validation](https://github.com/horiiiiii032929/digital-twin/issues/25) | Done / Keep for local scope | The complete local administrator/professor/student journey passed; external-human usability remains separately open in #10 |
 | 12 | [#127 Flow-independent 10,000-case evaluation](https://github.com/horiiiiii032929/digital-twin/issues/127) | Done / Refine | Preserve Program 011's valid 10,000+1,000 result and transfer method redesign to a fresh successor issue |
 | 13 | [#24 Fidelity calibration](https://github.com/horiiiiii032929/digital-twin/issues/24) | Todo / professor input | Use synthetic profile approval only for workflow verification; obtain real professor approval before any fidelity claim |
 | 14 | [#10 Invite-only pilot](https://github.com/horiiiiii032929/digital-twin/issues/10) | Todo / approval-gated | Complete consented professor/student workflows; keep usability separate from learning outcomes |
