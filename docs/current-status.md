@@ -6,7 +6,7 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
-## Prospective R1.2 clarification checkpoint
+## Qualified R1.2 clarification release
 
 Issue #212 owns one finite successor to the measured grounding floor. It does
 not reopen or rescore the known 10,000+1,000 benchmark. The selected
@@ -24,10 +24,10 @@ student quick replies, and a frozen 200-case network-free product confirmation.
 versus 25% for the fail-closed control (+75 percentage points), with 100%
 boundary safety, invalid-reply safety, source-version validity, restart, and
 idempotency checks. Unsafe releases, duplicates, clarification-loop violations,
-and provider calls were all zero. The mechanism now proceeds to exact local
-R1.2 requalification; R1.1 remains the rollback until that passes. The claim is
-limited to mechanism correctness; real-student interpretation choice, learning
-improvement, and professor fidelity remain unproven.
+and provider calls were all zero. The mechanism passed exact local R1.2
+requalification; R1.1 remains the historical rollback. The claim is limited to
+mechanism and local operational correctness; real-student interpretation
+choice, learning improvement, and professor fidelity remain unproven.
 
 The first exact R1.2 qualification attempt is preserved as
 `invalid-execution`. Its fresh HTTPS and restart checks passed 25/25 and 6/6,
@@ -84,13 +84,19 @@ citation/unsupported claim remained and complete original-region lineage was
 20/30. Only eight questions activated the visual route. Local R1.1 therefore
 retains `text-ocr-fallback`; the 60 cases will not be tuned or rerun.
 
-The independent C0-C3 synthetic proxy was operationally invalid when the direct
-OpenAI endpoint rejected unsupported `uniqueItems` in its response schema on
-the first request. It used zero reported tokens/cost and produced no profile
-quality estimate. The finite correction allowance was already consumed, so it
-is preserved without retry. All program/provider authority is revoked, #24
-remains open, and exact local qualification 007 was completed with these
-limitations.
+The independent C0-C3 synthetic proxy 002 was operationally invalid when the
+direct OpenAI endpoint rejected unsupported `uniqueItems` in its response
+schema on the first request. It used zero reported tokens/cost and remains
+preserved. Separately reviewed successor 003 moved only those unsupported
+schema assertions into deterministic post-parse validation. All 48 GPT-5.4
+Mini generation calls then completed with exact identity and complete
+accounting, but three C0 `abstain` outputs returned an empty response. The raw
+runner status remains `invalid-execution`; zero-call analysis correction 001
+classifies the scientific decision as `Refine` because this is a model-output
+contract quality failure, not a transport or harness failure. Advisory review
+never began, no C0-C3 profile-uplift estimate exists, the same packet will not
+be rerun, and #24 remains open for a real-professor-approved reference. All
+successor provider authority is revoked.
 
 Exact local qualification 007 is now `completed-keep` for the local R1.1
 research-demo scope. The final source revision passed 25/25 live HTTPS, 6/6

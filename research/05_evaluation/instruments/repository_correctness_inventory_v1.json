@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "33d060a3769220a53ccc8f97f5c2edcff45fd0e1aac11146f4d4c3aea8466d54",
+  "record_sha256": "7583e2c29964548847d4fba361b53cac8f8842b240329be21778c61580199eba",
   "records": [
     {
       "audit": {
@@ -5416,10 +5416,10 @@
     {
       "audit": {
         "domain": "professor-fidelity-proxy-c0-c3-003",
-        "evidence": "Authorization review verified one schema-compatibility change, immutable 12-case/profile hashes, fixed C0-C3 conditions, direct exact OpenAI snapshots, deterministic hard-gate authority, synthetic-only claim boundary, and one bounded 80-call/USD 3 execution.",
+        "evidence": "Post-run review verified all 48 generation calls completed with exact identity and accounting, preserved the three empty C0 responses as a model-output contract failure, recorded the zero-call Refine interpretation, and revoked provider authority without tuning or rerunning the packet.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex synthetic-fidelity successor review"
+        "reviewer": "Codex synthetic-fidelity result audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5427,7 +5427,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_003.json",
       "risk": "high",
-      "sha256": "a9643b1937420be31690be7e2a153a7b60451a76518d17e6ff74632825cb91d8"
+      "sha256": "396d324fbdaa89f54ac4f97139bdec905e2f46cb733f09a9709486d3654788ea"
     },
     {
       "audit": {
@@ -14185,10 +14185,10 @@
     {
       "audit": {
         "domain": "professor-fidelity-proxy-c0-c3-003",
-        "evidence": "Execution-freeze review grants only the named synthetic successor external-model and method-evaluation operations; all unrelated provider, held-out, private-data, and dataset operations remain denied.",
+        "evidence": "Post-run freeze review removes the completed successor from bounded authorizations and restores the repository-wide provider and method-evaluation block.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex synthetic-fidelity successor review"
+        "reviewer": "Codex synthetic-fidelity result audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14196,7 +14196,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "a6b23b55fa1c27087390927480f41d5e0379ac10d2b28b65985685b568e011cb"
+      "sha256": "3b7885109d12ce0d41226574dd250544e3f5914231c38cd68a2cb250c4fdf697"
     },
     {
       "audit": {
@@ -15065,10 +15065,10 @@
     {
       "audit": {
         "domain": "professor-fidelity-proxy-c0-c3-003",
-        "evidence": "Focused freeze regression verifies only the exact successor authorization is admitted while historical and unrelated instruments retain their prior boundaries.",
+        "evidence": "Focused freeze regression verifies the completed successor is no longer authorized and historical and unrelated instruments retain their prior boundaries.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex synthetic-fidelity successor review"
+        "reviewer": "Codex synthetic-fidelity result audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15076,7 +15076,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "cc25fefa4f1690fb5706959652a88ecfb4b5617e5249ccb14753fe70528c57cc"
+      "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
     },
     {
       "audit": {

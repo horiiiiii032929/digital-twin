@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0.0",
   "instrument_id": "professor-fidelity-proxy-c0-c3-003",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine-authorization-revoked",
   "owner_issue": 24,
   "successor_of": "professor-fidelity-proxy-c0-c3-002",
   "dataset_id": "professor-fidelity-proxy-packet-001",
@@ -89,13 +89,16 @@
     "synthetic_profile_diagnostic_only": true,
     "professor_approval_required_for_reference": true
   },
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
   "authorization": {
     "authorized_at": "2026-09-04T19:28:37Z",
     "authorization_text": "Proceed with the best result in the finite window ending around 10:00 SGT, including evaluation and material design improvements.",
-    "scope": "one bounded synthetic C0-C3 successor execution under the USD 3 ceiling"
+    "scope": "one bounded synthetic C0-C3 successor execution under the USD 3 ceiling",
+    "revoked_at": "2026-09-04T19:34:29Z",
+    "outcome": "completed-refine-analysis-correction-001"
   },
   "private_data_authorized": false,
-  "result_record": null
+  "raw_result_record": "research/05_evaluation/records/professor-fidelity-proxy-c0-c3-003-invalid.json",
+  "result_record": "research/05_evaluation/records/professor-fidelity-proxy-c0-c3-003-analysis-correction-001.json"
 }
