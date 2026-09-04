@@ -729,6 +729,12 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
         ),
+        # Issue #24. One schema-corrected synthetic C0-C3 proxy execution;
+        # no real-professor, held-out, private-source, or release authority.
+        "professor-fidelity-proxy-c0-c3-003": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
     }
 )
 

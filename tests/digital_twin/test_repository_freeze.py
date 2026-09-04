@@ -53,6 +53,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-grounding-successor-011",
         "true-visual-colpali-confirmation-001",
         "true-visual-product-checkpoint-001",
+        "professor-fidelity-proxy-c0-c3-003",
     }
 
     for pilot_id in pilot_ids:
@@ -144,7 +145,6 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-actual-product-confirmation-021",
         "governed-full-autonomy-v2-1-persona-confirmation-024",
         "professor-fidelity-proxy-c0-c3-002",
-        "professor-fidelity-proxy-c0-c3-003",
         "local-r1-final-technical-completion-001",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
