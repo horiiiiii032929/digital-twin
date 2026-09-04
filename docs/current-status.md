@@ -48,21 +48,23 @@ findings.
 
 ## Endgame repository and Project state
 
-PRs #199 and #200 are merged. The refreshed final-report evidence inventory
-contains 2,019 tracked report-relevant files and 311 registered results with
-zero broken local links. The final local gate passed 1,850 Python/API tests and
-50 frontend tests; repository correctness is 1,075/1,075 and the execution
-freeze covers 174/174 guarded entrypoints.
+PRs #199, #200, and #201 are merged. The refreshed final-report evidence
+inventory contains 2,019 tracked report-relevant files and 311 registered
+results with zero broken local links. The final local gate passed 1,850
+Python/API tests and 50 frontend tests; repository correctness is 1,075/1,075
+and the execution freeze covers 174/174 guarded entrypoints.
 
 The exact evaluated local release revision
 `cbdfca679f9622e3674e6e4c26bb9d7afd17d865` is preserved by annotated tag
-`local-r1-governed-v2.1-qualification-005`. Issues #157, #105, #88, #9, #25,
-and #198 are closed and their Project cards are `Done`. The release parent #8
-remains `In Progress / Refine` because the academic factual result is `No
-Release`; the active endgame deliverables are the professor checkpoint #44 and
-final report/demo package #13. Professor fidelity #24, external human evidence
-#10, true-visual confirmation #131, and the private real-source pilot #102 stay
-open as explicitly unclaimed future evidence, not unfinished local engineering.
+`local-r1-governed-v2.1-qualification-005` and published as the Course Digital
+Twin R1 research release. Issues #8, #157, #105, #88, #9, #25, and #198 are
+closed and their Project cards are `Done`. Product release is `Keep`; the
+separate academic factual result remains `No Release` for a high grounding
+claim. The active post-release deliverables are the professor checkpoint #44
+and final report/demo package #13. Professor fidelity #24, external human
+evidence #10, true-visual confirmation #131, and the private real-source pilot
+#102 stay open as explicitly unclaimed future evidence, not unfinished local
+engineering.
 
 Fresh confirmation issue #196 is complete. The
 `governed-full-autonomy-v2-1-persona-confirmation-023` package contained 670
@@ -2521,32 +2523,29 @@ continues to hold report, presentation, and professor-communication work.
 
 ## Evidence state
 
-| Boundary | Current decision | Established | Missing before product release |
+| Boundary | Current decision | Established | Post-release evidence boundary |
 | --- | --- | --- | --- |
-| Product UX and autonomous tutoring | **No Release** for autonomous LLM-backed R1; local deterministic T1-v1/T0 deployment retained | Student conversation-first workspace; professor workflow-first governance console; V2.1 durable goals, opportunities, plans, actions/outcomes, wake-ups, transactional delivery and worker; provider-backed 008 completed 820/820 and identified the action-envelope defect; successor 009 adds deterministic event-scoped eligibility and passes all 820 fresh network-free cases | Freeze 009 and run one provider-backed confirmation on its fresh cases; do not reuse the opened 008 cases or promote T1-v2.1 from network-free development evidence |
+| Product UX and autonomous tutoring | **Keep / released** for the exact local R1 research profile | Governed V2.1 goals, plans, bounded proactive actions, persistence, and rollback are implemented; provider-backed confirmation 024 passed 670/670 autonomy cases and exact local qualification 005 passed 43/43 operational checks | Preserve the tagged release and T0 rollback; do not generalize the result to real-professor fidelity, real-student usability, learning improvement, or durable hosting |
 | Text retrieval | Component Keep / product Refine | M2 hybrid BM25 plus local Qwen3 dense RRF remains the historical component selection with BM25 rollback, but the R1 product screen retrieved all required evidence@3 for only 57.5% and Recall@5 was 66.6% | Design one prospective retrieval/evidence method successor before final academic scaling; do not reinterpret the component benchmark |
 | Multimodal retrieval | Refine; no selection | Region-aware tables/cells/diagrams/equations/OCR, scanned-PDF API ingestion, original crop citations, 13/13 synthetic complete@3 and lineage; unfavorable historical and V2 attempt results preserved | Production OCR/layout qualification, representative real-PDF quality and end-to-end latency; frozen relative micro-p95 gate still failed |
 | Generator and prompt | Refine; deterministic fallback selected for demo | GPT-5.4 mini, GPT-5.6 Luna, GPT-5.6 Terra, and GPT-5.6 Sol completed the same 200-case screen with exact identities and zero operational failures, but none passed and each had at least one severe unsupported release | Make no LLM-quality claim; qualify deterministic T0/T1 graph mechanics network-free and revisit generation only with a new retrieval/evidence method |
 | Professor fidelity | Refine / Paused | Invalid C0-C3 comparison and correction preserved; execution policy protects held-out | Independent expert calibration, valid prospective development comparison, and hard-gate pass |
 | Publication/student core | Go Deeper; atomic-claim candidate provisional | V8 images built and became healthy; failed query/evidence comparison preserved; the 120-row NLI contract test passed its frozen synthetic gates | Evaluate T0 and the provisional validator on independently validated, source-linked examples through the actual retrieval/generation path before selection or product binding |
-| Large factual QA | Historical 10,000+1,000 Refine; fresh ambiguity-safe method Keep | Program 011 preserves the leakage-free final failure. On new source-disjoint development evidence, ambiguity-safe V2 passed every frozen gate at 97.75% grounded success, 100% action/citation/retrieval, 98.25% claim precision/recall, and zero severe releases | Keep the final package known and immutable; use the selected method only in a separately frozen provider-backed product confirmation before any release claim |
+| Large factual QA | **No Release** for a high factual-quality claim | The immutable known 10,000+1,000 regression measured 25.38% fully grounded factual success for the selected system versus 44.16% for T0, while severe unsupported releases fell from 478 to 4 | Keep the package known and immutable; report the limitation and do not tune, rerun, or rescore it |
 
-## Release readiness and critical path
+## Released product and post-release path
 
-The repository and local product baseline are healthy, but the system is not
-release-ready. #172 repaired the reference-uniqueness and ambiguity defect and
-selected V2 on fresh development evidence. The #157 actual-product harness
-passed all 820 cases through real services with virtual time and zero provider
-calls. Provider-backed attempts 003 and 004 then failed operationally at their
-canary gates without opening bulk cases or hidden gold. The one allowed harness
-correction is consumed and no quality or promotion claim follows from those
-runs. Attempt 005 then reproduced the same canary failure, so broad connectivity
-loss is unlikely and identical retries stop. A2 promotion, target-host
-operations, professor fidelity, and real-user evidence remain future work.
+The best evaluated working design is released at tag
+`local-r1-governed-v2.1-qualification-005`. Issue #8 is `Done / Keep` for this
+local research-product scope. This is a real product release decision, not a
+claim that every academic gate passed. The known factual regression remains an
+unfavorable result and narrows the release claim. Professor communication #44
+and final packaging #13 now form the active delivery path; A2 generalization,
+durable hosting, professor fidelity, and real-user evidence remain future work.
 
 | Order | Issue | State | Exit condition |
 | ---: | --- | --- | --- |
-| 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | In Progress / parent | Keep every implementation and evaluation item tied to the R1/R2/R3 definition of done |
+| 1 | [#8 Release goal](https://github.com/horiiiiii032929/digital-twin/issues/8) | Done / Keep for local R1 | Preserve the exact tagged best-available product release; keep academic factual `No Release` as a separate limitation |
 | 2 | Repository correctness and execution freeze | Keep | Maintain a clean audited baseline; no prospective paid or held-out execution without its own authorization |
 | 3 | [#139 Persisted retrieval indexes](https://github.com/horiiiiii032929/digital-twin/issues/139) | Done / Keep | Preserve the qualified four-index lifecycle and its no-runtime-document-embedding guarantee |
 | 4 | [#172 Ambiguity-safe grounding](https://github.com/horiiiiii032929/digital-twin/issues/172) | Done / Keep | Preserve attempt 001 invalid evidence and attempt 002 Keep; retain V1 rollback and use V2 only in a new immutable product confirmation |

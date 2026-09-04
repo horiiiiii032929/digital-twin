@@ -11,8 +11,9 @@ evaluation, and delivery work.
 
 ## Planning fields
 
-- **Status:** Todo, In Progress, Done. Release goal #8 remains `In Progress` as
-  the parent. Keep only one unblocked execution package in progress per
+- **Status:** Todo, In Progress, Done. Release goal #8 is `Done / Keep` for the
+  exact local R1 research release. #44 and #13 remain the active post-release
+  delivery items. Keep only one unblocked execution package in progress per
   independent track.
 - **Decision:** Pending, Keep, Refine, Go Deeper, Drop.
 - **Work Type:** Feature, Research, Design, Prototype, Documentation,
@@ -32,7 +33,7 @@ the release-critical path.
 
 ## Endgame repository checkpoint
 
-PRs #199 and #200 are merged. The endgame correctness audit corrected
+PRs #199, #200, and #201 are merged. The endgame correctness audit corrected
 the selection-004 metric label, hardened prior-ledger validation, fixed the
 evaluation-record dispatcher, made the default repository gate independent of
 ignored/sealed artifacts, and normalized the exact Luna H+E1 release binding.
@@ -42,14 +43,16 @@ entrypoints. The refreshed report inventory contains 2,019 tracked files and
 311 registered results with zero broken local links. The detailed record is in
 [the endgame correctness audit](../reports/repository-endgame-correctness-audit-2026-09-04.md).
 
-The project state must distinguish the two current conclusions:
+The project state distinguishes the two current conclusions:
 
-- Academic factual grounding: `No Release`. The known 10,000+1,000 result is
-  immutable and was not reopened.
-- Local operational candidate: `Keep` for a local research demo. Exact HTTPS
-  qualification 005 passed 43/43 checks for Luna H+E1 with the dominance-scoped
-  gate and deterministic generator. Its fast-path journey made zero Luna calls,
-  and it creates no academic factual-quality or durable-hosting claim.
+- Academic factual grounding: `No Release` for a high factual-quality claim.
+  The known 10,000+1,000 result is immutable and was not reopened.
+- Product release: `Keep`. The exact local R1 research product is published at
+  [the governed V2.1 release](https://github.com/horiiiiii032929/digital-twin/releases/tag/local-r1-governed-v2.1-qualification-005).
+  Exact HTTPS qualification 005 passed 43/43 checks for Luna H+E1 with the
+  dominance-scoped gate and deterministic generator. Its fast-path journey made
+  zero Luna calls, and it creates no academic factual-quality or durable-hosting
+  claim.
 
 The exact evaluated revision is tagged
 `local-r1-governed-v2.1-qualification-005`. All merged endgame worktrees and
@@ -57,9 +60,8 @@ branches have been removed after ancestry and cleanliness checks. Two unique
 unmerged historical branches remain preserved remotely:
 `codex/hosted-retrieval-eval` and `codex/professor-result-format`. Local `tmp/`
 handoff material remains preserved and ignored. There are no open pull
-requests. Issues #157, #105, #88, #9, #25, and #198 are closed as completed;
-#8 remains the open release/no-release parent, with #44 and #13 as the active
-reporting deliverables.
+requests. Issues #8, #157, #105, #88, #9, #25, and #198 are closed as
+completed. #44 and #13 are the active post-release reporting deliverables.
 
 ## Completed local release qualification
 
