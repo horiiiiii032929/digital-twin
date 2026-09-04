@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "true-visual-supplement-003",
+  "status": "built-provider-unauthorized",
+  "owner_issue": 131,
+  "dataset_id": "academic-factual-qa-visual-supplement-001",
+  "supersedes_method_only": "course-digital-twin-nonhuman-visual-002-invalid",
+  "change_from_attempt_002": "Normalize whitespace and remove exact case-insensitive duplicate semantic-list entries per asset while retaining the first value and recording every removal; do not reinterpret attempt 002.",
+  "provider_binding": {
+    "provider": "openai",
+    "api_url": "https://api.openai.com/v1/responses",
+    "model": "gpt-5.4-nano-2026-03-17",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "request_store": false,
+    "reasoning_effort": "low",
+    "maximum_output_tokens": 1500,
+    "maximum_calls": 30,
+    "maximum_transport_retries": 0,
+    "maximum_cost_usd": 2.0,
+    "input_price_usd_per_million": 0.2,
+    "output_price_usd_per_million": 1.25,
+    "metadata_refresh_required_before_paid_execution": true
+  },
+  "quality_gates": {
+    "complete_visual_evidence_at_3_min": 0.9,
+    "complete_visual_fact_cases_min": 29,
+    "mean_visual_fact_recall_min": 0.9666666667,
+    "mean_visual_fact_precision_min": 0.9,
+    "unsupported_visual_facts_max": 0,
+    "boundary_policy_accuracy_min": 1.0,
+    "boundary_releases_max": 0,
+    "original_region_lineage_min": 1.0
+  },
+  "result_scope": "development true-visual supplement only; never a representative visual-capability claim",
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "private_data_authorized": false
+}

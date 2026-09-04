@@ -105,6 +105,9 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # deterministic product simulation only; no provider or held-out path is
     # implemented.
     "run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+    # The professor-fidelity proxy exposes only contract validation and a
+    # deterministic two-reviewer simulation; it has no provider execution.
+    "run_professor_fidelity_proxy_harness.py",
     "run_ingestion_worker.py",
     # This successor-study simulation drives only synthetic hidden-state
     # learners through pure-Python estimators and timing policies. It has no

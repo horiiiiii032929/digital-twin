@@ -29,6 +29,23 @@ The autonomous arm's count-based next-outcome AUROC was 0.466 and 32.9% of
 interventions were classified as wasted by the simulator. The known
 10,000+1,000 package remains immutable and was not read, rerun, or rescored.
 
+The exact non-secret release selectors are now captured separately in
+`deploy/local-r1.qualified.env.example`; the conservative
+`deploy/local-r1.env.example` remains the safe T1-v1 default. Candidate-v3 now
+distinguishes mandatory runtime policy/citation safeguards from independent
+component-selection evidence instead of treating an active safeguard as a
+comparative quality result.
+
+Two post-release evidence successors are build-complete and make zero provider
+calls in this checkpoint. `professor-fidelity-proxy-harness-001` supplies a
+12-case blinded C0-C3 packet with deterministic hard gates and a minimum
+two-LLM advisory review contract; it explicitly cannot establish real-professor
+fidelity without professor approval. `true-visual-supplement-003` preserves the
+30-asset/60-case question-independent visual design and original-region
+authority while deterministically canonicalizing duplicate semantic-list
+values that invalidated attempt 002. Its paid execution remains unauthorized,
+so no visual quality result is claimed yet.
+
 ## Release-binding correctness checkpoint
 
 The end-of-project correctness audit found two release-relevant defects before

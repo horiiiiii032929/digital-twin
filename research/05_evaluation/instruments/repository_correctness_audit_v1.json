@@ -937,6 +937,17 @@
       "sha256": "bdbc00da92afe17a7d68631f86352c9e687100d15b64069ac8469293e3ca1681"
     },
     {
+      "path": "deploy/local-r1.qualified.env.example",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "configuration-and-deployment",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "f41006d9adf142909d297765ae5e17de4e566896a876196aa8cd51b95d71eff0"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
@@ -961,13 +972,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "persona-robust-release-selection",
-      "evidence": "Package command review verifies successor 022 requirements, bank, selection, preflight, execution, and resume entrypoints are explicit while historical commands remain unchanged.",
+      "domain": "active-tooling",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
       "path": "package.json",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex persona-robust evaluation audit",
-      "sha256": "b924cfc92cc93101ef0246682fb686575ea97a780f36dd9fca341908b2f8f130"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "6ef3b2f105e845fae07f5e4266595dc8bca2aae1d26eb6ef849b770664d5a61a"
     },
     {
       "audit_status": "audited",
@@ -3282,6 +3293,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "post-release-multi-concept-confirmation",
+      "evidence": "Prospective instrument review verifies fresh concepts and seeds, two actual T1-v2 conditions, 30 virtual days, fixed hard gates, network-free execution, and explicit synthetic-only claim boundaries.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_multi_concept_confirmation_025.json",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "Codex final technical closure audit",
+      "sha256": "b8b45b8583df3e2bc16fc732b92f5cd94600f459def7e55b6ffbdbdbe0eab8c9"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "persona-robust-fresh-confirmation",
       "evidence": "Prospective instrument review verifies source-disjoint inputs, selected architecture and engine, exact pricing and identity checks, registered hard gates, bounded calls/cost, immutable progression, and explicit external-validity limitations.",
       "findings": [],
@@ -3665,6 +3687,17 @@
       "sha256": "9c00b6eed9d67541fcc8a099a0ba9d69f581c371fc26502357671e5549d3199d"
     },
     {
+      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_harness_001.json",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "679e9c444596c134c3b30bbc3a9fbb55122ff727115979f5c180d418a5bb2f5b"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
@@ -3885,6 +3918,17 @@
       "sha256": "0ffae82b8019bd78b5e55afe618ad6fad7af61b462f809a5de9f6e008d48d480"
     },
     {
+      "path": "research/05_evaluation/instruments/true_visual_supplement_003.json",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "multimodal-evaluation",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "fe7301c3d383e7fbf5a45614e37f547592d0cbf50cb7a7bf3fb1b215c609745a"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
@@ -4085,13 +4129,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "evaluation-evidence-correctness",
-      "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+      "domain": "release-profile-correctness",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "a8e306d2b4e418a6cd97b3612fdc611674a97f714ff601beddbede940b568d9d"
     },
     {
       "audit_status": "audited",
@@ -4767,6 +4811,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "final-report-evidence-inventory",
+      "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+      "findings": [],
+      "path": "scripts/build_final_report_evidence_inventory.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
@@ -5104,17 +5159,6 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "e947683bf27dc105d7ec2370312835e28a4f438db14bf74b99b940812da16575"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "final-report-evidence-inventory",
-      "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
-      "findings": [],
-      "path": "scripts/build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
     },
     {
       "audit_status": "audited",
@@ -6549,6 +6593,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "post-release-multi-concept-confirmation",
+      "evidence": "Manual runner review verifies exclusive output creation, zero provider path, fresh fixture binding, exact case count, finite Keep/Refine gates, and reuse of the public flow-independent product adapter.",
+      "findings": [],
+      "path": "scripts/run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "Codex final technical closure audit",
+      "sha256": "fbf2d5f2a8a7b221b580a319c33bfa9e38a562e86066af0a113bb37948ddeb02"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "persona-robust-fresh-confirmation",
       "evidence": "Runner review verifies actual-service execution, selected T1-v2 binding, paired T0/reactive diagnostics, strict direct-transport identity canary, atomic resume, hidden-gold ordering, and fail-closed bounded execution.",
       "findings": [],
@@ -6745,6 +6800,17 @@
       "sha256": "753a6785a00c9d11ab245f23bbe22d291f575b64fc3671777f8f6a40df683f22"
     },
     {
+      "path": "scripts/run_professor_fidelity_proxy_harness.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "bbbcbe4f3b374f3fabde16b19461f984dfe0cb9408ae937e784a79df4a48962c"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
@@ -6820,6 +6886,17 @@
       "reviewed_at": "2026-09-02",
       "reviewer": "Codex successor-study integration audit",
       "sha256": "a22d5dfe6f6507acb444a53ad0436d6e897a97bb9cb86cebec1336c66990927e"
+    },
+    {
+      "path": "scripts/run_true_visual_supplement_003.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "multimodal-evaluation",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "e9e4226f992d809d3d9d3a925fbcd55aa9e0469fdf726c47bfabf6e6901a875d"
     },
     {
       "audit_status": "audited",
@@ -7210,12 +7287,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-execution-freeze",
-      "evidence": "Freeze review classifies 021, the persona-wording requirements builder, and confirmation 025's synthetic network-free runner as non-provider entrypoints while retaining guarded provider and held-out runners.",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "d551aa5ffd49c942398c2b74dbf761854ca1642ee7aca11810491f05cc573f63"
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "1cd343d2784ef28cc4cdb3c0a7218a376202537568698b40bd48db6aabf06927"
     },
     {
       "audit_status": "audited",
@@ -8131,6 +8208,17 @@
       "sha256": "101a4ffcac2928a83311609978808c280cfd2479614f96e8bbb5476bb3a27cd9"
     },
     {
+      "path": "src/digital_twin/evaluation/professor_fidelity_proxy.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program",
@@ -8244,7 +8332,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "evidence": "Manual SE7-11 and post-release freeze-coverage review found no unresolved defects; the true-visual successor is registered as a guarded provider/method entrypoint and focused regressions preserve authoritative coverage.",
       "findings": [],
       "path": "src/digital_twin/generation/__init__.py",
       "reviewed_at": "2026-09-03",
@@ -8842,8 +8930,8 @@
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex persona-robust selection freeze audit",
-      "sha256": "07ad6171a68ededdd9eb48005bafdd2b1f5752bc7f4f7e0edae9f2e299fa9242"
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "453b5f0d5f24d5fe32c1cc12065e14f20e2d083053c5c8c663b7c022830f7c15"
     },
     {
       "audit_status": "audited",
@@ -9097,17 +9185,6 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "9ffbad379d9c20980780c15f8cefd09f9de226306940995bbe51a5c105a29acf"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "final-report-evidence-inventory",
-      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
-      "findings": [],
-      "path": "tests/test_build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
     },
     {
       "audit_status": "audited",
@@ -10465,6 +10542,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "final-report-evidence-inventory",
+      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+      "findings": [],
+      "path": "tests/test_build_final_report_evidence_inventory.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-primary-endgame-correctness-audit",
+      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "verification-evidence",
       "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
       "findings": [],
@@ -11147,6 +11235,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "post-release-multi-concept-confirmation",
+      "evidence": "Focused tests cover fresh design identity, finite decision gates, real-product smoke execution, and exclusive-output protection.",
+      "findings": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "Codex final technical closure audit",
+      "sha256": "21d10679d605ecf2ca3eaa4042ce4df5c0eb7374cd4ca90e68e41dcb632ab2d0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "persona-robust-fresh-confirmation",
       "evidence": "Focused tests verify selected-condition bindings, exact distributions, fresh source identities, absence of hidden gold, autonomous canary coverage, and provider execution blocked before authorization.",
       "findings": [],
@@ -11255,6 +11354,17 @@
       "sha256": "f269fce9044f3fa1195ee73c3b8c65c0922d24784866a2b6bf5d7a5c20808366"
     },
     {
+      "path": "tests/test_local_r1_qualified_environment.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "configuration-and-deployment",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "e8b03dd7ed188e02930ac2dbd7908710bae1e187e0b8702b0c2369a4b78c06f6"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-evidence",
@@ -11330,6 +11440,17 @@
       "reviewed_at": "2026-08-21",
       "reviewer": "codex-primary-review",
       "sha256": "f59b10d56895a3508cd22dd8b86c88885a99c336df73cf5658ee8485da8ce967"
+    },
+    {
+      "path": "tests/test_professor_fidelity_proxy_harness.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "professor-fidelity-proxy",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "8dcc839f1e7a497f1dc32dcca02f879b2497e85e0dfef62111fd8dbcceea495b"
     },
     {
       "audit_status": "audited",
@@ -11706,6 +11827,17 @@
       "sha256": "f00863701a1396007e8b2d8f06ed27ad56e577f9ab40b34040980b77decdfe07"
     },
     {
+      "path": "tests/test_true_visual_supplement_003.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "multimodal-evaluation",
+      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "findings": [],
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-post-release-technical-closure",
+      "sha256": "1178252896375c674485d5b62c33f853116f419d6fac735911928f4b950adaf0"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "verification-correctness",
@@ -11825,39 +11957,6 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "6c4411149fd69e4091d17cfb6d8cc619c842418d8415b29c0756e55ab5078c74"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "post-release-multi-concept-confirmation",
-      "evidence": "Prospective instrument review verifies fresh concepts and seeds, two actual T1-v2 conditions, 30 virtual days, fixed hard gates, network-free execution, and explicit synthetic-only claim boundaries.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_multi_concept_confirmation_025.json",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "Codex final technical closure audit",
-      "sha256": "b8b45b8583df3e2bc16fc732b92f5cd94600f459def7e55b6ffbdbdbe0eab8c9"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "post-release-multi-concept-confirmation",
-      "evidence": "Manual runner review verifies exclusive output creation, zero provider path, fresh fixture binding, exact case count, finite Keep/Refine gates, and reuse of the public flow-independent product adapter.",
-      "findings": [],
-      "path": "scripts/run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "Codex final technical closure audit",
-      "sha256": "fbf2d5f2a8a7b221b580a319c33bfa9e38a562e86066af0a113bb37948ddeb02"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "post-release-multi-concept-confirmation",
-      "evidence": "Focused tests cover fresh design identity, finite decision gates, real-product smoke execution, and exclusive-output protection.",
-      "findings": [],
-      "path": "tests/test_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "Codex final technical closure audit",
-      "sha256": "21d10679d605ecf2ca3eaa4042ce4df5c0eb7374cd4ca90e68e41dcb632ab2d0"
     }
   ],
   "schema_version": 1

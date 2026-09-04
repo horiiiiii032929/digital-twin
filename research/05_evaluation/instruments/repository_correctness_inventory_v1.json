@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1078
+    "audited": 1087
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 283,
-    "active_runtime": 161,
+    "active_or_unclassified_tooling": 285,
+    "active_runtime": 162,
     "ci_configuration": 1,
     "deferred_tooling": 2,
-    "deployment_configuration": 9,
-    "evaluation_configuration": 283,
+    "deployment_configuration": 10,
+    "evaluation_configuration": 285,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 250
+    "verification": 253
   },
-  "file_count": 1078,
+  "file_count": 1087,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "3fe655a8ddb9e2c5de6c377ef83a91901c26218d86faa93bc4f68f253530f85f",
+  "record_sha256": "a76a2110e41d7b11bcd58450ba0b67430f564ccbff007c48fa4b374d641db23c",
   "records": [
     {
       "audit": {
@@ -1383,6 +1383,22 @@
     },
     {
       "audit": {
+        "domain": "configuration-and-deployment",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "deployment_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "deploy/local-r1.qualified.env.example",
+      "risk": "high",
+      "sha256": "f41006d9adf142909d297765ae5e17de4e566896a876196aa8cd51b95d71eff0"
+    },
+    {
+      "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
         "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
         "findings": [],
@@ -1415,11 +1431,11 @@
     },
     {
       "audit": {
-        "domain": "persona-robust-release-selection",
-        "evidence": "Package command review verifies successor 022 requirements, bank, selection, preflight, execution, and resume entrypoints are explicit while historical commands remain unchanged.",
+        "domain": "active-tooling",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex persona-robust evaluation audit"
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -1427,7 +1443,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "b924cfc92cc93101ef0246682fb686575ea97a780f36dd9fca341908b2f8f130"
+      "sha256": "6ef3b2f105e845fae07f5e4266595dc8bca2aae1d26eb6ef849b770664d5a61a"
     },
     {
       "audit": {
@@ -5367,6 +5383,22 @@
     },
     {
       "audit": {
+        "domain": "professor-fidelity-proxy",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_harness_001.json",
+      "risk": "high",
+      "sha256": "679e9c444596c134c3b30bbc3a9fbb55122ff727115979f5c180d418a5bb2f5b"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -5687,6 +5719,22 @@
     },
     {
       "audit": {
+        "domain": "multimodal-evaluation",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/true_visual_supplement_003.json",
+      "risk": "high",
+      "sha256": "fe7301c3d383e7fbf5a45614e37f547592d0cbf50cb7a7bf3fb1b215c609745a"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -5975,11 +6023,11 @@
     },
     {
       "audit": {
-        "domain": "evaluation-evidence-correctness",
-        "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
+        "domain": "release-profile-correctness",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-primary-endgame-correctness-audit"
+        "reviewer": "codex-post-release-technical-closure"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -5987,7 +6035,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json",
       "risk": "high",
-      "sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
+      "sha256": "a8e306d2b4e418a6cd97b3612fdc611674a97f714ff601beddbede940b568d9d"
     },
     {
       "audit": {
@@ -10595,6 +10643,25 @@
     },
     {
       "audit": {
+        "domain": "professor-fidelity-proxy",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:professor-fidelity-proxy-harness",
+        "verify:professor-fidelity-proxy-harness"
+      ],
+      "path": "scripts/run_professor_fidelity_proxy_harness.py",
+      "risk": "high",
+      "sha256": "bbbcbe4f3b374f3fabde16b19461f984dfe0cb9408ae937e784a79df4a48962c"
+    },
+    {
+      "audit": {
         "domain": "whole-system-architecture-evolution",
         "evidence": "Export-surface review confirms the round instrument and architecture manifest contracts are available without import-time execution; focused tests and simulation passed.",
         "findings": [],
@@ -10749,6 +10816,27 @@
       "path": "scripts/run_successor_learner_timing_simulation_001.py",
       "risk": "high",
       "sha256": "a22d5dfe6f6507acb444a53ad0436d6e897a97bb9cb86cebec1336c66990927e"
+    },
+    {
+      "audit": {
+        "domain": "multimodal-evaluation",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:true-visual-supplement-003",
+        "preflight:true-visual-supplement-003",
+        "simulate:true-visual-supplement-003",
+        "verify:true-visual-supplement-003"
+      ],
+      "path": "scripts/run_true_visual_supplement_003.py",
+      "risk": "high",
+      "sha256": "e9e4226f992d809d3d9d3a925fbcd55aa9e0469fdf726c47bfabf6e6901a875d"
     },
     {
       "audit": {
@@ -11382,10 +11470,10 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Freeze review classifies 021, the persona-wording requirements builder, and confirmation 025's synthetic network-free runner as non-provider entrypoints while retaining guarded provider and held-out runners.",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
         "findings": [],
         "reviewed_at": "2026-09-04",
-        "reviewer": "codex-primary-endgame-correctness-audit"
+        "reviewer": "codex-post-release-technical-closure"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -11395,7 +11483,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "d551aa5ffd49c942398c2b74dbf761854ca1642ee7aca11810491f05cc573f63"
+      "sha256": "1cd343d2784ef28cc4cdb3c0a7218a376202537568698b40bd48db6aabf06927"
     },
     {
       "audit": {
@@ -12743,6 +12831,22 @@
     },
     {
       "audit": {
+        "domain": "professor-fidelity-proxy",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/evaluation/professor_fidelity_proxy.py",
+      "risk": "high",
+      "sha256": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e"
+    },
+    {
+      "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Direct-provider transport review verified image inputs are supported while request ledgers persist hashes rather than image payloads; identity, schema, token, latency, and cost accounting remain enforced.",
         "findings": [],
@@ -12904,7 +13008,7 @@
     {
       "audit": {
         "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "evidence": "Manual SE7-11 and post-release freeze-coverage review found no unresolved defects; the true-visual successor is registered as a guarded provider/method entrypoint and focused regressions preserve authoritative coverage.",
         "findings": [],
         "reviewed_at": "2026-09-03",
         "reviewer": "Codex SE7-11 root-cause and confirmation audit"
@@ -13771,7 +13875,7 @@
         "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
         "findings": [],
         "reviewed_at": "2026-09-03",
-        "reviewer": "Codex persona-robust selection freeze audit"
+        "reviewer": "codex-post-release-technical-closure"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13779,7 +13883,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "07ad6171a68ededdd9eb48005bafdd2b1f5752bc7f4f7e0edae9f2e299fa9242"
+      "sha256": "453b5f0d5f24d5fe32c1cc12065e14f20e2d083053c5c8c663b7c022830f7c15"
     },
     {
       "audit": {
@@ -17303,6 +17407,22 @@
     },
     {
       "audit": {
+        "domain": "configuration-and-deployment",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_local_r1_qualified_environment.py",
+      "risk": "medium",
+      "sha256": "e8b03dd7ed188e02930ac2dbd7908710bae1e187e0b8702b0c2369a4b78c06f6"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -17412,6 +17532,22 @@
       "path": "tests/test_professor_digital_twin_transition.py",
       "risk": "medium",
       "sha256": "f59b10d56895a3508cd22dd8b86c88885a99c336df73cf5658ee8485da8ce967"
+    },
+    {
+      "audit": {
+        "domain": "professor-fidelity-proxy",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_professor_fidelity_proxy_harness.py",
+      "risk": "medium",
+      "sha256": "8dcc839f1e7a497f1dc32dcca02f879b2497e85e0dfef62111fd8dbcceea495b"
     },
     {
       "audit": {
@@ -17959,6 +18095,22 @@
     },
     {
       "audit": {
+        "domain": "multimodal-evaluation",
+        "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-post-release-technical-closure"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_true_visual_supplement_003.py",
+      "risk": "medium",
+      "sha256": "1178252896375c674485d5b62c33f853116f419d6fac735911928f4b950adaf0"
+    },
+    {
+      "audit": {
         "domain": "verification-correctness",
         "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
         "findings": [],
@@ -18135,8 +18287,8 @@
     }
   ],
   "risk_counts": {
-    "high": 814,
-    "medium": 264
+    "high": 820,
+    "medium": 267
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
