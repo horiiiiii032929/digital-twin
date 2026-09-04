@@ -23,10 +23,18 @@ live, restart, clean-restore, rollback, and restoration checks.
 Selection 004 remains the relative development winner after correcting its
 metric label: answerable factual success is 42.50% versus 26.00%, not the
 overall task rates of 50.00% versus 36.80%. Both arms fail the absolute product
-quality gates. Qualification 005 therefore permits an accurately labelled local
-research demo, not a claim that the grounding problem or sealed benchmark has
-been solved. Its deterministic fast-path journey made zero Luna calls; Luna
-behavior remains bound to immutable confirmation 024.
+quality gates. Qualification 005 therefore supports an accurately labelled
+local research release, not a claim that the grounding problem or sealed
+benchmark has been solved. Its deterministic fast-path journey made zero Luna
+calls; Luna behavior remains bound to immutable confirmation 024.
+
+## Released R1 product
+
+The best evaluated working design is published as
+[Course Digital Twin R1 — Governed Autonomy V2.1](https://github.com/horiiiiii032929/digital-twin/releases/tag/local-r1-governed-v2.1-qualification-005).
+The product decision is `Keep` for the exact local research-release scope. The
+known 10,000+1,000 `No Release` outcome is retained separately as the academic
+factual-grounding decision and limits the claims made about this release.
 
 ## Current audit-safe release boundary
 
@@ -47,8 +55,8 @@ the operational candidate. The later winner-only known 10,000+1,000 regression
 completed as `No Release`: 25.38% fully grounded factual success versus T0's
 44.16%, with severe unsupported releases reduced from 478 to 4. That package is
 now known and immutable. Exact local HTTPS qualification 005 establishes a
-usable local research demo at 43/43 operational checks, but cannot override the
-unfavorable academic grounding result; no same-package tuning or rerun is
+usable local research product at 43/43 operational checks. It does not override
+the unfavorable academic grounding result; no same-package tuning or rerun is
 allowed.
 
 Issue #192 is complete: provider-failure scoring now follows durable trigger
@@ -435,7 +443,7 @@ compensate for a failed development prerequisite.
 | Stage | Outcome | Promotion rule |
 | --- | --- | --- |
 | R0 — Local baseline | Reviewed professor/student UX and a locally qualified deployable package | Already established; retain as rollback evidence |
-| R1 — Hosted release candidate | One immutable revision runs through trusted HTTPS with credentialed roles, durable state, governed sources, monitoring, restore, and rollback | All R1 hard gates pass on the target host |
+| R1 — Local governed research release | One immutable revision runs through local trusted HTTPS with credentialed roles, durable state, governed sources, monitoring, restore, and rollback | Completed at tag `local-r1-governed-v2.1-qualification-005`; factual-quality limitation disclosed |
 | R2 — Invite-only pilot | Approved professors and students complete the core workflows without a critical safety, privacy, grounding, or usability failure | Consent, privacy, supervisor approval, and R1 evidence are complete |
 | R3 — Final project release | Reproducible code, configuration, evaluation evidence, demo, report, and explicit release/no-release decision | Every claim is linked to evidence and limitations |
 
