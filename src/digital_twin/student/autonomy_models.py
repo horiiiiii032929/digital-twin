@@ -228,6 +228,11 @@ class LearnerObservationV2(_Contract):
     release_id: str = Field(min_length=1, max_length=128)
     event_kind: AutonomousEventKind
     concept_ids: list[str] = Field(default_factory=list, max_length=16)
+    # ``concept_ids`` records every course concept that the turn may concern.
+    # A single turn-level assessment must not be copied onto weaker secondary
+    # matches, so new runtime records bind it to an explicit subset.  ``None``
+    # preserves the historical V2.1 meaning for already-persisted records.
+    assessment_concept_ids: list[str] | None = Field(default=None, max_length=16)
     perception: TurnPerceptionV2
     assessment_outcome: AssessmentOutcome = AssessmentOutcome.NOT_ASSESSED
     assessment_confidence: float = Field(default=0, ge=0, le=1)
@@ -241,6 +246,26 @@ class LearnerObservationV2(_Contract):
         if len(value) != len(set(value)):
             raise ValueError("learner observation concept IDs must be unique")
         return value
+
+    @model_validator(mode="after")
+    def assessment_scope_must_be_explicit_and_valid(self) -> "LearnerObservationV2":
+        if self.assessment_concept_ids is None:
+            return self
+        if len(self.assessment_concept_ids) != len(set(self.assessment_concept_ids)):
+            raise ValueError("learner assessment concept IDs must be unique")
+        if not set(self.assessment_concept_ids).issubset(self.concept_ids):
+            raise ValueError("learner assessment concepts must be attributed concepts")
+        if (
+            self.assessment_outcome == AssessmentOutcome.NOT_ASSESSED
+            and self.assessment_concept_ids
+        ):
+            raise ValueError("unassessed observations cannot bind assessment concepts")
+        if (
+            self.assessment_outcome != AssessmentOutcome.NOT_ASSESSED
+            and not self.assessment_concept_ids
+        ):
+            raise ValueError("assessed observations require an assessment concept")
+        return self
 
     @field_validator("evidence_keys")
     @classmethod

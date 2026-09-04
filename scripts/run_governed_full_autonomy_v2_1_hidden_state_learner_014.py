@@ -104,14 +104,20 @@ def build_case(*, persona: LearnerPersona, family: SimulatorFamily, seed: int, d
     )
 
 
-def _manifest(condition: str, *, network_free: bool, code_revision: str) -> AutonomySystemManifestV1:
+def _manifest(
+    condition: str,
+    *,
+    network_free: bool,
+    code_revision: str,
+    fixture_id: str = "hidden-state-learner-v1",
+) -> AutonomySystemManifestV1:
     return AutonomySystemManifestV1(
         system_id=f"actual-product:{condition}",
         flow_id="hidden-state-learner-closed-loop-v1",
         adapter_version=StudentProductAutonomyAdapterV1.adapter_version,
         code_revision=code_revision,
         graph_version="product-runtime",
-        release_profile_sha256=hashlib.sha256(b"hidden-state-learner-v1").hexdigest(),
+        release_profile_sha256=hashlib.sha256(fixture_id.encode("utf-8")).hexdigest(),
         policy_version=1,
         model_bindings={} if network_free else {"engine": "pending-authorization"},
         network_free=network_free,
@@ -128,14 +134,30 @@ async def run_case(
     days: int,
     provider_backed: bool = False,
     code_revision: str = "unknown",
+    concept_cards=HIDDEN_STATE_CONCEPT_CARDS,
+    fixture_id: str = "hidden-state-learner-v1",
 ) -> tuple[HiddenStateRunResult, HiddenStateCaseScoreV1]:
     case = build_case(persona=persona, family=family, seed=seed, days=days)
-    learner = TextRealisingLearnerV1(persona=persona, family=family, seed=seed, cards=HIDDEN_STATE_CONCEPT_CARDS)
+    learner = TextRealisingLearnerV1(
+        persona=persona,
+        family=family,
+        seed=seed,
+        cards=concept_cards,
+    )
     adapter = StudentProductAutonomyAdapterV1(
         condition=condition,
-        manifest=_manifest(condition, network_free=not provider_backed, code_revision=code_revision),
+        manifest=_manifest(
+            condition,
+            network_free=not provider_backed,
+            code_revision=code_revision,
+            fixture_id=fixture_id,
+        ),
         runtime_factory=build_hidden_state_runtime_factory(
-            root / condition / case.case_id, condition, provider_backed=provider_backed
+            root / condition / case.case_id,
+            condition,
+            provider_backed=provider_backed,
+            concept_cards=concept_cards,
+            fixture_id=fixture_id,
         ),
         clock_origin=CLOCK_ORIGIN,
     )
@@ -168,6 +190,10 @@ async def run_program(
     days: int,
     provider_backed: bool,
     resamples: int,
+    program_id: str = PROGRAM_ID,
+    concept_cards=HIDDEN_STATE_CONCEPT_CARDS,
+    fixture_id: str = "hidden-state-learner-v1",
+    contrasts=CONTRASTS,
 ) -> dict:
     output_dir.mkdir(parents=True, exist_ok=True)
     runtime_root = output_dir / "runtime"
@@ -188,14 +214,16 @@ async def run_program(
                             days=days,
                             provider_backed=provider_backed,
                             code_revision=str(code["revision"]),
+                            concept_cards=concept_cards,
+                            fixture_id=fixture_id,
                         )
                         scores.append(score)
                         score_file.write(score.model_dump_json() + "\n")
                         truth_file.write(json.dumps({"condition": condition, **result.truth.to_dict()}, sort_keys=True) + "\n")
                         response_file.write(json.dumps({"condition": condition, **result.response.model_dump(mode="json")}, sort_keys=True) + "\n")
-    summary = summarize_hidden_state_scores(scores, contrasts=CONTRASTS, resamples=resamples)
+    summary = summarize_hidden_state_scores(scores, contrasts=contrasts, resamples=resamples)
     summary["run"] = {
-        "program_id": PROGRAM_ID,
+        "program_id": program_id,
         "code": code,
         "elapsed_seconds": round(time.perf_counter() - started, 2),
         "network": "none" if not provider_backed else "provider",

@@ -20,6 +20,19 @@ cp deploy/local-r1.env.example .env.local-r1
 chmod 600 .env.local-r1
 ```
 
+For the exact evidence-bound R1 composition, copy the separate qualified
+example instead:
+
+```bash
+cp deploy/local-r1.qualified.env.example .env.local-r1
+chmod 600 .env.local-r1
+```
+
+The two files serve different purposes. `local-r1.env.example` remains the
+conservative T1-v1 default; `local-r1.qualified.env.example` pins the exact
+candidate-v3, dominance-gate, Luna H+E1 configuration that must be used for
+release requalification. Neither file contains credentials.
+
 Keep `.env.local-r1` outside Git. `APP_LEARNING_GAP_HMAC_SECRET` must be an
 unpredictable value of at least 32 bytes. The three staging passwords are used
 only by the local bootstrap and acceptance verifier. Leave
@@ -56,8 +69,9 @@ startup therefore rejects this block by design. Keep the committed bounded
 T1-v1/T0 configuration until a fresh architecture comparison selects and binds
 a successor.
 
-The architecture and engine comparisons have now selected the following
-candidate for exact local qualification:
+The architecture and engine comparisons selected the following candidate for
+exact local qualification and it is represented directly by
+`deploy/local-r1.qualified.env.example`:
 
 ```text
 APP_GENERATOR_MODE=deterministic
@@ -70,10 +84,13 @@ APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-fu
 
 The normalized binding record composes the immutable confirmation-024 H+E1
 result with development selection 004 and binds the exact profile hash. It does
-not itself qualify the composed release. Use this block only for the fresh
-local HTTPS qualification 005. Qualification 005 passed 43/43 operational
-checks on revision `cbdfca6`; keep T0 as the rollback because this does not
-create an academic factual-quality pass.
+not itself qualify the composed release. Qualification 006 rechecked the exact
+composition after the multi-concept assessment-scope correction and passed
+43/43 operational checks on revision `7901c9e`, plus desktop/390-pixel browser
+smoke with no critical defect. Keep T0 as the rollback because this does not
+create an academic factual-quality pass. Do not edit explanatory notes inside
+the hash-bound profile; place status updates in this runbook or
+`docs/current-status.md`.
 
 ## Build and start
 

@@ -58,6 +58,11 @@ class DeterministicEvidenceCountBeliefEstimator:
             raise ValueError("belief revision scope differs from its observation")
 
         by_concept = {item.concept_id: item for item in prior.concepts}
+        assessed_concept_ids = set(
+            observation.concept_ids
+            if observation.assessment_concept_ids is None
+            else observation.assessment_concept_ids
+        )
         changed: list[str] = []
         for concept_id in observation.concept_ids:
             current = by_concept.get(
@@ -74,10 +79,13 @@ class DeterministicEvidenceCountBeliefEstimator:
             evidence_keys = list(
                 dict.fromkeys([*current.evidence_keys, *observation.evidence_keys])
             )[-16:]
-            assessed = observation.assessment_outcome != AssessmentOutcome.NOT_ASSESSED
-            correct = observation.assessment_outcome == AssessmentOutcome.CORRECT
-            partial = observation.assessment_outcome == AssessmentOutcome.PARTIAL
-            incorrect = observation.assessment_outcome == AssessmentOutcome.INCORRECT
+            assessed = (
+                concept_id in assessed_concept_ids
+                and observation.assessment_outcome != AssessmentOutcome.NOT_ASSESSED
+            )
+            correct = assessed and observation.assessment_outcome == AssessmentOutcome.CORRECT
+            partial = assessed and observation.assessment_outcome == AssessmentOutcome.PARTIAL
+            incorrect = assessed and observation.assessment_outcome == AssessmentOutcome.INCORRECT
             assessed_count = current.assessed_evidence_count + int(assessed)
             observation_count = current.observation_count + 1
             # Evidence count, not a knowledge-state probability. Two assessed

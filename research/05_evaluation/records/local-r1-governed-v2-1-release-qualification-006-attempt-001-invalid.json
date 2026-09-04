@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-006-attempt-001-invalid",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-006",
+  "date": "2026-09-04",
+  "status": "invalid-execution",
+  "code_revision": "8e61f57ed2a729fd01ec77b3238116adadce784e",
+  "stage_reached": "startup-binding-preflight",
+  "bulk_journey_started": false,
+  "hidden_or_sealed_data_read": false,
+  "provider_usage": {
+    "calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "expected_profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+  "observed_profile_sha256": "a8e306d2b4e418a6cd97b3612fdc611674a97f714ff601beddbede940b568d9d",
+  "failure": {
+    "category": "release-binding-drift",
+    "message": "The API correctly failed closed because documentation-only note edits changed the hash of the frozen selected profile.",
+    "root_cause": "Mutable explanatory notes were edited inside the hash-bound release profile instead of in an external status document.",
+    "correction_boundary": "Restore the exact immutable profile bytes; retain explanatory updates outside the profile; rebuild the images and start a fresh attempt without changing the selected product method or checks."
+  },
+  "image_digests": {
+    "api": "sha256:fdca29e4413d95ff1cf71cf4e1900567af6ee89a3748deeca3a5e4b1a00b0192",
+    "web": "sha256:68669477088419d8b82ba18a957fd4df66b36d749729fa9af0bdd1dbef3875be"
+  },
+  "decision": "Invalid execution; preserve the failed-closed result and permit one binding-only corrective attempt with the immutable profile restored."
+}

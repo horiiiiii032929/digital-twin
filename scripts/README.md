@@ -989,6 +989,21 @@ Current utilities:
   identity checks, zero retries, safe resume, 66 calls maximum, and separate USD
   2/USD 1.5 stage stops. Use package commands ending in
   `nonhuman-evaluation-supplements`.
+- `run_professor_fidelity_proxy_harness.py`: validates and simulates the fresh
+  12-case, flow-independent C0-C3 proxy packet. It keeps deterministic factual,
+  citation, safety, and boundary gates separate from blinded multi-LLM teaching
+  ratings. Its output is explicitly synthetic proxy evidence and cannot become
+  a real-professor fidelity reference without professor approval. Use
+  `npm run verify:professor-fidelity-proxy-harness` and
+  `npm run simulate:professor-fidelity-proxy-harness`.
+- `run_true_visual_supplement_003.py`: provides the method-level successor to
+  the two immutable invalid visual attempts. It preserves question-independent
+  visual descriptions and original-region citation authority, but normalizes
+  whitespace and removes only exact case-insensitive duplicate semantic-list
+  values per asset while accounting for every removal. The 30-asset/60-case
+  run remains provider-unauthorized and can only support a development
+  `Go Deeper` decision. Use package commands ending in
+  `true-visual-supplement-003`.
 - `run_course_digital_twin_evaluation_program.py`: owns the finite factual,
   visual, synthetic-profile, and autonomous-tutoring evaluation dispatcher.
   Historical programs 002 and 003 are immutable invalid executions. Program

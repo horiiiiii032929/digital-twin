@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-006",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-006",
+  "date": "2026-09-04",
+  "status": "completed-keep",
+  "code_revision": "7901c9e8b19aa4ba9ccc5cc2dfa8efc55008c491",
+  "supersedes_for_exact_composition": "local-r1-governed-v2-1-release-qualification-005",
+  "corrective_predecessor": "local-r1-governed-v2-1-release-qualification-006-attempt-001-invalid",
+  "decision": "Keep for a local research demo; academic factual grounding remains below its absolute release threshold.",
+  "runtime": {
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "generator_mode": "deterministic",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_version": "v2.1-floor-004-h-e1",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-release-binding-correction-001",
+    "multi_concept_confirmation": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+    "t0_rollback_available": true
+  },
+  "results": {
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "clean_restore": "6/6",
+    "t0_rollback": "3/3",
+    "governed_v2_1_restoration": "3/3",
+    "total_machine_checks": "43/43",
+    "desktop_render": "passed",
+    "mobile_390_render": "passed",
+    "keyboard_order_and_accessible_names": "passed",
+    "critical_browser_defects": 0
+  },
+  "browser_method": {
+    "actual_https_desktop": "Chrome 152 headless with the local private CA accepted for this local test",
+    "mobile_and_keyboard": "Codex in-app browser at an exact 390x844 viewport against the identical Vite frontend; Email, Password, and Sign in were labelled and keyboard ordered",
+    "mechanical_design_detector_findings": 0,
+    "playwright_cli": "unavailable because package acquisition did not complete; no product check was weakened",
+    "limitation": "The in-app browser does not trust the private local CA, so the 390-pixel static layout check used the identical development frontend while the authenticated workflow was independently exercised by the CA-pinned HTTPS verifier."
+  },
+  "provider_usage": {
+    "autonomy_planner_calls": 0,
+    "generator_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "image_digests": {
+    "api": "sha256:dc56998993a44add29bc637559a8ace7662d111bc3d054f9825518785839e693",
+    "web": "sha256:de11eeef4aff10c3a0dc6ce7d976524e533ee8178a75cebe0d6dbf00e9e1c6b5"
+  },
+  "artifact_hashes": {
+    "live_journey_sha256": "42c294e44fb19fa9f19b6a9ef4c013bad652431c76444f344244194914a4d0bb",
+    "restart_sha256": "0502883176e42fe36e93b66a4f2a841e8c0f5eb8ae807f8901c475cc8a821616",
+    "clean_restore_sha256": "0502883176e42fe36e93b66a4f2a841e8c0f5eb8ae807f8901c475cc8a821616",
+    "t0_rollback_sha256": "8c484c324b6a829673ad3a0038007dc2a037c9968dc9523a30f858b6f8f8a1a5",
+    "v2_restore_sha256": "92b7809630878086e90b45b34ed0089ba87aff4f00dc1308fc1f94648c7859c9",
+    "runtime_backup_sha256": "af81e11aab5165fe228dec531a86887d992f3e421453c8637c433824f0cbe34a"
+  },
+  "private_data_used": false,
+  "release_scope": "qualified local research demo on the development Mac through internal-CA HTTPS",
+  "limitations": [
+    "The selected evidence gate is the best measured relative development gate but remains below the absolute factual-quality threshold.",
+    "The live journey exercised deterministic fast paths and made zero Luna planner calls; exact Luna behavior remains supported by the immutable confirmation-024 evidence.",
+    "The known 10,000+1,000 package remained immutable and was not read, rerun, or rescored.",
+    "True visual quality remains unmeasured for successor 003.",
+    "The professor-fidelity packet is a synthetic LLM-proxy harness and does not establish real-professor fidelity.",
+    "No real-student usability, learning improvement, durable hosting, or broad accessibility claim is established."
+  ]
+}

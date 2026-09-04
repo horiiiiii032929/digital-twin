@@ -6,6 +6,57 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Post-release multi-concept correction
+
+The final professor-level audit reproduced one product defect left open by
+hidden-state extension 014: the live T1-v2 graph attributed a turn to as many
+as three weak lexical concept matches and copied one assessment outcome across
+all of them. A correct primary-concept attempt could therefore be stored as
+`partial` and fabricate assessed evidence for secondary concepts.
+
+Revision `f4c2449` separates broad turn attribution from assessment scope. New
+observations bind an assessment only to one unambiguous primary concept; tied
+matches remain unassessed, and historical V2.1 records preserve their original
+meaning. Fresh confirmation 025 then drove 72 source- and seed-disjoint
+synthetic learner histories through the actual T1-v2 services for 30 virtual
+days. Reactive and autonomous modes each reached 100% concept attribution,
+assessment agreement, and attempt recognition, with zero quiet-hour,
+frequency, cooldown, or provider-use violations. The correction is `Keep` for
+local requalification.
+
+This does not upgrade the academic factual result or establish real learning.
+The autonomous arm's count-based next-outcome AUROC was 0.466 and 32.9% of
+interventions were classified as wasted by the simulator. The known
+10,000+1,000 package remains immutable and was not read, rerun, or rescored.
+
+The exact non-secret release selectors are now captured separately in
+`deploy/local-r1.qualified.env.example`; the conservative
+`deploy/local-r1.env.example` remains the safe T1-v1 default. Candidate-v3 now
+distinguishes mandatory runtime policy/citation safeguards from independent
+component-selection evidence instead of treating an active safeguard as a
+comparative quality result.
+
+Two post-release evidence successors are build-complete and make zero provider
+calls in this checkpoint. `professor-fidelity-proxy-harness-001` supplies a
+12-case blinded C0-C3 packet with deterministic hard gates and a minimum
+two-LLM advisory review contract; it explicitly cannot establish real-professor
+fidelity without professor approval. `true-visual-supplement-003` preserves the
+30-asset/60-case question-independent visual design and original-region
+authority while deterministically canonicalizing duplicate semantic-list
+values that invalidated attempt 002. Its paid execution remains unauthorized,
+so no visual quality result is claimed yet.
+
+Exact local requalification 006 is now `completed-keep` after the
+multi-concept correction: 25/25 live HTTPS, 6/6 restart, 6/6 clean restore,
+3/3 T0 rollback, and 3/3 governed V2.1 restoration checks passed. Desktop and
+exact 390-pixel browser smoke found no critical defect, and keyboard focus
+advanced Email → Password → Sign in. Attempt 001 is retained as invalid because
+the API correctly rejected a documentation-only edit that changed the frozen
+profile hash. The corrected run restored the immutable profile bytes and did
+not change the selected method or thresholds. The result qualifies a local
+research demo only; the grounding floor and unexecuted true-visual/fidelity
+claim boundaries remain unchanged.
+
 ## Release-binding correctness checkpoint
 
 The end-of-project correctness audit found two release-relevant defects before

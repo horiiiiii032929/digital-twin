@@ -30,6 +30,7 @@ from src.digital_twin.student.autonomy_models import (
 from src.digital_twin.student.tutoring_graph import (
     DeterministicTurnInterpreter,
     _assess_attempt,
+    _assessment_concepts,
     _attribute_concepts,
 )
 
@@ -93,7 +94,9 @@ def test_learner_text_has_the_intended_lexical_properties() -> None:
         assert signals.attempt_present
         concept_ids = _attribute_concepts(utterance.text, domain)
         assert concept_ids[0] == utterance.concept_id
-        outcome, _ = _assess_attempt(utterance.text, concept_ids[:1], domain)
+        assessment_concept_ids = _assessment_concepts(utterance.text, domain)
+        assert assessment_concept_ids == [utterance.concept_id]
+        outcome, _ = _assess_attempt(utterance.text, assessment_concept_ids, domain)
         if utterance.hidden_correct:
             assert outcome is AssessmentOutcome.CORRECT
             seen_correct = True
@@ -104,6 +107,22 @@ def test_learner_text_has_the_intended_lexical_properties() -> None:
     misconception = learner.misconception_statement(HIDDEN_STATE_CONCEPT_CARDS[1].concept_id)
     assert interpreter.interpret(misconception.text).misconception_observed
     assert _attribute_concepts(misconception.text, domain)[0] == HIDDEN_STATE_CONCEPT_CARDS[1].concept_id
+
+
+def test_runtime_assessment_scope_does_not_dilute_a_correct_multi_concept_turn() -> None:
+    domain = _domain_model()
+    message = (
+        "My attempt on lease ordering: Lease ordering grants each replica a bounded "
+        "lease token so updates apply in lease sequence, expired leases are renewed "
+        "before commit, and stale holders are fenced by the sequence number."
+    )
+
+    attributed = _attribute_concepts(message, domain)
+    assessed = _assessment_concepts(message, domain)
+
+    assert len(attributed) > 1
+    assert assessed == ["concept-lease-ordering"]
+    assert _assess_attempt(message, assessed, domain)[0] is AssessmentOutcome.CORRECT
 
 
 @pytest.mark.parametrize("condition", ["t0-grounded-control", "t1-v2-autonomous"])

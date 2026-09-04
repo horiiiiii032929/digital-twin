@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "professor-fidelity-proxy-harness-001",
+  "status": "built-provider-unauthorized",
+  "owner_issue": 24,
+  "dataset_id": "professor-fidelity-proxy-packet-001",
+  "conditions": [
+    {"condition_id": "C0", "evidence": "none", "policy": "generic"},
+    {"condition_id": "C1", "evidence": "oracle", "policy": "generic"},
+    {"condition_id": "C2", "evidence": "oracle", "policy": "synthetic-professor-profile-v1"},
+    {"condition_id": "C3", "evidence": "selected-product-retrieval", "policy": "synthetic-professor-profile-v1"}
+  ],
+  "fixed_controls": ["question", "generator", "decoding", "output_schema", "C1-C2 evidence"],
+  "hard_gate_authority": "deterministic",
+  "llm_review_authority": "advisory",
+  "review_design": {
+    "blinded": true,
+    "condition_labels_hidden": true,
+    "response_order_seed": 42024,
+    "reviewer_count_min": 2,
+    "pairwise_contrasts": ["C1_vs_C0", "C2_vs_C1", "C3_vs_C2", "C3_vs_C0"],
+    "dimensions": ["teaching_style", "explanation_depth", "example_policy", "misconception_handling", "academic_integrity"],
+    "rating_scale": [1, 2, 3, 4, 5]
+  },
+  "decision_boundary": {
+    "synthetic_proxy_result_allowed": true,
+    "real_professor_fidelity_claim_allowed": false,
+    "professor_approval_required_for_reference": true,
+    "c3_is_diagnostic_while_grounding_is_below_absolute_gate": true
+  },
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "private_data_authorized": false
+}
