@@ -228,6 +228,23 @@ def _execution_authorized() -> bool:
     )
 
 
+def _source_title(asset: dict[str, Any]) -> str:
+    """Return a deterministic display title without extending frozen source gold."""
+
+    explicit = asset.get("title")
+    if isinstance(explicit, str) and explicit.strip():
+        return explicit.strip()
+    source_path = asset.get("source_document_path")
+    if isinstance(source_path, str) and source_path.strip():
+        stem = Path(source_path).stem.replace("_", " ").replace("-", " ").strip()
+        if stem:
+            return stem.title()
+    source_artifact_id = asset.get("source_artifact_id")
+    if isinstance(source_artifact_id, str) and source_artifact_id.strip():
+        return source_artifact_id.strip()
+    raise VisualProductCheckpointError("visual source has no display-title lineage")
+
+
 def _chunks_by_course(sources: dict[str, Any]) -> dict[str, list[DocumentChunk]]:
     output: dict[str, list[DocumentChunk]] = {}
     kind_map = {
@@ -258,7 +275,7 @@ def _chunks_by_course(sources: dict[str, Any]) -> dict[str, list[DocumentChunk]]
             retrieval_allowed=True,
             display_allowed=True,
             metadata={
-                "title": asset["title"],
+                "title": _source_title(asset),
                 "course_id": asset["course_id"],
                 "asset_id": asset["asset_id"],
                 "semantic_atom_version": "source-semantic-evidence-atom-v1",

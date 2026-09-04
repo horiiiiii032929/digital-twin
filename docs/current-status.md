@@ -34,6 +34,13 @@ execution under the Jina 10M-token and OpenAI USD 3 ceilings. The known
 10,000+1,000 package has not been read, rerun, or rescored. A passing proxy
 remains `Go Deeper` and cannot prove real-professor fidelity.
 
+The first authorized execution at revision `e3c15d7` was operationally invalid
+before any provider call because the runner required an optional source display
+`title`. Zero responses were persisted, hidden gold remained closed, and cost
+was USD 0. The invalid evidence is registered. The sole allowed harness
+correction derives that non-authoritative title from existing source-path
+lineage; no case, gold, method, gate, provider, or budget changes.
+
 ## Post-release multi-concept correction
 
 The final professor-level audit reproduced one product defect left open by
