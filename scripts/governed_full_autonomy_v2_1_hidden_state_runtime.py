@@ -102,7 +102,14 @@ HIDDEN_STATE_CONCEPT_CARDS: tuple[ConceptCardV1, ...] = (
 )
 
 
-def _install_multi_concept_release(repository, fixture, *, now: datetime):
+def _install_multi_concept_release(
+    repository,
+    fixture,
+    *,
+    now: datetime,
+    concept_cards: tuple[ConceptCardV1, ...] = HIDDEN_STATE_CONCEPT_CARDS,
+    fixture_id: str = "hidden-state-learner-v1",
+):
     profiles = TeachingProfileService(repository)
     draft = profiles.create_draft(
         fixture.professor_id,
@@ -132,8 +139,8 @@ def _install_multi_concept_release(repository, fixture, *, now: datetime):
     chunks = []
     concepts = []
     objectives = []
-    for index, card in enumerate(HIDDEN_STATE_CONCEPT_CARDS, start=1):
-        source_id = f"hidden-source-{index:02d}"
+    for index, card in enumerate(concept_cards, start=1):
+        source_id = f"{fixture_id}-source-{index:02d}"
         sha = hashlib.sha256(card.description.encode("utf-8")).hexdigest()
         chunk = template.model_copy(
             update={
@@ -168,7 +175,7 @@ def _install_multi_concept_release(repository, fixture, *, now: datetime):
                 label=card.label,
                 description=card.description,
                 prerequisite_concept_ids=(
-                    [HIDDEN_STATE_CONCEPT_CARDS[index - 2].concept_id] if index > 1 else []
+                    [concept_cards[index - 2].concept_id] if index > 1 else []
                 ),
                 canonical_ranges=[
                     CanonicalSourceRangeV1(
@@ -191,7 +198,7 @@ def _install_multi_concept_release(repository, fixture, *, now: datetime):
         )
     release = current.model_copy(
         update={
-            "id": "release-hidden-state-learner-v1",
+            "id": f"release-{fixture_id}",
             "status": StudentReleaseStatus.DRAFT,
             "chunks": chunks,
             "teaching_profile_id": approved.profile_id,
@@ -204,7 +211,7 @@ def _install_multi_concept_release(repository, fixture, *, now: datetime):
     repository.publish_release(release.id)
     repository.save_course_domain_model(
         CourseDomainModelV1(
-            domain_model_id="domain-hidden-state-learner-v1",
+            domain_model_id=f"domain-{fixture_id}",
             course_id=fixture.course_a_id,
             release_id=release.id,
             release_sha256=hashlib.sha256(release.model_dump_json().encode("utf-8")).hexdigest(),
@@ -214,7 +221,7 @@ def _install_multi_concept_release(repository, fixture, *, now: datetime):
             approved_by=fixture.professor_id,
         )
     )
-    return release, [card.objective for card in HIDDEN_STATE_CONCEPT_CARDS]
+    return release, [card.objective for card in concept_cards]
 
 
 def build_hidden_state_runtime_factory(
@@ -224,6 +231,8 @@ def build_hidden_state_runtime_factory(
     provider_backed: bool,
     maximum_case_cost_usd: float = 1.0,
     engine_binding: ProductEngineBindingV1 | None = None,
+    concept_cards: tuple[ConceptCardV1, ...] = HIDDEN_STATE_CONCEPT_CARDS,
+    fixture_id: str = "hidden-state-learner-v1",
 ):
     """Per-case factory for the hidden-state learner extension (multi-concept)."""
 
@@ -240,9 +249,15 @@ def build_hidden_state_runtime_factory(
             repository,
             profile_id=str(profile["profile_id"]),
             profile_version=str(profile["profile_version"]),
-            source_namespace=f"hidden-state-learner-{case.case_id}",
+            source_namespace=f"{fixture_id}-{case.case_id}",
         )
-        release, objectives = _install_multi_concept_release(repository, fixture, now=clock.now())
+        release, objectives = _install_multi_concept_release(
+            repository,
+            fixture,
+            now=clock.now(),
+            concept_cards=concept_cards,
+            fixture_id=fixture_id,
+        )
         repository.save_course_tutoring_runtime_profile(
             CourseTutoringRuntimeProfileV1(
                 course_id=fixture.course_a_id,

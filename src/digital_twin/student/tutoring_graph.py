@@ -1061,6 +1061,7 @@ class GovernedReactiveTutoringGraphV2:
             graph_input.student_message,
             graph_input.domain_model,
         )
+        assessment_concept_ids: list[str] = []
         source_turn_key = hashlib.sha256(
             f"{graph_input.release.id}:{state['event_id']}".encode("utf-8")
         ).hexdigest()
@@ -1070,11 +1071,24 @@ class GovernedReactiveTutoringGraphV2:
             assessment_outcome == AssessmentOutcome.NOT_ASSESSED
             and perception.attempt_present
         ):
-            assessment_outcome, assessment_confidence = _assess_attempt(
+            assessment_concept_ids = _assessment_concepts(
                 graph_input.student_message,
-                concept_ids,
                 graph_input.domain_model,
             )
+            if assessment_concept_ids:
+                assessment_outcome, assessment_confidence = _assess_attempt(
+                    graph_input.student_message,
+                    assessment_concept_ids,
+                    graph_input.domain_model,
+                )
+        elif assessment_outcome != AssessmentOutcome.NOT_ASSESSED:
+            assessment_concept_ids = _assessment_concepts(
+                graph_input.student_message,
+                graph_input.domain_model,
+            )
+            if not assessment_concept_ids:
+                assessment_outcome = AssessmentOutcome.NOT_ASSESSED
+                assessment_confidence = 0
         observation = LearnerObservationV2(
             observation_id=state["event_id"],
             learner_key=graph_input.learner_key,
@@ -1082,6 +1096,7 @@ class GovernedReactiveTutoringGraphV2:
             release_id=graph_input.conversation.release_id,
             event_kind="student-message",
             concept_ids=concept_ids,
+            assessment_concept_ids=assessment_concept_ids,
             perception=perception,
             assessment_outcome=assessment_outcome,
             assessment_confidence=assessment_confidence,
@@ -1628,20 +1643,62 @@ def _attribute_concepts(
 ) -> list[str]:
     """Map a turn to approved concepts without allowing a model to invent IDs."""
 
+    ranked = _rank_concepts(message, domain_model)
+    selected = [concept_id for score, concept_id in ranked if score > 0]
+    if not selected:
+        selected = list(domain_model.objectives[0].concept_ids)
+    return selected[:3]
+
+
+def _assessment_concepts(
+    message: str,
+    domain_model: CourseDomainModelV1,
+) -> list[str]:
+    """Return one unambiguous concept for turn-level attempt assessment.
+
+    The learner model currently stores one assessment outcome per observation.
+    Applying that outcome to several weak lexical matches fabricates evidence for
+    concepts the learner did not attempt.  Tied top matches are therefore left
+    unassessed until a concept-scoped assessment contract is available.
+    """
+
+    ranked = _rank_concepts(message, domain_model)
+    if not ranked or ranked[0][0] <= 0:
+        return []
+    if len(ranked) > 1 and ranked[1][0] == ranked[0][0]:
+        return []
+    return [ranked[0][1]]
+
+
+def _rank_concepts(
+    message: str,
+    domain_model: CourseDomainModelV1,
+) -> list[tuple[int, str]]:
+    normalized_message = " ".join(
+        re.findall(r"[a-z0-9]+", message.casefold().replace("_", " ").replace("-", " "))
+    )
     tokens = set(re.findall(r"[a-z0-9][a-z0-9_-]+", message.casefold()))
     ranked: list[tuple[int, str]] = []
     for concept in domain_model.concepts:
+        normalized_label = " ".join(
+            re.findall(
+                r"[a-z0-9]+",
+                concept.label.casefold().replace("_", " ").replace("-", " "),
+            )
+        )
         concept_tokens = set(
             re.findall(
                 r"[a-z0-9][a-z0-9_-]+",
                 f"{concept.label} {concept.description}".casefold(),
             )
         )
-        ranked.append((len(tokens & concept_tokens), concept.concept_id))
-    selected = [concept_id for score, concept_id in sorted(ranked, reverse=True) if score > 0]
-    if not selected:
-        selected = list(domain_model.objectives[0].concept_ids)
-    return selected[:3]
+        # An explicit approved concept label is stronger evidence than generic
+        # vocabulary shared by several concept descriptions.
+        label_bonus = (
+            100 if normalized_label and normalized_label in normalized_message else 0
+        )
+        ranked.append((label_bonus + len(tokens & concept_tokens), concept.concept_id))
+    return sorted(ranked, key=lambda item: (-item[0], item[1]))
 
 
 def _assess_attempt(

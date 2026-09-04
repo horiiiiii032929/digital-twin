@@ -101,6 +101,10 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # This integration smoke drives only deterministic local services over
     # synthetic data. It has no provider, paid, execute, or held-out mode.
     "run_governed_full_autonomy_v2_1_actual_product_smoke.py",
+    # Fresh synthetic multi-concept confirmation. It exposes validation and a
+    # deterministic product simulation only; no provider or held-out path is
+    # implemented.
+    "run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
     "run_ingestion_worker.py",
     # This successor-study simulation drives only synthetic hidden-state
     # learners through pure-Python estimators and timing policies. It has no

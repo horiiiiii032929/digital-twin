@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0.0",
+  "program_id": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+  "status": "frozen-pending-network-free-execution",
+  "issue": 203,
+  "predecessor": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+  "decision_question": "Does the corrected actual T1-v2 runtime assess an attempted explanation only against its unambiguous primary concept without copying that outcome to weaker secondary matches?",
+  "prediction": "Fresh multi-concept turns will reach at least 0.95 attribution accuracy and assessment agreement in reactive and autonomous T1-v2, with no timing, duplicate, restart, or provider-use violations.",
+  "runner": "scripts/run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+  "conditions": ["t1-v2-reactive", "t1-v2-autonomous"],
+  "dataset": {
+    "kind": "fresh-synthetic-hidden-state-learners-closed-loop",
+    "concepts": 6,
+    "source_overlap_with_014": 0,
+    "families": ["bkt-like", "logistic-like"],
+    "personas": ["fast-learner", "slow-learner", "high-forgetting", "misconception-prone", "answer-seeking", "low-receptivity"],
+    "seeds": [3101, 3102, 3103],
+    "seed_overlap_with_014": 0,
+    "days": 30,
+    "cases": 72
+  },
+  "hard_gates": {
+    "attribution_accuracy_each_condition": ">=0.95",
+    "assessment_agreement_each_condition": ">=0.95",
+    "attempts_recognised_each_condition": "1.0",
+    "quiet_hour_violations": 0,
+    "frequency_violations": 0,
+    "cooldown_violations": 0,
+    "provider_calls": 0
+  },
+  "decision": {
+    "completed-keep": "The multi-concept correction is eligible for local release requalification.",
+    "completed-refine": "Preserve the valid failure and do not qualify the corrected release.",
+    "invalid-execution": "Only a demonstrated harness, hash, or ledger defect permits one correction."
+  },
+  "statistics": "Paired percentile bootstrap by simulator family, persona, and seed with 1000 resamples.",
+  "boundaries": {
+    "network": "none",
+    "provider_calls": 0,
+    "private_data": "none",
+    "known_10000_package_read": false,
+    "claims": "Synthetic multi-concept assessment and operational behavior only; no real learning, usability, or professor-fidelity claim."
+  }
+}

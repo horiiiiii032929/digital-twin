@@ -1269,6 +1269,60 @@ def test_v2_belief_revision_uses_assessed_evidence_counts_only():
     assert "mastery" not in attribution.model_dump()
 
 
+def test_v2_belief_revision_does_not_copy_assessment_to_secondary_concepts():
+    estimator = DeterministicEvidenceCountBeliefEstimator()
+    learner_key = "b" * 64
+    prior = estimator.initial_state(
+        learner_key=learner_key,
+        course_id="course-a",
+        release_id="release-a",
+    )
+    observation = LearnerObservationV2(
+        observation_id="observation-multi-concept",
+        learner_key=learner_key,
+        course_id="course-a",
+        release_id="release-a",
+        event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+        concept_ids=["lease-ordering", "snapshot-isolation"],
+        assessment_concept_ids=["lease-ordering"],
+        perception=TurnPerceptionV2(
+            event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+            request_type="attempt",
+            attempt_present=True,
+        ),
+        assessment_outcome=AssessmentOutcome.CORRECT,
+        assessment_confidence=0.8,
+    )
+
+    revised, _ = estimator.revise(prior, observation)
+
+    by_concept = {item.concept_id: item for item in revised.concepts}
+    assert by_concept["lease-ordering"].correct_evidence_count == 1
+    assert by_concept["lease-ordering"].assessed_evidence_count == 1
+    assert by_concept["snapshot-isolation"].observation_count == 1
+    assert by_concept["snapshot-isolation"].assessed_evidence_count == 0
+
+
+def test_v2_observation_rejects_an_assessment_without_a_bound_concept():
+    with pytest.raises(ValueError, match="require an assessment concept"):
+        LearnerObservationV2(
+            observation_id="observation-unbound-assessment",
+            learner_key="c" * 64,
+            course_id="course-a",
+            release_id="release-a",
+            event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+            concept_ids=["lease-ordering", "snapshot-isolation"],
+            assessment_concept_ids=[],
+            perception=TurnPerceptionV2(
+                event_kind=AutonomousEventKind.STUDENT_MESSAGE,
+                request_type="attempt",
+                attempt_present=True,
+            ),
+            assessment_outcome=AssessmentOutcome.CORRECT,
+            assessment_confidence=0.8,
+        )
+
+
 def test_release_domain_model_is_immutable(tmp_path):
     repository, _, _, release, _ = _autonomy_fixture(tmp_path)
     stored = repository.get_course_domain_model(release.id)

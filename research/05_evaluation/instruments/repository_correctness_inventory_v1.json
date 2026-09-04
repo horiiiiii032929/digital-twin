@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1075
+    "audited": 1078
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 282,
+    "active_or_unclassified_tooling": 283,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 9,
-    "evaluation_configuration": 282,
+    "evaluation_configuration": 283,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 249
+    "verification": 250
   },
-  "file_count": 1075,
+  "file_count": 1078,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "403e6893ccb5a42c2b06263cbcdb6da6f727d5b74d7750a2fefc20d83c606716",
+  "record_sha256": "5fe1cfcfeda188c74ebacb53fa66072f8ad36bbdb8bbd9a9decfe07b91c11022",
   "records": [
     {
       "audit": {
@@ -1427,7 +1427,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "0a563f4d0e973519c65cad1bca6a39f6e00dd70f0dc3d7771cb888009199c115"
+      "sha256": "b924cfc92cc93101ef0246682fb686575ea97a780f36dd9fca341908b2f8f130"
     },
     {
       "audit": {
@@ -4791,6 +4791,22 @@
     },
     {
       "audit": {
+        "domain": "post-release-multi-concept-confirmation",
+        "evidence": "Prospective instrument review verifies fresh concepts and seeds, two actual T1-v2 conditions, 30 virtual days, fixed hard gates, network-free execution, and explicit synthetic-only claim boundaries.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "Codex final technical closure audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/governed_full_autonomy_v2_1_multi_concept_confirmation_025.json",
+      "risk": "high",
+      "sha256": "bfc2b35df2706eb14a220e0573de4cb676de55faf8974c8dbaa62b06fb438dd9"
+    },
+    {
+      "audit": {
         "domain": "persona-robust-fresh-confirmation",
         "evidence": "Prospective instrument review verifies source-disjoint inputs, selected architecture and engine, exact pricing and identity checks, registered hard gates, bounded calls/cost, immutable progression, and explicit external-validity limitations.",
         "findings": [],
@@ -8043,7 +8059,7 @@
       "package_commands": [],
       "path": "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py",
       "risk": "high",
-      "sha256": "3e65b3545c8cf377b4ca2fd91d0092d1b00ed11fbfaf0fbbfefd407e9706cade"
+      "sha256": "b5fe89fb86208f36099d16d07231ea2bcf1aeea1c8e772393430f5fc94f65e75"
     },
     {
       "audit": {
@@ -10224,7 +10240,27 @@
       "package_commands": [],
       "path": "scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py",
       "risk": "high",
-      "sha256": "0eb7b4f461ef1ac40cf587befc8439386d496f88744ce3a7a70a1dd560b62824"
+      "sha256": "a1e017e68af99de6ec53fd1d29aa211717f34079073435138932668262149af4"
+    },
+    {
+      "audit": {
+        "domain": "post-release-multi-concept-confirmation",
+        "evidence": "Manual runner review verifies exclusive output creation, zero provider path, fresh fixture binding, exact case count, finite Keep/Refine gates, and reuse of the public flow-independent product adapter.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "Codex final technical closure audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "simulate:multi-concept-confirmation-025",
+        "smoke:multi-concept-confirmation-025",
+        "verify:multi-concept-confirmation-025"
+      ],
+      "path": "scripts/run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+      "risk": "high",
+      "sha256": "fbf2d5f2a8a7b221b580a319c33bfa9e38a562e86066af0a113bb37948ddeb02"
     },
     {
       "audit": {
@@ -11346,7 +11382,7 @@
     {
       "audit": {
         "domain": "repository-execution-freeze",
-        "evidence": "Freeze review classifies 021 and the persona-wording requirements builder as network-free builders while retaining guarded provider and evaluation runners.",
+        "evidence": "Freeze review classifies 021, the persona-wording requirements builder, and confirmation 025's synthetic network-free runner as non-provider entrypoints while retaining guarded provider and held-out runners.",
         "findings": [],
         "reviewed_at": "2026-09-04",
         "reviewer": "codex-primary-endgame-correctness-audit"
@@ -11359,7 +11395,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "87b07e6f43bed0fff18784f2cc3927024c6fb3340efd154046f753c156d00e38"
+      "sha256": "d551aa5ffd49c942398c2b74dbf761854ca1642ee7aca11810491f05cc573f63"
     },
     {
       "audit": {
@@ -13807,7 +13843,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/autonomy_models.py",
       "risk": "high",
-      "sha256": "0b50cd599c9c08a9a05d58fba83c1e9c887289a37ef26f0f089d9842ed014575"
+      "sha256": "231115ee7b48812c916bc8b61d4ff9c086e4747e1ce9a09bc5e08c0a7ebca3a5"
     },
     {
       "audit": {
@@ -13887,7 +13923,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/learner_belief.py",
       "risk": "high",
-      "sha256": "7ff67977d1ead9f89f5fa55f4461e6d4bd25bdc15d4dbd576d439031f4f953a4"
+      "sha256": "332e20eb602db11ffa2aa99980e72827b8e5b8c10f1be7a9e9cdb820abbbf12f"
     },
     {
       "audit": {
@@ -14063,7 +14099,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "b5310e31412810e239d6e8bbb83e0214182f6aa5bd7e9c71c396452f1c17c239"
+      "sha256": "d1c31f3f5568db35dd6ca8302462be36d155359ffcd2be476b40937b87be8642"
     },
     {
       "audit": {
@@ -14367,7 +14403,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "risk": "medium",
-      "sha256": "bc15dbf9c9ed4ceaa6da5be7103112010cfcf380b078abdf3172085849333ee9"
+      "sha256": "f0fac2fcf9d93ff5ff9119a5b1438127ba7eb6bbbb20e4e9efdc17b1fa453ba9"
     },
     {
       "audit": {
@@ -14399,7 +14435,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_hidden_state_learner_extension.py",
       "risk": "medium",
-      "sha256": "5b2262d3d7167315bfcf4e4dacd5869a25171b5dbbb3b6cda236869ee02513b2"
+      "sha256": "6da3984e141c7126b63f5c13b051ff125b474a6799d44c562d14d25155bf9aff"
     },
     {
       "audit": {
@@ -17091,6 +17127,22 @@
     },
     {
       "audit": {
+        "domain": "post-release-multi-concept-confirmation",
+        "evidence": "Focused tests cover fresh design identity, finite decision gates, real-product smoke execution, and exclusive-output protection.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "Codex final technical closure audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+      "risk": "medium",
+      "sha256": "21d10679d605ecf2ca3eaa4042ce4df5c0eb7374cd4ca90e68e41dcb632ab2d0"
+    },
+    {
+      "audit": {
         "domain": "persona-robust-fresh-confirmation",
         "evidence": "Focused tests verify selected-condition bindings, exact distributions, fresh source identities, absence of hidden gold, autonomous canary coverage, and provider execution blocked before authorization.",
         "findings": [],
@@ -18083,8 +18135,8 @@
     }
   ],
   "risk_counts": {
-    "high": 812,
-    "medium": 263
+    "high": 814,
+    "medium": 264
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
