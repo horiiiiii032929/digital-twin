@@ -5,6 +5,7 @@ colors:
   ink: "#202123"
   accent: "#5b5bd6"
   accent-soft: "#eeeeff"
+  selection: "#d5e0fb"
   canvas: "#ffffff"
   shell: "#f7f7f8"
   subtle: "#f0f0f2"
@@ -114,6 +115,7 @@ iris marks selection and focus; semantic colors are reserved for real states.
 
 - **Workspace Ink** (#202123): Primary text and decisive actions.
 - **Context Iris** (#5b5bd6): Selected navigation, focus, and current AI context.
+- **Selection Iris** (#d5e0fb): Native text selection without weakening legibility.
 
 ### Neutral
 

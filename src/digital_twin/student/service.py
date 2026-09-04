@@ -16,7 +16,6 @@ from src.digital_twin.generation import (
     citation_matches_chunk,
 )
 from src.digital_twin.grounding import (
-    FallbackRetriever,
     RetrievalIndexError,
     RetrievalIndexStoreV1,
     build_retrieval_index_binding,
@@ -90,6 +89,8 @@ from src.digital_twin.student.tutoring_graph import (
     retrieval_boundary_intent,
     initial_learner_state,
 )
+
+
 class StudentWorkflowError(ValueError):
     def __init__(self, code: str, message: str) -> None:
         super().__init__(message)
@@ -121,6 +122,8 @@ class StudentTutoringService:
             [Sequence[DocumentChunk], Mapping[str, int]], Retriever
         ]
         | None = None,
+        retriever_decorator: Callable[[Retriever, DigitalTwinRelease], Retriever]
+        | None = None,
         clock: UtcClock | None = None,
     ) -> None:
         self.repository = repository
@@ -141,6 +144,7 @@ class StudentTutoringService:
         self.retrieval_index_chunker_id = retrieval_index_chunker_id
         self.retrieval_index_chunker_version = retrieval_index_chunker_version
         self.retriever_factory = retriever_factory
+        self.retriever_decorator = retriever_decorator
         self.learning_gap_pseudonymizer = learning_gap_pseudonymizer
         self.learning_gap_policy = learning_gap_policy or LearningGapPrivacyPolicyV1()
         self.autonomy_goal_manager = (
@@ -369,8 +373,7 @@ class StudentTutoringService:
                 graph_kwargs = {
                     "event_id": hashlib.sha256(
                         (
-                            f"reactive-event:{conversation.id}:"
-                            f"{client_request_id}"
+                            f"reactive-event:{conversation.id}:{client_request_id}"
                         ).encode("utf-8")
                     ).hexdigest(),
                     "learner_key": learner_key,
@@ -501,18 +504,20 @@ class StudentTutoringService:
             observed_at=now,
             tutoring_mode=tutoring_mode,
         )
-        autonomous_opportunity, completed_autonomous_goal_ids = self._autonomous_follow_up(
-            account_id=account_id,
-            conversation=conversation,
-            release=release,
-            tutor_message=tutor_message,
-            hits=hits,
-            citations=citations,
-            learner_state=learner_state,
-            reactive_v2_artifacts=reactive_v2_artifacts,
-            observed_at=now,
-            responding_to_outreach_message_id=responding_to_outreach_message_id,
-            tutoring_mode=tutoring_mode,
+        autonomous_opportunity, completed_autonomous_goal_ids = (
+            self._autonomous_follow_up(
+                account_id=account_id,
+                conversation=conversation,
+                release=release,
+                tutor_message=tutor_message,
+                hits=hits,
+                citations=citations,
+                learner_state=learner_state,
+                reactive_v2_artifacts=reactive_v2_artifacts,
+                observed_at=now,
+                responding_to_outreach_message_id=responding_to_outreach_message_id,
+                tutoring_mode=tutoring_mode,
+            )
         )
         try:
             self.repository.save_turn(
@@ -617,10 +622,13 @@ class StudentTutoringService:
         else:
             return None
         if hits:
-            source_identity = hits[0].chunk.source_artifact_id or hits[0].chunk.document_id
-            topic_key = "source-" + hashlib.sha256(
-                source_identity.encode("utf-8")
-            ).hexdigest()[:16]
+            source_identity = (
+                hits[0].chunk.source_artifact_id or hits[0].chunk.document_id
+            )
+            topic_key = (
+                "source-"
+                + hashlib.sha256(source_identity.encode("utf-8")).hexdigest()[:16]
+            )
         else:
             topic_key = "course-boundary"
         return build_learning_gap_signal(
@@ -743,10 +751,7 @@ class StudentTutoringService:
             ),
             None,
         )
-        if (
-            goal is not None
-            and lifecycle_by_goal[goal.goal_id].next_event is None
-        ):
+        if goal is not None and lifecycle_by_goal[goal.goal_id].next_event is None:
             return None, []
         if goal is None:
             goal = self._create_autonomous_goal(
@@ -995,29 +1000,33 @@ class StudentTutoringService:
                     active_source_versions=active_versions,
                     embedder=self.embedder,
                 )
+            if self.retriever_decorator is not None:
+                retriever = self.retriever_decorator(retriever, release)
             self._retrievers[release.id] = retriever
-        fallback_before = (
-            retriever.fallback_count if isinstance(retriever, FallbackRetriever) else 0
-        )
+        fallback_before = int(getattr(retriever, "fallback_count", 0))
         hits = retriever.retrieve(question, limit=5)
         events: list[AuditEvent] = []
-        fallback_used = (
-            isinstance(retriever, FallbackRetriever)
-            and retriever.fallback_count > fallback_before
+        fallback_used = int(getattr(retriever, "fallback_count", 0)) > fallback_before
+        primary_available = bool(getattr(retriever, "primary_available", True))
+        primary_implementation = str(
+            getattr(
+                retriever,
+                "primary_implementation_id",
+                getattr(retriever, "implementation_id", "retriever"),
+            )
         )
-        primary_available = (
-            retriever.primary_available
-            if isinstance(retriever, FallbackRetriever)
-            else True
+        fallback_implementation = str(
+            getattr(
+                retriever,
+                "fallback_implementation_id",
+                getattr(retriever, "implementation_id", "retriever"),
+            )
         )
         retrieval_details: dict[str, str | int | float | bool | None] = {
             "implementation": (
-                retriever.fallback_implementation_id
-                if isinstance(retriever, FallbackRetriever)
-                and (fallback_used or not primary_available)
-                else retriever.primary_implementation_id
-                if isinstance(retriever, FallbackRetriever)
-                else getattr(retriever, "implementation_id", "retriever")
+                fallback_implementation
+                if fallback_used or not primary_available
+                else primary_implementation
             ),
             "primary_available": primary_available,
             "hit_count": len(hits),
@@ -1025,6 +1034,9 @@ class StudentTutoringService:
         artifact_id = self._retrieval_artifact_ids.get(release.id)
         if artifact_id is not None:
             retrieval_details["index_artifact_id"] = artifact_id
+        visual_artifact_id = getattr(retriever, "artifact_id", None)
+        if isinstance(visual_artifact_id, str) and visual_artifact_id:
+            retrieval_details["visual_index_artifact_id"] = visual_artifact_id
         events.append(
             self._event(
                 "retrieval-completed",
@@ -1035,7 +1047,7 @@ class StudentTutoringService:
                 details=retrieval_details,
             )
         )
-        if isinstance(retriever, FallbackRetriever) and fallback_used:
+        if fallback_used:
             events.append(
                 self._event(
                     "retrieval-fallback",
@@ -1044,9 +1056,11 @@ class StudentTutoringService:
                     release_id=release.id,
                     conversation_id=conversation.id,
                     details={
-                        "primary": retriever.primary_implementation_id,
-                        "fallback": retriever.fallback_implementation_id,
-                        "failure_type": retriever.last_failure_type,
+                        "primary": primary_implementation,
+                        "fallback": fallback_implementation,
+                        "failure_type": getattr(
+                            retriever, "last_failure_type", "unknown"
+                        ),
                     },
                 )
             )
@@ -1475,6 +1489,7 @@ class StudentTutoringService:
             details=details or {},
             created_at=utc_timestamp(self.clock.now()),
         )
+
 
 def _generator_model_identity(generator: object) -> str:
     """Return the requested provider snapshot without coupling to one client wrapper."""

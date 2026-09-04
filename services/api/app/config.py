@@ -6,6 +6,7 @@ import math
 import os
 import hashlib
 import json
+import re
 from dataclasses import dataclass, field
 from enum import StrEnum
 from pathlib import Path
@@ -52,6 +53,11 @@ class EvidenceGateMode(StrEnum):
     DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3 = "dominance-scoped-ambiguity-safe-v3"
 
 
+class VisualRetrievalMode(StrEnum):
+    TEXT_OCR_FALLBACK = "text-ocr-fallback"
+    JINA_V4_LATE_INTERACTION = "jina-v4-late-interaction"
+
+
 # Governed deterministic generation is qualified against these gates only.
 # The v3 successor was added by product-evidence-gate-selection-004, which
 # measured it at 50.00% fully grounded factual success against the v2 gate's
@@ -81,13 +87,13 @@ class AppSettings:
     log_level: str = "INFO"
     generator_mode: GeneratorMode = GeneratorMode.DETERMINISTIC
     evidence_gate_mode: EvidenceGateMode = EvidenceGateMode.UNSELECTED
+    visual_retrieval_mode: VisualRetrievalMode = VisualRetrievalMode.TEXT_OCR_FALLBACK
+    visual_query_timeout_seconds: float = 8.0
+    visual_component_ledger_sha256: str | None = None
     student_profile_path: Path = (
-        ROOT
-        / "research/05_evaluation/profiles/student-tutor-v1.json"
+        ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"
     )
-    student_tutoring_mode: StudentTutoringMode = (
-        StudentTutoringMode.GROUNDED_ASSISTANT
-    )
+    student_tutoring_mode: StudentTutoringMode = StudentTutoringMode.GROUNDED_ASSISTANT
     autonomy_planner_mode: AutonomyPlannerMode = AutonomyPlannerMode.DETERMINISTIC
     proactive_outreach_worker_enabled: bool = False
     learning_gap_hmac_secret: bytes | None = field(default=None, repr=False)
@@ -141,13 +147,26 @@ class AppSettings:
                     EvidenceGateMode.UNSELECTED.value,
                 )
             ),
+            visual_retrieval_mode=VisualRetrievalMode(
+                os.getenv(
+                    "APP_VISUAL_RETRIEVAL_MODE",
+                    VisualRetrievalMode.TEXT_OCR_FALLBACK.value,
+                )
+            ),
+            visual_query_timeout_seconds=_positive_float(
+                "APP_VISUAL_QUERY_TIMEOUT_SECONDS", 8.0
+            ),
+            visual_component_ledger_sha256=(
+                value
+                if (
+                    value := os.getenv("APP_VISUAL_COMPONENT_LEDGER_SHA256", "").strip()
+                )
+                else None
+            ),
             student_profile_path=_repository_path(
                 os.getenv(
                     "APP_STUDENT_PROFILE_PATH",
-                    str(
-                        ROOT
-                        / "research/05_evaluation/profiles/student-tutor-v1.json"
-                    ),
+                    str(ROOT / "research/05_evaluation/profiles/student-tutor-v1.json"),
                 )
             ),
             student_tutoring_mode=StudentTutoringMode(
@@ -172,11 +191,7 @@ class AppSettings:
             ),
             t1_qualification_result_path=(
                 _repository_path(value)
-                if (
-                    value := os.getenv(
-                        "APP_T1_QUALIFICATION_RESULT_PATH", ""
-                    ).strip()
-                )
+                if (value := os.getenv("APP_T1_QUALIFICATION_RESULT_PATH", "").strip())
                 else None
             ),
             provider_max_calls_per_process=_positive_int(
@@ -206,6 +221,14 @@ class AppSettings:
     @property
     def source_root(self) -> Path:
         return self.data_root / "derived/course-sources"
+
+    @property
+    def visual_index_root(self) -> Path:
+        return self.data_root / "derived/visual-indexes"
+
+    @property
+    def visual_quota_database_path(self) -> Path:
+        return self.data_root / "provider-ledgers/jina-visual-quota.sqlite3"
 
     def validate(self) -> None:
         if (
@@ -252,14 +275,18 @@ class AppSettings:
             or self.provider_cost_cap_usd <= 0
         ):
             raise ValueError("APP_PROVIDER_COST_CAP_USD must be positive")
+        if (
+            isinstance(self.visual_query_timeout_seconds, bool)
+            or not math.isfinite(self.visual_query_timeout_seconds)
+            or self.visual_query_timeout_seconds <= 0
+            or self.visual_query_timeout_seconds > 30
+        ):
+            raise ValueError("APP_VISUAL_QUERY_TIMEOUT_SECONDS must be within (0, 30]")
         if self.mode == RuntimeMode.STAGING:
-            if (
-                self.student_tutoring_mode
-                in {
-                    StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
-                    StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
-                }
-            ):
+            if self.student_tutoring_mode in {
+                StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+            }:
                 _validate_t1_qualification_result(
                     self.t1_qualification_result_path,
                     self.student_profile_path,
@@ -281,16 +308,12 @@ class AppSettings:
                 raise ValueError(
                     "staging APP_MAX_UPLOAD_BYTES cannot exceed the proxy 64 MiB cap"
                 )
-            if (
-                self.student_tutoring_mode
-                in {
-                    StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
-                    StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
-                }
-                and (
-                    self.learning_gap_hmac_secret is None
-                    or len(self.learning_gap_hmac_secret) < 32
-                )
+            if self.student_tutoring_mode in {
+                StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+                StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
+            } and (
+                self.learning_gap_hmac_secret is None
+                or len(self.learning_gap_hmac_secret) < 32
             ):
                 raise ValueError(
                     "staging T1 requires APP_LEARNING_GAP_HMAC_SECRET with at least 32 bytes"
@@ -304,8 +327,7 @@ class AppSettings:
             self.student_tutoring_mode
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
             and self.generator_mode == GeneratorMode.DETERMINISTIC
-            and self.evidence_gate_mode
-            not in GOVERNED_DETERMINISTIC_EVIDENCE_GATES
+            and self.evidence_gate_mode not in GOVERNED_DETERMINISTIC_EVIDENCE_GATES
         ):
             raise ValueError(
                 "governed deterministic generation requires "
@@ -321,7 +343,8 @@ class AppSettings:
             == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         )
         if (
-            self.generator_mode in {
+            self.generator_mode
+            in {
                 GeneratorMode.OPENAI_GPT_5_4_MINI,
                 GeneratorMode.OPENAI_PROFILE_SELECTED,
             }
@@ -333,6 +356,21 @@ class AppSettings:
             )
         if not self.student_profile_path.is_file():
             raise ValueError("APP_STUDENT_PROFILE_PATH must identify a profile file")
+        if (
+            self.visual_retrieval_mode == VisualRetrievalMode.JINA_V4_LATE_INTERACTION
+            and not os.getenv("JINA_API_KEY", "").strip()
+        ):
+            raise ValueError("JINA_API_KEY is required for jina-v4-late-interaction")
+        if self.visual_retrieval_mode == VisualRetrievalMode.JINA_V4_LATE_INTERACTION:
+            ledger_sha256 = self.visual_component_ledger_sha256
+            if (
+                ledger_sha256 is None
+                or re.fullmatch(r"[0-9a-f]{64}", ledger_sha256) is None
+            ):
+                raise ValueError(
+                    "APP_VISUAL_COMPONENT_LEDGER_SHA256 must be a lowercase SHA-256 "
+                    "for jina-v4-late-interaction"
+                )
 
 
 def _positive_int(name: str, default: int) -> int:
@@ -366,9 +404,7 @@ def _validate_t1_qualification_result(
     evidence_gate_mode: EvidenceGateMode,
 ) -> None:
     if result_path is None or not result_path.is_file():
-        raise ValueError(
-            "staging T1 requires APP_T1_QUALIFICATION_RESULT_PATH"
-        )
+        raise ValueError("staging T1 requires APP_T1_QUALIFICATION_RESULT_PATH")
     try:
         result = json.loads(result_path.read_text(encoding="utf-8"))
         profile = json.loads(profile_path.read_text(encoding="utf-8"))
@@ -408,9 +444,7 @@ def _validate_t1_qualification_result(
         try:
             record = ComponentEvaluationRecord.model_validate(result)
         except ValidationError as error:
-            raise ValueError(
-                "staging T1 qualification evidence is invalid"
-            ) from error
+            raise ValueError("staging T1 qualification evidence is invalid") from error
         selected_id = record.decision.selected_implementation_id
         selected = next(
             (
@@ -440,8 +474,7 @@ def _validate_t1_qualification_result(
             != configuration.get("provider_model")
             or selected_configuration.get("profile_sha256") != profile_sha256
             or (
-                tutoring_mode
-                == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+                tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
                 and (
                     selected_configuration.get("planner")
                     != _qualified_planner_model(planner_mode)
@@ -478,8 +511,7 @@ def _validate_t1_qualification_result(
         or result.get("hard_gates_passed") is not True
         or result.get("t0_rollback_available") is not True
         or result.get("selected_model") != configuration.get("provider_model")
-        or result.get("profile_sha256")
-        != profile_sha256
+        or result.get("profile_sha256") != profile_sha256
         or result.get("content_sha256") != expected_hash
     ):
         raise ValueError("staging T1 qualification evidence does not bind this release")

@@ -7,7 +7,9 @@ from src.digital_twin.onboarding import (
     ScopedSessionRepository,
     SessionWriteConflictError,
     SQLiteSessionRepository,
+    confirm_revision_proposal,
     create_session,
+    submit_message,
 )
 
 
@@ -29,6 +31,31 @@ def test_compatibility_facade_exports_existing_onboarding_api() -> None:
     assert expected_exports.issubset(set(onboarding_workflow.__all__))
     assert onboarding_workflow.create_session is create_session
     assert onboarding_workflow.OnboardingSession is OnboardingSession
+
+
+def test_sqlite_repository_preserves_revision_history_across_restart(tmp_path) -> None:
+    path = tmp_path / "onboarding-history.sqlite3"
+    repository = SQLiteSessionRepository(path)
+    session = create_session(session_id="history-session")
+    for answer in (
+        "Use syllabus, slides, assignments, and rubrics only.",
+        "Balance concise explanations with guiding questions.",
+        "Ask what the student tried first, then give hints.",
+        "Correct directly, then show a contrastive example.",
+        "Reject full graded-work answers and unapproved sources.",
+    ):
+        session = submit_message(session, answer)
+    session = submit_message(session, "The tone should be friendlier.")
+    session = confirm_revision_proposal(session)
+    repository.save(session)
+    repository.close()
+
+    reopened = SQLiteSessionRepository(path)
+    restored = reopened.get("history-session")
+    assert restored is not None
+    assert restored.policy_version == 2
+    assert restored.revision_history[-1].status == "confirmed"
+    reopened.close()
 
 
 def test_in_memory_repository_isolates_saved_session_state() -> None:

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-final-technical-completion-001",
+  "status": "invalid-execution",
+  "decision": "Complete Local R1.1 qualification with text/OCR fallback and disclose invalid synthetic fidelity proxy",
+  "completed_at": "2026-09-04T16:54:57Z",
+  "code_revision": "a36401057f61970d0dcedf01cfa7622e5511840d",
+  "children": [
+    {
+      "run_id": "true-visual-product-checkpoint-001",
+      "status": "completed-refine",
+      "decision": "Refine"
+    },
+    {
+      "run_id": "professor-fidelity-proxy-c0-c3-002",
+      "status": "invalid-execution",
+      "decision": "Invalid"
+    }
+  ],
+  "program_result_sha256": "3f87c76965b6b429bae71a9b848d6a1689947ff2da71398f24c8f02a69335e32",
+  "release_implication": {
+    "visual_mode": "text-ocr-fallback",
+    "professor_feedback_workflow": "retain-completed-implementation",
+    "professor_fidelity_claim": false,
+    "next_stage": "local-r1.1-qualification-007"
+  },
+  "known_benchmark_10000_touched": false,
+  "private_data_used": false,
+  "authorization_revoked": true
+}

@@ -7,6 +7,7 @@ from services.api.app.schemas import (
     MessageRequest,
     PolicyFieldUpdateRequest,
     PreviewDecisionRequest,
+    RevisionAlternativeSelectionRequest,
     SourceInventoryCreateRequest,
     SourceInventoryUpdateRequest,
 )
@@ -22,6 +23,7 @@ from src.digital_twin.onboarding_workflow import (
     create_session,
     create_supervisor_demo_session,
     discard_revision_proposal,
+    select_revision_alternative,
     set_preview_decision,
     submit_message,
     update_approval_checklist_item,
@@ -334,12 +336,25 @@ def confirm_revision(
     try:
         return _save_session(repository, confirm_revision_proposal(session))
     except ValueError as exc:
-        if str(exc) == "revision_proposal_not_found":
+        if str(exc) in {
+            "revision_proposal_not_found",
+            "revision_alternative_required",
+            "revision_proposal_stale",
+            "revision_artifact_stale",
+        }:
+            code = str(exc)
             raise HTTPException(
                 status_code=status.HTTP_409_CONFLICT,
                 detail={
-                    "code": "revision_proposal_not_found",
-                    "message": "There is no pending revision proposal.",
+                    "code": code,
+                    "message": (
+                        "Choose one revision option before confirming."
+                        if code == "revision_alternative_required"
+                        else "Reload the current review artifact before confirming."
+                        if code
+                        in {"revision_proposal_stale", "revision_artifact_stale"}
+                        else "There is no pending revision proposal."
+                    ),
                 },
             ) from exc
         raise
@@ -360,6 +375,35 @@ def discard_revision(
                 detail={
                     "code": "revision_proposal_not_found",
                     "message": "There is no pending revision proposal.",
+                },
+            ) from exc
+        raise
+
+
+@router.post("/onboarding/sessions/{session_id}/revision-proposal/select")
+def select_revision_option(
+    session_id: str,
+    request: RevisionAlternativeSelectionRequest,
+    repository: SessionRepositoryDependency,
+):
+    session = _get_session_or_404(repository, session_id)
+    try:
+        return _save_session(
+            repository,
+            select_revision_alternative(session, request.alternative_id),
+        )
+    except ValueError as exc:
+        code = str(exc)
+        if code in {
+            "revision_proposal_not_found",
+            "revision_alternative_not_found",
+            "revision_proposal_stale",
+        }:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail={
+                    "code": code,
+                    "message": "Reload the current revision proposal and choose a valid option.",
                 },
             ) from exc
         raise

@@ -19,6 +19,7 @@ from src.digital_twin.onboarding.repository import (
 from src.digital_twin.onboarding.revisions import (
     confirm_revision_proposal,
     discard_revision_proposal,
+    select_revision_alternative,
 )
 from src.digital_twin.onboarding.service import create_session, submit_message
 
@@ -36,6 +37,7 @@ __all__ = [
     "create_session",
     "create_supervisor_demo_session",
     "discard_revision_proposal",
+    "select_revision_alternative",
     "set_preview_decision",
     "submit_message",
     "update_approval_checklist_item",

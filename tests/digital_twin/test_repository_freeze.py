@@ -52,6 +52,7 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "course-digital-twin-whole-system-architecture-round-3-001",
         "governed-full-autonomy-v2-1-grounding-successor-011",
         "true-visual-colpali-confirmation-001",
+        "true-visual-product-checkpoint-001",
     }
 
     for pilot_id in pilot_ids:
@@ -109,6 +110,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "true-visual-colpali-confirmation-001"
     ] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS[
+        "true-visual-product-checkpoint-001"
+    ] == ("dataset_generation",)
     for instrument_id in (
         "course-digital-twin-autonomous-long-run-001",
         "academic-factual-qa-grounding-selection-002",
@@ -139,6 +143,8 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         "governed-full-autonomy-v2-1-actual-product-confirmation-020",
         "governed-full-autonomy-v2-1-actual-product-confirmation-021",
         "governed-full-autonomy-v2-1-persona-confirmation-024",
+        "professor-fidelity-proxy-c0-c3-002",
+        "local-r1-final-technical-completion-001",
     ):
         with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
             require_bounded_pilot_operation_allowed(

@@ -89,6 +89,7 @@ export function ProfessorReviewConsole({
     addCustomPreview,
     confirmRevision,
     discardRevision,
+    selectRevisionOption,
   } = controller
   const [activeStage, setActiveStage] = useState<ReviewStageId>(
     supervisorDemo ? "policy" : "interview",
@@ -162,6 +163,7 @@ export function ProfessorReviewConsole({
         onAddCustomPreview={addCustomPreview}
         onConfirmRevision={confirmRevision}
         onDiscardRevision={discardRevision}
+        onSelectRevisionOption={selectRevisionOption}
         isAddingSource={isAddingSource}
         updatingSourceId={updatingSourceId}
         updatingFieldId={updatingFieldId}
@@ -595,6 +597,7 @@ function StageTool({
   onAddCustomPreview,
   onConfirmRevision,
   onDiscardRevision,
+  onSelectRevisionOption,
   isAddingSource,
   updatingSourceId,
   updatingFieldId,
@@ -613,6 +616,7 @@ function StageTool({
   onAddCustomPreview: OnboardingController["addCustomPreview"]
   onConfirmRevision: OnboardingController["confirmRevision"]
   onDiscardRevision: OnboardingController["discardRevision"]
+  onSelectRevisionOption: OnboardingController["selectRevisionOption"]
   isAddingSource: boolean
   updatingSourceId: string | null
   updatingFieldId: string | null
@@ -677,6 +681,7 @@ function StageTool({
             isResolvingRevision={isResolvingRevision}
             onConfirm={onConfirmRevision}
             onDiscard={onDiscardRevision}
+            onSelect={onSelectRevisionOption}
           />
         ) : null}
         <PreviewComparison

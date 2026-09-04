@@ -9,6 +9,7 @@ import {
   createSupervisorDemoSession,
   discardRevisionProposal,
   getOnboardingSession,
+  selectRevisionAlternative,
   setPreviewDecision,
   submitOnboardingMessage,
   updateApprovalChecklistItem,
@@ -30,6 +31,7 @@ const SESSION: OnboardingSession = {
   preview_decisions: {},
   evidence_snapshots: [],
   revision_proposal: null,
+  revision_history: [],
   approval_checklist: [],
   release_blockers: {
     source_inventory: [],
@@ -247,6 +249,20 @@ describe("onboarding API client", () => {
       2,
       "/api/onboarding/sessions/session-1/revision-proposal/discard",
       expect.objectContaining({ method: "POST" }),
+    )
+  })
+
+  it("selects one revision alternative before confirmation", async () => {
+    const fetchMock = stubFetch(SESSION)
+
+    await selectRevisionAlternative("session ?one", "tone")
+
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/api/onboarding/sessions/session%20%3Fone/revision-proposal/select",
+      expect.objectContaining({
+        method: "POST",
+        body: JSON.stringify({ alternative_id: "tone" }),
+      }),
     )
   })
 })

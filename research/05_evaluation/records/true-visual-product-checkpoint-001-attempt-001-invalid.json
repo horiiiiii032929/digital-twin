@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "run_id": "true-visual-product-checkpoint-001-attempt-001-invalid",
+  "instrument_id": "true-visual-product-checkpoint-001",
+  "status": "invalid-execution",
+  "decision": "Invalid",
+  "completed_at": "2026-09-04T16:48:56Z",
+  "code_revision": "e3c15d7c05e343c8257a274dd35bc3923d8e81f2",
+  "instrument_sha256": "a10ced1c3062f3d5269a55d7fd2bfe448e02c23aff7b6d809bca094522c95542",
+  "public_sha256": "a9d3497e3f0e2587ecb0593cf0ff2b17215829de97ea70a2fee0d50ed2d0d70a",
+  "gold_sha256": "3aa731a506705e38cb9ce2bdb76e579ff92a0f1e4992af8e39c05a246c087ce8",
+  "sources_sha256": "1f47dfe2ccdc8934209234a314ec108d3c7d54e1a035d2eafcb960f04f9c628c",
+  "component_ledger_sha256": "a2e59f3d00b25827e3a6e4c0c97ca69a155e44b809ecdc768941a1d4fd30e184",
+  "failure": {
+    "classification": "harness-defect",
+    "exception": "KeyError: 'title'",
+    "cause": "The actual-product runner treated an optional display title as a required frozen-source field before constructing the product releases.",
+    "scientific_inputs_affected": false
+  },
+  "execution": {
+    "durable_responses": 0,
+    "gold_opened": false,
+    "provider_calls": 0,
+    "provider_tokens": 0,
+    "provider_cost_usd": 0.0,
+    "private_data_used": false,
+    "known_benchmark_10000_touched": false
+  },
+  "raw_artifacts": {
+    "location": "reports/generated/true-visual-product-checkpoint-001-attempt-001-invalid/",
+    "result_sha256": "b87daa6334c570c3b47145df5273e88b7620f6e1bfe9573adbca0803a7690277",
+    "response_ledger_sha256": "2e1c2b4acd07ca1336d62fe723ce81f4f245936671b483721b3cf712c6ca8d74",
+    "quota_ledger_sha256": "c93c186bc7c756c80a16d89bda7a66f4d423141d41fe97a32a2293e984987db"
+  },
+  "correction_boundary": {
+    "allowed": true,
+    "maximum_attempts": 1,
+    "change": "Derive a non-authoritative display title deterministically from source_document_path, with source_artifact_id fallback.",
+    "unchanged": [
+      "public cases",
+      "hidden gold",
+      "source claims and lineage",
+      "retrieval method",
+      "quality gates",
+      "provider model",
+      "token ceiling"
+    ]
+  },
+  "limitations": [
+    "No visual product quality estimate is attached to this operationally invalid attempt."
+  ]
+}

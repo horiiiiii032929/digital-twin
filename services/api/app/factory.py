@@ -1,4 +1,5 @@
 import math
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -12,6 +13,7 @@ from services.api.app.config import (
     GeneratorMode,
     RuntimeMode,
     StudentTutoringMode,
+    VisualRetrievalMode,
 )
 from services.api.app.middleware import (
     OriginGuardMiddleware,
@@ -59,6 +61,13 @@ from src.digital_twin.grounding import (
     RetrievalIndexStoreV1,
     StructuredLexicalCoverageEvidenceGate,
     QuestionTargetedAtomicEvidenceGate,
+    PersistentJinaQuotaLedgerV1,
+    QuotaBoundJinaVisualQueryProviderV1,
+    SyncVisualQueryProvider,
+    VisualAwareRetrieverV1,
+    VisualIndexStoreV1,
+    VisualIndexUnavailableError,
+    VisualIndexUnavailableRetrieverV1,
     build_retrieval_index_binding,
 )
 from src.digital_twin.grounding.protocols import (
@@ -130,6 +139,8 @@ def create_app(
     source_description_provider: RegionDescriptionProvider | None = None,
     identity_repository: IdentityRepository | None = None,
     retrieval_index_store: RetrievalIndexStoreV1 | None = None,
+    visual_index_store: VisualIndexStoreV1 | None = None,
+    visual_query_provider: SyncVisualQueryProvider | None = None,
     learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
     settings: AppSettings | None = None,
     clock: UtcClock | None = None,
@@ -202,10 +213,14 @@ def create_app(
     )
     profile = load_release_profile(resolved_student_profile_path)
     retriever = next(
-        entry for entry in profile.components if entry.component == ComponentKind.RETRIEVER
+        entry
+        for entry in profile.components
+        if entry.component == ComponentKind.RETRIEVER
     )
     chunker = next(
-        entry for entry in profile.components if entry.component == ComponentKind.CHUNKER
+        entry
+        for entry in profile.components
+        if entry.component == ComponentKind.CHUNKER
     )
     configured_generator, provider_budget = _configured_generator(
         runtime_settings,
@@ -247,6 +262,54 @@ def create_app(
             evidence_limit=5,
         )
     app.state.provider_budget = provider_budget
+    visual_retriever_decorator = None
+    if (
+        runtime_settings.visual_retrieval_mode
+        == VisualRetrievalMode.JINA_V4_LATE_INTERACTION
+    ):
+        component_ledger_sha256 = runtime_settings.visual_component_ledger_sha256
+        if component_ledger_sha256 is None:
+            raise ValueError("qualified visual component ledger hash is unavailable")
+        active_visual_index_store = visual_index_store or VisualIndexStoreV1(
+            runtime_settings.visual_index_root
+        )
+        active_visual_query_provider = visual_query_provider
+        if active_visual_query_provider is None:
+            quota = PersistentJinaQuotaLedgerV1(
+                runtime_settings.visual_quota_database_path,
+                imported_ledger_sha256=component_ledger_sha256,
+            )
+            active_visual_query_provider = QuotaBoundJinaVisualQueryProviderV1(
+                api_key=os.environ["JINA_API_KEY"],
+                quota_ledger=quota,
+                timeout_seconds=runtime_settings.visual_query_timeout_seconds,
+            )
+            app.state.visual_quota_ledger = quota
+        app.state.visual_index_store = active_visual_index_store
+        app.state.visual_query_provider = active_visual_query_provider
+
+        def decorate_visual_retriever(text_retriever, release):
+            try:
+                manifest, index = active_visual_index_store.load_bound(
+                    course_id=release.course_id,
+                    release_id=release.id,
+                    profile_id=release.profile_id,
+                    profile_version=release.profile_version,
+                    source_ledger_sha256=component_ledger_sha256,
+                    chunks=release.chunks,
+                )
+            except VisualIndexUnavailableError:
+                return VisualIndexUnavailableRetrieverV1(text_retriever)
+            return VisualAwareRetrieverV1(
+                text_retriever=text_retriever,
+                query_provider=active_visual_query_provider,
+                index=index,
+                course_id=release.course_id,
+                chunks=release.chunks,
+                artifact_id=manifest.artifact_id,
+            )
+
+        visual_retriever_decorator = decorate_visual_retriever
     autonomy_planner_budget = None
     live_proactive_planner = None
     reactive_semantic_planner = None
@@ -321,6 +384,7 @@ def create_app(
         ),
         autonomy_generator_model=active_generator_model,
         reactive_semantic_planner=reactive_semantic_planner,
+        retriever_decorator=visual_retriever_decorator,
         clock=runtime_clock,
     )
     app.state.proactive_outreach_service = ProactiveOutreachService(
@@ -371,6 +435,7 @@ def create_app(
         )
 
     app.state.discord_delivery_adapter = DiscordWebhookDeliveryAdapter(enabled=False)
+
     def release_index_binding(release):
         if retriever.implementation is None or chunker.implementation is None:
             raise ValueError("release profile lacks an indexable retrieval selection")

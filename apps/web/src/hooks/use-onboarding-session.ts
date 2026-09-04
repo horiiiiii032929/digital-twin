@@ -15,6 +15,7 @@ import {
   createSupervisorDemoSession,
   discardRevisionProposal,
   getOnboardingSession,
+  selectRevisionAlternative,
   setPreviewDecision,
   submitOnboardingMessage,
   updateApprovalChecklistItem,
@@ -82,6 +83,7 @@ export type OnboardingController = SessionState & {
   addCustomPreview: (prompt: string, tag: PromptTag) => Promise<boolean>
   confirmRevision: () => Promise<void>
   discardRevision: () => Promise<void>
+  selectRevisionOption: (alternativeId: string) => Promise<void>
 }
 
 export function useOnboardingSession({
@@ -381,6 +383,18 @@ export function useOnboardingSession({
     )
   }, [runOperation, state.isResolvingRevision, state.session])
 
+  const selectRevisionOption = useCallback(
+    async (alternativeId: string) => {
+      if (!state.session || state.isResolvingRevision) {
+        return
+      }
+      await runOperation("revision-resolve", () =>
+        selectRevisionAlternative(state.session!.session_id, alternativeId),
+      )
+    },
+    [runOperation, state.isResolvingRevision, state.session],
+  )
+
   return {
     ...state,
     restart: startSession,
@@ -394,5 +408,6 @@ export function useOnboardingSession({
     addCustomPreview,
     confirmRevision,
     discardRevision,
+    selectRevisionOption,
   }
 }

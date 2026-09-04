@@ -102,10 +102,38 @@ export type RevisionProposal = {
   preview_case_id?: string | null
   feedback: string
   affected_policy_fields: string[]
-  proposed_value: string
+  proposed_value: string | string[] | Record<string, unknown>
   rationale: string
-  status: "pending" | "confirmed" | "discarded"
+  status: "pending" | "confirmed" | "discarded" | "superseded"
   created_at: string
+  base_policy_version: number
+  review_artifact_sha256?: string | null
+  alternatives: RevisionAlternative[]
+  selected_alternative_id?: string | null
+}
+
+export type RevisionAlternative = {
+  id: string
+  category: "academic_integrity" | "source_grounding" | "tone"
+  affected_policy_fields: string[]
+  proposed_value: string | string[] | Record<string, unknown>
+  rationale: string
+}
+
+export type RevisionDecisionRecordV1 = {
+  proposal_id: string
+  preview_case_id?: string | null
+  feedback: string
+  affected_policy_fields: string[]
+  proposed_value: string | string[] | Record<string, unknown>
+  rationale: string
+  status: "confirmed" | "discarded" | "superseded"
+  base_policy_version: number
+  target_policy_version: number
+  review_artifact_sha256?: string | null
+  selected_alternative_id?: string | null
+  created_at: string
+  resolved_at: string
 }
 
 export type ApprovalItem = {
@@ -145,6 +173,7 @@ export type OnboardingSession = {
   preview_decisions: Record<string, PreviewDecisionRecord>
   evidence_snapshots: EvidenceSnapshot[]
   revision_proposal: RevisionProposal | null
+  revision_history: RevisionDecisionRecordV1[]
   approval_checklist: ApprovalItem[]
   release_blockers: Record<string, string[]>
   trace: WorkflowTraceItem[]

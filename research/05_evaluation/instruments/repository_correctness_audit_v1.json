@@ -15,13 +15,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Configuration review verified that only the JINA_API_KEY variable name is documented; no credential is committed and provider execution remains unauthorized.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": ".env.example",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "2b2fbe77008334985c277ffa3df8ca77761c076f52f1b30e6f2f2201adf5d46d"
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "262fc7ae13e695ab64731a5306b8a2f6896745ae9de52566cda9f81c471fd9ad"
     },
     {
       "audit_status": "audited",
@@ -71,7 +71,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Final Impeccable and browser review formalized the only literal selection tint as a named design-system token; detector returned zero findings, 51 Vitest regressions passed, Oxlint passed, and the TypeScript production build passed.",
       "findings": [],
       "path": "apps/web/.oxlintrc.json",
       "reviewed_at": "2026-08-20",
@@ -158,13 +158,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/components/onboarding/console/professor-review-console.tsx",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "c22b570d6c9aeb5566b7848f02df8e8f6e9142215e83b8eb8940189af07b319c"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "8b9aefdeeda6a4fbea59f0f6a92db4cf67915b54fe41f95ff73d6e2dc9e23fc9"
     },
     {
       "audit_status": "audited",
@@ -191,13 +191,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/components/onboarding/console/revision-proposal-panel.tsx",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "a0ad361072157e36e2a3f7e80163a3ed040317f0d1951a5bc14512801248d7dd"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "ed02afb31f1662bd1ac14d02d1c5f85c133b661add927793ef73343c569cd8f8"
     },
     {
       "audit_status": "audited",
@@ -477,13 +477,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/hooks/onboarding/session-state.test.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "01ef9705ae804df450d77343712f4250d2fb4420a439bf11c1f79761d106e978"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "5ab8f7e3df7240ad775dbc92c8685447868d19e23ca78c73a1a9a0d751c464c8"
     },
     {
       "audit_status": "audited",
@@ -510,13 +510,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-correctness",
-      "evidence": "npm advisory triage identified GHSA-c83g-rgw3-j3cx and GHSA-73wf-gq98-2v4g in transitive Browserslist 4.28.4; the lock now resolves Browserslist 4.28.8 and related metadata packages, npm audit reports zero vulnerabilities, and 50 frontend tests, lint, and production build pass.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/hooks/use-onboarding-session.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "repository-maintenance",
-      "sha256": "8bec1f04389df551ebe1d8261eb5761e6c4b728ab9ca845bc501ff6a1b687454"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "62d00b494af0e3524f1a0427783986eb38f66d814b2439aa8f8265fc76a06253"
     },
     {
       "audit_status": "audited",
@@ -536,20 +536,20 @@
       "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
       "findings": [],
       "path": "apps/web/src/index.css",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "7e0afa80cf97bf99ca079f4a066813ced108d5c772f74ad3d14f2fc25d34488b"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-impeccable-final-qualification",
+      "sha256": "4c17fde56a6117452796fb1d4e27243d713bdd5d2d34b446417f35c3afb02962"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/lib/api.test.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "be4aebb8080e51a06368ebdb1991bb956d40b5c5844129242baac4800c3316b2"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "9e31e7846583f4c0ee855ab16951e8a9cde02e31f124c77bf128a8c1b0db295e"
     },
     {
       "audit_status": "audited",
@@ -587,13 +587,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/lib/api/onboarding.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "09ae9c7f2ef6479bb46a52f189803531143c528583ca7eb58c87a5a0b7249453"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "fb0d4c078831580faa4924929afc493f1e4ced3ee189a02740c3cfee978d3079"
     },
     {
       "audit_status": "audited",
@@ -642,13 +642,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-ux",
-      "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/lib/api/types.ts",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "9e33878a9977497635cab9d7fe576e4da99f25eade79cbcdb6f885a2d65b567d"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "799d34480b11beefc92211c0a1d70a5a7a79412a8390f816503e38cc6230702a"
     },
     {
       "audit_status": "audited",
@@ -675,13 +675,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "apps/web/src/lib/onboarding/readiness.test.ts",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "a0517c61c13a5cbf106e652ae6fa82655f29089c6810cd3a6db270d7b880af05"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "907212d36519ba983f3a34d8d38bcc365e548316c00d7d7ebb395970f2149aab"
     },
     {
       "audit_status": "audited",
@@ -937,15 +937,15 @@
       "sha256": "bdbc00da92afe17a7d68631f86352c9e687100d15b64069ac8469293e3ca1681"
     },
     {
-      "path": "deploy/local-r1.qualified.env.example",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "evidence": "Qualification-007 configuration review verified the exact selected Local R1.1 selectors remain unchanged except for the immutable image tag; text/OCR fallback, governed V2.1, profile, evidence gate, rollback binding, budgets, and secret placeholders remain explicit.",
       "findings": [],
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "f41006d9adf142909d297765ae5e17de4e566896a876196aa8cd51b95d71eff0"
+      "path": "deploy/local-r1.qualified.env.example",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "eaa6c57fc1390f78034d965ea57efe46588c1a3fe3266acdfb26ba4275826249"
     },
     {
       "audit_status": "audited",
@@ -972,13 +972,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Package command review verified explicit build, validate, network-free simulation, no-call preflight, and separately frozen execution entrypoints for the visual successor.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "b9400292f340ec3c7d07b1594393ecebfe7b4f5d3a0c2fc17912f3038c851fd0"
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "c7c40177d2da5f5466bf4c480749082385bd5c95f640ec24f92acaed57586c4f"
     },
     {
       "audit_status": "audited",
@@ -3513,6 +3513,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Result-publication review verified the one-shot program ended with the visual Refine result and invalid C0-C3 proxy, revoked all provider authority, preserved the known-benchmark boundary, and bound the parent record to both immutable child outcomes.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/local_r1_final_technical_completion_001.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "8f680aa5a2622844c6c1d56f08b83bfb5ffa3129b816b886bc54649bed8e9e1e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "evaluation-instruments-and-profiles",
       "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
       "findings": [],
@@ -3687,12 +3698,23 @@
       "sha256": "9c00b6eed9d67541fcc8a099a0ba9d69f581c371fc26502357671e5549d3199d"
     },
     {
-      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_harness_001.json",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Invalid-result review verified the first OpenAI request was rejected before inference for an unsupported schema keyword, recorded one failed attempt and zero tokens/cost, produced no fidelity estimate, and revoked provider authority without retry.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_002.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "23ec0cdc19ee4b7b92259bfa596c3cfe531003d088f242bf3a76d6c20c4e3ca9"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "professor-fidelity-proxy",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "research/05_evaluation/instruments/professor_fidelity_proxy_harness_001.json",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "679e9c444596c134c3b30bbc3a9fbb55122ff727115979f5c180d418a5bb2f5b"
@@ -3918,12 +3940,34 @@
       "sha256": "0ffae82b8019bd78b5e55afe618ad6fad7af61b462f809a5de9f6e008d48d480"
     },
     {
-      "path": "research/05_evaluation/instruments/true_visual_supplement_003.json",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Post-result review verifies the completed-go-deeper terminal state, exact first-party Jina v4 binding, passed preregistered retrieval gates, 10M-token account ceiling accounting, explicit product-claim deferral, and revoked provider authorization.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-result-publication-audit",
+      "sha256": "0903fcaec87e56e77f68591af415e86ac7d3ebcbe26e527472f5443a47ed20ea"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Completed-result review verified all 120 responses were durable before hidden-gold scoring, candidate and control metrics match the raw ledgers, Jina usage remains below 10M tokens, the valid Refine decision retains text/OCR fallback, and provider authority is revoked.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/true_visual_product_checkpoint_001.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "63a0de297e4ec805f957f77f5ce4da9f2efc1e467aa653515afec4daf8525f2c"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
       "evidence": "Post-result review verified the completed-refine terminal state, preserved exact snapshot and public-only binding, recorded the frozen metric limitation, and revoked the one-time 30-call/USD 2 authorization.",
       "findings": [],
+      "path": "research/05_evaluation/instruments/true_visual_supplement_003.json",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "1fbc15ffbe68f035073efeff3108075b49527bbd38316d2a75133842490ec767"
@@ -5218,6 +5262,28 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual builder review plus reconstruction tests verify pinned-source extraction, deterministic SVG-to-PNG rendering, interval-based source-disjointness, balanced cases, no private data, and fail-closed hash validation.",
+      "findings": [],
+      "path": "scripts/build_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "6f7e210ef0eea73c350af56199ceeada4027ab38bd18e22a240e614ebba73df0"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "scripts/build_true_visual_product_checkpoint.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "a0825d4db15eed1b0b2cf05c5f5cfc66cb781bf1c255bf24404797d753d90bc7"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "whole-system-architecture-evolution",
       "evidence": "Builder review and focused tests confirm deterministic order-preserving question deduplication, source-range overlap rejection, exact public/gold ID parity, content hashing, byte-stable check mode, and bounded freeze authorization before writes.",
       "findings": [],
@@ -5511,6 +5577,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "9d972ee8efc0357e3f52acc2def3543b3f05dc395227255033028b41ef1980ce"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "scripts/materialize_visual_retrieval_index.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "987936f4980488a4e7667e6c11dd6e4a32301eeb8021c0e2e842addbc74aed5a"
     },
     {
       "audit_status": "audited",
@@ -6681,6 +6758,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "scripts/run_local_r1_final_technical_completion_001.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "adf00da2018670a60b1b9cce430daeb17dfc46b610fc6b595b0ca48f187c622c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
@@ -6800,12 +6888,23 @@
       "sha256": "753a6785a00c9d11ab245f23bbe22d291f575b64fc3671777f8f6a40df683f22"
     },
     {
-      "path": "scripts/run_professor_fidelity_proxy_harness.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "scripts/run_professor_fidelity_proxy_c0_c3_002.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "f1c7bb3ef997ad059ce9f555078ddea5e00f3618c1493d70e5dd18b8b7e2c311"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "professor-fidelity-proxy",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "scripts/run_professor_fidelity_proxy_harness.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "bbbcbe4f3b374f3fabde16b19461f984dfe0cb9408ae937e784a79df4a48962c"
@@ -6888,12 +6987,34 @@
       "sha256": "a22d5dfe6f6507acb444a53ad0436d6e897a97bb9cb86cebec1336c66990927e"
     },
     {
-      "path": "scripts/run_true_visual_supplement_003.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual runner review plus validation and simulation verify case-ID ranking, course isolation, original-region lineage, canaries, atomic resume, cost accounting, and cumulative pre/post-call enforcement of the 10M-token ceiling.",
+      "findings": [],
+      "path": "scripts/run_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-token-quota-audit",
+      "sha256": "a4ac19fdfe3b9f0d22ce7ce80c58e60413ca777a7629ae76bd03ca5a57522a6c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Root-cause review of invalid attempt 001 found one optional display-title assumption before provider I/O. The harness now derives that non-authoritative label deterministically from frozen source-path lineage without changing cases, gold, retrieval, or gates.",
+      "findings": [],
+      "path": "scripts/run_true_visual_product_checkpoint.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "de3422519f3ce03273becf3f18ef3d68cf6f4dcaf1a5605f58f2000d9f48c951"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "scripts/run_true_visual_supplement_003.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "e9e4226f992d809d3d9d3a925fbcd55aa9e0469fdf726c47bfabf6e6901a875d"
@@ -7286,13 +7407,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-execution-freeze",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "1cd343d2784ef28cc4cdb3c0a7218a376202537568698b40bd48db6aabf06927"
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "19ac69b26e586e6a8447afc95b693b08eab0b912cb7a80efa588e4b2e7b8cadb"
     },
     {
       "audit_status": "audited",
@@ -7418,13 +7539,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Configuration review verified Luna policy-value mode is explicit, OpenAI-only, qualification-bound, and fail-closed in staging until the exact H architecture and model identity pass confirmation.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "services/api/app/config.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex H+E1 product-integration audit",
-      "sha256": "a506319d8e57bd1c9b78a0ffcb1dca8d47a14a935d6a4e8357aae041a547e164"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "b6b6968f4cb126bdcac1776083138cc8f388357f654287a7516acc51ad4420f6"
     },
     {
       "audit_status": "audited",
@@ -7440,13 +7561,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "services/api/app/factory.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "e1ecc652c1b7434f2bc89722e734cf3d5a48ad82d9938b9907c9e9cd0231f03f"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "6bc05e5e0c2d77bf15d148e1864235c393ad1b9ee85d24abc87db785a7a25edb"
     },
     {
       "audit_status": "audited",
@@ -7506,13 +7627,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-api",
-      "evidence": "Session ownership, optimistic conflict mapping, bounded inputs, policy/source validation, preview decisions, revisions, and approval routes reviewed; focused API tests passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "services/api/app/routers/onboarding.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "80a23b4ea87aa536faa853c6fd07819b963083520ad897b03a8fc35a13a63395"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "b75e5619d099ed1939b3627c87273271126f6b725b9a3b1392a0a8bf4cc2d819"
     },
     {
       "audit_status": "audited",
@@ -7550,13 +7671,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "services/api/app/schemas.py",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex audit-closure cross-review",
-      "sha256": "9d98ea21b9091f0c57d792308c5ec9afbb4e8b05545dfdf1b1066ea5b72eaee5"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "e0fc685f08f59bb152cd2f46a3f4e8506170766fa9335f1e09ec3831e23d49f8"
     },
     {
       "audit_status": "audited",
@@ -8208,12 +8329,12 @@
       "sha256": "101a4ffcac2928a83311609978808c280cfd2479614f96e8bbb5476bb3a27cd9"
     },
     {
-      "path": "src/digital_twin/evaluation/professor_fidelity_proxy.py",
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "professor-fidelity-proxy",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "src/digital_twin/evaluation/professor_fidelity_proxy.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e"
@@ -8408,13 +8529,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Public API review verified that the hash-bound visual region, provider, MaxSim, size, token, and pricing contracts are exported without replacing historical grounding interfaces.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "eb6d1d92e3030ae8867815196df51d33347d43aa10b6483d66703b4e626fff84"
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "2d59e152a1bd48313095e0d940cef6a6de3476cfb3161e1fa16d274f54d28a16"
     },
     {
       "audit_status": "audited",
@@ -8694,6 +8815,28 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Manual runtime review and focused tests verify bounded finite multi-vectors, normalized MaxSim, exact course filtering, immutable source-region lineage, 8 MB input enforcement, exact request tasks, returned index/model checks, and no-retry first-party transport.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/visual_late_interaction.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/visual_runtime.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "9b82da9a1f1047747ee1db97c91ad6241a89a2044c03d854e900810c600aeb52"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "runtime-package-surface",
       "evidence": "Manual identity export review confirmed the supported credential, session, repository, and password interfaces only; authentication regressions passed.",
       "findings": [],
@@ -8760,13 +8903,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Public onboarding exports reviewed against the modular domain facade and focused compatibility tests.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/onboarding/__init__.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "f1864f4a4fef1564e4bfbe5fad23d7984a6bf207adf2d48e236842a9cbefbe91"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "28a6a6c6d930c16cad3ae57e2f9c6562dfe77ad2ffa3554d0d3486aa7614ce5c"
     },
     {
       "audit_status": "audited",
@@ -8804,13 +8947,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Owned, one-course, optimistic-revision session state and complete release-blocker schema reviewed with persistence and API tests.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/onboarding/models.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "7da8e7947a9b2fa84108a8ff0260ae6508863b89ec5e460751330fe898eca40b"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "5708b732cadc2b6199308d56a5baf6f70f01a1b01a65dac16a3268d6331af0c9"
     },
     {
       "audit_status": "audited",
@@ -8859,35 +9002,35 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Feedback proposal classification, explicit confirmation/discard, policy version increment, preview regeneration, and unresolved rejection behavior reviewed; tests passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/onboarding/revisions.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "105459c3a8656272a59a9bb594887d0e71cb88271f1a4094f531298f977f1712"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "b3093e73e3203cb81107bc196d5ef8c9727651bc4e09249ba13cec859573e481"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Seeded deterministic graph, empty/vague turns, immutable state transitions, draft generation, revision proposal blocking, and trace uniqueness reviewed; tests passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/onboarding/service.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "08e8a3df2940513ca15786788b9f80ea5a825e189a4e655e68b7bd81f20271ca"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "78768c0a034b027d88d6c104141f529dc446d22e352bbc5fa91d444474b29382"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Compatibility facade reviewed for exact modular API binding; export regression passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/onboarding_workflow.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "77f4356f7a6ff58db1b3d287f6c5f0c2bd03980887eeaae4843516edbac30839"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "4f11adafbad448cdab2927b3cf7b0368e24f1ca17402d8adcc224e334b1b40ef"
     },
     {
       "audit_status": "audited",
@@ -8925,13 +9068,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Manual post-run review confirms the completed Jina provider operation was removed while deterministic dataset generation remains registered; any later actual-product checkpoint stays fail-closed.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Post-execution review verified issue-210 provider/method authority is revoked, only deterministic visual package generation remains allowed, and the global freeze plus held-out restrictions remain active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-result-publication-audit",
-      "sha256": "a369b5a1b69bb6e560a804c081389a02d8823a1c7ca14a8585c390d20ddd0191"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "d14ebe35556f06b1c3cfb380a0f9e87b3437a4f0262662c001124cb7e60a3df7"
     },
     {
       "audit_status": "audited",
@@ -9123,13 +9266,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "src/digital_twin/student/service.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "4ebf246f721e841c1e0baf00761462e051f07c8a134e818e274ba88e1a5578a0"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "102218ecf035f06d67d4b181f63d209e276ea33420be898f8e57b990abf47e92"
     },
     {
       "audit_status": "audited",
@@ -9156,24 +9299,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-domain",
-      "evidence": "Policy/source/preview schemas, sensitivity fail-closed behavior, course-level source mode validation, field status, and safe initial policy reviewed; tests passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "src/digital_twin/tutor_policy.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "073447f0bfc97e28cb13158951d4268add3ccae06251f2a0080a8cbd8d8bc389"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "0934e11ec009fae82994c5808d64544f91492dc5f1b9f0cbc5b04891f6b148d2"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "structured-request-intent-release-correction",
-      "evidence": "The exact bounded-authorization registry test covers the ColPali build and first-party Jina execution operations while preserving fail-closed behavior for unknown checkpoints.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex SE7-11 root-cause and confirmation audit",
-      "sha256": "63a74add5708942c4bad76502acef0c930f67fcea624422e0f56615188233a83"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "0e7acadc4b7b33294c7a7f6403fbb77b3dcb5294833c09bb2a3649526cee9854"
     },
     {
       "audit_status": "audited",
@@ -9200,13 +9343,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "repository-correctness",
-      "evidence": "Targeted review + pytest/vitest + lint against changed frontend/backend boundaries for Step-1 repository correctness closure",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "tests/api/test_onboarding_api.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "repository-maintenance",
-      "sha256": "303263a633f0e410ae93b6223064a855aa9d237dcfcd9e1e098e69aa53dd13d6"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "c16cb08c87016ffc1665213a78c586337ca2b94283f70ef292e1cc4a7181292d"
     },
     {
       "audit_status": "audited",
@@ -9453,24 +9596,24 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-verification",
-      "evidence": "Facade identity, state-copy isolation, stale-write rejection, and owner takeover refusal reviewed across memory and SQLite repositories; tests passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "tests/digital_twin/test_onboarding_facade.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "d3deae4b87e1995f44e1c9b1848861ac8ce07d5771cd64088a08644766e21500"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "ab3de1fd52c11cc5a7f573d50fda6cb1aa65cd5ff38b4e2bc4952617e0c7a9c6"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "onboarding-and-policy-verification",
-      "evidence": "Interview, source, versioned policy, stale decisions, all custom previews, revision, approval revocation, and release-state regressions reviewed and passed.",
+      "domain": "professor-feedback-revision-workflow",
+      "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
       "findings": [],
       "path": "tests/digital_twin/test_onboarding_workflow.py",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-review",
-      "sha256": "9ae6d0e1b51329873901125c06befa4a79164423ba10fabb152a6318306cc100"
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "6fb89a790f12ad37a9e2b34b03701cacd530988b9a8ceca0e3321044f762e935"
     },
     {
       "audit_status": "audited",
@@ -9519,13 +9662,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "structured-request-intent-release-correction",
-      "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Focused regression verifies the completed issue-210 parent and C0-C3 child are denied, the visual child retains package-generation only, and unrelated or held-out instruments remain denied.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-result-publication-audit",
-      "sha256": "a3b8cf190fcbe23eb3afcad3aa94f62f47003ead731641c96a203dcb2c4bdc5b"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "fdc47879dd5831dbb185e3c8e83563bfcf2d53bef13a41a6a9b30f2153f6aaef"
     },
     {
       "audit_status": "audited",
@@ -9713,6 +9856,28 @@
       "reviewed_at": "2026-08-29",
       "reviewer": "codex-primary-review",
       "sha256": "c91843458cc43c317a699c22410e99b49c2f0953adaf4b8f57805706b0238f2a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Focused unit tests cover MaxSim semantics, zero/ragged/non-finite vectors, course isolation, lineage, exact payloads, 8 MB bounds, first-party headers, response identity, index, and accounting validation.",
+      "findings": [],
+      "path": "tests/digital_twin/test_visual_late_interaction.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-successor-audit",
+      "sha256": "cdd37158d54a7fe8e889cab166460b5988e529f12377968a108742d60e2a787c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
+      "findings": [],
+      "path": "tests/digital_twin/test_visual_runtime.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "da783675558a527565f68292ab8537e780aa3a234140afebf9b0f75f0c434b39"
     },
     {
       "audit_status": "audited",
@@ -11354,12 +11519,23 @@
       "sha256": "f269fce9044f3fa1195ee73c3b8c65c0922d24784866a2b6bf5d7a5c20808366"
     },
     {
-      "path": "tests/test_local_r1_qualified_environment.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Focused regression proves the title-optional frozen source package constructs all 30 product chunks with deterministic non-empty display titles and leaves the package unchanged.",
+      "findings": [],
+      "path": "tests/test_local_r1_final_technical_completion_001.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "11fe38b8794a0a5996f3e1439547f7ba444e181063dc33cbea5ced7e7a336572"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "tests/test_local_r1_qualified_environment.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "e8b03dd7ed188e02930ac2dbd7908710bae1e187e0b8702b0c2369a4b78c06f6"
@@ -11442,12 +11618,23 @@
       "sha256": "f59b10d56895a3508cd22dd8b86c88885a99c336df73cf5658ee8485da8ce967"
     },
     {
-      "path": "tests/test_professor_fidelity_proxy_harness.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "local-r1-final-technical-completion",
+      "evidence": "Focused regression asserts the revoked provider state while preserving the synthetic-only claim boundary, deterministic hard-gate authority, and network-free simulation behavior.",
+      "findings": [],
+      "path": "tests/test_professor_fidelity_proxy_c0_c3_002.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-final-local-r1-audit",
+      "sha256": "ca095ed3fe184b3c5921cf4402ed1b42e2afe1f7f60b5f1b4dfbcc3d008268b8"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "professor-fidelity-proxy",
       "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
       "findings": [],
+      "path": "tests/test_professor_fidelity_proxy_harness.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "8dcc839f1e7a497f1dc32dcca02f879b2497e85e0dfef62111fd8dbcceea495b"
@@ -11827,12 +12014,23 @@
       "sha256": "f00863701a1396007e8b2d8f06ed27ad56e577f9ab40b34040980b77decdfe07"
     },
     {
-      "path": "tests/test_true_visual_supplement_003.py",
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "visual-late-interaction-successor",
+      "evidence": "Focused tests cover deterministic reconstruction, simulation, isolated preflight reasons, exact 10M-token quota calculation, excessive-reservation rejection, render hashes, boundary deferral, and terminal provider-authority revocation.",
+      "findings": [],
+      "path": "tests/test_true_visual_colpali_confirmation.py",
+      "reviewed_at": "2026-09-04",
+      "reviewer": "codex-colpali-result-publication-audit",
+      "sha256": "a7bb670416ddb887fe7004311f8555013bc6c5acc7c44e0ac1797fe04b9343da"
+    },
+    {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "multimodal-evaluation",
       "evidence": "Focused review verifies the revoked terminal state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and fail-closed post-run preflight behavior.",
       "findings": [],
+      "path": "tests/test_true_visual_supplement_003.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-post-release-technical-closure",
       "sha256": "71289030988a436e30e9c0b599e7d042ff010e8deb3fcbfc8f28a618ed2b85c4"
@@ -11946,72 +12144,6 @@
       "reviewed_at": "2026-09-01",
       "reviewer": "Codex whole-system architecture audit",
       "sha256": "c8436a18989117df9941be605af3d1cdf6f141f9f68feb4befa4ebcb8ffaa19e"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Post-result review verifies the completed-go-deeper terminal state, exact first-party Jina v4 binding, passed preregistered retrieval gates, 10M-token account ceiling accounting, explicit product-claim deferral, and revoked provider authorization.",
-      "findings": [],
-      "path": "research/05_evaluation/instruments/true_visual_colpali_confirmation_001.json",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-result-publication-audit",
-      "sha256": "0903fcaec87e56e77f68591af415e86ac7d3ebcbe26e527472f5443a47ed20ea"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Manual builder review plus reconstruction tests verify pinned-source extraction, deterministic SVG-to-PNG rendering, interval-based source-disjointness, balanced cases, no private data, and fail-closed hash validation.",
-      "findings": [],
-      "path": "scripts/build_true_visual_colpali_confirmation.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "6f7e210ef0eea73c350af56199ceeada4027ab38bd18e22a240e614ebba73df0"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Manual runner review plus validation and simulation verify case-ID ranking, course isolation, original-region lineage, canaries, atomic resume, cost accounting, and cumulative pre/post-call enforcement of the 10M-token ceiling.",
-      "findings": [],
-      "path": "scripts/run_true_visual_colpali_confirmation.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-token-quota-audit",
-      "sha256": "a4ac19fdfe3b9f0d22ce7ce80c58e60413ca777a7629ae76bd03ca5a57522a6c"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Manual runtime review and focused tests verify bounded finite multi-vectors, normalized MaxSim, exact course filtering, immutable source-region lineage, 8 MB input enforcement, exact request tasks, returned index/model checks, and no-retry first-party transport.",
-      "findings": [],
-      "path": "src/digital_twin/grounding/visual_late_interaction.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Focused unit tests cover MaxSim semantics, zero/ragged/non-finite vectors, course isolation, lineage, exact payloads, 8 MB bounds, first-party headers, response identity, index, and accounting validation.",
-      "findings": [],
-      "path": "tests/digital_twin/test_visual_late_interaction.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "cdd37158d54a7fe8e889cab166460b5988e529f12377968a108742d60e2a787c"
-    },
-    {
-      "audit_status": "audited",
-      "disposition": "active_audited",
-      "domain": "visual-late-interaction-successor",
-      "evidence": "Focused tests cover deterministic reconstruction, simulation, isolated preflight reasons, exact 10M-token quota calculation, excessive-reservation rejection, render hashes, boundary deferral, and terminal provider-authority revocation.",
-      "findings": [],
-      "path": "tests/test_true_visual_colpali_confirmation.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-result-publication-audit",
-      "sha256": "a7bb670416ddb887fe7004311f8555013bc6c5acc7c44e0ac1797fe04b9343da"
     },
     {
       "audit_status": "audited",

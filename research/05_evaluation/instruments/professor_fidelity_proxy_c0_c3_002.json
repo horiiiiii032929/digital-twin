@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "instrument_id": "professor-fidelity-proxy-c0-c3-002",
+  "status": "invalid-execution",
+  "owner_issue": 24,
+  "technical_integration_issue": 210,
+  "successor_of": "professor-fidelity-proxy-harness-001",
+  "dataset_id": "professor-fidelity-proxy-packet-001",
+  "dataset_file_sha256": "aaae38dae6f502000ecb6b5affbba8c3fbb10af9b412a346a0ccc2296eb0e48a",
+  "synthetic_profile_file_sha256": "d59ab6962f32e8385e95fe23724e5376c36373b27e76452e71d1e7090c62391c",
+  "conditions": [
+    {"condition_id": "C0", "evidence": "none", "policy": "generic"},
+    {"condition_id": "C1", "evidence": "oracle", "policy": "generic"},
+    {"condition_id": "C2", "evidence": "oracle", "policy": "synthetic-professor-profile-v1"},
+    {"condition_id": "C3", "evidence": "selected-product-retrieval", "policy": "synthetic-professor-profile-v1"}
+  ],
+  "fixed_controls": ["question", "generator", "reasoning_effort", "output_schema", "C1-C2 evidence"],
+  "hard_gate_authority": "deterministic",
+  "llm_review_authority": "advisory",
+  "review_design": {
+    "blinded": true,
+    "condition_labels_hidden": true,
+    "response_order_seed": 42024,
+    "reviewer_count": 2,
+    "dimensions": ["teaching_style", "explanation_depth", "example_policy", "misconception_handling", "academic_integrity"],
+    "rating_scale": [1, 2, 3, 4, 5]
+  },
+  "provider_binding": {
+    "verified_at": "2026-09-04T16:26:43Z",
+    "maximum_age_hours_for_execution": 24,
+    "api_url": "https://api.openai.com/v1/responses",
+    "credential_environment_variable": "OPENAI_API_KEY",
+    "routing": "direct-openai-only-no-router-no-fallback",
+    "request_store": false,
+    "background_mode": false,
+    "maximum_transport_retries_per_call": 1,
+    "maximum_transport_retries_total": 2,
+    "generator": {
+      "binding_id": "professor-fidelity-c0-c3-gpt-5.4-mini-002",
+      "provider_model": "gpt-5.4-mini-2026-03-17",
+      "documented_revision": "gpt-5.4-mini-2026-03-17",
+      "reasoning_effort": "none",
+      "max_output_tokens": 900,
+      "timeout_seconds": 120,
+      "pricing_usd_per_million_input_tokens": 0.75,
+      "pricing_usd_per_million_output_tokens": 4.5,
+      "model_source": "https://developers.openai.com/api/docs/models/gpt-5.4-mini"
+    },
+    "routine_reviewer": {
+      "binding_id": "professor-fidelity-c0-c3-gpt-5.4-nano-002",
+      "provider_model": "gpt-5.4-nano-2026-03-17",
+      "documented_revision": "gpt-5.4-nano-2026-03-17",
+      "reasoning_effort": "none",
+      "max_output_tokens": 1800,
+      "timeout_seconds": 120,
+      "pricing_usd_per_million_input_tokens": 0.2,
+      "pricing_usd_per_million_output_tokens": 1.25,
+      "model_source": "https://developers.openai.com/api/docs/models/gpt-5.4-nano"
+    },
+    "semantic_reviewer": {
+      "binding_id": "professor-fidelity-c0-c3-gpt-5.4-002",
+      "provider_model": "gpt-5.4-2026-03-05",
+      "documented_revision": "gpt-5.4-2026-03-05",
+      "reasoning_effort": "none",
+      "max_output_tokens": 1800,
+      "timeout_seconds": 120,
+      "pricing_usd_per_million_input_tokens": 2.5,
+      "pricing_usd_per_million_output_tokens": 15.0,
+      "model_source": "https://developers.openai.com/api/docs/models/gpt-5.4"
+    },
+    "retention_source": "https://developers.openai.com/api/docs/guides/your-data",
+    "privacy_boundary": "public-synthetic-inputs-only"
+  },
+  "execution_limits": {
+    "generator_calls": 48,
+    "review_calls": 24,
+    "maximum_calls_including_retries": 80,
+    "maximum_cost_usd": 3.0
+  },
+  "quality_gates": {
+    "c1_c3_hard_gate_defects": 0,
+    "c2_profile_adherence_wins_over_c1_minimum": 8,
+    "mean_c2_profile_uplift_minimum": 0.5,
+    "mean_c3_drop_from_c2_maximum": 0.5
+  },
+  "decision_boundary": {
+    "passing_status": "completed-go-deeper",
+    "real_professor_fidelity_claim_allowed": false,
+    "synthetic_profile_diagnostic_only": true,
+    "professor_approval_required_for_reference": true
+  },
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
+  "authorization": {
+    "authorized_at": "2026-09-04T16:29:31Z",
+    "authorization_text": "Authorize local-r1-final-technical-completion-001.",
+    "scope": "one bounded execution through the parent completion program",
+    "revoked_at": "2026-09-04T16:54:57Z",
+    "outcome": "invalid-execution"
+  },
+  "private_data_authorized": false,
+  "result_record": "research/05_evaluation/records/professor-fidelity-proxy-c0-c3-002-invalid.json"
+}

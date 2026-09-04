@@ -20,6 +20,7 @@ const SESSION: OnboardingSession = {
   preview_decisions: {},
   evidence_snapshots: [],
   revision_proposal: null,
+  revision_history: [],
   approval_checklist: [],
   release_blockers: {},
   trace: [],

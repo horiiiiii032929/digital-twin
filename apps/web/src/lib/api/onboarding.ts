@@ -172,3 +172,16 @@ export function discardRevisionProposal(
     },
   )
 }
+
+export function selectRevisionAlternative(
+  sessionId: string,
+  alternativeId: string,
+): Promise<OnboardingSession> {
+  return request<OnboardingSession>(
+    `/api/onboarding/sessions/${pathSegment(sessionId)}/revision-proposal/select`,
+    {
+      method: "POST",
+      body: JSON.stringify({ alternative_id: alternativeId }),
+    },
+  )
+}

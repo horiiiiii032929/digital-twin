@@ -107,6 +107,10 @@ class CustomPreviewRequest(BaseModel):
     tag: PromptTag
 
 
+class RevisionAlternativeSelectionRequest(BaseModel):
+    alternative_id: str = Field(min_length=1, max_length=128)
+
+
 class StudentMessageRequest(BaseModel):
     content: str = Field(min_length=1, max_length=8_000)
     request_id: str = Field(min_length=1, max_length=128)

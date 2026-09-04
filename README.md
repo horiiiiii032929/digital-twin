@@ -6,8 +6,9 @@ rollback; authorized students receive autonomous, persistent,
 citation-grounded tutoring through the accepted
 [tutoring graph](docs/autonomous-tutoring-graph.md).
 
-The active outcome is a hosted, supervisor-reviewable release candidate followed
-by an approval-gated real-user pilot—not another local demo or model benchmark.
+The active outcome is a complete, supervisor-reviewable local research release
+with governed autonomy, followed by explicitly separate professor and real-user
+evidence. Durable public hosting is not part of the current release claim.
 Start with the [release plan](docs/release-plan.md), then use the
 [current status](docs/current-status.md) for dated evidence and blockers.
 
@@ -60,6 +61,16 @@ The project's technical standard, learning commitments, and strengthened Sprint
   ignored run products when their bound local artifacts are present. This is
   intentionally separate from `check` so a fresh clone does not access sealed
   or machine-local evaluation output.
+- `npm run verify:local-r1-final-technical-completion`: validate the frozen
+  visual-product and synthetic C0-C3 program without calling a provider.
+- `npm run simulate:local-r1-final-technical-completion`: run the complete
+  network-free transport and scoring simulation.
+- `npm run preflight:local-r1-final-technical-completion`: check credentials,
+  bindings, quota, output exclusivity, authorization, and a clean revision.
+- `npm run preflight:visual-product-index -- --release-id <id>`: prove that a
+  published release can be materialized from the qualified visual ledger.
+- `npm run materialize:visual-product-index -- --release-id <id>`: write the
+  ignored, release-bound visual index after the preflight succeeds.
 
 Historical tests that require ignored ledgers, prior generated indexes, or the
 known sealed package are also excluded from the default API suite. Their source

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-007-attempt-001-invalid",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-007",
+  "date": "2026-09-05",
+  "status": "invalid-execution",
+  "code_revision": "a31cd227ff66ff346f1500eb699c8291d39fd544",
+  "stage_reached": "compose-startup-settings-validation",
+  "bulk_journey_started": false,
+  "hidden_or_sealed_data_read": false,
+  "provider_usage": {
+    "calls": 0,
+    "reported_input_tokens": 0,
+    "reported_output_tokens": 0,
+    "reported_cost_usd": 0.0
+  },
+  "failure": {
+    "category": "environment-credential-forwarding",
+    "message": "The API failed closed because the qualification Compose process did not receive OPENAI_API_KEY from the repository-root environment.",
+    "root_cause": "The ignored qualified runtime file intentionally contains no credential, while the launch command sourced only that file and did not preserve the separately stored root credential for Compose interpolation.",
+    "correction_boundary": "Load the repository-root credential into the process environment without printing or copying it, then source the non-secret qualified selectors and start a fresh stack. No product method, source, profile, gate, image source, or qualification check may change."
+  },
+  "decision": "Invalid execution; preserve the failed-closed result and permit one environment-only corrective attempt with the credential passed in memory."
+}

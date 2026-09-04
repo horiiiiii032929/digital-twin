@@ -1,10 +1,78 @@
 # Current project status
 
-Status date: 2026-09-04
+Status date: 2026-09-05
 
 This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
+
+## Final local R1.1 technical checkpoint
+
+Issue #210 owns one finite post-release checkpoint. The professor-feedback
+workflow now persists immutable pending, confirmed, discarded, and superseded
+revision decisions, detects multi-category conflicts, rejects stale or duplicate
+confirmation, invalidates prior preview approval after a confirmed change, and
+leaves the published release unchanged until reapproval and republication.
+
+The qualified Jina v4 late-interaction retriever is now integrated behind an
+explicit product mode. General text questions retain the existing text/OCR
+path. Visual questions use a release-, profile-, source-, region-, crop-, and
+render-hash-bound local index; only transient provider failure may fall back to
+text/OCR. Model identity or lineage drift fails closed. Persistent accounting
+imports the historical 144,639 tokens and enforces the researcher-supplied
+10,000,000-token account ceiling across restarts. Runtime startup is bound to
+the public component-ledger SHA-256 and does not require the ignored raw ledger
+inside a release image.
+
+`true-visual-product-checkpoint-001` evaluated 30 answerable and 30 boundary
+actual-product cases. `professor-fidelity-proxy-c0-c3-002` froze the existing
+12-case synthetic C0-C3 packet with GPT-5.4 Mini generation and blinded GPT-5.4
+Nano/GPT-5.4 advisory review. On 2026-09-05 SGT the researcher authorized the
+one-shot parent program `local-r1-final-technical-completion-001`. Execution is
+now closed: visual quality validly Refined to text/OCR fallback, while the
+C0-C3 proxy was operationally invalid before inference. The known
+10,000+1,000 package was not read, rerun, or rescored.
+
+The first authorized execution at revision `e3c15d7` was operationally invalid
+before any provider call because the runner required an optional source display
+`title`. Zero responses were persisted, hidden gold remained closed, and cost
+was USD 0. The invalid evidence is registered. The sole allowed harness
+correction derives that non-authoritative title from existing source-path
+lineage; no case, gold, method, gate, provider, or budget changed.
+
+The corrected actual-product visual run at revision `a364010` is valid
+`completed-refine`: Jina v4 and text/OCR each produced 20/30 fully grounded
+visual answers. Candidate boundary releases were 0/30, but one wrong-region
+citation/unsupported claim remained and complete original-region lineage was
+20/30. Only eight questions activated the visual route. Local R1.1 therefore
+retains `text-ocr-fallback`; the 60 cases will not be tuned or rerun.
+
+The independent C0-C3 synthetic proxy was operationally invalid when the direct
+OpenAI endpoint rejected unsupported `uniqueItems` in its response schema on
+the first request. It used zero reported tokens/cost and produced no profile
+quality estimate. The finite correction allowance was already consumed, so it
+is preserved without retry. All program/provider authority is revoked, #24
+remains open, and exact local qualification 007 was completed with these
+limitations.
+
+Exact local qualification 007 is now `completed-keep` for the local R1.1
+research-demo scope. The final source revision passed 25/25 live HTTPS, 6/6
+restart, 6/6 clean-restore, 3/3 T0 rollback, and 3/3 governed V2.1 restoration
+checks: 43/43 in total. Playwright desktop and exact 390-by-844 browser smoke
+found no critical defect or horizontal overflow, with labelled controls and
+Email → Password → Sign in keyboard order. The live API p95 was 5.03 ms and the
+journey used zero provider calls or cost. API and web image digests, release
+bindings, backup, journey, and screenshot hashes are recorded in the immutable
+result.
+
+Qualification 007 retains `text-ocr-fallback` and T0 rollback. It does not
+change the measured 50.00% academic grounding floor, establish visual product
+quality, or produce professor-fidelity evidence. The live journey used the
+deterministic fast path, so provider-backed autonomous behavior remains bound
+to confirmation 024 rather than newly established by this run. Attempt 001 is
+preserved as invalid because the first Compose launch did not pass the
+separately stored root OpenAI credential; the fresh attempt changed only that
+environment forwarding and no product method or check.
 
 ## Post-release multi-concept correction
 
@@ -125,22 +193,22 @@ findings.
 
 ## Endgame repository and Project state
 
-PRs #199 through #204 are merged. The refreshed final-report evidence
-inventory and exact gate totals are regenerated after each terminal result.
-Qualification 006 passed 1,867 Python/API tests and 50 frontend tests;
-repository correctness was 1,087/1,087 and the execution freeze covered
-175/175 guarded entrypoints.
+PRs #199 through #204 are merged, and PR #211 carries the terminal R1.1
+evidence. The refreshed final-report evidence inventory includes qualification
+007 and its invalid predecessor. The final repository gate passed 1,906
+Python/API tests and 51 frontend tests; repository correctness is 1,105/1,105
+and the execution freeze covers 181/181 guarded entrypoints.
 
-The exact evaluated local release revision
-`7901c9e8b19aa4ba9ccc5cc2dfa8efc55008c491` is preserved by annotated tag
-`local-r1-governed-v2.1-qualification-006` and published as the Course Digital
-Twin R1 research release. Issues #8, #157, #105, #88, #9, #25, #198, and #203 are
-closed and their Project cards are `Done`. Product release is `Keep`; the
-separate academic factual result remains `No Release` for a high grounding
-claim. The active post-release deliverables are the professor checkpoint #44
-and final report/demo package #13. Professor fidelity #24, external human
-evidence #10, true-visual confirmation #131, and the private real-source pilot
-#102 stay open as explicitly unclaimed future evidence, not unfinished local
+The exact evaluated application source revision is
+`60495ec5018c791fe591151a8f3c67a6ee1a0f17`; its API and web image digests are
+recorded by qualification 007. The merged evidence revision is preserved by
+annotated tag `local-r1-governed-v2.1-qualification-007` as the Course Digital
+Twin R1.1 local research release. Product operation is `Keep`; the separate
+academic factual result remains `No Release` for a high-grounding claim. Issue
+#210 is complete. The professor checkpoint #44 and final report/demo package
+#13 remain deliverables. Professor fidelity #24, external human evidence #10,
+representative visual capability #131, and the private real-source pilot #102
+remain explicitly unclaimed future evidence rather than unfinished local R1.1
 engineering.
 
 Fresh confirmation issue #196 is complete. The

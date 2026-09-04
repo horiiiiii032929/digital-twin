@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-007",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-007",
+  "date": "2026-09-05",
+  "status": "completed-keep",
+  "code_revision": "60495ec5018c791fe591151a8f3c67a6ee1a0f17",
+  "supersedes_for_exact_composition": "local-r1-governed-v2-1-release-qualification-006",
+  "corrective_predecessor": "local-r1-governed-v2-1-release-qualification-007-attempt-001-invalid",
+  "decision": "Keep for a local R1.1 research demo with text/OCR visual fallback; academic factual grounding and professor fidelity remain outside the passed claim.",
+  "runtime": {
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "generator_mode": "deterministic",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "visual_retrieval_mode": "text-ocr-fallback",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_version": "v2.1-floor-004-h-e1",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-release-binding-correction-001",
+    "multi_concept_confirmation": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+    "professor_revision_workflow": "revision-decision-record-v1",
+    "t0_rollback_available": true
+  },
+  "results": {
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "clean_restore": "6/6",
+    "t0_rollback": "3/3",
+    "governed_v2_1_restoration": "3/3",
+    "total_machine_checks": "43/43",
+    "desktop_render": "passed",
+    "mobile_390x844_render": "passed",
+    "horizontal_overflow": false,
+    "keyboard_order_and_accessible_names": "passed",
+    "critical_browser_defects": 0,
+    "live_api_p95_ms": 5.03,
+    "backup_schema_version": 16,
+    "backup_data_files": 7
+  },
+  "browser_method": {
+    "tool": "Playwright-controlled Chromium",
+    "surface": "the actual local HTTPS application",
+    "viewports": [
+      "desktop",
+      "390x844"
+    ],
+    "keyboard_order": "Email -> Password -> Sign in",
+    "accessible_names_missing": 0,
+    "mechanical_design_detector_findings": 0,
+    "console_errors": "one expected unauthenticated 401 from /api/auth/session",
+    "console_warnings": 0
+  },
+  "provider_usage": {
+    "autonomy_planner_calls": 0,
+    "autonomy_planner_tokens": 0,
+    "generator_calls": 0,
+    "generator_tokens": 0,
+    "reported_cost_usd": 0.0
+  },
+  "image_digests": {
+    "api": "sha256:5484d10ed118eed233fd6b27d5041d8861e6804a8487e4c37d4a20cff9465e7a",
+    "web": "sha256:b2b8e1b4b64870f5a05835784fc0cbe10640a7915907bc681a260f4bfbd2b819"
+  },
+  "binding_hashes": {
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "t1_binding_record_sha256": "c5bd05cc0e763492aadd6e3effdc8211175302ff3208568123cd435e111c5e94",
+    "qualified_environment_example_sha256": "eaa6c57fc1390f78034d965ea57efe46588c1a3fe3266acdfb26ba4275826249",
+    "compose_sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
+  },
+  "artifact_hashes": {
+    "live_journey_sha256": "64c6fb26be38a014f228c94b844599b306fb0049fc0fca004f80cdeb02769cf4",
+    "restart_sha256": "7836941d02942108ebd98a59dc6a57a84db24c0f94c0e6ee0c5d9c9b30a528ad",
+    "clean_restore_sha256": "7836941d02942108ebd98a59dc6a57a84db24c0f94c0e6ee0c5d9c9b30a528ad",
+    "t0_rollback_sha256": "2edc71aa5e7a601051bc4dee5d0fbb1fcd32f24e2eac2e16f88cc95010792f4b",
+    "v2_restore_sha256": "06032bd108ab3f7f99e2597ba900bbf9591d6e4949f2b65989c4fe45f7959e76",
+    "runtime_backup_sha256": "ea65e55418e1c99a53db4cd5eebbd6492a631bddeb1bb66ba9d085fa9ab904bb",
+    "desktop_screenshot_sha256": "6f4792ec80152690039d425d4e4c26b8fb0adade9b2deae7a6dd68bc58f869f7",
+    "mobile_screenshot_sha256": "d6c151775beda99375f3c9c1647d441a313759a848f2d85c3911c4e5723b8291"
+  },
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false,
+  "release_scope": "qualified local R1.1 research demo on the development Mac through internal-CA HTTPS",
+  "limitations": [
+    "The selected evidence gate remains a measured development floor at 50.00% overall task success and does not meet the absolute academic factual-grounding threshold.",
+    "The actual-product visual candidate failed its frozen quality gates, so the release retains text/OCR fallback and makes no representative true-visual capability claim.",
+    "The C0-C3 synthetic profile proxy was operationally invalid and produced no professor-fidelity estimate.",
+    "The live journey exercised deterministic fast paths and made zero Luna planner calls; provider-backed autonomous behavior remains supported by immutable confirmation-024 rather than this qualification.",
+    "The known 10,000+1,000 package remained immutable and was not read, rerun, or rescored.",
+    "No real-professor fidelity, real-student usability, learning improvement, durable hosting, or broad accessibility claim is established."
+  ]
+}

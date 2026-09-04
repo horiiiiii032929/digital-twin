@@ -5,6 +5,8 @@ from src.digital_twin.onboarding_workflow import (
     add_source_inventory_item,
     confirm_revision_proposal,
     create_session,
+    discard_revision_proposal,
+    select_revision_alternative,
     set_preview_decision,
     submit_message,
     update_approval_checklist_item,
@@ -171,9 +173,7 @@ def test_completed_interview_generates_policy_preview_and_approval_items():
     ]
     assert session.policy_version == 1
     assert len(session.evidence_snapshots) == 3
-    assert [
-        item.id for item in session.approval_checklist if item.blocks_release
-    ] == [
+    assert [item.id for item in session.approval_checklist if item.blocks_release] == [
         "source_scope",
         "private_sources",
         "source_strictness",
@@ -262,7 +262,9 @@ def test_preview_generation_includes_source_audit_warnings_decisions_and_evidenc
     session = _complete_interview()
 
     grounding = next(
-        preview for preview in session.preview_cases if preview.id == "external-grounding"
+        preview
+        for preview in session.preview_cases
+        if preview.id == "external-grounding"
     )
 
     assert grounding.tag == "source_grounding"
@@ -320,8 +322,9 @@ def test_rejected_preview_blocks_release_until_revised_or_accepted():
 def test_missing_custom_preview_has_actionable_release_blocker():
     session = _complete_interview()
 
-    assert "custom-preview preview is not accepted." not in (
-        session.release_blockers["preview_acceptance"]
+    assert (
+        "custom-preview preview is not accepted."
+        not in (session.release_blockers["preview_acceptance"])
     )
     assert session.release_blockers["preview_acceptance"] == [
         "academic-integrity preview is not accepted.",
@@ -345,8 +348,9 @@ def test_every_added_custom_preview_requires_current_acceptance() -> None:
     )
     session = set_preview_decision(session, "custom-1", "accepted")
 
-    assert "custom-2 preview is not accepted." in (
-        session.release_blockers["preview_acceptance"]
+    assert (
+        "custom-2 preview is not accepted."
+        in (session.release_blockers["preview_acceptance"])
     )
     custom_check = next(
         item
@@ -425,13 +429,13 @@ def test_policy_change_versions_preview_and_revokes_stale_acceptance() -> None:
         for preview in changed.preview_cases
     )
     assert all(
-        record.policy_version == changed.policy_version
-        and record.decision == "pending"
+        record.policy_version == changed.policy_version and record.decision == "pending"
         for record in changed.preview_decisions.values()
     )
     assert changed.policy.release_status == ReleaseStatus.BLOCKED
-    assert "external-grounding preview is not accepted." in (
-        changed.release_blockers["preview_acceptance"]
+    assert (
+        "external-grounding preview is not accepted."
+        in (changed.release_blockers["preview_acceptance"])
     )
 
 
@@ -448,8 +452,9 @@ def test_release_check_rejects_stale_preview_decision_even_if_marked_accepted() 
     assert session.release_blockers["preview_decisions"] == [
         "external-grounding decision is for a stale policy version."
     ]
-    assert "external-grounding preview is not accepted." in (
-        session.release_blockers["preview_acceptance"]
+    assert (
+        "external-grounding preview is not accepted."
+        in (session.release_blockers["preview_acceptance"])
     )
 
 
@@ -560,7 +565,101 @@ def test_chat_feedback_creates_confirmable_revision_and_regenerates_preview():
     assert confirmed.preview_decisions["academic-integrity"].decision == "pending"
     assert confirmed.preview_decisions["academic-integrity"].revision_resolved is True
     assert confirmed.release_blockers["preview_decisions"] == []
-    assert any(snapshot.policy_version == 2 for snapshot in confirmed.evidence_snapshots)
+    assert any(
+        snapshot.policy_version == 2 for snapshot in confirmed.evidence_snapshots
+    )
+    assert len(confirmed.revision_history) == 1
+    assert confirmed.revision_history[0].status == "confirmed"
+    assert confirmed.revision_history[0].base_policy_version == 1
+    assert confirmed.revision_history[0].target_policy_version == 2
+
+
+def test_multi_category_feedback_requires_explicit_resolution() -> None:
+    session = _complete_interview()
+
+    proposed = submit_message(
+        session,
+        "The tone is too friendly and the citation source is unclear.",
+    )
+
+    assert proposed.revision_proposal is not None
+    assert [row.id for row in proposed.revision_proposal.alternatives] == [
+        "source-grounding",
+        "tone",
+    ]
+    assert proposed.revision_proposal.selected_alternative_id is None
+
+    unchanged = submit_message(proposed, "confirm")
+    assert unchanged.policy_version == 1
+    assert unchanged.revision_proposal is not None
+    assert "Choose one revision option" in unchanged.messages[-1].content
+
+    selected = select_revision_alternative(unchanged, "tone")
+    assert selected.revision_proposal is not None
+    assert selected.revision_proposal.selected_alternative_id == "tone"
+    assert selected.revision_proposal.affected_policy_fields == ["tone_guidance"]
+
+    confirmed = confirm_revision_proposal(selected)
+    assert confirmed.policy_version == 2
+    assert confirmed.revision_history[-1].selected_alternative_id == "tone"
+
+
+def test_new_feedback_supersedes_pending_proposal_and_preserves_history() -> None:
+    session = _complete_interview()
+    first = submit_message(session, "The tone should be friendlier.")
+    replacement = submit_message(first, "The citation source is unclear.")
+
+    assert replacement.revision_proposal is not None
+    assert replacement.revision_proposal.selected_alternative_id == "source-grounding"
+    assert len(replacement.revision_history) == 1
+    assert replacement.revision_history[0].status == "superseded"
+
+
+def test_discard_preserves_immutable_revision_decision() -> None:
+    session = _complete_interview()
+    proposed = submit_message(session, "The tone should be friendlier.")
+
+    discarded = discard_revision_proposal(proposed)
+
+    assert discarded.revision_proposal is None
+    assert discarded.policy_version == 1
+    assert len(discarded.revision_history) == 1
+    assert discarded.revision_history[0].status == "discarded"
+
+
+def test_revision_confirmation_rejects_stale_policy_version() -> None:
+    session = _complete_interview()
+    proposed = submit_message(session, "The tone should be friendlier.")
+    assert proposed.revision_proposal is not None
+    proposed.policy_version += 1
+
+    with pytest.raises(ValueError, match="revision_proposal_stale"):
+        confirm_revision_proposal(proposed)
+
+
+def test_revision_confirmation_rejects_changed_review_artifact() -> None:
+    session = _complete_interview()
+    proposed = submit_message(session, "The tone should be friendlier.")
+    proposed.preview_cases[0].configured_response = "Changed after proposal creation."
+
+    with pytest.raises(ValueError, match="revision_artifact_stale"):
+        confirm_revision_proposal(proposed)
+
+
+def test_source_feedback_preserves_structured_source_policy() -> None:
+    session = _complete_interview()
+    proposed = submit_message(session, "Every citation needs a visible source label.")
+
+    confirmed = confirm_revision_proposal(proposed)
+    field = next(
+        item
+        for item in confirmed.policy.safety_compliance
+        if item.id == "knowledge_source_policy"
+    )
+
+    assert isinstance(field.value, dict)
+    assert field.value["external_sources_require_visible_labels"] is True
+    assert field.status == FieldStatus.NEEDS_REVIEW
 
 
 def test_submitting_after_completion_preserves_review_state_and_artifacts():

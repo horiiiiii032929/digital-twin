@@ -47,9 +47,10 @@ def test_create_supervisor_demo_returns_populated_synthetic_review_state():
             ),
         }
     ]
-    assert client.get(
-        f"/api/onboarding/sessions/{payload['session_id']}"
-    ).status_code == 200
+    assert (
+        client.get(f"/api/onboarding/sessions/{payload['session_id']}").status_code
+        == 200
+    )
 
 
 def test_submit_message_advances_session():
@@ -94,9 +95,7 @@ def test_cors_allows_vite_fallback_localhost_port():
     )
 
     assert response.status_code == 200
-    assert response.headers["access-control-allow-origin"] == (
-        "http://localhost:5174"
-    )
+    assert response.headers["access-control-allow-origin"] == ("http://localhost:5174")
 
 
 def test_application_factory_isolates_default_session_repositories():
@@ -105,12 +104,18 @@ def test_application_factory_isolates_default_session_repositories():
 
     created = first_client.post("/api/onboarding/sessions").json()
 
-    assert first_client.get(
-        f"/api/onboarding/sessions/{created['session_id']}"
-    ).status_code == 200
-    assert second_client.get(
-        f"/api/onboarding/sessions/{created['session_id']}"
-    ).status_code == 404
+    assert (
+        first_client.get(
+            f"/api/onboarding/sessions/{created['session_id']}"
+        ).status_code
+        == 200
+    )
+    assert (
+        second_client.get(
+            f"/api/onboarding/sessions/{created['session_id']}"
+        ).status_code
+        == 404
+    )
 
 
 def test_source_inventory_routes_create_and_update_metadata_only_items():
@@ -184,9 +189,7 @@ def test_custom_preview_rejects_whitespace_only_prompt() -> None:
     )
 
     assert response.status_code == 422
-    assert response.json()["detail"]["code"] == (
-        "custom_preview_prompt_required"
-    )
+    assert response.json()["detail"]["code"] == ("custom_preview_prompt_required")
 
 
 def test_preview_decision_custom_prompt_revision_and_approval_routes():
@@ -202,9 +205,10 @@ def test_preview_decision_custom_prompt_revision_and_approval_routes():
     )
 
     assert decision_response.status_code == 200
-    assert decision_response.json()["preview_decisions"]["academic-integrity"][
-        "decision"
-    ] == "rejected"
+    assert (
+        decision_response.json()["preview_decisions"]["academic-integrity"]["decision"]
+        == "rejected"
+    )
 
     custom_response = client.post(
         f"/api/onboarding/sessions/{session_id}/preview-cases",
@@ -251,6 +255,41 @@ def test_preview_decision_custom_prompt_revision_and_approval_routes():
         if item["id"] == "integrity"
     )
     assert integrity_item["checked"] is True
+
+
+def test_revision_alternative_selection_and_history_routes() -> None:
+    session_id = _completed_session()["session_id"]
+    proposed = client.post(
+        f"/api/onboarding/sessions/{session_id}/messages",
+        json={
+            "content": "The tone is too friendly and the citation source is unclear."
+        },
+    )
+    assert proposed.status_code == 200
+    proposal = proposed.json()["revision_proposal"]
+    assert proposal["selected_alternative_id"] is None
+
+    blocked = client.post(
+        f"/api/onboarding/sessions/{session_id}/revision-proposal/confirm"
+    )
+    assert blocked.status_code == 409
+    assert blocked.json()["detail"]["code"] == "revision_alternative_required"
+
+    selected = client.post(
+        f"/api/onboarding/sessions/{session_id}/revision-proposal/select",
+        json={"alternative_id": "tone"},
+    )
+    assert selected.status_code == 200
+    assert selected.json()["revision_proposal"]["selected_alternative_id"] == "tone"
+
+    confirmed = client.post(
+        f"/api/onboarding/sessions/{session_id}/revision-proposal/confirm"
+    )
+    assert confirmed.status_code == 200
+    payload = confirmed.json()
+    assert payload["policy_version"] == 2
+    assert payload["revision_history"][-1]["status"] == "confirmed"
+    assert payload["revision_history"][-1]["selected_alternative_id"] == "tone"
 
 
 def _completed_session():

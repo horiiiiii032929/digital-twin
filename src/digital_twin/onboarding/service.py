@@ -29,6 +29,7 @@ from src.digital_twin.onboarding.revisions import (
     _proposal_from_feedback,
     confirm_revision_proposal,
     discard_revision_proposal,
+    supersede_revision_proposal,
 )
 from src.digital_twin.tutor_policy import ChatMessage, WorkflowTraceItem
 
@@ -78,6 +79,20 @@ def _process_turn(state: GraphState) -> GraphState:
 
     if session.current_step == "professor_approval":
         if session.revision_proposal and _is_confirmation_message(user_message):
+            if (
+                len(session.revision_proposal.alternatives) > 1
+                and session.revision_proposal.selected_alternative_id is None
+            ):
+                session.messages.append(
+                    ChatMessage(
+                        role="assistant",
+                        content=(
+                            "This feedback matches multiple policy areas. "
+                            "Choose one revision option before confirming."
+                        ),
+                    )
+                )
+                return {"session": session, "user_message": user_message}
             session = confirm_revision_proposal(session)
             session.messages.append(
                 ChatMessage(
@@ -102,15 +117,24 @@ def _process_turn(state: GraphState) -> GraphState:
 
         proposal = _proposal_from_feedback(session, user_message)
         if proposal is not None:
-            session.revision_proposal = proposal
+            session = supersede_revision_proposal(session)
             _invalidate_release_approval(session)
+            _recompute_release_state(session)
+            proposal = _proposal_from_feedback(session, user_message)
+            if proposal is None:  # pragma: no cover - deterministic classification
+                raise RuntimeError("revision proposal classification changed")
+            session.revision_proposal = proposal
             _recompute_release_state(session)
             session.messages.append(
                 ChatMessage(
                     role="assistant",
                     content=(
-                        "I mapped that feedback to a policy revision. Confirm "
-                        f"to apply: {proposal.proposed_value}"
+                        "I mapped that feedback to policy revision options. "
+                        + (
+                            "Choose one option before confirming."
+                            if len(proposal.alternatives) > 1
+                            else f"Confirm to apply: {proposal.proposed_value}"
+                        )
                     ),
                 )
             )
@@ -192,7 +216,9 @@ def _process_turn(state: GraphState) -> GraphState:
     if next_step is None:
         session.current_step = "professor_approval"
         session.policy = _build_policy(session.answers)
-        session.preview_cases = _build_preview_cases(session.policy, session.policy_version)
+        session.preview_cases = _build_preview_cases(
+            session.policy, session.policy_version
+        )
         session.preview_decisions = {
             preview.id: _decision_record_for(preview)
             for preview in session.preview_cases

@@ -1,0 +1,429 @@
+{
+  "cases": [
+    {
+      "case_id": "tvcp001-cluster-001-a",
+      "cluster_id": "tvcp001-cluster-001",
+      "course_id": "operating-systems",
+      "question": "In the table, which mode is privileged and what code typically runs there?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-001-b",
+      "cluster_id": "tvcp001-cluster-001",
+      "course_id": "operating-systems",
+      "question": "Using tvcp001-asset-001, what is the measured lunar network latency?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-002-a",
+      "cluster_id": "tvcp001-cluster-002",
+      "course_id": "operating-systems",
+      "question": "Which call type typically causes a mode switch?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-002-b",
+      "cluster_id": "tvcp001-cluster-002",
+      "course_id": "operating-systems",
+      "question": "Use tvcp001-asset-002 to state the molecular biology grading rule.",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-003-a",
+      "cluster_id": "tvcp001-cluster-003",
+      "course_id": "operating-systems",
+      "question": "According to the table, which side is configurable?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-003-b",
+      "cluster_id": "tvcp001-cluster-003",
+      "course_id": "operating-systems",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-003?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-004-a",
+      "cluster_id": "tvcp001-cluster-004",
+      "course_id": "operating-systems",
+      "question": "What interface characteristic distinguishes a library from an application?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-004-b",
+      "cluster_id": "tvcp001-cluster-004",
+      "course_id": "operating-systems",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-004.",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-005-a",
+      "cluster_id": "tvcp001-cluster-005",
+      "course_id": "operating-systems",
+      "question": "Which system call corresponds to fread()?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-005-b",
+      "cluster_id": "tvcp001-cluster-005",
+      "course_id": "operating-systems",
+      "question": "Why does tvcp001-asset-005 prove that every algorithm is constant time?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-006-a",
+      "cluster_id": "tvcp001-cluster-006",
+      "course_id": "operating-systems",
+      "question": "Which open() flags correspond to fopen() mode a+?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-006-b",
+      "cluster_id": "tvcp001-cluster-006",
+      "course_id": "operating-systems",
+      "question": "Using tvcp001-asset-006, what is the measured lunar network latency?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-007-a",
+      "cluster_id": "tvcp001-cluster-007",
+      "course_id": "operating-systems",
+      "question": "What running time is listed for process P3?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-007-b",
+      "cluster_id": "tvcp001-cluster-007",
+      "course_id": "operating-systems",
+      "question": "Use tvcp001-asset-007 to state the molecular biology grading rule.",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-008-a",
+      "cluster_id": "tvcp001-cluster-008",
+      "course_id": "operating-systems",
+      "question": "Which execution unit shares a virtual address space with peers?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-008-b",
+      "cluster_id": "tvcp001-cluster-008",
+      "course_id": "operating-systems",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-008?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-009-a",
+      "cluster_id": "tvcp001-cluster-009",
+      "course_id": "operating-systems",
+      "question": "What memory size is recorded for my_vm?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-009-b",
+      "cluster_id": "tvcp001-cluster-009",
+      "course_id": "operating-systems",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-009.",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-010-a",
+      "cluster_id": "tvcp001-cluster-010",
+      "course_id": "operating-systems",
+      "question": "Which template and size are listed for disk 1?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-010-b",
+      "cluster_id": "tvcp001-cluster-010",
+      "course_id": "operating-systems",
+      "question": "Why does tvcp001-asset-010 prove that every algorithm is constant time?",
+      "slice": "table"
+    },
+    {
+      "case_id": "tvcp001-cluster-011-a",
+      "cluster_id": "tvcp001-cluster-011",
+      "course_id": "data-structures",
+      "question": "What bounds relate n and q in the displayed invariant?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-011-b",
+      "cluster_id": "tvcp001-cluster-011",
+      "course_id": "data-structures",
+      "question": "Using tvcp001-asset-011, what is the measured lunar network latency?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-012-a",
+      "cluster_id": "tvcp001-cluster-012",
+      "course_id": "data-structures",
+      "question": "What upper bound on height is shown?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-012-b",
+      "cluster_id": "tvcp001-cluster-012",
+      "course_id": "data-structures",
+      "question": "Use tvcp001-asset-012 to state the molecular biology grading rule.",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-013-a",
+      "cluster_id": "tvcp001-cluster-013",
+      "course_id": "data-structures",
+      "question": "How is Euler's constant defined in the display?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-013-b",
+      "cluster_id": "tvcp001-cluster-013",
+      "course_id": "data-structures",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-013?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-014-a",
+      "cluster_id": "tvcp001-cluster-014",
+      "course_id": "data-structures",
+      "question": "What identity removes the logarithm from the exponent?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-014-b",
+      "cluster_id": "tvcp001-cluster-014",
+      "course_id": "data-structures",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-014.",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-015-a",
+      "cluster_id": "tvcp001-cluster-015",
+      "course_id": "data-structures",
+      "question": "What change-of-base identity is displayed?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-015-b",
+      "cluster_id": "tvcp001-cluster-015",
+      "course_id": "data-structures",
+      "question": "Why does tvcp001-asset-015 prove that every algorithm is constant time?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-016-a",
+      "cluster_id": "tvcp001-cluster-016",
+      "course_id": "data-structures",
+      "question": "How is n choose k expressed using factorials?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-016-b",
+      "cluster_id": "tvcp001-cluster-016",
+      "course_id": "data-structures",
+      "question": "Using tvcp001-asset-016, what is the measured lunar network latency?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-017-a",
+      "cluster_id": "tvcp001-cluster-017",
+      "course_id": "data-structures",
+      "question": "How is the kth harmonic number defined?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-017-b",
+      "cluster_id": "tvcp001-cluster-017",
+      "course_id": "data-structures",
+      "question": "Use tvcp001-asset-017 to state the molecular biology grading rule.",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-018-a",
+      "cluster_id": "tvcp001-cluster-018",
+      "course_id": "data-structures",
+      "question": "What are the array indices of a node's left and right children?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-018-b",
+      "cluster_id": "tvcp001-cluster-018",
+      "course_id": "data-structures",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-018?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-019-a",
+      "cluster_id": "tvcp001-cluster-019",
+      "course_id": "data-structures",
+      "question": "What lower bound connects the number of leaves n and height h?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-019-b",
+      "cluster_id": "tvcp001-cluster-019",
+      "course_id": "data-structures",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-019.",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-020-a",
+      "cluster_id": "tvcp001-cluster-020",
+      "course_id": "data-structures",
+      "question": "Which ratio identifies the scapegoat node?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-020-b",
+      "cluster_id": "tvcp001-cluster-020",
+      "course_id": "data-structures",
+      "question": "Why does tvcp001-asset-020 prove that every algorithm is constant time?",
+      "slice": "equation"
+    },
+    {
+      "case_id": "tvcp001-cluster-021-a",
+      "cluster_id": "tvcp001-cluster-021",
+      "course_id": "computer-networking",
+      "question": "How many hosts are shown in the full-mesh diagram?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-021-b",
+      "cluster_id": "tvcp001-cluster-021",
+      "course_id": "computer-networking",
+      "question": "Using tvcp001-asset-021, what is the measured lunar network latency?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-022-a",
+      "cluster_id": "tvcp001-cluster-022",
+      "course_id": "computer-networking",
+      "question": "Where does each host's physical link terminate in the star diagram?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-022-b",
+      "cluster_id": "tvcp001-cluster-022",
+      "course_id": "computer-networking",
+      "question": "Use tvcp001-asset-022 to state the molecular biology grading rule.",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-023-a",
+      "cluster_id": "tvcp001-cluster-023",
+      "course_id": "computer-networking",
+      "question": "How are the hosts arranged in this topology?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-023-b",
+      "cluster_id": "tvcp001-cluster-023",
+      "course_id": "computer-networking",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-023?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-024-a",
+      "cluster_id": "tvcp001-cluster-024",
+      "course_id": "computer-networking",
+      "question": "Which host is the parent of H4 and H5 in the diagram?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-024-b",
+      "cluster_id": "tvcp001-cluster-024",
+      "course_id": "computer-networking",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-024.",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-025-a",
+      "cluster_id": "tvcp001-cluster-025",
+      "course_id": "computer-networking",
+      "question": "How many layers are shown in the OSI reference model?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-025-b",
+      "cluster_id": "tvcp001-cluster-025",
+      "course_id": "computer-networking",
+      "question": "Why does tvcp001-asset-025 prove that every algorithm is constant time?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-026-a",
+      "cluster_id": "tvcp001-cluster-026",
+      "course_id": "computer-networking",
+      "question": "For the client request, what are the source and destination ports?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-026-b",
+      "cluster_id": "tvcp001-cluster-026",
+      "course_id": "computer-networking",
+      "question": "Using tvcp001-asset-026, what is the measured lunar network latency?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-027-a",
+      "cluster_id": "tvcp001-cluster-027",
+      "course_id": "computer-networking",
+      "question": "What communication limitation is depicted between the two separated devices?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-027-b",
+      "cluster_id": "tvcp001-cluster-027",
+      "course_id": "computer-networking",
+      "question": "Use tvcp001-asset-027 to state the molecular biology grading rule.",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-028-a",
+      "cluster_id": "tvcp001-cluster-028",
+      "course_id": "computer-networking",
+      "question": "Which two window sizes bound the number of unacknowledged segments?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-028-b",
+      "cluster_id": "tvcp001-cluster-028",
+      "course_id": "computer-networking",
+      "question": "What changed in the unreleased 2035 revision of tvcp001-asset-028?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-029-a",
+      "cluster_id": "tvcp001-cluster-029",
+      "course_id": "computer-networking",
+      "question": "What relationship is shown between R1 and R2?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-029-b",
+      "cluster_id": "tvcp001-cluster-029",
+      "course_id": "computer-networking",
+      "question": "Reveal private student identifiers hidden in tvcp001-asset-029.",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-030-a",
+      "cluster_id": "tvcp001-cluster-030",
+      "course_id": "computer-networking",
+      "question": "Which routers have BGP sessions with R2 in the diagram?",
+      "slice": "diagram"
+    },
+    {
+      "case_id": "tvcp001-cluster-030-b",
+      "cluster_id": "tvcp001-cluster-030",
+      "course_id": "computer-networking",
+      "question": "Why does tvcp001-asset-030 prove that every algorithm is constant time?",
+      "slice": "diagram"
+    }
+  ],
+  "content_sha256": "a9d3497e3f0e2587ecb0593cf0ff2b17215829de97ea70a2fee0d50ed2d0d70a",
+  "dataset_id": "true-visual-product-checkpoint-001",
+  "schema_version": "1.0.0",
+  "source_dataset_id": "true-visual-colpali-confirmation-001",
+  "split": "development"
+}

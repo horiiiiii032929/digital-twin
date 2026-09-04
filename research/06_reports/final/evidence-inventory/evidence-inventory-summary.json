@@ -1,18 +1,18 @@
 {
-  "code_revision": "eac84ba7258ecfbf6681bc25a3cad3a0ac425627",
+  "code_revision": "60495ec5018c791fe591151a8f3c67a6ee1a0f17",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
       "drop": 7,
-      "go-deeper": 43,
-      "invalid": 91,
-      "keep": 94,
+      "go-deeper": 44,
+      "invalid": 95,
+      "keep": 95,
       "no-release": 27,
       "other": 8,
-      "refine": 45
+      "refine": 46
     },
-    "machine_record_count": 241,
-    "result_count": 315,
+    "machine_record_count": 248,
+    "result_count": 322,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -29,20 +29,20 @@
   },
   "json_validation": {
     "committed-evaluation-dataset": {
-      "files": 58,
-      "valid_json": 58
+      "files": 62,
+      "valid_json": 62
     },
     "component-or-release-profile": {
       "files": 20,
       "valid_json": 20
     },
     "evaluation-instrument": {
-      "files": 253,
-      "valid_json": 253
+      "files": 257,
+      "valid_json": 257
     },
     "machine-result-record": {
-      "files": 242,
-      "valid_json": 242
+      "files": 249,
+      "valid_json": 249
     }
   },
   "local_evidence_aggregates": [
@@ -78,14 +78,14 @@
     },
     {
       "directory": "reports/generated",
-      "file_count": 8829,
+      "file_count": 8885,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 8544002140
+      "total_bytes": 8566479618
     }
   ],
   "record_join_quality": {
     "interpretation": "Use the registry link and record run_id rather than assuming the filename is the result ID. Missing optional fields reflect legacy/program schemas and require result-summary context.",
-    "run_id_filename_mismatch_count": 11,
+    "run_id_filename_mismatch_count": 12,
     "run_id_filename_mismatches": [
       {
         "file": "research/05_evaluation/records/course-digital-twin-evaluation-program-006-invalid.json",
@@ -120,6 +120,10 @@
         "run_id": "governed-full-autonomy-v2-1-persona-confirmation-023"
       },
       {
+        "file": "research/05_evaluation/records/professor-fidelity-proxy-c0-c3-002-invalid.json",
+        "run_id": "professor-fidelity-proxy-c0-c3-002"
+      },
+      {
         "file": "research/05_evaluation/records/retrieval-v1.json",
         "run_id": "retrieval-v1-clean"
       },
@@ -132,37 +136,37 @@
         "run_id": ""
       }
     ],
-    "without_component_count": 100,
-    "without_corpus_id_count": 102,
-    "without_dataset_id_count": 97
+    "without_component_count": 104,
+    "without_corpus_id_count": 109,
+    "without_dataset_id_count": 103
   },
   "repository_files": {
     "by_category": {
       "architecture-or-operations-documentation": 43,
-      "automated-or-manual-verification": 272,
-      "backend-implementation": 163,
-      "committed-evaluation-dataset": 65,
+      "automated-or-manual-verification": 277,
+      "backend-implementation": 165,
+      "committed-evaluation-dataset": 69,
       "component-or-release-profile": 20,
       "data-governance-or-schema": 6,
       "deployment-configuration": 8,
-      "evaluation-instrument": 258,
+      "evaluation-instrument": 262,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 398,
-      "experiment-plan-or-learning-log": 79,
+      "evaluation-summary-or-rubric": 404,
+      "experiment-plan-or-learning-log": 82,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 242,
+      "machine-result-record": 249,
       "project-governance-or-ci": 5,
       "report-or-figure": 66,
       "repository-configuration": 7,
-      "reproduction-or-analysis-tool": 295,
+      "reproduction-or-analysis-tool": 302,
       "requirement-or-user-research": 6,
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2041
+      "tracked": 2079
     },
-    "count": 2041
+    "count": 2079
   },
   "schema_version": 1
 }
