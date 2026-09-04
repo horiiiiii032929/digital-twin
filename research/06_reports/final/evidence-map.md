@@ -1,7 +1,7 @@
 # Final report evidence map
 
 Status: evidence-gathering checkpoint 0.1  
-Inventory revision: `9474e64adbf2895329e807b9a787a1013ddc03a4`
+Inventory revision: `eac84ba7258ecfbf6681bc25a3cad3a0ac425627`
 Purpose: understand the complete evidence archive before drafting the report
 
 ## What this map does

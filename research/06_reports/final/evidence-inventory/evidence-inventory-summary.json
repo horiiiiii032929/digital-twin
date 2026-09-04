@@ -1,5 +1,5 @@
 {
-  "code_revision": "7901c9e8b19aa4ba9ccc5cc2dfa8efc55008c491",
+  "code_revision": "eac84ba7258ecfbf6681bc25a3cad3a0ac425627",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
@@ -9,10 +9,10 @@
       "keep": 94,
       "no-release": 27,
       "other": 8,
-      "refine": 44
+      "refine": 45
     },
-    "machine_record_count": 240,
-    "result_count": 314,
+    "machine_record_count": 241,
+    "result_count": 315,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -41,8 +41,8 @@
       "valid_json": 253
     },
     "machine-result-record": {
-      "files": 241,
-      "valid_json": 241
+      "files": 242,
+      "valid_json": 242
     }
   },
   "local_evidence_aggregates": [
@@ -78,9 +78,9 @@
     },
     {
       "directory": "reports/generated",
-      "file_count": 8825,
+      "file_count": 8829,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 8543845197
+      "total_bytes": 8544002140
     }
   ],
   "record_join_quality": {
@@ -133,7 +133,7 @@
       }
     ],
     "without_component_count": 100,
-    "without_corpus_id_count": 101,
+    "without_corpus_id_count": 102,
     "without_dataset_id_count": 97
   },
   "repository_files": {
@@ -147,11 +147,11 @@
       "deployment-configuration": 8,
       "evaluation-instrument": 258,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 397,
+      "evaluation-summary-or-rubric": 398,
       "experiment-plan-or-learning-log": 79,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 241,
+      "machine-result-record": 242,
       "project-governance-or-ci": 5,
       "report-or-figure": 66,
       "repository-configuration": 7,
@@ -160,9 +160,9 @@
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2039
+      "tracked": 2041
     },
-    "count": 2039
+    "count": 2041
   },
   "schema_version": 1
 }
