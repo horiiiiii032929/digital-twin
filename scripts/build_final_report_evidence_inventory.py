@@ -215,7 +215,11 @@ def decision_class(status: str, decision: str) -> str:
 
 def write_csv(path: Path, fieldnames: Iterable[str], rows: Iterable[dict[str, object]]) -> None:
     with path.open("w", newline="") as handle:
-        writer = csv.DictWriter(handle, fieldnames=list(fieldnames))
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=list(fieldnames),
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 

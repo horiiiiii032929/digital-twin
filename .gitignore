@@ -21,6 +21,7 @@ htmlcov/
 .idea/
 .vscode/
 .playwright-cli/
+tmp/
 *.tsbuildinfo
 
 # Notebook runtime state

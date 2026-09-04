@@ -5,6 +5,7 @@ from scripts.build_final_report_evidence_inventory import (
     decision_class,
     markdown_link_targets,
     parse_registry,
+    write_csv,
 )
 
 
@@ -49,3 +50,11 @@ def test_parse_registry_reads_complete_rows(tmp_path: Path) -> None:
     assert len(rows) == 1
     assert rows[0].result_id == "result-001"
     assert rows[0].line_number == 5
+
+
+def test_write_csv_uses_repository_safe_lf_endings(tmp_path: Path) -> None:
+    output = tmp_path / "inventory.csv"
+
+    write_csv(output, ["path", "status"], [{"path": "example.py", "status": "ok"}])
+
+    assert output.read_bytes() == b"path,status\nexample.py,ok\n"

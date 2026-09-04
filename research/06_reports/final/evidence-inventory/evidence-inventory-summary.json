@@ -1,18 +1,18 @@
 {
-  "code_revision": "2bdfea9ffecd78f41bf564efd343ade59b4db7dd",
+  "code_revision": "6ca2936838e2dd7bf976008d2b22e86e86592099",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
       "drop": 7,
-      "go-deeper": 32,
-      "invalid": 75,
-      "keep": 76,
-      "no-release": 10,
-      "other": 3,
-      "refine": 42
+      "go-deeper": 43,
+      "invalid": 90,
+      "keep": 93,
+      "no-release": 26,
+      "other": 8,
+      "refine": 44
     },
-    "machine_record_count": 171,
-    "result_count": 245,
+    "machine_record_count": 237,
+    "result_count": 311,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -29,20 +29,20 @@
   },
   "json_validation": {
     "committed-evaluation-dataset": {
-      "files": 55,
-      "valid_json": 55
+      "files": 57,
+      "valid_json": 57
     },
     "component-or-release-profile": {
-      "files": 19,
-      "valid_json": 19
+      "files": 20,
+      "valid_json": 20
     },
     "evaluation-instrument": {
-      "files": 217,
-      "valid_json": 217
+      "files": 250,
+      "valid_json": 250
     },
     "machine-result-record": {
-      "files": 171,
-      "valid_json": 171
+      "files": 238,
+      "valid_json": 238
     }
   },
   "local_evidence_aggregates": [
@@ -85,7 +85,7 @@
   ],
   "record_join_quality": {
     "interpretation": "Use the registry link and record run_id rather than assuming the filename is the result ID. Missing optional fields reflect legacy/program schemas and require result-summary context.",
-    "run_id_filename_mismatch_count": 8,
+    "run_id_filename_mismatch_count": 11,
     "run_id_filename_mismatches": [
       {
         "file": "research/05_evaluation/records/course-digital-twin-evaluation-program-006-invalid.json",
@@ -112,46 +112,57 @@
         "run_id": "generation-v1-gemma3-4b-exploratory"
       },
       {
+        "file": "research/05_evaluation/records/governed-full-autonomy-v2-1-hidden-state-learner-extension-014-summary.json",
+        "run_id": ""
+      },
+      {
+        "file": "research/05_evaluation/records/governed-full-autonomy-v2-1-persona-confirmation-023-invalid.json",
+        "run_id": "governed-full-autonomy-v2-1-persona-confirmation-023"
+      },
+      {
         "file": "research/05_evaluation/records/retrieval-v1.json",
         "run_id": "retrieval-v1-clean"
       },
       {
         "file": "research/05_evaluation/records/retrieval-v2.json",
         "run_id": "retrieval-v2-clean"
+      },
+      {
+        "file": "research/05_evaluation/records/successor-learner-timing-simulation-001-summary.json",
+        "run_id": ""
       }
     ],
-    "without_component_count": 32,
-    "without_corpus_id_count": 33,
-    "without_dataset_id_count": 32
+    "without_component_count": 97,
+    "without_corpus_id_count": 98,
+    "without_dataset_id_count": 94
   },
   "repository_files": {
     "by_category": {
-      "architecture-or-operations-documentation": 38,
-      "automated-or-manual-verification": 231,
-      "backend-implementation": 150,
-      "committed-evaluation-dataset": 62,
-      "component-or-release-profile": 19,
+      "architecture-or-operations-documentation": 43,
+      "automated-or-manual-verification": 268,
+      "backend-implementation": 162,
+      "committed-evaluation-dataset": 64,
+      "component-or-release-profile": 20,
       "data-governance-or-schema": 6,
       "deployment-configuration": 7,
-      "evaluation-instrument": 222,
+      "evaluation-instrument": 255,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 318,
-      "experiment-plan-or-learning-log": 74,
+      "evaluation-summary-or-rubric": 394,
+      "experiment-plan-or-learning-log": 78,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 171,
+      "machine-result-record": 238,
       "project-governance-or-ci": 5,
-      "report-or-figure": 28,
+      "report-or-figure": 66,
       "repository-configuration": 7,
-      "reproduction-or-analysis-tool": 239,
+      "reproduction-or-analysis-tool": 292,
       "requirement-or-user-research": 6,
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 1686,
-      "untracked": 5
+      "tracked": 2019
     },
-    "count": 1691
+    "count": 2019
   },
   "schema_version": 1
 }

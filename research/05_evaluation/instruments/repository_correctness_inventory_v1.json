@@ -1,10 +1,10 @@
 {
   "audit_status_counts": {
-    "audited": 1073
+    "audited": 1075
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 281,
+    "active_or_unclassified_tooling": 282,
     "active_runtime": 161,
     "ci_configuration": 1,
     "deferred_tooling": 2,
@@ -13,13 +13,13 @@
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 248
+    "verification": 249
   },
-  "file_count": 1073,
+  "file_count": 1075,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "17c5d8cb965621e4768b46a1b804dabf6f22c66b6d148681667f968ddcf3b272",
+  "record_sha256": "403e6893ccb5a42c2b06263cbcdb6da6f727d5b74d7750a2fefc20d83c606716",
   "records": [
     {
       "audit": {
@@ -72,10 +72,10 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Manual exclusion review plus git check-ignore probes for environment secrets, private data, run outputs, and generated reports.",
+        "evidence": "Manual exclusion review plus git check-ignore probes for environment secrets, private data, run outputs, generated reports, and local handoff/probe material under tmp/.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -83,7 +83,7 @@
       "package_commands": [],
       "path": ".gitignore",
       "risk": "medium",
-      "sha256": "acb89553cb79fce1b215708799ae2f576cf5d44ec9fa99aabdd8ddee263f1e4e"
+      "sha256": "3fda63cd627ab641625553e5b62c8c29227a2e19fd30eedb1c45477aa4801f1a"
     },
     {
       "audit": {
@@ -7058,6 +7058,22 @@
     },
     {
       "audit": {
+        "domain": "final-report-evidence-inventory",
+        "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_final_report_evidence_inventory.py",
+      "risk": "high",
+      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -11332,8 +11348,8 @@
         "domain": "repository-execution-freeze",
         "evidence": "Freeze review classifies 021 and the persona-wording requirements builder as network-free builders while retaining guarded provider and evaluation runners.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex persona-wording requirements audit"
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -11343,7 +11359,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "b393a5385296dcfdff0d32e639804b10505cbaa2ea1a32986006666f80439f55"
+      "sha256": "87b07e6f43bed0fff18784f2cc3927024c6fb3340efd154046f753c156d00e38"
     },
     {
       "audit": {
@@ -16067,6 +16083,22 @@
     },
     {
       "audit": {
+        "domain": "final-report-evidence-inventory",
+        "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+        "findings": [],
+        "reviewed_at": "2026-09-04",
+        "reviewer": "codex-primary-endgame-correctness-audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_build_final_report_evidence_inventory.py",
+      "risk": "medium",
+      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -18051,8 +18083,8 @@
     }
   ],
   "risk_counts": {
-    "high": 811,
-    "medium": 262
+    "high": 812,
+    "medium": 263
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
