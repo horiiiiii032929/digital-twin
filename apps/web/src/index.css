@@ -19,6 +19,7 @@
   --accent-strong: #5b5bd6;
   --accent-soft: #eeeeff;
   --accent-border: #b8b8ee;
+  --selection: #d5e0fb;
   --cobalt: var(--accent-strong);
   --cobalt-soft: var(--accent-soft);
   --shell: #f7f7f8;
@@ -147,7 +148,7 @@ summary {
 
 ::selection {
   color: var(--ink);
-  background: #d5e0fb;
+  background: var(--selection);
 }
 
 @layer base {

@@ -71,7 +71,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "frontend-correctness",
-      "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+      "evidence": "Final Impeccable and browser review formalized the only literal selection tint as a named design-system token; detector returned zero findings, 51 Vitest regressions passed, Oxlint passed, and the TypeScript production build passed.",
       "findings": [],
       "path": "apps/web/.oxlintrc.json",
       "reviewed_at": "2026-08-20",
@@ -536,9 +536,9 @@
       "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
       "findings": [],
       "path": "apps/web/src/index.css",
-      "reviewed_at": "2026-08-20",
-      "reviewer": "codex-primary-plus-independent-cross-review",
-      "sha256": "7e0afa80cf97bf99ca079f4a066813ced108d5c772f74ad3d14f2fc25d34488b"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "codex-impeccable-final-qualification",
+      "sha256": "4c17fde56a6117452796fb1d4e27243d713bdd5d2d34b446417f35c3afb02962"
     },
     {
       "audit_status": "audited",
