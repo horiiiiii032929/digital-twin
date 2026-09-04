@@ -50,10 +50,10 @@ The known 10,000-candidate plus 1,000-control package remains immutable
   active runtime defects and are preserved to avoid rewriting historical
   evidence tooling.
 
-## Next bounded action
+## Qualification outcome
 
-Run `local-r1-governed-v2-1-release-qualification-005` against a clean commit
-using the exact Luna H+E1, deterministic generator,
-`dominance-scoped-ambiguity-safe-v3`, and candidate-v3 profile binding. Record
-the outcome whether it passes or fails. A pass supports only a local research
-demo claim; it cannot override the unfavorable academic grounding result.
+`local-r1-governed-v2-1-release-qualification-005` subsequently passed 43/43
+checks against clean revision `cbdfca6` using the exact Luna H+E1,
+deterministic generator, `dominance-scoped-ambiguity-safe-v3`, and candidate-v3
+profile binding. This supports only a local research-demo claim; it does not
+override the unfavorable academic grounding result.

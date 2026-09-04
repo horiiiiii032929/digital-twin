@@ -1,0 +1,67 @@
+{
+  "artifact_hashes": {
+    "clean_restore_sha256": "d68be425127253dbb96e87036816e4549809a3b2f7a6118a924768f6f546932f",
+    "live_journey_sha256": "40c8a234efaa86cf0d8dcab2b820728d36c37e194facb03483f96b8c8df19d50",
+    "restart_sha256": "d68be425127253dbb96e87036816e4549809a3b2f7a6118a924768f6f546932f",
+    "runtime_backup_sha256": "d7fb7621e8e4dff4da07c9b083eb98c409714d21e689c7b3e3b56ba3d7ee1117",
+    "t0_rollback_sha256": "9d9e46acef7dd98b06ae752ce600a557aca92b4a4bb4f7c55eceb04d031a1b0f",
+    "v2_restore_sha256": "20c68bcc4d5db728500241007df8943b72f8b491cdf86661e6f8e3a6e86a6598"
+  },
+  "code_revision": "cbdfca679f9622e3674e6e4c26bb9d7afd17d865",
+  "date": "2026-09-04",
+  "decision": "Keep for a local research demo; academic factual grounding remains No Release",
+  "dependency_audit": {
+    "fast_uri_version": "3.1.7",
+    "image_build_live_audit_vulnerability_count": 0,
+    "post_update_offline_audit_vulnerability_count": 0
+  },
+  "evidence_binding": {
+    "autonomy_result": "governed-full-autonomy-v2-1-persona-confirmation-024",
+    "binding_record": "governed-full-autonomy-v2-1-release-binding-correction-001",
+    "grounding_result": "product-evidence-gate-selection-004",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5"
+  },
+  "image_digests": {
+    "api": "sha256:82d8d97eb7ace5f704d865746ff7bae37c6d1dbd880334dc0dd5b2d72d7cbef7",
+    "web": "sha256:ee6b9b7ded1073d3df402f2d2f98cf2ae698c6832ce099e09e41e439ed2bdd07"
+  },
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-005",
+  "limitations": [
+    "Qualified only on the development Mac through internal-CA HTTPS.",
+    "Synthetic identities and open demonstration material only.",
+    "The live journey exercised deterministic fast paths and made zero Luna planner calls; exact Luna behavior remains supported by immutable confirmation-024 rather than retested here.",
+    "The selected evidence gate is the best relative development gate but fails the absolute factual-quality thresholds.",
+    "The known 10,000+1,000 result remains No Release and was not read, rerun, or rescored.",
+    "Establishes no real-professor fidelity, real-student usability, learning improvement, or durable hosted-production claim."
+  ],
+  "private_data_used": false,
+  "provider_usage": {
+    "autonomy_planner_calls": 0,
+    "generator_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "release_scope": "qualified local research demo on the development Mac through internal-CA HTTPS; academic and durable-production release remain blocked",
+  "results": {
+    "clean_restore": "6/6",
+    "governed_v2_1_restoration": "3/3",
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "t0_rollback": "3/3",
+    "total": "43/43"
+  },
+  "run_id": "local-r1-governed-v2-1-release-qualification-005",
+  "runtime": {
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "generator_mode": "deterministic",
+    "profile_id": "student-tutor-r1-local-candidate",
+    "profile_version": "v2.1-floor-004-h-e1",
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-release-binding-correction-001",
+    "t0_rollback_available": true
+  },
+  "schema_version": 1,
+  "status": "completed-keep",
+  "supersedes_for_exact_composition": "local-r1-governed-v2-1-release-qualification-004"
+}

@@ -17,14 +17,16 @@ generation, `dominance-scoped-ambiguity-safe-v3`, and profile version
 `v2.1-floor-004-h-e1`. Startup now rejects absent as well as conflicting
 evidence-gate bindings. Local qualification 004 is retained as historical
 operational evidence because it used Terra and a historical qualification
-record; qualification 005 must exercise the exact composition.
+record. Qualification 005 exercised the exact composition and passed 43/43
+live, restart, clean-restore, rollback, and restoration checks.
 
 Selection 004 remains the relative development winner after correcting its
 metric label: answerable factual success is 42.50% versus 26.00%, not the
 overall task rates of 50.00% versus 36.80%. Both arms fail the absolute product
-quality gates. A successful qualification 005 therefore permits an accurately
-labelled local research demo, not a claim that the grounding problem or sealed
-benchmark has been solved.
+quality gates. Qualification 005 therefore permits an accurately labelled local
+research demo, not a claim that the grounding problem or sealed benchmark has
+been solved. Its deterministic fast-path journey made zero Luna calls; Luna
+behavior remains bound to immutable confirmation 024.
 
 ## Current audit-safe release boundary
 
@@ -44,9 +46,10 @@ calls for USD 0.4216108 and its authority is revoked. T1-v2 autonomous remains
 the operational candidate. The later winner-only known 10,000+1,000 regression
 completed as `No Release`: 25.38% fully grounded factual success versus T0's
 44.16%, with severe unsupported releases reduced from 478 to 4. That package is
-now known and immutable. Exact local HTTPS qualification 005 may establish a
-usable local research demo, but cannot override the unfavorable academic
-grounding result; no same-package tuning or rerun is allowed.
+now known and immutable. Exact local HTTPS qualification 005 establishes a
+usable local research demo at 43/43 operational checks, but cannot override the
+unfavorable academic grounding result; no same-package tuning or rerun is
+allowed.
 
 Issue #192 is complete: provider-failure scoring now follows durable trigger
 lineage, and confirmation 021 remains immutable. The completed development

@@ -23,9 +23,12 @@ record, while the selected confirmation-024 architecture uses Luna H+E1. The
 runtime now fails closed on any missing or mismatched evidence-gate binding.
 The exact profile and provenance composition are normalized in
 `student-tutor-r1-local-candidate-v3` and
-`governed-full-autonomy-v2-1-release-binding-correction-001`. One fresh local
-HTTPS qualification 005 is preregistered before this exact composition may be
-described as locally qualified. T0 remains the rollback.
+`governed-full-autonomy-v2-1-release-binding-correction-001`. Fresh local HTTPS
+qualification 005 passed all 43 checks: 25 live journey, six restart, six clean
+restore, three T0 rollback, and three governed restoration. T0 remains the
+rollback. The journey used deterministic fast paths and made zero Luna calls,
+so it qualifies the local composition while relying on immutable confirmation
+024 for live Luna behavior.
 
 The four later grounding-floor audits retain their negative mechanism
 decisions, but their exact historical totals were not reproducible because the
@@ -33,7 +36,9 @@ original calculation commands were not committed and the summaries disagree
 internally. A new provider-free reproduction verifies the central safety
 finding while narrowing the claim: these are development-only tests of bounded
 mechanisms, not proof of a universal task ceiling. The sealed 10,000-case
-package was not touched.
+package was not touched. The exact operational composition is now qualified as
+a local research demo, but the academic factual-grounding decision remains
+`No Release`.
 
 The same audit also found a newly published high-severity advisory affecting
 transitive frontend development dependency `fast-uri` 3.1.5. The lockfile now
@@ -60,9 +65,8 @@ remain unproven. Execution authority is revoked. The subsequent labelled known
 10,000+1,000 regression completed as `No Release`: the selected candidate
 reached 25.38% fully grounded factual success against T0's 44.16%, while severe
 unsupported releases fell from 478 to 4. That known package is immutable and
-must not be rerun or rescored. The only current operational checkpoint is exact
-local HTTPS qualification 005; passing it supports a local research-demo claim,
-not factual-quality or production release.
+must not be rerun or rescored. Exact local HTTPS qualification 005 now supports
+a local research-demo claim, not factual-quality or durable-production release.
 
 ## H+E1 whole-system confirmation and grounding successor
 
