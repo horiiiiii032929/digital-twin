@@ -5,7 +5,7 @@
     "candidate": "jina-v4-late-interaction",
     "control": "text-ocr-fallback"
   },
-  "content_sha256": "a10ced1c3062f3d5269a55d7fd2bfe448e02c23aff7b6d809bca094522c95542",
+  "content_sha256": "1584382be15573212f9581addb294a13c69854df96eed5d5d81ca059ba3b2673",
   "gold_opening_rule": "score only after all control and candidate responses are durable",
   "gold_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_gold.json",
   "gold_sha256": "3aa731a506705e38cb9ce2bdb76e579ff92a0f1e4992af8e39c05a246c087ce8",
@@ -46,7 +46,7 @@
     "name": "Jina AI",
     "retries": 0
   },
-  "provider_execution_authorized": true,
+  "provider_execution_authorized": false,
   "public_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_public.json",
   "public_sha256": "a9d3497e3f0e2587ecb0593cf0ff2b17215829de97ea70a2fee0d50ed2d0d70a",
   "related_issue": 131,
@@ -54,11 +54,14 @@
   "schema_version": "1.0.0",
   "sources_path": "research/05_evaluation/datasets/true_visual_product_checkpoint_001_sources.json",
   "sources_sha256": "1f47dfe2ccdc8934209234a314ec108d3c7d54e1a035d2eafcb960f04f9c628c",
-  "status": "frozen-pending-execution",
-  "paid_execution_authorized": true,
+  "status": "completed-refine",
+  "paid_execution_authorized": false,
   "authorization": {
     "authorized_at": "2026-09-04T16:29:31Z",
     "authorization_text": "Authorize local-r1-final-technical-completion-001.",
-    "scope": "one bounded execution through the parent completion program"
-  }
+    "scope": "one bounded execution through the parent completion program",
+    "revoked_at": "2026-09-04T16:54:57Z",
+    "outcome": "completed-refine"
+  },
+  "result_record": "research/05_evaluation/records/true-visual-product-checkpoint-001.json"
 }

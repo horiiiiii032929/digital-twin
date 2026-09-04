@@ -39,7 +39,21 @@ before any provider call because the runner required an optional source display
 `title`. Zero responses were persisted, hidden gold remained closed, and cost
 was USD 0. The invalid evidence is registered. The sole allowed harness
 correction derives that non-authoritative title from existing source-path
-lineage; no case, gold, method, gate, provider, or budget changes.
+lineage; no case, gold, method, gate, provider, or budget changed.
+
+The corrected actual-product visual run at revision `a364010` is valid
+`completed-refine`: Jina v4 and text/OCR each produced 20/30 fully grounded
+visual answers. Candidate boundary releases were 0/30, but one wrong-region
+citation/unsupported claim remained and complete original-region lineage was
+20/30. Only eight questions activated the visual route. Local R1.1 therefore
+retains `text-ocr-fallback`; the 60 cases will not be tuned or rerun.
+
+The independent C0-C3 synthetic proxy was operationally invalid when the direct
+OpenAI endpoint rejected unsupported `uniqueItems` in its response schema on
+the first request. It used zero reported tokens/cost and produced no profile
+quality estimate. The finite correction allowance was already consumed, so it
+is preserved without retry. All program/provider authority is revoked, #24
+remains open, and exact local qualification 007 proceeds with these limitations.
 
 ## Post-release multi-concept correction
 

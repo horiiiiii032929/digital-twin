@@ -28,6 +28,12 @@ Jina/OpenAI ceilings remain hard stops. After both results are registered, the
 exact selected/fallback composition receives local HTTPS qualification 007,
 Docker/restart/restore/rollback verification, and one immutable release tag.
 
+Execution is now closed. The actual-product visual result was `Refine` at
+20/30 fully grounded answers for both candidate and control, so qualification
+007 must use `text-ocr-fallback`. The C0-C3 proxy was invalid before inference
+because its response schema used an unsupported keyword; it is not retried
+under the finite correction rule and contributes no professor-fidelity claim.
+
 ## Final correctness and exact-binding checkpoint
 
 Before release consolidation, the selected configuration is being qualified as

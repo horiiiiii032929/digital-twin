@@ -1,20 +1,20 @@
 {
   "schema_version": "1.0.0",
   "program_id": "local-r1-final-technical-completion-001",
-  "status": "frozen-pending-execution",
+  "status": "invalid-execution",
   "owner_issue": 210,
   "purpose": "Finish the bounded visual actual-product checkpoint and synthetic C0-C3 professor-profile proxy before local R1.1 qualification.",
   "children": [
     {
       "run_id": "true-visual-product-checkpoint-001",
       "instrument_path": "research/05_evaluation/instruments/true_visual_product_checkpoint_001.json",
-      "instrument_file_sha256": "833f32cd0844ef6c34b70d65e6482ae65010f3fd87e256307fab61279d5411c3",
+      "instrument_file_sha256": "63a0de297e4ec805f957f77f5ce4da9f2efc1e467aa653515afec4daf8525f2c",
       "failure_policy": "record-and-continue-to-independent-profile-proxy"
     },
     {
       "run_id": "professor-fidelity-proxy-c0-c3-002",
       "instrument_path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_002.json",
-      "instrument_file_sha256": "e26e3247edb6e109d2a4fa2b76cf37e664a389a88aefe1c87bafba2c207d3ed5",
+      "instrument_file_sha256": "23ec0cdc19ee4b7b92259bfa596c3cfe531003d088f242bf3a76d6c20c4e3ca9",
       "failure_policy": "record-and-preserve-professor-approval-boundary"
     }
   ],
@@ -35,13 +35,16 @@
     "openai-cost-ceiling-exhaustion"
   ],
   "known_benchmark_10000_touched": false,
-  "provider_execution_authorized": true,
-  "paid_execution_authorized": true,
+  "provider_execution_authorized": false,
+  "paid_execution_authorized": false,
   "authorization": {
     "authorized_at": "2026-09-04T16:29:31Z",
     "authorization_text": "Authorize local-r1-final-technical-completion-001.",
-    "scope": "true-visual-product-checkpoint-001 then professor-fidelity-proxy-c0-c3-002"
+    "scope": "true-visual-product-checkpoint-001 then professor-fidelity-proxy-c0-c3-002",
+    "revoked_at": "2026-09-04T16:54:57Z",
+    "outcome": "visual-completed-refine-profile-proxy-invalid"
   },
   "private_data_authorized": false,
-  "automatic_child_progression": true
+  "automatic_child_progression": true,
+  "result_record": "research/05_evaluation/records/local-r1-final-technical-completion-001.json"
 }

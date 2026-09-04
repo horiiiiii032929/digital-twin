@@ -21,7 +21,7 @@ def test_validate_preserves_synthetic_claim_boundary() -> None:
     assert result["status"] == "passed-build-only"
     assert result["condition_count"] == 4
     assert result["real_professor_fidelity_claim"] is False
-    assert result["provider_execution_authorized"] is True
+    assert result["provider_execution_authorized"] is False
 
 
 def test_network_free_simulation_exercises_passing_harness() -> None:

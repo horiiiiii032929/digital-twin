@@ -3514,12 +3514,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Authorization-only review verified the one-shot parent scope, child hashes, no-private-data and known-benchmark boundaries, bounded cost/token ceilings, and fail-closed execution guards.",
+      "evidence": "Result-publication review verified the one-shot program ended with the visual Refine result and invalid C0-C3 proxy, revoked all provider authority, preserved the known-benchmark boundary, and bound the parent record to both immutable child outcomes.",
       "findings": [],
       "path": "research/05_evaluation/instruments/local_r1_final_technical_completion_001.json",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "c51e5d3cc7b35b4e9054c74d4521f2df79de45e9516f7d89daadb1614e3b5598"
+      "sha256": "8f680aa5a2622844c6c1d56f08b83bfb5ffa3129b816b886bc54649bed8e9e1e"
     },
     {
       "audit_status": "audited",
@@ -3701,12 +3701,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Authorization-only review verified fresh exact OpenAI bindings, public-synthetic inputs, USD 3 ceiling, bounded retries, advisory-only review authority, and one-shot parent scope.",
+      "evidence": "Invalid-result review verified the first OpenAI request was rejected before inference for an unsupported schema keyword, recorded one failed attempt and zero tokens/cost, produced no fidelity estimate, and revoked provider authority without retry.",
       "findings": [],
       "path": "research/05_evaluation/instruments/professor_fidelity_proxy_c0_c3_002.json",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "e26e3247edb6e109d2a4fa2b76cf37e664a389a88aefe1c87bafba2c207d3ed5"
+      "sha256": "23ec0cdc19ee4b7b92259bfa596c3cfe531003d088f242bf3a76d6c20c4e3ca9"
     },
     {
       "audit_status": "audited",
@@ -3954,12 +3954,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Authorization-only review verified the immutable 60-case package, component-ledger binding, 10M-token ceiling, zero retries, public-source boundary, and one-shot parent scope.",
+      "evidence": "Completed-result review verified all 120 responses were durable before hidden-gold scoring, candidate and control metrics match the raw ledgers, Jina usage remains below 10M tokens, the valid Refine decision retains text/OCR fallback, and provider authority is revoked.",
       "findings": [],
       "path": "research/05_evaluation/instruments/true_visual_product_checkpoint_001.json",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "833f32cd0844ef6c34b70d65e6482ae65010f3fd87e256307fab61279d5411c3"
+      "sha256": "63a0de297e4ec805f957f77f5ce4da9f2efc1e467aa653515afec4daf8525f2c"
     },
     {
       "audit_status": "audited",
@@ -9069,12 +9069,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual review verified that only the three exact issue-210 instrument IDs gained bounded external/method execution operations; the global freeze and held-out restrictions remain active.",
+      "evidence": "Post-execution review verified issue-210 provider/method authority is revoked, only deterministic visual package generation remains allowed, and the global freeze plus held-out restrictions remain active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "d2ebcf1b23ee57a79392bbf832902f36b24b337e241d643ea78d7700987f42e3"
+      "sha256": "d14ebe35556f06b1c3cfb380a0f9e87b3437a4f0262662c001124cb7e60a3df7"
     },
     {
       "audit_status": "audited",
@@ -9663,12 +9663,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Manual review and focused regression verify the exact three-run authorization set and operation tuples; unrelated and held-out instruments remain denied.",
+      "evidence": "Focused regression verifies the completed issue-210 parent and C0-C3 child are denied, the visual child retains package-generation only, and unrelated or held-out instruments remain denied.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "cbca8627dcdb606d4f373d32ddd0faa9538c798814fba71f12918c062ccdbaa4"
+      "sha256": "fdc47879dd5831dbb185e3c8e83563bfcf2d53bef13a41a6a9b30f2153f6aaef"
     },
     {
       "audit_status": "audited",
@@ -11621,12 +11621,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Focused regression now asserts the frozen authorized state while preserving the synthetic-only claim boundary and deterministic hard-gate authority.",
+      "evidence": "Focused regression asserts the revoked provider state while preserving the synthetic-only claim boundary, deterministic hard-gate authority, and network-free simulation behavior.",
       "findings": [],
       "path": "tests/test_professor_fidelity_proxy_c0_c3_002.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "b42498625abe7baa117c5343e851b474569dc3313f492078e577fd7cceeb1f1e"
+      "sha256": "ca095ed3fe184b3c5921cf4402ed1b42e2afe1f7f60b5f1b4dfbcc3d008268b8"
     },
     {
       "audit_status": "audited",

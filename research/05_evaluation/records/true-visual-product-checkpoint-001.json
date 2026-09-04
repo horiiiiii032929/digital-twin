@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "run_id": "true-visual-product-checkpoint-001",
+  "status": "completed-refine",
+  "decision": "Refine: retain text/OCR fallback for Local R1.1",
+  "component": "actual-product-visual-grounding",
+  "completed_at": "2026-09-04T16:54:56Z",
+  "code_revision": "a36401057f61970d0dcedf01cfa7622e5511840d",
+  "instrument_sha256_at_execution": "a10ced1c3062f3d5269a55d7fd2bfe448e02c23aff7b6d809bca094522c95542",
+  "public_sha256": "a9d3497e3f0e2587ecb0593cf0ff2b17215829de97ea70a2fee0d50ed2d0d70a",
+  "gold_sha256": "3aa731a506705e38cb9ce2bdb76e579ff92a0f1e4992af8e39c05a246c087ce8",
+  "sources_sha256": "1f47dfe2ccdc8934209234a314ec108d3c7d54e1a035d2eafcb960f04f9c628c",
+  "component_ledger_sha256": "a2e59f3d00b25827e3a6e4c0c97ca69a155e44b809ecdc768941a1d4fd30e184",
+  "sample": {
+    "answerable": 30,
+    "boundary": 30,
+    "modalities": {
+      "table": 10,
+      "equation": 10,
+      "diagram": 10
+    }
+  },
+  "conditions": {
+    "control": {
+      "implementation": "text-ocr-fallback",
+      "fully_grounded_visual_success": 0.6666666666666666,
+      "fully_grounded_visual_success_count": 20,
+      "boundary_releases": 0,
+      "unsupported_claims": 1,
+      "invalid_or_wrong_version_citations": 1,
+      "original_region_lineage": 0.6666666666666666,
+      "wrong_course_retrieval": 0
+    },
+    "candidate": {
+      "implementation": "jina-v4-late-interaction",
+      "fully_grounded_visual_success": 0.6666666666666666,
+      "fully_grounded_visual_success_count": 20,
+      "boundary_releases": 0,
+      "unsupported_claims": 1,
+      "invalid_or_wrong_version_citations": 1,
+      "original_region_lineage": 0.6666666666666666,
+      "wrong_course_retrieval": 0
+    }
+  },
+  "candidate_failure_slices": {
+    "table": 2,
+    "equation": 6,
+    "diagram": 2,
+    "wrong_region_answer": 1,
+    "safe_abstention_on_answerable_case": 9
+  },
+  "provider_accounting": {
+    "provider": "Jina AI",
+    "model": "jina-embeddings-v4",
+    "calls": 8,
+    "completed_calls": 8,
+    "failed_calls": 0,
+    "query_tokens": 113,
+    "historical_imported_tokens": 144639,
+    "accounted_total_tokens": 144752,
+    "account_limit_tokens": 10000000,
+    "remaining_tokens": 9855248,
+    "p95_latency_seconds": 2.7425482920079958
+  },
+  "hard_gates": {
+    "fully_grounded_visual_success": false,
+    "boundary_releases": true,
+    "unsupported_claims": false,
+    "invalid_or_wrong_version_citations": false,
+    "original_region_lineage": false,
+    "wrong_course_retrieval": true,
+    "visual_retrieval_p95_seconds": true,
+    "text_path_regressions": true,
+    "provider_failures": true,
+    "provider_calls_within_limit": true,
+    "all_passed": false
+  },
+  "raw_artifacts": {
+    "location": "reports/generated/true-visual-product-checkpoint-001/",
+    "result_sha256": "a8efded8bf7707fd99226a275cb57278626eabe208472eea519c3432ec019128",
+    "response_ledger_sha256": "39d1f179204c1e4cdf79b61ef22d0f4f81d76b5fc4e74db5517a74c7c8d83637",
+    "quota_ledger_sha256": "b49846c34ad283f2e662f52857178960da7306265f428177c281dc2dcaeab4ad"
+  },
+  "limitations": [
+    "The candidate did not improve actual-product answers over text/OCR on this 30-cluster public/synthetic sample.",
+    "Only eight questions activated the visual route; visual-intent routing is part of the measured method and is not tuned on this result.",
+    "This small public/open sample is not representative professor-material evidence.",
+    "No same-case tuning or rerun is permitted after this valid quality result."
+  ],
+  "authorization_revoked": true,
+  "private_data_used": false,
+  "known_benchmark_10000_touched": false
+}
