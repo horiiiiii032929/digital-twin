@@ -917,13 +917,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "governed-autonomy-v2-1",
-      "evidence": "Manual worker and immutable-image review plus successful staging, local-R1, and preview Compose configuration validation; governed worker preserves the existing A0 queue path.",
+      "domain": "final-local-release-composition",
+      "evidence": "Packaging review confirms the final immutable autonomy binding is included alongside historical controls; focused configuration tests and the qualification image build pass without broadening the runtime image surface.",
       "findings": [],
       "path": "deploy/Dockerfile",
-      "reviewed_at": "2026-09-02",
-      "reviewer": "Codex V2.1 Docker packaging root-cause audit",
-      "sha256": "f7213c52f2f9680565ad3f779496316fcb427eaa66f835904d4158c513b2d5af"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final local release audit",
+      "sha256": "73291b68909663c115d51c0eb19cdf820be8cffb91a592d4669f123ea2f1fc0c"
     },
     {
       "audit_status": "audited",
@@ -939,13 +939,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Qualification-007 configuration review verified the exact selected Local R1.1 selectors remain unchanged except for the immutable image tag; text/OCR fallback, governed V2.1, profile, evidence gate, rollback binding, budgets, and secret placeholders remain explicit.",
+      "domain": "final-local-release-composition",
+      "evidence": "Configuration review pins the final BM25/dominance/text-OCR profile, exact autonomy binding, governed V2.1 runtime, rollback, budgets, and empty credential placeholder; focused environment tests pass.",
       "findings": [],
       "path": "deploy/local-r1.qualified.env.example",
       "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "eaa6c57fc1390f78034d965ea57efe46588c1a3fe3266acdfb26ba4275826249"
+      "reviewer": "Codex final local release audit",
+      "sha256": "8296c5a3a605543f829f1ca05ebec6606717132f053c779e41326da8f29067bc"
     },
     {
       "audit_status": "audited",
@@ -972,13 +972,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "stateful-clarification-r1-2",
-      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Command registration review plus focused validation, hidden-gold separation tests, Ruff, execution-freeze validation, and git diff checks found no unresolved correctness finding.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity successor review",
-      "sha256": "3acad93c094366168ba60605b2c95124f942058505de7c4fda39202c9c03839a"
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "09bb008bb687b08e97c0215dfc29a49ad4a8ba14f523bf01226d5175628df5c5"
     },
     {
       "audit_status": "audited",
@@ -2904,6 +2904,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-manual-source-review",
       "sha256": "f56904349837a72cb054375f3bdc86082eb051041514a2330e24e2263ab7c90b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Post-run instrument review verifies the immutable fresh package hashes, five completed provider-free arms, hidden-gold opening order, terminal Refine decision, no-retuning rule, and revoked held-out authority.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/final_cross_method_factual_confirmation_001.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "4579307e8279267980ee95d521e8aa72a04013563cb95d45f3157ea6f43bee42"
     },
     {
       "audit_status": "audited",
@@ -4878,12 +4889,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-report-evidence-inventory",
-      "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+      "evidence": "Final Phase 9 review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, LF-only CSV generation, and status-led decision classification that cannot be changed by diagnostic phrases such as invalid citation.",
       "findings": [],
       "path": "scripts/build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final Phase 9 evidence audit",
+      "sha256": "55f7f514a36725f0e24b8e30a0093ee000f284db0ccf14b7f8405a9df9d38636"
     },
     {
       "audit_status": "audited",
@@ -5489,6 +5500,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-plus-independent-cross-review",
       "sha256": "fff6576b1840d805d8d6be3afde3c6388a01a52a86ec247a61566fdbbb9cc68e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Focused code review and tests verify explicit profile/retriever bindings, actual Qwen activation without silent fallback, deterministic generator/policy parity, canonical lineage, and T1-v2 product-service execution.",
+      "findings": [],
+      "path": "scripts/final_cross_method_factual_adapter.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "22e09999f8191fa81ae76819e230b48f79e5f2b15ccf9b760ea4b5e52b4f20a7"
     },
     {
       "audit_status": "audited",
@@ -6358,6 +6380,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Focused code review and tests verify clean-revision execution, immutable public/source hashes, complete response-ledger checks before gold loading, ID-based scoring, finite selection, and zero provider calls.",
+      "findings": [],
+      "path": "scripts/run_final_cross_method_factual_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "47d9dcda37c48997dc4314ddf7c7be7a565625f2cbbf0dd184b9bcaf5a5708a0"
     },
     {
       "audit_status": "audited",
@@ -7457,7 +7490,7 @@
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex stateful-clarification correctness review",
-      "sha256": "8de383ee89d723d8476b44b6845b003c98bd1bec0b66015449b72db7bfbb2165"
+      "sha256": "a6e839b27720c3e36660569a5f0cba16b1c993e0908da89e887c8dbd44a716bc"
     },
     {
       "audit_status": "audited",
@@ -7583,13 +7616,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Root-cause review separates provider credential checks from offline administration while preserving all staging/profile/qualification validation; focused configuration, API, backup/restore, and runtime fail-closed tests pass.",
+      "domain": "final-local-release-composition",
+      "evidence": "Validation review binds the exact final profile to its selected BM25 retriever and text/OCR visual mode while retaining historical qualification compatibility; focused API and configuration tests pass.",
       "findings": [],
       "path": "services/api/app/config.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-r1-2-root-cause-review",
-      "sha256": "353f8e5931c8d2033dbed3b51d28274bd0a3862f34fedb00c8f3dd9c19920365"
+      "reviewer": "Codex final local release audit",
+      "sha256": "c7f0ec7eb67ee769e08dbe8a1317d42b606d2629812b41a85b06641e56d1236a"
     },
     {
       "audit_status": "audited",
@@ -8056,8 +8089,8 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "active-runtime",
-      "evidence": "Root-cause review closes SE7-9 and SE7-10 prospectively: deterministic code retains authority; the model returns only intent/reason; valid action alternatives are preregistered; safety, lineage, restart, and fallback scoring remain hard gates.",
+      "domain": "governed-autonomy-checkpoint-recovery",
+      "evidence": "Root-cause review verifies the T1-v2 serializer explicitly permits every nested structured value persisted by live region-bearing citations, including RegionKind, while retaining the restricted allowlist and fail-closed restore path.",
       "findings": [],
       "path": "src/digital_twin/evaluation/autonomy_independent_scoring.py",
       "reviewed_at": "2026-09-03",
@@ -8579,7 +8612,7 @@
       "path": "src/digital_twin/grounding/__init__.py",
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-final-local-r1-audit",
-      "sha256": "2d59e152a1bd48313095e0d940cef6a6de3476cfb3161e1fa16d274f54d28a16"
+      "sha256": "be936237651336756cb53368543c1635958c9ec7ca1354c8de159cd97a17c683"
     },
     {
       "audit_status": "audited",
@@ -9112,13 +9145,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "professor-fidelity-proxy-c0-c3-003",
-      "evidence": "Post-run freeze review removes the completed successor from bounded authorizations and restores the repository-wide provider and method-evaluation block.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Post-run freeze review confirms the completed fresh 1,000-case authorization is revoked while the repository-wide freeze remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity result audit",
-      "sha256": "3b7885109d12ce0d41226574dd250544e3f5914231c38cd68a2cb250c4fdf697"
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "d917b8ff45577167cefc66e6f4c8aca3bea0b12176238909a0e2c50d8a46a777"
     },
     {
       "audit_status": "audited",
@@ -9348,8 +9381,8 @@
       "findings": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "d1c31f3f5568db35dd6ca8302462be36d155359ffcd2be476b40937b87be8642"
+      "reviewer": "Codex qualification-009 checkpoint audit",
+      "sha256": "1db13384ef6047ab67acbe84c81a9ce815e03ba9eaaca5344b1b0b2713962f94"
     },
     {
       "audit_status": "audited",
@@ -9365,13 +9398,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "local-r1-final-technical-completion",
-      "evidence": "Configuration tests prove runtime provider credentials still fail closed, offline administration may omit them, and the bypass does not relax staging origin or other safety validation; the full focused API suite passes.",
+      "domain": "final-local-release-composition",
+      "evidence": "API configuration regression verifies the final release binding accepts only the exact selected BM25 profile and rejects retriever drift while preserving staging, credential, and offline-operation safety checks.",
       "findings": [],
       "path": "tests/api/test_auth_api.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-r1-2-root-cause-review",
-      "sha256": "ec56dd03a5bfe79d40167daa33828d303387b53134a650f26b1e2238b0ca3fcb"
+      "reviewer": "Codex final local release audit",
+      "sha256": "1a0df2d6f71f1b76940ee039c6db7d9585aede99181a8b33d2d5e72426e89bd3"
     },
     {
       "audit_status": "audited",
@@ -9552,13 +9585,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "verification-evidence",
-      "evidence": "Focused regressions cover the set-valued action contract, minimal provider schema, exact bounded authorization recognition, independent scoring, terminal checkpoint binding, provider rejection paths, and the fresh 820-case network-free confirmation.",
+      "domain": "governed-autonomy-checkpoint-recovery",
+      "evidence": "Focused V2 regression interrupts after validation, persists a RegionKind.TEXT citation, reconstructs a fresh graph process, restores the checkpoint once, and verifies no duplicate generation and an exact citation enum round trip.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
       "reviewed_at": "2026-09-03",
-      "reviewer": "Codex confirmation-020 root-cause audit",
-      "sha256": "f0fac2fcf9d93ff5ff9119a5b1438127ba7eb6bbbb20e4e9efdc17b1fa453ba9"
+      "reviewer": "Codex qualification-009 checkpoint audit",
+      "sha256": "859fbbba53e56153fc72d4080dd76a5ca1a40c5b30abb1a0ba666be449e32e19"
     },
     {
       "audit_status": "audited",
@@ -9717,12 +9750,12 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "professor-fidelity-proxy-c0-c3-003",
-      "evidence": "Focused freeze regression verifies the completed successor is no longer authorized and historical and unrelated instruments retain their prior boundaries.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Regression review confirms the bounded authorization set no longer contains the completed fresh 1,000-case run and retains no unreviewed operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity result audit",
+      "reviewer": "Codex final cross-method audit",
       "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
     },
     {
@@ -10774,12 +10807,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-report-evidence-inventory",
-      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, deterministic outputs, and precedence of explicit Keep, Refine, Go Deeper, invalid-execution, and No Release labels over diagnostic prose.",
       "findings": [],
       "path": "tests/test_build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final Phase 9 evidence audit",
+      "sha256": "e7df518814036560bec7cc4f60d5623fb55840754e18813365411ac71906fc4a"
     },
     {
       "audit_status": "audited",
@@ -11165,6 +11198,17 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "45c28bed97447a56173e0e01418a4631ac840b973f68d75fde5694999c15f2ad"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Regression tests cover gold isolation, incomplete response refusal, exact manifest binding, unique arm definitions, ID-set validation, and no-provider authorization.",
+      "findings": [],
+      "path": "tests/test_final_cross_method_factual_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "8671716ddf1341442fb377d869728845de6c5e26518a4096e7d6ce7ae846bb07"
     },
     {
       "audit_status": "audited",
@@ -11598,13 +11642,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Post-release closure review verified exact release selectors, C0-C3 proxy claim boundaries, true-visual successor isolation and deterministic duplicate accounting, focused regressions, and no provider or private-data execution.",
+      "domain": "final-local-release-composition",
+      "evidence": "Environment regression verifies the exact final profile and final autonomy binding selectors while retaining deterministic generation, governed V2.1, dominance evidence gating, budget limits, and credential placeholders.",
       "findings": [],
       "path": "tests/test_local_r1_qualified_environment.py",
       "reviewed_at": "2026-09-04",
-      "reviewer": "codex-post-release-technical-closure",
-      "sha256": "e8b03dd7ed188e02930ac2dbd7908710bae1e187e0b8702b0c2369a4b78c06f6"
+      "reviewer": "Codex final local release audit",
+      "sha256": "4bfc7c3e4feb08fa1ec141c9bf66b5ae5c1d49b13875cfed7723f53bd4911f2c"
     },
     {
       "audit_status": "audited",
@@ -11741,13 +11785,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "configuration-and-deployment",
-      "evidence": "Configuration regressions require digest-pinned bases, minimal operational scripts and evaluation records, explicit inclusion of both qualified rollback and V2.1 selection records, Vite root env binding, and security headers.",
+      "domain": "final-local-release-composition",
+      "evidence": "Container regression requires the final autonomy binding to be copied in addition to historical controls while retaining digest-pinned bases, minimal runtime surface, security headers, and repository configuration constraints.",
       "findings": [],
       "path": "tests/test_repository_configuration.py",
       "reviewed_at": "2026-09-02",
-      "reviewer": "Codex V2.1 Docker packaging root-cause audit",
-      "sha256": "f28f17a5dfa20ab89f3679e9a9a3a5e3c76a8d43d8deda30a8ecea524e108030"
+      "reviewer": "Codex final local release audit",
+      "sha256": "9e4769348eed4b29de2454315df47a1bfdf0b5bb27b74ce936efcf2143177063"
     },
     {
       "audit_status": "audited",
@@ -12243,6 +12287,105 @@
       "reviewed_at": "2026-09-04",
       "reviewer": "codex-colpali-successor-audit",
       "sha256": "85994fe843c7828d3d8531b4192223debb2032fc96c0db93d114bc80d930589a"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Prospective instrument review confirms one fresh Jina v5 versus text/OCR comparison, frozen quality gates, exact provider identity, no retries, hidden-gold separation, and the cumulative 10M-token ceiling.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/true_visual_omni_confirmation_002.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "de10402f6b0cfef7cc9b2ad7527a2deb6811cc621fc86b51d57d32559769d93e"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Builder review and deterministic double-build tests cover package hashes, distribution, source disjointness, licence lineage, original regions, and boundary cases without provider calls.",
+      "findings": [],
+      "path": "scripts/build_true_visual_omni_confirmation_002.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "96a878696e94feb2ad7ff34c7263ed93b41231e51200886ac3c37a3258e6ab3c"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Runner review plus validate/simulate tests cover exact bindings, atomic image and product-response ledgers, hidden-gold opening order, cumulative quota accounting, product-only inputs, original-region scoring, safe resume, and finite Keep/Refine gates.",
+      "findings": [],
+      "path": "scripts/run_true_visual_omni_confirmation_002.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "8162063f9731d90789a15988c4ff23ec74d942729018489c1ae7918425926c6d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Manual transport and retrieval review plus focused tests cover current first-party payload shape, identity and dimension checks, quota accounting, ordinary-text bypass, visual routing, deterministic lineage, and safe transient fallback.",
+      "findings": [],
+      "path": "src/digital_twin/grounding/visual_omni_runtime.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "c261a3ea212a58d2045bd88e2c8dba0701ecde02a40d0b1dcdbc68e0b375cc3b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Focused tests verify strict API payloads, exact identity, 1024-dimensional output, durable quota accounting, text-path non-regression, visual routing, immutable region authority, and safe fallback.",
+      "findings": [],
+      "path": "tests/digital_twin/test_visual_omni_runtime.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "c57fcb07464175cc497bbd959fe00ca81a547cc4bc30eeeb253461df2125cf3d"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-visual-method-comparison",
+      "evidence": "Focused evaluation tests verify deterministic packages, public/gold separation, balanced visual families, source disjointness, network-free simulation, and an executable ordinary-text non-regression assertion.",
+      "findings": [],
+      "path": "tests/test_true_visual_omni_confirmation_002.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final visual audit",
+      "sha256": "bb21e3116d8c6859f2431f3405a2a3afd50a8f5c05059cc3500868f04a2b1f33"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-local-release-composition",
+      "evidence": "Manifest review distinguishes the exact qualification-010 runtime composition from academic claims, pins source revision and image digests, and records factual, visual, professor-fidelity, human-learning, usability, and hosting exclusions.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/local-r1-final-system-manifest-v1.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final Phase 9 release audit",
+      "sha256": "31df479e6aa0e72ffbfaab67c37f8061b0fc9bffbe397c5f3628d6fe0148d5ef"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-local-release-composition",
+      "evidence": "Profile review verifies every active component has an explicit selected or fallback implementation, BM25 and dominance selections match fresh evidence, Jina is dropped, text/OCR fallback is explicit, and historical evidence remains linked.",
+      "findings": [],
+      "path": "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final local release audit",
+      "sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-local-release-composition",
+      "evidence": "Focused tests verify there are no pending final-profile components, the selected retriever is exactly BM25 without silent fallback, the final binding hash and configuration agree, and unsupported visual/provider selectors stay disabled.",
+      "findings": [],
+      "path": "tests/test_final_local_release_profile.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final local release audit",
+      "sha256": "4e037cdccd34c18bf3dc751781baf01fc73d46918cae38d7889bad86b34ade1c"
     }
   ],
   "schema_version": 1

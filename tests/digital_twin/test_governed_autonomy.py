@@ -16,6 +16,7 @@ from src.digital_twin.grounding import (
 from src.digital_twin.grounding.models import (
     AtomicAnswerClaim,
     GenerationTrace,
+    RegionKind,
     TutorAnswer,
 )
 from src.digital_twin.student import (
@@ -1565,6 +1566,16 @@ async def test_t1_v2_observation_uses_the_injected_turn_timestamp(tmp_path):
 @pytest.mark.asyncio
 async def test_t1_v2_resumes_after_node_failure_without_duplicate_generation(tmp_path):
     repository, fixture, _, release, _ = _autonomy_fixture(tmp_path)
+    region_chunk = release.chunks[0].model_copy(
+        update={
+            "page_start": 1,
+            "region_id": "region-text-001",
+            "region_kind": RegionKind.TEXT,
+        }
+    )
+    release = release.model_copy(
+        update={"chunks": [region_chunk, *release.chunks[1:]]}
+    )
     validator = AtomicClaimEvidenceValidator(
         ExactQuoteAtomicClaimVerifier(),
         minimum_entailment=1.0,
@@ -1644,6 +1655,7 @@ async def test_t1_v2_resumes_after_node_failure_without_duplicate_generation(tmp
     assert artifacts.trace.restart_count == 1
     assert artifacts.trace.output_state_revision == 1
     assert artifacts.response.policy_action == "answer"
+    assert resumed.answer.citations[0].region_kind == RegionKind.TEXT
 
 
 @pytest.mark.asyncio

@@ -22,7 +22,7 @@ def test_qualified_environment_pins_exact_release_composition() -> None:
     assert values["APP_GENERATOR_MODE"] == "deterministic"
     assert values["APP_EVIDENCE_GATE_MODE"] == "dominance-scoped-ambiguity-safe-v3"
     assert values["APP_STUDENT_PROFILE_PATH"].endswith(
-        "/student-tutor-r1-local-candidate-v3.json"
+        "/student-tutor-r1-local-final-v1.json"
     )
     assert values["APP_STUDENT_TUTORING_MODE"] == (
         "governed-autonomous-tutoring-graph-v2.1"
@@ -31,7 +31,7 @@ def test_qualified_environment_pins_exact_release_composition() -> None:
         "openai-gpt-5.6-luna-policy-value"
     )
     assert values["APP_T1_QUALIFICATION_RESULT_PATH"].endswith(
-        "/governed-full-autonomy-v2-1-release-binding-correction-001.json"
+        "/governed-full-autonomy-v2-1-final-release-binding-001.json"
     )
 
 

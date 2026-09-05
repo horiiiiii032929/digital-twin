@@ -295,6 +295,7 @@ class AppSettings:
                     self.student_tutoring_mode,
                     self.autonomy_planner_mode,
                     self.evidence_gate_mode,
+                    self.visual_retrieval_mode,
                 )
             if not self.secure_cookies:
                 raise ValueError("staging requires APP_SECURE_COOKIES=true")
@@ -406,6 +407,7 @@ def _validate_t1_qualification_result(
     tutoring_mode: StudentTutoringMode,
     planner_mode: AutonomyPlannerMode,
     evidence_gate_mode: EvidenceGateMode,
+    visual_retrieval_mode: VisualRetrievalMode,
 ) -> None:
     if result_path is None or not result_path.is_file():
         raise ValueError("staging T1 requires APP_T1_QUALIFICATION_RESULT_PATH")
@@ -432,6 +434,7 @@ def _validate_t1_qualification_result(
         {
             "governed-full-autonomy-v2-1-confirmation-001",
             "governed-full-autonomy-v2-1-release-binding-correction-001",
+            "governed-full-autonomy-v2-1-final-release-binding-001",
         }
         if tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
         else {
@@ -466,6 +469,23 @@ def _validate_t1_qualification_result(
         selected_configuration = (
             selected.implementation.configuration if selected is not None else {}
         )
+        profile_retriever = next(
+            (
+                row
+                for row in profile.get("components", [])
+                if row.get("component") == "retriever"
+            ),
+            None,
+        )
+        profile_retriever_id = (
+            profile_retriever.get("implementation", {}).get("implementation_id")
+            if isinstance(profile_retriever, dict)
+            else None
+        )
+        final_release_binding = (
+            record.run_id
+            == "governed-full-autonomy-v2-1-final-release-binding-001"
+        )
         if (
             record.run_id not in allowed_run_ids
             or record.component.value != "conversation-orchestration"
@@ -477,6 +497,14 @@ def _validate_t1_qualification_result(
             or selected_configuration.get("generator")
             != configuration.get("provider_model")
             or selected_configuration.get("profile_sha256") != profile_sha256
+            or (
+                final_release_binding
+                and (
+                    selected_configuration.get("retriever") != profile_retriever_id
+                    or selected_configuration.get("visual_retrieval_mode")
+                    != visual_retrieval_mode.value
+                )
+            )
             or (
                 tutoring_mode == StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
                 and (

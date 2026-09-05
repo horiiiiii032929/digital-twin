@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "instrument_id": "true-visual-omni-confirmation-002",
+  "status": "completed-refine-authorization-revoked",
+  "owner_issue": 216,
+  "related_issue": 131,
+  "decision_question": "Does the current Jina v5 omni visual retriever improve actual-product grounding over text/OCR on fresh source-disjoint visual assets without weakening safety or citation authority?",
+  "dataset": {
+    "public_path": "research/05_evaluation/datasets/true_visual_omni_confirmation_002_public.json",
+    "gold_path": "research/05_evaluation/datasets/true_visual_omni_confirmation_002_gold.json",
+    "sources_path": "research/05_evaluation/datasets/true_visual_omni_confirmation_002_sources.json",
+    "public_sha256": "7a44ad9026a79f113ba79e8ebc835b04daf6b2943934b1719eea9a64f2ebb2d4",
+    "gold_sha256": "becf33add94de47c7bfac774fce5a651a17d6cec5cdf22d86d08eb79b19bec9e",
+    "sources_sha256": "5b98b6828765397c949838fb164d305c7ec00dc1b18fa4a91a1a2cba4a046e4d",
+    "source_disjoint_from_prior_visual_sets": true,
+    "answerable_cases": 30,
+    "boundary_cases": 30
+  },
+  "conditions": {
+    "control": "bm25-text-ocr-fallback",
+    "candidate": "jina-v5-omni-single-vector-with-deterministic-visual-routing-v2"
+  },
+  "fixed_components": {
+    "generator": "deterministic-evidence-set-grounded-generator-v2",
+    "policy": "deterministic-tutor-action-router-v3",
+    "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+    "product_input": "course-id-and-question-only"
+  },
+  "provider": {
+    "name": "Jina AI first party",
+    "endpoint": "https://api.jina.ai/v1/embeddings",
+    "model": "jina-embeddings-v5-omni-small",
+    "dimensions": 1024,
+    "task_query": "retrieval.query",
+    "task_passage": "retrieval.passage",
+    "fallback": false,
+    "maximum_calls": 90,
+    "retries": 0,
+    "prior_accounted_tokens": 144752,
+    "account_token_limit": 10000000,
+    "pricing": "free non-commercial research API access",
+    "license": "CC-BY-NC-4.0",
+    "metadata_verified_at": "2026-09-05T14:05:00+08:00",
+    "openapi_sha256": "0ae64d1cd6e195f901e06c261f2f3c720dc2d69f6ffd9322772a0e2a5244b5a5",
+    "sources": [
+      "https://jina.ai/models/jina-embeddings-v5-omni-small/",
+      "https://jina.ai/embeddings/",
+      "https://api.jina.ai/openapi.json"
+    ]
+  },
+  "hard_gates": {
+    "fully_grounded_visual_success_count": {"minimum": 27},
+    "boundary_releases": {"maximum": 0},
+    "unsupported_claims": {"maximum": 0},
+    "invalid_or_wrong_version_citations": {"maximum": 0},
+    "original_region_lineage": {"minimum": 1.0},
+    "wrong_course_retrieval": {"maximum": 0},
+    "provider_failures": {"maximum": 0},
+    "visual_retrieval_p95_seconds": {"maximum": 8.0},
+    "candidate_grounded_delta": {"minimum": 0.0},
+    "ordinary_text_path_provider_calls": {"maximum": 0}
+  },
+  "execution": {
+    "responses_before_gold": true,
+    "atomic_sqlite_checkpoints": true,
+    "same_case_tuning_allowed": false,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
+    "authorization_source": "continue through phase 9",
+    "authorization_date": "2026-09-05",
+    "authorization_revoked_at": "2026-09-05T06:38:48+00:00",
+    "terminal_result": "completed-refine",
+    "terminal_decision": "Drop Jina v5 omni from the release profile; retain text/OCR fallback without a representative visual-quality claim."
+  }
+}

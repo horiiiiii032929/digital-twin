@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "run_id": "true-visual-omni-confirmation-002",
+  "status": "completed-refine",
+  "decision": "Drop",
+  "selected_for_release": false,
+  "completed_at": "2026-09-05T06:38:48+00:00",
+  "code_revision": "0fc6b3155a9d84ba3579369392a131efadeb6f41",
+  "dataset": {
+    "fresh_source_disjoint": true,
+    "public_sha256": "7a44ad9026a79f113ba79e8ebc835b04daf6b2943934b1719eea9a64f2ebb2d4",
+    "gold_sha256": "becf33add94de47c7bfac774fce5a651a17d6cec5cdf22d86d08eb79b19bec9e",
+    "sources_sha256": "5b98b6828765397c949838fb164d305c7ec00dc1b18fa4a91a1a2cba4a046e4d",
+    "assets": 30,
+    "answerable_cases": 30,
+    "boundary_cases": 30
+  },
+  "conditions": {
+    "text_ocr_control": {
+      "fully_grounded_count": 26,
+      "fully_grounded_rate": 0.8666666666666667,
+      "boundary_releases": 0,
+      "invalid_or_wrong_version_citations": 1,
+      "original_region_lineage": 0.8666666666666667
+    },
+    "jina_v5_omni_candidate": {
+      "fully_grounded_count": 16,
+      "fully_grounded_rate": 0.5333333333333333,
+      "boundary_releases": 0,
+      "unsupported_claims": 0,
+      "invalid_or_wrong_version_citations": 0,
+      "original_region_lineage": 0.5333333333333333,
+      "failure_counts_by_visual_family": {
+        "packet-layout": 10,
+        "protocol-flow": 1,
+        "architecture-chart": 3
+      }
+    }
+  },
+  "paired_grounded_delta": -0.33333333333333337,
+  "provider": {
+    "provider": "Jina AI first party",
+    "model": "jina-embeddings-v5-omni-small",
+    "calls": 90,
+    "tokens": 10087,
+    "cumulative_jina_tokens": 154839,
+    "remaining_account_tokens": 9845161,
+    "p95_latency_seconds": 1.1083930830063764,
+    "cost_usd": 0.0,
+    "failures": 0,
+    "retries": 0
+  },
+  "hard_gate_failures": [
+    "fully_grounded_visual_success",
+    "original_region_lineage",
+    "candidate_grounded_delta"
+  ],
+  "failure_interpretation": "The current single-vector omni representation did not preserve enough fine-grained packet-layout discrimination for the actual product evidence gate. All ten packet-layout answerable cases failed closed. The safe behavior was maintained, but the candidate reduced grounded completion by 33.33 percentage points.",
+  "release_decision": "Do not select Jina v5 omni. Keep the text/OCR path as the operational fallback and make no representative visual-capability claim because the control also had one invalid or wrong-region citation.",
+  "raw_evidence": {
+    "location": "reports/generated/true-visual-omni-confirmation-002",
+    "result_sha256": "1125b8df2cc530cc25bc42419a24fa26add26582766ad0bf47e66be3f82fcf9a",
+    "response_ledger_sha256": "e1b36ae24b9e4e042d1496ee13759f7241e50e3752141a3d1e5e3e7d1378bd02",
+    "quota_ledger_sha256": "9a95c4a2f494bbe552582ad8c84bf7b0a884ffa151b8a6b78662014bb16a66b5"
+  },
+  "limitations": [
+    "The fresh set contains open-licensed networking visuals and is not representative of every course modality.",
+    "The product used deterministic extractive generation, so natural tutoring quality was outside this checkpoint.",
+    "The control's 26/30 result and citation defect support fallback operation, not a broad multimodal quality claim.",
+    "No tuning or rerun on these 60 cases is allowed."
+  ]
+}

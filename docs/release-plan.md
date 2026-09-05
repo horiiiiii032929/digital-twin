@@ -8,6 +8,30 @@ defines what the product is; immutable evaluation records define what has been
 proven. This plan orders the remaining work without changing historical
 results.
 
+## Final selected local composition
+
+The final technical release decision is complete under issue #216. The exact
+profile is `student-tutor-r1-local-final@v2.1-final-001-bm25-text-ocr`:
+BM25 retrieval, dominance-scoped ambiguity-safe evidence gating, deterministic
+grounded generation, governed T1-v2 autonomy with the selected Luna H+E1
+planner for complex jobs, in-app outreach, privacy-minimized learning-gap
+aggregation, text/OCR visual fallback, and immediate T0 rollback.
+
+Fresh cross-method factual confirmation selected this stack only as the safest
+measured local fallback: its best arm reached 63.25% fully grounded success and
+did not pass the academic quality gate. Fresh Jina v5 true-visual confirmation
+reached 16/30 versus 26/30 for text/OCR, so Jina is dropped. These negative
+results are release limitations, not unfinished selection work.
+
+Qualification 009 exposed and preserved a real checkpoint serializer defect
+after its surface checks passed. The root-cause successor added the missing
+`RegionKind` enum to the restricted serializer and a region-bearing restart
+regression. Qualification 010 then passed all 43 exact local HTTPS, restart,
+restore, rollback, and restoration checks with zero application-log errors,
+plus desktop/mobile/keyboard smoke. The selected local research release is
+therefore operationally `Keep`; Phase 10 report construction begins only after
+the researcher agrees the argument and claim boundaries.
+
 ## R1.2 stateful clarification candidate
 
 Issue #212 preserves the selected R1.1 gate and replaces terminal clarification

@@ -160,6 +160,14 @@ from src.digital_twin.grounding.visual_runtime import (
     VisualRuntimeError,
     visual_source_set_sha256,
 )
+from src.digital_twin.grounding.visual_omni_runtime import (
+    JINA_CUMULATIVE_PRIOR_TOKENS,
+    JINA_OMNI_DIMENSIONS,
+    JINA_OMNI_MODEL,
+    JinaOmniEmbeddingProviderV1,
+    VisualAwareRetrieverV2,
+    VisualOmniBindingV1,
+)
 from src.digital_twin.grounding.retrieval_evaluation import (
     RelevantChunkReference,
     RetrievalBenchmarkCorpus,
@@ -347,6 +355,10 @@ __all__ = [
     "JINA_IMPORTED_COMPONENT_TOKENS",
     "JinaVisualMultiVectorProvider",
     "JinaQuotaSnapshotV1",
+    "JINA_CUMULATIVE_PRIOR_TOKENS",
+    "JINA_OMNI_DIMENSIONS",
+    "JINA_OMNI_MODEL",
+    "JinaOmniEmbeddingProviderV1",
     "MultiVector",
     "VisualEmbeddingResultV1",
     "VisualEmbeddingUsageV1",
@@ -358,9 +370,11 @@ __all__ = [
     "QuotaBoundJinaVisualQueryProviderV1",
     "SyncVisualQueryProvider",
     "VisualAwareRetrieverV1",
+    "VisualAwareRetrieverV2",
     "VisualIndexManifestV1",
     "VisualIndexUnavailableError",
     "VisualIndexUnavailableRetrieverV1",
+    "VisualOmniBindingV1",
     "VisualProviderIdentityDriftError",
     "VisualProviderUnavailableError",
     "VisualIndexStoreV1",

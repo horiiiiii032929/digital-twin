@@ -27,6 +27,30 @@ def test_decision_class_preserves_invalid_and_no_release() -> None:
     assert decision_class("Completed Keep", "Select candidate") == "keep"
 
 
+def test_decision_class_uses_the_status_label_not_diagnostic_words() -> None:
+    assert (
+        decision_class(
+            "Completed Keep: zero invalid citations or duplicate turns",
+            "Retain the qualified candidate",
+        )
+        == "keep"
+    )
+    assert (
+        decision_class(
+            "Completed Refine: five evidence invalidations were recorded",
+            "Return to the bounded rollback",
+        )
+        == "refine"
+    )
+    assert (
+        decision_class(
+            "Completed Go Deeper: all development checks passed",
+            "Keep the method as a hypothesis only",
+        )
+        == "go-deeper"
+    )
+
+
 def test_markdown_link_targets_preserves_multiple_evidence_links() -> None:
     cell = "[Instrument](instruments/run.json); [Record](records/run.json)"
 

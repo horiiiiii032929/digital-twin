@@ -29,9 +29,9 @@ chmod 600 .env.local-r1
 ```
 
 The two files serve different purposes. `local-r1.env.example` remains the
-conservative T1-v1 default; `local-r1.qualified.env.example` pins the exact
-candidate-v3, dominance-gate, Luna H+E1 configuration that must be used for
-release requalification. Neither file contains credentials.
+conservative T1-v1 default; `local-r1.qualified.env.example` pins the final
+BM25, dominance-gate, text/OCR, Luna H+E1 configuration used by qualification
+010. Neither file contains credentials.
 
 Keep `.env.local-r1` outside Git. `APP_LEARNING_GAP_HMAC_SECRET` must be an
 unpredictable value of at least 32 bytes. The three staging passwords are used
@@ -81,22 +81,22 @@ exact local qualification and it is represented directly by
 ```text
 APP_GENERATOR_MODE=deterministic
 APP_EVIDENCE_GATE_MODE=dominance-scoped-ambiguity-safe-v3
-APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json
+APP_STUDENT_PROFILE_PATH=/app/research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json
 APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
 APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-luna-policy-value
-APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-release-binding-correction-001.json
+APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-full-autonomy-v2-1-final-release-binding-001.json
 ```
 
-The normalized binding record composes the immutable confirmation-024 H+E1
-result with development selection 004 and binds the exact profile hash. It does
-not itself qualify the composed release. Qualification 008 rechecked the exact
-composition after bounded stateful clarification was selected and the offline
-administration credential boundary was corrected. It passed 43/43 operational
-checks on source revision `e86d664`, plus desktop/exact-390x844 browser smoke
-with no critical defect. R1.1 qualification 007 and T0 remain rollbacks because
-this does not create an academic factual-quality or professor-fidelity pass. Do not edit
-explanatory notes inside the hash-bound profile; place status updates in this
-runbook or `docs/current-status.md`.
+The final binding composes immutable confirmation-024 H+E1, multi-concept
+confirmation 025, and the fresh factual fallback selection without changing
+their claim boundaries. Qualification 010 rechecked the exact composition after
+the region-bearing checkpoint serializer correction. It passed 43/43
+operational checks on source revision `6449dcf`, plus desktop/exact-390x844
+browser smoke and internal log audit with no critical defect. Qualification 008
+and T0 remain rollbacks. This result does not create an academic factual-quality,
+representative visual, or professor-fidelity pass. Do not edit explanatory
+notes inside the hash-bound profile; place status updates in this runbook or
+`docs/current-status.md`.
 
 ## Build and start
 
@@ -150,7 +150,8 @@ npm run verify:staging-https -- \
   --base-url "https://localhost:${LOCAL_R1_HTTPS_PORT:-8443}" \
   --ca-file reports/generated/local-r1-caddy-root.crt \
   --admin-email admin@foundation.local \
-  --profile-version v2.1-floor-004-h-e1 \
+  --profile-id student-tutor-r1-local-final \
+  --profile-version v2.1-final-001-bm25-text-ocr \
   --expected-tutoring-mode governed-autonomous-tutoring-graph-v2.1 \
   --output reports/generated/local-r1-live-journey.json
 ```

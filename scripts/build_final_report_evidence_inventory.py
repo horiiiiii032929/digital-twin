@@ -197,19 +197,37 @@ def markdown_link_targets(cell: str) -> list[str]:
 
 
 def decision_class(status: str, decision: str) -> str:
-    combined = f"{status} {decision}".lower()
-    if "invalid" in combined:
-        return "invalid"
-    if "no release" in combined:
+    normalized_status = re.sub(r"[`*_]", "", status).strip().lower()
+    normalized_decision = re.sub(r"[`*_]", "", decision).strip().lower()
+    combined = f"{normalized_status} {normalized_decision}"
+    if re.search(r"\bno[ -]release\b", combined):
         return "no-release"
-    if "keep" in combined:
-        return "keep"
-    if "refine" in combined:
-        return "refine"
-    if "drop" in combined:
-        return "drop"
-    if "go deeper" in combined:
-        return "go-deeper"
+
+    # The status cell is the authoritative result label.  Restrict matching to
+    # its leading label so diagnostic phrases such as ``invalid citation`` do
+    # not turn a completed Keep result into an invalid execution.  Only fall
+    # back to the decision cell for older rows without a structured status.
+    status_patterns = (
+        (r"^(?:completed\s+)?invalid(?:[ -]execution)?\b", "invalid"),
+        (r"^(?:completed\s+)?keep\b", "keep"),
+        (r"^(?:completed\s+)?refine\b", "refine"),
+        (r"^(?:completed\s+)?drop\b", "drop"),
+        (r"^(?:completed\s+)?go[ -]deeper\b", "go-deeper"),
+    )
+    for pattern, classification in status_patterns:
+        if re.search(pattern, normalized_status):
+            return classification
+
+    decision_patterns = (
+        (r"^(?:decision:\s*)?invalid(?:[ -]execution)?\b", "invalid"),
+        (r"^(?:decision:\s*)?keep\b", "keep"),
+        (r"^(?:decision:\s*)?refine\b", "refine"),
+        (r"^(?:decision:\s*)?drop\b", "drop"),
+        (r"^(?:decision:\s*)?go[ -]deeper\b", "go-deeper"),
+    )
+    for pattern, classification in decision_patterns:
+        if re.search(pattern, normalized_decision):
+            return classification
     return "other"
 
 

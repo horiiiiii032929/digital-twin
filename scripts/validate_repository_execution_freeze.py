@@ -53,6 +53,7 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # contracts. Provider and paid execution live in separately guarded run_*
     # entrypoints.
     "build_academic_factual_qa_grounding_selection_002.py",
+    "build_true_visual_omni_confirmation_002.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_003.py",
     "build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py",

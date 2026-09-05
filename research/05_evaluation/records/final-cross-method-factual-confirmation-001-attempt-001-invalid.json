@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "run_id": "final-cross-method-factual-confirmation-001-attempt-001-invalid",
+  "instrument_id": "final-cross-method-factual-confirmation-001",
+  "status": "invalid-execution",
+  "decision": "Correct harness binding once",
+  "executed_at": "2026-09-05",
+  "code_revision": "6702516",
+  "failure_stage": "adapter-course-installation-before-first-response",
+  "failure_type": "domain-model-approver-course-owner-identity-mismatch",
+  "responses_persisted": 0,
+  "hidden_gold_loaded": false,
+  "provider_calls": 0,
+  "cost_usd": 0.0,
+  "correction_boundary": "Bind the synthetic course owner to the immutable domain-model approver identity; do not change methods, data, gold, gates, or selection rules.",
+  "raw_partial_artifact": "reports/generated/final-cross-method-factual-confirmation-001-attempt-001-invalid",
+  "private_data_used": false
+}
