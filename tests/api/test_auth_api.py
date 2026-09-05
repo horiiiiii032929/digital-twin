@@ -64,6 +64,15 @@ LOCAL_R1_V3_PROFILE = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json"
 )
+LOCAL_R1_FINAL_PROFILE = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json"
+)
+LOCAL_R1_FINAL_BINDING = (
+    Path(__file__).resolve().parents[2]
+    / "research/05_evaluation/records/"
+    "governed-full-autonomy-v2-1-final-release-binding-001.json"
+)
 LOCAL_R1_RESULT = (
     Path(__file__).resolve().parents[2]
     / "research/05_evaluation/records/autonomous-tutoring-r1-confirmation-002.json"
@@ -590,6 +599,41 @@ def test_release_binding_correction_binds_luna_dominance_gate_and_v3_profile(
 
     configuration.pop("evidence_gate")
     result_path.write_text(json.dumps(payload), encoding="utf-8")
+    with pytest.raises(ValueError, match="does not bind this release"):
+        settings.validate()
+
+
+def test_final_release_binding_accepts_only_exact_bm25_profile(tmp_path, monkeypatch):
+    monkeypatch.setenv("OPENAI_API_KEY", "synthetic-test-key")
+    result_path = tmp_path / "final-release-binding.json"
+    result_path.write_bytes(LOCAL_R1_FINAL_BINDING.read_bytes())
+
+    settings = AppSettings(
+        mode=RuntimeMode.STAGING,
+        database_path=tmp_path / "db.sqlite3",
+        data_root=tmp_path,
+        allowed_origins=(ORIGIN,),
+        secure_cookies=True,
+        generator_mode=GeneratorMode.DETERMINISTIC,
+        evidence_gate_mode=EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3,
+        student_tutoring_mode=(
+            StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH
+        ),
+        autonomy_planner_mode=(
+            AutonomyPlannerMode.OPENAI_GPT_5_6_LUNA_POLICY_VALUE
+        ),
+        learning_gap_hmac_secret=b"x" * 32,
+        student_profile_path=LOCAL_R1_FINAL_PROFILE,
+        t1_qualification_result_path=result_path,
+    )
+    settings.validate()
+
+    drifted = json.loads(result_path.read_text(encoding="utf-8"))
+    selected = next(
+        row for row in drifted["candidates"] if row["role"] == "candidate"
+    )
+    selected["implementation"]["configuration"]["retriever"] = "qwen3-hybrid-v1"
+    result_path.write_text(json.dumps(drifted), encoding="utf-8")
     with pytest.raises(ValueError, match="does not bind this release"):
         settings.validate()
 
