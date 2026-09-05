@@ -20,7 +20,7 @@ must not be placed on one ranking axis.
 | Visual retrieval v4 | text/OCR versus Jina v4 late interaction | historical 30-asset retrieval and 60-case product checkpoints | Direct inside each historical checkpoint | Retrieval improvement did not become product success; not selected |
 | Visual retrieval v5 | text/OCR versus Jina v5 omni | `true-visual-omni-confirmation-002`, fresh 30 assets / 60 cases | Direct paired comparison | Jina v5 dropped; text/OCR fallback retained |
 | Professor-profile behavior | C0–C2/C3 synthetic proxy conditions | proxy 002/003 and analysis correction | No complete valid C0–C3 estimate | `Refine`; workflow exists, fidelity remains unproven |
-| Local operations | exact HTTPS journey, restart, restore, rollback, browser smoke | qualification 010 (43/43 machine checks) | Direct operational checks, not academic quality | Exact final profile qualified; tag local-r1-governed-v2.1-qualification-010 |
+| Local operations | exact HTTPS journey, restart, restore, rollback, browser smoke | qualification 011 (43/43 machine checks; 51/51 container regressions) | Direct operational checks, not academic quality | Exact final profile with correctness fixes qualified at source d9ec1a8; qualification 010 retained as rollback |
 
 ## Selected local composition
 

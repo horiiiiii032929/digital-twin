@@ -100,6 +100,12 @@ performed. Historical qualifications and factual-quality results are unchanged.
 
 ## Audit limits
 
+Subsequent [qualification 011](../../research/05_evaluation/local-r1-governed-v2-1-release-qualification-011-results.md)
+tested the committed fixes at `d9ec1a8`: all 43 Docker operations checks and 51
+built-image regression tests passed. The preceding verification section records
+the earlier audit stage; the linked qualification is the current operational
+evidence for the corrected source.
+
 Review concentrated on student request authorization/commit, publication and
 withdrawal, clarification, proactive delivery, and related UI state. The full
 repository gate provides broader regression coverage, not a proof of absence

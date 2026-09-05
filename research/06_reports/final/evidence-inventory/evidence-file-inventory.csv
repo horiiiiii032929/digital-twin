@@ -113,7 +113,7 @@ docs/atomic-claim-validation.md,architecture-or-operations-documentation,tracked
 docs/autonomous-tutoring-graph.md,architecture-or-operations-documentation,tracked,20630,f83f518bb82e9c8c4b827f06e9a1691adea9db832cf1476303cb8054dcc206a2
 docs/autonomous-tutoring-loop-v2.md,architecture-or-operations-documentation,tracked,31201,ef1d6394b009d773ba0e919c8ebf51a9cde041a6a495db9d288a03a65f98602d
 docs/component-inventory.md,architecture-or-operations-documentation,tracked,9013,5c8a79930026413df498aa2fdd16135ee5551c72a9c03b69e0d876dafc7289b5
-docs/current-status.md,architecture-or-operations-documentation,tracked,203717,9c0c87f45013b54f851ea7cfba3744076740e272ef3e5c3a6c0de76c63dff705
+docs/current-status.md,architecture-or-operations-documentation,tracked,204028,964d91ad42758026b827e6951e07e3feb8d35e7483f63acff876063fe82db756
 docs/deployment-threat-model.md,architecture-or-operations-documentation,tracked,5046,473d02994987bf3303d980412604661e32f14dcd5cf31403936180782a399c18
 docs/deployment.md,architecture-or-operations-documentation,tracked,12600,df3dd32f53fbb15eb8daacb02c28be37720630fcceec1d7723f388a5ef0ee301
 docs/evaluation-architecture.md,architecture-or-operations-documentation,tracked,12840,826a6bdcdd887799db649a94461f4d78bca91ce64ab759b48345b319aa514620
@@ -121,7 +121,7 @@ docs/evaluation-data-flow-and-threat-model.md,architecture-or-operations-documen
 docs/github-project.md,architecture-or-operations-documentation,tracked,26221,3dac714a52f2a764034ce404b6592eca0df2e09bba4a29c43256298836a571dd
 docs/live-generation.md,architecture-or-operations-documentation,tracked,10982,d602aad3341054dc8601d7c5484148fde1ee8bc169b3eae250044d8bb694959c
 docs/local-ingestion.md,architecture-or-operations-documentation,tracked,7306,f8b7410998cc56726f3a00db1afd3d523dbf45df5a0742cbb580469459733f69
-docs/local-r1-runbook.md,architecture-or-operations-documentation,tracked,11426,129d4ea6325f91fec0d14de446d371b12fa5c5a6e308b21944eedafd1cdf636f
+docs/local-r1-runbook.md,architecture-or-operations-documentation,tracked,12250,ba946f2ea91c510ad180ef35095ca0e7137755e00b71354be0c69b98f3e81da1
 docs/local-retrieval.md,architecture-or-operations-documentation,tracked,10474,e8d194f6a8caf275d65f6e9e81418c5864a6a4e28e9f1ea88facf5dc880342f2
 docs/onboarding-prototype.md,architecture-or-operations-documentation,tracked,4933,25c86b472de5126ec0cd8dd0cc1c0d1d7e8c84929d8d805b5342ef444113490b
 docs/privacy-and-ethics.md,architecture-or-operations-documentation,tracked,2919,8ac947ecad8da2073f2e3a7d402cb989f61e9832cb8459ecb8460f4eba9a6d72
@@ -131,7 +131,7 @@ docs/quality-and-learning-plan.md,architecture-or-operations-documentation,track
 docs/r1-openai-release-path.md,architecture-or-operations-documentation,tracked,8463,53e76550ad8001ae8f0ada34ee443ef1546f4b3c4fa709355a2b13f8f3d74ae1
 docs/rag-and-llm-benchmarking.md,architecture-or-operations-documentation,tracked,23716,e135c35076a645193579f47513a73d383c461221e700c6d3521cae5a04398111
 docs/release-plan.md,architecture-or-operations-documentation,tracked,52582,57aeb487334c33656312689b7b4654ea5e827ad5afb8090f2d9ec896e8f92828
-docs/research/2026-09-05-runtime-correctness-audit.md,architecture-or-operations-documentation,untracked,6255,2cf5406353717c3dbcf07ca75717eaf2aea4314025f1803cea597dbb118e60a7
+docs/research/2026-09-05-runtime-correctness-audit.md,architecture-or-operations-documentation,tracked,6649,fdbffa3a73d0762d1023798d7d8fd0410e85deab7fcf31123a43479b03fc9d19
 docs/research/main-commit-audit-8786375-2bdfea9.md,architecture-or-operations-documentation,tracked,18952,02b7d8d4933db5910becbb682fb6de8d46cda48614ce8350af92d1bec1d32cd4
 docs/research/sota-autonomous-digital-twin-decision.md,architecture-or-operations-documentation,tracked,19821,0177b4ffdf443e49a24397169b13670617afb2d7c39055f50208412ede3e6cc1
 docs/research/sota-autonomous-digital-twin-evaluation-design.md,architecture-or-operations-documentation,tracked,25152,19d030a03adc70b32def664d3149f64905c339e268f757efd33767de3415c26c
@@ -313,6 +313,7 @@ research/04_experiments/2026-09-04-local-r1-governed-v2-1-release-qualification-
 research/04_experiments/2026-09-04-local-r1-governed-v2-1-release-qualification-006-plan.md,experiment-plan-or-learning-log,tracked,2425,4a28fd48b2af66cdc822b8983dffef6405c5a9e5e1e187eee0183f1d719df678
 research/04_experiments/2026-09-05-final-cross-method-evaluation-closure-plan.md,experiment-plan-or-learning-log,tracked,2226,6d04e670aa482223a4505aeadf43dcaba1beafdee474ad97bd085f8b6b8dcaff
 research/04_experiments/2026-09-05-local-r1-governed-v2-1-release-qualification-007-plan.md,experiment-plan-or-learning-log,tracked,2478,4549c79c9dc5fb84162920b6076caf6e97e34f3725497432749606bf719e46f6
+research/04_experiments/2026-09-05-local-r1-governed-v2-1-release-qualification-011-plan.md,experiment-plan-or-learning-log,tracked,3362,273d7d80fb99ca7dd26a14eab20065a1d223137913a4daa7d2015d067efc4e50
 research/04_experiments/2026-09-05-professor-fidelity-proxy-c0-c3-003-plan.md,experiment-plan-or-learning-log,tracked,966,57d32c29157fd7d7373b01ad296892b88239315dc0517e3358475d628aff2d72
 research/04_experiments/2026-09-05-stateful-clarification-r1-2-plan.md,experiment-plan-or-learning-log,tracked,3362,c2e07ceaed039dbca46c120c6db7147ddaf1e8269041f12e2e77cb769efec5f5
 research/04_experiments/README.md,experiment-plan-or-learning-log,tracked,1776,e6c28dc999c49b8588534f9ef317ddcdf01833237ff65b0da52797e4248246be
@@ -586,7 +587,7 @@ research/05_evaluation/factual-qa-v3-semantic-role-triage-v2-correction-001-resu
 research/05_evaluation/factual-qa-v3-source-disposition-v1-results.md,evaluation-summary-or-rubric,tracked,2620,24094bdeafbd591769f341ea0d6a4a17d2dd5521c3851d5309567cbfdb18430e
 research/05_evaluation/factual-qa-v3-source-disposition-v2-correction-001-results.md,evaluation-summary-or-rubric,tracked,1989,ade1ac26273c575e75723cfba67e8efc4cc81c5f2d5e8b29b5c0e18be86f1db4
 research/05_evaluation/factual_qa_pilot_corpus_v1.json,evaluation-summary-or-rubric,tracked,24395,dd69703503b6ed0883e19e03330f9a4d98fa9c14056a71d7bdfdee0ed4aecd31
-research/05_evaluation/final-cross-method-factual-confirmation-001-analysis-correction-001-results.md,evaluation-summary-or-rubric,untracked,4075,dfd82520cd4a1043d7c7a3fb42b798999e45f6a5229edd56376d029cb8d9aff2
+research/05_evaluation/final-cross-method-factual-confirmation-001-analysis-correction-001-results.md,evaluation-summary-or-rubric,tracked,4075,dfd82520cd4a1043d7c7a3fb42b798999e45f6a5229edd56376d029cb8d9aff2
 research/05_evaluation/final-cross-method-factual-confirmation-001-attempt-001-invalid-results.md,evaluation-summary-or-rubric,tracked,775,4d8c31db2dc4a273dc76b8400aa7930a76baa54fc36380d881639cee748e082c
 research/05_evaluation/final-cross-method-factual-confirmation-001-results.md,evaluation-summary-or-rubric,tracked,2595,9fc1cd5a7f6e09e47fcfb1c9bdfdd7b8b57c8f0603bf557dea2217d5fb9b2c45
 research/05_evaluation/generation-v1-gemma3-4b-results.md,evaluation-summary-or-rubric,tracked,5724,e7449a9858850e9e8f654208570581ef04a37df1bd6181cc609e94202c04eb54
@@ -974,6 +975,7 @@ research/05_evaluation/local-r1-governed-v2-1-release-qualification-008-attempt-
 research/05_evaluation/local-r1-governed-v2-1-release-qualification-008-results.md,evaluation-summary-or-rubric,tracked,2574,be258b635309a0e16d45620b4423655427819c2001a311c35ba59bb6226f25e8
 research/05_evaluation/local-r1-governed-v2-1-release-qualification-009-attempt-001-invalid-results.md,evaluation-summary-or-rubric,tracked,1519,b165a01a5f95e7794cf3d2bf52caa79f663b16c65041a5a6d430b1e1afaa06c2
 research/05_evaluation/local-r1-governed-v2-1-release-qualification-010-results.md,evaluation-summary-or-rubric,tracked,2619,1918843a13b1d8f12da35c8d2fded8517e320b2f306822dae320b3379be1a008
+research/05_evaluation/local-r1-governed-v2-1-release-qualification-011-results.md,evaluation-summary-or-rubric,untracked,7196,b07829ac2a25937a4329f46ffa1fbec839389b1fbcd5d465b6e9bb9a285a5df9
 research/05_evaluation/local-r1-release-qualification-001-results.md,evaluation-summary-or-rubric,tracked,3555,e3ccf549731ff0ac5581ab33e7504c7bf16a95cb64e0b8dff0e2b7332c43a690
 research/05_evaluation/local_reviewer_sensitivity_probes_v1.json,evaluation-summary-or-rubric,tracked,9151,c72abce9f4d392aeab0ec31ef90d26b9759a95ff90b9c4ee0138ec799770a352
 research/05_evaluation/main-commit-audit-resolution-001-results.md,evaluation-summary-or-rubric,tracked,2578,3f8843fde339fdc2959e65dfad684a498abcc1a5e980dc57a263e7faf22469de
@@ -1161,7 +1163,7 @@ research/05_evaluation/records/evidence-sufficiency-v2-independent-review-007-bu
 research/05_evaluation/records/evidence-sufficiency-v2-independent-review-008-build.json,machine-result-record,tracked,5425,24e8575858aba33a8f855b7216d057dee669ea79142ac9599b41897927a44005
 research/05_evaluation/records/evidence-sufficiency-v3-atomic-claim-confirmation-001-build.json,machine-result-record,tracked,5115,a210bf2b43b2df2f1b2396507e80815605c33f586b61cf72aaa0483741cee816
 research/05_evaluation/records/evidence-sufficiency-v3-atomic-claim-confirmation-001.json,machine-result-record,tracked,5589,98474e8e658c145c709e8c9ce5d78902d2a1c5bed4889d0e4cf66ff147885955
-research/05_evaluation/records/final-cross-method-factual-confirmation-001-analysis-correction-001.json,machine-result-record,untracked,2586,74b62f8b47ead3bd65a29044da83e13c1bac7855caf2ed6c4f3bdef108a97b6c
+research/05_evaluation/records/final-cross-method-factual-confirmation-001-analysis-correction-001.json,machine-result-record,tracked,2586,74b62f8b47ead3bd65a29044da83e13c1bac7855caf2ed6c4f3bdef108a97b6c
 research/05_evaluation/records/final-cross-method-factual-confirmation-001-attempt-001-invalid.json,machine-result-record,tracked,870,2b731315e0ec12913f2db1684ee1bc379c838e273702c41401bbfb6d929ebfa2
 research/05_evaluation/records/final-cross-method-factual-confirmation-001.json,machine-result-record,tracked,3487,78208b489a590697a60c7a7276fa0cdd4971afc98826041ca1ba394f9be93b74
 research/05_evaluation/records/generation-v1-gemma3-4b.json,machine-result-record,tracked,3799,5e91175e931ec4ad0a8356b3b9d728ee3114faf68b418c290e6e15e87fb7af0f
@@ -1233,6 +1235,7 @@ research/05_evaluation/records/local-r1-governed-v2-1-release-qualification-008-
 research/05_evaluation/records/local-r1-governed-v2-1-release-qualification-008.json,machine-result-record,tracked,4808,8cea1ae0483275169bd323c0628628f3ca862aaaa4ac5a207217165a381dc5db
 research/05_evaluation/records/local-r1-governed-v2-1-release-qualification-009-attempt-001-invalid.json,machine-result-record,tracked,2959,9ea6bc82bedb191c9b8b2e66a88857818beb34f679150558252a465a412e1aa1
 research/05_evaluation/records/local-r1-governed-v2-1-release-qualification-010.json,machine-result-record,tracked,5273,98ea56940f8d72de4c299d4009a20cfd00d9dba207937b7b66cf193bb4532450
+research/05_evaluation/records/local-r1-governed-v2-1-release-qualification-011.json,machine-result-record,untracked,20347,da56e59bd9b89d3d59c6ecf7ffe467e0437ddf4abeaa1149a0db4549621041e0
 research/05_evaluation/records/local-r1-release-qualification-001.json,machine-result-record,tracked,6068,d5d7aa099228661539bcad11841c68a2034883764e665973d0c229aba55e1039
 research/05_evaluation/records/main-commit-audit-resolution-001.json,machine-result-record,tracked,7261,7a49353ea45a96fef3c076a10bca4fb643e90e6a9288d438152c7d2abd16452e
 research/05_evaluation/records/multimodal-product-grounding-v2-development-001.json,machine-result-record,tracked,6365,055b06215763160a1fbf60a7a65c4e6ed504234e23d3d4544ffc87f4a3494fb7
@@ -1297,7 +1300,7 @@ research/05_evaluation/repository-correctness-dependency-remediation-2026-08-19-
 research/05_evaluation/repository-correctness-full-sweep-2026-08-20-results.md,evaluation-summary-or-rubric,tracked,2427,b1c2d9faa674905d95432afc7b7dd389c6a44ecd2b534e7118ffd6a8d9e64f54
 research/05_evaluation/repository-correctness-onboarding-policy-2026-08-20-results.md,evaluation-summary-or-rubric,tracked,3237,20ab9d81fda8d59ca24e931263addb57a42a21ae4e975f63e6906a12bcc385e9
 research/05_evaluation/repository-correctness-runtime-boundaries-2026-08-19-results.md,evaluation-summary-or-rubric,tracked,3132,aea108510cd2d17361a2d561b4e8ea5e9bba505a1c9aa292c5257bc7e7b8da94
-research/05_evaluation/result-registry.md,evaluation-registry,tracked,258740,4c41d60c05836e6cca9ba83604dd39933d1ddf57baf2666dfc486a24cfe37baa
+research/05_evaluation/result-registry.md,evaluation-registry,tracked,259436,836ff5d15b3a0b8910b81d39d7100347d7a692e2d6027a3f197537795513ea3e
 research/05_evaluation/retrieval-index-lifecycle-development-001-results.md,evaluation-summary-or-rubric,tracked,3613,b00c3de00b5b1b12d9b29d6dc6c159f0c4addaff4cc08def65f933cd5f6adcdc
 research/05_evaluation/retrieval-v1-results.md,evaluation-summary-or-rubric,tracked,2983,0d55fe4f1c934e4954db1fc8e5bcad2d6f268d9b18faf95b1f96c18b795e9d62
 research/05_evaluation/retrieval-v2-results.md,evaluation-summary-or-rubric,tracked,4940,1f0ab5d7c276d17b9be05b5e1651e5f18dd6c503fa3f78609ecbc5d0c47257c2
@@ -1364,8 +1367,8 @@ research/06_reports/final/components/system-design-tables.tex,report-or-figure,t
 research/06_reports/final/diagram-plan.md,report-or-figure,tracked,9900,9e97a7901a53b890fc129f3e9b14b5c88cea2b0490d1e96675960dd8e4c8c3e3
 research/06_reports/final/diagram-quality-audit.md,report-or-figure,tracked,10251,fd9a9324a84cb68a014cb02dcb5e15d1fd4a4db744a8928dee9014b45767da73
 research/06_reports/final/evidence-map.md,report-or-figure,tracked,22607,c7fa4086d113513e0a12041ef5693277b75927cc385301b755b299ba10659ce1
-research/06_reports/final/final-claim-evidence-matrix.md,report-or-figure,tracked,3643,e745dddf98f5e80c7d081e47168d5ed673174da31a5a4fbc63353d647ebc4b13
-research/06_reports/final/final-method-catalog.md,report-or-figure,tracked,3455,3c6f133bbd54b45d07e32b1426e5c1c52df867aec9097d5a67feaaf69ac595f5
+research/06_reports/final/final-claim-evidence-matrix.md,report-or-figure,tracked,3956,9ff13e7e1383609c52a723b7152e6f9eb9009f2c14577d7e7b2fb79122ecd04c
+research/06_reports/final/final-method-catalog.md,report-or-figure,tracked,3519,ea6394d1aa4b346ed0fc8f00da6e92189550c4d4de5e3b9aefbdc680dfd68c56
 research/06_reports/final/it5004-system-design-alignment.md,report-or-figure,tracked,9213,4bd47873066006ded887af0314549058eee3bbdb58c8b81efb688f36b48ca5eb
 research/06_reports/final/report-working-draft.md,report-or-figure,tracked,9163,5e8ea9be7d456ecf8349be9a3a64cef5e71a161fa69b16da3217b4dba3d483e6
 research/06_reports/final/report.tex,report-or-figure,tracked,6443,f3d32d5e81663f3ff450ce2797245ded866e062c67932ef08c75c751725bd4cf

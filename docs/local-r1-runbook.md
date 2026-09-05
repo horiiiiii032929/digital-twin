@@ -100,6 +100,17 @@ notes inside the hash-bound profile; place status updates in this runbook or
 
 ## Build and start
 
+Qualification 011 subsequently validated the runtime correctness fixes at clean
+source `d9ec1a8`: 43/43 operational checks and 51/51 built-image regressions passed.
+See its [result](../research/05_evaluation/local-r1-governed-v2-1-release-qualification-011-results.md)
+for exact image digests, configuration hashes, and limitations. It used separate
+projects on ports 8454/8455 and left the qualification-010 project intact.
+The test projects are stopped with their volumes preserved. To reproduce using
+the retained private test configuration, replace `--env-file .env.local-r1` below
+with `--env-file .env.local-r1-q011`; its image tag is `r1-qualification-011`.
+This test environment has an inert provider key and supports only the qualified
+deterministic fast paths. Live provider integration remains separately gated.
+
 ```bash
 npm run local-r1:config
 npm run local-r1:build

@@ -1,18 +1,18 @@
 {
-  "code_revision": "5bb3d632e6b586e458751b61b22791347d80ea5d",
+  "code_revision": "d9ec1a8eeb405fb0843d7cbc480c9636605cbde4",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
       "drop": 6,
       "go-deeper": 70,
       "invalid": 82,
-      "keep": 64,
+      "keep": 65,
       "no-release": 30,
       "other": 19,
       "refine": 63
     },
-    "machine_record_count": 260,
-    "result_count": 334,
+    "machine_record_count": 261,
+    "result_count": 335,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -41,8 +41,8 @@
       "valid_json": 261
     },
     "machine-result-record": {
-      "files": 261,
-      "valid_json": 261
+      "files": 262,
+      "valid_json": 262
     }
   },
   "local_evidence_aggregates": [
@@ -78,9 +78,9 @@
     },
     {
       "directory": "reports/generated",
-      "file_count": 9876,
+      "file_count": 9909,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 9351374304
+      "total_bytes": 9351511635
     }
   ],
   "record_join_quality": {
@@ -141,8 +141,8 @@
       }
     ],
     "without_component_count": 113,
-    "without_corpus_id_count": 120,
-    "without_dataset_id_count": 114
+    "without_corpus_id_count": 121,
+    "without_dataset_id_count": 115
   },
   "repository_files": {
     "by_category": {
@@ -155,11 +155,11 @@
       "deployment-configuration": 8,
       "evaluation-instrument": 266,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 416,
-      "experiment-plan-or-learning-log": 85,
+      "evaluation-summary-or-rubric": 417,
+      "experiment-plan-or-learning-log": 86,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 261,
+      "machine-result-record": 262,
       "project-governance-or-ci": 5,
       "report-or-figure": 68,
       "repository-configuration": 7,
@@ -168,10 +168,10 @@
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2130,
-      "untracked": 3
+      "tracked": 2134,
+      "untracked": 2
     },
-    "count": 2133
+    "count": 2136
   },
   "schema_version": 1
 }
