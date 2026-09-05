@@ -945,7 +945,7 @@
       "path": "deploy/local-r1.qualified.env.example",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final local release audit",
-      "sha256": "cfc2b3f3f6805adf03f4240265d14628cb73c067d18b7452368b85fc6cb37e5a"
+      "sha256": "8296c5a3a605543f829f1ca05ebec6606717132f053c779e41326da8f29067bc"
     },
     {
       "audit_status": "audited",

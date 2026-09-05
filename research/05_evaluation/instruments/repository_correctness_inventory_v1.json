@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "bef9179284234069c76e619ed98962783f1ebd39a968e1a44f5d18516d99dff0",
+  "record_sha256": "b136aadc0d0f41402ecdba6892e8e53c6962764e9d25b51bb9ec45892ade8eb6",
   "records": [
     {
       "audit": {
@@ -1395,7 +1395,7 @@
       "package_commands": [],
       "path": "deploy/local-r1.qualified.env.example",
       "risk": "high",
-      "sha256": "cfc2b3f3f6805adf03f4240265d14628cb73c067d18b7452368b85fc6cb37e5a"
+      "sha256": "8296c5a3a605543f829f1ca05ebec6606717132f053c779e41326da8f29067bc"
     },
     {
       "audit": {
