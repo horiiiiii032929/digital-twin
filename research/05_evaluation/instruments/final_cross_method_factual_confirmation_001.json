@@ -1,12 +1,12 @@
 {
   "schema_version": 1,
   "instrument_id": "final-cross-method-factual-confirmation-001",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine",
   "authorization": {
     "authorized_by": "researcher",
     "authorized_at": "2026-09-05",
     "source": "continue through phase 9",
-    "heldout_execution_authorized": true,
+    "heldout_execution_authorized": false,
     "provider_execution_authorized": false,
     "paid_execution_authorized": false
   },
@@ -43,5 +43,14 @@
     "maximum fully grounded factual success",
     "maximum boundary action accuracy",
     "maximum canonical all-evidence@3"
-  ]
+  ],
+  "result": {
+    "executed_at": "2026-09-05",
+    "code_revision": "71f15f810905227334ed7705839ea9b1356384ec",
+    "decision": "Refine",
+    "highest_scoring_arm": "bm25-dominance",
+    "highest_scoring_arm_selected_for_release": false,
+    "reason": "The highest-scoring arm reached 63.25% fully grounded factual success and failed the preregistered quality gates. All five arms recorded zero severe unsupported releases.",
+    "authorization_revoked": true
+  }
 }

@@ -733,13 +733,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
         ),
-        # Issue #216. One-time provider-free execution of the untouched,
-        # source-disjoint 1,000-case package. Hidden gold opens only after all
-        # five actual-product response ledgers are complete.
-        "final-cross-method-factual-confirmation-001": (
-            "heldout_execution",
-            "method_evaluation_execution",
-        ),
     }
 )
 

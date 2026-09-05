@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "run_id": "final-cross-method-factual-confirmation-001",
+  "instrument_id": "final-cross-method-factual-confirmation-001",
+  "executed_at": "2026-09-05",
+  "status": "completed-refine",
+  "decision": "Refine",
+  "code_revision": "71f15f810905227334ed7705839ea9b1356384ec",
+  "dirty_worktree": false,
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-cross-engine-sealed-1000-010",
+    "case_count": 1000,
+    "answerable_count": 800,
+    "boundary_count": 200,
+    "source_family_count": 200,
+    "known_benchmark": false,
+    "case_package_sha256": "436ad73bb1e4bf7ca4c42b4ab763ac8ad630193d72b666263e9ec46d30857e2c",
+    "source_package_sha256": "e583150c1a4630414e59ba7bf538398806be29fd53c167a1d429b11a0781a83e",
+    "gold_loaded_after_all_responses": true
+  },
+  "system": {
+    "profile": "student-tutor-r1-local-candidate-v3",
+    "profile_sha256": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+    "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "generator": "deterministic-evidence-set-grounded-generator-v2",
+    "policy": "deterministic-tutor-action-router-v3"
+  },
+  "arms": {
+    "bm25-any-hit": {
+      "fully_grounded_factual_success": 0.0,
+      "boundary_action_accuracy": 1.0,
+      "canonical_all_evidence_at_3": 0.98,
+      "evidence_recall_at_5": 0.99375,
+      "severe_unsupported_releases": 0
+    },
+    "bm25-question-targeted": {
+      "fully_grounded_factual_success": 0.6325,
+      "boundary_action_accuracy": 0.955,
+      "canonical_all_evidence_at_3": 0.98,
+      "evidence_recall_at_5": 0.99375,
+      "severe_unsupported_releases": 0
+    },
+    "bm25-dominance": {
+      "fully_grounded_factual_success": 0.6325,
+      "fully_grounded_source_family_lower_95": 0.5875,
+      "fully_grounded_source_family_upper_95": 0.67625,
+      "answerable_action_accuracy": 0.9975,
+      "boundary_action_accuracy": 0.96,
+      "atomic_claim_precision": 0.679375,
+      "atomic_claim_recall": 0.679375,
+      "citation_precision": 0.696875,
+      "citation_recall": 0.696875,
+      "source_version_validity": 0.89625,
+      "canonical_all_evidence_at_3": 0.98,
+      "evidence_recall_at_5": 0.99375,
+      "severe_unsupported_releases": 0,
+      "latency_ms_p95": 0.221375
+    },
+    "qwen-question-targeted": {
+      "fully_grounded_factual_success": 0.62,
+      "boundary_action_accuracy": 0.945,
+      "canonical_all_evidence_at_3": 0.92875,
+      "evidence_recall_at_5": 0.97625,
+      "severe_unsupported_releases": 0
+    },
+    "qwen-dominance": {
+      "fully_grounded_factual_success": 0.62,
+      "boundary_action_accuracy": 0.95,
+      "canonical_all_evidence_at_3": 0.92875,
+      "evidence_recall_at_5": 0.97625,
+      "severe_unsupported_releases": 0
+    }
+  },
+  "highest_scoring_arm": "bm25-dominance",
+  "highest_scoring_arm_selected_for_release": false,
+  "provider_calls": 0,
+  "cost_usd": 0.0,
+  "limitations": [
+    "The sealed set contains mechanically generated questions, including terse structured-source references; this lowers ecological validity but was not altered after inspection.",
+    "The deterministic generator measures extractive grounding rather than natural tutoring quality.",
+    "The release may use BM25 as the best measured safe fallback, but this result does not support a high factual-quality claim.",
+    "This one-time set is closed to tuning after the run."
+  ],
+  "raw_artifact": "reports/generated/final-cross-method-factual-confirmation-001"
+}

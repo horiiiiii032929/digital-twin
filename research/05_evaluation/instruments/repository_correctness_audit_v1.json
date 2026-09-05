@@ -2909,12 +2909,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-cross-method-evaluation-closure",
-      "evidence": "Instrument review verifies the immutable fresh package hashes, five prospective arms, provider-free scope, hidden-gold opening order, and finite no-retuning selection rule.",
+      "evidence": "Post-run instrument review verifies the immutable fresh package hashes, five completed provider-free arms, hidden-gold opening order, terminal Refine decision, no-retuning rule, and revoked held-out authority.",
       "findings": [],
       "path": "research/05_evaluation/instruments/final_cross_method_factual_confirmation_001.json",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final cross-method audit",
-      "sha256": "73fe85155553cbc7656f35192d1cc6e126bc4f15ab2299ca6dadfa92a6922a84"
+      "sha256": "4579307e8279267980ee95d521e8aa72a04013563cb95d45f3157ea6f43bee42"
     },
     {
       "audit_status": "audited",
@@ -9146,12 +9146,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-cross-method-evaluation-closure",
-      "evidence": "Freeze review confirms the one-time fresh 1,000-case run is limited to held-out and method evaluation, contains no provider authority, and leaves the repository-wide freeze active.",
+      "evidence": "Post-run freeze review confirms the completed fresh 1,000-case authorization is revoked while the repository-wide freeze remains active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final cross-method audit",
-      "sha256": "85a621b8b3a47ccb17dd3d3e8ca06ce8d8a14a534c902c17cbc6cf29a0ff7c12"
+      "sha256": "064d6e525b30e5aecc964ab047732487779efca2f1802883bbbafcc38afc3322"
     },
     {
       "audit_status": "audited",
@@ -9751,12 +9751,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-cross-method-evaluation-closure",
-      "evidence": "Regression review confirms the bounded authorization set includes the one-time fresh 1,000-case provider-free run and no unreviewed operation.",
+      "evidence": "Regression review confirms the bounded authorization set no longer contains the completed fresh 1,000-case run and retains no unreviewed operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final cross-method audit",
-      "sha256": "bd4f5954819fd300ca1c84441cc87db15781d3a886082de8aa07c8cbe660ebc1"
+      "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
     },
     {
       "audit_status": "audited",
