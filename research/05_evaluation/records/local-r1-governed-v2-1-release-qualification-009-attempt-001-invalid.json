@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-009-attempt-001-invalid",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-009",
+  "date": "2026-09-05",
+  "status": "invalid-execution",
+  "code_revision": "0faf35843692c8beb83a56912cf2be59d073f8ce",
+  "decision": "Preserve the invalid result and permit one root-cause successor that adds RegionKind to the V2 checkpoint serializer allowlist and proves region-bearing restart in a focused regression test.",
+  "results": {
+    "profile_binding_preflight": "first invocation rejected the default historical profile before journey execution; the exact final profile was then supplied explicitly",
+    "live_https_journey": "25/25",
+    "restart_persistence_surface_checks": "6/6",
+    "clean_restore": "6/6",
+    "t0_rollback": "3/3",
+    "governed_v2_1_restoration_surface_checks": "3/3",
+    "total_surface_machine_checks": "43/43",
+    "qualification_interpretation": "invalid because the application log rejected a region-bearing LangGraph checkpoint during governed restoration",
+    "provider_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "root_cause": "The governed T1-v2 JsonPlusSerializer allowlist included SourceCitation and DocumentChunk-related result models but omitted src.digital_twin.grounding.models.RegionKind. Live PDF ingestion populated RegionKind.TEXT, so restart deserialization failed even though the HTTP request failed closed with status 200.",
+  "why_existing_tests_missed_it": "The restart fixture carried citations with region_kind=null and therefore never exercised enum deserialization.",
+  "permitted_correction": "Add only RegionKind to the checkpoint serializer allowlist and extend the existing interrupt/restart regression to persist and restore a RegionKind.TEXT citation. Rebuild immutable images and rerun the full exact qualification on a fresh project.",
+  "image_digests": {
+    "api": "sha256:7338468b7ce489004cf16e98494e227122392a4c699bfe3a1a1a0b9a2496753e",
+    "web": "sha256:eaeb0daa9047def226fee63962575ce3a59b136a47142c8daedc781847d0f49d"
+  },
+  "artifact_hashes": {
+    "live_journey_sha256": "1c95505bd615cd599195ba2b538afe48221950602b0c7e28a1d03ae1f6ab04ee",
+    "restart_sha256": "0b56ea297cdf9cac0fb8bcbbfc67dcfbcaf8db158240885f867241e093db125a",
+    "clean_restore_sha256": "0b56ea297cdf9cac0fb8bcbbfc67dcfbcaf8db158240885f867241e093db125a",
+    "t0_rollback_sha256": "776b317532b582feec65242961eab4b54058edec7d807b2d31ab8fbdc25a7554",
+    "v2_restore_sha256": "866c259e4bbe659ee79191d8271b652cb5061453f55a8c627f122f8a87b0b394",
+    "runtime_backup_sha256": "16826d0bbecab5d5113241062bc697b4b45ef3144a9c7c639c0a6645ae2cc041",
+    "desktop_screenshot_sha256": "5127799e66aaffcb79fb0cb95852c02f7b73e11fb7387a0973688120244440ba",
+    "mobile_screenshot_sha256": "a652c8a6e0053c8b93736f64fd35746d2cd54d8d6aa47a077d7dc82b09940e5b"
+  },
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false
+}

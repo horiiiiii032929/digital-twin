@@ -851,6 +851,7 @@ class GovernedReactiveTutoringGraphV2:
                 ("src.digital_twin.grounding.models", "GenerationUsage"),
                 ("src.digital_twin.grounding.models", "SourceCitation"),
                 ("src.digital_twin.grounding.models", "AtomicAnswerClaim"),
+                ("src.digital_twin.grounding.models", "RegionKind"),
                 ("src.digital_twin.student.models", "AuditEvent"),
             ]
         )
