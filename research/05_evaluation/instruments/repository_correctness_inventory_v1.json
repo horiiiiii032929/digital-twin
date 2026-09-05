@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1117
+    "audited": 1123
   },
   "category_counts": {
     "active_frontend": 71,
-    "active_or_unclassified_tooling": 296,
-    "active_runtime": 165,
+    "active_or_unclassified_tooling": 298,
+    "active_runtime": 166,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 10,
-    "evaluation_configuration": 292,
+    "evaluation_configuration": 293,
     "execution_configuration": 9,
     "historical_tooling": 4,
     "report_artifact": 5,
-    "verification": 262
+    "verification": 264
   },
-  "file_count": 1117,
+  "file_count": 1123,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "0e5812648d5a63095e58d1e02cc38d73b079624953b4f29a77ee8accfe3849f1",
+  "record_sha256": "b4cbe3e5f61bfd4d1605d5a80527894ff1e30cbcc91a76c8d905683a68feab9f",
   "records": [
     {
       "audit": {
@@ -1443,7 +1443,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "e4099ea1b05349d1a0bd5f1921b932fc255a8219773f39cce4a4df2f1f6b87a6"
+      "sha256": "09bb008bb687b08e97c0215dfc29a49ad4a8ba14f523bf01226d5175628df5c5"
     },
     {
       "audit": {
@@ -5815,6 +5815,22 @@
     },
     {
       "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Prospective instrument review confirms one fresh Jina v5 versus text/OCR comparison, frozen quality gates, exact provider identity, no retries, hidden-gold separation, and the cumulative 10M-token ceiling.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/instruments/true_visual_omni_confirmation_002.json",
+      "risk": "high",
+      "sha256": "4e81d232fd4aebf84fe66ded431b57a38cf78401ac73d2b3ee9f7ed6e9d825e9"
+    },
+    {
+      "audit": {
         "domain": "local-r1-final-technical-completion",
         "evidence": "Completed-result review verified all 120 responses were durable before hidden-gold scoring, candidate and control metrics match the raw ledgers, Jina usage remains below 10M tokens, the valid Refine decision retains text/OCR fallback, and provider authority is revoked.",
         "findings": [],
@@ -7864,6 +7880,25 @@
       "path": "scripts/build_true_visual_colpali_confirmation.py",
       "risk": "high",
       "sha256": "6f7e210ef0eea73c350af56199ceeada4027ab38bd18e22a240e614ebba73df0"
+    },
+    {
+      "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Builder review and deterministic double-build tests cover package hashes, distribution, source disjointness, licence lineage, original regions, and boundary cases without provider calls.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "build:true-visual-omni-confirmation-002",
+        "verify:true-visual-omni-confirmation-002"
+      ],
+      "path": "scripts/build_true_visual_omni_confirmation_002.py",
+      "risk": "high",
+      "sha256": "96a878696e94feb2ad7ff34c7263ed93b41231e51200886ac3c37a3258e6ab3c"
     },
     {
       "audit": {
@@ -11131,6 +11166,28 @@
     },
     {
       "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Runner review plus validate/simulate tests cover exact bindings, atomic image and product-response ledgers, hidden-gold opening order, cumulative quota accounting, product-only inputs, original-region scoring, safe resume, and finite Keep/Refine gates.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [
+        "execute:true-visual-omni-confirmation-002",
+        "preflight:true-visual-omni-confirmation-002",
+        "resume:true-visual-omni-confirmation-002",
+        "simulate:true-visual-omni-confirmation-002",
+        "verify:true-visual-omni-confirmation-002"
+      ],
+      "path": "scripts/run_true_visual_omni_confirmation_002.py",
+      "risk": "high",
+      "sha256": "8162063f9731d90789a15988c4ff23ec74d942729018489c1ae7918425926c6d"
+    },
+    {
+      "audit": {
         "domain": "local-r1-final-technical-completion",
         "evidence": "Root-cause review of invalid attempt 001 found one optional display-title assumption before provider I/O. The harness now derives that non-authoritative label deterministically from frozen source-path lineage without changing cases, gold, retrieval, or gates.",
         "findings": [],
@@ -11817,7 +11874,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "8de383ee89d723d8476b44b6845b003c98bd1bec0b66015449b72db7bfbb2165"
+      "sha256": "a6e839b27720c3e36660569a5f0cba16b1c993e0908da89e887c8dbd44a716bc"
     },
     {
       "audit": {
@@ -13465,7 +13522,7 @@
       "package_commands": [],
       "path": "src/digital_twin/grounding/__init__.py",
       "risk": "high",
-      "sha256": "2d59e152a1bd48313095e0d940cef6a6de3476cfb3161e1fa16d274f54d28a16"
+      "sha256": "be936237651336756cb53368543c1635958c9ec7ca1354c8de159cd97a17c683"
     },
     {
       "audit": {
@@ -13885,6 +13942,22 @@
     },
     {
       "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Manual transport and retrieval review plus focused tests cover current first-party payload shape, identity and dimension checks, quota accounting, ordinary-text bypass, visual routing, deterministic lineage, and safe transient fallback.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/grounding/visual_omni_runtime.py",
+      "risk": "high",
+      "sha256": "c261a3ea212a58d2045bd88e2c8dba0701ecde02a40d0b1dcdbc68e0b375cc3b"
+    },
+    {
+      "audit": {
         "domain": "local-r1-final-technical-completion",
         "evidence": "Manual code/configuration review plus focused runtime, provider-free simulation, hash/lineage, quota, failure, resume, and execution-freeze tests found no unresolved correctness finding.",
         "findings": [],
@@ -14249,7 +14322,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "064d6e525b30e5aecc964ab047732487779efca2f1802883bbbafcc38afc3322"
+      "sha256": "6c2578aee3306d0bed6e4fa258ce13623e65baf47e9041f2a462eb3f1d8ca0c0"
     },
     {
       "audit": {
@@ -15129,7 +15202,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
+      "sha256": "34a6ab0cd9cdefe6797c4b69a801bf689358e6ebcec78a3d33d2af94a76693b3"
     },
     {
       "audit": {
@@ -15434,6 +15507,22 @@
       "path": "tests/digital_twin/test_visual_late_interaction.py",
       "risk": "medium",
       "sha256": "cdd37158d54a7fe8e889cab166460b5988e529f12377968a108742d60e2a787c"
+    },
+    {
+      "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Focused tests verify strict API payloads, exact identity, 1024-dimensional output, durable quota accounting, text-path non-regression, visual routing, immutable region authority, and safe fallback.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_visual_omni_runtime.py",
+      "risk": "medium",
+      "sha256": "c57fcb07464175cc497bbd959fe00ca81a547cc4bc30eeeb253461df2125cf3d"
     },
     {
       "audit": {
@@ -18621,6 +18710,22 @@
     },
     {
       "audit": {
+        "domain": "final-visual-method-comparison",
+        "evidence": "Focused evaluation tests verify deterministic packages, public/gold separation, balanced visual families, source disjointness, network-free simulation, and an executable ordinary-text non-regression assertion.",
+        "findings": [],
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final visual audit"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_true_visual_omni_confirmation_002.py",
+      "risk": "medium",
+      "sha256": "bb21e3116d8c6859f2431f3405a2a3afd50a8f5c05059cc3500868f04a2b1f33"
+    },
+    {
+      "audit": {
         "domain": "multimodal-evaluation",
         "evidence": "Focused review verifies the revoked terminal state, network-free validation/simulation, deterministic duplicate normalization, original-region lineage, and fail-closed post-run preflight behavior.",
         "findings": [],
@@ -18813,8 +18918,8 @@
     }
   ],
   "risk_counts": {
-    "high": 841,
-    "medium": 276
+    "high": 845,
+    "medium": 278
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"

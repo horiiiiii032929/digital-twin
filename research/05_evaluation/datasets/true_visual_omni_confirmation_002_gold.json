@@ -1,0 +1,907 @@
+{
+  "cases": [
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-001",
+          "evidence_ids": [
+            "tvoc002-region-001-full"
+          ],
+          "text": "Address 1, Address 2, and Address 3 are each 48 bits."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Address 1, Address 2, and Address 3 are each 48 bits.",
+      "case_id": "tvoc002-cluster-001-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-001"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-001-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-001-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-002",
+          "evidence_ids": [
+            "tvoc002-region-002-full"
+          ],
+          "text": "The RTS frame contains Receiver Address and Transmitter Address."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The RTS frame contains Receiver Address and Transmitter Address.",
+      "case_id": "tvoc002-cluster-002-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-002"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-002-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-002-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-003",
+          "evidence_ids": [
+            "tvoc002-region-003-full"
+          ],
+          "text": "The CTS frame contains the Receiver Address field."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The CTS frame contains the Receiver Address field.",
+      "case_id": "tvoc002-cluster-003-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-003"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-003-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-003-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-004",
+          "evidence_ids": [
+            "tvoc002-region-004-full"
+          ],
+          "text": "The VLAN Identifier is 12 bits."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The VLAN Identifier is 12 bits.",
+      "case_id": "tvoc002-cluster-004-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-004"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-004-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-004-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-005",
+          "evidence_ids": [
+            "tvoc002-region-005-full"
+          ],
+          "text": "The four count fields are QDCOUNT, ANCOUNT, NSCOUNT, and ARCOUNT."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The four count fields are QDCOUNT, ANCOUNT, NSCOUNT, and ARCOUNT.",
+      "case_id": "tvoc002-cluster-005-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-005"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-005-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-005-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-006",
+          "evidence_ids": [
+            "tvoc002-region-006-full"
+          ],
+          "text": "RDLENGTH immediately follows TTL."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "RDLENGTH immediately follows TTL.",
+      "case_id": "tvoc002-cluster-006-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-006"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-006-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-006-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-007",
+          "evidence_ids": [
+            "tvoc002-region-007-full"
+          ],
+          "text": "The source address is 48 bits."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The source address is 48 bits.",
+      "case_id": "tvoc002-cluster-007-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-007"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-007-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-007-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-008",
+          "evidence_ids": [
+            "tvoc002-region-008-full"
+          ],
+          "text": "The Stream Identifier is 31 bits."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The Stream Identifier is 31 bits.",
+      "case_id": "tvoc002-cluster-008-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-008"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-008-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-008-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-009",
+          "evidence_ids": [
+            "tvoc002-region-009-full"
+          ],
+          "text": "The Identification field identifies the fragment set and is 32 bits."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The Identification field identifies the fragment set and is 32 bits.",
+      "case_id": "tvoc002-cluster-009-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-009"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-009-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-009-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-010",
+          "evidence_ids": [
+            "tvoc002-region-010-full"
+          ],
+          "text": "The value n precedes the array elements and records their count."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The value n precedes the array elements and records their count.",
+      "case_id": "tvoc002-cluster-010-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-010"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-010-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-010-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-011",
+          "evidence_ids": [
+            "tvoc002-region-011-full"
+          ],
+          "text": "Host A sends the data frame and Host B returns the ACK frame."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host A sends the data frame and Host B returns the ACK frame.",
+      "case_id": "tvoc002-cluster-011-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-011"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-011-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-011-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-012",
+          "evidence_ids": [
+            "tvoc002-region-012-full"
+          ],
+          "text": "Host B is marked Busy."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host B is marked Busy.",
+      "case_id": "tvoc002-cluster-012-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-012"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-012-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-012-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-013",
+          "evidence_ids": [
+            "tvoc002-region-013-full"
+          ],
+          "text": "Host A performs Backoff(0, 7) after DIFS."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host A performs Backoff(0, 7) after DIFS.",
+      "case_id": "tvoc002-cluster-013-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-013"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-013-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-013-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-014",
+          "evidence_ids": [
+            "tvoc002-region-014-full"
+          ],
+          "text": "A token-ring node is shown in Listen mode and Transmit mode."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "A token-ring node is shown in Listen mode and Transmit mode.",
+      "case_id": "tvoc002-cluster-014-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-014"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-014-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-014-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-015",
+          "evidence_ids": [
+            "tvoc002-region-015-full"
+          ],
+          "text": "Host C is unable to decode the signal."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host C is unable to decode the signal.",
+      "case_id": "tvoc002-cluster-015-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-015"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-015-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-015-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-016",
+          "evidence_ids": [
+            "tvoc002-region-016-full"
+          ],
+          "text": "The two frames collide in the middle of the medium."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The two frames collide in the middle of the medium.",
+      "case_id": "tvoc002-cluster-016-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-016"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-016-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-016-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-017",
+          "evidence_ids": [
+            "tvoc002-region-017-full"
+          ],
+          "text": "Host B notices the collision first."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host B notices the collision first.",
+      "case_id": "tvoc002-cluster-017-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-017"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-017-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-017-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-018",
+          "evidence_ids": [
+            "tvoc002-region-018-full"
+          ],
+          "text": "The transport clock rises linearly and resets, forming a sawtooth trace."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The transport clock rises linearly and resets, forming a sawtooth trace.",
+      "case_id": "tvoc002-cluster-018-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-018"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-018-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-018-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-019",
+          "evidence_ids": [
+            "tvoc002-region-019-full"
+          ],
+          "text": "Host A initiates the connection by sending CR(seq=x)."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Host A initiates the connection by sending CR(seq=x).",
+      "case_id": "tvoc002-cluster-019-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-019"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-019-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-019-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-020",
+          "evidence_ids": [
+            "tvoc002-region-020-full"
+          ],
+          "text": "The window is blocked and no transmission is possible until a control segment arrives."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The window is blocked and no transmission is possible until a control segment arrives.",
+      "case_id": "tvoc002-cluster-020-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-020"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-020-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-020-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-021",
+          "evidence_ids": [
+            "tvoc002-region-021-full"
+          ],
+          "text": "AS7 is shown at the bottom between AS6 and AS5."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "AS7 is shown at the bottom between AS6 and AS5.",
+      "case_id": "tvoc002-cluster-021-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-021"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-021-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-021-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-022",
+          "evidence_ids": [
+            "tvoc002-region-022-full"
+          ],
+          "text": "AS4 first prefers the path AS1:AS0."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "AS4 first prefers the path AS1:AS0.",
+      "case_id": "tvoc002-cluster-022-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-022"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-022-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-022-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-023",
+          "evidence_ids": [
+            "tvoc002-region-023-full"
+          ],
+          "text": "The primary path is 34 Mbps and the backup path is 2 Mbps."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The primary path is 34 Mbps and the backup path is 2 Mbps.",
+      "case_id": "tvoc002-cluster-023-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-023"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-023-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-023-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-024",
+          "evidence_ids": [
+            "tvoc002-region-024-full"
+          ],
+          "text": "AS4 accepts ANY from AS1 and AS2."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "AS4 accepts ANY from AS1 and AS2.",
+      "case_id": "tvoc002-cluster-024-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-024"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-024-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-024-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-025",
+          "evidence_ids": [
+            "tvoc002-region-025-full"
+          ],
+          "text": "AS7 is directly attached to AS4 as a customer."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "AS7 is directly attached to AS4 as a customer.",
+      "case_id": "tvoc002-cluster-025-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-025"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-025-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-025-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-026",
+          "evidence_ids": [
+            "tvoc002-region-026-full"
+          ],
+          "text": "The second fragment shows a payload length of 126."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The second fragment shows a payload length of 126.",
+      "case_id": "tvoc002-cluster-026-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-026"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-026-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "no-evidence",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-026-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-027",
+          "evidence_ids": [
+            "tvoc002-region-027-full"
+          ],
+          "text": "Routers R9 and R10 are in Area 2."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "Routers R9 and R10 are in Area 2.",
+      "case_id": "tvoc002-cluster-027-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-027"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-027-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "cross-course",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-027-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-028",
+          "evidence_ids": [
+            "tvoc002-region-028-full"
+          ],
+          "text": "The congestion window drops to W/2."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The congestion window drops to W/2.",
+      "case_id": "tvoc002-cluster-028-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-028"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-028-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "stale-version",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-028-b",
+      "expected_action": "clarify",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-029",
+          "evidence_ids": [
+            "tvoc002-region-029-full"
+          ],
+          "text": "The legend identifies Measured RTT, Mean RTT, and Timeout."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The legend identifies Measured RTT, Mean RTT, and Timeout.",
+      "case_id": "tvoc002-cluster-029-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-029"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-029-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "permission",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-029-b",
+      "expected_action": "refuse",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    },
+    {
+      "atomic_claims": [
+        {
+          "claim_id": "tvoc002-claim-030",
+          "evidence_ids": [
+            "tvoc002-region-030-full"
+          ],
+          "text": "The chart compares Desktop and Mobile pages."
+        }
+      ],
+      "boundary_reason": null,
+      "canonical_answer": "The chart compares Desktop and Mobile pages.",
+      "case_id": "tvoc002-cluster-030-a",
+      "expected_action": "answer",
+      "required_asset_ids": [
+        "tvoc002-asset-030"
+      ],
+      "required_region_ids": [
+        "tvoc002-region-030-full"
+      ]
+    },
+    {
+      "atomic_claims": [],
+      "boundary_reason": "unsupported-premise",
+      "canonical_answer": "",
+      "case_id": "tvoc002-cluster-030-b",
+      "expected_action": "abstain",
+      "required_asset_ids": [],
+      "required_region_ids": []
+    }
+  ],
+  "content_sha256": "becf33add94de47c7bfac774fce5a651a17d6cec5cdf22d86d08eb79b19bec9e",
+  "dataset_id": "true-visual-omni-confirmation-002",
+  "schema_version": "1.0.0"
+}

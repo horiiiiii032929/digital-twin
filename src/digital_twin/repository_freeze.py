@@ -219,6 +219,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_true_visual_omni_confirmation_002.py": (
+            "external_model_evaluation",
+            "method_evaluation_execution",
+        ),
         "scripts/run_final_cross_method_factual_confirmation.py": (
             "heldout_execution",
             "method_evaluation_execution",
@@ -732,6 +736,15 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # authority is revoked; only deterministic package validation remains.
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
+        ),
+        # Issue #216 / #131. Fresh source-disjoint current Jina omni
+        # confirmation. The user authorized continuation through the final
+        # technical qualification; exact hashes and a clean revision remain
+        # mandatory before the first provider call.
+        "true-visual-omni-confirmation-002": (
+            "dataset_generation",
+            "external_model_evaluation",
+            "method_evaluation_execution",
         ),
     }
 )

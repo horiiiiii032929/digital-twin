@@ -1,0 +1,1028 @@
+{
+  "assets": [
+    {
+      "approved_source_claim": "Address 1, Address 2, and Address 3 are each 48 bits.",
+      "asset_id": "tvoc002-asset-001",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/80211.png",
+      "original_asset_sha256": "05a3d6a4f09981223ae6b9aa112ccb6317fd427768c2a26a56e8262bcfd9945f",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-001-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/80211.png",
+      "render_sha256": "05a3d6a4f09981223ae6b9aa112ccb6317fd427768c2a26a56e8262bcfd9945f",
+      "source_artifact_id": "computer-networking:pkt/80211.png",
+      "source_char_end": 9334,
+      "source_char_start": 9277,
+      "source_document_path": "protocols/wifi.rst",
+      "source_excerpt_sha256": "e48c4db77c18efdc94af08a37509d2b53b83df1bbddab6761169ffca120ee60e",
+      "source_sha256": "bad3da72a019e3a2bf45eebdec090ef579092c936db4492964f10a565e077db3",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The RTS frame contains Receiver Address and Transmitter Address.",
+      "asset_id": "tvoc002-asset-002",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/80211-rts.png",
+      "original_asset_sha256": "7df68928b58136a1c4df512f2c251c0269aa1726f5f51c5cfeca1bcc2d94b58f",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-002-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/80211-rts.png",
+      "render_sha256": "7df68928b58136a1c4df512f2c251c0269aa1726f5f51c5cfeca1bcc2d94b58f",
+      "source_artifact_id": "computer-networking:pkt/80211-rts.png",
+      "source_char_end": 13532,
+      "source_char_start": 13471,
+      "source_document_path": "protocols/wifi.rst",
+      "source_excerpt_sha256": "689277a3c275287a72db9b4deb50024a70d93209974246d3e85dcdb80b8291b7",
+      "source_sha256": "bad3da72a019e3a2bf45eebdec090ef579092c936db4492964f10a565e077db3",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The CTS frame contains the Receiver Address field.",
+      "asset_id": "tvoc002-asset-003",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/80211-cts.png",
+      "original_asset_sha256": "93fc819ea72c81f76d68f9d68a0db75e359066a938ecebc221b807b2a387174a",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-003-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/80211-cts.png",
+      "render_sha256": "93fc819ea72c81f76d68f9d68a0db75e359066a938ecebc221b807b2a387174a",
+      "source_artifact_id": "computer-networking:pkt/80211-cts.png",
+      "source_char_end": 12911,
+      "source_char_start": 12850,
+      "source_document_path": "protocols/wifi.rst",
+      "source_excerpt_sha256": "abbabf8b103920bd62b4b353467675af6476a9d04224f778316b47dce86b6f5c",
+      "source_sha256": "bad3da72a019e3a2bf45eebdec090ef579092c936db4492964f10a565e077db3",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The VLAN Identifier is 12 bits.",
+      "asset_id": "tvoc002-asset-004",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/8021q.png",
+      "original_asset_sha256": "1731f8af69cd0fd92ef44bc595014d71b430582a6181feacae0f791e1eec4c57",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-004-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/8021q.png",
+      "render_sha256": "1731f8af69cd0fd92ef44bc595014d71b430582a6181feacae0f791e1eec4c57",
+      "source_artifact_id": "computer-networking:pkt/8021q.png",
+      "source_char_end": 46340,
+      "source_char_start": 46283,
+      "source_document_path": "protocols/ethernet.rst",
+      "source_excerpt_sha256": "565eb92024005179221733eb62f7c9cb55a41372a76ff8a8b801c80dfe2d1842",
+      "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The four count fields are QDCOUNT, ANCOUNT, NSCOUNT, and ARCOUNT.",
+      "asset_id": "tvoc002-asset-005",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/dnsheader.png",
+      "original_asset_sha256": "873d44ff0da5f2efea1ff93516f247925fd173fabe8e5463f3098a0e2c62eee5",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-005-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/dnsheader.png",
+      "render_sha256": "873d44ff0da5f2efea1ff93516f247925fd173fabe8e5463f3098a0e2c62eee5",
+      "source_artifact_id": "computer-networking:pkt/dnsheader.png",
+      "source_char_end": 1825,
+      "source_char_start": 1764,
+      "source_document_path": "protocols/dns.rst",
+      "source_excerpt_sha256": "3ad717652cd748122433fd0d8595a04e2b90fb03780bcbd68223e1ae93ce82d9",
+      "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "RDLENGTH immediately follows TTL.",
+      "asset_id": "tvoc002-asset-006",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/dnsrr.png",
+      "original_asset_sha256": "612bf5a86fee7fda8d9c699810f29b74c54610568b55bdd71e1586692bf683fd",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-006-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/dnsrr.png",
+      "render_sha256": "612bf5a86fee7fda8d9c699810f29b74c54610568b55bdd71e1586692bf683fd",
+      "source_artifact_id": "computer-networking:pkt/dnsrr.png",
+      "source_char_end": 5068,
+      "source_char_start": 5011,
+      "source_document_path": "protocols/dns.rst",
+      "source_excerpt_sha256": "a1209db98870e2401190e4379e7173511db9b71448cd2a30504d501e1151b5d8",
+      "source_sha256": "ee093e3a634b74c2f2cd06c1ff341fba2b61ab0174fe22963a5d0d30b3b06b81",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The source address is 48 bits.",
+      "asset_id": "tvoc002-asset-007",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/ethernet-8023.png",
+      "original_asset_sha256": "a6bc079698a7962eb0ff5379a76e738ac6855f34aee1911ac204a7c76382ceeb",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-007-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/ethernet-8023.png",
+      "render_sha256": "a6bc079698a7962eb0ff5379a76e738ac6855f34aee1911ac204a7c76382ceeb",
+      "source_artifact_id": "computer-networking:pkt/ethernet-8023.png",
+      "source_char_end": 11228,
+      "source_char_start": 11163,
+      "source_document_path": "protocols/ethernet.rst",
+      "source_excerpt_sha256": "25fcaf56b21a9cc84a81ded0d190797b6a5a735f6c421a67a6d0976fef56cfcb",
+      "source_sha256": "7f4915ab9c8c5519495fdc4ea0062f62bf269186f0b793298595adada0077b56",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The Stream Identifier is 31 bits.",
+      "asset_id": "tvoc002-asset-008",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/http2-frame.png",
+      "original_asset_sha256": "10108b00d954e76c1de4f264ffd51ba42add4559998ff1e5f203b9fe4e8aea2d",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-008-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/http2-frame.png",
+      "render_sha256": "10108b00d954e76c1de4f264ffd51ba42add4559998ff1e5f203b9fe4e8aea2d",
+      "source_artifact_id": "computer-networking:pkt/http2-frame.png",
+      "source_char_end": 14388,
+      "source_char_start": 14325,
+      "source_document_path": "protocols/http2.rst",
+      "source_excerpt_sha256": "e62147753683b31c8188cc74921fced910cfaa1ae796333cc506602e476c39af",
+      "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The Identification field identifies the fragment set and is 32 bits.",
+      "asset_id": "tvoc002-asset-009",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/ipv6-fragment.png",
+      "original_asset_sha256": "ed0ea96d20ba49ddfcbe128d91b2ec8b2c5801e54e77cd059b7e5a7d3c2232e4",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-009-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/ipv6-fragment.png",
+      "render_sha256": "ed0ea96d20ba49ddfcbe128d91b2ec8b2c5801e54e77cd059b7e5a7d3c2232e4",
+      "source_artifact_id": "computer-networking:pkt/ipv6-fragment.png",
+      "source_char_end": 40188,
+      "source_char_start": 40141,
+      "source_document_path": "protocols/ipv6.rst",
+      "source_excerpt_sha256": "8ffba0e992e68f84ece4f91369f72d4b3003fa872e0afada7578f8dee1e045ad",
+      "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "The value n precedes the array elements and records their count.",
+      "asset_id": "tvoc002-asset-010",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "table",
+      "original_asset_path": "pkt/xdr-array.png",
+      "original_asset_sha256": "ba813bdbb73e0c6a41976658e299663801484506f41b7f80795d33c2bcae3198",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-010-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/pkt/xdr-array.png",
+      "render_sha256": "ba813bdbb73e0c6a41976658e299663801484506f41b7f80795d33c2bcae3198",
+      "source_artifact_id": "computer-networking:pkt/xdr-array.png",
+      "source_char_end": 5977,
+      "source_char_start": 5916,
+      "source_document_path": "protocols/rpc.rst",
+      "source_excerpt_sha256": "cd8cffad6b8771eaa4d7312fb25a8fa4fb6b156600e9454ed8eab09416eff956",
+      "source_sha256": "ca6c2870b1d01978bd29f1c8d3f5338cc7a7b49c2d3fe82e5015e495a5a7a45a",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "packet-layout"
+    },
+    {
+      "approved_source_claim": "Host A sends the data frame and Host B returns the ACK frame.",
+      "asset_id": "tvoc002-asset-011",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/csmaca-1.png",
+      "original_asset_sha256": "dc4b22574e59ebd18d54d72f046f37c66754278b3e3631b1982d31695e526302",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-011-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/csmaca-1.png",
+      "render_sha256": "dc4b22574e59ebd18d54d72f046f37c66754278b3e3631b1982d31695e526302",
+      "source_artifact_id": "computer-networking:principles/figures/csmaca-1.png",
+      "source_char_end": 72122,
+      "source_char_start": 72048,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "647f567c98bee229cf431f6b6259818b9797cbf1e0424eb5843af10887d564e7",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "Host B is marked Busy.",
+      "asset_id": "tvoc002-asset-012",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/csmaca-2.png",
+      "original_asset_sha256": "e15fbcb3b4f726c3416967028aa16ec9fac7a77c8071aa50f0029cad8a830114",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-012-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/csmaca-2.png",
+      "render_sha256": "e15fbcb3b4f726c3416967028aa16ec9fac7a77c8071aa50f0029cad8a830114",
+      "source_artifact_id": "computer-networking:principles/figures/csmaca-2.png",
+      "source_char_end": 72655,
+      "source_char_start": 72581,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "92288c0c0df976d42b6f30ae5ef96f7bc007645cefcda8158f1d40f137afd42f",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "Host A performs Backoff(0, 7) after DIFS.",
+      "asset_id": "tvoc002-asset-013",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/csmaca-3.png",
+      "original_asset_sha256": "756355ac4fb5d7f39d54ea783482c3278f6b8e53871edf18541fb7f69dff9ebc",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-013-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/csmaca-3.png",
+      "render_sha256": "756355ac4fb5d7f39d54ea783482c3278f6b8e53871edf18541fb7f69dff9ebc",
+      "source_artifact_id": "computer-networking:principles/figures/csmaca-3.png",
+      "source_char_end": 74191,
+      "source_char_start": 74117,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "b2eca6daf3bce547a1f5b26043fbf11886217360758631fdd8e0068ffe3a6c80",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "A token-ring node is shown in Listen mode and Transmit mode.",
+      "asset_id": "tvoc002-asset-014",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/token-ring.png",
+      "original_asset_sha256": "24cd5852f8133e640093cd7a585f86b50863db517ac739be4871a98608d0216e",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-014-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/token-ring.png",
+      "render_sha256": "24cd5852f8133e640093cd7a585f86b50863db517ac739be4871a98608d0216e",
+      "source_artifact_id": "computer-networking:principles/figures/token-ring.png",
+      "source_char_end": 81013,
+      "source_char_start": 80937,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "d94e8390086c20949f81601ce0373d0dc9e1ec76acc58bf957ff370deb1044f9",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "Host C is unable to decode the signal.",
+      "asset_id": "tvoc002-asset-015",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/frame-collision.png",
+      "original_asset_sha256": "91c6de00be3f24863cd508ca14e37c049b933ba80948528dfe0a52c48dc0fa34",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-015-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/frame-collision.png",
+      "render_sha256": "91c6de00be3f24863cd508ca14e37c049b933ba80948528dfe0a52c48dc0fa34",
+      "source_artifact_id": "computer-networking:principles/figures/frame-collision.png",
+      "source_char_end": 60350,
+      "source_char_start": 60269,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "e00a9463de2832a089c893ab43f86b3f8c06477a8c010e7712afeaa0e22d516a",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "The two frames collide in the middle of the medium.",
+      "asset_id": "tvoc002-asset-016",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/frame-collision-short.png",
+      "original_asset_sha256": "712e6628080cf8b95d2ef55052871d770efc87783fb5c5c884ba64fe30a47753",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-016-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/frame-collision-short.png",
+      "render_sha256": "712e6628080cf8b95d2ef55052871d770efc87783fb5c5c884ba64fe30a47753",
+      "source_artifact_id": "computer-networking:principles/figures/frame-collision-short.png",
+      "source_char_end": 64858,
+      "source_char_start": 64771,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "18ef93ebbe4816d79b83bde29157fd10bf0ab3459b453cd294f9bdef16aa28d4",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "Host B notices the collision first.",
+      "asset_id": "tvoc002-asset-017",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/frame-collision-worst.png",
+      "original_asset_sha256": "7c6aa0aca0d513baa368376a75c7c20e4053f0bc92b26d0c3a25e27aa3eaa22e",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-017-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/frame-collision-worst.png",
+      "render_sha256": "7c6aa0aca0d513baa368376a75c7c20e4053f0bc92b26d0c3a25e27aa3eaa22e",
+      "source_artifact_id": "computer-networking:principles/figures/frame-collision-worst.png",
+      "source_char_end": 63124,
+      "source_char_start": 63037,
+      "source_document_path": "principles/sharing.rst",
+      "source_excerpt_sha256": "f08a20a6587fabe1446c72745b11e9696a33d82cf3f14c976eee7d805542f1a3",
+      "source_sha256": "141e082098a4069092cc4d542fdd07df2f9dbf1a2b4db1e0d0e66b30241e6c46",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "The transport clock rises linearly and resets, forming a sawtooth trace.",
+      "asset_id": "tvoc002-asset-018",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/transport-clock.png",
+      "original_asset_sha256": "acd96f8e874ffb0a2ad70e68c3e819616c9fc52b519880d164c7a3b12b575886",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-018-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/transport-clock.png",
+      "render_sha256": "acd96f8e874ffb0a2ad70e68c3e819616c9fc52b519880d164c7a3b12b575886",
+      "source_artifact_id": "computer-networking:principles/figures/transport-clock.png",
+      "source_char_end": 52500,
+      "source_char_start": 52419,
+      "source_document_path": "principles/transport.rst",
+      "source_excerpt_sha256": "e8cb86e4400f8260010f33b75d23cbbd4f3d9b84f5cf71a5c483b34e7815d05c",
+      "source_sha256": "34e66b65a3f180e480cdc1f67c37e8d1b8edc9b1551c10160e5cb1b68941243f",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "Host A initiates the connection by sending CR(seq=x).",
+      "asset_id": "tvoc002-asset-019",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/transport-twh.png",
+      "original_asset_sha256": "182b89c48c587cb7ade313154202afb031b6b03c13c0fa1289abd0fbafc96cb5",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-019-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/transport-twh.png",
+      "render_sha256": "182b89c48c587cb7ade313154202afb031b6b03c13c0fa1289abd0fbafc96cb5",
+      "source_artifact_id": "computer-networking:principles/figures/transport-twh.png",
+      "source_char_end": 54722,
+      "source_char_start": 54643,
+      "source_document_path": "principles/transport.rst",
+      "source_excerpt_sha256": "b98f3975a478e8be41386b66a2a7c2a41f23804a55ce90e6f6d4ee74eb78bb06",
+      "source_sha256": "34e66b65a3f180e480cdc1f67c37e8d1b8edc9b1551c10160e5cb1b68941243f",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "The window is blocked and no transmission is possible until a control segment arrives.",
+      "asset_id": "tvoc002-asset-020",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "principles/figures/transport-win-deadlock.png",
+      "original_asset_sha256": "b75a9ef47f18b99adc4c78061939da4fb5f0f00b6be400e5861570b1b8444684",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-020-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/principles/figures/transport-win-deadlock.png",
+      "render_sha256": "b75a9ef47f18b99adc4c78061939da4fb5f0f00b6be400e5861570b1b8444684",
+      "source_artifact_id": "computer-networking:principles/figures/transport-win-deadlock.png",
+      "source_char_end": 64790,
+      "source_char_start": 64702,
+      "source_document_path": "principles/transport.rst",
+      "source_excerpt_sha256": "ce7e2d7ac78da8c91353a58deaccb42eeb6dfefb3cbd5daefc3a4c1bd601c68c",
+      "source_sha256": "34e66b65a3f180e480cdc1f67c37e8d1b8edc9b1551c10160e5cb1b68941243f",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "protocol-flow"
+    },
+    {
+      "approved_source_claim": "AS7 is shown at the bottom between AS6 and AS5.",
+      "asset_id": "tvoc002-asset-021",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/asymetry.png",
+      "original_asset_sha256": "3a08cf193f8f2dd28126f0199ab2e969b1c47ddf00b8adf6ff4859cb286aa9c2",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-021-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/asymetry.png",
+      "render_sha256": "3a08cf193f8f2dd28126f0199ab2e969b1c47ddf00b8adf6ff4859cb286aa9c2",
+      "source_artifact_id": "computer-networking:protocols/figures/asymetry.png",
+      "source_char_end": 36568,
+      "source_char_start": 36494,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "ec07543560a4d11f803d012cc6a524ca1f21b771438f29d89733513def6cd957",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "AS4 first prefers the path AS1:AS0.",
+      "asset_id": "tvoc002-asset-022",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/bad-gadget.png",
+      "original_asset_sha256": "a2757d2ccf8fa442d480f384b7b227418a1da933c801c542be973053bed8b45c",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-022-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bad-gadget.png",
+      "render_sha256": "a2757d2ccf8fa442d480f384b7b227418a1da933c801c542be973053bed8b45c",
+      "source_artifact_id": "computer-networking:protocols/figures/bad-gadget.png",
+      "source_char_end": 39910,
+      "source_char_start": 39834,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "1c254fe5976e39d3a80c00232eea4bf7ff9b06d226a2ff3a16a9d0d0689a55ca",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "The primary path is 34 Mbps and the backup path is 2 Mbps.",
+      "asset_id": "tvoc002-asset-023",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/bgp-backup.png",
+      "original_asset_sha256": "3d0f54adf8a820201c93d5bc3f8beb01e7b5b1a63b68e8c65084a63bcd7f42fc",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-023-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bgp-backup.png",
+      "render_sha256": "3d0f54adf8a820201c93d5bc3f8beb01e7b5b1a63b68e8c65084a63bcd7f42fc",
+      "source_artifact_id": "computer-networking:protocols/figures/bgp-backup.png",
+      "source_char_end": 32724,
+      "source_char_start": 32648,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "46e6c450e98c1cda3e4d7d7d0917d071129254c895cfe8e45ac71e4df4c3361a",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "AS4 accepts ANY from AS1 and AS2.",
+      "asset_id": "tvoc002-asset-024",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/bgp-policies.png",
+      "original_asset_sha256": "38e9e4d209313466c86d0de358b324e78f97895a5c157205237fa9d37ea7ad64",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-024-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/bgp-policies.png",
+      "render_sha256": "38e9e4d209313466c86d0de358b324e78f97895a5c157205237fa9d37ea7ad64",
+      "source_artifact_id": "computer-networking:protocols/figures/bgp-policies.png",
+      "source_char_end": 11499,
+      "source_char_start": 11422,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "80bdcd5e7dc1baa471f77f31eb11785667ec4005efc2b83102a6e06bc629d587",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "AS7 is directly attached to AS4 as a customer.",
+      "asset_id": "tvoc002-asset-025",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/cust-prov.png",
+      "original_asset_sha256": "0d82e18baebf92976ba2eb38bfdf07f7f51bfe1563fd447fdd92909e666a318c",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-025-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/cust-prov.png",
+      "render_sha256": "0d82e18baebf92976ba2eb38bfdf07f7f51bfe1563fd447fdd92909e666a318c",
+      "source_artifact_id": "computer-networking:protocols/figures/cust-prov.png",
+      "source_char_end": 5727,
+      "source_char_start": 5653,
+      "source_document_path": "protocols/bgp.rst",
+      "source_excerpt_sha256": "b48e631d33763bdd2e449482610751f49a2321b57dcae4dfa6498d019e026d5c",
+      "source_sha256": "5e0b5265ce444e09b27f5b7035d0a7579365d7aa2d331a52368e18fc6f55c1f2",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "The second fragment shows a payload length of 126.",
+      "asset_id": "tvoc002-asset-026",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/ipv6-frag-example.png",
+      "original_asset_sha256": "0f81f9f826538d68389efa93c1ade3e87dc2309e23ace40d4994dd5cba3c1093",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-026-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/ipv6-frag-example.png",
+      "render_sha256": "0f81f9f826538d68389efa93c1ade3e87dc2309e23ace40d4994dd5cba3c1093",
+      "source_artifact_id": "computer-networking:protocols/figures/ipv6-frag-example.png",
+      "source_char_end": 43220,
+      "source_char_start": 43138,
+      "source_document_path": "protocols/ipv6.rst",
+      "source_excerpt_sha256": "3a6885cea0cb3423490a797d2408f60da289c2bb03eedf23d627304e2e8484ea",
+      "source_sha256": "7b9ebd1d6af15a61f5d75b39228d382e88facf53d48f3e7826187f5ba381b067",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "Routers R9 and R10 are in Area 2.",
+      "asset_id": "tvoc002-asset-027",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/ospf-areas.png",
+      "original_asset_sha256": "5d49ece5b3ba66bc953b3bf7ae62abbdb662dc7c84d1952f788bc12f927f16fa",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-027-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/ospf-areas.png",
+      "render_sha256": "5d49ece5b3ba66bc953b3bf7ae62abbdb662dc7c84d1952f788bc12f927f16fa",
+      "source_artifact_id": "computer-networking:protocols/figures/ospf-areas.png",
+      "source_char_end": 9967,
+      "source_char_start": 9892,
+      "source_document_path": "protocols/routing.rst",
+      "source_excerpt_sha256": "923a95b24a074eede044f562e228d649f8a6c9cad6d1e1bdb01c1483490bf0ef",
+      "source_sha256": "b709ff930d7cf06a3f4e24a35820eb745c3c9d4bd4e59cea1815b2bf8d609793",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "The congestion window drops to W/2.",
+      "asset_id": "tvoc002-asset-028",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/tcp-congestion-regular.png",
+      "original_asset_sha256": "45889f07a852725275df453fae3ab5e228e4ca281881e201a27d959444d55ecd",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-028-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/tcp-congestion-regular.png",
+      "render_sha256": "45889f07a852725275df453fae3ab5e228e4ca281881e201a27d959444d55ecd",
+      "source_artifact_id": "computer-networking:protocols/figures/tcp-congestion-regular.png",
+      "source_char_end": 23134,
+      "source_char_start": 23047,
+      "source_document_path": "protocols/congestion.rst",
+      "source_excerpt_sha256": "0b99789d2089a2c0403c810947866c3e50ea9ca080f6f41d63babc316dbd55f8",
+      "source_sha256": "d580b60ef01b46019aa7e84d369a1e1b2d2a111e1a9752b7a00c539f0a53a460",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "The legend identifies Measured RTT, Mean RTT, and Timeout.",
+      "asset_id": "tvoc002-asset-029",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/tcp-rto.png",
+      "original_asset_sha256": "da739c6fe314ce9873a0be324ddc3dad6ddd8d90e615b92eae1d178e86b696bb",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-029-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/tcp-rto.png",
+      "render_sha256": "da739c6fe314ce9873a0be324ddc3dad6ddd8d90e615b92eae1d178e86b696bb",
+      "source_artifact_id": "computer-networking:protocols/figures/tcp-rto.png",
+      "source_char_end": 40247,
+      "source_char_start": 40175,
+      "source_document_path": "protocols/tcp.rst",
+      "source_excerpt_sha256": "c9fd12ee388c5f88d6cb3cb4f9990f4a5f9221ac3157e5bd779e2ffc1306d024",
+      "source_sha256": "f931b3b11cab3c3f9da3ccc81dc92b84d762b2c2a0d8efd2afa57baa6a1c9127",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    },
+    {
+      "approved_source_claim": "The chart compares Desktop and Mobile pages.",
+      "asset_id": "tvoc002-asset-030",
+      "attribution": "Olivier Bonaventure and contributors, Computer Networking: Principles, Protocols and Practice",
+      "course_id": "computer-networking",
+      "license_spdx": "CC-BY-SA-3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "mime_type": "image/png",
+      "modality": "diagram",
+      "original_asset_path": "protocols/figures/httparchive-bytes.png",
+      "original_asset_sha256": "00d503aca3120ff824fb68e197b98ea79dfc1329de47da8042a2ff38b7d71a93",
+      "region_lineage": [
+        {
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "region_id": "tvoc002-region-030-full"
+        }
+      ],
+      "render_path": "data/external/academic_factual_qa_confirmation_002/networking-ebook/protocols/figures/httparchive-bytes.png",
+      "render_sha256": "00d503aca3120ff824fb68e197b98ea79dfc1329de47da8042a2ff38b7d71a93",
+      "source_artifact_id": "computer-networking:protocols/figures/httparchive-bytes.png",
+      "source_char_end": 8730,
+      "source_char_start": 8648,
+      "source_document_path": "protocols/http2.rst",
+      "source_excerpt_sha256": "6d8c4091bfd39fc66972666b77dafe6585d70a5e7b0030b20cfa8bee072f41e3",
+      "source_sha256": "834cbec8d1f7b36c25c6114ad03aa8cd5f855cfe63954d177481e4fa9b181b3b",
+      "source_version": "5d270364790500fe58283be91329365835a69d66",
+      "source_version_number": 1,
+      "visual_family": "architecture-chart"
+    }
+  ],
+  "content_sha256": "5b98b6828765397c949838fb164d305c7ec00dc1b18fa4a91a1a2cba4a046e4d",
+  "dataset_id": "true-visual-omni-confirmation-002",
+  "schema_version": "1.0.0",
+  "source_role": "product-visible-approved-course-evidence"
+}
