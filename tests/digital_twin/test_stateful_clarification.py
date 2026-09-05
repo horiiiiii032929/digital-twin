@@ -198,3 +198,23 @@ def test_clarification_contract_rejects_inconsistent_resolution(tmp_path):
                 "status": ClarificationStatus.RESOLVED,
             }
         )
+
+
+def test_long_source_metadata_produces_bounded_distinct_clarification_labels(tmp_path):
+    repository, fixture, _, conversation, _ = _service(tmp_path)
+    release = repository.get_release(fixture.release_a_id)
+    chunks = [chunk.model_copy(update={"metadata": {
+        **chunk.metadata, "title": "Long approved source title " * 30,
+        "section": "A long approved section " * 30,
+    }}) for chunk in release.chunks]
+    request = build_clarification_request(
+        conversation_id=conversation.id, student_id=fixture.student_a_id,
+        course_id=fixture.course_a_id, release_id=fixture.release_a_id,
+        original_student_message_id="long-title-message",
+        original_question="Which mechanism?", chunks=chunks,
+        created_at="2026-09-05T00:00:00+00:00",
+    )
+    assert all(len(option.label) <= 240 for option in request.options)
+    assert len({option.label for option in request.options}) == len(request.options)
+    for option in request.options:
+        assert resolve_clarification_option(request, option.label) == option

@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "f8f1a64fc4ed4eee47e9657662cd6117f1525793ceb9ab4fc619a110c65d3e93",
+  "record_sha256": "107cf96e4b7cbea490de9710536ea3698817f066855cc83302179a38a6f8ea64",
   "records": [
     {
       "audit": {
@@ -776,10 +776,10 @@
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -787,7 +787,7 @@
       "package_commands": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
       "risk": "high",
-      "sha256": "4003f9210524e1880c7b5dca3dda06155ce5a57bbfe2ac6150752fc215e3c7e2"
+      "sha256": "40486feae678f7b7a7ff7304f8100de4b242bcb3cadd23cff3afb389416980d6"
     },
     {
       "audit": {
@@ -10817,10 +10817,10 @@
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "The finite runner was reviewed for exact instrument binding, clean exclusive preflight, bounded freeze guard, twenty isolated synthetic cases, twelve mechanism checks, zero provider or external delivery paths, and durable per-case output.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10830,15 +10830,15 @@
       ],
       "path": "scripts/run_proactive_outreach_a1_development.py",
       "risk": "high",
-      "sha256": "8d11d6e415d2a272f4971a2db68a6cc8ae885a368ecfe9dd355a6986a0255d4d"
+      "sha256": "d2b4092ac7487b4907349b684e40d195a58320b5c98b9289450e549cf86170dd"
     },
     {
       "audit": {
         "domain": "proactive-outreach-evaluation",
-        "evidence": "Runner review covers exact 12-cluster and 60-case expansion, publication-integrated shadow execution, exclusive output, clean blocked preflight, current-lineage validation, suppression slices, zero side effects, and bounded freeze enforcement.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10851,7 +10851,7 @@
       ],
       "path": "scripts/run_proactive_outreach_a1_shadow_confirmation.py",
       "risk": "high",
-      "sha256": "6339b5491e38c1de447857837502756b28853208b31503f5c600ed9a877b1554"
+      "sha256": "da5d11790cc13ca032159a217084a7e85e48c167fecdd3cfa7c0d2a4f71f654f"
     },
     {
       "audit": {
@@ -12279,10 +12279,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Manual authority, state, privacy, failure, restart, and provider-boundary review plus focused Ruff/tests; fresh routing reached 500/500 and the seven-day deterministic autonomy simulation passed every frozen gate.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12290,7 +12290,7 @@
       "package_commands": [],
       "path": "services/api/app/routers/student.py",
       "risk": "high",
-      "sha256": "d8b07a0fda26933499b088ae547ba0736e7915ba85640a821b4be178a1ae29da"
+      "sha256": "466d962906b347e02f0f284c69705c7a1a723fbb747b8af579080fb7aed74e66"
     },
     {
       "audit": {
@@ -14455,10 +14455,10 @@
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14466,7 +14466,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/clarification.py",
       "risk": "high",
-      "sha256": "de8537161cefd17e044cdec51e17ed2dd3db93b28ed3e883deca0a305aabfeeb"
+      "sha256": "79033c91a6f0fa0bb1bf538a6499960f646244a970bd1866d3a34d6f04da5037"
     },
     {
       "audit": {
@@ -14567,10 +14567,10 @@
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14578,7 +14578,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/models.py",
       "risk": "high",
-      "sha256": "5f45063dd52d588bfb816049532d7dfe68777203f45fd0525c0252dd6381cef8"
+      "sha256": "8d857906e8658a061ceacc3eef373e189e1989c149cb2d0abe56cef09026ec5f"
     },
     {
       "audit": {
@@ -14599,10 +14599,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "API regression review verifies the ambiguity-safe evidence mode is accepted by configuration while preserving selected defaults, authentication boundaries, and factory startup behavior.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14610,7 +14610,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/proactive.py",
       "risk": "high",
-      "sha256": "9a1fad65d49a167e95eb775d5094728579d7d3994bd8a99d3dd8025395b483c3"
+      "sha256": "34e1dce2bf783e5a35e6bc53ec87baca5b0dcda36a34d087d26e18138c67bfa6"
     },
     {
       "audit": {
@@ -14631,10 +14631,10 @@
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental code review and passing synthetic regressions documented in docs/research/2026-09-05-runtime-correctness-audit.md; revalidates authority and preferences atomically with delivery. Full repository verification recorded separately.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14642,15 +14642,15 @@
       "package_commands": [],
       "path": "src/digital_twin/student/repository.py",
       "risk": "high",
-      "sha256": "5e05d2dcb791c47e243772b4f02b5befff3cf2c588291ca5b504b1b653e85581"
+      "sha256": "3168308a58569e8d8d0f3856724b277bb046b4f8b6d75478092ccf0192e3cd49"
     },
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14658,7 +14658,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "47267adb43cb31f031cea8d7ee97adf9f43aa113c75a48e981ff147cc4fc844a"
+      "sha256": "35ff75e85afc6de01aab4b86499fd4fd71f1bf7426ffaa6899ac9148036a1f04"
     },
     {
       "audit": {
@@ -14791,10 +14791,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Main-commit audit finding closure, focused regression coverage, 1,623 Python tests, 50 frontend tests, frontend lint/build, and changed-file Ruff verification passed.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14802,7 +14802,7 @@
       "package_commands": [],
       "path": "tests/api/test_publication_api.py",
       "risk": "medium",
-      "sha256": "4fe21aadedcf5e1a1aad24f94a07ad08a90e63cbc951618fd3b26b496aa51879"
+      "sha256": "f5d8d01923c12917e25da1d514208b9f88bb0322a6f9fa8cb61282e131d732d9"
     },
     {
       "audit": {
@@ -14823,10 +14823,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
-        "reviewed_at": "2026-08-29",
-        "reviewer": "Codex repository correctness sweep"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -14834,7 +14834,7 @@
       "package_commands": [],
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
-      "sha256": "3ff5aea4f923cf4675c447406c669541073cca209c21cd762c4cf651852cb6c6"
+      "sha256": "b240c6e0d5d7da6add066553bcdc7ebb3b6e281cfb052e57f231ecb3c179cb01"
     },
     {
       "audit": {
@@ -15207,10 +15207,10 @@
     {
       "audit": {
         "domain": "proactive-outreach",
-        "evidence": "Domain regressions verify fail-closed consent, new evidence detection, no-action on unchanged evidence, active-mode authorization, idempotency, citation lineage, and privacy-safe generic Discord deep links.",
+        "evidence": "Incremental code review and passing synthetic regressions documented in docs/research/2026-09-05-runtime-correctness-audit.md; revalidates authority and preferences atomically with delivery. Full repository verification recorded separately.",
         "findings": [],
-        "reviewed_at": "2026-08-27",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15218,7 +15218,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_proactive_outreach.py",
       "risk": "medium",
-      "sha256": "276d38d6221673d311616e351b89756729948135e720dfd13ec0a44b368084a8"
+      "sha256": "e5900cb825154caa4567f7732adc717f7dea647e7f1a3fd4f6a2dd91c1ac7cae"
     },
     {
       "audit": {
@@ -15447,10 +15447,10 @@
     {
       "audit": {
         "domain": "stateful-clarification-r1-2",
-        "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex runtime correctness audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15458,7 +15458,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_stateful_clarification.py",
       "risk": "medium",
-      "sha256": "29df8bb9a302a7ff4fc396796693dfc5e1ab51bd3e699c263eb2c03c46b8c234"
+      "sha256": "c4e27026bcd9b00036e484590562ccedb4ca38cf7a87d3f3cf8128fcfa5ee147"
     },
     {
       "audit": {

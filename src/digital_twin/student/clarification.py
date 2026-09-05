@@ -210,12 +210,22 @@ def _unique_source_labels(chunks: Sequence[DocumentChunk]) -> list[str]:
         parts = [value for value in (title, section) if value]
         bases.append(" · ".join(parts) or (chunk.locator or "Approved source passage"))
     counts = {value: bases.count(value) for value in bases}
-    return [
+    labels = [
         value
         if counts[value] == 1
         else f"{value} · {chunk.locator or f'passage {chunk.ordinal + 1}'}"
         for value, chunk in zip(bases, chunks, strict=True)
     ]
+    normalized = [" ".join(label.casefold().split()) for label in labels]
+    if any(len(label) > 240 for label in labels) or len(set(normalized)) != len(labels):
+        # The source metadata is unbounded; only the UI label has a size limit.
+        # Suffix every option in this case so truncation cannot create collisions
+        # with a different, already-short label. Authoritative lineage is intact.
+        return [
+            f"{label[:220].rstrip()} … · option {index}"
+            for index, label in enumerate(labels, start=1)
+        ]
+    return labels
 
 
 __all__ = [

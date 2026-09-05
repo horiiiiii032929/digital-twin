@@ -6,6 +6,18 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Uncommitted runtime audit after qualification 010
+
+Report drafting is paused for the runtime audit in
+[the 2026-09-05 audit note](research/2026-09-05-runtime-correctness-audit.md).
+Synthetic regressions reproduced in-flight turn authority and proactive-delivery
+races, invalid outreach-reply handling, and over-length clarification labels.
+Local source corrections passed `npm run check` (1,952 Python tests, 51 frontend
+tests, repository validators, frontend lint, and production build). Qualification 010 and its tag
+remain historical evidence for their exact original revision; these changed
+sources are not yet a requalified Docker release. The frozen factual result is
+unchanged and is not being rerun or tuned.
+
 ## Final local release checkpoint
 
 Issue #216 consolidates the final method comparison and exact local release.

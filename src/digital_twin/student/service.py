@@ -86,6 +86,7 @@ from src.digital_twin.student.autonomy_runtime import (
 from src.digital_twin.student.repository import (
     ClarificationConflictError,
     DuplicateTurnError,
+    TurnAuthorityChangedError,
     StudentRepository,
 )
 from src.digital_twin.student.repository import LearnerStateConflictError
@@ -317,6 +318,24 @@ class StudentTutoringService:
                 ),
             )
         release = self._require_current_release(conversation, account_id)
+        if responding_to_outreach_message_id is not None:
+            outreach_message = self.repository.get_proactive_message(
+                responding_to_outreach_message_id
+            )
+            if (
+                outreach_message is None
+                or outreach_message.student_id != account_id
+                or outreach_message.course_id != conversation.course_id
+                or outreach_message.release_id != release.id
+            ):
+                self._deny(
+                    "outreach_response_forbidden",
+                    "The check-in is not available in this conversation.",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                )
         turn_timestamp = utc_timestamp(self.clock.now())
         tutoring_mode = self._runtime_mode(conversation.course_id)
         tutoring_graph = self._runtime_graph(tutoring_mode)
@@ -736,6 +755,11 @@ class StudentTutoringService:
                     conversation.id
                 ),
             )
+        except TurnAuthorityChangedError as error:
+            raise StudentWorkflowError(
+                "turn_authority_changed",
+                "Course access or the published release changed while preparing this answer. Reload the course.",
+            ) from error
         except (LearnerStateConflictError, ClarificationConflictError) as error:
             raise StudentWorkflowError(
                 "learner_state_conflict",

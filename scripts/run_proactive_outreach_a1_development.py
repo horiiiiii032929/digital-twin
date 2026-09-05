@@ -150,6 +150,8 @@ def _record_prior_turn(
         deep=True,
     )
     repository.save_release(previous)
+    # Record history while its release is active, then replace it below.
+    repository.publish_release(previous.id)
     conversation = repository.save_conversation(
         Conversation(
             id=f"conversation-{case['id']}",
@@ -185,6 +187,7 @@ def _record_prior_turn(
         [],
         [],
     )
+    repository.publish_release(current.id)
 
 
 def _prepare_case(

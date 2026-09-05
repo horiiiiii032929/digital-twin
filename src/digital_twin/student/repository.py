@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import sqlite3
+from datetime import datetime, timedelta
 from pathlib import Path
 from threading import RLock
 from typing import Protocol
@@ -72,6 +73,18 @@ from src.digital_twin.tutor_policy import TutorPolicy, timestamp_now
 
 class DuplicateTurnError(RuntimeError):
     """A concurrent request already claimed the conversation request ID."""
+
+
+class ProactiveDeliveryConflictError(RuntimeError):
+    """A delivery limit or preference changed before materialization."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__(reason)
+        self.reason = reason
+
+
+class TurnAuthorityChangedError(RuntimeError):
+    """Account, membership, or publication authority changed before commit."""
 
 
 class LearnerStateConflictError(RuntimeError):
@@ -1493,6 +1506,37 @@ class SQLiteStudentRepository:
             raise ValueError("tutor turn records have inconsistent lineage")
         try:
             with self._lock, self._connection:
+                # The first write acquires SQLite's writer lock before checking
+                # authority, including against administrative writes in another
+                # worker. All following turn writes share this transaction.
+                authorized = self._connection.execute(
+                    """UPDATE conversations SET updated_at = ?
+                       WHERE id = ? AND student_id = ? AND course_id = ?
+                         AND release_id = ?
+                         AND EXISTS (
+                           SELECT 1 FROM accounts a
+                           JOIN memberships m ON m.account_id = a.id
+                           WHERE a.id = conversations.student_id
+                             AND a.role = 'student' AND a.status = 'active'
+                             AND m.course_id = conversations.course_id
+                             AND m.role = 'student' AND m.active = 1
+                         )
+                         AND EXISTS (
+                           SELECT 1 FROM releases r
+                           WHERE r.id = conversations.release_id
+                             AND r.course_id = conversations.course_id
+                             AND r.status = 'published'
+                         )""",
+                    (
+                        conversation.updated_at,
+                        conversation.id,
+                        conversation.student_id,
+                        conversation.course_id,
+                        conversation.release_id,
+                    ),
+                )
+                if authorized.rowcount != 1:
+                    raise TurnAuthorityChangedError
                 if learner_state is not None:
                     current = self._connection.execute(
                         """SELECT revision FROM conversation_learner_states
@@ -1675,10 +1719,6 @@ class SQLiteStudentRepository:
                         learner_state=learner_state,
                         linked_at=conversation.updated_at,
                     )
-                self._connection.execute(
-                    "UPDATE conversations SET updated_at = ? WHERE id = ?",
-                    (conversation.updated_at, conversation.id),
-                )
         except sqlite3.IntegrityError as error:
             if "messages.conversation_id, messages.client_request_id" in str(error):
                 raise DuplicateTurnError from error
@@ -2052,6 +2092,12 @@ class SQLiteStudentRepository:
             raise ValueError("proactive message records have inconsistent lineage")
         try:
             with self._lock, self._connection:
+                # Acquire the cross-worker writer lock before reading mutable
+                # preferences/counts; hold it through message/outbox insertion.
+                self._connection.execute(
+                    "UPDATE proactive_triggers SET status = status WHERE id = ?",
+                    (trigger.id,),
+                )
                 current = self._connection.execute(
                     "SELECT status FROM proactive_triggers WHERE id = ?", (trigger.id,)
                 ).fetchone()
@@ -2059,6 +2105,46 @@ class SQLiteStudentRepository:
                     raise KeyError("proactive_trigger_not_found")
                 if current["status"] != ProactiveTriggerStatus.PENDING.value:
                     return False
+                account = self.get_account(trigger.student_id)
+                if (
+                    account is None
+                    or account.role != AccountRole.STUDENT
+                    or account.status != AccountStatus.ACTIVE
+                ):
+                    raise ProactiveDeliveryConflictError("student-inactive")
+                membership = self.get_membership(trigger.student_id, trigger.course_id)
+                if (
+                    membership is None
+                    or not membership.active
+                    or membership.role != MembershipRole.STUDENT
+                ):
+                    raise ProactiveDeliveryConflictError("membership-inactive")
+                release = self.get_published_release(trigger.course_id)
+                if release is None or release.id != trigger.release_id:
+                    raise ProactiveDeliveryConflictError("release-unavailable")
+                preference = self.get_outreach_preference(
+                    trigger.student_id, trigger.course_id, trigger.channel
+                )
+                if preference is None or not preference.enabled:
+                    raise ProactiveDeliveryConflictError("consent-disabled")
+                instant = datetime.fromisoformat(message.created_at.replace("Z", "+00:00"))
+                if preference.snoozed_until is not None and datetime.fromisoformat(
+                    preference.snoozed_until.replace("Z", "+00:00")
+                ) > instant:
+                    raise ProactiveDeliveryConflictError("student-snoozed")
+                if preference.is_quiet_at(instant):
+                    raise ProactiveDeliveryConflictError("quiet-hours")
+                if self.count_recent_proactive_messages(
+                    trigger.student_id,
+                    trigger.course_id,
+                    since=(instant - timedelta(days=7)).isoformat(),
+                ) >= preference.max_messages_per_7_days:
+                    raise ProactiveDeliveryConflictError("frequency-cap")
+                if outbox_item is not None and (
+                    not preference.private_destination
+                    or outbox_item.destination_ref != preference.destination_ref
+                ):
+                    raise ProactiveDeliveryConflictError("private-destination-required")
                 self._connection.execute(
                     """INSERT INTO proactive_messages
                        (id, trigger_id, student_id, course_id, release_id, channel,

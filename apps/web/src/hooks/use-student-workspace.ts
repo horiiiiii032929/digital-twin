@@ -162,6 +162,8 @@ export function useStudentWorkspace(
       setError(null)
       setIsLoadingConversation(true)
       pendingRequestRef.current = null
+      outreachReplyRef.current = null
+      setDraft("")
 
       let activeConversationId = conversationId
       if (activeConversationId) {
@@ -592,7 +594,9 @@ export function useStudentWorkspace(
     isUpdatingOutreach,
     outreachError,
     requiresNewConversation:
-      error?.code === "release_unavailable" || error?.code === "profile_mismatch",
+      error?.code === "release_unavailable" ||
+      error?.code === "profile_mismatch" ||
+      error?.code === "turn_authority_changed",
     setDraft,
     reload,
     selectCourse,

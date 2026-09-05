@@ -286,6 +286,8 @@ def _http_error(error: StudentWorkflowError) -> HTTPException:
         "citation_scope_violation",
         "request_id_conflict",
         "turn_persistence_conflict",
+        "turn_authority_changed",
+        "learner_state_conflict",
     }
     status_code = (
         status.HTTP_404_NOT_FOUND

@@ -1,5 +1,5 @@
 {
-  "code_revision": "9a4746d8e400c5f29a207944e1c681e3d0ad998a",
+  "code_revision": "5bb3d632e6b586e458751b61b22791347d80ea5d",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
@@ -9,10 +9,10 @@
       "keep": 64,
       "no-release": 30,
       "other": 19,
-      "refine": 62
+      "refine": 63
     },
-    "machine_record_count": 259,
-    "result_count": 333,
+    "machine_record_count": 260,
+    "result_count": 334,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -41,8 +41,8 @@
       "valid_json": 261
     },
     "machine-result-record": {
-      "files": 260,
-      "valid_json": 260
+      "files": 261,
+      "valid_json": 261
     }
   },
   "local_evidence_aggregates": [
@@ -140,13 +140,13 @@
         "run_id": ""
       }
     ],
-    "without_component_count": 112,
-    "without_corpus_id_count": 119,
-    "without_dataset_id_count": 113
+    "without_component_count": 113,
+    "without_corpus_id_count": 120,
+    "without_dataset_id_count": 114
   },
   "repository_files": {
     "by_category": {
-      "architecture-or-operations-documentation": 43,
+      "architecture-or-operations-documentation": 44,
       "automated-or-manual-verification": 284,
       "backend-implementation": 167,
       "committed-evaluation-dataset": 72,
@@ -155,11 +155,11 @@
       "deployment-configuration": 8,
       "evaluation-instrument": 266,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 415,
+      "evaluation-summary-or-rubric": 416,
       "experiment-plan-or-learning-log": 85,
       "frontend-implementation": 82,
       "literature-note": 9,
-      "machine-result-record": 260,
+      "machine-result-record": 261,
       "project-governance-or-ci": 5,
       "report-or-figure": 68,
       "repository-configuration": 7,
@@ -168,9 +168,10 @@
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2130
+      "tracked": 2130,
+      "untracked": 3
     },
-    "count": 2130
+    "count": 2133
   },
   "schema_version": 1
 }

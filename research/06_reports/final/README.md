@@ -33,9 +33,11 @@ The first modular, IT5004-aligned review set is indexed in
 [the system-design component README](components/README.md); it remains separate
 from `report.tex` until its scope and terminology are accepted.
 
-Maintain the report argument in
+Maintain current report claims in the
+[final claim–evidence matrix](final-claim-evidence-matrix.md) and
+[final method catalog](final-method-catalog.md). The older
 [`reports/claim-to-evidence-matrix.md`](../../../reports/claim-to-evidence-matrix.md)
-from protocol freeze onward. A result belongs in the final paper or slides only
+is a historical frozen baseline. A result belongs in the final paper or slides only
 when the row links to a stable registered result and machine-readable source.
 
 ## Evidence inventory
