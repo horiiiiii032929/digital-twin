@@ -379,31 +379,34 @@ export function ProfessorDeliveryWorkspace({
   }
 
   return (
-    <main className="h-dvh overflow-hidden bg-white text-foreground">
+    <main className="h-dvh overflow-hidden bg-[var(--shell)] text-foreground">
       <div className="grid h-full min-h-0 lg:grid-cols-[216px_minmax(0,1fr)]">
-        <aside className="hidden min-h-0 flex-col border-r bg-[var(--shell)] lg:flex">
+        <aside className="workspace-rail hidden min-h-0 flex-col lg:flex">
           <WorkspaceBrand />
-          <nav className="space-y-1 p-3" aria-label="Professor workspace">
+          <nav className="flex flex-col gap-1 p-3 pt-4" aria-label="Professor workspace">
             <Button className="w-full justify-start" variant="ghost" onClick={onOpenSetup}>
               <BookOpenCheck data-icon="inline-start" />
               Twin setup
             </Button>
-            <Button className="w-full justify-start bg-white" variant="outline">
+            <Button
+              className="w-full justify-start bg-white shadow-[0_1px_2px_rgba(25,25,29,0.06),0_5px_14px_rgba(25,25,29,0.04)]"
+              variant="ghost"
+            >
               <PackageCheck data-icon="inline-start" />
               Course delivery
             </Button>
           </nav>
           <div className="border-t px-3 pt-4">
             <p className="px-2 text-xs font-semibold text-muted-foreground">Courses</p>
-            <div className="mt-2 space-y-1">
+            <div className="mt-2 flex flex-col gap-1">
               {courses.map((course) => (
                 <button
                   key={course.course_id}
                   className={cn(
                     "w-full truncate rounded-lg px-2.5 py-2 text-left text-sm transition-colors",
                     course.course_id === selectedCourseId
-                      ? "bg-[var(--accent-soft)] font-medium text-[var(--accent-foreground)]"
-                      : "text-muted-foreground hover:bg-white hover:text-foreground",
+                      ? "bg-white font-medium text-[var(--accent-foreground)] shadow-[0_1px_2px_rgba(25,25,29,0.05)]"
+                      : "text-muted-foreground hover:bg-white/80 hover:text-foreground",
                   )}
                   disabled={busy !== null}
                   onClick={() => setSelectedCourseId(course.course_id)}
@@ -416,7 +419,7 @@ export function ProfessorDeliveryWorkspace({
         </aside>
 
         <section className="flex min-h-0 min-w-0 flex-col">
-          <header className="flex min-h-14 items-center gap-3 border-b pl-3 pr-14 sm:pl-5 xl:pr-56">
+          <header className="workspace-header flex min-h-16 items-center gap-3 pl-3 pr-14 sm:pl-5 xl:pr-56">
             <Button
               className="lg:hidden"
               size="icon"
@@ -427,15 +430,15 @@ export function ProfessorDeliveryWorkspace({
               <ArrowLeft aria-hidden="true" />
             </Button>
             <div className="min-w-0">
-              <h1 className="truncate text-sm font-semibold sm:text-base">Course delivery</h1>
+              <h1 className="truncate text-sm font-semibold sm:text-base">Course operations</h1>
               <p className="hidden text-xs text-muted-foreground sm:block">
-                Upload, verify, and publish evidence to students.
+                Evidence, releases, and governed autonomy.
               </p>
             </div>
           </header>
 
           <div className="min-h-0 flex-1 overflow-y-auto bg-[var(--shell)]">
-            <div className="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-10">
+            <div className="mx-auto max-w-7xl px-4 py-7 sm:px-6 sm:py-9">
               {error ? (
                 <Alert className="mb-5" variant="destructive">
                   <CircleAlert />
@@ -472,10 +475,16 @@ export function ProfessorDeliveryWorkspace({
               ) : null}
 
               <section className="grid grid-cols-[minmax(0,1fr)] gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
-                <div className="min-w-0 space-y-5">
+                <div className="flex min-w-0 flex-col gap-5">
                   <CourseHeader course={selectedCourse} loading={loading} />
                   {selectedCourse ? (
                     <>
+                      <ProfessorAutonomyPanel
+                        course={selectedCourse}
+                        evidenceChunks={evidenceChunks}
+                        releaseId={selectedRelease?.id}
+                        onApprovedProfileChange={setApprovedTeachingProfileId}
+                      />
                       <EvidenceCard
                         busy={busy}
                         jobs={jobs}
@@ -492,12 +501,6 @@ export function ProfessorDeliveryWorkspace({
                           })
                         }
                         onSubmit={uploadSource}
-                      />
-                      <ProfessorAutonomyPanel
-                        course={selectedCourse}
-                        evidenceChunks={evidenceChunks}
-                        releaseId={selectedRelease?.id}
-                        onApprovedProfileChange={setApprovedTeachingProfileId}
                       />
                       <ReleaseCard
                         busy={busy}
@@ -517,7 +520,7 @@ export function ProfessorDeliveryWorkspace({
                   ) : null}
                 </div>
 
-                <aside className="min-w-0 space-y-5">
+                <aside className="flex min-w-0 flex-col gap-5">
                   <CreateCourseCard busy={busy} onSubmit={createCourse} />
                   {selectedCourse ? (
                     <StudentsCard
@@ -564,21 +567,23 @@ function CourseHeader({
   }
   const published = course.releases.find((release) => release.status === "published")
   return (
-    <header className="rounded-xl border bg-white px-5 py-5 sm:px-6">
+    <header className="workspace-card rounded-2xl border bg-white px-5 py-5 sm:px-6 sm:py-6">
       <div className="flex flex-col items-start gap-3 sm:flex-row sm:justify-between">
         <div className="min-w-0">
-          <p className="text-xs font-medium text-muted-foreground">Selected course</p>
-          <h2 className="mt-1 break-words text-2xl font-semibold tracking-[-0.03em]">{course.title}</h2>
+          <p className="workspace-kicker">Professor workspace</p>
+          <h2 className="mt-1 break-words text-2xl font-semibold tracking-[-0.03em]">
+            {course.title}
+          </h2>
         </div>
         <Badge className="shrink-0" variant={published ? "default" : "outline"}>
           {published ? "Published" : "Not published"}
         </Badge>
       </div>
-      <p className="mt-3 text-sm text-muted-foreground">
-        {course.student_account_ids.length} assigned student
-        {course.student_account_ids.length === 1 ? "" : "s"} · {course.releases.length}{" "}
-        release{course.releases.length === 1 ? "" : "s"}
-      </p>
+      <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 border-t pt-4 text-xs font-medium text-muted-foreground">
+        <span>{course.student_account_ids.length} assigned student{course.student_account_ids.length === 1 ? "" : "s"}</span>
+        <span>{course.releases.length} release{course.releases.length === 1 ? "" : "s"}</span>
+        <span>{published ? "Student access is live" : "Not visible to students"}</span>
+      </div>
     </header>
   )
 }

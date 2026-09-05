@@ -356,24 +356,25 @@ export function ProfessorAutonomyPanel({
   ].filter((item): item is string => item !== null), [approved, policy, releaseId])
 
   return (
-    <Card className="overflow-hidden">
-      <CardHeader className="border-b bg-white pb-0">
+    <Card className="workspace-card overflow-hidden rounded-2xl">
+      <CardHeader className="border-b bg-white pb-3">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <CardTitle className="flex items-center gap-2"><BrainCircuit className="size-4" aria-hidden="true" /> Tutor governance</CardTitle>
-            <CardDescription className="mt-1 max-w-2xl">Set the professor-approved boundary, then inspect what the autonomous tutor is allowed to do and what it actually did.</CardDescription>
+            <p className="workspace-kicker">Digital Twin control room</p>
+            <CardTitle className="mt-1 flex items-center gap-2 text-lg"><BrainCircuit className="size-4" aria-hidden="true" /> Governed autonomous tutor</CardTitle>
+            <CardDescription className="mt-1 max-w-2xl">Approve its teaching boundary, activate bounded autonomy, and inspect every learner-facing decision.</CardDescription>
           </div>
-          <Badge variant="outline">V2.1 development candidate</Badge>
+          <Badge variant="outline">R1.2 local release</Badge>
         </div>
 
-        <dl className="mt-5 grid grid-cols-2 border-t sm:grid-cols-4">
+        <dl className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl bg-[var(--shell)] sm:grid-cols-4">
           <SummaryItem label="Profile" value={approved ? `Approved v${approved.version}` : "Needs review"} ready={Boolean(approved)} />
           <SummaryItem label="Autonomy" value={policyStatus} ready={policyStatus === "Active"} />
           <SummaryItem label="Active goals" value={`${activeGoals.length}`} ready={activeGoals.length > 0} />
           <SummaryItem label="Delivered actions" value={`${deliveredActions.length}`} ready={deliveredActions.length > 0} />
         </dl>
 
-        <nav className="-mx-1 mt-1 grid grid-cols-2 gap-x-1 sm:flex" aria-label="Tutor governance views" role="tablist">
+        <nav className="mt-2 grid grid-cols-2 gap-1 rounded-xl bg-[var(--shell)] p-1 sm:flex" aria-label="Tutor governance views" role="tablist">
           {GOVERNANCE_VIEWS.map((item) => (
             <button
               key={item.id}
@@ -381,7 +382,12 @@ export function ProfessorAutonomyPanel({
               role="tab"
               aria-selected={view === item.id}
               aria-controls={`governance-${item.id}`}
-              className={cn("border-b-2 px-2 py-3 text-left text-xs font-semibold transition-colors sm:shrink-0 sm:px-3 sm:text-center", view === item.id ? "border-[var(--accent-strong)] text-foreground" : "border-transparent text-muted-foreground hover:text-foreground")}
+              className={cn(
+                "rounded-lg px-3 py-2 text-left text-xs font-semibold transition-colors sm:shrink-0 sm:text-center",
+                view === item.id
+                  ? "bg-white text-foreground shadow-[0_1px_3px_rgba(25,25,29,0.08)]"
+                  : "text-muted-foreground hover:bg-white/60 hover:text-foreground",
+              )}
               onClick={() => setView(item.id)}
             >
               {item.label}
@@ -772,7 +778,7 @@ function ActivitySection({ actions, outcomes, traces }: { actions: AutonomousAct
 }
 
 function SummaryItem({ label, value, ready }: { label: string; value: string; ready: boolean }) {
-  return <div className="border-b px-3 py-3 even:border-l sm:border-b-0 sm:border-l sm:first:border-l-0"><dt className="text-xs text-muted-foreground">{label}</dt><dd className="mt-1 flex items-center gap-1.5 text-sm font-semibold"><span className={cn("size-1.5 rounded-full", ready ? "bg-[var(--success)]" : "bg-muted-foreground")} />{value}</dd></div>
+  return <div className="border-b px-3 py-3 even:border-l sm:border-b-0 sm:border-l sm:first:border-l-0"><dt className="text-xs text-muted-foreground">{label}</dt><dd className="mt-1.5 flex items-center gap-2 text-sm font-semibold"><span className={cn("size-2 rounded-full", ready ? "bg-[var(--success)]" : "bg-muted-foreground")} />{value}</dd></div>
 }
 
 function BoundaryRow({ done, label }: { done: boolean; label: string }) {

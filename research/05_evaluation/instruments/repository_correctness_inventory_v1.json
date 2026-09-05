@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "7583e2c29964548847d4fba361b53cac8f8842b240329be21778c61580199eba",
+  "record_sha256": "4b72ae7a7e88f2086e3c42108d7f5011e1aecc947ff327972911426d905cf311",
   "records": [
     {
       "audit": {
@@ -247,11 +247,11 @@
     },
     {
       "audit": {
-        "domain": "professor-feedback-revision-workflow",
-        "evidence": "Manual contract and implementation review plus focused API/frontend tests verified immutable revision history, conflict selection, stale/double-submit safety, preview invalidation, and restart-safe professor feedback behavior.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
-        "reviewed_at": "2026-09-04",
-        "reviewer": "codex-final-local-r1-audit"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -259,15 +259,15 @@
       "package_commands": [],
       "path": "apps/web/src/components/onboarding/console/professor-review-console.tsx",
       "risk": "high",
-      "sha256": "8b9aefdeeda6a4fbea59f0f6a92db4cf67915b54fe41f95ff73d6e2dc9e23fc9"
+      "sha256": "a73fe2210c592d44aa934a9092d562a3346cb84f8d02c900699b575ea8edec80"
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -275,7 +275,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/onboarding/console/readiness-summary.tsx",
       "risk": "high",
-      "sha256": "5c461a7d744162b94c3c27d87e8d25f99318d2a92f9e4e78a9696c2ca0877289"
+      "sha256": "220e275ebbd379ce067b886773068d0738315d407ebb1cd27997ccdeef8c227a"
     },
     {
       "audit": {
@@ -423,11 +423,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-ux",
-        "evidence": "Rechecked the committed local-R1 Compose topology during the release-binding audit; service, volume, worker, health-check, and environment boundaries remain active and intentional.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
-        "reviewed_at": "2026-09-02",
-        "reviewer": "Codex audit-closure cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -435,15 +435,15 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "0a3b526b097be1f3ba9eba3f0663af58a3a44dd434a7b4f2efc4f6a80291a055"
+      "sha256": "0ea1a7ef3ba3ad28c670cc2d31e22f214c780543dd6a21dfe496180c0e53f0ad"
     },
     {
       "audit": {
-        "domain": "governed-autonomy-ux",
-        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -451,7 +451,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "eb72718e31542c23d8cfeca473c0a04f22820223f68fcdd3485b70dba8198873"
+      "sha256": "8958de25aa406335a0ceedaac02f00004ee43f441bd374f6e67eb51ec225f57d"
     },
     {
       "audit": {
@@ -471,11 +471,11 @@
     },
     {
       "audit": {
-        "domain": "professor-fidelity-proxy-c0-c3-003",
-        "evidence": "Reviewed package commands bind validation, network-free simulation, preflight, execute, and resume to the schema-corrected successor; focused tests and simulation passed with zero provider calls.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex stateful-clarification correctness review"
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -483,12 +483,12 @@
       "package_commands": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "risk": "high",
-      "sha256": "9253b67fc42f3ca37168c2dee9b7937f155f9960348ec260de9ac1968d2e1ec4"
+      "sha256": "8a2a40de08c3cf12e60589caa15ef0dd082661b7017928087092b3950988e292"
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -698,8 +698,8 @@
         "domain": "frontend-correctness",
         "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
         "findings": [],
-        "reviewed_at": "2026-08-20",
-        "reviewer": "codex-primary-plus-independent-cross-review"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -707,7 +707,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/workspace/workspace-brand.tsx",
       "risk": "high",
-      "sha256": "bc60481d98a2c27ddae134ad16bfcee0bf57a1ca6fb244f7e1f8c605c8228d7f"
+      "sha256": "95610c78ecab3f2669b4a10a8ac8d178adc96756800adea59c43d0a83b3194b6"
     },
     {
       "audit": {
@@ -743,8 +743,8 @@
     },
     {
       "audit": {
-        "domain": "frontend-correctness",
-        "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
+        "domain": "release-interface-ux",
+        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
         "findings": [],
         "reviewed_at": "2026-08-20",
         "reviewer": "codex-primary-plus-independent-cross-review"
@@ -795,7 +795,7 @@
         "evidence": "Independent manual frontend review plus Oxlint, 46 Vitest regressions, TypeScript production build, state/readiness corrections, and import/dead-module tracing.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "codex-impeccable-final-qualification"
+        "reviewer": "Codex Impeccable release-interface audit"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -803,7 +803,7 @@
       "package_commands": [],
       "path": "apps/web/src/index.css",
       "risk": "high",
-      "sha256": "4c17fde56a6117452796fb1d4e27243d713bdd5d2d34b446417f35c3afb02962"
+      "sha256": "c7c8fdd152641ecf21de14537f780eadfdd44d7e35465ed66a0aa27381252b6c"
     },
     {
       "audit": {

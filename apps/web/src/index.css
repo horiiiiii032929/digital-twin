@@ -15,19 +15,22 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --ink: #202123;
-  --accent-strong: #5b5bd6;
-  --accent-soft: #eeeeff;
-  --accent-border: #b8b8ee;
+  --ink: #19191d;
+  --ink-soft: #34343a;
+  --accent-strong: #5450d6;
+  --accent-soft: #efefff;
+  --accent-border: #b9b8ef;
   --selection: #d5e0fb;
   --cobalt: var(--accent-strong);
   --cobalt-soft: var(--accent-soft);
-  --shell: #f7f7f8;
+  --shell: #f5f5f6;
   --workspace: var(--shell);
-  --subtle: #f0f0f2;
-  --rule: #e2e2e6;
-  --rule-strong: #c7c7cd;
-  --border-strong: #c7c7cd;
+  --conversation: #fcfcfd;
+  --surface-raised: #ffffff;
+  --subtle: #eeeeF1;
+  --rule: #dedee3;
+  --rule-strong: #bebec7;
+  --border-strong: #bebec7;
   --success: #147a57;
   --success-soft: #eaf8f2;
   --success-border: #9bd9bf;
@@ -37,8 +40,10 @@
   --destructive-ink: #c2413b;
   --destructive-soft: #fff0ef;
   --destructive-border: #f4b7b4;
-  --shadow-composer: 0 8px 30px rgba(32, 33, 35, 0.08),
-    0 1px 3px rgba(32, 33, 35, 0.08);
+  --shadow-composer: 0 18px 48px rgba(25, 25, 29, 0.1),
+    0 2px 8px rgba(25, 25, 29, 0.07);
+  --shadow-overlay: 0 22px 70px rgba(25, 25, 29, 0.16),
+    0 4px 16px rgba(25, 25, 29, 0.08);
 
   --radius: 0.5rem;
   --background: #ffffff;
@@ -129,7 +134,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: #ffffff;
+  background: var(--shell);
 }
 
 button,
@@ -144,6 +149,11 @@ label,
 select,
 summary {
   -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
 }
 
 ::selection {
@@ -166,6 +176,33 @@ summary {
 }
 
 @layer components {
+  .workspace-rail {
+    background: var(--shell);
+    box-shadow: inset -1px 0 0 color-mix(in srgb, var(--rule) 72%, transparent);
+  }
+
+  .workspace-header {
+    background: color-mix(in srgb, var(--surface-raised) 94%, transparent);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--rule) 76%, transparent);
+  }
+
+  .workspace-canvas {
+    background: var(--conversation);
+  }
+
+  .workspace-card {
+    background: var(--surface-raised);
+    box-shadow: 0 1px 2px rgba(25, 25, 29, 0.04),
+      0 10px 30px rgba(25, 25, 29, 0.035);
+  }
+
+  .workspace-kicker {
+    color: var(--muted-foreground);
+    font-size: 0.75rem;
+    font-weight: 550;
+    line-height: 1.35;
+  }
+
   .dossier-label {
     color: var(--muted-foreground);
     font-size: 0.75rem;
