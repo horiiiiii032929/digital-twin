@@ -5510,7 +5510,7 @@
       "path": "scripts/final_cross_method_factual_adapter.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final cross-method audit",
-      "sha256": "14ecf04a73f46e52c337424a8e5c17ca774ef70e98b396a63d47f1e56c8c35c1"
+      "sha256": "22e09999f8191fa81ae76819e230b48f79e5f2b15ccf9b760ea4b5e52b4f20a7"
     },
     {
       "audit_status": "audited",
@@ -11208,7 +11208,7 @@
       "path": "tests/test_final_cross_method_factual_confirmation.py",
       "reviewed_at": "2026-09-05",
       "reviewer": "Codex final cross-method audit",
-      "sha256": "bba3f548034b4daa0dc46a014386507f58495a2f6eee33dc89e2e33c9f485064"
+      "sha256": "8671716ddf1341442fb377d869728845de6c5e26518a4096e7d6ce7ae846bb07"
     },
     {
       "audit_status": "audited",

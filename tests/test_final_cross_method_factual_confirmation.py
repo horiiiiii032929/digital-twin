@@ -13,6 +13,8 @@ from src.digital_twin.evaluation.factual_qa_contract import (
     EvaluationCaseV1,
     EvaluationResponseV1,
 )
+from src.digital_twin.grounding import DocumentChunk
+from src.digital_twin.student import SQLiteStudentRepository
 
 
 def test_validation_does_not_open_hidden_gold(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -109,3 +111,40 @@ def test_frozen_instrument_declares_no_provider_or_paid_calls() -> None:
     assert instrument["execution"]["provider_calls"] == 0
     assert instrument["authorization"]["provider_execution_authorized"] is False
     assert instrument["authorization"]["paid_execution_authorized"] is False
+
+
+def test_course_owner_and_domain_model_approver_are_identical(tmp_path: Path) -> None:
+    repository = SQLiteStudentRepository(tmp_path / "state.sqlite3")
+    text = "A queue removes items in first-in, first-out order."
+    chunk = DocumentChunk(
+        id="region-1",
+        document_id="source-1",
+        text=text,
+        ordinal=1,
+        source_artifact_id="source-1",
+        source_version=1,
+        locator="source-1 characters 0-50",
+        source_checksum="a" * 64,
+        retrieval_allowed=True,
+        display_allowed=True,
+        metadata={
+            "course_id": "course-1",
+            "title": "Queues",
+            "char_start": "0",
+            "char_end": str(len(text)),
+            "source_family_id": "queue-family",
+            "parent_cluster_id": "queue-cluster",
+        },
+    )
+
+    adapter._install_courses(
+        repository,
+        {"course-1": [chunk]},
+        profile_path=adapter.PROFILE_PATH,
+    )
+
+    release = repository.get_published_release("course-1")
+    assert release is not None
+    domain = repository.get_course_domain_model(release.id)
+    assert domain is not None
+    assert domain.approved_by == adapter.PROFESSOR_ID

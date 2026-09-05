@@ -75,8 +75,11 @@ QWEN_RETRIEVER_ID = "qwen3-hybrid-v1"
 ANY_HIT_GATE = "any-hit-evidence-gate-v1"
 QUESTION_TARGETED_GATE = "question-targeted-ambiguity-safe-v2"
 DOMINANCE_GATE = "dominance-scoped-ambiguity-safe-v3"
-PROFESSOR_ID = "final-confirmation-professor"
-STUDENT_ID = "final-confirmation-student"
+# The domain-model helper is intentionally reused from the historical adapter;
+# its approved_by identity is part of that helper's contract.  Bind the course
+# owner to the same synthetic professor rather than inventing a second owner.
+PROFESSOR_ID = historical.PROFESSOR_ID
+STUDENT_ID = historical.STUDENT_ID
 PSEUDONYMIZATION_SECRET = b"final-confirmation-public-only-32"
 
 
@@ -361,4 +364,3 @@ def build_final_cross_method_adapter(
         evidence_gate_id=gate_impl.implementation_id,
         generator_id=GENERATOR_ID,
     )
-

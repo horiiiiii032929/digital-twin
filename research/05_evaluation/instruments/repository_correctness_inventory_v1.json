@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "6a2da562afba546a488494ba510ba5631591bc525b6f0fb466c830313dd28f8a",
+  "record_sha256": "c6a7973e1e0744e6fc8950fd0014066a2f95bb817e2f55452b7a9d632d737c65",
   "records": [
     {
       "audit": {
@@ -8206,7 +8206,7 @@
       "package_commands": [],
       "path": "scripts/final_cross_method_factual_adapter.py",
       "risk": "high",
-      "sha256": "14ecf04a73f46e52c337424a8e5c17ca774ef70e98b396a63d47f1e56c8c35c1"
+      "sha256": "22e09999f8191fa81ae76819e230b48f79e5f2b15ccf9b760ea4b5e52b4f20a7"
     },
     {
       "audit": {
@@ -17241,7 +17241,7 @@
       "package_commands": [],
       "path": "tests/test_final_cross_method_factual_confirmation.py",
       "risk": "medium",
-      "sha256": "bba3f548034b4daa0dc46a014386507f58495a2f6eee33dc89e2e33c9f485064"
+      "sha256": "8671716ddf1341442fb377d869728845de6c5e26518a4096e7d6ce7ae846bb07"
     },
     {
       "audit": {
