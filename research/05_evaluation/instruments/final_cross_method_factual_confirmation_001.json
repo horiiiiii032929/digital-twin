@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "instrument_id": "final-cross-method-factual-confirmation-001",
+  "status": "frozen-pending-execution",
+  "authorization": {
+    "authorized_by": "researcher",
+    "authorized_at": "2026-09-05",
+    "source": "continue through phase 9",
+    "heldout_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false
+  },
+  "dataset": {
+    "dataset_id": "governed-full-autonomy-v2-1-cross-engine-sealed-1000-010",
+    "case_count": 1000,
+    "case_package_sha256": "436ad73bb1e4bf7ca4c42b4ab763ac8ad630193d72b666263e9ec46d30857e2c",
+    "source_package_sha256": "e583150c1a4630414e59ba7bf538398806be29fd53c167a1d429b11a0781a83e",
+    "known_benchmark": false,
+    "sealed_confirmation": true
+  },
+  "arms": [
+    "bm25-any-hit",
+    "bm25-question-targeted",
+    "bm25-dominance",
+    "qwen-question-targeted",
+    "qwen-dominance"
+  ],
+  "fixed_components": {
+    "generator": "deterministic-evidence-set-grounded-generator-v2",
+    "policy": "deterministic-tutor-action-router-v3",
+    "orchestration": "governed-autonomous-tutoring-graph-v2.1",
+    "profile": "student-tutor-r1-local-candidate-v3"
+  },
+  "execution": {
+    "provider_calls": 0,
+    "cost_usd": 0,
+    "retries": 0,
+    "hidden_gold_opening": "after-all-five-response-ledgers-complete",
+    "same_set_tuning_permitted": false
+  },
+  "selection_rule": [
+    "zero severe unsupported releases",
+    "maximum fully grounded factual success",
+    "maximum boundary action accuracy",
+    "maximum canonical all-evidence@3"
+  ]
+}

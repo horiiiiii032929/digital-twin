@@ -972,13 +972,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "stateful-clarification-r1-2",
-      "evidence": "Manual implementation and privacy review plus a 200-case network-free actual-service simulation, targeted Python tests, full frontend tests/build, execution-freeze coverage, and source/version/claim-lineage, restart, and idempotency checks found no unresolved correctness finding.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Command registration review plus focused validation, hidden-gold separation tests, Ruff, execution-freeze validation, and git diff checks found no unresolved correctness finding.",
       "findings": [],
       "path": "package.json",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity successor review",
-      "sha256": "3acad93c094366168ba60605b2c95124f942058505de7c4fda39202c9c03839a"
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "e4099ea1b05349d1a0bd5f1921b932fc255a8219773f39cce4a4df2f1f6b87a6"
     },
     {
       "audit_status": "audited",
@@ -2904,6 +2904,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-manual-source-review",
       "sha256": "f56904349837a72cb054375f3bdc86082eb051041514a2330e24e2263ab7c90b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Instrument review verifies the immutable fresh package hashes, five prospective arms, provider-free scope, hidden-gold opening order, and finite no-retuning selection rule.",
+      "findings": [],
+      "path": "research/05_evaluation/instruments/final_cross_method_factual_confirmation_001.json",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "73fe85155553cbc7656f35192d1cc6e126bc4f15ab2299ca6dadfa92a6922a84"
     },
     {
       "audit_status": "audited",
@@ -5493,6 +5504,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Focused code review and tests verify explicit profile/retriever bindings, actual Qwen activation without silent fallback, deterministic generator/policy parity, canonical lineage, and T1-v2 product-service execution.",
+      "findings": [],
+      "path": "scripts/final_cross_method_factual_adapter.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "14ecf04a73f46e52c337424a8e5c17ca774ef70e98b396a63d47f1e56c8c35c1"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
@@ -6358,6 +6380,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Focused code review and tests verify clean-revision execution, immutable public/source hashes, complete response-ledger checks before gold loading, ID-based scoring, finite selection, and zero provider calls.",
+      "findings": [],
+      "path": "scripts/run_final_cross_method_factual_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "47d9dcda37c48997dc4314ddf7c7be7a565625f2cbbf0dd184b9bcaf5a5708a0"
     },
     {
       "audit_status": "audited",
@@ -9112,13 +9145,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "professor-fidelity-proxy-c0-c3-003",
-      "evidence": "Post-run freeze review removes the completed successor from bounded authorizations and restores the repository-wide provider and method-evaluation block.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Freeze review confirms the one-time fresh 1,000-case run is limited to held-out and method evaluation, contains no provider authority, and leaves the repository-wide freeze active.",
       "findings": [],
       "path": "src/digital_twin/repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity result audit",
-      "sha256": "3b7885109d12ce0d41226574dd250544e3f5914231c38cd68a2cb250c4fdf697"
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "85a621b8b3a47ccb17dd3d3e8ca06ce8d8a14a534c902c17cbc6cf29a0ff7c12"
     },
     {
       "audit_status": "audited",
@@ -9717,13 +9750,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "professor-fidelity-proxy-c0-c3-003",
-      "evidence": "Focused freeze regression verifies the completed successor is no longer authorized and historical and unrelated instruments retain their prior boundaries.",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Regression review confirms the bounded authorization set includes the one-time fresh 1,000-case provider-free run and no unreviewed operation.",
       "findings": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex synthetic-fidelity result audit",
-      "sha256": "a7696331b5aae595c0e6ae12507c002a9ad1f2c3d98fd25852cbd560ebfcaa64"
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "bd4f5954819fd300ca1c84441cc87db15781d3a886082de8aa07c8cbe660ebc1"
     },
     {
       "audit_status": "audited",
@@ -11165,6 +11198,17 @@
       "reviewed_at": "2026-08-27",
       "reviewer": "codex-primary-review",
       "sha256": "45c28bed97447a56173e0e01418a4631ac840b973f68d75fde5694999c15f2ad"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "final-cross-method-evaluation-closure",
+      "evidence": "Regression tests cover gold isolation, incomplete response refusal, exact manifest binding, unique arm definitions, ID-set validation, and no-provider authorization.",
+      "findings": [],
+      "path": "tests/test_final_cross_method_factual_confirmation.py",
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final cross-method audit",
+      "sha256": "bba3f548034b4daa0dc46a014386507f58495a2f6eee33dc89e2e33c9f485064"
     },
     {
       "audit_status": "audited",

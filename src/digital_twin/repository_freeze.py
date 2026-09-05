@@ -219,6 +219,10 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
             "external_model_evaluation",
             "method_evaluation_execution",
         ),
+        "scripts/run_final_cross_method_factual_confirmation.py": (
+            "heldout_execution",
+            "method_evaluation_execution",
+        ),
         "scripts/run_professor_fidelity_proxy_c0_c3_002.py": (
             "external_model_evaluation",
             "method_evaluation_execution",
@@ -728,6 +732,13 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         # authority is revoked; only deterministic package validation remains.
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
+        ),
+        # Issue #216. One-time provider-free execution of the untouched,
+        # source-disjoint 1,000-case package. Hidden gold opens only after all
+        # five actual-product response ledgers are complete.
+        "final-cross-method-factual-confirmation-001": (
+            "heldout_execution",
+            "method_evaluation_execution",
         ),
     }
 )
