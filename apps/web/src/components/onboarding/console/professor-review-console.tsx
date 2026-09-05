@@ -15,6 +15,7 @@ import { useEffect, useRef, useState, type ReactNode, type RefObject } from "rea
 import {
   Activity,
   AlertCircle,
+  ArrowRight,
   BookOpen,
   FlaskConical,
   Menu,
@@ -106,6 +107,9 @@ export function ProfessorReviewConsole({
   const releaseReadiness = getReleaseReadiness(session)
   const stepStates = getStepStates(session)
   const nextAction = getNextAction(session, releaseReadiness.blockers)
+  const completedStageCount = stepStates.filter(
+    (step) => step.state === "complete",
+  ).length
 
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 1024px)")
@@ -175,7 +179,7 @@ export function ProfessorReviewConsole({
     )
 
   return (
-    <main className="h-dvh min-w-0 overflow-hidden bg-white text-foreground">
+    <main className="h-dvh min-w-0 overflow-hidden bg-[var(--shell)] text-foreground">
       <div
         className={cn(
           "grid h-full min-h-0 min-w-0 lg:overflow-hidden",
@@ -184,16 +188,34 @@ export function ProfessorReviewConsole({
             : "lg:grid-cols-[216px_minmax(0,1fr)]",
         )}
       >
-        <aside className="hidden min-h-0 flex-col border-r bg-[var(--shell)] lg:flex">
+        <aside className="workspace-rail hidden min-h-0 flex-col lg:flex">
           <WorkspaceBrand />
-          <div className="px-3 pt-3">
+          <div className="px-3 pt-4">
             <Button
               type="button"
-              className="w-full"
+              className="w-full justify-between"
               onClick={() => openStage(nextAction.stage)}
             >
-              Continue setup
+              Continue review
+              <ArrowRight data-icon="inline-end" />
             </Button>
+            <div className="px-2 pt-3">
+              <div className="flex items-center justify-between gap-2 text-xs font-medium text-muted-foreground">
+                <span>{completedStageCount} of {stepStates.length} stages ready</span>
+                <span>{Math.round((completedStageCount / stepStates.length) * 100)}%</span>
+              </div>
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-[var(--subtle)]">
+                <div
+                  className="h-full rounded-full bg-[var(--accent-strong)] transition-[width] duration-300"
+                  style={{
+                    width: `${(completedStageCount / stepStates.length) * 100}%`,
+                  }}
+                />
+              </div>
+              <p className="mt-2 text-xs leading-4 font-medium text-[var(--ink-soft)]">
+                {nextAction.title}
+              </p>
+            </div>
           </div>
           <ReleaseRoute
             steps={stepStates}
@@ -202,7 +224,7 @@ export function ProfessorReviewConsole({
             onSelectStage={openStage}
           />
 
-          <div className="mt-auto space-y-1 border-t p-3">
+          <div className="mt-auto flex flex-col gap-1 border-t p-3">
             {onOpenDelivery ? (
               <Button
                 type="button"
@@ -240,7 +262,7 @@ export function ProfessorReviewConsole({
           </div>
         </aside>
 
-        <section className="flex min-h-0 min-w-0 flex-col bg-white">
+        <section className="workspace-canvas flex min-h-0 min-w-0 flex-col">
           <ProfessorHeader
             status={formatReleaseStatus(releaseReadiness.status)}
             blockerCount={releaseReadiness.blockers.length}
@@ -252,8 +274,8 @@ export function ProfessorReviewConsole({
           />
 
           {supervisorDemo ? (
-            <div className="border-b bg-[var(--accent-soft)] px-4 py-2.5 text-[var(--accent-foreground)] sm:px-5">
-              <div className="mx-auto flex max-w-3xl items-start gap-2.5 text-xs leading-5">
+            <div className="border-b bg-[var(--accent-soft)]/70 px-4 py-2.5 text-[var(--accent-foreground)] sm:px-5">
+              <div className="mx-auto flex max-w-[840px] items-start gap-2.5 text-xs leading-5">
                 <FlaskConical className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
                 <p className="min-w-0 flex-1">
                   <strong className="font-semibold">Synthetic supervisor demo.</strong>{" "}
@@ -280,7 +302,7 @@ export function ProfessorReviewConsole({
             </div>
           ) : null}
 
-          <section aria-label="Setup conversation" className="min-h-0 min-w-0 flex-1 bg-white">
+          <section aria-label="Setup conversation" className="min-h-0 min-w-0 flex-1">
             <OnboardingChat
               messages={session?.messages ?? []}
               currentStep={session?.current_step ?? "starting"}
@@ -370,7 +392,7 @@ function ProfessorHeader({
   onToggleInspector: () => void
 }) {
   return (
-    <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white px-3 sm:px-5">
+    <header className="workspace-header flex min-h-16 items-center justify-between gap-3 px-3 sm:px-5">
       <div className="flex min-w-0 items-center gap-2.5">
         <Button
           ref={menuTriggerRef}
@@ -469,7 +491,10 @@ function ProfessorInspector({
   return (
     <aside
       aria-label={`${title} inspector`}
-      className={cn("relative min-h-0 min-w-0 flex-col overflow-y-auto bg-white", className)}
+      className={cn(
+        "relative min-h-0 min-w-0 flex-col overflow-y-auto bg-[var(--surface-raised)]",
+        className,
+      )}
     >
       <Button
         type="button"
@@ -522,7 +547,7 @@ function ProfessorMobileMenu({
             }
             triggerRef.current?.focus()
           }}
-          className="fixed inset-y-0 left-0 z-30 flex w-[min(88vw,320px)] flex-col border-r bg-[var(--shell)] shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
+          className="workspace-rail fixed inset-y-0 left-0 z-30 flex w-[min(88vw,320px)] flex-col shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
         >
           <DialogPrimitive.Title className="sr-only">
             Tutor setup navigation
@@ -544,7 +569,7 @@ function ProfessorMobileMenu({
             collapsed={false}
             onSelectStage={onSelectStage}
           />
-          <div className="mt-auto space-y-1 border-t p-3">
+          <div className="mt-auto flex flex-col gap-1 border-t p-3">
             {onOpenDelivery ? (
               <Button
                 type="button"

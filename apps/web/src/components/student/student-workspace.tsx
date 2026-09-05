@@ -14,10 +14,12 @@
 import { useEffect, useRef, useState, type RefObject } from "react"
 import {
   AlertCircle,
+  ArrowUpRight,
   Bell,
   BellOff,
   BookOpen,
   Clock3,
+  FileCheck2,
   FileText,
   Menu,
   MessageCircle,
@@ -27,6 +29,7 @@ import {
   RefreshCcw,
   Send,
   Sparkles,
+  Target,
   UserRound,
   X,
 } from "lucide-react"
@@ -145,7 +148,7 @@ export function StudentWorkspace({
   }
 
   return (
-    <main className="h-dvh min-w-0 overflow-hidden bg-white text-foreground">
+    <main className="h-dvh min-w-0 overflow-hidden bg-[var(--shell)] text-foreground">
       <div
         className={cn(
           "grid h-full min-h-0 min-w-0 lg:overflow-hidden",
@@ -166,7 +169,7 @@ export function StudentWorkspace({
           onNewConversation={startNewConversation}
         />
 
-        <section className="flex min-h-0 min-w-0 flex-col bg-white">
+        <section className="workspace-canvas flex min-h-0 min-w-0 flex-col">
           <StudentHeader
             activeCourse={activeCourse}
             citationAvailable={Boolean(selectedCitation)}
@@ -197,11 +200,14 @@ export function StudentWorkspace({
                 messages={messages}
                 citationsByMessage={citationsByMessage}
                 selectedCitation={selectedCitation}
+                autonomousGoals={autonomousGoals}
+                learnerEvidence={learnerEvidence}
                 isLoading={isLoadingConversation}
                 pendingClarification={pendingClarification}
                 isSubmitting={isSubmitting}
                 onChooseClarification={chooseClarification}
                 onOpenCitation={openCitation}
+                onChoosePrompt={setDraft}
               />
               <Composer
                 course={activeCourse}
@@ -244,7 +250,7 @@ export function StudentWorkspace({
               event.preventDefault()
               courseMenuTriggerRef.current?.focus()
             }}
-            className="fixed inset-y-0 left-0 z-30 w-[min(88vw,320px)] overflow-hidden border-r bg-[var(--shell)] shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
+            className="workspace-rail fixed inset-y-0 left-0 z-30 w-[min(88vw,320px)] overflow-hidden shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
           >
             <DialogPrimitive.Title className="sr-only">
               Student course navigation
@@ -370,7 +376,7 @@ function StudentHeader({
   onOpenOutreach: () => void
 }) {
   return (
-    <header className="flex min-h-14 items-center justify-between gap-3 border-b bg-white pl-3 pr-14 sm:pl-5 xl:pr-56">
+    <header className="workspace-header flex min-h-16 items-center justify-between gap-3 pl-3 pr-14 sm:pl-5 xl:pr-56">
       <div className="flex min-w-0 items-center gap-2.5">
         <Button
           ref={menuTriggerRef}
@@ -412,7 +418,7 @@ function StudentHeader({
           ref={outreachTriggerRef}
           type="button"
           variant="ghost"
-          size="icon"
+          size="sm"
           className="relative"
           aria-label={
             unreadOutreachCount > 0
@@ -421,7 +427,8 @@ function StudentHeader({
           }
           onClick={onOpenOutreach}
         >
-          <Bell aria-hidden="true" />
+          <Bell data-icon="inline-start" />
+          <span className="hidden sm:inline">Check-ins</span>
           {unreadOutreachCount > 0 ? (
             <span className="absolute top-0.5 right-0.5 flex min-w-5 items-center justify-center rounded-full bg-[var(--accent-strong)] px-1 text-xs leading-5 font-bold text-white">
               {Math.min(unreadOutreachCount, 9)}
@@ -813,13 +820,13 @@ function CourseRail({
     "Current conversation"
 
   return (
-    <aside className={cn("min-h-0 flex-col border-r bg-[var(--shell)]", className)}>
+    <aside className={cn("workspace-rail min-h-0 flex-col", className)}>
       <WorkspaceBrand className="pr-14 lg:pr-4" />
-      <div className="p-3">
+      <div className="p-3 pt-4">
         <h2 className="px-2 pb-2 text-xs font-semibold text-muted-foreground">
           Current course
         </h2>
-        <div className="space-y-1">
+        <div className="flex flex-col gap-1">
           {isLoading ? (
             <div className="h-16 animate-pulse rounded-xl bg-[var(--subtle)]" />
           ) : (
@@ -828,15 +835,15 @@ function CourseRail({
                 key={course.course_id}
                 type="button"
                 className={cn(
-                  "flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left outline-none transition-colors hover:bg-[var(--subtle)] focus-visible:ring-2 focus-visible:ring-ring/30",
+                  "flex w-full items-center gap-3 rounded-xl px-2.5 py-2.5 text-left outline-none transition-colors hover:bg-white/80 focus-visible:ring-2 focus-visible:ring-ring/30",
                   activeCourse?.course_id === course.course_id &&
-                    "bg-[var(--accent-soft)]",
+                    "bg-white shadow-[0_1px_2px_rgba(25,25,29,0.06),0_5px_14px_rgba(25,25,29,0.04)]",
                 )}
                 aria-pressed={activeCourse?.course_id === course.course_id}
                 disabled={isStartingConversation || isSubmitting}
                 onClick={() => void onSelectCourse(course.course_id)}
               >
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-[var(--accent-strong)]">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent-strong)]">
                   <BookOpen className="size-4.5" aria-hidden="true" />
                 </span>
                 <span className="min-w-0">
@@ -872,7 +879,7 @@ function CourseRail({
           <h2 className="px-2 pb-2 text-xs font-semibold text-muted-foreground">
             Current chat
           </h2>
-          <div className="flex items-center gap-2 rounded-lg bg-[var(--subtle)] px-2.5 py-2 text-sm text-foreground">
+          <div className="flex items-center gap-2 rounded-lg bg-white/70 px-2.5 py-2 text-sm text-foreground">
             <MessageCircle className="size-4 shrink-0 text-[var(--accent-strong)]" aria-hidden="true" />
             <span className="truncate">{conversationTitle}</span>
           </div>
@@ -893,16 +900,21 @@ function Conversation({
   messages,
   citationsByMessage,
   selectedCitation,
+  autonomousGoals,
+  learnerEvidence,
   isLoading,
   pendingClarification,
   isSubmitting,
   onChooseClarification,
   onOpenCitation,
+  onChoosePrompt,
 }: {
   course: StudentCourse | null
   messages: StudentChatMessage[]
   citationsByMessage: Record<string, StudentCitation[]>
   selectedCitation: StudentCitation | null
+  autonomousGoals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
   isLoading: boolean
   pendingClarification: ClarificationRequestV1 | null
   isSubmitting: boolean
@@ -912,14 +924,29 @@ function Conversation({
     citationId: string,
     trigger: HTMLButtonElement,
   ) => void
+  onChoosePrompt: (prompt: string) => void
 }) {
+  const hasConversation = messages.length > 0 || Boolean(pendingClarification)
+
   return (
     <ChatContainerRoot
       aria-label="Student tutoring conversation"
-      className="min-h-0 flex-1 bg-white"
+      className="workspace-canvas min-h-0 flex-1"
     >
-      <ChatContainerContent className="mx-auto w-full max-w-[800px] gap-7 px-4 py-7 sm:px-8 sm:py-9">
-        {course ? <TutorWelcome course={course} /> : null}
+      <ChatContainerContent
+        className={cn(
+          "mx-auto w-full max-w-[840px] gap-7 px-4 sm:px-8",
+          hasConversation ? "py-8 sm:py-10" : "min-h-full justify-center py-10",
+        )}
+      >
+        {course && !hasConversation ? (
+          <TutorWelcome
+            course={course}
+            goals={autonomousGoals}
+            learnerEvidence={learnerEvidence}
+            onChoosePrompt={onChoosePrompt}
+          />
+        ) : null}
         {isLoading ? <ConversationLoading /> : null}
         {messages.map((message) => (
           <ConversationMessage
@@ -986,18 +1013,95 @@ function ClarificationOptions({
   )
 }
 
-function TutorWelcome({ course }: { course: StudentCourse }) {
+function TutorWelcome({
+  course,
+  goals,
+  learnerEvidence,
+  onChoosePrompt,
+}: {
+  course: StudentCourse
+  goals: AutonomousGoalV1[]
+  learnerEvidence: StudentLearnerEvidence | null
+  onChoosePrompt: (prompt: string) => void
+}) {
+  const activeGoal = goals.find((goal) => goal.status === "active")
+  const observedConceptCount = learnerEvidence?.belief_state?.concepts.length ?? 0
+  const suggestions = [
+    activeGoal
+      ? `Help me continue this learning goal: ${activeGoal.learner_subgoal}`
+      : "Explain a key concept from this course",
+    "Quiz me using the approved course material",
+    "Help me work through something I misunderstood",
+  ]
+
   return (
-    <article className="flex gap-3.5">
-      <TutorAvatar />
-      <div className="min-w-0 max-w-[70ch] pt-0.5">
-        <h2 className="text-sm font-semibold">Tutor</h2>
-        <p className="mt-1 text-sm leading-6 text-foreground">
-          Hi. I&apos;m your course tutor for {course.title}. I answer only from
-          approved course material.
-        </p>
+    <section className="mx-auto w-full max-w-2xl" aria-labelledby="tutor-welcome-title">
+      <div className="flex items-center gap-3">
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[var(--ink)] text-white shadow-[0_8px_22px_rgba(25,25,29,0.18)]">
+          <Sparkles className="size-5" aria-hidden="true" />
+        </span>
+        <div className="min-w-0">
+          <p className="workspace-kicker">Your course tutor</p>
+          <h2
+            id="tutor-welcome-title"
+            className="mt-0.5 text-balance text-2xl font-semibold tracking-[-0.03em] sm:text-3xl"
+          >
+            Learn with evidence, not guesses.
+          </h2>
+        </div>
       </div>
-    </article>
+
+      <p className="mt-5 max-w-[65ch] text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
+        Ask about {course.title}. I stay inside the current approved release,
+        show the source behind each answer, and adapt the next step to the
+        evidence you have shown.
+      </p>
+
+      <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-y py-3 text-xs font-medium text-[var(--ink-soft)]">
+        <span className="inline-flex items-center gap-1.5">
+          <FileCheck2 className="size-3.5 text-[var(--success)]" aria-hidden="true" />
+          Approved sources only
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <BookOpen className="size-3.5 text-[var(--accent-strong)]" aria-hidden="true" />
+          Inspectable citations
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <Target className="size-3.5 text-[var(--accent-strong)]" aria-hidden="true" />
+          {activeGoal
+            ? "Active learning goal"
+            : observedConceptCount > 0
+              ? `${observedConceptCount} observed concept${observedConceptCount === 1 ? "" : "s"}`
+              : "Progress starts with your first question"}
+        </span>
+      </div>
+
+      {activeGoal ? (
+        <div className="mt-5 rounded-xl bg-[var(--accent-soft)] px-4 py-3.5">
+          <p className="text-xs font-semibold text-[var(--accent-strong)]">
+            Current learning focus
+          </p>
+          <p className="mt-1 text-sm font-medium leading-6">
+            {activeGoal.learner_subgoal}
+          </p>
+        </div>
+      ) : null}
+
+      <div className="mt-6 flex flex-col gap-2" aria-label="Suggested questions">
+        <p className="workspace-kicker px-1">Try asking</p>
+        {suggestions.map((suggestion) => (
+          <button
+            key={suggestion}
+            type="button"
+            className="group flex min-h-11 w-full items-center justify-between gap-4 rounded-xl border bg-white px-4 py-3 text-left text-sm font-medium shadow-[0_1px_2px_rgba(25,25,29,0.03)] outline-none transition-[border-color,background-color,transform] hover:-translate-y-px hover:border-[var(--accent-border)] hover:bg-[var(--accent-soft)]/35 focus-visible:ring-2 focus-visible:ring-ring/35"
+            onClick={() => onChoosePrompt(suggestion)}
+          >
+            <span>{suggestion}</span>
+            <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-[var(--accent-strong)]" aria-hidden="true" />
+          </button>
+        ))}
+      </div>
+    </section>
   )
 }
 
@@ -1020,7 +1124,7 @@ function ConversationMessage({
   const isSafeAction = isTutor && message.action !== "answer"
 
   return (
-    <article className="flex gap-3.5">
+    <article className={cn("flex gap-3.5", !isTutor && "justify-end")}>
       {isTutor ? (
         <TutorAvatar />
       ) : (
@@ -1028,7 +1132,12 @@ function ConversationMessage({
           <UserRound className="size-4.5" aria-hidden="true" />
         </span>
       )}
-      <div className="min-w-0 max-w-[70ch] pt-0.5">
+      <div
+        className={cn(
+          "min-w-0 max-w-[70ch] pt-0.5",
+          !isTutor && "order-first rounded-2xl bg-[var(--subtle)] px-4 py-3",
+        )}
+      >
         <h2 className="text-sm font-semibold">{isTutor ? "Tutor" : "You"}</h2>
         <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-foreground">
           {message.content}
@@ -1100,8 +1209,8 @@ function Composer({
     !course || !conversationAvailable || isLoading || requiresNewConversation
 
   return (
-    <div className="border-t bg-white px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 sm:px-6">
-      <div className="mx-auto w-full max-w-[800px]">
+    <div className="workspace-canvas px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 sm:px-6">
+      <div className="mx-auto w-full max-w-[840px]">
         {error ? (
           <Alert variant="destructive" className="mb-3">
             <AlertCircle />
