@@ -6,6 +6,48 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Final local release checkpoint
+
+Issue #216 consolidates the final method comparison and exact local release.
+The fresh 1,000-case actual-product comparison evaluated five BM25/Qwen and
+evidence-gate arms through one common adapter. BM25 with the dominance-scoped
+gate was the safest measured fallback at 63.25% fully grounded success, 96.0%
+boundary action accuracy, and zero severe unsupported releases. It did not pass
+the academic factual-quality threshold, so the decision remains `Refine` for
+that claim rather than presenting the local product as highly accurate.
+
+The source-disjoint 30-asset/60-case visual successor also produced a valid
+negative result. Jina v5 reached 16/30 fully grounded visual answers versus
+26/30 for text/OCR, with all ten packet-layout cases failing. Jina is therefore
+`Drop`; the final release profile explicitly selects text/OCR fallback and
+makes no representative visual-understanding claim. The historical Jina v4
+result remains preserved as retrieval-only evidence rather than an active
+product selection.
+
+The exact final profile is `student-tutor-r1-local-final` at
+`v2.1-final-001-bm25-text-ocr`. It binds BM25, the dominance-scoped gate,
+deterministic grounded generation, governed T1-v2 autonomy with Luna H+E1 for
+complex planning, A0 in-app outreach, privacy-minimized learning-gap
+aggregation, text/OCR fallback, and T0 rollback. Autonomy evidence remains
+confirmation 024 (670/670) plus multi-concept confirmation 025 (72/72).
+
+Qualification 009 attempt 001 is preserved as `invalid-execution`: all 43
+surface checks passed, but log audit found that `RegionKind.TEXT` was absent
+from the restricted LangGraph checkpoint serializer allowlist. The correction
+added that nested enum and a region-bearing interrupt/restart regression. The
+complete gate then passed with 1,937 Python/API tests and 51 frontend tests.
+Corrective qualification 010 used fresh immutable images and passed 25/25 live
+HTTPS, 6/6 restart, 6/6 clean restore, 3/3 T0 rollback, and 3/3 governed V2.1
+restoration checks. Internal log errors were zero, desktop and exact 390x844
+smoke passed, and live API p95 was 5.664 ms.
+
+The final technical decision is therefore `Keep` for this exact local research
+release candidate, while high factual quality, representative visual
+understanding, real-professor fidelity, real-student usability or learning
+improvement, and durable hosting remain unsupported claims. Phase 9 is the
+technical stop; report argument and wording are intentionally deferred for
+researcher discussion.
+
 ## Qualified R1.2 clarification release
 
 Issue #212 owns one finite successor to the measured grounding floor. It does

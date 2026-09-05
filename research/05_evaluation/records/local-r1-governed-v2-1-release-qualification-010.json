@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-010",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-010",
+  "date": "2026-09-05",
+  "status": "completed-keep",
+  "code_revision": "6449dcfeb6945d3a4d035d3216eaafd68e414524",
+  "corrective_predecessor": "local-r1-governed-v2-1-release-qualification-009-attempt-001-invalid",
+  "decision": "Keep this exact local Professor Digital Twin research release candidate as the best measured working composition, with T0 rollback and explicit factual, visual, professor-fidelity, human-learning, usability, and hosting limitations.",
+  "runtime": {
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "generator_mode": "deterministic",
+    "retriever": "bm25-v1",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "visual_retrieval_mode": "text-ocr-fallback",
+    "profile_id": "student-tutor-r1-local-final",
+    "profile_version": "v2.1-final-001-bm25-text-ocr",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-final-release-binding-001",
+    "t0_rollback_available": true
+  },
+  "results": {
+    "live_https_journey": "25/25",
+    "restart_persistence": "6/6",
+    "clean_restore": "6/6",
+    "t0_rollback": "3/3",
+    "governed_v2_1_restoration": "3/3",
+    "total_machine_checks": "43/43",
+    "checkpoint_deserialization_errors": 0,
+    "application_log_errors": 0,
+    "desktop_render": "passed",
+    "mobile_390x844_render": "passed",
+    "horizontal_overflow": false,
+    "labelled_login_controls": "3/3",
+    "keyboard_order": "Email -> Password -> Sign in",
+    "critical_browser_defects": 0,
+    "live_api_p95_ms": 5.664,
+    "ingestion_queue_to_complete_ms": 1056.919,
+    "backup_schema_version": 17,
+    "backup_data_files": 7
+  },
+  "browser_method": {
+    "tool": "Playwright CLI with Chrome channel",
+    "surface": "actual local internal-CA HTTPS application",
+    "viewports": [
+      "1440x1000",
+      "390x844"
+    ],
+    "desktop_document_width_matches_viewport": true,
+    "mobile_document_width_matches_viewport": true,
+    "accessible_names": [
+      "Email",
+      "Password",
+      "Sign in"
+    ],
+    "expected_console_events": [
+      "unauthenticated /api/auth/session returns HTTP 401 on the login page"
+    ]
+  },
+  "provider_usage": {
+    "autonomy_planner_calls": 0,
+    "generator_calls": 0,
+    "reported_cost_usd": 0.0
+  },
+  "image_digests": {
+    "api": "sha256:e081445a9653c27d3644712f0a402c70f80c50e2c3fd712851d88138ec3076ed",
+    "web": "sha256:144ba61cc6bfa8c4bb24ccaf0b9787764716ca8bc99561ce41c086b41a249527"
+  },
+  "binding_hashes": {
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "t1_binding_record_sha256": "f68fe607849f46da22ce272bda6725890fd33b54841bc1a7abfb1dfa9099c373",
+    "qualified_environment_example_sha256": "8296c5a3a605543f829f1ca05ebec6606717132f053c779e41326da8f29067bc",
+    "compose_sha256": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29"
+  },
+  "artifact_hashes": {
+    "live_journey_sha256": "0b968df2a009a813ba2f5ba0fd23260761d6ba3354571b4ac34d6ac73537942f",
+    "restart_sha256": "30886af563423d7792d8647d4fa145ebbeb629e349c826e367921272a0e66fad",
+    "clean_restore_sha256": "30886af563423d7792d8647d4fa145ebbeb629e349c826e367921272a0e66fad",
+    "t0_rollback_sha256": "816958374aeb1a39e13a776cb0d7b3cfec032b4a56d45fb6c2f069d9fde05be2",
+    "v2_restore_sha256": "fd9aabbb973a13f7a51490b218e1782ee5a7ed4508057fb5febb119a9b6c5b21",
+    "runtime_backup_sha256": "1dee5f190eed9b7f3613339bed4c4ff01b3bce31632d054c7160681e12aa2665",
+    "primary_application_log_sha256": "f9c77457babb59e147277ef07a1353d7276443cf6634c5e4080f39364481a02a",
+    "restore_application_log_sha256": "807fb4bade130184bc22a946891c13bc863b8315be9a0da8a5059a85cd996a8b",
+    "desktop_screenshot_sha256": "5127799cac75535936753ee9de7dd918f51e2791ccefb396777fb2b757d9da75",
+    "mobile_screenshot_sha256": "a652c8acbc64267364d5545f1ae854f7950395b6200b810d0540851f4e7c2990"
+  },
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false,
+  "release_scope": "qualified local research release candidate on the development Mac through internal-CA HTTPS",
+  "limitations": [
+    "Fresh 1,000-case factual confirmation selected this stack only as the safest measured local fallback; it reached 63.25% fully grounded success and did not pass the academic factual-quality gate.",
+    "Jina v5 true-visual retrieval reached 16/30 fully grounded answers versus 26/30 for text/OCR, so no representative visual-understanding claim is made.",
+    "The professor-profile proxy Refined without a valid uplift estimate; real-professor fidelity is not established.",
+    "Synthetic learner and autonomy evidence does not establish real-student usability or learning improvement.",
+    "This local qualification does not establish durable hosted production.",
+    "Provider-backed autonomy remains bound to immutable confirmation 024; this operational journey used deterministic fast paths."
+  ]
+}

@@ -31,6 +31,27 @@ Priority labels provide the critical path: `priority:p0` is work required next,
 `priority:p1` is required for the release candidate, and `priority:p2` follows
 the release-critical path.
 
+## Final Phase 9 checkpoint
+
+Issue #216 owns the final evidence consolidation and exact local qualification.
+The selected profile is
+`student-tutor-r1-local-final@v2.1-final-001-bm25-text-ocr`. Fresh factual
+confirmation retained BM25 plus the dominance-scoped gate as the safest local
+fallback but recorded `Refine` at 63.25% fully grounded success. Fresh visual
+confirmation dropped Jina v5 at 16/30 versus 26/30 for text/OCR. Autonomy
+remains supported by confirmation 024 (670/670) and multi-concept confirmation
+025 (72/72), with their synthetic-evidence boundaries unchanged.
+
+Qualification 009 is preserved as invalid because internal log audit found a
+region-enum checkpoint restoration defect after 43/43 surface checks. The
+root-cause correction passed the full 1,937-test Python/API suite, 51 frontend
+tests, 1,126/1,126 repository audits, and 184/184 execution guards.
+Qualification 010 then passed 43/43 exact local operational checks and browser
+smoke with zero application-log errors. The Project should mark #216
+`Done / Keep` for the local technical-release scope after its evidence PR is
+merged, while #24 and the report deliverables retain their claim and authorship
+boundaries.
+
 ## Endgame repository checkpoint
 
 PRs #199, #200, and #201 are merged. The endgame correctness audit corrected

@@ -4889,12 +4889,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-report-evidence-inventory",
-      "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+      "evidence": "Final Phase 9 review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, LF-only CSV generation, and status-led decision classification that cannot be changed by diagnostic phrases such as invalid citation.",
       "findings": [],
       "path": "scripts/build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final Phase 9 evidence audit",
+      "sha256": "55f7f514a36725f0e24b8e30a0093ee000f284db0ccf14b7f8405a9df9d38636"
     },
     {
       "audit_status": "audited",
@@ -10807,12 +10807,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-report-evidence-inventory",
-      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+      "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, deterministic outputs, and precedence of explicit Keep, Refine, Go Deeper, invalid-execution, and No Release labels over diagnostic prose.",
       "findings": [],
       "path": "tests/test_build_final_report_evidence_inventory.py",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-primary-endgame-correctness-audit",
-      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
+      "reviewed_at": "2026-09-05",
+      "reviewer": "Codex final Phase 9 evidence audit",
+      "sha256": "e7df518814036560bec7cc4f60d5623fb55840754e18813365411ac71906fc4a"
     },
     {
       "audit_status": "audited",
@@ -12358,12 +12358,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "final-local-release-composition",
-      "evidence": "Manifest review distinguishes the exact qualified runtime composition from academic claims and records factual, visual, professor-fidelity, human-learning, usability, and hosting exclusions prospectively.",
+      "evidence": "Manifest review distinguishes the exact qualification-010 runtime composition from academic claims, pins source revision and image digests, and records factual, visual, professor-fidelity, human-learning, usability, and hosting exclusions.",
       "findings": [],
       "path": "research/05_evaluation/profiles/local-r1-final-system-manifest-v1.json",
       "reviewed_at": "2026-09-05",
-      "reviewer": "Codex final local release audit",
-      "sha256": "fccfcd143c47c542d0bfd9fb95f5c7d1bc0988607158ab17a701621148a39108"
+      "reviewer": "Codex final Phase 9 release audit",
+      "sha256": "31df479e6aa0e72ffbfaab67c37f8061b0fc9bffbe397c5f3628d6fe0148d5ef"
     },
     {
       "audit_status": "audited",

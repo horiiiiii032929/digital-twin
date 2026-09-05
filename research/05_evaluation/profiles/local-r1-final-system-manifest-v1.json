@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "manifest_id": "local-r1-final-system-manifest-v1",
-  "status": "frozen-pending-exact-qualification",
+  "status": "qualified-local-release-candidate",
   "profile_path": "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json",
   "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
   "binding_path": "research/05_evaluation/records/governed-full-autonomy-v2-1-final-release-binding-001.json",
@@ -32,7 +32,16 @@
     "professor_profile_proxy": "refine-no-fidelity-claim",
     "learning_outcome": "no-real-learning-claim"
   },
-  "qualification": null,
+  "qualification": {
+    "run_id": "local-r1-governed-v2-1-release-qualification-010",
+    "status": "completed-keep",
+    "source_revision": "6449dcfeb6945d3a4d035d3216eaafd68e414524",
+    "api_image_digest": "sha256:e081445a9653c27d3644712f0a402c70f80c50e2c3fd712851d88138ec3076ed",
+    "web_image_digest": "sha256:144ba61cc6bfa8c4bb24ccaf0b9787764716ca8bc99561ce41c086b41a249527",
+    "machine_checks": "43/43",
+    "application_log_errors": 0,
+    "provider_calls": 0
+  },
   "claims_excluded": [
     "high factual-quality pass",
     "representative visual understanding",

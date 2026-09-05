@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "b136aadc0d0f41402ecdba6892e8e53c6962764e9d25b51bb9ec45892ade8eb6",
+  "record_sha256": "f8f1a64fc4ed4eee47e9657662cd6117f1525793ceb9ab4fc619a110c65d3e93",
   "records": [
     {
       "audit": {
@@ -6104,10 +6104,10 @@
     {
       "audit": {
         "domain": "final-local-release-composition",
-        "evidence": "Manifest review distinguishes the exact qualified runtime composition from academic claims and records factual, visual, professor-fidelity, human-learning, usability, and hosting exclusions prospectively.",
+        "evidence": "Manifest review distinguishes the exact qualification-010 runtime composition from academic claims, pins source revision and image digests, and records factual, visual, professor-fidelity, human-learning, usability, and hosting exclusions.",
         "findings": [],
         "reviewed_at": "2026-09-05",
-        "reviewer": "Codex final local release audit"
+        "reviewer": "Codex final Phase 9 release audit"
       },
       "audit_status": "audited",
       "category": "evaluation_configuration",
@@ -6115,7 +6115,7 @@
       "package_commands": [],
       "path": "research/05_evaluation/profiles/local-r1-final-system-manifest-v1.json",
       "risk": "high",
-      "sha256": "fccfcd143c47c542d0bfd9fb95f5c7d1bc0988607158ab17a701621148a39108"
+      "sha256": "31df479e6aa0e72ffbfaab67c37f8061b0fc9bffbe397c5f3628d6fe0148d5ef"
     },
     {
       "audit": {
@@ -7283,10 +7283,10 @@
     {
       "audit": {
         "domain": "final-report-evidence-inventory",
-        "evidence": "Endgame review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, and LF-only CSV generation so regenerated evidence passes repository whitespace checks.",
+        "evidence": "Final Phase 9 review verified tracked-file enumeration, result-registry parsing, machine-record validation, privacy-preserving ignored-directory aggregates, deterministic output, LF-only CSV generation, and status-led decision classification that cannot be changed by diagnostic phrases such as invalid citation.",
         "findings": [],
-        "reviewed_at": "2026-09-04",
-        "reviewer": "codex-primary-endgame-correctness-audit"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final Phase 9 evidence audit"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -7294,7 +7294,7 @@
       "package_commands": [],
       "path": "scripts/build_final_report_evidence_inventory.py",
       "risk": "high",
-      "sha256": "69c655f53b36656f093fc35504a92ab89d7b80ca2924f281df9b26f18b52e7ea"
+      "sha256": "55f7f514a36725f0e24b8e30a0093ee000f284db0ccf14b7f8405a9df9d38636"
     },
     {
       "audit": {
@@ -16775,10 +16775,10 @@
     {
       "audit": {
         "domain": "final-report-evidence-inventory",
-        "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, and deterministic final-report evidence outputs.",
+        "evidence": "Focused tests verify repository and registry enumeration, machine-record joins, invalid JSON handling, broken-link reporting, ignored-directory aggregate privacy, deterministic outputs, and precedence of explicit Keep, Refine, Go Deeper, invalid-execution, and No Release labels over diagnostic prose.",
         "findings": [],
-        "reviewed_at": "2026-09-04",
-        "reviewer": "codex-primary-endgame-correctness-audit"
+        "reviewed_at": "2026-09-05",
+        "reviewer": "Codex final Phase 9 evidence audit"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16786,7 +16786,7 @@
       "package_commands": [],
       "path": "tests/test_build_final_report_evidence_inventory.py",
       "risk": "medium",
-      "sha256": "15cbdb9078bcb0204ca1a0e988a7c6ba24a924ada4c1590b18c6d3de9bcce83b"
+      "sha256": "e7df518814036560bec7cc4f60d5623fb55840754e18813365411ac71906fc4a"
     },
     {
       "audit": {
