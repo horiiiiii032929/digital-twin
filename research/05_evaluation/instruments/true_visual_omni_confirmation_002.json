@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "instrument_id": "true-visual-omni-confirmation-002",
-  "status": "frozen-pending-execution",
+  "status": "completed-refine-authorization-revoked",
   "owner_issue": 216,
   "related_issue": 131,
   "decision_question": "Does the current Jina v5 omni visual retriever improve actual-product grounding over text/OCR on fresh source-disjoint visual assets without weakening safety or citation authority?",
@@ -64,9 +64,12 @@
     "responses_before_gold": true,
     "atomic_sqlite_checkpoints": true,
     "same_case_tuning_allowed": false,
-    "provider_execution_authorized": true,
-    "paid_execution_authorized": true,
+    "provider_execution_authorized": false,
+    "paid_execution_authorized": false,
     "authorization_source": "continue through phase 9",
-    "authorization_date": "2026-09-05"
+    "authorization_date": "2026-09-05",
+    "authorization_revoked_at": "2026-09-05T06:38:48+00:00",
+    "terminal_result": "completed-refine",
+    "terminal_decision": "Drop Jina v5 omni from the release profile; retain text/OCR fallback without a representative visual-quality claim."
   }
 }

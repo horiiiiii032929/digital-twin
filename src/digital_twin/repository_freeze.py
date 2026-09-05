@@ -737,15 +737,6 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "true-visual-product-checkpoint-001": (
             "dataset_generation",
         ),
-        # Issue #216 / #131. Fresh source-disjoint current Jina omni
-        # confirmation. The user authorized continuation through the final
-        # technical qualification; exact hashes and a clean revision remain
-        # mandatory before the first provider call.
-        "true-visual-omni-confirmation-002": (
-            "dataset_generation",
-            "external_model_evaluation",
-            "method_evaluation_execution",
-        ),
     }
 )
 
