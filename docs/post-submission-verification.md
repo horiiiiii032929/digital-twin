@@ -37,3 +37,12 @@ refactor is justified solely by that warning.
 
 Raw command logs are local under `reports/generated/post-submission-verification/`.
 The public record reports outcomes without exposing credentials or private inputs.
+
+## Post-submission tooling correction
+
+A clean clone exposed one result link into ignored `reports/generated/` content.
+The historical fiction-only assistant disclosure review is now retained under
+`research/05_evaluation/`, with its AI-review role explicit. The link validator
+now rejects existing ignored/outside-repository targets instead of accepting
+whatever happens to exist on the author's machine. All five validator tests pass.
+No tutoring runtime behavior or submitted PDF changed.

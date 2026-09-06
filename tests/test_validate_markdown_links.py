@@ -43,3 +43,29 @@ def test_reviewable_untracked_markdown_is_checked(tmp_path: Path) -> None:
 
     assert checked_links == 1
     assert broken_links == ["draft.md: missing.md"]
+
+
+def test_existing_ignored_target_is_not_publishable(tmp_path: Path) -> None:
+    _git(tmp_path, "init")
+    (tmp_path / ".gitignore").write_text("generated/\n")
+    (tmp_path / "generated").mkdir()
+    (tmp_path / "generated" / "result.md").write_text("local only")
+    (tmp_path / "README.md").write_text("[result](generated/result.md)")
+    assert find_broken_links(tmp_path)[1] == ["README.md: generated/result.md"]
+
+
+def test_directory_with_publishable_file_is_valid(tmp_path: Path) -> None:
+    _git(tmp_path, "init")
+    (tmp_path / "docs").mkdir()
+    (tmp_path / "docs" / "guide.md").write_text("guide")
+    (tmp_path / "README.md").write_text("[docs](docs/)")
+    assert find_broken_links(tmp_path)[1] == []
+
+
+def test_existing_external_target_is_not_publishable(tmp_path: Path) -> None:
+    root = tmp_path / "repo"
+    root.mkdir()
+    _git(root, "init")
+    (tmp_path / "external.md").write_text("not in repository")
+    (root / "README.md").write_text("[external](../external.md)")
+    assert find_broken_links(root)[1] == ["README.md: ../external.md"]

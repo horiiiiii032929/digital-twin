@@ -8139,12 +8139,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
-      "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads. Integration review combined the flow-independent factual-QA, learning-gap, and proactive-outreach changes; conflict resolution was inspected and is covered by focused tests plus the complete local gate.",
+      "evidence": "Fresh-clone regression: reject existing ignored and outside-repository targets, retain tracked/reviewable files and populated directory targets. Five targeted tests passed. No application behavior change.",
       "findings": [],
       "path": "scripts/validate_markdown_links.py",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "0a6628cdb137a0eb1d9d6cfcf067c7b509633ab1f3f5b4412da9826ddeb21b56"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "cd44e364e5e5478bbce5e85c02d03a7362893ef9e4a377c4eefbc45a9cf53215"
     },
     {
       "audit_status": "audited",
@@ -14540,12 +14540,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "repository-correctness-controls",
-      "evidence": "Regression tests prove ignored external Markdown is excluded, reviewable untracked Markdown remains checked, and broken local links are still reported.",
+      "evidence": "Fresh-clone regression: reject existing ignored and outside-repository targets, retain tracked/reviewable files and populated directory targets. Five targeted tests passed. No application behavior change.",
       "findings": [],
       "path": "tests/test_validate_markdown_links.py",
-      "reviewed_at": "2026-08-25",
-      "reviewer": "codex-primary-review",
-      "sha256": "05ead4ece27b33bbcffe44708321d99a3d1f676ecb12def7534135c137fa3ac4"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "9378b194695153e84ed554263d9979d1a09095136d3e6804fecf8a3792588b0f"
     },
     {
       "audit_status": "audited",
