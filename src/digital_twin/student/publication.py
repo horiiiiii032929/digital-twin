@@ -24,6 +24,7 @@ from src.digital_twin.student.models import (
     StudentReleaseStatus,
 )
 from src.digital_twin.student.repository import StudentRepository
+from src.digital_twin.student.teaching_profile import TeachingProfileError
 from src.digital_twin.tutor_policy import (
     KnowledgeSourcePolicy,
     ReleaseStatus,
@@ -406,7 +407,10 @@ class ReleaseLifecycleService:
         release = self._require_owned_release(professor_id, release_id)
         self._require_publishable(release)
         self._prepare_retrieval_index(release)
-        self.repository.publish_release(release.id)
+        try:
+            self.repository.publish_release(release.id)
+        except TeachingProfileError as error:
+            raise PublicationError(error.code, error.message) from error
         published = self._require_release(release.id)
         self._run_post_publish_hook(professor_id, published)
         return published
@@ -430,7 +434,10 @@ class ReleaseLifecycleService:
             )
         self._require_publishable(release)
         self._prepare_retrieval_index(release)
-        self.repository.publish_release(release.id)
+        try:
+            self.repository.publish_release(release.id)
+        except TeachingProfileError as error:
+            raise PublicationError(error.code, error.message) from error
         published = self._require_release(release.id)
         self._run_post_publish_hook(professor_id, published)
         return published

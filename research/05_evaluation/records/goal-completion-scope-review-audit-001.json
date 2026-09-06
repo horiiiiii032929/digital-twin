@@ -1,0 +1,682 @@
+{
+  "schema_version": 1,
+  "run_id": "goal-completion-scope-review-audit-001",
+  "date": "2026-09-06",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "status": "completed-defect-confirmed",
+  "decision": "refine-goal-completion-scope",
+  "component": "conversation-orchestration",
+  "method": "Read-only retrospective audit plus actual-service deterministic counterexample.",
+  "aggregate": [
+    {
+      "run": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+      "database_count": 72,
+      "nonempty_wal_skipped": [],
+      "goal_status_counts": {
+        "active": 43,
+        "expired": 161,
+        "completed": 22
+      },
+      "completed_goals_examined": 22,
+      "scope_mismatch_count": 10,
+      "histories_with_scope_mismatch": 8,
+      "unmapped_or_multiconcept_goals": 0,
+      "completed_goals_without_qualified_target_or_other": 0,
+      "responses_sha256": "9cffa68a654f98828feaa58e1852fcf68b2beb016ec4702fed889c516846c189"
+    },
+    {
+      "run": "final-profile-operational-dialogue-development-001-full-live-001",
+      "database_count": 24,
+      "nonempty_wal_skipped": [],
+      "goal_status_counts": {
+        "cancelled": 2,
+        "completed": 4,
+        "expired": 4,
+        "active": 1
+      },
+      "completed_goals_examined": 4,
+      "scope_mismatch_count": 0,
+      "histories_with_scope_mismatch": 0,
+      "unmapped_or_multiconcept_goals": 0,
+      "completed_goals_without_qualified_target_or_other": 0,
+      "responses_sha256": null
+    }
+  ],
+  "historical_findings": [
+    {
+      "run": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+      "method": "Read final DBs without WAL; map exact goal objective to domain concept; count only observations joined to committed learner_state_deltas_v2 through the virtual goal completion time, separately by concept. Initial observation-only output is retained but superseded because rejected turns can retain observations without committing their state.",
+      "database_count": 72,
+      "nonempty_wal_skipped": [],
+      "goal_status_counts": {
+        "active": 43,
+        "expired": 161,
+        "completed": 22
+      },
+      "completed_goals_examined": 22,
+      "scope_mismatch_count": 10,
+      "histories_with_scope_mismatch": 8,
+      "unmapped_or_multiconcept_goals": 0,
+      "completed_goals_without_qualified_target_or_other": 0,
+      "responses_sha256": "9cffa68a654f98828feaa58e1852fcf68b2beb016ec4702fed889c516846c189",
+      "records": [
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-fast-learner-3103/574f9f009e0bf573bef8.sqlite3",
+          "database_sha256": "80baf9ee9279f6f720f236cb55730d11657a06af8dd385b9fd19d0bec3b77215",
+          "goal_id": "autonomous-goal-d0b03493-a1eb-41f9-9d7c-f07573fef419",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-13T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-fast-learner-3103/574f9f009e0bf573bef8.sqlite3",
+          "database_sha256": "80baf9ee9279f6f720f236cb55730d11657a06af8dd385b9fd19d0bec3b77215",
+          "goal_id": "autonomous-goal-2a7db8ed-cdae-4842-982a-593bd40cb263",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-13T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-token-bucket"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-fast-learner-3103/574f9f009e0bf573bef8.sqlite3",
+          "database_sha256": "80baf9ee9279f6f720f236cb55730d11657a06af8dd385b9fd19d0bec3b77215",
+          "goal_id": "autonomous-goal-6252e35f-32a5-450c-b6f2-fb7ba63ecdb8",
+          "objective": "Explain how copy on write delays page copying.",
+          "completed_at": "2026-09-13T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-copy-on-write"
+          ],
+          "target_evidence": {
+            "concept-copy-on-write": {
+              "incorrect": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-token-bucket"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-high-forgetting-3103/e210b07e2f3a3c8476d5.sqlite3",
+          "database_sha256": "b36de590d3649f38a3b2dedcb0c57fea0cbf38dc6299fa01f94acb6bb8969676",
+          "goal_id": "autonomous-goal-9fb49bcf-843a-4a5d-be4d-18b3445545d7",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-11T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-token-bucket"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-high-forgetting-3103/e210b07e2f3a3c8476d5.sqlite3",
+          "database_sha256": "b36de590d3649f38a3b2dedcb0c57fea0cbf38dc6299fa01f94acb6bb8969676",
+          "goal_id": "autonomous-goal-1323c912-f68f-42dc-9197-2eaa8ee6c484",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-11T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-bkt-like-low-receptivity-3103/de92629cd5942e1a2641.sqlite3",
+          "database_sha256": "e5f0e36c50b256e754fc71f298ae6927419f20aea78e2d921849fff45e49481a",
+          "goal_id": "autonomous-goal-bd15352b-3b20-4eeb-91d4-8963d970e42d",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-12T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-answer-seeking-3101/61c7adf5e699b6a3c085.sqlite3",
+          "database_sha256": "bf3fb3265558d23dac2f8fc7e99086ff21d9295fb763282457385ca0d982c036",
+          "goal_id": "autonomous-goal-c0304b50-93f9-45cb-8c65-f7b2e94d23da",
+          "objective": "Explain how copy on write delays page copying.",
+          "completed_at": "2026-10-04T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-copy-on-write"
+          ],
+          "target_evidence": {
+            "concept-copy-on-write": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-answer-seeking-3101/61c7adf5e699b6a3c085.sqlite3",
+          "database_sha256": "bf3fb3265558d23dac2f8fc7e99086ff21d9295fb763282457385ca0d982c036",
+          "goal_id": "autonomous-goal-3c884cb3-d34a-43aa-a138-143e16d078b8",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-10-04T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 6,
+              "incorrect": 4,
+              "partial": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-copy-on-write"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-answer-seeking-3103/ae83577d07e41e078907.sqlite3",
+          "database_sha256": "1bebe21f450e2e7bd6f916080e2858958ebc7a21b083e91597f3c3cfd49c713d",
+          "goal_id": "autonomous-goal-190d5c08-97ba-4f00-a40f-a97073740bb6",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-11T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-answer-seeking-3103/ae83577d07e41e078907.sqlite3",
+          "database_sha256": "1bebe21f450e2e7bd6f916080e2858958ebc7a21b083e91597f3c3cfd49c713d",
+          "goal_id": "autonomous-goal-849795c0-f494-4c0c-8e68-a36965a769b0",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-30T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "incorrect": 4,
+              "partial": 1,
+              "correct": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-copy-on-write"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3101/2ef2aa22cc62b5801185.sqlite3",
+          "database_sha256": "7f827bc87eb7fe8c3be6b6b2278820854a56d02c5211e21191b2b74d6d121b22",
+          "goal_id": "autonomous-goal-5b54e1dd-1c11-4878-aeeb-e00ba7a49b3a",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-23T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "incorrect": 2,
+              "correct": 4
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-path-compression"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3101/2ef2aa22cc62b5801185.sqlite3",
+          "database_sha256": "7f827bc87eb7fe8c3be6b6b2278820854a56d02c5211e21191b2b74d6d121b22",
+          "goal_id": "autonomous-goal-85f2b5b8-76ef-4494-8e5e-9918c0390687",
+          "objective": "Explain how path compression accelerates later finds.",
+          "completed_at": "2026-09-23T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-path-compression"
+          ],
+          "target_evidence": {
+            "concept-path-compression": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3101/2ef2aa22cc62b5801185.sqlite3",
+          "database_sha256": "7f827bc87eb7fe8c3be6b6b2278820854a56d02c5211e21191b2b74d6d121b22",
+          "goal_id": "autonomous-goal-da96bfce-4a02-416f-93ce-06e55d561fbe",
+          "objective": "Explain how a sliding window bounds outstanding frames.",
+          "completed_at": "2026-09-23T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-sliding-window"
+          ],
+          "target_evidence": {
+            "concept-sliding-window": {
+              "correct": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-path-compression"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3102/5017870b597d34d84324.sqlite3",
+          "database_sha256": "24d7e401de9a6cb1886805d7a4fef59c30f82da2d694fd4f3c511c6fe804c7d8",
+          "goal_id": "autonomous-goal-868a2764-966c-46de-ad86-e46ee9e896a8",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-12T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "incorrect": 3,
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-red-black-repair"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3102/5017870b597d34d84324.sqlite3",
+          "database_sha256": "24d7e401de9a6cb1886805d7a4fef59c30f82da2d694fd4f3c511c6fe804c7d8",
+          "goal_id": "autonomous-goal-24900cad-696b-401f-8320-d76ffc1b723d",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-12T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-fast-learner-3102/5017870b597d34d84324.sqlite3",
+          "database_sha256": "24d7e401de9a6cb1886805d7a4fef59c30f82da2d694fd4f3c511c6fe804c7d8",
+          "goal_id": "autonomous-goal-12aee1d9-f25c-44b6-af79-2c03cae7d0ca",
+          "objective": "Explain how a sliding window bounds outstanding frames.",
+          "completed_at": "2026-09-24T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-sliding-window"
+          ],
+          "target_evidence": {
+            "concept-sliding-window": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-high-forgetting-3101/ad268fad57ee0951058b.sqlite3",
+          "database_sha256": "f477497caa904db0466182b6c19c0fbdb3cde81c336d193d056410f47fe43b46",
+          "goal_id": "autonomous-goal-3c857ac2-3e64-472a-b92f-c7d8bd8f996b",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-18T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-high-forgetting-3101/ad268fad57ee0951058b.sqlite3",
+          "database_sha256": "f477497caa904db0466182b6c19c0fbdb3cde81c336d193d056410f47fe43b46",
+          "goal_id": "autonomous-goal-dd8a91d8-132e-49a7-badd-0e44ba04a118",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-18T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "incorrect": 3,
+              "correct": 4
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-red-black-repair"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-high-forgetting-3102/5387877dc8fcac86a8c4.sqlite3",
+          "database_sha256": "c9e5a515391f332f24f5cef2e76fd11325aab7a6da77a227abecedbc8da0334d",
+          "goal_id": "autonomous-goal-68e53998-4dee-43ce-9976-6438aa3176ca",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-16T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-high-forgetting-3103/5e987df3349a261e3b51.sqlite3",
+          "database_sha256": "a87484818f04b562bb552ad032408d951a15ca9c530532fb880421e0606d8325",
+          "goal_id": "autonomous-goal-dc0d951e-208a-4cf1-9a38-f52e8a0bf82e",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-11T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-high-forgetting-3103/5e987df3349a261e3b51.sqlite3",
+          "database_sha256": "a87484818f04b562bb552ad032408d951a15ca9c530532fb880421e0606d8325",
+          "goal_id": "autonomous-goal-87ad1448-985e-4531-a752-ec201ecb780e",
+          "objective": "Explain how red black repair restores insertion invariants.",
+          "completed_at": "2026-09-11T10:30:00+00:00",
+          "target_concept_ids": [
+            "concept-red-black-repair"
+          ],
+          "target_evidence": {
+            "concept-red-black-repair": {
+              "correct": 1
+            }
+          },
+          "target_meets_existing_count_rule": false,
+          "other_concepts_meeting_rule": [
+            "concept-token-bucket"
+          ],
+          "scope_mismatch": true
+        },
+        {
+          "database": "reports/generated/governed-full-autonomy-v2-1-multi-concept-confirmation-025/runtime/t1-v2-autonomous/hs-logistic-like-low-receptivity-3103/010b5c333c0e1299c03b.sqlite3",
+          "database_sha256": "3e586be002679d3aadf62d50c1d7d7c45c3ecd58a1c94077a87a433aef5b2171",
+          "goal_id": "autonomous-goal-d67e8daa-819d-4c78-9536-9ed85d23dc8c",
+          "objective": "Explain how token bucket shaping controls bursts.",
+          "completed_at": "2026-09-15T14:00:00+00:00",
+          "target_concept_ids": [
+            "concept-token-bucket"
+          ],
+          "target_evidence": {
+            "concept-token-bucket": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        }
+      ],
+      "limitations": [
+        "Retrospective diagnostic, not a rerun or re-score of original metrics.",
+        "Does not estimate the counterfactual effect of fixing goal completion.",
+        "Runtime DB hashes are captured now; available separately registered response hashes can be cross-checked."
+      ]
+    },
+    {
+      "run": "final-profile-operational-dialogue-development-001-full-live-001",
+      "method": "Read final DBs without WAL; map exact goal objective to domain concept; count only observations joined to committed learner_state_deltas_v2 through the virtual goal completion time, separately by concept. Initial observation-only output is retained but superseded because rejected turns can retain observations without committing their state.",
+      "database_count": 24,
+      "nonempty_wal_skipped": [],
+      "goal_status_counts": {
+        "cancelled": 2,
+        "completed": 4,
+        "expired": 4,
+        "active": 1
+      },
+      "completed_goals_examined": 4,
+      "scope_mismatch_count": 0,
+      "histories_with_scope_mismatch": 0,
+      "unmapped_or_multiconcept_goals": 0,
+      "completed_goals_without_qualified_target_or_other": 0,
+      "responses_sha256": null,
+      "records": [
+        {
+          "database": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/runtime/434088e5e921b0283db8/runtime.sqlite3",
+          "database_sha256": "97dd2c7d4311b57db93e5ff5514cda0efa56ca01513657bfda69872fd4c01ae4",
+          "goal_id": "autonomous-goal-8599f70d-e1f4-4b6d-ab99-7577a3a90966",
+          "objective": "Explain when parcel window resumes sending.",
+          "completed_at": "2026-09-18T12:00:00+00:00",
+          "target_concept_ids": [
+            "fresh-op-parcel-window"
+          ],
+          "target_evidence": {
+            "fresh-op-parcel-window": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/runtime/6e1c3b125b26590ea6bc/runtime.sqlite3",
+          "database_sha256": "f62a3a142fd0649afc4b585a1039bd83ac3eddd01c10d47876750a453f87f3fd",
+          "goal_id": "autonomous-goal-10048361-a2cf-416d-b9b1-2a38496b09cf",
+          "objective": "Explain how slot seal rejects an older update.",
+          "completed_at": "2026-09-14T12:00:00+00:00",
+          "target_concept_ids": [
+            "fresh-op-slot-seal"
+          ],
+          "target_evidence": {
+            "fresh-op-slot-seal": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/runtime/947dc2b754b8613294e0/runtime.sqlite3",
+          "database_sha256": "6e4e6d05602d20e2efd929d93831cfd2ff3368186c557f30d8bc5b3d61886b71",
+          "goal_id": "autonomous-goal-52575e17-663c-4917-9e7f-8ec9dfa32264",
+          "objective": "Explain how slot seal rejects an older update.",
+          "completed_at": "2026-09-14T12:00:00+00:00",
+          "target_concept_ids": [
+            "fresh-op-slot-seal"
+          ],
+          "target_evidence": {
+            "fresh-op-slot-seal": {
+              "correct": 2
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        },
+        {
+          "database": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/runtime/395e4cd5c4b81ce4c870/runtime.sqlite3",
+          "database_sha256": "967a21fc793d0f5ebf1436668b61681f85aafa4a2135fb800b50a90eb912842f",
+          "goal_id": "autonomous-goal-34c1ad32-ff8b-4163-b9db-8f15a8b6faff",
+          "objective": "Explain when parcel window resumes sending.",
+          "completed_at": "2026-09-18T12:00:00+00:00",
+          "target_concept_ids": [
+            "fresh-op-parcel-window"
+          ],
+          "target_evidence": {
+            "fresh-op-parcel-window": {
+              "correct": 3
+            }
+          },
+          "target_meets_existing_count_rule": true,
+          "other_concepts_meeting_rule": [],
+          "scope_mismatch": false
+        }
+      ],
+      "limitations": [
+        "Retrospective diagnostic, not a rerun or re-score of original metrics.",
+        "Does not estimate the counterfactual effect of fixing goal completion.",
+        "Runtime DB hashes are captured now; available separately registered response hashes can be cross-checked."
+      ]
+    }
+  ],
+  "verification": {
+    "prior_verified_tests": {
+      "failed": 2,
+      "passed": 5
+    },
+    "current_reproduction": {
+      "failed": 2,
+      "passed": 2
+    },
+    "external_llm_calls": 0
+  },
+  "corrections": [
+    {
+      "kind": "invalid-harness",
+      "artifact": "harness-initial.txt",
+      "detail": "Four setup errors from replacing an immutable domain. Corrected by creating another approved release; not counted as product defects."
+    },
+    {
+      "kind": "invalid-measurement",
+      "artifact": "historical-impact-initial-observation-only.json",
+      "superseded_by": "historical-impact.json",
+      "detail": "Initial audit counted rejected observations. Committed-delta join removes a false flag in the provider run; 025 retains 10 flags."
+    }
+  ],
+  "dataset": {
+    "permissions": "Repository-authored synthetic sources and learner histories only",
+    "historical_databases": 96,
+    "private_data_used": false
+  },
+  "artifacts": {
+    "historical-impact.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/historical-impact.json",
+      "sha256": "3411dc7cce8e118d96389c319a84fe78f2443aa84de31c3bd004fa61b0b37e6d"
+    },
+    "actual-service-turns.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/actual-service-turns.json",
+      "sha256": "efca8653bbfc2ba456fcdd380b33e62686ffe2a019f0127c24a04d9de6784a6f"
+    },
+    "test_goal_scope_audit.py": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/test_goal_scope_audit.py",
+      "sha256": "ca8ebdf614697bcfbf4cf1ca582c2ab923e5c54a600a05dcc8b76f2f7c8921d2"
+    },
+    "harness-initial.txt": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/harness-initial.txt",
+      "sha256": "675c1c429eef83e97f6f82b489556377780b29f31a250dcb0e1560131cae35f4"
+    },
+    "historical-impact-initial-observation-only.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/historical-impact-initial-observation-only.json",
+      "sha256": "059a565cf13ef1aa35200082b52e1a1c96697f7828a1100234f52a8c5062fbbb"
+    },
+    "verified-junit.xml": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/verified-junit.xml",
+      "sha256": "1784b33d7feb4a3a1e0493a64c14250df257b7df56308bf2283ab97483fdd2de"
+    },
+    "other-correct-target-incorrect.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/other-correct-target-incorrect.json",
+      "sha256": "b21e77537c3fcd99f6cde8c81fb9a97a8ca4072f8f284e557caec6c3921cfb74"
+    },
+    "audit.md": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/audit.md",
+      "sha256": "e7d7f4b8da772506b2593713ef01b2cbe1302d63970562e49952dc5ace918336"
+    },
+    "no-assessments.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/no-assessments.json",
+      "sha256": "ddba44b509a394c21a5ee4d4dde4c85e3e86df576025cc38b10b0388e9c5e4e9"
+    },
+    "matching-correct.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/matching-correct.json",
+      "sha256": "f7627cb644bbbc57a8cee508ed480a26bd53325448656e95a95972c4e92db0c3"
+    },
+    "audit_saved_goal_completion.py": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/audit_saved_goal_completion.py",
+      "sha256": "4b3a6d539a876ff540be27d95ef30d7fd53ab579f75ef1706fbeb0be46a0f227"
+    },
+    "after-database-reopen.json": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/after-database-reopen.json",
+      "sha256": "82afb9a2176bfcc925ae928f5312498ad6f77ec9398dd8e430db11426194d39e"
+    },
+    "junit.xml": {
+      "path": "reports/generated/goal-completion-scope-review-audit-001/junit.xml",
+      "sha256": "0eae7b7205a64af8de88e85364812efb6f1a4a4529e42658847346a895d33dec"
+    }
+  },
+  "limitations": [
+    "Retrospective count-rule diagnostic, not a counterfactual rerun or quality rescore.",
+    "025 completion counts do not evaluate the corrected implementation.",
+    "The four provider-run completed goals showing no mismatch do not establish general lifecycle correctness.",
+    "Original audit pools committed counts within student/course/release; new paired-run auditor uses per-conversation committed snapshots and confidence."
+  ],
+  "successor": "goal-completion-scope-development-001"
+}

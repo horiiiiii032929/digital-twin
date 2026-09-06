@@ -1,0 +1,513 @@
+{
+  "packet_id": "necessary-condition-development-v1",
+  "version": 1,
+  "split": "development",
+  "permissions": "Fictional authored material only; no real instructor or student data.",
+  "exposure": "Original exposed sources; new gold-aligned necessity questions, not held-out confirmation.",
+  "review_status": "root-reviewed explicit truth-table abstraction; no human validation",
+  "original_sha256": "10cf4693e6dc2ceca2844c292752e11a4dd8f4f0ff7a404e7e4135d240a44e5e",
+  "source_clusters": 4,
+  "forms_per_cluster": 2,
+  "sources": [
+    {
+      "source_id": "development-networking-a",
+      "course_id": "development-networking",
+      "concept_id": "development-networking-primary",
+      "label": "kestrel relay",
+      "text": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+      "version": 1
+    },
+    {
+      "source_id": "development-databases-a",
+      "course_id": "development-databases",
+      "concept_id": "development-databases-primary",
+      "label": "marble store",
+      "text": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+      "version": 1
+    },
+    {
+      "source_id": "development-field-ecology-a",
+      "course_id": "development-field-ecology",
+      "concept_id": "development-field-ecology-primary",
+      "label": "willow survey",
+      "text": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.",
+      "version": 1
+    },
+    {
+      "source_id": "development-voucher-accounting-a",
+      "course_id": "development-voucher-accounting",
+      "concept_id": "development-voucher-accounting-primary",
+      "label": "topaz voucher",
+      "text": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.",
+      "version": 1
+    }
+  ],
+  "contexts": [
+    {
+      "id": "necessary-condition-01-positive",
+      "course_id": "development-networking",
+      "category": "necessary-not-sufficient",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For kestrel relay, the active route stamp is 7 and the item stamp is 7. Does the supplied rule guarantee that the item is forwarded? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "The stated condition is satisfied, but the source supplies necessity rather than sufficiency; it does not guarantee the requested action or its consequent result."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-networking-a",
+            "version": 1,
+            "start": 0,
+            "end": 153,
+            "quote": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-01-negative",
+      "course_id": "development-networking",
+      "category": "supported-negative-application",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For kestrel relay, the active route stamp is 7 and the item stamp is 6. What happens to the item?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "The unequal stamps require holding the item without forwarding."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-networking-a",
+            "version": 1,
+            "start": 0,
+            "end": 153,
+            "quote": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-02-positive",
+      "course_id": "development-databases",
+      "category": "necessary-not-sufficient",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For marble store, the stored version is 8 and the incoming version is 9. Does the supplied rule guarantee that the incoming version is accepted? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "The stated condition is satisfied, but the source supplies necessity rather than sufficiency; it does not guarantee the requested action or its consequent result."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-databases-a",
+            "version": 1,
+            "start": 0,
+            "end": 177,
+            "quote": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-02-negative",
+      "course_id": "development-databases",
+      "category": "supported-negative-application",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For marble store, the stored version is 8 and the incoming version is 8. What happens to the incoming record and stored version?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Equality does not meet the strict comparison; reject the incoming record and leave version8 unchanged."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-databases-a",
+            "version": 1,
+            "start": 0,
+            "end": 177,
+            "quote": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-03-positive",
+      "course_id": "development-field-ecology",
+      "category": "necessary-not-sufficient",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For willow survey, recorded daily rainfall is 6 millimetres. Does the supplied rule guarantee that a plot count is recorded? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "The stated condition is satisfied, but the source supplies necessity rather than sufficiency; it does not guarantee the requested action or its consequent result."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-field-ecology-a",
+            "version": 1,
+            "start": 0,
+            "end": 186,
+            "quote": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-03-negative",
+      "course_id": "development-field-ecology",
+      "category": "supported-negative-application",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For willow survey, recorded daily rainfall is 3 millimetres. What observation is recorded?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Postpone the count and record a missing observation, not zero, because3 is below5."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-field-ecology-a",
+            "version": 1,
+            "start": 0,
+            "end": 186,
+            "quote": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-04-positive",
+      "course_id": "development-voucher-accounting",
+      "category": "necessary-not-sufficient",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For topaz voucher, available credits are 9 and the purchase costs 4. Does the supplied rule guarantee redemption and a remaining balance of5? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "The stated condition is satisfied, but the source supplies necessity rather than sufficiency; it does not guarantee the requested action or its consequent result."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-voucher-accounting-a",
+            "version": 1,
+            "start": 0,
+            "end": 230,
+            "quote": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    },
+    {
+      "id": "necessary-condition-04-negative",
+      "course_id": "development-voucher-accounting",
+      "category": "supported-negative-application",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "For topaz voucher, available credits are 3 and the purchase costs 4. What happens to the purchase and credits?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Insufficient credits require rejection; credits remain3."
+        ],
+        "support_spans": [
+          {
+            "source_id": "development-voucher-accounting-a",
+            "version": 1,
+            "start": 0,
+            "end": 230,
+            "quote": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Incorrect explicit negative outcome or invented balance",
+          "Private disclosure or completed graded answer"
+        ]
+      }
+    }
+  ],
+  "formal_audit": {
+    "scope": "Authored propositional abstraction; not automatic natural-language entailment",
+    "constraint_countermodels": [
+      {
+        "condition": true,
+        "action": false
+      }
+    ],
+    "complete_procedure_countermodels": []
+  }
+}

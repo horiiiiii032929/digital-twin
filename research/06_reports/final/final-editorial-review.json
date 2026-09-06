@@ -1,0 +1,381 @@
+{
+  "edits": [
+    {
+      "file": "report.tex",
+      "before": "development fold, while the separate fresh factual comparison retained a\n63.25\\% local fallback. Integrated model-backed trials exercised 24 histories",
+      "after": "development fold. In a separate evaluation on fresh cases, the retained BM25\nfallback achieved 63.25\\% grounded success and remained below its acceptance\nthreshold. Integrated model-backed trials exercised 24 histories"
+    },
+    {
+      "file": "report.tex",
+      "before": "Real instructor fidelity and student learning\nbenefit remain unestablished.",
+      "after": "Fidelity to the actual instructor's teaching style and benefits to student\nlearning have not been established."
+    },
+    {
+      "file": "chapters/02-course-workflow.tex",
+      "before": "A professor works with an\nowned course and an onboarding session. The session collects the tutoring policy,",
+      "after": "An instructor configures a course they own through an\nonboarding session. The session collects the tutoring policy,"
+    },
+    {
+      "file": "chapters/02-course-workflow.tex",
+      "before": "Course membership and its published release determine the\npermitted Twin.",
+      "after": "Course membership and the published release determine which\nTwin configuration the student can access."
+    },
+    {
+      "file": "chapters/02-course-workflow.tex",
+      "before": "actual response excerpts. These profiles are synthetic.",
+      "after": "actual response excerpts."
+    },
+    {
+      "file": "chapters/profile-examples.tex",
+      "before": "effect of changing a single profile. The protocol is synthetic.",
+      "after": "effect of changing a single profile."
+    },
+    {
+      "file": "chapters/profile-examples.tex",
+      "before": "Section~\\ref{sec:verification}",
+      "after": "Section~\\ref{sec:provider-study}"
+    },
+    {
+      "file": "chapters/04-comparisons.tex",
+      "before": "remain uncompleted.",
+      "after": "have not yet been completed."
+    },
+    {
+      "file": "chapters/04-comparisons.tex",
+      "before": "cross-reviewed before outputs, and",
+      "after": "cross-reviewed before candidate outputs were generated, and"
+    },
+    {
+      "file": "design-summary.tex",
+      "before": "An advisory judge passed 64 judgments on 32\ncalibration controls yet missed disclosure in actual outputs.",
+      "after": "An advisory judge passed its calibration checks across 64 judgments on 32\ncontrols yet missed disclosure in actual outputs."
+    },
+    {
+      "file": "design-summary.tex",
+      "before": "Final response audits stopped at 20/112\nand 12/112 reached cases while known critical errors survived.",
+      "after": "Final response audits stopped after reviewing 20 and 12 of the 112 cases,\nrespectively, while known critical errors remained."
+    },
+    {
+      "file": "chapters/03-runtime-design.tex",
+      "before": "\\input{chapters/learner-decision-detail.tex}",
+      "after": "\\FloatBarrier\n\\input{chapters/learner-decision-detail.tex}"
+    },
+    {
+      "file": "chapters/learner-decision-detail.tex",
+      "before": "\\subsection{How the Planner Chooses a Teaching Action}",
+      "after": "\\FloatBarrier\n\\subsection{How the Planner Chooses a Teaching Action}"
+    },
+    {
+      "file": "chapters/03-runtime-design.tex",
+      "before": "\\subsection{From a Durable Event to Proactive Delivery}",
+      "after": "\\FloatBarrier\n\\subsection{From a Durable Event to Proactive Delivery}"
+    },
+    {
+      "file": "chapters/03-runtime-design.tex",
+      "before": "The in-app workspace is the delivery channel.",
+      "after": "The in-app workspace is the delivery channel.\n\n\\textbf{Following one recorded cycle.}\nIn the historical deterministic trace in Appendix~\\ref{sec:historical-autonomy},\na diagnostic question and hint are followed by an incomplete-objective event\nbefore the next student turn. That event leads to a permitted check-in, whose\nopportunity, action and message identifiers link the decision to delivery.\nLater student turns produce new learner-state revisions, and reopening the\nstore on virtual day 15 preserves the recorded state hash. This connects the\ninteraction, worker and persistence views. The trace predates the goal-completion\ncorrection; Study H tests that correction separately.\n"
+    },
+    {
+      "file": "chapters/05-integration.tex",
+      "before": "comparison-based choices from requirements that the implementation must enforce.",
+      "after": "comparison-based choices from requirements that the implementation must enforce.\n\nThe experiments do not identify a single composition that wins on every\ncriterion. Study A tests a development evidence interface; Study B supports\nthe retained factual fallback. Studies C--D compare planners using supplied\nstate cards, whereas the product adapter still supplies delivery/event proxies.\nStudy E evaluates estimator/timing alternatives outside the tutoring service.\nStudy G exercises an integrated development configuration with actual model\ncalls, and Study H isolates a later lifecycle correction without model calls.\nThus neither the component improvements nor the historical integrated run\nconstitute an end-to-end qualification of all current components together.\n"
+    },
+    {
+      "file": "chapters/05-integration.tex",
+      "before": "Studies C--D support progression to integration; validity does not establish individualized instruction.",
+      "after": "Synthetic utility supports progression to integration, despite lower preferred-action agreement; product proxy inputs and individualized instruction remain unvalidated."
+    },
+    {
+      "file": "chapters/05-integration.tex",
+      "before": "Study~\\hyperref[study-B]{B} supports a simpler fallback; grounded and boundary scores remain below targets.",
+      "after": "Study~\\hyperref[study-B]{B} supports the simpler local fallback, not a qualified winner; grounded and boundary scores remain below targets."
+    },
+    {
+      "file": "chapters/05-integration.tex",
+      "before": "The system is a working, evaluated research prototype, with separate evidence\nfor application correctness and teaching quality.",
+      "after": "At submission, R1 and R5 have bounded local verification; R2 remains below\nfactual acceptance targets; R3 lacks validation of actual instructor fidelity;\nand R4 has operational and lifecycle evidence but not demonstrated learning\nbenefit. The system is a working research prototype, not an accepted deployment\nmeeting all five requirements."
+    }
+  ],
+  "sentence_boundary_excerpts_revised": 105,
+  "no_sentence_boundary": [],
+  "historical_records_unchanged": true,
+  "additional_incomplete_fields_revised": [
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Interpretation = Passed Cross-\\allowbreak{}course citation leakage: Observed"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " fingerprint a26a7955944dc5c60445bff77fac9c8e -\\allowbreak{} Independent sensitivity review: local qwen3:4b, digest 359d7dd4bcda -\\allowbreak{} Gemma calls: zero -\\allowbreak{} Private course or student data: none read or emitted -\\allowbreak{} Execution: sequential, zero retries, at most 24 calls per role, USD 1 stop Qwen remained diagnostic only because prior repository evidence did not"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Frozen gate = diagnostic"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " see evidence record] It contains"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Physical presence and hash integrity: 570/570 -\\allowbreak{} Local content-\\allowbreak{}screen completion: 570/570 -\\allowbreak{} Final source roles assigned:"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} File-\\allowbreak{}integrity gate: passed, 610/610 -\\allowbreak{} Local-\\allowbreak{}conversion gate: failed, 586/610 ready -\\allowbreak{} External provider calls: 0 -\\allowbreak{} Model calls: 0 -\\allowbreak{} API cost: USD 0 -\\allowbreak{} Private paths or extracted"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Conversion gate: passed -\\allowbreak{} Unresolved conversion cases: 0 -\\allowbreak{} Sources advancing to"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Complete physical accounting: passed, 2,637/2,637 -\\allowbreak{} Proven authoritative promotion: 32 exact approved hashes -\\allowbreak{} Path-\\allowbreak{} or format-\\allowbreak{}only final labels: zero -\\allowbreak{} Content-\\allowbreak{}level semantic-\\allowbreak{}role gate: failed, 570 unresolved -\\allowbreak{} External"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Outcome ="
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " These advisory verdicts"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " 0.897\\% vs 0.5\\% Priority"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Outcome = Supports Keep The 223 calls were 101 DeepSeek V4 Flash"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " Each case ran in its own conversation: T1-\\allowbreak{}v2 keeps a learner belief state, so the course-\\allowbreak{}scoped conversations Program 011 could"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " On a 100-\\allowbreak{}case probe the target source cluster is in the top five for 94 cases"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " Finite bounds: 5,400 calls / USD 888, at most two runs"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " No teaching quality, source entailment, useful outreach, deployed capacity,"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " No teaching quality, source entailment, useful outreach, deployed capacity,"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " Share"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} all 19 paraphrases added a"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " -\\allowbreak{} 114 required factual claims and 114"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " For no-\\allowbreak{}evidence cases,"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Invalid = 20 Gemma revised all 19 no-\\allowbreak{}evidence cases, five assessed-\\allowbreak{}work"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Invalid = 1 All 19 no-\\allowbreak{}evidence cases"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Invalid = 11 Nine"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Current human lower bound at stop: 35, well below"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " five empty first responses"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Valid-\\allowbreak{}decision disagreement:"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Citation"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " This fails the zero-\\allowbreak{}false-\\allowbreak{}pass gate and shows why pedagogy judgments cannot be interpreted without the"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Both are below their intended calibration levels, but neither partial estimate is a"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " This is not a completed cross-\\allowbreak{}family metric, but it reinforces the prior finding that this Qwen binding is not a"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Newly discovered evidence is returned to professor review before a release is"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " configuration.packet.profiles.explanatory.example\\_\\allowbreak{}preferences = a concrete non-\\allowbreak{}assessed example [additional fields in"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Cases: Value = 670 (150 / 150 / 370) Registered gates passed: Value = 20 of 20 Valid action-\\allowbreak{}set accuracy: Value = 1.000 Goal termination accuracy: Value"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Floor = below USD 2 The first review inspected every output"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} gqv1-\\allowbreak{}dev-\\allowbreak{}045 explained both meanings but did not ask the student to choose before"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Made concurrent duplicate student turns converge on one persisted response and derive citation titles"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Its"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " -\\allowbreak{} Bounded chunked uploads while streaming, validated source metadata before object"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The provider exceeded the"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The deterministic stop,"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " This is an unambiguous operational"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " A 12-\\allowbreak{}case Codex-\\allowbreak{}assisted priority audit confirmed that the risk is material"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The fixes cover the governed boundary router, proactive evidence contract, clarification persistence, provider-\\allowbreak{}call accounting, planner observability, fallback"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " The root"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " retain the readable prefix"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " It verified every ledger metadata binding,"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " The API image is sha256:[hash"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " POSTs"
+    },
+    {
+      "field": "\\textbf{Provenance (extract):} ",
+      "removed_trailing_fragment": " dataset.cards[1].objective = When does beacon ring declare"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The model task counts were 484"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Deterministic control:"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The previous private path-\\allowbreak{}level snapshot was not retained, so this result does not claim which"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Pass = -\\allowbreak{}-\\allowbreak{}-\\allowbreak{} Identity, source, visual"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The deterministic stop, accounting, source boundary, and diagnostic"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The missed wrong-\\allowbreak{}action mutation is unambiguous"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " The defect v4 corrects -\\allowbreak{}-\\allowbreak{} a"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Operational failures = 0 Pre-\\allowbreak{}registered checks: severe"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Ten tests passed, including constant-\\allowbreak{}cluster and unequal nested-\\allowbreak{}size invariants, paired discordance, invalid/duplicate pairing, nonfinite clusters, and"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " The exact versioned"
+    },
+    {
+      "field": "\\textbf{Configuration / comparison:} ",
+      "removed_trailing_fragment": " it does"
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Frozen gate ="
+    },
+    {
+      "field": "\\textbf{Results / gates (extract):} ",
+      "removed_trailing_fragment": " Ignored filenames, contents,"
+    }
+  ],
+  "layout_status_followup": {
+    "scope": "Operational status documentation and layout only; no academic-integrity recheck",
+    "main_pages": 34,
+    "profile_unchanged": true,
+    "changed_docs": [
+      "docs/local-r1-runbook.md"
+    ],
+    "figure_pages": {
+      "tutoring_sequence": 6,
+      "data_relationships": 26,
+      "publication_sequence": 27
+    }
+  },
+  "reader_names_revision": {
+    "internal_versions_removed_from_narrative": true,
+    "descriptive_study_names": true,
+    "model_allocation_ids_replaced": true,
+    "stable_trial_ids_preserved": 474,
+    "main_pages": 35,
+    "companion_pages": 326
+  }
+}

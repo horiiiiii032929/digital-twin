@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import contextmanager
 import hashlib
 import json
 import sqlite3
@@ -67,6 +68,8 @@ from src.digital_twin.student.tutoring_graph import LearnerState
 from src.digital_twin.student.teaching_profile import (
     TeachingProfileStatus,
     TeachingProfileV1,
+    TeachingProfileError,
+    new_teaching_profile,
 )
 from src.digital_twin.tutor_policy import TutorPolicy, timestamp_now
 
@@ -194,6 +197,10 @@ class StudentRepository(Protocol):
 
     def delete_expired_learning_gap_signals(self, *, expired_at: str) -> int: ...
 
+    def create_teaching_profile_draft(
+        self, course_id: str, values: dict
+    ) -> TeachingProfileV1: ...
+
     def save_teaching_profile(
         self, profile: TeachingProfileV1
     ) -> TeachingProfileV1: ...
@@ -251,6 +258,8 @@ class StudentRepository(Protocol):
         reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
         clarification_request: ClarificationRequestV1 | None = None,
         resolved_clarification: ClarificationRequestV1 | None = None,
+        *,
+        nonblocking_writer: bool = False,
     ) -> None: ...
 
     def list_citations(self, message_id: str) -> list[Citation]: ...
@@ -1115,6 +1124,21 @@ class SQLiteStudentRepository:
             )
         return int(cursor.rowcount)
 
+    def create_teaching_profile_draft(self, course_id: str, values: dict) -> TeachingProfileV1:
+        """Allocate a course version under the same write lock as its insertion."""
+        with self._lock, self._connection:
+            cursor = self._connection.execute(
+                "UPDATE courses SET title = title WHERE id = ?", (course_id,)
+            )
+            if cursor.rowcount != 1:
+                raise KeyError("course_not_found")
+            row = self._connection.execute(
+                "SELECT COALESCE(MAX(version), 0) + 1 FROM teaching_profiles WHERE course_id = ?",
+                (course_id,),
+            ).fetchone()
+            profile = new_teaching_profile(course_id=course_id, version=row[0], values=values)
+            return self.save_teaching_profile(profile)
+
     def save_teaching_profile(self, profile: TeachingProfileV1) -> TeachingProfileV1:
         profile = TeachingProfileV1.model_validate(profile.model_dump(mode="python"))
         with self._lock, self._connection:
@@ -1173,6 +1197,65 @@ class SQLiteStudentRepository:
             TeachingProfileV1.model_validate_json(row["profile_json"]) for row in rows
         ]
 
+    def save_generated_profile_preview(self, artifact, *, course_id, owner_id):
+        with self._lock, self._connection:
+            self._connection.execute("INSERT INTO generated_profile_previews VALUES (?,?,?,?,?,?,?)",
+                (artifact["artifact_id"], course_id, artifact["profile_id"], owner_id,
+                 artifact["artifact_sha256"], json.dumps(artifact, sort_keys=True), artifact["created_at"]))
+        return artifact
+
+    def list_generated_profile_previews(self, course_id, profile_id):
+        rows = self._connection.execute("SELECT artifact_json FROM generated_profile_previews WHERE course_id=? AND profile_id=? ORDER BY created_at DESC", (course_id, profile_id)).fetchall()
+        values = []
+        for row in rows:
+            value = json.loads(row["artifact_json"])
+            review = self._connection.execute("SELECT review_status FROM generated_profile_preview_reviews WHERE artifact_id=?", (value["artifact_id"],)).fetchone()
+            value["review_status"] = review["review_status"] if review else "unreviewed"
+            values.append(value)
+        return values
+
+    def record_generated_profile_review(self, artifact_id, artifact_sha256, decisions, status, changed_at):
+        with self._lock, self._connection:
+            previous = self._connection.execute("SELECT * FROM generated_profile_preview_reviews WHERE artifact_id=?", (artifact_id,)).fetchone()
+            encoded = json.dumps(decisions, sort_keys=True)
+            if previous:
+                if previous["artifact_sha256"] != artifact_sha256 or previous["decisions_json"] != encoded:
+                    raise ValueError("preview review is immutable")
+                return
+            self._connection.execute("INSERT INTO generated_profile_preview_reviews VALUES (?,?,?,?,?)",
+                (artifact_id, artifact_sha256, encoded, status, changed_at))
+
+    def approve_teaching_profile_atomic(self, profile_id, *, preview_sha256, changed_at, generated_review=None):
+        """One transaction; failed successor writes cannot invalidate predecessor."""
+        with self._lock, self._connection:
+            # Serialize other connections before reading the mutable status.
+            # A concurrent withdrawal must not be overwritten by a stale draft.
+            self._connection.execute(
+                "UPDATE teaching_profiles SET status = status WHERE profile_id = ?",
+                (profile_id,),
+            )
+            profile = self.get_teaching_profile(profile_id)
+            if profile is None:
+                raise KeyError("teaching_profile_not_found")
+            if profile.status in {TeachingProfileStatus.APPROVED, TeachingProfileStatus.SUPERSEDED} and profile.preview_sha256 == preview_sha256:
+                return profile
+            if profile.status != TeachingProfileStatus.DRAFT:
+                raise ValueError("only draft teaching profiles can be approved")
+            approved = TeachingProfileV1.model_validate({**profile.model_dump(mode="python"),
+                "status": TeachingProfileStatus.APPROVED, "preview_sha256": preview_sha256, "approved_at": changed_at})
+            for prior in self.list_teaching_profiles(profile.course_id):
+                if prior.status == TeachingProfileStatus.APPROVED:
+                    prior = prior.model_copy(update={"status": TeachingProfileStatus.SUPERSEDED})
+                    self._connection.execute("UPDATE teaching_profiles SET status=?, profile_json=? WHERE profile_id=?",
+                        (prior.status.value, prior.model_dump_json(), prior.profile_id))
+            self._connection.execute("UPDATE teaching_profiles SET status=?, preview_sha256=?, approved_at=?, profile_json=? WHERE profile_id=?",
+                (approved.status.value, preview_sha256, changed_at, approved.model_dump_json(), profile_id))
+            if generated_review is not None:
+                artifact_id, decisions = generated_review
+                self._connection.execute("INSERT INTO generated_profile_preview_reviews VALUES (?,?,?,?,?)",
+                    (artifact_id, preview_sha256, json.dumps(decisions, sort_keys=True), "accepted", changed_at))
+            return approved
+
     def set_teaching_profile_status(
         self,
         profile_id: str,
@@ -1198,7 +1281,7 @@ class SQLiteStudentRepository:
                     TeachingProfileStatus.SUPERSEDED,
                     TeachingProfileStatus.WITHDRAWN,
                 },
-                TeachingProfileStatus.SUPERSEDED: set(),
+                TeachingProfileStatus.SUPERSEDED: {TeachingProfileStatus.WITHDRAWN},
                 TeachingProfileStatus.WITHDRAWN: set(),
             }
             if status not in allowed[profile.status]:
@@ -1239,6 +1322,14 @@ class SQLiteStudentRepository:
                     profile_id,
                 ),
             )
+            if status == TeachingProfileStatus.WITHDRAWN:
+                bound = self._connection.execute("SELECT id FROM releases WHERE teaching_profile_id=?", (profile_id,)).fetchall()
+                for release_row in bound:
+                    self._cancel_autonomy_scope_sql(student_id=None, course_id=profile.course_id,
+                        release_id=release_row["id"], changed_at=changed_at)
+                    self._connection.execute("UPDATE proactive_triggers SET status='cancelled', updated_at=? WHERE release_id=? AND status='pending'", (changed_at, release_row["id"]))
+                    self._connection.execute("UPDATE proactive_delivery_outbox SET status='cancelled', updated_at=? WHERE status='pending' AND message_id IN (SELECT id FROM proactive_messages WHERE release_id=?)", (changed_at, release_row["id"]))
+                    self._connection.execute("UPDATE proactive_messages SET status='cancelled' WHERE release_id=? AND status='queued'", (release_row["id"],))
         return updated
 
     def list_messages(self, conversation_id: str) -> list[Message]:
@@ -1349,6 +1440,22 @@ class SQLiteStudentRepository:
         tutor_message = self._message(tutor_row)
         return student_message, tutor_message, self.list_citations(tutor_message.id)
 
+    @contextmanager
+    def _turn_transaction(self, *, nonblocking_writer: bool):
+        # Async callers retry only this short transaction after releasing both
+        # SQLite and the Python lock. A synchronous busy wait would prevent
+        # another request's async checkpointer from scheduling its commit.
+        with self._lock:
+            previous_timeout = self._connection.execute("PRAGMA busy_timeout").fetchone()[0]
+            if nonblocking_writer:
+                self._connection.execute("PRAGMA busy_timeout = 0")
+            try:
+                with self._connection:
+                    yield
+            finally:
+                if nonblocking_writer:
+                    self._connection.execute(f"PRAGMA busy_timeout = {int(previous_timeout)}")
+
     def save_turn(
         self,
         conversation: Conversation,
@@ -1365,6 +1472,8 @@ class SQLiteStudentRepository:
         reactive_v2_artifacts: ReactiveTurnArtifactsV2 | None = None,
         clarification_request: ClarificationRequestV1 | None = None,
         resolved_clarification: ClarificationRequestV1 | None = None,
+        *,
+        nonblocking_writer: bool = False,
     ) -> None:
         conversation = Conversation.model_validate(
             conversation.model_dump(mode="python")
@@ -1505,7 +1614,7 @@ class SQLiteStudentRepository:
         ):
             raise ValueError("tutor turn records have inconsistent lineage")
         try:
-            with self._lock, self._connection:
+            with self._turn_transaction(nonblocking_writer=nonblocking_writer):
                 # The first write acquires SQLite's writer lock before checking
                 # authority, including against administrative writes in another
                 # worker. All following turn writes share this transaction.
@@ -1537,6 +1646,18 @@ class SQLiteStudentRepository:
                 )
                 if authorized.rowcount != 1:
                     raise TurnAuthorityChangedError
+                # Recheck the bound approval after acquiring the writer lock.
+                # An in-flight answer cannot outlive an instructor withdrawal.
+                bound_release = self.get_release(conversation.release_id)
+                if bound_release is not None and bound_release.teaching_profile_id:
+                    from .teaching_profile_context import profile_authorizes_release
+
+                    if not profile_authorizes_release(
+                        self,
+                        self.get_teaching_profile(bound_release.teaching_profile_id),
+                        bound_release,
+                    ):
+                        raise TurnAuthorityChangedError
                 if learner_state is not None:
                     current = self._connection.execute(
                         """SELECT revision FROM conversation_learner_states
@@ -2356,7 +2477,11 @@ class SQLiteStudentRepository:
                 raise ValueError("autonomy policy requires the course owner")
             if (
                 profile is None
-                or profile["status"] != "approved"
+                or (profile["status"] != "approved" and not (
+                    profile["status"] == "superseded"
+                    and (bound_release := self.get_published_release(policy.course_id)) is not None
+                    and bound_release.teaching_profile_id == policy.approved_profile_id
+                    and bound_release.teaching_profile_sha256 == policy.approved_profile_sha256))
                 or profile["content_sha256"] != policy.approved_profile_sha256
             ):
                 raise ValueError("autonomy policy requires the approved profile hash")
@@ -2855,6 +2980,11 @@ class SQLiteStudentRepository:
             opportunity.model_dump(mode="python")
         )
         with self._lock, self._connection:
+            # Hold the writer lock across wake status and goal/policy validation.
+            self._connection.execute(
+                "UPDATE autonomous_wakeups SET status = status WHERE wake_up_id = ?",
+                (wake_up_id,),
+            )
             wake = self._connection.execute(
                 """SELECT wake_up_json, status FROM autonomous_wakeups
                    WHERE wake_up_id = ?""",
@@ -2996,6 +3126,12 @@ class SQLiteStudentRepository:
         )
         binding_sha256 = hashlib.sha256(binding_json.encode("utf-8")).hexdigest()
         with self._lock, self._connection:
+            # A deferred transaction alone does not protect the status read
+            # from a cancellation committed through another connection.
+            self._connection.execute(
+                "UPDATE autonomous_opportunities SET status = status WHERE opportunity_id = ?",
+                (opportunity.opportunity_id,),
+            )
             current = self._connection.execute(
                 "SELECT status FROM autonomous_opportunities WHERE opportunity_id = ?",
                 (opportunity.opportunity_id,),
@@ -3378,9 +3514,23 @@ class SQLiteStudentRepository:
     def publish_release(self, release_id: str) -> None:
         """Atomically make one course release current and withdraw its predecessor."""
         with self._lock, self._connection:
+            # Serialize profile withdrawal on other SQLite connections before
+            # checking authority or changing either release's publication state.
+            self._connection.execute(
+                "UPDATE releases SET status = status WHERE id = ?", (release_id,)
+            )
             release = self.get_release(release_id)
             if release is None:
                 raise KeyError("release_not_found")
+            if release.teaching_profile_id is not None:
+                profile = self.get_teaching_profile(release.teaching_profile_id)
+                if (profile is None or profile.course_id != release.course_id
+                        or profile.content_sha256 != release.teaching_profile_sha256
+                        or profile.status not in {TeachingProfileStatus.APPROVED, TeachingProfileStatus.SUPERSEDED}):
+                    raise TeachingProfileError(
+                        "teaching_profile_unavailable",
+                        "The release teaching profile is no longer approved for use.",
+                    )
             DigitalTwinRelease.model_validate(
                 {
                     **release.model_dump(mode="python"),
@@ -3463,7 +3613,11 @@ class SQLiteStudentRepository:
     def _validate_autonomous_opportunity_scope(
         self, opportunity: ProactiveOpportunityV1
     ) -> None:
+        from .teaching_profile_context import profile_authorizes_release
         policy = self.get_autonomy_policy(opportunity.course_id)
+        current = self.get_published_release(opportunity.course_id)
+        if current is not None and current.teaching_profile_id and not profile_authorizes_release(self, self.get_teaching_profile(current.teaching_profile_id), current):
+            raise ValueError("opportunity teaching profile approval was withdrawn")
         membership = self.get_membership(opportunity.student_id, opportunity.course_id)
         release = self.get_published_release(opportunity.course_id)
         if (

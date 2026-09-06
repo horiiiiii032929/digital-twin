@@ -21,7 +21,7 @@ from src.digital_twin.operations import (
     IngestionJobStatus,
     ObjectStore,
 )
-from src.digital_twin.tutor_policy import SourceLabel
+from src.digital_twin.tutor_policy import SourceLabel, infer_sensitive_source_name
 
 
 class IngestionJobError(ValueError):
@@ -62,10 +62,15 @@ class IngestionJobService:
         self.max_attempts = max_attempts
         self.lease_seconds = lease_seconds
 
-    def enqueue_pdf(
+    def enqueue_pdf(self, content: bytes, **kwargs) -> tuple[IngestionJob, bool]:
+        return self.enqueue_source(content, mime_type="application/pdf", **kwargs)
+
+    def enqueue_source(
         self,
         content: bytes,
         *,
+        mime_type: str = "application/pdf",
+        deidentified_reviewed: bool = False,
         idempotency_key: str,
         course_id: str,
         artifact_id: str,
@@ -75,6 +80,20 @@ class IngestionJobService:
         display_allowed: bool,
         source_label: SourceLabel,
     ) -> tuple[IngestionJob, bool]:
+        suffixes = {"application/pdf": ".pdf", "text/plain": ".txt", "text/markdown": ".md"}
+        if mime_type not in suffixes:
+            raise IngestionJobError("unsupported_source_format", "Use PDF, UTF-8 text or Markdown.")
+        if source_label == SourceLabel.UNAPPROVED_EXTERNAL:
+            raise IngestionJobError("source_not_approved", "Unapproved external sources cannot be ingested for tutoring.")
+        if (infer_sensitive_source_name(title) or infer_sensitive_source_name(artifact_id)) and not (mime_type.startswith("text/") and deidentified_reviewed):
+            raise IngestionJobError("source_review_required", "Transcript/forum sources require explicit permission and de-identification review for text or Markdown.")
+        if mime_type.startswith("text/"):
+            try:
+                text = content.decode("utf-8")
+            except UnicodeDecodeError as error:
+                raise IngestionJobError("invalid_utf8", "Text sources must use UTF-8.") from error
+            if not text.strip() or any(ord(char) < 32 and char not in "\n\r\t" for char in text):
+                raise IngestionJobError("invalid_text", "Text sources must be nonempty and contain no binary controls.")
         normalized_key = idempotency_key.strip()
         normalized_course_id = course_id.strip()
         normalized_artifact_id = artifact_id.strip()
@@ -109,7 +128,7 @@ class IngestionJobService:
             raise IngestionJobError(
                 "source_too_large", "The PDF exceeds the configured upload limit."
             )
-        if not content.startswith(b"%PDF-"):
+        if mime_type == "application/pdf" and not content.startswith(b"%PDF-"):
             raise IngestionJobError(
                 "invalid_pdf_signature", "The uploaded file is not a valid PDF."
             )
@@ -124,7 +143,9 @@ class IngestionJobService:
                     existing.title != normalized_title,
                     existing.version != version,
                     existing.source_checksum != checksum,
+                    not existing.source_object_key.endswith(suffixes[mime_type]),
                     existing.display_allowed != display_allowed,
+                    existing.deidentified_reviewed != deidentified_reviewed,
                     existing.source_label != source_label,
                 )
             ):
@@ -137,8 +158,8 @@ class IngestionJobService:
             stored = self.object_store.put(
                 content,
                 namespace="course-sources",
-                suffix=".pdf",
-                mime_type="application/pdf",
+                suffix=suffixes[mime_type],
+                mime_type=mime_type,
             )
         except ValueError as error:
             if "quota" not in str(error).casefold():
@@ -157,6 +178,7 @@ class IngestionJobService:
             version=version,
             professor_id=normalized_professor_id,
             display_allowed=display_allowed,
+            deidentified_reviewed=deidentified_reviewed,
             source_label=source_label,
             source_object_key=stored.key,
             source_checksum=stored.checksum,
@@ -171,7 +193,9 @@ class IngestionJobService:
                 saved.title != requested.title,
                 saved.version != requested.version,
                 saved.source_checksum != requested.source_checksum,
+                saved.source_object_key != requested.source_object_key,
                 saved.display_allowed != requested.display_allowed,
+                saved.deidentified_reviewed != requested.deidentified_reviewed,
                 saved.source_label != requested.source_label,
             )
         ):
@@ -274,6 +298,11 @@ class IngestionJobService:
         return retried
 
     def process_one(self, worker_id: str) -> IngestionJob | None:
+        if not worker_id.strip():
+            raise ValueError("worker_id is required")
+        # A process name may be reused after a stalled lease. Bind every claim,
+        # heartbeat and terminal write to this invocation rather than that name.
+        worker_id = f"{worker_id}:{uuid4()}"
         job = self.repository.claim(worker_id, lease_seconds=self.lease_seconds)
         if job is None:
             return None
@@ -287,10 +316,19 @@ class IngestionJobService:
         try:
             try:
                 content = self.object_store.read(job.source_object_key)
-                if self.object_store.checksum(job.source_object_key) != job.source_checksum:
+                if hashlib.sha256(content).hexdigest() != job.source_checksum:
                     raise RuntimeError("stored source checksum mismatch")
-                output = self.ingestion.ingest_pdf(
+                mime_type = next((mime for suffix, mime in
+                    {".pdf": "application/pdf", ".txt": "text/plain", ".md": "text/markdown"}.items()
+                    if job.source_object_key.endswith(suffix)), None)
+                if mime_type is None:
+                    raise ValueError("unsupported stored source format")
+                ingest = self.ingestion.ingest_pdf if mime_type == "application/pdf" else self.ingestion.ingest_source
+                format_kwargs = {} if mime_type == "application/pdf" else {"mime_type": mime_type}
+                output = ingest(
                     content,
+                    **format_kwargs,
+                    deidentified_reviewed=job.deidentified_reviewed,
                     course_id=job.course_id,
                     artifact_id=job.artifact_id,
                     title=job.title,

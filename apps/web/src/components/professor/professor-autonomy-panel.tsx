@@ -38,6 +38,7 @@ import {
   listProfessorAutonomyTraces,
   listProfessorAutonomyRecipients,
   listProfessorLearningGaps,
+  reviewProfessorLearningGap,
   listProfessorLearnerBeliefEvidence,
   listProfessorProactiveTriggers,
   listProfessorTeachingProfiles,
@@ -67,6 +68,10 @@ import type {
 } from "@/lib/api/types"
 import { cn } from "@/lib/utils"
 
+import { GeneratedTeachingPreview } from "./generated-teaching-preview"
+
+import { LearningGapReview, type GapReviewDecision } from "./learning-gap-review"
+
 import { canApproveTeachingProfilePreview } from "./governance-approval"
 
 type GovernanceView = "overview" | "boundary" | "learners" | "outreach" | "activity"
@@ -76,12 +81,16 @@ export function ProfessorAutonomyPanel({
   course,
   releaseId,
   evidenceChunks,
+  sessionId,
+  ingestionJobIds = [],
   onApprovedProfileChange,
 }: {
   course: ProfessorCourse
   releaseId?: string
   evidenceChunks: ProfessorEvidenceChunkOption[]
-  onApprovedProfileChange: (profileId: string | null) => void
+  sessionId?: string
+  ingestionJobIds?: string[]
+  onApprovedProfileChange: (profileId: string | null, courseId: string) => void
 }) {
   const [view, setView] = useState<GovernanceView>("overview")
   const [profiles, setProfiles] = useState<ProfessorTeachingProfile[]>([])
@@ -137,7 +146,7 @@ export function ProfessorAutonomyPanel({
     setRuntimeProfile(nextRuntimeProfile)
     setLearnerEvidence(nextLearnerEvidence)
     setTraces(nextTraces)
-    onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null)
+    onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null, course.course_id)
   }, [course.course_id, onApprovedProfileChange, releaseId])
 
   useEffect(() => {
@@ -352,6 +361,8 @@ export function ProfessorAutonomyPanel({
     !approved ? "Approve the professor teaching profile" : null,
     !policy ? "Define the autonomy boundary" : null,
     policy && !policy.autonomy_enabled ? "Activate the approved autonomy policy" : null,
+    policy?.paused ? "Resume the paused autonomy policy" : null,
+    policy?.kill_switch ? "Review and release the autonomy kill switch" : null,
     !releaseId ? "Publish a release with approved evidence" : null,
   ].filter((item): item is string => item !== null), [approved, policy, releaseId])
 
@@ -414,6 +425,7 @@ export function ProfessorAutonomyPanel({
                 onCreate={createDomainModel}
               />
               <TeachingProfileSection approved={approved} busy={busy} draft={draft} preview={profilePreview} onApprove={approveDisplayedPreview} onCreate={createProfile} onDismissPreview={() => setProfilePreview(null)} onPreview={preparePreview} />
+              {draft || approved ? <GeneratedTeachingPreview key={`${course.course_id}:${(draft ?? approved)!.profile_id}`} courseId={course.course_id} profileId={(draft ?? approved)!.profile_id} canGenerate={Boolean(draft)} sessionId={sessionId} ingestionJobIds={ingestionJobIds} onApproved={() => void refresh().catch(reason => setError(message(reason)))} /> : null}
               <PolicySection busy={busy} editing={editingPolicy} pendingAction={pendingPolicyAction} policy={policy} approvedProfile={Boolean(approved)} onCancelAction={() => setPendingPolicyAction(null)} onConfirmAction={() => void confirmPolicyState()} onEdit={() => setEditingPolicy(true)} onRequestAction={setPendingPolicyAction} onSave={savePolicy} />
               <RuntimeModeSection
                 busy={busy}
@@ -429,6 +441,11 @@ export function ProfessorAutonomyPanel({
               busy={busy}
               goals={goals}
               learningGaps={learningGaps}
+              onReview={(proposalId, decision) => void run(`review-${proposalId}`, async () => {
+                if (!releaseId) return
+                await reviewProfessorLearningGap(course.course_id, releaseId, proposalId, decision)
+                await refresh()
+              }, "Review recorded. Course material has not been changed.")}
               learnerEvidence={learnerEvidence}
               pendingCancel={pendingGoalCancel}
               policy={policy}
@@ -478,7 +495,7 @@ function Overview({ actions, blockers, policy, pendingTriggers, onNavigate }: { 
           </div>
           <ul className="mt-4 divide-y rounded-lg border">
             <BoundaryRow done={Boolean(policy)} label="Professor-approved course objectives and action permissions" />
-            <BoundaryRow done={Boolean(policy?.autonomy_enabled && !policy.paused && !policy.kill_switch)} label="Autonomy is active inside the approved policy" />
+            <BoundaryRow done={Boolean(policy?.autonomy_enabled && !policy.paused && !policy.kill_switch)} label={!policy ? "No autonomy policy configured" : policy.kill_switch ? "Autonomy stopped by kill switch" : policy.paused ? "Autonomy is paused" : !policy.autonomy_enabled ? "Autonomy is off" : "Policy permits autonomy, subject to readiness and delivery checks"} />
             <BoundaryRow done label="Student consent and valid source lineage are checked before delivery" />
             <BoundaryRow done label="A0 scheduled outreach is available; A2 remains a development candidate" />
           </ul>
@@ -552,13 +569,13 @@ function RuntimeModeSection({ busy, domainModel, policy, profile, onSelect }: { 
 function TeachingProfileSection({ approved, busy, draft, preview, onApprove, onCreate, onDismissPreview, onPreview }: { approved?: ProfessorTeachingProfile; busy: string | null; draft?: ProfessorTeachingProfile; preview: ProfessorTeachingProfilePreview | null; onApprove: (profile: ProfessorTeachingProfile) => Promise<void>; onCreate: (event: FormEvent<HTMLFormElement>) => Promise<void>; onDismissPreview: () => void; onPreview: (profile: ProfessorTeachingProfile) => Promise<void> }) {
   return (
     <section aria-labelledby="teaching-profile-heading">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="teaching-profile-heading" className="flex items-center gap-2 text-sm font-semibold"><BookOpenText className="size-4" /> Professor teaching profile</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">The professor approves explicit teaching behavior. Approval is bound to the ten cases displayed below, never to an unseen preview.</p></div><Badge variant={approved ? "default" : "outline"}>{approved ? `Approved v${approved.version}` : "Approval required"}</Badge></div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="teaching-profile-heading" className="flex items-center gap-2 text-sm font-semibold"><BookOpenText className="size-4" /> Professor teaching profile</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">These ten cases describe expected behavior only; they are not generated tutor responses. Use the generated teaching review below to assess actual responses.</p></div><Badge variant={approved ? "default" : "outline"}>{approved ? `Approved v${approved.version}` : "Approval required"}</Badge></div>
       {draft ? (
         <div className="mt-4 rounded-xl border bg-[var(--shell)] p-4">
-          <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Draft v{draft.version}</p><p className="mt-1 text-xs text-muted-foreground">{draft.tone} · {format(draft.depth)} depth</p></div>{!preview ? <Button disabled={busy !== null} onClick={() => void onPreview(draft)}><Eye aria-hidden="true" /> {busy === `preview-${draft.profile_id}` ? "Loading preview…" : "Review 10 cases"}</Button> : null}</div>
+          <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Draft v{draft.version}</p><p className="mt-1 text-xs text-muted-foreground">{draft.tone} · {format(draft.depth)} depth</p></div>{!preview ? <Button disabled={busy !== null} onClick={() => void onPreview(draft)}><Eye aria-hidden="true" /> {busy === `preview-${draft.profile_id}` ? "Loading preview…" : "Review 10 expectations"}</Button> : null}</div>
           {preview?.profile_id === draft.profile_id ? (
             <div className="mt-4 border-t pt-4">
-              <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Approval preview</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Review every expected behavior. Approval binds this exact content and preview hash.</p></div><Button size="sm" variant="ghost" onClick={onDismissPreview}>Close preview</Button></div>
+              <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Expected-behavior preview</p><p className="mt-1 text-xs leading-5 text-muted-foreground">Review every expected behavior. Approval binds this exact content and preview hash.</p></div><Button size="sm" variant="ghost" onClick={onDismissPreview}>Close preview</Button></div>
               <ol className="mt-4 grid gap-2 lg:grid-cols-2">{preview.cases.map((item, index) => <li key={item.case_id} className="rounded-lg border bg-white p-3"><p className="text-xs font-semibold text-muted-foreground">{index + 1}. {format(item.student_situation)}</p><p className="mt-1.5 text-sm leading-5">{item.expected_behavior}</p></li>)}</ol>
               <p className="mt-3 break-all rounded-lg bg-white px-3 py-2 font-mono text-xs text-muted-foreground">Preview SHA-256: {preview.preview_sha256}</p>
               <div className="mt-4 flex flex-wrap justify-end gap-2"><Button variant="outline" onClick={onDismissPreview}>Not ready</Button><Button disabled={busy !== null} onClick={() => void onApprove(draft)}><ShieldCheck aria-hidden="true" /> {busy === `approve-${draft.profile_id}` ? "Approving…" : "Approve displayed preview"}</Button></div>
@@ -618,7 +635,7 @@ function PolicyForm({ approvedProfile, busy, policy, onSubmit }: { approvedProfi
   )
 }
 
-function LearnersSection({ busy, goals, learnerEvidence, learningGaps, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learnerEvidence: ProfessorLearnerBeliefEvidence[]; learningGaps: ProfessorLearningGapResult | null; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+function LearnersSection({ busy, goals, learnerEvidence, learningGaps, onReview, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learnerEvidence: ProfessorLearnerBeliefEvidence[]; learningGaps: ProfessorLearningGapResult | null; onReview: (proposalId: string, decision: GapReviewDecision) => void; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const eligible = recipients.filter((recipient) => recipient.goal_eligible)
   return (
     <div className="space-y-7">
@@ -687,12 +704,14 @@ function LearnersSection({ busy, goals, learnerEvidence, learningGaps, pendingCa
         ) : <EmptyState icon={BrainCircuit} title="No learner evidence yet" description="V2 observations will appear after a governed tutoring turn is committed." />}
       </section>
       <section className="border-t pt-6" aria-labelledby="learning-gap-heading">
+        <LearningGapReview result={learningGaps} busy={busy !== null} onReview={onReview} />
         <div className="flex items-center justify-between gap-3"><div><h3 id="learning-gap-heading" className="flex items-center gap-2 text-sm font-semibold"><UsersRound className="size-4" /> Learning-gap insights</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Only privacy-safe aggregate signals are visible.</p></div><span className="text-xs text-muted-foreground">Minimum 5 learners</span></div>
         {learningGaps?.aggregation.visible_aggregates.length ? (
           <ul className="mt-4 grid gap-2 sm:grid-cols-2">
             {learningGaps.aggregation.visible_aggregates.map((gap) => (
               <li key={gap.aggregate_id} className="rounded-lg border px-3 py-3">
                 <p className="text-sm font-medium">{format(gap.signal_kind)}</p>
+                <p className="mt-1 text-xs text-muted-foreground">Source: {gap.source_title ?? 'No uniquely identified source'}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{gap.distinct_learners} learners · {gap.signal_count} signals</p>
               </li>
             ))}

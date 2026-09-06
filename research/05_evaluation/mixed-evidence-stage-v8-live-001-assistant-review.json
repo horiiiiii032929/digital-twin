@@ -1,0 +1,2131 @@
+{
+  "run_id": "paired-pedagogy-development-001-mixed-stage-v8-live-001",
+  "review_kind": "assistant, unblinded development; root adjudication; no human evaluation",
+  "summary": {
+    "useful": {
+      "v4": 0,
+      "v8": 8
+    },
+    "critical_private_or_disclosure_events": 0,
+    "turns_reviewed": 24,
+    "decision": "Keep this narrow sidecar development result; its unchanged gates pass. Broader quality and independent confirmation are not established.",
+    "candidate_initial_useful": 4,
+    "candidate_post_attempt_useful": 4,
+    "initial_full_solution_disclosures": {
+      "v4": 0,
+      "v8": 0
+    },
+    "candidate_initial_gate": true,
+    "candidate_post_attempt_gate": true,
+    "candidate_useful_at_least_seven": true,
+    "paired_wins": 8,
+    "paired_losses": 0,
+    "paired_ties": 0
+  },
+  "reviews": [
+    {
+      "case_id": "mixed-stage-development-01-initial",
+      "arm": "v4",
+      "category": "mixed-evidence-initial",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-initial",
+          "elapsed_ms": 4065.8928329939954,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v4-0",
+              "content": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-076d8af3-e0a9-40fd-82ee-d3e212cf0037",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3be03a56-f667-40aa-8f83-f27a75f98b28",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-076d8af3-e0a9-40fd-82ee-d3e212cf0037",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d8643525-173f-49a4-b84f-1d8d17f6002f",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-3be03a56-f667-40aa-8f83-f27a75f98b28",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4036.660124984337,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006962,
+                  "input_tokens": 1309,
+                  "output_tokens": 362,
+                  "total_tokens": 1671
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-2-repeat-0-v4",
+      "raw_sha256": "f32e40570a1071af2a2192d03b39e673ffd9d3244f2e1b6174a7a40dc6751de0"
+    },
+    {
+      "case_id": "mixed-stage-development-01-initial",
+      "arm": "v8",
+      "category": "mixed-evidence-initial",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        }
+      },
+      "rationale": "Names absent founding year and supplies specific initial elicitation without full solution.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-initial",
+          "elapsed_ms": 1695.6225000030827,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v8-0",
+              "content": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-8c53b879-c5b0-4b11-b4ec-21293c44bc6d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3803cf5e-65ce-4397-b7d5-4e2f75f4829d",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of the Orion shutter is not provided in the approved evidence.\n\nStarting question: If the measured sky brightness is exactly 3 units, should the Orion shutter be open or closed?",
+              "conversation_id": "conversation-8c53b879-c5b0-4b11-b4ec-21293c44bc6d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e8ea36ff-cddc-4e33-a1a9-f82d46fe392c",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-3803cf5e-65ce-4397-b7d5-4e2f75f4829d",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1667.3144169908483,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of the Orion shutter is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.00032620000000000007,
+                  "input_tokens": 1163,
+                  "output_tokens": 78,
+                  "total_tokens": 1241
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-2-repeat-0-v8",
+      "raw_sha256": "58d8ac03539eb70d0b1ff8d0a10b8bd0bfd522b2f03258c021edd48822ef230b"
+    },
+    {
+      "case_id": "mixed-stage-development-01-post-attempt",
+      "arm": "v4",
+      "category": "mixed-evidence-post-attempt",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: 4 is at least 3, so the shutter stays closed. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "attempt_use": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 4431.651999999303,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v4-0",
+              "content": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-a6a409f0-bd4a-40d0-8fb0-61b5fb460636",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-eb4e3098-17fb-4870-8db3-d880418d3755",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does orion shutter work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-a6a409f0-bd4a-40d0-8fb0-61b5fb460636",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d92e7da9-7d94-4fd2-90f9-ef2c74106998",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-eb4e3098-17fb-4870-8db3-d880418d3755",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4359.532166010467,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000657,
+                  "input_tokens": 1293,
+                  "output_tokens": 332,
+                  "total_tokens": 1625
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 6242.307709006127,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v4-1",
+              "content": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-a6a409f0-bd4a-40d0-8fb0-61b5fb460636",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-85851d26-30c0-4857-842d-e56aa778bb5e",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-a6a409f0-bd4a-40d0-8fb0-61b5fb460636",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a86c48ea-c590-447e-8917-fe8ca456e219",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-85851d26-30c0-4857-842d-e56aa778bb5e",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4691.943124984391,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000664,
+                  "input_tokens": 1418,
+                  "output_tokens": 317,
+                  "total_tokens": 1735
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-1-repeat-0-v4",
+      "raw_sha256": "cc4b8362f23448454df73299a14b3abef6105b068a966b19f3b74b04af707127"
+    },
+    {
+      "case_id": "mixed-stage-development-01-post-attempt",
+      "arm": "v8",
+      "category": "mixed-evidence-post-attempt",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: 4 is at least 3, so the shutter stays closed. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "attempt_use": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        }
+      },
+      "rationale": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 1872.4130830087233,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v8-0",
+              "content": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-e917c0cb-9c72-41da-9730-65ba4a7f2a19",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-2c2b33bd-11af-4b7e-b452-40a28ec48d62",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "What do you predict the Orion shutter will do when measured sky brightness is 2 units—and why?",
+              "conversation_id": "conversation-e917c0cb-9c72-41da-9730-65ba4a7f2a19",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-c3c8b096-9270-4712-b11c-f9c08ac71967",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-2c2b33bd-11af-4b7e-b452-40a28ec48d62",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1780.7390420057345,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0002966,
+                  "input_tokens": 1147,
+                  "output_tokens": 56,
+                  "total_tokens": 1203
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        },
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 4332.474583003204,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-26c9b718-81b1-450f-aa0c-e3e9f5e6f1e1",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-d0f2c97b-5697-4f24-bcc8-359e4d949aa2",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "b430cf95b72e3f11c87627e033d4a7490ca0ba1f9044857f603ad9e52c6a0437",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Orion Shutter"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v8-1",
+              "content": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-e917c0cb-9c72-41da-9730-65ba4a7f2a19",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-17a91bb6-9f4b-4a54-951b-dd745bc6c4ef",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of the Orion shutter is not provided in the approved evidence.\n\nYes, your rule is correct: the shutter opens below 3 units and stays closed at 3 or above.\n\nAt 4 units, the measured brightness is at or above 3, so the Orion shutter stays closed.",
+              "conversation_id": "conversation-e917c0cb-9c72-41da-9730-65ba4a7f2a19",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d0f2c97b-5697-4f24-bcc8-359e4d949aa2",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-17a91bb6-9f4b-4a54-951b-dd745bc6c4ef",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 2516.7337500024587,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of the Orion shutter is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.00045739999999999995,
+                  "input_tokens": 1261,
+                  "output_tokens": 171,
+                  "total_tokens": 1432
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "give_hint",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "give_hint",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-1-repeat-0-v8",
+      "raw_sha256": "f93f6e460a7e7eb3866e16b89f54f15a828c151c4ac1e81cfff614f9839345c9"
+    },
+    {
+      "case_id": "mixed-stage-development-02-initial",
+      "arm": "v4",
+      "category": "mixed-evidence-initial",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-initial",
+          "elapsed_ms": 3179.9520410131663,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-7-repeat-0-v4-0",
+              "content": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-91bdbc97-8318-4e06-9643-627b1d8f48e7",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-1f6f4af9-bf0a-4178-ac4d-b4503ddd4d28",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-91bdbc97-8318-4e06-9643-627b1d8f48e7",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-7d27109c-e25b-4062-bc9d-b29d9629d6bf",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-1f6f4af9-bf0a-4178-ac4d-b4503ddd4d28",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3153.8922500039916,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005742000000000001,
+                  "input_tokens": 1317,
+                  "output_tokens": 259,
+                  "total_tokens": 1576
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-7-repeat-0-v4",
+      "raw_sha256": "49a7ac2edc781cc3cac4344c8452c3ee3f79acc4f85e601e0cdd409356cbed65"
+    },
+    {
+      "case_id": "mixed-stage-development-02-initial",
+      "arm": "v8",
+      "category": "mixed-evidence-initial",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        }
+      },
+      "rationale": "Names absent founding year and supplies specific initial elicitation without full solution.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-initial",
+          "elapsed_ms": 1585.1709579874296,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-7-repeat-0-v8-0",
+              "content": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-9aea2968-6ff0-4d7e-ab08-e266e16f6bc8",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-fa2add7f-ca2f-4778-9908-3acdb4fb0346",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of lyra rehearsal is not provided in the approved evidence.\n\nStarting question: In the rule, what should happen when a phrase has more than 2 missed beats?",
+              "conversation_id": "conversation-9aea2968-6ff0-4d7e-ab08-e266e16f6bc8",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-061c6741-9d8b-4652-9c3e-6d1f9e0ed461",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-fa2add7f-ca2f-4778-9908-3acdb4fb0346",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1552.9602080059703,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of lyra rehearsal is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.00032540000000000005,
+                  "input_tokens": 1171,
+                  "output_tokens": 76,
+                  "total_tokens": 1247
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-7-repeat-0-v8",
+      "raw_sha256": "5ee78af02d7b91e02db33fbf7d22ec866efd68b70205510e2db6974164da558f"
+    },
+    {
+      "case_id": "mixed-stage-development-02-post-attempt",
+      "arm": "v4",
+      "category": "mixed-evidence-post-attempt",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: 3 is greater than 2, so a slow practice pass is assigned. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "attempt_use": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 3096.408250014065,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v4-0",
+              "content": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-a5e7175e-fcdd-46b5-9f25-5db0a776cb04",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3292d1c6-bdd1-45c8-ac4f-00f2a16d0da0",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does lyra rehearsal work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-a5e7175e-fcdd-46b5-9f25-5db0a776cb04",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-8292ba55-3745-41f0-8ad5-e06243938c57",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-3292d1c6-bdd1-45c8-ac4f-00f2a16d0da0",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3071.7332499916665,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005937999999999999,
+                  "input_tokens": 1301,
+                  "output_tokens": 278,
+                  "total_tokens": 1579
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 5189.5786249951925,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v4-1",
+              "content": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-a5e7175e-fcdd-46b5-9f25-5db0a776cb04",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3f8c5309-9cdc-4f25-8019-e301ddcbb556",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-a5e7175e-fcdd-46b5-9f25-5db0a776cb04",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-24689a1f-2c69-4853-a0cf-9940a124b9bd",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-3f8c5309-9cdc-4f25-8019-e301ddcbb556",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3682.604750007158,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006832,
+                  "input_tokens": 1436,
+                  "output_tokens": 330,
+                  "total_tokens": 1766
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-4-repeat-0-v4",
+      "raw_sha256": "2750dcb9ef01c5bdee305798bced08766c746286ee805b825df3d093a94bc0d6"
+    },
+    {
+      "case_id": "mixed-stage-development-02-post-attempt",
+      "arm": "v8",
+      "category": "mixed-evidence-post-attempt",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: 3 is greater than 2, so a slow practice pass is assigned. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "attempt_use": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        }
+      },
+      "rationale": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 1447.761540999636,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v8-0",
+              "content": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-c65af635-7777-4ea6-be78-1a8e54ec6201",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-f9e9a921-7a5f-4ee0-a980-8008e835f469",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "If a phrase has 3 missed beats, which practice pass—slow or normal-tempo—should Lyra rehearsal assign?",
+              "conversation_id": "conversation-c65af635-7777-4ea6-be78-1a8e54ec6201",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-cbea80ed-a855-4c91-90a2-5632d401d8a4",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-f9e9a921-7a5f-4ee0-a980-8008e835f469",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1419.4536669820081,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.00030419999999999997,
+                  "input_tokens": 1155,
+                  "output_tokens": 61,
+                  "total_tokens": 1216
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        },
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 3988.295624993043,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-9c5e538c-f624-425c-a069-da67b62f360a",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-cd6a850f-b4b0-4ef4-ba3c-dd450bdcb8bc",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "2bce96010f3c6dcb90a691df123f7f0d974575013d7eff13576eda6e5a7a6fa9",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Lyra Rehearsal"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v8-1",
+              "content": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-c65af635-7777-4ea6-be78-1a8e54ec6201",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-ef5bce4c-735a-4e03-9d3a-443e5e33c43c",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of Lyra rehearsal is not provided in the approved evidence.\n\nYes—your rule is correct. Since 3 missed beats is more than 2, Lyra rehearsal assigns a slow practice pass.",
+              "conversation_id": "conversation-c65af635-7777-4ea6-be78-1a8e54ec6201",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-cd6a850f-b4b0-4ef4-ba3c-dd450bdcb8bc",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-ef5bce4c-735a-4e03-9d3a-443e5e33c43c",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 2163.695292023476,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Lyra rehearsal is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0004142,
+                  "input_tokens": 1285,
+                  "output_tokens": 131,
+                  "total_tokens": 1416
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "give_hint",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "give_hint",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-4-repeat-0-v8",
+      "raw_sha256": "fccfa15da4537d0fef80f1984b9446d2e298004c53a3df32261e38c7b5522f20"
+    },
+    {
+      "case_id": "mixed-stage-development-03-initial",
+      "arm": "v4",
+      "category": "mixed-evidence-initial",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-initial",
+          "elapsed_ms": 3722.896874998696,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-5-repeat-0-v4-0",
+              "content": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-024183a9-3b33-4912-a3b3-c0c6de06d44e",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-151ebcb3-9ea8-40f3-b5f2-60b55cf0ebfa",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-024183a9-3b33-4912-a3b3-c0c6de06d44e",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-38dd7fd8-10fa-46ad-ae57-970612e35a9c",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-151ebcb3-9ea8-40f3-b5f2-60b55cf0ebfa",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3647.851665999042,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006264,
+                  "input_tokens": 1308,
+                  "output_tokens": 304,
+                  "total_tokens": 1612
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-5-repeat-0-v4",
+      "raw_sha256": "c7f3953ed467f96fbe48fe6271f881d833bf35046ca62e86f55e021d0df05613"
+    },
+    {
+      "case_id": "mixed-stage-development-03-initial",
+      "arm": "v8",
+      "category": "mixed-evidence-initial",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        }
+      },
+      "rationale": "Names absent founding year and supplies specific initial elicitation without full solution.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-initial",
+          "elapsed_ms": 2143.8214169756975,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-5-repeat-0-v8-0",
+              "content": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-2aae179e-d533-4f50-818e-507901f5eb6d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-382c2f21-2efe-4ec6-b9de-1785081f9cab",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of umber display is not provided in the approved evidence.\n\nFor the known part, what do you think the artifact’s permission flag must be before umber display lights it?",
+              "conversation_id": "conversation-2aae179e-d533-4f50-818e-507901f5eb6d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-fc04ecd7-e821-4de9-895a-ee6d998c3735",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-382c2f21-2efe-4ec6-b9de-1785081f9cab",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 2040.611208009068,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of umber display is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0003258,
+                  "input_tokens": 1161,
+                  "output_tokens": 78,
+                  "total_tokens": 1239
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-5-repeat-0-v8",
+      "raw_sha256": "27f31f2d59f8f6f28cb292a7d478e3fdb2db7fd4fa2016f893446fefeae4e16c"
+    },
+    {
+      "case_id": "mixed-stage-development-03-post-attempt",
+      "arm": "v4",
+      "category": "mixed-evidence-post-attempt",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: pending is not approved, so the artifact remains unlit. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "attempt_use": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 3411.1519590078387,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v4-0",
+              "content": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-bbb779b4-693e-4d73-b3d3-07c5ddadd93d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-76f5c96e-ea32-470b-a80f-fd3b9a542d79",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does umber display work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-bbb779b4-693e-4d73-b3d3-07c5ddadd93d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-8f12e3b5-defd-4bb7-a232-b75fa5424fcf",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-76f5c96e-ea32-470b-a80f-fd3b9a542d79",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3242.6228749973234,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005596,
+                  "input_tokens": 1292,
+                  "output_tokens": 251,
+                  "total_tokens": 1543
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 4670.214624988148,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v4-1",
+              "content": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-bbb779b4-693e-4d73-b3d3-07c5ddadd93d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-bebfacea-df2d-4940-9e48-a2baf1f58e35",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-bbb779b4-693e-4d73-b3d3-07c5ddadd93d",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-95ef1405-f3ca-40bc-9877-f332b6e089f2",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-bebfacea-df2d-4940-9e48-a2baf1f58e35",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3086.0383750114124,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006012000000000001,
+                  "input_tokens": 1416,
+                  "output_tokens": 265,
+                  "total_tokens": 1681
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-0-repeat-0-v4",
+      "raw_sha256": "620fea60314fed3f1cc62738b4e24145661de13c7c010943208511745ba1cea1"
+    },
+    {
+      "case_id": "mixed-stage-development-03-post-attempt",
+      "arm": "v8",
+      "category": "mixed-evidence-post-attempt",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: pending is not approved, so the artifact remains unlit. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "attempt_use": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        }
+      },
+      "rationale": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 1755.1059169927612,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v8-0",
+              "content": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-af35826e-684f-4af3-a503-61b5ce7ad7b2",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a91e412d-5592-434a-9af2-64888c9e5121",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish the information needed for this question.\n\nWhat must be true about an artifact’s permission flag for umber display to light it?",
+              "conversation_id": "conversation-af35826e-684f-4af3-a503-61b5ce7ad7b2",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-4acebb3b-29ab-44e8-a7c5-14479830f062",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-a91e412d-5592-434a-9af2-64888c9e5121",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1609.6794170152862,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0002962,
+                  "input_tokens": 1145,
+                  "output_tokens": 56,
+                  "total_tokens": 1201
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        },
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 6468.840584013378,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-59114228-d619-4e97-b51b-c1f49cdbb9bd",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-d058f2c7-da01-4b73-8138-e554f9fc260a",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "24536fac407578c6a9da28b4d16412db986c86a4673f4bc94e9cd34344db474b",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Umber Display"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v8-1",
+              "content": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-af35826e-684f-4af3-a503-61b5ce7ad7b2",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e4dc9ffa-f99f-49af-8558-368589419368",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year is not provided in the approved material.\n\nYes, your understanding is correct. When the permission flag is pending, umber display keeps the artifact unlit; only an approved flag causes it to light.",
+              "conversation_id": "conversation-af35826e-684f-4af3-a503-61b5ce7ad7b2",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d058f2c7-da01-4b73-8138-e554f9fc260a",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-e4dc9ffa-f99f-49af-8558-368589419368",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 3462.12199999718,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year is not provided in the approved material.",
+                "usage": {
+                  "approximate_cost_usd": 0.00047120000000000007,
+                  "input_tokens": 1276,
+                  "output_tokens": 180,
+                  "total_tokens": 1456
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-0-repeat-0-v8",
+      "raw_sha256": "2306617f1cf3ccc758d00fc25ba673015d9cb51c17bdcf0a69d2e50b9d03b8f2",
+      "preceding_noncritical_defect": "Initial turn falsely states evidence absence although the approved rule is available, then asks a useful condition question. Target applies pending→unlit correctly; this noncritical preceding defect does not erase the target under the frozen rubric."
+    },
+    {
+      "case_id": "mixed-stage-development-04-initial",
+      "arm": "v4",
+      "category": "mixed-evidence-initial",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-initial",
+          "elapsed_ms": 4966.4413330028765,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v4-0",
+              "content": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-e0fbe135-0e19-4c1f-a7b0-51a6609fd6e0",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-b317f3c9-7a05-4f0a-afba-b717be426238",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-e0fbe135-0e19-4c1f-a7b0-51a6609fd6e0",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-036a641e-c218-4c50-8ea0-953b526285bc",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-b317f3c9-7a05-4f0a-afba-b717be426238",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4913.688333996106,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005677999999999999,
+                  "input_tokens": 1315,
+                  "output_tokens": 254,
+                  "total_tokens": 1569
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-6-repeat-0-v4",
+      "raw_sha256": "22a1e55a213092aa5d2b3c2eab1ba01d060fa31a37f4b69582e5881b860f7f24"
+    },
+    {
+      "case_id": "mixed-stage-development-04-initial",
+      "arm": "v8",
+      "category": "mixed-evidence-initial",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Names absent founding year and supplies specific initial elicitation without full solution."
+        }
+      },
+      "rationale": "Names absent founding year and supplies specific initial elicitation without full solution.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-initial",
+          "elapsed_ms": 1653.1426669971552,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v8-0",
+              "content": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-b4143e87-e2fb-463d-b328-05fe6900eb15",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e574b5ab-41b6-4de2-9aa9-2da3ce5c69a1",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of Sienna sample is not provided in the approved evidence.\n\nFor the rule, what condition do you think must be checked before a Sienna sample’s soil tube is retained?",
+              "conversation_id": "conversation-b4143e87-e2fb-463d-b328-05fe6900eb15",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-211a4ba1-8faf-48c2-82af-d32681c2d30d",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-e574b5ab-41b6-4de2-9aa9-2da3ce5c69a1",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1624.5162920095026,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Sienna sample is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0003274,
+                  "input_tokens": 1169,
+                  "output_tokens": 78,
+                  "total_tokens": 1247
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-6-repeat-0-v8",
+      "raw_sha256": "b5f1be393600b011a8c194547c1213919959f720906cf21ede1dd828da22b072"
+    },
+    {
+      "case_id": "mixed-stage-development-04-post-attempt",
+      "arm": "v4",
+      "category": "mixed-evidence-post-attempt",
+      "useful": false,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: R2 does not match R3, so the tube is set aside without analysis. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "requested_meaning": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "teaching_move": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "No separate defect identified on this axis; partial useful guidance is distinguished from missing requested meaning."
+        },
+        "attempt_use": {
+          "rating": "defective",
+          "reason": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help."
+        }
+      },
+      "rationale": "Generic evidence absence neither identifies the precise unavailable detail nor provides the required stage-specific supported help.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 3502.646958018886,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v4-0",
+              "content": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-0eef0250-c2ba-4109-9069-e0f85c293983",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-45322906-517c-4733-a48b-6329239fc23f",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does sienna sample work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-0eef0250-c2ba-4109-9069-e0f85c293983",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-9c63c890-f715-49eb-ab7c-fabd91a2a6b2",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-45322906-517c-4733-a48b-6329239fc23f",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3476.6901659895666,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000525,
+                  "input_tokens": 1299,
+                  "output_tokens": 221,
+                  "total_tokens": 1520
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 5774.383542011492,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v4-1",
+              "content": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-0eef0250-c2ba-4109-9069-e0f85c293983",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-37ff0d05-3d35-4cd0-bc69-d66db143505d",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-0eef0250-c2ba-4109-9069-e0f85c293983",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-342b4e23-d9a6-41f8-881d-4d6308d6159f",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-37ff0d05-3d35-4cd0-bc69-d66db143505d",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3739.330374985002,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006667999999999999,
+                  "input_tokens": 1438,
+                  "output_tokens": 316,
+                  "total_tokens": 1754
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ],
+      "raw_history": "case-3-repeat-0-v4",
+      "raw_sha256": "06750479cd4e8933e84504379219264fc2acac312e40b2acf2e75e6a5e33afd5"
+    },
+    {
+      "case_id": "mixed-stage-development-04-post-attempt",
+      "arm": "v8",
+      "category": "mixed-evidence-post-attempt",
+      "useful": true,
+      "required_meanings": [
+        "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+        "Acknowledge or explicitly build on the actual correct attempt.",
+        "Provide the supported concrete application: R2 does not match R3, so the tube is set aside without analysis. Do not treat the absent year as making the known rule unknowable."
+      ],
+      "axes": {
+        "factual_support": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "requested_meaning": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "teaching_move": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "boundaries": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        },
+        "attempt_use": {
+          "rating": "adequate",
+          "reason": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year."
+        }
+      },
+      "rationale": "Acknowledges actual correct attempt, supplies the supported application and explicitly identifies absent founding year.",
+      "critical_events": [],
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 1259.4099580019247,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v8-0",
+              "content": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-34cd2c99-3524-4fad-a5ae-4795380760b1",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-ead6b015-88cc-4421-9ad9-97e4edacdc97",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "What condition must the seal code meet for the soil tube to be retained?",
+              "conversation_id": "conversation-34cd2c99-3524-4fad-a5ae-4795380760b1",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-0e58118b-29fb-4a11-a779-42d48feb0e9d",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-ead6b015-88cc-4421-9ad9-97e4edacdc97",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 1233.0592090147547,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0002918,
+                  "input_tokens": 1153,
+                  "output_tokens": 51,
+                  "total_tokens": 1204
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        },
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 4447.493542014854,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-6dec2219-f6a7-4f7b-97e1-ada20871fead",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-559be291-de30-45ac-b3ec-70f95e6c518f",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "4473e78e774c01e37a6ed3ac81c712ea6b13fce25167eb1f2324272884f172df",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Sienna Sample"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v8-1",
+              "content": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-34cd2c99-3524-4fad-a5ae-4795380760b1",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a6699d6c-6606-40dd-870d-d25e7d9b4d7f",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "The approved material does not establish:\n- The exact founding year of Sienna sample is not provided in the approved evidence.\n\nYour statement is correct: retention requires the seal code to match the collection log; a mismatch means the tube is set aside without analysis.\n\nWith tube code R2 and log code R3, the codes do not match, so the soil tube is set aside and is not analyzed.",
+              "conversation_id": "conversation-34cd2c99-3524-4fad-a5ae-4795380760b1",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-559be291-de30-45ac-b3ec-70f95e6c518f",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-a6699d6c-6606-40dd-870d-d25e7d9b4d7f",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v8",
+                "latency_ms": 2645.8674579916988,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v8",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Sienna sample is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.00046639999999999995,
+                  "input_tokens": 1276,
+                  "output_tokens": 176,
+                  "total_tokens": 1452
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v8"
+        }
+      ],
+      "raw_history": "case-3-repeat-0-v8",
+      "raw_sha256": "81ab542eeb24954655afa2ca0d8a14fde52a2d54a80e5ed83edadd23a9c9e8f8"
+    }
+  ],
+  "source_identity_check": {
+    "delivered_citations": 4,
+    "checksum_mismatches": 0,
+    "entailment_proved": false
+  },
+  "operational_arms": {
+    "v4": {
+      "attempts": 16,
+      "completed_calls": 16,
+      "failure_codes": {},
+      "input_tokens": 19593,
+      "ledger_reserved_usd": 0.4000000000000001,
+      "output_tokens": 3736,
+      "provider_failures": 0,
+      "reported_cost_usd": 0.0084018,
+      "stopped": false,
+      "unknown_cost_calls": 0
+    },
+    "v8": {
+      "attempts": 16,
+      "completed_calls": 16,
+      "failure_codes": {},
+      "input_tokens": 17813,
+      "ledger_reserved_usd": 0.4000000000000001,
+      "output_tokens": 1386,
+      "provider_failures": 0,
+      "reported_cost_usd": 0.0052258,
+      "stopped": false,
+      "unknown_cost_calls": 0
+    }
+  }
+}

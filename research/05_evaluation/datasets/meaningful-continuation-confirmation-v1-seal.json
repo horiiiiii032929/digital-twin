@@ -1,0 +1,10 @@
+{
+  "packet_id": "meaningful-continuation-confirmation-v1",
+  "path": "research/05_evaluation/datasets/meaningful-continuation-confirmation-v1.json",
+  "sha256": "d2d0567bd62ba43245586f47780eb529cbee4498015c59399a4bd7845c253638",
+  "contexts": 48,
+  "source_clusters": 4,
+  "author_exposure": true,
+  "candidate_runtime_exposure": false,
+  "executed": false
+}

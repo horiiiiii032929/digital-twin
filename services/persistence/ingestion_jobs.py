@@ -46,8 +46,8 @@ class SQLiteIngestionJobRepository:
                     professor_id, display_allowed, source_label, source_object_key,
                     source_checksum, status, attempts, max_attempts, lease_owner,
                     lease_expires_at, error_code, error_message, result_json,
-                    created_at, updated_at)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    created_at, updated_at, deidentified_reviewed)
+                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 _job_values(job),
             )
             created = cursor.rowcount == 1
@@ -327,12 +327,14 @@ def _job_values(job: IngestionJob) -> tuple[object, ...]:
         job.result.model_dump_json() if job.result else None,
         job.created_at,
         job.updated_at,
+        int(job.deidentified_reviewed),
     )
 
 
 def _job(row: sqlite3.Row) -> IngestionJob:
     values = dict(row)
     values["display_allowed"] = bool(values["display_allowed"])
+    values["deidentified_reviewed"] = bool(values["deidentified_reviewed"])
     result_json = values.pop("result_json")
     values["result"] = (
         IngestionJobResult.model_validate_json(result_json) if result_json else None

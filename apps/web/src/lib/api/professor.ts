@@ -13,6 +13,8 @@ import type {
   OnboardingSession,
   PedagogicalPolicyV2,
   ProfessorCourse,
+  ProfessorGeneratedPreview,
+  ProfessorGeneratedPreviewRequest,
   ProfessorIngestionJob,
   ProfessorIngestionResult,
   ProfessorLearningGapResult,
@@ -86,31 +88,44 @@ export function listProfessorIngestionJobs(
   )
 }
 
+export function courseSourceMime(file: Pick<File, "name" | "type">): string | null {
+  const suffix = file.name.toLowerCase().split('.').pop()
+  const expected = ({ pdf: 'application/pdf', txt: 'text/plain', md: 'text/markdown' } as Record<string, string>)[suffix ?? '']
+  if (!expected) return null
+  if (file.type && file.type !== expected && !(suffix === 'md' && file.type === 'text/plain')) return null
+  return expected
+}
+
 export function uploadProfessorCoursePdf({
   courseId,
   artifactId,
   title,
   file,
   idempotencyKey,
+  deidentifiedReviewed = false,
 }: {
   courseId: string
   artifactId: string
   title: string
   file: File
   idempotencyKey: string
+  deidentifiedReviewed?: boolean
 }): Promise<ProfessorIngestionJob | ProfessorIngestionResult> {
+  const mime = courseSourceMime(file)
+  if (!mime) throw new Error("Choose a PDF, UTF-8 .txt or .md file.")
   const query = new URLSearchParams({
     title,
     version: "1",
     display_allowed: "true",
     source_label: "course-approved",
+    deidentified_reviewed: String(deidentifiedReviewed),
   })
   return professorRequest<ProfessorIngestionJob | ProfessorIngestionResult>(
     `/api/professor/courses/${pathSegment(courseId)}/sources/${pathSegment(artifactId)}?${query}`,
     {
       method: "PUT",
       headers: {
-        "Content-Type": "application/pdf",
+        "Content-Type": mime,
         "Idempotency-Key": idempotencyKey,
       },
       body: file,
@@ -493,15 +508,18 @@ export function buildInlineProfessorIngestionJob({
   title,
   result,
   timestamp,
+  mimeType = "application/pdf",
 }: {
   courseId: string
   artifactId: string
   title: string
   result: ProfessorIngestionResult
   timestamp: string
+  mimeType?: string
 }): ProfessorIngestionJob {
   return {
     id: `inline-${result.source_checksum.slice(0, 16)}`,
+    source_mime_type: mimeType,
     course_id: courseId,
     artifact_id: artifactId,
     title,
@@ -513,4 +531,23 @@ export function buildInlineProfessorIngestionJob({
     created_at: timestamp,
     updated_at: timestamp,
   }
+}
+
+export function reviewProfessorLearningGap(courseId: string, releaseId: string, proposalId: string,
+  decision: "consider-for-next-release" | "dismissed") {
+  return professorRequest<{ proposal_id: string; decision: string }>(
+    `/api/professor/courses/${pathSegment(courseId)}/learning-gaps/review`, {
+      method: "POST",
+      body: JSON.stringify({ release_id: releaseId, proposal_id: proposalId, decision, rationale: "" }),
+    })
+}
+
+export function listProfessorGeneratedPreviews(courseId: string, profileId: string): Promise<ProfessorGeneratedPreview[]> {
+  return professorRequest(`/api/professor/courses/${pathSegment(courseId)}/teaching-profiles/${pathSegment(profileId)}/generated-previews`)
+}
+export function createProfessorGeneratedPreview(courseId: string, profileId: string, body: ProfessorGeneratedPreviewRequest): Promise<ProfessorGeneratedPreview> {
+  return professorRequest(`/api/professor/courses/${pathSegment(courseId)}/teaching-profiles/${pathSegment(profileId)}/generated-previews`, { method: 'POST', body: JSON.stringify(body) })
+}
+export function approveProfessorGeneratedPreview(courseId: string, profileId: string, artifactId: string, body: { artifact_sha256: string; decisions: Array<{ case_id: string; decision: 'accept' | 'revise' }> }): Promise<ProfessorGeneratedPreview> {
+  return professorRequest(`/api/professor/courses/${pathSegment(courseId)}/teaching-profiles/${pathSegment(profileId)}/generated-previews/${pathSegment(artifactId)}/approve`, { method: 'POST', body: JSON.stringify(body) })
 }

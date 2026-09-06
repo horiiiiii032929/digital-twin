@@ -1,9 +1,9 @@
 # System-design report components
 
-These components are intentionally separate from `report.tex`. They are the
-first review unit for the System Design and Implementation section and should
-not be treated as accepted report content until their scope and terminology
-have been reviewed.
+The logical architecture and governed tutoring activity figures are now included
+in the working `report.tex` draft (2026-09-06). The publication sequence,
+use-case scope and detailed tables remain modular supporting material. Inclusion
+is an editorial draft decision, not evidence of implementation qualification.
 
 ## Visual components
 

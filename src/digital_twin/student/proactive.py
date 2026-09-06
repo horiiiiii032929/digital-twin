@@ -806,6 +806,10 @@ class ProactiveOutreachService:
             or release.status != StudentReleaseStatus.PUBLISHED
         ):
             return "release-unavailable"
+        if release.teaching_profile_id:
+            from .teaching_profile_context import profile_authorizes_release
+            if not profile_authorizes_release(self.repository, self.repository.get_teaching_profile(release.teaching_profile_id), release):
+                return "teaching-profile-withdrawn"
         return None
 
     def _recovery_availability_reason(
@@ -866,6 +870,10 @@ class ProactiveOutreachService:
             raise ProactiveOutreachError(
                 "release_unavailable", "The course Digital Twin is not published."
             )
+        if release.teaching_profile_id:
+            from .teaching_profile_context import profile_authorizes_release
+            if not profile_authorizes_release(self.repository, self.repository.get_teaching_profile(release.teaching_profile_id), release):
+                raise ProactiveOutreachError("teaching_profile_withdrawn", "The bound teaching profile was withdrawn.")
         return release
 
     def _authorize_professor_schedule(self, professor_id: str, student_id: str, course_id: str):

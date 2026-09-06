@@ -1,0 +1,65 @@
+\section{Objective and Research Contribution}
+The approved capstone brief proposes an identity and knowledge ingestion engine,
+pedagogical alignment, and student access with instructor oversight.\footnote{NUS
+MComp project allocation brief, \emph{Architecting an Digital Twin for Scalable,
+Style-Aligned Instructor Presence}, supplied by the student; academic advisor:
+Lek Hsiang Hui. Unpublished project description.}
+The intended experience is that an instructor configures course materials,
+teaching preferences and learning objectives, then the Twin answers students
+and initiates permitted support between their questions. Students' responses
+inform subsequent support, while the instructor can review and revise the course
+configuration.
+
+The central engineering question is: \emph{How can instructor configuration,
+course evidence and accumulated learner observations be connected to an agent
+that initiates and continues support, and which component combinations are
+supported by comparative evidence?} Here, autonomy means starting a permitted
+action without a new student request or approval of every message. It includes
+deciding to wait.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Requirements linking the project brief to executable behaviour.}
+\label{tab:requirements}
+\begin{tabularx}{\linewidth}{@{}L{0.29\linewidth}Y@{}}
+\toprule User need & Required behaviour \\\midrule
+Configure a course Twin & Review permitted sources, teaching settings and objectives; preview and publish a course-scoped release. \\
+Obtain grounded support & Answer with complete, traceable course evidence, or choose clarification, abstention or refusal as appropriate. \\
+Follow teaching preferences & Use the approved assistance sequence, explanation style and permitted actions in the delivered response. \\
+Receive continuing support & Preserve learner observations and goals; initiate support, incorporate the response, and stop each goal using relevant evidence. \\
+Retain human control & Honour membership and consent, timing limits and publication changes; support review, pause and restart. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The report makes three contributions. First, it describes a working integration
+of instructor configuration, evidence-grounded dialogue and persistent proactive
+tutoring. Second, it compares evidence interfaces, action planners, model
+allocations and learner/timing combinations, identifying both useful changes
+and unsuccessful alternatives. Third, it uses integrated trials and a reproduced
+goal-completion defect to show why successful execution, correct state transitions
+and useful teaching require separate evidence. The \href{https://github.com/horiiiiii032929/digital-twin}{project
+repository} retains implementation and evaluation records~\cite{horinouchi2026digitaltwin}.
+
+\subsection{Related Work and Positioning}
+Retrieval-augmented generation (RAG) combines generation with retrieved external knowledge~\cite{lewis2020retrieval}.
+ALCE distinguishes answer correctness from citation quality~\cite{gao2023citations}.
+The implemented system enforces course/release authority and an explicit evidence-to-answer
+contract. Finding a relevant passage is insufficient when a question requires
+several facts or the selected source region is wrong.
+
+StratL represents a multi-turn teaching strategy through transitions between
+tutoring intents~\cite{puech-etal-2025-towards}; ScaffoldLM combines a stepwise plan
+with assessment-driven memory~\cite{li-etal-2026-planning}. This project integrates those concerns with instructor-reviewed settings,
+proactive execution and inspectable state.
+
+Mixed-initiative interaction considers uncertainty, the benefit of assistance
+and the cost of interrupting a user~\cite{horvitz1999mixed}. That framing motivates
+comparing when to act, wait or decline, alongside what to say. The present
+planning scores are engineering heuristics; their coefficients are not measured
+educational effects.
+
+MRBench evaluates tutoring through multiple pedagogical dimensions
+\cite{maurya-etal-2025-unifying}. It motivates inspecting actual delivered
+guidance instead of accepting an action label as proof of good instruction.
+The comparisons evaluate local candidates under shared conditions.

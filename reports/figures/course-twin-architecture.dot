@@ -1,0 +1,22 @@
+digraph G {
+graph [rankdir=TB,bgcolor="white",pad=".12",nodesep=".28",ranksep=".34"]; node [shape=box,style=rounded,fontname="Helvetica",fontsize=13,margin=".12,.10"]; edge [fontname="Helvetica",fontsize=11,arrowsize=.65];
+
+ ui[label="Web workspaces\nProfessor / Student"];
+ api[label="FastAPI routes\nAuthenticate; validate request; call service"];
+ subgraph cluster_domain {label="APPLICATION SERVICES";fontname="Helvetica";color=gray;
+ pub[label="Publication / ingestion\nDraft; preflight; release"];
+ tutor[label="Student tutoring\nScope; evidence; policy\nResponse checks"];
+ auto[label="Autonomy / outreach\nGoals; eligibility\nDelivery"];
+ {rank=same;pub;tutor;auto;}
+ }
+ worker[label="Separate worker entry points\nIngestion jobs / due autonomy polls"];
+ store[shape=cylinder,label="Repository interfaces\nSQLite domain records + checkpoints\nLocal source-artifact files"];
+ provider[label="Provider adapters\nBounded planning / configured generation"];
+ ui->api[label="role-scoped request / response",dir=both];
+ api->pub;api->tutor;api->auto;
+ worker->pub[label="ingestion job"];worker->auto[label="observe / process due"];
+ pub->store[label="release / sources",dir=both];tutor->store[label="turn / state",dir=both];auto->store[label="lease / outcome",dir=both];
+ tutor->provider[label="proposal",dir=both];auto->provider[label="proposal",dir=both];
+ {rank=same;store;provider;}
+
+}

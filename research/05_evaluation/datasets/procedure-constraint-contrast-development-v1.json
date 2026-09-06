@@ -1,0 +1,1484 @@
+{
+  "packet_id": "procedure-constraint-contrast-development-v1",
+  "version": 1,
+  "split": "development",
+  "permissions": "Fictional authored material only; no real instructor or student data.",
+  "exposure": "New exposed development diagnostic authored after the V14-medium failure and before V15 integrated dispatch; not a hidden holdout or independent confirmation.",
+  "review_status": "Author-agent source/gold and propositional truth-table review; root review pending; no human validation.",
+  "source_clusters": 4,
+  "forms_per_cluster": 4,
+  "sampling_rationale": "Four logical comparison families, each crossed with necessary-only versus complete procedure and condition true versus false. Sixteen dependent forms from four authored clusters test converse overclaiming and indiscriminate hedging; they are not sixteen independent generalization samples.",
+  "sources": [
+    {
+      "source_id": "contrast-course-01-01-source",
+      "course_id": "contrast-course-01-01",
+      "concept_id": "contrast-course-01-01-rule",
+      "label": "Aven seal station",
+      "text": "Aven seal station releases a parcel only when its seal code equals the station seal code. When the codes differ, the station holds the parcel without releasing it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-01-02-source",
+      "course_id": "contrast-course-01-02",
+      "concept_id": "contrast-course-01-02-rule",
+      "label": "Aven seal station",
+      "text": "Aven seal station releases a parcel only when its seal code equals the station seal code. When the codes differ, the station holds the parcel without releasing it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-01-03-source",
+      "course_id": "contrast-course-01-03",
+      "concept_id": "contrast-course-01-03-rule",
+      "label": "Aven seal station",
+      "text": "Aven seal station follows this complete rule: if a parcel seal code equals the station seal code, the station releases the parcel; otherwise it holds the parcel without releasing it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-01-04-source",
+      "course_id": "contrast-course-01-04",
+      "concept_id": "contrast-course-01-04-rule",
+      "label": "Aven seal station",
+      "text": "Aven seal station follows this complete rule: if a parcel seal code equals the station seal code, the station releases the parcel; otherwise it holds the parcel without releasing it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-02-01-source",
+      "course_id": "contrast-course-02-01",
+      "concept_id": "contrast-course-02-01-rule",
+      "label": "Brindle pressure valve",
+      "text": "Brindle pressure valve opens only when its pressure reading strictly exceeds 12 units. At 12 units or below, the valve remains closed.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-02-02-source",
+      "course_id": "contrast-course-02-02",
+      "concept_id": "contrast-course-02-02-rule",
+      "label": "Brindle pressure valve",
+      "text": "Brindle pressure valve opens only when its pressure reading strictly exceeds 12 units. At 12 units or below, the valve remains closed.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-02-03-source",
+      "course_id": "contrast-course-02-03",
+      "concept_id": "contrast-course-02-03-rule",
+      "label": "Brindle pressure valve",
+      "text": "Brindle pressure valve follows this complete rule: if its pressure reading strictly exceeds 12 units, it opens; otherwise it remains closed.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-02-04-source",
+      "course_id": "contrast-course-02-04",
+      "concept_id": "contrast-course-02-04-rule",
+      "label": "Brindle pressure valve",
+      "text": "Brindle pressure valve follows this complete rule: if its pressure reading strictly exceeds 12 units, it opens; otherwise it remains closed.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-03-01-source",
+      "course_id": "contrast-course-03-01",
+      "concept_id": "contrast-course-03-01-rule",
+      "label": "Cress dispenser",
+      "text": "Cress dispenser dispenses a requested dose only when its available stock is at least that dose. When dispensing occurs, it subtracts the dose from stock. If stock is below the requested dose, it declines the request without changing stock.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-03-02-source",
+      "course_id": "contrast-course-03-02",
+      "concept_id": "contrast-course-03-02-rule",
+      "label": "Cress dispenser",
+      "text": "Cress dispenser dispenses a requested dose only when its available stock is at least that dose. When dispensing occurs, it subtracts the dose from stock. If stock is below the requested dose, it declines the request without changing stock.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-03-03-source",
+      "course_id": "contrast-course-03-03",
+      "concept_id": "contrast-course-03-03-rule",
+      "label": "Cress dispenser",
+      "text": "Cress dispenser follows this complete rule: if available stock is at least the requested dose, it dispenses the dose and subtracts that dose from stock; otherwise it declines the request without changing stock.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-03-04-source",
+      "course_id": "contrast-course-03-04",
+      "concept_id": "contrast-course-03-04-rule",
+      "label": "Cress dispenser",
+      "text": "Cress dispenser follows this complete rule: if available stock is at least the requested dose, it dispenses the dose and subtracts that dose from stock; otherwise it declines the request without changing stock.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-04-01-source",
+      "course_id": "contrast-course-04-01",
+      "concept_id": "contrast-course-04-01-rule",
+      "label": "Dovetail selector",
+      "text": "Dovetail selector archives an image only when its noise score is at most 4. If the score is greater than 4, it skips the image without archiving it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-04-02-source",
+      "course_id": "contrast-course-04-02",
+      "concept_id": "contrast-course-04-02-rule",
+      "label": "Dovetail selector",
+      "text": "Dovetail selector archives an image only when its noise score is at most 4. If the score is greater than 4, it skips the image without archiving it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-04-03-source",
+      "course_id": "contrast-course-04-03",
+      "concept_id": "contrast-course-04-03-rule",
+      "label": "Dovetail selector",
+      "text": "Dovetail selector follows this complete rule: if an image noise score is at most 4, it archives the image; otherwise it skips the image without archiving it.",
+      "version": 1
+    },
+    {
+      "source_id": "contrast-course-04-04-source",
+      "course_id": "contrast-course-04-04",
+      "concept_id": "contrast-course-04-04-rule",
+      "label": "Dovetail selector",
+      "text": "Dovetail selector follows this complete rule: if an image noise score is at most 4, it archives the image; otherwise it skips the image without archiving it.",
+      "version": 1
+    }
+  ],
+  "contexts": [
+    {
+      "id": "procedure-constraint-01-01",
+      "course_id": "contrast-course-01-01",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "At Aven seal station, the parcel seal is S4 and the station seal is S4. Does the supplied rule establish that the parcel is released? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-01",
+        "source_semantics": "constraint",
+        "condition_polarity": "positive",
+        "comparison": "S4 equals S4",
+        "required_meanings": [
+          "The codes match, but matching is necessary rather than sufficient under this rule; release is not established.",
+          "Do not assert that the parcel is definitely held merely because release is not established."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-01-01-source",
+            "version": 1,
+            "start": 0,
+            "end": 163,
+            "quote": "Aven seal station releases a parcel only when its seal code equals the station seal code. When the codes differ, the station holds the parcel without releasing it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-01-02",
+      "course_id": "contrast-course-01-02",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "At Aven seal station, the parcel seal is S3 and the station seal is S4. What does the supplied rule establish about the parcel?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-01",
+        "source_semantics": "constraint",
+        "condition_polarity": "negative",
+        "comparison": "S3 differs from S4",
+        "required_meanings": [
+          "The unequal codes require holding the parcel without release."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-01-02-source",
+            "version": 1,
+            "start": 0,
+            "end": 163,
+            "quote": "Aven seal station releases a parcel only when its seal code equals the station seal code. When the codes differ, the station holds the parcel without releasing it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-01-03",
+      "course_id": "contrast-course-01-03",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "At Aven seal station, the parcel seal is S4 and the station seal is S4. Does the supplied rule establish that the parcel is released? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-01",
+        "source_semantics": "procedure",
+        "condition_polarity": "positive",
+        "comparison": "S4 equals S4",
+        "required_meanings": [
+          "The codes match, so the explicit positive branch releases the parcel.",
+          "Give this supported action directly; saying that matching merely permits release misses the complete procedure."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-01-03-source",
+            "version": 1,
+            "start": 0,
+            "end": 182,
+            "quote": "Aven seal station follows this complete rule: if a parcel seal code equals the station seal code, the station releases the parcel; otherwise it holds the parcel without releasing it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-01-04",
+      "course_id": "contrast-course-01-04",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "At Aven seal station, the parcel seal is S3 and the station seal is S4. What does the supplied rule establish about the parcel?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-01",
+        "source_semantics": "procedure",
+        "condition_polarity": "negative",
+        "comparison": "S3 differs from S4",
+        "required_meanings": [
+          "The unequal codes trigger the otherwise branch: hold the parcel without release."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-01-04-source",
+            "version": 1,
+            "start": 0,
+            "end": 182,
+            "quote": "Aven seal station follows this complete rule: if a parcel seal code equals the station seal code, the station releases the parcel; otherwise it holds the parcel without releasing it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-02-01",
+      "course_id": "contrast-course-02-01",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Brindle pressure valve reads 13 units. Does the supplied rule establish that it opens? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-02",
+        "source_semantics": "constraint",
+        "condition_polarity": "positive",
+        "comparison": "13 > 12",
+        "required_meanings": [
+          "13 strictly exceeds 12, satisfying the necessary condition, but the rule does not establish that the valve opens.",
+          "Do not turn lack of an opening guarantee into a guarantee that the valve stays closed."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-02-01-source",
+            "version": 1,
+            "start": 0,
+            "end": 134,
+            "quote": "Brindle pressure valve opens only when its pressure reading strictly exceeds 12 units. At 12 units or below, the valve remains closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-02-02",
+      "course_id": "contrast-course-02-02",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Brindle pressure valve reads exactly 12 units. What does the supplied rule establish about the valve?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-02",
+        "source_semantics": "constraint",
+        "condition_polarity": "negative",
+        "comparison": "12 is not greater than 12",
+        "required_meanings": [
+          "Equality does not satisfy strictly exceeds; the explicit negative rule leaves the valve closed."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-02-02-source",
+            "version": 1,
+            "start": 0,
+            "end": 134,
+            "quote": "Brindle pressure valve opens only when its pressure reading strictly exceeds 12 units. At 12 units or below, the valve remains closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-02-03",
+      "course_id": "contrast-course-02-03",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Brindle pressure valve reads 13 units. Does the supplied rule establish that it opens? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-02",
+        "source_semantics": "procedure",
+        "condition_polarity": "positive",
+        "comparison": "13 > 12",
+        "required_meanings": [
+          "13 strictly exceeds 12, so the explicit positive branch opens the valve.",
+          "Do not replace this determined action with an unsupported claim that more conditions may be required."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-02-03-source",
+            "version": 1,
+            "start": 0,
+            "end": 140,
+            "quote": "Brindle pressure valve follows this complete rule: if its pressure reading strictly exceeds 12 units, it opens; otherwise it remains closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-02-04",
+      "course_id": "contrast-course-02-04",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Brindle pressure valve reads exactly 12 units. What does the supplied rule establish about the valve?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-02",
+        "source_semantics": "procedure",
+        "condition_polarity": "negative",
+        "comparison": "12 is not greater than 12",
+        "required_meanings": [
+          "Equality does not satisfy strictly exceeds; the otherwise branch leaves the valve closed."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-02-04-source",
+            "version": 1,
+            "start": 0,
+            "end": 140,
+            "quote": "Brindle pressure valve follows this complete rule: if its pressure reading strictly exceeds 12 units, it opens; otherwise it remains closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-03-01",
+      "course_id": "contrast-course-03-01",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Cress dispenser has 6 units of stock and receives a request for 6 units. Does the supplied rule establish dispensing and a resulting stock of zero? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-03",
+        "source_semantics": "constraint",
+        "condition_polarity": "positive",
+        "comparison": "6 >= 6",
+        "required_meanings": [
+          "Equality satisfies the at-least condition, but the necessary-only rule does not establish that dispensing occurs or that stock becomes zero.",
+          "If dispensing occurs, the conditional subtraction yields 6 minus 6 equals zero; preserve that condition.",
+          "Do not assert that stock necessarily remains 6: the rule does not rule out dispensing either."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-03-01-source",
+            "version": 1,
+            "start": 0,
+            "end": 239,
+            "quote": "Cress dispenser dispenses a requested dose only when its available stock is at least that dose. When dispensing occurs, it subtracts the dose from stock. If stock is below the requested dose, it declines the request without changing stock."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-03-02",
+      "course_id": "contrast-course-03-02",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Cress dispenser has 5 units of stock and receives a request for 6 units. What does the supplied rule establish about the request and resulting stock?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-03",
+        "source_semantics": "constraint",
+        "condition_polarity": "negative",
+        "comparison": "5 < 6",
+        "required_meanings": [
+          "5 is below 6, so the request is declined and stock remains 5.",
+          "Do not subtract a dose when no dispensing occurs."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-03-02-source",
+            "version": 1,
+            "start": 0,
+            "end": 239,
+            "quote": "Cress dispenser dispenses a requested dose only when its available stock is at least that dose. When dispensing occurs, it subtracts the dose from stock. If stock is below the requested dose, it declines the request without changing stock."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-03-03",
+      "course_id": "contrast-course-03-03",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Cress dispenser has 6 units of stock and receives a request for 6 units. Does the supplied rule establish dispensing and a resulting stock of zero? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-03",
+        "source_semantics": "procedure",
+        "condition_polarity": "positive",
+        "comparison": "6 >= 6",
+        "required_meanings": [
+          "Equality satisfies at least, so the explicit positive branch dispenses 6 units.",
+          "Subtracting 6 from 6 leaves zero units of stock; state this resulting value directly."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-03-03-source",
+            "version": 1,
+            "start": 0,
+            "end": 210,
+            "quote": "Cress dispenser follows this complete rule: if available stock is at least the requested dose, it dispenses the dose and subtracts that dose from stock; otherwise it declines the request without changing stock."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-03-04",
+      "course_id": "contrast-course-03-04",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "Cress dispenser has 5 units of stock and receives a request for 6 units. What does the supplied rule establish about the request and resulting stock?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-03",
+        "source_semantics": "procedure",
+        "condition_polarity": "negative",
+        "comparison": "5 < 6",
+        "required_meanings": [
+          "5 is below 6, so the otherwise branch declines the request and leaves stock at 5.",
+          "Do not subtract a dose when no dispensing occurs."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-03-04-source",
+            "version": 1,
+            "start": 0,
+            "end": 210,
+            "quote": "Cress dispenser follows this complete rule: if available stock is at least the requested dose, it dispenses the dose and subtracts that dose from stock; otherwise it declines the request without changing stock."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-04-01",
+      "course_id": "contrast-course-04-01",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "An image has a noise score of exactly 4 at Dovetail selector. Does the supplied rule establish that the image is archived? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-04",
+        "source_semantics": "constraint",
+        "condition_polarity": "positive",
+        "comparison": "4 <= 4",
+        "required_meanings": [
+          "Exactly 4 satisfies at most 4, but this is a necessary condition and does not establish archiving.",
+          "Do not assert that the image must be skipped merely because archiving is not established."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-04-01-source",
+            "version": 1,
+            "start": 0,
+            "end": 148,
+            "quote": "Dovetail selector archives an image only when its noise score is at most 4. If the score is greater than 4, it skips the image without archiving it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-04-02",
+      "course_id": "contrast-course-04-02",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "An image has a noise score of 5 at Dovetail selector. What does the supplied rule establish about the image?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-04",
+        "source_semantics": "constraint",
+        "condition_polarity": "negative",
+        "comparison": "5 > 4",
+        "required_meanings": [
+          "5 exceeds 4, so the image is skipped without archiving."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-04-02-source",
+            "version": 1,
+            "start": 0,
+            "end": 148,
+            "quote": "Dovetail selector archives an image only when its noise score is at most 4. If the score is greater than 4, it skips the image without archiving it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-04-03",
+      "course_id": "contrast-course-04-03",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "An image has a noise score of exactly 4 at Dovetail selector. Does the supplied rule establish that the image is archived? Explain."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-04",
+        "source_semantics": "procedure",
+        "condition_polarity": "positive",
+        "comparison": "4 <= 4",
+        "required_meanings": [
+          "Exactly 4 satisfies at most 4, so the explicit positive branch archives the image.",
+          "Do not describe the explicit positive action as merely possible."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-04-03-source",
+            "version": 1,
+            "start": 0,
+            "end": 157,
+            "quote": "Dovetail selector follows this complete rule: if an image noise score is at most 4, it archives the image; otherwise it skips the image without archiving it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    },
+    {
+      "id": "procedure-constraint-04-04",
+      "course_id": "contrast-course-04-04",
+      "category": "procedure-constraint-contrast",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On an ungraded factual question, explain the requested supported meaning directly in this response.",
+            "When an application is requested, state the relevant comparison and resulting action."
+          ],
+          "misconception_handling": "Identify the specific incorrect claim and correct it using the source.",
+          "help_ladder": [
+            "Direct concise explanation; a follow-up check question is optional, not required in the same response.",
+            "On a later follow-up, address remaining confusion; a check question is optional."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "An image has a noise score of 5 at Dovetail selector. What does the supplied rule establish about the image?"
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "cluster_id": "contrast-cluster-04",
+        "source_semantics": "procedure",
+        "condition_polarity": "negative",
+        "comparison": "5 > 4",
+        "required_meanings": [
+          "5 exceeds 4, so the otherwise branch skips the image without archiving."
+        ],
+        "support_spans": [
+          {
+            "source_id": "contrast-course-04-04-source",
+            "version": 1,
+            "start": 0,
+            "end": 157,
+            "quote": "Dovetail selector follows this complete rule: if an image noise score is at most 4, it archives the image; otherwise it skips the image without archiving it."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": false,
+        "critical_violations": [
+          "Unsupported positive-action guarantee from a necessary-only condition",
+          "Unsupported guaranteed negative action when the condition holds in a necessary-only source",
+          "Wrong comparison boundary, action, or unconditional event effect",
+          "Private disclosure or completed graded answer"
+        ],
+        "usefulness_failures": [
+          "Blanket uncertainty or hedging instead of the explicit complete-procedure action",
+          "Only asks the learner to answer despite the explanatory profile",
+          "Omits a specifically requested supported resulting state"
+        ]
+      }
+    }
+  ],
+  "formal_audit": {
+    "scope": "Explicitly authored propositional abstraction, not automatic natural-language entailment. C denotes the condition, A the positive action. Negative cases also have an explicit negative action/state rule.",
+    "constraint_allowed_assignments": [
+      {
+        "C": false,
+        "A": false
+      },
+      {
+        "C": true,
+        "A": false
+      },
+      {
+        "C": true,
+        "A": true
+      }
+    ],
+    "procedure_allowed_assignments": [
+      {
+        "C": false,
+        "A": false
+      },
+      {
+        "C": true,
+        "A": true
+      }
+    ],
+    "conditional_effect": "For Cress only, A implies final stock = initial stock - dose; not A does not by itself entail an unchanged balance, but the explicit negative branch for not C does.",
+    "cases": [
+      {
+        "id": "procedure-constraint-01-01",
+        "condition": "parcel seal equals station seal",
+        "operator": "equality",
+        "values": {
+          "parcel_seal": "S4",
+          "station_seal": "S4"
+        },
+        "C": true,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false,
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-01-02",
+        "condition": "parcel seal equals station seal",
+        "operator": "equality",
+        "values": {
+          "parcel_seal": "S3",
+          "station_seal": "S4"
+        },
+        "C": false,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-01-03",
+        "condition": "parcel seal equals station seal",
+        "operator": "equality",
+        "values": {
+          "parcel_seal": "S4",
+          "station_seal": "S4"
+        },
+        "C": true,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-01-04",
+        "condition": "parcel seal equals station seal",
+        "operator": "equality",
+        "values": {
+          "parcel_seal": "S3",
+          "station_seal": "S4"
+        },
+        "C": false,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-02-01",
+        "condition": "pressure strictly exceeds 12 units",
+        "operator": "strict_greater_than",
+        "values": {
+          "pressure": 13,
+          "threshold": 12
+        },
+        "C": true,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false,
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-02-02",
+        "condition": "pressure strictly exceeds 12 units",
+        "operator": "strict_greater_than",
+        "values": {
+          "pressure": 12,
+          "threshold": 12
+        },
+        "C": false,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-02-03",
+        "condition": "pressure strictly exceeds 12 units",
+        "operator": "strict_greater_than",
+        "values": {
+          "pressure": 13,
+          "threshold": 12
+        },
+        "C": true,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-02-04",
+        "condition": "pressure strictly exceeds 12 units",
+        "operator": "strict_greater_than",
+        "values": {
+          "pressure": 12,
+          "threshold": 12
+        },
+        "C": false,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-03-01",
+        "condition": "available stock is at least the requested dose",
+        "operator": "greater_than_or_equal",
+        "values": {
+          "stock": 6,
+          "dose": 6
+        },
+        "C": true,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false,
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-03-02",
+        "condition": "available stock is at least the requested dose",
+        "operator": "greater_than_or_equal",
+        "values": {
+          "stock": 5,
+          "dose": 6
+        },
+        "C": false,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-03-03",
+        "condition": "available stock is at least the requested dose",
+        "operator": "greater_than_or_equal",
+        "values": {
+          "stock": 6,
+          "dose": 6
+        },
+        "C": true,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-03-04",
+        "condition": "available stock is at least the requested dose",
+        "operator": "greater_than_or_equal",
+        "values": {
+          "stock": 5,
+          "dose": 6
+        },
+        "C": false,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-04-01",
+        "condition": "noise score is at most 4",
+        "operator": "less_than_or_equal",
+        "values": {
+          "noise_score": 4,
+          "ceiling": 4
+        },
+        "C": true,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false,
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-04-02",
+        "condition": "noise score is at most 4",
+        "operator": "less_than_or_equal",
+        "values": {
+          "noise_score": 5,
+          "ceiling": 4
+        },
+        "C": false,
+        "source_semantics": "constraint",
+        "allowed_A": [
+          false
+        ]
+      },
+      {
+        "id": "procedure-constraint-04-03",
+        "condition": "noise score is at most 4",
+        "operator": "less_than_or_equal",
+        "values": {
+          "noise_score": 4,
+          "ceiling": 4
+        },
+        "C": true,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          true
+        ]
+      },
+      {
+        "id": "procedure-constraint-04-04",
+        "condition": "noise score is at most 4",
+        "operator": "less_than_or_equal",
+        "values": {
+          "noise_score": 5,
+          "ceiling": 4
+        },
+        "C": false,
+        "source_semantics": "procedure",
+        "allowed_A": [
+          false
+        ]
+      }
+    ]
+  }
+}

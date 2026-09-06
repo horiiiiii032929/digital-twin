@@ -1,0 +1,117 @@
+{
+  "seed": 620918,
+  "selection": "one case per11public kinds; balance sourcecontexts, random ties; botharms",
+  "source_sha256": "2a303dcc1eaab11b6cb16d210cb73ecdc21621ada46caa37d1a32bc8250dbf7f",
+  "mapping": [
+    {
+      "review_id": "Q01-A",
+      "source_case_id": "ledger-provider-failure",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q01-B",
+      "source_case_id": "ledger-provider-failure",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q02-A",
+      "source_case_id": "ecology-explanatory",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q02-B",
+      "source_case_id": "ecology-explanatory",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q03-A",
+      "source_case_id": "ledger-cross-course",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q03-B",
+      "source_case_id": "ledger-cross-course",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q04-A",
+      "source_case_id": "ecology-multi-source",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q04-B",
+      "source_case_id": "ecology-multi-source",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q05-A",
+      "source_case_id": "protocol-misconception",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q05-B",
+      "source_case_id": "protocol-misconception",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q06-A",
+      "source_case_id": "protocol-missing-detail",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q06-B",
+      "source_case_id": "protocol-missing-detail",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q07-A",
+      "source_case_id": "scheduler-injection",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q07-B",
+      "source_case_id": "scheduler-injection",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q08-A",
+      "source_case_id": "protocol-socratic",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q08-B",
+      "source_case_id": "protocol-socratic",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q09-A",
+      "source_case_id": "scheduler-paraphrase",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q09-B",
+      "source_case_id": "scheduler-paraphrase",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q10-A",
+      "source_case_id": "ledger-partial",
+      "arm": "incumbent"
+    },
+    {
+      "review_id": "Q10-B",
+      "source_case_id": "ledger-partial",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q11-A",
+      "source_case_id": "ecology-privacy",
+      "arm": "question-specific-profile-candidate"
+    },
+    {
+      "review_id": "Q11-B",
+      "source_case_id": "ecology-privacy",
+      "arm": "incumbent"
+    }
+  ]
+}

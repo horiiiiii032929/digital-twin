@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "run_id": "final-profile-live-longitudinal-development-001-live-001",
+  "instrument_id": "final-profile-live-longitudinal-development-001",
+  "status": "completed-live-development",
+  "decision": "Keep integration wiring; Refine quality separately; not release qualified",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "configuration": {
+    "code_dirty": true,
+    "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+    "concurrency": 2,
+    "conditions": [
+      "t1-v2-reactive",
+      "t1-v2-autonomous"
+    ],
+    "dataset_sha256": "500ed28d840180b23249ce7d02ebcce82aca33e641546f3d504d06e2614fe5de",
+    "days": 7,
+    "harness_sha256": {
+      "scripts/final_profile_longitudinal_runtime.py": "292ae63f4b36d7fc2f2d2aaaca63c79a2bb329c6b0a70c6ed621600612269f8e",
+      "scripts/run_final_profile_longitudinal.py": "60f528fe430792e1667bab3ad25efc454db8dc14a634baaba36a0501453b47dc"
+    },
+    "live_authorized": false,
+    "maximum_calls": 500,
+    "maximum_cost_usd": 5,
+    "mode": "live-development",
+    "model": "gpt-5.6-luna",
+    "profile_id": "student-tutor-r1-local-final",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "program_id": "final-profile-live-longitudinal-development-001",
+    "remaining": [
+      "fresh profile-adherence comparison",
+      "independent factual scoring",
+      "actual ingestion/dashboard journey",
+      "30-day live confirmation"
+    ],
+    "seed": 4107,
+    "setup_boundary": "synthetic release fixture; not ingestion or UI qualification",
+    "stage": "development-only",
+    "tracked_diff_sha256": "e2fc3f3211375bbdb4386b3331ca7862ffd1448a590f8f5e634553528465cbe4"
+  },
+  "authorization": "2026-09-05 user requested implementation and evaluation, then directed that budget be disregarded; exact instrument allowance checked before calls; finite 500-call/USD5 caps recorded in run manifest.",
+  "metadata_correction": "manifest.live_authorized remained false from validation-only template despite successful exact runtime authorization. This descriptive metadata defect was fixed after the run; raw evidence is preserved unchanged.",
+  "dataset": {
+    "permissions": "repository-authored synthetic only",
+    "split": "development",
+    "sha256": "500ed28d840180b23249ce7d02ebcce82aca33e641546f3d504d06e2614fe5de",
+    "sample_size_rationale": "2 personas x 2 conditions; 7 virtual days to exercise actual model paths and restart, not population quality estimation"
+  },
+  "aggregate": {
+    "histories": 4,
+    "history_errors": 0,
+    "provider_successes": 36,
+    "provider_failures": 0,
+    "tasks": {
+      "reactive_tutoring_intent": 17,
+      "hierarchical_autonomy_plan": 13,
+      "autonomous_tutoring_wording_strategy": 6
+    },
+    "usage": {
+      "input_tokens": 20378,
+      "output_tokens": 4486,
+      "approximate_cost_usd": 0.0094588
+    },
+    "provider_latency_ms": {
+      "median": 2411.342416497064,
+      "maximum": 3893.144708010368,
+      "scope": "individual model calls; not full HTTP tutoring response latency"
+    },
+    "restarts": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "timing_violations": 0
+  },
+  "task_coverage": {
+    "t1-v2-autonomous-fresh-final-hs-bkt-like-fast-learner-4107": {
+      "autonomous_tutoring_wording_strategy:completed": 3,
+      "hierarchical_autonomy_plan:completed": 6,
+      "reactive_tutoring_intent:completed": 5
+    },
+    "t1-v2-autonomous-fresh-final-hs-bkt-like-slow-learner-4107": {
+      "autonomous_tutoring_wording_strategy:completed": 3,
+      "hierarchical_autonomy_plan:completed": 7,
+      "reactive_tutoring_intent:completed": 3
+    },
+    "t1-v2-reactive-fresh-final-hs-bkt-like-fast-learner-4107": {
+      "reactive_tutoring_intent:completed": 6
+    },
+    "t1-v2-reactive-fresh-final-hs-bkt-like-slow-learner-4107": {
+      "reactive_tutoring_intent:completed": 3
+    }
+  },
+  "limitations": [
+    "Four histories with one seed and one simulator family; no precision or learning-effect claim.",
+    "Approved-profile context candidate was off; no professor-fidelity inference.",
+    "Deterministic factual generator remained selected; model calls performed semantic planning and bounded wording selection.",
+    "No independent factual/teaching-quality scoring or ingestion/browser qualification.",
+    "Untracked profile-context helper is not separately hashed in original manifest; it was inactive.",
+    "Raw live_authorized metadata correction documented above."
+  ],
+  "raw_artifact": "reports/generated/final-profile-live-longitudinal-development-001-live-001",
+  "artifact_sha256": {
+    "cases.jsonl": "7fc13e67bdcaf22cf6680e7036443a517225edfce63d9ec36037d138224e9dcd",
+    "learner-evidence.jsonl": "d76401440100e0c0efb9d0d38e566cb122bb09710a680e465b463a9eb72f4daf",
+    "provider.jsonl": "50738f1ca2c8522805f6409a944b2fafd9b141090eb6fe851e751f9b0ecdb30d",
+    "responses.jsonl": "a6de7a5e839f6fc4648ec0db99620a8d2820c89c0ccce184a303220dc242e4e4",
+    "truth.jsonl": "dff3230fda380671d3005b255c31f7b6400bcd0aa6a7b9bbc21d86bf31fbc97c"
+  },
+  "summary_sha256": "ac750f1f25fcf82c8ca5b7ad02c68e385a76289f2648a1c882c9329cb41f37d4",
+  "reproduction": "Load authorized OpenAI credential without logging it; uv run python -m scripts.run_final_profile_longitudinal --execute --days 7 --concurrency 2 --maximum-calls 500 --maximum-cost-usd 5 --output-dir <fresh-directory>"
+}

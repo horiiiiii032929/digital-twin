@@ -49,6 +49,7 @@ import {
   retryProfessorIngestionJob,
   runProfessorReleasePreflight,
   uploadProfessorCoursePdf,
+  courseSourceMime,
 } from "@/lib/api/professor"
 import type {
   ProfessorCourse,
@@ -121,6 +122,10 @@ export function ProfessorDeliveryWorkspace({
     }),
   )
 
+  const handleApprovedProfileChange = useCallback((profileId: string | null, courseId: string) => {
+    if (selectedCourseIdRef.current === courseId) setApprovedTeachingProfileId(profileId)
+  }, [])
+
   const refreshCourses = useCallback(async (preferredCourseId?: string) => {
     const next = await listProfessorCourses()
     setCourses(next)
@@ -165,6 +170,8 @@ export function ProfessorDeliveryWorkspace({
 
   useEffect(() => {
     selectedCourseIdRef.current = selectedCourseId
+    setNotice(null)
+    setError(null)
     setJobs([])
     setApprovedTeachingProfileId(null)
     if (!selectedCourseId) {
@@ -242,11 +249,11 @@ export function ProfessorDeliveryWorkspace({
     const data = new FormData(form)
     const file = data.get("source")
     if (!(file instanceof File) || !file.name) {
-      setError("Choose a PDF before uploading.")
+      setError("Choose a PDF, UTF-8 text or Markdown file before uploading.")
       return
     }
-    if (file.type !== "application/pdf") {
-      setError("Only PDF course materials are accepted.")
+    if (!courseSourceMime(file)) {
+      setError("Choose a PDF, UTF-8 .txt or .md file.")
       return
     }
     await runAction("upload", async () => {
@@ -258,6 +265,7 @@ export function ProfessorDeliveryWorkspace({
         title,
         file,
         idempotencyKey: crypto.randomUUID(),
+        deidentifiedReviewed: data.get("deidentified_reviewed") === "on",
       })
       if (isProfessorIngestionJob(uploaded)) {
         await refreshJobs(selectedCourse.course_id)
@@ -268,6 +276,7 @@ export function ProfessorDeliveryWorkspace({
           title,
           result: uploaded,
           timestamp: new Date().toISOString(),
+          mimeType: courseSourceMime(file) ?? undefined,
         })
         const existing =
           inlineJobsByCourseRef.current.get(selectedCourse.course_id) ?? []
@@ -283,6 +292,7 @@ export function ProfessorDeliveryWorkspace({
         }
       }
       form.reset()
+      if (selectedCourseIdRef.current !== selectedCourse.course_id) return
       setNotice(
         isProfessorIngestionJob(uploaded)
           ? "Upload queued. It is safe to leave this page while the worker processes it."
@@ -319,7 +329,7 @@ export function ProfessorDeliveryWorkspace({
         for (const job of unreviewedJobs) {
           const recorded = await controller.addSource({
             name: job.title,
-            mime_type: "application/pdf",
+            mime_type: job.source_mime_type ?? (job.source_object_key?.endsWith(".md") ? "text/markdown" : job.source_object_key?.endsWith(".txt") ? "text/plain" : "application/pdf"),
             size_bytes: 0,
             permission_status: "approved",
             source_label: "course-approved",
@@ -480,10 +490,13 @@ export function ProfessorDeliveryWorkspace({
                   {selectedCourse ? (
                     <>
                       <ProfessorAutonomyPanel
+                        key={`${selectedCourse.course_id}:${selectedRelease?.id ?? "no-release"}`}
                         course={selectedCourse}
                         evidenceChunks={evidenceChunks}
+                        sessionId={controller.session?.course_id === selectedCourse.course_id ? controller.session.session_id : undefined}
+                        ingestionJobIds={successfulJobs.map(job => job.id)}
                         releaseId={selectedRelease?.id}
-                        onApprovedProfileChange={setApprovedTeachingProfileId}
+                        onApprovedProfileChange={handleApprovedProfileChange}
                       />
                       <EvidenceCard
                         busy={busy}
@@ -688,7 +701,7 @@ function EvidenceCard({
       <CardHeader>
         <CardTitle>Course evidence</CardTitle>
         <CardDescription>
-          PDFs are stored privately, processed in a recoverable worker, and retained with citation lineage.
+          PDF, UTF-8 text and Markdown are stored privately and retain citation lineage. Upload only approved, de-identified transcripts or forum material.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
@@ -700,14 +713,18 @@ function EvidenceCard({
             placeholder="Week 1 lecture"
           />
           <label className="block">
-            <span className="mb-1.5 block text-xs font-medium">PDF file</span>
+            <span className="mb-1.5 block text-xs font-medium">Course source file</span>
             <input
-              accept="application/pdf,.pdf"
+              accept="application/pdf,text/plain,text/markdown,.pdf,.txt,.md"
               className="block h-10 w-full rounded-lg border bg-white px-3 py-2 text-xs file:mr-3 file:border-0 file:bg-transparent file:font-medium"
               name="source"
               required
               type="file"
             />
+          </label>
+          <label className="flex gap-2 text-xs sm:col-span-3">
+            <input type="checkbox" name="deidentified_reviewed" />
+            I have permission to use this text/Markdown transcript or forum material and have removed personal information. This records my review; the system does not anonymize it.
           </label>
           <Button disabled={busy !== null} type="submit">
             <Upload aria-hidden="true" />

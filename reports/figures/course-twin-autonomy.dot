@@ -1,0 +1,24 @@
+digraph Autonomy {
+  graph [rankdir=TB, bgcolor="white", pad=".10", nodesep=".25", ranksep=".22"];
+  node [shape=box, style="rounded", fontname="Helvetica", fontsize=13, margin=".13,.09", width=4.4];
+  edge [fontname="Helvetica", fontsize=11, arrowsize=.65];
+  observe [label="1  OBSERVE AND CLAIM (worker)\nSaved events / scheduled times; active goals\nTerminal goals stop; claim due opportunity with lease"];
+  plan [label="2  PROPOSE ACTION (planner)\nInstructor policy intersects event actions\nRule fallback; LLM + heuristic score may replace it\nDefault state uses delivery/event proxies"];
+  auth [shape=diamond, width=2.8, label="3  AUTHORIZE\nConsent / membership / release\nTiming limits / evidence"];
+  wording [label="4  GENERATE AND VALIDATE (graph)\nBounded wording strategy + approved source text\nValidate action and lineage; at most one repair"];
+  delivery [label="5  DELIVER AND RECORD (service)\nRecheck current authority; stable-key in-app message\nThen commit job / action / outcome separately"];
+  feedback [label="6  INCORPORATE LATER RESPONSE (service)\nCommit eligible concept-specific assessment\nRecheck every target concept for goal completion"];
+  stop [width=1.5, label="NO DELIVERY\nRecord reason\nWait for new event"];
+  done [width=1.5, label="STOP THIS GOAL\nComplete / cancelled\nExpired / attempt limit"];
+  observe -> plan [label="goal + evidence + policy snapshot"];
+  plan -> auth [label="one proposal"];
+  auth -> wording [label="allowed"];
+  auth -> stop [label="blocked"];
+  wording -> delivery [label="valid output"];
+  wording -> stop [label="invalid / uncertain", constraint=false];
+  delivery -> feedback [style=dashed, label="later student reply"];
+  feedback -> observe [style=dashed, label="new event;\ngoal still active", constraint=false];
+  feedback -> done [label="terminal"];
+  {rank=same; auth; stop}
+  {rank=same; feedback; done}
+}

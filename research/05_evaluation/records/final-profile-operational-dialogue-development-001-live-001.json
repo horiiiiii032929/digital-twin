@@ -1,0 +1,498 @@
+{
+  "run_id": "final-profile-operational-dialogue-development-001-live-001",
+  "date": "2026-09-06",
+  "decision": "Refine pedagogical progression; keep operational instrumentation",
+  "permissions": "Fresh synthetic protocol cards, seeded simulated students, scoped paid development authority",
+  "artifact_directory": "reports/generated/final-profile-operational-dialogue-development-001-live-001",
+  "manifest": {
+    "instrument_id": "final-profile-operational-dialogue-development-001",
+    "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+    "dirty": true,
+    "days": 3,
+    "seed": 6209,
+    "histories": [
+      {
+        "id": "fast-learner-socratic-t1-v2-reactive-6209",
+        "persona": "fast-learner",
+        "profile": "socratic",
+        "condition": "t1-v2-reactive",
+        "seed": 6209
+      },
+      {
+        "id": "fast-learner-socratic-t1-v2-autonomous-6209",
+        "persona": "fast-learner",
+        "profile": "socratic",
+        "condition": "t1-v2-autonomous",
+        "seed": 6209
+      }
+    ],
+    "candidate": "question-specific-profile-grounded-v1",
+    "admission": "authorized-top5-async-answerability-admission-v1",
+    "profile_context": "approved-teaching-profile-context-v1",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "harness_sha256": {
+      "scripts/run_operational_dialogue_development.py": "74c4d3ddb5e703c3a83a29f1abd820124e220301aee45528c4393496f9842a09",
+      "scripts/final_profile_longitudinal_runtime.py": "c6df4e1f6282579c389be4fe577baef16a3d862879ba583ee2d6dcde886132b7",
+      "src/digital_twin/generation/question_specific.py": "621e93bfe577c9ea98c1e0f0e3f3967b5c4f9a1ea260786561038e35da08081b",
+      "scripts/teaching_profile_responsiveness_packet.py": "b5992989dcc3e309297bc3af91202a29e38d98874f7d08cf3b7d1fe64a2b5fe8",
+      "services/api/app/factory.py": "d7ae11780581847a38bd612b68b351caa4a8c1c373b9bf54d57681a5677f7555",
+      "services/llm/openai_responses_client.py": "fe5119f6ac37366c8b24242ae33ff571859b7663c8e839f7b63a27f983e8d8c2",
+      "src/digital_twin/student/service.py": "008c78cfd03d48fa295e93a675bcbc2f6dd9cd074805ca4a62db270176836ebd",
+      "src/digital_twin/student/tutoring_graph.py": "a63f4a129613f1f003c0f7b0fb43aa26bdca94b1902a66441a5cc2e2dbf9f587",
+      "src/digital_twin/student/autonomy_models.py": "78f1113eeb95494960a0f67b9b8b923c322d615080756a938fd7fcb7766d6ca9",
+      "src/digital_twin/student/teaching_profile_context.py": "06a94a5702b3a00430b83677db8bf8765189be6797302562a69326ec7817b89a"
+    },
+    "cards": [
+      {
+        "concept_id": "fresh-op-slot-seal",
+        "label": "slot seal",
+        "description": "In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+        "objective": "Explain how slot seal rejects an older update."
+      },
+      {
+        "concept_id": "fresh-op-lantern-check",
+        "label": "lantern check",
+        "description": "In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+        "objective": "Explain when lantern check marks a station unavailable."
+      },
+      {
+        "concept_id": "fresh-op-ribbon-log",
+        "label": "ribbon log",
+        "description": "In this synthetic protocol, ribbon log appends an operation before acknowledging it and replays acknowledged operations in recorded order after restart.",
+        "objective": "Explain how ribbon log preserves operation order after restart."
+      },
+      {
+        "concept_id": "fresh-op-parcel-window",
+        "label": "parcel window",
+        "description": "In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+        "objective": "Explain when parcel window resumes sending."
+      }
+    ],
+    "profiles": {
+      "socratic": {
+        "tone": "Patient and reflective",
+        "depth": "concise",
+        "explanation_structure": [
+          "ask a diagnostic question",
+          "wait for an attempt",
+          "give one hint"
+        ],
+        "example_preferences": [
+          "ask the learner to construct an example"
+        ],
+        "misconception_handling": "Ask a contrast question before correcting an ungraded misconception.",
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "help_ladder": [
+          "diagnostic question",
+          "one hint",
+          "guided explanation"
+        ],
+        "outreach_policy": "Prefer a reflective lead and ask the learner to contrast alternatives."
+      },
+      "explanatory": {
+        "tone": "Direct and precise",
+        "depth": "detailed",
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence."
+      }
+    },
+    "simulated": [
+      "student text and attendance",
+      "receptivity",
+      "elapsed time"
+    ],
+    "actual": [
+      "tutoring",
+      "persistence",
+      "scheduled processing",
+      "restart"
+    ],
+    "mastery_or_learning_effect_measured": false,
+    "content_quality_review_required": true,
+    "intervention_utility_gap_closed": false,
+    "network_mode": "provider-backed",
+    "maximum_provider_calls": 80,
+    "per_call_timeout_seconds": 30,
+    "concurrency": 2,
+    "stage": "two-history-operational-pilot"
+  },
+  "summary": {
+    "instrument_id": "final-profile-operational-dialogue-development-001",
+    "network_mode": "provider-backed",
+    "histories": [
+      {
+        "history": {
+          "id": "fast-learner-socratic-t1-v2-reactive-6209",
+          "persona": "fast-learner",
+          "profile": "socratic",
+          "condition": "t1-v2-reactive",
+          "seed": 6209
+        },
+        "days": 3,
+        "network_mode": "provider-backed",
+        "counters": {
+          "turns": 6,
+          "questions": 6,
+          "question_replies": 3,
+          "proactive_seen": 0,
+          "proactive_replies": 0,
+          "unmapped_proactive": 0,
+          "restart_count": 1
+        },
+        "metrics": {
+          "provider_calls": 9,
+          "input_tokens": 8194,
+          "output_tokens": 2029,
+          "total_tokens": 10223,
+          "provider_latency_ms": 32077.203,
+          "cost_usd": 0.0040736,
+          "call_records": [
+            {
+              "call_number": 1,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 815,
+              "output_tokens": 219,
+              "total_tokens": 1034,
+              "reported_cost_usd": 0.0004258,
+              "latency_ms": 3967.617,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 2,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 798,
+              "output_tokens": 41,
+              "total_tokens": 839,
+              "reported_cost_usd": 0.0002088,
+              "latency_ms": 1748.91,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 3,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 902,
+              "output_tokens": 370,
+              "total_tokens": 1272,
+              "reported_cost_usd": 0.0006244,
+              "latency_ms": 4992.88,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 4,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 966,
+              "output_tokens": 243,
+              "total_tokens": 1209,
+              "reported_cost_usd": 0.0004848,
+              "latency_ms": 4473.096,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 5,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 796,
+              "output_tokens": 88,
+              "total_tokens": 884,
+              "reported_cost_usd": 0.0002648,
+              "latency_ms": 1943.681,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 6,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1045,
+              "output_tokens": 363,
+              "total_tokens": 1408,
+              "reported_cost_usd": 0.0006446,
+              "latency_ms": 4345.701,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 7,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1040,
+              "output_tokens": 332,
+              "total_tokens": 1372,
+              "reported_cost_usd": 0.0006064,
+              "latency_ms": 4515.071,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 8,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 800,
+              "output_tokens": 41,
+              "total_tokens": 841,
+              "reported_cost_usd": 0.0002092,
+              "latency_ms": 1523.393,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 9,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1032,
+              "output_tokens": 332,
+              "total_tokens": 1364,
+              "reported_cost_usd": 0.0006048,
+              "latency_ms": 4566.854,
+              "error_code": null,
+              "failure_diagnostics": null
+            }
+          ]
+        },
+        "decision": "completed-operational-history-pending-content-review",
+        "learning_effect_measured": false,
+        "intervention_utility_gap_closed": false
+      },
+      {
+        "history": {
+          "id": "fast-learner-socratic-t1-v2-autonomous-6209",
+          "persona": "fast-learner",
+          "profile": "socratic",
+          "condition": "t1-v2-autonomous",
+          "seed": 6209
+        },
+        "days": 3,
+        "network_mode": "provider-backed",
+        "counters": {
+          "turns": 6,
+          "questions": 4,
+          "question_replies": 3,
+          "proactive_seen": 0,
+          "proactive_replies": 0,
+          "unmapped_proactive": 0,
+          "restart_count": 1
+        },
+        "metrics": {
+          "provider_calls": 9,
+          "input_tokens": 8114,
+          "output_tokens": 1679,
+          "total_tokens": 9793,
+          "provider_latency_ms": 26699.422,
+          "cost_usd": 0.0036376,
+          "call_records": [
+            {
+              "call_number": 1,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 815,
+              "output_tokens": 232,
+              "total_tokens": 1047,
+              "reported_cost_usd": 0.0004414,
+              "latency_ms": 3655.414,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 2,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 798,
+              "output_tokens": 40,
+              "total_tokens": 838,
+              "reported_cost_usd": 0.0002076,
+              "latency_ms": 1530.736,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 3,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 902,
+              "output_tokens": 211,
+              "total_tokens": 1113,
+              "reported_cost_usd": 0.0004336,
+              "latency_ms": 4083.983,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 4,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 945,
+              "output_tokens": 238,
+              "total_tokens": 1183,
+              "reported_cost_usd": 0.0004746,
+              "latency_ms": 3177.518,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 5,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 796,
+              "output_tokens": 102,
+              "total_tokens": 898,
+              "reported_cost_usd": 0.0002816,
+              "latency_ms": 1808.798,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 6,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1029,
+              "output_tokens": 178,
+              "total_tokens": 1207,
+              "reported_cost_usd": 0.0004194,
+              "latency_ms": 3149.193,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 7,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1008,
+              "output_tokens": 283,
+              "total_tokens": 1291,
+              "reported_cost_usd": 0.0005412,
+              "latency_ms": 3425.852,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 8,
+              "task": "reactive_tutoring_intent",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 800,
+              "output_tokens": 40,
+              "total_tokens": 840,
+              "reported_cost_usd": 0.000208,
+              "latency_ms": 1860.746,
+              "error_code": null,
+              "failure_diagnostics": null
+            },
+            {
+              "call_number": 9,
+              "task": "question_specific_profile_tutoring",
+              "status": "completed",
+              "provider_model": "gpt-5.6-luna",
+              "provider_revision": "gpt-5.6-luna",
+              "input_tokens": 1021,
+              "output_tokens": 355,
+              "total_tokens": 1376,
+              "reported_cost_usd": 0.0006302,
+              "latency_ms": 4007.182,
+              "error_code": null,
+              "failure_diagnostics": null
+            }
+          ]
+        },
+        "decision": "completed-operational-history-pending-content-review",
+        "learning_effect_measured": false,
+        "intervention_utility_gap_closed": false
+      }
+    ],
+    "provider_attempts": 18,
+    "provider_successes": 18,
+    "provider_failures": 0,
+    "provider_stopped": false,
+    "reserved_usd": 0.18000000000000002,
+    "reported_cost_usd": 0.0077112,
+    "decision": "operational-pilot-pending-content-review",
+    "learning_effect_measured": false,
+    "release_qualified": false,
+    "artifact_sha256": {
+      "provider.jsonl": "16e2d8677e76d8dbb332f945d50bdf98956ac96a701de20c0c6717b68fabcb62",
+      "fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl": "3b81547aadd2ce21413eb69574c650d090c75ad0d58799c5c982dd207cfed3a0",
+      "fast-learner-socratic-t1-v2-autonomous-6209/days.jsonl": "e0aea5935169707af91daeb1eee1a48e954cc4d514897472fe3f7d06d73b78e7",
+      "fast-learner-socratic-t1-v2-autonomous-6209/result.jsonl": "53c41c1332b813289968ad39fbb75805c1a54228cb9ee91f3312890653719dae",
+      "fast-learner-socratic-t1-v2-autonomous-6209/configuration.jsonl": "ee7db940b9183076de668a2c8000d6ea839367028e3c9512f4dc0a9c0251293b",
+      "fast-learner-socratic-t1-v2-reactive-6209/turns.jsonl": "c303db2e0d5d67b7d552045eeb5335f280c571c047b4f6b58c4f05a18119af01",
+      "fast-learner-socratic-t1-v2-reactive-6209/days.jsonl": "43d19b03083dfa866cd1a9121e91b729fe62c23a142098a9620a6b493061f8b0",
+      "fast-learner-socratic-t1-v2-reactive-6209/result.jsonl": "3d2f05149cde2d49f0fcf6cf36e2ca262a1065faac5a5b487c9e456a30af1754",
+      "fast-learner-socratic-t1-v2-reactive-6209/configuration.jsonl": "a286e011f7386c685a7c8c5ba4adb0f79a9632f84253e5b3a64110847f8f5733"
+    }
+  },
+  "review": {
+    "source_files_unchanged_at_completion": true,
+    "tutor_actions": {
+      "question": 10,
+      "clarify": 2
+    },
+    "restart_count": 2,
+    "synthetic_replies_to_actual_questions": 6,
+    "proactive_deliveries": 0,
+    "progression_limitation": "Correct synthetic attempts received generic elicitation or clarification; no answer or useful-hint progression demonstrated.",
+    "classification": "Operational continuity pass; pedagogical progression requires refinement"
+  },
+  "sample_size_rationale": "Two matched three-day histories assess actual call, bounded response, persistence and restart contracts; no statistical quality or utility estimate",
+  "limits": [
+    "Not human learning or real professor fidelity",
+    "No outreach observed in this short sample",
+    "No ingestion or deployed browser/authentication proof",
+    "Source hashes verified before subsequent neutral wording change"
+  ],
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "status": "completed-development-refine"
+}

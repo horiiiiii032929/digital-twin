@@ -152,6 +152,12 @@ def build_teaching_profile_preview(profile: TeachingProfileV1) -> TeachingProfil
 
 
 def new_teaching_profile(*, course_id: str, version: int, values: dict) -> TeachingProfileV1:
+    preference_fields = {
+        "tone", "depth", "explanation_structure", "example_preferences",
+        "misconception_handling", "integrity_limits", "help_ladder", "outreach_policy",
+    }
+    if set(values) - preference_fields:
+        raise ValueError("Only teaching preference fields may be supplied.")
     payload = {"course_id": course_id, "version": version, **values}
     return TeachingProfileV1(
         profile_id=f"teaching-profile-{uuid4()}",
@@ -174,10 +180,14 @@ class TeachingProfileService:
         self.repository = repository
 
     def _authorize(self, professor_id: str, course_id: str) -> None:
+        account = self.repository.get_account(professor_id)
         course = self.repository.get_course(course_id)
         membership = self.repository.get_membership(professor_id, course_id)
         if (
-            course is None
+            account is None
+            or account.status.value != "active"
+            or account.role.value != "professor"
+            or course is None
             or course.owner_professor_id != professor_id
             or membership is None
             or membership.role.value != "professor"
@@ -213,13 +223,8 @@ class TeachingProfileService:
         self, professor_id: str, course_id: str, values: dict
     ) -> TeachingProfileV1:
         self._authorize(professor_id, course_id)
-        profiles = self.repository.list_teaching_profiles(course_id)
-        version = max((profile.version for profile in profiles), default=0) + 1
         try:
-            profile = new_teaching_profile(
-                course_id=course_id, version=version, values=values
-            )
-            return self.repository.save_teaching_profile(profile)
+            return self.repository.create_teaching_profile_draft(course_id, values)
         except (TypeError, ValueError) as error:
             raise TeachingProfileError(
                 "teaching_profile_invalid", str(error)
@@ -248,27 +253,19 @@ class TeachingProfileService:
         *,
         preview_sha256: str,
     ) -> TeachingProfileV1:
+        self._authorize(professor_id, course_id)
+        profile = self.repository.get_teaching_profile(profile_id)
+        if profile is None or profile.course_id != course_id:
+            raise TeachingProfileError("teaching_profile_not_found", "The teaching profile was not found.")
+        if profile.status in {TeachingProfileStatus.APPROVED, TeachingProfileStatus.SUPERSEDED}:
+            if profile.preview_sha256 == preview_sha256:
+                return profile
+            raise TeachingProfileError("teaching_profile_preview_drifted", "Approval hash does not match.")
         preview = self.preview(professor_id, course_id, profile_id)
         if preview.preview_sha256 != preview_sha256:
-            raise TeachingProfileError(
-                "teaching_profile_preview_drifted",
-                "Approval must bind to the current ten-case preview.",
-            )
-        changed_at = timestamp_now()
-        for current in self.repository.list_teaching_profiles(course_id):
-            if current.status == TeachingProfileStatus.APPROVED:
-                self.repository.set_teaching_profile_status(
-                    current.profile_id,
-                    TeachingProfileStatus.SUPERSEDED,
-                    preview_sha256=None,
-                    changed_at=changed_at,
-                )
-        return self.repository.set_teaching_profile_status(
-            profile_id,
-            TeachingProfileStatus.APPROVED,
-            preview_sha256=preview_sha256,
-            changed_at=changed_at,
-        )
+            raise TeachingProfileError("teaching_profile_preview_drifted", "Approval must bind the displayed preview.")
+        return self.repository.approve_teaching_profile_atomic(profile_id,
+            preview_sha256=preview_sha256, changed_at=timestamp_now())
 
     def withdraw(
         self, professor_id: str, course_id: str, profile_id: str
@@ -282,6 +279,7 @@ class TeachingProfileService:
         if profile.status not in {
             TeachingProfileStatus.DRAFT,
             TeachingProfileStatus.APPROVED,
+            TeachingProfileStatus.SUPERSEDED,
         }:
             raise TeachingProfileError(
                 "teaching_profile_not_withdrawable",

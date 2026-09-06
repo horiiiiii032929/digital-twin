@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 import {
   ApiError,
@@ -23,6 +23,7 @@ export function useAuthSession(): AuthSessionController {
   const [profile, setProfile] = useState<IdentityProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const inFlight = useRef(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -45,6 +46,8 @@ export function useAuthSession(): AuthSessionController {
   }, [])
 
   const signIn = useCallback(async (email: string, password: string) => {
+    if (inFlight.current) return
+    inFlight.current = true
     setSubmitting(true)
     setError(null)
     try {
@@ -52,11 +55,14 @@ export function useAuthSession(): AuthSessionController {
     } catch (reason) {
       setError(errorMessage(reason, "Sign in failed."))
     } finally {
+      inFlight.current = false
       setSubmitting(false)
     }
   }, [])
 
   const signOut = useCallback(async () => {
+    if (inFlight.current) return
+    inFlight.current = true
     setSubmitting(true)
     setError(null)
     try {
@@ -66,12 +72,15 @@ export function useAuthSession(): AuthSessionController {
       setError(errorMessage(reason, "Could not sign out."))
       throw reason
     } finally {
+      inFlight.current = false
       setSubmitting(false)
     }
   }, [])
 
   const updatePassword = useCallback(
     async (currentPassword: string, newPassword: string) => {
+      if (inFlight.current) return
+      inFlight.current = true
       setSubmitting(true)
       setError(null)
       try {
@@ -82,6 +91,7 @@ export function useAuthSession(): AuthSessionController {
         setError(message)
         throw reason
       } finally {
+        inFlight.current = false
         setSubmitting(false)
       }
     },

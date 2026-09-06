@@ -37,6 +37,7 @@ from services.ingestion import IngestionJobService
 from services.persistence import SQLiteIngestionJobRepository
 from services.storage import FileSystemObjectStore
 from services.llm import BudgetedLlmClient, OpenAiResponsesClient
+from src.digital_twin.llm import LlmClient
 from src.digital_twin.model_policy import (
     OPENAI_GPT_5_6_LUNA_MODEL,
     OPENAI_GPT_5_6_TERRA_MODEL,
@@ -144,9 +145,58 @@ def create_app(
     learning_gap_pseudonymizer: LearningGapPseudonymizer | None = None,
     settings: AppSettings | None = None,
     clock: UtcClock | None = None,
+    autonomy_planner_client: LlmClient | None = None,
+    teaching_profile_context_enabled: bool = False,
+    question_specific_generation_enabled: bool = False,
+    bounded_generation_contract_enabled: bool = False,
+    named_referent_context_enabled: bool = False,
+    instructional_moves_enabled: bool = False,
+    instructional_continuation_enabled: bool = False,
+    instructional_request_coverage_enabled: bool = False,
+    instructional_compact_response_enabled: bool = False,
+    instructional_profile_authority_enabled: bool = False,
+    instructional_typed_response_enabled: bool = False,
+    instructional_evidence_strength_enabled: bool = False,
+    instructional_factual_revision_enabled: bool = False,
+    instructional_bounded_revision_enabled: bool = False,
+    instructional_conditional_revision_enabled: bool = False,
+    experimental_generation_model_id: str | None = None,
+    provider_max_concurrency: int = 1,
 ) -> FastAPI:
+    if instructional_conditional_revision_enabled and (not instructional_factual_revision_enabled or instructional_bounded_revision_enabled):
+        raise ValueError("conditional revision requires factual revision and excludes bounded revision")
+    if instructional_bounded_revision_enabled and not instructional_factual_revision_enabled:
+        raise ValueError("bounded revision requires factual revision")
+    if instructional_factual_revision_enabled and not instructional_evidence_strength_enabled:
+        raise ValueError("factual revision requires evidence strength instruction")
+    if instructional_evidence_strength_enabled and not instructional_typed_response_enabled:
+        raise ValueError("evidence strength instruction requires typed instruction")
+    if instructional_typed_response_enabled and not instructional_profile_authority_enabled:
+        raise ValueError("typed instruction requires profile authority")
+    if instructional_profile_authority_enabled and not instructional_compact_response_enabled:
+        raise ValueError("profile authority requires compact instruction")
+    if instructional_compact_response_enabled and (not named_referent_context_enabled or instructional_moves_enabled):
+        raise ValueError("compact instruction requires named-referent context and excludes V5-V7 flags")
+    if instructional_request_coverage_enabled and not instructional_continuation_enabled:
+        raise ValueError("instructional request coverage requires continuation")
+    if instructional_continuation_enabled and not instructional_moves_enabled:
+        raise ValueError("instructional continuation requires instructional moves")
+    if instructional_moves_enabled and not named_referent_context_enabled:
+        raise ValueError("instructional moves require named-referent context")
+    if named_referent_context_enabled and not bounded_generation_contract_enabled:
+        raise ValueError("named referent context requires bounded generation contract")
+    if bounded_generation_contract_enabled and not question_specific_generation_enabled:
+        raise ValueError("bounded generation contract requires the explicit question-specific candidate")
     runtime_settings = settings or AppSettings()
-    runtime_settings.validate()
+    # An explicitly injected planner transport needs no OpenAI credential. Keep
+    # credential checks for every other independently configured provider.
+    runtime_settings.validate(
+        require_provider_credentials=(
+            autonomy_planner_client is None
+            or runtime_settings.generator_mode != GeneratorMode.DETERMINISTIC
+            or runtime_settings.visual_retrieval_mode != VisualRetrievalMode.TEXT_OCR_FALLBACK
+        )
+    )
     runtime_clock = clock or SystemUtcClock()
     app = FastAPI(
         title=(
@@ -316,7 +366,7 @@ def create_app(
     if live_autonomy_planner:
         assert autonomy_provider_model is not None
         autonomy_planner_budget = BudgetedLlmClient(
-            OpenAiResponsesClient(
+            autonomy_planner_client or OpenAiResponsesClient(
                 autonomy_provider_model,
                 timeout_seconds=30,
                 max_output_tokens=500,
@@ -330,6 +380,7 @@ def create_app(
             ),
             max_calls=runtime_settings.provider_max_calls_per_process,
             max_cost_usd=runtime_settings.provider_cost_cap_usd,
+            max_concurrency=provider_max_concurrency,
         )
         live_proactive_planner = (
             GuardedPolicyValuePlanner(
@@ -349,6 +400,77 @@ def create_app(
             autonomy_planner_budget,
             model_id=autonomy_provider_model,
         )
+    if experimental_generation_model_id is not None and (
+        not instructional_typed_response_enabled
+        or experimental_generation_model_id not in {"gpt-5.6-luna", "gpt-5.6-sol"}
+    ):
+        raise ValueError("generation model override requires the explicit typed candidate and approved model")
+    if question_specific_generation_enabled:
+        if autonomy_planner_budget is None or student_generator is not None:
+            raise ValueError("question-specific candidate requires configured planner transport and no generator override")
+        from src.digital_twin.generation.question_specific import (
+            QuestionSpecificProfileGroundedGenerator, AsyncAnswerabilityAdmissionGateV1,
+            BOUNDED_CONTRACT_CANDIDATE_ID, CANDIDATE_ID, NAMED_REFERENT_CANDIDATE_ID,
+        )
+        if student_evidence_gate is not None:
+            raise ValueError("question-specific candidate requires its explicit async admission gate")
+        configured_evidence_gate = AsyncAnswerabilityAdmissionGateV1()
+        generator_class = QuestionSpecificProfileGroundedGenerator
+        if instructional_moves_enabled:
+            if student_claim_evidence_validator is not None:
+                raise ValueError("instructional candidate requires its explicit source-binding validator")
+            from src.digital_twin.generation.instructional import (
+                EvidenceLinkedInstructionalGenerator, InstructionalSourceBindingValidator,
+            )
+            generator_class = EvidenceLinkedInstructionalGenerator
+            active_claim_validator = InstructionalSourceBindingValidator()
+            if instructional_continuation_enabled:
+                from src.digital_twin.generation.continuation import InstructionalContinuationGenerator
+                generator_class = InstructionalContinuationGenerator
+                if instructional_request_coverage_enabled:
+                    from src.digital_twin.generation.request_coverage import RequestCoverageInstructionalGenerator
+                    generator_class = RequestCoverageInstructionalGenerator
+        if instructional_compact_response_enabled:
+            if student_claim_evidence_validator is not None:
+                raise ValueError("compact instruction requires its explicit source-association validator")
+            from src.digital_twin.generation.compact_instruction import CompactInstructionalGenerator
+            from src.digital_twin.generation.instructional import InstructionalSourceBindingValidator
+            generator_class = CompactInstructionalGenerator
+            if instructional_profile_authority_enabled:
+                from src.digital_twin.generation.profile_authority import ProfileAuthorityInstructionalGenerator
+                generator_class = ProfileAuthorityInstructionalGenerator
+                if instructional_typed_response_enabled:
+                    from src.digital_twin.generation.typed_instruction import TypedInstructionalGenerator
+                    generator_class = TypedInstructionalGenerator
+                    if instructional_evidence_strength_enabled:
+                        from src.digital_twin.generation.evidence_strength import EvidenceStrengthInstructionalGenerator
+                        generator_class = EvidenceStrengthInstructionalGenerator
+                        if instructional_factual_revision_enabled:
+                            from src.digital_twin.generation.factual_revision import FactualRevisionInstructionalGenerator
+                            generator_class = FactualRevisionInstructionalGenerator
+                            if instructional_bounded_revision_enabled:
+                                from src.digital_twin.generation.bounded_revision import BoundedRevisionInstructionalGenerator
+                                generator_class = BoundedRevisionInstructionalGenerator
+                            if instructional_conditional_revision_enabled:
+                                from src.digital_twin.generation.conditional_revision import ConditionalRevisionInstructionalGenerator
+                                generator_class = ConditionalRevisionInstructionalGenerator
+            active_claim_validator = InstructionalSourceBindingValidator()
+        app.state.experimental_generation_configuration = {
+            "candidate_id": "question-specific-profile-grounded-v14" if instructional_conditional_revision_enabled else "question-specific-profile-grounded-v13" if instructional_bounded_revision_enabled else "question-specific-profile-grounded-v12" if instructional_factual_revision_enabled else "question-specific-profile-grounded-v11" if instructional_evidence_strength_enabled else "question-specific-profile-grounded-v10" if instructional_typed_response_enabled else "question-specific-profile-grounded-v9" if instructional_profile_authority_enabled else "question-specific-profile-grounded-v8" if instructional_compact_response_enabled else "question-specific-profile-grounded-v7" if instructional_request_coverage_enabled else ("question-specific-profile-grounded-v6" if instructional_continuation_enabled else ("question-specific-profile-grounded-v5" if instructional_moves_enabled else (NAMED_REFERENT_CANDIDATE_ID if named_referent_context_enabled else (BOUNDED_CONTRACT_CANDIDATE_ID if bounded_generation_contract_enabled else CANDIDATE_ID)))),
+            "admission_gate": configured_evidence_gate.implementation_id,
+            "retriever": "selected-profile-unchanged",
+            "semantic_support": "model-assessed-not-proven-by-spans",
+        }
+        generation_model = experimental_generation_model_id or autonomy_provider_model
+        active_generator = generator_class(autonomy_planner_budget,
+            model_id=generation_model, bounded_contract_enabled=bounded_generation_contract_enabled,
+            named_referent_context_enabled=named_referent_context_enabled,
+            policy_enforcer=DeterministicPolicyEnforcer(action_router=DeterministicActionRouterV3()))
+        active_generator_model = generation_model
+        if experimental_generation_model_id is not None:
+            app.state.experimental_generation_configuration.update(generation_model=generation_model, planner_model=autonomy_provider_model)
+        if instructional_moves_enabled or instructional_compact_response_enabled:
+            app.state.experimental_generation_configuration["claim_validation"] = "experimental-source-binding-only; semantic-support-unverified"
     app.state.autonomy_planner_budget = autonomy_planner_budget
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
@@ -384,6 +506,7 @@ def create_app(
         ),
         autonomy_generator_model=active_generator_model,
         reactive_semantic_planner=reactive_semantic_planner,
+        teaching_profile_context_enabled=teaching_profile_context_enabled,
         retriever_decorator=visual_retriever_decorator,
         clock=runtime_clock,
     )
@@ -419,6 +542,7 @@ def create_app(
         app.state.student_repository,
         app.state.proactive_outreach_service,
         graph=autonomy_graph,
+        teaching_profile_context_enabled=teaching_profile_context_enabled,
         clock=runtime_clock,
     )
     app.state.teaching_profile_service = TeachingProfileService(
@@ -512,6 +636,14 @@ def create_app(
     app.include_router(onboarding_router, prefix="/api")
     app.include_router(publication_router, prefix="/api")
     app.include_router(student_router, prefix="/api")
+    # Capture construction inputs only in memory; artifacts receive a whitelist
+    # of public configuration fields, never clients, settings secrets or handles.
+    import inspect
+    from services.api.app.generated_preview import attach_generated_preview
+    local_parameters = locals()
+    preview_parameters = {key: local_parameters[key] for key in inspect.signature(create_app).parameters}
+    attach_generated_preview(app, factory=create_app, factory_parameters=preview_parameters,
+        parent_budget=autonomy_planner_budget)
     return app
 
 

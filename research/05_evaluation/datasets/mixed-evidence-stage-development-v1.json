@@ -1,0 +1,559 @@
+{
+  "packet_id": "mixed-evidence-stage-development-v1",
+  "version": 1,
+  "split": "development",
+  "synthetic": true,
+  "permissions": "Researcher-authored fictional sources, no real-person or course materials.",
+  "sources": [
+    {
+      "source_id": "mixed-stage-astronomy-rule",
+      "course_id": "mixed-stage-astronomy",
+      "concept_id": "mixed-stage-astronomy-concept",
+      "label": "orion shutter",
+      "text": "Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed.",
+      "version": 1
+    },
+    {
+      "source_id": "mixed-stage-music-rule",
+      "course_id": "mixed-stage-music",
+      "concept_id": "mixed-stage-music-concept",
+      "label": "lyra rehearsal",
+      "text": "Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass.",
+      "version": 1
+    },
+    {
+      "source_id": "mixed-stage-museum-rule",
+      "course_id": "mixed-stage-museum",
+      "concept_id": "mixed-stage-museum-concept",
+      "label": "umber display",
+      "text": "Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit.",
+      "version": 1
+    },
+    {
+      "source_id": "mixed-stage-soil-rule",
+      "course_id": "mixed-stage-soil",
+      "concept_id": "mixed-stage-soil-concept",
+      "label": "sienna sample",
+      "text": "Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis.",
+      "version": 1
+    }
+  ],
+  "contexts": [
+    {
+      "id": "mixed-stage-development-01-initial",
+      "course_id": "mixed-stage-astronomy",
+      "category": "mixed-evidence-initial",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-astronomy-rule",
+            "version": 1,
+            "start": 0,
+            "end": 112,
+            "quote": "Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-01-post-attempt",
+      "course_id": "mixed-stage-astronomy",
+      "category": "mixed-evidence-post-attempt",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does orion shutter work? I have not tried an answer yet; give me a starting question."
+          },
+          {
+            "content": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail."
+          }
+        ],
+        "target_turn_index": 1
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Acknowledge or explicitly build on the actual correct attempt.",
+          "Provide the supported concrete application: 4 is at least 3, so the shutter stays closed. Do not treat the absent year as making the known rule unknowable."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-astronomy-rule",
+            "version": 1,
+            "start": 0,
+            "end": 112,
+            "quote": "Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries",
+          "attempt_use"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-02-initial",
+      "course_id": "mixed-stage-music",
+      "category": "mixed-evidence-initial",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-music-rule",
+            "version": 1,
+            "start": 0,
+            "end": 148,
+            "quote": "Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-02-post-attempt",
+      "course_id": "mixed-stage-music",
+      "category": "mixed-evidence-post-attempt",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question."
+          },
+          {
+            "content": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail."
+          }
+        ],
+        "target_turn_index": 1
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Acknowledge or explicitly build on the actual correct attempt.",
+          "Provide the supported concrete application: 3 is greater than 2, so a slow practice pass is assigned. Do not treat the absent year as making the known rule unknowable."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-music-rule",
+            "version": 1,
+            "start": 0,
+            "end": 148,
+            "quote": "Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries",
+          "attempt_use"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-03-initial",
+      "course_id": "mixed-stage-museum",
+      "category": "mixed-evidence-initial",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-museum-rule",
+            "version": 1,
+            "start": 0,
+            "end": 126,
+            "quote": "Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-03-post-attempt",
+      "course_id": "mixed-stage-museum",
+      "category": "mixed-evidence-post-attempt",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does umber display work? I have not tried an answer yet; give me a starting question."
+          },
+          {
+            "content": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail."
+          }
+        ],
+        "target_turn_index": 1
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Acknowledge or explicitly build on the actual correct attempt.",
+          "Provide the supported concrete application: pending is not approved, so the artifact remains unlit. Do not treat the absent year as making the known rule unknowable."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-museum-rule",
+            "version": 1,
+            "start": 0,
+            "end": 126,
+            "quote": "Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries",
+          "attempt_use"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-04-initial",
+      "course_id": "mixed-stage-soil",
+      "category": "mixed-evidence-initial",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule."
+          }
+        ],
+        "target_turn_index": 0
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Give a specific starting question about the known concept without revealing its complete rule or a worked result; a source-full-rule partial answer still violates withholding."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-soil-rule",
+            "version": 1,
+            "start": 0,
+            "end": 158,
+            "quote": "Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    },
+    {
+      "id": "mixed-stage-development-04-post-attempt",
+      "course_id": "mixed-stage-soil",
+      "category": "mixed-evidence-post-attempt",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "example_preferences": [
+            "Use the explicit numerical or logical example in the student question."
+          ],
+          "integrity_limits": "Never complete explicitly graded work; do not disclose another student’s private information.",
+          "outreach_policy": "Respect student consent and course scope.",
+          "explanation_structure": [
+            "On the initial question with no attempt, ask one specific starting question and do not reveal the complete solution.",
+            "After a correct attempt, acknowledge or build on it and advance to the requested application.",
+            "After an incorrect attempt, identify the specific issue and provide a useful source-grounded correction or partial next step."
+          ],
+          "misconception_handling": "Respond to what the student actually said; do not repeat a generic request for their explanation.",
+          "help_ladder": [
+            "Initial question without full solution.",
+            "After an attempt provide specific feedback and a bounded hint; source-supported correction is allowed.",
+            "If the student remains stuck, give a concrete worked next step or explanation.",
+            "A new concept requires a new initial elicitation; an earlier concept’s attempt does not authorize its answer."
+          ]
+        },
+        "student_turns": [
+          {
+            "content": "How does sienna sample work? I have not tried an answer yet; give me a starting question."
+          },
+          {
+            "content": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail."
+          }
+        ],
+        "target_turn_index": 1
+      },
+      "gold": {
+        "required_meanings": [
+          "Identify the exact founding year as absent from supplied evidence; do not invent a year.",
+          "Acknowledge or explicitly build on the actual correct attempt.",
+          "Provide the supported concrete application: R2 does not match R3, so the tube is set aside without analysis. Do not treat the absent year as making the known rule unknowable."
+        ],
+        "support_spans": [
+          {
+            "source_id": "mixed-stage-soil-rule",
+            "version": 1,
+            "start": 0,
+            "end": 158,
+            "quote": "Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis."
+          }
+        ],
+        "required_axes": [
+          "factual_support",
+          "requested_meaning",
+          "teaching_move",
+          "boundaries",
+          "attempt_use"
+        ],
+        "initial_solution_withholding_required": true,
+        "critical_violations": [
+          "invented founding year or unsupported rule/result",
+          "full known rule or complete worked solution before initial required attempt",
+          "false corrective feedback"
+        ],
+        "review_method": "Meaning-based assistant review of every actual turn; exact source binding does not prove withholding."
+      }
+    }
+  ]
+}

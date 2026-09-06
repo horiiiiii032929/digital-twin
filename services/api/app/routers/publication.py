@@ -1,4 +1,7 @@
+from src.digital_twin.student.generated_preview import GeneratedPreviewRequest, GeneratedPreviewApproval
 from collections import Counter
+from datetime import datetime, timedelta
+from uuid import uuid4
 import hashlib
 import json
 
@@ -169,6 +172,14 @@ def withdraw_teaching_profile(
         raise _teaching_profile_http_error(error) from error
 
 
+def _windowed_learning_gap_signals(publication, course_id: str, release_id: str, now: str):
+    end = datetime.fromisoformat(now)
+    start = end - timedelta(days=30)
+    return [signal for signal in publication.repository.list_learning_gap_signals(
+        course_id, release_id, active_at=now)
+        if start <= datetime.fromisoformat(signal.observed_at) <= end]
+
+
 @router.get("/courses/{course_id}/learning-gaps")
 def list_learning_gaps(
     course_id: str,
@@ -178,20 +189,62 @@ def list_learning_gaps(
 ) -> dict[str, LearningGapAggregationResultV1 | list[CourseImprovementDraftV1]]:
     try:
         publication.authorize_source_ingestion(account_id, course_id)
-        signals = publication.repository.list_learning_gap_signals(
-            course_id, release_id, active_at=_now()
-        )
+        computed_at = _now()
+        window_start = (datetime.fromisoformat(computed_at) - timedelta(days=30)).isoformat()
+        signals = _windowed_learning_gap_signals(publication, course_id, release_id, computed_at)
+
         aggregate = aggregate_learning_gap_signals(
             signals,
             course_id=course_id,
             release_id=release_id,
             policy=LearningGapPrivacyPolicyV1(),
-            computed_at=_now(),
+            computed_at=computed_at,
         )
-        return {
-            "aggregation": aggregate,
-            "proposals": build_course_improvement_drafts(aggregate),
+        # Enrich only visible cells, from this authorized release's metadata.
+        # A source-level signal must not be presented as a diagnosed concept.
+        release = publication.repository.get_release(release_id)
+        source_titles: dict[str, set[str]] = {}
+        if release is not None and release.course_id == course_id:
+            for chunk in release.chunks:
+                identity = chunk.source_artifact_id or chunk.document_id
+                key = "source-" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:16]
+                title = chunk.metadata.get("title")
+                if isinstance(title, str) and title.strip():
+                    source_titles.setdefault(key, set()).add(title.strip())
+        aggregate = aggregate.model_copy(update={
+            "visible_aggregates": [
+                gap.model_copy(update={
+                    "source_title": next(iter(source_titles[gap.topic_key]))
+                    if len(source_titles.get(gap.topic_key, set())) == 1 else None,
+                })
+                for gap in aggregate.visible_aggregates
+            ],
+        })
+        active_students = {
+            conversation.student_id
+            for conversation in publication.repository.list_course_conversations(course_id)
+            if conversation.release_id == release_id
+            and any(message.role == "student"
+                and datetime.fromisoformat(window_start) <= datetime.fromisoformat(message.created_at) <= datetime.fromisoformat(computed_at)
+                for message in publication.repository.list_messages(conversation.id))
         }
+        aggregate = aggregate.model_copy(update={
+            "reporting_window_start": window_start,
+            "active_learner_count": len(active_students) if len(active_students) >= 5 else None,
+        })
+        reviews = {
+            event.details.get("proposal_id"): event
+            for event in sorted(publication.repository.list_audit_events(), key=lambda event: event.created_at)
+            if event.event_type == "learning-gap-proposal-reviewed"
+            and event.course_id == course_id and event.details.get("release_id") == release_id
+        }
+        proposals = []
+        for proposal in build_course_improvement_drafts(aggregate):
+            review = reviews.get(proposal.proposal_id)
+            if review is not None:
+                proposal = proposal.model_copy(update={"review_decision": review.details.get("decision"), "reviewed_at": review.created_at})
+            proposals.append(proposal)
+        return {"aggregation": aggregate, "proposals": proposals}
     except (PublicationError, KeyError, ValueError) as error:
         if isinstance(error, PublicationError):
             raise _http_error(error) from error
@@ -211,9 +264,7 @@ def review_learning_gap_proposal(
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         reviewed_at = _now()
-        signals = publication.repository.list_learning_gap_signals(
-            course_id, request.release_id, active_at=reviewed_at
-        )
+        signals = _windowed_learning_gap_signals(publication, course_id, request.release_id, reviewed_at)
         aggregate = aggregate_learning_gap_signals(
             signals,
             course_id=course_id,
@@ -230,7 +281,7 @@ def review_learning_gap_proposal(
             raise KeyError("learning_gap_proposal_not_found")
         publication.repository.save_audit_event(
             AuditEvent(
-                id=f"learning-gap-review-{request.proposal_id[:16]}-{request.decision}",
+                id=f"learning-gap-review-{uuid4()}",
                 event_type="learning-gap-proposal-reviewed",
                 account_id=account_id,
                 course_id=course_id,
@@ -892,6 +943,7 @@ async def ingest_course_source(
     title: str = Query(min_length=1, max_length=240),
     version: int = Query(default=1, ge=1),
     display_allowed: bool = Query(default=False),
+    deidentified_reviewed: bool = Query(default=False),
     source_label: SourceLabel = Query(default=SourceLabel.COURSE_APPROVED),
 ):
     if any(
@@ -906,17 +958,19 @@ async def ingest_course_source(
             },
         )
     content_type = request.headers.get("content-type", "").partition(";")[0].strip()
-    if content_type != "application/pdf":
+    if content_type not in {"application/pdf", "text/plain", "text/markdown"}:
         raise HTTPException(
             status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
-            detail={"code": "pdf_required", "message": "Upload a PDF document."},
+            detail={"code": "unsupported_source_format", "message": "Upload PDF, UTF-8 text or Markdown."},
         )
     try:
         publication.authorize_source_ingestion(account_id, course_id)
         content = await _read_bounded_body(request, settings.max_upload_bytes)
         if settings.mode == RuntimeMode.STAGING:
-            job, _ = jobs.enqueue_pdf(
+            job, _ = jobs.enqueue_source(
                 content,
+                mime_type=content_type,
+                deidentified_reviewed=deidentified_reviewed,
                 idempotency_key=idempotency_key or "",
                 course_id=course_id,
                 artifact_id=artifact_id,
@@ -928,8 +982,10 @@ async def ingest_course_source(
             )
             response.status_code = status.HTTP_202_ACCEPTED
             return job
-        result = ingestion.ingest_pdf(
+        result = ingestion.ingest_source(
             content,
+            mime_type=content_type,
+            deidentified_reviewed=deidentified_reviewed,
             course_id=course_id,
             artifact_id=artifact_id,
             title=title,
@@ -1300,3 +1356,67 @@ async def _read_bounded_body(request: Request, limit: int) -> bytes:
             )
         content.extend(chunk)
     return bytes(content)
+
+
+
+
+def _generated_snapshot(owner, course_id, payload, sessions, jobs):
+    session = sessions.get(payload.session_id)
+    if session is None or session.owner_account_id != owner or session.course_id != course_id or session.policy is None:
+        raise TeachingProfileError("generated_preview_setup_required", "Use the owned reviewed tutor setup for this course.")
+    from src.digital_twin.generation.policy import policy_is_approved_for_generation
+    if not policy_is_approved_for_generation(session.policy):
+        raise TeachingProfileError("generated_preview_setup_required", "Approve the course tutor policy before generating samples.")
+    chunks = jobs.release_chunks_owned(owner, course_id, payload.ingestion_job_ids)
+    if not chunks or len(chunks) > 16:
+        raise TeachingProfileError("generated_preview_source_limit", "Select source material containing one to sixteen chunks for this bounded preview.")
+    return {"policy": session.policy.model_dump(mode="json"), "policy_version": session.policy_version,
+        "chunks": [chunk.model_dump(mode="json") for chunk in chunks],
+        "concept_label": payload.concept_label, "concept_description": payload.concept_description,
+        "objective": payload.objective}
+
+
+def _generated_error(error):
+    return HTTPException(status_code=403 if getattr(error, "code", "") == "course_forbidden" else 409,
+        detail={"code": getattr(error, "code", "generated_preview_unavailable"),
+            "message": getattr(error, "message", "The generated preview could not be completed or approved.")})
+
+
+@router.post("/courses/{course_id}/teaching-profiles/{profile_id}/generated-previews", status_code=201)
+async def create_generated_profile_preview(course_id: str, profile_id: str, payload: GeneratedPreviewRequest,
+        request: Request, account_id: ProfessorAccountDependency,
+        sessions: SessionRepositoryDependency, jobs: IngestionJobServiceDependency):
+    try:
+        return await request.app.state.generated_preview_service.create(account_id, course_id, profile_id, payload,
+            resolve_snapshot=lambda value: _generated_snapshot(account_id, course_id, value, sessions, jobs))
+    except (TeachingProfileError, IngestionJobError, ValueError) as error:
+        raise _generated_error(error) from error
+
+
+@router.get("/courses/{course_id}/teaching-profiles/{profile_id}/generated-previews")
+def list_generated_profile_previews(course_id: str, profile_id: str, request: Request,
+        account_id: ProfessorAccountDependency):
+    try:
+        return request.app.state.generated_preview_service.list(account_id, course_id, profile_id)
+    except TeachingProfileError as error:
+        raise _generated_error(error) from error
+
+
+@router.get("/courses/{course_id}/teaching-profiles/{profile_id}/generated-previews/{artifact_id}")
+def get_generated_profile_preview(course_id: str, profile_id: str, artifact_id: str, request: Request,
+        account_id: ProfessorAccountDependency):
+    try:
+        return request.app.state.generated_preview_service.get(account_id, course_id, profile_id, artifact_id)
+    except TeachingProfileError as error:
+        raise _generated_error(error) from error
+
+
+@router.post("/courses/{course_id}/teaching-profiles/{profile_id}/generated-previews/{artifact_id}/approve")
+def approve_generated_profile_preview(course_id: str, profile_id: str, artifact_id: str, payload: GeneratedPreviewApproval,
+        request: Request, account_id: ProfessorAccountDependency,
+        sessions: SessionRepositoryDependency, jobs: IngestionJobServiceDependency):
+    try:
+        return request.app.state.generated_preview_service.approve(account_id, course_id, profile_id, artifact_id, payload,
+            resolve_snapshot=lambda value: _generated_snapshot(account_id, course_id, value, sessions, jobs))
+    except (TeachingProfileError, IngestionJobError, ValueError) as error:
+        raise _generated_error(error) from error

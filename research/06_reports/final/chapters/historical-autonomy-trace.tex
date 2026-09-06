@@ -1,0 +1,55 @@
+\section{Historical Multi-concept Trial and Correction}\label{sec:historical-autonomy}
+\textbf{Recorded example.} In the saved deterministic fast-learner history
+(seed 3101, Bayesian-style simulator), the first day contains a diagnostic
+question and a hint. Before the next recorded student turn, an
+\texttt{incomplete-objective} event produces an in-app check-in: the goal still
+requires assessed evidence, and the deterministic event rule selects that
+permitted action. The saved opportunity, action and delivery-message identifiers
+link the decision to its persisted effect and source citation. Subsequent turns
+produce further learner-state revisions; the day-15 restart check retains an
+identical state hash. By the end, the token-bucket concept has eight correct and
+four incorrect assessments, illustrating why a delivered check-in is not itself
+proof of mastery. This is one operational trace, not evidence that the check-in
+caused those later outcomes. Its source is the \href{https://github.com/horiiiiii032929/digital-twin/blob/main/research/05_evaluation/governed-full-autonomy-v2-1-multi-concept-confirmation-025-results.md}{historical multi-concept result}; the sanitized trace is retained in
+\path{research/06_reports/final/professor-reader-review.md}.
+
+
+\subsection{Original Reported Simulator Outcomes}
+For the autonomous-support question, the deterministic longitudinal study compared 72 histories in 36 matched pairs.
+A pair shares the specified learner scenario and seed, with autonomous support
+in one history and reactive-only support in the other. This is a comparison
+within the simulator, not a randomized study of students.
+It exercised 30 virtual days of tutoring and intervention logic without external
+LLM calls. Simulated mastery averaged 0.365 with autonomous support and 0.332
+with the reactive control; the paired difference was 0.0324, with a 95\% interval
+of 0.0040--0.0617. For pair $k$, let $m_k^{A}$ and $m_k^{R}$ be final simulated mastery under
+autonomous and reactive support, respectively. Each history's mastery summarizes
+its simulated concepts on a zero-to-one scale. The paired mean difference is
+\begin{equation}
+\overline{\Delta m}=\frac{1}{36}\sum_{k=1}^{36}(m_k^{A}-m_k^{R})=0.0324.
+\label{eq:mastery-difference}
+\end{equation}
+This is 3.24 percentage points on the simulator's scale. It is computed from
+unrounded paired values, so subtracting the displayed rounded means need not
+reproduce it exactly. Its interval resamples the paired differences. Both the
+means and their difference follow the simulator's learning and forgetting rules;
+they are not measured student learning gains.
+
+Predictive area under the receiver operating characteristic curve (AUROC) summarizes how well the previous learner-state estimate ranks
+later correct above incorrect simulated attempts. A value of 0.5 gives no ranking
+advantage; 1 indicates perfect ranking. The reported 0.466, averaged over histories with both outcomes, therefore
+provides little evidence of useful prediction. A simulated intervention is labelled
+wasted when its recipient is already at the mastery threshold or is unreceptive.
+The reported 32.9\% is an average of per-history wasted-delivery rates, rather
+than a human judgment of whether a message helped. These diagnostics reveal
+weaknesses that successful consent and restart checks cannot detect.
+
+
+\paragraph{Later interpretation correction.}
+These numbers describe the original multi-concept implementation. The subsequent
+goal-scope audit found ten unsupported completed goals among 22 completions
+across eight histories, even though the concept-assessment gates had passed.
+The old paired mastery difference is therefore retained as a historical
+simulator outcome, not evidence for the corrected lifecycle or real learning.
+The \hyperref[study-H]{goal-completion regression} uses new seeds on the same exposed concepts and reports its own
+paired results; it does not overwrite or rescore the historical trial.

@@ -1,0 +1,471 @@
+{
+  "derivation": "Match top-level responding_to_delivered_message_id to the delivered proactive message.id in the same history; original audit incorrectly inspected student_message.response_to_message_id. Raw summary preserved.",
+  "derived_verified_outreach_reply_count": 2,
+  "finding": "All outreach copied approved complete card facts after earlier correct synthetic attempts; generic contrast wrapper. All deliveries occurred on days 2 or 3; no delivery after restart or consent restoration was observed. Necessity, adaptation and learning benefit remain unproven.",
+  "histories": [
+    {
+      "history": "v10-fast-learner-socratic-t1-v2-autonomous-6209",
+      "linked_replies": [
+        {
+          "classification": "factual-answer-needs-quality-review",
+          "day": 2,
+          "reason": "proactive-reply",
+          "responding_to_delivered_message_id": "proactive-message-d78993e5-a86e-430c-86c4-5d6f874fcc94",
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-a04d4bab-70e3-4b3b-8f2f-aefa0d434e27",
+                "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+                "message_id": "message-6a249bf9-f4cb-48ec-92c9-324498901e4b",
+                "page": null,
+                "region_id": "region-fresh-operational-dialogue-001-source-01",
+                "region_kind": null,
+                "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+                "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+                "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+                "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+                "source_version": 1,
+                "title": "Slot Seal"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 3,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "v10-fast-learner-socratic-t1-v2-autonomous-6209-3",
+              "content": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+              "conversation_id": "conversation-a0f26657-952f-4954-863e-2aa3b3ca9aee",
+              "created_at": "2026-09-14T12:00:00+00:00",
+              "id": "message-2b260fdb-633e-4594-b5ca-b16e6818b150",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "Your definition is correct: slot seal attaches the slot number before storage and rejects an update whose number is older than the stored number.\n\nConstruct a brief example using a stored slot number and an incoming slot number that would be rejected. Then give a second incoming number that would not be rejected.",
+              "conversation_id": "conversation-a0f26657-952f-4954-863e-2aa3b3ca9aee",
+              "created_at": "2026-09-14T12:00:00+00:00",
+              "id": "message-6a249bf9-f4cb-48ec-92c9-324498901e4b",
+              "learner_state_revision": 3,
+              "response_to_message_id": "message-2b260fdb-633e-4594-b5ca-b16e6818b150",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v10",
+                "latency_ms": 2766.687916999217,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v10",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000647,
+                  "input_tokens": 1759,
+                  "output_tokens": 246,
+                  "total_tokens": 2005
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          }
+        }
+      ],
+      "outreach": [
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-7727b868-9027-4932-9fc3-2455f8c93efe",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-d78993e5-a86e-430c-86c4-5d6f874fcc94",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 2,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-14T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-d78993e5-a86e-430c-86c4-5d6f874fcc94",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-71dc06e3-fa2e-4c14-813f-81fcc6a0a2a3"
+          }
+        }
+      ]
+    },
+    {
+      "history": "v10-fast-learner-socratic-t1-v2-reactive-6209",
+      "linked_replies": [],
+      "outreach": []
+    },
+    {
+      "history": "v10-low-receptivity-socratic-t1-v2-autonomous-6209",
+      "linked_replies": [],
+      "outreach": [
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-7d61f795-9b93-4592-b859-6ac7d42bd17b",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-858caa95-ee28-4914-9128-411c349933e8",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 2,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-14T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-858caa95-ee28-4914-9128-411c349933e8",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-6bd80609-7800-4fce-b107-d33c2ab62be7"
+          }
+        },
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-0bddf016-1dcc-4145-83c2-2466d68f3f87",
+              "locator": "fresh-operational-dialogue-001-source-02 paragraph 1",
+              "message_id": "proactive-message-3867ae86-93d1-4110-8937-7bdd047ad327",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-02",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-02",
+              "source_checksum": "f9b0a403add4eb96a0f89df1cba03cda67e493582872d5c3e48eb2c4a7b486e9",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-02",
+              "source_version": 1,
+              "title": "Lantern Check"
+            }
+          ],
+          "day": 3,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-15T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-3867ae86-93d1-4110-8937-7bdd047ad327",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-f5697d0b-b4fb-4a80-963f-ab7bf8147660"
+          }
+        },
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-75f34bda-149b-4c0c-8323-ea8429425dd8",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-9e113f6b-82e6-4e2c-b765-2e2a4bb2f5f0",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 3,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-15T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-9e113f6b-82e6-4e2c-b765-2e2a4bb2f5f0",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-9ce657b8-6e74-4ae2-9a6c-ffb0fe84958b"
+          }
+        }
+      ]
+    },
+    {
+      "history": "v10-low-receptivity-socratic-t1-v2-reactive-6209",
+      "linked_replies": [],
+      "outreach": []
+    },
+    {
+      "history": "v4-fast-learner-socratic-t1-v2-autonomous-6209",
+      "linked_replies": [
+        {
+          "classification": "elicitation",
+          "day": 2,
+          "reason": "proactive-reply",
+          "responding_to_delivered_message_id": "proactive-message-6a4098c6-5f6d-4381-b477-d7f051dc3542",
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 3,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "v4-fast-learner-socratic-t1-v2-autonomous-6209-3",
+              "content": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+              "conversation_id": "conversation-0bcaac39-1185-4141-852f-291751ccc8ca",
+              "created_at": "2026-09-14T12:00:00+00:00",
+              "id": "message-7211243e-b009-4b25-9727-a54fc3435927",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For \u201cslot seal\u201d, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-0bcaac39-1185-4141-852f-291751ccc8ca",
+              "created_at": "2026-09-14T12:00:00+00:00",
+              "id": "message-9448963e-b65a-472c-9365-efe7aeb7ccbd",
+              "learner_state_revision": 3,
+              "response_to_message_id": "message-7211243e-b009-4b25-9727-a54fc3435927",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 5195.364667015383,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0007746000000000001,
+                  "input_tokens": 1473,
+                  "output_tokens": 400,
+                  "total_tokens": 1873
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          }
+        }
+      ],
+      "outreach": [
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-41303617-e2c2-450c-b445-8345ba4ede98",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-6a4098c6-5f6d-4381-b477-d7f051dc3542",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 2,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-14T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-6a4098c6-5f6d-4381-b477-d7f051dc3542",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-4cde03df-5520-4406-b177-eca771273418"
+          }
+        }
+      ]
+    },
+    {
+      "history": "v4-fast-learner-socratic-t1-v2-reactive-6209",
+      "linked_replies": [],
+      "outreach": []
+    },
+    {
+      "history": "v4-low-receptivity-socratic-t1-v2-autonomous-6209",
+      "linked_replies": [],
+      "outreach": [
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-f12e8c0e-8ecc-4fe9-9de8-cf0e568acd7f",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-e2fdcdaf-070d-4a10-9191-5a311bff6943",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 2,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-14T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-e2fdcdaf-070d-4a10-9191-5a311bff6943",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-4f8ceb4e-861d-401e-8713-30995002ee0e"
+          }
+        },
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-98f17f63-f979-4786-aeee-20b14a26e8de",
+              "locator": "fresh-operational-dialogue-001-source-02 paragraph 1",
+              "message_id": "proactive-message-f16a328a-3646-4f04-bdd8-34354c00c7bd",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-02",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-02",
+              "source_checksum": "f9b0a403add4eb96a0f89df1cba03cda67e493582872d5c3e48eb2c4a7b486e9",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-02",
+              "source_version": 1,
+              "title": "Lantern Check"
+            }
+          ],
+          "day": 3,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-15T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-f16a328a-3646-4f04-bdd8-34354c00c7bd",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-ffbc1228-c5cd-411c-92f6-f8081db8507f"
+          }
+        },
+        {
+          "citations": [
+            {
+              "bounding_box": null,
+              "course_id": "course-a-synthetic",
+              "crop_ref": null,
+              "id": "proactive-citation-ea78db19-a0a0-4b7a-9812-18f460359ab1",
+              "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+              "message_id": "proactive-message-a2609019-85f2-409c-a4b3-c58a811e9f00",
+              "page": null,
+              "region_id": "region-fresh-operational-dialogue-001-source-01",
+              "region_kind": null,
+              "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+              "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+              "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+              "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+              "source_version": 1,
+              "title": "Slot Seal"
+            }
+          ],
+          "day": 3,
+          "message": {
+            "channel": "in-app",
+            "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+            "course_id": "course-a-synthetic",
+            "created_at": "2026-09-15T12:00:00+00:00",
+            "dismissed_at": null,
+            "id": "proactive-message-a2609019-85f2-409c-a4b3-c58a811e9f00",
+            "read_at": null,
+            "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+            "status": "delivered",
+            "student_id": "student-a-synthetic",
+            "trigger_id": "proactive-trigger-c997a357-aa4b-46a4-9b36-ca3e3043b98b"
+          }
+        }
+      ]
+    },
+    {
+      "history": "v4-low-receptivity-socratic-t1-v2-reactive-6209",
+      "linked_replies": [],
+      "outreach": []
+    }
+  ],
+  "original_audit_outreach_reply_count": 0,
+  "raw_summary_sha256": "3c00548091562f2c54042e93f84f22cb78b98fab7dbf74e282a9a916e5d8e34b",
+  "review_scope": "All eight delivered outreach and both linked replies; unblinded assistant diagnostic, not semantic qualification.",
+  "run_id": "instructional-eight-history-operational-development-001-v10-live-001"
+}

@@ -21,6 +21,7 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
     AutonomousGoalStatus,
     AutonomousGoalV1,
+    CourseDomainModelV1,
     LearnerBeliefStateV2,
     PedagogicalPolicyV2,
     ProactiveOpportunityV1,
@@ -180,7 +181,7 @@ class AutonomousEvidenceAssessor:
 class DeterministicAutonomousGoalManager:
     """Select, prioritize, and terminate goals from approved objectives."""
 
-    implementation_id = "deterministic-autonomous-goal-manager-v1"
+    implementation_id = "deterministic-autonomous-goal-manager-v2"
 
     def select_objective(
         self,
@@ -255,114 +256,90 @@ class DeterministicAutonomousGoalManager:
         self,
         goal: AutonomousGoalV1,
         learner_state: LearnerState | LearnerBeliefStateV2 | None,
+        *,
+        domain_model: CourseDomainModelV1 | None = None,
     ) -> AutonomousGoalLifecycleDecisionV1:
+        """Require evidence for every concept of the exact approved objective.
+
+        The caller supplies a committed state for this student. Objective mappings
+        come from the immutable release domain, never retrieval rank or free-text
+        interpretation of a success condition. Progress is an evidence heuristic.
+        """
         if goal.status != AutonomousGoalStatus.ACTIVE:
             return AutonomousGoalLifecycleDecisionV1(
                 complete=goal.status == AutonomousGoalStatus.COMPLETED,
                 progress=1.0 if goal.status == AutonomousGoalStatus.COMPLETED else 0.0,
                 reason=f"goal-{goal.status.value}",
             )
-        if isinstance(learner_state, LearnerBeliefStateV2):
-            if not learner_state.concepts:
-                return AutonomousGoalLifecycleDecisionV1(
-                    complete=False,
-                    progress=0.0,
-                    reason=(
-                        "attempt-limit-reached"
-                        if goal.attempt_count >= goal.attempt_limit
-                        else "insufficient-assessed-evidence"
-                    ),
-                    next_event=(
-                        None
-                        if goal.attempt_count >= goal.attempt_limit
-                        else AutonomousEventKind.INCOMPLETE_OBJECTIVE
-                    ),
-                )
-            strongest = max(
-                learner_state.concepts,
-                key=lambda item: (
-                    item.correct_evidence_count,
-                    -item.incorrect_evidence_count,
-                    item.attribution_confidence,
-                ),
+        if domain_model is None:
+            return AutonomousGoalLifecycleDecisionV1(
+                complete=False, progress=0.0, reason="missing-objective-domain",
             )
-            complete = bool(
-                strongest.correct_evidence_count >= 2
-                and strongest.incorrect_evidence_count == 0
-                and strongest.attribution_confidence >= 0.5
+        if (domain_model.course_id, domain_model.release_id) != (
+            goal.course_id, goal.release_id,
+        ):
+            return AutonomousGoalLifecycleDecisionV1(
+                complete=False, progress=0.0, reason="objective-domain-scope-mismatch",
+            )
+        objectives = [
+            objective for objective in domain_model.objectives
+            if objective.statement == goal.approved_course_objective
+        ]
+        if len(objectives) != 1:
+            return AutonomousGoalLifecycleDecisionV1(
+                complete=False, progress=0.0, reason="missing-or-ambiguous-objective",
+            )
+        if learner_state is not None and (
+            learner_state.course_id, learner_state.release_id,
+        ) != (goal.course_id, goal.release_id):
+            return AutonomousGoalLifecycleDecisionV1(
+                complete=False, progress=0.0, reason="learner-state-scope-mismatch",
+            )
+        targets = objectives[0].concept_ids
+        complete, progress = False, 0.0
+        reason = "insufficient-learner-observations"
+        if isinstance(learner_state, LearnerBeliefStateV2):
+            by_concept = {item.concept_id: item for item in learner_state.concepts}
+            evidence = [by_concept.get(concept_id) for concept_id in targets]
+            complete = all(
+                item is not None
+                and item.correct_evidence_count >= 2
+                and item.incorrect_evidence_count == 0
+                and item.attribution_confidence >= 0.5
+                for item in evidence
             )
             progress = min(
-                1.0,
-                (
-                    strongest.correct_evidence_count
-                    + 0.5 * strongest.partial_evidence_count
-                )
-                / max(2, strongest.assessed_evidence_count),
+                min(1.0, (item.correct_evidence_count + 0.5 * item.partial_evidence_count)
+                    / max(2, item.assessed_evidence_count)) if item else 0.0
+                for item in evidence
             )
-            return AutonomousGoalLifecycleDecisionV1(
-                complete=complete,
-                progress=1.0 if complete else progress,
-                reason=(
-                    "success-condition-met"
-                    if complete
-                    else "attempt-limit-reached"
-                    if goal.attempt_count >= goal.attempt_limit
-                    else "goal-needs-more-assessed-evidence"
-                ),
-                next_event=(
-                    None
-                    if complete or goal.attempt_count >= goal.attempt_limit
-                    else AutonomousEventKind.INCOMPLETE_OBJECTIVE
-                ),
+            reason = "goal-needs-more-assessed-evidence"
+        elif learner_state is not None:
+            mastery = [learner_state.mastery_by_concept.get(concept_id) for concept_id in targets]
+            signals = learner_state.latest_signals
+            complete = bool(
+                all(item is not None and item.estimate >= 0.80
+                    and item.confidence >= 0.60 and item.observation_count >= 2
+                    for item in mastery)
+                and signals is not None and signals.attempt_present
+                and signals.confusion < 0.40 and not signals.misconception_observed
             )
-        if learner_state is None or not learner_state.mastery_by_concept:
-            return AutonomousGoalLifecycleDecisionV1(
-                complete=False,
-                progress=0.0,
-                reason=(
-                    "attempt-limit-reached"
-                    if goal.attempt_count >= goal.attempt_limit
-                    else "insufficient-learner-observations"
-                ),
-                next_event=(
-                    None
-                    if goal.attempt_count >= goal.attempt_limit
-                    else AutonomousEventKind.INCOMPLETE_OBJECTIVE
-                ),
+            progress = min(
+                min(1.0, 0.5 * item.estimate + 0.3 * item.confidence
+                    + 0.2 * min(1.0, item.observation_count / 2)) if item else 0.0
+                for item in mastery
             )
-        strongest = max(
-            learner_state.mastery_by_concept.values(),
-            key=lambda item: (item.estimate, item.confidence, item.observation_count),
-        )
-        signals = learner_state.latest_signals
-        complete = bool(
-            strongest.estimate >= 0.80
-            and strongest.confidence >= 0.60
-            and strongest.observation_count >= 2
-            and signals is not None
-            and signals.attempt_present
-            and signals.confusion < 0.40
-            and not signals.misconception_observed
-        )
-        progress = min(
-            1.0,
-            0.5 * strongest.estimate
-            + 0.3 * strongest.confidence
-            + 0.2 * min(1.0, strongest.observation_count / 2),
-        )
+            reason = "goal-needs-more-evidence"
         return AutonomousGoalLifecycleDecisionV1(
             complete=complete,
             progress=1.0 if complete else progress,
             reason=(
-                "success-condition-met"
-                if complete
-                else "attempt-limit-reached"
-                if goal.attempt_count >= goal.attempt_limit
-                else "goal-needs-more-evidence"
+                "success-condition-met" if complete
+                else "attempt-limit-reached" if goal.attempt_count >= goal.attempt_limit
+                else reason
             ),
             next_event=(
-                None
-                if complete or goal.attempt_count >= goal.attempt_limit
+                None if complete or goal.attempt_count >= goal.attempt_limit
                 else AutonomousEventKind.INCOMPLETE_OBJECTIVE
             ),
         )

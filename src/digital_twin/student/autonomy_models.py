@@ -478,7 +478,7 @@ class GroundedTutorResponseV2(_Contract):
     atomic_claims: list[str] = Field(default_factory=list, max_length=8)
     citation_ids: list[str] = Field(default_factory=list, max_length=8)
     source_range_keys: list[str] = Field(default_factory=list, max_length=8)
-    policy_action: Literal["answer", "clarify", "abstain", "refuse", "no-action"]
+    policy_action: Literal["answer", "question", "clarify", "abstain", "refuse", "no-action"]
 
     @model_validator(mode="after")
     def answer_requires_lineage(self) -> "GroundedTutorResponseV2":

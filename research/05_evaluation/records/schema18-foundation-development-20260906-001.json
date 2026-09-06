@@ -1,0 +1,313 @@
+{
+  "aggregate": {
+    "failures": 0,
+    "network_calls": 0,
+    "passed": 42,
+    "provider_cost_usd": 0,
+    "total": 42
+  },
+  "artifact": {
+    "path": "reports/generated/schema18-foundation-development-20260906-001/result.json",
+    "sha256": "aafe8dfacd6dd7250517432b507e079807d5151373cf7ef0dd8104a4973cfa48"
+  },
+  "captured_at_utc": "2026-09-05T16:35:30.956058+00:00",
+  "checks": [
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "admin-credential-login",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "admin-invites-professor",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "admin-invites-student",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 204; expected 204.",
+      "name": "admin-session-revoked",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "professor-credential-login",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "synthetic-header-rejected",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "professor-creates-course",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "professor-assigns-student",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "professor-onboarding-persists",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "professor-session-bound-to-course",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "professor-policy-approved",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 202; expected 202.",
+      "name": "source-upload-queued",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "source-upload-idempotent",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "worker-completes-ingestion",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "source-lineage-preserved",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "ingestion-latency",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "release-draft-created",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "release-preflight-runs",
+      "passed": true
+    },
+    {
+      "detail": "[]",
+      "name": "release-preflight-passes",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "evaluated-release-published",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "release-is-published",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 204; expected 204.",
+      "name": "professor-session-revoked",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "student-credential-login",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "student-sees-assigned-course",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "course-isolation",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 201; expected 201.",
+      "name": "student-creates-conversation",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "student-receives-grounded-answer",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "answer-has-source-citation",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "citation-has-original-region-lineage",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "authorized-citation-crop",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "capacity-error-rate",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "capacity-api-p95",
+      "passed": true
+    },
+    {
+      "detail": "Deterministic staging run made zero external calls and cost USD 0.",
+      "name": "provider-cost-control",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "restart-student-login",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "restart-state-durability",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "restart-citation-durability",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "restart-object-durability",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "backup-restore-checksums",
+      "passed": true
+    },
+    {
+      "detail": "HTTP 200; expected 200.",
+      "name": "restored-credential-login",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "clean-restore-workflow-state",
+      "passed": true
+    },
+    {
+      "detail": "",
+      "name": "a0-demo-rollback",
+      "passed": true
+    },
+    {
+      "detail": "Peak RSS 334839808 bytes.",
+      "name": "memory-envelope",
+      "passed": true
+    }
+  ],
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "component": "schema18-synthetic-foundation-recovery",
+  "configuration": {
+    "authenticated_requests_per_minute": 1000,
+    "evidence_gate": "AnyHitEvidenceGate synthetic control",
+    "existing_services_touched": false,
+    "final_profile_selected": false,
+    "generation": "deterministic",
+    "login_attempts_per_minute": 100,
+    "mode": "staging",
+    "runtime": "FastAPI TestClient in-process",
+    "secure_cookies": true,
+    "session_ttl_seconds": 3600
+  },
+  "dataset": {
+    "id": "synthetic-deployable-foundation-v7-post-correctness",
+    "permissions": "Repository-authored synthetic accounts, course and PDF; no external or private corpus.",
+    "private_data_used": false,
+    "rationale": "Existing finite regression checklist, one execution per stage; not independent statistical quality trials.",
+    "sample_size": 42,
+    "split": "development",
+    "synthetic": true
+  },
+  "date": "2026-09-06",
+  "decision": "go-deeper",
+  "environment": {
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "processor": "arm",
+    "python": "3.12.13"
+  },
+  "failures": [],
+  "follow_up": "Fresh final-candidate deployment with model-backed tutoring POST load and source/turn/outreach recovery verification.",
+  "harness": {
+    "baseline_id": "A1-single-node-staging-v5-local-multimodel-policy",
+    "baseline_rerun": false,
+    "candidate_id": "A1-single-node-staging-v7-post-correctness",
+    "original_run_id": "deployable-product-foundation-v7-post-correctness-requalification-001",
+    "path": "scripts/verify_deployable_foundation.py",
+    "sha256": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b"
+  },
+  "limits": [
+    "No external model",
+    "No live HTTP server, TLS deployment, Docker image or domain verification",
+    "No final candidate/profile qualification",
+    "No real-student learning or professor fidelity",
+    "No concurrent model-backed capacity claim",
+    "Temporary backup removed after verifier completes"
+  ],
+  "metrics": {
+    "api_latency_gate_ms": 750,
+    "api_latency_p50_ms": 3.279,
+    "api_latency_p95_ms": 7.363,
+    "backup_bytes": 65307,
+    "backup_data_files": 7,
+    "backup_duration_ms": 19.23,
+    "backup_schema_version": 18,
+    "capacity_error_rate": 0.0,
+    "capacity_errors": 0,
+    "capacity_requests": 100,
+    "database_bytes": 679936,
+    "external_generation_included": false,
+    "external_provider_cost_usd": 0.0,
+    "ingestion_gate_ms": 10000,
+    "ingestion_queue_to_complete_ms": 61.508,
+    "peak_rss_bytes": 334839808,
+    "peak_rss_gate_bytes": 4294967296,
+    "restore_duration_ms": 9.311,
+    "runtime_data_bytes": 726715,
+    "throughput_requests_per_second": 233.712
+  },
+  "metrics_scope": {
+    "backup": "Fresh temporary schema18 runtime, seven data files, clean target restore",
+    "capacity_requests": "100 sequential GET /api/student/courses in TestClient; not tutoring POST/model latency or hosted throughput"
+  },
+  "profile_change": null,
+  "run_id": "schema18-foundation-development-20260906-001",
+  "schema_version": 1,
+  "separate_test_evidence": {
+    "command": "uv run pytest -q tests/services/test_schema18_product_recovery.py tests/services/test_runtime_backup.py tests/test_verify_deployable_foundation.py tests/api/test_text_ingestion_journey.py tests/test_tutoring_capacity_probe.py",
+    "passed": 24,
+    "scope": "Separate routine test execution; not added to 42 run checks or timing metrics. Includes reviewed txt/md clean recovery and three actual ASGI students \u00d7 two tutoring POSTs using deterministic test components.",
+    "test_file": "tests/services/test_schema18_product_recovery.py"
+  },
+  "source_snapshot_limitation": "Only revision, dirty state and verifier hash captured; complete dirty source tree was not snapshotted. No immutable final-candidate qualification claim.",
+  "status": "completed",
+  "uncertainty": "Not applicable to this finite operational checklist; no population or capacity estimate.",
+  "working_tree_dirty": true
+}

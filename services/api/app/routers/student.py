@@ -287,10 +287,13 @@ def _http_error(error: StudentWorkflowError) -> HTTPException:
         "request_id_conflict",
         "turn_persistence_conflict",
         "turn_authority_changed",
+        "teaching_profile_unavailable",
         "learner_state_conflict",
     }
     status_code = (
-        status.HTTP_404_NOT_FOUND
+        status.HTTP_503_SERVICE_UNAVAILABLE
+        if error.code == "turn_storage_busy"
+        else status.HTTP_404_NOT_FOUND
         if error.code in not_found
         else status.HTTP_409_CONFLICT
         if error.code in conflict

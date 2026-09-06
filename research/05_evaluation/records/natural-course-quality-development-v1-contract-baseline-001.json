@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "run_id": "natural-course-quality-development-v1-contract-baseline-001",
+  "instrument_id": "natural-course-quality-development-v1",
+  "status": "completed-development-baseline",
+  "decision": "Refine query-to-evidence adequacy; no live or final quality qualification",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "dataset": {
+    "sha256": "622fcd1e3690669930490b39a06072de6c22ac0dd60a4da283b7c5e7c591fdc4",
+    "split": "development",
+    "review_status": "AI-authored; researcher review pending; not independently human-validated",
+    "permissions": "AI-authored synthetic sources only",
+    "sample_size_rationale": "Four concepts with three natural question forms each and four explicit boundaries; diagnostic coverage, not population estimate"
+  },
+  "configuration": {
+    "profile_id": "student-tutor-r1-local-final",
+    "retriever": "bm25-v1",
+    "evidence_gate": "dominance-scoped-ambiguity-safe-v3",
+    "generator": "deterministic-evidence-set-grounded-generator",
+    "semantic_client": "injected fake malformed client; not called",
+    "condition": "t1-v2-reactive",
+    "fixture_boundary": "Synthetic source installation; ingestion and browser not exercised"
+  },
+  "aggregate": {
+    "completed": 16,
+    "extractive_support_passes": 11,
+    "answerable_cases": 12,
+    "boundary_passes": 3,
+    "boundary_cases": 4,
+    "actual_network_calls": 0,
+    "actual_model_calls": 0,
+    "injected_client_calls": 0,
+    "cost_usd": 0,
+    "duration_seconds": 1.054323457996361
+  },
+  "failures": [
+    {
+      "case_id": "ncq-1-1",
+      "classification": "query/evidence-gate",
+      "observed": "Supported archived-file paraphrase abstained; source shares only one exact token with query, below two-token gate."
+    },
+    {
+      "case_id": "ncq-no-evidence",
+      "classification": "evidence-gate/answer-adequacy",
+      "observed": "Algorithm and output length absent from source, but three topic tokens admitted a general excerpt answer; no algorithm fabricated."
+    }
+  ],
+  "limitations": [
+    "Exact span coverage is an extractive diagnostic, not semantic answer correctness.",
+    "Labels AI-authored and pending researcher review.",
+    "Only four short synthetic sources; no ingestion, browser or representative course.",
+    "All requests took deterministic paths; fake client was never called.",
+    "Harness/profile/diff hashes were not captured at execution; dirty revision cannot reconstruct exact state. No retrospective hash is presented as an execution snapshot.",
+    "Memory and aggregate token ledger were not captured; zero actual/fake calls implies no model token use."
+  ],
+  "raw_artifact": "reports/generated/natural-course-quality-development-v1-contract-baseline-001",
+  "artifact_sha256": {
+    "summary.json": "00bf2c4a0ecee2082f78370343c76f21e33b1d6fd3e6c65362ddc3a467e165eb",
+    "responses.jsonl": "2057c5572b17a599c280b60093037c7f207a6888625ec7f264f3ce181ce7ddf8"
+  },
+  "reproduction": "uv run python -m scripts.natural_course_quality_development --output-dir <fresh-output-directory>"
+}

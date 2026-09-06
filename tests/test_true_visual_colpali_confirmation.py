@@ -42,10 +42,13 @@ def test_network_free_simulation_passes_without_provider_calls() -> None:
     assert result["boundary_evaluation_status"] == "deferred-to-actual-product-checkpoint"
 
 
+@pytest.mark.parametrize("metadata_fresh", [True, False])
 def test_preflight_is_blocked_when_credential_is_missing(
-    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, metadata_fresh: bool
 ) -> None:
     monkeypatch.setattr(runner, "_instrument", _authorized_instrument)
+    # Isolate the missing-key guard from the wall clock; retain stale coverage.
+    monkeypatch.setattr(runner, "_metadata_is_fresh", lambda _: metadata_fresh)
     monkeypatch.setattr(runner, "_git_clean", lambda: True)
     monkeypatch.setattr(runner, "_git_revision", lambda: "a" * 40)
     monkeypatch.setattr(runner, "DEFAULT_OUTPUT_ROOT", tmp_path)
@@ -56,7 +59,8 @@ def test_preflight_is_blocked_when_credential_is_missing(
     assert result["network_calls_made"] == 0
     assert result["status"] == "blocked"
     assert "JINA_API_KEY is missing" in result["reasons"]
-    assert result["reasons"] == ["JINA_API_KEY is missing"]
+    expected = [] if metadata_fresh else ["provider metadata is older than 24 hours"]
+    assert result["reasons"] == expected + ["JINA_API_KEY is missing"]
 
 
 def test_account_token_quota_bounds_the_complete_run() -> None:

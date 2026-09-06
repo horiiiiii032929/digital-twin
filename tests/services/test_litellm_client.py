@@ -315,3 +315,13 @@ async def test_litellm_adapter_rejects_model_or_revision_drift():
         await client.chat([LlmMessage(role="user", content="test")], task="test")
     assert captured.value.provider_model == "deepseek-v4-pro"
     assert captured.value.provider_revision == "unexpected"
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("observed", [None, "", "   "])
+async def test_litellm_missing_observed_identity_is_not_replaced_by_requested_model(observed):
+    async def completion(**kwargs):
+        return {"model": observed, "choices": [{"message": {"content": "Synthetic answer"}}],
+                "usage": {"prompt_tokens": 3, "completion_tokens": 2, "total_tokens": 5}}
+    client = LiteLlmClient("deepseek-v4-flash", completion=completion, cost_calculator=lambda **kwargs: .001)
+    with pytest.raises(LlmIdentityDriftError):
+        await client.chat([LlmMessage(role="user", content="Synthetic")], "tutor_answer")

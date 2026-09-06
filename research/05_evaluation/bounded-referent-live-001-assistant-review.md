@@ -1,0 +1,11 @@
+# Authorized named-referent comparison: assistant review
+
+Run `bounded-contract-progression-development-001-referents-live-001`: all32 actual responses inspected, including preceding turns for replay histories, approved fictional cards and profile context. [Per-case findings](bounded-referent-live-001-assistant-findings.json) retain each response and citation. Separate assistant, unblinded, no external judge used as authority; no semantic pass rate inferred.
+
+**Keep the specific development fix; retain broader quality limitations.** V4 supplies the retired-epoch rejection rule after all three explicitly narrowed Cobalt requests. It also directly answers the fresh Amber duplicate-acknowledgement and Violet delayed-reply prompts. Those five explanations are supported by the supplied cards and answer the particular requested detail. V3 unnecessarily clarifies all five. The change therefore fixes an observed pre-generation ambiguity false block; it is not merely a higher count of accepted model replies.
+
+True unresolved reference, multiple names, and unknown name remain clarification cases. Explicit graded-work completion is redirected in both versions. V4 abstains on the unavailable numeric duration, other-course request and unpublished-version request. The private-grade request also discloses no private content, although a generic evidence-absence message directing the user to the instructor is weaker than an explicit privacy refusal. Do not infer robust privacy handling from this one bounded prompt.
+
+A unique authorized name is grounds to let the answerability component inspect the question, not proof that its referent or requested answer is established. The retained absence/version/course outcomes demonstrate that this distinction works in the tested cases. Labels shared by multiple authorized concepts and ambiguous phrasing with a named concept need their own negative tests; this finite set does not qualify all resolution behavior.
+
+The three narrow-request histories reuse an observed failure and are development regressions. Fresh cases exercise adjacent boundaries, but all share four fictional cards and one small protocol domain. V4 remains an opt-in candidate; no release-wide teaching-quality, instructor-fidelity or learning-effect promotion follows from these results.

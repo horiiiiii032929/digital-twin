@@ -1,0 +1,51 @@
+\section{Synthetic Teaching Profiles and Saved Responses}\label{sec:profile-examples}
+A teaching profile specifies tone, explanation depth, examples, misconception
+handling and the sequence of assistance. A Socratic policy can prefer an initial
+question or a hint; an explanatory policy can permit a direct explanation.
+The synthetic profiles used in the saved dialogue trial expose eight fields
+(Table~\ref{tab:profile-fields}). Their values enter the approved teaching-context
+candidate, where the service supplies them together with the current question,
+permitted evidence and dialogue state. A profile change therefore needs a new
+reviewed binding; a student message is not allowed to replace that configuration.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Teaching fields in the live-model integration trial's synthetic profiles.}
+\label{tab:profile-fields}
+\begin{tabularx}{\linewidth}{@{}L{0.24\linewidth}YY@{}}
+\toprule Field & Socratic configuration & Explanatory configuration \\\midrule
+Tone / depth & Patient and reflective; concise & Direct and precise; detailed \\
+Explanation structure & Diagnostic question, attempt, one hint & Explanation, example, understanding check \\
+Example preference & Learner constructs an example & Concrete non-assessed example \\
+Misconception handling & Contrast question before correction & Explain correction, then apply it \\
+Integrity limits & Require an attempt; no assessed-work solutions & Same restriction \\
+Help ladder & Question, hint, guided explanation & Explanation, worked example, application question \\
+Outreach policy & Reflective lead; contrast alternatives & Direct lead; apply the evidence \\
+\bottomrule
+\end{tabularx}
+\end{table}
+Source: \path{scripts/teaching_profile_responsiveness_packet.py}, used by the
+operational dialogue runner. Tone and depth are separate fields shown together
+for compactness. 
+
+Table~\ref{tab:worked-example} uses saved outputs from the 24-history operational
+trial. These are separate synthetic contexts, not a controlled comparison of the
+effect of changing a single profile.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Saved configuration-to-response examples from the live-model integration trial.}
+\label{tab:worked-example}
+\begin{tabularx}{\linewidth}{@{}L{0.20\linewidth}Y@{}}
+\toprule Context & Stored output and interpretation \\\midrule
+Socratic; first turn & Student: ``How does slot seal work in this course protocol?'' Tutor: ``For `How does slot seal work', what is your current explanation, and which step are you unsure about?'' The system elicits an attempt, but the question remains generic. \\
+Explanatory; day 30 & Student asks how lantern check works. Tutor: ``lantern check sends a probe to each station'' and ``marks a station unavailable after two consecutive unanswered probes''. The reply supplies the source rule; repeated extraction does not establish personalized progression. \\
+Proactive support & All 16 reviewed check-ins used a generic wrapper around an entire synthetic source card. Authority checks permitted delivery; the effect of these messages on students was not measured. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+The source record is \path{research/05_evaluation/dialogue-full-live-001-assistant-findings.json};
+its finding identifiers F21 (Socratic example) and F03 (explanatory example) retain the history, day, student input, response and diagnostic finding.
+The operational trial is reported in Section~\ref{sec:provider-study} and indexed
+in Appendix~\ref{sec:study-index}.
+

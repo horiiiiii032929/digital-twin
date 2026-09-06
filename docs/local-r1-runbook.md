@@ -10,6 +10,28 @@ selects the exact governed V2.1 profile and retains T0 as a one-setting
 rollback. Deterministic fast paths do not call a provider; complex V2.1 turns
 require the locally configured OpenAI credential.
 
+## Qualification scope at the report snapshot
+
+Qualification 010 applies to its recorded source `6449dcf`; qualification 011
+applies to `d9ec1a8` and its recorded images and environment. These are historical
+local operational qualifications, not qualification of every subsequent working-tree
+change. The later objective-scoped goal-completion correction is supported by
+`goal-completion-scope-development-001` and focused regressions; the complete
+current composition has not been requalified as one frozen release. Live-provider
+quality, factual acceptance and instructor fidelity retain their separate gates.
+
+The `student-tutor-r1-local-final-v1.json` profile is hash-bound evidence. Its
+note that exact HTTPS qualification was still required records its selection-time
+status; qualifications 010/011 document subsequent bounded operational checks.
+Do not edit that profile merely to refresh explanatory notes.
+
+Its `proactive-trigger` entry describes the earlier A0 professor-scheduled
+workflow and the A1 evidence-recovery shadow candidate. `a1_enabled: false`
+refers to that candidate, not a global switch for the separate governed-autonomy
+worker. The `conversation-orchestration` entry and governed workflow below
+describe that worker's bounded jobs. These pathways must not be conflated when
+interpreting the manifest or reproducing an experiment.
+
 ## One-time setup
 
 Create a private environment file and replace every placeholder with a long,
@@ -70,9 +92,8 @@ APP_T1_QUALIFICATION_RESULT_PATH=/app/research/05_evaluation/records/governed-fu
 
 That historical qualification record does not bind the evidence gate and its
 release selection was revoked by `main-commit-audit-resolution-001`. Current
-startup therefore rejects this block by design. Keep the committed bounded
-T1-v1/T0 configuration until a fresh architecture comparison selects and binds
-a successor.
+startup therefore rejects this block by design. That revocation applied to the historical block above; the successor
+configuration and its later qualification records are documented below.
 
 The architecture and engine comparisons selected the following candidate for
 exact local qualification and it is represented directly by
@@ -238,8 +259,9 @@ release authorization.
 
 ## Governed autonomy operating workflow
 
-The V2.1 product implementation and exact local profile are qualified for the
-development Mac. The governed workflow is:
+The recorded V2.1 configurations passed the bounded local qualifications
+described above. Later changes retain their own verification scope. The governed
+workflow is:
 
 1. The professor creates and approves an explicit teaching profile.
 2. A release binds the approved profile and current evidence.

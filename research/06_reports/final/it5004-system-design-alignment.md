@@ -162,3 +162,12 @@ The converted figures remain review drafts until their terminology and scope
 are approved. They should not yet be inserted into `report.tex` as final system
 design evidence. The completeness and quality decisions are recorded in
 [`diagram-quality-audit.md`](diagram-quality-audit.md).
+
+## Software-centered report update (6 September 2026)
+
+The main report now uses a compact lifecycle flow, simplified layered
+architecture, native LaTeX response sequence and autonomous activity flow.
+Publication sequence detail is retained in the appendix. The earlier Draw.io
+assets remain historical editable sources for those earlier diagrams; they
+do not override the newer Graphviz/LaTeX sources referenced by `report.tex`.
+See the [revision note](software-report-revision.md) for implementation mapping.

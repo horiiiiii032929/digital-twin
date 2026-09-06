@@ -1,0 +1,68 @@
+{
+  "run_id": "generation-role-model-development-001-protocol-live-001",
+  "review_scope": "All6 outputs; assistant unblinded review, not human or independent authored confirmation. Two development contexts only; no candidate selection.",
+  "per_case": [
+    {
+      "history": "case-0-v10-luna-low",
+      "case_id": "entity-implication-development-v2-02",
+      "arm": "v10-luna-low",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "Information missing from approved material:\n- Whether Nova sorter and Nova counter have a dependency relationship is not established by the provided evidence.\n\nNova sorter places square tokens in tray A and round tokens in tray B. Nova counter counts sealed boxes and does not sort tokens.",
+      "raw_sha256": "fe43afb2db054b0e6b92e810081e7e02244300f96d2c2c5fdc523e0536ef72a0"
+    },
+    {
+      "history": "case-0-v10-luna-medium",
+      "case_id": "entity-implication-development-v2-02",
+      "arm": "v10-luna-medium",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "Nova sorter sorts tokens by shape: square tokens go to tray A, and round tokens go to tray B. Nova counter counts sealed boxes and does not sort tokens. The evidence does not establish a dependency between them.",
+      "raw_sha256": "b317783ccd6326709193476a24248088a1b912814df3f5423662e9f6d6edf646"
+    },
+    {
+      "history": "case-0-v10-sol-low",
+      "case_id": "entity-implication-development-v2-02",
+      "arm": "v10-sol-low",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "Information missing from approved material:\n- Whether any dependency exists between Nova sorter and Nova counter is not established by the supplied evidence.\n\nNova sorter sorts tokens by shape: square tokens go in tray A, and round tokens go in tray B. Nova counter instead counts sealed boxes and does not sort tokens.",
+      "raw_sha256": "30bf040bce1a19f1e4b1da99b39588eee050d5d648485c6a5aabad40d11d9926"
+    },
+    {
+      "history": "case-1-v10-luna-low",
+      "case_id": "entity-implication-development-v2-01",
+      "arm": "v10-luna-low",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "The nova sorter places square tokens in tray A and round tokens in tray B.",
+      "raw_sha256": "183e0b0686692d993e7c27deb449908bfee9d7df61f0f98b0bd96fb38ed135a5"
+    },
+    {
+      "history": "case-1-v10-luna-medium",
+      "case_id": "entity-implication-development-v2-01",
+      "arm": "v10-luna-medium",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "Nova sorter places square tokens in tray A and round tokens in tray B.",
+      "raw_sha256": "60721a999aff9f8fdae99b4db64762ba004ad836b60f765ad7c617eb8e6505db"
+    },
+    {
+      "history": "case-1-v10-sol-low",
+      "case_id": "entity-implication-development-v2-01",
+      "arm": "v10-sol-low",
+      "useful": true,
+      "critical": false,
+      "rationale": "Correct shape/tray rule; when requested, separate counter identity and acknowledge dependency not established. No unsupported relation or universal claim.",
+      "response": "Nova sorter sorts tokens by shape: it places square tokens in tray A and round tokens in tray B.",
+      "raw_sha256": "80e7d5c9953c348c023a9cfd0c895e20fb1e229a30f31292987754edfff99461"
+    }
+  ],
+  "useful": 6,
+  "critical": 0
+}

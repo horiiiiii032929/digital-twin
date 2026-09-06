@@ -1,0 +1,31 @@
+\setlength{\unitlength}{1mm}
+\begin{picture}(166,124)
+\linethickness{0.3pt}
+\put(0,114){\framebox(25,9){\scriptsize\shortstack{Student\\workspace}}}
+\multiput(12,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(36,114){\framebox(25,9){\scriptsize\shortstack{Tutoring\\service}}}
+\multiput(48,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(79,114){\framebox(25,9){\scriptsize\shortstack{Repository /\\retrieval}}}
+\multiput(91,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(127,114){\framebox(25,9){\scriptsize\shortstack{Generator /\\model adapter}}}
+\multiput(139,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(12,104){\vector(1,0){36}}
+\put(13,106){\scriptsize 1. Submit content + conversation ID + request ID}
+\put(48,94){\vector(1,0){43}}
+\put(49,96){\scriptsize 2. Authorize course/release; resolve duplicate request}
+\put(91,84){\vector(-1,0){43}}
+\put(49,86){\scriptsize 3. Policy, learner state, scoped retrieval candidates}
+\put(47,72){\framebox(104,7){\scriptsize 4. Select evidence; ambiguity/sufficiency gate; choose permitted intent}}
+\put(48,64){\vector(1,0){91}}
+\put(49,66){\scriptsize 5. Selected evidence + policy + intent (outside write transaction)}
+\put(139,54){\vector(-1,0){91}}
+\put(49,56){\scriptsize 6. Response proposal + claims / source references}
+\put(47,42){\framebox(104,7){\scriptsize 7. Validate claims/citations; prepare state and follow-up artifacts}}
+\put(48,34){\vector(1,0){43}}
+\put(49,36){\scriptsize 8. save\_turn: recheck authority + expected state revision}
+\put(91,24){\vector(-1,0){43}}
+\put(49,26){\scriptsize 9. Committed turn, or duplicate / conflict / revoked access}
+\put(48,14){\vector(-1,0){36}}
+\put(13,16){\scriptsize 10. Saved response + authoritative citations, or explicit error}
+\put(0,0){\parbox{166mm}{\scriptsize No evidence/ambiguous reference: clarify or abstain; restricted request: refuse/redirect.\\ Invalid output follows the configured bounded recovery path. A matching duplicate returns the saved turn; conflicting content is rejected.}}
+\end{picture}

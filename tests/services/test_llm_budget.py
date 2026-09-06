@@ -42,6 +42,11 @@ async def test_budget_stops_before_call_limit():
         await client.chat(message, "test")
 
     assert client.snapshot() == {
+        "max_concurrency": 1,
+        "inflight_calls": 0,
+        "peak_inflight_calls": 1,
+        "inflight_reserved_usd": 0.0,
+        "uncertain_reserved_usd": 0.0,
         "calls": 1,
         "max_calls": 1,
         "completed_calls": 1,

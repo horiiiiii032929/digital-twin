@@ -109,6 +109,7 @@ class LearningGapAggregateV1(BaseModel):
     course_id: str = Field(min_length=1)
     release_id: str = Field(min_length=1)
     topic_key: str
+    source_title: str | None = None
     signal_kind: LearningGapSignalKind
     distinct_learners: int = Field(ge=3)
     signal_count: int = Field(ge=1)
@@ -167,6 +168,8 @@ class LearningGapAggregationResultV1(BaseModel):
     visible_aggregates: list[LearningGapAggregateV1]
     suppressed_group_count: int = Field(ge=0)
     computed_at: str
+    reporting_window_start: str | None = None
+    active_learner_count: int | None = Field(default=None, ge=5)
 
 
 class CourseImprovementDraftV1(BaseModel):
@@ -185,6 +188,8 @@ class CourseImprovementDraftV1(BaseModel):
         "draft-awaiting-professor-review"
     )
     observed_pattern: str = Field(min_length=1)
+    review_decision: str | None = None
+    reviewed_at: str | None = None
     suggested_follow_up: str = Field(min_length=1)
     distinct_learners: int = Field(ge=3)
     signal_count: int = Field(ge=1)

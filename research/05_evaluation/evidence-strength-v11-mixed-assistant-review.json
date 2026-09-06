@@ -1,0 +1,3434 @@
+{
+  "run_id": "paired-pedagogy-development-001-evidence-strength-v11-mixed-trial-1-live-001",
+  "reviewer": "root assistant; unblinded development review, not independent human assessment",
+  "method": "Meaning-based review of all source rules, required meanings and every delivered turn; uncertain is unqualified. No source-ID entailment assumption.",
+  "candidate_useful": 8,
+  "candidate_total": 8,
+  "candidate_critical": 0,
+  "candidate_uncertain": 0,
+  "control_useful": 0,
+  "control_total": 8,
+  "control_critical": 0,
+  "reviewed_turns": 24,
+  "narrow_gate_passed": true,
+  "whole_candidate_selection": false,
+  "source_files_unchanged": true,
+  "manifest_sha256": "ccc5be40f9b639e4abd6ecf854a4efd57adee96f7f448d2810bf75f9b0d4c648",
+  "source_summary_sha256": "2785b8cad63380bd6492fab2ae7d6fcb6ef014bbf6511f1defe6d71daa17811d",
+  "artifact_hashes": {
+    "case-0-repeat-0-v11-luna-low/turns.jsonl": "c1ed010a5cadbe75e513eb124c4935f685e0de178978c3fde83d81cfe68fe7d5",
+    "case-6-repeat-0-v4/turns.jsonl": "a1262ae9dada5de80284ef74ea044725e10719129a3f4cf824a1e294838c40f6",
+    "case-2-repeat-0-v11-luna-low/turns.jsonl": "6008fe717c292092579326f89e314962930c5b868a9c18487644303bff9e3754",
+    "case-3-repeat-0-v4/turns.jsonl": "e5e049a0287dbe7bdb6e8d926faef2769991292f2dc12508a2f7d62768bbc13b",
+    "case-0-repeat-0-v4/turns.jsonl": "62624241279b4ed1eb779e4e5a0efb6ea196bd60d8f2804ae4b158207288cfd0",
+    "case-4-repeat-0-v11-luna-low/turns.jsonl": "937b87447cf542585c9c6ac74f0683467ced18f2497b4e3bec6a5a3421aaf334",
+    "case-5-repeat-0-v4/turns.jsonl": "85f7651c17b14e21312a38638726a47b7213517590e551b4922ea43aa850a2a7",
+    "case-6-repeat-0-v11-luna-low/turns.jsonl": "3fd37ef7e6475c61e81ed117d2291eb26d581a5d67248200613defcfb8196802",
+    "case-2-repeat-0-v4/turns.jsonl": "508e9d8d8070098cc9d87281e279bb5ba7a27e277a82f9882bd40eba46276e96",
+    "case-1-repeat-0-v11-luna-low/turns.jsonl": "283572d61696625c83f0edac993d85677ff8a3438cd73b96f47945116e07942a",
+    "case-3-repeat-0-v11-luna-low/turns.jsonl": "133e8ee6e6ede48f6df65076ad3f462720b9e2df29ba92d6b509262ee0604a1b",
+    "case-7-repeat-0-v4/turns.jsonl": "7eef9f94dacd9b6219d7d9ae75ffd2a58581b5a02e80f287867116a75b7b74de",
+    "case-4-repeat-0-v4/turns.jsonl": "b2e6b38ea25afa7a77e163b2c5d5586b6b30e758f2afe4d270b64362481e464d",
+    "case-5-repeat-0-v11-luna-low/turns.jsonl": "db154581c78e76d9f05d9fac9ac47f162ee0a44f3b5749ff3febf854383867ca",
+    "case-7-repeat-0-v11-luna-low/turns.jsonl": "39c8c0a492d0e8cd8b1921221a86c33cc5c78a4c61bed00a57b7436c202702ce",
+    "case-1-repeat-0-v4/turns.jsonl": "54d6c2ce7d3619bd6d4e5721412efd918e6f36c42980602781e4a0f7d0a1cd66"
+  },
+  "cases": [
+    {
+      "case_id": "mixed-stage-development-01-initial",
+      "version": "v11-luna-low",
+      "history_id": "case-7-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Identifies absent founding year and asks which measured quantity controls the shutter, without threshold or outcome.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1758,
+                  "latency_ms": 3939.161,
+                  "output_tokens": 188,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005772,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1946
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1758,
+              "latency_p50_ms": 3939.161,
+              "latency_p95_ms": 3939.161,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 188,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0005772,
+              "total_latency_ms": 3939.161,
+              "total_tokens": 1946,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-01-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 4.030372000008356,
+        "id": "case-7-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-initial",
+          "elapsed_ms": 3995.256584021263,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-7-repeat-0-v11-luna-low-0",
+              "content": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-7f8b5e9b-7e99-49b6-b543-8841960ba6ff",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-73eea5c7-ecc0-45d4-8851-e98cc61ed252",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of the Orion shutter is not provided in the evidence.\n\nTo start, what measured quantity should you inspect to decide whether the Orion shutter opens or stays closed?",
+              "conversation_id": "conversation-7f8b5e9b-7e99-49b6-b543-8841960ba6ff",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-4fa40b0b-d745-46c5-817e-7ea8e0a48e60",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-73eea5c7-ecc0-45d4-8851-e98cc61ed252",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3939.358584000729,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of the Orion shutter is not provided in the evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005772,
+                  "input_tokens": 1758,
+                  "output_tokens": 188,
+                  "total_tokens": 1946
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-01-initial",
+      "version": "v4",
+      "history_id": "case-7-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1309,
+                  "latency_ms": 5616.448,
+                  "output_tokens": 420,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0007658,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1729
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1309,
+              "latency_p50_ms": 5616.448,
+              "latency_p95_ms": 5616.448,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 420,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0007658,
+              "total_latency_ms": 5616.448,
+              "total_tokens": 1729,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-01-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 5.6826306660077535,
+        "id": "case-7-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-initial",
+          "elapsed_ms": 5651.769207994221,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-7-repeat-0-v4-0",
+              "content": "How does orion shutter work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-ed522146-1d3f-4593-9f80-61c7b89ccacf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-01aba31a-f56e-46d5-bb5f-b22ffdece912",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-ed522146-1d3f-4593-9f80-61c7b89ccacf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-12a96891-a0d7-4efe-8380-02b89edcd7b8",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-01aba31a-f56e-46d5-bb5f-b22ffdece912",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 5616.651541989995,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0007658,
+                  "input_tokens": 1309,
+                  "output_tokens": 420,
+                  "total_tokens": 1729
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-01-post-attempt",
+      "version": "v11-luna-low",
+      "history_id": "case-6-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Initial question withholds the threshold; after the correct attempt, confirms4>=3 andclosed while identifying the absent year.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 858,
+                  "latency_ms": 1375.42,
+                  "output_tokens": 40,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002196,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 898
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1865,
+                  "latency_ms": 2697.747,
+                  "output_tokens": 134,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005338,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1999
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2723,
+              "latency_p50_ms": 1375.42,
+              "latency_p95_ms": 2697.747,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 174,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0007534,
+              "total_latency_ms": 4073.167,
+              "total_tokens": 2897,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1742,
+                  "latency_ms": 1965.418,
+                  "output_tokens": 66,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0004276,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1808
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 858,
+                  "latency_ms": 1375.407,
+                  "output_tokens": 40,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002196,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 898
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1865,
+                  "latency_ms": 2697.718,
+                  "output_tokens": 134,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005338,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1999
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 4465,
+              "latency_p50_ms": 1965.418,
+              "latency_p95_ms": 2697.718,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 240,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.001181,
+              "total_latency_ms": 6038.543,
+              "total_tokens": 4705,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-01-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 6.2358138330164365,
+        "id": "case-6-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v11"
+        ],
+        "restarted_role_configurations": [
+          {
+            "generation": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            },
+            "planner": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            }
+          }
+        ],
+        "restarts": 1,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 2017.947540996829,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v11-luna-low-0",
+              "content": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-ea56650d-96d4-4936-8778-8ce6e3e8f629",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-f6903075-1bfa-4a85-9134-c997452c797f",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "What measured sky-brightness condition do you think would make the Orion shutter open, and what happens when the brightness is at or above that boundary?",
+              "conversation_id": "conversation-ea56650d-96d4-4936-8778-8ce6e3e8f629",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-14e67e3f-d843-4975-a24c-629b9d1a9fdd",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-f6903075-1bfa-4a85-9134-c997452c797f",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 1965.5776250001509,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.00042760000000000004,
+                  "input_tokens": 1742,
+                  "output_tokens": 66,
+                  "total_tokens": 1808
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        },
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 4159.2298750183545,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-9d21f207-4079-402e-adcf-fa0d969bc5e2",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-0512ef75-70aa-4772-a2df-20db73c3dc10",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "b430cf95b72e3f11c87627e033d4a7490ca0ba1f9044857f603ad9e52c6a0437",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Orion Shutter"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v11-luna-low-1",
+              "content": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-ea56650d-96d4-4936-8778-8ce6e3e8f629",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-bf4a6fbd-e0df-49ea-9c7b-90323e12241d",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of the Orion shutter is not provided in the available evidence.\n\nYour attempt is correct: the Orion shutter opens only below 3 units and stays closed at 3 or above. Since 4 units is above 3, the shutter stays closed.",
+              "conversation_id": "conversation-ea56650d-96d4-4936-8778-8ce6e3e8f629",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-0512ef75-70aa-4772-a2df-20db73c3dc10",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-bf4a6fbd-e0df-49ea-9c7b-90323e12241d",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 2698.1327919929754,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of the Orion shutter is not provided in the available evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005338,
+                  "input_tokens": 1865,
+                  "output_tokens": 134,
+                  "total_tokens": 1999
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-01-post-attempt",
+      "version": "v4",
+      "history_id": "case-6-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 858,
+                  "latency_ms": 1264.124,
+                  "output_tokens": 40,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002196,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 898
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1416,
+                  "latency_ms": 3118.619,
+                  "output_tokens": 263,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005988,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1679
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2274,
+              "latency_p50_ms": 1264.124,
+              "latency_p95_ms": 3118.619,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 303,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0008184,
+              "total_latency_ms": 4382.743,
+              "total_tokens": 2577,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1293,
+                  "latency_ms": 2791.169,
+                  "output_tokens": 208,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005082,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1501
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 858,
+                  "latency_ms": 1264.104,
+                  "output_tokens": 40,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002196,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 898
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1416,
+                  "latency_ms": 3118.61,
+                  "output_tokens": 263,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005988,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1679
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 3567,
+              "latency_p50_ms": 2791.169,
+              "latency_p95_ms": 3118.61,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 511,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0013266,
+              "total_latency_ms": 7173.883,
+              "total_tokens": 4078,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-01-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 7.285331125021912,
+        "id": "case-6-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v4"
+        ],
+        "restarts": 1,
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 2822.7343329926953,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v4-0",
+              "content": "How does orion shutter work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-41fccb6e-7d45-417f-a29c-5151961e39ec",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-66f9f5f5-16aa-4776-9a1b-ae5464627960",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does orion shutter work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-41fccb6e-7d45-417f-a29c-5151961e39ec",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d869ae10-2f4f-4d03-b365-8f21063ef44d",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-66f9f5f5-16aa-4776-9a1b-ae5464627960",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 2791.4542499929667,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005082,
+                  "input_tokens": 1293,
+                  "output_tokens": 208,
+                  "total_tokens": 1501
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-01-post-attempt",
+          "elapsed_ms": 4418.595833005384,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-6-repeat-0-v4-1",
+              "content": "My attempt for orion shutter: Orion shutter opens only when the measured sky brightness is below 3 units. At 3 units or above it stays closed. Is this correct? Work through what happens when sky brightness is 4 units. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-41fccb6e-7d45-417f-a29c-5151961e39ec",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-1deb532f-e5ac-48c7-a46c-fef4dec8fcf2",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-41fccb6e-7d45-417f-a29c-5151961e39ec",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-4ee8561f-eb61-4313-ac31-d3335821d57e",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-1deb532f-e5ac-48c7-a46c-fef4dec8fcf2",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3119.026375003159,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005987999999999999,
+                  "input_tokens": 1416,
+                  "output_tokens": 263,
+                  "total_tokens": 1679
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-02-initial",
+      "version": "v11-luna-low",
+      "history_id": "case-5-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Identifies absent year and asks the missed-beat condition without revealing threshold or result.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1766,
+                  "latency_ms": 3402.028,
+                  "output_tokens": 179,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000568,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1945
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1766,
+              "latency_p50_ms": 3402.028,
+              "latency_p95_ms": 3402.028,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 179,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.000568,
+              "total_latency_ms": 3402.028,
+              "total_tokens": 1945,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-02-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.4613374170148745,
+        "id": "case-5-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-initial",
+          "elapsed_ms": 3430.058750003809,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-5-repeat-0-v11-luna-low-0",
+              "content": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-2a42c217-9c4c-45b0-a6b5-62f576d3ddac",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-f5481c4d-1b4c-46bf-ae9e-858af22f55f3",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- Lyra rehearsal’s exact founding year is not provided in the approved evidence.\n\nFor the rehearsal rule, what condition about the number of missed beats do you think determines whether the practice pass is slow or normal-tempo?",
+              "conversation_id": "conversation-2a42c217-9c4c-45b0-a6b5-62f576d3ddac",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-519ba2be-5525-4709-9e62-0ae4fc976f47",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-f5481c4d-1b4c-46bf-ae9e-858af22f55f3",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3402.2298749769107,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "Lyra rehearsal’s exact founding year is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.000568,
+                  "input_tokens": 1766,
+                  "output_tokens": 179,
+                  "total_tokens": 1945
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-02-initial",
+      "version": "v4",
+      "history_id": "case-5-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1317,
+                  "latency_ms": 3066.986,
+                  "output_tokens": 246,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005586,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1563
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1317,
+              "latency_p50_ms": 3066.986,
+              "latency_p95_ms": 3066.986,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 246,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0005586,
+              "total_latency_ms": 3066.986,
+              "total_tokens": 1563,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-02-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.132678250025492,
+        "id": "case-5-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-initial",
+          "elapsed_ms": 3102.765374991577,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-5-repeat-0-v4-0",
+              "content": "How does lyra rehearsal work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-222e22dc-1f86-4e30-b5f4-863909480350",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-8e9593ce-23d4-456d-8752-9de1dc5997f9",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-222e22dc-1f86-4e30-b5f4-863909480350",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-859064e5-8ce6-4675-8e0f-528b4829c4be",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-8e9593ce-23d4-456d-8752-9de1dc5997f9",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3067.2740419977345,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005586,
+                  "input_tokens": 1317,
+                  "output_tokens": 246,
+                  "total_tokens": 1563
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-02-post-attempt",
+      "version": "v11-luna-low",
+      "history_id": "case-2-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Initial3-missed-beat task withholds the outcome; later confirms3>2 andslowpractice, with year absent.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 866,
+                  "latency_ms": 2109.808,
+                  "output_tokens": 110,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0003052,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 976
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1873,
+                  "latency_ms": 3258.337,
+                  "output_tokens": 139,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005414,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 2012
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2739,
+              "latency_p50_ms": 2109.808,
+              "latency_p95_ms": 3258.337,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 249,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0008466,
+              "total_latency_ms": 5368.145,
+              "total_tokens": 2988,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1750,
+                  "latency_ms": 1934.48,
+                  "output_tokens": 56,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0004172,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1806
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 866,
+                  "latency_ms": 2109.775,
+                  "output_tokens": 110,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0003052,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 976
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1873,
+                  "latency_ms": 3258.322,
+                  "output_tokens": 139,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005414,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 2012
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 4489,
+              "latency_p50_ms": 2109.775,
+              "latency_p95_ms": 3258.322,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 305,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0012638,
+              "total_latency_ms": 7302.577,
+              "total_tokens": 4794,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-02-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 7.4134809160023,
+        "id": "case-2-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v11"
+        ],
+        "restarted_role_configurations": [
+          {
+            "generation": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            },
+            "planner": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            }
+          }
+        ],
+        "restarts": 1,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 1959.472916991217,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v11-luna-low-0",
+              "content": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-b59ceb60-633f-4747-916c-047b604fef39",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-ede9ff21-b35b-4d78-8126-c967d4b17c9c",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "In Lyra rehearsal, what practice pass would you expect for a phrase with 3 missed beats?",
+              "conversation_id": "conversation-b59ceb60-633f-4747-916c-047b604fef39",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-399e06b8-98af-41ce-b115-ddd67f4eb166",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-ede9ff21-b35b-4d78-8126-c967d4b17c9c",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 1934.6548749890644,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0004172,
+                  "input_tokens": 1750,
+                  "output_tokens": 56,
+                  "total_tokens": 1806
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        },
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 5407.434583001304,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-989416ce-24d5-4c35-bb2a-5e6822a733e3",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-b652ed01-8fe5-497a-9a9c-88be73b7fe44",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "2bce96010f3c6dcb90a691df123f7f0d974575013d7eff13576eda6e5a7a6fa9",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Lyra Rehearsal"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v11-luna-low-1",
+              "content": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-b59ceb60-633f-4747-916c-047b604fef39",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-4cc1056d-cd9b-485d-b3b7-7c7a8189c7f1",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of Lyra rehearsal is not provided in the approved evidence.\n\nYes, your rule summary is correct. For 3 missed beats, 3 is more than 2, so Lyra rehearsal assigns a slow practice pass.",
+              "conversation_id": "conversation-b59ceb60-633f-4747-916c-047b604fef39",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-b652ed01-8fe5-497a-9a9c-88be73b7fe44",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-4cc1056d-cd9b-485d-b3b7-7c7a8189c7f1",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3258.7696670088917,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Lyra rehearsal is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005413999999999999,
+                  "input_tokens": 1873,
+                  "output_tokens": 139,
+                  "total_tokens": 2012
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-02-post-attempt",
+      "version": "v4",
+      "history_id": "case-2-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 866,
+                  "latency_ms": 2349.368,
+                  "output_tokens": 119,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000316,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 985
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1434,
+                  "latency_ms": 3275.302,
+                  "output_tokens": 276,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000618,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1710
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2300,
+              "latency_p50_ms": 2349.368,
+              "latency_p95_ms": 3275.302,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 395,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.000934,
+              "total_latency_ms": 5624.67,
+              "total_tokens": 2695,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1301,
+                  "latency_ms": 3085.434,
+                  "output_tokens": 236,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005434,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1537
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 866,
+                  "latency_ms": 2349.349,
+                  "output_tokens": 119,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000316,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 985
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1434,
+                  "latency_ms": 3275.286,
+                  "output_tokens": 276,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000618,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1710
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 3601,
+              "latency_p50_ms": 3085.434,
+              "latency_p95_ms": 3275.286,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 631,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0014774,
+              "total_latency_ms": 8710.069,
+              "total_tokens": 4232,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-02-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 8.848155166982906,
+        "id": "case-2-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v4"
+        ],
+        "restarts": 1,
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 3123.203458992066,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v4-0",
+              "content": "How does lyra rehearsal work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-87e47e84-928f-4ca3-bb0c-7c389c5cfd51",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-94ada534-c6fc-42ca-a7b1-93a19857903a",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does lyra rehearsal work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-87e47e84-928f-4ca3-bb0c-7c389c5cfd51",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-aafb6256-a86b-4514-9760-e49d182693d0",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-94ada534-c6fc-42ca-a7b1-93a19857903a",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3085.7552499801386,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005434,
+                  "input_tokens": 1301,
+                  "output_tokens": 236,
+                  "total_tokens": 1537
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-02-post-attempt",
+          "elapsed_ms": 5666.684875002829,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-2-repeat-0-v4-1",
+              "content": "My attempt for lyra rehearsal: Lyra rehearsal assigns a slow practice pass when a phrase has more than 2 missed beats. With 2 or fewer missed beats it assigns a normal-tempo pass. Is this correct? Work through what happens when the phrase has 3 missed beats. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-87e47e84-928f-4ca3-bb0c-7c389c5cfd51",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3058a480-ecf9-4349-ab8f-4c7515b115ff",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-87e47e84-928f-4ca3-bb0c-7c389c5cfd51",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-d5292d7f-5521-40e9-b7d4-ee51a61a1c6e",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-3058a480-ecf9-4349-ab8f-4c7515b115ff",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3275.6014580081683,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000618,
+                  "input_tokens": 1434,
+                  "output_tokens": 276,
+                  "total_tokens": 1710
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-03-initial",
+      "version": "v11-luna-low",
+      "history_id": "case-0-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Identifies absent year and asks about permission status without stating the decisive approved condition.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1756,
+                  "latency_ms": 3228.911,
+                  "output_tokens": 151,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005324,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1907
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1756,
+              "latency_p50_ms": 3228.911,
+              "latency_p95_ms": 3228.911,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 151,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0005324,
+              "total_latency_ms": 3228.911,
+              "total_tokens": 1907,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-03-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.463177249999717,
+        "id": "case-0-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-initial",
+          "elapsed_ms": 3416.9368340226356,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v11-luna-low-0",
+              "content": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-4e4ba7b2-86c4-45fa-a93d-0e1155ec5284",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e5435880-abdf-4e05-95d5-49e9a15c627c",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of umber display is not provided.\n\nTo start, what permission-status information would you check to decide whether an artifact should light?",
+              "conversation_id": "conversation-4e4ba7b2-86c4-45fa-a93d-0e1155ec5284",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-cbee93b7-7ced-49f8-b126-24cefb216469",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-e5435880-abdf-4e05-95d5-49e9a15c627c",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3229.1861659905408,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of umber display is not provided.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005324,
+                  "input_tokens": 1756,
+                  "output_tokens": 151,
+                  "total_tokens": 1907
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-03-initial",
+      "version": "v4",
+      "history_id": "case-0-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1308,
+                  "latency_ms": 3709.435,
+                  "output_tokens": 290,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0006096,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1598
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1308,
+              "latency_p50_ms": 3709.435,
+              "latency_p95_ms": 3709.435,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 290,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0006096,
+              "total_latency_ms": 3709.435,
+              "total_tokens": 1598,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-03-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.979178709007101,
+        "id": "case-0-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-initial",
+          "elapsed_ms": 3922.504457994364,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-0-repeat-0-v4-0",
+              "content": "How does umber display work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-baa84739-e6b8-4f65-88ab-93ca5e862187",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-be911240-b90e-43af-800b-b3290e608014",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-baa84739-e6b8-4f65-88ab-93ca5e862187",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-badde9cb-bba0-43be-be49-60157945378d",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-be911240-b90e-43af-800b-b3290e608014",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3709.652042016387,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006096000000000001,
+                  "input_tokens": 1308,
+                  "output_tokens": 290,
+                  "total_tokens": 1598
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-03-post-attempt",
+      "version": "v11-luna-low",
+      "history_id": "case-4-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Initial question asks the needed permission condition without answering; later confirms pending is notapproved andunlit, with year absent.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 855,
+                  "latency_ms": 1529.219,
+                  "output_tokens": 45,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000225,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 900
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1852,
+                  "latency_ms": 2769.841,
+                  "output_tokens": 140,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005384,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1992
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2707,
+              "latency_p50_ms": 1529.219,
+              "latency_p95_ms": 2769.841,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 185,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0007634,
+              "total_latency_ms": 4299.06,
+              "total_tokens": 2892,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1740,
+                  "latency_ms": 1607.879,
+                  "output_tokens": 53,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0004116,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1793
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 855,
+                  "latency_ms": 1529.189,
+                  "output_tokens": 45,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000225,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 900
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1852,
+                  "latency_ms": 2769.822,
+                  "output_tokens": 140,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005384,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1992
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 4447,
+              "latency_p50_ms": 1607.879,
+              "latency_p95_ms": 2769.822,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 238,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.001175,
+              "total_latency_ms": 5906.89,
+              "total_tokens": 4685,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-03-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 6.054156875004992,
+        "id": "case-4-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v11"
+        ],
+        "restarted_role_configurations": [
+          {
+            "generation": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            },
+            "planner": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            }
+          }
+        ],
+        "restarts": 1,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 1651.028291991679,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v11-luna-low-0",
+              "content": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-e71c6a69-0cd3-46ba-8134-64690388feaf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-fc67ed0c-d36e-4157-8f4c-c2b6e236a18b",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "What condition must an artifact’s permission flag meet for umber display to light it?",
+              "conversation_id": "conversation-e71c6a69-0cd3-46ba-8134-64690388feaf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e2b59bea-c5b8-480e-b7c6-10b13acb3ec2",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-fc67ed0c-d36e-4157-8f4c-c2b6e236a18b",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 1608.2186669809744,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.00041160000000000003,
+                  "input_tokens": 1740,
+                  "output_tokens": 53,
+                  "total_tokens": 1793
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        },
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 4343.525459000375,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-2e9b70a0-56a9-4c46-a17c-b8beb84fe395",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-10273546-36b2-4bd1-8594-22385c7f7f0d",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "24536fac407578c6a9da28b4d16412db986c86a4673f4bc94e9cd34344db474b",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Umber Display"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v11-luna-low-1",
+              "content": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-e71c6a69-0cd3-46ba-8134-64690388feaf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-edd7b47a-6173-4202-a099-a981bca26574",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of umber display is not provided in the approved evidence.\n\nCorrect. Because a pending permission flag is not approved, umber display keeps the artifact unlit.",
+              "conversation_id": "conversation-e71c6a69-0cd3-46ba-8134-64690388feaf",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-10273546-36b2-4bd1-8594-22385c7f7f0d",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-edd7b47a-6173-4202-a099-a981bca26574",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 2770.5605830124114,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of umber display is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005384000000000001,
+                  "input_tokens": 1852,
+                  "output_tokens": 140,
+                  "total_tokens": 1992
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-03-post-attempt",
+      "version": "v4",
+      "history_id": "case-4-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 855,
+                  "latency_ms": 1552.207,
+                  "output_tokens": 53,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002346,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 908
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1416,
+                  "latency_ms": 4193.962,
+                  "output_tokens": 324,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000672,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1740
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2271,
+              "latency_p50_ms": 1552.207,
+              "latency_p95_ms": 4193.962,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 377,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0009066,
+              "total_latency_ms": 5746.169,
+              "total_tokens": 2648,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1292,
+                  "latency_ms": 4699.579,
+                  "output_tokens": 332,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0006568,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1624
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 855,
+                  "latency_ms": 1552.199,
+                  "output_tokens": 53,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0002346,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 908
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1416,
+                  "latency_ms": 4193.939,
+                  "output_tokens": 324,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000672,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1740
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 3563,
+              "latency_p50_ms": 4193.939,
+              "latency_p95_ms": 4699.579,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 709,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0015634,
+              "total_latency_ms": 10445.717,
+              "total_tokens": 4272,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-03-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 10.581510416988749,
+        "id": "case-4-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v4"
+        ],
+        "restarts": 1,
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 4731.603709020419,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v4-0",
+              "content": "How does umber display work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-545f53c8-277f-4eb3-9b2b-38eafdb2ae24",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-09d9fba4-1a21-4ea4-85c1-f1b285440c93",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does umber display work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-545f53c8-277f-4eb3-9b2b-38eafdb2ae24",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a2ecae7e-8271-4a20-801d-af848790e96a",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-09d9fba4-1a21-4ea4-85c1-f1b285440c93",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4699.757666996447,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006567999999999999,
+                  "input_tokens": 1292,
+                  "output_tokens": 332,
+                  "total_tokens": 1624
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-03-post-attempt",
+          "elapsed_ms": 5798.536749993218,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-4-repeat-0-v4-1",
+              "content": "My attempt for umber display: Umber display lights an artifact only when its permission flag is approved. A pending or denied flag keeps the artifact unlit. Is this correct? Work through what happens when the permission flag is pending. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-545f53c8-277f-4eb3-9b2b-38eafdb2ae24",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-528c7fa9-eb19-4ae4-b94b-509754dbad7b",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-545f53c8-277f-4eb3-9b2b-38eafdb2ae24",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-ab5c26bf-c6bb-4922-be2b-ddd8bf5d7e0a",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-528c7fa9-eb19-4ae4-b94b-509754dbad7b",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4194.26679200842,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.000672,
+                  "input_tokens": 1416,
+                  "output_tokens": 324,
+                  "total_tokens": 1740
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-04-initial",
+      "version": "v11-luna-low",
+      "history_id": "case-1-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Identifies absent year and asks what sample detail tocompare without stating the matching condition orcomplete rule.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1764,
+                  "latency_ms": 3801.757,
+                  "output_tokens": 160,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005448,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1924
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1764,
+              "latency_p50_ms": 3801.757,
+              "latency_p95_ms": 3801.757,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 160,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0005448,
+              "total_latency_ms": 3801.757,
+              "total_tokens": 1924,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-04-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.974651291995542,
+        "id": "case-1-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-initial",
+          "elapsed_ms": 3913.3901660097763,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v11-luna-low-0",
+              "content": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-f11b0228-3412-40bf-be85-e9d79929ec63",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a97b80d7-5ca8-4ece-8fad-fa99007f59b5",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of Sienna sample is not provided in the approved evidence.\n\nBefore deciding what happens to a Sienna sample, what detail from the sample would you compare with the collection record?",
+              "conversation_id": "conversation-f11b0228-3412-40bf-be85-e9d79929ec63",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-bca1204f-e9ff-4489-8aa3-329b7cfd7499",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-a97b80d7-5ca8-4ece-8fad-fa99007f59b5",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3801.974292000523,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Sienna sample is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005447999999999999,
+                  "input_tokens": 1764,
+                  "output_tokens": 160,
+                  "total_tokens": 1924
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-04-initial",
+      "version": "v4",
+      "history_id": "case-1-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 0,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1315,
+                  "latency_ms": 3423.041,
+                  "output_tokens": 253,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005666,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1568
+                }
+              ],
+              "calls": 1,
+              "completed_calls": 1,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 1315,
+              "latency_p50_ms": 3423.041,
+              "latency_p95_ms": 3423.041,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 253,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0005666,
+              "total_latency_ms": 3423.041,
+              "total_tokens": 1568,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-04-initial",
+        "category": "mixed-evidence-initial",
+        "completed": true,
+        "completed_turns": 1,
+        "elapsed_seconds": 3.5497946249961387,
+        "id": "case-1-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 1,
+        "repetition": 0,
+        "restarts": 0,
+        "split": "development",
+        "target_turn_index": 0,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-initial",
+          "elapsed_ms": 3516.8265420070384,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-1-repeat-0-v4-0",
+              "content": "How does sienna sample work? Also give its exact founding year. I have not attempted the rule yet; identify the unavailable detail and give me a starting question without the full rule.",
+              "conversation_id": "conversation-51ca21ca-2b83-42fc-ab7c-5f39ccbacf55",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-a9e0a88c-4b8c-482f-a3d6-aa6c42141da0",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-51ca21ca-2b83-42fc-ab7c-5f39ccbacf55",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-e3d955dc-35f5-4f39-aedc-6515dd71075e",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-a9e0a88c-4b8c-482f-a3d6-aa6c42141da0",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3423.2688329939265,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005665999999999999,
+                  "input_tokens": 1315,
+                  "output_tokens": 253,
+                  "total_tokens": 1568
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-04-post-attempt",
+      "version": "v11-luna-low",
+      "history_id": "case-3-repeat-0-v11-luna-low",
+      "useful": true,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Initial question asks the retention condition without answering; later confirmsR2!=R3 andsetaside withoutanalysis, with year absent.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 872,
+                  "latency_ms": 1463.786,
+                  "output_tokens": 48,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000232,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 920
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1872,
+                  "latency_ms": 3151.473,
+                  "output_tokens": 147,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005508,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 2019
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2744,
+              "latency_p50_ms": 1463.786,
+              "latency_p95_ms": 3151.473,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 195,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0007828,
+              "total_latency_ms": 4615.259,
+              "total_tokens": 2939,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1748,
+                  "latency_ms": 2970.884,
+                  "output_tokens": 51,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0004108,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 1799
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 872,
+                  "latency_ms": 1463.778,
+                  "output_tokens": 48,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000232,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 920
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1872,
+                  "latency_ms": 3151.449,
+                  "output_tokens": 147,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005508,
+                  "status": "completed",
+                  "task": "question_specific_typed_instruction",
+                  "total_tokens": 2019
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 4492,
+              "latency_p50_ms": 2970.884,
+              "latency_p95_ms": 3151.449,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 246,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0011936,
+              "total_latency_ms": 7586.111,
+              "total_tokens": 4738,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-04-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 7.735165999998571,
+        "id": "case-3-repeat-0-v11-luna-low",
+        "observed_generation_model": "gpt-5.6-luna",
+        "observed_generator_id": "question-specific-profile-grounded-v11",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v11"
+        ],
+        "restarted_role_configurations": [
+          {
+            "generation": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            },
+            "planner": {
+              "model": "gpt-5.6-luna",
+              "output_cap": 3000,
+              "reasoning_effort": "low"
+            }
+          }
+        ],
+        "restarts": 1,
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          }
+        },
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v11-luna-low"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 3020.3173750196584,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v11-luna-low-0",
+              "content": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-1fc289d1-3f2e-4d31-88eb-7b9cbfddd571",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3577d49e-40c7-4ab7-bfdf-28d4446e79fc",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "What condition must be true for Sienna sample to retain a soil tube?",
+              "conversation_id": "conversation-1fc289d1-3f2e-4d31-88eb-7b9cbfddd571",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-3513a2e9-3212-43f1-9123-9715f85a9231",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-3577d49e-40c7-4ab7-bfdf-28d4446e79fc",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 2971.1854579800274,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0004108,
+                  "input_tokens": 1748,
+                  "output_tokens": 51,
+                  "total_tokens": 1799
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        },
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 4659.607457986567,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [
+              {
+                "bounding_box": null,
+                "course_id": "course-a-synthetic",
+                "crop_ref": null,
+                "id": "citation-df6b61a4-fe18-4516-ade6-c73e8cda1335",
+                "locator": "mixed-evidence-stage-development-v1-source-01 paragraph 1",
+                "message_id": "message-15a531c9-6d5c-4370-9958-164cec591ad2",
+                "page": null,
+                "region_id": "region-mixed-evidence-stage-development-v1-source-01",
+                "region_kind": null,
+                "release_id": "release-mixed-evidence-stage-development-v1-profile-703b45672d3a",
+                "source_artifact_id": "mixed-evidence-stage-development-v1-source-01",
+                "source_checksum": "4473e78e774c01e37a6ed3ac81c712ea6b13fce25167eb1f2324272884f172df",
+                "source_document_id": "document-mixed-evidence-stage-development-v1-source-01",
+                "source_version": 1,
+                "title": "Sienna Sample"
+              }
+            ],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v11-luna-low-1",
+              "content": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-1fc289d1-3f2e-4d31-88eb-7b9cbfddd571",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-95368e4c-ac7f-46dd-87e8-599d07c52a40",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "answer",
+              "client_request_id": null,
+              "content": "Information missing from approved material:\n- The exact founding year of Sienna sample is not provided in the approved evidence.\n\nYes, your description is correct. Because R2 does not match R3, the tube is set aside without analysis.",
+              "conversation_id": "conversation-1fc289d1-3f2e-4d31-88eb-7b9cbfddd571",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-15a531c9-6d5c-4370-9958-164cec591ad2",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-95368e4c-ac7f-46dd-87e8-599d07c52a40",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v11",
+                "latency_ms": 3152.0039169990923,
+                "policy_action": "answer",
+                "prompt_version": "question-specific-profile-grounded-v11",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": "The exact founding year of Sienna sample is not provided in the approved evidence.",
+                "usage": {
+                  "approximate_cost_usd": 0.0005508,
+                  "input_tokens": 1872,
+                  "output_tokens": 147,
+                  "total_tokens": 2019
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified"
+              },
+              "tutoring_intent": "correct_misconception",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "correct_misconception",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v11-luna-low"
+        }
+      ]
+    },
+    {
+      "case_id": "mixed-stage-development-04-post-attempt",
+      "version": "v4",
+      "history_id": "case-3-repeat-0-v4",
+      "useful": false,
+      "critical": false,
+      "uncertain": false,
+      "reason": "Generic whole-request no-evidence fallback omits supported starting help or post-attempt application; prior turns also inspected.",
+      "target_turn_index": 1,
+      "all_turns_reviewed": true,
+      "history": {
+        "budget_chain": {
+          "any_cost_reporting_failed": false,
+          "observable": true,
+          "wrappers": [
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 872,
+                  "latency_ms": 1875.678,
+                  "output_tokens": 43,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000226,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 915
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 1438,
+                  "latency_ms": 3892.142,
+                  "output_tokens": 300,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0006476,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1738
+                }
+              ],
+              "calls": 2,
+              "completed_calls": 2,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 2310,
+              "latency_p50_ms": 1875.678,
+              "latency_p95_ms": 3892.142,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 343,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.0008736,
+              "total_latency_ms": 5767.82,
+              "total_tokens": 2653,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            },
+            {
+              "call_records": [
+                {
+                  "call_number": 1,
+                  "error_code": null,
+                  "input_tokens": 1299,
+                  "latency_ms": 4331.934,
+                  "output_tokens": 273,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0005874,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1572
+                },
+                {
+                  "call_number": 2,
+                  "error_code": null,
+                  "input_tokens": 872,
+                  "latency_ms": 1875.667,
+                  "output_tokens": 43,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.000226,
+                  "status": "completed",
+                  "task": "reactive_tutoring_intent",
+                  "total_tokens": 915
+                },
+                {
+                  "call_number": 3,
+                  "error_code": null,
+                  "input_tokens": 1438,
+                  "latency_ms": 3892.125,
+                  "output_tokens": 300,
+                  "provider_model": "gpt-5.6-luna",
+                  "provider_revision": "gpt-5.6-luna",
+                  "reported_cost_usd": 0.0006476,
+                  "status": "completed",
+                  "task": "question_specific_profile_tutoring",
+                  "total_tokens": 1738
+                }
+              ],
+              "calls": 3,
+              "completed_calls": 3,
+              "cost_reporting_failed": false,
+              "failed_calls": 0,
+              "inflight_calls": 0,
+              "inflight_reserved_usd": 0.0,
+              "input_tokens": 3609,
+              "latency_p50_ms": 3892.125,
+              "latency_p95_ms": 4331.934,
+              "max_calls": 40,
+              "max_concurrency": 1,
+              "max_cost_usd": 9.6,
+              "output_tokens": 616,
+              "peak_inflight_calls": 1,
+              "reported_cost_usd": 0.001461,
+              "total_latency_ms": 10099.726,
+              "total_tokens": 4225,
+              "uncertain_reserved_usd": 0.0,
+              "unknown_cost_calls": 0
+            }
+          ]
+        },
+        "case_id": "mixed-stage-development-04-post-attempt",
+        "category": "mixed-evidence-post-attempt",
+        "completed": true,
+        "completed_turns": 2,
+        "elapsed_seconds": 10.226353417005157,
+        "id": "case-3-repeat-0-v4",
+        "observed_generator_id": "question-specific-profile-grounded-v4",
+        "planned_turns": 2,
+        "repetition": 0,
+        "restarted_generator_ids": [
+          "question-specific-profile-grounded-v4"
+        ],
+        "restarts": 1,
+        "split": "development",
+        "target_turn_index": 1,
+        "version": "v4"
+      },
+      "turns": [
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 4362.815667001996,
+          "repetition": 0,
+          "stage": 0,
+          "student": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 1,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v4-0",
+              "content": "How does sienna sample work? I have not tried an answer yet; give me a starting question.",
+              "conversation_id": "conversation-98681343-c8cf-4517-a6ae-38ae24aab735",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-b8ac8c7f-2305-4819-bb3d-e4e7f165b04f",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "question",
+              "client_request_id": null,
+              "content": "For “How does sienna sample work?”, what is your current explanation, and which step are you unsure about?",
+              "conversation_id": "conversation-98681343-c8cf-4517-a6ae-38ae24aab735",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-f0dd34fc-52df-4ccb-b615-2af382bc00f7",
+              "learner_state_revision": 1,
+              "response_to_message_id": "message-b8ac8c7f-2305-4819-bb3d-e4e7f165b04f",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 4332.168249995448,
+                "policy_action": "question",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0005874,
+                  "input_tokens": 1299,
+                  "output_tokens": 273,
+                  "total_tokens": 1572
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "diagnose_understanding",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "diagnose_understanding",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        },
+        {
+          "case_id": "mixed-stage-development-04-post-attempt",
+          "elapsed_ms": 5812.106750003295,
+          "repetition": 0,
+          "stage": 1,
+          "student": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+          "turn": {
+            "citations": [],
+            "duplicate": false,
+            "learner_state_revision": 2,
+            "pending_clarification": null,
+            "student_message": {
+              "action": "question",
+              "client_request_id": "case-3-repeat-0-v4-1",
+              "content": "My attempt for sienna sample: Sienna sample retains a soil tube only when its seal code matches the collection log. A mismatched seal code causes the tube to be set aside without analysis. Is this correct? Work through what happens when the tube seal code is R2 and the log seal code is R3. Also state the exact founding year, distinguishing any unavailable detail.",
+              "conversation_id": "conversation-98681343-c8cf-4517-a6ae-38ae24aab735",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-afbae208-04e5-4cdf-8514-9460d96e0785",
+              "learner_state_revision": null,
+              "response_to_message_id": null,
+              "role": "student",
+              "trace": null,
+              "tutoring_intent": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutor_message": {
+              "action": "no-evidence",
+              "client_request_id": null,
+              "content": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+              "conversation_id": "conversation-98681343-c8cf-4517-a6ae-38ae24aab735",
+              "created_at": "2026-09-22T00:00:00+00:00",
+              "id": "message-fb169027-e877-4d42-b114-13a1d04dd9a9",
+              "learner_state_revision": 2,
+              "response_to_message_id": "message-afbae208-04e5-4cdf-8514-9460d96e0785",
+              "role": "tutor",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v4",
+                "latency_ms": 3892.564665991813,
+                "policy_action": "no-evidence",
+                "prompt_version": "question-specific-profile-grounded-v4",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "unresolved_detail": null,
+                "usage": {
+                  "approximate_cost_usd": 0.0006476,
+                  "input_tokens": 1438,
+                  "output_tokens": 300,
+                  "total_tokens": 1738
+                },
+                "validation_scope": null
+              },
+              "tutoring_intent": "ask_next_step",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+            },
+            "tutoring_intent": "ask_next_step",
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+          },
+          "version": "v4"
+        }
+      ]
+    }
+  ],
+  "candidate_category_useful": {
+    "initial": 4,
+    "post-attempt": 4
+  }
+}

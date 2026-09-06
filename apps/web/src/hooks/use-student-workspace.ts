@@ -125,6 +125,8 @@ export function useStudentWorkspace(
   const pendingRequestRef = useRef<PendingRequest | null>(null)
   const outreachReplyRef = useRef<string | null>(null)
   const outreachOperationRef = useRef(0)
+  const outreachScopeRef = useRef(0)
+  const outreachCourseRef = useRef<string | null>(null)
   const indexRef = useRef(
     typeof window === "undefined"
       ? {
@@ -152,6 +154,16 @@ export function useStudentWorkspace(
   const loadConversation = useCallback(
     async (course: StudentCourse, conversationId?: string) => {
       const operation = ++operationRef.current
+      if (outreachCourseRef.current !== course.course_id) {
+        outreachCourseRef.current = course.course_id
+        ++outreachScopeRef.current
+        ++outreachOperationRef.current
+        setOutreachMessages([])
+        setOutreachPreferences([])
+        setAutonomousGoals([])
+        setOutreachError(null)
+        setIsUpdatingOutreach(false)
+      }
       setActiveCourse(course)
       setConversation(null)
       setMessages([])
@@ -172,6 +184,7 @@ export function useStudentWorkspace(
             activeConversationId,
             accountId,
           )
+          if (operation !== operationRef.current) return
           if (!isConversationForCurrentRelease(view.conversation, course)) {
             saveIndex(
               forgetStudentConversation(indexRef.current, course.course_id),
@@ -210,6 +223,7 @@ export function useStudentWorkspace(
             return
           }
         } catch (caught) {
+          if (operation !== operationRef.current) return
           const staleLocalReference =
             caught instanceof StudentApiError && [403, 404].includes(caught.status)
           if (!staleLocalReference) {
@@ -258,6 +272,15 @@ export function useStudentWorkspace(
       setIsLoadingCourses(false)
 
       if (availableCourses.length === 0) {
+        outreachCourseRef.current = null
+        ++outreachScopeRef.current
+        ++outreachOperationRef.current
+        setLearnerEvidence(null)
+        setPendingClarification(null)
+        pendingRequestRef.current = null
+        outreachReplyRef.current = null
+        setDraft("")
+        setIsLoadingConversation(false)
         setActiveCourse(null)
         setConversation(null)
         setMessages([])
@@ -318,6 +341,8 @@ export function useStudentWorkspace(
   useEffect(() => {
     const courseId = activeCourse?.course_id
     if (!courseId) {
+      ++outreachOperationRef.current
+      setIsLoadingOutreach(false)
       setOutreachMessages([])
       setOutreachPreferences([])
       setAutonomousGoals([])
@@ -327,7 +352,11 @@ export function useStudentWorkspace(
     const interval = window.setInterval(() => {
       void loadOutreach(courseId, true)
     }, 30_000)
-    return () => window.clearInterval(interval)
+    const operations = outreachOperationRef
+    return () => {
+      window.clearInterval(interval)
+      ++operations.current
+    }
   }, [activeCourse?.course_id, loadOutreach])
 
   const selectCourse = useCallback(
@@ -433,13 +462,14 @@ export function useStudentWorkspace(
       setSelectedCitation(turn.citations[0] ?? null)
       setPendingClarification(turn.pending_clarification ?? null)
       try {
-        setLearnerEvidence(
-          await getStudentLearnerEvidence(conversation.id, accountId),
-        )
+        const evidence = await getStudentLearnerEvidence(conversation.id, accountId)
+        if (operation !== operationRef.current) return
+        setLearnerEvidence(evidence)
       } catch {
         // The completed tutoring turn remains authoritative if this optional
         // evidence summary is temporarily unavailable.
       }
+      if (operation !== operationRef.current) return
       setDraft("")
       outreachReplyRef.current = null
       pendingRequestRef.current = null
@@ -482,6 +512,7 @@ export function useStudentWorkspace(
   const setInAppOutreachEnabled = useCallback(
     async (enabled: boolean) => {
       if (!activeCourse || isUpdatingOutreach) return
+      const scope = outreachScopeRef.current
       setIsUpdatingOutreach(true)
       setOutreachError(null)
       try {
@@ -490,14 +521,18 @@ export function useStudentWorkspace(
           enabled,
           accountId,
         )
+        if (scope !== outreachScopeRef.current) return
+        ++outreachOperationRef.current
+        setIsLoadingOutreach(false)
         setOutreachPreferences((current) => [
           ...current.filter((item) => item.channel !== "in-app"),
           preference,
         ])
       } catch (caught) {
+        if (scope !== outreachScopeRef.current) return
         setOutreachError(toWorkspaceError(caught, "workspace").message)
       } finally {
-        setIsUpdatingOutreach(false)
+        if (scope === outreachScopeRef.current) setIsUpdatingOutreach(false)
       }
     },
     [accountId, activeCourse, isUpdatingOutreach],
@@ -506,6 +541,7 @@ export function useStudentWorkspace(
   const snoozeOutreach = useCallback(
     async (days: number | null) => {
       if (!activeCourse || isUpdatingOutreach || (days !== null && days < 1)) return
+      const scope = outreachScopeRef.current
       setIsUpdatingOutreach(true)
       setOutreachError(null)
       try {
@@ -518,14 +554,18 @@ export function useStudentWorkspace(
           accountId,
           until,
         )
+        if (scope !== outreachScopeRef.current) return
+        ++outreachOperationRef.current
+        setIsLoadingOutreach(false)
         setOutreachPreferences((current) => [
           ...current.filter((item) => item.channel !== "in-app"),
           preference,
         ])
       } catch (caught) {
+        if (scope !== outreachScopeRef.current) return
         setOutreachError(toWorkspaceError(caught, "workspace").message)
       } finally {
-        setIsUpdatingOutreach(false)
+        if (scope === outreachScopeRef.current) setIsUpdatingOutreach(false)
       }
     },
     [accountId, activeCourse, isUpdatingOutreach],
@@ -533,14 +573,19 @@ export function useStudentWorkspace(
 
   const markOutreachRead = useCallback(
     async (messageId: string) => {
+      const scope = outreachScopeRef.current
       try {
         const updated = await markStudentOutreachRead(messageId, accountId)
+        if (scope !== outreachScopeRef.current) return
+        ++outreachOperationRef.current
+        setIsLoadingOutreach(false)
         setOutreachMessages((current) =>
           current.map((item) =>
             item.message.id === messageId ? updated : item,
           ),
         )
       } catch (caught) {
+        if (scope !== outreachScopeRef.current) return
         setOutreachError(toWorkspaceError(caught, "workspace").message)
       }
     },
@@ -549,12 +594,17 @@ export function useStudentWorkspace(
 
   const dismissOutreach = useCallback(
     async (messageId: string) => {
+      const scope = outreachScopeRef.current
       try {
         await dismissStudentOutreach(messageId, accountId)
+        if (scope !== outreachScopeRef.current) return
+        ++outreachOperationRef.current
+        setIsLoadingOutreach(false)
         setOutreachMessages((current) =>
           current.filter((item) => item.message.id !== messageId),
         )
       } catch (caught) {
+        if (scope !== outreachScopeRef.current) return
         setOutreachError(toWorkspaceError(caught, "workspace").message)
       }
     },

@@ -49,6 +49,13 @@ The project's technical standard, learning commitments, and strengthened Sprint
 └── tests/                  # Automated and manual verification notes
 ```
 
+## Submitted report and reproducibility
+
+The [submitted report snapshot](reports/submitted/2026-09-06/README.md) contains
+the unchanged submitted PDFs and LaTeX package. The [report source guide](research/06_reports/final/README.md)
+explains how to rebuild it. The [post-submission verification record](docs/post-submission-verification.md)
+distinguishes code checks from the historical evaluation claims.
+
 ## Development Commands
 
 - `uv sync --locked --dev`: install the locked Python API and test dependencies into `.venv`.

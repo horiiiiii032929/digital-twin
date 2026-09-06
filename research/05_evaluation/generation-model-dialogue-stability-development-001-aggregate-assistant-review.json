@@ -1,0 +1,1368 @@
+{
+  "group_id": "generation-model-dialogue-stability-development-001",
+  "review_scope": "Every delivered main/profile response reviewed: Luna candidates and allV4 controls by evidence reviewer; Solcandidate by runtime reviewer, with master checks of critical/boundary examples. Assistant/unblinded/author-aware, nothuman.",
+  "arms": {
+    "v10-luna-low": {
+      "main_useful": 87,
+      "main_denominator": 96,
+      "on_style_useful": 10,
+      "on_style_denominator": 12,
+      "critical_events": 2,
+      "trials": {
+        "1": {
+          "main_useful": 47,
+          "main_denominator": 48,
+          "primary_useful": 15,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 12,
+          "on_style_useful": 5,
+          "on_style_denominator": 6,
+          "critical_events": 1,
+          "missing_main_targets": 0
+        },
+        "2": {
+          "main_useful": 40,
+          "main_denominator": 48,
+          "primary_useful": 13,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 11,
+          "on_style_useful": 5,
+          "on_style_denominator": 6,
+          "critical_events": 1,
+          "missing_main_targets": 7
+        }
+      }
+    },
+    "v10-luna-medium": {
+      "main_useful": 95,
+      "main_denominator": 96,
+      "on_style_useful": 11,
+      "on_style_denominator": 12,
+      "critical_events": 1,
+      "trials": {
+        "1": {
+          "main_useful": 48,
+          "main_denominator": 48,
+          "primary_useful": 16,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 12,
+          "on_style_useful": 5,
+          "on_style_denominator": 6,
+          "critical_events": 1,
+          "missing_main_targets": 0
+        },
+        "2": {
+          "main_useful": 47,
+          "main_denominator": 48,
+          "primary_useful": 16,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 12,
+          "on_style_useful": 6,
+          "on_style_denominator": 6,
+          "critical_events": 0,
+          "missing_main_targets": 0
+        }
+      }
+    },
+    "v10-sol-low": {
+      "main_useful": 96,
+      "main_denominator": 96,
+      "on_style_useful": 11,
+      "on_style_denominator": 12,
+      "critical_events": 1,
+      "trials": {
+        "1": {
+          "main_useful": 48,
+          "main_denominator": 48,
+          "primary_useful": 16,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 12,
+          "on_style_useful": 6,
+          "on_style_denominator": 6,
+          "critical_events": 0,
+          "missing_main_targets": 0
+        },
+        "2": {
+          "main_useful": 48,
+          "main_denominator": 48,
+          "primary_useful": 16,
+          "primary_denominator": 16,
+          "explanatory_moves_adequate": 12,
+          "on_style_useful": 5,
+          "on_style_denominator": 6,
+          "critical_events": 1,
+          "missing_main_targets": 0
+        }
+      }
+    }
+  },
+  "controls": {
+    "paired-pedagogy-development-001-stability-v10-luna-low-trial-1-live-001": {
+      "useful": 15,
+      "denominator": 48,
+      "critical_events": 1
+    },
+    "paired-pedagogy-development-001-stability-v10-luna-low-trial-2-live-001": {
+      "useful": 15,
+      "denominator": 48,
+      "critical_events": 1
+    },
+    "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001": {
+      "useful": 16,
+      "denominator": 48,
+      "critical_events": 0
+    },
+    "paired-pedagogy-development-001-stability-v10-luna-medium-trial-2-live-001": {
+      "useful": 18,
+      "denominator": 48,
+      "critical_events": 1
+    },
+    "paired-pedagogy-development-001-stability-v10-sol-low-trial-1-live-001": {
+      "useful": 16,
+      "denominator": 48,
+      "critical_events": 1
+    },
+    "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001": {
+      "useful": 16,
+      "denominator": 48,
+      "critical_events": 2
+    }
+  },
+  "paired_candidate_comparisons": {
+    "v10-luna-medium": {
+      "main": {
+        "counts": {
+          "tie": 87,
+          "win": 2,
+          "missing_comparator": 7
+        },
+        "net_observed": 2,
+        "per_pair": [
+          {
+            "case_id": "development-01-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-03",
+            "trial": 1,
+            "outcome": "win"
+          },
+          {
+            "case_id": "development-04-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-07",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-03",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-07",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-03",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-04",
+            "trial": 2,
+            "outcome": "win"
+          },
+          {
+            "case_id": "development-02-10",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-07",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-03-03",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-01-01",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-01-07",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-03",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-06",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          }
+        ]
+      },
+      "on_style": {
+        "counts": {
+          "tie": 11,
+          "win": 1
+        },
+        "net_observed": 1,
+        "per_pair": [
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 2,
+            "outcome": "win"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 2,
+            "outcome": "tie"
+          }
+        ]
+      }
+    },
+    "v10-sol-low": {
+      "main": {
+        "counts": {
+          "tie": 87,
+          "win": 2,
+          "missing_comparator": 7
+        },
+        "net_observed": 2,
+        "per_pair": [
+          {
+            "case_id": "development-01-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-03",
+            "trial": 1,
+            "outcome": "win"
+          },
+          {
+            "case_id": "development-01-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-01",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-02",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-03",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-04",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-05",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-06",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-07",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-08",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-09",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-10",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-11",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-12",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-01",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-01-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-03",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-07",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-01-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-01-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-03",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-06",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-07",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-10",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-02-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-02-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-03",
+            "trial": 2,
+            "outcome": "missing_comparator"
+          },
+          {
+            "case_id": "development-03-04",
+            "trial": 2,
+            "outcome": "win"
+          },
+          {
+            "case_id": "development-03-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-07",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-03-12",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-01",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-02",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-03",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-04",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-05",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-06",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-07",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-08",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-09",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-10",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-11",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "development-04-12",
+            "trial": 2,
+            "outcome": "tie"
+          }
+        ]
+      },
+      "on_style": {
+        "counts": {
+          "win": 1,
+          "tie": 11
+        },
+        "net_observed": 1,
+        "per_pair": [
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 1,
+            "outcome": "win"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 1,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "explanatory-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-checksum-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-escrow-question",
+            "trial": 2,
+            "outcome": "tie"
+          },
+          {
+            "case_id": "socratic-approved-teaching-profile-context-v1-fresh-prefix-misconception",
+            "trial": 2,
+            "outcome": "tie"
+          }
+        ]
+      }
+    }
+  },
+  "actual_main_turns": 977,
+  "actual_profile_turns": 144,
+  "planned_main_turns": 1008,
+  "planned_profile_turns": 144,
+  "decision": "Refine / No Selection. Every alias has at least one verified critical checksum overclaim; no new confirmation, real-course transfer or release promotion.",
+  "missing_policy": "Missing targets remain unqualified in fixed48/96 denominators. Missing comparator excluded from observed semantic win/loss; missingness and planned-denominator utility reported separately.",
+  "limitations": [
+    "Only48unique contexts/four source clusters, two stochastic executions; not96independent students.",
+    "Reused development; previous failedconfirmation remains consumed.",
+    "Some Luna-low trial2 targets absent after unknown-usage stop; never imputed or selectively retried.",
+    "Earlier complete main output comparisons cannot establish model equivalence.",
+    "No learning, authenticprofessorfidelity or humanvalidation inference."
+  ],
+  "review_artifacts": {
+    "dialogue-stability-luna-low-trial1-assistant-review.json": "8afc818e07bd89b111263574057388a8674cdb687d55a24ab6e5b0a001fa57dc",
+    "dialogue-stability-profile-luna-low-trial1-assistant-review.json": "11d92b70192e4e6445b4f84e294a18cf0f282bda8a93c2b319992fa29bc3d052",
+    "dialogue-stability-luna-low-trial2-assistant-review.json": "26473e08559e2994d57045aa4bf4666ef6f432618e38fde3f78d738e747abc36",
+    "dialogue-stability-profile-luna-low-trial2-assistant-review.json": "4059384b40f78e5679293741e193fca5217aeac7cbf2c3f9c7a0995430b1f8fe",
+    "dialogue-stability-luna-medium-trial1-assistant-review.json": "ae2cf36ec9d07548386713cc49907b030bb3af16d01a5a8b3103d4819aaed69f",
+    "dialogue-stability-profile-luna-medium-trial1-assistant-review.json": "7977ccdd182f4a1a31cad90bfdff1467d8623cf2ad97db98ef7df4662364b5fa",
+    "dialogue-stability-luna-medium-trial2-assistant-review.json": "1f246309b3efa3180f8a1a53dd5fbf6e235d9d015d4cf276f44d2375c96b1197",
+    "dialogue-stability-profile-luna-medium-trial2-assistant-review.json": "51da88a310d2e4dd719ff079136194a4d8dec0c4000133e98e61370e6c390095",
+    "generation-model-dialogue-stability-sol-trial-1-assistant-review.json": "c1a12ea0f2b61ecd3db0beae761c03342cab9afdda35d842c902d5cc19bba7cf",
+    "dialogue-stability-sol-control-trial1-assistant-review.json": "ae20e539159ecd8ca61cbfbfd49449d5239c90d9692d7093a08e0dfc69a13c50",
+    "generation-model-dialogue-stability-sol-trial-2-assistant-review.json": "3873082dba958e895a4da9b56cfc538a3c6fc6047b922398d8c982637dd1ac4a",
+    "dialogue-stability-sol-control-trial2-assistant-review.json": "74b8e65a1a522946831ff672623b10efc0f371f79c4a41d3ee8c0ae32ad4ea05"
+  },
+  "execution_summaries": [
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-low-trial-1-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "b1657a72e3e6fe6c41b78de7f0065734a5bd2f8925efe13f8e90bab51ac21bce",
+      "actual_turns": 168
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-luna-low-trial-1-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "89d7aeb5d0b35349ca9e0f8b00b2bbd94e84a816ffb2cd30daf6cf6fc8545b98",
+      "actual_turns": 24
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "0bfc4e0ee0de41a7fc428825778740d7fdecfd41ed529c04514bfc47c48a3096",
+      "actual_turns": 168
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "8a549da5a39c7dbbdd92275c54ee093f3197612fba2c4dfebc9a08f469ab0926",
+      "actual_turns": 24
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-1-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "a24ab25e926de01c0a5515d6367ad002849c58ad2fa414829b23efef9d19930e",
+      "actual_turns": 168
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-sol-low-trial-1-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "e5536c6e5280a9f9dd846859b91eaa53b24ebe0cd499171a59097928763f19fa",
+      "actual_turns": 24
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "e66d56418317d2055730b20bd202f3aaf287676ad3a94feaffada605edc017ed",
+      "actual_turns": 168
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-sol-low-trial-2-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "046954780376b8d279f1e919959f24f2d3f5adcdc934dd7c32d91f1c754f1d23",
+      "actual_turns": 24
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-2-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "2281476d6ab7f8fd1e6a1cb2847596ae9724c81892fd5d3947766d4cac8f322f",
+      "actual_turns": 168
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-luna-medium-trial-2-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "5723cea8556b66e2f26f3e0d5c37a95df3644cd019af6dd12edf5db4590fb5b9",
+      "actual_turns": 24
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-low-trial-2-live-001",
+      "kind": "main",
+      "source_files_unchanged": true,
+      "summary_sha256": "932ae3333f87e8087d646d62da0f706a677bff8993688dd6147a01e8834a8ceb",
+      "actual_turns": 137
+    },
+    {
+      "run_id": "teaching-profile-responsiveness-development-001-stability-v10-luna-low-trial-2-live-001",
+      "kind": "profile",
+      "source_files_unchanged": true,
+      "summary_sha256": "6cc5fca29106527a1a96be3948ace629018fa645a0a13ad30e702df72d7985cf",
+      "actual_turns": 24
+    }
+  ]
+}

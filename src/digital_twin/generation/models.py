@@ -8,6 +8,7 @@ from src.digital_twin.llm import LlmMessage
 
 class PolicyAction(StrEnum):
     ANSWER = "answer"
+    QUESTION = "question"
     CLARIFY = "clarify"
     REDIRECT_GRADED_WORK = "redirect-graded-work"
     NO_EVIDENCE = "no-evidence"

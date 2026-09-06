@@ -360,6 +360,8 @@ export type ProfessorIngestionResult = {
 }
 
 export type ProfessorIngestionJob = {
+  source_object_key?: string
+  source_mime_type?: string
   id: string
   course_id: string
   artifact_id: string
@@ -577,6 +579,7 @@ export type ProfessorTeachingProfilePreview = {
 export type ProfessorLearningGapAggregate = {
   aggregate_id: string
   topic_key: string
+  source_title?: string | null
   signal_kind: string
   distinct_learners: number
   signal_count: number
@@ -589,6 +592,8 @@ export type ProfessorLearningGapResult = {
     visible_aggregates: ProfessorLearningGapAggregate[]
     suppressed_group_count: number
     computed_at: string
+    reporting_window_start?: string | null
+    active_learner_count?: number | null
   }
   proposals: Array<{
     proposal_id: string
@@ -596,6 +601,8 @@ export type ProfessorLearningGapResult = {
     signal_kind: string
     observed_pattern: string
     suggested_follow_up: string
+    review_decision?: string | null
+    reviewed_at?: string | null
     distinct_learners: number
     signal_count: number
   }>
@@ -745,4 +752,25 @@ export type ReleasePreflightResult = {
   passed: boolean
   checks: ReleasePreflightCheck[]
   evaluated_at: string
+}
+
+export type ProfessorGeneratedPreviewRequest = {
+  session_id: string
+  ingestion_job_ids: string[]
+  concept_label: string
+  concept_description: string
+  objective: string
+  cases: Array<{ case_id: string; student_messages: string[] }>
+}
+export type ProfessorGeneratedPreview = {
+  artifact_id: string
+  profile_id: string
+  status: 'complete' | 'failed'
+  artifact_sha256: string
+  created_at: string
+  review_status: 'unreviewed' | 'accepted' | 'needs_revision'
+  bindings: { profile_sha256: string; source_sha256: string; configuration_sha256: string; composition: Record<string, unknown>; scope: 'isolated-single-concept-preview' }
+  cases: Array<{ case_id: string; student_messages: string[]; turns: Array<{ student: string; tutor: string; action: string; citations: Array<Record<string, unknown>> }>; error_code: string | null }>
+  usage: { max_calls: number; max_cost_usd: number; actual_calls: number; known_cost_usd: number | null; unknown_cost_calls: number }
+  error_code: string | null
 }

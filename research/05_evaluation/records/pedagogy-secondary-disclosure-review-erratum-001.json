@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "run_id": "pedagogy-secondary-disclosure-review-erratum-001",
+  "status": "completed-read-only-adverse-review-correction",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "decision": "Refine; correct missed review errors without rewriting original outputs or original published reviews.",
+  "source_runs": {
+    "paired-pedagogy-development-001-live-001": {
+      "source_code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+      "source_dirty": true,
+      "manifest_sha256": "3d75f61a02ce64eea64a3e8c8aef6476ad33154d00f1a4d3dfb06dff3ac3d113",
+      "original_review_sha256": "18b29d115cdb1d6f1de186f6c01724146a6ef86ca06f0ce7a10b5ba0953ab0ba"
+    },
+    "paired-pedagogy-development-001-v6-live-001": {
+      "source_code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+      "source_dirty": true,
+      "manifest_sha256": "bd5df2e39dc58990f3748ea527e695887663b6c0d1f0aba039325d0b52a13da1",
+      "original_review_sha256": "ea7cc8dd8c9e9a403a4608efd5e5d75190c9f8b984e5c11a053e9156fce31fe6"
+    }
+  },
+  "dataset": "Same consumed synthetic development-v2 packet; targeted retrospective secondary-disclosure check, not fresh confirmation.",
+  "reviewer": "Unblinded evidence assistant with root-assistant adjudication; not human validation.",
+  "search_scope": {
+    "socratic_answer_turns_screened": 80,
+    "matched_secondary_concept_passages_manually_reviewed": 2,
+    "method": "Screen all Socratic ANSWER turns for secondary-concept names/commit/recovery/boundary vocabulary, manually compare every match with actual source, current/prior turns and approved profile. Earlier full-turn reviews are retained, not represented as freshly repeated for every axis."
+  },
+  "cases": [
+    {
+      "source_run_id": "paired-pedagogy-development-001-live-001",
+      "case_id": "development-01-06",
+      "arm": "v5",
+      "stage": 3,
+      "raw_history": "case-32-repeat-0-v5",
+      "student": "I still cannot apply that hint. What should happen when active route stamp is 7 and the item stamp is 6? Please work through the next step instead of asking for my explanation again.",
+      "response": "Because 6 does not equal the active stamp 7, the item is held rather than forwarded.\n\nDuring recovery, Kestrel restores the last committed route stamp, then rechecks the held item against that restored stamp.",
+      "raw_sha256": "2342105a1bb25b616e0fa0d7bd973d4f4b42506e9f428d51e06e24336a316ef1",
+      "correction": "Complete secondary recovery rule supplied without any attempt on that concept, violating explicit new-concept initial elicitation.",
+      "critical": true
+    },
+    {
+      "source_run_id": "paired-pedagogy-development-001-v6-live-001",
+      "case_id": "development-01-06",
+      "arm": "v4",
+      "stage": 3,
+      "raw_history": "case-32-repeat-0-v4",
+      "student": "I still cannot apply that hint. What should happen when active route stamp is 7 and the item stamp is 6? Please work through the next step instead of asking for my explanation again.",
+      "response": "A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp.",
+      "raw_sha256": "a1d233f1f3685024c87803d780cce7e50cb15bf6db32afa2edd5d0e82ba3041d",
+      "correction": "Complete secondary recovery rule supplied without any attempt on that concept, violating explicit new-concept initial elicitation.",
+      "critical": true
+    }
+  ],
+  "corrected_aggregates": {
+    "v5_run_candidate": {
+      "original_useful": 30,
+      "corrected_useful": 29,
+      "denominator": 48,
+      "original_critical": 0,
+      "corrected_critical": 1,
+      "primary_useful_unchanged": 8,
+      "paired_wins_corrected": 15,
+      "paired_losses_unchanged": 2,
+      "paired_ties_corrected": 30,
+      "uncertain_pairs_unchanged": 1
+    },
+    "v6_run_control": {
+      "original_useful": 15,
+      "corrected_useful": 15,
+      "denominator": 48,
+      "original_critical": 0,
+      "corrected_critical": 1
+    },
+    "v6_run_candidate": {
+      "useful_unchanged": 43,
+      "primary_useful_unchanged": 13,
+      "critical_unchanged": 0
+    }
+  },
+  "external_calls": 0,
+  "cost_usd": 0,
+  "limitations": [
+    "Targeted missed-review correction, not a new all-axis relabel or population estimate.",
+    "No source/code/model execution or old rubric change; no original unfavorable outcomes removed.",
+    "Candidate V5 already failed; V6 boundary sidecar still fails, so no release promotion follows."
+  ]
+}

@@ -50,6 +50,8 @@ class DeterministicPolicyEnforcer:
         question: str,
         hits: list[RetrievalHit],
         policy: TutorPolicy,
+        *,
+        authorized_referents: tuple[str, ...] = (),
     ) -> PolicyDecision:
         if not question.strip():
             return PolicyDecision(
@@ -64,7 +66,10 @@ class DeterministicPolicyEnforcer:
                 matched_rules=["professor-release-approval-required"],
             )
         if self.action_router is not None:
-            route = self.action_router.route(question)
+            contextual_route = getattr(self.action_router, "route_with_authorized_referents", None)
+            route = (contextual_route(question, authorized_referents=authorized_referents)
+                if authorized_referents and callable(contextual_route)
+                else self.action_router.route(question))
             if route is not None:
                 return PolicyDecision(
                     action=PolicyAction(route.action),

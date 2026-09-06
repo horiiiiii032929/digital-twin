@@ -1,0 +1,31 @@
+\setlength{\unitlength}{1mm}
+\begin{picture}(166,124)
+\linethickness{0.3pt}
+\put(0,114){\framebox(25,9){\scriptsize\shortstack{Professor\\workspace}}}
+\multiput(12,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(36,114){\framebox(25,9){\scriptsize\shortstack{Publication\\service}}}
+\multiput(48,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(79,114){\framebox(25,9){\scriptsize\shortstack{Release\\repository}}}
+\multiput(91,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(127,114){\framebox(25,9){\scriptsize\shortstack{Retrieval index\\adapter}}}
+\multiput(139,112)(0,-3){32}{\line(0,-1){1.5}}
+\put(12,104){\vector(1,0){36}}
+\put(13,106){\scriptsize 1. Request preflight for owned draft release}
+\put(48,94){\vector(1,0){91}}
+\put(49,96){\scriptsize 2. Prepare index when configured}
+\put(47,82){\framebox(104,7){\scriptsize 3. Check active profile, source permission/lineage, policy and preview}}
+\put(48,74){\vector(1,0){43}}
+\put(49,76){\scriptsize 4. Persist evaluation status + preflight audit}
+\put(48,64){\vector(-1,0){36}}
+\put(13,66){\scriptsize 5. Return check list; blockers require revision}
+\put(12,54){\vector(1,0){36}}
+\put(13,56){\scriptsize 6. Publish release ID after checks pass}
+\put(47,42){\framebox(104,7){\scriptsize 7. Recheck ownership / publishability; prepare retrieval index}}
+\put(48,34){\vector(1,0){43}}
+\put(49,36){\scriptsize 8. publish\_release: serialize and recheck profile authority}
+\put(91,24){\vector(-1,0){43}}
+\put(49,26){\scriptsize 9. Current release replaced; predecessor withdrawn; old work cancelled}
+\put(48,14){\vector(-1,0){36}}
+\put(13,16){\scriptsize 10. Published release (post-publication hook is separate)}
+\put(0,0){\parbox{166mm}{\scriptsize Failed preflight is not publication. Rollback revalidates a withdrawn release before republishing.\\ The database transition is atomic; index preparation and the post-publication hook are outside that transaction.}}
+\end{picture}

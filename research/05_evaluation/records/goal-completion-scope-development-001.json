@@ -1,0 +1,1511 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-06",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "component": "conversation-orchestration",
+  "dataset": {
+    "id": "goal-scope-histories-v1",
+    "split": "development",
+    "histories_per_arm": 72,
+    "personas": 6,
+    "simulator_families": 2,
+    "seeds": [
+      9101,
+      9102,
+      9103
+    ],
+    "concepts": 6,
+    "days": 30,
+    "restarts_per_history": 1,
+    "permissions": "Repository-authored synthetic sources, students and time; no private data.",
+    "reuse": "Six concepts and driver reused from 025; fresh seed histories, not independent held-out validation.",
+    "rationale": "Full persona/family grid with three repeats, intended as bounded regression coverage, not powered learning-effect inference."
+  },
+  "plan": "research/04_experiments/2026-09-06-goal-completion-scope-plan.md",
+  "limitations": [
+    "Deterministic generation and planning; zero external LLM calls.",
+    "Operational evidence thresholds are not calibrated mastery or instructor approval.",
+    "Same-template histories are dependent; goal fractions have no population confidence interval.",
+    "Final-DB audit cannot disambiguate equal virtual timestamps; exact commit boundaries are covered by service tests.",
+    "No automatic rewrite of historical completed goals.",
+    "Provider-backed final composition and real-student learning are not requalified."
+  ],
+  "run_id": "goal-completion-scope-development-001",
+  "status": "completed-correction-verified",
+  "decision": "keep-goal-scope-correction-only",
+  "comparison": {
+    "run_id": "goal-completion-scope-development-001",
+    "changed_sources": [
+      "src/digital_twin/student/autonomy_control.py",
+      "src/digital_twin/student/service.py"
+    ],
+    "input_artifacts": {
+      "reports/generated/goal-completion-scope-development-001-baseline/manifest.json": "327fb06175121b89a5641b5b4c2da86be08f52d6e9282cdbc548f06143c4f0f0",
+      "reports/generated/goal-completion-scope-development-001-baseline/scores.jsonl": "43b9fd7d061d5a589233296b3af52265f3d1fbd7f806eadf1616ca966a8a8473",
+      "reports/generated/goal-completion-scope-development-001-baseline/responses.jsonl": "389e02c0e50ce4903e901137e0e0c75c008c3f377014d1e65dd898d3af181443",
+      "reports/generated/goal-completion-scope-development-001-baseline/goal-audit.json": "957c8517e75e9f21e804a32211dc7281993e7202da3e21baeb248441b241ac93",
+      "reports/generated/goal-completion-scope-development-001-baseline/decision.json": "35fe07772c94b2ed38489a4642528962d22cd07fedece07ec1001a20f59c6a60",
+      "reports/generated/goal-completion-scope-development-001-baseline/source.zip": "94eb5a7521414f33a560deb129e5b3c1478a514b0646710c9896f6eabcbfe38b",
+      "reports/generated/goal-completion-scope-development-001-candidate/manifest.json": "ffdc1b765b2532b121cf81b05f8f6a0c6afff0f0422061cf9c8564ec0996c8d0",
+      "reports/generated/goal-completion-scope-development-001-candidate/scores.jsonl": "3f790db0662ea60b1dacd236f99278de8412798ef26bedd5fbb4331cd10e8217",
+      "reports/generated/goal-completion-scope-development-001-candidate/responses.jsonl": "e72e1242e8043df2c7d4037f3ea58038a4da06b950015ea86f02c75c39e2def8",
+      "reports/generated/goal-completion-scope-development-001-candidate/goal-audit.json": "c22ceaf80850213df382986a20b01984929e3d9f31bd2cb806fd0c46b40c50eb",
+      "reports/generated/goal-completion-scope-development-001-candidate/decision.json": "3af9d5749e71298bac3a0b41caff6f2daa7c325657acc696cd63c38f1b6fd3d5",
+      "reports/generated/goal-completion-scope-development-001-candidate/source.zip": "71a831f3c61dfddfaaaba9fc54a755731a10fa52bc1cf93a40c94b78b84a1d12"
+    },
+    "paired_candidate_minus_baseline": {
+      "t1-v2-autonomous": {
+        "messages_delivered": {
+          "n_pairs": 36,
+          "mean_difference": 1.5555555555555556,
+          "decreased": 0,
+          "unchanged": 24,
+          "increased": 12,
+          "minimum": 0,
+          "maximum": 8
+        },
+        "final_hidden_mastery": {
+          "n_pairs": 36,
+          "mean_difference": -0.0023991555737067558,
+          "decreased": 9,
+          "unchanged": 16,
+          "increased": 11,
+          "minimum": -0.2602874625164585,
+          "maximum": 0.09573014050459791
+        },
+        "wasted_rate": {
+          "n_pairs": 36,
+          "mean_difference": 0.007631874298540968,
+          "decreased": 7,
+          "unchanged": 20,
+          "increased": 9,
+          "minimum": -0.5050505050505051,
+          "maximum": 0.5555555555555556
+        },
+        "follow_up_fraction": {
+          "n_pairs": 36,
+          "mean_difference": -0.017227833894500562,
+          "decreased": 8,
+          "unchanged": 23,
+          "increased": 5,
+          "minimum": -0.8888888888888888,
+          "maximum": 0.6363636363636364
+        }
+      },
+      "t1-v2-reactive": {
+        "messages_delivered": {
+          "n_pairs": 36,
+          "mean_difference": 0,
+          "decreased": 0,
+          "unchanged": 36,
+          "increased": 0,
+          "minimum": 0,
+          "maximum": 0
+        },
+        "final_hidden_mastery": {
+          "n_pairs": 36,
+          "mean_difference": 0.0,
+          "decreased": 0,
+          "unchanged": 36,
+          "increased": 0,
+          "minimum": 0.0,
+          "maximum": 0.0
+        },
+        "wasted_rate": {
+          "n_pairs": 0,
+          "mean_difference": null,
+          "decreased": 0,
+          "unchanged": 0,
+          "increased": 0,
+          "minimum": null,
+          "maximum": null
+        },
+        "follow_up_fraction": {
+          "n_pairs": 0,
+          "mean_difference": null,
+          "decreased": 0,
+          "unchanged": 0,
+          "increased": 0,
+          "minimum": null,
+          "maximum": null
+        }
+      }
+    },
+    "paired_histories": [
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-answer-seeking-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-answer-seeking-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-answer-seeking-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": -0.2602874625164585,
+          "wasted_rate": -0.2727272727272727,
+          "follow_up_fraction": 0.09090909090909088
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-fast-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-fast-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-fast-learner-9103",
+        "deltas": {
+          "messages_delivered": 8,
+          "final_hidden_mastery": 0.011749705165414015,
+          "wasted_rate": -0.3,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-high-forgetting-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-high-forgetting-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-high-forgetting-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-low-receptivity-9101",
+        "deltas": {
+          "messages_delivered": 8,
+          "final_hidden_mastery": -0.0112485999393456,
+          "wasted_rate": 0.5555555555555556,
+          "follow_up_fraction": -0.8888888888888888
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-low-receptivity-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.11111111111111116,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-low-receptivity-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-misconception-prone-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-misconception-prone-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-misconception-prone-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-slow-learner-9101",
+        "deltas": {
+          "messages_delivered": 4,
+          "final_hidden_mastery": 0.016511080919970417,
+          "wasted_rate": -0.16666666666666669,
+          "follow_up_fraction": 0.41666666666666663
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-slow-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-bkt-like-slow-learner-9103",
+        "deltas": {
+          "messages_delivered": 2,
+          "final_hidden_mastery": 0.09573014050459791,
+          "wasted_rate": -0.5050505050505051,
+          "follow_up_fraction": 0.6363636363636364
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-answer-seeking-9101",
+        "deltas": {
+          "messages_delivered": 7,
+          "final_hidden_mastery": 0.027097404064665764,
+          "wasted_rate": 0.2,
+          "follow_up_fraction": -0.19999999999999996
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-answer-seeking-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.031208986476811917,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-answer-seeking-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-fast-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": -0.02934294150585115,
+          "wasted_rate": 0.16666666666666669,
+          "follow_up_fraction": -0.08333333333333331
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-fast-learner-9102",
+        "deltas": {
+          "messages_delivered": 3,
+          "final_hidden_mastery": 0.051515191376312,
+          "wasted_rate": 0.3333333333333333,
+          "follow_up_fraction": 0.05555555555555555
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-fast-learner-9103",
+        "deltas": {
+          "messages_delivered": 2,
+          "final_hidden_mastery": 0.015982691008112893,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": -0.08333333333333331
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-high-forgetting-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": -0.017728615853525198,
+          "wasted_rate": 0.1,
+          "follow_up_fraction": -0.09999999999999998
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-high-forgetting-9102",
+        "deltas": {
+          "messages_delivered": 1,
+          "final_hidden_mastery": -0.006378781274837764,
+          "wasted_rate": 0.06363636363636366,
+          "follow_up_fraction": -0.13636363636363635
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-high-forgetting-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": -0.0015681803526973181,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-low-receptivity-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-low-receptivity-9102",
+        "deltas": {
+          "messages_delivered": 6,
+          "final_hidden_mastery": 0.023570179247432876,
+          "wasted_rate": -0.050000000000000044,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-low-receptivity-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-misconception-prone-9101",
+        "deltas": {
+          "messages_delivered": 6,
+          "final_hidden_mastery": -0.013247876692356525,
+          "wasted_rate": -0.3,
+          "follow_up_fraction": 0.15000000000000002
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-misconception-prone-9102",
+        "deltas": {
+          "messages_delivered": 4,
+          "final_hidden_mastery": -0.028859474231112958,
+          "wasted_rate": 0.35555555555555557,
+          "follow_up_fraction": -0.37777777777777777
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-misconception-prone-9103",
+        "deltas": {
+          "messages_delivered": 5,
+          "final_hidden_mastery": 0.013574300101189762,
+          "wasted_rate": -0.1,
+          "follow_up_fraction": -0.10000000000000009
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-slow-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": -0.012454796069246099,
+          "wasted_rate": 0.08333333333333337,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-slow-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.003331991129429057,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-autonomous",
+        "case_id": "hs-logistic-like-slow-learner-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.004475457788051307,
+          "wasted_rate": 0.0,
+          "follow_up_fraction": 0.0
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-answer-seeking-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-answer-seeking-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-answer-seeking-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-fast-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-fast-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-fast-learner-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-high-forgetting-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-high-forgetting-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-high-forgetting-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-low-receptivity-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-low-receptivity-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-low-receptivity-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-misconception-prone-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-misconception-prone-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-misconception-prone-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-slow-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-slow-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-bkt-like-slow-learner-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-answer-seeking-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-answer-seeking-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-answer-seeking-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-fast-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-fast-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-fast-learner-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-high-forgetting-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-high-forgetting-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-high-forgetting-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-low-receptivity-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-low-receptivity-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-low-receptivity-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-misconception-prone-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-misconception-prone-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-misconception-prone-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-slow-learner-9101",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-slow-learner-9102",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      },
+      {
+        "condition": "t1-v2-reactive",
+        "case_id": "hs-logistic-like-slow-learner-9103",
+        "deltas": {
+          "messages_delivered": 0,
+          "final_hidden_mastery": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null
+        }
+      }
+    ],
+    "arms": [
+      {
+        "run_id": "goal-completion-scope-development-001-baseline",
+        "gates": {
+          "t1-v2-reactive:attribution_accuracy": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:assessment_agreement": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:attempts_recognised": {
+            "threshold": 1.0,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:quiet_hour_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:frequency_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:cooldown_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:provider_calls": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:attribution_accuracy": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:assessment_agreement": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:attempts_recognised": {
+            "threshold": 1.0,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:quiet_hour_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:frequency_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:cooldown_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:provider_calls": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "target-scoped-completions": {
+            "pass": false,
+            "observed": 12,
+            "threshold": 0
+          },
+          "positive-completions": {
+            "pass": true,
+            "observed": 14,
+            "threshold": 1
+          },
+          "restart-consistency": {
+            "pass": true
+          },
+          "completed-histories": {
+            "pass": true
+          },
+          "database-coverage": {
+            "pass": true
+          }
+        },
+        "decision": "refine",
+        "peak_memory_native_units": 236584960,
+        "peak_memory_unit": "bytes",
+        "responses": 72,
+        "summary": {
+          "aggregate": {
+            "t1-v2-autonomous": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "attempts_recognised": 1.0,
+              "mse_vs_hidden": 0.08130804081204242,
+              "brier_next_outcome": 0.2529353236686151,
+              "ece_next_outcome": 0.21737041920436692,
+              "auroc_next_outcome": 0.46009873651466404,
+              "messages_delivered": 9.055555555555555,
+              "wasted_rate": 0.3495931537598204,
+              "follow_up_fraction": 0.43247755331088666,
+              "quiet_hour_violations": 0.0,
+              "frequency_violations": 0.0,
+              "cooldown_violations": 0.0,
+              "final_hidden_mastery": 0.3632157942140168,
+              "concepts_mastered_final": 0.8333333333333334,
+              "provider_calls": 0.0,
+              "cost_usd": 0.0,
+              "realization_fallback_rate": 0.0,
+              "mse_vs_hidden[bkt-like]": 0.10011546117583442,
+              "wasted_rate[bkt-like]": 0.35409652076318743,
+              "mse_vs_hidden[logistic-like]": 0.06250062044825043,
+              "wasted_rate[logistic-like]": 0.3450897867564534,
+              "worst_persona_final_mastery": 0.24151188925150932,
+              "realization_slices": {
+                "deterministic-semantic-frame": {
+                  "n_cases": 36,
+                  "attribution_accuracy": 1.0,
+                  "assessment_agreement": 1.0,
+                  "final_hidden_mastery": 0.3632157942140168,
+                  "realization_fallback_rate": 0.0
+                }
+              },
+              "hard_gates": {
+                "zero_quiet_hour_violations": true,
+                "zero_frequency_violations": true,
+                "zero_cooldown_violations": true
+              }
+            },
+            "t1-v2-reactive": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "attempts_recognised": 1.0,
+              "mse_vs_hidden": 0.0844670466686464,
+              "brier_next_outcome": 0.26460950325097105,
+              "ece_next_outcome": 0.24000190041525496,
+              "auroc_next_outcome": 0.39793106337005146,
+              "messages_delivered": 0.0,
+              "wasted_rate": null,
+              "follow_up_fraction": null,
+              "quiet_hour_violations": 0.0,
+              "frequency_violations": 0.0,
+              "cooldown_violations": 0.0,
+              "final_hidden_mastery": 0.3254264999550928,
+              "concepts_mastered_final": 0.5555555555555556,
+              "provider_calls": 0.0,
+              "cost_usd": 0.0,
+              "realization_fallback_rate": 0.0,
+              "mse_vs_hidden[bkt-like]": 0.10307989372075319,
+              "wasted_rate[bkt-like]": null,
+              "mse_vs_hidden[logistic-like]": 0.06585419961653965,
+              "wasted_rate[logistic-like]": null,
+              "worst_persona_final_mastery": 0.17069571688632004,
+              "realization_slices": {
+                "deterministic-semantic-frame": {
+                  "n_cases": 36,
+                  "attribution_accuracy": 1.0,
+                  "assessment_agreement": 1.0,
+                  "final_hidden_mastery": 0.3254264999550928,
+                  "realization_fallback_rate": 0.0
+                }
+              },
+              "hard_gates": {
+                "zero_quiet_hour_violations": true,
+                "zero_frequency_violations": true,
+                "zero_cooldown_violations": true
+              }
+            }
+          },
+          "paired_contrasts": {
+            "t1-v2-autonomous vs t1-v2-reactive": {
+              "mse_vs_hidden": {
+                "n_pairs": 36,
+                "mean_difference": -0.0031590058566039925,
+                "ci95": [
+                  -0.007686943336720937,
+                  0.0013589359818644432
+                ],
+                "lower_bound_excludes_zero": false
+              },
+              "attribution_accuracy": {
+                "n_pairs": 36,
+                "mean_difference": 0.0,
+                "ci95": [
+                  0.0,
+                  0.0
+                ],
+                "lower_bound_excludes_zero": false
+              },
+              "wasted_rate": {
+                "n_pairs": 0,
+                "mean_difference": null,
+                "ci95": null
+              },
+              "follow_up_fraction": {
+                "n_pairs": 0,
+                "mean_difference": null,
+                "ci95": null
+              },
+              "final_hidden_mastery": {
+                "n_pairs": 36,
+                "mean_difference": 0.037789294258923994,
+                "ci95": [
+                  0.019328673986845596,
+                  0.056461992286443524
+                ],
+                "lower_bound_excludes_zero": true
+              },
+              "messages_delivered": {
+                "n_pairs": 36,
+                "mean_difference": 9.055555555555555,
+                "ci95": [
+                  7.972222222222222,
+                  9.972222222222221
+                ],
+                "lower_bound_excludes_zero": true
+              }
+            }
+          },
+          "run": {
+            "program_id": "goal-completion-scope-development-001-baseline",
+            "code": {
+              "revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+              "dirty": true
+            },
+            "elapsed_seconds": 176.42,
+            "network": "none",
+            "conditions": [
+              "t1-v2-reactive",
+              "t1-v2-autonomous"
+            ],
+            "personas": [
+              "fast-learner",
+              "slow-learner",
+              "high-forgetting",
+              "misconception-prone",
+              "answer-seeking",
+              "low-receptivity"
+            ],
+            "families": [
+              "bkt-like",
+              "logistic-like"
+            ],
+            "seeds": [
+              9101,
+              9102,
+              9103
+            ],
+            "days": 30,
+            "cases": 72,
+            "bootstrap_resamples": 1000
+          }
+        },
+        "goal_audit": {
+          "database_count": 72,
+          "goal_status_counts": {
+            "active": 47,
+            "expired": 155,
+            "completed": 26
+          },
+          "completed": 26,
+          "supported": 14,
+          "unsupported": 12,
+          "affected_histories": 11,
+          "unmapped": 0,
+          "limitations": [
+            "Final database audit cannot disambiguate commits with identical virtual timestamps.",
+            "A completion is supported if one same-student/course/release conversation has eligible evidence; conversations are never pooled.",
+            "Operational evidence eligibility is not human mastery or a pedagogical quality score."
+          ]
+        }
+      },
+      {
+        "run_id": "goal-completion-scope-development-001-candidate",
+        "gates": {
+          "t1-v2-reactive:attribution_accuracy": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:assessment_agreement": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:attempts_recognised": {
+            "threshold": 1.0,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-reactive:quiet_hour_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:frequency_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:cooldown_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-reactive:provider_calls": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:attribution_accuracy": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:assessment_agreement": {
+            "threshold": 0.95,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:attempts_recognised": {
+            "threshold": 1.0,
+            "observed": 1.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:quiet_hour_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:frequency_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:cooldown_violations": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "t1-v2-autonomous:provider_calls": {
+            "threshold": 0,
+            "observed": 0.0,
+            "pass": true
+          },
+          "target-scoped-completions": {
+            "pass": true,
+            "observed": 0,
+            "threshold": 0
+          },
+          "positive-completions": {
+            "pass": true,
+            "observed": 15,
+            "threshold": 1
+          },
+          "restart-consistency": {
+            "pass": true
+          },
+          "completed-histories": {
+            "pass": true
+          },
+          "database-coverage": {
+            "pass": true
+          }
+        },
+        "decision": "keep",
+        "peak_memory_native_units": 282034176,
+        "peak_memory_unit": "bytes",
+        "responses": 72,
+        "summary": {
+          "aggregate": {
+            "t1-v2-autonomous": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "attempts_recognised": 1.0,
+              "mse_vs_hidden": 0.08190694214186565,
+              "brier_next_outcome": 0.25137179576084734,
+              "ece_next_outcome": 0.2078412747086276,
+              "auroc_next_outcome": 0.4582156426351152,
+              "messages_delivered": 10.61111111111111,
+              "wasted_rate": 0.35722502805836137,
+              "follow_up_fraction": 0.41524971941638605,
+              "quiet_hour_violations": 0.0,
+              "frequency_violations": 0.0,
+              "cooldown_violations": 0.0,
+              "final_hidden_mastery": 0.36081663864031,
+              "concepts_mastered_final": 0.8333333333333334,
+              "provider_calls": 0.0,
+              "cost_usd": 0.0,
+              "realization_fallback_rate": 0.0,
+              "mse_vs_hidden[bkt-like]": 0.09917787752242796,
+              "wasted_rate[bkt-like]": 0.32199775533108865,
+              "mse_vs_hidden[logistic-like]": 0.06463600676130335,
+              "wasted_rate[logistic-like]": 0.3924523007856341,
+              "worst_persona_final_mastery": 0.25944420163030973,
+              "realization_slices": {
+                "deterministic-semantic-frame": {
+                  "n_cases": 36,
+                  "attribution_accuracy": 1.0,
+                  "assessment_agreement": 1.0,
+                  "final_hidden_mastery": 0.36081663864031,
+                  "realization_fallback_rate": 0.0
+                }
+              },
+              "hard_gates": {
+                "zero_quiet_hour_violations": true,
+                "zero_frequency_violations": true,
+                "zero_cooldown_violations": true
+              }
+            },
+            "t1-v2-reactive": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "attempts_recognised": 1.0,
+              "mse_vs_hidden": 0.0844670466686464,
+              "brier_next_outcome": 0.26460950325097105,
+              "ece_next_outcome": 0.24000190041525496,
+              "auroc_next_outcome": 0.39793106337005146,
+              "messages_delivered": 0.0,
+              "wasted_rate": null,
+              "follow_up_fraction": null,
+              "quiet_hour_violations": 0.0,
+              "frequency_violations": 0.0,
+              "cooldown_violations": 0.0,
+              "final_hidden_mastery": 0.3254264999550928,
+              "concepts_mastered_final": 0.5555555555555556,
+              "provider_calls": 0.0,
+              "cost_usd": 0.0,
+              "realization_fallback_rate": 0.0,
+              "mse_vs_hidden[bkt-like]": 0.10307989372075319,
+              "wasted_rate[bkt-like]": null,
+              "mse_vs_hidden[logistic-like]": 0.06585419961653965,
+              "wasted_rate[logistic-like]": null,
+              "worst_persona_final_mastery": 0.17069571688632004,
+              "realization_slices": {
+                "deterministic-semantic-frame": {
+                  "n_cases": 36,
+                  "attribution_accuracy": 1.0,
+                  "assessment_agreement": 1.0,
+                  "final_hidden_mastery": 0.3254264999550928,
+                  "realization_fallback_rate": 0.0
+                }
+              },
+              "hard_gates": {
+                "zero_quiet_hour_violations": true,
+                "zero_frequency_violations": true,
+                "zero_cooldown_violations": true
+              }
+            }
+          },
+          "paired_contrasts": {
+            "t1-v2-autonomous vs t1-v2-reactive": {
+              "mse_vs_hidden": {
+                "n_pairs": 36,
+                "mean_difference": -0.00256010452678076,
+                "ci95": [
+                  -0.007212814364746205,
+                  0.0016756327944987433
+                ],
+                "lower_bound_excludes_zero": false
+              },
+              "attribution_accuracy": {
+                "n_pairs": 36,
+                "mean_difference": 0.0,
+                "ci95": [
+                  0.0,
+                  0.0
+                ],
+                "lower_bound_excludes_zero": false
+              },
+              "wasted_rate": {
+                "n_pairs": 0,
+                "mean_difference": null,
+                "ci95": null
+              },
+              "follow_up_fraction": {
+                "n_pairs": 0,
+                "mean_difference": null,
+                "ci95": null
+              },
+              "final_hidden_mastery": {
+                "n_pairs": 36,
+                "mean_difference": 0.035390138685217246,
+                "ci95": [
+                  0.015481679602118804,
+                  0.05521365551084518
+                ],
+                "lower_bound_excludes_zero": true
+              },
+              "messages_delivered": {
+                "n_pairs": 36,
+                "mean_difference": 10.61111111111111,
+                "ci95": [
+                  10.277777777777779,
+                  10.944444444444445
+                ],
+                "lower_bound_excludes_zero": true
+              }
+            }
+          },
+          "run": {
+            "program_id": "goal-completion-scope-development-001-candidate",
+            "code": {
+              "revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+              "dirty": true
+            },
+            "elapsed_seconds": 315.96,
+            "network": "none",
+            "conditions": [
+              "t1-v2-reactive",
+              "t1-v2-autonomous"
+            ],
+            "personas": [
+              "fast-learner",
+              "slow-learner",
+              "high-forgetting",
+              "misconception-prone",
+              "answer-seeking",
+              "low-receptivity"
+            ],
+            "families": [
+              "bkt-like",
+              "logistic-like"
+            ],
+            "seeds": [
+              9101,
+              9102,
+              9103
+            ],
+            "days": 30,
+            "cases": 72,
+            "bootstrap_resamples": 1000
+          }
+        },
+        "goal_audit": {
+          "database_count": 72,
+          "goal_status_counts": {
+            "active": 56,
+            "expired": 187,
+            "completed": 15
+          },
+          "completed": 15,
+          "supported": 15,
+          "unsupported": 0,
+          "affected_histories": 0,
+          "unmapped": 0,
+          "limitations": [
+            "Final database audit cannot disambiguate commits with identical virtual timestamps.",
+            "A completion is supported if one same-student/course/release conversation has eligible evidence; conversations are never pooled.",
+            "Operational evidence eligibility is not human mastery or a pedagogical quality score."
+          ]
+        }
+      }
+    ],
+    "interpretation": "Descriptive matched-seed development comparison. Actions change subsequent simulated learner responses; the closed-loop transcripts are not fixed across arms. Histories share six concept cards and persona/family templates. No population confidence interval or human learning claim is made for the between-arm changes."
+  },
+  "verification": {
+    "focused_tests": 72,
+    "focused_failures": 0,
+    "new_tests": 30,
+    "full_python": {
+      "initial_total": 2598,
+      "initial_passed": 2585,
+      "initial_failed": 13,
+      "initial_failure_classes": {
+        "sandbox_ps_denial": 11,
+        "new_runner_network_free_classification_missing": 2
+      },
+      "rechecks": {
+        "goal-completion-scope-full-python.xml": {
+          "tests": 2598,
+          "failures": 13,
+          "errors": 0,
+          "skipped": 0,
+          "sha256": "2fbc3b2230c5225c24b9cfbf107b90ad0e2405e570a9fc81ac31e87274afbcb6"
+        },
+        "goal-completion-scope-loopback-recheck.xml": {
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "sha256": "4d54a6c9a3e80fdeb6aa3509b78f912c73a21896dae3e0ff172192ffb46653d2"
+        },
+        "goal-completion-scope-final-recheck.xml": {
+          "tests": 83,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "sha256": "cb3c36b89b171667ec50fa0d8298ddcaa2208a54eaa8ee915be7aadf47cb143c"
+        }
+      },
+      "distinct_tests_verified_across_initial_and_targeted_rechecks": 2600,
+      "unresolved_failures": 0,
+      "single_clean_full_rerun_after_tooling_classification": false
+    },
+    "loopback_recheck": {
+      "passed": 13,
+      "failures": 0,
+      "artifact": "reports/generated/goal-completion-scope-loopback-recheck.xml",
+      "reason": "Sandbox denied ps; reran the existing external-model-free localhost HTTPS tests with local execution permission."
+    },
+    "evaluation_registry_validation": {
+      "machine_records": 399,
+      "summaries": 465,
+      "status": "passed"
+    },
+    "local_markdown_links": {
+      "validated": 2003,
+      "status": "passed"
+    },
+    "source_identity_and_experimental_profile": "passed",
+    "artifacts": [
+      "reports/generated/goal-completion-scope-focused-final.xml",
+      "reports/generated/goal-completion-scope-full-python.xml",
+      "reports/generated/goal-completion-scope-loopback-recheck.xml",
+      "reports/generated/goal-completion-scope-result-validation.json",
+      "reports/generated/goal-completion-scope-link-validation.txt",
+      "reports/generated/goal-completion-scope-final-recheck.xml"
+    ],
+    "final_targeted_recheck": 83
+  },
+  "analysis": {
+    "path": "scripts/analyze_goal_completion_scope.py",
+    "sha256": "7ce4802ddccf5350bbf3a7f21c864137474708a29388ff42ce455677a58be1c5",
+    "note": "Analysis utility added after arm source snapshots; product sources and original runner match apart from the two declared runtime corrections."
+  },
+  "historical_correction": "goal-completion-scope-review-audit-001",
+  "quality_decision": "Correctness improved; no simulator learning-quality improvement. Autonomous outreach increased and mean hidden mastery slightly decreased. Keep the logical fix; do not select additional interventions or requalify the full system from this study.",
+  "profile_selection": {
+    "path": "research/05_evaluation/profiles/goal-completion-scope-v2.json",
+    "sha256": "81007ced8a557905fc75475c30900e60786ca159fc2c254904057759b7bee2aa",
+    "scope": "Current working-tree goal lifecycle; not frozen release requalification."
+  },
+  "post_run_tooling_correction": {
+    "file": "scripts/validate_repository_execution_freeze.py",
+    "sha256": "6c556c9054cf7ac60b54d6239b3b9d53b4695499e67510ee8e8e8c36e02b98df",
+    "change": "Register the hard-coded deterministic-only runner beside existing 025 in the network-free entrypoint classification. Tests ensure provider_backed=False, socket denial and rejection of --execute. No external-provider or held-out operation is authorized by this classification.",
+    "runtime_changed": false,
+    "original_failed_full_suite_retained": true
+  }
+}
