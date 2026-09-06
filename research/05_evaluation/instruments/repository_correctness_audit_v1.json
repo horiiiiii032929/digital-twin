@@ -27,12 +27,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Manual CI review, immutable third-party action SHAs, least-privilege contents permission, dependency audit, and full-check execution.",
+      "evidence": "Raised the job wall-time ceiling from 15 to 45 minutes for the measured long-running synthetic integration suite and dependency setup. All existing tests, audit steps and SHA-pinned actions remain enabled; no quality gate was weakened.",
       "findings": [],
       "path": ".github/workflows/ci.yml",
-      "reviewed_at": "2026-08-19",
-      "reviewer": "codex-primary-review",
-      "sha256": "8429001cbda58ebf2d43f5df73a2ee23b821058d3b0b2df71c56ed5a8a7f5ef8"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "27d502b2f19a1fdebdc2f84b1e1ff7cbf051861d82161df8e274adcf8424f4f4"
     },
     {
       "audit_status": "audited",

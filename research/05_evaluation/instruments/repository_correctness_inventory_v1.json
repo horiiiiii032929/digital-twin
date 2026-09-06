@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "012a3ed3fab3c6053b9471e16474fcf13f547623b033c3edcde8be072d952309",
+  "record_sha256": "934bbb305475c11fd6b2536314497dfd606d5605b48e605ae0eb94311f10f090",
   "records": [
     {
       "audit": {
@@ -56,10 +56,10 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "Manual CI review, immutable third-party action SHAs, least-privilege contents permission, dependency audit, and full-check execution.",
+        "evidence": "Raised the job wall-time ceiling from 15 to 45 minutes for the measured long-running synthetic integration suite and dependency setup. All existing tests, audit steps and SHA-pinned actions remain enabled; no quality gate was weakened.",
         "findings": [],
-        "reviewed_at": "2026-08-19",
-        "reviewer": "codex-primary-review"
+        "reviewed_at": "2026-09-07",
+        "reviewer": "codex-reproducibility-review"
       },
       "audit_status": "audited",
       "category": "ci_configuration",
@@ -67,7 +67,7 @@
       "package_commands": [],
       "path": ".github/workflows/ci.yml",
       "risk": "high",
-      "sha256": "8429001cbda58ebf2d43f5df73a2ee23b821058d3b0b2df71c56ed5a8a7f5ef8"
+      "sha256": "27d502b2f19a1fdebdc2f84b1e1ff7cbf051861d82161df8e274adcf8424f4f4"
     },
     {
       "audit": {

@@ -46,3 +46,8 @@ The historical fiction-only assistant disclosure review is now retained under
 now rejects existing ignored/outside-repository targets instead of accepting
 whatever happens to exist on the author's machine. All five validator tests pass.
 No tutoring runtime behavior or submitted PDF changed.
+
+The GitHub job retains every check and uses a 45-minute wall-time ceiling
+instead of 15 minutes. The expanded synthetic integration suite is CPU-active
+and takes substantially longer than the frontend checks; this changes only
+the execution allowance, not pass criteria.
