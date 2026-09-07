@@ -1136,20 +1136,13 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
-      "domain": "completion-development-execution_configuration",
-      "evidence": "Separated old development-v2 reconstruction and audit checks requiring ignored 10,000-case generated sources from portable checks. Marked only the three source-bound tests; existing portable tests and historical assertions remain. Explicit historical test command also includes the four previously excluded generated-artifact modules.",
+      "domain": "configuration-and-deployment",
+      "evidence": "Read-only submitted-artifact and PDF-link guard; focused reference, Markdown, report inventory and repository configuration tests passed (25 tests). Negative fixtures cover changed or missing evidence, changed PDFs, incomplete baselines and unsafe paths. Standard check includes the guard without altering runtime or evaluation scoring.",
       "findings": [],
       "path": "package.json",
-      "previous_review": {
-        "audit_status": "audited",
-        "evidence": "Command registration review plus focused validation, hidden-gold separation tests, Ruff, execution-freeze validation, and git diff checks found no unresolved correctness finding.",
-        "reviewed_at": "2026-09-05",
-        "reviewer": "Codex final cross-method audit",
-        "sha256": "09bb008bb687b08e97c0215dfc29a49ad4a8ba14f523bf01226d5175628df5c5"
-      },
       "reviewed_at": "2026-09-07",
       "reviewer": "codex-reproducibility-review",
-      "sha256": "76cb4842f13fd898ff538e6b09c147491e5e0a760767c9675fc54499f43c2b87"
+      "sha256": "a1e037b87332c3dcc470cf54b09d3f47a0c10020d1b0539fa1a8f47a8a26121b"
     },
     {
       "audit_status": "audited",
@@ -8237,6 +8230,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "report-reference-preservation",
+      "evidence": "Read-only submitted-artifact and PDF-link guard; focused reference, Markdown, report inventory and repository configuration tests passed (25 tests). Negative fixtures cover changed or missing evidence, changed PDFs, incomplete baselines and unsafe paths. Standard check includes the guard without altering runtime or evaluation scoring.",
+      "findings": [],
+      "path": "scripts/validate_submitted_report_links.py",
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "d482414372b99ff5def6112e435440fb70883c84af09a189ae4bb558a4bf957b"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "tooling-and-execution-freeze",
       "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
       "findings": [],
@@ -14590,6 +14594,17 @@
       "reviewed_at": "2026-08-20",
       "reviewer": "codex-primary-review",
       "sha256": "37eb5d6e3fbef59a94daa870f8a37159fa910f8c71d42a9a02dcd0b1e533d260"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "report-reference-preservation",
+      "evidence": "Read-only submitted-artifact and PDF-link guard; focused reference, Markdown, report inventory and repository configuration tests passed (25 tests). Negative fixtures cover changed or missing evidence, changed PDFs, incomplete baselines and unsafe paths. Standard check includes the guard without altering runtime or evaluation scoring.",
+      "findings": [],
+      "path": "tests/test_validate_submitted_report_links.py",
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "64bb8a7676679bf8d829ab51c56c126613561c3aa59d8487bdba38ced4db09b0"
     },
     {
       "audit_status": "audited",

@@ -1,0 +1,20 @@
+{
+  "baseline_revision": "d25e2727336c48cced3c84ce680fc25c7554e91c",
+  "repository": "https://github.com/horiiiiii032929/digital-twin",
+  "files": {
+    "research/05_evaluation/academic-factual-qa-open-10000-winner-regression-001-results.md": "e29777a5fe5ab6151bf8d9f0db870bf6df3fbac78963a20d3d7618d3ada900b3",
+    "research/05_evaluation/course-digital-twin-evaluation-program-011-results.md": "af5097b954a38b8e298dc4fbc4d2aa90e10f24a7b7c6656feef321795bcb2560",
+    "research/05_evaluation/course-digital-twin-whole-system-architecture-round-2-001-results.md": "e4372d113707b3cfe628a20a3ebdcc1e27e6c57ef4cd14dbd02009d9c69c9196",
+    "research/05_evaluation/factual-qa-v3-scale-completion-10000-001-analysis-correction-001-results.md": "6d7d4d0f4e8aaa203ce7adfa6f2bd235e05b016ff5c3a15a442408790fed7e09",
+    "research/05_evaluation/factual-qa-v3-scale-completion-10000-001-results.md": "bff052ac4ca2fcfa9b16047c8ef2cbc454924827a3553ccbe425b4a01214c4f7",
+    "research/05_evaluation/final-cross-method-factual-confirmation-001-results.md": "9fc1cd5a7f6e09e47fcfb1c9bdfdd7b8b57c8f0603bf557dea2217d5fb9b2c45",
+    "research/05_evaluation/final-profile-operational-dialogue-development-001-full-live-001-results.md": "32d69d4226e16fa973d661a780bc9129421d33ebd6aa1dca2b82a4e7bf25f4ec",
+    "research/05_evaluation/goal-completion-scope-development-001-results.md": "78da9869354d7f077cd300773e06a32271dd05e3dba274c6e8f9d38df6de0cf7",
+    "research/05_evaluation/goal-completion-scope-review-audit-001-results.md": "42a06846bdd84dc336ac54b8fd9224dc90d0e08a11941530feef06bc8f891263",
+    "research/05_evaluation/governed-full-autonomy-v2-1-multi-concept-confirmation-025-results.md": "3ed39e95fd30ca13ceb17f610086d2518d47ccfd1182d7e6ddbc2191fbfabace",
+    "research/05_evaluation/independent-factual-revision-controls-001-fresh-v16-live-001-results.md": "cb78236510a6aafb31011d57c4f526bf642c21cebecba83878eac4a6abb46279",
+    "research/05_evaluation/successor-architecture-confirmation-005-001-results.md": "b4642b26ab64f48ca8e6e5de7f7f216699c922decb6a22ddfb1ac85966cca79f",
+    "research/05_evaluation/successor-architecture-engine-comparison-006-001-results.md": "973a190d933e72f9587fe623c1c69939e9a480e8ed11fce2264f10067f518224",
+    "research/05_evaluation/successor-learner-timing-simulation-001-results.md": "606e5ab87d5a63f0a8c60fbf4bac561a9db59887be3282dda32fa52aecaccd40"
+  }
+}

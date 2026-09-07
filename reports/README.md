@@ -1,13 +1,19 @@
 # Reports
 
-Use this folder for shareable figures, generated report assets, and presentation
-materials.
+Start with the [submitted snapshot](submitted/2026-09-06/README.md) for the
+unchanged abstract, report and source package. The
+[LaTeX guide](../research/06_reports/final/README.md) describes the current build.
 
 Generated outputs should go under `generated/`, which is ignored by default.
 
 ## Final-report diagrams
 
-Editable Draw.io sources for the IT5004-aligned final-report diagrams live in
+The current manuscript uses the `course-twin-*.pdf` figures referenced by its
+chapter sources. Their vector builder is `figures/build_sdlc_figures.py`.
+Building the LaTeX report uses the checked-in figure PDFs; it does not require
+regenerating them.
+
+Earlier editable Draw.io sources live in
 `figures/drawio/`. Render an approved source to both reviewable SVG and
 LaTeX-ready PDF with:
 
@@ -21,9 +27,9 @@ DRAWIO_CLI="/Applications/draw.io.app/Contents/MacOS/draw.io"
 
 Rendered files in `reports/figures/` are intentional review artifacts. Proposed
 deployment diagrams must retain a visible “not implemented or evaluated” label.
-The Graphviz files under `figures/source/` are retained as early content and
-layout sketches; they are not the authoritative source for the converted
-IT5004 system-design diagrams.
+The Graphviz files under `figures/source/` and earlier Draw.io sources are
+retained for design history. They should not be substituted for the current
+manuscript's figure files.
 
 ## Professor-fidelity closeout
 
