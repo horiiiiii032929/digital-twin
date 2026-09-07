@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "e7547b034aacd4fc295cbfb2b16d6155e912df9b8d7eab6465394d385353a6ae",
+  "record_sha256": "0458bb442451da8ca2738e22368a2fbe4bea81328f04625420f8a88e4abd16c8",
   "records": [
     {
       "audit": {
@@ -56,7 +56,7 @@
     {
       "audit": {
         "domain": "configuration-and-deployment",
-        "evidence": "CI prepares five public source revisions before the portable suite; original source-build assertions and SHA-pinned actions remain. Historical artifacts have separate explicit commands.",
+        "evidence": "CI installs the missing librsvg2-bin system prerequisite, reports its version and runs SVG integration checks before the complete portable suite. Five public input revisions are prepared explicitly; no test assertion or runtime/scoring behavior changed. Remote run 34088376440 passed 2548 tests and isolated four missing-renderer failures.",
         "findings": [],
         "reviewed_at": "2026-09-07",
         "reviewer": "codex-reproducibility-review"
@@ -67,7 +67,7 @@
       "package_commands": [],
       "path": ".github/workflows/ci.yml",
       "risk": "high",
-      "sha256": "59b0ef5c9626abce88795055ce7f32aad35649d6045d60518ac80de56048a89a"
+      "sha256": "6fae7783b0a84afd9881d6523ab66ded150adcbba7ea1b0cdd8d483cae6fee79"
     },
     {
       "audit": {

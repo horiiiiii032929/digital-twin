@@ -8,7 +8,8 @@ experimental results.
 ## Reproduce code checks
 
 Use the versions in `.python-version` and `.node-version`, then run from a fresh
-checkout:
+checkout with `rsvg-convert` installed (`brew install librsvg` on macOS, or
+`sudo apt-get install librsvg2-bin` on Debian/Ubuntu):
 
 ```sh
 uv sync --locked --dev
@@ -34,7 +35,9 @@ and passed in a separate five-test validator invocation. The standard `npm run
 check` pipeline subsequently completed: its Python selection passed 2,577 tests
 in 1,340.68 seconds, followed by 71 frontend tests, lint and the production build.
 The repository owner approved publication of the evaluation-record payload on
-7 September 2026; remote CI remains to be checked after push. The first standard run found stale audit
+7 September 2026. Remote CI outcomes are recorded below and on
+[pull request 218](https://github.com/horiiiiii032929/digital-twin/pull/218).
+The first standard run found stale audit
 hashes for the submitted goal-scope correction and missing report/tool entries.
 The relevant source boundaries and evidence were reviewed, then audit metadata
 was refreshed. This changes verification bookkeeping, not tutoring behaviour.
@@ -88,7 +91,7 @@ inputs or scores. Four network-free Git-fixture tests cover initial fetch,
 offline reuse, dirty/revision-drift rejection, and failed-fetch cleanup. The
 standard CI job now prepares these sources before the portable checks. A fifth
 pinned public source, ThinkOS, is also required by successor-build regressions.
-Remote verification of this correction is pending.
+Remote verification of these corrections is tracked on pull request 218.
 
 The second remote run, [34087950670](https://github.com/horiiiiii032929/digital-twin/actions/runs/34087950670),
 passed source preparation but exposed another dependency on ignored generated
@@ -109,3 +112,16 @@ fixture mixed a fixed August 31 event time with the real wall clock. After
 September 7 its goal expiry was no longer in the future. Passing the existing
 `VirtualUtcClock` into that fixture fixed the test setup; all 67 related
 autonomy/worker/freeze checks passed. Production expiry validation is unchanged.
+
+The third remote run, [34088376440](https://github.com/horiiiiii032929/digital-twin/actions/runs/34088376440),
+completed Python execution with 2,548 passes, one skipped test, 28 explicitly
+excluded historical tests and four failures. All four failures were missing
+`rsvg-convert` on the Linux runner. CI now installs `librsvg2-bin`, checks the
+renderer version, and exercises SVG integration before the complete suite. The
+application and evaluation scoring implementations did not change.
+
+The supplemental clean-checkout tooling run passed 1,771 tests; its only three
+failures were the old development-v2 artifact tests collected before their
+marker correction. That corrected module separately passed 12 portable tests
+with three historical tests deselected. The remaining validation-command chain
+completed without failures after the input-preparation corrections.

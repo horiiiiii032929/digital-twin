@@ -27,12 +27,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "CI prepares five public source revisions before the portable suite; original source-build assertions and SHA-pinned actions remain. Historical artifacts have separate explicit commands.",
+      "evidence": "CI installs the missing librsvg2-bin system prerequisite, reports its version and runs SVG integration checks before the complete portable suite. Five public input revisions are prepared explicitly; no test assertion or runtime/scoring behavior changed. Remote run 34088376440 passed 2548 tests and isolated four missing-renderer failures.",
       "findings": [],
       "path": ".github/workflows/ci.yml",
       "reviewed_at": "2026-09-07",
       "reviewer": "codex-reproducibility-review",
-      "sha256": "59b0ef5c9626abce88795055ce7f32aad35649d6045d60518ac80de56048a89a"
+      "sha256": "6fae7783b0a84afd9881d6523ab66ded150adcbba7ea1b0cdd8d483cae6fee79"
     },
     {
       "audit_status": "audited",

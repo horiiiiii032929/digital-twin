@@ -58,6 +58,9 @@ distinguishes code checks from the historical evaluation claims.
 
 ## Development Commands
 
+- Install `rsvg-convert` for SVG conversion tests: `brew install librsvg` on
+  macOS, or `sudo apt-get install librsvg2-bin` on Debian/Ubuntu. Verify with
+  `rsvg-convert --version`.
 - `uv sync --locked --dev`: install the locked Python API and test dependencies into `.venv`.
 - `npm ci`: install the locked frontend workspace dependencies.
 - `npm run setup:evaluation-sources`: before the full checks, fetch five
