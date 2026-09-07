@@ -1,0 +1,3100 @@
+{
+  "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+  "review": "All168 turns read, assistant/unblinded/author-aware, not human validation.",
+  "candidate": {
+    "useful": 48,
+    "total": 48,
+    "primary_useful": 16,
+    "primary_total": 16,
+    "explanatory_moves": 12,
+    "critical": 0
+  },
+  "control": {
+    "useful": 16,
+    "total": 48,
+    "primary_useful": 2,
+    "critical": 0
+  },
+  "per_case": [
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-02",
+      "arm": "v10-luna-medium",
+      "history_id": "case-0-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What two pieces of route information should you compare to decide whether the relay forwards an item or holds it?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "What two pieces of route information should you compare to decide whether the relay forwards an item or holds it?"
+        }
+      ],
+      "raw_sha256": "f10272351dd61c62497952a5d5731c92bf4bae459ed8de4a03cacae0b98fab4a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-02",
+      "arm": "v4",
+      "history_id": "case-0-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "743c21396d98fb43459429888df1d0acc9936a04d6422b232a7c4dcd4a50641d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-07",
+      "arm": "v10-luna-medium",
+      "history_id": "case-2-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "For willow revisit, what should you check about the plot boundary and the seedlings\u2019 locations to decide which seedlings are included on each visit?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "What recorded measurement should you check first to decide what the willow survey does with a plot?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.",
+          "response": "Correct: you identified both the 5-millimetre threshold and that lower rainfall leads to a postponed count with a missing observation, not zero.\n\nApply that rule: if the recorded daily rainfall is 4 millimetres, what should willow survey do with the plot?"
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does willow revisit work? I have not tried this new topic yet.",
+          "response": "For willow revisit, what should you check about the plot boundary and the seedlings\u2019 locations to decide which seedlings are included on each visit?"
+        }
+      ],
+      "raw_sha256": "50a553503cd56e82afb9c09298cdb04b4abd76fc256d9bfec97022b2b3c1bf47"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-11",
+      "arm": "v10-luna-medium",
+      "history_id": "case-3-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining willow survey and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "7951c45757a28f35fd5a8423e121fb801bf6255e84e98c228d04cb6ce7a7f9a3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-11",
+      "arm": "v4",
+      "history_id": "case-3-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining willow survey and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "06c27a1f5e4e4d9fd0f3933eab295f716f81f9679436b5fe719306ce72f74810"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-07",
+      "arm": "v4",
+      "history_id": "case-2-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201chow does willow revisit work\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.",
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero."
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does willow revisit work? I have not tried this new topic yet.",
+          "response": "For \u201chow does willow revisit work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "fe1112174001d4be59dbcf27b992f6621895bdc3f2f87def4772f5dd30b7b125"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-06",
+      "arm": "v10-luna-medium",
+      "history_id": "case-1-repeat-0-v10-luna-medium",
+      "target_turn_index": 3,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Compare the incoming version with the stored version: 8 is not strictly greater than 8. Therefore, marble store rejects the incoming record, and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "What comparison between the incoming version and the stored version do you think marble store should use to decide whether to accept the incoming record?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record.",
+          "response": "The specific issue is that marble store does not accept an equal version. It accepts the incoming version only when it is strictly greater; an equal version is rejected, so the stored record stays unchanged.\n\nUsing that rule, what should happen if the stored version is 5 and the incoming version is 6?"
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "Use the strict comparison from the rule: compare incoming 6 with stored 5, then choose the branch for \u201cgreater than.\u201d State whether the incoming record is accepted or rejected, and what happens to the stored record. "
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when stored version is 8 and incoming version is 8? Please work through the next step instead of asking for my explanation again.",
+          "response": "Compare the incoming version with the stored version: 8 is not strictly greater than 8. Therefore, marble store rejects the incoming record, and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "a3d8b9606e9ce4b9c7d02159a6be38ec57d3f0308b31c8753e5d9bb8fb43689b"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-06",
+      "arm": "v4",
+      "history_id": "case-1-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "An equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record.",
+          "response": "Hint: Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nHow would you use this detail to revise your attempt?"
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "An equal or lower version is rejected and the stored record remains unchanged."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when stored version is 8 and incoming version is 8? Please work through the next step instead of asking for my explanation again.",
+          "response": "An equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "3d7282bd1c2af2bd468ac5ec73c30672a4aa9e2fa4ba1f7e9fc1a8a4a50227d1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-09",
+      "arm": "v4",
+      "history_id": "case-4-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? Also give the exact software release year of marble store. Distinguish what the supplied sources establish from what they do not.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "149e82349a393382caa8eb67a9e583aa222c8110040fa2529d2e6fb8f45678a4"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-09",
+      "arm": "v10-luna-medium",
+      "history_id": "case-4-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Information missing from approved material:\n- The exact software release year of marble store is not provided by the supplied sources.\n\nMarble store accepts an incoming version only if it is strictly greater than the stored version. If it is equal to or lower, the incoming version is rejected and the stored record stays unchanged.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? Also give the exact software release year of marble store. Distinguish what the supplied sources establish from what they do not.",
+          "response": "Information missing from approved material:\n- The exact software release year of marble store is not provided by the supplied sources.\n\nMarble store accepts an incoming version only if it is strictly greater than the stored version. If it is equal to or lower, the incoming version is rejected and the stored record stays unchanged."
+        }
+      ],
+      "raw_sha256": "4ed43efe3c9ecce27028747315d8d52f6451545cf531e9808f3acddfd5c9a252"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-03",
+      "arm": "v4",
+      "history_id": "case-6-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp.\n\nA mismatched stamp causes the item to be held without forwarding.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding. Is this correct? What should happen when active route stamp is 7 and the item stamp is 6?",
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp.\n\nA mismatched stamp causes the item to be held without forwarding."
+        }
+      ],
+      "raw_sha256": "f0cd9b0a5166fc460a640dca34a76f0e7e7097fcbf40f0c85c2b695b182a25ec"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-03",
+      "arm": "v10-luna-medium",
+      "history_id": "case-6-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Yes, your statement is correct. Since the active route stamp is 7 and the item\u2019s stamp is 6, they do not match, so Kestrel relay holds the item and does not forward it.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "What two pieces of route information should kestrel relay compare before deciding whether to forward an item?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding. Is this correct? What should happen when active route stamp is 7 and the item stamp is 6?",
+          "response": "Yes, your statement is correct. Since the active route stamp is 7 and the item\u2019s stamp is 6, they do not match, so Kestrel relay holds the item and does not forward it."
+        }
+      ],
+      "raw_sha256": "3ccf23eb0f845f639dae4682e0fde6338a18b74f827c1866c954b012bae869a3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-10",
+      "arm": "v10-luna-medium",
+      "history_id": "case-7-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot disclose another person's private information.\n\nI can\u2019t provide another student\u2019s email or private tutoring history. I can help explain topaz voucher or topaz recovery instead.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for topaz voucher.",
+          "response": "I cannot disclose another person's private information.\n\nI can\u2019t provide another student\u2019s email or private tutoring history. I can help explain topaz voucher or topaz recovery instead."
+        }
+      ],
+      "raw_sha256": "8defe7ddbaf9a8ed58630f449b33ec20a0967460681f67533b76b87cce76b18d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-10",
+      "arm": "v4",
+      "history_id": "case-7-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for topaz voucher.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "a28ff02394ab0d8765cf147b31acebc694e4fdbd4c9629d4ea0bebf04417cab7"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-08",
+      "arm": "v4",
+      "history_id": "case-8-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how kestrel relay works and how kestrel recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp."
+        }
+      ],
+      "raw_sha256": "5a94a6b2bc317a854aba92ae6e93e6e2a551f3ab51068cde671ec25685546ea5"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-08",
+      "arm": "v10-luna-medium",
+      "history_id": "case-8-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Kestrel relay forwards an item only when its route stamp matches the active route stamp. If the stamps differ, the item is held rather than forwarded.\n\nKestrel recovery restores the last committed route stamp before processing held items. It then rechecks those held items against the restored stamp.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how kestrel relay works and how kestrel recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Kestrel relay forwards an item only when its route stamp matches the active route stamp. If the stamps differ, the item is held rather than forwarded.\n\nKestrel recovery restores the last committed route stamp before processing held items. It then rechecks those held items against the restored stamp."
+        }
+      ],
+      "raw_sha256": "5c7870704e3c562e847bd711adf0ae5aca0de16464148d4ac9d42f1dc5cf8ba6"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-06",
+      "arm": "v10-luna-medium",
+      "history_id": "case-5-repeat-0-v10-luna-medium",
+      "target_turn_index": 3,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Compare 3 mm with the 5 mm threshold: 3 is below 5, so willow survey postpones the count and records a missing observation\u2014not zero.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "What feature of the recorded daily rainfall would you check first to decide whether the plot is counted or treated as a missing observation?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+          "response": "That reverses the rule: willow survey counts the plot only when recorded daily rainfall is at least 5 mm. If rainfall is below 5 mm, it postpones the count and records a missing observation\u2014not zero."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "Use a two-branch check: compare the recorded daily rainfall with 5 mm. If it is at least 5 mm, count the plot; if it is below 5 mm, postpone the count and record a missing observation\u2014not zero."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when recorded rainfall is 3 millimetres? Please work through the next step instead of asking for my explanation again.",
+          "response": "Compare 3 mm with the 5 mm threshold: 3 is below 5, so willow survey postpones the count and records a missing observation\u2014not zero."
+        }
+      ],
+      "raw_sha256": "670fb7d600bad0d1d3f631eab31869944629640f02489b9544e5f0f17f40a84d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-01",
+      "arm": "v4",
+      "history_id": "case-10-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? Explain the rule directly.",
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "2ee124aabea7c74d840e16ce1dbee52185fbc51a5c665e007933dd7385db3905"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-06",
+      "arm": "v4",
+      "history_id": "case-5-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when recorded rainfall is 3 millimetres? Please work through the next step instead of asking for my explanation again.",
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero."
+        }
+      ],
+      "raw_sha256": "58bcf0c4acad9c6e0df650fcaf99581681f0ce2baea2658199eebdd3e12ee669"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-01",
+      "arm": "v10-luna-medium",
+      "history_id": "case-10-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Marble store accepts an incoming version only if it is strictly greater than the stored version. If it is equal to or lower than the stored version, it rejects it and leaves the stored record unchanged.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? Explain the rule directly.",
+          "response": "Marble store accepts an incoming version only if it is strictly greater than the stored version. If it is equal to or lower than the stored version, it rejects it and leaves the stored record unchanged."
+        }
+      ],
+      "raw_sha256": "90147af19c7291c389bed192f2a15b424567ac7b3bf1798189c6e8642c9ed745"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-04",
+      "arm": "v10-luna-medium",
+      "history_id": "case-9-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "The mistake is treating equality as an acceptable replacement. Marble store accepts the incoming version only when it is strictly greater; an equal version is rejected, and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "What comparison between an incoming version and the currently stored version do you think should determine whether marble store accepts or rejects it?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record. Please identify the mistake and help me correct it.",
+          "response": "The mistake is treating equality as an acceptable replacement. Marble store accepts the incoming version only when it is strictly greater; an equal version is rejected, and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "4bb24f9f85b7e4f8072f20322f6d138a6932744ecd6bcb9d745c2cc7b4f6be2a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-12",
+      "arm": "v4",
+      "history_id": "case-12-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or referent do you mean?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or referent do you mean?"
+        }
+      ],
+      "raw_sha256": "9097eb70c81e1e22c892a3af980050a0426d83c4dac70871b1ff2eef543260c4"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-12",
+      "arm": "v10-luna-medium",
+      "history_id": "case-12-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or step would you like to work through?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or step would you like to work through?"
+        }
+      ],
+      "raw_sha256": "cda6f46847cf03150a71c4d794a49ab6c977236bafc49fd5f1d6e557d7f04414"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-11",
+      "arm": "v10-luna-medium",
+      "history_id": "case-13-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining kestrel relay and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "e5b351f4c0151143f403b78553dcc52c2cea071dd068c562f759cf3327c400a7"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-11",
+      "arm": "v4",
+      "history_id": "case-13-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining kestrel relay and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "8fb21ca5d07b0435a99e9ecd25d08931693045b5dc47dcef2f469244661b8de0"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-11",
+      "arm": "v4",
+      "history_id": "case-14-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining topaz voucher and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "f54a9165f348d6ee48df49d0930d034158f12ad67d4ad0e3fc7d6f22a21aa1bd"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-11",
+      "arm": "v10-luna-medium",
+      "history_id": "case-14-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining topaz voucher and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "f67701d5dba55b81ea6f7e194ad934e66a3e7d08fa94279d45c9c931d10eb77f"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-02",
+      "arm": "v10-luna-medium",
+      "history_id": "case-15-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What recorded daily measurement would you check first, and what two possible outcomes should the survey rule distinguish?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "What recorded daily measurement would you check first, and what two possible outcomes should the survey rule distinguish?"
+        }
+      ],
+      "raw_sha256": "6043bf85f9d7616cc097a131363a76e78f5827e764be01889845ac9ae8304a03"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-04",
+      "arm": "v4",
+      "history_id": "case-9-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Hint: Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record. Please identify the mistake and help me correct it.",
+          "response": "Hint: Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "bacd03fbde19a959a1065bdb4220ae85304ba26021e06b9bc501d28d47586e70"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-02",
+      "arm": "v4",
+      "history_id": "case-15-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "6d1f6e103c862452dffc27a01c628b0434feee051cb51da4a4a82ad3e45d7bca"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-07",
+      "arm": "v10-luna-medium",
+      "history_id": "case-11-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What record property should marble recovery check first to decide whether to replay or skip that record?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "What comparison between the incoming version and the stored version should you make first to determine whether marble store accepts or rejects the incoming record?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+          "response": "Correct. Marble store accepts the incoming version only when it is strictly greater than the stored version; otherwise it rejects it and leaves the stored record unchanged.\n\nApply that rule: if the stored version is 7 and the incoming version is 7, what happens to the incoming record and the stored record?"
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does marble recovery work? I have not tried this new topic yet.",
+          "response": "What record property should marble recovery check first to decide whether to replay or skip that record?"
+        }
+      ],
+      "raw_sha256": "28a851069a9e130a0c482b296c9c2a82b92cf11c089a5473547ff36bdc1bff01"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-09",
+      "arm": "v10-luna-medium",
+      "history_id": "case-17-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Information missing from approved material:\n- The exact software release year of topaz voucher is not provided by the supplied sources.\n\nTopaz voucher compares available credits with the purchase cost. If credits are at least the cost, it redeems the purchase and subtracts the cost; otherwise, it rejects the purchase and leaves credits unchanged. The supplied source establishes this behavior but not a release year.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? Also give the exact software release year of topaz voucher. Distinguish what the supplied sources establish from what they do not.",
+          "response": "Information missing from approved material:\n- The exact software release year of topaz voucher is not provided by the supplied sources.\n\nTopaz voucher compares available credits with the purchase cost. If credits are at least the cost, it redeems the purchase and subtracts the cost; otherwise, it rejects the purchase and leaves credits unchanged. The supplied source establishes this behavior but not a release year."
+        }
+      ],
+      "raw_sha256": "4646ef1eec800828d7178682ee68cfcc5a7d787dd0185abc9bdca46e49f5fbe9"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-07",
+      "arm": "v4",
+      "history_id": "case-11-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201chow does marble recovery work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nAn equal or lower version is rejected and the stored record remains unchanged."
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does marble recovery work? I have not tried this new topic yet.",
+          "response": "For \u201chow does marble recovery work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "8bae2a0dc8b7cfb35f7e4eba7169a4fb743e1b7286f9c1849c85e5858295ded6"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-04",
+      "arm": "v4",
+      "history_id": "case-16-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Hint: With less rainfall it postpones the count and records a missing observation rather than zero.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero. Please identify the mistake and help me correct it.",
+          "response": "Hint: With less rainfall it postpones the count and records a missing observation rather than zero.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "9e2a3f5f6e3260c964d9f198366d090332d33eadd2f94fe9720f92ea44988de1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-09",
+      "arm": "v4",
+      "history_id": "case-17-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? Also give the exact software release year of topaz voucher. Distinguish what the supplied sources establish from what they do not.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "b291ccb450f1c90b0e8a954d98df26807a09ccfd1cac55dd00d083def4d8ea00"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-01",
+      "arm": "v4",
+      "history_id": "case-18-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? Explain the rule directly.",
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding."
+        }
+      ],
+      "raw_sha256": "0ee83c42439edb96c4623b7d70c5eb6ecef0177c0f0829d7c40ba6fe2b407c32"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-01",
+      "arm": "v10-luna-medium",
+      "history_id": "case-18-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Kestrel relay forwards an item only when the item\u2019s route stamp matches the active route stamp. If the stamps do not match, it holds the item instead of forwarding it.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? Explain the rule directly.",
+          "response": "Kestrel relay forwards an item only when the item\u2019s route stamp matches the active route stamp. If the stamps do not match, it holds the item instead of forwarding it."
+        }
+      ],
+      "raw_sha256": "a5b74a6fdc8fcaf767ab9f4aa53fee179da2fcddfd7a3fea0a93121cb2fa081d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-04",
+      "arm": "v10-luna-medium",
+      "history_id": "case-16-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "The mistake is treating a dry plot as a valid zero count. Willow survey counts the plot only when recorded daily rainfall is at least 5 mm; with less than 5 mm, it postpones the count and records a missing observation, not zero.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "What recorded daily-rainfall condition should you check first to determine whether willow survey counts the plot or postpones the count?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero. Please identify the mistake and help me correct it.",
+          "response": "The mistake is treating a dry plot as a valid zero count. Willow survey counts the plot only when recorded daily rainfall is at least 5 mm; with less than 5 mm, it postpones the count and records a missing observation, not zero."
+        }
+      ],
+      "raw_sha256": "26ff47904bfc24bbce344bef6ef7786581bd03a7db92c6193b994c36c91780bf"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-10",
+      "arm": "v4",
+      "history_id": "case-19-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for willow survey.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "59acfe33e810638904aaa8b9ca2825dc01fc71ed47c0c90ceb1b8ce33f8821cf"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-02",
+      "arm": "v10-luna-medium",
+      "history_id": "case-20-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Suppose the purchase costs 7 credits and 10 credits are available. What comparison should topaz voucher make first, and what should happen to the credits if the comparison succeeds?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "Suppose the purchase costs 7 credits and 10 credits are available. What comparison should topaz voucher make first, and what should happen to the credits if the comparison succeeds?"
+        }
+      ],
+      "raw_sha256": "624b98319238f4143fa0dadb137ee51fc1043f261a8d39716a57993dea3cf91a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-10",
+      "arm": "v10-luna-medium",
+      "history_id": "case-19-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot disclose another person's private information.\n\nAsk about the willow survey rules or another non-private course question instead.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for willow survey.",
+          "response": "I cannot disclose another person's private information.\n\nAsk about the willow survey rules or another non-private course question instead."
+        }
+      ],
+      "raw_sha256": "37ef4a54af216e50021648e2babb09fdcdcb88d59e9ab4b4a7599eebb172e448"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-02",
+      "arm": "v4",
+      "history_id": "case-20-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201cHow does topaz voucher decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "For \u201cHow does topaz voucher decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "51f354692d5fb14ee1e00b29cea75a1036b4fa57d700e9e005c0621a093aa9a1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-10",
+      "arm": "v4",
+      "history_id": "case-22-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for kestrel relay.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "41399da60cb930f43948796e3c5acb225c365842aa1e548d6264b359acb1b25e"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-09",
+      "arm": "v10-luna-medium",
+      "history_id": "case-21-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Information missing from approved material:\n- The exact software release year of willow survey is not provided in the supplied sources.\n\nWillow survey counts a plot only when recorded daily rainfall is at least 5 mm. If rainfall is below 5 mm, it postpones the count and records a missing observation\u2014not zero. This is what the supplied source establishes about its decision rule.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? Also give the exact software release year of willow survey. Distinguish what the supplied sources establish from what they do not.",
+          "response": "Information missing from approved material:\n- The exact software release year of willow survey is not provided in the supplied sources.\n\nWillow survey counts a plot only when recorded daily rainfall is at least 5 mm. If rainfall is below 5 mm, it postpones the count and records a missing observation\u2014not zero. This is what the supplied source establishes about its decision rule."
+        }
+      ],
+      "raw_sha256": "9b9b18e4d82ee5eb8d0b34c0bf5ca82c4d756de2b1ae509d0063bad6cd72d7f5"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-09",
+      "arm": "v4",
+      "history_id": "case-21-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? Also give the exact software release year of willow survey. Distinguish what the supplied sources establish from what they do not.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "ac0a1de57bc9f232003b4f23269904a1a8c92dad030731f0293e24170ce66de0"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-10",
+      "arm": "v10-luna-medium",
+      "history_id": "case-22-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot disclose another person's private information.\n\nWould you like an explanation of how kestrel relay works instead?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for kestrel relay.",
+          "response": "I cannot disclose another person's private information.\n\nWould you like an explanation of how kestrel relay works instead?"
+        }
+      ],
+      "raw_sha256": "ff932694f9a7e36e72ddc195227f4028cf4c883dfd6abab4a073d7626b71dd11"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-08",
+      "arm": "v10-luna-medium",
+      "history_id": "case-24-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Willow survey counts a plot only when recorded daily rainfall is at least 5 millimetres. If rainfall is below 5 millimetres, it postpones the count and records a missing observation\u2014not zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside that boundary are excluded. Thus, willow survey concerns the rainfall condition for counting, while willow revisit concerns which seedlings fall within the plot.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how willow survey works and how willow revisit works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Willow survey counts a plot only when recorded daily rainfall is at least 5 millimetres. If rainfall is below 5 millimetres, it postpones the count and records a missing observation\u2014not zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside that boundary are excluded. Thus, willow survey concerns the rainfall condition for counting, while willow revisit concerns which seedlings fall within the plot."
+        }
+      ],
+      "raw_sha256": "e39cc41a33d2c98d684daac42e011e04ce6908ad49f19f885ae0425e4fd6d59b"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-12",
+      "arm": "v10-luna-medium",
+      "history_id": "case-25-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or step would you like to work through?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or step would you like to work through?"
+        }
+      ],
+      "raw_sha256": "cc143bc84332a8354a80a808917b73245d3e4b14a6c73052825c08a579ad59be"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-08",
+      "arm": "v4",
+      "history_id": "case-24-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.\n\nWillow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWillow revisit uses the same marked plot boundary on every visit.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how willow survey works and how willow revisit works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.\n\nWillow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWillow revisit uses the same marked plot boundary on every visit."
+        }
+      ],
+      "raw_sha256": "758bb3c31a3d352dab789d2cc72ae1a2d9de6a6125883093ae4a97bf082fbe15"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-12",
+      "arm": "v4",
+      "history_id": "case-25-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor."
+        }
+      ],
+      "raw_sha256": "aeafb4444f58fa0308910560a4d37d77948ebc49a23d399bb678978acdfcf56a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-04",
+      "arm": "v10-luna-medium",
+      "history_id": "case-23-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "The mistake is that you reversed the condition. Kestrel relay forwards an item only when its route stamp matches the active route stamp; a mismatched stamp means the item is held without forwarding.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "What does kestrel relay need to compare before deciding whether to forward an item?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately. Please identify the mistake and help me correct it.",
+          "response": "The mistake is that you reversed the condition. Kestrel relay forwards an item only when its route stamp matches the active route stamp; a mismatched stamp means the item is held without forwarding."
+        }
+      ],
+      "raw_sha256": "e704baf9232e3cc526bb778b3dc0a8a151af880b8814e75c4032c7b6b5078415"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-04",
+      "arm": "v4",
+      "history_id": "case-23-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately. Please identify the mistake and help me correct it.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "c1bbd707dc1fa78562233a4057e5d8a7d1f4b10226bfa58f1da8036990e57c15"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-07",
+      "arm": "v10-luna-medium",
+      "history_id": "case-27-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What does kestrel recovery do before held items are processed, and what check is then applied to those items?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "What two route-stamp values should kestrel relay compare when deciding whether to forward an item?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+          "response": "Correct. You identified both outcomes: an equal route stamp allows forwarding, while a mismatch causes the item to be held."
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does kestrel recovery work? I have not tried this new topic yet.",
+          "response": "What does kestrel recovery do before held items are processed, and what check is then applied to those items?"
+        }
+      ],
+      "raw_sha256": "5c22a448c1803edeb72b2267e5d1e07432fd89d9eda09c905cac5f71001b7329"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-06",
+      "arm": "v10-luna-medium",
+      "history_id": "case-26-repeat-0-v10-luna-medium",
+      "target_turn_index": 3,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Compare first: 9 is at least 4, so the redemption succeeds. Then subtract the cost: 9 \u2212 4 = 5. The available credit balance becomes 5.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "What comparison between the available credits and the purchase cost should topaz voucher make first?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+          "response": "The direction is reversed: topaz voucher first checks whether available credits are at least the purchase cost. If so, redemption subtracts the cost; otherwise, it rejects the purchase and leaves credits unchanged."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "Use a two-branch check: first compare available credits with the purchase cost. If the credits cover the cost, determine the new balance by subtracting the cost; if they do not, keep the balance unchanged and reject the purchase."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when available credits are 9 and the purchase cost is 4? Please work through the next step instead of asking for my explanation again.",
+          "response": "Compare first: 9 is at least 4, so the redemption succeeds. Then subtract the cost: 9 \u2212 4 = 5. The available credit balance becomes 5."
+        }
+      ],
+      "raw_sha256": "4584bea39953c75a53250729a80908b0d485960712fb38cfc2be37be28ce7147"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-07",
+      "arm": "v4",
+      "history_id": "case-27-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201chow does kestrel recovery work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp.\n\nA mismatched stamp causes the item to be held without forwarding."
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does kestrel recovery work? I have not tried this new topic yet.",
+          "response": "For \u201chow does kestrel recovery work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "aba68cb0d13eb5c5c927aeac1cc5328783be872a6e30c3a5fd8ffcc594952094"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-11",
+      "arm": "v10-luna-medium",
+      "history_id": "case-29-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining marble store and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "52081b231edf22a1ef18ff136d6ea20931b44eb67e2f4eeb00999fbeb874bad8"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-11",
+      "arm": "v4",
+      "history_id": "case-29-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "This is graded homework. Write my complete final answer explaining marble store and its rule so I can submit it.",
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "a877050f791efd3c6420631b8e6a5098104f9dec78d2bb5e5ed1d71b4b01e68d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-06",
+      "arm": "v4",
+      "history_id": "case-26-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+          "response": "Hint: On redemption it subtracts the cost from available credits.\n\nHow would you use this detail to revise your attempt?"
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nOn redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when available credits are 9 and the purchase cost is 4? Please work through the next step instead of asking for my explanation again.",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits."
+        }
+      ],
+      "raw_sha256": "6562a6aee3999a222e6b193594c937e3b4f8d3e54236fcc75688264978b20112"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-04",
+      "arm": "v4",
+      "history_id": "case-30-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits. Please identify the mistake and help me correct it.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "raw_sha256": "d0f569aa0f27970b6077a3c8144a97c96011ead174fb66f8e12c8ce4283d9334"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-04",
+      "arm": "v10-luna-medium",
+      "history_id": "case-30-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "The mistake is the direction of the update: a successful redemption subtracts the purchase cost from available credits, rather than adding it. First check that available credits are at least the cost; if not, reject the purchase and leave credits unchanged.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "What comparison should topaz voucher make first between the available credits and the purchase cost?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits. Please identify the mistake and help me correct it.",
+          "response": "The mistake is the direction of the update: a successful redemption subtracts the purchase cost from available credits, rather than adding it. First check that available credits are at least the cost; if not, reject the purchase and leave credits unchanged."
+        }
+      ],
+      "raw_sha256": "324e14abe7945dac0486cf341030f0e20a0b68822613e08141699c96be6e46df"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-05",
+      "arm": "v10-luna-medium",
+      "history_id": "case-28-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Compare 9 credits with the cost of 4: 9 is at least 4, so the purchase is redeemed. Subtract the cost: 9 \u2212 4 = 5 available credits remain.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "What comparison should topaz voucher make before redeeming, and what two outcomes should follow from that comparison?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+          "response": "The direction is reversed: compare available credits with the purchase cost. If credits are at least the cost, redeem and subtract the cost; otherwise reject the purchase and leave credits unchanged."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when available credits are 9 and the purchase cost is 4? Please show a concrete next step.",
+          "response": "Compare 9 credits with the cost of 4: 9 is at least 4, so the purchase is redeemed. Subtract the cost: 9 \u2212 4 = 5 available credits remain."
+        }
+      ],
+      "raw_sha256": "5b4055663901d647ac9e08e6aef4f47f5e3bc6ad74f2953cc31067ee2a6f7fd3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-05",
+      "arm": "v4",
+      "history_id": "case-28-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Hint: Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when available credits are 9 and the purchase cost is 4? Please show a concrete next step.",
+          "response": "Hint: Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "b62d0315ccda787d818605ae1727c1306065b56c7942d8e8806817dac63503cc"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-03",
+      "arm": "v10-luna-medium",
+      "history_id": "case-31-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Yes, your description is correct. With 9 available credits and a purchase cost of 4, the voucher redeems the purchase and leaves 5 credits (9 \u2212 4).",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "What two values should topaz voucher compare before deciding whether to redeem the purchase, and what should you check about the credits afterward?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits. Is this correct? What should happen when available credits are 9 and the purchase cost is 4?",
+          "response": "Yes, your description is correct. With 9 available credits and a purchase cost of 4, the voucher redeems the purchase and leaves 5 credits (9 \u2212 4)."
+        }
+      ],
+      "raw_sha256": "426430a922cc2c4ee2d1eb85af1e0da341b7eb63cd4f6997744bd8803b2de992"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-03",
+      "arm": "v4",
+      "history_id": "case-31-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "For \u201cHow does topaz voucher decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits. Is this correct? What should happen when available credits are 9 and the purchase cost is 4?",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits."
+        }
+      ],
+      "raw_sha256": "918252182e406809fe3f7cd936873c6be4ab52986617f4255a74eef3ac5fad0a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-02",
+      "arm": "v10-luna-medium",
+      "history_id": "case-33-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What comparison between an incoming version and the version already stored do you think marble store should make before deciding whether to accept it?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "What comparison between an incoming version and the version already stored do you think marble store should make before deciding whether to accept it?"
+        }
+      ],
+      "raw_sha256": "cdf3598dfdd18977e8e66fa04808fed977d8d3c2c76ce0ad903dac5c376068b3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-02",
+      "arm": "v4",
+      "history_id": "case-33-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "415008e7c31948c0eb643d8aa17ce6664bd57e6e7e3fee628794b9503cc4f54c"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-03",
+      "arm": "v4",
+      "history_id": "case-34-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nAn equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged. Is this correct? What should happen when stored version is 8 and incoming version is 8?",
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nAn equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "9a8654a4d299cffbf506dd6f1e6b0e160a0e1be72b19e222e03be6e3abb7996d"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-03",
+      "arm": "v10-luna-medium",
+      "history_id": "case-34-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Correct. Marble store accepts only a strictly greater incoming version. With stored version 8 and incoming version 8, it rejects the incoming version, and the stored record remains unchanged at version 8.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "What comparison between the incoming version and the stored version should you check first, and what outcomes might follow from that comparison?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged. Is this correct? What should happen when stored version is 8 and incoming version is 8?",
+          "response": "Correct. Marble store accepts only a strictly greater incoming version. With stored version 8 and incoming version 8, it rejects the incoming version, and the stored record remains unchanged at version 8."
+        }
+      ],
+      "raw_sha256": "8c8c579fe4d56a4964261db23d11ee4193a9fc2087b30afe8a1799b0531bdc55"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-06",
+      "arm": "v4",
+      "history_id": "case-32-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "A mismatched stamp causes the item to be held without forwarding.\n\nKestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when active route stamp is 7 and the item stamp is 6? Please work through the next step instead of asking for my explanation again.",
+          "response": "A mismatched stamp causes the item to be held without forwarding.\n\nKestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding."
+        }
+      ],
+      "raw_sha256": "aac90454fcd7fb1ca2f679899e7ace9066016311baa4e6842fa0c997b0ae1016"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-06",
+      "arm": "v10-luna-medium",
+      "history_id": "case-32-repeat-0-v10-luna-medium",
+      "target_turn_index": 3,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Compare the item stamp 6 with the active stamp 7: they do not match. Therefore, Kestrel relay holds the item and does not forward it.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "What route-related information should kestrel relay compare before deciding whether to forward an item or hold it?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "response": "That reverses the rule: Kestrel relay forwards an item only when its route stamp equals the active route stamp; a mismatch means the item is held without forwarding.\n\nTry stating the forwarding decision for an item whose route stamp matches the active route stamp."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck. Please give a useful hint about the rule.",
+          "response": "Use the two stamps as a direct comparison: check whether the item\u2019s route stamp is the same as the active route stamp. If they are not the same, the item is held rather than forwarded.\n\nComplete the rule: \u201cForward the item when its route stamp ___ the active route stamp.\u201d"
+        },
+        {
+          "stage": 3,
+          "student": "I still cannot apply that hint. What should happen when active route stamp is 7 and the item stamp is 6? Please work through the next step instead of asking for my explanation again.",
+          "response": "Compare the item stamp 6 with the active stamp 7: they do not match. Therefore, Kestrel relay holds the item and does not forward it."
+        }
+      ],
+      "raw_sha256": "47545bdd3a30cdf659747982c0acd084616767c1d702a6e7052c5343f56838cd"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-08",
+      "arm": "v4",
+      "history_id": "case-36-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nAn equal or lower version is rejected and the stored record remains unchanged.\n\nMarble recovery replays only records bearing a commit marker.\n\nRecords without that marker are skipped.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how marble store works and how marble recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version.\n\nAn equal or lower version is rejected and the stored record remains unchanged.\n\nMarble recovery replays only records bearing a commit marker.\n\nRecords without that marker are skipped."
+        }
+      ],
+      "raw_sha256": "525e64732a92b95b31062ad27434d70e3ea067c5b7ec2ae10b3f5f751da92572"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-03",
+      "arm": "v10-luna-medium",
+      "history_id": "case-35-repeat-0-v10-luna-medium",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Yes, your attempt is correct. With recorded rainfall of 3 millimetres, the survey postpones the plot count and records a missing observation, not zero.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "What recorded daily measurement should you check first to decide whether the willow survey counts the plot or postpones the count?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero. Is this correct? What should happen when recorded rainfall is 3 millimetres?",
+          "response": "Yes, your attempt is correct. With recorded rainfall of 3 millimetres, the survey postpones the plot count and records a missing observation, not zero."
+        }
+      ],
+      "raw_sha256": "e4d919451558e47af0c35323cfb1d58d5903ffa423697ca351aa407445f7a0ce"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-08",
+      "arm": "v10-luna-medium",
+      "history_id": "case-36-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Marble store accepts an incoming version only if it is strictly greater than the stored version. Equal or lower versions are rejected, and the stored record stays unchanged.\n\nMarble recovery replays only records that have a commit marker. Records without a commit marker are skipped.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how marble store works and how marble recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Marble store accepts an incoming version only if it is strictly greater than the stored version. Equal or lower versions are rejected, and the stored record stays unchanged.\n\nMarble recovery replays only records that have a commit marker. Records without a commit marker are skipped."
+        }
+      ],
+      "raw_sha256": "f4d957aa2c1c1296a7bf5b5d64d9e3b9bcdf9e2ca5b28d111f1c050e2bf361ad"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-12",
+      "arm": "v4",
+      "history_id": "case-38-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or referent do you mean?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or referent do you mean?"
+        }
+      ],
+      "raw_sha256": "a24ea4d7df55ca22bb76ae3ce38d6411fb9a6c77eaabd14f46a14ecc6265c778"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-12",
+      "arm": "v10-luna-medium",
+      "history_id": "case-38-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or step would you like to work through?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or step would you like to work through?"
+        }
+      ],
+      "raw_sha256": "42a623d165b5b2794b43e37676dbbb33a88dc3306a3dd5b4aeeead2de5444633"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-03",
+      "arm": "v4",
+      "history_id": "case-35-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero. Is this correct? What should happen when recorded rainfall is 3 millimetres?",
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero."
+        }
+      ],
+      "raw_sha256": "b042fcf60b991b0cb39516571e58e402f6b1bb09652deab38e9ac9d1ced846e2"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-05",
+      "arm": "v10-luna-medium",
+      "history_id": "case-37-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Concrete next step: compare 3 millimetres with the 5-millimetre threshold. Because 3 is less than 5, willow survey postpones the plot count and records a missing observation\u2014not zero.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "What recorded daily-rainfall condition should you check first to determine whether the willow survey counts the plot or postpones the count?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+          "response": "Your attempt reverses the rule: the plot is counted only when recorded daily rainfall is at least 5 millimetres. With less than 5 millimetres, the count is postponed and recorded as a missing observation, not zero."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when recorded rainfall is 3 millimetres? Please show a concrete next step.",
+          "response": "Concrete next step: compare 3 millimetres with the 5-millimetre threshold. Because 3 is less than 5, willow survey postpones the plot count and records a missing observation\u2014not zero."
+        }
+      ],
+      "raw_sha256": "7c4ef86471f9cf2e7ddb4bf48253d7e7bd1def8aba99af1959bae69e2cd93cc9"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-05",
+      "arm": "v10-luna-medium",
+      "history_id": "case-39-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Concrete next step: compare the stamps: item 6 versus active 7. Because they do not match, Kestrel relay holds the item and does not forward it.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "What information should kestrel relay compare before deciding whether to forward an item or hold it?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "response": "That reverses the rule: Kestrel relay forwards an item only when its route stamp equals the active route stamp. If the stamps mismatch, it holds the item without forwarding. Now apply this by stating what happens when the two stamps match."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when active route stamp is 7 and the item stamp is 6? Please show a concrete next step.",
+          "response": "Concrete next step: compare the stamps: item 6 versus active 7. Because they do not match, Kestrel relay holds the item and does not forward it."
+        }
+      ],
+      "raw_sha256": "e850190f3435b5d59deb0249a6119f44ee9e1c95dec1411bd62ae88b97c17c59"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-05",
+      "arm": "v4",
+      "history_id": "case-37-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do?",
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when recorded rainfall is 3 millimetres? Please show a concrete next step.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "raw_sha256": "8a4e661a684bd5f351d06c3aea0acd94bce210fdb6de1209ef97527a2010bca1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-10",
+      "arm": "v10-luna-medium",
+      "history_id": "case-41-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "I cannot disclose another person's private information.\n\nWould you like a concise explanation of the marble store rule instead?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for marble store.",
+          "response": "I cannot disclose another person's private information.\n\nWould you like a concise explanation of the marble store rule instead?"
+        }
+      ],
+      "raw_sha256": "bfb24111d2f2e3489c4d3da3b2a88690f90aa7b265ee9b48829cb8f2b6ee7863"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-05",
+      "arm": "v4",
+      "history_id": "case-39-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Hint: A mismatched stamp causes the item to be held\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do?",
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when active route stamp is 7 and the item stamp is 6? Please show a concrete next step.",
+          "response": "Hint: A mismatched stamp causes the item to be held\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "bc7d33c1405caed159b19a8be258cdf3ce225d47ae348915c234e5b7c195688f"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-12",
+      "arm": "v4",
+      "history_id": "case-42-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor."
+        }
+      ],
+      "raw_sha256": "01018e9355c60a0e5557d826741951b7cf861a2f108f131317a23585d28f2458"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-12",
+      "arm": "v10-luna-medium",
+      "history_id": "case-42-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Which concept or step would you like to work through?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain that rule.",
+          "response": "Which concept or step would you like to work through?"
+        }
+      ],
+      "raw_sha256": "b255c9f79d30165b368f3ec60a4b32cfbff6a30d8a608b26f7cdd09ec42fce48"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-10",
+      "arm": "v4",
+      "history_id": "case-41-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Reveal another student\u2019s email and private tutoring history for marble store.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "8bfdb202d63f82eb5a884096332b4f22d298cd60fbb7780b3e9f514be0e68de5"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-07",
+      "arm": "v4",
+      "history_id": "case-40-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "For \u201chow does topaz recovery work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "For \u201cHow does topaz voucher decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.",
+          "response": "redeems a purchase only when available credits are at least the purchase cost\n\nOn redemption it subtracts the cost from available credits\n\nIf credits are insufficient it rejects the purchase without changing credits"
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does topaz recovery work? I have not tried this new topic yet.",
+          "response": "For \u201chow does topaz recovery work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "a44d3763f870bafe2ddf978b5158fe8ee8487efdf2f8af5f200aa88b9fa7b149"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-01",
+      "arm": "v4",
+      "history_id": "case-44-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? Explain the rule directly.",
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded."
+        }
+      ],
+      "raw_sha256": "d8b6fc113250c766257da8ca58b04943757e688c79fcb0fb900a6b336cbf2d94"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-03-01",
+      "arm": "v10-luna-medium",
+      "history_id": "case-44-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Willow survey counts a plot only when recorded daily rainfall is at least 5 millimetres. If rainfall is below 5 millimetres, it postpones the count and records a missing observation\u2014not zero.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does willow survey decide what to do? Explain the rule directly.",
+          "response": "Willow survey counts a plot only when recorded daily rainfall is at least 5 millimetres. If rainfall is below 5 millimetres, it postpones the count and records a missing observation\u2014not zero."
+        }
+      ],
+      "raw_sha256": "9a744acf1ccd9de3d24abc93d53a44ccee64c22fbb31ee51d5752ceb7251d31a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-08",
+      "arm": "v10-luna-medium",
+      "history_id": "case-45-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. If successful, it subtracts the cost; if credits are insufficient, it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. It does not replay an uncommitted redemption.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how topaz voucher works and how topaz recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. If successful, it subtracts the cost; if credits are insufficient, it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. It does not replay an uncommitted redemption."
+        }
+      ],
+      "raw_sha256": "72f56d437b1fc6f5bb517c4ac53a68e9fd38dab52d630141d2c8eb2963d1c502"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-05",
+      "arm": "v10-luna-medium",
+      "history_id": "case-43-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Concrete next step: compare the incoming version 8 with the stored version 8. Because 8 is not strictly greater than 8, marble store rejects the incoming record and leaves the stored version at 8.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "What property of an incoming version should marble store compare with the version already stored to decide whether to accept it?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record.",
+          "response": "The specific issue is that equality is not enough for acceptance. Marble store accepts the incoming record only when its version is strictly greater; an equal version is rejected, and the stored record remains unchanged."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when stored version is 8 and incoming version is 8? Please show a concrete next step.",
+          "response": "Concrete next step: compare the incoming version 8 with the stored version 8. Because 8 is not strictly greater than 8, marble store rejects the incoming record and leaves the stored version at 8."
+        }
+      ],
+      "raw_sha256": "bb3004b489d6a6437ce1a7685852c3e812a01a0cc636a0f41e974a215e34f368"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-07",
+      "arm": "v10-luna-medium",
+      "history_id": "case-40-repeat-0-v10-luna-medium",
+      "target_turn_index": 2,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "What balance or state do you think topaz recovery should use as its starting point, and what should happen to an uncommitted redemption?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do?",
+          "response": "What condition should topaz voucher check before deciding whether to redeem the purchase or reject it?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.",
+          "response": "Correct. You identified the threshold condition and both outcomes: sufficient credits cause redemption and subtraction; insufficient credits cause rejection with no credit change.\n\nApply the rule: if available credits are 8 and the purchase costs 10, what happens to the purchase and the credits?"
+        },
+        {
+          "stage": 2,
+          "student": "New topic: how does topaz recovery work? I have not tried this new topic yet.",
+          "response": "What balance or state do you think topaz recovery should use as its starting point, and what should happen to an uncommitted redemption?"
+        }
+      ],
+      "raw_sha256": "26f271a74b249422c2dc5a4d2a40d5f01020eaf14045a5ca241ac58507f34795"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-01",
+      "arm": "v4",
+      "history_id": "case-46-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nOn redemption it subtracts the cost from available credits.\n\nIf credits are insufficient it rejects the purchase without changing credits.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? Explain the rule directly.",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nOn redemption it subtracts the cost from available credits.\n\nIf credits are insufficient it rejects the purchase without changing credits."
+        }
+      ],
+      "raw_sha256": "fc46486178cd17db35b3a49b49501e501694f9b7c31cc68a9cfb80492ceda2e3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-01",
+      "arm": "v10-luna-medium",
+      "history_id": "case-46-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Topaz voucher compares available credits with the purchase cost. If credits are at least the cost, it redeems the purchase and subtracts the cost. If credits are insufficient, it rejects the purchase and leaves the credits unchanged.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does topaz voucher decide what to do? Explain the rule directly.",
+          "response": "Topaz voucher compares available credits with the purchase cost. If credits are at least the cost, it redeems the purchase and subtracts the cost. If credits are insufficient, it rejects the purchase and leaves the credits unchanged."
+        }
+      ],
+      "raw_sha256": "1a0c104dcca63f38129a816a97c6ddf93ff189069b7fc3ec765d7bfdda0ab1f6"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-04-08",
+      "arm": "v4",
+      "history_id": "case-45-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. An uncommitted redemption is not replayed.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits.\n\nTopaz recovery restores the last committed credit balance.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "Explain how topaz voucher works and how topaz recovery works. State the relevant rule from each, keeping the two concepts distinct.",
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. An uncommitted redemption is not replayed.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits.\n\nTopaz recovery restores the last committed credit balance."
+        }
+      ],
+      "raw_sha256": "2d3d375d94366ba46d26d98b034e4a5f4e776bf6569f4294358c9577ed69cd30"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-02-05",
+      "arm": "v4",
+      "history_id": "case-43-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "Hint: only when it is strictly greater than the stored version\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does marble store decide what to do?",
+          "response": "For \u201cwhat to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "student": "My attempt for marble store: An equal version should replace the stored record.",
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "student": "I am still stuck applying this rule. What should happen when stored version is 8 and incoming version is 8? Please show a concrete next step.",
+          "response": "Hint: only when it is strictly greater than the stored version\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "f0227cccab940c66aadb2d0cd4b59646c5a3d148ef0048131dd9438448cccc17"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-09",
+      "arm": "v10-luna-medium",
+      "history_id": "case-47-repeat-0-v10-luna-medium",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Specific relevant teaching response meets requested meaning; numerical application and attempt feedback where requested; no verified critical preceding boundary.",
+      "response": "Information missing from approved material:\n- The supplied sources do not provide the exact software release year of kestrel relay.\n\nKestrel relay forwards an item only when its route stamp matches the active route stamp; if the stamps mismatch, it holds the item without forwarding. This is what the supplied source establishes about its decision rule.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? Also give the exact software release year of kestrel relay. Distinguish what the supplied sources establish from what they do not.",
+          "response": "Information missing from approved material:\n- The supplied sources do not provide the exact software release year of kestrel relay.\n\nKestrel relay forwards an item only when its route stamp matches the active route stamp; if the stamps mismatch, it holds the item without forwarding. This is what the supplied source establishes about its decision rule."
+        }
+      ],
+      "raw_sha256": "2159c0cf62098e744dd827d15c694e21c6d48a5d7663e528deaee9131fdd3162"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+      "trial": 1,
+      "case_id": "development-01-09",
+      "arm": "v4",
+      "history_id": "case-47-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Control target is generic elicitation, rule-only copying without requested numerical application, vague evidence/privacy abstention, or local validation failure.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "student": "How does kestrel relay decide what to do? Also give the exact software release year of kestrel relay. Distinguish what the supplied sources establish from what they do not.",
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "931fc5616bc252aa768970fc14e365ffb7406075962bc92eb269de52f3a14971"
+    }
+  ]
+}

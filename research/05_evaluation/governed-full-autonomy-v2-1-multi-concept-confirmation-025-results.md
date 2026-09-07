@@ -1,5 +1,8 @@
 # Governed full-autonomy V2.1 multi-concept confirmation 025
 
+Correctness addendum (6 September 2026): a [retrospective goal-scope audit](goal-completion-scope-review-audit-001-results.md) found 10 target-unmet completions among 22 completed goals, across eight saved histories. The original assessment gates did not test objective-specific completion. The original results below remain unchanged and describe the historical implementation; they do not establish outcomes for the correction.
+
+
 ## Decision
 
 **Completed Keep for the multi-concept assessment correction.** The corrected

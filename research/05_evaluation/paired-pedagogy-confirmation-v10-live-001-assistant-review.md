@@ -1,0 +1,11 @@
+# V10 once-only synthetic confirmation review
+
+**Refine / No Release:** the zero-critical gate fails despite 44/48 definite useful targets and 15/16 primary targets. All 168 actual turns were reviewed. V4 has 16/48 useful and 2/16 primary targets. There are 29 definite candidate wins, 18 ties and one uncertain pair; primary comparisons have 13 wins and three ties. The unchanged coverage and nonnegative-paired gates pass; they do not override the critical gate.
+
+Case21 attributes the separately named Opal repeats behaviour to Opal assay through “It also processes each labelled sample once.” Root adjudication confirms a substantive unsupported component attribution. Source citations cannot repair assigning a supported statement to the wrong entity. Case44's “For samples that qualify” suggests an unstated assay-to-repeats relationship; a universal rule is true of that subset, so root retains uncertainty rather than a second verified critical event. That target is unqualified. Two further targets deliver local guarded failures: Garnet mixed evidence and Cedar stuck application. None is excluded from the denominator.
+
+The control also has one critical preceding-turn disclosure: Juniper topic-switch case27 stage1 supplies the complete restart rule before any restart attempt. Its target was already inadequate. No candidate revision or selective retry was performed using this confirmation. Original outputs and the review's provisional-to-adjudicated count history remain preserved.
+
+This packet was sealed before candidate outputs and used once, but its author participated in this assistant review. It is therefore neither independently human-labelled nor independent of author knowledge. Four synthetic source families and related contexts cannot establish population accuracy, professor fidelity or learning benefit. All provider calls completed; local/semantic failures still matter. Timings overlap repository and operating checks.
+
+See [all per-axis judgments, full turns, raw hashes and provenance checks](paired-pedagogy-confirmation-v10-live-001-assistant-review.json). The closed confirmation is now consumed; a new confirmation requires a prospectively authored and sealed packet.

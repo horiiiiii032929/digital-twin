@@ -1,0 +1,408 @@
+{
+  "source_run_id": "bounded-contract-progression-development-001-switch-live-001",
+  "reviewer": "separate assistant; unblinded; no external judge authority",
+  "coverage": 18,
+  "human_review": false,
+  "semantic_accuracy_estimate": null,
+  "manifest_sha256": "dfe78c6d48dbf4aa2060d82e3577ac8988764a51cb6ee25d53ce58c2ec792423",
+  "source_hashes_at_review": {
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7402-v3/turns.jsonl": "42f7a54175140380288ee226924dd85ea4b68dc81b43ddebc7b579744d2db73a",
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7402-v2/turns.jsonl": "15ab9a44f2c88acfabf47b983c464fe7aa1c088844a21911fff1f26205bf6f8b",
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7403-v2/turns.jsonl": "99043b621182890708ed402196af8f53bb3cb6b5dfa93a8a5a150da8ef8126e3",
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7403-v3/turns.jsonl": "2fbc2c1437f835440c72097095c1ced7b8ca3056b590755b915a8a3ff2c728ea",
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7401-v3/turns.jsonl": "b1e60492ad82d33d824ee1a663a0aa9cdd5c08cb7b5c8519d25bb80e19b3ffbb",
+    "reports/generated/bounded-contract-progression-development-001-switch-live-001/genuine-amber-to-cobalt-switch-7401-v2/turns.jsonl": "9ab26e11d135afa6cfbfeaa762f08321e666d36d3279a147045db75d30c8adcb"
+  },
+  "cases": [
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v2",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cafter an acknowledgement\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v2",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cafter an acknowledgement\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-a123bd00-87b3-4c38-a59c-c53fde5ae200",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-a58415d0-10b2-4730-a247-bc31b4b7c7eb",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v2",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cafter an acknowledgement\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place"
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v3",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v3",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-d317de35-acf2-4d71-bd55-9c5f064b6d4d",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-8b4901af-c20c-4ddb-93f3-76e19a26edbb",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7401-v3",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place."
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v2",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v2",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-9886b1a4-5c21-4191-8704-7ef72258bcd8",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-2c1676f8-eb68-4253-a3fc-6d9694a5cd7b",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v2",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place"
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v3",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v3",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-ae6f78b4-cc2e-4b75-b836-a99402a2f0f4",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-ad284abd-3e5f-493d-9d7b-0c1867e6b422",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7402-v3",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place."
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v2",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v2",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-fd3c06ca-767c-461f-b949-27a3dae276c9",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-e7bfffa6-5937-439c-87ea-718ba376ce1a",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v2",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place."
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v3",
+      "stage": 0,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "How does amber queue admit a waiting item after an acknowledgement?",
+      "prior": [],
+      "action": "question",
+      "response": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "Initial topical Socratic elicitation; no complete answer disclosed."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v3",
+      "stage": 1,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "action": "answer",
+      "response": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-2b041c24-5b7c-49da-b073-08d3dede2a0d",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-a0e3a9f7-e6d4-43c6-b167-9cea10ef41ea",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "finding": "Accurate source-supported restatement after relevant Amber attempt; explicit acknowledgement/application still absent."
+    },
+    {
+      "history": "genuine-amber-to-cobalt-switch-7403-v3",
+      "stage": 2,
+      "situation": "genuine-amber-to-cobalt-switch",
+      "question": "New topic: how does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?",
+      "prior": [
+        {
+          "student": "How does amber queue admit a waiting item after an acknowledgement?",
+          "tutor": "For \u201cHow does amber queue admit a waiting item after an acknowledgement?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt: in amber queue, the acknowledgement removes its item and admits the oldest waiting item.",
+          "tutor": "When an acknowledgement arrives, it removes that acknowledged item\n\nand admits the oldest waiting item into the freed place"
+        }
+      ],
+      "action": "question",
+      "response": "For \u201chow does cobalt ticket treat an update from a retired epoch even if its sequence number is very large?\u201d, what is your current explanation, and which step are you unsure about?",
+      "citations": [],
+      "finding": "New Cobalt topic receives elicitation rather than inheriting prior Amber attempt permission; no premature Cobalt answer."
+    }
+  ]
+}

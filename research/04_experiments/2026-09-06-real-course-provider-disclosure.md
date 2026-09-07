@@ -1,0 +1,23 @@
+# Real-course continuation provider disclosure
+
+Prospective draft; candidate and run ID must be finalized before any private transfer. No private source content is included here.
+
+Authority: research/03_data/academics-source-permission.md authorizes eligible collection materials for research generation by a prospectively recorded provider. The run-specific scope is research/04_experiments/2026-09-06-real-course-continuation-diagnostic-plan.md. It is not student-facing publication permission.
+
+Provider and transport: OpenAI API, configured key-authenticated account, endpoint https://api.openai.com/v1/responses, model gpt-5.6-luna, low reasoning, 3,000 output tokens, no external judge. Account class/organization billing tier is not established by the repository or API key and must be recorded as unknown unless independently supplied. Do not print the key or environment contents.
+
+Transferred fields: eight approved, bounded lecture excerpts from the four-course portfolio; synthetic student questions and previous generated dialogue; approved synthetic teaching profile; course-local concept labels and provenance identifiers; system instructions and structured response schema. No full PDFs or images, real students, identities, email addresses, grade records, assignments/solutions, credentials, hidden gold criteria, or other reviewers' decisions. Course-filtered public inputs only; gold remains local.
+
+Retention and training: the implemented request sets store=false. That describes the request setting and does not establish zero retention, no abuse-monitoring storage, no training, or a contractual deletion guarantee. Project-specific retention/training controls, organization agreement, and processing/data-residency region are unknown. No verified zero-data-retention status is claimed. These unknowns must remain visible in the run record rather than being replaced with vendor-default assumptions.
+
+Bounds: 400 attempts and USD10 cumulative conservative reservation, 32 contexts/80 paired turns, one fixed repeat, up to four histories, 30-second request timeout. Exact final candidate ID and source hashes must be bound before dispatch. No output-driven retries or additional provider judging.
+
+Local retention/deletion: raw packet, excerpt lineage, build script, per-turn outputs and provider records stay in ignored local run directories for thesis verification. Proposed expiry is 30 days after final report acceptance, with researcher-controlled deletion of only named generated diagnostic directories; original source vault and existing permission records remain unchanged. Record the actual deletion date later; this draft does not claim deletion occurred. Provider-side deletion beyond store=false is unverified and must not be promised. Durable records contain sanitized IDs, hashes, aggregate metrics and failure categories only, never private questions, source text, or schedules.
+
+Preflight already independently reviewed the private packet hash cfa7eacc2fe6fd2ae91bf83840c99937c5f7e1ddf97faf605d42facec3cac406. Recheck byte hash and lineage/build artifact hashes at input archive and run end. The eight excerpts are curated context coverage, not full-corpus retrieval or multimodal qualification. Dispatch remains conditional on synthetic quality acceptance and final named provider disclosure.
+
+## Frozen V10 run binding
+
+The prospective named execution is `paired-pedagogy-development-001-real-course-v10-live-001`, preceded by `paired-pedagogy-development-001-real-course-v10-contract-001`. The compared implementations are `question-specific-profile-grounded-v4` and `question-specific-profile-grounded-v10`, using the shared versioned selector, `gpt-5.6-luna`, low reasoning and 3,000 output tokens. The byte-identical packet hash above, 400-call/USD10 bounds, seed 7801 and one repeat apply. Up to four histories execute concurrently; the total remains 64 histories and 80 paired turns.
+
+This binding is recorded before transfer. Account class, organization/billing tier, project-specific provider retention/training controls and processing region remain unknown. The request uses `store=false`; no stronger guarantee is inferred. The exact source/configuration hashes are captured by the runner at dispatch and checked at completion. A sanitized prospective disclosure sidecar is retained with the ignored input packet and archived with the named output. No private transfer occurs until the once-only V10 synthetic confirmation is accepted. The local expiry above is a proposed researcher-controlled policy, not an automated deletion or a claim that deletion has occurred.

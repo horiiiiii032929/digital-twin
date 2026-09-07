@@ -1,0 +1,32 @@
+[
+  {
+    "correction": "course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001",
+    "original": "course-digital-twin-whole-system-architecture-round-3-001",
+    "effect": "Invalidates architecture-selection interpretation because the candidate count violated the preregistered parent program; raw execution remains preserved.",
+    "basis": "Correction and Evidence retained sections of the correction's readable result."
+  },
+  {
+    "correction": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+    "original": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
+    "effect": "Corrects cross-layer evaluator interpretation and repeat denominators; does not qualify automated pedagogy.",
+    "basis": "Correction and Recomputed evidence sections of the correction's readable result."
+  },
+  {
+    "correction": "academic-factual-qa-grounding-selection-002-build-analysis-correction-001",
+    "original": "academic-factual-qa-grounding-selection-002-build",
+    "effect": "Narrows the earlier build-readiness claim and records the corrected adapter identity boundary, without supplying factual-quality evidence.",
+    "basis": "Outcome and Decision sections of the correction's readable result."
+  },
+  {
+    "correction": "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001",
+    "original": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
+    "effect": "Reinterprets the same 820 saved responses after correcting 30 provider-failure references; adds no provider calls and preserves the original Refine result.",
+    "basis": "Outcome and Results sections of the correction's readable result."
+  },
+  {
+    "original": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+    "correction": "goal-completion-scope-review-audit-001",
+    "effect": "Retrospective committed-state audit found 10 target-unmet completions among 22 completed goals in 8 of 72 histories. Original assessment and simulator scores are retained; they do not qualify goal-scoped completion or the corrected implementation.",
+    "basis": "research/05_evaluation/goal-completion-scope-review-audit-001-results.md"
+  }
+]

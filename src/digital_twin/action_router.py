@@ -334,6 +334,27 @@ class DeterministicActionRouterV3:
     owns_academic_integrity = True
 
     def route(self, question: str) -> ActionRouteV1 | None:
+        return self._route(question, defer_demonstrative_ambiguity=False)
+
+    def route_without_reference_clarification(self, question: str) -> ActionRouteV1 | None:
+        """Expose existing integrity/source routes without creating a new classifier."""
+        return self._route(question, defer_demonstrative_ambiguity=True)
+
+    def route_with_authorized_referents(
+        self, question: str, *, authorized_referents: tuple[str, ...]
+    ) -> ActionRouteV1 | None:
+        """Admit one explicitly named approved concept to downstream answerability.
+
+        This does not resolve ambiguous local referents; the downstream model can
+        still clarify. The caller supplies labels from the bound approved release.
+        """
+        normalized = " ".join(question.split()).casefold()
+        labels = [" ".join(label.split()).casefold() for label in authorized_referents if label.strip()]
+        matches = [label for label in labels
+            if re.search(r"(?<!\w)" + re.escape(label) + r"(?!\w)", normalized)]
+        return self._route(question, defer_demonstrative_ambiguity=len(matches) == 1)
+
+    def _route(self, question: str, *, defer_demonstrative_ambiguity: bool) -> ActionRouteV1 | None:
         normalized = " ".join(question.split())
         if not normalized:
             return None
@@ -347,8 +368,8 @@ class DeterministicActionRouterV3:
                 ),
                 matched_rule="structured-request-intent-v3",
             )
-        if _DEICTIC_ACTION_QUESTION.search(normalized) or _UNRESOLVED_REFERENCE_V2.search(
-            normalized
+        if not defer_demonstrative_ambiguity and (
+            _DEICTIC_ACTION_QUESTION.search(normalized) or _UNRESOLVED_REFERENCE_V2.search(normalized)
         ):
             return ActionRouteV1(
                 action="clarify",

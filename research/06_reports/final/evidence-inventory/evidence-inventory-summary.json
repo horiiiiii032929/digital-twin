@@ -1,18 +1,18 @@
 {
-  "code_revision": "9a4746d8e400c5f29a207944e1c681e3d0ad998a",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
   "evaluation_registry": {
     "broken_local_link_count": 0,
     "decision_classes": {
-      "drop": 6,
-      "go-deeper": 70,
+      "drop": 13,
+      "go-deeper": 81,
       "invalid": 82,
-      "keep": 64,
+      "keep": 117,
       "no-release": 30,
-      "other": 19,
-      "refine": 62
+      "other": 28,
+      "refine": 123
     },
-    "machine_record_count": 259,
-    "result_count": 333,
+    "machine_record_count": 400,
+    "result_count": 474,
     "without_machine_record_count": 74
   },
   "inventory_boundary": {
@@ -29,20 +29,20 @@
   },
   "json_validation": {
     "committed-evaluation-dataset": {
-      "files": 65,
-      "valid_json": 65
+      "files": 82,
+      "valid_json": 82
     },
     "component-or-release-profile": {
-      "files": 22,
-      "valid_json": 22
+      "files": 23,
+      "valid_json": 23
     },
     "evaluation-instrument": {
       "files": 261,
       "valid_json": 261
     },
     "machine-result-record": {
-      "files": 260,
-      "valid_json": 260
+      "files": 401,
+      "valid_json": 401
     }
   },
   "local_evidence_aggregates": [
@@ -54,9 +54,9 @@
     },
     {
       "directory": "data/interim",
-      "file_count": 266,
+      "file_count": 268,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 24397850
+      "total_bytes": 24397975
     },
     {
       "directory": "data/processed",
@@ -78,9 +78,9 @@
     },
     {
       "directory": "reports/generated",
-      "file_count": 9876,
+      "file_count": 18788,
       "inventory_boundary": "aggregate-only; ignored local contents and filenames are not copied",
-      "total_bytes": 9351374304
+      "total_bytes": 14457986265
     }
   ],
   "record_join_quality": {
@@ -140,37 +140,38 @@
         "run_id": ""
       }
     ],
-    "without_component_count": 112,
-    "without_corpus_id_count": 119,
-    "without_dataset_id_count": 113
+    "without_component_count": 246,
+    "without_corpus_id_count": 260,
+    "without_dataset_id_count": 254
   },
   "repository_files": {
     "by_category": {
-      "architecture-or-operations-documentation": 43,
-      "automated-or-manual-verification": 284,
-      "backend-implementation": 167,
-      "committed-evaluation-dataset": 72,
-      "component-or-release-profile": 22,
+      "architecture-or-operations-documentation": 62,
+      "automated-or-manual-verification": 346,
+      "backend-implementation": 188,
+      "committed-evaluation-dataset": 89,
+      "component-or-release-profile": 23,
       "data-governance-or-schema": 6,
       "deployment-configuration": 8,
       "evaluation-instrument": 266,
       "evaluation-registry": 1,
-      "evaluation-summary-or-rubric": 415,
-      "experiment-plan-or-learning-log": 85,
-      "frontend-implementation": 82,
+      "evaluation-summary-or-rubric": 675,
+      "experiment-plan-or-learning-log": 142,
+      "frontend-implementation": 90,
       "literature-note": 9,
-      "machine-result-record": 260,
+      "machine-result-record": 401,
       "project-governance-or-ci": 5,
-      "report-or-figure": 68,
+      "report-or-figure": 111,
       "repository-configuration": 7,
-      "reproduction-or-analysis-tool": 308,
+      "reproduction-or-analysis-tool": 338,
       "requirement-or-user-research": 6,
       "scope-or-decision-history": 16
     },
     "by_git_state": {
-      "tracked": 2130
+      "tracked": 2136,
+      "untracked": 653
     },
-    "count": 2130
+    "count": 2789
   },
   "schema_version": 1
 }

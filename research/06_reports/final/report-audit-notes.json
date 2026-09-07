@@ -1,0 +1,21 @@
+[
+  {
+    "audit_id": "report-audit-large-regression-metric-20260906",
+    "result_id": "academic-factual-qa-open-10000-winner-regression-001",
+    "anchor": "trial-92eed03a470d",
+    "type": "unreconciled-summary-inconsistency",
+    "status": "excluded-from-performance-comparison",
+    "recorded_rate": 0.2538,
+    "recorded_answer_actions": 1669,
+    "recorded_answerable_count": 8000,
+    "implied_upper_bound": 0.208625,
+    "source_revision_checked": "e1e00fb",
+    "report_locations": [
+      "chapters/04-comparisons.tex",
+      "design-appendix.tex"
+    ],
+    "raw_ledger": "not located among inspected local artifacts",
+    "original_record_preserved": true,
+    "new_experiment": false
+  }
+]

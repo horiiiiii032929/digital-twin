@@ -4,11 +4,22 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import os
 import socket
 import time
 
 from services.api.app.config import AppSettings, RuntimeMode
 from services.api.app.factory import create_app
+
+
+def build_worker_app(settings: AppSettings, *, candidate: str | None = None):
+    """Keep the incumbent default; opt in using the API's shared composition."""
+    selected = (candidate if candidate is not None else os.environ.get(
+        "APP_EXPERIMENTAL_TUTORING_CANDIDATE", "")).strip()
+    if not selected:
+        return create_app(settings=settings)
+    from services.api.app.experimental import build_experimental_app
+    return build_experimental_app(settings, selected, serve_web=False)
 
 
 async def _process_once(app, *, worker_id: str, batch_size: int) -> None:
@@ -41,7 +52,7 @@ def main() -> None:
         raise SystemExit(
             "APP_PROACTIVE_OUTREACH_WORKER_ENABLED=true is required for the autonomy worker"
         )
-    app = create_app(settings=settings)
+    app = build_worker_app(settings)
     repository = app.state.student_repository
     try:
         while True:

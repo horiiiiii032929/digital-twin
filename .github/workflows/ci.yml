@@ -15,7 +15,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 45
 
     steps:
       - name: Check out repository
@@ -45,6 +45,23 @@ jobs:
 
       - name: Audit resolved dependencies
         run: npm run audit:dependencies
+
+      - name: Install SVG renderer
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y librsvg2-bin
+          rsvg-convert --version
+
+      - name: Prepare public evaluation sources
+        # Source-derived build regressions require these exact public revisions.
+        # Preparation does not execute or rescore historical evaluations.
+        run: npm run setup:evaluation-sources
+
+      - name: Check SVG integration prerequisites
+        run: >-
+          uv run pytest -q
+          tests/test_academic_factual_qa_visual_checkpoint.py
+          tests/test_course_digital_twin_nonhuman_supplements.py::test_oversized_svg_is_rasterized_within_memory_bound
 
       - name: Verify repository
         run: npm run check

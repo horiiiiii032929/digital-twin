@@ -79,6 +79,7 @@ class IngestionJobResult(BaseModel):
 
 
 class IngestionJob(BaseModel):
+    deidentified_reviewed: bool = False
     id: str = Field(min_length=1)
     idempotency_key: str = Field(min_length=1, max_length=128)
     course_id: str = Field(min_length=1)

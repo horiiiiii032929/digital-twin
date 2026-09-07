@@ -1,0 +1,155 @@
+\section{Runtime Design}
+\label{sec:system-design}
+\subsection{Responsibilities and Persistent Data}
+The architecture uses C4-style responsibility and boundary labels; interaction,
+activity and state views use UML conventions~\cite{c4-notation,omg-uml251}.
+
+The React web application presents professor and student workspaces. FastAPI
+handlers~\cite{fastapi-docs} expose the operations, while domain services implement
+ingestion, publication and tutoring. Repositories store courses, membership,
+releases, conversations, messages, learner observations and autonomous goals.
+SQLite is the local persistent store; uploaded artifacts use file-based storage.
+Separate workers process ingestion and scheduled tutoring opportunities.
+Figure~\ref{fig:responsibilities} shows this separation.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../../../reports/figures/course-twin-architecture.pdf}
+\caption{Logical components shared by web requests and background workers.}
+\label{fig:responsibilities}
+\end{figure}
+
+A course is owned by a professor and has student memberships. A published release
+binds the policy and evidence used for tutoring. A conversation references a
+course release; messages retain citations and learner observations contribute
+to subsequent decisions. Autonomous goals and action outcomes also persist.
+Appendix~\ref{sec:publication-data} adds publication transactions and the
+conceptual persistent data model.
+
+LangGraph provides workflow checkpoints~\cite{langgraph-docs}. Provider adapters
+isolate model calls from course policy and storage. The custom OpenAI transport
+uses HTTPX and the Responses API~\cite{openai-responses-docs}. Model generation
+occurs outside database transactions; authority is checked again when an effect
+is committed. Persisting an action requires current permission, even if a model
+started generating while permission was still valid.
+
+\subsection{From Question to Saved Response}
+Figure~\ref{fig:response-sequence} traces a turn from submission to the
+authorized commit of its response and learner-state update.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\linewidth]{../../../reports/figures/course-twin-tutoring-sequence.pdf}
+\caption{Tutoring interaction, evidence branch and serialized turn commit.}
+\label{fig:response-sequence}
+\end{figure}
+\FloatBarrier
+
+PyMuPDF parses approved PDFs~\cite{pymupdf-docs}; chunks preserve page boundaries,
+source versions and available heading information. BM25~\cite{robertson2009bm25}
+ranks eligible evidence within the student's published course. The evidence gate
+checks whether support is sufficient and unambiguous. Its dominance rule
+compares leading source interpretations rather than treating every weak match
+as an equal competitor; competing leading answers require clarification. Retrieval and answer completeness are evaluated separately in Section~\ref{sec:grounding-comparison}.
+
+The service validates
+the account, course and release, loads policy and evidence, and invokes the
+configured generation path. The retained factual path assembles approved claims
+deterministically. Experimental paths ask a model for bounded explanations,
+questions and feedback tied to approved source identifiers. The application
+resolves citations from authoritative metadata rather than trusting invented
+model links.
+
+
+
+\begin{samepage}
+After generation, current authority is rechecked within the commit boundary.
+If membership, consent where applicable, or release availability has changed,
+the proposed effect cannot be saved as an authorized delivery. Successful turns
+persist the response, citations and associated state. A request identifier
+allows matching retries to reuse the saved turn; changed content under the same
+identifier is a conflict. Optimistic learner-state revision checks prevent a
+stale turn from silently overwriting newer evidence.
+\end{samepage}
+
+\FloatBarrier
+\input{chapters/learner-decision-detail.tex}
+
+\FloatBarrier
+\subsection{From a Durable Event to Proactive Delivery}
+Autonomy here means initiating a permitted teaching action without a new
+student request. A separate worker polls durable state every 30 seconds by
+default. A \emph{goal} records an approved learning objective and its stopping
+conditions. An \emph{opportunity} records an event, student, release and time
+window in which support may be considered. An opportunity does not authorize a
+message by itself.
+
+The observer derives events from stored interactions. For example, two recent
+observations with confusion scores of at least 0.7 and an overlapping concept
+produce a repeated-confusion event; inactivity defaults to 72 hours without a
+student message. Both thresholds are configured heuristics. Due opportunities are claimed
+with a time-limited worker lease before processing.
+
+
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../../../reports/figures/course-twin-autonomy.pdf}
+\caption{A proactive job ends after delivery or a recorded no-delivery outcome; later evidence starts another decision.}
+\label{fig:autonomy}
+\end{figure}
+
+The selected model-backed wording adapter asks the model for an introduction
+and a prompt strategy, then assembles permitted templates with approved source
+text. Experimental instructional adapters instead generate richer questions and
+explanations. 
+
+
+
+Table~\ref{tab:outreach-decisions} specifies delivery conditions. These checks
+surround a bounded graph: one proposal, initial generation and at most one repair.
+An uncertain provider-call outcome stops without repeating the call. Delivery and
+job-result recording are separate persistence steps; the recovery contract uses
+a stable delivery key. The in-app workspace is the delivery channel.
+
+\textbf{Following one recorded cycle.}
+In the historical deterministic trace in Appendix~\ref{sec:historical-autonomy},
+a diagnostic question and hint are followed by an incomplete-objective event
+before the next student turn. That event leads to a permitted check-in, whose
+opportunity, action and message identifiers link the decision to delivery.
+Later student turns produce new learner-state revisions, and reopening the
+store on virtual day 15 preserves the recorded state hash. This connects the
+interaction, worker and persistence views. The trace predates the goal-completion
+correction; the goal-completion regression tests that correction separately.
+
+
+\begin{table}[htbp]
+\centering\small
+\caption{Outreach conditions and the outcome when a condition fails.}
+\label{tab:outreach-decisions}
+\begin{tabularx}{\linewidth}{@{}L{0.22\linewidth}Y Y@{}}
+\toprule Boundary & Required condition & Otherwise \\ \midrule
+Opportunity & Active and due; linked goal active and below its attempt limit & Record no action; do not generate or deliver. \\
+Course authority & Consent, membership, current release/profile and instructor permission valid & Block outreach; revoked authority cannot be restored by a model proposal. \\
+Schedule & Outside quiet hours; frequency and concept-cooldown checks pass & Suppress this attempt; subsequent eligible work requires a later event. \\
+Evidence & Sufficient authorized support exists for the proposed action & Select no action; do not invent course evidence. \\
+Generated content & Output passes the action and evidence checks & One bounded repair; stop if invalid or the provider outcome is uncertain. \\
+Delivery commit & Authority still valid; stable delivery key not already saved & Reject revoked access, or reuse the already saved delivery on retry. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{A Goal Persists Across Bounded Jobs}
+Figure~\ref{fig:goal-states} separates the long-lived goal from an individual
+worker execution. A successful delivery increments the attempt count; it does
+not complete the learning objective. The default goal manager allows three
+attempts and sets expiry after seven days. The instructor may cancel a goal,
+and authority changes can cancel its pending work. Pause and consent controls
+prevent delivery independently of goal status. Terminal goals cannot be reactivated.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\linewidth]{../../../reports/figures/course-twin-goal-states.pdf}
+\caption{Goal transitions. Completion requires Equation~\ref{eq:goal-completion}; delivery attempts are counted separately.}
+\label{fig:goal-states}
+\end{figure}

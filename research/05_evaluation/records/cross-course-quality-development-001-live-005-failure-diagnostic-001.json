@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "run_id": "cross-course-quality-development-001-live-005-failure-diagnostic-001",
+  "source_run_id": "cross-course-quality-development-001-live-005",
+  "status": "completed-read-only-sidecar-analysis",
+  "decision": "Keep separate operational failure diagnostic; original39/44candidate mechanical result unchanged",
+  "scorer_version": "provider-failure-diagnostic-v1",
+  "scorer_sha256": "bc9bc1ac954fd49ec1e7e48d4d03fa9055d34840e65c7b7998f97686b7c47f90",
+  "aggregate": {
+    "candidate_injected_timeout_cases": 4,
+    "candidate_closed_failure_passes": 4,
+    "incumbent_provider_failure_cases_not_injected": 4,
+    "original_candidate_mechanical_passes": 39,
+    "original_cases": 44,
+    "external_calls": 0,
+    "cost_usd": 0
+  },
+  "cases": [
+    {
+      "id": "incumbent:scheduler-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": false,
+      "injected_timeout_tied": false,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "incumbent:ledger-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": false,
+      "injected_timeout_tied": false,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "incumbent:ecology-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": false,
+      "injected_timeout_tied": false,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "incumbent:protocol-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": false,
+      "injected_timeout_tied": false,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "question-specific-profile-candidate:scheduler-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": true,
+      "injected_timeout_tied": true,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "question-specific-profile-candidate:ledger-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": true,
+      "injected_timeout_tied": true,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "question-specific-profile-candidate:ecology-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": true,
+      "injected_timeout_tied": true,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    },
+    {
+      "id": "question-specific-profile-candidate:protocol-provider-failure",
+      "version": "provider-failure-diagnostic-v1",
+      "applicable": true,
+      "operational_failure_handling_pass": true,
+      "injected_timeout_tied": true,
+      "claims_evidence": "exact registered nonfactual failure template; no claim objects exposed by TutorTurn",
+      "scope": "Operational closed failure only; original action/content score unchanged"
+    }
+  ],
+  "source_artifact_sha256": {
+    "summary.json": "2f80da2f12f7a15111428521c10716b3b0097e96227b678edc11a00569bae8c8",
+    "cases.jsonl": "fb187bcb7cb8fb5e47dad1b5a0b68615ab9274f76df666f26004b403e6caea0e",
+    "provider.jsonl": "e59c1b3daf54f1205e5961ed46d7ae2f0d58b33110536f010408c8844fd14b68"
+  },
+  "limitations": [
+    "Notqualityrescoring, no originalgoldoroutputsmodified.",
+    "Exactregisteredfailuretemplate usedbecauseTutorTurndoesnotexposeatomicclaims; unknowntextcannotpass.",
+    "Fourincumbentcasesdonotreachinjectedprovider andthereforecannotprovefailurehandling.",
+    "Ecologyfragmentcase remainsoriginalmechanicalfailurewithseparatequalitativeflag."
+  ],
+  "tests": "8passed tests/test_provider_failure_diagnostic.py",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "code_revision_provenance": "Source run captured base revision; sidecar scorer identified by preserved scorer_sha256. Separate sidecar execution-time git/dirty snapshot was not captured.",
+  "source_working_tree_dirty": true
+}

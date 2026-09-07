@@ -1,0 +1,68 @@
+{
+  "reviewer": "separate assistant reviewer; unblinded diagnostic review, not human",
+  "selection": "12 post-run diagnostic cases, not random error estimate",
+  "cases": [
+    {
+      "id": "response-001",
+      "classification": "Same-turn check ambiguity",
+      "finding": "A grounded ledger candidate multi-source response fails solely for missing check question; generic profile does not state same-turn obligation."
+    },
+    {
+      "id": "response-005",
+      "classification": "Same-turn check ambiguity",
+      "finding": "Protocol candidate response is also rejected for missing check question."
+    },
+    {
+      "id": "response-037",
+      "classification": "Arm comparison interpretation sensitivity",
+      "finding": "Incumbent protocol explanatory response with generic implication prompt accepted; matched candidate response072 rejected for missing check."
+    },
+    {
+      "id": "response-072",
+      "classification": "Arm comparison interpretation sensitivity",
+      "finding": "Matched answer rejected for same-turn check; cannot trust arm ranking from these judgments."
+    },
+    {
+      "id": "response-048",
+      "classification": "Premature answer false acceptance",
+      "finding": "Scheduler incumbent reveals core rule before an attempt; generic Try one step yourself does not remove answer leakage."
+    },
+    {
+      "id": "response-049",
+      "classification": "Premature answer false acceptance",
+      "finding": "Protocol incumbent reveals checksum rule before an attempt but is accepted."
+    },
+    {
+      "id": "response-058",
+      "classification": "Inconsistent defect handling",
+      "finding": "Ledger incumbent shows corresponding early answer pattern and is correctly rejected."
+    },
+    {
+      "id": "response-064",
+      "classification": "Retained uncertainty",
+      "finding": "Ecology candidate temporal-profile interpretation correctly recorded as uncertain."
+    },
+    {
+      "id": "response-063",
+      "classification": "Missing judge outcome",
+      "finding": "Exact-excerpt guard rejected extra curly quotes; missing judgment stays in denominator."
+    },
+    {
+      "id": "response-015",
+      "classification": "Useful diagnostic",
+      "finding": "Ledger incumbent multi-source no-evidence response despite available support correctly identified."
+    },
+    {
+      "id": "response-027",
+      "classification": "Question adequacy interpretation",
+      "finding": "Candidate says paused task excluded but judge asks for paused status; interpretation is debatable."
+    },
+    {
+      "id": "response-042",
+      "classification": "Wording concern",
+      "finding": "Privacy response withholds information but invites a source; a real wording concern, though outreach policy is an indirect grading basis."
+    }
+  ],
+  "citation_namespace_check": "Inspected source/document/version/checksum/locator and runtime course/release match; no namespace error explains discrepancies.",
+  "decision": "Drop as a decision-bearing semantic scorer for these broad profiles; retain diagnostic outputs only"
+}

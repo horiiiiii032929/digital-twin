@@ -6,6 +6,22 @@ This is the operational starting point for prospective work. Frozen experiment
 plans, result records, corrections, profiles, and the technical evidence freeze
 remain authoritative for the historical runs and claims they document.
 
+## Runtime audit and qualification 011
+
+Report drafting is paused for the runtime audit in
+[the 2026-09-05 audit note](research/2026-09-05-runtime-correctness-audit.md).
+Synthetic regressions reproduced in-flight turn authority and proactive-delivery
+races, invalid outreach-reply handling, and over-length clarification labels.
+Source corrections are committed at `d9ec1a8` and passed `npm run check`
+(1,952 Python tests, 51 frontend tests, validators, lint, and production build).
+[Qualification 011](../research/05_evaluation/local-r1-governed-v2-1-release-qualification-011-results.md)
+then passed 43/43 Docker HTTPS/recovery/rollback checks and 51/51 focused tests
+against the built API image, plus desktop/mobile login smoke and log audit.
+The temporary projects are stopped with volumes preserved; the running
+qualification-010 project was left intact. This qualifies the corrected local
+source, with no remote deployment or new factual-quality claim. The frozen
+factual result is unchanged and is not being rerun or tuned.
+
 ## Final local release checkpoint
 
 Issue #216 consolidates the final method comparison and exact local release.

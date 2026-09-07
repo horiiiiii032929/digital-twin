@@ -46,6 +46,9 @@ PROTECTED_NAME_PREFIXES = (
     "second_review_",
 )
 ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
+    # Fetches exact public source revisions only; no dataset generation,
+    # evaluation execution, hidden-gold inspection or provider calls.
+    "prepare_public_evaluation_sources.py",
     # This builder is pure and network-free. Provider execution lives in the
     # separately guarded run_academic_* reference-validation entrypoint.
     "build_academic_factual_qa_open_reference_validation.py",
@@ -106,6 +109,10 @@ ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
     # deterministic product simulation only; no provider or held-out path is
     # implemented.
     "run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py",
+    # Paired regression using 025's synthetic product driver. The provider flag
+    # is hard-coded false, product socket connections are denied, and the CLI
+    # exposes no provider, paid, private-source or held-out execution mode.
+    "run_goal_completion_scope.py",
     # This fresh mixed-initiative confirmation drives only synthetic product
     # services and SQLite state. It contains no provider, held-out, private-
     # source, or paid execution path.

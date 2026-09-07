@@ -1,0 +1,1063 @@
+{
+  "guarded_turns": [
+    {
+      "case_id": "development-01-05",
+      "elapsed_ms": 4537.769624992507,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-39-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-39-repeat-0-v4-1",
+          "content": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "conversation_id": "conversation-357d1fb5-d795-4bf8-a394-ffc7656547f1",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-ed616665-4d57-4ffa-8949-537a0147eece",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-357d1fb5-d795-4bf8-a394-ffc7656547f1",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-e6379355-9169-488e-95db-9e23faa00793",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-ed616665-4d57-4ffa-8949-537a0147eece",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "correct_misconception",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "correct_misconception",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-01-05",
+      "elapsed_ms": 6968.06449998985,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-39-repeat-0-v4/runtime",
+      "stage": 2,
+      "student": "I am still stuck applying this rule. What should happen when active route stamp is 7 and the item stamp is 6? Please show a concrete next step.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-39-repeat-0-v4-2",
+          "content": "I am still stuck applying this rule. What should happen when active route stamp is 7 and the item stamp is 6? Please show a concrete next step.",
+          "conversation_id": "conversation-357d1fb5-d795-4bf8-a394-ffc7656547f1",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-259b27bd-03b2-43bd-b4d1-93a22930f97d",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-357d1fb5-d795-4bf8-a394-ffc7656547f1",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-97e8dce6-efcd-4396-872b-7531f1848505",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-259b27bd-03b2-43bd-b4d1-93a22930f97d",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "give_hint",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "give_hint",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-04-04",
+      "elapsed_ms": 12001.599291019375,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-30-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits. Please identify the mistake and help me correct it.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-30-repeat-0-v4-1",
+          "content": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits. Please identify the mistake and help me correct it.",
+          "conversation_id": "conversation-df12abd6-ce36-4e08-a8c5-ae7a3c2db515",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-e95ced17-c26f-405a-8511-b44e9895e306",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-df12abd6-ce36-4e08-a8c5-ae7a3c2db515",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-f0020f36-79df-428c-9fcb-c3b2f2bd4c98",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-e95ced17-c26f-405a-8511-b44e9895e306",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "correct_misconception",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "correct_misconception",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-04-03",
+      "elapsed_ms": 9649.01695799199,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-31-repeat-0-v6/runtime",
+      "stage": 1,
+      "student": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits. Is this correct? What should happen when available credits are 9 and the purchase cost is 4?",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-31-repeat-0-v6-1",
+          "content": "My attempt for topaz voucher: Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits. Is this correct? What should happen when available credits are 9 and the purchase cost is 4?",
+          "conversation_id": "conversation-1f6f6b22-ef1e-4fae-8ac9-af4582ff278e",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-81126595-d4bc-4b64-8af8-6dfca377f517",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-1f6f6b22-ef1e-4fae-8ac9-af4582ff278e",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-7a482beb-8d0b-4fdf-b39b-b94ad9d3514d",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-81126595-d4bc-4b64-8af8-6dfca377f517",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v6"
+    },
+    {
+      "case_id": "development-02-04",
+      "elapsed_ms": 6033.988499984844,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-9-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for marble store: An equal version should replace the stored record. Please identify the mistake and help me correct it.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-9-repeat-0-v4-1",
+          "content": "My attempt for marble store: An equal version should replace the stored record. Please identify the mistake and help me correct it.",
+          "conversation_id": "conversation-608d10be-47dc-48a1-b393-1598f768a525",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-1bcbd37e-7997-45c3-8b6e-11f0d734d7bc",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-608d10be-47dc-48a1-b393-1598f768a525",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-6579b285-ecc9-473e-91d9-5140d52d9791",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-1bcbd37e-7997-45c3-8b6e-11f0d734d7bc",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-02-02",
+      "elapsed_ms": 3897.3211249976885,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-33-repeat-0-v4/runtime",
+      "stage": 0,
+      "student": "How does marble store decide what to do? I have not attempted an answer yet; give me a starting question.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-33-repeat-0-v4-0",
+          "content": "How does marble store decide what to do? I have not attempted an answer yet; give me a starting question.",
+          "conversation_id": "conversation-6df7436b-e8f1-43ee-ad2c-cc75cd97969c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-fcabc886-f18f-481e-9a21-5c17786a979c",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-6df7436b-e8f1-43ee-ad2c-cc75cd97969c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-fbd74020-a591-460f-8266-02ee4ae27e9d",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-fcabc886-f18f-481e-9a21-5c17786a979c",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "diagnose_understanding",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "diagnose_understanding",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-02-05",
+      "elapsed_ms": 6136.3489590003155,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-43-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for marble store: An equal version should replace the stored record.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-43-repeat-0-v4-1",
+          "content": "My attempt for marble store: An equal version should replace the stored record.",
+          "conversation_id": "conversation-eccb78b4-976d-4907-894c-4d3343f7d2c4",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-e6aafdf0-10c8-43db-b53d-4588364d3269",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-eccb78b4-976d-4907-894c-4d3343f7d2c4",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-6d91b7f5-8ef1-461b-921a-f5e6abd7c48e",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-e6aafdf0-10c8-43db-b53d-4588364d3269",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-04-06",
+      "elapsed_ms": 8052.353749983013,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-26-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-26-repeat-0-v4-1",
+          "content": "My attempt for topaz voucher: Redemption should add the purchase cost to available credits.",
+          "conversation_id": "conversation-685fc4f7-1b9b-48c4-9193-cf9bc72b288c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-ecae283f-82fa-4e80-b003-cd8b311bd284",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-685fc4f7-1b9b-48c4-9193-cf9bc72b288c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-91e8483a-6815-44d3-857a-8caf076e96d0",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-ecae283f-82fa-4e80-b003-cd8b311bd284",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "correct_misconception",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "correct_misconception",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-04-06",
+      "elapsed_ms": 10171.557458001189,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-26-repeat-0-v4/runtime",
+      "stage": 2,
+      "student": "I am still stuck. Please give a useful hint about the rule.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-26-repeat-0-v4-2",
+          "content": "I am still stuck. Please give a useful hint about the rule.",
+          "conversation_id": "conversation-685fc4f7-1b9b-48c4-9193-cf9bc72b288c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-0a83a460-c479-4043-9b20-95ca1757369c",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-685fc4f7-1b9b-48c4-9193-cf9bc72b288c",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-96e888cc-6f66-4cf6-a087-a108fbda6fbe",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-0a83a460-c479-4043-9b20-95ca1757369c",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "give_hint",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "give_hint",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-01-06",
+      "elapsed_ms": 5930.617499980144,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-32-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-32-repeat-0-v4-1",
+          "content": "My attempt for kestrel relay: A mismatched stamp should be forwarded immediately.",
+          "conversation_id": "conversation-e2918058-0017-4cac-981b-4db6291e2c5f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-0f9a2dcd-93f6-4eb6-8b24-47102f8dea8b",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-e2918058-0017-4cac-981b-4db6291e2c5f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-78bcc7a0-0b78-40e3-8842-74b0dae58fa1",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-0f9a2dcd-93f6-4eb6-8b24-47102f8dea8b",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-01-06",
+      "elapsed_ms": 6059.379334008554,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-32-repeat-0-v4/runtime",
+      "stage": 2,
+      "student": "I am still stuck. Please give a useful hint about the rule.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-32-repeat-0-v4-2",
+          "content": "I am still stuck. Please give a useful hint about the rule.",
+          "conversation_id": "conversation-e2918058-0017-4cac-981b-4db6291e2c5f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-7e48fba3-f71b-47fb-bc28-e00dc497e518",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-e2918058-0017-4cac-981b-4db6291e2c5f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-3975c3e2-1fc2-411c-b190-9f22b5e7bef1",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-7e48fba3-f71b-47fb-bc28-e00dc497e518",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "give_hint",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "give_hint",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-02-07",
+      "elapsed_ms": 11212.736207991838,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-11-repeat-0-v6/runtime",
+      "stage": 1,
+      "student": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-11-repeat-0-v6-1",
+          "content": "My attempt for marble store: Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+          "conversation_id": "conversation-163cd1b6-4a49-44ed-8f3c-a873c9b366bf",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-7d5570b9-1559-4d00-b304-286d2b803550",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-163cd1b6-4a49-44ed-8f3c-a873c9b366bf",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-c5e7cfa6-d00f-43ad-92f4-3643edec15e0",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-7d5570b9-1559-4d00-b304-286d2b803550",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v6"
+    },
+    {
+      "case_id": "development-03-05",
+      "elapsed_ms": 6449.348541995278,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-37-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-37-repeat-0-v4-1",
+          "content": "My attempt for willow survey: A dry plot should be counted and entered as zero.",
+          "conversation_id": "conversation-023a3be9-720d-4878-99d3-9699a5543b20",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-cf3cfb7b-f663-46ed-bd8c-526f56d5b6eb",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-023a3be9-720d-4878-99d3-9699a5543b20",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-a9f1c4b7-d563-48c3-9856-f35913d29f09",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-cf3cfb7b-f663-46ed-bd8c-526f56d5b6eb",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-03-05",
+      "elapsed_ms": 6367.038249998586,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-37-repeat-0-v4/runtime",
+      "stage": 2,
+      "student": "I am still stuck applying this rule. What should happen when recorded rainfall is 3 millimetres? Please show a concrete next step.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-37-repeat-0-v4-2",
+          "content": "I am still stuck applying this rule. What should happen when recorded rainfall is 3 millimetres? Please show a concrete next step.",
+          "conversation_id": "conversation-023a3be9-720d-4878-99d3-9699a5543b20",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-ab441093-57eb-4a06-afe3-7cde78166f10",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-023a3be9-720d-4878-99d3-9699a5543b20",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-0fa779f7-bd6f-41a1-82d0-a47b72a3cc97",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-ab441093-57eb-4a06-afe3-7cde78166f10",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "give_hint",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "give_hint",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-02-06",
+      "elapsed_ms": 5921.974458004115,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-1-repeat-0-v4/runtime",
+      "stage": 1,
+      "student": "My attempt for marble store: An equal version should replace the stored record.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-1-repeat-0-v4-1",
+          "content": "My attempt for marble store: An equal version should replace the stored record.",
+          "conversation_id": "conversation-c9ea852c-45f2-4906-8c7d-c52b61c7eb6f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-05b2fe68-109c-4a2a-b881-5c65e632fce5",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-c9ea852c-45f2-4906-8c7d-c52b61c7eb6f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-4dd45acc-cda7-4f65-89f0-6d96b62f0048",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-05b2fe68-109c-4a2a-b881-5c65e632fce5",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "ask_next_step",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "ask_next_step",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    },
+    {
+      "case_id": "development-02-06",
+      "elapsed_ms": 4752.168125007302,
+      "repetition": 0,
+      "runtime_directory": "reports/generated/paired-pedagogy-development-001-v6-live-001/case-1-repeat-0-v4/runtime",
+      "stage": 2,
+      "student": "I am still stuck. Please give a useful hint about the rule.",
+      "turn": {
+        "citations": [],
+        "duplicate": false,
+        "learner_state_revision": null,
+        "pending_clarification": null,
+        "student_message": {
+          "action": "question",
+          "client_request_id": "case-1-repeat-0-v4-2",
+          "content": "I am still stuck. Please give a useful hint about the rule.",
+          "conversation_id": "conversation-c9ea852c-45f2-4906-8c7d-c52b61c7eb6f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-8f3928c7-0928-439b-8b79-96cfad468ada",
+          "learner_state_revision": null,
+          "response_to_message_id": null,
+          "role": "student",
+          "trace": null,
+          "tutoring_intent": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutor_message": {
+          "action": "safe-graph-failure",
+          "client_request_id": null,
+          "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+          "conversation_id": "conversation-c9ea852c-45f2-4906-8c7d-c52b61c7eb6f",
+          "created_at": "2026-09-22T00:00:00+00:00",
+          "id": "message-0d3856f6-aab1-4752-865c-c5a111dd9464",
+          "learner_state_revision": null,
+          "response_to_message_id": "message-8f3928c7-0928-439b-8b79-96cfad468ada",
+          "role": "tutor",
+          "trace": {
+            "generator_id": "bounded-tutoring-graph-v1",
+            "latency_ms": 0.0,
+            "policy_action": "safe-graph-failure",
+            "prompt_version": "safe-fallback-v1",
+            "provider_model": "not-called",
+            "provider_revision": null,
+            "unresolved_detail": null,
+            "usage": {
+              "approximate_cost_usd": null,
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0
+            },
+            "validation_scope": null
+          },
+          "tutoring_intent": "give_hint",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+        },
+        "tutoring_intent": "give_hint",
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+      },
+      "version": "v4"
+    }
+  ],
+  "interpretation": "Both v6 guarded turns correspond to feedback.student_excerpt string_too_long schema failures. V4 local guards remain unchanged control evidence.",
+  "run_id": "paired-pedagogy-development-001-v6-live-001",
+  "summary_sha256": "1ecaba5c691912e219a7a349674cfb8f10dc143a1f7230dbe73397a47ebb7174",
+  "v6_provider_schema_failures": [
+    {
+      "attempt": 32,
+      "case": "case-11-repeat-0-v6-turn-1",
+      "error_code": "malformed-response",
+      "failure_diagnostics": {
+        "content_part_types": [
+          "output_text"
+        ],
+        "failure_stage": "schema-validation",
+        "http_status": 200,
+        "incomplete_reason": null,
+        "output_item_types": [
+          "reasoning",
+          "message"
+        ],
+        "output_text_count": 1,
+        "provider_error_code": null,
+        "refusal_present": false,
+        "response_sha256": "8a3cc08b36757b7ad918eb22d9cf095f649e8eb0c9c30e46d3a2449e7e39ab0c",
+        "response_status": "completed",
+        "schema_errors": [
+          {
+            "location": [
+              "feedback",
+              "student_excerpt"
+            ],
+            "type": "string_too_long"
+          }
+        ]
+      },
+      "failure_stage": "schema-validation",
+      "latency_ms": 8650.537959008943,
+      "network_mode": "live",
+      "request_sha256": "3ddc360dbb1428e0c1804f9a5bcd38fc5081d68bae2afbb325fba1120591b2d8",
+      "requested_model": "gpt-5.6-luna",
+      "reserved_usd": 0.025,
+      "returned_model": "gpt-5.6-luna",
+      "returned_revision": "gpt-5.6-luna",
+      "status": "failed",
+      "task": "question_specific_instructional_continuation",
+      "usage": {
+        "approximate_cost_usd": 0.0013002,
+        "input_tokens": 2559,
+        "output_tokens": 657,
+        "total_tokens": 3216
+      }
+    },
+    {
+      "attempt": 69,
+      "case": "case-31-repeat-0-v6-turn-1",
+      "error_code": "malformed-response",
+      "failure_diagnostics": {
+        "content_part_types": [
+          "output_text"
+        ],
+        "failure_stage": "schema-validation",
+        "http_status": 200,
+        "incomplete_reason": null,
+        "output_item_types": [
+          "reasoning",
+          "message"
+        ],
+        "output_text_count": 1,
+        "provider_error_code": null,
+        "refusal_present": false,
+        "response_sha256": "17a5f4009b96e2fd29d1f16aba40feff6a7f087771aeebc578036e878d1b775a",
+        "response_status": "completed",
+        "schema_errors": [
+          {
+            "location": [
+              "feedback",
+              "student_excerpt"
+            ],
+            "type": "string_too_long"
+          }
+        ]
+      },
+      "failure_stage": "schema-validation",
+      "latency_ms": 8016.093291982543,
+      "network_mode": "live",
+      "request_sha256": "36dee2ef7c836a9d7bb9197c5be0358fcafb97e2a7784faf4be006c364e46473",
+      "requested_model": "gpt-5.6-luna",
+      "reserved_usd": 0.025,
+      "returned_model": "gpt-5.6-luna",
+      "returned_revision": "gpt-5.6-luna",
+      "status": "failed",
+      "task": "question_specific_instructional_continuation",
+      "usage": {
+        "approximate_cost_usd": 0.0013364000000000002,
+        "input_tokens": 2602,
+        "output_tokens": 680,
+        "total_tokens": 3282
+      }
+    }
+  ]
+}

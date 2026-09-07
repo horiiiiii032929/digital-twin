@@ -923,4 +923,22 @@ DEFAULT_MIGRATIONS = (
             connection, STATEFUL_CLARIFICATION_SCHEMA_STATEMENTS
         ),
     ),
+    SQLiteMigration(
+        version=18,
+        name="source-deidentification-attestation",
+        definition="ALTER TABLE ingestion_jobs ADD COLUMN deidentified_reviewed INTEGER NOT NULL DEFAULT 0 CHECK (deidentified_reviewed IN (0, 1))",
+        operation=lambda connection: connection.execute(
+            "ALTER TABLE ingestion_jobs ADD COLUMN deidentified_reviewed INTEGER NOT NULL DEFAULT 0 CHECK (deidentified_reviewed IN (0, 1))"
+        ),
+    ),
+    SQLiteMigration(
+        version=19,
+        name="generated-professor-preview-artifacts",
+        definition="immutable generated preview artifacts and explicit case decisions v1",
+        operation=lambda connection: _execute_statements(connection, (
+            "CREATE TABLE generated_profile_previews (artifact_id TEXT PRIMARY KEY, course_id TEXT NOT NULL, profile_id TEXT NOT NULL, owner_id TEXT NOT NULL, artifact_sha256 TEXT NOT NULL, artifact_json TEXT NOT NULL, created_at TEXT NOT NULL)",
+            "CREATE TABLE generated_profile_preview_reviews (artifact_id TEXT PRIMARY KEY REFERENCES generated_profile_previews(artifact_id), artifact_sha256 TEXT NOT NULL, decisions_json TEXT NOT NULL, review_status TEXT NOT NULL, reviewed_at TEXT NOT NULL)",
+        )),
+    ),
+
 )

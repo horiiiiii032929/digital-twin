@@ -1,0 +1,63 @@
+{
+  "status": "Researcher allocation key; withhold during initial review",
+  "seed": 620905,
+  "source_artifact_sha256": "fb187bcb7cb8fb5e47dad1b5a0b68615ab9274f76df666f26004b403e6caea0e",
+  "mapping": [
+    {
+      "review_label": "R01A",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "scheduler-socratic",
+      "arm": "question-specific-profile-candidate",
+      "response_sha256": "375fa105d1a6e2e246cf40d1438db06474c4cfa49b22fa6a5fc44af3da2b4505"
+    },
+    {
+      "review_label": "R01B",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "scheduler-socratic",
+      "arm": "incumbent",
+      "response_sha256": "62cbebbe34ea53254d6e7e14c69d5e313f4ae5f9797c9d7122be6e0e05268106"
+    },
+    {
+      "review_label": "R02A",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "scheduler-explanatory",
+      "arm": "incumbent",
+      "response_sha256": "67fc001e0a27c11b755ad6510ccbdd8df6b1523efae84f596b046d8aa08f0797"
+    },
+    {
+      "review_label": "R02B",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "scheduler-explanatory",
+      "arm": "question-specific-profile-candidate",
+      "response_sha256": "8e02fbba65840d6a2279b1ba5cc4b57c0cbc17b119df760c982484b6707b536d"
+    },
+    {
+      "review_label": "R03A",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "protocol-socratic",
+      "arm": "incumbent",
+      "response_sha256": "73c807d3676042948469a39a64b804fd3671d7490a9937391ee9596981940689"
+    },
+    {
+      "review_label": "R03B",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "protocol-socratic",
+      "arm": "question-specific-profile-candidate",
+      "response_sha256": "7c96af2604646dab56631122b15082ad40732a2fb4687f5f692f8fb80227b257"
+    },
+    {
+      "review_label": "R04A",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "protocol-explanatory",
+      "arm": "incumbent",
+      "response_sha256": "e315f19a2b044667023816403c6fe3e0b508b319b6a273f20363d4d71aad7a41"
+    },
+    {
+      "review_label": "R04B",
+      "run_id": "cross-course-quality-development-001-live-005",
+      "case_id": "protocol-explanatory",
+      "arm": "question-specific-profile-candidate",
+      "response_sha256": "13651a39397419789c2ac78d42592d4196df1da7880fe940672cb4f4d7e44a65"
+    }
+  ]
+}

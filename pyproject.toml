@@ -37,3 +37,6 @@ dev = [
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+markers = [
+    "historical_artifact: requires ignored historical run products or original rasterization environment; run explicitly with -m historical_artifact",
+]

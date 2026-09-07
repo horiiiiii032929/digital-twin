@@ -1,0 +1,23 @@
+{
+  "registered_results": 474,
+  "unique_result_ids": 474,
+  "included_trials": 474,
+  "unallocated_result_summaries": [],
+  "linked_evidence_files": 897,
+  "governance_rows": 297,
+  "plan_or_learning_documents": 140,
+  "source_allocation_entries": 1810,
+  "family_counts": {
+    "Learner state and timing": 7,
+    "Evaluation instruments and evidence governance": 66,
+    "Persistence, delivery and operations": 105,
+    "Retrieval and factual grounding": 92,
+    "Response generation and revision": 76,
+    "Instructor configuration and teaching policy": 38,
+    "Autonomous orchestration": 73,
+    "Multimodal evidence": 17
+  },
+  "related_record_edges": 116,
+  "manually_verified_correction_pairs": 5,
+  "scope": "All registry rows, all linked readable and machine evidence, decision-log and method-catalog table rows, and direct experiment Markdown documents. Source references are not automatically correction edges."
+}

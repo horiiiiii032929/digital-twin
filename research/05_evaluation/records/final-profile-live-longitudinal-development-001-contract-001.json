@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "run_id": "final-profile-live-longitudinal-development-001-contract-001",
+  "instrument_id": "final-profile-live-longitudinal-development-001",
+  "status": "completed-contract-smoke",
+  "decision": "Keep harness wiring for further development; no live model or release qualification",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "configuration": {
+    "code_dirty": true,
+    "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+    "concurrency": 2,
+    "conditions": [
+      "t1-v2-reactive",
+      "t1-v2-autonomous"
+    ],
+    "dataset_sha256": "500ed28d840180b23249ce7d02ebcce82aca33e641546f3d504d06e2614fe5de",
+    "days": 3,
+    "harness_sha256": {
+      "scripts/final_profile_longitudinal_runtime.py": "0510bfe1d9b6cf2fb48bd5080478836d3cdc95ca701dacd9ddaf8184868d0623",
+      "scripts/run_final_profile_longitudinal.py": "293dfd6644af5807808dc2f50c2ee4e6abb1f5dcb196c66b2554c9f780ee9a53"
+    },
+    "live_authorized": false,
+    "maximum_calls": 200,
+    "maximum_cost_usd": 2.0,
+    "mode": "contract-smoke",
+    "model": "gpt-5.6-luna",
+    "profile_id": "student-tutor-r1-local-final",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "program_id": "final-profile-live-longitudinal-development-001",
+    "remaining": [
+      "fresh profile-adherence comparison",
+      "independent factual scoring",
+      "actual ingestion/dashboard journey",
+      "30-day live confirmation"
+    ],
+    "seed": 4107,
+    "setup_boundary": "synthetic release fixture; not ingestion or UI qualification",
+    "stage": "development-only",
+    "tracked_diff_sha256": "2ba7a2681cf0affa001c359bdc2d71e29c2c99b6f9ebcf6300168ab968389d54"
+  },
+  "dataset": {
+    "kind": "new synthetic development concept cards",
+    "permissions": "repository-authored synthetic only",
+    "split": "development contract smoke",
+    "sample_size_rationale": "two personas by two conditions; three virtual days for wiring and restart, not quality estimation",
+    "sha256": "500ed28d840180b23249ce7d02ebcce82aca33e641546f3d504d06e2614fe5de"
+  },
+  "aggregate": {
+    "histories_completed": 4,
+    "history_errors": 0,
+    "injected_client_attempts": 11,
+    "actual_network_calls": 0,
+    "actual_model_calls": 0,
+    "cost_usd": 0,
+    "restarts_per_history": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "limitations": [
+    "All model attempts intentionally fail with synthetic malformed-output responses.",
+    "Some histories contain zero assessed attempts; missing metrics are null, not passing.",
+    "Synthetic release installed directly, excluding upload/publication/browser and representative course quality.",
+    "No independent factual or professor-profile judge is implemented in this runner.",
+    "No real-model continuity or learning inference."
+  ],
+  "failure_classification": "injected provider schema failure; no history-level execution errors",
+  "raw_artifact": "reports/generated/final-profile-live-longitudinal-development-001-contract-001",
+  "artifact_sha256": {
+    "cases.jsonl": "805ca05645342d6ab6036feed9574e4d40fa6d07d45242c59913a289f706f5dc",
+    "learner-evidence.jsonl": "57251d1ee49446aad5c44984a3f16fe50027025ea08488c1e7d98e2d17683143",
+    "provider.jsonl": "8286e173552a312fbb12b6e3e2c704afceade806785bda191f7fbad6a61537c1",
+    "responses.jsonl": "17d978a88bc45c14e836fe6c731b9aa75e271910f3602d991bfb0f8cfb68594f",
+    "truth.jsonl": "6b4e6ee99a9c5046848a2e9fe67b2eaaf051457a8e508a6d9d6ed42235804372"
+  },
+  "summary_sha256": "9fa22bf24ca54c7cbe4bce3859a2ed4f50d6d708ccc59c500134b0a90c99ffad",
+  "reproduction": "uv run python -m scripts.run_final_profile_longitudinal --contract-smoke --days 3 --output-dir <fresh-output-directory>"
+}

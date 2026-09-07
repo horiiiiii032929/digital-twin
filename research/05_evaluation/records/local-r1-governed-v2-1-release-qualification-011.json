@@ -1,0 +1,474 @@
+{
+  "schema_version": 1,
+  "run_id": "local-r1-governed-v2-1-release-qualification-011",
+  "instrument_id": "local-r1-governed-v2-1-release-qualification-011",
+  "component": "local-runtime-correctness-and-release-operations",
+  "date": "2026-09-05",
+  "status": "completed-keep",
+  "code_revision": "d9ec1a8eeb405fb0843d7cbc480c9636605cbde4",
+  "working_tree_dirty": false,
+  "source_tree": "d746efcb551aa02feb3597cd155fa69e489e00bd",
+  "predecessor": "local-r1-governed-v2-1-release-qualification-010",
+  "plan_path": "research/04_experiments/2026-09-05-local-r1-governed-v2-1-release-qualification-011-plan.md",
+  "decision": "Keep the corrected exact local research release after all operational and targeted container regression gates pass; retain qualification 010 and T0 as rollback, with existing factual-quality limitations unchanged.",
+  "dataset": {
+    "id": "verify-https-staging-synthetic-journey",
+    "version": "1cd8ef4c6fa710ff0d8b6b4c600d036053bdad151404116b331c785243fb8832",
+    "split": "operational regression, no held-out quality inference",
+    "corpus": "generated synthetic PDF from the versioned verifier",
+    "permissions": "repository-authored synthetic accounts, course and PDF; no private data",
+    "sample_size_rationale": "43 finite operational assertions plus 51 container regression cases; checklist coverage, not population accuracy",
+    "trials": "one per stage; no failed acceptance attempts",
+    "excluded": "consumed factual 1000/10000 packages and provider-backed inference"
+  },
+  "runtime": {
+    "student_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "autonomy_planner_mode": "openai-gpt-5.6-luna-policy-value",
+    "autonomy_planner_architecture": "guarded-policy-value-planner-v2",
+    "generator_mode": "deterministic",
+    "retriever": "bm25-v1",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "visual_retrieval_mode": "text-ocr-fallback",
+    "profile_id": "student-tutor-r1-local-final",
+    "profile_version": "v2.1-final-001-bm25-text-ocr",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "t1_qualification_record": "governed-full-autonomy-v2-1-final-release-binding-001",
+    "t0_rollback_available": true
+  },
+  "exact_environment_selectors": {
+    "APP_IMAGE_TAG": "r1-qualification-011",
+    "APP_GENERATOR_MODE": "deterministic",
+    "APP_EVIDENCE_GATE_MODE": "dominance-scoped-ambiguity-safe-v3",
+    "APP_STUDENT_PROFILE_PATH": "/app/research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json",
+    "APP_STUDENT_TUTORING_MODE": "governed-autonomous-tutoring-graph-v2.1",
+    "APP_AUTONOMY_PLANNER_MODE": "openai-gpt-5.6-luna-policy-value",
+    "APP_T1_QUALIFICATION_RESULT_PATH": "/app/research/05_evaluation/records/governed-full-autonomy-v2-1-final-release-binding-001.json",
+    "APP_PROVIDER_MAX_CALLS_PER_PROCESS": "250",
+    "APP_PROVIDER_COST_CAP_USD": "5.0"
+  },
+  "runtime_metadata": {
+    "docker": "28.5.1",
+    "compose": "2.40.0-desktop.1",
+    "source_revision": "d9ec1a8eeb405fb0843d7cbc480c9636605cbde4",
+    "source_tree": "d746efcb551aa02feb3597cd155fa69e489e00bd",
+    "working_tree_dirty_at_build": false,
+    "images": {
+      "api": {
+        "Id": "sha256:0477fc91610537bb2bfbf8a32e196fecd6233fcb1eac3632f5b46862291c8787",
+        "RepoDigests": [
+          "digital-twin-api@sha256:0477fc91610537bb2bfbf8a32e196fecd6233fcb1eac3632f5b46862291c8787"
+        ],
+        "Created": "2026-09-05T10:25:38.941129128Z",
+        "Size": 253945109,
+        "Architecture": "arm64",
+        "Os": "linux"
+      },
+      "web": {
+        "Id": "sha256:d1f2b6a005822673012bb37f0654e223074dfbb7e6353b5f92d5c34a2c514771",
+        "RepoDigests": [
+          "digital-twin-web@sha256:d1f2b6a005822673012bb37f0654e223074dfbb7e6353b5f92d5c34a2c514771"
+        ],
+        "Created": "2026-09-05T10:25:46.798314298Z",
+        "Size": 21941788,
+        "Architecture": "arm64",
+        "Os": "linux"
+      }
+    },
+    "api_python_version": "Python 3.12.12"
+  },
+  "results": {
+    "total_machine_checks": "43/43",
+    "container_regressions": "51/51",
+    "repository_python_tests": 1952,
+    "frontend_tests": 51,
+    "repository_gate": "passed before source commit; no runtime edits since",
+    "stage_checks": {
+      "live": [
+        {
+          "name": "https-readiness",
+          "passed": true
+        },
+        {
+          "name": "admin-credential-login",
+          "passed": true
+        },
+        {
+          "name": "secure-session-cookie",
+          "passed": true
+        },
+        {
+          "name": "invite-only-accounts",
+          "passed": true
+        },
+        {
+          "name": "unsafe-origin-rejected",
+          "passed": true
+        },
+        {
+          "name": "synthetic-account-header-rejected",
+          "passed": true
+        },
+        {
+          "name": "professor-course-and-membership",
+          "passed": true
+        },
+        {
+          "name": "professor-session-bound-to-course",
+          "passed": true
+        },
+        {
+          "name": "professor-policy-approved",
+          "passed": true
+        },
+        {
+          "name": "professor-teaching-profile-approved",
+          "passed": true
+        },
+        {
+          "name": "asynchronous-ingestion-succeeded",
+          "passed": true
+        },
+        {
+          "name": "deterministic-release-preflight",
+          "passed": true
+        },
+        {
+          "name": "evaluated-release-published",
+          "passed": true
+        },
+        {
+          "name": "release-bound-course-domain-model-approved",
+          "passed": true
+        },
+        {
+          "name": "student-consented-in-app-outreach",
+          "passed": true
+        },
+        {
+          "name": "professor-scheduled-private-outreach",
+          "passed": true
+        },
+        {
+          "name": "scheduled-outreach-worker-delivered",
+          "passed": true
+        },
+        {
+          "name": "student-course-isolation",
+          "passed": true
+        },
+        {
+          "name": "grounded-answer-released",
+          "passed": true
+        },
+        {
+          "name": "grounded-answer-with-lineage",
+          "passed": true
+        },
+        {
+          "name": "selected-tutoring-mode-active",
+          "passed": true
+        },
+        {
+          "name": "bounded-tutoring-state-visible",
+          "passed": true
+        },
+        {
+          "name": "authorized-original-citation-region",
+          "passed": true
+        },
+        {
+          "name": "live-api-p95",
+          "passed": true
+        },
+        {
+          "name": "privacy-preserving-learning-gap-view",
+          "passed": true
+        }
+      ],
+      "restart": [
+        {
+          "name": "restored-readiness",
+          "passed": true
+        },
+        {
+          "name": "restored-course",
+          "passed": true
+        },
+        {
+          "name": "restored-conversation",
+          "passed": true
+        },
+        {
+          "name": "restored-tutoring-state",
+          "passed": true
+        },
+        {
+          "name": "restored-citation",
+          "passed": true
+        },
+        {
+          "name": "restored-citation-region",
+          "passed": true
+        }
+      ],
+      "clean-restore": [
+        {
+          "name": "restored-readiness",
+          "passed": true
+        },
+        {
+          "name": "restored-course",
+          "passed": true
+        },
+        {
+          "name": "restored-conversation",
+          "passed": true
+        },
+        {
+          "name": "restored-tutoring-state",
+          "passed": true
+        },
+        {
+          "name": "restored-citation",
+          "passed": true
+        },
+        {
+          "name": "restored-citation-region",
+          "passed": true
+        }
+      ],
+      "t0": [
+        {
+          "name": "selected-tutoring-mode",
+          "passed": true
+        },
+        {
+          "name": "mode-check-grounded-answer",
+          "passed": true
+        },
+        {
+          "name": "mode-check-state-boundary",
+          "passed": true
+        }
+      ],
+      "governed-restore": [
+        {
+          "name": "selected-tutoring-mode",
+          "passed": true
+        },
+        {
+          "name": "mode-check-grounded-answer",
+          "passed": true
+        },
+        {
+          "name": "mode-check-state-boundary",
+          "passed": true
+        }
+      ]
+    },
+    "live_metrics": {
+      "ingestion_queue_to_complete_ms": 1286.195,
+      "live_api_p95_ms": 8.857,
+      "live_api_requests": 25,
+      "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1"
+    },
+    "live_journey_duration_ms": 6568.656,
+    "backup_schema_version": 17,
+    "backup_data_files": 7,
+    "application_and_checkpoint_log_hits": {
+      "primary-before-rollback.log": 0,
+      "t0-application.log": 0,
+      "restore-application.log": 0,
+      "governed-application.log": 0
+    },
+    "container_memory_snapshot": [
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.30%",
+        "Container": "digital-twin-r1-q011-api-1",
+        "ID": "2b0700b0ea7b",
+        "MemPerc": "3.08%",
+        "MemUsage": "241.7MiB / 7.654GiB",
+        "Name": "digital-twin-r1-q011-api-1",
+        "NetIO": "116kB / 3.08kB",
+        "PIDs": "7"
+      },
+      {
+        "BlockIO": "0B / 4.1kB",
+        "CPUPerc": "0.04%",
+        "Container": "digital-twin-r1-q011-web-1",
+        "ID": "b0045df66926",
+        "MemPerc": "0.38%",
+        "MemUsage": "29.69MiB / 7.654GiB",
+        "Name": "digital-twin-r1-q011-web-1",
+        "NetIO": "56.1kB / 257kB",
+        "PIDs": "13"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.07%",
+        "Container": "digital-twin-r1-q011-ingestion-worker-1",
+        "ID": "e432fc680de0",
+        "MemPerc": "1.10%",
+        "MemUsage": "86.48MiB / 7.654GiB",
+        "Name": "digital-twin-r1-q011-ingestion-worker-1",
+        "NetIO": "1.04kB / 126B",
+        "PIDs": "2"
+      },
+      {
+        "BlockIO": "0B / 0B",
+        "CPUPerc": "0.00%",
+        "Container": "digital-twin-r1-q011-outreach-worker-1",
+        "ID": "a3499cafbbd9",
+        "MemPerc": "3.05%",
+        "MemUsage": "238.8MiB / 7.654GiB",
+        "Name": "digital-twin-r1-q011-outreach-worker-1",
+        "NetIO": "114kB / 2.2kB",
+        "PIDs": "2"
+      }
+    ]
+  },
+  "hard_gates": {
+    "all_43_https_checks": true,
+    "all_51_container_regressions": true,
+    "verified_clean_restore": true,
+    "no_application_or_checkpoint_errors": true,
+    "no_critical_browser_defects": true,
+    "api_p95_at_most_750_ms": true
+  },
+  "browser": {
+    "tool": "Playwright CLI, Chrome",
+    "desktop": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "document_width": 1440
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "document_width": 390
+    },
+    "labelled_controls": [
+      "Email",
+      "Password",
+      "Sign in"
+    ],
+    "keyboard_order": [
+      "Email",
+      "Password",
+      "Sign in"
+    ],
+    "visual_inspection": "passed both screenshots",
+    "console_observations": [
+      "One /api/auth/session HTTP 502 while the deliberately concurrent service restart was in progress; login displayed an explicit error and recovered on reload after readiness.",
+      "One expected unauthenticated /api/auth/session HTTP 401 after readiness."
+    ],
+    "tls_boundary": "HTTP verifier validated the project internal CA; browser context ignored local-certificate errors without altering OS trust."
+  },
+  "provider_usage": {
+    "billable_credentials_available": false,
+    "observed_final_api_and_restore_planner_calls": 0,
+    "observed_final_input_tokens": 0,
+    "observed_final_output_tokens": 0,
+    "reported_cost_usd": 0,
+    "limitations": "Budget counters are per process; pre-restart counters were not captured. All retained application logs have zero provider endpoint/failure hits; this run validates only deterministic fast paths, not live provider integration."
+  },
+  "failures_and_surprises": [
+    {
+      "category": "operations",
+      "observation": "Private .env.local-r1 still named an older candidate profile; isolated environment used the committed qualified final selectors before execution."
+    },
+    {
+      "category": "operations",
+      "observation": "A transient browser 502 coincided with planned restart and recovered on reload; no continuous-availability claim."
+    },
+    {
+      "category": "verification",
+      "observation": "Container tests added pinned pytest 9.1.1 and pytest-asyncio 1.4.0 in a disposable container, without changing the built image; Starlette emitted its httpx deprecation warning."
+    }
+  ],
+  "measurement_limits": [
+    "Container memory is a single point sample, not peak memory.",
+    "Whole build/startup elapsed time and per-request mean latency were not separately instrumented; Docker build logs, image timestamps, total live duration, and p95 are retained."
+  ],
+  "reproduction": {
+    "runbook": "docs/local-r1-runbook.md",
+    "primary_project": "digital-twin-r1-q011",
+    "restore_project": "digital-twin-r1-q011-restore",
+    "ports": [
+      8454,
+      8455
+    ],
+    "image_tag": "r1-qualification-011",
+    "private_environment": ".env.local-r1-q011",
+    "artifacts": "reports/generated/local-r1-q011",
+    "browser_artifacts": "output/playwright/local-r1-q011",
+    "container_tests": "docker run --rm --user 0 --mount type=bind,src=<repository>/tests,dst=/app/tests,readonly digital-twin-api:r1-qualification-011 sh -c \"uv pip install --python /app/.venv/bin/python pytest==9.1.1 pytest-asyncio==1.4.0 && python -m pytest -q -p no:cacheprovider tests/api/test_student_api.py tests/digital_twin/test_stateful_clarification.py tests/digital_twin/test_proactive_outreach.py\""
+  },
+  "binding_hashes": {
+    "compose.local-r1.yml": "573cbf174d330bc91e33bf5d20f91b0f37d3f5273dee1e686b436680ebd03f29",
+    "deploy/Dockerfile": "73291b68909663c115d51c0eb19cdf820be8cffb91a592d4669f123ea2f1fc0c",
+    "deploy/local-r1.qualified.env.example": "8296c5a3a605543f829f1ca05ebec6606717132f053c779e41326da8f29067bc",
+    "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "research/05_evaluation/records/governed-full-autonomy-v2-1-final-release-binding-001.json": "f68fe607849f46da22ce272bda6725890fd33b54841bc1a7abfb1dfa9099c373"
+  },
+  "artifact_hashes": {
+    "reports/generated/local-r1-q011/backup.log": "da9522fe25b057d6567aef283af4cf60f06fa4222a0f62172a3e07c0f7e80bc1",
+    "reports/generated/local-r1-q011/bootstrap.log": "c9e09d781ca3814cd6b432df718f04a6bc2b7fe8262131165de292a7ad295353",
+    "reports/generated/local-r1-q011/build.log": "ec61cc57f5318a25c270d26c9f74548523ba81b2229e29d58a92c124e3da90a9",
+    "reports/generated/local-r1-q011/clean-restore.json": "3abcab78db8bf24fd46c82a2b802d770aebfde274b43b883eb6a833e3e2adbe9",
+    "reports/generated/local-r1-q011/clean-restore.log": "a924a117d6df18273ab2648a1b756efe07ab21538d8e1a1a576ec4fc86bfede0",
+    "reports/generated/local-r1-q011/container-regressions.log": "2a5ee58f3b2c5c110dc09e1018953835dc814e721bd676bbb93c8258206c2050",
+    "reports/generated/local-r1-q011/container-stats.jsonl": "780dfba97e5d610634c4af6a981545d30a5dc22f119b8be304ec4f7cec8f4c7a",
+    "reports/generated/local-r1-q011/governed-application.log": "498fa5412af39aedd82949aee8b20d7b73ddee0da248db7054f7877ebc6cb2e9",
+    "reports/generated/local-r1-q011/governed-restore.json": "377c39d2fca2abe555707cf463dbd57483e885a51f1f361dc3c8e34ccb1dd88b",
+    "reports/generated/local-r1-q011/governed-restore.log": "5f7d450301456e3b607cad213b196923221434e1c6212f1a8821dd821af719c4",
+    "reports/generated/local-r1-q011/governed-startup.log": "b314c8f398a9eee4e3f6f836fad97b5b8a6ddb64a77b8307e7e5b4f80a29de06",
+    "reports/generated/local-r1-q011/live.json": "01bd9be9442fd40e63af1bbbafa8daa9b0dca0c30e1fefaf47f1ee2cd4a7473f",
+    "reports/generated/local-r1-q011/live.log": "445f0dfb2742abb5158effd7578e33200e058dc5a5eaa4b9a53ef3b31ee54501",
+    "reports/generated/local-r1-q011/primary-before-rollback.log": "3a33bb8cd09530a21940c919699b55843fc91e6fbfad2e9dd24cf6e7aa893db9",
+    "reports/generated/local-r1-q011/primary-metrics.json": "ca243e15febee7e7c6209706421473a135480b35c45d694e5d28bd06a63fcd21",
+    "reports/generated/local-r1-q011/restart-services.log": "56187d99711030da54f84ac0613086b1f2bbe61d2c7682b93e2f25e0ac498e1a",
+    "reports/generated/local-r1-q011/restart.json": "3abcab78db8bf24fd46c82a2b802d770aebfde274b43b883eb6a833e3e2adbe9",
+    "reports/generated/local-r1-q011/restart.log": "a924a117d6df18273ab2648a1b756efe07ab21538d8e1a1a576ec4fc86bfede0",
+    "reports/generated/local-r1-q011/restore-application.log": "9ecacf4f3df148f5a413e0d99d68cd842ec3135a9bc4afb52052eea3aabbe496",
+    "reports/generated/local-r1-q011/restore-metrics.json": "8ac997eee17c0f049b5e97f72de5cfd9e850aeb693633993e7550c7488b62218",
+    "reports/generated/local-r1-q011/restore-shutdown.log": "7fa06d409133d36f0f36c232a5103559047fc718d146fc15c9ae82b930a9d0f2",
+    "reports/generated/local-r1-q011/restore-startup.log": "414f999b08c227ac78ed5b6bb04b89368cb9b4807c4ea1886be56522a0d937fb",
+    "reports/generated/local-r1-q011/restore.log": "ffd7315e0d17c0efdd19c49a76a896da39c590b3c41036009975ec448727dcdb",
+    "reports/generated/local-r1-q011/runtime-backup.zip": "b39d9deddf5df3a466715fd961e4dcd2742ea37612691d299cb3bd711546ea4e",
+    "reports/generated/local-r1-q011/runtime-metadata.json": "7b8ade06b07aa250e2d5c06c2282be3821e59534a260d390969081a4222ae43b",
+    "reports/generated/local-r1-q011/shutdown.log": "e0aa7a90db643f08b32ecd3fceb9e54f7d81bd30dc52b9bfdf8eb9948396c9eb",
+    "reports/generated/local-r1-q011/startup.log": "7f3d7c40ebd0f744d4367375d029122bad100bab0ba764ac75be82035cce92c2",
+    "reports/generated/local-r1-q011/t0-application.log": "551dd3891007e80577327dfa494d38ec23eba3532589908eec119a405130d7ab",
+    "reports/generated/local-r1-q011/t0-startup.log": "209e6668ebbcdd04ebd67a5e0e074a028fad41c6bfceecf212c66b8e3d71e5bb",
+    "reports/generated/local-r1-q011/t0.json": "a244158e6ae92840f71fe21100eef67e885818f70115a3a82b732e7c8080fadc",
+    "reports/generated/local-r1-q011/t0.log": "5f7d450301456e3b607cad213b196923221434e1c6212f1a8821dd821af719c4"
+  },
+  "browser_artifact_hashes": {
+    "output/playwright/local-r1-q011/browser-console.log": "8648bc92f6b18ca8b438e7af3a52120af44f9276c11ce6518138ec9af65565ab",
+    "output/playwright/local-r1-q011/desktop-check.log": "036de785e93f290bc60e403121f6e0de78ba025ac478d32c0ec640816739145b",
+    "output/playwright/local-r1-q011/desktop-metrics.log": "93a6af8ca1de89ad204273cc0380e52e0e77237fb0caf8ae8c5d6160a33ab7b4",
+    "output/playwright/local-r1-q011/desktop.png": "85efdb85e0b07e6d60ce7d167a725e2f5629cc8ee7419b65d2eb2de588d6e0e6",
+    "output/playwright/local-r1-q011/mobile-check.log": "d031551a4a15b101a8418ff8645d4a2632b7934b69838d5a6555441c10f3a73d",
+    "output/playwright/local-r1-q011/mobile.png": "d7afcff80dd5326520253e5e46e4ad4617fa4b631d3e323d993a79f97a0404fe",
+    "output/playwright/local-r1-q011/playwright-cli.json": "995a3b183741c97eae2dc4a6f27be119193b5a25118a879f042e8bc61629e0aa"
+  },
+  "private_data_used": false,
+  "known_10000_plus_1000_touched": false,
+  "run_invalidated": false,
+  "profile_change": null,
+  "post_run_state": "Both temporary Compose projects stopped; all named evidence volumes and backup retained. Previous qualification-010 project untouched.",
+  "limitations": [
+    "Fresh 1,000-case factual confirmation selected this stack only as the safest measured local fallback; it reached 63.25% fully grounded success and did not pass the academic factual-quality gate.",
+    "Jina v5 true-visual retrieval reached 16/30 fully grounded answers versus 26/30 for text/OCR, so no representative visual-understanding claim is made.",
+    "The professor-profile proxy Refined without a valid uplift estimate; real-professor fidelity is not established.",
+    "Synthetic learner and autonomy evidence does not establish real-student usability or learning improvement.",
+    "This local qualification does not establish durable hosted production.",
+    "Provider-backed autonomy remains bound to immutable confirmation 024; this operational journey used deterministic fast paths."
+  ]
+}

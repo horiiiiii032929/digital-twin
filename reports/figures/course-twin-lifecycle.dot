@@ -1,0 +1,23 @@
+digraph G {
+graph [rankdir=TB,bgcolor="white",pad=".12",nodesep=".28",ranksep=".34"]; node [shape=box,style=rounded,fontname="Helvetica",fontsize=13,margin=".12,.10"]; edge [fontname="Helvetica",fontsize=11,arrowsize=.65];
+
+ subgraph cluster_p {label="PROFESSOR: configuration and authority";fontname="Helvetica";color=gray;
+ draft[label="1. Choose owned course\nUpload permitted sources; set teaching policy"];
+ preview[label="2. Review preview and release draft\nSource versions + policy + component profile"];
+ check[shape=diamond,label="Preflight passes?"];
+ publish[label="3. Publish reviewed release\nRecheck; replace current course version"];
+ draft->preview->check;check->preview[label="blockers: revise",constraint=false];check->publish[label="yes"];
+ }
+ subgraph cluster_s {label="STUDENT: membership-scoped access";fontname="Helvetica";color=gray;
+ access[label="4. Select available course\nAuthorize membership and current release"];
+ chat[label="5. Open compatible conversation\nAsk / submit attempt / inspect citation"];
+ consent[label="Separate choice: enable / snooze\nor withdraw in-app check-in consent"];
+ access->chat;chat->consent[style=dashed,label="optional setting"];
+ }
+ publish->access[label="published release ID"];
+ review[label="6. Instructor review\nAggregate difficulties + autonomous outcomes"];
+ chat->review[label="saved interaction signals"];
+ review->preview[style=dashed,label="reviewed revision",constraint=false];
+ legend[shape=note,label="Withdrawal or lost access blocks further tutoring.\nOrdinary dialogue does not imply check-in consent.",fontsize=11];review->legend[style=invis];
+
+}

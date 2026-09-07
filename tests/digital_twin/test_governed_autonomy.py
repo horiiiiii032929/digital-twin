@@ -68,6 +68,7 @@ from src.digital_twin.student.autonomy_service import (
     GovernedAutonomyService,
     RepositoryGroundedWordingGenerator,
 )
+from src.digital_twin.clock import VirtualUtcClock
 from src.digital_twin.student.tutoring_graph import (
     DeterministicTurnInterpreter,
     GovernedReactiveTutoringGraphV2,
@@ -221,7 +222,7 @@ def _autonomy_fixture(tmp_path):
         quiet_hours_end="02:00",
         max_messages_per_7_days=3,
     )
-    service = GovernedAutonomyService(repository, outreach)
+    service = GovernedAutonomyService(repository, outreach, clock=VirtualUtcClock(NOW))
     service.set_policy(
         fixture.professor_id,
         fixture.course_a_id,

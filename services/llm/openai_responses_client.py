@@ -12,6 +12,14 @@ from typing import Any
 import httpx
 
 from src.digital_twin.generation.models import ModelTutorOutput, ModelTutorOutputV2
+from src.digital_twin.generation.question_specific import QuestionSpecificProposal
+from src.digital_twin.generation.instructional import InstructionalProposal
+from src.digital_twin.generation.continuation import ContinuationProposal
+from src.digital_twin.generation.request_coverage import RequestCoverageProposal
+from src.digital_twin.generation.compact_instruction import CompactInstructionProposal
+from src.digital_twin.generation.typed_instruction import TypedInstructionProposal
+from src.digital_twin.generation.bounded_revision import BoundedRevisionProposal
+from src.digital_twin.generation.conditional_revision import ConditionalRevisionDecision
 from src.digital_twin.grounding.models import GenerationUsage
 from src.digital_twin.student.autonomy_models import (
     AutonomousPlannerOutputV1,
@@ -25,6 +33,7 @@ from src.digital_twin.student.planning_architectures import (
 )
 from src.digital_twin.llm import (
     LlmAuthenticationError,
+    LlmBudgetExceededError,
     LlmConfigurationError,
     LlmIdentityDriftError,
     LlmMalformedResponseError,
@@ -34,7 +43,7 @@ from src.digital_twin.llm import (
     LlmUnavailableError,
     validate_llm_task,
 )
-from src.digital_twin.model_policy import require_active_release_model
+from src.digital_twin.model_policy import require_active_release_model, require_registered_current_model
 from src.digital_twin.model_policy import OPENAI_MODEL_PRICING_USD_PER_MILLION
 
 
@@ -109,11 +118,15 @@ class OpenAiResponsesClient:
         output_price_usd_per_million: float | None = None,
         credential_environment_variable: str = "OPENAI_API_KEY",
         post: _Post | None = None,
+        experimental_sol_enabled: bool = False,
     ) -> None:
-        self.model = require_active_release_model(model)
+        self.model = (require_registered_current_model(model)
+            if experimental_sol_enabled and model == "gpt-5.6-sol" else require_active_release_model(model))
+        self.experimental_sol_enabled = experimental_sol_enabled
         if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
-        if isinstance(max_output_tokens, bool) or max_output_tokens < 1:
+        if (isinstance(max_output_tokens, bool) or not isinstance(max_output_tokens, int)
+                or max_output_tokens < 1):
             raise ValueError("max_output_tokens must be positive")
         if reasoning_effort not in {"none", "low", "medium", "high", "xhigh"}:
             raise ValueError("reasoning_effort is unsupported")
@@ -146,6 +159,19 @@ class OpenAiResponsesClient:
         self.credential_environment_variable = credential_environment_variable
         self._post = post or self._post_direct
 
+    def conservative_request_cost_usd(self, messages: list[LlmMessage], task: str) -> float:
+        """Ceiling for this bounded text-only schema request, at configured prices.
+
+        UTF-8 bytes conservatively bound input tokens; framing receives additional
+        headroom. The configured output cap includes reasoning tokens. This client
+        has no tools, image/audio inputs, retry or extra provider-side conversation.
+        """
+        payload_bytes = len(json.dumps(self._payload(messages, task), ensure_ascii=False).encode("utf-8"))
+        if payload_bytes > 20_000:
+            raise LlmBudgetExceededError()
+        return ((payload_bytes + 4096) * self.input_price
+                + self.max_output_tokens * self.output_price) / 1_000_000
+
     async def _post_direct(self, **kwargs: Any) -> httpx.Response:
         async with httpx.AsyncClient(
             timeout=httpx.Timeout(self.timeout_seconds)
@@ -153,29 +179,45 @@ class OpenAiResponsesClient:
             return await client.post(**kwargs)
 
     @staticmethod
-    def _schema(task: str) -> dict[str, Any]:
-        if task == "grounded_tutor_atomic_claims":
-            schema = ModelTutorOutputV2.model_json_schema()
-        elif task in {
-            "grounded_tutor_answer",
-            "bounded_pedagogical_tutor_answer",
-        }:
-            schema = ModelTutorOutput.model_json_schema()
-        elif task == "autonomous_tutoring_plan":
-            schema = AutonomousPlannerOutputV1.model_json_schema()
-        elif task == "reactive_tutoring_plan":
-            schema = ReactiveSemanticProposalV2.model_json_schema()
-        elif task == "reactive_tutoring_intent":
-            schema = ReactiveIntentProposalV3.model_json_schema()
-        elif task == "hierarchical_autonomy_plan":
-            schema = HierarchicalPlanningProposalV1.model_json_schema()
-        elif task == "autonomy_plan_verifier":
-            schema = PlannerVerificationV1.model_json_schema()
-        elif task == "autonomous_tutoring_wording_strategy":
-            schema = AutonomousWordingStrategyV1.model_json_schema()
-        else:
-            raise LlmConfigurationError()
-        return _openai_strict_schema(schema)
+    def _output_type(task: str):
+        # A single task registry drives both request schema and response parsing.
+        # Separate branches previously rejected valid output for newly added tasks.
+        outputs = {
+            "question_specific_profile_tutoring": QuestionSpecificProposal,
+            "question_specific_instructional_tutoring": InstructionalProposal,
+            "question_specific_instructional_continuation": ContinuationProposal,
+            "question_specific_request_coverage": RequestCoverageProposal,
+            "question_specific_compact_instruction": CompactInstructionProposal,
+            "question_specific_profile_authority": CompactInstructionProposal,
+            "question_specific_typed_instruction": TypedInstructionProposal,
+            "question_specific_factual_revision": TypedInstructionProposal,
+            "question_specific_bounded_revision": BoundedRevisionProposal,
+            "question_specific_conditional_revision": ConditionalRevisionDecision,
+            "grounded_tutor_atomic_claims": ModelTutorOutputV2,
+            "grounded_tutor_answer": ModelTutorOutput,
+            "bounded_pedagogical_tutor_answer": ModelTutorOutput,
+            "autonomous_tutoring_plan": AutonomousPlannerOutputV1,
+            "reactive_tutoring_plan": ReactiveSemanticProposalV2,
+            "reactive_tutoring_intent": ReactiveIntentProposalV3,
+            "hierarchical_autonomy_plan": HierarchicalPlanningProposalV1,
+            "autonomy_plan_verifier": PlannerVerificationV1,
+            "autonomous_tutoring_wording_strategy": AutonomousWordingStrategyV1,
+        }
+        try:
+            return outputs[task]
+        except KeyError as error:
+            raise LlmConfigurationError() from error
+
+    @classmethod
+    def _schema(cls, task: str) -> dict[str, Any]:
+        raw_schema = cls._output_type(task).model_json_schema()
+        schema = _openai_strict_schema(raw_schema)
+        if task in {"question_specific_typed_instruction", "question_specific_factual_revision", "question_specific_conditional_revision"}:
+            # V10 explicitly qualifies this supported array constraint; keep
+            # historical tasks byte-for-byte on the original conversion path.
+            minimum = raw_schema["$defs"]["FactualInstructionUnit"]["properties"]["source_ids"]["minItems"]
+            schema["$defs"]["FactualInstructionUnit"]["properties"]["source_ids"]["minItems"] = minimum
+        return schema
 
     def _payload(self, messages: list[LlmMessage], task: str) -> dict[str, Any]:
         return {
@@ -202,7 +244,7 @@ class OpenAiResponsesClient:
         }
 
     def _usage(self, payload: dict[str, Any]) -> GenerationUsage:
-        usage = payload.get("usage", {})
+        usage = payload.get("usage")
         if not isinstance(usage, dict):
             raise ValueError("usage is not an object")
         input_tokens = _token_count(usage, "input_tokens")
@@ -375,10 +417,24 @@ class OpenAiResponsesClient:
             raise self._malformed(response, None, stage="response-root")
         observed_model = payload.get("model")
         if observed_model != self.model:
-            raise LlmIdentityDriftError(
+            failure = LlmIdentityDriftError(
                 provider_model=str(observed_model or "not-returned"),
                 provider_revision=None,
             )
+            # Preserve validated observed token counts, but never price an
+            # unexpected model using the requested model's rates.
+            try:
+                observed_usage = payload.get("usage")
+                if not isinstance(observed_usage, dict):
+                    raise ValueError("usage is not an object")
+                input_tokens = _token_count(observed_usage, "input_tokens")
+                output_tokens = _token_count(observed_usage, "output_tokens")
+                failure.usage = GenerationUsage(input_tokens=input_tokens,
+                    output_tokens=output_tokens, total_tokens=input_tokens + output_tokens,
+                    approximate_cost_usd=None)
+            except (TypeError, ValueError):
+                failure.usage = None
+            raise failure
         try:
             usage = self._usage(payload)
         except (TypeError, ValueError) as error:
@@ -397,26 +453,16 @@ class OpenAiResponsesClient:
                 response, payload, stage="structured-root", usage=usage
             )
         try:
-            if task == "grounded_tutor_atomic_claims":
-                validated = ModelTutorOutputV2.model_validate(content)
-            elif task == "autonomous_tutoring_plan":
-                validated = AutonomousPlannerOutputV1.model_validate(content)
-            elif task == "reactive_tutoring_plan":
-                validated = ReactiveSemanticProposalV2.model_validate(content)
-            elif task == "reactive_tutoring_intent":
-                validated = ReactiveIntentProposalV3.model_validate(content)
-            elif task == "hierarchical_autonomy_plan":
-                validated = HierarchicalPlanningProposalV1.model_validate(content)
-            elif task == "autonomy_plan_verifier":
-                validated = PlannerVerificationV1.model_validate(content)
-            elif task == "autonomous_tutoring_wording_strategy":
-                validated = AutonomousWordingStrategyV1.model_validate(content)
-            else:
-                validated = ModelTutorOutput.model_validate(content)
+            validated = self._output_type(task).model_validate(content)
         except (TypeError, ValueError) as error:
-            raise self._malformed(
-                response, payload, stage="schema-validation", usage=usage
-            ) from error
+            failure = self._malformed(response, payload, stage="schema-validation", usage=usage)
+            if hasattr(error, "errors"):
+                # Field paths and error categories only; never include input text.
+                failure.diagnostics["schema_errors"] = [
+                    {"location": list(item["loc"]), "type": item["type"]}
+                    for item in error.errors(include_input=False, include_url=False)
+                ]
+            raise failure from error
         return LlmResponse(
             content=validated.model_dump_json(),
             provider_model=observed_model,
@@ -426,7 +472,9 @@ class OpenAiResponsesClient:
 
 
 def _token_count(usage: dict[str, Any], name: str) -> int:
-    value = usage.get(name, 0)
+    if name not in usage:
+        raise ValueError(f"{name} is missing")
+    value = usage[name]
     if isinstance(value, bool) or not isinstance(value, int) or value < 0:
         raise ValueError(f"{name} must be a non-negative integer")
     return value

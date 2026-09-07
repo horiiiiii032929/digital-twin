@@ -447,6 +447,14 @@ class GenerationTrace(BaseModel):
     policy_action: str = Field(min_length=1)
     latency_ms: float = Field(ge=0, allow_inf_nan=False)
     usage: GenerationUsage = Field(default_factory=GenerationUsage)
+    validation_scope: str | None = None
+    unresolved_detail: str | None = None
+
+
+class ClaimSourceBinding(BaseModel):
+    """Exact source provenance for experimental wording, not entailment proof."""
+    evidence_hit_id: str = Field(min_length=1)
+    text: str = Field(min_length=1, max_length=2400)
 
 
 class AtomicAnswerClaim(BaseModel):
@@ -455,6 +463,7 @@ class AtomicAnswerClaim(BaseModel):
     claim_id: str = Field(pattern=r"^claim-[a-z0-9-]+$")
     text: str = Field(min_length=1)
     evidence_hit_ids: list[str] = Field(min_length=1)
+    source_bindings: list[ClaimSourceBinding] = Field(default_factory=list, max_length=8)
 
     @field_validator("text")
     @classmethod

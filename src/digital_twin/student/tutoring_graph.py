@@ -12,6 +12,9 @@ from functools import lru_cache
 from typing import Protocol, TypedDict
 
 import aiosqlite
+from services.persistence.async_sqlite_coordination import (
+    coordinated_connection, database_operation_lock,
+)
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
 from langgraph.graph import END, START, StateGraph
@@ -215,6 +218,7 @@ class TutoringGraphInput(BaseModel):
     account_id: str = Field(min_length=1)
     conversation: Conversation
     release: DigitalTwinRelease
+    teaching_profile_context: dict | None = None
     student_message: str = Field(min_length=1)
     learner_state: LearnerState
     observed_at: str = Field(default_factory=timestamp_now, min_length=1)
@@ -366,6 +370,7 @@ class LiveReactiveSemanticPlanner:
         belief: LearnerBeliefStateV2,
         evidence_keys: list[str],
         candidate_intent: str,
+        teaching_profile_context: dict | None = None,
     ) -> ReactiveSemanticProposalV2:
         payload = {
             "instruction": (
@@ -389,6 +394,8 @@ class LiveReactiveSemanticPlanner:
             "evidence_range_count": len(evidence_keys),
             "deterministic_candidate_intent": candidate_intent,
         }
+        if teaching_profile_context is not None:
+            payload["approved_teaching_profile"] = teaching_profile_context
         try:
             response = await self.client.chat(
                 [
@@ -764,6 +771,7 @@ class GovernedReactiveTutoringGraphV2:
         interpreter: DeterministicTurnInterpreter | None = None,
         selector: DeterministicIntentSelector | None = None,
         belief_estimator: DeterministicEvidenceCountBeliefEstimator | None = None,
+        initial_reference_priority: Callable[[TutoringGraphInput], bool] | None = None,
     ) -> None:
         if not evidence_gate_configured:
             raise ValueError("T1-v2 requires a selected evidence-sufficiency gate")
@@ -771,6 +779,7 @@ class GovernedReactiveTutoringGraphV2:
             raise ValueError("T1-v2 requires an atomic-claim validator")
         if not checkpoint_database_path.strip():
             raise ValueError("T1-v2 requires a checkpoint database path")
+        self.initial_reference_priority = initial_reference_priority
         self.retrieve = retrieve
         self.generate = generate
         self.fallback = fallback
@@ -857,6 +866,9 @@ class GovernedReactiveTutoringGraphV2:
         )
         async with aiosqlite.connect(self.checkpoint_database_path) as connection:
             saver = AsyncSqliteSaver(connection, serde=serializer)
+            # Every instance targeting this database shares only its short
+            # checkpoint operations, never graph execution or provider calls.
+            saver.lock = database_operation_lock(self.checkpoint_database_path)
             await saver.setup()
             graph = self._builder.compile(checkpointer=saver)
             snapshot = await graph.aget_state(config)
@@ -1153,6 +1165,15 @@ class GovernedReactiveTutoringGraphV2:
         if signals is None:
             raise RuntimeError("retrieval requires turn perception")
         intent = state["intent"]
+        if intent == "pending-evidence" and self.initial_reference_priority is not None and self.initial_reference_priority(runtime.context.graph_input):
+            intent = TutoringIntent.CLARIFY_REQUEST
+            graph_input = runtime.context.graph_input
+            events = [*events, AuditEvent(id=f"initial-reference-{graph_input.event_id}",
+                event_type="initial-reference-priority", account_id=graph_input.account_id,
+                course_id=graph_input.release.course_id, release_id=graph_input.release.id,
+                conversation_id=graph_input.conversation.id,
+                details={"scope": "fresh-conversation-existing-router", "recommended_action": "clarify",
+                    "retrieved_hit_count": len(hits), "semantic_reference_resolution": False})]
         if intent == "pending-evidence":
             intent = (
                 retrieval_boundary_intent(events)
@@ -1305,6 +1326,8 @@ class GovernedReactiveTutoringGraphV2:
             "candidate_intent": candidate_intent,
             "planner_model": self.semantic_planner.model_id,
         }
+        if graph_input.teaching_profile_context is not None:
+            request_payload["approved_teaching_profile"] = graph_input.teaching_profile_context
         request_sha256 = hashlib.sha256(
             json.dumps(
                 request_payload,
@@ -1313,7 +1336,7 @@ class GovernedReactiveTutoringGraphV2:
             ).encode("utf-8")
         ).hexdigest()
         stage = "semantic-plan"
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute("BEGIN IMMEDIATE")
             cursor = await connection.execute(
                 """SELECT request_sha256, status, output_json
@@ -1351,9 +1374,11 @@ class GovernedReactiveTutoringGraphV2:
                 belief=belief,
                 evidence_keys=state["evidence_keys"],
                 candidate_intent=candidate_intent,
+                **({"teaching_profile_context": graph_input.teaching_profile_context}
+                    if graph_input.teaching_profile_context is not None else {}),
             )
         except Exception as error:
-            async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            async with coordinated_connection(self.checkpoint_database_path) as connection:
                 await connection.execute(
                     """UPDATE tutoring_model_calls_v2
                        SET status = 'failed', failure_code = ?, completed_at = ?
@@ -1367,7 +1392,7 @@ class GovernedReactiveTutoringGraphV2:
                 )
                 await connection.commit()
             return None, "operational-provider-failure"
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute(
                 """UPDATE tutoring_model_calls_v2
                    SET status = 'completed', output_json = ?, audit_events_json = '[]',
@@ -1520,7 +1545,7 @@ class GovernedReactiveTutoringGraphV2:
                 separators=(",", ":"),
             ).encode("utf-8")
         ).hexdigest()
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute("BEGIN IMMEDIATE")
             cursor = await connection.execute(
                 """SELECT request_sha256, status, output_json, audit_events_json
@@ -1564,7 +1589,7 @@ class GovernedReactiveTutoringGraphV2:
                 repair_reason,
             )
         except Exception as error:
-            async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+            async with coordinated_connection(self.checkpoint_database_path) as connection:
                 await connection.execute(
                     """UPDATE tutoring_model_calls_v2
                        SET status = 'failed', failure_code = ?, completed_at = ?
@@ -1578,7 +1603,7 @@ class GovernedReactiveTutoringGraphV2:
                 )
                 await connection.commit()
             return None, [], "operational-provider-failure"
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute(
                 """UPDATE tutoring_model_calls_v2
                    SET status = 'completed', output_json = ?, audit_events_json = ?,
@@ -1787,6 +1812,7 @@ def _grounded_response_v2(
     raw_action = answer.trace.policy_action if answer.trace is not None else "no-action"
     policy_action = {
         "answer": "answer",
+        "question": "question",
         "clarify": "clarify",
         "clarify-request": "clarify",
         "no-evidence": "abstain",

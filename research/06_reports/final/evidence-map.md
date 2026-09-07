@@ -1,8 +1,27 @@
 # Final report evidence map
 
-Status: evidence-gathering checkpoint 0.1  
+Status: historical evidence-gathering checkpoint 0.1; superseded for current selection
 Inventory revision: `eac84ba7258ecfbf6681bc25a3cad3a0ac425627`
 Purpose: understand the complete evidence archive before drafting the report
+
+## Current report entrypoint (2026-09-05)
+
+The checkpoint below is preserved as history, including its dated counts and
+interpretations; it is not the current selection or inventory snapshot.
+In particular, confirmation 013's corrected Keep was subsequently revoked by
+`main-commit-audit-resolution-001` and must not justify the final release.
+
+Current report inputs are the [final claim matrix](final-claim-evidence-matrix.md),
+[method catalog](final-method-catalog.md), and
+[registered analysis correction](../../05_evaluation/final-cross-method-factual-confirmation-001-analysis-correction-001-results.md).
+The selected profile is `student-tutor-r1-local-final-v1.json`, version
+`v2.1-final-001-bm25-text-ocr`; qualification 010 passed 43/43 local checks.
+Confirmation 024 and multi-concept confirmation 025 support their bounded
+synthetic claims. Fresh factual confirmation remains Refine at 506/800 fully
+grounded answers; visual confirmation 002 drops Jina v5 and retains text/OCR.
+Use the generated inventory summary for refreshed counts, not the tables below.
+Factual/visual ledgers remain local; 024/010 raw generated artifacts were not
+found locally, so those claims rely on committed aggregates and artifact hashes.
 
 ## What this map does
 

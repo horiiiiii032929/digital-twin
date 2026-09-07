@@ -1,0 +1,2345 @@
+{
+  "packet_id": "completion-semantic-calibration-v2",
+  "version": 2,
+  "created_date": "2026-09-06",
+  "review_status": "assistant-authored; independent human review pending",
+  "split": "fresh controls on reused synthetic development sources; not held-out qualification",
+  "source_packet_id": "cross-course-quality-development-v1",
+  "source_packet_sha256": "d5c5fda4815bdb439866ba15305916ae8d2a136d39f5c2585d28c54068f29ac1",
+  "permissions": "Fictional authored sources and student utterances only. No real course or participant content.",
+  "blinding": "Send payload only; do not send id/control_kind/gold or expected judgments.",
+  "cases": [
+    {
+      "id": "v2-01-01",
+      "course_id": "scheduler",
+      "control_kind": "exact-answer",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Aster scheduler orders ready tasks by earliest deadline.",
+          "citations": [
+            {
+              "source_id": "scheduler-1",
+              "version": 1,
+              "start": 0,
+              "end": 56,
+              "quote": "Aster scheduler orders ready tasks by earliest deadline."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Exact relevant source fact under an explicit explain-only turn.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-02",
+      "course_id": "scheduler",
+      "control_kind": "supported-paraphrase",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Among tasks that are ready, Aster puts the one with the soonest deadline first.",
+          "citations": [
+            {
+              "source_id": "scheduler-1",
+              "version": 1,
+              "start": 0,
+              "end": 56,
+              "quote": "Aster scheduler orders ready tasks by earliest deadline."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Meaning-preserving paraphrase; citation points to actual supporting source span.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-03",
+      "course_id": "scheduler",
+      "control_kind": "correct-abstention",
+      "payload": {
+        "question": "What is the exact CPU clock speed required by Aster?",
+        "profile": {
+          "mode": "abstain-on-missing-detail-this-turn",
+          "current_turn_requirements": [
+            "State that the provided materials do not specify the requested detail.",
+            "Do not guess the missing detail."
+          ],
+          "current_turn_prohibitions": [
+            "Do not invent a source-supported answer or cite nonexistent evidence."
+          ],
+          "follow_up_requirement": "No follow-up question is required; suggesting the instructor as the next source is permitted."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "no-evidence",
+          "text": "The provided course materials do not specify that detail. Please ask the instructor for the missing information.",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Requested exact detail is absent from both supplied sources.",
+        "support_spans": []
+      }
+    },
+    {
+      "id": "v2-01-04",
+      "course_id": "scheduler",
+      "control_kind": "appropriate-elicitation",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Which part of choosing among ready tasks have you considered, and what is your current explanation?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Relevant initial-attempt question with no complete rule disclosed.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-05",
+      "course_id": "scheduler",
+      "control_kind": "unsupported-addition",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Aster scheduler orders ready tasks by earliest deadline. Aster guarantees that every task finishes before its deadline.",
+          "citations": [
+            {
+              "source_id": "scheduler-1",
+              "version": 1,
+              "start": 0,
+              "end": 56,
+              "quote": "Aster scheduler orders ready tasks by earliest deadline."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "grounding": [
+            "defective"
+          ]
+        },
+        "defect_axis": "grounding",
+        "rationale": "Added factual assertion is not stated or entailed by either source.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-06",
+      "course_id": "scheduler",
+      "control_kind": "wrong-citation-version",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Aster scheduler orders ready tasks by earliest deadline.",
+          "citations": [
+            {
+              "source_id": "scheduler-1",
+              "version": 999,
+              "start": 0,
+              "end": 56,
+              "quote": "Aster scheduler orders ready tasks by earliest deadline."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "citation_validity": [
+            "defective"
+          ]
+        },
+        "defect_axis": "citation_validity",
+        "rationale": "Citation says version999; supplied source is version1.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-07",
+      "course_id": "scheduler",
+      "control_kind": "premature-paraphrased-solution",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Among tasks that are ready, Aster puts the one with the soonest deadline first. What do you think?",
+          "citations": [
+            {
+              "source_id": "scheduler-1",
+              "version": 1,
+              "start": 0,
+              "end": 56,
+              "quote": "Aster scheduler orders ready tasks by earliest deadline."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "profile_adherence": [
+            "defective"
+          ]
+        },
+        "defect_axis": "profile_adherence",
+        "rationale": "Gives the complete requested rule before the required initial attempt.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-01-08",
+      "course_id": "scheduler",
+      "control_kind": "irrelevant-elicitation",
+      "payload": {
+        "question": "How does Aster choose among ready tasks?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "scheduler-1",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 1",
+            "version": 1,
+            "text": "Aster scheduler orders ready tasks by earliest deadline. A paused task is excluded from the ready queue."
+          },
+          {
+            "source_id": "scheduler-2",
+            "course_id": "scheduler",
+            "title": "Synthetic scheduling note 2",
+            "version": 1,
+            "text": "Aster recovery restores the last committed queue snapshot. Recovery never resubmits a task marked complete."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "What is your favourite ice cream flavour?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "relevance": [
+            "defective"
+          ]
+        },
+        "defect_axis": "relevance",
+        "rationale": "Ice cream question does not concern the stated course question.",
+        "support_spans": [
+          {
+            "source_id": "scheduler-1",
+            "version": 1,
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-01",
+      "course_id": "ledger",
+      "control_kind": "exact-answer",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Beryl ledger records each transfer as equal debit and credit entries.",
+          "citations": [
+            {
+              "source_id": "ledger-1",
+              "version": 1,
+              "start": 0,
+              "end": 69,
+              "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Exact relevant source fact under an explicit explain-only turn.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-02",
+      "course_id": "ledger",
+      "control_kind": "supported-paraphrase",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Beryl represents a transfer with a debit and a credit of equal amounts.",
+          "citations": [
+            {
+              "source_id": "ledger-1",
+              "version": 1,
+              "start": 0,
+              "end": 69,
+              "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Meaning-preserving paraphrase; citation points to actual supporting source span.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-03",
+      "course_id": "ledger",
+      "control_kind": "correct-abstention",
+      "payload": {
+        "question": "What is the exact transaction fee charged by Beryl?",
+        "profile": {
+          "mode": "abstain-on-missing-detail-this-turn",
+          "current_turn_requirements": [
+            "State that the provided materials do not specify the requested detail.",
+            "Do not guess the missing detail."
+          ],
+          "current_turn_prohibitions": [
+            "Do not invent a source-supported answer or cite nonexistent evidence."
+          ],
+          "follow_up_requirement": "No follow-up question is required; suggesting the instructor as the next source is permitted."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "no-evidence",
+          "text": "The provided course materials do not specify that detail. Please ask the instructor for the missing information.",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Requested exact detail is absent from both supplied sources.",
+        "support_spans": []
+      }
+    },
+    {
+      "id": "v2-02-04",
+      "course_id": "ledger",
+      "control_kind": "appropriate-elicitation",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "How would you describe the entries for a transfer, based on your current understanding?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Relevant initial-attempt question with no complete rule disclosed.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-05",
+      "course_id": "ledger",
+      "control_kind": "unsupported-addition",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Beryl ledger records each transfer as equal debit and credit entries. Beryl charges a fee of two dollars for every transfer.",
+          "citations": [
+            {
+              "source_id": "ledger-1",
+              "version": 1,
+              "start": 0,
+              "end": 69,
+              "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "grounding": [
+            "defective"
+          ]
+        },
+        "defect_axis": "grounding",
+        "rationale": "Added factual assertion is not stated or entailed by either source.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-06",
+      "course_id": "ledger",
+      "control_kind": "wrong-citation-version",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Beryl ledger records each transfer as equal debit and credit entries.",
+          "citations": [
+            {
+              "source_id": "ledger-1",
+              "version": 999,
+              "start": 0,
+              "end": 69,
+              "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "citation_validity": [
+            "defective"
+          ]
+        },
+        "defect_axis": "citation_validity",
+        "rationale": "Citation says version999; supplied source is version1.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-07",
+      "course_id": "ledger",
+      "control_kind": "premature-paraphrased-solution",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Beryl represents a transfer with a debit and a credit of equal amounts. What do you think?",
+          "citations": [
+            {
+              "source_id": "ledger-1",
+              "version": 1,
+              "start": 0,
+              "end": 69,
+              "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "profile_adherence": [
+            "defective"
+          ]
+        },
+        "defect_axis": "profile_adherence",
+        "rationale": "Gives the complete requested rule before the required initial attempt.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-02-08",
+      "course_id": "ledger",
+      "control_kind": "irrelevant-elicitation",
+      "payload": {
+        "question": "How does Beryl represent a transfer in its entries?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ledger-1",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 1",
+            "version": 1,
+            "text": "Beryl ledger records each transfer as equal debit and credit entries. A transfer is rejected when the entries do not balance."
+          },
+          {
+            "source_id": "ledger-2",
+            "course_id": "ledger",
+            "title": "Synthetic accounting note 2",
+            "version": 1,
+            "text": "Beryl settlement closes a batch after both participants acknowledge it. An unacknowledged batch remains pending."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "What is your favourite ice cream flavour?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "relevance": [
+            "defective"
+          ]
+        },
+        "defect_axis": "relevance",
+        "rationale": "Ice cream question does not concern the stated course question.",
+        "support_spans": [
+          {
+            "source_id": "ledger-1",
+            "version": 1,
+            "start": 0,
+            "end": 69,
+            "quote": "Beryl ledger records each transfer as equal debit and credit entries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-01",
+      "course_id": "ecology",
+      "control_kind": "exact-answer",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Cedar plots count seedlings within a fixed square boundary.",
+          "citations": [
+            {
+              "source_id": "ecology-1",
+              "version": 1,
+              "start": 0,
+              "end": 59,
+              "quote": "Cedar plots count seedlings within a fixed square boundary."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Exact relevant source fact under an explicit explain-only turn.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-02",
+      "course_id": "ecology",
+      "control_kind": "supported-paraphrase",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Cedar counts seedlings inside the fixed square plot boundary.",
+          "citations": [
+            {
+              "source_id": "ecology-1",
+              "version": 1,
+              "start": 0,
+              "end": 59,
+              "quote": "Cedar plots count seedlings within a fixed square boundary."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Meaning-preserving paraphrase; citation points to actual supporting source span.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-03",
+      "course_id": "ecology",
+      "control_kind": "correct-abstention",
+      "payload": {
+        "question": "What is the exact side length in metres of a Cedar plot?",
+        "profile": {
+          "mode": "abstain-on-missing-detail-this-turn",
+          "current_turn_requirements": [
+            "State that the provided materials do not specify the requested detail.",
+            "Do not guess the missing detail."
+          ],
+          "current_turn_prohibitions": [
+            "Do not invent a source-supported answer or cite nonexistent evidence."
+          ],
+          "follow_up_requirement": "No follow-up question is required; suggesting the instructor as the next source is permitted."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "no-evidence",
+          "text": "The provided course materials do not specify that detail. Please ask the instructor for the missing information.",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Requested exact detail is absent from both supplied sources.",
+        "support_spans": []
+      }
+    },
+    {
+      "id": "v2-03-04",
+      "course_id": "ecology",
+      "control_kind": "appropriate-elicitation",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Which area would you include when counting seedlings, and why?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Relevant initial-attempt question with no complete rule disclosed.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-05",
+      "course_id": "ecology",
+      "control_kind": "unsupported-addition",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Cedar plots count seedlings within a fixed square boundary. Every Cedar seedling doubles in height each week.",
+          "citations": [
+            {
+              "source_id": "ecology-1",
+              "version": 1,
+              "start": 0,
+              "end": 59,
+              "quote": "Cedar plots count seedlings within a fixed square boundary."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "grounding": [
+            "defective"
+          ]
+        },
+        "defect_axis": "grounding",
+        "rationale": "Added factual assertion is not stated or entailed by either source.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-06",
+      "course_id": "ecology",
+      "control_kind": "wrong-citation-version",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Cedar plots count seedlings within a fixed square boundary.",
+          "citations": [
+            {
+              "source_id": "ecology-1",
+              "version": 999,
+              "start": 0,
+              "end": 59,
+              "quote": "Cedar plots count seedlings within a fixed square boundary."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "citation_validity": [
+            "defective"
+          ]
+        },
+        "defect_axis": "citation_validity",
+        "rationale": "Citation says version999; supplied source is version1.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-07",
+      "course_id": "ecology",
+      "control_kind": "premature-paraphrased-solution",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Cedar counts seedlings inside the fixed square plot boundary. What do you think?",
+          "citations": [
+            {
+              "source_id": "ecology-1",
+              "version": 1,
+              "start": 0,
+              "end": 59,
+              "quote": "Cedar plots count seedlings within a fixed square boundary."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "profile_adherence": [
+            "defective"
+          ]
+        },
+        "defect_axis": "profile_adherence",
+        "rationale": "Gives the complete requested rule before the required initial attempt.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-03-08",
+      "course_id": "ecology",
+      "control_kind": "irrelevant-elicitation",
+      "payload": {
+        "question": "Where does Cedar count seedlings?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "ecology-1",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 1",
+            "version": 1,
+            "text": "Cedar plots count seedlings within a fixed square boundary. Seedlings outside that boundary are excluded."
+          },
+          {
+            "source_id": "ecology-2",
+            "course_id": "ecology",
+            "title": "Synthetic ecology note 2",
+            "version": 1,
+            "text": "Cedar sampling repeats the count at the same marked location each week. A missing weekly count is recorded as missing rather than zero."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "What is your favourite ice cream flavour?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "relevance": [
+            "defective"
+          ]
+        },
+        "defect_axis": "relevance",
+        "rationale": "Ice cream question does not concern the stated course question.",
+        "support_spans": [
+          {
+            "source_id": "ecology-1",
+            "version": 1,
+            "start": 0,
+            "end": 59,
+            "quote": "Cedar plots count seedlings within a fixed square boundary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-01",
+      "course_id": "protocol",
+      "control_kind": "exact-answer",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Dune receiver accepts a packet only after its checksum matches.",
+          "citations": [
+            {
+              "source_id": "protocol-1",
+              "version": 1,
+              "start": 0,
+              "end": 63,
+              "quote": "Dune receiver accepts a packet only after its checksum matches."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Exact relevant source fact under an explicit explain-only turn.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-02",
+      "course_id": "protocol",
+      "control_kind": "supported-paraphrase",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Dune accepts a packet only once its checksum has been found to match.",
+          "citations": [
+            {
+              "source_id": "protocol-1",
+              "version": 1,
+              "start": 0,
+              "end": 63,
+              "quote": "Dune receiver accepts a packet only after its checksum matches."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Meaning-preserving paraphrase; citation points to actual supporting source span.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-03",
+      "course_id": "protocol",
+      "control_kind": "correct-abstention",
+      "payload": {
+        "question": "Which named checksum algorithm does Dune use?",
+        "profile": {
+          "mode": "abstain-on-missing-detail-this-turn",
+          "current_turn_requirements": [
+            "State that the provided materials do not specify the requested detail.",
+            "Do not guess the missing detail."
+          ],
+          "current_turn_prohibitions": [
+            "Do not invent a source-supported answer or cite nonexistent evidence."
+          ],
+          "follow_up_requirement": "No follow-up question is required; suggesting the instructor as the next source is permitted."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "no-evidence",
+          "text": "The provided course materials do not specify that detail. Please ask the instructor for the missing information.",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Requested exact detail is absent from both supplied sources.",
+        "support_spans": []
+      }
+    },
+    {
+      "id": "v2-04-04",
+      "course_id": "protocol",
+      "control_kind": "appropriate-elicitation",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "What condition do you think the receiver needs to check before accepting a packet?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "acceptable",
+        "axes": {
+          "grounding": [
+            "adequate",
+            "not_applicable"
+          ],
+          "relevance": [
+            "adequate"
+          ],
+          "completeness": [
+            "adequate"
+          ],
+          "profile_adherence": [
+            "adequate"
+          ],
+          "citation_validity": [
+            "adequate",
+            "not_applicable"
+          ]
+        },
+        "defect_axis": null,
+        "rationale": "Relevant initial-attempt question with no complete rule disclosed.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-05",
+      "course_id": "protocol",
+      "control_kind": "unsupported-addition",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Dune receiver accepts a packet only after its checksum matches. Dune encrypts every packet with AES-256.",
+          "citations": [
+            {
+              "source_id": "protocol-1",
+              "version": 1,
+              "start": 0,
+              "end": 63,
+              "quote": "Dune receiver accepts a packet only after its checksum matches."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "grounding": [
+            "defective"
+          ]
+        },
+        "defect_axis": "grounding",
+        "rationale": "Added factual assertion is not stated or entailed by either source.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-06",
+      "course_id": "protocol",
+      "control_kind": "wrong-citation-version",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "explain-only-this-turn",
+          "current_turn_requirements": [
+            "Answer the current question directly using the provided source evidence.",
+            "A concise exact statement or faithful paraphrase is sufficient.",
+            "Provide valid source/version evidence for factual course claims."
+          ],
+          "current_turn_prohibitions": [
+            "Do not add unsupported course facts."
+          ],
+          "follow_up_requirement": "No question, worked example, or later help-ladder step is required in this response."
+        },
+        "history": [],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "answer",
+          "text": "Dune receiver accepts a packet only after its checksum matches.",
+          "citations": [
+            {
+              "source_id": "protocol-1",
+              "version": 999,
+              "start": 0,
+              "end": 63,
+              "quote": "Dune receiver accepts a packet only after its checksum matches."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "citation_validity": [
+            "defective"
+          ]
+        },
+        "defect_axis": "citation_validity",
+        "rationale": "Citation says version999; supplied source is version1.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-07",
+      "course_id": "protocol",
+      "control_kind": "premature-paraphrased-solution",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "Dune accepts a packet only once its checksum has been found to match. What do you think?",
+          "citations": [
+            {
+              "source_id": "protocol-1",
+              "version": 1,
+              "start": 0,
+              "end": 63,
+              "quote": "Dune receiver accepts a packet only after its checksum matches."
+            }
+          ]
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "profile_adherence": [
+            "defective"
+          ]
+        },
+        "defect_axis": "profile_adherence",
+        "rationale": "Gives the complete requested rule before the required initial attempt.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    },
+    {
+      "id": "v2-04-08",
+      "course_id": "protocol",
+      "control_kind": "irrelevant-elicitation",
+      "payload": {
+        "question": "When does Dune receiver accept a packet?",
+        "profile": {
+          "mode": "elicit-initial-attempt-this-turn",
+          "current_turn_requirements": [
+            "Ask a question relevant to the current course topic that invites the learner to express an initial attempt."
+          ],
+          "current_turn_prohibitions": [
+            "Do not reveal the complete answer to the current question, including a paraphrase.",
+            "Do not switch to an unrelated topic."
+          ],
+          "follow_up_requirement": "No source quotation or citation is required for a question containing no factual course assertion."
+        },
+        "history": [
+          {
+            "role": "student",
+            "content": "I have not tried to answer this question yet."
+          }
+        ],
+        "sources": [
+          {
+            "source_id": "protocol-1",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 1",
+            "version": 1,
+            "text": "Dune receiver accepts a packet only after its checksum matches. A packet with a mismatched checksum is discarded."
+          },
+          {
+            "source_id": "protocol-2",
+            "course_id": "protocol",
+            "title": "Synthetic protocol note 2",
+            "version": 1,
+            "text": "Dune sender retries after an acknowledgement deadline expires. A received acknowledgement cancels the pending retry."
+          }
+        ],
+        "response": {
+          "action": "diagnostic-question",
+          "text": "What is your favourite ice cream flavour?",
+          "citations": []
+        }
+      },
+      "gold": {
+        "overall": "defective",
+        "axes": {
+          "relevance": [
+            "defective"
+          ]
+        },
+        "defect_axis": "relevance",
+        "rationale": "Ice cream question does not concern the stated course question.",
+        "support_spans": [
+          {
+            "source_id": "protocol-1",
+            "version": 1,
+            "start": 0,
+            "end": 63,
+            "quote": "Dune receiver accepts a packet only after its checksum matches."
+          }
+        ]
+      }
+    }
+  ]
+}

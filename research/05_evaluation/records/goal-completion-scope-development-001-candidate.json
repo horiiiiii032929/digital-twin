@@ -1,0 +1,2581 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-06",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "component": "conversation-orchestration",
+  "dataset": {
+    "id": "goal-scope-histories-v1",
+    "split": "development",
+    "histories_per_arm": 72,
+    "personas": 6,
+    "simulator_families": 2,
+    "seeds": [
+      9101,
+      9102,
+      9103
+    ],
+    "concepts": 6,
+    "days": 30,
+    "restarts_per_history": 1,
+    "permissions": "Repository-authored synthetic sources, students and time; no private data.",
+    "reuse": "Six concepts and driver reused from 025; fresh seed histories, not independent held-out validation.",
+    "rationale": "Full persona/family grid with three repeats, intended as bounded regression coverage, not powered learning-effect inference."
+  },
+  "plan": "research/04_experiments/2026-09-06-goal-completion-scope-plan.md",
+  "limitations": [
+    "Deterministic generation and planning; zero external LLM calls.",
+    "Operational evidence thresholds are not calibrated mastery or instructor approval.",
+    "Same-template histories are dependent; goal fractions have no population confidence interval.",
+    "Final-DB audit cannot disambiguate equal virtual timestamps; exact commit boundaries are covered by service tests.",
+    "No automatic rewrite of historical completed goals.",
+    "Provider-backed final composition and real-student learning are not requalified."
+  ],
+  "run_id": "goal-completion-scope-development-001-candidate",
+  "status": "completed",
+  "decision": "keep-objective-scoped-correction",
+  "configuration": {
+    "goal_manager": "deterministic-autonomous-goal-manager-v2",
+    "generation": "deterministic",
+    "required_correct": 2,
+    "maximum_incorrect": 0,
+    "minimum_attribution_confidence": 0.5,
+    "objective_binding": "exact objective, all required concepts, committed state only"
+  },
+  "runtime_result": {
+    "run_id": "goal-completion-scope-development-001-candidate",
+    "gates": {
+      "t1-v2-reactive:attribution_accuracy": {
+        "threshold": 0.95,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-reactive:assessment_agreement": {
+        "threshold": 0.95,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-reactive:attempts_recognised": {
+        "threshold": 1.0,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-reactive:quiet_hour_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-reactive:frequency_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-reactive:cooldown_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-reactive:provider_calls": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:attribution_accuracy": {
+        "threshold": 0.95,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:assessment_agreement": {
+        "threshold": 0.95,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:attempts_recognised": {
+        "threshold": 1.0,
+        "observed": 1.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:quiet_hour_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:frequency_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:cooldown_violations": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "t1-v2-autonomous:provider_calls": {
+        "threshold": 0,
+        "observed": 0.0,
+        "pass": true
+      },
+      "target-scoped-completions": {
+        "pass": true,
+        "observed": 0,
+        "threshold": 0
+      },
+      "positive-completions": {
+        "pass": true,
+        "observed": 15,
+        "threshold": 1
+      },
+      "restart-consistency": {
+        "pass": true
+      },
+      "completed-histories": {
+        "pass": true
+      },
+      "database-coverage": {
+        "pass": true
+      }
+    },
+    "decision": "keep",
+    "peak_memory_native_units": 282034176,
+    "peak_memory_unit": "bytes",
+    "responses": 72,
+    "summary": {
+      "aggregate": {
+        "t1-v2-autonomous": {
+          "n_cases": 36,
+          "attribution_accuracy": 1.0,
+          "assessment_agreement": 1.0,
+          "attempts_recognised": 1.0,
+          "mse_vs_hidden": 0.08190694214186565,
+          "brier_next_outcome": 0.25137179576084734,
+          "ece_next_outcome": 0.2078412747086276,
+          "auroc_next_outcome": 0.4582156426351152,
+          "messages_delivered": 10.61111111111111,
+          "wasted_rate": 0.35722502805836137,
+          "follow_up_fraction": 0.41524971941638605,
+          "quiet_hour_violations": 0.0,
+          "frequency_violations": 0.0,
+          "cooldown_violations": 0.0,
+          "final_hidden_mastery": 0.36081663864031,
+          "concepts_mastered_final": 0.8333333333333334,
+          "provider_calls": 0.0,
+          "cost_usd": 0.0,
+          "realization_fallback_rate": 0.0,
+          "mse_vs_hidden[bkt-like]": 0.09917787752242796,
+          "wasted_rate[bkt-like]": 0.32199775533108865,
+          "mse_vs_hidden[logistic-like]": 0.06463600676130335,
+          "wasted_rate[logistic-like]": 0.3924523007856341,
+          "worst_persona_final_mastery": 0.25944420163030973,
+          "realization_slices": {
+            "deterministic-semantic-frame": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "final_hidden_mastery": 0.36081663864031,
+              "realization_fallback_rate": 0.0
+            }
+          },
+          "hard_gates": {
+            "zero_quiet_hour_violations": true,
+            "zero_frequency_violations": true,
+            "zero_cooldown_violations": true
+          }
+        },
+        "t1-v2-reactive": {
+          "n_cases": 36,
+          "attribution_accuracy": 1.0,
+          "assessment_agreement": 1.0,
+          "attempts_recognised": 1.0,
+          "mse_vs_hidden": 0.0844670466686464,
+          "brier_next_outcome": 0.26460950325097105,
+          "ece_next_outcome": 0.24000190041525496,
+          "auroc_next_outcome": 0.39793106337005146,
+          "messages_delivered": 0.0,
+          "wasted_rate": null,
+          "follow_up_fraction": null,
+          "quiet_hour_violations": 0.0,
+          "frequency_violations": 0.0,
+          "cooldown_violations": 0.0,
+          "final_hidden_mastery": 0.3254264999550928,
+          "concepts_mastered_final": 0.5555555555555556,
+          "provider_calls": 0.0,
+          "cost_usd": 0.0,
+          "realization_fallback_rate": 0.0,
+          "mse_vs_hidden[bkt-like]": 0.10307989372075319,
+          "wasted_rate[bkt-like]": null,
+          "mse_vs_hidden[logistic-like]": 0.06585419961653965,
+          "wasted_rate[logistic-like]": null,
+          "worst_persona_final_mastery": 0.17069571688632004,
+          "realization_slices": {
+            "deterministic-semantic-frame": {
+              "n_cases": 36,
+              "attribution_accuracy": 1.0,
+              "assessment_agreement": 1.0,
+              "final_hidden_mastery": 0.3254264999550928,
+              "realization_fallback_rate": 0.0
+            }
+          },
+          "hard_gates": {
+            "zero_quiet_hour_violations": true,
+            "zero_frequency_violations": true,
+            "zero_cooldown_violations": true
+          }
+        }
+      },
+      "paired_contrasts": {
+        "t1-v2-autonomous vs t1-v2-reactive": {
+          "mse_vs_hidden": {
+            "n_pairs": 36,
+            "mean_difference": -0.00256010452678076,
+            "ci95": [
+              -0.007212814364746205,
+              0.0016756327944987433
+            ],
+            "lower_bound_excludes_zero": false
+          },
+          "attribution_accuracy": {
+            "n_pairs": 36,
+            "mean_difference": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ],
+            "lower_bound_excludes_zero": false
+          },
+          "wasted_rate": {
+            "n_pairs": 0,
+            "mean_difference": null,
+            "ci95": null
+          },
+          "follow_up_fraction": {
+            "n_pairs": 0,
+            "mean_difference": null,
+            "ci95": null
+          },
+          "final_hidden_mastery": {
+            "n_pairs": 36,
+            "mean_difference": 0.035390138685217246,
+            "ci95": [
+              0.015481679602118804,
+              0.05521365551084518
+            ],
+            "lower_bound_excludes_zero": true
+          },
+          "messages_delivered": {
+            "n_pairs": 36,
+            "mean_difference": 10.61111111111111,
+            "ci95": [
+              10.277777777777779,
+              10.944444444444445
+            ],
+            "lower_bound_excludes_zero": true
+          }
+        }
+      },
+      "run": {
+        "program_id": "goal-completion-scope-development-001-candidate",
+        "code": {
+          "revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+          "dirty": true
+        },
+        "elapsed_seconds": 315.96,
+        "network": "none",
+        "conditions": [
+          "t1-v2-reactive",
+          "t1-v2-autonomous"
+        ],
+        "personas": [
+          "fast-learner",
+          "slow-learner",
+          "high-forgetting",
+          "misconception-prone",
+          "answer-seeking",
+          "low-receptivity"
+        ],
+        "families": [
+          "bkt-like",
+          "logistic-like"
+        ],
+        "seeds": [
+          9101,
+          9102,
+          9103
+        ],
+        "days": 30,
+        "cases": 72,
+        "bootstrap_resamples": 1000
+      }
+    },
+    "goal_audit": {
+      "database_count": 72,
+      "goal_status_counts": {
+        "active": 56,
+        "expired": 187,
+        "completed": 15
+      },
+      "completed": 15,
+      "supported": 15,
+      "unsupported": 0,
+      "affected_histories": 0,
+      "unmapped": 0,
+      "limitations": [
+        "Final database audit cannot disambiguate commits with identical virtual timestamps.",
+        "A completion is supported if one same-student/course/release conversation has eligible evidence; conversations are never pooled.",
+        "Operational evidence eligibility is not human mastery or a pedagogical quality score."
+      ]
+    }
+  },
+  "completion_evidence": {
+    "database_count": 72,
+    "goal_status_counts": {
+      "active": 56,
+      "expired": 187,
+      "completed": 15
+    },
+    "completed": 15,
+    "supported": 15,
+    "unsupported": 0,
+    "affected_histories": 0,
+    "unmapped": 0,
+    "records": [
+      {
+        "database": "t1-v2-autonomous/hs-bkt-like-fast-learner-9103/9e6fff4acd67811d7eed.sqlite3",
+        "database_sha256": "b5c1a0fc2a019086a838337eb7f7dfb73ced3351da8433b0bed3c1d856b92a07",
+        "goal_id": "autonomous-goal-5869025e-9462-46c2-a250-21e1f448af62",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-11T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-f3fd49ab-906a-4977-a41e-c18842f21715",
+            "revision": 5,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 2,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "beb3e3d95786332a5e5ea41187bd22a0afd3138582d165abc1ea12fb69f34f5b",
+                  "8a5651fb66e8a1ed52bdf63a8e9c66eeca6f71fd5f722c24c49858818f0c85a3"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 5,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "e078003ca4053201e8a1e974a3cbf5bf329af33d12152151573090cb2bc0c6ec",
+                  "83b93a01a604747a30d28a1271be87b3156901dcf0947488eec2380618cc1838",
+                  "beb3e3d95786332a5e5ea41187bd22a0afd3138582d165abc1ea12fb69f34f5b",
+                  "8a5651fb66e8a1ed52bdf63a8e9c66eeca6f71fd5f722c24c49858818f0c85a3",
+                  "45965bbbf420e77cc9d415a34a7e40f9306e060900a65b7dd0112524d34479dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "83b93a01a604747a30d28a1271be87b3156901dcf0947488eec2380618cc1838",
+                  "45965bbbf420e77cc9d415a34a7e40f9306e060900a65b7dd0112524d34479dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "e078003ca4053201e8a1e974a3cbf5bf329af33d12152151573090cb2bc0c6ec",
+                  "83b93a01a604747a30d28a1271be87b3156901dcf0947488eec2380618cc1838",
+                  "45965bbbf420e77cc9d415a34a7e40f9306e060900a65b7dd0112524d34479dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 1,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 1,
+                "attribution_confidence": 0.3333333333333333,
+                "uncertainty": 0.6666666666666667,
+                "observation_ids": [
+                  "e078003ca4053201e8a1e974a3cbf5bf329af33d12152151573090cb2bc0c6ec",
+                  "beb3e3d95786332a5e5ea41187bd22a0afd3138582d165abc1ea12fb69f34f5b",
+                  "8a5651fb66e8a1ed52bdf63a8e9c66eeca6f71fd5f722c24c49858818f0c85a3"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-bkt-like-low-receptivity-9101/334f15c6cb001a716411.sqlite3",
+        "database_sha256": "d217131af924bf5670a1b0cebfb1318d4f4844271dc8ecbb88ed15fac74040b6",
+        "goal_id": "autonomous-goal-8e60e06d-089d-4df9-978a-5e5ce465f914",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-10T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-261a138e-79be-4e6f-a6ae-92a223179820",
+            "revision": 3,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "a7871f7687aab9ad495844f6fa8ae84efdeb9719d059dc1ee48daa83487b29b5"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "a7871f7687aab9ad495844f6fa8ae84efdeb9719d059dc1ee48daa83487b29b5",
+                  "cdb0721bdd2aa83e07f45bac52188e6acb97248b87fce9a7a6d7de51166971ad",
+                  "be2cd312bd3159eaf3a5fee549aafde666f93ab0e3b37a6841e9715090fc3aaa"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "cdb0721bdd2aa83e07f45bac52188e6acb97248b87fce9a7a6d7de51166971ad",
+                  "be2cd312bd3159eaf3a5fee549aafde666f93ab0e3b37a6841e9715090fc3aaa"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "a7871f7687aab9ad495844f6fa8ae84efdeb9719d059dc1ee48daa83487b29b5",
+                  "cdb0721bdd2aa83e07f45bac52188e6acb97248b87fce9a7a6d7de51166971ad",
+                  "be2cd312bd3159eaf3a5fee549aafde666f93ab0e3b37a6841e9715090fc3aaa"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-bkt-like-slow-learner-9101/df461371513719f2f513.sqlite3",
+        "database_sha256": "3df94e5ba405b253f3ac9d2479cd9b14fac8f7518f6ab1f9dc5e0491ffa452f2",
+        "goal_id": "autonomous-goal-4f336359-9518-43d7-a544-6f2202c2a804",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-11T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-b6206aea-88bc-471f-aa6b-7f84aaeb27a0",
+            "revision": 7,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "e04464054f5522e75c682c4859afb719d7791a231624efc9679950afc1adb5d5",
+                  "949d6395b8bf279359a588e64a0f73ac0a159687f97a05a0e8e1a43f38a8c365",
+                  "5228712dda7a65cbe5e875824c499af5bfad91a4b8758541e18ab001d2741fe7",
+                  "66949f2276b00cd42fd92eb7c1044e77c0bf5eaa94f13bb6ee381303eacb585f"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 6,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "d4b6a58c246be212614f4ca12e78fba48477d9c008469003d62719b721592414",
+                  "e04464054f5522e75c682c4859afb719d7791a231624efc9679950afc1adb5d5",
+                  "61dd74c5ad3756a4d0125857aab61aa22a7205d1f0024732303a95d6777560be",
+                  "949d6395b8bf279359a588e64a0f73ac0a159687f97a05a0e8e1a43f38a8c365",
+                  "5228712dda7a65cbe5e875824c499af5bfad91a4b8758541e18ab001d2741fe7",
+                  "2f63ae99c068c68fd6ace7d7bdc2b0036c5727dfb2df39dd341db3d7f1fb1190"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "61dd74c5ad3756a4d0125857aab61aa22a7205d1f0024732303a95d6777560be",
+                  "2f63ae99c068c68fd6ace7d7bdc2b0036c5727dfb2df39dd341db3d7f1fb1190",
+                  "66949f2276b00cd42fd92eb7c1044e77c0bf5eaa94f13bb6ee381303eacb585f"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "d4b6a58c246be212614f4ca12e78fba48477d9c008469003d62719b721592414",
+                  "61dd74c5ad3756a4d0125857aab61aa22a7205d1f0024732303a95d6777560be",
+                  "2f63ae99c068c68fd6ace7d7bdc2b0036c5727dfb2df39dd341db3d7f1fb1190"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 5,
+                "assessed_evidence_count": 3,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 3,
+                "attribution_confidence": 0.6,
+                "uncertainty": 0.4,
+                "observation_ids": [
+                  "d4b6a58c246be212614f4ca12e78fba48477d9c008469003d62719b721592414",
+                  "e04464054f5522e75c682c4859afb719d7791a231624efc9679950afc1adb5d5",
+                  "949d6395b8bf279359a588e64a0f73ac0a159687f97a05a0e8e1a43f38a8c365",
+                  "5228712dda7a65cbe5e875824c499af5bfad91a4b8758541e18ab001d2741fe7",
+                  "66949f2276b00cd42fd92eb7c1044e77c0bf5eaa94f13bb6ee381303eacb585f"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-bkt-like-slow-learner-9103/290d37b97963b459020b.sqlite3",
+        "database_sha256": "083988b524e071f37f82dd0f543f9bb70d0540225f78b2ba11adfd0394faefaf",
+        "goal_id": "autonomous-goal-f7a41505-3172-4fca-9322-7ed24b8f4d60",
+        "objective": "Explain how token bucket shaping controls bursts.",
+        "completed_at": "2026-09-14T14:00:00+00:00",
+        "targets": [
+          "concept-token-bucket"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-4e08cd52-6605-486c-9a55-e61c468d72fa",
+            "revision": 4,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "668ccaf766602be5eeda104dfbe56219e2d996135eb129b6ab8aa298d1c0c250",
+                  "21fb941a021f3f7b09a5797e0354709d9c648fd08b40dae6902de24cc4f13cbd",
+                  "3bdbe938a0e7930f37e51a5756001d5f3bb2b4c9d80a03fa3215a806948c5730"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "99aab22257993cfd1bf65c03613e40a083210f4ea2ca9e6b711fd49f7cad8b91",
+                  "668ccaf766602be5eeda104dfbe56219e2d996135eb129b6ab8aa298d1c0c250",
+                  "21fb941a021f3f7b09a5797e0354709d9c648fd08b40dae6902de24cc4f13cbd",
+                  "3bdbe938a0e7930f37e51a5756001d5f3bb2b4c9d80a03fa3215a806948c5730"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "99aab22257993cfd1bf65c03613e40a083210f4ea2ca9e6b711fd49f7cad8b91"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 4,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "99aab22257993cfd1bf65c03613e40a083210f4ea2ca9e6b711fd49f7cad8b91",
+                  "668ccaf766602be5eeda104dfbe56219e2d996135eb129b6ab8aa298d1c0c250",
+                  "21fb941a021f3f7b09a5797e0354709d9c648fd08b40dae6902de24cc4f13cbd",
+                  "3bdbe938a0e7930f37e51a5756001d5f3bb2b4c9d80a03fa3215a806948c5730"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-answer-seeking-9101/8f05a1e12caddfb0ba8b.sqlite3",
+        "database_sha256": "25e6b5fe1a84f6d89329cc3c5c9d171ced36e50d0c11ee4ef9fe347555b1a8a5",
+        "goal_id": "autonomous-goal-97e2405f-c2f4-47a1-81cc-798cd4e06ba1",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-13T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-9707e9b4-9f64-4220-b57f-5c0f90c35272",
+            "revision": 8,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 5,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "e4a33984be62047c321840ce7ea7a98773a3e1d22cd98f1570eed57cbe0796b2",
+                  "6b800166fb9b0bd46e833bd75042196de40cc6a3c44406b19964259e5aa96b03",
+                  "5b73c6de269a6f50e1172d84fbc6996ec062d1f4b65e269ee3e3968298bc9b28",
+                  "430f7dbe7ae2ecc3e813daaa508e4dcb332db85387077f8a18ff8d79e24a11dd",
+                  "244816ce74224b64f38290eab876e245d9797760e29b079a4a8748c8d7a8d89c"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 8,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "fbb8e96f77a5ada859f09a900d888bd4bacc6ad670db7b4a8ea8fb359ed30d60",
+                  "e4a33984be62047c321840ce7ea7a98773a3e1d22cd98f1570eed57cbe0796b2",
+                  "6b800166fb9b0bd46e833bd75042196de40cc6a3c44406b19964259e5aa96b03",
+                  "c15f2ec66356c50270e4aac008d75d37319cd3aede21ea68674168063b417ccf",
+                  "5b73c6de269a6f50e1172d84fbc6996ec062d1f4b65e269ee3e3968298bc9b28",
+                  "430f7dbe7ae2ecc3e813daaa508e4dcb332db85387077f8a18ff8d79e24a11dd",
+                  "69254c34db253d33af695384a4b9596a51897e6236d0836c4562194683ae7a77",
+                  "244816ce74224b64f38290eab876e245d9797760e29b079a4a8748c8d7a8d89c"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "c15f2ec66356c50270e4aac008d75d37319cd3aede21ea68674168063b417ccf",
+                  "69254c34db253d33af695384a4b9596a51897e6236d0836c4562194683ae7a77"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "fbb8e96f77a5ada859f09a900d888bd4bacc6ad670db7b4a8ea8fb359ed30d60",
+                  "c15f2ec66356c50270e4aac008d75d37319cd3aede21ea68674168063b417ccf",
+                  "69254c34db253d33af695384a4b9596a51897e6236d0836c4562194683ae7a77"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 6,
+                "assessed_evidence_count": 4,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.6666666666666666,
+                "uncertainty": 0.33333333333333337,
+                "observation_ids": [
+                  "fbb8e96f77a5ada859f09a900d888bd4bacc6ad670db7b4a8ea8fb359ed30d60",
+                  "e4a33984be62047c321840ce7ea7a98773a3e1d22cd98f1570eed57cbe0796b2",
+                  "6b800166fb9b0bd46e833bd75042196de40cc6a3c44406b19964259e5aa96b03",
+                  "5b73c6de269a6f50e1172d84fbc6996ec062d1f4b65e269ee3e3968298bc9b28",
+                  "430f7dbe7ae2ecc3e813daaa508e4dcb332db85387077f8a18ff8d79e24a11dd",
+                  "244816ce74224b64f38290eab876e245d9797760e29b079a4a8748c8d7a8d89c"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-fast-learner-9102/8d58911cdbfcde84c8e6.sqlite3",
+        "database_sha256": "6ebaea837aff52843c5ef5db50dc7962151046fee05f87d5f55180dccb6147ff",
+        "goal_id": "autonomous-goal-04188b09-8328-49e2-a0fa-ac22d86cc581",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-17T14:00:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-aede99df-ec7f-440e-b434-39b3e0949a22",
+            "revision": 10,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 5,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 10,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 4,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 7,
+                "assessed_evidence_count": 5,
+                "correct_evidence_count": 3,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.7142857142857143,
+                "uncertainty": 0.2857142857142857,
+                "observation_ids": [
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-fast-learner-9102/8d58911cdbfcde84c8e6.sqlite3",
+        "database_sha256": "6ebaea837aff52843c5ef5db50dc7962151046fee05f87d5f55180dccb6147ff",
+        "goal_id": "autonomous-goal-4e989d5d-e6b8-4138-8995-a7bd47c17e70",
+        "objective": "Explain how path compression accelerates later finds.",
+        "completed_at": "2026-10-07T14:00:00+00:00",
+        "targets": [
+          "concept-path-compression"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-aede99df-ec7f-440e-b434-39b3e0949a22",
+            "revision": 27,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 19,
+                "assessed_evidence_count": 5,
+                "correct_evidence_count": 1,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 4,
+                "attribution_confidence": 0.7142857142857143,
+                "uncertainty": 0.2857142857142857,
+                "observation_ids": [
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93",
+                  "551e5ac94de1a3c297a6f6de1d8b9074bf7e67576d84f77466b78433ea6b0c01",
+                  "cf56c4da62683963b86146069724870ae2cc6fbc6ccb3be20f81eda1964387af",
+                  "2d1218b2af2e00526c1732d6a40b9625b330e1f04c8d4914f03744b07cc0df23",
+                  "ed1a358c9050332599b425bfc6977549df64a83a950372b0eacebcbd0d49cfa7",
+                  "e6aa056553d9c92a37ce7b6186a0f8f7f54304f0ef406341481210f47042151c",
+                  "2b31ff99cbff5b9259de455578a8ca0184d3137746c5ee6fbe04057da3fc9ab0",
+                  "2826340d179637daf7f95fcfebf988e51080b575bfba7e9678a9eb15a51cd842",
+                  "206fc233a12b25a69ecbd22d1df7407ff6e605dba0db1dee2e87397618f754b4",
+                  "2c48263031a3a41bd4aff03a7e2194c0a3fc03b8b9064394f6b15394613d184d",
+                  "696f2a802e73ea81c7e81561f50a9901cbbfeb64b411066aa83477055bbc8125",
+                  "1a2ea7ef40f1ff447ab216ed5bda7ea7aa910785712eb12ffbc5d413ba44acbc",
+                  "babc82b383acbd79f7553fe45e74ae1b39365547792a043d9180b469665a24fe",
+                  "602dfd34ac4aa8375e7d316552da022ffe80b703afa4488814a1007c4f4d7f59",
+                  "4cc4944b93829ee5c5e022b27a57eb3ccaa2165fec4b5dd09ab41a392e5698ff"
+                ],
+                "evidence_keys": []
+              },
+              "concept-lexical-closure": {
+                "concept_id": "concept-lexical-closure",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "b8bb9f168d8ca5cf3cdcc753a1eafe5157548a339e20d15f97480d8907cda255"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 25,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268",
+                  "cf56c4da62683963b86146069724870ae2cc6fbc6ccb3be20f81eda1964387af",
+                  "2d1218b2af2e00526c1732d6a40b9625b330e1f04c8d4914f03744b07cc0df23",
+                  "a8819eb2807f3db0cb8f50008e938828a80af96e6532eef4c9a22a6d1a8e9014",
+                  "ed1a358c9050332599b425bfc6977549df64a83a950372b0eacebcbd0d49cfa7",
+                  "e6aa056553d9c92a37ce7b6186a0f8f7f54304f0ef406341481210f47042151c",
+                  "2826340d179637daf7f95fcfebf988e51080b575bfba7e9678a9eb15a51cd842",
+                  "206fc233a12b25a69ecbd22d1df7407ff6e605dba0db1dee2e87397618f754b4",
+                  "b0b49f2925e4ecc18110e8a079278fa2753db1e0cc230918aea5daa056e314c0",
+                  "2c48263031a3a41bd4aff03a7e2194c0a3fc03b8b9064394f6b15394613d184d",
+                  "696f2a802e73ea81c7e81561f50a9901cbbfeb64b411066aa83477055bbc8125",
+                  "1a2ea7ef40f1ff447ab216ed5bda7ea7aa910785712eb12ffbc5d413ba44acbc",
+                  "babc82b383acbd79f7553fe45e74ae1b39365547792a043d9180b469665a24fe",
+                  "b8bb9f168d8ca5cf3cdcc753a1eafe5157548a339e20d15f97480d8907cda255",
+                  "602dfd34ac4aa8375e7d316552da022ffe80b703afa4488814a1007c4f4d7f59",
+                  "4cc4944b93829ee5c5e022b27a57eb3ccaa2165fec4b5dd09ab41a392e5698ff"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 16,
+                "assessed_evidence_count": 8,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 1,
+                "incorrect_evidence_count": 5,
+                "attribution_confidence": 0.8,
+                "uncertainty": 0.19999999999999996,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268",
+                  "551e5ac94de1a3c297a6f6de1d8b9074bf7e67576d84f77466b78433ea6b0c01",
+                  "cf56c4da62683963b86146069724870ae2cc6fbc6ccb3be20f81eda1964387af",
+                  "2d1218b2af2e00526c1732d6a40b9625b330e1f04c8d4914f03744b07cc0df23",
+                  "ed1a358c9050332599b425bfc6977549df64a83a950372b0eacebcbd0d49cfa7",
+                  "e6aa056553d9c92a37ce7b6186a0f8f7f54304f0ef406341481210f47042151c",
+                  "2b31ff99cbff5b9259de455578a8ca0184d3137746c5ee6fbe04057da3fc9ab0",
+                  "206fc233a12b25a69ecbd22d1df7407ff6e605dba0db1dee2e87397618f754b4",
+                  "2c48263031a3a41bd4aff03a7e2194c0a3fc03b8b9064394f6b15394613d184d",
+                  "696f2a802e73ea81c7e81561f50a9901cbbfeb64b411066aa83477055bbc8125",
+                  "1a2ea7ef40f1ff447ab216ed5bda7ea7aa910785712eb12ffbc5d413ba44acbc",
+                  "babc82b383acbd79f7553fe45e74ae1b39365547792a043d9180b469665a24fe",
+                  "4cc4944b93829ee5c5e022b27a57eb3ccaa2165fec4b5dd09ab41a392e5698ff"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 8,
+                "assessed_evidence_count": 1,
+                "correct_evidence_count": 1,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.3333333333333333,
+                "uncertainty": 0.6666666666666667,
+                "observation_ids": [
+                  "bbc100c9fe1f7e576fdae5104b329f5d4f4a151ef41accaf01430f6d1e162f76",
+                  "15c6e7931da463d382307b35db71ad2e8092f17863673ffe23c69943c60db039",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "5aabb0374c228de9308a01da13125498a622f9bbb7668cc653f6dfbb336b9268",
+                  "a8819eb2807f3db0cb8f50008e938828a80af96e6532eef4c9a22a6d1a8e9014",
+                  "b0b49f2925e4ecc18110e8a079278fa2753db1e0cc230918aea5daa056e314c0",
+                  "b8bb9f168d8ca5cf3cdcc753a1eafe5157548a339e20d15f97480d8907cda255",
+                  "602dfd34ac4aa8375e7d316552da022ffe80b703afa4488814a1007c4f4d7f59"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 12,
+                "assessed_evidence_count": 5,
+                "correct_evidence_count": 3,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.7142857142857143,
+                "uncertainty": 0.2857142857142857,
+                "observation_ids": [
+                  "37defdf95f786be9d1f7618f15329dec28873c10afe62a5c9e36599e9638e3ac",
+                  "06ecfb6ac22bad2f6eb8652c9a13c00c542198addbecfe9b8d1e8e5e4190d8e5",
+                  "1d7aa544136f78c3da3ba5f74b0c5e715d4a393d37aa687c36c7b7bc9204dd05",
+                  "a204796a831d92de50e9fe8253076f11c9d6b76f123575afa3ab5e0275f3b756",
+                  "ee5781370c9f49d2c077c75aeb4f88b0ecb6ad7c4eb859410dae4639890f84c4",
+                  "41f0720e4e21bc84385017c935effcd74781ee4b6a75a625d9a3c36274b515b5",
+                  "378e2dad45a735454c30666ceff65a173bf01ff1ea1658f1f1b0ba02df21df93",
+                  "551e5ac94de1a3c297a6f6de1d8b9074bf7e67576d84f77466b78433ea6b0c01",
+                  "a8819eb2807f3db0cb8f50008e938828a80af96e6532eef4c9a22a6d1a8e9014",
+                  "2b31ff99cbff5b9259de455578a8ca0184d3137746c5ee6fbe04057da3fc9ab0",
+                  "2826340d179637daf7f95fcfebf988e51080b575bfba7e9678a9eb15a51cd842",
+                  "b0b49f2925e4ecc18110e8a079278fa2753db1e0cc230918aea5daa056e314c0"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-low-receptivity-9102/90a7fabfc0ad7a8bd148.sqlite3",
+        "database_sha256": "704ec95b658ec52254f9da017f71d4e4d666ba400d0290910c1c0ae75bedb937",
+        "goal_id": "autonomous-goal-aed8891f-4354-4bee-be55-b67e57f9deee",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-12T14:00:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-c6c87ac3-2f2c-4a99-8d9b-175c6b70da36",
+            "revision": 6,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae"
+                ],
+                "evidence_keys": []
+              },
+              "concept-lexical-closure": {
+                "concept_id": "concept-lexical-closure",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 6,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3",
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4",
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae",
+                  "802144634e1aa4f463aa24a8954914899c8cf088b030e647bd8c4d08f31fa846"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4",
+                  "802144634e1aa4f463aa24a8954914899c8cf088b030e647bd8c4d08f31fa846"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3",
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4",
+                  "802144634e1aa4f463aa24a8954914899c8cf088b030e647bd8c4d08f31fa846"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-low-receptivity-9102/90a7fabfc0ad7a8bd148.sqlite3",
+        "database_sha256": "704ec95b658ec52254f9da017f71d4e4d666ba400d0290910c1c0ae75bedb937",
+        "goal_id": "autonomous-goal-6bd7d537-65b2-46a8-95e5-15970538e2ca",
+        "objective": "Explain how token bucket shaping controls bursts.",
+        "completed_at": "2026-09-11T14:00:00+00:00",
+        "targets": [
+          "concept-token-bucket"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-c6c87ac3-2f2c-4a99-8d9b-175c6b70da36",
+            "revision": 5,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae"
+                ],
+                "evidence_keys": []
+              },
+              "concept-lexical-closure": {
+                "concept_id": "concept-lexical-closure",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 5,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3",
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4",
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 1,
+                "assessed_evidence_count": 1,
+                "correct_evidence_count": 1,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.3333333333333333,
+                "uncertainty": 0.6666666666666667,
+                "observation_ids": [
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 2,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "68f009f132f22113028a751059881f513eaeb78b1fd946bbfdde64d853524ce3",
+                  "91d92982032e21b62602dcf8e3fb56dc323860462ec297f344724d79338b77d4"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "34e5f659a15c085ba6f5a13437e813ee9878f58a381fbf6b6c9bafb31e4b1900",
+                  "008fab46ae7706f72bbd012e00c42819da01093ee62b8fa2e9d0b0eb8d7f9993",
+                  "c94e266e45e585bd10f504c4c9032136fbf891114389c5845e63a80e5e77a9ae"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-low-receptivity-9103/9bd3cd6ddbd0b4621457.sqlite3",
+        "database_sha256": "0491dd05d90cf8e24208866cf8f127bb2f65001a87a290facc92e7d8be738b30",
+        "goal_id": "autonomous-goal-108cd485-e501-48c7-9739-65a9f628daa4",
+        "objective": "Explain how copy on write delays page copying.",
+        "completed_at": "2026-10-06T10:30:00+00:00",
+        "targets": [
+          "concept-copy-on-write"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-696cbc74-c357-4ec5-95bd-50a04bc70949",
+            "revision": 17,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 11,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "c15aa52dd58c9159aa09c4c304e8ef019de072fd72b3ded56fd83711b540ce11",
+                  "102c243790b2caa8aec4a538e1884296cc8a453bd9dd47d1b4c3d842da872fef",
+                  "297dd4d366bd841699402bad4fd2cbe1508e64ebc9fdfec554275b920ef70144",
+                  "fa240e6ee91af70a1a305e6dbc837f9c81de93002680afbe4980c59d036cdd4e",
+                  "bad6bf45a0239a4f0a00405332bc6359bec92a1ccaaf673a5aca4d08b636c509",
+                  "5cc20140ec1033b6a08906dc807abaef817d7e28e5a546a12ed3d9fedb93094d",
+                  "cfd5b2efc23a73971e235cb629e0d20e086db160111ca045a22a98036376dc4d",
+                  "ddc3fe586889c9cabb445b77e04bdbb9a549fccb47e9297cd87fcf402715ea4e",
+                  "4c28d6c9e34503ac41fa41c0aa157fc8be4782b16b2b488a4a2e4b69e33f5454",
+                  "ff6e0fd37e4fa47a526c265ea914e23a660e9d75038796b7cdd7e01b5f7e0898",
+                  "d603c83107df7ae0da3a359b397563b23b9af96ccb8952e71d3871aa8c896832"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 16,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "39d428122bd00d1a8f7a3d97a586016ebab0bd0788a54d5c006303269d4dc6de",
+                  "c15aa52dd58c9159aa09c4c304e8ef019de072fd72b3ded56fd83711b540ce11",
+                  "102c243790b2caa8aec4a538e1884296cc8a453bd9dd47d1b4c3d842da872fef",
+                  "1ee4820dd6e8e2ed75a043d44f93562fea19601701a3fdbfc562aa9e68845b49",
+                  "297dd4d366bd841699402bad4fd2cbe1508e64ebc9fdfec554275b920ef70144",
+                  "bad6bf45a0239a4f0a00405332bc6359bec92a1ccaaf673a5aca4d08b636c509",
+                  "7cc2c84dccf23b75b856a727c35de89cbad5cd93a15cca9a66cc5288aeee77a6",
+                  "adf3bd759b60b0c480c2bdd1af22a4d4960d26ce8f152c3e2b104e453bcf99a8",
+                  "5cc20140ec1033b6a08906dc807abaef817d7e28e5a546a12ed3d9fedb93094d",
+                  "cfd5b2efc23a73971e235cb629e0d20e086db160111ca045a22a98036376dc4d",
+                  "8100d57d188cba9b77219cf94b6e6cf435f5eb9013d8b7ddd97de53c4085134c",
+                  "ddc3fe586889c9cabb445b77e04bdbb9a549fccb47e9297cd87fcf402715ea4e",
+                  "4cefaceaf4bb1406930f6c29c2f18c9cd276a927108c75c9007970aaecf88d34",
+                  "4c28d6c9e34503ac41fa41c0aa157fc8be4782b16b2b488a4a2e4b69e33f5454",
+                  "ff6e0fd37e4fa47a526c265ea914e23a660e9d75038796b7cdd7e01b5f7e0898",
+                  "d603c83107df7ae0da3a359b397563b23b9af96ccb8952e71d3871aa8c896832"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 5,
+                "assessed_evidence_count": 4,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 1,
+                "incorrect_evidence_count": 1,
+                "attribution_confidence": 0.6666666666666666,
+                "uncertainty": 0.33333333333333337,
+                "observation_ids": [
+                  "297dd4d366bd841699402bad4fd2cbe1508e64ebc9fdfec554275b920ef70144",
+                  "fa240e6ee91af70a1a305e6dbc837f9c81de93002680afbe4980c59d036cdd4e",
+                  "adf3bd759b60b0c480c2bdd1af22a4d4960d26ce8f152c3e2b104e453bcf99a8",
+                  "8100d57d188cba9b77219cf94b6e6cf435f5eb9013d8b7ddd97de53c4085134c",
+                  "ddc3fe586889c9cabb445b77e04bdbb9a549fccb47e9297cd87fcf402715ea4e"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 6,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "39d428122bd00d1a8f7a3d97a586016ebab0bd0788a54d5c006303269d4dc6de",
+                  "1ee4820dd6e8e2ed75a043d44f93562fea19601701a3fdbfc562aa9e68845b49",
+                  "7cc2c84dccf23b75b856a727c35de89cbad5cd93a15cca9a66cc5288aeee77a6",
+                  "adf3bd759b60b0c480c2bdd1af22a4d4960d26ce8f152c3e2b104e453bcf99a8",
+                  "8100d57d188cba9b77219cf94b6e6cf435f5eb9013d8b7ddd97de53c4085134c",
+                  "4cefaceaf4bb1406930f6c29c2f18c9cd276a927108c75c9007970aaecf88d34"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 13,
+                "assessed_evidence_count": 6,
+                "correct_evidence_count": 4,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.75,
+                "uncertainty": 0.25,
+                "observation_ids": [
+                  "39d428122bd00d1a8f7a3d97a586016ebab0bd0788a54d5c006303269d4dc6de",
+                  "c15aa52dd58c9159aa09c4c304e8ef019de072fd72b3ded56fd83711b540ce11",
+                  "102c243790b2caa8aec4a538e1884296cc8a453bd9dd47d1b4c3d842da872fef",
+                  "1ee4820dd6e8e2ed75a043d44f93562fea19601701a3fdbfc562aa9e68845b49",
+                  "fa240e6ee91af70a1a305e6dbc837f9c81de93002680afbe4980c59d036cdd4e",
+                  "bad6bf45a0239a4f0a00405332bc6359bec92a1ccaaf673a5aca4d08b636c509",
+                  "7cc2c84dccf23b75b856a727c35de89cbad5cd93a15cca9a66cc5288aeee77a6",
+                  "5cc20140ec1033b6a08906dc807abaef817d7e28e5a546a12ed3d9fedb93094d",
+                  "cfd5b2efc23a73971e235cb629e0d20e086db160111ca045a22a98036376dc4d",
+                  "4cefaceaf4bb1406930f6c29c2f18c9cd276a927108c75c9007970aaecf88d34",
+                  "4c28d6c9e34503ac41fa41c0aa157fc8be4782b16b2b488a4a2e4b69e33f5454",
+                  "ff6e0fd37e4fa47a526c265ea914e23a660e9d75038796b7cdd7e01b5f7e0898",
+                  "d603c83107df7ae0da3a359b397563b23b9af96ccb8952e71d3871aa8c896832"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-misconception-prone-9101/a223ccbca3e6f392f2bc.sqlite3",
+        "database_sha256": "a87a33e87d57909019b65e42c1fb2a9a75c18fd55465ac51f91fbfc2f7362ddd",
+        "goal_id": "autonomous-goal-73082b3b-74aa-4650-b788-3aefe41ffbfb",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-20T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-c62102eb-64e3-4233-a7e8-6b6b428a7e3b",
+            "revision": 7,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "8768632c3bec1cfd57e5b990537b10f6d8f8190f60392b989536305d4a8a2548",
+                  "4fdd15be524733a67930f3cd29192157a6dd091e36ec1cefba769ad828867a33",
+                  "c2d462ce8f613ffbbc3243e2251f14b108d7fec02da60532185631c043b4cb0b"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 7,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "1de5d0049af5774cffbe32d0fb8f8c149597dd50e749d65dd3d4341ba94003a1",
+                  "8768632c3bec1cfd57e5b990537b10f6d8f8190f60392b989536305d4a8a2548",
+                  "4fdd15be524733a67930f3cd29192157a6dd091e36ec1cefba769ad828867a33",
+                  "c2d462ce8f613ffbbc3243e2251f14b108d7fec02da60532185631c043b4cb0b",
+                  "999ff191afa850d1941587fd401fca1a382c0ba3328b04b4e0188c4e0492d7bd",
+                  "1d7e1140f21f79ddd4b1f3fd2ce62ba72c147c3be7dfb01229a8d50d34cb02b1",
+                  "838beaec455881fc9c1e559a6b1c4fca549c4bef5f22b55e0f82dcc068b2126c"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "999ff191afa850d1941587fd401fca1a382c0ba3328b04b4e0188c4e0492d7bd",
+                  "838beaec455881fc9c1e559a6b1c4fca549c4bef5f22b55e0f82dcc068b2126c"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "1de5d0049af5774cffbe32d0fb8f8c149597dd50e749d65dd3d4341ba94003a1",
+                  "999ff191afa850d1941587fd401fca1a382c0ba3328b04b4e0188c4e0492d7bd",
+                  "1d7e1140f21f79ddd4b1f3fd2ce62ba72c147c3be7dfb01229a8d50d34cb02b1",
+                  "838beaec455881fc9c1e559a6b1c4fca549c4bef5f22b55e0f82dcc068b2126c"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 5,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "1de5d0049af5774cffbe32d0fb8f8c149597dd50e749d65dd3d4341ba94003a1",
+                  "8768632c3bec1cfd57e5b990537b10f6d8f8190f60392b989536305d4a8a2548",
+                  "4fdd15be524733a67930f3cd29192157a6dd091e36ec1cefba769ad828867a33",
+                  "c2d462ce8f613ffbbc3243e2251f14b108d7fec02da60532185631c043b4cb0b",
+                  "1d7e1140f21f79ddd4b1f3fd2ce62ba72c147c3be7dfb01229a8d50d34cb02b1"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-misconception-prone-9102/e6ba85246ec2910fbf04.sqlite3",
+        "database_sha256": "f88cf87de6a8827786d57e7f2134b22c425da104524eda3e6ddd6fee70ba681f",
+        "goal_id": "autonomous-goal-03505f6d-8438-4377-bf2c-07bffc452629",
+        "objective": "Explain how token bucket shaping controls bursts.",
+        "completed_at": "2026-09-10T14:00:00+00:00",
+        "targets": [
+          "concept-token-bucket"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-f318ad53-6dd2-42aa-ab28-855ec85a622a",
+            "revision": 4,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca",
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca",
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-misconception-prone-9102/e6ba85246ec2910fbf04.sqlite3",
+        "database_sha256": "f88cf87de6a8827786d57e7f2134b22c425da104524eda3e6ddd6fee70ba681f",
+        "goal_id": "autonomous-goal-2a898b96-95de-4ce5-869f-27c28e1a3cc6",
+        "objective": "Explain how red black repair restores insertion invariants.",
+        "completed_at": "2026-09-13T10:30:00+00:00",
+        "targets": [
+          "concept-red-black-repair"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-f318ad53-6dd2-42aa-ab28-855ec85a622a",
+            "revision": 6,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 4,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca",
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 6,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca",
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1",
+                  "55e48bb455394ff8bcedaf3b4383730ed08decd08b421fa296d8f16f53c1c29e",
+                  "eec69866a293f88a9b54801050e679db602edc19c967b730e7b3ea0b82c708dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 2,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "55e48bb455394ff8bcedaf3b4383730ed08decd08b421fa296d8f16f53c1c29e",
+                  "eec69866a293f88a9b54801050e679db602edc19c967b730e7b3ea0b82c708dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "366848d30e432b8f683781035bc663b55630e7bbe1bf44bf7ec0aaa87a8ba8ca",
+                  "55e48bb455394ff8bcedaf3b4383730ed08decd08b421fa296d8f16f53c1c29e",
+                  "eec69866a293f88a9b54801050e679db602edc19c967b730e7b3ea0b82c708dc"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "0960fdb7045f75ea911f53b16fa91a8b12a2304a39ba0c3fd21e42050747fefc",
+                  "2e8a2a27e6bbf09ffde0f2cf77d20e42a32c8548ce6ed59e7b83a3f62c6118c9",
+                  "e630045155eca06967dcaedc7844025ee2505ad8048d4d82a211da5d799f06e1"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-misconception-prone-9103/ebd23eac28004426661d.sqlite3",
+        "database_sha256": "05ef5dfbd137e1770fce8abb02437277cb90356e4a90f70e2f78bafc449429f4",
+        "goal_id": "autonomous-goal-e3540f09-8607-4174-9956-7b11ebe73b3e",
+        "objective": "Explain how token bucket shaping controls bursts.",
+        "completed_at": "2026-09-10T10:30:00+00:00",
+        "targets": [
+          "concept-token-bucket"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-5367c02e-5da5-445b-8fe3-52494b028cc1",
+            "revision": 3,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 2,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf",
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 1,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 3,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf",
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      },
+      {
+        "database": "t1-v2-autonomous/hs-logistic-like-misconception-prone-9103/ebd23eac28004426661d.sqlite3",
+        "database_sha256": "05ef5dfbd137e1770fce8abb02437277cb90356e4a90f70e2f78bafc449429f4",
+        "goal_id": "autonomous-goal-1cac92af-878d-4d12-a321-8f490011f0d0",
+        "objective": "Explain how copy on write delays page copying.",
+        "completed_at": "2026-09-23T14:00:00+00:00",
+        "targets": [
+          "concept-copy-on-write"
+        ],
+        "snapshots": [
+          {
+            "conversation_id": "conversation-5367c02e-5da5-445b-8fe3-52494b028cc1",
+            "revision": 15,
+            "attributions": {
+              "concept-copy-on-write": {
+                "concept_id": "concept-copy-on-write",
+                "observation_count": 12,
+                "assessed_evidence_count": 2,
+                "correct_evidence_count": 2,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.5,
+                "uncertainty": 0.5,
+                "observation_ids": [
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69",
+                  "c55be70353da0b3db4fcefcd4cbdd9b1eba86406912af345254d86c361787ff1",
+                  "bf2f11389c6730b6324e4eadb8fe7ae055269cd48946e6503f0fb1c836e2580e",
+                  "b88ca1a37e988c7bdb89fed541fac1ae61d6b134d76d71f18587ad64f8167d76",
+                  "737e46f1b77ab853f3f234af8b3521e4be47619fa024f4cb5fcff2658b9a68f2",
+                  "3c3f1e51e830d0cf5a3fe98f8ba2693e0cd2d4620439cb0802afd2a2bc01199e",
+                  "38f47b94db907cf83335cb7af34bdfe40db96faca2374c4ffe0710b9d00d0e58",
+                  "93ac99438b9aa20eeb325a5adff970ee94ff3d7e03e220d2aa4a7d3db2af2fbf",
+                  "76d8ee95e146a441eccd325ba4c4815e942a011d95f197a7d54cb321d3b00fc0",
+                  "5780d9360071baf9d484b19c0de291444485c754b4e136191b16a9c406c51b73",
+                  "160c7b540f136911255bfcbcb6a1d8eb57336e751d22c2690c5ec217e761575a"
+                ],
+                "evidence_keys": []
+              },
+              "concept-path-compression": {
+                "concept_id": "concept-path-compression",
+                "observation_count": 14,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf",
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69",
+                  "c55be70353da0b3db4fcefcd4cbdd9b1eba86406912af345254d86c361787ff1",
+                  "bf2f11389c6730b6324e4eadb8fe7ae055269cd48946e6503f0fb1c836e2580e",
+                  "b88ca1a37e988c7bdb89fed541fac1ae61d6b134d76d71f18587ad64f8167d76",
+                  "0be26ba5da4ae40d9dc11d7af5a77385ed38ec7f2445c4965d567edabd4f12ad",
+                  "737e46f1b77ab853f3f234af8b3521e4be47619fa024f4cb5fcff2658b9a68f2",
+                  "3c3f1e51e830d0cf5a3fe98f8ba2693e0cd2d4620439cb0802afd2a2bc01199e",
+                  "38f47b94db907cf83335cb7af34bdfe40db96faca2374c4ffe0710b9d00d0e58",
+                  "76d8ee95e146a441eccd325ba4c4815e942a011d95f197a7d54cb321d3b00fc0",
+                  "5780d9360071baf9d484b19c0de291444485c754b4e136191b16a9c406c51b73",
+                  "0aff5e3957875dcfbfd4f5881ec18e2b1d54918a419c8cebfd187e9155c9c70b",
+                  "160c7b540f136911255bfcbcb6a1d8eb57336e751d22c2690c5ec217e761575a"
+                ],
+                "evidence_keys": []
+              },
+              "concept-red-black-repair": {
+                "concept_id": "concept-red-black-repair",
+                "observation_count": 1,
+                "assessed_evidence_count": 1,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 1,
+                "attribution_confidence": 0.3333333333333333,
+                "uncertainty": 0.6666666666666667,
+                "observation_ids": [
+                  "93ac99438b9aa20eeb325a5adff970ee94ff3d7e03e220d2aa4a7d3db2af2fbf"
+                ],
+                "evidence_keys": []
+              },
+              "concept-sliding-window": {
+                "concept_id": "concept-sliding-window",
+                "observation_count": 3,
+                "assessed_evidence_count": 0,
+                "correct_evidence_count": 0,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 0,
+                "attribution_confidence": 0.0,
+                "uncertainty": 1.0,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf",
+                  "0be26ba5da4ae40d9dc11d7af5a77385ed38ec7f2445c4965d567edabd4f12ad",
+                  "0aff5e3957875dcfbfd4f5881ec18e2b1d54918a419c8cebfd187e9155c9c70b"
+                ],
+                "evidence_keys": []
+              },
+              "concept-token-bucket": {
+                "concept_id": "concept-token-bucket",
+                "observation_count": 15,
+                "assessed_evidence_count": 8,
+                "correct_evidence_count": 6,
+                "partial_evidence_count": 0,
+                "incorrect_evidence_count": 2,
+                "attribution_confidence": 0.8,
+                "uncertainty": 0.19999999999999996,
+                "observation_ids": [
+                  "74a0d9331a4e9c9d2539a858b73f840986b83d35e4175d71fe994a39ba301acf",
+                  "a4942b40420f3c9042520a6e7cabb23416930171b889b50c8a7c31e0337fe89e",
+                  "ee97f87e960dd3f70b0378a9466e20537c6aeebb6cacc476f2a765deb1a50b69",
+                  "c55be70353da0b3db4fcefcd4cbdd9b1eba86406912af345254d86c361787ff1",
+                  "bf2f11389c6730b6324e4eadb8fe7ae055269cd48946e6503f0fb1c836e2580e",
+                  "b88ca1a37e988c7bdb89fed541fac1ae61d6b134d76d71f18587ad64f8167d76",
+                  "0be26ba5da4ae40d9dc11d7af5a77385ed38ec7f2445c4965d567edabd4f12ad",
+                  "737e46f1b77ab853f3f234af8b3521e4be47619fa024f4cb5fcff2658b9a68f2",
+                  "3c3f1e51e830d0cf5a3fe98f8ba2693e0cd2d4620439cb0802afd2a2bc01199e",
+                  "38f47b94db907cf83335cb7af34bdfe40db96faca2374c4ffe0710b9d00d0e58",
+                  "93ac99438b9aa20eeb325a5adff970ee94ff3d7e03e220d2aa4a7d3db2af2fbf",
+                  "76d8ee95e146a441eccd325ba4c4815e942a011d95f197a7d54cb321d3b00fc0",
+                  "5780d9360071baf9d484b19c0de291444485c754b4e136191b16a9c406c51b73",
+                  "0aff5e3957875dcfbfd4f5881ec18e2b1d54918a419c8cebfd187e9155c9c70b",
+                  "160c7b540f136911255bfcbcb6a1d8eb57336e751d22c2690c5ec217e761575a"
+                ],
+                "evidence_keys": []
+              }
+            },
+            "target_ready": true
+          }
+        ],
+        "supported": true
+      }
+    ],
+    "limitations": [
+      "Final database audit cannot disambiguate commits with identical virtual timestamps.",
+      "A completion is supported if one same-student/course/release conversation has eligible evidence; conversations are never pooled.",
+      "Operational evidence eligibility is not human mastery or a pedagogical quality score."
+    ]
+  },
+  "source_manifest": {
+    "run_id": "goal-completion-scope-development-001-candidate",
+    "arm": "candidate",
+    "source_sha256": {
+      "pyproject.toml": "9bd8e90089005d618c671e081a63f9367649971d1e3e46b7048dbb7332be7d32",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v1.json": "611313d233937c62e0594b0fab8c8b4e5ec1d5489ad50325e69eddd55fbb0c7e",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v10.json": "6510d4ffee411236be5ad80395766fd3f8934fcaa453d7d2623557dfb20b95c1",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v11.json": "e96819b1d3dbfa514ac2000ca95f2ca3bfbf52453de59c1c7a55d24cfc1a6bc9",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v12.json": "50afd2fffd157cb2b4fba8cd8f0d938590d8394346ef11641faa27b6c6d88331",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v2.json": "0e433abd650e300968034735b319552a8545350ee0409f431644c5cbe368d2e1",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v3.json": "7dabf83c900fb59c46b84cc155f3fb27a512dbcabd308fa4056b71285186a7b2",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v4.json": "1b7655e5ea05f1f410672d80b83f89a19c445dfa0fd401c2798ffbfcae0b0e34",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v5.json": "9a6dd0c4f3ef0e489cca6bef10035a7c24ed83cd7b32746d9bc4dcaadc0891eb",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v6.json": "cd184a6dea2299a18499d3e7e1405715fe0011c2d6ba44285a8a4347edcc9d07",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v7.json": "d2d8fd676e747eed418d4d6968631772fac82f0cd2770b206e9b35f46d13d1ee",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v8.json": "c1578c00b3a2729e672947f213d8675a585815cfa66d03358957264ac9b52e99",
+      "research/05_evaluation/profiles/deployable-product-foundation-freeze-v9.json": "051f4613e2effe6b9302f47a21a7c3ff01621921de734fd64f1ed843dfde00b6",
+      "research/05_evaluation/profiles/local-r1-final-system-manifest-v1.json": "31df479e6aa0e72ffbfaab67c37f8061b0fc9bffbe397c5f3628d6fe0148d5ef",
+      "research/05_evaluation/profiles/professor-fidelity-anchor-v4-p3-candidate.json": "786dfd1b09a1891c4ff93733def6326267ce2f03d5e54003209a65bc19dbcc45",
+      "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v1.json": "1b3257e80e2bcb6f49871a537d022a6c65f0bf43fe1a37a535cf5b6eb8d34eec",
+      "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v2.json": "43da7e1bd1ae07343427e52f3e617ccdd5d49a1aa221fd6855d89d7ce527209d",
+      "research/05_evaluation/profiles/student-tutor-r1-local-candidate-v3.json": "a287db56a00714848d3b97e6e0d6fa66a9dc4acfa8547e9d61e79c10c54f7bc5",
+      "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+      "research/05_evaluation/profiles/student-tutor-r1-openai-candidate-v1.json": "10d6012e5eac2f788f2fe8b7d74fa16284eeb9ce25984cdc774a9b60610ea30c",
+      "research/05_evaluation/profiles/student-tutor-v0.json": "87d347a8dc107fe94a673bf99c7859564c3dec06f753c01a5251f66def599aeb",
+      "research/05_evaluation/profiles/student-tutor-v1.json": "49605552988a32302ccc28a3e144fa11ab03b2ef3867598a38d9d5b43972f798",
+      "research/05_evaluation/profiles/technical-evidence-freeze-v1.json": "4e6822230e2a544a44f427cdca5c31be16693d03b82cb8a331ace510edbd2b31",
+      "scripts/academic_factual_qa_atomic_m2_t0_adapter.py": "67bcfc5771fb8d35be7562de079c10a68e0e01fa372cf80a01a1788fd7b5ca3c",
+      "scripts/academic_factual_qa_open_10000_sealed_package.py": "5979229ee73601e839d15438109bd0e24660c0fd430cbd531697a36289c9efc3",
+      "scripts/academic_factual_qa_open_10000_t0_adapter.py": "96f161ee04443a6107de738a77fb72be4b884d6cdd327e60f8a32cdd69abd41e",
+      "scripts/academic_factual_qa_open_10000_winner_adapter.py": "20cddcfb949632782446dc376acfa3e5733a523a9d85bb44f0518306ca39ff20",
+      "scripts/academic_factual_qa_pilot_data.py": "9159753a8fe3c630b25d72f3566f577bd1835f2facb1ccb3f56369402b715320",
+      "scripts/analyze_cross_course_provider_result.py": "9ae3d1d3c8c90f4a085f0f53261220204357c7d4b7a9060a1be905384957d576",
+      "scripts/analyze_cross_course_retrieval_heldout.py": "7dbcff48e714ccebf43eea070250ed7f4bcfde5fd2c4ede73081acd18f51d6d3",
+      "scripts/analyze_cross_course_retrieval_pilot.py": "233171dcc439adfad96e279478243e7c90be177492603585f7dbb039a99c6240",
+      "scripts/analyze_final_response_audit.py": "5390a4f734a40354c6afb57b2401a8cf50488c316de8c1ca622d565a2ecc97a2",
+      "scripts/analyze_fresh_assessment_comparison.py": "1b6ec8a904331c93144e90553591cd814613ff379b2c2d34ae6f252886b7e496",
+      "scripts/analyze_generator_qualification_v2.py": "6cef8d87912d86a89388672395b57807705008efbe3f21e77cfc91453f594ce6",
+      "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": "ca508abe5b1c7e49c7552bb6ae34d02d4fc52b320bca43bcd313f1b6950eb835",
+      "scripts/analyze_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": "4ac4e6af0ccc5bfc5b187385d661211c8f619d52feb3377fea327ed37b2195ea",
+      "scripts/analyze_it5002_rapid_result.py": "297f99c15bdb6be8d09a7c46bd07227d744ac721d3ee92dc50c6b3967e37ae76",
+      "scripts/analyze_judge_calibration.py": "6aa1cc68f9e7b4c5e12411c03bc0cef129a63a3f5db0ebb385308a1ee556fdde",
+      "scripts/analyze_professor_fidelity.py": "9a477d2fc38254dfd0a5fb1bd47c11811462bfd1b0a18ce7eef412a61e12583b",
+      "scripts/apply_cross_course_qc_patch.py": "f9e1b7ed28d7651f98342cb6cfdffc61d0b781f15ab75c96a7a9fb821e35399f",
+      "scripts/apply_cross_course_second_review.py": "38c1e541cfa08689c7c407df998d3013252081f47764f733347f13389643574a",
+      "scripts/apply_multimodal_researcher_review.py": "1445d07e0b6b8fec5c5afd83bd066c1abf1e50b83c36ee54cf533fca5b430505",
+      "scripts/audit_academic_factual_qa_open_development.py": "8d18ce1365411d85334191cf8ccebe3aec5f659f710fa0e9669914642e154967",
+      "scripts/audit_academic_factual_qa_open_development_v2.py": "5ea6bb270e0a3fb40a4f59a5218fccb6d84f41e107acd136c7e82ea136da13cf",
+      "scripts/audit_academic_factual_qa_source_semantic_atom_failures.py": "f6257ab83c904dfcf50e3b4186add5709fa6ee2034cef616cf23487a76740da3",
+      "scripts/audit_cross_course_ingestion.py": "253a99e20a108b0e417ec7fb772fe389043ef13b0557e2bb0ceb1b6b767756e0",
+      "scripts/audit_factual_qa_v3_conversion_readiness.py": "219298c8a565a645ae2eaf3ed116c243ce93da1e611fb24f9adacd21b127e406",
+      "scripts/audit_multimodal_v3_result.py": "0c9039dad9721027e80211ec62611b8294721461a48ef2e2ef438c8f231a0334",
+      "scripts/audit_python_dependencies.py": "7a9ee4faf59ee70d0c2d70e3861a568fe750f8a1caf0ea17886009cbb94516c0",
+      "scripts/autonomous_tutoring_worker.py": "de72a647bd335f930bfb1df8678ae711b7a3f9e62ac8e62a215c662f55c77240",
+      "scripts/backup_runtime.py": "d53f47ad85554190ec15379032772bdda856ad7eb1641f34c5f6b8c9403b3739",
+      "scripts/benchmark_evidence_sufficiency.py": "a4ef0f16d10243ece475c6d48a4007199976fe28ccf84dc2179ea7685ae1008f",
+      "scripts/benchmark_retrieval.py": "45781054465801a5d4ac31d1037fc7bb41a6a0a8cb2241297106cfe6d820caf7",
+      "scripts/bootstrap_admin.py": "2e9f1896058b887bd7f9519e188b48fda38a29ee5e7c3fd9e24ae7f6305e731b",
+      "scripts/build_academic_factual_qa_action_router_confirmation.py": "3ba9c7ffd285fb7072948dfe7818210fa60cd07839a31da2507e454d15abf289",
+      "scripts/build_academic_factual_qa_action_router_product_checkpoint.py": "7cbc69d5a6ec23a9171cd358c67478edc60bf0eb21034a9d6fdcb9decc4a06a5",
+      "scripts/build_academic_factual_qa_ambiguity_safe_successor.py": "30209c08b6631b9aa47bf7686c545f8f0920c6ddf4e8e6e396cf35779d10c214",
+      "scripts/build_academic_factual_qa_atomic_m2_confirmation.py": "cf4556091c6767d5842f716ae8cd4abf830ef61a1c5a674582c49a3430d152c3",
+      "scripts/build_academic_factual_qa_atomic_m2_product_checkpoint.py": "fff0e59d78be1a4a7d575525ce8f04f13bc5f2832aafe194ac21c450a6dcf38d",
+      "scripts/build_academic_factual_qa_confirmation_v2.py": "c85bbc8daad72039428af51eade1ddc6a39d50274f6af28b93b757d04c406120",
+      "scripts/build_academic_factual_qa_development_region_corpus.py": "9856dd62777a813379c17162545984f82d9b3dfbe50bc890369ab6add502d54f",
+      "scripts/build_academic_factual_qa_grounding_selection_002.py": "e1f25be79adb9d1b6b70a2bedd2c895c18f36671bb4e64f72caa69a9f91de456",
+      "scripts/build_academic_factual_qa_open_10000.py": "4451fbbc63c49bdd17ab3c0f52eca22e0126e924d6ffa0dea5dd02757a82f225",
+      "scripts/build_academic_factual_qa_open_development_v2.py": "d24a5cacbb247b9ef0e1f7a67f809684d2fffd42caae2904456b3e2696dff4a4",
+      "scripts/build_academic_factual_qa_open_development_v3.py": "9db49c3b02c27f5fb680d5156adfb53058c0028e447b6bd7e8a358284cb5a453",
+      "scripts/build_academic_factual_qa_open_mixed_wording_005.py": "69d1820211d384f5790de6bea6e01b4b85940b7b04fd112751910f9b42ff8b69",
+      "scripts/build_academic_factual_qa_open_reference_aggregate_007.py": "f67d060012f46400d1618badd9fea946c348c2d1ebba6b88f05ddbb9466b963a",
+      "scripts/build_academic_factual_qa_open_reference_validation.py": "f3e1845754871ed1581a93d31cb59cb47e19cd21df7813783abdbe2114988270",
+      "scripts/build_academic_factual_qa_open_source_plan_v2.py": "ee93bad386183476af927558fe01d30a67898583e622167af39e9bdab334ca76",
+      "scripts/build_academic_factual_qa_semantic_target_successor.py": "9a42f2ff5c6b990a5d57ea36338916b91f19270a9e789315527523c91f42fbd2",
+      "scripts/build_academic_factual_qa_source_aligned_confirmation.py": "0fb83f9053168b7c3caec05b361156a164f22efc7a57da7ad86361e27acd6927",
+      "scripts/build_academic_factual_qa_source_semantic_atoms.py": "4a523bec3a3e60195716a282de737abeaa7759e5656b2f1a5b34ff5d2f259cc7",
+      "scripts/build_academic_factual_qa_visual_supplement.py": "e31b99b9b500edf89cade958481e8011e794359ebbcdb5f4928eba2d2a5ed821",
+      "scripts/build_atomic_claim_validation_dataset.py": "f3690c4c1498bd9178148442a0647be6fe32852ab9d294f5c05872ec852906af",
+      "scripts/build_course_tutor_splits.py": "06e9348178d3f64a8266190d00a3b1f75eabc5aa0379b8996bed2c315074ec41",
+      "scripts/build_cross_engine_sealed_confirmation_010.py": "c5d228093c4c5e329673314c0c7e28e98f79a48fb1f023a9e257bdbc65edee39",
+      "scripts/build_evidence_sufficiency_v2_decision_draft.py": "6f81baf9fb58d1a2cca57a17b612966ec7d5979d89abb3d27bf2713096099698",
+      "scripts/build_evidence_sufficiency_v2_decision_draft_002.py": "4131cdc33fa88774cde4d051086ff922beb0f3685a610afc0614a7fbf8dc550a",
+      "scripts/build_factual_qa_v3_10000_blueprints.py": "5b908cb2138b333c26585c89524966bcd58f541a7a3b9b3c5f9fbf27ced80d11",
+      "scripts/build_factual_qa_v3_10000_truth_packages.py": "a5f6a4c6e6b2986ccbb586c4491dbac9111b6e2cab738b79f0942f49b3e80ec9",
+      "scripts/build_factual_qa_v3_source_dispositions.py": "2f5c49906475daeaa06aa3db646b72d36f61bc092ebcfa79b95771d7b138cae7",
+      "scripts/build_final_report_evidence_inventory.py": "55f7f514a36725f0e24b8e30a0093ee000f284db0ccf14b7f8405a9df9d38636",
+      "scripts/build_generator_qualification_dataset.py": "cbf27a117dc4675c6851ef20a25bc00cb07fe933333cd790d8527f554084cdc5",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": "158182189ed0c678372c46ddf188878226d43575d7c6247e8e6aeb55246615f9",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": "c3b6c9998612c7755afc3af10ac58fd9435aadcaf65fcbf0713ec01cba8db127",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_014.py": "f7aa16e4d2b89507618659053d09bda42fdbc0d74c892dc5f509577cbe494a32",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_015.py": "68558024d45c66e7284316d60e3dde3e282cfc48967604848bb1abe4f9ba8579",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_016.py": "0e23b944d8155bc83298499d30517bf10aacb27fcdf57d99c0308bdc4ac40a73",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_018.py": "39a87a19e661b0aa3e91a3ca5604117fc2449daa4c1d7725f4bd4f3f308d8a90",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_019.py": "bc7825e6c86e8b38921ced419434fd6a6b14223b4c6e3924f97e2fdb203ae180",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_020.py": "def47c0a409dbb4ed0f359fc31f7f03f653a720d062af93fd815c2e0c2df57c2",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_confirmation_021.py": "f31db4a42a6d18749c405ceffa01314c4c8e00ccff17224224478d9d70e4a88b",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_002.py": "c1089b23a8022037d1da6bd0146707ab57a9e6fb119a1c4d4ea5ebd8ad656a0e",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_003.py": "2e7533b684ad08a661ac07414e1314417b76a55c29c68113372289dc9c08bedf",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_004.py": "410e46b3f1fe81aadba14c79f4b09b6db1b366ba37d2578418d9bce9a326d986",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_005.py": "4e37c499505b7370ef88d53e02d1d6dcba658b6b8cc50c9e928f8d80c4541c6b",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_006.py": "d21c2629060ab619c4f03dc35bdc1057b361d8c80dd4cc403dbda3016d50e300",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_007.py": "eae5a48563a5f00b8b15b07b38be73dd9700ecbcb783e8f5287f3903b20d8ae5",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_008.py": "b75ead6067d6171533be8ce6714fd3c84b4649168ef7e14308320d0ed43d91c1",
+      "scripts/build_governed_full_autonomy_v2_1_actual_product_evaluation_009.py": "a3fbf35ac86cb3cf28a57bf5280e11f1d090affdf0cec24da87dd6575d05e375",
+      "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_025.py": "7d1bf5c53bf41919d407b92f5f1e5f6460d98a4f99218269a33a09c0cff9ff58",
+      "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_026.py": "cffe25b2fa03c9c99df4e5585fab0c30e884eb47860715a42744b85ff7272880",
+      "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_027.py": "8a62fb89eac6ede725c77f536d2f13c81309fa6f262ed99161630107a771c5ce",
+      "scripts/build_governed_full_autonomy_v2_1_corpus_confirmation_028.py": "b102a9abf7eff3bf0ba1b27a55ce68d20edd919bf20b147491e5340f82fbbf5d",
+      "scripts/build_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py": "623052e6966c92fabe7c093d450050fca4a8667fbf23c6d4d8a6c2c6fb5588c0",
+      "scripts/build_governed_full_autonomy_v2_1_grounding_successor_011.py": "4d7477d48e8fc3483d8368510c5eeb02abc8cf6f9ac79640b58a5bbb4b807f9e",
+      "scripts/build_governed_full_autonomy_v2_1_persona_confirmation_023.py": "bf05ed085dfed5dfc87de8bfd2ee12e5f5c8ef0267a97bf69a5cbc4feefd8b9b",
+      "scripts/build_governed_full_autonomy_v2_1_persona_confirmation_024.py": "7b6f38717ddf38599d14404766777bc77beb31b5960ae31167fae985fd5d0e55",
+      "scripts/build_governed_full_autonomy_v2_1_persona_wording_requirements_022.py": "7081fec93933714da941e641abf96bdc603498ce1fcaf3deedf04b862c16b459",
+      "scripts/build_it5002_rapid_dataset.py": "26cf9a26fb4b693229a37da8084855e9c6030de5600deacc5918e67617de692c",
+      "scripts/build_main_oracle_alignment.py": "a43d9632551ef5a7d12d26c54e6eecc0bd06c92914a11128862492d585eaefb6",
+      "scripts/build_multimodal_development_artifacts.py": "f8bd721a9d873cf4c6d1753d82eac4ae9b6ea17ad8de5e353d7f06faadb57746",
+      "scripts/build_multimodal_private_draft.py": "931fd2b8e9ce5db6508dd533c5baef1dc775a1feda0e5dae4052ea3eab7fbae9",
+      "scripts/build_multimodal_visual_embeddings.py": "e947683bf27dc105d7ec2370312835e28a4f438db14bf74b99b940812da16575",
+      "scripts/build_repository_correctness_inventory.py": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998",
+      "scripts/build_successor_architecture_confirmation_005.py": "1bcda82ac844203c7d54e711e2425252258e73a0ee297835337dab708cf53f98",
+      "scripts/build_successor_architecture_development_fold_001.py": "9a9b7a7d17f48708dee07f26d0b23361894995f1ea9f9c276d7fc53fc129c87c",
+      "scripts/build_successor_architecture_engine_comparison_006.py": "b6b781f767108b1b039033243666616699f69f057618a337a1388e203464e123",
+      "scripts/build_successor_architecture_policy_value_fold_004.py": "6776b0b5fb064af2b88c46ce459acc2db8cddbf4c77e65810fda7a303abc95e4",
+      "scripts/build_true_visual_colpali_confirmation.py": "6f7e210ef0eea73c350af56199ceeada4027ab38bd18e22a240e614ebba73df0",
+      "scripts/build_true_visual_omni_confirmation_002.py": "96a878696e94feb2ad7ff34c7263ed93b41231e51200886ac3c37a3258e6ab3c",
+      "scripts/build_true_visual_product_checkpoint.py": "a0825d4db15eed1b0b2cf05c5f5cfc66cb781bf1c255bf24404797d753d90bc7",
+      "scripts/build_whole_system_architecture_tranches.py": "a2afb792c14c25a7f06081488be37ada4e928c189aace88c2a39fbbe8bbcdc15",
+      "scripts/compare_ml_dependency_compatibility.py": "e919713dfb25821d6d8e977ec8e01ae7770f61ec5bf77372095d5af27a60bbfe",
+      "scripts/construct_academic_factual_qa_open_10000.py": "131f61717d43e6fe166032828c3a249a8e4ff29d570e31f03bf84966120b5bd8",
+      "scripts/correct_professor_fidelity_anchor_machine_review.py": "11bd658761e73d5e58f5ad1dffcebac91a1f3a6c1dff6f69dd42aaffd0cdf870",
+      "scripts/course_digital_twin_evaluation_live_stages.py": "1754ea45365615e901766cbb8dffcb75f42bce9c97f637b901254161b4993cd8",
+      "scripts/course_digital_twin_program_factual.py": "893cbc5b6842e455b7629ef15cb5e915c1de52c41871e57988c600fd9182ef98",
+      "scripts/course_digital_twin_program_release.py": "f215deb8efb7af93af631e9d6b7fffc648f238009c8053a75e765a907d22a74b",
+      "scripts/course_digital_twin_program_supplementary.py": "0d808434a07851644e4790178c9f9b6668660e674247e52d2c4178f05116618c",
+      "scripts/cross_course_quality_development.py": "a4fd956b588bc1ce92b679b7d79b3af50a8b781d63cb9ae2170a463c39fbb6a4",
+      "scripts/cross_engine_factual.py": "f727ef413144269a2228c0e380ed423c528c10ab166d74948a61bd04c0dd9d00",
+      "scripts/cross_review_course_tutor_authoring.py": "b86d5addd412fdd86b37db972d428fa71af712b29a5518e85c210b239742f237",
+      "scripts/diagnose_instructional_rendering.py": "bb39ee9dee98608e50695a876ba53f297ab0e4217af7ad0c2804f19b0e42de6e",
+      "scripts/draft_cross_course_benchmark.py": "6371e21c556c4d85527f8c9e642041c9f2f52c5703aa4025dfd64908868f9b01",
+      "scripts/draft_cross_course_benchmark_v2.py": "f3d2e2c3b448efc3b8d0daac31fad08b0d11dfb6dc7efc32a218704115f3c5d1",
+      "scripts/evaluate_generation.py": "5d285b8f38d10f99e802f3fdce2bb205ac69c3991ff1d44311cb8c8c82835d15",
+      "scripts/evaluate_ml_dependency_compatibility.py": "c338daf95b4b0676ff1a990b0605010d4fe1be8afdf8d3bf427f7424bbe78a1a",
+      "scripts/evaluate_retrieval.py": "77e98d1aca193f5720f3a89d836931c8c5e38baecb515d48b7076fd9d13ddc97",
+      "scripts/evaluation_calibration_cluster_analysis.py": "f06d8d31494394a50dc7256f895c4c9683d2272d1ba524b1c7da97e90ab27696",
+      "scripts/execute_academic_factual_qa_panel_review_v2.py": "8bbf2cd2f23f83e8c4e17f88aa75ed9fd7b4923124817edf0d9604b2ff540aa5",
+      "scripts/execute_professor_fidelity.py": "fff6576b1840d805d8d6be3afde3c6388a01a52a86ec247a61566fdbbb9cc68e",
+      "scripts/final_cross_method_factual_adapter.py": "22e09999f8191fa81ae76819e230b48f79e5f2b15ccf9b760ea4b5e52b4f20a7",
+      "scripts/final_profile_longitudinal_runtime.py": "d13ea95138259d09d517776d9c55d1feb4e1fc790f4bb1e501777fc4715e3e60",
+      "scripts/finalize_factual_qa_v3_conversion.py": "314049a7f4c7342061df1f2820d869244996c96843ae0b6c67d4507b5aa33975",
+      "scripts/finalize_professor_fidelity_blinded_review.py": "1e920e73ee783768aed4791cb0ae2524d4f85415716fb87421f07d0544370438",
+      "scripts/governed_full_autonomy_v2_1_actual_product_runtime.py": "db28f3360938f392a782a928078f2109a39edf415b62a10de5ec81e78e941832",
+      "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py": "b5fe89fb86208f36099d16d07231ea2bcf1aeea1c8e772393430f5fc94f65e75",
+      "scripts/inspect_factual_qa_v3_archives.py": "7be02fcde9ab953aec08e1fadfa65c51ffecfc272989fdd03d8e08a458f98357",
+      "scripts/inventory_multimodal_sources.py": "e1b39a72b5544402f24d645c27ae65d51ac60f6254c99840022980c26adb9aa5",
+      "scripts/it5002_rapid_common.py": "4c11db29f1cc0b4f8dc51c7468e9e3ce0a5835ad24b99fdf420a6aa27ed0e54d",
+      "scripts/judge_generator_qualification_v3.py": "afe2a10551b68447366bedde68f5dc5dc3f07f824240186f07dffb5486f8a1e8",
+      "scripts/judge_professor_fidelity.py": "3b372fc3d801515029c78f78b1a30cabf330e13b5db9fe142789cde0cbb7e04f",
+      "scripts/manage_runtime_data.py": "205a7250ea63f1e8677e1d125ac0aa88b45653fcbbf50a6b16c577229f861e03",
+      "scripts/materialize_visual_retrieval_index.py": "987936f4980488a4e7667e6c11dd6e4a32301eeb8021c0e2e842addbc74aed5a",
+      "scripts/natural_course_quality_development.py": "a0d600657fb61a557dfe3f25c771be58fd1f63121f252f028a5e793d0399cb54",
+      "scripts/prepare_academic_factual_qa_open_development_003.py": "4066d45231b38e42a9543ef1406ebdd28d95364657cf7f0c9592e56f23ded775",
+      "scripts/prepare_academic_factual_qa_panel_review_v2.py": "5e89a3e034f3638e6128a2686a554c8c5590cb0354c3a5c3590cd3e09f5e2fc5",
+      "scripts/prepare_course_tutor_authoring_review.py": "9457c4726a6cf6fd8f6575e94f5807343c94f3a03ed2e735790764d02f54ea24",
+      "scripts/prepare_evidence_sufficiency_v2_independent_review.py": "e54787cb9299846f4dc219eab4a28b9e5ba3e07fccd68bfa3d91b1dcc24f0b74",
+      "scripts/prepare_professor_fidelity_blinded_review.py": "c5f642f9ec73c09726a40c0904f30c63bb55e688ba5579d71cdb7bd41219e775",
+      "scripts/proactive_outreach_worker.py": "589c43f6f9625eee0ff6eb96fc320e627eeb4ccf15de26d6bfad0708467c7e2f",
+      "scripts/professor_fidelity_scoring.py": "0d2f70c18840b170445a4a86f1c92d7ca396b6dc46d76e6f84cb0b64df308391",
+      "scripts/provider_failure_diagnostic.py": "bc9bc1ac954fd49ec1e7e48d4d03fa9055d34840e65c7b7998f97686b7c47f90",
+      "scripts/qualify_professor_fidelity_judge_v4.py": "ad36cf7353f5b0fe46113d1bca62b1c80be5a7eb17c8bb9c36c5ca9740c5405a",
+      "scripts/qualify_retrieval_index_lifecycle.py": "c35d29ddd743a8ec0cc89410865e0c2ec406cf1a307c55ec72b36feae205db0a",
+      "scripts/record_cross_course_reviews.py": "6a8787ea7e749e86bfb5abfb2d183c40dfae5812caae2c2ece38d279e2f29076",
+      "scripts/recorded_generation_roles.py": "abecfb1c5a7bdc014a2a775e35f8aab87b99a1a9e42a3a4574f17203b79cdbb1",
+      "scripts/recover_governed_full_autonomy_confirmation_score.py": "40b652422cd048acfd4b87c15288b7e42a08fbdc708eba92c480f4afa753fec2",
+      "scripts/remediate_factual_qa_v3_ocr.py": "1620ea590c290745d4be34108fc1d39cd67efcc53b58d37ddf87d8e5c9532c45",
+      "scripts/render_generator_qualification_second_review.py": "2c96923d76e18c71ed221565d31c70b617895517451917c5c0200c1ddb3278df",
+      "scripts/reproduce_grounding_floor_audits.py": "043ac6e0a72b29d6312365f6e7c181b246d3ed4e6198b4b90ce3d0f0aa628ce2",
+      "scripts/restore_runtime.py": "de0c0920a0853447ef012d84f8b9bc632a93bd84623a3dc506151b1cdf05769d",
+      "scripts/review_generator_qualification_v2.py": "dffad8cd3b51f98c286ef81102b810eecc27388d56e04c8179bdc86528333074",
+      "scripts/run_academic_factual_qa_action_router_product_checkpoint.py": "aae73b367718af97ac344459a4db77a7e00a57dd0016b195c27ed96744c4a515",
+      "scripts/run_academic_factual_qa_ambiguity_safe_comparison.py": "b81bbfda8424f9ec596127a397dd8dcacac89ce0a1e8feef459fbba47dc2756d",
+      "scripts/run_academic_factual_qa_api_retrieval_selection.py": "8486164e4f2ea3e57ee1db582e4d94f76a714b6e812ef8c65cf34cee994d43b9",
+      "scripts/run_academic_factual_qa_atomic_m2_confirmation.py": "4c138bae76f6075b7488d038de517dbdb8d0e0b1295b849015e1bc079d13597a",
+      "scripts/run_academic_factual_qa_atomic_m2_product_checkpoint.py": "bee446bebce02cd891c8d7454603bb250717444f05cdfae37c59c46d188dabb2",
+      "scripts/run_academic_factual_qa_end_to_end_pilot.py": "ad9e611065c729bb63eb46d79d44ade92de7d0636a4b325ba1a3dc6c327ad5af",
+      "scripts/run_academic_factual_qa_end_to_end_pilot_v2.py": "4a81498a824b5712e6c283b5957e64d9c0306a914a9bee1a1ebc1e54a5d5f937",
+      "scripts/run_academic_factual_qa_grounding_selection_002.py": "b570d498a90686b8efebf84918b05467139c89a3753f8d20488e0980642edae1",
+      "scripts/run_academic_factual_qa_open_10000.py": "ed3a53c9bbefe17a9157982fde0f041f9c9bfc3c2630037f7e3dc0569c8d408e",
+      "scripts/run_academic_factual_qa_open_10000_winner.py": "360960782a4947449979aed1b55cdda6e0d714696d5cfff206a39b7dd53513fb",
+      "scripts/run_academic_factual_qa_open_advisory_audit_004.py": "428a4272a2ef237f7147f47ee2015eb9b28b6b5d5eb33ad74433c061f49334e1",
+      "scripts/run_academic_factual_qa_open_development_checkpoint_003.py": "42bfe4c500b0cff2d963bc4582d014f5f1c0821aa5105ba75f5aac1c6863c347",
+      "scripts/run_academic_factual_qa_open_development_checkpoint_004.py": "adaa846125772204fa7f53b3104665d0882728104e0cadc3740c4aa547fbd865",
+      "scripts/run_academic_factual_qa_open_product_003.py": "e4a4f32477c93d355a7b905ee2d11a47439c4d0ddf9fbc29e13037112059b582",
+      "scripts/run_academic_factual_qa_open_product_checkpoint_005.py": "f151caa5eb415c88ad27b5b1c6a1d92da4d47aaafbdc32e9cc9b4c26eeae8be9",
+      "scripts/run_academic_factual_qa_open_product_checkpoint_006.py": "7f34c9a32185576dd0e5a7fe71a42b091452b925b3888f4ae5e90c7e61b9af6b",
+      "scripts/run_academic_factual_qa_open_product_checkpoint_007.py": "ae62dc15d973ab94a31310130070970801add172de999973e683b05bd22863ae",
+      "scripts/run_academic_factual_qa_open_reference_validation.py": "633e4a087e7f36f96d53550eda43952a723f3e47289e23ef63949ff64fe04842",
+      "scripts/run_academic_factual_qa_open_wording.py": "1d5b3c38a4e490f0eb53cf538886ba7f59c8edbc9ec7097f5d7e8e2cd599b59e",
+      "scripts/run_academic_factual_qa_open_wording_v2.py": "360695ce0a7b331006b0f0daf5cce32c9332828ac771cbad583d641ee9ca6457",
+      "scripts/run_academic_factual_qa_open_wording_v3.py": "85dc8a12e90de36d800e59bbfc4621cd7e9406c0f9c05e88c2e3dbda4589bb6c",
+      "scripts/run_academic_factual_qa_openai_reviewer_calibration.py": "62d1a63821f641f53654afc4ebd82c85ebf747ba0f33e7b714601f440ac3b900",
+      "scripts/run_academic_factual_qa_openai_reviewer_calibration_004.py": "9e973e8e02b4dd4471526791ceeb4203593d3b004bbd8346822eaa81a0d97a10",
+      "scripts/run_academic_factual_qa_panel_review_v2.py": "6587516744876df6550ab660e5806a7ec3800d0240e48ec06a7f105c6d047966",
+      "scripts/run_academic_factual_qa_r1_model_cascade.py": "fcd253b1470e5265bda6a2670e26e4f556b6b03e8da297ff405d4a0de2e30eb4",
+      "scripts/run_academic_factual_qa_semantic_target_comparison.py": "dfba3652463b4289f5010c9546b4761f947eb429e0149db91db7e2a54cf028d3",
+      "scripts/run_academic_factual_qa_source_aligned_retrieval.py": "7fab6e5cf5176f9679daab7ef9ebba0726a38c31ab920ae39197855b572f4f33",
+      "scripts/run_academic_factual_qa_source_aligned_wording.py": "4f5e7878d03b3e8013bf44be5959a64d8095a42fb29a0f3aa7c2272ebb723a33",
+      "scripts/run_academic_factual_qa_source_semantic_atom_comparison.py": "1af3e60d2f985fbd6dae209372624d7a7022639dedab0aa1d2db77f05c75d42e",
+      "scripts/run_academic_factual_qa_t0_confirmation.py": "bdc825268b5bb9b2bd0d2a12039f414749733555d393a8f61ee32800daa68a22",
+      "scripts/run_academic_factual_qa_visual_checkpoint.py": "c57ba8741e1b88e48d22daf76adebad62e415daa4ab80e808384aaede331a7c8",
+      "scripts/run_asgi_tutoring_concurrency_development.py": "368ea05d4ef7537ee2b48af63cb778de834b527fdc57ebff698750849bf8f253",
+      "scripts/run_atomic_claim_validation_confirmation.py": "30f75831c0a37e236bf1159f7e823ce3b6158904dbd7e982bd9316d6733c9ca8",
+      "scripts/run_authenticated_loopback_load_development.py": "4d4b7607576b46eaf212471f4f143f3a098d671c57ec7f57f6650ad9de9dae6b",
+      "scripts/run_autonomous_tutoring_graph_development.py": "d5f393819e98337a7f319b44e38b2c8b733dd20c4095b9c42881a501ef3f8c0b",
+      "scripts/run_autonomous_tutoring_r1_confirmation.py": "9dbcb0a72b19c5d368f9c5117be862ac21d4ec024e784a46a616a36367a32cba",
+      "scripts/run_autonomous_tutoring_r1_local_confirmation.py": "6f4557a23df7b954bf80684566e762053366c38c6d3b8ffdefd409ee0972dac7",
+      "scripts/run_bounded_contract_progression_development.py": "fb09092a6c058140baa44339d541d9218c11c73e491d72ed66cc91270829ffb3",
+      "scripts/run_completion_semantic_review.py": "7fc417c43f3ed0c05629584bd31a470fa43ccc4b297f3f81d4b1fc487b1abb88",
+      "scripts/run_course_digital_twin_autonomous_long_run_001.py": "1fb826a2b9c7d73ff104c8aed2a059e565787fa5187d60bdc3d75c7f6f16fa6e",
+      "scripts/run_course_digital_twin_evaluation_program.py": "5674493df817c65e1b67ce4053fbea19659ea202d6464a27ba18dff7c9c7f71d",
+      "scripts/run_course_digital_twin_nonhuman_supplements.py": "9046b5e3b0f9a0318aabe17de4771d16f56a96ac5c24cc0c4cfae18ffa039fa9",
+      "scripts/run_course_tutor_hybrid_review.py": "20a06abaefc8574ec95b35b1b6c9e969e4a1b6f40b1e8975368f32bea30e8421",
+      "scripts/run_cross_course_quality_development.py": "d75e4da2532e3f4d7adefec998d5cba494ba3d79178f71da5d9d737e6b897380",
+      "scripts/run_cross_course_retrieval_heldout.py": "c9016656da16ed0dc4b280215f4f3373203eba68c104e59adcea695338b4f690",
+      "scripts/run_cross_course_retrieval_pilot.py": "a65b43ac3d15118ccb98afe4cbaa18f15e966f6247afbe8ceeabcfcb351aef27",
+      "scripts/run_cross_course_retrieval_qualification.py": "9098c33e5745f171177e3d99646e5dde173b261b417b0d7d93e635e2030b9cb9",
+      "scripts/run_evidence_sufficiency_v2_candidate_comparison.py": "9ab7bce0a478be079491ac3105df5d4d7cb859883993011065c40dcc9785c63d",
+      "scripts/run_evidence_sufficiency_v2_independent_review.py": "a3a7a652f880b06373b0c4e6a87b11ec3a6d27dd468316014ffb3c26d23607bc",
+      "scripts/run_factual_qa_quality_pilot.py": "aa9f46eea391a6317ba828ee88200f62eb3cef2abc22fe78719c7a0b01e7f5be",
+      "scripts/run_factual_qa_v3_oracle_pilot.py": "76eee8ebf01033b8aa1a743f5b9a3bbc379aa5e166014c3533d8396588eaa8e6",
+      "scripts/run_factual_qa_v3_reviewer_qualification.py": "310f0631474fc1ada5cd846b60bdfb15e492800fd1e8c0716743079d633eea78",
+      "scripts/run_factual_qa_v3_scale_checkpoint_1000.py": "a8e6408b7842299ded5b9a0b9863b388619dfbbe261319ab90816d76f769315b",
+      "scripts/run_factual_qa_v3_scale_completion_10000.py": "d4b2b91e8e9f881643f2a915f12d56a29bdcf71e846e5faf9e2220caf82aa7ad",
+      "scripts/run_factual_qa_v3_scale_pilot_100.py": "893f5b64bc4416881fade42cbd91e4f3f5312dbfb12b6ba0f968616dafe905cf",
+      "scripts/run_factual_qa_v3_scale_pilot_100_003.py": "1d59d608d6edc45b60c6ece6ac2b95d8d2e9af40bc1069ebeb9a55aa49358326",
+      "scripts/run_factual_qa_v3_scale_rehearsal.py": "b37a86a19cb581f205867dedf7c67610a1009c0625b83732af5efb9c07efc084",
+      "scripts/run_factual_revision_controls.py": "3ba764ebc25833885b461de68babcb89b65a3f3fed9686bdbe6b594ac7222ff2",
+      "scripts/run_final_cross_method_factual_confirmation.py": "47d9dcda37c48997dc4314ddf7c7be7a565625f2cbbf0dd184b9bcaf5a5708a0",
+      "scripts/run_final_profile_longitudinal.py": "b8864c1f79e24be472ebf5028d0e5a7c134b41c1b7386b12715b48d1bac2deaf",
+      "scripts/run_final_response_support_audit.py": "37b92de0b7840a495b5b9e8f771811d71fe88c53d061e3180cf52cde81d23d6a",
+      "scripts/run_generation_role_model_comparison.py": "87c8dd23c7b71e896fbff36c2fca0fc868f0e52d823e2494736b466c7ecca6bb",
+      "scripts/run_generator_qualification.py": "30620f0ec245d786c1954fd291c7429e6a2e7b23bd11418d5c878ed69cb432f8",
+      "scripts/run_generator_qualification_stability.py": "9a2c9d3230a7211a567baa7c4bf48c8390c023a581ecdb91750369c76b829008",
+      "scripts/run_goal_completion_scope.py": "93b7f41bdf26f7f616971eb25de722eac8284377a8e4ab7a7b07b7686bda3cca",
+      "scripts/run_governed_full_autonomy_product_freeze.py": "6daea4754b19bc3c2476246753c41d9da28881482c962f3909f4163caf6a3103",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_012.py": "a08704732f2d9e13b4e18bb4f5a04d744cc56a122e39c65e4583eef5e107af09",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_013.py": "89e5eac29ae361a6c8aa3b972bca5421e4559d74150d5d66edb764c69fdd50bd",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_014.py": "4b4cb43413425075f1335a2db67cce339a2e48bc1f77981668d1fe6b7dffe30a",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_015.py": "e4789e206e095d40cd0c1429ec20a6150cb4fe94ad5e4e11fa62cb7e8d8de8c3",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_016.py": "bd52a7b66f847bc479014eb63328f7e10c64a65e3b008349c35292ff1c226dce",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_017.py": "3f7688360102a18b56c8b85e59d363417a875d9c8b9f90064a12c2c7e8e8e9ff",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_018.py": "4a7a11948ac312a95cf1aac5cb4b3c13054695c263e57096be52b86ca6dd1381",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_019.py": "656d83078cf66f62dbaa41000ef771667fcbf13fe3a1d476dac3cb4387598b04",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_020.py": "4e93ffce7e84efe4a83ef293e4fcf1fdd3344609686a6edb2ebc746e312297b8",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_confirmation_021.py": "7d75d6a1995cc686f65ceaf213fdd225ddf9faa91c51d301cd0e8cf77cfbced9",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_002.py": "1ef757d414dd6b0af5ebe9f3d5749e386a6d2ce6430415c404cc88a04d78095c",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_003.py": "392fc51573157345877f71f9758fedd065378f8845b8f1abc4e2073c1ae9c026",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_004.py": "b6ed31e145d8156d009e4bfdb17d1cfc6a84e707ac5e3c8b8140f6915502be96",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_005.py": "213e4eb024479474799be328ec3d9aebc2af3f3d76274bf7d100bd97b47fde5d",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_006.py": "aeb6b1112083499eb04e8dbd6d8a7bf0db21500704525756e6ee93fbf7f1ae75",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_007.py": "186d7f2cb7e36229f8cd40e5ea8738102a6a0b98a0ce9c23092b49d5fee765e4",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_008.py": "8a8397b3b1b557008afda42bb14dcae6a6ae767bcff82023a82c40bee85d4faa",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_evaluation_009.py": "d02622c12966c11d3803a473f71cd6045f1328a4bb3f645782ecd45cb216060e",
+      "scripts/run_governed_full_autonomy_v2_1_actual_product_smoke.py": "9e1a1b8535d0e624d6b9427e344d49b8804c8e457ec5b58348f3d82f391b2a7a",
+      "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_025.py": "e209e41288a2c271ce65713cdfb37ea6aaa51612ac4ce2fe3f475dfd49335c74",
+      "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_026.py": "01a4ab2ac7d8055cd226ff9db2ef0689725feed9be2af22ce9fd7cad8fa8a167",
+      "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_027.py": "22cfb85ac6f05eb974cb58f8df8f2d172aca0fdc110cdd6f4d60b4145cf29224",
+      "scripts/run_governed_full_autonomy_v2_1_corpus_confirmation_028.py": "3b98e8eb0b3216f6d8415518f24d5b4f6132f6e6766ff001b6bca9eb36865632",
+      "scripts/run_governed_full_autonomy_v2_1_cross_engine_evaluation_010.py": "0bff316fbb33ae94d9dcf0bea1fe498586946602ba155199361165598acd0d76",
+      "scripts/run_governed_full_autonomy_v2_1_evaluation_harness.py": "8a80d8a066eeeee53d41833372b4ed325671f99d22425e35e74427415d1a0037",
+      "scripts/run_governed_full_autonomy_v2_1_grounding_successor_011.py": "b517dc43e8e0265158928538b2e7393f592f6a003ed31a2fb416f8e2ed3d6955",
+      "scripts/run_governed_full_autonomy_v2_1_hidden_state_learner_014.py": "a1e017e68af99de6ec53fd1d29aa211717f34079073435138932668262149af4",
+      "scripts/run_governed_full_autonomy_v2_1_multi_concept_confirmation_025.py": "fbf2d5f2a8a7b221b580a319c33bfa9e38a562e86066af0a113bb37948ddeb02",
+      "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_023.py": "0724889e689d793569daf74b5320633e90cf900ee57893ebcb528783aa33c9f2",
+      "scripts/run_governed_full_autonomy_v2_1_persona_confirmation_024.py": "7eaf39f36342c1703e2d44d9b4f4130f2c3edcdf5c24b594e8d360b3563ffd97",
+      "scripts/run_governed_full_autonomy_v2_1_persona_robust_selection_022.py": "fd78841fe8ca371f4d5a2db650249d2c6a0c3470819ffae97308d43ad7d2c6af",
+      "scripts/run_governed_full_autonomy_v2_1_persona_wording_bank_022.py": "8c82215e56b6774fc8baea6d868ce5058b166fac5ecef0b105ea62ed109a2c1c",
+      "scripts/run_governed_full_autonomy_v2_1_provider_integration.py": "243db47c5c8bdde76c673167a1d617f75db2dd686fed92e34d26120af5749a50",
+      "scripts/run_ingestion_worker.py": "7614a938dc0683207da9c0097a2a5b4c50c4f65091eb65c8182333cde861a770",
+      "scripts/run_instructional_operational_comparison.py": "7ab72694d8dd27f25767d488b2cbd49e62b83eca315d45ea41fa46c3aa4500d5",
+      "scripts/run_it5002_retrieval_rapid.py": "da061788ddf55d2b64f7ea217b360941d6a8a7ba88923fc2ed45ea2358288623",
+      "scripts/run_local_r1_final_technical_completion_001.py": "adf00da2018670a60b1b9cce430daeb17dfc46b610fc6b595b0ca48f187c622c",
+      "scripts/run_local_reviewer_sensitivity.py": "fb7a7e7d77a7178b286708c4ffca561852cdbbbd1f02b8fd998a4f761594a2bb",
+      "scripts/run_mixed_source_recovery_development.py": "a0c60a8def0804297683d6c95fd9edf06b967176274f497041eaa959ed912a79",
+      "scripts/run_multimodal_product_grounding.py": "db1bbd11a41354017ed2050df54ead5fb4d808d0a4852356e91b8684a1cbdb2f",
+      "scripts/run_multimodal_retrieval_development.py": "869ea2ebef1d2647215a8596c77d53da62050f4b0f4c45559725438b9397b02c",
+      "scripts/run_multimodal_retrieval_v3_development.py": "720aa34e3f17e369f201e44aa008d45669023b4e08f041cbf16e73ebeba408ec",
+      "scripts/run_operational_dialogue_development.py": "77b09dc3318b759ba71e95894b16ddd779eb8171271e929b00d4f7c62151e336",
+      "scripts/run_output_cap_progression_development.py": "ed779858fd86fb51e59f7385d273d7d852cb3f5e6e634073a31afcabc64f0f9e",
+      "scripts/run_paired_pedagogy_development.py": "41c145baf08c435f2f7dad468b0d884559b703d190ad8dd060acc5b07b8abe24",
+      "scripts/run_proactive_outreach_a1_development.py": "d2b4092ac7487b4907349b684e40d195a58320b5c98b9289450e549cf86170dd",
+      "scripts/run_proactive_outreach_a1_shadow_confirmation.py": "da5d11790cc13ca032159a217084a7e85e48c167fecdd3cfa7c0d2a4f71f654f",
+      "scripts/run_product_evidence_gate_selection.py": "4fb6127cb1b429513d9f46d401ce0afc58ae8e0c8e13998083e27b5e819840f7",
+      "scripts/run_product_evidence_gate_selection_002.py": "2f5b374bedb4ac673072a34a0dd860624289c29e1efd6350411b3b45f1714aba",
+      "scripts/run_product_evidence_gate_selection_003.py": "6aca21a21e0ed9dad6d1f46b80f86ba8391ae1632259bbcf195cf71cf5ed905c",
+      "scripts/run_product_evidence_gate_selection_004.py": "76caf84e71ed038fafc9a434d09a73700ba845d59bbc72e87e827b08bf355d14",
+      "scripts/run_professor_fidelity_experiment.py": "753a6785a00c9d11ab245f23bbe22d291f575b64fc3671777f8f6a40df683f22",
+      "scripts/run_professor_fidelity_proxy_c0_c3_002.py": "f1c7bb3ef997ad059ce9f555078ddea5e00f3618c1493d70e5dd18b8b7e2c311",
+      "scripts/run_professor_fidelity_proxy_c0_c3_003.py": "d1c53dd62420717f6fcb15a016c81e56f92cf05ae74ac16724d77fdd252aca6c",
+      "scripts/run_professor_fidelity_proxy_harness.py": "bbbcbe4f3b374f3fabde16b19461f984dfe0cb9408ae937e784a79df4a48962c",
+      "scripts/run_r1_public_preview.py": "999f142d0df7799c9db417a8c0b89fe51c71fb1efcd18335a2357d5d6a8a0c3c",
+      "scripts/run_stateful_clarification_confirmation.py": "0c27bd74c003174648275bfbd16d7b05e232c738be96086268571c3d0604cd05",
+      "scripts/run_successor_architecture_confirmation_005.py": "58a7ff356c27dcc9037bb3bd5e80a13cf6ccd395778d73f172b8f98eee8dbfe7",
+      "scripts/run_successor_architecture_development_fold_001.py": "7cf227acf4d6e1c6641c606ed4aeec0a41e4e858444b409abe0247c4f604ae28",
+      "scripts/run_successor_architecture_engine_comparison_006.py": "feccd07a51ba6b988eb83cfdfbd431d105c5f1a9c0161a298a8da0b0bd3dde53",
+      "scripts/run_successor_architecture_paired_comparison_001.py": "acf2c709016c76a0b9307bd0672cd92fbab40da18e1f13cb6426aad13cf9692e",
+      "scripts/run_successor_architecture_policy_value_fold_004.py": "ad95792479006c88c1b9309688786dd0e5c01ba2e710947a839908a6d35cc325",
+      "scripts/run_successor_learner_timing_simulation_001.py": "a22d5dfe6f6507acb444a53ad0436d6e897a97bb9cb86cebec1336c66990927e",
+      "scripts/run_teaching_profile_responsiveness_development.py": "b8a2de622be4f5b5fc677957065f1d5e410c4b5ba1720e5601661c7620623113",
+      "scripts/run_true_visual_colpali_confirmation.py": "a4ac19fdfe3b9f0d22ce7ce80c58e60413ca777a7629ae76bd03ca5a57522a6c",
+      "scripts/run_true_visual_omni_confirmation_002.py": "8162063f9731d90789a15988c4ff23ec74d942729018489c1ae7918425926c6d",
+      "scripts/run_true_visual_product_checkpoint.py": "de3422519f3ce03273becf3f18ef3d68cf6f4dcaf1a5605f58f2000d9f48c951",
+      "scripts/run_true_visual_supplement_003.py": "e9e4226f992d809d3d9d3a925fbcd55aa9e0469fdf726c47bfabf6e6901a875d",
+      "scripts/run_whole_system_architecture_round.py": "d65f56a57a6f12f8a25e11c00dc56599a5a84197a57ee22291c5f9909e2095c3",
+      "scripts/sample_multimodal_pdf_pages.py": "0511fdb4c5d40b6667e5afb587da5327be787a3ca360c74406b723fb892ef648",
+      "scripts/score_academic_factual_qa_open_10000.py": "a2c3e59dc59746912734a4b5b183382cf01f94bac95e86b8feccc028401219c8",
+      "scripts/score_academic_factual_qa_open_10000_winner.py": "df3ddb04b72c1ad1afc50be31d9417461ad120599c4c51bcd37f7a9f45afbe14",
+      "scripts/score_academic_factual_qa_open_development_003.py": "5c70136e96858426ccc1e544a1a6113cce4a8f5ce001aeece747c0e26ccb4d8b",
+      "scripts/screen_factual_qa_v3_content_boundaries.py": "0731fe83429cf6b390d70ed495a8ba28c6f28f6d9ac4052c263a3077ac1c2455",
+      "scripts/seal_course_tutor_anchor.py": "f8ec9ec4398d2a2e81893bbf05dc78a102856f78570bcde13dfdb889bf07c918",
+      "scripts/seal_course_tutor_splits.py": "bc4cb162dc546ad7e8d4892a446d52a4d4537b7dbdfdf59be69057c0660406f7",
+      "scripts/seal_cross_course_benchmark.py": "2d1dc93f255022704e977cd1e6548751876d6985203d2dba661d54e505856970",
+      "scripts/seal_multimodal_benchmark.py": "72434b895b355a85bbac6a95e5eaa0102de75d8adfa8b9367a1fd8bd0ecd00c4",
+      "scripts/second_review_cross_course_benchmark.py": "296de93ed223a7dbdd56f4703d08fc36350d0f28a622557df8e8ab5fefdee5e4",
+      "scripts/second_review_multimodal_benchmark.py": "e384b0283e823c9ce7d5bc49398513c5aa77a4b7f1a0109281807c5228f43a36",
+      "scripts/semantic_calibration_v2.py": "1676ef2c55bf811b85437c0d2c284eee1422eaa4db30450a9df40283048d7eb9",
+      "scripts/summarize_professor_fidelity_anchor_machine_review.py": "a5d8ff062889983f74a84c5c535d521a5f9a7e01f66a1db4fd99b538da5a509c",
+      "scripts/synthetic_course_corpus.py": "9a3403d56a48899abddc1fdccf0a044ccbfa0ee62df9b1c8589b0c61af80758f",
+      "scripts/teaching_profile_responsiveness_packet.py": "b5992989dcc3e309297bc3af91202a29e38d98874f7d08cf3b7d1fe64a2b5fe8",
+      "scripts/triage_factual_qa_v3_semantic_roles.py": "f588f0251994976c3ba844a38879267a6df0d8091582038366e8855def36ca66",
+      "scripts/tutoring_capacity_probe.py": "b63c6ee73e09c39c388a504a853cd648eb92d6bb32b4d8f81833819f2d398447",
+      "scripts/validate_academic_factual_qa_confirmation.py": "c0cc4a9060e4c9b0f505d944ea114c7478ef19053037ca38af3be7309f93aa19",
+      "scripts/validate_academic_factual_qa_confirmation_v2.py": "d0e18ed5f7f42e7ed6b564190fb5aea9abaa997712fbf8185d6adb37d7b18ad1",
+      "scripts/validate_autonomous_tutoring_graph_instrument.py": "632175eb842a6fb913faad8d3af1597cb0276c7f6c58bc7a901a32aa66de5214",
+      "scripts/validate_component_profile.py": "0aec01c7ef92b42123aa0ce636cfe956d71b3a969cbd7e3ac93ec33aaded3027",
+      "scripts/validate_course_tutor_dataset.py": "a3ec993a8f2103c46f9bb69e5f00aef44a671483e72cdf67bd4634cda4671246",
+      "scripts/validate_cross_course_benchmark.py": "e09736b973258cffb70034ebd3d6f99094cd8f19c233f122172d4be1a35de0d0",
+      "scripts/validate_cross_course_portfolio.py": "b703a9a20e6cd917d086ca0c78f8b797e7891caca6d6d43b401bcfd38a3de5d9",
+      "scripts/validate_deployable_foundation_freeze.py": "8f2ffa501e8e1bc56b1d3765af4ecf2fbd00c2cbc442b9b61d7de023a6cd2f4b",
+      "scripts/validate_evaluation_instruments.py": "a0881546e8fb5afba3b58696a738d0c4dd1eb73a88372a7011c00ec97bdbfb3b",
+      "scripts/validate_evaluation_results.py": "44966535b88025d6d6fce0f8a43d1ce275ad781fdda8b5eff6b6aa792362815b",
+      "scripts/validate_evidence_sufficiency_v2.py": "567787029f5450758757e50e4c84dd7f039712ec6a72b771e92fa3d7a897d946",
+      "scripts/validate_evidence_sufficiency_v2_decision_freeze.py": "9e3c3b4b18204f1077ae28ad932b26f2bbdb1f00f6d0c8df3415d88dd7145612",
+      "scripts/validate_factual_qa_provider_freshness.py": "b7dd65275e612d90411d9e26d4276b2c98f7b404b65ba7c3fae34077513b19ee",
+      "scripts/validate_factual_qa_v3_design.py": "dc4b4cbe2e1e1c67c429dde0e48f4e4a644e9753a0edfa4c812028be7e849e81",
+      "scripts/validate_markdown_links.py": "0a6628cdb137a0eb1d9d6cfcf067c7b509633ab1f3f5b4412da9826ddeb21b56",
+      "scripts/validate_model_policy.py": "2134c5674f758eb8b6c0d768cd3212b78cfbe5b5ee32395867ad7028a04d7fdb",
+      "scripts/validate_multimodal_retrieval_dataset.py": "8059f36187e33358235e6440e31b808b500cc7eafb7ef922431bd91ea663ef9d",
+      "scripts/validate_professor_digital_twin_transition.py": "15d4bc9017885e644d2921f63ca19c81dda24acbfd0da74d600e2c16f7062b26",
+      "scripts/validate_professor_fidelity_post_audit.py": "35182128d99cf7348635dac0bcee38615a12b3d06a4e626c4502b5e68fb86a54",
+      "scripts/validate_reference_uniqueness_controls.py": "a90addb6a14467b2138e70e5572ed4e394e608ab16ab28f8d617ba25ec8eb5fa",
+      "scripts/validate_repository_execution_freeze.py": "a6e839b27720c3e36660569a5f0cba16b1c993e0908da89e887c8dbd44a716bc",
+      "scripts/validate_retrieval_v3_instruments.py": "def0dc55e1d232fc1f4c6ae0307ae93f3457eab6a18050c15ab542b024a8f3da",
+      "scripts/validate_technical_freeze.py": "56c837f1c57e011149aa462e1c94f0adaef52f62147cb25b9ebbcb8745ce4c04",
+      "scripts/validate_whole_system_architecture_program.py": "c8750d4e50576a76cdd4f2902cbd25c4bba6d276f4bbf0b58a87fc2c680b5f9a",
+      "scripts/verify_deployable_foundation.py": "d96fec72a57af69b17d77d9789068967d3523f5be7a1e57ddd468efef77d383b",
+      "scripts/verify_governed_autonomy_v2_1_implementation.py": "8e01cdf4254118629525c0cddebf618daca051a1ed0364a737115c71aeb6342c",
+      "scripts/verify_https_staging.py": "1cd8ef4c6fa710ff0d8b6b4c600d036053bdad151404116b331c785243fb8832",
+      "scripts/verify_local_ingestion.py": "047c1994faed34bd37cf7fb219d4fd70a02c219c57d74ba2e889cc0ff6d6ddc7",
+      "scripts/verify_student_workflow_slice.py": "75ceb934b5bc8339c907e88eecba885bb91b302f114202b6e5e478e3392226a4",
+      "services/__init__.py": "60303d6563334f741c1b315be7b58d455b92e2f9abb92e33784bef8b663c786c",
+      "services/api/__init__.py": "5a1c01a0d8d9ede8e902a422cdac400b2cbbdf104c7c17e7b55e15a7d1279f13",
+      "services/api/app/__init__.py": "20c25d2aa75f16b91090a4d5d350c73d3614787858f5ba8b04795b261320e6a4",
+      "services/api/app/config.py": "c7f0ec7eb67ee769e08dbe8a1317d42b606d2629812b41a85b06641e56d1236a",
+      "services/api/app/dependencies.py": "91d0958eeb012fa889285421a5e7a63a5fb358f73190b624faf70c48f27ea5a3",
+      "services/api/app/experimental.py": "8d2d867394046452840d222b6a3383a03dd042c639fd64d6a6db9218c4f21268",
+      "services/api/app/factory.py": "186d385c26f89d778f64ed3bc89df1ba3e429c88410a952bdfcedc3a8e1574d2",
+      "services/api/app/generated_preview.py": "723cd028b9907f6898ac83a4ca9af75fd4a3c47892b347466061f2a484e91e4b",
+      "services/api/app/main.py": "38aa5b4191674c21614d82959c66f61a6800f1f444b2475a3d71f3d1c705a3ce",
+      "services/api/app/middleware.py": "c99bd7622793b0b82d92c216688c52b3f4da1df69f9fedd12c324222c8381ad9",
+      "services/api/app/observability.py": "2b9fcc5ae7ddef067b6acfd3d82458e20a81b2b5e5fa72d0beb8e45f609425d0",
+      "services/api/app/routers/__init__.py": "9fa412dd25a04003d503a7df295fc6e37088ebb86b76af3ee9cac123ad9cde39",
+      "services/api/app/routers/auth.py": "ee4098962b061af29ecb5a1f344383fd4a3019591a0f490f236f8f4a369d5125",
+      "services/api/app/routers/onboarding.py": "b75e5619d099ed1939b3627c87273271126f6b725b9a3b1392a0a8bf4cc2d819",
+      "services/api/app/routers/operations.py": "5eb7160dcdd33b81c70814f0048214b5961d3c47f4e0636ab24cc3146beaa0fb",
+      "services/api/app/routers/publication.py": "2d9fe8ccffffd68b9868a3922b7b53756b5915d619c7180c99499ce4b925f08e",
+      "services/api/app/routers/student.py": "7e782cd8e1d5824d9e381beae45723f95ca2140400b1b8ec94a2e5c88be17c7d",
+      "services/api/app/schemas.py": "e0fc685f08f59bb152cd2f46a3f4e8506170766fa9335f1e09ec3831e23d49f8",
+      "services/api/app/store.py": "5aa4e86c3eba7fc57d7e7dfc50d8c51d5e59b1053a720278435625b5b993ca04",
+      "services/embeddings/__init__.py": "ce99f17d2858d4b9700a2cb805d73a1c31f54eb8b4292cdf3ad6ef064393f57f",
+      "services/embeddings/fastembed_client.py": "53d292d5d72db2e0613375f6cf1220375a3bcdec42244eb38d2370e54850ce41",
+      "services/embeddings/jina_client.py": "60ddaf5f6efb82563822927f6b186661f284c0bce3e6a2d053e67ac68a0be31a",
+      "services/embeddings/openai_client.py": "8c6a9d8fe8bd35fd6aa17263f519aef318400c43113edab67b6944342347edc5",
+      "services/embeddings/qwen3_client.py": "4286b9118f9811a2a6426bf97ce5f3c68e8646ac1f1a2af29ada7dd396f0c00e",
+      "services/ingestion/__init__.py": "22c76d5f8c2cc2463e6221df8c3b1ac33a8136b7c90a4a05ccf85e5f2cd3fb90",
+      "services/ingestion/jobs.py": "f13c98b630ea0ac08185d02250859295a00e15db46b2471de84278f4d93e15c6",
+      "services/llm/__init__.py": "fac9e68cec03e434aca1f0a3f2e2ead17aaf72304e2bcc429fe21bbb051e1fec",
+      "services/llm/budget.py": "b849edda44760e116a8a88cdc437ff3c38d2517a5c46aa9d8e82c2f9434066e3",
+      "services/llm/experimental_role_routing.py": "123881f88255080907f0956963d1638569f749825e20cea226c9d881c7663238",
+      "services/llm/litellm_client.py": "5fe0e437a7507796cec2799b8aeb21086429b5ad6b5b78ddc2eed34746338ed5",
+      "services/llm/openai_responses_client.py": "90f11572805d58c8d2790c855b7ca2276f05f369bbd8ea7adda7c9c5e5a556a8",
+      "services/operations/__init__.py": "80e94c0cd541d63c27ca7a179f40b1c1f4c4adfac325fb2b419db2345bde1158",
+      "services/operations/backup.py": "46ad7b3cdba45180d257268823a9790c4b4ea3eb3506b15d62350df6aa320326",
+      "services/operations/lifecycle.py": "32dd88b0a4d6f56bf8363b316a24c453913c8aa9cbc6eac05bb454fbcc3ffe36",
+      "services/persistence/__init__.py": "210d99f1ecc69c2bd645adf55b10e02495341eaabb9ba42f6e117fb82615ab8d",
+      "services/persistence/async_sqlite_coordination.py": "98284f0d46b70a03371c9ffa709d4f6a0c7b46cb088d9e0b380a59e14b09fd4b",
+      "services/persistence/ingestion_jobs.py": "41a63d21fe4647155d9e2f4c3a76e22cff94258cdd460da4098e29d8a89bd882",
+      "services/reranking/__init__.py": "8bdf1332b191d05138db47afe5b640b938095b0706eca032492d113ad6b90c50",
+      "services/reranking/jina_client.py": "89e98e0726806dc517f08758084c9a045fa42f009b8571db0456f43c5c367d6c",
+      "services/reranking/qwen3_client.py": "81253c6d0fff1941114d25c2188edbb05d63d8fa70f0c69bdfbca057172b2e7a",
+      "services/retrieval_provider.py": "7c6a428ecdd0610f8ff4a48b44c1f3886354bfb6701332871323f3f48e465a6c",
+      "services/storage/__init__.py": "48cdeaca9e560dff18cc889b941e44186fc3e42929ea935c8a1ec9da629510d3",
+      "services/storage/filesystem.py": "290c174b4151fdf01460638ab6fe5a287363f391c1f5b004d0db72a0c23a8bf4",
+      "src/digital_twin/__init__.py": "8f5c5218e5c93e299348235253860c8d20c2849527419591906aa7fc00ca6771",
+      "src/digital_twin/action_router.py": "3ade9b22d3fcede59bf3a545c017e27187b1adc1679f7f97ad50abf5c90f2a86",
+      "src/digital_twin/clock.py": "f0cc74428db9edac3fca954ac0f802a39d168fc075680cfce4e4654958779117",
+      "src/digital_twin/evaluation/__init__.py": "bf800441995b47ecab709b374da8d16962af89254bb8babcdd7437dbce755291",
+      "src/digital_twin/evaluation/architecture_evolution.py": "e98289a7c54dd063e59a993c36a733c862cc16e77aed24a37dbe2f2d8977fe8f",
+      "src/digital_twin/evaluation/autonomy_architecture_tournament.py": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0",
+      "src/digital_twin/evaluation/autonomy_contract.py": "db95ab6964da90171565d978c8a1d9febd8ec70593a32d0ee0aa8919d07ad4af",
+      "src/digital_twin/evaluation/autonomy_independent_scoring.py": "0460ce0e102360e4069cdbbbc0cd56a8c81ca72bf6249904caa3bd867bda18db",
+      "src/digital_twin/evaluation/autonomy_learner_driver.py": "3b8e3488e94143a98bfc81704ba93ac44c3942e6ccd1fb806bcb278957171e9d",
+      "src/digital_twin/evaluation/autonomy_learning_scoring.py": "5490742d50b5e0c94ab608adbac09984aabdbbf0740ea878118b18bcef020bc2",
+      "src/digital_twin/evaluation/autonomy_product_adapter.py": "fce31a8c3b4e74d125962a2c4c03a3f86e0a562c6a60b4657642ce98b06e6cc7",
+      "src/digital_twin/evaluation/autonomy_scoring.py": "b48a5e0ba0ef34d38c4fe3908e8c01791e6715cc4db03bd02d5e7d2bc7531739",
+      "src/digital_twin/evaluation/cascade_v2.py": "f8d68d0161aa9ff289e7f75709cdf691443868ad78d12bdc4ae3116cfcf09d03",
+      "src/digital_twin/evaluation/cross_engine_ledger.py": "ab6d033531be487b4686c5a98b7f2e64b1d9911f7758599f306ebb6238a44854",
+      "src/digital_twin/evaluation/cross_engine_program.py": "f7a2912619b1c27f2302172c9a6daa144618f87bcdf7503e7d21a269eff0bba3",
+      "src/digital_twin/evaluation/experimental_tutoring_candidate.py": "dbe31d328694fd80dcb224cac0a5491d061b36dbf7b6bc6918213b0269e24876",
+      "src/digital_twin/evaluation/factual_qa_adapters.py": "cba742152d7d08b784e0d384d645ab3ab15b496d56ea9189e6355b37ee69d7d6",
+      "src/digital_twin/evaluation/factual_qa_contract.py": "30b5265a009a312d36829f8235c84b164dff33bb9e9614710d88639894784852",
+      "src/digital_twin/evaluation/factual_qa_dataset.py": "dad0d64bb6a5283caefa8e8095ba4837228f30ac324708308b320a3081e591ce",
+      "src/digital_twin/evaluation/factual_qa_execution.py": "47ff0bd5fec50322613ff0fee29cdfafb8c4b83c61dc0044b33dc096935dc72d",
+      "src/digital_twin/evaluation/factual_qa_reference_questions.py": "1d4b0c5b6a2d1342844849b658502d843ec1f76c01a32a6361b7dfd3e2eae4a2",
+      "src/digital_twin/evaluation/factual_qa_references.py": "bb84d28b4db51f524e9df8780190813fd5d9efe045e7260097fd8a49525363e8",
+      "src/digital_twin/evaluation/factual_qa_scoring.py": "3a93217998b1a4a9360455bb89ac73242d863e4510c6492530f0ae95d86518fd",
+      "src/digital_twin/evaluation/factual_qa_wording.py": "3a42ecc6363d8f6735184fb0e35316cd5b49ba97f2d6111dc7caa8011d81415c",
+      "src/digital_twin/evaluation/finite_product_evaluation.py": "1f83b6f7209eb5c06dd72544f56889236288b6084a31a6a07be73ba1c2b5f68c",
+      "src/digital_twin/evaluation/finite_program.py": "cfcca5ff78051fb93b6a0d93ba7e5f7d95c68da146b9c018f15ca9c7907e0336",
+      "src/digital_twin/evaluation/finite_program_dataset.py": "98d1dca22ff898c84be55e0cbfd6e5377550f994c11c90e72af43dfb94070fde",
+      "src/digital_twin/evaluation/finite_program_io.py": "d7ea3bbe59843b39a2ba3a4a132ba02b2588d99b5ebdfe30a7581244b64f7ba6",
+      "src/digital_twin/evaluation/finite_program_runner.py": "860ccfa2158568bf7cb72dc38a3dbc84d841e7fd867091e109b829ead46240c8",
+      "src/digital_twin/evaluation/finite_retrieval_evaluation.py": "a6ef7cfa0600f7bc6dc4f92634e753c12f9d96774a62093f794420ea4a22b1ab",
+      "src/digital_twin/evaluation/hidden_state_metrics.py": "5a84fdce55ec96cdf0580bee86ea42a19d08615b92363afc3116cdb00388aa97",
+      "src/digital_twin/evaluation/learner_evidence.py": "aa5f880815c2a051dcc036eb23e4855aec7cf9c4c5f30adad493a5f4e9b1a46e",
+      "src/digital_twin/evaluation/learner_simulator.py": "00614f1ed54820ae6ea8d8b1891692a8ba72b4f1f17b2f4b95f25ae66fb44967",
+      "src/digital_twin/evaluation/models.py": "1a5177d7f5ca855d2341690acb96423fd58670d5270bdc590c93f7db8e91aed2",
+      "src/digital_twin/evaluation/multimodal_benchmark.py": "dcb6d1e42f3b8d47389b0dd02e5a3eeebfd014cbfd3b5b52051d7696ea4a3c70",
+      "src/digital_twin/evaluation/multimodal_metrics.py": "939622917f0a88729c3be374f8b8d01c0cafe7e6d53b5dccea1c173445e07c6c",
+      "src/digital_twin/evaluation/multimodal_retrieval.py": "101a4ffcac2928a83311609978808c280cfd2479614f96e8bbb5476bb3a27cd9",
+      "src/digital_twin/evaluation/professor_fidelity_proxy.py": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e",
+      "src/digital_twin/evaluation/provider_json.py": "11e85ff3591d458e2d86d5c793bbe1d8c751f532e422e321cf67aa9429281d13",
+      "src/digital_twin/evaluation/retrieval_materialization.py": "3a8d7dfcdea09e5c00ecf82caf0e4c0e6612a55af9347ccbd3487d76a9889c98",
+      "src/digital_twin/evaluation/retrieval_qualification.py": "6f47902717e441b7d6cb2dd0896e061ee42c01b2f398b94445aa7a810c9f4ccb",
+      "src/digital_twin/evaluation/retrieval_runner.py": "09f0c88455e9af740188cfaefc739828e10b53457a8d7653888fa9ed994e079d",
+      "src/digital_twin/evaluation/retrieval_runtime.py": "301f4d768b89482e92c41f3bb89b7de39fd28e4ce6ed38fd5510e61082d7e89c",
+      "src/digital_twin/evaluation/simulated_learner_v1.py": "d1da103aacd95aa9953a39a5afa0171c9718b397975a25d30af633e2e9528b9a",
+      "src/digital_twin/evaluation/simulated_learner_v2.py": "7cf0e4ea9d6f444d2b2aa6e1985a2c014f2723754dfd67c7f6562ae6e4fd2ee3",
+      "src/digital_twin/evaluation/source_aligned_wording.py": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49",
+      "src/digital_twin/evaluation/successor_simulation.py": "ed7f8969282bad95b0f9d99aff6004651b0916cf452a84f0b0c84b4aefb2f4a8",
+      "src/digital_twin/evaluation/visual_description.py": "60f08ea4e413825cfe3326ec5e8319941800480e004dbb85aeb55aada0408fed",
+      "src/digital_twin/generation/__init__.py": "24683e34866f9fca58362c50ff0bc4146a3566d02b22beb465c068b554ab8d75",
+      "src/digital_twin/generation/bounded_revision.py": "ef9ec8cf644b86b868fdf67cd78499e4837d2cd1552333be8c9377196e0ca4d8",
+      "src/digital_twin/generation/citations.py": "629e9954e8884fde4662d0e31e21f55e60d846f14410f9c8d44fe4d5879c2977",
+      "src/digital_twin/generation/compact_instruction.py": "390158bc45ffdac899b6c3ca9b7e3e460c13581f513bc2a3898a062baaf4bac2",
+      "src/digital_twin/generation/conditional_revision.py": "203960fb408992ff63cb99a2a13b24a36ca001a31c948d2602dbbd0c4df4828d",
+      "src/digital_twin/generation/continuation.py": "3fc19f323b270d75d2b20d7e3d24538c72a3c82719937acb9df5fbe3abea4566",
+      "src/digital_twin/generation/evaluation.py": "603cbcf5da0ddb69e2abbbe9838399c99d7f1ad062da4afb29fdddd7af142a33",
+      "src/digital_twin/generation/evidence_strength.py": "8205c4e2bba14c673ae6ecdaa992dd080d271b76418391998e192a9330804a34",
+      "src/digital_twin/generation/factual_revision.py": "44da492b7f7214885f90c8219984bff11b1b2c8ba2f712f367dad4d8f7581734",
+      "src/digital_twin/generation/final_response_audit.py": "acc1bff94a41251d559dd60ed6bfd68b4e1f7ea6264590fe4b11a2bd07f5e940",
+      "src/digital_twin/generation/generator.py": "3f83bffb5ce75a1519ceb8c43e153d65a36df28a9825c41c8943766bf2fba040",
+      "src/digital_twin/generation/global_support_revision.py": "136f2d65add8b4aa15f9554ec67dd73db79db48c89d338f085fa4798291ceeb9",
+      "src/digital_twin/generation/instructional.py": "12a06e2f9350d6a99f43fba0cff659bbdf88c614ff6f4fed4b8cbd1f1097d11f",
+      "src/digital_twin/generation/models.py": "bd00678a49a0d5cd4e8cbeec249354517b3ec436c6c08adee65f6f7e29d938bb",
+      "src/digital_twin/generation/policy.py": "be73d3b3c36f9ad96b9fdbdb0a8b13e68f9ae272a77dafc76935a74c73629b19",
+      "src/digital_twin/generation/profile_authority.py": "e58e151fabc253b6e3ba1d9d98dead35c927db52431769715dd78f781ffd408b",
+      "src/digital_twin/generation/prompt.py": "81f15e577b41a9316ccedb5613b7c70694c102756f260abfafcfe02f2ba7d571",
+      "src/digital_twin/generation/question_specific.py": "e4132180fd60feaedf7cae36a8861114391357bf2843be19a1526d05637c97a8",
+      "src/digital_twin/generation/request_coverage.py": "8845286e1b92d792212bee06a6d94ef89d5510ef74349cf1fb183ad9971d85a1",
+      "src/digital_twin/generation/typed_instruction.py": "d1a3f5ed6c1827ebfbfa19a2bb51d079287bc8795cd5cfa77d323897149d71c8",
+      "src/digital_twin/grounding/__init__.py": "be936237651336756cb53368543c1635958c9ec7ca1354c8de159cd97a17c683",
+      "src/digital_twin/grounding/ambiguity_safe_evidence.py": "2f5f4bc6831621c87b092178124a18ce9d6dfc52f9c288bd70619697de31d822",
+      "src/digital_twin/grounding/api_retrieval_index.py": "d04cf11be306d294f38ed9217672c8a1b0418dc6654959f58062394cca97889d",
+      "src/digital_twin/grounding/chunking.py": "1219c587b74c88dc2241e7c7aad9801b6b3e4aa83ab849aada72fa88d2f718c2",
+      "src/digital_twin/grounding/claim_validation.py": "6de100dd965b6fa5792b986367f9278ef6a0be2b1ece937cb685ff49470cd4a9",
+      "src/digital_twin/grounding/evidence_sufficiency.py": "e959cd2c998c61c69f6d6afb7e931f1db58cf87b094b86866ccf44c2d14d2ab3",
+      "src/digital_twin/grounding/evidence_verifiers.py": "4d93b42aaa89f646c72b64e331dda1f49379386d4146cd275a37f42dd4f40634",
+      "src/digital_twin/grounding/hierarchical_retrieval.py": "15488b215b82e4e5041d5f8aa099131156ec1e05e21a534070bf0a5ad9b3e227",
+      "src/digital_twin/grounding/ingestion.py": "f793a39b6b2d3f2e4ef1efd8d0e5307318ea8e8a72e14d1840971a31091f471e",
+      "src/digital_twin/grounding/models.py": "62cb58256a42dbc8bb3803cab191003d8e162034bec82d23f3789fdb040eaeb7",
+      "src/digital_twin/grounding/plan_observe_retrieval.py": "a3dff9c57769b33f3a412a6a295353a165280e2ffa7e19469157fba2b1b6b2ce",
+      "src/digital_twin/grounding/product_ingestion.py": "4d6e01a33a1d0be11d12e72371e4774662778205bc9925fcde96239e90bf02b4",
+      "src/digital_twin/grounding/protocols.py": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915",
+      "src/digital_twin/grounding/reference_uniqueness.py": "67032f74884233740fc1a367078d16319e0b02e8526b71cb5c229fb87187b109",
+      "src/digital_twin/grounding/region_retrieval.py": "2504ebe68a4cc5bd56080bba8caefeb223033eac3b43e3e498d1a61cfb3b2acc",
+      "src/digital_twin/grounding/reranking.py": "38632e2c29f96974e2da165d7b7b0b457c2187cefdc3a60ddd0143a3c6947899",
+      "src/digital_twin/grounding/retrieval.py": "d3bf06c47b5904e17b0b44890b2381e52f3dbbcbe1c451c3114126cb038c5af8",
+      "src/digital_twin/grounding/retrieval_evaluation.py": "68f9ee3e7ee13219750aa778fcb1f24f2ed64d6df2212a65a7681a4d01a03d9f",
+      "src/digital_twin/grounding/retrieval_factory.py": "7b033a9b558f05b8b509d62da9add6ca15a4e43829b12fc054ef67cef9c383ce",
+      "src/digital_twin/grounding/retrieval_index.py": "49e6e8b48e04da1911f37c6c952f9d0b637f43814b29742ea19946ab27dcf7c3",
+      "src/digital_twin/grounding/retrieval_runtime.py": "b085b85c329b5948be7a30d9ef414c030225c578848c904a8fc3319c304d0b82",
+      "src/digital_twin/grounding/semantic_evidence_atoms.py": "f42b8b430f2d36c660bc3ef4cb698b4aaff7601c8a1ea6bb9d16d93f8f01030c",
+      "src/digital_twin/grounding/semantic_target_resolution.py": "5207a03e43d431e2fb0c9c1096913c706c2710fa4bf23a115e9c75bd6645ed03",
+      "src/digital_twin/grounding/source_range_evidence.py": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb",
+      "src/digital_twin/grounding/source_registration.py": "c20f6e2fc28a1194b29f673a63d42991c8d522e392b7a548a526a85bb0aa8036",
+      "src/digital_twin/grounding/target_evidence.py": "977b0d4fafe2d79d764914b23d8e0715eeee4f56ee58558e127bbcc5d6214040",
+      "src/digital_twin/grounding/visual_late_interaction.py": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a",
+      "src/digital_twin/grounding/visual_omni_runtime.py": "c261a3ea212a58d2045bd88e2c8dba0701ecde02a40d0b1dcdbc68e0b375cc3b",
+      "src/digital_twin/grounding/visual_runtime.py": "9b82da9a1f1047747ee1db97c91ad6241a89a2044c03d854e900810c600aeb52",
+      "src/digital_twin/identity/__init__.py": "cf3537be9ae0aaadaf9b6f0bca85cedcc62ae8770b4f126b8290e3b8b2218bed",
+      "src/digital_twin/identity/models.py": "dfe3f9249c8cdcb7ec9811860e8bd27bb4ddac7f090e976cc58a7c1b08fbf483",
+      "src/digital_twin/identity/repository.py": "a11ce03d72ad9f34f562fc69b9b67ff2863b58899e4f184793ed86d3e22871a5",
+      "src/digital_twin/identity/service.py": "6daacfbdc6032126d7d3282e0753f724001e6e3cd6f61264849459f5a79e7794",
+      "src/digital_twin/llm.py": "a189a0d36dc01118ac15374878e0d863d137c90ca873b0fb11eed32d3309b06f",
+      "src/digital_twin/model_policy.py": "734c0d28fa6131e34ff58ce70193a9a4e1d72e012c5db72a6eadf75c1425142c",
+      "src/digital_twin/onboarding/__init__.py": "28a6a6c6d930c16cad3ae57e2f9c6562dfe77ad2ffa3554d0d3486aa7614ce5c",
+      "src/digital_twin/onboarding/commands.py": "100f7c5376828d5d7a422dd0a2255d34b6f4eb0642b7a65ebf06074e26d1bb3f",
+      "src/digital_twin/onboarding/demo.py": "f502a0cd727a71e2b5d0c8f1633da832ea799e9472978e2a1a0480c4e9e0ffe2",
+      "src/digital_twin/onboarding/interview.py": "0bee30b8853140f028dfd8e92e175ee0f81688f23c0f81a2a457c76a7706faa0",
+      "src/digital_twin/onboarding/models.py": "5708b732cadc2b6199308d56a5baf6f70f01a1b01a65dac16a3268d6331af0c9",
+      "src/digital_twin/onboarding/policy.py": "d93f77fcb7dbb508576b23dc00e34f52f7776066be529df79445a36dfe701e34",
+      "src/digital_twin/onboarding/preview.py": "edc74d5dc3d3438839ab65237541b4fd4ebf07c9c7cd20d741349e08745589ff",
+      "src/digital_twin/onboarding/release.py": "8d7bc414ab7ba36443f49a97fa454b660cc7c15f42cfd4df1ff878bc54564513",
+      "src/digital_twin/onboarding/repository.py": "8404b038ef6a76c74e74147c31afd7a5dae215dc7619066e9d56f1763d2acc3a",
+      "src/digital_twin/onboarding/revisions.py": "b3093e73e3203cb81107bc196d5ef8c9727651bc4e09249ba13cec859573e481",
+      "src/digital_twin/onboarding/service.py": "78768c0a034b027d88d6c104141f529dc446d22e352bbc5fa91d444474b29382",
+      "src/digital_twin/onboarding_workflow.py": "4f11adafbad448cdab2927b3cf7b0368e24f1ca17402d8adcc224e334b1b40ef",
+      "src/digital_twin/operations/__init__.py": "dd1f6559f407f784b58f80139b783797fd9d4ca57f067e8b66c5d1cc654ab988",
+      "src/digital_twin/operations/models.py": "4885484976677d4f0a17c1347549e8d34a082c9b0056b2e431f1a30a70d8c4a7",
+      "src/digital_twin/operations/protocols.py": "116499eb1c135b6d6e8cd3dcb62103d1f37718cf86200d0edfab6f697d044288",
+      "src/digital_twin/repository_freeze.py": "aa1d5dbff50359ea6efee83db283a4b4fa12219d0be7fa085e0f5e3c1abbf27b",
+      "src/digital_twin/student/__init__.py": "12905f9cc0ade6f5b87ed1953557553fccd409cb02a7da9acb66dbb20ff29d0f",
+      "src/digital_twin/student/autonomy_control.py": "051f85fb409a1c579e95ecbadcedd46758884dc9447fb5c607dbd0c6050b8599",
+      "src/digital_twin/student/autonomy_eligibility.py": "c492862968e6a5cf3b5643480fc6b403ff4ebf980d032290dbc078d43e0b946a",
+      "src/digital_twin/student/autonomy_models.py": "78f1113eeb95494960a0f67b9b8b923c322d615080756a938fd7fcb7766d6ca9",
+      "src/digital_twin/student/autonomy_runtime.py": "a71fadf1348955ea0195c2e2cf1d08364bf5cbf9874eb84b477088b51b497055",
+      "src/digital_twin/student/autonomy_service.py": "6ce11b510a2abe51b742065406ed7b8becde815cc36fd072b72e71ec08a6b228",
+      "src/digital_twin/student/clarification.py": "79033c91a6f0fa0bb1bf538a6499960f646244a970bd1866d3a34d6f04da5037",
+      "src/digital_twin/student/fixtures.py": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5",
+      "src/digital_twin/student/generated_preview.py": "c79e48e1f8e60ee4917430d78de5b1acd912e4eabae7beb7e00f210b9a25b702",
+      "src/digital_twin/student/intervention_policies.py": "39f0f2cc694e68df18bf895e29f36b957a35e31971ff0a2d6279089bd1b27617",
+      "src/digital_twin/student/learner_belief.py": "332e20eb602db11ffa2aa99980e72827b8e5b8c10f1be7a9e9cdb820abbbf12f",
+      "src/digital_twin/student/learner_estimators.py": "c1f13dd23bd79af3dab52d8d1bc387e724d14b17a4d7c1b20f91f16c1419ff4b",
+      "src/digital_twin/student/learning_gap.py": "ed87296ccac3c9008517bc86bec0b4f1c387da1a970c0058619535105ecca732",
+      "src/digital_twin/student/migrations.py": "ba1bb760d0330c32f74ffe346dfecb619ccef54e34ef614cd20b79bf05cf26b4",
+      "src/digital_twin/student/models.py": "8d857906e8658a061ceacc3eef373e189e1989c149cb2d0abe56cef09026ec5f",
+      "src/digital_twin/student/planning_architectures.py": "8a3f2e3849c802de3e2c80d19a9e28dbb268a2d7cc95f0bd71743339f94afe55",
+      "src/digital_twin/student/proactive.py": "da60e9a490d1ef75aedad6458eca11a9d1b08cfd152a564fa8a49597a5e44e2b",
+      "src/digital_twin/student/publication.py": "866bd77305448528830fbfd2d5e3b598dae1cf812f75b6cd1e8ab5d41eb548a6",
+      "src/digital_twin/student/repository.py": "5a560d4e710950f856853e4f99ac48401826ae81a24b425bb58c9c8db5f9a89f",
+      "src/digital_twin/student/service.py": "93160a0698fe8d85cec1c9ec26ea03db4b3500081e4b06da01820b3bf1324633",
+      "src/digital_twin/student/teaching_profile.py": "3b9ca02e3dfb0465c8bc827962005238682b3af7a8e00afc9c39fd6571c28bfb",
+      "src/digital_twin/student/teaching_profile_context.py": "6d151a4bbb1d5ed00dbf6417f7f727a1ea62e7a1f495c22b4630429563943aa4",
+      "src/digital_twin/student/tutoring_graph.py": "496c88c9e3cded75a31cbdb93e9ffb7f907d7c0ff1a660c380f6995233cbec61",
+      "src/digital_twin/tutor_policy.py": "0934e11ec009fae82994c5808d64544f91492dc5f1b9f0cbc5b04891f6b148d2",
+      "uv.lock": "85994fe843c7828d3d8531b4192223debb2032fc96c0db93d114bc80d930589a"
+    },
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "packages": {
+      "pydantic": "2.13.4",
+      "langgraph": "1.2.11",
+      "langgraph-checkpoint-sqlite": "3.1.1"
+    },
+    "dataset": {
+      "version": "goal-scope-histories-v1",
+      "seeds": [
+        9101,
+        9102,
+        9103
+      ],
+      "concept_source": "multi-concept-confirmation-025",
+      "days": 30
+    }
+  },
+  "source_archive": {
+    "path": "reports/generated/goal-completion-scope-development-001-candidate/source.zip",
+    "sha256": "71a831f3c61dfddfaaaba9fc54a755731a10fa52bc1cf93a40c94b78b84a1d12"
+  },
+  "command": "uv run --locked python -m scripts.run_goal_completion_scope --arm candidate --output-dir reports/generated/goal-completion-scope-development-001-candidate",
+  "reproduction_note": "Use the corresponding archived source in an isolated directory and choose a new exclusive output directory; the baseline command refuses candidate code.",
+  "operational": {
+    "llm_calls": 0,
+    "tokens": 0,
+    "provider_cost_usd": 0,
+    "elapsed_seconds": 315.96,
+    "peak_rss_bytes": 282034176,
+    "network_note": "Product run denies internet socket connections. During dependency import, LiteLLM attempted a public pricing-metadata fetch, failed DNS and used its packaged local map. No model request occurred.",
+    "timing_note": "Wall time and peak RSS are observations only; broader regression tests overlapped, so these are not controlled performance comparisons."
+  },
+  "artifact_hashes": {
+    "summary.json": "d5d455d3bac6bb1409b447e4993984ee7e137c73aaad47b668f6175f58d9b21f",
+    "source.zip": "71a831f3c61dfddfaaaba9fc54a755731a10fa52bc1cf93a40c94b78b84a1d12",
+    "summary.md": "1ac02a0e2467f167ef6b13981ce6f20ae889c4da896aa4853319675b6bae5519",
+    "scores.jsonl": "3f790db0662ea60b1dacd236f99278de8412798ef26bedd5fbb4331cd10e8217",
+    "responses.jsonl": "e72e1242e8043df2c7d4037f3ea58038a4da06b950015ea86f02c75c39e2def8",
+    "manifest.json": "ffdc1b765b2532b121cf81b05f8f6a0c6afff0f0422061cf9c8564ec0996c8d0",
+    "decision.json": "3af9d5749e71298bac3a0b41caff6f2daa7c325657acc696cd63c38f1b6fd3d5",
+    "goal-audit.json": "c22ceaf80850213df382986a20b01984929e3d9f31bd2cb806fd0c46b40c50eb",
+    "truth.jsonl": "8edbcd32b77c710e044eaabb4572a6de40ed54801156a54aa631b689e97ff99f"
+  }
+}

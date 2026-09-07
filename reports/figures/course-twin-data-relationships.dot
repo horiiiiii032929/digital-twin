@@ -1,0 +1,32 @@
+digraph G {
+graph [rankdir=TB,bgcolor="white",pad=".12",nodesep=".28",ranksep=".34"]; node [shape=box,style=rounded,fontname="Helvetica",fontsize=13,margin=".12,.10"]; edge [fontname="Helvetica",fontsize=11,arrowsize=.65,constraint=false];
+
+ course[label="Course\nid; owner_professor_id"];
+ member[label="Membership\naccount_id + course_id; role; active"];
+ release[label="Release\nid; course_id; status\ncomponent profile ID/version"];
+ bound[label="Release-bound content\npolicy; approved chunks\nteaching profile ID/hash when applicable"];
+ convo[label="Conversation\nid; student_id; course_id; release_id"];
+ msg[label="Message\nid; conversation_id; role\nclient request identity / response trace"];
+ cite[label="Citation\nmessage_id; source identity/version\nchecksum; locator"];
+ learner[label="Learner observations / belief\nstudent + course/release scope\nrevision; concept assessment evidence"];
+ goal[label="Autonomous goal\nstudent / course / release\nobjective; status; attempt limit; expiry"];
+ opp[label="Opportunity\nevent; due window; lease\noptional goal_id; idempotency key"];
+ action[label="Plan / action / outcome records\nopportunity_id; action_id\ndelivery trigger; result reason"];
+ member->course[label="many to one"];
+ release->course[label="many to one"];
+ release->bound[label="snapshot binding"];
+ convo->release[label="many to one"];
+ msg->convo[label="many to one"];
+ cite->msg[label="many to one"];
+ msg->learner[style=dashed,label="assessed observation"];
+ learner->goal[style=dashed,label="progress evidence"];
+ goal->opp[label="optional goal reference",dir=back];
+ opp->action[label="recorded processing"];
+ {rank=same;course;member;}
+ {rank=same;release;bound;}
+ {rank=same;convo;msg;}
+ {rank=same;cite;learner;}
+ {rank=same;goal;opp;}
+ course->release->convo->cite->goal->action[style=invis,constraint=true,weight=20];
+ member->bound->msg->learner->opp[style=invis,constraint=true,weight=20];
+}

@@ -367,6 +367,8 @@ def _record_prior_no_evidence_turn(repository, fixture) -> None:
         deep=True,
     )
     repository.save_release(previous)
+    # Record history while its release is active, then replace it below.
+    repository.publish_release(previous.id)
     conversation = repository.save_conversation(
         Conversation(
             id="conversation-publication-recovery",
@@ -396,6 +398,7 @@ def _record_prior_no_evidence_turn(repository, fixture) -> None:
         created_at="2026-08-10T00:00:01+00:00",
     )
     repository.save_turn(conversation, student_message, tutor_message, [], [])
+    repository.publish_release(current.id)
 
 
 def test_publication_requires_evaluation_and_resolved_policy(tmp_path):

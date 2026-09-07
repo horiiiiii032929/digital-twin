@@ -234,6 +234,12 @@ class AutonomyProviderCallV1(_Contract):
     output_tokens: int = Field(default=0, ge=0)
     total_tokens: int = Field(default=0, ge=0)
     reported_cost_usd: float | None = Field(default=None, ge=0, allow_inf_nan=False)
+    reserved_cost_usd: float | None = Field(
+        default=None, ge=0, allow_inf_nan=False, exclude_if=lambda value: value is None
+    )
+    reservation_exceeded: bool | None = Field(
+        default=None, strict=True, exclude_if=lambda value: value is None
+    )
     latency_ms: float = Field(default=0, ge=0, allow_inf_nan=False)
     error_code: str | None = Field(default=None, max_length=128)
     failure_diagnostics: dict[

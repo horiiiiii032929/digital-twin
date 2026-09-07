@@ -1,0 +1,875 @@
+{
+  "scope": "Read-only diagnosis, not complete semantic scoring",
+  "operational_failure": "UnitAudit verdict/issue-code consistency validation rejected both rendered and u1 entries in two completed HTTP200 model responses. Raw failing output text not retained; exact conflicting field values cannot be recovered.",
+  "evidence_profile_regressions": [
+    {
+      "id": "fresh-generalization-evidence-relations-02-adequate",
+      "question": "The main cell is low but the reserve cell is available. What color conclusion is supported?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "The panel does not display amber: the required conjunction is false. The passage does not specify which other color, if any, appears.",
+      "final": "What exact combination of main-cell and reserve-cell states does S1 associate with an amber display, and how does that combination compare with the states in this scenario?",
+      "outcome": "repaired",
+      "audits": [
+        {
+          "proposal_sha256": "270fc8a6c1de4dcacb0c2ccda88f00c42876e1e7db49afc89e6a85b32e2e2f86",
+          "rendered_sha256": "6f3d3f800c88f02650e09b515c8231f209744d0e4cf54969f0ff702f0023d4b5",
+          "context_sha256": "5e28dd2aad80a45534ae72234782fb6977d6de2f8dc53066716981de101b936e",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "1f67817138958d77ad198d26025bcbb85bef9eb6bad8c1ee9bccd076d24dd588",
+          "rendered_sha256": "86bc9839bca1f38b8e249de240fd70bdd8b728196146d6cebeff8a600e8b71e7",
+          "context_sha256": "5e28dd2aad80a45534ae72234782fb6977d6de2f8dc53066716981de101b936e",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "no_factual_assertion",
+              "evidence_ids": [],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "no_factual_assertion",
+              "evidence_ids": [],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fresh-generalization-evidence-relations-04-adequate",
+      "question": "A shipment has wax, foil and thread seals. Does it pass the checklist?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "No. It has three seals, whereas the checklist requires exactly two.",
+      "final": "Count the seals listed for this shipment. How many are present?",
+      "outcome": "repaired",
+      "audits": [
+        {
+          "proposal_sha256": "3ef947ed70792a0b0eb95f54056ab343960a46d59991ed234feefb992746cc91",
+          "rendered_sha256": "99b62404bfbada33817197fce620c82cbf120f94fa25c2fe847aadc4cbdaf2d4",
+          "context_sha256": "002202309798dab35f3270523d1a80cf7338ce921b8f1799437af76ddc39fe80",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "9969a8e2086ae0bf06be9104d816c85e6ac3833158a9aa8a7fc123e9289f68b0",
+          "rendered_sha256": "78990ae9211ced758409cae36ac77b146add7cf670c7b3e5a59ed52eff897674",
+          "context_sha256": "002202309798dab35f3270523d1a80cf7338ce921b8f1799437af76ddc39fe80",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "no_factual_assertion",
+              "evidence_ids": [],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "no_factual_assertion",
+              "evidence_ids": [],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fresh-generalization-evidence-relations-05-adequate",
+      "question": "How many chambers are in a full four-capsule tray?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "There are 4 \u00d7 3 = 12 chambers; each of the four capsules contributes its own three chambers.",
+      "final": "The tray has four capsules, and each capsule has three chambers with none shared. What calculation would you use to find the total?",
+      "outcome": "repaired",
+      "audits": [
+        {
+          "proposal_sha256": "04d195dbedbcbfd1987cb1bbff5e797220ca83f0074e1a7bbb01a0a443a780cc",
+          "rendered_sha256": "76d3ba899db71fb13dd9595eccfc16034871d3874775313a8ed46a2b05a9df45",
+          "context_sha256": "430adb032d1356bf24508019f10943df5610d22d1b9a38228aac6bc9760e49f2",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "f2036eb2a5805e20a3cd7cd5fb1012e73e61f0b8bcb4b2b2c1f2bb76096366e6",
+          "rendered_sha256": "4d51e83c55b53713f169b1945663010404a9ecdb8b8fee7812aca6b6f2592c1b",
+          "context_sha256": "430adb032d1356bf24508019f10943df5610d22d1b9a38228aac6bc9760e49f2",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fresh-generalization-evidence-relations-06-adequate",
+      "question": "A pass has a freeze mark and a signed curator override. Is it admitted?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "Yes. The signed curator override explicitly admits this freeze-marked pass.",
+      "final": "Which clause in S1 applies when a freeze-marked pass also has a signed curator override, and what outcome does that clause state?",
+      "outcome": "repaired",
+      "audits": [
+        {
+          "proposal_sha256": "a475c5cda411ad691884f3b7f2861e78d9650709cb399ab8a2885369bdbedc52",
+          "rendered_sha256": "d2d281603d9be3e407d22b978962f28d93e484ecd75a327d661a039707e8771a",
+          "context_sha256": "5d135a75a5ac4ff88a8ccbaa0c86f9887ff0708a7f0408f29cecb5fa630d2cee",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "69c91cbf765c1d7b6d892144c09be8bc9aada10f975525db272a7582904304fc",
+          "rendered_sha256": "4e52e61dd78425069efc73ae19c10e06bff7921412ee9f390b09d360efede736",
+          "context_sha256": "5d135a75a5ac4ff88a8ccbaa0c86f9887ff0708a7f0408f29cecb5fa630d2cee",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fresh-generalization-evidence-relations-07-adequate",
+      "question": "What does the labeler print, and which component changes the depth unit?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "The labeler prints the unchanged reading code. The converter changes depth from metres to centimetres.",
+      "final": "I could not verify this response. Please ask a narrower question or request instructor review.",
+      "outcome": "quarantined",
+      "audits": [
+        {
+          "proposal_sha256": "9b59ee8af55a7b7ad234e1cd4df104742b1b26902ee5a804239f482a401cc2dd",
+          "rendered_sha256": "ce74509a36802f1b64a02af7dd60d06f1b92a2dd5c3e4a5901f44c065ff7c87d",
+          "context_sha256": "d7ff25392aac380ef057e7544a4731b2c4b33baf55c2abbbe0ecdbe4d0c51983",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "missing_requested_answer",
+              "affected_entry_ids": [
+                "rendered"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "77f81ab67ee9d753b1bc4e6822f760e47783e54ae6e5ed6ad7512c7a138e2df5",
+          "rendered_sha256": "b718525e17f4b61639afdb8b5ba32f87a357fdf666770c13a6331a89823a17e4",
+          "context_sha256": "d7ff25392aac380ef057e7544a4731b2c4b33baf55c2abbbe0ecdbe4d0c51983",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fresh-generalization-evidence-relations-08-adequate",
+      "question": "What is the counter after this calibration attempt?",
+      "profile": {
+        "depth": "detailed",
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence.",
+        "tone": "Direct and precise"
+      },
+      "original": "It remains 14. Only the success branch resets it; the reported failure leaves it unchanged.",
+      "final": "The calibration is reported as failed. According to the passage, what happens to the counter after a failed calibration, and how does that apply to its starting value of 14?",
+      "outcome": "repaired",
+      "audits": [
+        {
+          "proposal_sha256": "8f6985d581f69e6eeeb0e927f1aae1e4eecd907f1555f085c3978cb711778813",
+          "rendered_sha256": "87703ff964e54128c0e29fc10cdfee5050eae256445c70425d4783f24ac489c9",
+          "context_sha256": "e19a7d63ace1a416fab4bb5c08a75525c245650c3ec69ca5c084842ee944a848",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "defective",
+              "issue_code": "premature_solution",
+              "affected_entry_ids": [
+                "rendered",
+                "u1"
+              ]
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        },
+        {
+          "proposal_sha256": "d416ecf95b2d6c8173d806fb03721be4512bdb87c6e9b9ff97f9819dcdcf5294",
+          "rendered_sha256": "80886f6e2b2e2015f766aace75d614a9a6d94ee29048de66731e3861f1a160f7",
+          "context_sha256": "e19a7d63ace1a416fab4bb5c08a75525c245650c3ec69ca5c084842ee944a848",
+          "entries": [
+            {
+              "entry_id": "rendered",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            },
+            {
+              "entry_id": "u1",
+              "verdict": "supported",
+              "evidence_ids": [
+                "S1",
+                "S2"
+              ],
+              "issue_code": "none"
+            }
+          ],
+          "dimensions": [
+            {
+              "dimension": "requested_coverage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "teaching_stage",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "attempt_use",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "boundaries",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            },
+            {
+              "dimension": "referent",
+              "verdict": "adequate",
+              "issue_code": "none",
+              "affected_entry_ids": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

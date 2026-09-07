@@ -1,0 +1,1954 @@
+{
+  "source_run_id": "final-profile-operational-dialogue-development-001-full-live-001",
+  "review_type": "post-run deterministic diagnostic selection; not a named new execution",
+  "selection": "All 13 safe-graph failures; all 16 proactive messages; first and last non-safe-graph tutor turn in each of24histories (48).",
+  "rubric": "dialogue-progression-assistant-review-rubric-v1",
+  "counts": {
+    "endpoint": 48,
+    "failure": 13,
+    "proactive": 16
+  },
+  "review_time_source_hashes": {
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/proactive.jsonl": "6ad61ab92b3aef925c15af329e2059427e681c09c556c1b73077effc4fb289b1",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/turns.jsonl": "e601733124b7e5acd6accce598fc3a569d469ade703052908c9c420800332b5b",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-reactive-6209/turns.jsonl": "42ebe36125b2eacdad422cee5a5fb5c98838965af559034aead376842288cf2d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/proactive.jsonl": "77c48a118fd748111c8bf4934503e0b52fc753660dc566e49cc8b65ae8541942",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl": "71224614ce1c841ceb282545b35e49daa73dd66add51d39bbd6549ac79192a1d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-reactive-6209/turns.jsonl": "cb81b53583408497e6d9fb9e623703c80a4fd87e96eae7c66484d2075e850382",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl": "59c956d79d3bc015d57f29b1ff5a22392a7b37d77f1dd742ca41883a66bb3965",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-reactive-6209/turns.jsonl": "7030e1043bdf80d4d8a87a9a1aa2045ee1cc79f55640017492cc9ccaf3e35648",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/proactive.jsonl": "fabaf4b5ff484d31c64770ebdb3b030e1a7fc00c5572407200882b11a40a1258",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl": "7cb05611b8bb46d414818c80d68b6b7ccbbde9a0b1837abbeb42f45b6b482ea3",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-reactive-6209/turns.jsonl": "bc88a1da69913dcff425f1b8b3a0e2bd79bef193a5bf56df5479a252d843a1a1",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-autonomous-6209/turns.jsonl": "ac0a41e863ce9f94c60fe0925e2f4a8fc85b183447f2e05f8247de05dd544f68",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-reactive-6209/turns.jsonl": "60064416d244dfdbb50a8db743e09a40e0d72dcb9b21ac048c8db59abdf6e082",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/proactive.jsonl": "919ef882696c7d4b591e426bcf986d6f0ae916d585a6b16100b8eaa12f01ebdc",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/turns.jsonl": "53dcdd1f979483bfe93a72bfb2e78bda27ee16912b3f734135df14f5b38e8c5a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-reactive-6209/turns.jsonl": "86c601c181d74a594a37fea1d1e06d41da958a351aab57d7e1638655ffa27496",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/proactive.jsonl": "b8d12d475bb839d19bc70248542477df89a8e36069a5c08914b0f103487580bf",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/turns.jsonl": "e6a0a123a8cb3d1d782c3d107c444b31ebba30091cae8211f52cbbeb802a7041",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-reactive-6209/turns.jsonl": "cbed9d69b649b930b176f32dba32d8cddb4da58a8b3f57e3d766e989489294dc",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/proactive.jsonl": "331b7fa39591bc7f45f9b1ed7a4c3b6d0bc92db9abc78f41fffd8c81f3e0ee0f",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/turns.jsonl": "b4334f0a92931ad8e154c97acb4b5e0e618feda32d4a8a52977a7d1fdfebc137",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-reactive-6209/turns.jsonl": "0c8779a0b64ea25ec58327b13d88aba3aa737a5a77c5c10e4247295fecea5cb8",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-autonomous-6209/turns.jsonl": "f20504d4332aa9c5c7ad786f46a44968228d1075763ab45f3cfc12840706053a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-reactive-6209/turns.jsonl": "d4f270961454dcd6467dab068a77a17a4843a6aeca282ecb4a3c21145bf1ba23",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/proactive.jsonl": "fd32646facfbd5ead59ef70cab4792584800827492c4274d945939e93409e368",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/turns.jsonl": "7790c23fe41d4db4fbd33648dea0f2770adabf65f78d4553a23e53333a4b599e",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-reactive-6209/turns.jsonl": "b7689388e00de65f6df27378c7d58cd37a147d222d3ee21c069dca7f60a2c3c0",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl": "ac4dc23575161681861aac2efcdf3ca0bbba1b18a0626123f2582057c742543d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-reactive-6209/turns.jsonl": "4cc12272ba2a1bbdf001c2d392e1711ccdca4ac334f8aeebab81a56b5b1ff77a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/proactive.jsonl": "1b60eee006605a839b98c6a3751d207761f4b55aca42284b01793f29f6240b41",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl": "8f0bb2bd0e98a92e40904c448971c3c7318973af320efe4f37213c7cd3ded5f0",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-reactive-6209/turns.jsonl": "7ce58a49fda45f96b7ba7453c1bda9320dc61b2ffaa969e28498dd582d2d8f44",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/provider.jsonl": "89f3335288b9c6ad816dfbdd2f38b39dc32d73f7bedfba2b987ae811e6cc826a"
+  },
+  "semantic_accuracy_estimate": null,
+  "human_review": false,
+  "cases": [
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F01",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 7,
+      "index": 7,
+      "student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F02",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 23,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        },
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        }
+      ],
+      "review_id": "F03",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 5,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-74011436-a81f-4eba-a171-28df2a050460",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-cd03a378-93ac-40f9-b119-4ce1643d4fb1",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F04",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 6,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-74473cbe-9e86-4738-8663-602e92c430ab",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-7e6a48a6-afcb-432a-b912-99e3ad709287",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F05",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 7,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-807bcc4e-779b-4678-80d9-e1eeb5f9e996",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-0943a3a3-cb47-4ac0-a63c-dd38ef841f59",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F06",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F07",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "answer-seeking-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 21,
+      "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F08",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F09",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 5,
+      "index": 5,
+      "student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        }
+      ],
+      "review_id": "F10",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 6,
+      "index": 8,
+      "student": "My attempt for lantern check: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F11",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 34,
+      "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F12",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 5,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-f1bf2116-509d-4bb7-bf1e-3123f62bd905",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-3f1f2d87-6912-47bc-b630-bc0216680707",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F13",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 6,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-5985512f-92e2-48e8-91f3-b8c6311ceb85",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-1ba45184-b2b7-46cd-9ff6-1193df6e0dd3",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F14",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F15",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "answer-seeking-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 30,
+      "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F16",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "fast-learner-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F17",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "fast-learner-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 15,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        }
+      ],
+      "review_id": "F18",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "fast-learner-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F19",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "fast-learner-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 17,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "For \u201clantern check\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        }
+      ],
+      "review_id": "F20",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F21",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 18,
+      "index": 16,
+      "student": "My attempt for lantern check: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F22",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 27,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "For \u201cHow does ribbon log work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F23",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 2,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-14eb427d-2426-4698-a0e1-cfc62594fc85",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-b0f0d08d-7e71-47bb-8c42-33ba85b52f98",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F24",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F25",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "fast-learner-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 26,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "For \u201cHow does ribbon log work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F26",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F27",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 17,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F28",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F29",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 21,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F30",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F31",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 11,
+      "index": 14,
+      "student": "How does ribbon log work in this course protocol?",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F32",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 28,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F33",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 2,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-0b707890-f4ce-4adf-8a9a-3d35f2fde546",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-5deca065-5580-458e-983f-d19007a1e811",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F34",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F35",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-reactive-6209",
+      "kind": "failure",
+      "day": 12,
+      "index": 16,
+      "student": "My attempt for parcel window: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for ribbon log: In this synthetic protocol, ribbon log appends an operation before acknowledging it and replays acknowledged operations in recorded order after restart.",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F36",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "high-forgetting-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 27,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F37",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F38",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation conflicts with approved explanatory first move."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 12,
+      "student": "How does parcel window work in this course protocol?",
+      "content": "parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        }
+      ],
+      "review_id": "F39",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 2,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-eb14359d-5701-43a1-a265-1757a403c301",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-10fbd4f2-a5c6-47d2-b288-26a37b221bc1",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number."
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F40",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 3,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-8557daf9-6e0e-4cd3-873b-421e830fe92e",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-586ede66-cb1d-462e-afaa-81559fce19a3",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number."
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F41",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 4,
+      "content": "Autonomous course-tutor follow-up\n\nUse this approved course evidence for the next step. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Apply this point to the current activity.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-2d0cf235-6478-470e-9a84-4b328b73b190",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-1af3d61d-b83c-4c2b-b979-9369a7c1375c",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-f0fe55a83425",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F42",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic application prompt does not specify an activity. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cslot seal\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F43",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation conflicts with approved explanatory first move."
+    },
+    {
+      "history": "low-receptivity-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 12,
+      "student": "How does parcel window work in this course protocol?",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it\n\nreplays acknowledged operations in recorded order after restart"
+        }
+      ],
+      "review_id": "F44",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cslot seal\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F45",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 16,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "For \u201cHow does ribbon log work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F46",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 2,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-b3bcba8b-dca5-46b9-9dce-ba4a84b41342",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-fcd25e9d-e444-4f93-af22-a01d5fa9788f",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cslot seal\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+          "tutor": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F47",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 3,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-c4e86788-0eb5-4b5b-a847-629bce592bce",
+          "locator": "fresh-operational-dialogue-001-source-01 paragraph 1",
+          "message_id": "proactive-message-318ccb03-c5c3-4ffb-b17a-ba523813db68",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-01",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-01",
+          "source_checksum": "66dd5d7f2ccf452db7643b37c3a29442d15a3f91bf0db89bdd5f61c88cbd8864",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-01",
+          "source_version": 1,
+          "title": "Slot Seal"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F48",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-slot-seal",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for slot seal: In this synthetic protocol, slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 3,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-87d080e2-ac0d-40bd-b5d9-a88783209452",
+          "locator": "fresh-operational-dialogue-001-source-02 paragraph 1",
+          "message_id": "proactive-message-2f55c42f-04e0-4f36-a4ce-8d80c9e64230",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-02",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-02",
+          "source_checksum": "f9b0a403add4eb96a0f89df1cba03cda67e493582872d5c3e48eb2c4a7b486e9",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-02",
+          "source_version": 1,
+          "title": "Lantern Check"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F49",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-lantern-check",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F50",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-reactive-6209",
+      "kind": "failure",
+      "day": 9,
+      "index": 7,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F51",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Model copied prior tutor phrase into question_focus rather than a current-question substring; exact-focus guard rejected.",
+      "failure_class": "model-focus-validation"
+    },
+    {
+      "history": "low-receptivity-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 15,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "For \u201cHow does ribbon log work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F52",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "misconception-prone-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F53",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "misconception-prone-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 13,
+      "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F54",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "misconception-prone-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage\n\nrejects an update when its slot number is older than the stored number",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F55",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "misconception-prone-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 12,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F56",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F57",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 19,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "Hint: lantern check sends a probe to each station\n\nHow would you use this detail to revise your attempt?",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: I think it skips every check and accepts all values.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "review_id": "F58",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Partial source-grounded probe hint responds to recent misconception; relevant prerequisite, no explicit contrast or application reasoning."
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 9,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-b0cb1004-d194-48a9-a431-82df27a7ed5c",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-2def63b8-baf0-482e-b0e5-3e792eb086fe",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F59",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F60",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-reactive-6209",
+      "kind": "failure",
+      "day": 8,
+      "index": 2,
+      "student": "How does parcel window work in this course protocol?",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F61",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Model copied prior tutor phrase into question_focus rather than a current-question substring; exact-focus guard rejected.",
+      "failure_class": "model-focus-validation"
+    },
+    {
+      "history": "misconception-prone-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 30,
+      "index": 17,
+      "student": "How does lantern check work in this course protocol?",
+      "content": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for lantern check: I think it skips every check and accepts all values.",
+          "tutor": "Hint: lantern check sends a probe to each station\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "review_id": "F62",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "slot seal attaches a slot number before storage and rejects an update when its slot number is older than the stored number.",
+      "action": "answer",
+      "prior": [],
+      "review_id": "F63",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Basic factual explanation; repeated source fragments do not demonstrate individualized progression."
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 11,
+      "student": "How does parcel window work in this course protocol?",
+      "content": "For \u201cHow does parcel window work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        }
+      ],
+      "review_id": "F64",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic re-elicitation after prior course answers; no substantive application help or acknowledgement."
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 28,
+      "index": 12,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F65",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F66",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation conflicts with approved explanatory first move."
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-reactive-6209",
+      "kind": "failure",
+      "day": 9,
+      "index": 4,
+      "student": "My attempt for slot seal: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "ribbon log appends an operation before acknowledging it and replays acknowledged operations in recorded order after restart."
+        },
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F67",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "slow-learner-explanatory-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 12,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F68",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F69",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 9,
+      "index": 8,
+      "student": "My attempt for slot seal: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for ribbon log: I think it skips every check and accepts all values.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "student": "How does slot seal work in this course protocol?",
+          "tutor": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F70",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "failure",
+      "day": 11,
+      "index": 10,
+      "student": "How does ribbon log work in this course protocol?",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for slot seal: I think it skips every check and accepts all values.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "For \u201cHow does lantern check work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F71",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 17,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "How does lantern check work in this course protocol?",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F72",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 5,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-18981952-1d73-4cec-a160-5ba97681a4e4",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-7cf6d919-2442-45a0-adb0-b41d04e56b6d",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F73",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+      "kind": "proactive",
+      "day": 6,
+      "content": "Autonomous course-tutor follow-up\n\nPause and connect the next step to this approved course evidence. \"In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.\" Contrast this point with the alternative you considered.",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "proactive-citation-99c27675-3bf8-4ac2-bc52-86069be08156",
+          "locator": "fresh-operational-dialogue-001-source-04 paragraph 1",
+          "message_id": "proactive-message-a9db7560-2ab5-4b33-8571-cc27245a5351",
+          "page": null,
+          "region_id": "region-fresh-operational-dialogue-001-source-04",
+          "region_kind": null,
+          "release_id": "release-fresh-operational-dialogue-001-profile-1bca49ff7bd0",
+          "source_artifact_id": "fresh-operational-dialogue-001-source-04",
+          "source_checksum": "89c2332ffc7d7d672b763147a194e57c84100dfd652f2af6b5a6287e56b2ce78",
+          "source_document_id": "document-fresh-operational-dialogue-001-source-04",
+          "source_version": 1,
+          "title": "Parcel Window"
+        }
+      ],
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot"
+        },
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "For \u201cparcel window\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "context_scope": "Strictly earlier simulated days; excludes same-day replies and scheduled turns.",
+      "review_id": "F74",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/proactive.jsonl",
+      "quoted_card": "fresh-op-parcel-window",
+      "exact_complete_card_quote": true,
+      "latest_earlier_day_same_concept_student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "finding": "Exact complete approved rule quoted; generic contrast prompt does not identify a learner-specific alternative. Repetition or prior correct attempt does not establish that outreach is needed; utility unqualified.",
+      "citation_scope": "Actual source/region metadata retained; exact card membership checked. No claim-specific offsets invented."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 1,
+      "index": 0,
+      "student": "How does slot seal work in this course protocol?",
+      "content": "For \u201cHow does slot seal work\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "prior": [],
+      "review_id": "F75",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Generic initial elicitation fits Socratic first move; diagnostic usefulness unqualified."
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-reactive-6209",
+      "kind": "failure",
+      "day": 7,
+      "index": 4,
+      "student": "My attempt for ribbon log: I think it skips every check and accepts all values.",
+      "content": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "prior": [
+        {
+          "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "student": "How does ribbon log work in this course protocol?",
+          "tutor": "For \u201cHow does ribbon log work in this course protocol?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F76",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Closed failure; no useful tutoring delivered. Provider response incomplete at max_output_tokens; no usable response.",
+      "failure_class": "provider-output-token-limit"
+    },
+    {
+      "history": "slow-learner-socratic-t1-v2-reactive-6209",
+      "kind": "endpoint",
+      "day": 28,
+      "index": 17,
+      "student": "My attempt for parcel window: In this synthetic protocol, parcel window allows four unacknowledged parcels and resumes sending only after an acknowledgement frees a slot.",
+      "content": "parcel window allows four unacknowledged parcels\n\nresumes sending only after an acknowledgement frees a slot",
+      "action": "answer",
+      "prior": [
+        {
+          "student": "My attempt for lantern check: In this synthetic protocol, lantern check sends a probe to each station and marks a station unavailable after two consecutive unanswered probes.",
+          "tutor": "lantern check sends a probe to each station\n\nmarks a station unavailable after two consecutive unanswered probes"
+        },
+        {
+          "student": "How does parcel window work in this course protocol?",
+          "tutor": "For \u201cHow does parcel window work\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "review_id": "F77",
+      "reviewer": "assistant; unblinded post-run diagnostic",
+      "source_file": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-reactive-6209/turns.jsonl",
+      "finding": "Relevant exact rule/extract supplied. Restates the current correct attempt without explicit acknowledgement, extension, or worked application."
+    }
+  ]
+}

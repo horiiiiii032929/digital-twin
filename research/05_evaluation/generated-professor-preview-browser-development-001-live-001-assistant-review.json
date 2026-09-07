@@ -1,0 +1,404 @@
+{
+  "run_id": "generated-professor-preview-browser-development-001-live-001",
+  "reviewer": "procedure_constraint_controls assistant; not independent human validation",
+  "synthetic_source": "Glimmer lease expires after nine ticks.",
+  "question": "After how many ticks does Glimmer lease expire?",
+  "profile": "Explanation first; supported answer followed by understanding check.",
+  "delivered_response": "The Glimmer lease expires after nine ticks.\n\nHow many ticks would remain after six ticks?",
+  "useful": true,
+  "critical": false,
+  "uncertain": false,
+  "reason": "Direct answer matches source nine ticks. Follow-up asks arithmetic application without an unsupported asserted answer. Scope one fictional case only.",
+  "artifact_id": "generated-preview-4952156b-be56-44ed-938e-3d667d48e38b",
+  "artifact_sha256": "9f484694464cef0c69b54668ccd3bd9d044ac9a6bb538705b2b5aa8796ef78c7",
+  "bindings": {
+    "composition": {
+      "implementation_id": "question-specific-profile-grounded-v14",
+      "implementation_sha256": "974b2f8793b1bb56a56f6785c68765a7549b90db0f7c2f71ee44a4c0822c4b74",
+      "model": "gpt-5.6-luna",
+      "prompt_sha256": "2605452c757e7fd0dba96a11d673de78fcb0ee39cb145c1a4a7126f0ffbb1678",
+      "selection": {
+        "base_qualification_is_not_candidate_semantic_qualification": true,
+        "default_or_selected_profile_changed": false,
+        "final_response_role": "generation-if-kept-otherwise-revision",
+        "implementation_id": "question-specific-profile-grounded-v14",
+        "model": "gpt-5.6-luna",
+        "observed_implementation_id": "question-specific-profile-grounded-v14",
+        "observed_openai_transport_configurations": [
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "planner"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "planner"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "generation"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "generation"
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "output_cap": 3000,
+            "reasoning_effort": "medium",
+            "role": "revision"
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "output_cap": 3000,
+            "reasoning_effort": "medium",
+            "role": "revision"
+          }
+        ],
+        "output_cap": 3000,
+        "provider_max_concurrency": 5,
+        "reasoning_effort": "low",
+        "role_configuration": {
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "revision": {
+            "model": "gpt-5.6-sol",
+            "output_cap": 3000,
+            "reasoning_effort": "medium"
+          }
+        },
+        "runtime_flags": {
+          "bounded_generation_contract_enabled": true,
+          "experimental_generation_model_id": "gpt-5.6-luna",
+          "instructional_compact_response_enabled": true,
+          "instructional_conditional_revision_enabled": true,
+          "instructional_evidence_strength_enabled": true,
+          "instructional_factual_revision_enabled": true,
+          "instructional_profile_authority_enabled": true,
+          "instructional_typed_response_enabled": true,
+          "named_referent_context_enabled": true,
+          "question_specific_generation_enabled": true,
+          "teaching_profile_context_enabled": true
+        },
+        "semantic_support_verified": false,
+        "variant_id": "v14-luna-sol-medium",
+        "version": "v14-luna-sol-medium"
+      }
+    },
+    "configuration_sha256": "2bf62b397b6e03e6631a513b44437a3202365c446493ce3737a01397dacceceb",
+    "profile_sha256": "9fccbe28799aacc7740ee86edafc14c6443f303475e4056ec49af908477b0e2b",
+    "scope": "isolated-single-concept-preview",
+    "source_sha256": "7242113a373c4ce899cad4b64488bee90655ca8fc99596970825aef140b4d563",
+    "sources": [
+      {
+        "bounding_box": null,
+        "content_hash": "283fa43d1c6e28ac39b78929ef40c869333ebaf4c2363bd9a301323def755edf",
+        "crop_ref": null,
+        "description_method": null,
+        "display_allowed": true,
+        "document_id": "document-ef2de76d814d8917fc1324e1",
+        "id": "chunk-a9b7c2dfa2dae70c23782bab",
+        "locator": "heading: Anonymized forum - Anonymized forum, paragraph 1",
+        "metadata": {
+          "approval_record_id": "approval-ef2de76d814d8917fc1324e1",
+          "course_id": "loopback-mixed-course",
+          "deidentified_reviewed": "true",
+          "display_allowed": "true",
+          "document_content_hash": "283fa43d1c6e28ac39b78929ef40c869333ebaf4c2363bd9a301323def755edf",
+          "ingestion_mode": "region-aware-offline",
+          "locator": "heading: Anonymized forum - Anonymized forum, paragraph 1",
+          "retrieval_allowed": "true",
+          "reviewer_id": "loopback-professor",
+          "source_artifact_id": "loopback-mixed-course:forum",
+          "source_checksum": "9a5152a607fc9b50635b11bc24b1fc6cecf5aedae4b9532040e038cdc6c8eeac",
+          "source_format": "markdown",
+          "source_label": "course-approved",
+          "source_version": "1",
+          "title": "Synthetic forum"
+        },
+        "ordinal": 0,
+        "page_end": null,
+        "page_start": null,
+        "region_checksum": null,
+        "region_id": null,
+        "region_kind": null,
+        "retrieval_allowed": true,
+        "source_artifact_id": "loopback-mixed-course:forum",
+        "source_checksum": "9a5152a607fc9b50635b11bc24b1fc6cecf5aedae4b9532040e038cdc6c8eeac",
+        "source_label": "course-approved",
+        "source_version": 1,
+        "text": "Anonymized forum\n\nLumen protocol rejects a token after five steps."
+      },
+      {
+        "bounding_box": null,
+        "content_hash": "7f2efc57a30d7996213cf000c71b1dd983e876df682ca2d418a390a1f7e5f423",
+        "crop_ref": null,
+        "description_method": null,
+        "display_allowed": true,
+        "document_id": "document-05aa9573b4a7323f7b312973",
+        "id": "chunk-f6426045fb51bf9e7d84d3a7",
+        "locator": "paragraph 1",
+        "metadata": {
+          "approval_record_id": "approval-05aa9573b4a7323f7b312973",
+          "course_id": "loopback-mixed-course",
+          "deidentified_reviewed": "true",
+          "display_allowed": "true",
+          "document_content_hash": "7f2efc57a30d7996213cf000c71b1dd983e876df682ca2d418a390a1f7e5f423",
+          "ingestion_mode": "region-aware-offline",
+          "locator": "paragraph 1",
+          "retrieval_allowed": "true",
+          "reviewer_id": "loopback-professor",
+          "source_artifact_id": "loopback-mixed-course:transcript",
+          "source_checksum": "7f2efc57a30d7996213cf000c71b1dd983e876df682ca2d418a390a1f7e5f423",
+          "source_format": "text",
+          "source_label": "course-approved",
+          "source_version": "1",
+          "title": "Synthetic transcript"
+        },
+        "ordinal": 0,
+        "page_end": null,
+        "page_start": null,
+        "region_checksum": null,
+        "region_id": null,
+        "region_kind": null,
+        "retrieval_allowed": true,
+        "source_artifact_id": "loopback-mixed-course:transcript",
+        "source_checksum": "7f2efc57a30d7996213cf000c71b1dd983e876df682ca2d418a390a1f7e5f423",
+        "source_label": "course-approved",
+        "source_version": 1,
+        "text": "Aster scheduler selects the ready task with the earliest deadline."
+      },
+      {
+        "bounding_box": [
+          0.12100840336134454,
+          0.07146674493712654,
+          0.4343512014180672,
+          0.08941686634779543
+        ],
+        "content_hash": "96fe372502e204d4784848ac17a79861942f24cfad3328c9590528d6edf2c8e8",
+        "crop_ref": "region://region-9d7ca6d6eb9b2ef608118ee1.png",
+        "description_method": null,
+        "display_allowed": true,
+        "document_id": "document-6d86dc3689d1f8bd235d59a1",
+        "id": "chunk-ada06a9b708a6725c9e489a4",
+        "locator": "page 1, text block 1",
+        "metadata": {
+          "approval_record_id": "approval-6d86dc3689d1f8bd235d59a1",
+          "column": "full-width",
+          "course_id": "loopback-mixed-course",
+          "crop_ref": "region://region-9d7ca6d6eb9b2ef608118ee1.png",
+          "deidentified_reviewed": "true",
+          "description_is_authoritative": "false",
+          "display_allowed": "true",
+          "document_content_hash": "96fe372502e204d4784848ac17a79861942f24cfad3328c9590528d6edf2c8e8",
+          "ingestion_mode": "region-aware-offline",
+          "locator": "page 1, text block 1",
+          "parent_region_id": "",
+          "region_checksum": "73a41aaa695175e9046f92f583f469f5f7c3b70309d68af9612cebf401f02c41",
+          "region_id": "region-9d7ca6d6eb9b2ef608118ee1",
+          "region_kind": "text",
+          "retrieval_allowed": "true",
+          "reviewer_id": "loopback-professor",
+          "search_content_hash": "e94dea6588f4f952ced22ea80ddc5bd17665b87471cb63fa37aa5f5842f0bc6d",
+          "search_description": "",
+          "source_artifact_id": "loopback-mixed-course:lecture",
+          "source_checksum": "cdda4ae9b3805902c21ae649eb77acfb32ed593e70e93496fffc3bd964327e50",
+          "source_format": "pdf",
+          "source_label": "course-approved",
+          "source_version": "1",
+          "title": "Synthetic lecture"
+        },
+        "ordinal": 0,
+        "page_end": 1,
+        "page_start": 1,
+        "region_checksum": "73a41aaa695175e9046f92f583f469f5f7c3b70309d68af9612cebf401f02c41",
+        "region_id": "region-9d7ca6d6eb9b2ef608118ee1",
+        "region_kind": "text",
+        "retrieval_allowed": true,
+        "source_artifact_id": "loopback-mixed-course:lecture",
+        "source_checksum": "cdda4ae9b3805902c21ae649eb77acfb32ed593e70e93496fffc3bd964327e50",
+        "source_label": "course-approved",
+        "source_version": 1,
+        "text": "Glimmer lease expires after nine ticks."
+      },
+      {
+        "bounding_box": [
+          0.0,
+          0.0,
+          1.0,
+          1.0
+        ],
+        "content_hash": "96fe372502e204d4784848ac17a79861942f24cfad3328c9590528d6edf2c8e8",
+        "crop_ref": "region://region-b53dd1422d26782a55193c0f.png",
+        "description_method": null,
+        "display_allowed": true,
+        "document_id": "document-6d86dc3689d1f8bd235d59a1",
+        "id": "chunk-d3d9e8babd363ef752875339",
+        "locator": "page 1",
+        "metadata": {
+          "approval_record_id": "approval-6d86dc3689d1f8bd235d59a1",
+          "course_id": "loopback-mixed-course",
+          "crop_ref": "region://region-b53dd1422d26782a55193c0f.png",
+          "deidentified_reviewed": "true",
+          "description_is_authoritative": "false",
+          "display_allowed": "true",
+          "document_content_hash": "96fe372502e204d4784848ac17a79861942f24cfad3328c9590528d6edf2c8e8",
+          "fallback": "selected-text",
+          "ingestion_mode": "region-aware-offline",
+          "locator": "page 1",
+          "parent_region_id": "",
+          "region_checksum": "c4f0ae278c895e323899dc5faa3d88c8512af8d2246ba97e4c414936a18720fe",
+          "region_id": "region-b53dd1422d26782a55193c0f",
+          "region_kind": "page",
+          "retrieval_allowed": "true",
+          "reviewer_id": "loopback-professor",
+          "search_content_hash": "e94dea6588f4f952ced22ea80ddc5bd17665b87471cb63fa37aa5f5842f0bc6d",
+          "search_description": "",
+          "source_artifact_id": "loopback-mixed-course:lecture",
+          "source_checksum": "cdda4ae9b3805902c21ae649eb77acfb32ed593e70e93496fffc3bd964327e50",
+          "source_format": "pdf",
+          "source_label": "course-approved",
+          "source_version": "1",
+          "title": "Synthetic lecture"
+        },
+        "ordinal": 1,
+        "page_end": 1,
+        "page_start": 1,
+        "region_checksum": "c4f0ae278c895e323899dc5faa3d88c8512af8d2246ba97e4c414936a18720fe",
+        "region_id": "region-b53dd1422d26782a55193c0f",
+        "region_kind": "page",
+        "retrieval_allowed": true,
+        "source_artifact_id": "loopback-mixed-course:lecture",
+        "source_checksum": "cdda4ae9b3805902c21ae649eb77acfb32ed593e70e93496fffc3bd964327e50",
+        "source_label": "course-approved",
+        "source_version": 1,
+        "text": "Glimmer lease expires after nine ticks."
+      }
+    ]
+  },
+  "review": {
+    "artifact_id": "generated-preview-4952156b-be56-44ed-938e-3d667d48e38b",
+    "artifact_sha256": "9f484694464cef0c69b54668ccd3bd9d044ac9a6bb538705b2b5aa8796ef78c7",
+    "decisions_json": "[{\"case_id\": \"case-1\", \"decision\": \"accept\"}]",
+    "review_status": "accepted",
+    "reviewed_at": "2026-09-06T03:57:21+00:00"
+  },
+  "checks": {
+    "browser_login_navigation": true,
+    "static_expectations_distinct_from_generated": true,
+    "actual_generated_saved_response": true,
+    "source_provenance_displayed": true,
+    "approval_request_exact_artifact_id_and_sha": true,
+    "persisted_review_exact_artifact_sha": true,
+    "refresh_persistence_no_new_calls": true,
+    "withdrawn_profile_reapproval_rejected_409": true,
+    "source_or_profile_content_change_stale_rejection": null,
+    "wrong_hash_response_body_retained": false,
+    "no_student_state_or_learning_gap_or_outreach_writes": true
+  },
+  "before_after_counts": {
+    "conversations": {
+      "before": 0,
+      "after": 0
+    },
+    "messages": {
+      "before": 0,
+      "after": 0
+    },
+    "conversation_learner_states": {
+      "before": 0,
+      "after": 0
+    },
+    "learning_gap_signals": {
+      "before": 0,
+      "after": 0
+    },
+    "proactive_delivery_outbox": {
+      "before": 0,
+      "after": 0
+    },
+    "generated_profile_previews": {
+      "before": 0,
+      "after": 1
+    },
+    "generated_profile_preview_reviews": {
+      "before": 0,
+      "after": 1
+    }
+  },
+  "withdrawn_reapproval": {
+    "status": 409,
+    "code": "teaching_profile_withdrawn"
+  },
+  "limitations": [
+    "One assistant-reviewed synthetic case and one artifact, no student-learning or real-professor style validation; no candidate qualification or selected runtime change.",
+    "Reviewed onboarding/accounts/course/sources were provisioned by load-runner fixture; browser session pointer seeded to that owned synthetic setup. This is not full onboarding from scratch.",
+    "Browser refresh persistence tested; server restart recovery not exercised in this run.",
+    "Withdrawn-profile lifecycle rejection exercised through browser fetch to existing API. Content mutation/source replacement stale-binding branch not exercised; no claim of full stale-source coverage.",
+    "Wrong-hash probe generated a409 before withdrawal but its exact response body was lost to a diagnostic request-observer error after refresh. Do not count that as independently verified error-code coverage.",
+    "Initial preprovider setup failed due a non-session-mode existing frontend build. Isolated frontend rebuilt and source refrozen before any provider call; failed evidence retained.",
+    "Diagnostic observer retained a request listener after refresh while window array reset; this caused tool-level errors during negative probes. Removed listener and independently captured the withdrawal409. No application runtime change.",
+    "Console initial unauthenticated session401 expected, followed by deliberate negative409 probes and browser password accessibility hints; no observed application exception in the normal generation/approval journey.",
+    "No memory/load/deployment evaluation; latency comprises two serial provider calls in one local journey."
+  ],
+  "actual_turn": {
+    "action": "answer",
+    "citations": [
+      {
+        "bounding_box": [
+          0.12100840336134454,
+          0.07146674493712654,
+          0.4343512014180672,
+          0.08941686634779543
+        ],
+        "course_id": "loopback-mixed-course",
+        "crop_ref": "region://region-9d7ca6d6eb9b2ef608118ee1.png",
+        "id": "citation-ee7f6eae-9aab-41c8-bb89-612d58f21eb9",
+        "locator": "page 1, text block 1",
+        "message_id": "message-b3609877-3b0a-4a8a-b8dc-4fb46db3dbe8",
+        "page": 1,
+        "region_id": "region-9d7ca6d6eb9b2ef608118ee1",
+        "region_kind": "text",
+        "release_id": "preview-release-0bcac050-1918-4820-903c-6ba5f9610b0d",
+        "source_artifact_id": "loopback-mixed-course:lecture",
+        "source_checksum": "cdda4ae9b3805902c21ae649eb77acfb32ed593e70e93496fffc3bd964327e50",
+        "source_document_id": "document-6d86dc3689d1f8bd235d59a1",
+        "source_version": 1,
+        "title": "Synthetic lecture"
+      }
+    ],
+    "student": "After how many ticks does Glimmer lease expire?",
+    "trace": {
+      "generator_id": "question-specific-profile-grounded-v14",
+      "latency_ms": 5721.121790993493,
+      "policy_action": "answer",
+      "prompt_version": "question-specific-profile-grounded-v14",
+      "provider_model": "gpt-5.6-luna",
+      "provider_revision": "gpt-5.6-luna",
+      "unresolved_detail": null,
+      "usage": {
+        "approximate_cost_usd": 0.009635,
+        "input_tokens": 3166,
+        "output_tokens": 244,
+        "total_tokens": 3410
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; draft_provider=gpt-5.6-luna; assessment_provider=gpt-5.6-sol; disposition=keep; final_provider=gpt-5.6-luna; usage_scope=combined-draft-and-conditional-revision; revision_limit=1; semantic-certification=false"
+    },
+    "tutor": "The Glimmer lease expires after nine ticks.\n\nHow many ticks would remain after six ticks?"
+  }
+}

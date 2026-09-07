@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 from pathlib import Path
 
 import yaml
@@ -97,9 +98,19 @@ def test_default_check_does_not_implicitly_open_machine_local_run_artifacts() ->
 
 
 def test_vite_reads_the_documented_repository_root_environment() -> None:
-    vite_config = (ROOT / "apps/web/vite.config.ts").read_text()
-
-    assert "envDir: path.resolve(import.meta.dirname, '../..')" in vite_config
+    result = subprocess.run(
+        [
+            "node", "--input-type=module", "-e",
+            "import { loadConfigFromFile } from 'vite';"
+            "const result = await loadConfigFromFile("
+            "{command: 'serve', mode: 'test'}, 'vite.config.ts');"
+            "console.log(JSON.stringify({envDir: result.config.envDir}));",
+        ],
+        cwd=ROOT / "apps/web", check=True, capture_output=True, text=True,
+        timeout=30,
+    )
+    configuration = json.loads(result.stdout.strip())
+    assert Path(configuration["envDir"]).resolve() == ROOT.resolve()
 
 
 def test_vite_does_not_force_a_cyclic_vendor_bundle() -> None:

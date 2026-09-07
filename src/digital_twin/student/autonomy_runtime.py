@@ -9,6 +9,10 @@ from typing import Protocol, TypedDict
 from uuid import uuid4
 
 import aiosqlite
+from services.persistence.async_sqlite_coordination import (
+    coordinated_connection,
+    database_operation_lock,
+)
 from langgraph.graph import END, START, StateGraph
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
@@ -53,6 +57,7 @@ class AutonomousJobInput(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     opportunity: ProactiveOpportunityV1
+    teaching_profile_context: dict | None = None
     goal: AutonomousGoalV1 | None = None
     policy: PedagogicalPolicyV2
     professor_id: str = Field(min_length=1, max_length=128)
@@ -409,6 +414,7 @@ class GovernedAutonomousTutoringGraph:
         )
         async with aiosqlite.connect(self.checkpoint_database_path) as connection:
             saver = AsyncSqliteSaver(connection, serde=serializer)
+            saver.lock = database_operation_lock(self.checkpoint_database_path)
             await saver.setup()
             graph = self._builder.compile(checkpointer=saver)
             snapshot = await graph.aget_state(config)
@@ -719,7 +725,7 @@ class GovernedAutonomousTutoringGraph:
             ).encode("utf-8")
         ).hexdigest()
         opportunity_id = job.opportunity.opportunity_id
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute("BEGIN IMMEDIATE")
             cursor = await connection.execute(
                 """SELECT request_sha256, status, output_json
@@ -752,7 +758,7 @@ class GovernedAutonomousTutoringGraph:
         stage: str,
         output_json: str,
     ) -> None:
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute(
                 """UPDATE autonomous_model_calls_v2
                    SET status = 'completed', output_json = ?, completed_at = ?
@@ -772,7 +778,7 @@ class GovernedAutonomousTutoringGraph:
         stage: str,
         failure_code: str,
     ) -> None:
-        async with aiosqlite.connect(self.checkpoint_database_path) as connection:
+        async with coordinated_connection(self.checkpoint_database_path) as connection:
             await connection.execute(
                 """UPDATE autonomous_model_calls_v2
                    SET status = 'failed', failure_code = ?, completed_at = ?

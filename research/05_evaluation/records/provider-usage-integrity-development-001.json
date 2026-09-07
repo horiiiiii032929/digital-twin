@@ -1,0 +1,107 @@
+{
+  "run_id": "provider-usage-integrity-development-001",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "dirty": true,
+  "date": "2026-09-06",
+  "status": "completed-contract-repair",
+  "decision": "Keep fail-closed missing-usage parsing; preserve valid explicit zero",
+  "dataset": {
+    "kind": "synthetic provider envelopes",
+    "new_tests": 11,
+    "focused_regression_tests": 58,
+    "sample_independence": "contract partitions, not random API observations"
+  },
+  "baseline": {
+    "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+    "dirty": true,
+    "before_sha256": "2dce9d7c5ca5ffc4b18b8a405dd78dc6d9807675de493519421487c9680e4cac",
+    "observations": [
+      {
+        "case": "absent-usage",
+        "parsed": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "approximate_cost_usd": 0.0
+        }
+      },
+      {
+        "case": "absent-input",
+        "parsed": {
+          "input_tokens": 0,
+          "output_tokens": 20,
+          "total_tokens": 20,
+          "approximate_cost_usd": 2.4e-05
+        }
+      },
+      {
+        "case": "absent-output",
+        "parsed": {
+          "input_tokens": 10,
+          "output_tokens": 0,
+          "total_tokens": 10,
+          "approximate_cost_usd": 2e-06
+        }
+      },
+      {
+        "case": "explicit-zero",
+        "parsed": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "approximate_cost_usd": 0.0
+        }
+      }
+    ]
+  },
+  "after_sha256": "b9a22229defb499177fe8371f331c5fad6e89ff08f31cf36c00e2ce3df951685",
+  "candidate": "Require usage object and input/output token keys; integer zeros remain valid; invalid/missing usage stays unknown and is rejected",
+  "primary_gates": {
+    "missing_usage_rejected": true,
+    "explicit_zero_accepted": true,
+    "serial_and_concurrent_budget_stop_after_unknown": true
+  },
+  "operational_measurements": {
+    "external_provider_calls": 0,
+    "external_cost_usd": 0,
+    "test_elapsed_seconds": 4.74
+  },
+  "recent_observed_usage_audit": {
+    "scope": "outcome rows only; reservation/admission rows excluded; positive recorded counts cannot be caused by absence-to-zero substitution",
+    "files": [
+      {
+        "path": "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/provider.jsonl",
+        "outcome_rows": 654,
+        "missing_or_nonpositive_counts": 0
+      },
+      {
+        "path": "reports/generated/output-cap-progression-development-001-live-001/provider-1500.jsonl",
+        "outcome_rows": 114,
+        "missing_or_nonpositive_counts": 0
+      },
+      {
+        "path": "reports/generated/output-cap-progression-development-001-live-001/provider-500.jsonl",
+        "outcome_rows": 114,
+        "missing_or_nonpositive_counts": 0
+      },
+      {
+        "path": "reports/generated/bounded-contract-progression-development-001-live-001/provider-v3.jsonl",
+        "outcome_rows": 36,
+        "missing_or_nonpositive_counts": 0
+      },
+      {
+        "path": "reports/generated/bounded-contract-progression-development-001-live-001/provider-v2.jsonl",
+        "outcome_rows": 36,
+        "missing_or_nonpositive_counts": 0
+      }
+    ]
+  },
+  "permissions": "Synthetic HTTP fixtures only; no external calls or private data",
+  "limitations": [
+    "Tests exercise parser and budget contracts, not probability of real provider omissions",
+    "No billing invoice validation",
+    "Only named recent ledgers inspected; not universal historical-cost recertification"
+  ],
+  "reproduction": "uv run pytest -q tests/services/test_provider_usage_integrity.py tests/services/test_openai_responses_client.py tests/services/test_llm_budget.py tests/services/test_llm_concurrent_budget.py",
+  "artifact_directory": "reports/generated/provider-usage-integrity-development-001"
+}

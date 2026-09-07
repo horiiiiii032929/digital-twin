@@ -68,10 +68,15 @@ class LocalCourseSourceIngestionService:
         self.description_provider = description_provider
         self.max_source_bytes = max_source_bytes
 
-    def ingest_pdf(
+    def ingest_pdf(self, content: bytes, **kwargs) -> CourseSourceIngestionResult:
+        return self.ingest_source(content, mime_type="application/pdf", **kwargs)
+
+    def ingest_source(
         self,
         content: bytes,
         *,
+        mime_type: str = "application/pdf",
+        deidentified_reviewed: bool = False,
         course_id: str,
         artifact_id: str,
         title: str,
@@ -80,10 +85,17 @@ class LocalCourseSourceIngestionService:
         permissions: SourcePermissions,
         source_label: SourceLabel = SourceLabel.COURSE_APPROVED,
     ) -> CourseSourceIngestionResult:
+        suffixes = {"application/pdf": ".pdf", "text/plain": ".txt", "text/markdown": ".md"}
+        if mime_type not in suffixes:
+            raise ValueError("unsupported course source format")
+        if mime_type.startswith("text/"):
+            text = content.decode("utf-8")
+            if not text.strip() or any(ord(char) < 32 and char not in "\n\r\t" for char in text):
+                raise ValueError("source must contain nonempty UTF-8 text without binary controls")
         if not content:
-            raise ValueError("uploaded PDF is empty")
+            raise ValueError("uploaded source is empty")
         if len(content) > self.max_source_bytes:
-            raise ValueError("uploaded PDF exceeds the configured size limit")
+            raise ValueError("uploaded source exceeds the configured size limit")
         if version < 1:
             raise ValueError("source version must be at least 1")
         if not all(
@@ -96,9 +108,7 @@ class LocalCourseSourceIngestionService:
             raise ValueError(
                 "unapproved external sources cannot be ingested for tutoring"
             )
-        if infer_sensitive_source_name(title) or infer_sensitive_source_name(
-            artifact_id
-        ):
+        if (infer_sensitive_source_name(title) or infer_sensitive_source_name(artifact_id)) and not (mime_type.startswith("text/") and deidentified_reviewed):
             raise ValueError(
                 "potentially sensitive student or private sources require a separate "
                 "consent-reviewed ingestion path"
@@ -109,7 +119,7 @@ class LocalCourseSourceIngestionService:
         source = SourceArtifact(
             id=source_identity,
             title=title.strip(),
-            mime_type="application/pdf",
+            mime_type=mime_type,
             checksum=checksum,
             version=version,
             source_label=source_label,
@@ -126,13 +136,13 @@ class LocalCourseSourceIngestionService:
             reviewer_id=professor_id,
             reviewer_role="professor",
             reviewed_at=datetime.now(UTC),
-            notes="Explicit professor approval captured by course ingestion.",
+            notes="Explicit professor approval captured by course ingestion." + (" Professor attests permission and completed de-identification for this exact source version." if deidentified_reviewed else ""),
         )
 
         self.source_root.mkdir(parents=True, exist_ok=True)
         descriptor, temporary_name = tempfile.mkstemp(
             prefix="course-source-",
-            suffix=".pdf",
+            suffix=suffixes[mime_type],
             dir=self.source_root,
         )
         temporary_path = Path(temporary_name)
@@ -152,10 +162,13 @@ class LocalCourseSourceIngestionService:
             chunks = [
                 chunk.model_copy(
                     update={
+                        "source_checksum": checksum,
                         "metadata": {
                             **chunk.metadata,
                             "course_id": course_id,
                             "ingestion_mode": "region-aware-offline",
+                            "deidentified_reviewed": str(deidentified_reviewed).lower(),
+                            "reviewer_id": professor_id,
                         }
                     },
                     deep=True,
@@ -169,7 +182,7 @@ class LocalCourseSourceIngestionService:
                 str(version),
                 checksum,
             )
-            final_path = self.source_root / f"{final_name}.pdf"
+            final_path = self.source_root / f"{final_name}{suffixes[mime_type]}"
             if final_path.is_symlink():
                 raise ValueError("stored source path is a symbolic link")
             if final_path.exists():

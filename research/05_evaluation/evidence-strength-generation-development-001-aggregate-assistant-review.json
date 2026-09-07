@@ -1,0 +1,107 @@
+{
+  "group_id": "evidence-strength-generation-development-001",
+  "decision": "Refine / No advancement; keep new confirmation sealed",
+  "scope": "Meaning-based unblinded assistant review of every delivered output across seven runs. Main reviewer was packet author; runtime reviewer had implementation exposure; root supplied sidecar/adjudication reviews. Not human or independent held-out qualification.",
+  "metrics": {
+    "main": {
+      "useful": 96,
+      "denominator": 96,
+      "per_trial": [
+        48,
+        48
+      ],
+      "primary": 32,
+      "primary_denominator": 32,
+      "explanatory_moves": 24,
+      "explanatory_denominator": 24,
+      "critical": 0,
+      "prior_local_guard_turns": 1,
+      "control_useful": [
+        16,
+        16
+      ],
+      "control_critical": 0
+    },
+    "short": {
+      "useful": 27,
+      "denominator": 28,
+      "critical": 0,
+      "failure": "Case 08 identifies ambiguous referent but does not request clarification."
+    },
+    "profile": {
+      "on_style_useful": 10,
+      "on_style_denominator": 12,
+      "per_trial": [
+        5,
+        5
+      ],
+      "critical": 2,
+      "qualified_contrasts": 4,
+      "contrast_denominator": 6,
+      "observed_move_contrasts": 6
+    },
+    "boundary": {
+      "useful": 8,
+      "denominator": 8,
+      "critical": 0,
+      "control_useful": 4
+    },
+    "mixed": {
+      "useful": 8,
+      "denominator": 8,
+      "initial": 4,
+      "post_attempt": 4,
+      "critical": 0,
+      "control_useful": 0
+    }
+  },
+  "gates": {
+    "main_92_of_96": true,
+    "each_main_39_of_48": true,
+    "each_primary_13_of_16": true,
+    "each_explanatory_12_of_12": true,
+    "short_28_of_28": false,
+    "on_style_12_of_12": false,
+    "zero_candidate_critical": false,
+    "boundary_7_of_8": true,
+    "mixed_7_of_8_and_3_each_stage": true,
+    "advance": false
+  },
+  "quantity_limits": [
+    "The 96 main targets are 48 reused contexts repeated twice, not 96 independent students.",
+    "The 12 on-style judgments are six reused profile cases repeated twice; the same checksum concept fails twice.",
+    "The 28 short contexts derive from 12 small source clusters. No pooled semantic accuracy is reported across different tasks.",
+    "Clean transport and completed histories do not establish tutoring quality or learning benefit."
+  ],
+  "review_artifacts": [
+    {
+      "path": "research/05_evaluation/evidence-strength-v11-main-trial-1-assistant-review.json",
+      "sha256": "b27c06ef9b34426bff68f50507fc81931a78c60ff0c7762e77e0ca3dde9c0991"
+    },
+    {
+      "path": "research/05_evaluation/evidence-strength-v11-main-trial-2-assistant-review.json",
+      "sha256": "14efd0be3c285f69cb5a46bd49eb6f4fc5e4c31b7ea3b4a9772f449c0dc100d1"
+    },
+    {
+      "path": "research/05_evaluation/evidence-strength-v11-short-profile-assistant-review.json",
+      "sha256": "94fddc31325ab8fbd28f457273b6593d96056413ee9732b20a3e419e70036cf0"
+    },
+    {
+      "path": "research/05_evaluation/evidence-strength-v11-boundary-assistant-review.json",
+      "sha256": "90b0551a64c0b1829385dff73693ebc662923b188a01af84b08db7433ced062e"
+    },
+    {
+      "path": "research/05_evaluation/evidence-strength-v11-mixed-assistant-review.json",
+      "sha256": "676dc1680be1ea8e03de490f13cb9c1ee037cc62cce1d60139fce9c1919917f3"
+    }
+  ],
+  "operational_execution": {
+    "delivered_turns": 452,
+    "actual_provider_calls": 563,
+    "provider_failures": 0,
+    "missing_histories": 0,
+    "source_files_unchanged": true,
+    "execution_group_summary": "reports/generated/evidence-strength-generation-development-001/summary.json"
+  },
+  "preserved_failure": "The general instruction did not prevent the unsupported alteration-to-digest-mismatch guarantee in either explanatory checksum response; no checksum-specific patch or confirmation reuse is justified by this result."
+}

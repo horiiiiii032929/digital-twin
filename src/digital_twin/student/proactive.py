@@ -6,7 +6,6 @@ from datetime import UTC, datetime, timedelta
 from typing import Literal, Mapping
 from urllib.parse import urlencode, urlsplit, urlunsplit
 from uuid import uuid4
-from zoneinfo import ZoneInfo
 
 from pydantic import BaseModel, Field, SecretStr, field_validator, model_validator
 
@@ -39,7 +38,10 @@ from src.digital_twin.student.models import (
     ProactiveTriggerStatus,
     StudentReleaseStatus,
 )
-from src.digital_twin.student.repository import StudentRepository
+from src.digital_twin.student.repository import (
+    ProactiveDeliveryConflictError,
+    StudentRepository,
+)
 class ProactiveOutreachError(ValueError):
     def __init__(self, code: str, message: str) -> None:
         super().__init__(message)
@@ -656,28 +658,39 @@ class ProactiveOutreachService:
                 created_at=created_at,
                 updated_at=created_at,
             )
-        inserted = self.repository.materialize_proactive_message(
-            trigger,
-            message,
-            [citation],
-            outbox_item,
-            self._event(
-                "proactive-message-materialized",
-                account_id=trigger.student_id,
-                course_id=trigger.course_id,
-                release_id=trigger.release_id,
-                details={
-                    "trigger_id": trigger.id,
-                    "message_id": message.id,
-                    "channel": trigger.channel.value,
-                },
-            ),
-        )
+        try:
+            inserted = self.repository.materialize_proactive_message(
+                trigger,
+                message,
+                [citation],
+                outbox_item,
+                self._event(
+                    "proactive-message-materialized",
+                    account_id=trigger.student_id,
+                    course_id=trigger.course_id,
+                    release_id=trigger.release_id,
+                    details={
+                        "trigger_id": trigger.id,
+                        "message_id": message.id,
+                        "channel": trigger.channel.value,
+                    },
+                ),
+            )
+        except ProactiveDeliveryConflictError as error:
+            if error.reason == "quiet-hours":
+                return ProactiveProcessResult(
+                    outcome="deferred-quiet-hours", trigger=trigger
+                )
+            return self._suppress(trigger, error.reason, instant)
         current_trigger = self.repository.get_proactive_trigger(trigger.id) or trigger
         if not inserted:
             current = self.repository.get_proactive_message_for_trigger(trigger.id)
             return ProactiveProcessResult(
-                outcome="duplicate",
+                outcome=(
+                    "duplicate"
+                    if current_trigger.status == ProactiveTriggerStatus.MATERIALIZED
+                    else "suppressed"
+                ),
                 trigger=current_trigger,
                 message=self._view(current) if current else None,
             )
@@ -793,6 +806,10 @@ class ProactiveOutreachService:
             or release.status != StudentReleaseStatus.PUBLISHED
         ):
             return "release-unavailable"
+        if release.teaching_profile_id:
+            from .teaching_profile_context import profile_authorizes_release
+            if not profile_authorizes_release(self.repository, self.repository.get_teaching_profile(release.teaching_profile_id), release):
+                return "teaching-profile-withdrawn"
         return None
 
     def _recovery_availability_reason(
@@ -853,6 +870,10 @@ class ProactiveOutreachService:
             raise ProactiveOutreachError(
                 "release_unavailable", "The course Digital Twin is not published."
             )
+        if release.teaching_profile_id:
+            from .teaching_profile_context import profile_authorizes_release
+            if not profile_authorizes_release(self.repository, self.repository.get_teaching_profile(release.teaching_profile_id), release):
+                raise ProactiveOutreachError("teaching_profile_withdrawn", "The bound teaching profile was withdrawn.")
         return release
 
     def _authorize_professor_schedule(self, professor_id: str, student_id: str, course_id: str):
@@ -924,17 +945,7 @@ def _as_utc(value: datetime) -> datetime:
 
 
 def _inside_quiet_hours(now: datetime, preference: OutreachPreference) -> bool:
-    local = now.astimezone(ZoneInfo(preference.timezone))
-    current = local.hour * 60 + local.minute
-    start_hour, start_minute = map(int, preference.quiet_hours_start.split(":"))
-    end_hour, end_minute = map(int, preference.quiet_hours_end.split(":"))
-    start = start_hour * 60 + start_minute
-    end = end_hour * 60 + end_minute
-    if start == end:
-        return False
-    if start < end:
-        return start <= current < end
-    return current >= start or current < end
+    return preference.is_quiet_at(now)
 
 
 def _chunk_lineage(chunk: DocumentChunk) -> tuple[str, int, str]:

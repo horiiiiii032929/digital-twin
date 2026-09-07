@@ -1,0 +1,113 @@
+\clearpage
+\section{Diagram Contracts and Reading Guide}
+\label{sec:diagram-contracts}
+Each diagram has one question and an explicit abstraction boundary. Solid arrows
+show the operation or reference named on the edge; dashed arrows have a local
+meaning given in the caption. A logical dependency does not imply an HTTP call,
+independent service or physical foreign key. The sequences are numbered
+collaboration summaries rather than complete UML models of every exception.
+
+\subsection{Course Lifecycle: Who Can Make the Twin Available?}
+Figure~\ref{fig:lifecycle} begins with a professor's owned course, permitted
+materials and teaching settings. The output of configuration is a release draft,
+not a student-visible chatbot. Preview lets the professor inspect behaviour;
+preflight returns specific blockers. Only a subsequent publish operation makes
+the release current. A student must independently pass membership and release
+checks before opening a compatible conversation. Check-in consent is a separate
+preference, not an automatic consequence of asking a question. Saved difficulty
+signals and action outcomes inform the instructor's next review; they do not
+change published policy automatically. Withdrawal blocks subsequent use of that
+release. This figure establishes actor responsibilities; the publication
+sequence supplies the transactional detail.
+
+\subsection{Logical Architecture: Where Does Each Decision Execute?}
+Figure~\ref{fig:responsibilities} separates web requests from worker entry points.
+Routes authenticate and validate transport inputs; publication, tutoring and
+autonomy services enforce domain rules. The ingestion worker processes queued
+source jobs. The autonomy worker observes durable events and processes due
+opportunities; it does not depend on an open browser tab. Both use application
+services and repository contracts. The local deployment uses SQLite and source
+files; LangGraph checkpoints support workflow recovery. Model adapters return
+proposals, not authorization or trusted database updates. Provider failures
+therefore enter service/graph recovery paths. This is a responsibility map:
+separate boxes do not claim microservice deployment, independent scaling or
+separate physical databases. A deployment diagram would answer a different
+question and is not inferred from this figure.
+
+\subsection{Response Sequence: What Must Hold Before a Reply Is Saved?}
+Figure~\ref{fig:response-sequence} accepts a conversation identifier, content and
+client request identifier. Scope checks resolve the student, membership and
+release. Retrieval returns candidate chunks with source identity and locators;
+the evidence gate selects what the generator may actually use. This boundary
+explains why complete retrieval alone did not make the any-hit control answer.
+The generator receives the selected evidence, policy and teaching intent. The
+retained factual generator is deterministic; configured candidates may use an
+external model. The returned text and claims remain proposals until claim and
+citation checks finish.
+
+The service then prepares messages, citations, audit information and applicable
+learner and follow-up artifacts. The repository checks current authority and the
+expected learner-state revision during the turn commit. A matching duplicate
+request can return the saved response; reuse with different content is rejected.
+A stale revision or withdrawn scope cannot silently overwrite current state.
+Insufficient evidence leads to clarification or abstention, while policy-restricted
+requests use refusal or redirection. Failed generation follows the configured
+bounded recovery path. Model execution and checkpoint writes need not share the turn transaction.
+
+\subsection{Autonomy Activity: What Happens Between Two Student Turns?}
+Figure~\ref{fig:autonomy} starts with an observed event or scheduled wake-up.
+The service creates or loads a scope-bound opportunity and claims it using an
+expiring lease. The job snapshot includes goal status, permitted evidence,
+release/profile identity, consent, quiet hours and recent-message constraints.
+Terminal goals stop before further work. The planner intersects event actions
+with instructor permissions, compares the deterministic fallback with a guarded
+model proposal, and consumes the default delivery/event proxy unless an explicit
+state resolver is supplied. The graph authorizes the resulting action,
+generates wording and validates the result. A blocked or invalid proposal
+produces a no-action/failure result; the worker is not obliged to send anything.
+A valid response goes through the outreach service, which rechecks authority
+before persisting an in-app message.
+
+Delivery and final job-result commit are distinct stages. A stable trigger key
+links retries to the same delivery instead of issuing a second message after
+an interrupted attempt. The action outcome and subsequent learner observations
+support later goal interpretation. The corrected V2 goal interpreter uses
+the exact release-bound objective and requires every target concept to satisfy
+the committed-evidence rule; the planning proxy cannot substitute for that
+assessment. The dashed return requires a new durable
+event or due wake-up: it is not unrestricted model self-invocation. Completion,
+cancellation, expiry and attempt limits terminate work for that goal. The graph
+explains operational control; its boxes do not establish that learner estimates
+or teaching interventions are educationally effective.
+
+\subsection{Publication Sequence: What Changes Atomically?}
+Figure~\ref{fig:publication-detail} distinguishes preflight from publication.
+Preflight checks active component-profile compatibility, approved policy,
+evidence readiness, source permissions and unique provenance. Where configured,
+index preparation also contributes to readiness. It persists the check outcome
+and audit information. Its evaluation status is a software readiness field;
+a passing status does not mean that all academic accuracy targets have passed.
+
+Publication rechecks ownership and publishability, prepares the index and asks
+the repository to replace the current release. The repository serializes the
+transition, rechecks applicable teaching-profile authority, withdraws the
+predecessor and cancels obsolete autonomous work. A post-publication observer
+runs after that transition: failure there must not be interpreted as reversal
+of a committed release. Rollback is revalidation and republication of a withdrawn
+release, not restoration of an entire database. Index preparation, the database
+transition and the observer hook are distinct failure boundaries.
+
+\subsection{Data Relationships: Which Identity Survives a Change?}
+Figure~\ref{fig:data-detail} uses explicit identifiers to explain persistence.
+Membership associates an account with a course; a conversation references a
+specific release; messages belong to conversations; citations retain source
+identity, version, checksum and location. Release-bound policy and evidence
+provide a snapshot against which an interaction can later be interpreted.
+Learner observations and beliefs are derived records with scope and revision,
+not ground truth copied from the source. Goals retain objectives and stopping
+conditions; opportunities retain event windows and optional goal references;
+actions/outcomes identify what processing actually did. The optional goal link
+matters because an opportunity need not always originate from a saved goal.
+Dashed update arrows describe information flow, not SQL referential constraints.
+The figure deliberately omits unrelated fields and does not merge the grouped
+plan/action/outcome records into one physical table.

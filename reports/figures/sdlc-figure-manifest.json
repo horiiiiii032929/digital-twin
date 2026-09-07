@@ -1,0 +1,79 @@
+[
+  {
+    "file": "course-twin-lifecycle.pdf",
+    "width_pt": 452,
+    "height_pt": 526,
+    "minimum_font_pt": 9.8,
+    "boxes": 10
+  },
+  {
+    "file": "course-twin-architecture.pdf",
+    "width_pt": 452,
+    "height_pt": 588,
+    "minimum_font_pt": 9.8,
+    "boxes": 10
+  },
+  {
+    "file": "course-twin-tutoring-sequence.pdf",
+    "width_pt": 452,
+    "height_pt": 528,
+    "minimum_font_pt": 9.8,
+    "boxes": 4
+  },
+  {
+    "file": "course-twin-learner-state.pdf",
+    "width_pt": 452,
+    "height_pt": 346,
+    "minimum_font_pt": 9.8,
+    "boxes": 7
+  },
+  {
+    "file": "course-twin-planner-decision.pdf",
+    "width_pt": 452,
+    "height_pt": 516,
+    "minimum_font_pt": 9.8,
+    "boxes": 11
+  },
+  {
+    "file": "course-twin-autonomy.pdf",
+    "width_pt": 452,
+    "height_pt": 557,
+    "minimum_font_pt": 9.8,
+    "boxes": 10
+  },
+  {
+    "file": "course-twin-goal-states.pdf",
+    "width_pt": 452,
+    "height_pt": 443,
+    "minimum_font_pt": 9.8,
+    "boxes": 5
+  },
+  {
+    "file": "course-twin-evidence-failure.pdf",
+    "width_pt": 452,
+    "height_pt": 352,
+    "minimum_font_pt": 9.8,
+    "boxes": 7
+  },
+  {
+    "file": "course-twin-simulation-design.pdf",
+    "width_pt": 452,
+    "height_pt": 422,
+    "minimum_font_pt": 9.8,
+    "boxes": 6
+  },
+  {
+    "file": "course-twin-publication-sequence.pdf",
+    "width_pt": 452,
+    "height_pt": 528,
+    "minimum_font_pt": 9.8,
+    "boxes": 4
+  },
+  {
+    "file": "course-twin-data-relationships.pdf",
+    "width_pt": 452,
+    "height_pt": 428,
+    "minimum_font_pt": 9.8,
+    "boxes": 10
+  }
+]

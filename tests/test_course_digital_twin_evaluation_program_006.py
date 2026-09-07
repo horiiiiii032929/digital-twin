@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from pathlib import Path
 
 from scripts import run_course_digital_twin_evaluation_program as runner
@@ -39,6 +41,7 @@ INSTRUMENT_011 = ROOT / (
 )
 
 
+@pytest.mark.historical_artifact
 def test_program_006_is_terminal_and_preserved() -> None:
     manifest = load_program_manifest(INSTRUMENT_006)
     result = runner.validate(INSTRUMENT_006)
@@ -50,6 +53,7 @@ def test_program_006_is_terminal_and_preserved() -> None:
     assert result["status"] == "passed-build-only"
 
 
+@pytest.mark.historical_artifact
 def test_question_targeted_successor_is_completed_and_exactly_matchable() -> None:
     manifest = load_program_manifest(INSTRUMENT_007)
     result = runner.validate(INSTRUMENT_007)
@@ -85,6 +89,7 @@ def test_question_targeted_successor_adapter_smoke_is_network_free() -> None:
     }
 
 
+@pytest.mark.historical_artifact
 def test_question_stratified_program_008_is_completed_and_exactly_matchable() -> None:
     manifest = load_program_manifest(INSTRUMENT_008)
     result = runner.validate(INSTRUMENT_008)
@@ -113,6 +118,7 @@ def test_question_stratified_program_008_adapter_smoke_is_network_free() -> None
     }
 
 
+@pytest.mark.historical_artifact
 def test_program_009_freezes_descriptive_continuation_without_claiming_keep() -> None:
     manifest = load_program_manifest(INSTRUMENT_009)
     result = runner.validate(INSTRUMENT_009)
@@ -128,6 +134,7 @@ def test_program_009_freezes_descriptive_continuation_without_claiming_keep() ->
     assert result["development_missing_reference_count"] == 0
 
 
+@pytest.mark.historical_artifact
 def test_program_010_corrects_bulk_cost_and_latency_without_changing_truth() -> None:
     manifest = load_program_manifest(INSTRUMENT_010)
     result = runner.validate(INSTRUMENT_010)
@@ -144,6 +151,7 @@ def test_program_010_corrects_bulk_cost_and_latency_without_changing_truth() -> 
     assert result["development_missing_reference_count"] == 0
 
 
+@pytest.mark.historical_artifact
 def test_program_011_corrects_only_the_measured_construction_budget_split() -> None:
     manifest = load_program_manifest(INSTRUMENT_011)
     result = runner.validate(INSTRUMENT_011)
@@ -214,6 +222,7 @@ def test_evaluation_v2_scores_per_case_provider_failures() -> None:
         raise AssertionError("legacy strict mode must still reject excess failures")
 
 
+@pytest.mark.historical_artifact
 def test_final_atomic_corpus_is_non_overlapping_and_exactly_matchable() -> None:
     cases, gold, diagnostics, source = build_atomic_final_rows(
         ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json",

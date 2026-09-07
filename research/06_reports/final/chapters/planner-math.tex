@@ -1,0 +1,64 @@
+\clearpage
+\section{Planner Calculation and Evaluation Definitions}
+\label{sec:planner-math}
+This appendix expands the executable heuristic in
+\path{src/digital_twin/student/planning_architectures.py}.
+It describes the inspected implementation, not fitted educational parameters.
+For an action $a$, let $p$ be the planning probability proxy, $u$ its uncertainty,
+$z$ goal progress and $L$ the look-ahead depth (default two). With elapsed
+observation time $t$ in days, spacing is $s=1-\exp(-t/3)$; when $t$ is absent,
+the implementation uses $s=1$. The default adapter leaves $t$ absent.
+
+\begin{align}
+G(a)&=\min\{1,\ g_a(1-p)(0.5+0.5s)\},\\
+O(a)&=\min\{1,\ o_a(0.5+0.5u)\},\\
+F(a)&=\min\{1,\ 0.35L[G(a)+O(a)](1-z)\}.
+\end{align}
+The misconception bonus is $0.12$ for a hint/example or $0.04$ for a diagnostic
+question when the inferred incorrect streak is at least two, otherwise zero.
+Evidence risk is one when evidence is not ready, otherwise zero, with an
+additional $0.05\max(0,k-2)$ for a check-in and clipping at one. Here $k$ is
+the state card's evidence count; the default adapter populates it with the
+number of supporting observation identifiers. The guarded
+planner returns no action before scoring when its evidence-readiness check
+fails; the risk term remains part of the shared forward-model interface.
+No action has all terms and utility equal to zero.
+
+\begin{table}[htbp]
+\centering\small
+\caption{Action constants used by the analytic forward model. Only
+event-eligible and instructor-permitted actions are scored for a job.}
+\begin{tabularx}{\linewidth}{@{}Yrrr@{}}
+\toprule Action & $g_a$ & $o_a$ & $I(a)$ \\\midrule
+Diagnostic question & 0.05 & 0.28 & 0.03 \\
+Hint or example & 0.18 & 0.12 & 0.04 \\
+Approved-source recommendation & 0.12 & 0.08 & 0.04 \\
+Retrieval practice & 0.24 & 0.24 & 0.05 \\
+Schedule follow-up & 0.02 & 0.03 & 0.02 \\
+In-app check-in & 0.03 & 0.05 & 0.08 \\
+Progress summary & 0.04 & 0.02 & 0.04 \\
+Professor insight draft & 0.01 & 0.00 & 0.01 \\
+No action & 0.00 & 0.00 & 0.00 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+For the worked calculation in Section~\ref{sec:planning}, a hint has
+$G=0.09$, $O=0.08$, $F=0.119$, $B=0.12$, $R=0$ and $I=0.04$.
+The sum is $0.325$. The diagnostic question has $G=0.025$,
+$O\approx0.186667$, $F\approx0.148167$, $B=0.04$, $R=0$ and $I=0.03$,
+giving approximately $0.267167$. This is a calculation from constants and a
+declared state, not an invented empirical case.
+
+The component evaluation uses a different quantity. If the hidden instrument
+assigns action value $v_i(a)$ in context $i$, the selected action is $\hat a_i$
+and $N$ is the number of contexts, then
+\begin{equation}
+\overline v=\frac1N\sum_i v_i(\hat a_i),\qquad
+\overline r=\frac1N\sum_i\left[\max_a v_i(a)-v_i(\hat a_i)\right].
+\end{equation}
+The \hyperref[study-C]{action-planning comparison}'s utility improvement is $0.004805$, with paired 95\% interval
+$0.003065$--$0.006760$ over 1,000 contexts. Its preferred-label difference
+is $-0.01$, with interval $-0.022$--$0.001$. Utility, preferred action and
+the runtime score therefore answer different questions. The synthetic action
+values and the model's internal prediction do not constitute observed learning.

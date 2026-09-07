@@ -303,6 +303,8 @@ class LlmHierarchicalPlanningProvider:
                 else None
             ),
         }
+        if job.teaching_profile_context is not None:
+            payload["approved_teaching_profile"] = job.teaching_profile_context
         response = await self.client.chat(
             [
                 LlmMessage(

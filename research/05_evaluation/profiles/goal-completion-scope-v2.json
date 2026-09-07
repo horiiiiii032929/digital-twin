@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "profile_kind": "experimental-component-selection",
+  "profile_id": "goal-completion-scope-v2",
+  "profile_version": "development-001",
+  "stage": "experimental",
+  "component": "conversation-orchestration",
+  "subcomponent": "autonomous-goal-lifecycle",
+  "implementation": {
+    "implementation_id": "deterministic-autonomous-goal-manager-v2",
+    "version": "goal-completion-scope-development-001",
+    "configuration": {
+      "objective_mapping": "exact-unambiguous-release-domain",
+      "required_concepts": "all",
+      "correct_evidence_minimum": 2,
+      "incorrect_evidence_maximum": 0,
+      "attribution_confidence_minimum": 0.5,
+      "committed_state_only": true
+    }
+  },
+  "control": {
+    "implementation_id": "deterministic-autonomous-goal-manager-v1",
+    "status": "historical-defective-control-only",
+    "source_archive": "reports/generated/goal-completion-scope-development-001-baseline/source.zip"
+  },
+  "fallback": {
+    "mode": "t1-v2-reactive",
+    "autonomy_enabled": false,
+    "note": "Disable autonomous support using the existing professor policy; do not restore known cross-goal completion."
+  },
+  "decision": "keep",
+  "result_ids": [
+    "goal-completion-scope-development-001",
+    "goal-completion-scope-development-001-baseline",
+    "goal-completion-scope-development-001-candidate"
+  ],
+  "evidence_paths": [
+    "research/05_evaluation/goal-completion-scope-development-001-results.md",
+    "docs/goal-completion-scope.md"
+  ],
+  "hard_gates": [
+    "target-scoped-completions",
+    "positive-completions",
+    "restart-consistency",
+    "completed-histories"
+  ],
+  "selection_scope": "The current working-tree goal lifecycle only. This is a component decision record, not a complete SystemReleaseProfile, and it does not requalify or mutate the frozen final release."
+}

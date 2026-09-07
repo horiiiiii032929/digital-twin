@@ -23,6 +23,23 @@ BLOCKED_OPERATIONS = frozenset(
 # script can exercise; one fail-closed guard at the entrypoint blocks all of them.
 FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
     {
+        "scripts/build_main_oracle_alignment.py": ("dataset_generation",),
+        "scripts/run_generation_role_model_comparison.py": ("external_model_evaluation",),
+        "scripts/run_factual_revision_controls.py": ("external_model_evaluation",),
+        "scripts/run_final_response_support_audit.py": ("external_model_evaluation",),
+        "scripts/run_paired_pedagogy_development.py": ("external_model_evaluation",),
+        "scripts/run_instructional_operational_comparison.py": ("external_model_evaluation",),
+        "scripts/run_authenticated_loopback_load_development.py": ("external_model_evaluation",),
+        "scripts/run_bounded_contract_progression_development.py": ("external_model_evaluation",),
+        "scripts/run_completion_semantic_review.py": ("external_model_evaluation",),
+        "scripts/run_mixed_source_recovery_development.py": ("method_evaluation_execution",),
+        "scripts/run_output_cap_progression_development.py": ("external_model_evaluation",),
+        "scripts/run_asgi_tutoring_concurrency_development.py": ("external_model_evaluation",),
+        "scripts/natural_course_quality_development.py": ("method_evaluation_execution", "external_model_evaluation"),
+        "scripts/run_cross_course_quality_development.py": ("external_model_evaluation", "method_evaluation_execution"),
+        "scripts/run_final_profile_longitudinal.py": ("external_model_evaluation",),
+        "scripts/run_operational_dialogue_development.py": ("external_model_evaluation",),
+        "scripts/run_teaching_profile_responsiveness_development.py": ("external_model_evaluation",),
         "scripts/analyze_cross_course_retrieval_heldout.py": ("heldout_execution",),
         "scripts/analyze_it5002_rapid_result.py": ("heldout_execution",),
         "scripts/apply_cross_course_qc_patch.py": ("dataset_generation",),
@@ -652,6 +669,29 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
 # successor instrument requires a new code review and an explicit entry here.
 BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
     {
+        # Preregistered source/oracle correction; exposed synthetic packets only.
+        "main-oracle-alignment-001": ("dataset_generation",),
+        "generation-role-model-development-001": ("external_model_evaluation",),
+        "independent-factual-revision-controls-001": ("external_model_evaluation",),
+        "final-response-support-audit-001": ("external_model_evaluation",),
+        "final-response-support-audit-002": ("external_model_evaluation",),
+        "paired-pedagogy-development-001": ("external_model_evaluation",),
+        "instructional-eight-history-operational-development-001": ("external_model_evaluation",),
+        "authenticated-loopback-load-development-001": ("external_model_evaluation",),
+        "bounded-contract-progression-development-001": ("external_model_evaluation",),
+        "completion-semantic-review-development-001": ("external_model_evaluation",),
+        "mixed-source-candidate-recovery-development-001": ("method_evaluation_execution",),
+        "output-cap-progression-development-001": ("external_model_evaluation",),
+        # 2026-09-06: user authorized all completion work and evaluation quality.
+        # Fresh synthetic development, finite runner caps, no consumed heldout set.
+        "final-profile-asgi-tutoring-concurrency-development-001": ("external_model_evaluation",),
+        "cross-course-quality-development-001": ("external_model_evaluation", "method_evaluation_execution"),
+        "final-profile-operational-dialogue-development-001": ("external_model_evaluation",),
+        # Researcher authorized completion work and necessary provider spend on
+        # 2026-09-05. Fresh development only; finite runner caps remain enforced.
+        "final-profile-live-longitudinal-development-001": ("external_model_evaluation",),
+        "teaching-profile-responsiveness-development-001": ("external_model_evaluation",),
+        "natural-course-quality-development-001": ("method_evaluation_execution", "external_model_evaluation"),
         "academic-factual-qa-open-10000-deterministic-development-001": (
             "dataset_generation",
         ),

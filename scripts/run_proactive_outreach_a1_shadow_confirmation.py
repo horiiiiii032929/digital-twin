@@ -297,12 +297,15 @@ def _run_case(root: Path, case: dict[str, Any]) -> dict[str, Any]:
         deep=True,
     )
     repository.save_release(previous)
+    # Record history while its release is active, then replace it below.
+    repository.publish_release(previous.id)
     _record_no_evidence_turn(
         repository,
         fixture,
         case=case,
         previous_release=previous,
     )
+    repository.publish_release(current.id)
     outreach = ProactiveOutreachService(repository)
     suppression = case.get("suppression")
     if suppression != "consent-disabled":

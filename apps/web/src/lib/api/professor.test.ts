@@ -1,6 +1,9 @@
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import {
+  approveProfessorGeneratedPreview,
+  createProfessorGeneratedPreview,
+  listProfessorGeneratedPreviews,
   bindProfessorOnboardingSession,
   buildInlineProfessorIngestionJob,
   buildProfessorReleasePayload,
@@ -12,11 +15,28 @@ import {
   publishProfessorRelease,
   runProfessorReleasePreflight,
   uploadProfessorCoursePdf,
+  courseSourceMime,
+  reviewProfessorLearningGap,
 } from "@/lib/api/professor"
 
 describe("professor API client", () => {
   afterEach(() => {
     vi.unstubAllGlobals()
+  })
+
+  it("reads saved artifacts without generation and binds decisions to the displayed hash", async () => {
+    const fetchMock = stubFetch([])
+    await listProfessorGeneratedPreviews("course-a", "profile-a")
+    expect(fetchMock.mock.calls[0][1]?.method).toBeUndefined()
+    await approveProfessorGeneratedPreview("course-a", "profile-a", "artifact-a", { artifact_sha256: "displayed-hash", decisions: [{ case_id: "case-1", decision: "revise" }] })
+    expect(fetchMock).toHaveBeenLastCalledWith("/api/professor/courses/course-a/teaching-profiles/profile-a/generated-previews/artifact-a/approve", expect.objectContaining({ method: "POST", body: JSON.stringify({ artifact_sha256: "displayed-hash", decisions: [{ case_id: "case-1", decision: "revise" }] }) }))
+  })
+
+  it("sends explicit source, session and fictional histories only on generation POST", async () => {
+    const fetchMock = stubFetch({})
+    const body = { session_id: "session-a", ingestion_job_ids: ["job-a"], concept_label: "Cache", concept_description: "Approved cache rule", objective: "Explain cache scope", cases: [{ case_id: "case-1", student_messages: ["What condition applies?", "Why?"] }] }
+    await createProfessorGeneratedPreview("course-a", "profile-a", body)
+    expect(fetchMock).toHaveBeenLastCalledWith("/api/professor/courses/course-a/teaching-profiles/profile-a/generated-previews", expect.objectContaining({ method: "POST", body: JSON.stringify(body) }))
   })
 
   it("uses the synthetic professor boundary outside session mode", async () => {
@@ -219,3 +239,25 @@ function stubFetch(payload: unknown, status = 200) {
   vi.stubGlobal("fetch", fetchMock)
   return fetchMock
 }
+
+
+describe("source formats and improvement review", () => {
+  afterEach(() => vi.unstubAllGlobals())
+  it("uses Markdown content type and carries explicit attestation", async () => {
+    const fetchMock = stubFetch({})
+    const file = new File(["# Anonymous discussion"], "discussion.md", { type: "text/plain" })
+    await uploadProfessorCoursePdf({ courseId: "course-a", artifactId: "discussion", title: "Discussion", file,
+      idempotencyKey: "md-new", deidentifiedReviewed: true })
+    expect(fetchMock).toHaveBeenCalledWith(expect.stringContaining("deidentified_reviewed=true"),
+      expect.objectContaining({ headers: expect.objectContaining({ "Content-Type": "text/markdown" }), body: file }))
+    expect(courseSourceMime({ name: "notes.txt", type: "" })).toBe("text/plain")
+    expect(courseSourceMime({ name: "notes.txt", type: "application/pdf" })).toBeNull()
+    expect(courseSourceMime({ name: "upload.exe", type: "text/plain" })).toBeNull()
+  })
+  it("posts the chosen review for the exact release and proposal", async () => {
+    const fetchMock = stubFetch({ proposal_id: "proposal-a", decision: "dismissed" })
+    await reviewProfessorLearningGap("course-a", "release-a", "proposal-a", "dismissed")
+    expect(fetchMock).toHaveBeenCalledWith("/api/professor/courses/course-a/learning-gaps/review",
+      expect.objectContaining({ method: "POST", body: JSON.stringify({ release_id: "release-a", proposal_id: "proposal-a", decision: "dismissed", rationale: "" }) }))
+  })
+})

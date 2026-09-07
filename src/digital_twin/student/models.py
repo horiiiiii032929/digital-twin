@@ -1,5 +1,6 @@
 import math
 import re
+from datetime import datetime
 from enum import StrEnum
 from typing import Literal
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
@@ -292,6 +293,22 @@ class OutreachPreference(BaseModel):
     destination_ref: str | None = Field(default=None, max_length=128)
     private_destination: bool = False
     updated_at: str = Field(default_factory=timestamp_now)
+
+    def is_quiet_at(self, now: datetime) -> bool:
+        """Apply the same local-time boundary before and during delivery commit."""
+        if now.tzinfo is None or now.utcoffset() is None:
+            raise ValueError("outreach time must be timezone-aware")
+        local = now.astimezone(ZoneInfo(self.timezone))
+        current = local.hour * 60 + local.minute
+        start_hour, start_minute = map(int, self.quiet_hours_start.split(":"))
+        end_hour, end_minute = map(int, self.quiet_hours_end.split(":"))
+        start = start_hour * 60 + start_minute
+        end = end_hour * 60 + end_minute
+        if start == end:
+            return False
+        if start < end:
+            return start <= current < end
+        return current >= start or current < end
 
     @field_validator("timezone")
     @classmethod

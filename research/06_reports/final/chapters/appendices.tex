@@ -1,0 +1,115 @@
+\clearpage
+\appendix
+\section{Failure Mechanisms and Design Disposition}
+\label{sec:failure-map}
+\label{sec:design-summary}
+\begin{table}[htbp]
+\centering\small
+\caption{What failed, the observed mechanism and the resulting engineering decision.}
+\begin{tabularx}{\linewidth}{@{}L{0.19\linewidth}Y Y@{}}
+\toprule Design / evidence & Failure mechanism & Disposition and remaining limit \\\midrule
+Any-hit evidence gate; factual confirmation & The generator expected one or two selected claims; the gate passed an unrestricted set. Correct retrieval therefore ended in abstention. & Preserve as a failed interface control. Use question-targeted selection and ambiguity checks; 63.25\% still fails complete-answer acceptance. \\
+Dense/hybrid retrieval; same factual set & Higher complexity did not improve downstream scores: 62\% versus BM25's 63.25\%.  & Retain BM25 locally.  \\
+Visual retrieval; omni confirmation & Candidate failures concentrated in packet layouts and source-region attribution: 16/30 grounded and 16/30 original-region lineage. & Drop this candidate. The 26/30 text/OCR control also had a wrong-region/invalid citation; visual capability remains limited. \\
+Instruction and revision; fresh paired drafts & Source-linked wording could assert sufficiency from a necessary condition. Both revision candidates preserved 56/56 drafts and repaired 47/56, but each retained one critical failure. & Do not promote based on aggregate repair rate. Validate the delivered claims, including supplementary examples. \\
+Learner assessment; multi-concept correction & One assessment spread across weak concept matches. Primary-concept-only assignment corrected that attribution problem. & Keep concept-assessment correction. The later goal audit found 10 unsupported completions in this historical run; the new paired lifecycle study removes that defect. Prediction and teaching remain separate. \\
+Goal completion; the \hyperref[study-H]{goal-completion regression} & The strongest concept's evidence completed unrelated goals. Both the service shortcut and interpreter lacked target-specific binding. & Require every concept of the exact objective. Unsupported completions fell from 12 to zero; mean final simulator mastery changed by $-0.0024$ relative to the old logic. \\
+Model-backed outreach; saved dialogue & All 16 reviewed check-ins wrapped an entire source card in generic guidance. Permission checks did not assess instructional usefulness. & Retain operational evidence only; contextual progression needs separate evaluation. \\
+Evaluation oracle; corrected controls & A source/reference packet reversed a one-way implication; structural checks did not detect every semantic defect. & Preserve invalid and corrected records. AI review is diagnostic; quality claims need independently checked reference meaning. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The linked evidence index in Appendix~\ref{sec:study-index} identifies the
+source records. Historical attempts remain in the repository, including
+invalid results and subsequent corrections. \clearpage
+\input{design-summary.tex}
+\clearpage
+\section{Software and Reproducibility}
+\label{sec:software}
+The retained component profile is
+\path{research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json}.
+The project repository is \url{https://github.com/horiiiiii032929/digital-twin}
+\cite{horinouchi2026digitaltwin}. It contains source code, synthetic evaluation
+instruments and durable result summaries. Sensitive material and bulky generated
+outputs are excluded. A repository URL identifies the project, not an immutable
+experimental snapshot: reproduce a result using its recorded source revision,
+dirty-state manifest, model configuration and dataset identifiers.
+
+Table~\ref{tab:software} links the principal implementation dependencies to their
+official documentation. Versions are taken from the current \path{uv.lock} and
+\path{package-lock.json}, inspected on 6 September 2026; they are not attributed
+to every historical run. Dynamic documentation was accessed on the same date.
+Optional retrieval packages support comparisons and are not all selected runtime
+components. The Qwen3 reranker adapter uses the prompt template published in the
+\href{https://huggingface.co/Qwen/Qwen3-Reranker-0.6B}{Qwen3-Reranker model card};
+that template is not a project contribution. 
+
+\begin{table}[htbp]
+\centering\small
+\caption{Principal software dependencies (locked versions).}
+\label{tab:software}
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}L{0.22\linewidth}>{\raggedright\arraybackslash}Y@{}}
+\toprule
+Role & Software and official documentation \\
+\midrule
+API and validation & \href{https://fastapi.tiangolo.com/}{FastAPI} (0.141.1), \href{https://pydantic.dev/docs/validation/latest/get-started/}{Pydantic} (2.13.4). \\
+Workflow and state & \href{https://docs.langchain.com/oss/python/langgraph/overview}{LangGraph} (1.2.11), SQLite checkpoint package (3.1.1), \href{https://www.sqlite.org/docs.html}{SQLite}, \href{https://aiosqlite.omnilib.dev/en/stable/}{aiosqlite} (0.22.1). \\
+Model transport & \href{https://docs.litellm.ai/docs/}{LiteLLM} (1.97.0), \href{https://www.python-httpx.org/}{HTTPX} (0.28.1), \href{https://developers.openai.com/api/docs/guides/text}{OpenAI Responses API}. \\
+Document processing & \href{https://pymupdf.readthedocs.io/en/latest/}{PyMuPDF} (1.28.2). \\
+Web application & \href{https://react.dev/}{React} (19.2.8), \href{https://www.typescriptlang.org/docs/}{TypeScript} (7.0.2), \href{https://vite.dev/guide/}{Vite} (8.2.1), \href{https://tailwindcss.com/docs/installation/using-vite}{Tailwind CSS} (4.3.3). \\
+Optional retrieval & \href{https://huggingface.co/docs/transformers/index}{Transformers} (5.15.1), \href{https://docs.pytorch.org/docs/stable/index.html}{PyTorch} (2.13.0), \href{https://www.sbert.net/}{Sentence Transformers} (6.0.0), \href{https://qdrant.github.io/fastembed/}{FastEmbed} (0.8.0). \\
+Deployment & \href{https://docs.docker.com/compose/}{Docker Compose}, \href{https://caddyserver.com/docs/}{Caddy}; image configuration is recorded in the deployment files. \\
+Testing & \href{https://docs.pytest.org/en/stable/}{pytest} (9.1.1), \href{https://vitest.dev/guide/}{Vitest} (4.1.10). \\
+Dependency and report builds & \href{https://docs.astral.sh/uv/}{uv}, \href{https://tectonic-typesetting.github.io/en-US/}{Tectonic}, \href{https://ctan.org/pkg/natbib}{natbib}. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Diagram preparation was informed by Lek Hsiang Hui's IT5004 lectures 4,
+``Requirements Analysis'' (PDF pp. 10--20, 54--58), and 5, ``Introduction to
+Enterprise System'' (PDF pp. 7--19, 24--29), supplied as course materials;
+the figures depict this project's implementation.
+
+The repository README documents \verb|uv sync --locked --dev|,
+\texttt{npm ci} and \texttt{npm run check}. The report README records the
+Tectonic build command. Model identifiers and experimental selections are
+versioned separately from library dependencies. 
+
+
+\clearpage
+\section{Development Lifecycle Traceability}
+\label{sec:sdlc}
+\begin{table}[htbp]
+\centering\small
+\caption{SDLC artifacts and acceptance conditions.}
+\label{tab:sdlc}
+\begin{tabularx}{\linewidth}{@{}L{0.17\linewidth}Y Y@{}}
+\toprule Stage & Retained artifact and responsibility & Acceptance and next step \\\midrule
+Requirements & Five user requirements in Table~\ref{tab:requirements}; approved project brief; \path{docs/quality-and-learning-plan.md}. Instructor defines knowledge, teaching policy and publication authority. & Walkthrough explains intended behaviour; instructor fidelity and real-course acceptance still require review. \\
+Design & Architecture, response sequence and autonomy activity; \path{research/05_evaluation/profiles/}. Interfaces separate policy, providers and persistence. & Compare alternatives under shared conditions; retain unsuccessful choices and explicit fallback. \\
+Implementation & Domain logic in \path{src/}, API in \path{services/}, interface in \path{apps/}; locked dependencies. & Trace requirements to executable boundaries; use \texttt{npm run check} for application checks.  \\
+Verification & \path{tests/}; versioned cases and \path{research/05_evaluation/result-registry.md}. & Factual-support and teaching-alignment gates remain unresolved. Continuing-support simulations assess continuity under artificial events, not student learning. \\
+Deployment & \path{docs/local-r1-runbook.md}; qualified configuration and rollback control. Operator starts API and workers with a shared persistent store. & Local qualification has a bounded environment. Confirm the exact profile, restore procedure and access controls before each deployment. \\
+Operation and revision & Persisted goals, actions, outcomes and audit events; instructor dashboard and publication controls. & Observe failures, pause/withdraw when required, reproduce a defect, revise a candidate and rerun affected checks before updating the selected profile. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The goal-completion repair passed 72 focused service, component and audit tests.
+The broader Python run and targeted rechecks verified 2,600 distinct tests;
+this was not a single clean full-suite run after correction. The linked
+\hyperref[study-H]{goal-completion record} preserves the initial failures,
+local HTTPS permission issue, evaluation-runner classification repair and JUnit
+records. The historical autonomy example is traced separately in
+Appendix~\ref{sec:historical-autonomy}.
+
+\input{chapters/study-index.tex}
+\input{chapters/planner-math.tex}
+\clearpage
+\input{chapters/profile-examples.tex}
+\clearpage
+\input{chapters/historical-autonomy-trace.tex}
+
+
+

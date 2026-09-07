@@ -39,6 +39,7 @@ def _providers() -> dict[str, dict[str, Any]]:
     return json.loads(BINDING_PATH.read_text(encoding="utf-8"))["providers"]
 
 
+@pytest.mark.historical_artifact
 def test_development_v2_is_complete_separate_and_byte_stable() -> None:
     first = build_packages()
     second = build_packages()
@@ -73,6 +74,7 @@ def test_development_v2_is_complete_separate_and_byte_stable() -> None:
     assert all(not row["claims"] and row["boundary_reason"] for row in boundary)
 
 
+@pytest.mark.historical_artifact
 def test_control_is_exact_twenty_cluster_subset() -> None:
     packages = build_packages()["packages"]
     cases = packages["cases"]["cases"]
@@ -516,6 +518,7 @@ async def test_direct_openai_transport_sends_visual_input_without_logging_bytes(
     assert user_content[1]["image_url"].startswith("data:image/png;base64,")
 
 
+@pytest.mark.historical_artifact
 def test_build_only_validation_does_not_write_outputs() -> None:
     existing = {
         path: path.exists()

@@ -1,0 +1,1810 @@
+{
+  "source_run_id": "bounded-contract-progression-development-001-live-001",
+  "reviewer": "assistant independent of implementer; unblinded",
+  "selection": "All72 delivered responses and actual preceding turns; all36 two-turn histories,3 order seeds across6 situations and2 versions.",
+  "rubric": "dialogue-progression-assistant-review-rubric-v1",
+  "semantic_pass_estimate": null,
+  "human_review": false,
+  "source_hashes_at_review": {
+    "reports/generated/bounded-contract-progression-development-001-live-001/manifest.json": "ff59afd7aaa4c524a9188538f148dd149a621bbc8d9153a83383509daa84c240",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7401-v2/turns.jsonl": "1f8703d27374d1770a251c9a1a5d39f1d62ea0e2e68edd9462b17d063201c47b",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7401-v3/turns.jsonl": "0f9a9fb8d8e910621d2c6de6be1fba4a2e3021c0c4afbdf0ef3fb33c1e017848",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7402-v2/turns.jsonl": "7bb44492840ae0b914badba68def602460f6403c6dcd2fc763668ea03d27391f",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7402-v3/turns.jsonl": "8ad82fab70eaefafc6f2e3cd7eb62a77f837ffcddb08d945792309eee9e07228",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7403-v2/turns.jsonl": "db60211608b0c6fc0a575445715c4d2604134a0178063d15b41225600637c483",
+    "reports/generated/bounded-contract-progression-development-001-live-001/explicit-no-attempt-7403-v3/turns.jsonl": "31589e0f7e54cf7812a999c173a3d787ab7be51697880f343c5d0e26487b9f4b",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7401-v2/turns.jsonl": "505e175d1672af224dd659b17f46dc22af413e522dc830d3b926c905b9c459b1",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7401-v3/turns.jsonl": "4f258b03bd27a3a6887a6bee376f958936382809962bbeba0aff0960731e694c",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7402-v2/turns.jsonl": "d7d41bc4c26d1c06b90e6e3743057ae7c286fa6a2d8587f722d7de8edb27bae3",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7402-v3/turns.jsonl": "25fa61ab09857856952e89a7ccdc6070dcce7a2c5059d9d9c7bbdb2c8d4577d6",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7403-v2/turns.jsonl": "2074011caa01186c735cd43dd26a301d0d14cd5826c34a6bd314a26459dbccc6",
+    "reports/generated/bounded-contract-progression-development-001-live-001/five-related-details-7403-v3/turns.jsonl": "8f599cf32d009f566ed6911656b84a03354a281b3ce392f7e645bf6c2330aeeb",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7401-v2/turns.jsonl": "2ad55b9e92513fb072445a0703b3d8f14141c71991fe5aeedf89e63b89094bd3",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7401-v3/turns.jsonl": "737f8832c5da318a187d1a8685e0376d8f76d73cfcd8081c2adb4785e3221505",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7402-v2/turns.jsonl": "13ba642f6486ae2f940532e9e11c64b4125ca3a9d6a1a8858825a915443c1d03",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7402-v3/turns.jsonl": "eb6be5a2580db53f8ca70e98ed1e5712347709502ccae67430fdc6d1c56c080a",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7403-v2/turns.jsonl": "8437f4fb96b29e5321bb5c601012c27c31f7ebb2ad3e948a1a1d1ddd08842954",
+    "reports/generated/bounded-contract-progression-development-001-live-001/multipart-specifics-7403-v3/turns.jsonl": "f1dd1fa4c826f386c7ffcbf31a3097f8437b254974f83cbc56c711b287ac76a5",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7401-v2/turns.jsonl": "35231dd3b04a63c14a6bb1ff56eb5fe01389206f70909fcdb0b0e8aaa639bee5",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7401-v3/turns.jsonl": "457b2653cc7394ff512d5eb19c700d11435a44b5b011a71b771f308056e76855",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7402-v2/turns.jsonl": "9bd48f1b2133d000d762abdcc183cef3f6dda5619c465fff5ddb5c0c5c296e42",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7402-v3/turns.jsonl": "28f8843ecfbeb78a07280a76a0b437558d7570de5176035b7fd868a06970d65b",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7403-v2/turns.jsonl": "cbbb92ecf56c47cef8d4d235fac7c7b8f3e77aa289f7501d33e872e6b5036c1a",
+    "reports/generated/bounded-contract-progression-development-001-live-001/separate-nine-details-7403-v3/turns.jsonl": "bf95e430a68aff6b01c5b20ad2fd32b82d85fafca500b4d58fc449e82a779e3a",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7401-v2/turns.jsonl": "af1357f26148ba269bd41a5712e9e8deb94371a11fc9dd4a7783baad86bb8022",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7401-v3/turns.jsonl": "584dea01de145bb83835e32ddf248c87aca1bdb9220840e63db21c7bfea2c175",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7402-v2/turns.jsonl": "ad0392fe587098b9374d59a0019f8101e2e29c9688415dbdcc800e189ec29ac2",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7402-v3/turns.jsonl": "5cb8a43e1bdb533d01ad89c2d0301ff34ec69af10ca048239bd481e55d709063",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7403-v2/turns.jsonl": "c35359641e2b5b6dfe8aedf563cefdcec69c6a3af41ab61703621074444d63e0",
+    "reports/generated/bounded-contract-progression-development-001-live-001/supported-and-absent-7403-v3/turns.jsonl": "966657be8aa6ed63b30da69299bbf7fe2f31d4274f5aaa9c0657699e1dd63671",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7401-v2/turns.jsonl": "b95c1dd313d28e52728df9249032795bff77fef8f54760e49b0dbce87867c06e",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7401-v3/turns.jsonl": "ea0c91d15c64a3678201fb572124991252d788bce122bdd248264b97a7ef7ecc",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7402-v2/turns.jsonl": "6f06d743f9f8f8c2033534f3ecd9445e1ce0156aafae6d77d8e6dcd29a477724",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7402-v3/turns.jsonl": "4c5c08cffe45daddb5af6e9133646fddba24ff5b35c457e973985c533d615c1c",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7403-v2/turns.jsonl": "8924dcbcd925dc319ec4bac1f81fbb4beaf04db1d4e7237b4c94ce6bb2425de7",
+    "reports/generated/bounded-contract-progression-development-001-live-001/topic-reset-7403-v3/turns.jsonl": "650c61a2e7e467e6f51a69ee23b87a1af7a461bd38b06f34045734013bfdc53f"
+  },
+  "cases": [
+    {
+      "id": "explicit-no-attempt-7401-v2-stage-0",
+      "history_id": "explicit-no-attempt-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201crecover operations after restart\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7401-v2-stage-1",
+      "history_id": "explicit-no-attempt-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201crecover operations after restart\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cstarting question\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Repeats generic elicitation rather than offering a concrete starting question; focusing on starting question is a meta-level loop."
+    },
+    {
+      "id": "explicit-no-attempt-7401-v3-stage-0",
+      "history_id": "explicit-no-attempt-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7401-v3-stage-1",
+      "history_id": "explicit-no-attempt-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cstarting question\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Repeats generic elicitation rather than offering a concrete starting question; focusing on starting question is a meta-level loop."
+    },
+    {
+      "id": "explicit-no-attempt-7402-v2-stage-0",
+      "history_id": "explicit-no-attempt-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7402-v2-stage-1",
+      "history_id": "explicit-no-attempt-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cstarting question\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Repeats generic elicitation rather than offering a concrete starting question; focusing on starting question is a meta-level loop."
+    },
+    {
+      "id": "explicit-no-attempt-7402-v3-stage-0",
+      "history_id": "explicit-no-attempt-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7402-v3-stage-1",
+      "history_id": "explicit-no-attempt-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cstarting question\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Repeats generic elicitation rather than offering a concrete starting question; focusing on starting question is a meta-level loop."
+    },
+    {
+      "id": "explicit-no-attempt-7403-v2-stage-0",
+      "history_id": "explicit-no-attempt-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7403-v2-stage-1",
+      "history_id": "explicit-no-attempt-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cstarting question\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Repeats generic elicitation rather than offering a concrete starting question; focusing on starting question is a meta-level loop."
+    },
+    {
+      "id": "explicit-no-attempt-7403-v3-stage-0",
+      "history_id": "explicit-no-attempt-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "explicit-no-attempt",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does slate receipt recover operations after restart?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "explicit-no-attempt-7403-v3-stage-1",
+      "history_id": "explicit-no-attempt-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "explicit-no-attempt",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+      "preceding_actual_turns": [
+        {
+          "student": "How does slate receipt recover operations after restart?",
+          "tutor": "For \u201cHow does slate receipt recover operations after restart?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cslate receipt\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "No full solution disclosed. Topic is named, but generic elicitation still does not provide a concrete starting question."
+    },
+    {
+      "id": "five-related-details-7401-v2-stage-0",
+      "history_id": "five-related-details-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7401-v2-stage-1",
+      "history_id": "five-related-details-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7401-v3-stage-0",
+      "history_id": "five-related-details-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "For \u201cexplain all five details\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Requested details not supplied; replaces explicit explanatory request with generic elicitation/clarification despite named topic."
+    },
+    {
+      "id": "five-related-details-7401-v3-stage-1",
+      "history_id": "five-related-details-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "For \u201cexplain all five details\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201cexplain all five details\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Requested details not supplied; replaces explicit explanatory request with generic elicitation/clarification despite named topic."
+    },
+    {
+      "id": "five-related-details-7402-v2-stage-0",
+      "history_id": "five-related-details-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7402-v2-stage-1",
+      "history_id": "five-related-details-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7402-v3-stage-0",
+      "history_id": "five-related-details-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "cobalt ticket attaches an epoch and a sequence number before storing an update.\n\nThe receiver first compares the epoch with its active epoch.\n\nIt rejects any update from a retired epoch, even when its sequence number is larger. Within the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number.\n\nAfter acceptance, it stores the update and its sequence number atomically.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-ae195750-9924-4dbf-a543-2ecfd80c4046",
+          "locator": "bounded-contract-dialogues-v1-source-01 paragraph 1",
+          "message_id": "message-790320fc-9650-462b-94c0-ec66fdd4fb46",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-01",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-01",
+          "source_checksum": "31924d257a5fb7bb1a2e84e96992d839a27e5d1ae7e3b9b26f1d553926556e7c",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-01",
+          "source_version": 1,
+          "title": "Cobalt Ticket"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All five requested facts represented by grounded source excerpts; equal-sequence outcome is implicit in strict greater-than rule."
+    },
+    {
+      "id": "five-related-details-7402-v3-stage-1",
+      "history_id": "five-related-details-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "cobalt ticket attaches an epoch and a sequence number before storing an update.\n\nThe receiver first compares the epoch with its active epoch.\n\nIt rejects any update from a retired epoch, even when its sequence number is larger. Within the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number.\n\nAfter acceptance, it stores the update and its sequence number atomically."
+        }
+      ],
+      "response": "amber queue admits at most three unacknowledged items.\n\nIt retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place. A duplicate acknowledgement never frees a second place.\n\nIf no acknowledgement arrives, waiting items remain outside the admitted set.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-52daaaa1-ed1f-4804-97e2-8bdda8661c90",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-ffe39def-d9d2-4933-a251-e7810ec9779e",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All five requested queue facts represented by source excerpts, including duplicate acknowledgements and continued waiting."
+    },
+    {
+      "id": "five-related-details-7403-v2-stage-0",
+      "history_id": "five-related-details-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7403-v2-stage-1",
+      "history_id": "five-related-details-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "five-related-details-7403-v3-stage-0",
+      "history_id": "five-related-details-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "five-related-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+      "preceding_actual_turns": [],
+      "response": "cobalt ticket attaches an epoch and a sequence number before storing an update.\n\nThe receiver first compares the epoch with its active epoch.\n\nIt rejects any update from a retired epoch, even when its sequence number is larger. Within the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number.\n\nAfter acceptance, it stores the update and its sequence number atomically.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-2839a8b5-cfc9-4c00-88c8-b21626f7dbcf",
+          "locator": "bounded-contract-dialogues-v1-source-01 paragraph 1",
+          "message_id": "message-d630a8b6-4bcf-4997-ae45-8f0dda6aab18",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-01",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-01",
+          "source_checksum": "31924d257a5fb7bb1a2e84e96992d839a27e5d1ae7e3b9b26f1d553926556e7c",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-01",
+          "source_version": 1,
+          "title": "Cobalt Ticket"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All five requested facts represented by grounded source excerpts; equal-sequence outcome is implicit in strict greater-than rule."
+    },
+    {
+      "id": "five-related-details-7403-v3-stage-1",
+      "history_id": "five-related-details-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "five-related-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain all five details: admission limit, retained order, which waiting item enters after acknowledgement, duplicate acknowledgement behavior, and what happens to waiting items when no acknowledgement arrives.",
+      "preceding_actual_turns": [
+        {
+          "student": "For cobalt ticket, explain all five details: fields attached before storage, the first epoch comparison, treatment of retired epochs with large sequences, treatment of equal sequences in the active epoch, and what is stored atomically after acceptance.",
+          "tutor": "cobalt ticket attaches an epoch and a sequence number before storing an update.\n\nThe receiver first compares the epoch with its active epoch.\n\nIt rejects any update from a retired epoch, even when its sequence number is larger. Within the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number.\n\nAfter acceptance, it stores the update and its sequence number atomically."
+        }
+      ],
+      "response": "Which concept or part of the question should we focus on?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Requested details not supplied; replaces explicit explanatory request with generic elicitation/clarification despite named topic."
+    },
+    {
+      "id": "multipart-specifics-7401-v2-stage-0",
+      "history_id": "multipart-specifics-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-aea4c01c-5d5c-4450-8c2c-a4d32ad96505",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-cfb07a54-2b3f-4700-8d6e-dfca05ef7911",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Four requested queue details supplied; some repeats include a redundant admission-effect fragment."
+    },
+    {
+      "id": "multipart-specifics-7401-v2-stage-1",
+      "history_id": "multipart-specifics-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place."
+        }
+      ],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "multipart-specifics-7401-v3-stage-0",
+      "history_id": "multipart-specifics-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nadmits the oldest waiting item into the freed place\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-405644e5-2c37-4f03-af80-9b312c5baddc",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-0325c4f9-65e2-4731-9621-0a3057c2d942",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Four requested queue details supplied; some repeats include a redundant admission-effect fragment."
+    },
+    {
+      "id": "multipart-specifics-7401-v3-stage-1",
+      "history_id": "multipart-specifics-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nadmits the oldest waiting item into the freed place\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place."
+        }
+      ],
+      "response": "For \u201cCompare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Substitutes generic elicitation for an explicit supported explanation/comparison; no concrete requested details."
+    },
+    {
+      "id": "multipart-specifics-7402-v2-stage-0",
+      "history_id": "multipart-specifics-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place\n\nA duplicate acknowledgement never frees a second place",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-10b9a767-f4c3-45ba-954f-87e7af48570d",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-5c271d3e-a1a8-488c-881f-5871ecc75458",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Four requested queue details supplied; some repeats include a redundant admission-effect fragment."
+    },
+    {
+      "id": "multipart-specifics-7402-v2-stage-1",
+      "history_id": "multipart-specifics-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place\n\nA duplicate acknowledgement never frees a second place"
+        }
+      ],
+      "response": "For \u201cCompare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Substitutes generic elicitation for an explicit supported explanation/comparison; no concrete requested details."
+    },
+    {
+      "id": "multipart-specifics-7402-v3-stage-0",
+      "history_id": "multipart-specifics-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nadmits the oldest waiting item into the freed place\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-1539ab77-e9f3-41eb-ba4d-62ac13dbd67b",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-435debd8-cc78-4b74-992b-1e7e180270f5",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Four requested queue details supplied; some repeats include a redundant admission-effect fragment."
+    },
+    {
+      "id": "multipart-specifics-7402-v3-stage-1",
+      "history_id": "multipart-specifics-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nadmits the oldest waiting item into the freed place\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place."
+        }
+      ],
+      "response": "The receiver first compares the epoch with its active epoch. It rejects any update from a retired epoch, even when its sequence number is larger.\n\nThe replayed operation identifier is stored in a completed set. A record whose identifier is already in that set is skipped, preventing duplicate replay.\n\nWithin the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-c2174d1d-f01a-4655-86b3-2602f4faa87f",
+          "locator": "bounded-contract-dialogues-v1-source-01 paragraph 1",
+          "message_id": "message-b43dd0d1-d4b7-497a-a3b9-eafe3572093c",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-01",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-01",
+          "source_checksum": "31924d257a5fb7bb1a2e84e96992d839a27e5d1ae7e3b9b26f1d553926556e7c",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-01",
+          "source_version": 1,
+          "title": "Cobalt Ticket"
+        },
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-bf8c33da-2775-4498-9d2c-6659b1eb369b",
+          "locator": "bounded-contract-dialogues-v1-source-03 paragraph 1",
+          "message_id": "message-b43dd0d1-d4b7-497a-a3b9-eafe3572093c",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-03",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-03",
+          "source_checksum": "bc646dfd67adb8b206a58e7dcf4f6906f68056be956462943565ade1817981d2",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-03",
+          "source_version": 1,
+          "title": "Slate Receipt"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Both rejection/replay rules and their checked stored states supplied; some repeats include redundant fragments or extra supported active-epoch context."
+    },
+    {
+      "id": "multipart-specifics-7403-v2-stage-0",
+      "history_id": "multipart-specifics-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-5162d0ed-60e5-43f7-9d2a-9dc0393ace7c",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-42041e5d-17fb-4106-a4a4-6d2addbaf692",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Four requested queue details supplied; some repeats include a redundant admission-effect fragment."
+    },
+    {
+      "id": "multipart-specifics-7403-v2-stage-1",
+      "history_id": "multipart-specifics-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "amber queue admits at most three unacknowledged items\n\nIt retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\nA duplicate acknowledgement never frees a second place."
+        }
+      ],
+      "response": "The receiver first compares the epoch with its active epoch. It rejects any update from a retired epoch, even when its sequence number is larger.\n\nThe replayed operation identifier is stored in a completed set. A record whose identifier is already in that set is skipped, preventing duplicate replay.\n\nThe receiver first compares the epoch with its active epoch.\n\nThe replayed operation identifier is stored in a completed set.\n\nIt rejects any update from a retired epoch, even when its sequence number is larger.\n\nA record whose identifier is already in that set is skipped, preventing duplicate replay.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-66eaa3d5-5e78-414a-86ea-0068dd29b52b",
+          "locator": "bounded-contract-dialogues-v1-source-01 paragraph 1",
+          "message_id": "message-0bb38240-62c9-4541-9120-a9f668e1c1ba",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-01",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-01",
+          "source_checksum": "31924d257a5fb7bb1a2e84e96992d839a27e5d1ae7e3b9b26f1d553926556e7c",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-01",
+          "source_version": 1,
+          "title": "Cobalt Ticket"
+        },
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-6aba6263-5ab0-4f54-8f2b-a40835679071",
+          "locator": "bounded-contract-dialogues-v1-source-03 paragraph 1",
+          "message_id": "message-0bb38240-62c9-4541-9120-a9f668e1c1ba",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-03",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-03",
+          "source_checksum": "bc646dfd67adb8b206a58e7dcf4f6906f68056be956462943565ade1817981d2",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-03",
+          "source_version": 1,
+          "title": "Slate Receipt"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Both rejection/replay rules and their checked stored states supplied; some repeats include redundant fragments or extra supported active-epoch context."
+    },
+    {
+      "id": "multipart-specifics-7403-v3-stage-0",
+      "history_id": "multipart-specifics-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "multipart-specifics",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+      "preceding_actual_turns": [],
+      "response": "For \u201cexplain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Substitutes generic elicitation for an explicit supported explanation/comparison; no concrete requested details."
+    },
+    {
+      "id": "multipart-specifics-7403-v3-stage-1",
+      "history_id": "multipart-specifics-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "multipart-specifics",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+      "preceding_actual_turns": [
+        {
+          "student": "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "tutor": "For \u201cexplain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "The receiver first compares the epoch with its active epoch. It rejects any update from a retired epoch, even when its sequence number is larger.\n\nThe replayed operation identifier is stored in a completed set. A record whose identifier is already in that set is skipped, preventing duplicate replay.\n\ncompares the epoch with its active epoch\n\nidentifier is already in that set",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-a9f094dc-64a4-4e3a-8505-8d3d320104f8",
+          "locator": "bounded-contract-dialogues-v1-source-01 paragraph 1",
+          "message_id": "message-9b7a077b-e3b3-4a71-aad2-acfa478d5007",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-01",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-01",
+          "source_checksum": "31924d257a5fb7bb1a2e84e96992d839a27e5d1ae7e3b9b26f1d553926556e7c",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-01",
+          "source_version": 1,
+          "title": "Cobalt Ticket"
+        },
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-79b0418c-fb2d-4ff3-bd87-8397429f076f",
+          "locator": "bounded-contract-dialogues-v1-source-03 paragraph 1",
+          "message_id": "message-9b7a077b-e3b3-4a71-aad2-acfa478d5007",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-03",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-03",
+          "source_checksum": "bc646dfd67adb8b206a58e7dcf4f6906f68056be956462943565ade1817981d2",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-03",
+          "source_version": 1,
+          "title": "Slate Receipt"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Both rejection/replay rules and their checked stored states supplied; some repeats include redundant fragments or extra supported active-epoch context."
+    },
+    {
+      "id": "separate-nine-details-7401-v2-stage-0",
+      "history_id": "separate-nine-details-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "separate-nine-details-7401-v2-stage-1",
+      "history_id": "separate-nine-details-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "separate-nine-details-7401-v3-stage-0",
+      "history_id": "separate-nine-details-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "Which concept or part of the question should we focus on?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Narrowing request is appropriate for nine ungrouped items beyond bounded contract, but gives no specific grouping or explanation of limit."
+    },
+    {
+      "id": "separate-nine-details-7401-v3-stage-1",
+      "history_id": "separate-nine-details-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "Which concept or part of the question should we focus on?"
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "separate-nine-details-7402-v2-stage-0",
+      "history_id": "separate-nine-details-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "separate-nine-details-7402-v2-stage-1",
+      "history_id": "separate-nine-details-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "separate-nine-details-7402-v3-stage-0",
+      "history_id": "separate-nine-details-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "Which concept or part of the question should we focus on?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Narrowing request is appropriate for nine ungrouped items beyond bounded contract, but gives no specific grouping or explanation of limit."
+    },
+    {
+      "id": "separate-nine-details-7402-v3-stage-1",
+      "history_id": "separate-nine-details-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "Which concept or part of the question should we focus on?"
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "separate-nine-details-7403-v2-stage-0",
+      "history_id": "separate-nine-details-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "separate-nine-details-7403-v2-stage-1",
+      "history_id": "separate-nine-details-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "separate-nine-details-7403-v3-stage-0",
+      "history_id": "separate-nine-details-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "separate-nine-details",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+      "preceding_actual_turns": [],
+      "response": "Which concept or part of the question should we focus on?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Narrowing request is appropriate for nine ungrouped items beyond bounded contract, but gives no specific grouping or explanation of limit."
+    },
+    {
+      "id": "separate-nine-details-7403-v3-stage-1",
+      "history_id": "separate-nine-details-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "separate-nine-details",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Please narrow this to cobalt ticket's handling of a retired epoch and explain that rule.",
+      "preceding_actual_turns": [
+        {
+          "student": "Give nine separate source-backed explanations, one per item without grouping: cobalt ticket fields, epoch comparison, retired epoch treatment, equal sequence treatment, atomic storage, amber queue limit, waiting order, duplicate acknowledgements, and waiting without acknowledgement.",
+          "tutor": "Which concept or part of the question should we focus on?"
+        }
+      ],
+      "response": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Unnecessary referent clarification: learner already narrowed to named cobalt ticket retired-epoch rule. Recovery not useful."
+    },
+    {
+      "id": "supported-and-absent-7401-v2-stage-0",
+      "history_id": "supported-and-absent-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "supported-and-absent-7401-v2-stage-1",
+      "history_id": "supported-and-absent-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "It marks a station unavailable after two consecutive unanswered requests.\n\nA reply is valid only when its request number matches the latest outstanding request for that station.\n\nA delayed reply to an earlier request does not reset the count.\n\nAny valid reply resets the consecutive-miss count to zero.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-28a099db-bc4d-417e-a640-2015d843d702",
+          "locator": "bounded-contract-dialogues-v1-source-04 paragraph 1",
+          "message_id": "message-d4653cf5-2708-4157-bd14-230315ac01c7",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-04",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-04",
+          "source_checksum": "1d597aff7570c9eeb7341a70f8a4e04655f59e161680a77ced94d1096e26fc48",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-04",
+          "source_version": 1,
+          "title": "Violet Probe"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All four requested supported rules are present; resumes substantive help after removing absent detail."
+    },
+    {
+      "id": "supported-and-absent-7401-v3-stage-0",
+      "history_id": "supported-and-absent-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "action": "no-evidence",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Withholds missing timeout without inventing it; could identify which requested detail is absent more clearly."
+    },
+    {
+      "id": "supported-and-absent-7401-v3-stage-1",
+      "history_id": "supported-and-absent-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "response": "It marks a station unavailable after two consecutive unanswered requests.\n\nA reply is valid only when its request number matches the latest outstanding request for that station.\n\nA delayed reply to an earlier request does not reset the count.\n\nAny valid reply resets the consecutive-miss count to zero.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-6df65699-61c9-4588-a0ac-9912dc93b565",
+          "locator": "bounded-contract-dialogues-v1-source-04 paragraph 1",
+          "message_id": "message-db9469c8-14eb-489b-8e77-63afb27983e4",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-04",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-04",
+          "source_checksum": "1d597aff7570c9eeb7341a70f8a4e04655f59e161680a77ced94d1096e26fc48",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-04",
+          "source_version": 1,
+          "title": "Violet Probe"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All four requested supported rules are present; resumes substantive help after removing absent detail."
+    },
+    {
+      "id": "supported-and-absent-7402-v2-stage-0",
+      "history_id": "supported-and-absent-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "supported-and-absent-7402-v2-stage-1",
+      "history_id": "supported-and-absent-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "For \u201cExplain the four supported violet probe details together\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Asks for a generic explanation despite explicit request for four supported details; no requested explanation."
+    },
+    {
+      "id": "supported-and-absent-7402-v3-stage-0",
+      "history_id": "supported-and-absent-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "action": "no-evidence",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Withholds missing timeout without inventing it; could identify which requested detail is absent more clearly."
+    },
+    {
+      "id": "supported-and-absent-7402-v3-stage-1",
+      "history_id": "supported-and-absent-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "response": "It marks a station unavailable after two consecutive unanswered requests.\n\nA reply is valid only when its request number matches the latest outstanding request for that station.\n\nA delayed reply to an earlier request does not reset the count.\n\nAny valid reply resets the consecutive-miss count to zero.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-80b73851-9363-4ef8-aabf-3fbee11d41b3",
+          "locator": "bounded-contract-dialogues-v1-source-04 paragraph 1",
+          "message_id": "message-ba83371e-4c93-4611-8109-f6f05265ddbc",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-04",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-04",
+          "source_checksum": "1d597aff7570c9eeb7341a70f8a4e04655f59e161680a77ced94d1096e26fc48",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-04",
+          "source_version": 1,
+          "title": "Violet Probe"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All four requested supported rules are present; resumes substantive help after removing absent detail."
+    },
+    {
+      "id": "supported-and-absent-7403-v2-stage-0",
+      "history_id": "supported-and-absent-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "supported-and-absent-7403-v2-stage-1",
+      "history_id": "supported-and-absent-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "It marks a station unavailable after two consecutive unanswered requests.\n\nA reply is valid only when its request number matches the latest outstanding request for that station.\n\nA delayed reply to an earlier request does not reset the count.\n\nAny valid reply resets the consecutive-miss count to zero.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-05e13b1d-5557-4607-b63c-900dc1f1064d",
+          "locator": "bounded-contract-dialogues-v1-source-04 paragraph 1",
+          "message_id": "message-22ecaccb-a0e4-46c0-ac29-5ac6e54fa03a",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-04",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-04",
+          "source_checksum": "1d597aff7570c9eeb7341a70f8a4e04655f59e161680a77ced94d1096e26fc48",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-04",
+          "source_version": 1,
+          "title": "Violet Probe"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All four requested supported rules are present; resumes substantive help after removing absent detail."
+    },
+    {
+      "id": "supported-and-absent-7403-v3-stage-0",
+      "history_id": "supported-and-absent-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "supported-and-absent",
+      "stage": 0,
+      "profile_mode": "explanatory",
+      "question": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+      "preceding_actual_turns": [],
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "action": "no-evidence",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Withholds missing timeout without inventing it; could identify which requested detail is absent more clearly."
+    },
+    {
+      "id": "supported-and-absent-7403-v3-stage-1",
+      "history_id": "supported-and-absent-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "supported-and-absent",
+      "stage": 1,
+      "profile_mode": "explanatory",
+      "question": "Leave the unspecified timeout aside. Explain the four supported violet probe details together.",
+      "preceding_actual_turns": [
+        {
+          "student": "For violet probe, explain its failure threshold, valid reply rule, delayed reply treatment, reset behavior, and the exact timeout duration in seconds.",
+          "tutor": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "response": "It marks a station unavailable after two consecutive unanswered requests.\n\nA reply is valid only when its request number matches the latest outstanding request for that station.\n\nA delayed reply to an earlier request does not reset the count.\n\nAny valid reply resets the consecutive-miss count to zero.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-7ba94854-5b17-4aca-a15a-cb4fd3bd7830",
+          "locator": "bounded-contract-dialogues-v1-source-04 paragraph 1",
+          "message_id": "message-bbf46331-0c2d-400e-be05-2ed7079e6cf4",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-04",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-f0fe55a83425",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-04",
+          "source_checksum": "1d597aff7570c9eeb7341a70f8a4e04655f59e161680a77ced94d1096e26fc48",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-04",
+          "source_version": 1,
+          "title": "Violet Probe"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "All four requested supported rules are present; resumes substantive help after removing absent detail."
+    },
+    {
+      "id": "topic-reset-7401-v2-stage-0",
+      "history_id": "topic-reset-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "topic-reset-7401-v2-stage-1",
+      "history_id": "topic-reset-7401-v2",
+      "version": "v2",
+      "seed": 7401,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "It retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-2c0f0ccc-cde6-4143-9049-735f8ba03579",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-7a749d04-1d43-4079-a2c9-95000ec2ebd0",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Restates supported rule after learner attempt without explicit acknowledgement or extension."
+    },
+    {
+      "id": "topic-reset-7401-v3-stage-0",
+      "history_id": "topic-reset-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "topic-reset-7401-v3-stage-1",
+      "history_id": "topic-reset-7401-v3",
+      "version": "v3",
+      "seed": 7401,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "It retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-0ddc63c2-48d5-4fe7-ba2a-69a44bdb06e7",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-31f14794-bf1c-4ff7-b631-87da7c58e93d",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Restates supported rule after learner attempt without explicit acknowledgement or extension."
+    },
+    {
+      "id": "topic-reset-7402-v2-stage-0",
+      "history_id": "topic-reset-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Validation failed; safe nonfactual fallback, no requested help delivered."
+    },
+    {
+      "id": "topic-reset-7402-v2-stage-1",
+      "history_id": "topic-reset-7402-v2",
+      "version": "v2",
+      "seed": 7402,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "response": "It retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-f38e367c-7dcc-41f7-925a-5951efdcb08c",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-a67de105-e229-4182-a6d7-d5eb9cb92542",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Restates supported rule after learner attempt without explicit acknowledgement or extension."
+    },
+    {
+      "id": "topic-reset-7402-v3-stage-0",
+      "history_id": "topic-reset-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "topic-reset-7402-v3-stage-1",
+      "history_id": "topic-reset-7402-v3",
+      "version": "v3",
+      "seed": 7402,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "For \u201coldest waiting item enter a freed place\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Re-elicits generic explanation after a relevant attempt; no concrete continuation."
+    },
+    {
+      "id": "topic-reset-7403-v2-stage-0",
+      "history_id": "topic-reset-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "topic-reset-7403-v2-stage-1",
+      "history_id": "topic-reset-7403-v2",
+      "version": "v2",
+      "seed": 7403,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "It retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-dbfc7f3c-8f64-44c8-9626-989076d31088",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-ed3fb023-ffee-40f7-895f-1aae6bf303b6",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Restates supported rule after learner attempt without explicit acknowledgement or extension."
+    },
+    {
+      "id": "topic-reset-7403-v3-stage-0",
+      "history_id": "topic-reset-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "topic-reset",
+      "stage": 0,
+      "profile_mode": "socratic",
+      "question": "How does amber queue manage waiting items?",
+      "preceding_actual_turns": [],
+      "response": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "citations": [],
+      "answer_paragraph_source_membership": null,
+      "finding": "Initial topical elicitation fits Socratic mode."
+    },
+    {
+      "id": "topic-reset-7403-v3-stage-1",
+      "history_id": "topic-reset-7403-v3",
+      "version": "v3",
+      "seed": 7403,
+      "situation": "topic-reset",
+      "stage": 1,
+      "profile_mode": "socratic",
+      "question": "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+      "preceding_actual_turns": [
+        {
+          "student": "How does amber queue manage waiting items?",
+          "tutor": "For \u201cHow does amber queue manage waiting items?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "response": "It retains admitted items in arrival order.\n\nWhen an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place.\n\namber queue admits at most three unacknowledged items.",
+      "action": "answer",
+      "citations": [
+        {
+          "bounding_box": null,
+          "course_id": "course-a-synthetic",
+          "crop_ref": null,
+          "id": "citation-d4b6fbf8-15b1-4828-91ea-1be239837caf",
+          "locator": "bounded-contract-dialogues-v1-source-02 paragraph 1",
+          "message_id": "message-94b4b68c-8f8c-4973-8e75-a3d6bbd29b95",
+          "page": null,
+          "region_id": "region-bounded-contract-dialogues-v1-source-02",
+          "region_kind": null,
+          "release_id": "release-bounded-contract-dialogues-v1-profile-1bca49ff7bd0",
+          "source_artifact_id": "bounded-contract-dialogues-v1-source-02",
+          "source_checksum": "722a0f2641943e8b7e47f22bab9259ac71f25aecab3f04e011ebaa3d051f4b15",
+          "source_document_id": "document-bounded-contract-dialogues-v1-source-02",
+          "source_version": 1,
+          "title": "Amber Queue"
+        }
+      ],
+      "answer_paragraph_source_membership": true,
+      "finding": "Restates supported rule after learner attempt without explicit acknowledgement or extension."
+    }
+  ]
+}

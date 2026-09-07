@@ -928,3 +928,84 @@ def test_t1_learner_state_survives_repository_and_application_restart(tmp_path):
     state = second_repository.get_learner_state(conversation["id"])
     assert state is not None and state.turn_count == 2
     second_repository.close()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("revocation", ["release", "membership", "account"])
+@pytest.mark.parametrize("mode", [
+    StudentTutoringMode.GROUNDED_ASSISTANT,
+    StudentTutoringMode.BOUNDED_TUTORING_GRAPH,
+])
+async def test_inflight_turn_rechecks_authority_before_commit(tmp_path, revocation, mode):
+    from src.digital_twin.student.models import AccountStatus
+
+    started = asyncio.Event()
+    resume = asyncio.Event()
+
+    class PausedGenerator(AtomicClaimGenerator):
+        async def generate(self, question, hits, policy):
+            answer = await super().generate(question, hits, policy)
+            started.set()
+            await resume.wait()
+            return answer
+
+    client, repository, fixture = _client(
+        tmp_path, embedder=KeywordEmbedder(),
+        generator=PausedGenerator(supported=True),
+        tutoring_mode=mode,
+    )
+    service = client.app.state.student_service
+    conversation = service.create_conversation(fixture.student_a_id, fixture.course_a_id)
+    task = asyncio.create_task(service.submit_message(
+        fixture.student_a_id, conversation.id,
+        content="Explain cache coherence.", client_request_id="inflight-revocation",
+    ))
+    await asyncio.wait_for(started.wait(), timeout=5)
+    # A separate connection represents an administrator request in another worker.
+    administrator = SQLiteStudentRepository(repository.path)
+    try:
+        if revocation == "release":
+            administrator.set_release_status(fixture.release_a_id, StudentReleaseStatus.WITHDRAWN)
+        elif revocation == "membership":
+            membership = administrator.get_membership(fixture.student_a_id, fixture.course_a_id)
+            administrator.save_membership(membership.model_copy(update={"active": False}))
+        else:
+            account = administrator.get_account(fixture.student_a_id)
+            administrator.save_account(account.model_copy(update={"status": AccountStatus.REVOKED}))
+        resume.set()
+        with pytest.raises(StudentWorkflowError) as error:
+            await task
+        assert error.value.code == "turn_authority_changed"
+        assert repository.list_messages(conversation.id) == []
+        assert repository.get_learner_state(conversation.id) is None
+    finally:
+        resume.set()
+        if not task.done():
+            task.cancel()
+        administrator.close()
+
+
+def test_unknown_outreach_reply_is_rejected_before_generation(tmp_path):
+    class UnexpectedGenerator:
+        implementation_id = "must-not-run"
+        calls = 0
+
+        async def generate(self, *args):
+            self.calls += 1
+            raise AssertionError("invalid outreach lineage reached generation")
+
+    generator = UnexpectedGenerator()
+    client, repository, fixture = _client(
+        tmp_path, embedder=KeywordEmbedder(), generator=generator,
+    )
+    conversation = _create_conversation(client, fixture)
+    response = client.post(
+        f"/api/student/conversations/{conversation['id']}/messages",
+        headers=_headers(fixture.student_a_id),
+        json={"content": "Explain cache coherence.", "request_id": "invalid-outreach",
+              "responding_to_outreach_message_id": "nonexistent-message"},
+    )
+    assert response.status_code == 403
+    assert response.json()["detail"]["code"] == "outreach_response_forbidden"
+    assert generator.calls == 0
+    assert repository.list_messages(conversation["id"]) == []

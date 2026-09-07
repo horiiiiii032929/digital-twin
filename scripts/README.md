@@ -631,6 +631,14 @@ Current utilities:
   preflight:academic-factual-qa-confirmation-v2`. The source/case build is now
   bound, but preflight remains blocked; no Codex review, provider call,
   researcher audit, product execution, or final tranche is authorized.
+- `prepare_public_evaluation_sources.py`: `npm run setup:evaluation-sources`
+  fetches the five public Git revisions already specified by the confirmation
+  builder. Run it before `npm run check` in a fresh checkout. It checks revisions
+  and working-tree cleanliness, refuses to overwrite changed inputs, and leaves
+  no partial destination on a failed fetch. Sources stay in ignored
+  `data/external/academic_factual_qa_confirmation_002/`; their permissions and
+  attribution remain recorded in the existing source manifest. This command
+  does not generate or score evaluation cases or call model providers.
 - `build_academic_factual_qa_confirmation_v2.py`: reads four locally cached,
   exact public repository revisions and deterministically rebuilds the
   160-section source manifest, 200 confirmation cases, and 40 disjoint planted
@@ -1207,3 +1215,686 @@ authorization is revoked; the opened cases must not be reused for confirmation.
   Codex-assisted case adjudications. The audit never changes the official
   result or its gates. Use `--validate` for a no-write check and `--execute`
   once for the bounded network-free audit.
+# Final-profile longitudinal development
+
+The new runner constructs tutoring services through the production application
+factory. It preserves selected deterministic factual claims while allowing the
+selected live planning client, durable per-call ledgers, and shared budget limits
+across virtual-time restarts. Historical experiment 025 is unchanged.
+
+```bash
+uv run python -m scripts.run_final_profile_longitudinal --validate
+uv run python -m scripts.run_final_profile_longitudinal --contract-smoke --days 3 --output-dir reports/generated/final-profile-contract-fresh
+```
+
+`--contract-smoke` injects malformed provider responses without network access.
+It is not live evidence. `--execute` requires recorded bounded authorization for
+`final-profile-live-longitudinal-development-001` and accepts `--days`,
+`--concurrency`, `--maximum-calls`, and `--maximum-cost-usd`. Defaults are seven
+virtual days, concurrency two, 200 attempts, and USD 2 of conservative reserved
+allowance. Each admitted call reserves USD 0.01; oversized payloads and budget
+exhaustion block before the transport is called. Existing outputs are rejected;
+no run-level resume is supported. Prompt/response ledgers are synthetic local
+artifacts and remain Git-ignored.
+
+This runner installs a synthetic course fixture directly and does not qualify
+ingestion or browser workflows. See the
+[completion plan](../research/04_experiments/2026-09-05-project-completion-plan.md)
+for independent quality, contrasting-profile, and end-to-end acceptance work.
+
+## Teaching-profile responsiveness development
+
+`uv run python -m scripts.run_teaching_profile_responsiveness_development --validate`
+shows the fresh 24-arm packet: two approved synthetic teaching profiles, context
+on/off, and six cases. The runner uses isolated reactive production-factory
+runtimes and preserves complete delivered responses, pedagogical intents, and
+provider attempt records. It does not establish real-professor fidelity.
+
+Use `--contract-smoke --output-dir reports/generated/profile-contract-new` for
+network-free malformed-provider handling. Live `--execute --output-dir
+reports/generated/profile-live-new --maximum-calls 100 --maximum-cost-usd 1`
+requires the exact `teaching-profile-responsiveness-development-001` bounded
+instrument authorization and a configured OpenAI credential. Outputs must not
+already exist. Defaults permit two concurrent cases. The summary reports style
+intent diagnostics; delivered content and boundary quality require independent
+review, and qualification is never inferred from execution completion.
+
+## Schema18 source recovery and tutoring request probe
+
+`uv run pytest -q tests/services/test_schema18_product_recovery.py` checks reviewed
+UTF-8 text/Markdown jobs through backup and clean restore, plus actual in-process
+ASGI tutoring POST contracts. `scripts.tutoring_capacity_probe` exposes
+`StudentProbeSession` and `measure_tutoring_requests` for callers with separately
+provisioned clients and conversations. It issues sequential turns per student,
+concurrent students, and no retries; callers supply deployment/authentication and
+must separately score teaching quality. Its mock/ASGI tests are not deployed
+capacity evidence. Never substitute the old verifier's sequential course-list
+GET loop for model-backed tutoring load.
+
+The professor upload route now accepts `text/plain` and `text/markdown` in the
+same worker flow as PDF; see [service source instructions](../services/README.md).
+No connector or automatic anonymizer is implied by those accepted formats.
+
+## Shared-runtime ASGI tutoring concurrency
+
+`uv run python -m scripts.run_asgi_tutoring_concurrency_development --validate`
+shows the bounded 25-student, four-turn development configuration. Use
+`--contract-smoke --students 2 --turns 2 --output-dir reports/generated/asgi-contract-new`
+for a network-free smoke check. Live `--execute --output-dir reports/generated/asgi-live-new
+--maximum-calls 500 --maximum-cost-usd 5` requires the exact
+`final-profile-asgi-tutoring-concurrency-development-001` authorization and configured
+provider credentials. Output directories must be new.
+
+The existing student route uses one actual factory-built tutoring service and
+SQLite runtime; injected synthetic account headers replace production login.
+Outputs retain complete responses, per-request provider attribution, latency,
+errors, persistence counts and start/end source hashes. This measures in-process
+route concurrency, excluding Docker, sockets, production authentication and
+distributed workers. Successful response contracts do not score teaching quality
+or establish deployed capacity. See the
+[prospective plan](../research/04_experiments/2026-09-06-asgi-tutoring-concurrency-plan.md).
+
+The default provider budget remains serial. The prospective bounded comparison
+opts into `--provider-max-concurrency 5`; only a transport exposing a conservative
+request-cost ceiling can overlap. Admission reserves all in-flight ceilings under
+the dollar cap, and cancellation or unknown usage retains its reservation and
+closes further admissions. Client and provider peak concurrency are reported
+separately. Clients without the ceiling capability retain serial behavior; an
+advertised ceiling returning no bound is rejected before admission. This experimental setting
+does not silently select a release profile or change the production default.
+
+
+Explicit serial control and bounded candidate commands (load the local credential
+first; each output directory must be new):
+
+```sh
+uv run python -m scripts.run_asgi_tutoring_concurrency_development --execute --students 25 --turns 4 --provider-max-concurrency 1 --maximum-calls 500 --maximum-cost-usd 5 --output-dir reports/generated/asgi-serial-new
+uv run python -m scripts.run_asgi_tutoring_concurrency_development --execute --students 25 --turns 4 --provider-max-concurrency 5 --maximum-calls 500 --maximum-cost-usd 5 --output-dir reports/generated/asgi-concurrent-new
+```
+
+## Operational dialogue development
+
+The following commands use fresh synthetic histories through actual product
+services. `--progression-contract` needs no external provider. Live modes require
+local credentials and the exact operational-dialogue instrument authorization;
+all outputs are exclusive. The finite progression packet uses four histories and
+16 stimuli. Terra changes reactive planning/generation only, not full autonomous
+planning; neither model's successful schema validation is a teaching-quality pass.
+
+```sh
+uv run python -m scripts.run_operational_dialogue_development --progression-contract --output-dir reports/generated/progression-contract-new
+uv run python -m scripts.run_operational_dialogue_development --progression-live --progression-model gpt-5.6-luna --output-dir reports/generated/progression-luna-new
+uv run python -m scripts.run_operational_dialogue_development --progression-live --progression-model gpt-5.6-terra --output-dir reports/generated/progression-terra-new
+uv run python -m scripts.run_operational_dialogue_development --full-live --output-dir reports/generated/operational-full-new
+```
+
+The full live mode fixes 24 histories over 30 virtual days, six simultaneous
+histories, 5,000 maximum calls and a USD 50 conservative reservation cap. Provider
+calls within each history remain serial. Its students, replies and elapsed time
+are simulated; generation, state persistence, consent checks, scheduled processing
+and restart exercise actual services. See the
+[operational plan](../research/04_experiments/2026-09-06-operational-dialogue-development-plan.md)
+and retained result registry. No private material is automatically ingested.
+
+### Evaluator calibration and clustered development analysis
+
+`uv run python -m scripts.evaluation_calibration_cluster_analysis --output-dir reports/generated/<new-directory>` runs the no-network scorer mutation calibration and paired cluster analysis of frozen live005 and the full operating simulation. It refuses to overwrite an output directory. See the [prospective plan](../research/04_experiments/2026-09-06-evaluator-calibration-and-cluster-analysis-plan.md). These are development diagnostics, not semantic qualification or a learning-effect estimate.
+
+### Output-cap progression development
+
+`uv run python -m scripts.run_output_cap_progression_development --output-dir reports/generated/output-cap-contract-fresh`
+runs a network-free contract instrument. With the authorized provider credential
+privately loaded, add `--live` for the preregistered500/1500-token comparison:
+48 synthetic trajectories,192 actual student turns, three order/repetition
+seeds, and a500-call/$10 reservation ceiling. Use a fresh output directory.
+The selected/default profile is unchanged; inspect per-case responses and the
+plan in `research/04_experiments/2026-09-06-output-cap-progression-development-plan.md`.
+Later tutor histories may diverge between arms; this is development, not a
+held-out quality confirmation or a learning study.
+
+`uv run python -m scripts.semantic_calibration_v2` validates the 32 synthetic controls with explicit current-turn profiles. Add `--public-output <new.jsonl>` to export only allowlisted judge payloads; gold and control labels are excluded. See the [v2 calibration plan](../research/04_experiments/2026-09-06-semantic-calibration-v2-plan.md). This validation makes no external calls and does not establish human-reviewed labels.
+
+## Mixed-source candidate recovery contract
+
+```sh
+uv run python -m scripts.run_mixed_source_recovery_development --execute --output-dir reports/generated/mixed-source-contract-new
+uv run pytest -q tests/test_mixed_source_recovery_development.py
+```
+
+The exact `mixed-source-candidate-recovery-development-001` instrument authorization
+and an exclusive output directory are required. No external credential or private
+material is needed. The actual staging TestClient app uses credential/session and
+Origin handling, queued PDF/text/Markdown ingestion, approved profile/domain and
+publication APIs, candidate dialogue, source-window feedback and clean restore.
+A deterministic injected provider makes this an integration contract, not live
+model quality or deployed TLS/browser performance. Approved onboarding is a
+synthetic setup fixture; the historical staging binding does not qualify the
+candidate override. All failed setup attempts remain in the evaluation registry.
+See the [coverage and load audit](../docs/evaluation-mixed-source-and-load-audit-2026-09-06.md).
+
+### Bounded-contract v2/v3 development
+
+`uv run python -m scripts.run_bounded_contract_progression_development --output-dir reports/generated/bounded-contract-fresh`
+runs the network-free contract version. Add `--live` only with the authorized
+credential loaded privately to run the preregistered fixed1500-token v2/v3
+comparison:36 trajectories/72 turns, three order/repetition seeds, maximum240
+calls/$4.80 reserved. V3 is explicitly opt-in; local count limits and selected
+defaults remain unchanged. See the plan at
+`research/04_experiments/2026-09-06-bounded-contract-communication-plan.md`.
+
+The preregistered genuine concept-switch supplement uses the same command with
+`--concept-switch`, a fresh output directory, and explicit `--live` for provider
+calls. It contains six three-turn histories (40 calls / USD 0.80 upper bound).
+
+The bounded-contract runner also supports `--named-referents` for its preregistered
+v3/v4 authorized-referent supplement: 26 histories / 32 turns, six replay histories
+and fresh boundary cases, at most 120 calls / USD 2.40. Use a fresh output directory;
+`--live` is required for external calls. This opts into the v4 contextual admission
+candidate without altering the selected release or runtime defaults.
+
+### Authenticated loopback load development
+
+The isolated HTTPS evaluator starts and stops only its own dynamically allocated
+Uvicorn process. It creates synthetic credentials and a mixed-source course,
+then exercises actual session/Origin middleware over a network socket. The
+contract uses an injected generator; it does not contact a provider:
+
+```bash
+uv run python -m scripts.run_authenticated_loopback_load_development --contract --bounded-contract --output-dir reports/generated/authenticated-loopback-contract-fresh
+```
+
+For the preregistered live v3 operational candidate, provide `OPENAI_API_KEY` in
+the process environment and use `--execute` in place of `--contract`, with a
+fresh output directory. This is the explicit bounded generation candidate at
+1,500 output tokens and provider concurrency 5; the product default remains
+serial concurrency 1. The fixed load order is 5/25/25/5/5/25 learners, two turns
+each (180 POSTs), with at most 300 model calls and USD 10 of ledger reservations.
+The 15-second route p95 gate is unchanged. See the
+[plan](../research/04_experiments/2026-09-06-authenticated-loopback-load-plan.md)
+for failure accounting, source archive, local-certificate scope and limitations.
+A successful contract is not a live load result or a production capacity claim.
+
+### Advisory semantic review and usage integrity
+
+Run the offline evaluator contract checks with:
+
+```bash
+uv run pytest -q tests/test_completion_semantic_review.py tests/test_semantic_calibration_v2.py tests/services/test_provider_usage_integrity.py
+```
+
+The preserved live review can be reproduced with a fresh output directory using
+`uv run python -m scripts.run_completion_semantic_review --execute --calibration-version 2 --output-dir reports/generated/semantic-review-fresh`.
+This makes paid external calls on synthetic development evidence only. It gates
+88 frozen response reviews behind 32 calibration controls repeated twice.
+Despite passing calibration, the recorded reviewer missed important teaching
+violations on actual outputs. It is **not an accepted accuracy scorer**; see the
+[transfer-validity decision](../research/05_evaluation/completion-semantic-review-development-001-live-002-results.md).
+The [human review packet](../research/05_evaluation/professor-review-quality-audit-20260906/README.md)
+is prepared but has not been rated by a human.
+
+### Paired pedagogy development
+
+`run_paired_pedagogy_development` compares explicit v4/v5 persistent-runtime arms
+using a versioned synthetic packet. It sends only course-filtered public source,
+profile and fixed student-turn inputs to the runtime; gold criteria remain
+outside provider inputs. Fresh arm histories, actual restarts, full responses,
+provider ledgers and a source ZIP are retained. Semantic review remains separate.
+
+```bash
+uv run python -m scripts.run_paired_pedagogy_development --packet research/05_evaluation/datasets/meaningful-continuation-development-v2.json --output-dir reports/generated/paired-pedagogy-contract-fresh
+```
+
+The default contract transport deliberately exercises provider failure handling;
+for a useful successful contract use the injected test transport. Add `--live`
+only for the parent-approved frozen development packet, with the provider key in
+the process environment. The finite bound is800calls/USD20, Luna3000outputtokens,
+four independent histories; a packet whose prospective three-calls-per-turn bound
+exceeds this is rejected. Do not use the sealed confirmation packet until the
+candidate is frozen and that dispatch is explicitly approved. This measures the
+persistent service boundary, not authenticated HTTP, deployment or human learning.
+
+The paired pedagogy runner preserves `--candidate v5` as its default historical
+reproduction. Use `--candidate v6` only for the prospectively documented successor
+comparison; it retains the v4 control and verifies the actual implementation ID
+both initially and after restart. The development-v2 packet is openly reused,
+not a fresh confirmation set. Model/cap/limits remain identical in both arms.
+Neither candidate becomes the product default through this command.
+
+For the separately authorized boundary sidecar, use the same runner with
+`--candidate v6` and
+`research/05_evaluation/datasets/boundary-classification-development-v1.json`.
+Set CLI options `--maximum-calls 80 --maximum-cost-usd 2`; the sidecar's eight contexts remain separate from the main
+48-context denominator. Its prospective plan is
+[here](../research/04_experiments/2026-09-06-boundary-classification-sidecar-plan.md).
+
+To classify a preserved v5 pedagogy run without provider calls, use
+`uv run python -m scripts.diagnose_instructional_rendering <raw-run-directory> --output <new-audit.json>`.
+The helper opens archived runtime SQLite files read-only, replays recorded
+proposals through local rendering/graph checks, and checks live-run source hashes.
+Run it against the matching preserved v5 source revision; a later revision may
+report a source mismatch and must not be described as exact frozen replay.
+
+Use `--candidate v7` for the prospectively authorized request-coverage successor;
+`v5` remains the default and `v6` remains reproducible. The mixed-stage sidecar
+uses `research/05_evaluation/datasets/mixed-evidence-stage-development-v1.json`
+with `--maximum-calls 120 --maximum-cost-usd 3`. Its24 paired turns remain separate
+from both the main48 contexts and the boundary8 contexts. Confirmation stays
+closed until all relevant development gates pass; the narrower development rubric
+does not replace the project's factual/profile and boundary completion thresholds.
+
+When invoked with `--packet`, the runner verifies the file's parsed content against
+the supplied packet, archives its original bytes, and snapshots adjacent
+`source-lineage.json` and `build_packet.py` when present. Their byte hashes and
+end-of-run consistency are recorded separately from the canonical packet hash.
+These are provenance artifacts only; the builder is never executed by the runner.
+For permission-approved real-course inputs, keep the output directory ignored.
+Durable summaries must contain sanitized IDs/hashes and metrics, not the private
+packet, source cards, questions, or manifest schedule text.
+
+### Explicit compact tutoring candidate
+
+The shared `experimental_tutoring_configuration("v8")` selector fixes Luna,
+3,000 output tokens, low reasoning effort, and the standalone compact response
+contract with V4 policy/referent admission. It does not enable the V5–V7
+instructional contracts or change a selected/default release. V4–V7 remain
+available for reproduction through the paired runner.
+
+```bash
+uv run python -m scripts.run_paired_pedagogy_development --candidate v8 --packet research/05_evaluation/datasets/meaningful-continuation-development-v2.json --output-dir reports/generated/FRESH_CONTRACT_ID
+uv run python -m scripts.run_authenticated_loopback_load_development --contract --candidate v8 --output-dir reports/generated/FRESH_HTTPS_CONTRACT_ID
+```
+
+The paired CLI's default transport is a failure fixture; use the injected test
+fixture for the source-bound orchestration contract. Paid execution additionally
+requires the existing exact bounded authorization, configured provider credential,
+a prospective run plan, and `--live` (paired) or `--execute` (HTTPS). The HTTPS
+candidate selector preserves historical runs without a selector at their original
+1,500-token configuration. Its isolated server verifies the actual constructed
+implementation ID, and the manifest records the complete selector.
+
+The existing operational `run_history(..., candidate="v8")` also accepts this
+selector. Its caller must supply a `RecordedRunClient` with Luna and a matching
+3,000-token serializer; mismatches fail before runtime creation. The optional
+parameter leaves historical V2 schedules unchanged. This is a reusable execution
+configuration, not evidence of autonomy utility or release qualification. A new
+candidate-specific cohort still needs its own prospective schedule and result.
+
+### Profile-authoritative compact candidate
+
+V9 preserves the compact V8 output contract and applies approved profile
+instructions ahead of advisory planning hints. Select it explicitly with
+`--candidate v9` in the paired or authenticated HTTPS evaluator. Both use the
+same shared configuration and retain the V4 control and historical candidates.
+The three development packets and all previous outcomes remain unchanged.
+
+For a usable local application, run `VITE_API_BASE_URL='' VITE_AUTH_MODE=session npm run build:web` once. The separate ASGI factory serves that existing built UI and API at the same HTTPS origin and uses the existing
+staging database, credential authentication, source/publication controls, and
+base T1 qualification configuration. Configure those existing staging settings
+and the provider credential first; the candidate selector replaces the need to
+set individual instructional flags. With the existing local TLS certificate:
+
+```bash
+APP_EXPERIMENTAL_TUTORING_CANDIDATE=v9 uv run uvicorn services.api.app.experimental:create_experimental_app --factory --host 127.0.0.1 --port 8018 --ssl-keyfile /absolute/path/localhost.key --ssl-certfile /absolute/path/localhost.crt
+```
+
+The configured HTTPS allowed origin must match `https://127.0.0.1:8018`; open that address in the browser. Startup verifies the inspectable `build-configuration.json` marker and refuses a demo-auth bundle. Known student/professor deep links serve the same index; unknown API and asset paths remain 404. The built UI uses the same origin for API requests, so no Vite proxy change is needed. The factory
+rejects demo authentication, missing candidate selection, incompatible base
+qualification, and actual implementation mismatch. It fixes Luna, low reasoning,
+3,000 output tokens, and bounded provider concurrency of five; existing process
+call/cost limits still apply. Inspect
+`app.state.experimental_tutoring_configuration` for the actual identity and
+settings. This does not change the default ASGI entrypoint, bootstrap accounts,
+approve or publish sources, or qualify the candidate for production. The
+experimental evidence profile is recorded separately after evaluation.
+
+### Eight-history instructional operating comparison
+
+`uv run python -m scripts.run_instructional_operational_comparison --output reports/generated/instructional-operating-contract-new` runs the bounded injected failure contract for exactly V4/V9 × two personas × reactive/autonomous conditions. Add `--live` only after the candidate quality decision and prospective execution clearance. Both arms use the explicit 3000-token model configuration; the cumulative bounds are 2500 calls/USD62.50 per arm. This records 30 accelerated virtual days, durable restart equality, consent intervals, actual lineage and every provider failure; it does not measure human learning or establish intervention utility. See `research/04_experiments/2026-09-06-final-candidate-eight-history-operational-plan.md`.
+
+The experimental local entrypoint requires these existing staging modes explicitly:
+
+```dotenv
+APP_MODE=staging
+APP_STUDENT_TUTORING_MODE=governed-autonomous-tutoring-graph-v2.1
+APP_AUTONOMY_PLANNER_MODE=openai-gpt-5.6-luna-policy-value
+APP_EVIDENCE_GATE_MODE=dominance-scoped-ambiguity-safe-v3
+APP_GENERATOR_MODE=deterministic
+```
+
+Retain the configured absolute database/data paths, secure cookies, HMAC secret,
+base student profile and matching T1 qualification record from the staging setup.
+The factory rejects mismatches rather than silently replacing these settings.
+Only the explicit instructional selector is new; the base qualification remains
+separate from the candidate's semantic evidence.
+
+### Final instructional profile-context comparison
+
+`uv run python -m scripts.run_teaching_profile_responsiveness_development --contract-smoke --candidate v10 --maximum-calls 100 --maximum-cost-usd 3 --output-dir reports/generated/profile-context-v10-contract-new`
+keeps the existing24-case packet and compares explicit approved-context handling
+off/on with the V10 composition. Replace `--contract-smoke` with `--execute`
+only after its development decision and prospective clearance. The model's
+actual input binding, all delivered responses and source snapshot are retained;
+old intent scores are descriptive. The unchanged default runner remains the
+historical500-token configuration. See the
+[prospective content criteria](../research/04_experiments/2026-09-06-v10-profile-responsiveness-plan.md).
+
+### Typed compact V10 comparison
+
+Use explicit `--candidate v10` in the paired and authenticated HTTPS evaluators,
+or `APP_EXPERIMENTAL_TUTORING_CANDIDATE=v10` with the same validated local ASGI
+startup above. V10 keeps a distinct typed factual-unit schema and initial-turn
+clarification admission; V9 remains available unchanged. The operational wrapper
+also accepts `--candidate v10`; its omitted-argument default remains V9 to preserve
+historical commands. The V10 boundary packet runs before main development to
+qualify actual provider acceptance of the new schema. This sequence and the
+unchanged gates are documented in the V10 prospective plan; no default release
+or qualification claim follows from selecting a version.
+
+`APP_GENERATOR_MODE=deterministic` configures the inherited base/fallback
+component; it does **not** describe the explicit experimental instructional
+generator. The V9/V10 composition constructs Luna through the shared, bounded
+provider transport and verifies the actual `question-specific-profile-grounded-v9`
+or `question-specific-profile-grounded-v10` implementation. The observed runtime
+ID and provider ledger distinguish these live calls from deterministic fixtures.
+The legacy setting remains visible so it is not mistaken for evidence that the
+experimental tutor avoided the external LLM.
+
+### Match an experimental API with its autonomy worker
+
+The worker now uses the same experimental builder when `APP_EXPERIMENTAL_TUTORING_CANDIDATE` is explicitly exported. With no selector it retains its incumbent composition. Supply the same staging settings, database path, credentials and explicit selector to both processes; a separate worker does not inherit another process's environment. The API's local `.env` loader does not export settings to the worker shell.
+
+```sh
+APP_EXPERIMENTAL_TUTORING_CANDIDATE=v10 APP_PROACTIVE_OUTREACH_WORKER_ENABLED=true uv run python -m scripts.autonomous_tutoring_worker --once --batch-size 1
+```
+
+The command processes at most one due governed opportunity and one scheduled outreach batch; it does not wait or poll indefinitely. The shared selector also defines explicit model variants when available; use precisely the same alias for API and worker. Worker composition sets `serve_web=False`, preserves staging/worker-enabled checks and rejects incompatible selector settings. Model budgets remain per process, not a shared API-plus-worker global budget. Do not infer pedagogical qualification from matching configuration. Design and injected verification are in [the worker composition plan](../research/04_experiments/2026-09-06-experimental-worker-composition-plan.md).
+
+The operational output audit now counts outreach replies using the actual top-level delivered-message link on `proactive-reply` turns. The prior V10 run's unmodified raw zero count and separately verified two replies are retained in [its result and erratum](../research/05_evaluation/instructional-eight-history-operational-development-001-v10-live-001.md).
+
+For the prospectively accepted V10 generator variant, the same responsiveness
+runner accepts `--candidate v10-luna-low`, `v10-luna-medium`, or `v10-sol-low`.
+Use `--maximum-calls 100 --maximum-cost-usd 20`; role-separated runs require
+USD16..20 to cover conservative fixed allocations. Planner calls remain Luna-low;
+the chosen alias applies only to typed V10 generation. Separate role ledgers
+preserve actual request model/reasoning, and one shared outer budget spans all
+24 isolated cases. Run an injected contract before an authorized `--execute` run.
+These are repeated development comparisons under the
+[prospective profile plan](../research/04_experiments/2026-09-06-v10-profile-responsiveness-plan.md),
+not fresh confirmation or a human-instructor evaluation.
+
+### Generation-only model and reasoning comparison
+
+`run_generation_role_model_comparison.py` compares explicit `v10-luna-low`,
+`v10-luna-medium`, and `v10-sol-low` variants with the identical V10 prompt,
+schema, source handling and 3,000-token cap. Planner tasks remain Luna-low.
+These are experimental configurations; none changes the selected release.
+
+```sh
+uv run python -m scripts.run_generation_role_model_comparison \
+  --packet reports/generated/fresh-attribution-protocol-v1/entity-implication-development-v2.json \
+  --output-dir reports/generated/generation-role-model-development-001-contract-001
+```
+
+The CLI without `--live` deliberately uses a failure fixture; positive named
+contracts use the injected `RoleFixture` from the runner's tests. An authorized
+live run adds `--live` with the existing provider credential in the environment.
+Each new run needs an exclusive output directory. The runner archives only the
+specified packet, never sibling authoring builders or sealed confirmation. The
+three-arm global ceiling is 500 calls/USD100: each arm receives a fixed third,
+and each role half of that allocation. Unused role allowance is not pooled.
+All role-specific provider ledgers, actual identities, reasoning settings,
+source hashes, costs and failures remain inspectable.
+
+For the prospectively declared evidence-strength experiment, select only the new
+prompt with `--candidates v11-luna-low --maximum-calls 200
+--maximum-cost-usd 32` (the other required arguments remain as above). Explicit
+selection accepts one to three distinct declared candidates; budgets are divided
+by the actual number of arms and then by role. Omitting `--candidates` retains
+the original three V10 variants. V11 keeps the typed schema/task but records a
+distinct implementation and prompt ID. See the
+[evidence-strength plan](../research/04_experiments/2026-09-06-evidence-strength-generation-plan.md).
+
+The same aliases can be passed to `APP_EXPERIMENTAL_TUTORING_CANDIDATE` for the
+separate authenticated application entrypoint documented above. For a session
+UI build, explicitly use `VITE_API_BASE_URL='' VITE_AUTH_MODE=session npm run
+build:web`. The application uses one shared provider semaphore of five within
+its process; API and worker processes do not share a distributed budget.
+Catalogued Sol is enabled only by the explicit experimental transport opt-in;
+ordinary release-mode constructors remain unchanged.
+
+The authenticated loopback runner also accepts the three aliases. Variant-only
+bounds are 800 calls/USD128, divided into two 400-call/USD64 role ledgers;
+historical candidates retain 300 calls/USD10. The original six-burst schedule
+and 15-second p95 gate are unchanged. Paid timing trials require quality
+acceptance and a quiet host; injected HTTPS contracts establish authentication,
+configuration and persistence, not semantic quality or provider performance.
+
+Explicit generator-role operating comparisons accept `--candidate v10-luna-low`, `v10-luna-medium` or `v10-sol-low`; all keep Luna-low planning and the same V10 instructional algorithm. They use separate recorded role ledgers and verify actual role/model bindings before and after restart. These aliases have prospective conservative ceilings of 9,600 calls/USD 1,536 across eight histories (effective inner call ceiling 4,800), not the historical V9/V10 5,000-call/USD 125 ceilings. The [plan amendment](../research/04_experiments/2026-09-06-final-candidate-eight-history-operational-plan.md) explains fixed role partitions and retains prior results. Run the injected contract first; no alias is semantically qualified by its presence in the CLI.
+
+For subsequent V4-versus-variant development or confirmation, the existing
+`run_paired_pedagogy_development.py` accepts the same aliases. Explicitly supply
+the amended bounds: main/confirmation `--maximum-calls 800
+--maximum-cost-usd 128`, boundary `80/12.8`, and mixed-stage `120/19.2`.
+Historical version defaults remain unchanged. The default input archive includes
+only the specified packet. Only for an explicitly approved provenance scope,
+repeat `--input-provenance /absolute/path/to/artifact` for each reviewed lineage
+or reconstruction file; sibling builders are never discovered automatically.
+A real-course run still requires its separate model-specific provider disclosure
+and budget decision before transfer.
+
+The explicitly experimental `v11-luna-low` alias uses V11 evidence-strength
+instructions with the same typed JSON contract, Luna-low model roles and
+3,000-token generation cap. It is available to the paired comparison,
+authenticated HTTPS and eight-history operating runners through `--candidate
+v11-luna-low`, and to the separate API/worker through
+`APP_EXPERIMENTAL_TUTORING_CANDIDATE=v11-luna-low`. Historical aliases and defaults
+remain reproducible. This option is not a release selection or semantic
+qualification; see the [prospective V11 plan](../research/04_experiments/2026-09-06-evidence-strength-generation-plan.md).
+
+For the synthetic boundary comparison use the paired runner with
+`--maximum-calls 80 --maximum-cost-usd 12.8`; the mixed-stage packet uses
+`--maximum-calls 120 --maximum-cost-usd 19.2`. Main trials use800 calls/USD128.
+The versioned packet, source snapshot, actual implementation ID and role ledgers
+must match each named run. Operational and HTTPS provider execution remains
+conditional on the prospective quality gates; injected contracts alone do not
+satisfy them.
+
+### Independent factual revision controls (experimental V12)
+
+`v12-luna-sol` retains Luna-low planning and drafting, then performs one separate
+Sol-low revision. All roles use3,000-token caps and exact task/model ledgers;
+unknown usage stops subsequent admission. The final answer identifies Sol while
+draft metadata remains Luna. Source IDs are associations, not semantic approval.
+V10/V11 and application defaults remain unchanged.
+
+Stage A uses the actual revision helper and shared server composer on64 authored
+synthetic controls. It sends public inputs and draft only; adequacy/gold labels
+are withheld. After the prospective packet and source freeze are approved, run:
+
+```sh
+PYTHONPATH=. uv run python scripts/run_factual_revision_controls.py \
+  --packet reports/generated/revision-controls-v1/packet.json \
+  --output-dir reports/generated/independent-factual-revision-controls-001-live-001 \
+  --input-provenance reports/generated/revision-controls-v1/preflight-seal.json \
+  --input-provenance research/05_evaluation/independent-factual-revision-controls-preflight-review.md \
+  --execute
+```
+
+The fixed limit is64 calls/USD10.24, one pass per control with no retries.
+Original and revised rendered answers, proposals, source links, local guards and
+provider failures are retained. Stage B requires semantic acceptance of Stage A.
+It uses the paired runner with `--candidate v12-luna-sol`: main1,200 calls/USD192,
+boundary120/USD19.20, mixed180/USD28.80. Short diagnostics use
+`--candidates v12-luna-sol --maximum-calls 200 --maximum-cost-usd 32`; profile
+comparisons use `--candidate v12-luna-sol --maximum-calls 150
+--maximum-cost-usd 30`. Three-role partitions and up to five calls per tutoring
+turn replace the old two-role/three-call estimate only for V12. Subsequent
+HTTPS uses1,200/USD192; eight-history operations retain their9,600/USD1,536 total
+ceiling, with the candidate arm split three ways. These are conditional
+experimental commands, not a release or deployment qualification.
+
+The V13 controls use `run_factual_revision_controls.py --candidate v13` with the
+new independently reviewed80-entry packet and explicit preflight/seal provenance.
+V12 remains the default64-entry/64-call contract. V13 permits exactly80 revision
+calls / USD12.80 and uses the actual restricted revision task for draft actions
+covered by the disclosure ceiling; other drafts retain the V12 revision helper.
+Both original and revised server-rendered answers remain review artifacts.
+
+For later conditional integrated experiments, `v13-luna-sol` is an explicit
+API/worker and paired/operational/HTTPS selection. It retains V12's three roles,
+model/cap settings and five-call-per-turn budgets. Its presence in the selector
+is not Stage A acceptance or a release selection. See the
+[bounded revision plan](../research/04_experiments/2026-09-06-bounded-revision-plan.md).
+
+### Conditional revision V14 plumbing
+
+The preregistered effort comparison adds `--candidate v14-medium` to the direct
+component command below. It uses the same112 frozen controls and V14 helper,
+changing only Sol revision reasoning to medium. Run each of the two planned
+trials in a distinct new output directory; do not overwrite or retry an
+unfavourable result. Each trial is bounded at112 calls / USD17.92, cap3000 and
+concurrency1. The matching runtime alias is `v14-luna-sol-medium`; this alias
+does not imply semantic acceptance. See the
+[effort plan](../research/04_experiments/2026-09-06-conditional-revision-effort-plan.md).
+
+The explicit `v14-luna-sol` alias uses Luna-low planning and drafting plus one
+Sol-low conditional keep/repair assessment, all with a 3,000-token output cap.
+A kept answer retains Luna as its content provider; a replacement identifies Sol.
+Both calls remain observable and charged. Existing versions remain reproducible.
+The wrapper's diagnosis and proposed move are model judgments, not correctness
+certificates.
+
+The paired runner accepts this alias for the same openly reused development
+packets: main `--maximum-calls 1200 --maximum-cost-usd 192`, boundary 120 / 19.2,
+and mixed-stage 180 / 28.8. The five-call worst-case turn allowance and three-role
+reservations remain unchanged. The authenticated loopback runner also accepts
+this alias with its 1,200-call / USD 192 envelope. The eight-history operational
+wrapper retains 4,800 calls / USD 768 **per arm** (three equal role partitions).
+These are executable configurations, not permission to bypass the prerequisite
+Stage A semantic gates or evidence that integrated V14 runs have occurred. The
+conditional-revision prospective plan is included in each runner's source archive.
+
+The V14 Stage A component command is:
+
+```bash
+PYTHONPATH=. uv run python scripts/run_factual_revision_controls.py \
+  --candidate v14 \
+  --packet reports/generated/conditional-revision-controls-v1/combined-packet.json \
+  --output-dir reports/generated/independent-factual-revision-controls-001-v14-live-001 \
+  --execute
+```
+
+Use the final reviewed packet and explicit preflight/seal `--input-provenance`
+paths when recording the named run. This makes exactly 112 bounded Sol assessment
+calls, at most USD 17.92 reserved, with no draft-generation calls: drafts are
+researcher-authored controls. A KEEP result therefore retains researcher-authored
+origin in this component trial, not a fictional Luna call. Judge the actual
+rendered answer separately from disposition/fault diagnostics. Stage B remains
+conditional on all prospectively frozen semantic gates; V12 and V13 commands
+and failed records are preserved.
+
+### Source–oracle alignment packets
+
+`uv run python -m scripts.build_main_oracle_alignment` materializes the exposed
+v3 complete-procedure packet and the eight original-source necessity controls.
+It refuses to overwrite either artifact. Use
+`uv run python -m scripts.build_main_oracle_alignment --check` to verify their
+reproducibility. The v2 packet remains unchanged; see
+`research/04_experiments/2026-09-06-main-oracle-alignment-plan.md` for gates and
+why historical main accuracy is not factual qualification evidence.
+
+### Fresh fixed-candidate assessment analysis
+
+`analyze_fresh_assessment_comparison.py` validates complete112-control manual
+reviews against frozen live packets, reports every adequacy/family/action slice,
+and resamples56scenario pairs within families (seed8801;10000draws). It does not
+call a provider or infer semantic labels from model dispositions. Critical and
+uncertain judgments cannot count as useful; output paths must be new.
+
+```sh
+.venv/bin/python -m scripts.analyze_fresh_assessment_comparison --packet research/05_evaluation/datasets/fresh-assessment-generalization-development-v1.json --baseline-dir reports/generated/independent-factual-revision-controls-001-fresh-v14-medium-live-001 --candidate-dir reports/generated/independent-factual-revision-controls-001-fresh-v16-live-001 --baseline-review research/05_evaluation/independent-factual-revision-controls-001-fresh-v14-medium-live-001-assistant-review.json --candidate-review research/05_evaluation/independent-factual-revision-controls-001-fresh-v16-live-001-assistant-review.json --output /tmp/fresh-assessment-reproduction.json
+```
+
+The fresh comparison failed; V16 is not integrated or selected. See
+`research/05_evaluation/fresh-assessment-generalization-comparison-001-results.md`.
+
+### Final-response verification component study
+
+`run_final_response_support_audit.py` replays fixed responses (C0), compares a
+source-only audit (C1) with a quality audit plus one issue-guided repair and final
+reaudit (C2). An unchanged rejected repair or failed final audit is quarantined;
+no rewritten response bypasses the final check. This is experimental component
+code, with no product selector or release-profile change.
+
+Live inputs must match the reviewed bank and explicitly supplied SHA-256:
+112exposed responses or128fresh authored controls. The latter have64adequate and
+64defective originals byconstruction, not128actualV16generations. Four inputs may
+run concurrently; banks run sequentially so the aggregate concurrency stays four.
+The shared cap is4calls/USD0.64perinput, with C1<=1 and C2<=3. Audit usesSol-high,
+repair Sol-medium, cap3000. The actual serialized request must fit20,000UTF-8bytes
+and the conservativeUSD0.16reservation. Unknown cost or contract/provider failure
+stops further admissions; already admitted requests remain recorded.
+
+```sh
+.venv/bin/python -m scripts.run_final_response_support_audit --bank exposed --packet reports/generated/final-response-support-audit-v1/exposed-packet.json --expected-packet-sha256 7386fe29e2cfa42e95b49d71d127347d42c994f892fe13fa7df09ecbabae26d6 --output-dir reports/generated/final-response-support-audit-001-exposed-live-001 --input-provenance research/04_experiments/2026-09-06-final-response-support-audit-plan.md --input-provenance reports/generated/final-response-support-audit-v1/bank-preflight.json --concurrency 4 --execute
+.venv/bin/python -m scripts.run_final_response_support_audit --bank fresh --packet reports/generated/final-response-support-audit-v1/fresh-packet.json --expected-packet-sha256 5b66327006390857f58e064ee0488ba587025704efc57fc78f8d3da2e270f5c9 --output-dir reports/generated/final-response-support-audit-001-fresh-live-001 --input-provenance research/04_experiments/2026-09-06-final-response-support-audit-plan.md --input-provenance reports/generated/final-response-support-audit-v1/bank-preflight.json --concurrency 4 --execute
+```
+
+The v1 commands above describe the original planned protocol; its exposed run
+stopped and its fresh bank was not executed. Do not automatically run that later bank.
+The explicitly selected `--variant v2` refinement uses program
+`final-response-support-audit-002`, distinct provider task IDs, unchanged model/cap
+and schema limits, and the same frozen packets. It requires the source/serializer
+preflight and exposed screening gates in
+`research/04_experiments/2026-09-06-final-response-audit-contract-policy-refinement-plan.md`
+before any fresh-bank calls. Omitting the variant retains v1.
+
+These commands require configured credentials and completed source/serializer
+preflight. Keep credentials out of the source/input archives. The runner archives
+exact inputs, source bytes, request/response usage, per-arm latency and outcomes;
+independent final-text review is still required. Model acceptance is never the
+semantic score. Output directories cannot be overwritten. The complete review and
+fresh preservation/correction gates are in the corresponding experiment plan.
+
+`analyze_final_response_audit.py` validates a completed run archive and independent
+manual judgments before calculating C0/C1/C2 coverage, critical errors, operational
+failures, cost and latency. Review JSON must bind `packet_sha256` and
+`cases_sha256`, and include every planned ID with C0/C1/C2 boolean `useful`,
+`critical`, `uncertain` and a `reason`. Separate support annotations use
+`factual_support_defect` (`true`, `false` or `null`); policy failures do not
+implicitly become factual defects. Unknown support labels remain explicit with
+conservative precision/recall sensitivities.
+
+```sh
+.venv/bin/python -m scripts.analyze_final_response_audit --run-dir reports/generated/final-response-support-audit-001-exposed-live-001 --review reports/generated/final-response-support-audit-v1/exposed-assistant-review.json --support-labels reports/generated/final-response-support-audit-v1/baseline-support-labels.json --output /tmp/final-response-audit-exposed-reproduction.json
+```
+
+The reader checks exact IDs, source archive and output hashes, provider ledgers,
+original and delivered proposals, rendering and final audit bindings. Blocked,
+quarantined and uncertain cases remain in the planned denominator. Bootstrap
+comparisons resample whole scenario pairs within families (seed8801,10,000draws).
+Exposed results cannot authorize promotion; fresh gates require61/64 in each
+adequacy group,30/32 per family, zero criticals and the recorded operational
+conditions. Stopped-run intervals describe combined operational and semantic
+outcomes, not completed model-quality trials. Output files cannot be overwritten.
+
+## Goal completion scope regression
+
+`run_goal_completion_scope.py` runs the prospective 72-history, 30-day synthetic
+goal-scope contract using the real product adapter. It archives code/configuration,
+refuses existing output directories and forbids external sockets during product
+execution. Select the matching source archive before running an arm:
+
+```bash
+uv run --locked python -m scripts.run_goal_completion_scope --arm baseline --output-dir reports/generated/goal-scope-baseline-rerun
+uv run --locked python -m scripts.run_goal_completion_scope --arm candidate --output-dir reports/generated/goal-scope-candidate-rerun
+uv run --locked python -m scripts.analyze_goal_completion_scope --baseline reports/generated/goal-completion-scope-development-001-baseline --candidate reports/generated/goal-completion-scope-development-001-candidate --output reports/generated/goal-scope-comparison-rerun.json
+uv run --locked pytest -q tests/digital_twin/test_goal_completion_scope.py tests/test_goal_completion_scope_evaluation.py tests/digital_twin/test_governed_autonomy.py
+```
+
+The baseline requires archived v1 code; it intentionally fails the new correctness
+gate. Rerun output names must be new and any decision-bearing rerun must be separately
+registered. Six exposed 025 concept cards and seeds 9101–9103 form a development
+regression dataset, not held-out quality evidence. Dependency imports may attempt
+public pricing-metadata discovery and fall back locally; no external LLM is used.
+See the [design and results](../research/05_evaluation/goal-completion-scope-development-001-results.md).

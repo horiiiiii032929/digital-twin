@@ -1,0 +1,1476 @@
+{
+  "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+  "review": "All84controlturns independently read; Solcandidate reviewed by runtime agent.",
+  "useful": 16,
+  "critical": 2,
+  "per_case": [
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-08",
+      "arm": "v4",
+      "history_id": "case-0-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. An uncommitted redemption is not replayed.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz recovery restores the last committed credit balance. An uncommitted redemption is not replayed."
+        }
+      ],
+      "raw_sha256": "c16957bc5a2a8b3365881ffee67442085d459aacefe5780f21e328e89839fea0"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-02",
+      "arm": "v4",
+      "history_id": "case-1-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "f2bfb5706744c8dd1c2def5d042c5d9a25a69e8d22b108510fc2aeb462d096b5"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-09",
+      "arm": "v4",
+      "history_id": "case-3-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "eae2ab6bb39e0e00d36533d72cf7b3337e2c91a43ad1e6e7cbaf21738562aa86"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-07",
+      "arm": "v4",
+      "history_id": "case-4-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201chow does topaz recovery work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits."
+        },
+        {
+          "stage": 2,
+          "response": "For \u201chow does topaz recovery work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "9281cfb23a80442b0ff7c0f42d0d6939d832da76d51b08521d43b0a3e554bb9b"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-08",
+      "arm": "v4",
+      "history_id": "case-5-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.\n\nWillow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWillow revisit uses the same marked plot boundary on every visit.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.\n\nWillow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWillow revisit uses the same marked plot boundary on every visit."
+        }
+      ],
+      "raw_sha256": "dfa84c5e0939f713406c3ba464449ad028d7e0d3f96c32250bddea69c71f0a54"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-05",
+      "arm": "v4",
+      "history_id": "case-2-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Hint: With less rainfall it postpones the count\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "stage": 2,
+          "response": "Hint: With less rainfall it postpones the count\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "bee48306be102e19f4d6178eed0022b94c720fa00e9fa8c82fb4dd8483acc3f1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-02",
+      "arm": "v4",
+      "history_id": "case-6-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "raw_sha256": "42160985b480ec0ebd9303793c91f6fba93c6a9f0a433fab3f6433752304df77"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-01",
+      "arm": "v4",
+      "history_id": "case-8-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "c6bce17f21cb48f94c532d41b8cfca0a3888cfbbb5d30d6d34f22c60b36f0bdd"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-08",
+      "arm": "v4",
+      "history_id": "case-9-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp."
+        }
+      ],
+      "raw_sha256": "dba68b8ff7fac00066a7a8a02a7da1448300cefd749a9eb4f938b66dacd4245e"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-03",
+      "arm": "v4",
+      "history_id": "case-7-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits.\n\nTopaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits."
+        }
+      ],
+      "raw_sha256": "e5a9c68f27676e638e5c8a80effe9cbab7096f9ed3348bc5522fafebd89ca2f2"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-12",
+      "arm": "v4",
+      "history_id": "case-12-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Which concept or referent do you mean?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Which concept or referent do you mean?"
+        }
+      ],
+      "raw_sha256": "bfbb52f3e7b8f91eb14eab993fd356ff01a2aa01d3985e57f6bcffcc7ff5566a"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-10",
+      "arm": "v4",
+      "history_id": "case-11-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "fa56e2f1cd7848785d7ef864081de307b48b5072eab51f4c89c6dbfd71362eaa"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-12",
+      "arm": "v4",
+      "history_id": "case-14-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor."
+        }
+      ],
+      "raw_sha256": "fb91927656a273bfe13314326a1893892fbe8e812cf74601171f940ae3968443"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-09",
+      "arm": "v4",
+      "history_id": "case-13-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "4cd5b605ec113f4e0c7e953758cafe20b54727fb14218e1550c7b08813e5ae48"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-09",
+      "arm": "v4",
+      "history_id": "case-15-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "32ce60dcb6d3ecccbbaa741e1814820d58f54c9805bb99de69796bf042a9eda1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-08",
+      "arm": "v4",
+      "history_id": "case-16-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nMarble recovery replays only records bearing a commit marker. Records without that marker are skipped.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nMarble recovery replays only records bearing a commit marker. Records without that marker are skipped."
+        }
+      ],
+      "raw_sha256": "570701f188207d8794b0c126668b8d07a2a1adbeadc007f41eb1e47b6d65264b"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-06",
+      "arm": "v4",
+      "history_id": "case-10-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [
+        {
+          "stage": 3,
+          "excerpt": "Kestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp.",
+          "reason": "Complete unattempted secondary-concept solution despite new-concept initial-elicitation profile."
+        }
+      ],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "defective",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 3,
+          "response": "A mismatched stamp causes the item to be held without forwarding.\n\nKestrel recovery restores the last committed route stamp before processing held items. Held items are rechecked against that restored stamp."
+        }
+      ],
+      "raw_sha256": "0a7706c0626c0bfa7d54ab75c924f8324c2fade7ecc7bd69e6634b47f3edb5bc"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-02",
+      "arm": "v4",
+      "history_id": "case-18-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "8eb644880bab545477a3cde7a81a2833cfed7a69c7eb91fefdc1a94638de0618"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-11",
+      "arm": "v4",
+      "history_id": "case-19-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "8e439b93c251f5b39480ff8a168f65e63c3810fc68001c4cb85e19b26075fae1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-04",
+      "arm": "v4",
+      "history_id": "case-17-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "raw_sha256": "b527f2cb1787b34b4c5e51c36d5c47b109663c468ee409b15131e7d8b4de9676"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-11",
+      "arm": "v4",
+      "history_id": "case-22-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "3c8405825dc0a45abdf7306486f0f42dc14972b655e031e4f1983ad5efe615c1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-11",
+      "arm": "v4",
+      "history_id": "case-23-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "ebb0e42f60cda2ae02f5067b1d60afbaac3273326eac46823bb1e84185a042b7"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-05",
+      "arm": "v4",
+      "history_id": "case-20-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Hint: On redemption it subtracts the cost from available credits.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "Hint: On redemption it subtracts the cost from available credits.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "63d760da6ffbf3ba9d3317c1d7ed55ed24b5b0cea6dae145cc458b400eed696f"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-07",
+      "arm": "v4",
+      "history_id": "case-21-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [
+        {
+          "stage": 1,
+          "excerpt": "Willow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.",
+          "reason": "Complete unattempted secondary-concept solution despite new-concept initial-elicitation profile."
+        }
+      ],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "defective",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201chow does willow revisit work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded."
+        },
+        {
+          "stage": 2,
+          "response": "For \u201chow does willow revisit work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "456f6208017a7a13d991c899e389aa1f984e13fcb597441e563345d389c0d9f1"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-04",
+      "arm": "v4",
+      "history_id": "case-24-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "032b312c25baae98a4db9b9b35a869d1f5f281a5fd5a0f773c05c3ba525ea441"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-11",
+      "arm": "v4",
+      "history_id": "case-26-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step."
+        }
+      ],
+      "raw_sha256": "f01c85fa2c641b7d3d5d3d89ebc301f63465d996853cfcb781d0d3c6f6531cd0"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-12",
+      "arm": "v4",
+      "history_id": "case-27-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor."
+        }
+      ],
+      "raw_sha256": "3ca8dd0dc5254b3e2928640e5eaa59b097aa993fa6cecccc840e03c0fb47d6d3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-06",
+      "arm": "v4",
+      "history_id": "case-25-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "On redemption it subtracts the cost from available credits.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does topaz voucher decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Hint: Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nHow would you use this detail to revise your attempt?"
+        },
+        {
+          "stage": 2,
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost. On redemption it subtracts the cost from available credits. If credits are insufficient it rejects the purchase without changing credits."
+        },
+        {
+          "stage": 3,
+          "response": "On redemption it subtracts the cost from available credits."
+        }
+      ],
+      "raw_sha256": "bcc610b3d395a5dc0e62189a264930b476f123b8cf303bc1813a99fff125b6c3"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-06",
+      "arm": "v4",
+      "history_id": "case-28-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "With less rainfall it postpones the count and records a missing observation rather than zero.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 3,
+          "response": "With less rainfall it postpones the count and records a missing observation rather than zero."
+        }
+      ],
+      "raw_sha256": "c208a14b1cf4f1941679c410d369f13e6e222c341b0f5b28318d4e436a989d65"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-02",
+      "arm": "v4",
+      "history_id": "case-30-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "45ab456ac2c03f54c3a8a3b0183ba1a320471d3998a6ea99c2f60efce7fde18b"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-10",
+      "arm": "v4",
+      "history_id": "case-31-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "c84da76c26eff943bdd8722e047afaa1db4022cd23c080a6a9268a5cc9c38173"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-12",
+      "arm": "v4",
+      "history_id": "case-33-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Which concept or referent do you mean?",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Which concept or referent do you mean?"
+        }
+      ],
+      "raw_sha256": "81ddf66fc1a51b548cf2880ed56f73d9e76046cb8d1b1bbbc4f9ae5ddf381426"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-01",
+      "arm": "v4",
+      "history_id": "case-32-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.\n\nWillow revisit uses the same marked plot boundary on every visit. Seedlings outside the boundary are excluded."
+        }
+      ],
+      "raw_sha256": "799e4aac6d163f5ae6e7538ab54c35f07e67e1a9b1485c329bbeba3f836c6d26"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-04",
+      "arm": "v4",
+      "history_id": "case-29-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Hint: A mismatched stamp causes the item to be held without forwarding.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Hint: A mismatched stamp causes the item to be held without forwarding.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "017ca4fb57176b5e797f30675e582888cb1465daac4cb0f20c35c4c5e69f0919"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-03",
+      "arm": "v4",
+      "history_id": "case-34-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nA mismatched stamp causes the item to be held without forwarding.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.\n\nA mismatched stamp causes the item to be held without forwarding."
+        }
+      ],
+      "raw_sha256": "7dd9e2087abfa258db0a33f1c5dcf65fe49fbb47e2fe430cc6957e63ab9e825c"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-10",
+      "arm": "v4",
+      "history_id": "case-37-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "7284a8a1862899b444833f476e9814d26040e856e98b1e691fba217b43a40e0f"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-09",
+      "arm": "v4",
+      "history_id": "case-38-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "8453701a1113ebb7ef13e547464eab5f9e03b73841b8490e7cc373b5ed3716e0"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-05",
+      "arm": "v4",
+      "history_id": "case-35-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        }
+      ],
+      "raw_sha256": "8475077cdc6f813e23c39965b918ba00f84d2d83a07d6d6a8a78afd3a05c93d4"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-04-01",
+      "arm": "v4",
+      "history_id": "case-40-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nOn redemption it subtracts the cost from available credits.\n\nIf credits are insufficient it rejects the purchase without changing credits.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Topaz voucher redeems a purchase only when available credits are at least the purchase cost.\n\nOn redemption it subtracts the cost from available credits.\n\nIf credits are insufficient it rejects the purchase without changing credits."
+        }
+      ],
+      "raw_sha256": "4d86486b5f06753b5a1e01676128fb7e3f5e89b772017d3d5ecf69937626365c"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-05",
+      "arm": "v4",
+      "history_id": "case-36-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Hint: A mismatched stamp causes the item to be held without forwarding.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "Hint: A mismatched stamp causes the item to be held without forwarding.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "eb2cc8938f4a0a52f4c0acde864ee2adfd846709de9f3c47bbf49506526a1770"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-10",
+      "arm": "v4",
+      "history_id": "case-42-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "14745aeb56ea0b6e2f0d2b3aad5369ee84cfc404807bb41ebed7759b7b0f5f69"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-04",
+      "arm": "v4",
+      "history_id": "case-39-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Hint: With less rainfall it postpones the count and records a missing observation rather than zero.\n\nHow would you use this detail to revise your attempt?",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Hint: With less rainfall it postpones the count and records a missing observation rather than zero.\n\nHow would you use this detail to revise your attempt?"
+        }
+      ],
+      "raw_sha256": "bee7d24819030f7dfaccef69d0b61cc1b0ad937cc2a9c4ed2f3200382c57b340"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-07",
+      "arm": "v4",
+      "history_id": "case-41-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cwhat to do\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged."
+        },
+        {
+          "stage": 2,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        }
+      ],
+      "raw_sha256": "f876ad14d4a7f996c7141d110152f295a0441e01427412ae1ac02ee9f5fc2dfd"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-03-03",
+      "arm": "v4",
+      "history_id": "case-43-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does willow survey decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Willow survey counts a plot only when the recorded daily rainfall is at least 5 millimetres. With less rainfall it postpones the count and records a missing observation rather than zero.\n\nWith less rainfall it postpones the count and records a missing observation rather than zero."
+        }
+      ],
+      "raw_sha256": "09a2e737efdef1b12daec7eba927062e369db8bb6611664fe0138884204ee54e"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-01",
+      "arm": "v4",
+      "history_id": "case-45-repeat-0-v4",
+      "target_turn_index": 0,
+      "useful": true,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "adequate",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Complete requested explanation, concrete misconception contrast, graded refusal or genuine clarification.",
+      "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding.",
+      "preceding_turns_reviewed": 0,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp. A mismatched stamp causes the item to be held without forwarding."
+        }
+      ],
+      "raw_sha256": "a90994664f57fae491d4c08f1d4de38bd196d95bc6558bc2bbe6424dd4dd8a03"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-01-07",
+      "arm": "v4",
+      "history_id": "case-44-repeat-0-v4",
+      "target_turn_index": 2,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "For \u201chow does kestrel recovery work?\u201d, what is your current explanation, and which step are you unsure about?",
+      "preceding_turns_reviewed": 2,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does kestrel relay decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Kestrel relay forwards an item only when its route stamp equals the active route stamp.\n\nA mismatched stamp causes the item to be held without forwarding."
+        },
+        {
+          "stage": 2,
+          "response": "For \u201chow does kestrel recovery work?\u201d, what is your current explanation, and which step are you unsure about?"
+        }
+      ],
+      "raw_sha256": "aa0f0706e7b787c59637b90c4507cf9967404fae6cf33ec79364cca47025037e"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-03",
+      "arm": "v4",
+      "history_id": "case-47-repeat-0-v4",
+      "target_turn_index": 1,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nAn equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 1,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "Marble store accepts an incoming version only when it is strictly greater than the stored version. An equal or lower version is rejected and the stored record remains unchanged.\n\nAn equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "f955f45f0b61db3ef2102a47a565a2a8e48831e71061a7f38003e46482036b16"
+    },
+    {
+      "run_id": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+      "trial": 2,
+      "case_id": "development-02-06",
+      "arm": "v4",
+      "history_id": "case-46-repeat-0-v4",
+      "target_turn_index": 3,
+      "useful": false,
+      "uncertain": false,
+      "critical_events": [],
+      "axes": {
+        "factual_support": "adequate",
+        "requested_meaning": "defective",
+        "teaching_move": "adequate",
+        "boundaries": "adequate",
+        "attempt_use": "adequate"
+      },
+      "rationale": "Generic elicitation, unworked rule copying instead of required application, vague missing/private response or local guard; critical secondary disclosure separately retained.",
+      "response": "An equal or lower version is rejected and the stored record remains unchanged.",
+      "preceding_turns_reviewed": 3,
+      "all_turns": [
+        {
+          "stage": 0,
+          "response": "For \u201cHow does marble store decide what to do?\u201d, what is your current explanation, and which step are you unsure about?"
+        },
+        {
+          "stage": 1,
+          "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor."
+        },
+        {
+          "stage": 2,
+          "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question."
+        },
+        {
+          "stage": 3,
+          "response": "An equal or lower version is rejected and the stored record remains unchanged."
+        }
+      ],
+      "raw_sha256": "f327888572c30cab753036cf8ee6fd941af46bf98d0d68a2763f7d23d4482208"
+    }
+  ]
+}

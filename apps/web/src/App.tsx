@@ -47,10 +47,10 @@ function AuthenticatedApp() {
   return (
     <>
       {auth.profile.role === "student" ? (
-        <StudentApp accountId={auth.profile.account_id} />
+        <StudentApp key={auth.profile.account_id} accountId={auth.profile.account_id} />
       ) : null}
       {auth.profile.role === "professor" ? (
-        <ProfessorApp accountId={auth.profile.account_id} />
+        <ProfessorApp key={auth.profile.account_id} accountId={auth.profile.account_id} />
       ) : null}
       {auth.profile.role === "admin" ? <AdminWorkspace /> : null}
       <AccountControl

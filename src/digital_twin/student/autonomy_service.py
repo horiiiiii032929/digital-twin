@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from .teaching_profile_context import approved_teaching_profile_context
+
 import hashlib
 import json
 from datetime import UTC, datetime, timedelta
@@ -267,6 +269,8 @@ class BoundedStrategyGroundedWordingGenerator:
             "lead_styles": list(_AUTONOMOUS_LEAD_TEXT),
             "prompt_modes": list(_AUTONOMOUS_PROMPT_TEXT),
         }
+        if job.teaching_profile_context is not None:
+            prompt["approved_teaching_profile"] = job.teaching_profile_context
         try:
             response = await self.strategy_client.chat(
                 [
@@ -344,9 +348,11 @@ class GovernedAutonomyService:
         goal_manager: DeterministicAutonomousGoalManager | None = None,
         lease_seconds: int = 300,
         clock: UtcClock | None = None,
+        teaching_profile_context_enabled: bool = False,
     ) -> None:
         if not 30 <= lease_seconds <= 900:
             raise ValueError("autonomy lease must be between 30 and 900 seconds")
+        self.teaching_profile_context_enabled = teaching_profile_context_enabled
         self.repository = repository
         self.outreach = outreach
         self.graph = graph or GovernedAutonomousTutoringGraph(
@@ -1118,6 +1124,8 @@ class GovernedAutonomyService:
         )
         cooldown = self._same_concept_cooldown(opportunity, instant, policy)
         job = AutonomousJobInput(
+            teaching_profile_context=(approved_teaching_profile_context(self.repository, release)
+                if self.teaching_profile_context_enabled else None),
             opportunity=opportunity,
             goal=goal,
             policy=policy or _disabled_policy(opportunity, course),

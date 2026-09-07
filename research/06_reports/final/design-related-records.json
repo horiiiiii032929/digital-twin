@@ -1,0 +1,703 @@
+[
+  {
+    "from": "goal-completion-scope-development-001",
+    "to": "goal-completion-scope-development-001-baseline",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001",
+    "to": "goal-completion-scope-development-001-candidate",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001",
+    "to": "goal-completion-scope-review-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-baseline",
+    "to": "goal-completion-scope-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-baseline",
+    "to": "goal-completion-scope-development-001-candidate",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-baseline",
+    "to": "goal-completion-scope-review-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-candidate",
+    "to": "goal-completion-scope-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-candidate",
+    "to": "goal-completion-scope-development-001-baseline",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "goal-completion-scope-development-001-candidate",
+    "to": "goal-completion-scope-review-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "final-profile-asgi-tutoring-concurrency-development-20260906-002",
+    "to": "final-profile-asgi-tutoring-concurrency-development-20260906-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "cross-course-quality-development-001-live-005-failure-diagnostic-001",
+    "to": "cross-course-quality-development-001-live-005",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "cross-course-quality-development-001-live-002",
+    "to": "cross-course-quality-development-001-live-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "schema18-foundation-development-20260906-001",
+    "to": "deployable-product-foundation-v7-post-correctness-requalification-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "local-r1-governed-v2-1-release-qualification-011",
+    "to": "local-r1-governed-v2-1-release-qualification-010",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "final-cross-method-factual-confirmation-001-analysis-correction-001",
+    "to": "final-cross-method-factual-confirmation-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "final-cross-method-factual-confirmation-001-attempt-001-invalid",
+    "to": "final-cross-method-factual-confirmation-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-proxy-c0-c3-003-analysis-correction-001",
+    "to": "professor-fidelity-proxy-c0-c3-003",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-proxy-c0-c3-003",
+    "to": "professor-fidelity-proxy-c0-c3-003-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+    "to": "goal-completion-scope-review-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "wrong-region-selection-audit-001",
+    "to": "tie-resolution-hypothesis-audit-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "local-r1-governed-v2-1-release-qualification-004",
+    "to": "product-evidence-gate-selection-004",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "product-evidence-gate-selection-004",
+    "to": "evidence-range-match-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "local-r1-governed-v2-1-release-qualification-003",
+    "to": "governed-full-autonomy-v2-1-confirmation-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "local-r1-governed-v2-1-release-qualification-003",
+    "to": "local-r1-governed-v2-1-release-qualification-002",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "local-r1-governed-v2-1-release-qualification-003",
+    "to": "product-evidence-gate-selection-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-corpus-confirmation-027-invalid",
+    "to": "governed-full-autonomy-v2-1-corpus-confirmation-028",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-actual-product-confirmation-014",
+    "to": "governed-full-autonomy-v2-1-actual-product-confirmation-015",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+    "to": "governed-full-autonomy-v2-1-cross-engine-evaluation-010",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-hidden-state-learner-extension-014",
+    "to": "successor-learner-timing-simulation-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
+    "to": "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "academic-factual-qa-source-semantic-atom-comparison-001",
+    "to": "academic-factual-qa-source-semantic-atom-failure-validity-audit-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "academic-factual-qa-semantic-target-comparison-001-build",
+    "to": "academic-factual-qa-semantic-target-comparison-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "course-digital-twin-evaluation-program-001-invalid",
+    "to": "local-r1-release-qualification-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "generation-v1-gemma3-4b-exploratory",
+    "to": "generation-v1-preflight-clean",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "evidence-sufficiency-v1-clean",
+    "to": "retrieval-v2-clean",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "deployable-product-foundation-v8-current-image-attempt-001",
+    "to": "evidence-sufficiency-v1-clean",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-002-build",
+    "to": "evidence-sufficiency-v2-independent-review-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-003-build",
+    "to": "evidence-sufficiency-v2-independent-review-003",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-004-build",
+    "to": "evidence-sufficiency-v2-independent-review-004",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-006-build",
+    "to": "evidence-sufficiency-v2-independent-review-006",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-007-build",
+    "to": "evidence-sufficiency-v2-independent-review-007",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v2-independent-review-008-build",
+    "to": "evidence-sufficiency-v2-independent-review-008",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "it5002-retrieval-rapid-v1-invalid",
+    "to": "retrieval-v2-clean",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "cross-course-provider-qualification-v1-local-qwen3",
+    "to": "cross-course-retrieval-deployability-v1-batch8-context1024",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "cross-course-retrieval-deployability-v1-batch8-context1024",
+    "to": "cross-course-retrieval-deployability-v1-depth20",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "multimodal-retrieval-v1-v3-development-attempt-002",
+    "to": "multimodal-retrieval-v1-v3-development-attempt-002-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "multimodal-retrieval-v1-v3-development-attempt-002-analysis-correction-001",
+    "to": "multimodal-retrieval-v1-v3-development-attempt-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "student-workflow-slice-v2-publication-synthetic",
+    "to": "student-workflow-slice-v1-synthetic",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "professor-fidelity-v1-development-001",
+    "to": "professor-fidelity-v1-development-001-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v1-development-001-analysis-correction-001",
+    "to": "course-tutor-v1.2.1-authoring-cross-review-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v1-development-001-analysis-correction-001",
+    "to": "course-tutor-v1.2.3-authoring-cross-review-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v1-development-001-analysis-correction-001",
+    "to": "professor-fidelity-v1-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "course-tutor-v1.2.1-authoring-cross-review-001",
+    "to": "course-tutor-v1.2.3-authoring-cross-review-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-attempt-001-invalid",
+    "to": "generator-qualification-v2-v4-pro-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "generator-qualification-v2-v4-pro-development-001",
+    "to": "generator-qualification-v2-v4-pro-development-001-action-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "generator-qualification-v2-qwen-review-attempt-001-invalid",
+    "to": "generator-qualification-v2-v4-pro-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "generator-qualification-v2-qwen-review-v2-attempt-001-invalid",
+    "to": "generator-qualification-v2-v4-pro-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "generator-qualification-v2-v4-pro-development-001-action-analysis-correction-001",
+    "to": "generator-qualification-v2-v4-pro-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "generator-qualification-v3-v4-pro-p3-development-001",
+    "to": "generator-qualification-v3-v4-pro-p3-deepseek-review-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "generator-qualification-v3-v4-pro-p3-deepseek-review-001",
+    "to": "generator-qualification-v3-v4-pro-p3-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-deepseek-primary-attempt-001-invalid",
+    "to": "professor-fidelity-v2-anchor-002",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-deepseek-primary-attempt-002",
+    "to": "professor-fidelity-v2-anchor-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-deepseek-primary-attempt-002",
+    "to": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
+    "to": "professor-fidelity-v2-anchor-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
+    "to": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "multimodal-product-grounding-v2-development-001",
+    "to": "multimodal-retrieval-v1-v3-development-attempt-002-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "multimodal-product-grounding-v2-development-attempt-002",
+    "to": "multimodal-product-grounding-v2-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "multimodal-product-grounding-v2-development-attempt-003",
+    "to": "multimodal-product-grounding-v2-development-attempt-002",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "local-qwen-reviewer-sensitivity-v2-development-002",
+    "to": "local-qwen-reviewer-sensitivity-v1-development-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "academic-vault-source-inventory-v1-refresh-2026-08-19",
+    "to": "multimodal-source-inventory-v1",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "factual-qa-v3-source-disposition-v2-correction-001",
+    "to": "factual-qa-v3-source-disposition-v1",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "factual-qa-v3-preconversion-exclusion-correction-001",
+    "to": "factual-qa-v3-conversion-readiness-v1",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "factual-qa-v3-preconversion-exclusion-correction-001",
+    "to": "factual-qa-v3-source-disposition-v2-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "factual-qa-v3-semantic-role-triage-v2-correction-001",
+    "to": "factual-qa-v3-semantic-role-triage-v1",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "factual-qa-v3-scale-completion-10000-001-analysis-correction-001",
+    "to": "factual-qa-v3-scale-completion-10000-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "evidence-sufficiency-v3-atomic-claim-confirmation-001-analysis-correction-001",
+    "to": "evidence-sufficiency-v3-atomic-claim-confirmation-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "academic-factual-qa-open-10000-development-product-checkpoint-006-build",
+    "to": "retrieval-index-lifecycle-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "academic-factual-qa-api-retrieval-selection-001-build",
+    "to": "academic-factual-qa-api-retrieval-selection-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "academic-factual-qa-source-aligned-retrieval-confirmation-001",
+    "to": "academic-factual-qa-source-aligned-retrieval-confirmation-001-analysis-correction-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "academic-factual-qa-source-aligned-retrieval-confirmation-001-analysis-correction-001",
+    "to": "academic-factual-qa-source-aligned-retrieval-confirmation-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "successor-architecture-engine-comparison-006-001-build",
+    "to": "successor-architecture-engine-comparison-006-design-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "coverage-measure-hypothesis-audit-001",
+    "to": "local-r1-governed-v2-1-release-qualification-004",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "coverage-measure-hypothesis-audit-001",
+    "to": "tie-resolution-hypothesis-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "coverage-measure-hypothesis-audit-001",
+    "to": "wrong-region-selection-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "tie-set-citation-hypothesis-audit-001",
+    "to": "coverage-measure-hypothesis-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "tie-set-citation-hypothesis-audit-001",
+    "to": "tie-resolution-hypothesis-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "tie-set-citation-hypothesis-audit-001",
+    "to": "wrong-region-selection-audit-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "final-profile-operational-dialogue-development-001-progression-terra-live-001",
+    "to": "final-profile-operational-dialogue-development-001-progression-live-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-luna-low-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-luna-low-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-luna-medium-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-sol-low-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-sol-low-trial-1-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-sol-low-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-sol-low-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-luna-medium-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-luna-low-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-stability-v10-luna-medium-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-stability-v10-luna-low-trial-2-live-001",
+    "to": "generation-model-dialogue-stability-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "generation-role-model-development-001-evidence-strength-v11-short-trial-1-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-evidence-strength-v11-profile-trial-1-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-evidence-strength-v11-boundary-trial-1-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-evidence-strength-v11-mixed-trial-1-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "teaching-profile-responsiveness-development-001-evidence-strength-v11-profile-trial-2-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-evidence-strength-v11-main-trial-1-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "paired-pedagogy-development-001-evidence-strength-v11-main-trial-2-live-001",
+    "to": "evidence-strength-generation-development-001",
+    "relation": "source-reference",
+    "correction_context": false
+  },
+  {
+    "from": "independent-factual-revision-controls-001-fresh-v14-medium-live-001",
+    "to": "fresh-assessment-generalization-comparison-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "independent-factual-revision-controls-001-fresh-v16-live-001",
+    "to": "fresh-assessment-generalization-comparison-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "fresh-assessment-generalization-comparison-001",
+    "to": "independent-factual-revision-controls-001-fresh-v14-medium-live-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "fresh-assessment-generalization-comparison-001",
+    "to": "independent-factual-revision-controls-001-fresh-v16-live-001",
+    "relation": "source-reference",
+    "correction_context": true
+  },
+  {
+    "from": "course-digital-twin-whole-system-architecture-round-3-001-analysis-correction-001",
+    "to": "course-digital-twin-whole-system-architecture-round-3-001",
+    "relation": "verified-interpretation-correction",
+    "effect": "Invalidates architecture-selection interpretation because the candidate count violated the preregistered parent program; raw execution remains preserved.",
+    "basis": "Correction and Evidence retained sections of the correction's readable result."
+  },
+  {
+    "from": "professor-fidelity-v2-anchor-002-machine-review-summary-001-analysis-correction-001",
+    "to": "professor-fidelity-v2-anchor-002-machine-review-summary-001",
+    "relation": "verified-interpretation-correction",
+    "effect": "Corrects cross-layer evaluator interpretation and repeat denominators; does not qualify automated pedagogy.",
+    "basis": "Correction and Recomputed evidence sections of the correction's readable result."
+  },
+  {
+    "from": "academic-factual-qa-grounding-selection-002-build-analysis-correction-001",
+    "to": "academic-factual-qa-grounding-selection-002-build",
+    "relation": "verified-interpretation-correction",
+    "effect": "Narrows the earlier build-readiness claim and records the corrected adapter identity boundary, without supplying factual-quality evidence.",
+    "basis": "Outcome and Decision sections of the correction's readable result."
+  },
+  {
+    "from": "governed-full-autonomy-v2-1-actual-product-confirmation-013-reference-validity-correction-001",
+    "to": "governed-full-autonomy-v2-1-actual-product-confirmation-013",
+    "relation": "verified-interpretation-correction",
+    "effect": "Reinterprets the same 820 saved responses after correcting 30 provider-failure references; adds no provider calls and preserves the original Refine result.",
+    "basis": "Outcome and Results sections of the correction's readable result."
+  },
+  {
+    "from": "goal-completion-scope-review-audit-001",
+    "to": "governed-full-autonomy-v2-1-multi-concept-confirmation-025",
+    "relation": "verified-interpretation-correction",
+    "effect": "Retrospective committed-state audit found 10 target-unmet completions among 22 completed goals in 8 of 72 histories. Original assessment and simulator scores are retained; they do not qualify goal-scoped completion or the corrected implementation.",
+    "basis": "research/05_evaluation/goal-completion-scope-review-audit-001-results.md"
+  }
+]

@@ -34,6 +34,24 @@ def test_repository_freeze_status_is_explicit() -> None:
 
 def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
+        "main-oracle-alignment-001",
+        "paired-pedagogy-development-001",
+        "generation-role-model-development-001",
+        "independent-factual-revision-controls-001",
+        "final-response-support-audit-001",
+        "final-response-support-audit-002",
+        "instructional-eight-history-operational-development-001",
+        "authenticated-loopback-load-development-001",
+        "bounded-contract-progression-development-001",
+        "completion-semantic-review-development-001",
+        "mixed-source-candidate-recovery-development-001",
+        "output-cap-progression-development-001",
+        "final-profile-asgi-tutoring-concurrency-development-001",
+        "cross-course-quality-development-001",
+        "final-profile-operational-dialogue-development-001",
+        "final-profile-live-longitudinal-development-001",
+        "teaching-profile-responsiveness-development-001",
+        "natural-course-quality-development-001",
         "academic-factual-qa-open-10000-deterministic-development-001",
         "academic-factual-qa-open-10000-reference-aggregate-007",
         "academic-factual-qa-open-10000-winner-regression-001",
@@ -59,6 +77,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
         require_bounded_pilot_operation_allowed(pilot_id)
 
     assert set(BOUNDED_PILOT_AUTHORIZATIONS) == pilot_ids
+    assert BOUNDED_PILOT_AUTHORIZATIONS["main-oracle-alignment-001"] == ("dataset_generation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS["final-response-support-audit-001"] == ("external_model_evaluation",)
+    assert BOUNDED_PILOT_AUTHORIZATIONS["final-response-support-audit-002"] == ("external_model_evaluation",)
     assert BOUNDED_PILOT_AUTHORIZATIONS[
         "academic-factual-qa-open-10000-deterministic-development-001"
     ] == ("dataset_generation",)

@@ -1,6 +1,11 @@
 from __future__ import annotations
 
+from .teaching_profile_context import approved_teaching_profile_context
+from .autonomy_models import AssessmentOutcome
+
 from collections.abc import Callable, Mapping, Sequence
+import asyncio
+import sqlite3
 import hashlib
 from functools import partial
 from datetime import UTC, datetime, timedelta
@@ -86,6 +91,7 @@ from src.digital_twin.student.autonomy_runtime import (
 from src.digital_twin.student.repository import (
     ClarificationConflictError,
     DuplicateTurnError,
+    TurnAuthorityChangedError,
     StudentRepository,
 )
 from src.digital_twin.student.repository import LearnerStateConflictError
@@ -130,6 +136,7 @@ class StudentTutoringService:
         autonomy_planner_model: str = DETERMINISTIC_PLANNER_MODEL,
         autonomy_generator_model: str = DETERMINISTIC_GENERATOR_MODEL,
         reactive_semantic_planner: ReactiveSemanticPlanner | None = None,
+        teaching_profile_context_enabled: bool = False,
         retriever_factory: Callable[
             [Sequence[DocumentChunk], Mapping[str, int]], Retriever
         ]
@@ -141,6 +148,7 @@ class StudentTutoringService:
         self.repository = repository
         self.clock = clock or SystemUtcClock()
         profile = load_release_profile(profile_path)
+        self.teaching_profile_context_enabled = teaching_profile_context_enabled
         self.profile_id = profile.profile_id
         self.profile_version = profile.profile_version
         self.retriever_selection = next(
@@ -203,6 +211,8 @@ class StudentTutoringService:
                 checkpoint_database_path=checkpoint_path,
                 generator_model_id=_generator_model_identity(self.generator),
                 semantic_planner=reactive_semantic_planner,
+                initial_reference_priority=(self._initial_reference_priority
+                    if getattr(self.generator, "supports_initial_reference_priority", False) else None),
             )
         self.tutoring_graph = self._tutoring_graphs.get(self.tutoring_mode)
 
@@ -317,6 +327,24 @@ class StudentTutoringService:
                 ),
             )
         release = self._require_current_release(conversation, account_id)
+        if responding_to_outreach_message_id is not None:
+            outreach_message = self.repository.get_proactive_message(
+                responding_to_outreach_message_id
+            )
+            if (
+                outreach_message is None
+                or outreach_message.student_id != account_id
+                or outreach_message.course_id != conversation.course_id
+                or outreach_message.release_id != release.id
+            ):
+                self._deny(
+                    "outreach_response_forbidden",
+                    "The check-in is not available in this conversation.",
+                    account_id=account_id,
+                    course_id=conversation.course_id,
+                    release_id=release.id,
+                    conversation_id=conversation.id,
+                )
         turn_timestamp = utc_timestamp(self.clock.now())
         tutoring_mode = self._runtime_mode(conversation.course_id)
         tutoring_graph = self._runtime_graph(tutoring_mode)
@@ -519,6 +547,8 @@ class StudentTutoringService:
                 }
             graph_result = await tutoring_graph.run(
                 TutoringGraphInput(
+                    teaching_profile_context=(approved_teaching_profile_context(self.repository, release)
+                        if self.teaching_profile_context_enabled else None),
                     account_id=account_id,
                     conversation=conversation,
                     release=release,
@@ -691,7 +721,7 @@ class StudentTutoringService:
             )
         )
         try:
-            self.repository.save_turn(
+            await self._save_turn_with_retry(
                 conversation,
                 student_message,
                 tutor_message,
@@ -736,6 +766,11 @@ class StudentTutoringService:
                     conversation.id
                 ),
             )
+        except TurnAuthorityChangedError as error:
+            raise StudentWorkflowError(
+                "turn_authority_changed",
+                "Course access or the published release changed while preparing this answer. Reload the course.",
+            ) from error
         except (LearnerStateConflictError, ClarificationConflictError) as error:
             raise StudentWorkflowError(
                 "learner_state_conflict",
@@ -755,6 +790,26 @@ class StudentTutoringService:
                 or (pending_clarification if resolved_option is None else None)
             ),
         )
+
+    async def _save_turn_with_retry(self, *args, timeout_seconds: float = 5.0) -> None:
+        """Yield to checkpoint writers without regenerating or weakening authority."""
+        loop = asyncio.get_running_loop()
+        deadline = loop.time() + timeout_seconds
+        while True:
+            try:
+                self.repository.save_turn(*args, nonblocking_writer=True)
+                return
+            except sqlite3.OperationalError as error:
+                code = getattr(error, "sqlite_errorcode", None)
+                if code is None or code & 0xFF not in {sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED}:
+                    raise
+                remaining = deadline - loop.time()
+                if remaining <= 0:
+                    raise StudentWorkflowError(
+                        "turn_storage_busy",
+                        "The tutor could not save this turn while storage was busy. Retry the same request shortly.",
+                    ) from error
+                await asyncio.sleep(min(0.01, remaining))
 
     def _learning_gap_signal(
         self,
@@ -872,43 +927,28 @@ class StudentTutoringService:
             and reactive_v2_artifacts.state_committed
             else None
         )
+        domain_model = self.repository.get_course_domain_model(release.id)
         lifecycle_by_goal = {
-            goal.goal_id: self.autonomy_goal_manager.interpret(goal, belief_state)
+            goal.goal_id: self.autonomy_goal_manager.interpret(
+                goal, belief_state, domain_model=domain_model,
+            )
             for goal in active_goals
         }
-        evidence_completed = bool(
-            reactive_v2_artifacts is not None
-            and reactive_v2_artifacts.belief_state is not None
-            and any(
-                attribution.assessed_evidence_count >= 2
-                and attribution.correct_evidence_count >= 2
-                and attribution.incorrect_evidence_count == 0
-                and attribution.attribution_confidence >= 0.5
-                for attribution in reactive_v2_artifacts.belief_state.concepts
-            )
-        )
-        completed_goal_ids = (
-            [goal.goal_id for goal in active_goals]
-            if evidence_completed
-            else [
-                goal_id
-                for goal_id, lifecycle in lifecycle_by_goal.items()
-                if lifecycle.complete
-            ]
-        )
-        if completed_goal_ids:
-            return None, completed_goal_ids
+        completed_goal_ids = [
+            goal_id for goal_id, lifecycle in lifecycle_by_goal.items()
+            if lifecycle.complete
+        ]
         signals = learner_state.latest_signals
         if signals.misconception_observed:
             event_kind = AutonomousEventKind.MISCONCEPTION
         elif signals.confusion >= 0.7 and learner_state.help_level >= 2:
             event_kind = AutonomousEventKind.REPEATED_CONFUSION
-        elif signals.attempt_present and not evidence_completed:
+        elif signals.attempt_present:
             event_kind = AutonomousEventKind.INCOMPLETE_OBJECTIVE
         elif responding_to_outreach_message_id is not None:
             event_kind = AutonomousEventKind.STUDENT_MESSAGE
         else:
-            return None, []
+            return None, completed_goal_ids
         cited_chunks = []
         for citation in citations:
             matches = [
@@ -917,11 +957,11 @@ class StudentTutoringService:
                 if _stored_citation_matches_chunk(citation, hit.chunk)
             ]
             if len(matches) != 1:
-                return None, []
+                return None, completed_goal_ids
             if matches[0].id not in {chunk.id for chunk in cited_chunks}:
                 cited_chunks.append(matches[0])
         if not cited_chunks:
-            return None, []
+            return None, completed_goal_ids
         objective = self.autonomy_goal_manager.select_objective(policy, cited_chunks)
         goal = next(
             (
@@ -932,7 +972,7 @@ class StudentTutoringService:
             None,
         )
         if goal is not None and lifecycle_by_goal[goal.goal_id].next_event is None:
-            return None, []
+            return None, completed_goal_ids
         if goal is None:
             goal = self._create_autonomous_goal(
                 account_id=account_id,
@@ -943,7 +983,7 @@ class StudentTutoringService:
                 observed_at=observed_at,
             )
         if goal is None:
-            return None, []
+            return None, completed_goal_ids
         instant = datetime.fromisoformat(observed_at).astimezone(UTC)
         primary = cited_chunks[0]
         return ProactiveOpportunityV1(
@@ -977,7 +1017,7 @@ class StudentTutoringService:
             latest_action_at=(instant + timedelta(hours=48)).isoformat(),
             created_at=observed_at,
             updated_at=observed_at,
-        ), []
+        ), completed_goal_ids
 
     def _create_autonomous_goal(
         self,
@@ -999,6 +1039,12 @@ class StudentTutoringService:
             planner_model=self.autonomy_planner_model,
             generator_model=self.autonomy_generator_model,
         )
+        if self.autonomy_goal_manager.interpret(
+            goal,
+            learner_belief,
+            domain_model=self.repository.get_course_domain_model(release.id),
+        ).complete:
+            return None
         try:
             return self.repository.save_autonomous_goal(goal)
         except ValueError:
@@ -1100,6 +1146,18 @@ class StudentTutoringService:
         return release
 
     def _require_matching_profile(self, release: DigitalTwinRelease) -> None:
+        if release.teaching_profile_id:
+            from .teaching_profile_context import profile_authorizes_release
+
+            if not profile_authorizes_release(
+                self.repository,
+                self.repository.get_teaching_profile(release.teaching_profile_id),
+                release,
+            ):
+                raise StudentWorkflowError(
+                    "teaching_profile_unavailable",
+                    "The teaching profile bound to this release is no longer authorized.",
+                )
         if (
             release.profile_id != self.profile_id
             or release.profile_version != self.profile_version
@@ -1372,6 +1430,19 @@ class StudentTutoringService:
             question=graph_input.student_message,
         )
 
+    def _initial_reference_priority(self, graph_input: TutoringGraphInput) -> bool:
+        """Fresh requests only; do not invent a conversational reference resolver."""
+        from src.digital_twin.action_router import DeterministicActionRouterV3
+        if self.repository.list_messages(graph_input.conversation.id):
+            return False
+        router = DeterministicActionRouterV3()
+        # Preserve existing integrity and explicit course/source boundaries.
+        if router.route_without_reference_clarification(graph_input.student_message) is not None:
+            return False
+        labels = tuple(concept.label for concept in graph_input.domain_model.concepts) if graph_input.domain_model else ()
+        route = router.route_with_authorized_referents(graph_input.student_message, authorized_referents=labels)
+        return route is not None and route.action == "clarify"
+
     @staticmethod
     def _clarification_candidate_ids(events: Sequence[AuditEvent]) -> list[str]:
         candidates: list[tuple[int, str]] = []
@@ -1414,6 +1485,17 @@ class StudentTutoringService:
                     intent=intent,
                     help_level=help_level,
                     repair_reason=repair_reason,
+                    **({"authorized_concept_labels": tuple(concept.label for concept in graph_input.domain_model.concepts)
+                        if graph_input.domain_model is not None else ()}
+                        if getattr(self.generator, "supports_named_referent_context", False) else {}),
+                    **({"teaching_profile_context": graph_input.teaching_profile_context,
+                        "learner_attempt_present": (
+                            graph_input.assessment_outcome != AssessmentOutcome.NOT_ASSESSED
+                        ),
+                        "learner_history": [{"role": str(message.role), "content": message.content,
+                            "action": message.action}
+                            for message in self.repository.list_messages(graph_input.conversation.id)[-10:]]}
+                        if getattr(self.generator, "supports_teaching_context", False) else {}),
                 )
                 return self._ensure_v2_atomic_claims(
                     answer,
@@ -1560,6 +1642,11 @@ class StudentTutoringService:
             "score": decision.score if decision is not None else 0.0,
             "validator_failure_type": failure_type,
         }
+        if decision is not None and decision.features.get("semantic_support_unverified"):
+            details.update({"semantic_support_unverified": True,
+                "score_kind": "structural-source-binding-only",
+                "checked_source_bindings": decision.features.get("checked_source_bindings", 0),
+                "validation_reason": decision.reason})
         event = self._event(
             "post-generation-claim-validation",
             account_id=account_id,
@@ -1727,6 +1814,9 @@ class StudentTutoringService:
 def _generator_model_identity(generator: object) -> str:
     """Return the requested provider snapshot without coupling to one client wrapper."""
 
+    requested_model = getattr(generator, "model_id", None)
+    if isinstance(requested_model, str) and requested_model.strip():
+        return requested_model.strip()
     client = getattr(generator, "client", None)
     wrapped = getattr(client, "client", client)
     model = getattr(wrapped, "model", None)

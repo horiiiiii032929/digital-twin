@@ -1,0 +1,580 @@
+{
+  "run_id": "evaluation-calibration-cluster-development-20260906-001",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "working_tree_dirty": true,
+  "status": "completed-development-diagnostic",
+  "decision": "Keep explicit review-needed advisory; Refine semantic scoring; no tutor quality promotion",
+  "external_calls": 0,
+  "cost_usd": 0,
+  "input_hashes": {
+    "research/05_evaluation/datasets/cross-course-quality-development-v1.json": "d5c5fda4815bdb439866ba15305916ae8d2a136d39f5c2585d28c54068f29ac1",
+    "reports/generated/cross-course-quality-development-001-live-005/cases.jsonl": "fb187bcb7cb8fb5e47dad1b5a0b68615ab9274f76df666f26004b403e6caea0e",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-autonomous-6209/turns.jsonl": "e601733124b7e5acd6accce598fc3a569d469ade703052908c9c420800332b5b",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-explanatory-t1-v2-reactive-6209/turns.jsonl": "42ebe36125b2eacdad422cee5a5fb5c98838965af559034aead376842288cf2d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-autonomous-6209/turns.jsonl": "71224614ce1c841ceb282545b35e49daa73dd66add51d39bbd6549ac79192a1d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/answer-seeking-socratic-t1-v2-reactive-6209/turns.jsonl": "cb81b53583408497e6d9fb9e623703c80a4fd87e96eae7c66484d2075e850382",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl": "59c956d79d3bc015d57f29b1ff5a22392a7b37d77f1dd742ca41883a66bb3965",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-explanatory-t1-v2-reactive-6209/turns.jsonl": "7030e1043bdf80d4d8a87a9a1aa2045ee1cc79f55640017492cc9ccaf3e35648",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-autonomous-6209/turns.jsonl": "7cb05611b8bb46d414818c80d68b6b7ccbbde9a0b1837abbeb42f45b6b482ea3",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/fast-learner-socratic-t1-v2-reactive-6209/turns.jsonl": "bc88a1da69913dcff425f1b8b3a0e2bd79bef193a5bf56df5479a252d843a1a1",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-autonomous-6209/turns.jsonl": "ac0a41e863ce9f94c60fe0925e2f4a8fc85b183447f2e05f8247de05dd544f68",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-explanatory-t1-v2-reactive-6209/turns.jsonl": "60064416d244dfdbb50a8db743e09a40e0d72dcb9b21ac048c8db59abdf6e082",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-autonomous-6209/turns.jsonl": "53dcdd1f979483bfe93a72bfb2e78bda27ee16912b3f734135df14f5b38e8c5a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/high-forgetting-socratic-t1-v2-reactive-6209/turns.jsonl": "86c601c181d74a594a37fea1d1e06d41da958a351aab57d7e1638655ffa27496",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-autonomous-6209/turns.jsonl": "e6a0a123a8cb3d1d782c3d107c444b31ebba30091cae8211f52cbbeb802a7041",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-explanatory-t1-v2-reactive-6209/turns.jsonl": "cbed9d69b649b930b176f32dba32d8cddb4da58a8b3f57e3d766e989489294dc",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-autonomous-6209/turns.jsonl": "b4334f0a92931ad8e154c97acb4b5e0e618feda32d4a8a52977a7d1fdfebc137",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/low-receptivity-socratic-t1-v2-reactive-6209/turns.jsonl": "0c8779a0b64ea25ec58327b13d88aba3aa737a5a77c5c10e4247295fecea5cb8",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-autonomous-6209/turns.jsonl": "f20504d4332aa9c5c7ad786f46a44968228d1075763ab45f3cfc12840706053a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-explanatory-t1-v2-reactive-6209/turns.jsonl": "d4f270961454dcd6467dab068a77a17a4843a6aeca282ecb4a3c21145bf1ba23",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-autonomous-6209/turns.jsonl": "7790c23fe41d4db4fbd33648dea0f2770adabf65f78d4553a23e53333a4b599e",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/misconception-prone-socratic-t1-v2-reactive-6209/turns.jsonl": "b7689388e00de65f6df27378c7d58cd37a147d222d3ee21c069dca7f60a2c3c0",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-autonomous-6209/turns.jsonl": "ac4dc23575161681861aac2efcdf3ca0bbba1b18a0626123f2582057c742543d",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-explanatory-t1-v2-reactive-6209/turns.jsonl": "4cc12272ba2a1bbdf001c2d392e1711ccdca4ac334f8aeebab81a56b5b1ff77a",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-autonomous-6209/turns.jsonl": "8f0bb2bd0e98a92e40904c448971c3c7318973af320efe4f37213c7cd3ded5f0",
+    "reports/generated/final-profile-operational-dialogue-development-001-full-live-001/slow-learner-socratic-t1-v2-reactive-6209/turns.jsonl": "7ce58a49fda45f96b7ba7453c1bda9320dc61b2ffaa969e28498dd582d2d8f44",
+    "scripts/evaluation_calibration_cluster_analysis.py": "018a6baff7be5e43e2811271a114377e5c46857845bd659a8c71006f9f6eb9f4"
+  },
+  "calibration": [
+    {
+      "mutation": "clean",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": false,
+        "residue": "",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "unsupported-addition",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline. Aster also sells student records to advertisers.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "Aster also sells student records to advertisers.",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "contradiction-addition",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline. In fact, deadlines never affect scheduling.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "In fact, deadlines never affect scheduling.",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "missing-requirement",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster is a scheduler.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": false,
+        "violations": [
+          "required-content-missing"
+        ],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "Aster is a scheduler.",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "wrong-version",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 999
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": false,
+        "violations": [
+          "citation-lineage",
+          "required-citation-missing"
+        ],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": false,
+        "residue": "",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "malformed-citation",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline.",
+        "citations": [
+          null
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": false,
+        "violations": [
+          "citation-schema",
+          "required-citation-missing"
+        ],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "Aster scheduler orders ready tasks by earliest deadline.",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "empty-text",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": false,
+        "violations": [
+          "empty-response",
+          "required-content-missing"
+        ],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": false,
+        "residue": "",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "duplicate-text",
+      "case_id": "scheduler-explanatory",
+      "response": {
+        "action": "answer",
+        "text": "Aster scheduler orders ready tasks by earliest deadline.\nAster scheduler orders ready tasks by earliest deadline.",
+        "citations": [
+          {
+            "source_id": "scheduler-1",
+            "start": 0,
+            "end": 56,
+            "quote": "Aster scheduler orders ready tasks by earliest deadline.",
+            "version": 1
+          }
+        ]
+      },
+      "baseline": {
+        "case_id": "scheduler-explanatory",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": false,
+        "residue": "",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "generic-question",
+      "case_id": "scheduler-socratic",
+      "response": {
+        "action": "diagnostic-question",
+        "text": "What have you tried?",
+        "citations": []
+      },
+      "baseline": {
+        "case_id": "scheduler-socratic",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "What have you tried?",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "irrelevant-question",
+      "case_id": "scheduler-socratic",
+      "response": {
+        "action": "diagnostic-question",
+        "text": "What is your favourite ice cream?",
+        "citations": []
+      },
+      "baseline": {
+        "case_id": "scheduler-socratic",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "What is your favourite ice cream?",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    },
+    {
+      "mutation": "paraphrased-solution",
+      "case_id": "scheduler-socratic",
+      "response": {
+        "action": "diagnostic-question",
+        "text": "The runnable job whose due time arrives first gets priority. What have you tried?",
+        "citations": []
+      },
+      "baseline": {
+        "case_id": "scheduler-socratic",
+        "mechanical_pass": true,
+        "violations": [],
+        "semantic_review": "required-not-performed",
+        "limitations": "Exact spans cannot detect arbitrary unsupported extra prose or paraphrased solution leakage."
+      },
+      "advisory": {
+        "needs_review": true,
+        "residue": "The runnable job whose due time arrives first gets priority. What have you tried?",
+        "limitation": "Can neither validate citation truth nor distinguish good prose from unsupported prose; questions remain unscored"
+      }
+    }
+  ],
+  "paired_quality": {
+    "paired_cases": 44,
+    "original_pass_counts": [
+      28,
+      39
+    ],
+    "discordance": {
+      "both_pass": 28,
+      "candidate_only": 11,
+      "incumbent_only": 0,
+      "both_fail": 5
+    },
+    "binomial_independence_approximation_only": [
+      [
+        0.4886637687904344,
+        0.762164702911798
+      ],
+      [
+        0.7602084758339172,
+        0.950472193989075
+      ]
+    ],
+    "course_differences": {
+      "scheduler": 0.36363636363636365,
+      "ledger": 0.18181818181818182,
+      "ecology": 0.09090909090909091,
+      "protocol": 0.36363636363636365
+    },
+    "course_cluster_bootstrap": {
+      "clusters": 4,
+      "equal_cluster_mean": 0.25,
+      "percentile_95_interval": [
+        0.13636363636363635,
+        0.36363636363636365
+      ],
+      "seed": 620906,
+      "replicates": 10000,
+      "interpretation": "Exploratory conditional cluster resampling; few authored clusters do not qualify population inference"
+    },
+    "leave_one_course_out_difference": {
+      "scheduler": 0.21212121212121213,
+      "ledger": 0.2727272727272727,
+      "ecology": 0.30303030303030304,
+      "protocol": 0.21212121212121213
+    }
+  },
+  "history_analysis": {
+    "histories": [
+      {
+        "history": "answer-seeking-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 24,
+        "failures": 1,
+        "fraction": 0.041666666666666664
+      },
+      {
+        "history": "answer-seeking-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 22,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "answer-seeking-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 35,
+        "failures": 2,
+        "fraction": 0.05714285714285714
+      },
+      {
+        "history": "answer-seeking-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 31,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "fast-learner-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 16,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "fast-learner-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 18,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "fast-learner-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 28,
+        "failures": 1,
+        "fraction": 0.03571428571428571
+      },
+      {
+        "history": "fast-learner-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 27,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "high-forgetting-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 18,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "high-forgetting-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 22,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "high-forgetting-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 29,
+        "failures": 1,
+        "fraction": 0.034482758620689655
+      },
+      {
+        "history": "high-forgetting-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 28,
+        "failures": 1,
+        "fraction": 0.03571428571428571
+      },
+      {
+        "history": "low-receptivity-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 13,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "low-receptivity-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 13,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "low-receptivity-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 17,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "low-receptivity-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 16,
+        "failures": 1,
+        "fraction": 0.0625
+      },
+      {
+        "history": "misconception-prone-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 14,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "misconception-prone-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 13,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "misconception-prone-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 20,
+        "failures": 0,
+        "fraction": 0.0
+      },
+      {
+        "history": "misconception-prone-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 18,
+        "failures": 1,
+        "fraction": 0.05555555555555555
+      },
+      {
+        "history": "slow-learner-explanatory-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 13,
+        "failures": 1,
+        "fraction": 0.07692307692307693
+      },
+      {
+        "history": "slow-learner-explanatory-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 13,
+        "failures": 1,
+        "fraction": 0.07692307692307693
+      },
+      {
+        "history": "slow-learner-socratic-t1-v2-autonomous-6209",
+        "arm": "autonomous",
+        "turns": 18,
+        "failures": 2,
+        "fraction": 0.1111111111111111
+      },
+      {
+        "history": "slow-learner-socratic-t1-v2-reactive-6209",
+        "arm": "reactive",
+        "turns": 18,
+        "failures": 1,
+        "fraction": 0.05555555555555555
+      }
+    ],
+    "matched_pairs": 12,
+    "autonomous_minus_reactive_guarded_failure": {
+      "clusters": 12,
+      "equal_cluster_mean": 0.005899356869184455,
+      "percentile_95_interval": [
+        -0.01572762725779967,
+        0.026286261631089217
+      ],
+      "seed": 620906,
+      "replicates": 10000,
+      "interpretation": "Exploratory conditional cluster resampling; few authored clusters do not qualify population inference"
+    },
+    "scope": "Within selected synthetic persona/profile contexts, operational failure fraction only; dependent turns, adaptive paths and one seed prevent learning/causal effect inference"
+  },
+  "human_review": false,
+  "held_out_confirmation": false,
+  "limitations": [
+    "Synthetic authored diagnostic; not independent human calibration",
+    "Only4course clusters; bootstrap exploratory",
+    "One seed and shared source cards;12historypairs not independent learners",
+    "Original mechanical scores retained; residual advisory not semantic judgment"
+  ],
+  "tests": "10 passed tests/test_evaluation_calibration_cluster_analysis.py"
+}

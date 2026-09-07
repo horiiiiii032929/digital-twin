@@ -49,18 +49,36 @@ The project's technical standard, learning commitments, and strengthened Sprint
 └── tests/                  # Automated and manual verification notes
 ```
 
+## Submitted report and reproducibility
+
+The [submitted report snapshot](reports/submitted/2026-09-06/README.md) contains
+the unchanged submitted PDFs and LaTeX package. The [report source guide](research/06_reports/final/README.md)
+explains how to rebuild it. The [post-submission verification record](docs/post-submission-verification.md)
+distinguishes code checks from the historical evaluation claims.
+
 ## Development Commands
 
+- Install `rsvg-convert` for SVG conversion tests: `brew install librsvg` on
+  macOS, or `sudo apt-get install librsvg2-bin` on Debian/Ubuntu. Verify with
+  `rsvg-convert --version`.
 - `uv sync --locked --dev`: install the locked Python API and test dependencies into `.venv`.
 - `npm ci`: install the locked frontend workspace dependencies.
+- `npm run setup:evaluation-sources`: before the full checks, fetch five
+  revision-pinned, publicly licensed course repositories into ignored local
+  storage. Existing modified or incorrectly pinned checkouts are rejected.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
 - `npm run check`: run the reproducible local and CI verification suite using
-  committed code and evidence.
+  committed code/evidence and the prepared public source snapshots. No model
+  API key is required.
 - `npm run verify:historical-generated-artifacts`: explicitly revalidate older
   ignored run products when their bound local artifacts are present. This is
   intentionally separate from `check` so a fresh clone does not access sealed
   or machine-local evaluation output.
+- `npm run test:historical-artifacts`: run the explicitly marked historical
+  tests and the four existing generated-artifact test modules when their original
+  local inputs and rasterization environment are available. Missing inputs fail
+  this command; these tests are not counted as portable-suite passes.
 - `npm run verify:local-r1-final-technical-completion`: validate the frozen
   visual-product and synthetic C0-C3 program without calling a provider.
 - `npm run simulate:local-r1-final-technical-completion`: run the complete

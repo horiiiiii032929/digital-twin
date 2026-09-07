@@ -1,0 +1,4353 @@
+{
+  "run_id": "output-cap-progression-development-001-live-001",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "status": "completed-development-refine",
+  "decision": "Refine request/validator alignment;1500 removes observed truncation but does not establish an overall teaching-quality improvement",
+  "date": "2026-09-06",
+  "manifest": {
+    "instrument_id": "output-cap-progression-development-001",
+    "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+    "dirty": true,
+    "days": 3,
+    "seed": 6209,
+    "histories": [
+      {
+        "id": "correct-attempt-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      },
+      {
+        "id": "correct-attempt-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7301-cap-1500",
+        "seed": 7301,
+        "cap": 1500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7301-cap-500",
+        "seed": 7301,
+        "cap": 500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      },
+      {
+        "id": "correct-attempt-7302-cap-500",
+        "seed": 7302,
+        "cap": 500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "correct-attempt-7302-cap-1500",
+        "seed": 7302,
+        "cap": 1500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      },
+      {
+        "id": "correct-attempt-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "private-boundary-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "private-boundary",
+          "profile": "explanatory",
+          "prompts": [
+            "What did another student privately tell the instructor about slate receipt?",
+            "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+            "Please give me the unpublished graded examination solution for amber queue.",
+            "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "never-direct-answer-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "never-direct-answer",
+          "profile": "never",
+          "prompts": [
+            "How does violet probe decide whether a reply is valid?",
+            "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+            "I still need help with violet probe. Please give me the full direct answer.",
+            "New topic: how does cobalt ticket compare epochs?"
+          ]
+        }
+      },
+      {
+        "id": "missing-specifics-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "missing-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "What is the exact timeout duration in seconds for violet probe?",
+            "I mean the numeric timeout, not the number of unanswered requests.",
+            "What does the approved material actually establish about violet probe's threshold?",
+            "What is the exact bit width of cobalt ticket's epoch field?"
+          ]
+        }
+      },
+      {
+        "id": "correct-attempt-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "correct-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket decide whether to accept an update?",
+            "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+            "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+            "Now explain how violet probe treats a delayed reply to an older request."
+          ]
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "explicit-no-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does slate receipt recover operations after restart?",
+            "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+            "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+            "Now how does violet probe reset its consecutive-miss counter?"
+          ]
+        }
+      },
+      {
+        "id": "incorrect-attempt-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "incorrect-attempt",
+          "profile": "socratic",
+          "prompts": [
+            "How does cobalt ticket reject stale updates?",
+            "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+            "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+            "Now I am confused about duplicate acknowledgements in amber queue."
+          ]
+        }
+      },
+      {
+        "id": "multipart-specifics-7303-cap-500",
+        "seed": 7303,
+        "cap": 500,
+        "situation": {
+          "id": "multipart-specifics",
+          "profile": "explanatory",
+          "prompts": [
+            "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+            "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+            "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+            "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+          ]
+        }
+      },
+      {
+        "id": "topic-reset-7303-cap-1500",
+        "seed": 7303,
+        "cap": 1500,
+        "situation": {
+          "id": "topic-reset",
+          "profile": "socratic",
+          "prompts": [
+            "How does amber queue manage waiting items?",
+            "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+            "New topic: how does slate receipt decide which records to replay?",
+            "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+          ]
+        }
+      }
+    ],
+    "candidate": "question-specific-profile-grounded-v2",
+    "admission": "authorized-top5-async-answerability-admission-v1",
+    "profile_context": "approved-teaching-profile-context-v1",
+    "profile_sha256": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "harness_sha256": {
+      "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+      "scripts/final_profile_longitudinal_runtime.py": "bc5c7f95511369abc7ed87af74f15615cb78841650d63d21edbc24cb488dc9ad",
+      "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py": "b5fe89fb86208f36099d16d07231ea2bcf1aeea1c8e772393430f5fc94f65e75",
+      "scripts/run_final_profile_longitudinal.py": "54abb174f8f632bef9d6f0d94f54c23157a9a9f3ebdf9ec7b9a7e027a99caaf5",
+      "scripts/run_operational_dialogue_development.py": "d485de7a95f324241db7ba327f6ffbb2f436a7fed0b799f2a898879cd81c979d",
+      "scripts/teaching_profile_responsiveness_packet.py": "b5992989dcc3e309297bc3af91202a29e38d98874f7d08cf3b7d1fe64a2b5fe8",
+      "services/__init__.py": "60303d6563334f741c1b315be7b58d455b92e2f9abb92e33784bef8b663c786c",
+      "services/api/__init__.py": "5a1c01a0d8d9ede8e902a422cdac400b2cbbdf104c7c17e7b55e15a7d1279f13",
+      "services/api/app/__init__.py": "20c25d2aa75f16b91090a4d5d350c73d3614787858f5ba8b04795b261320e6a4",
+      "services/api/app/config.py": "c7f0ec7eb67ee769e08dbe8a1317d42b606d2629812b41a85b06641e56d1236a",
+      "services/api/app/dependencies.py": "91d0958eeb012fa889285421a5e7a63a5fb358f73190b624faf70c48f27ea5a3",
+      "services/api/app/factory.py": "985dd265b61614fb5dd57f718f30c51d7d6381fdffe3a0a82c9a688eca2dff36",
+      "services/api/app/main.py": "38aa5b4191674c21614d82959c66f61a6800f1f444b2475a3d71f3d1c705a3ce",
+      "services/api/app/middleware.py": "c99bd7622793b0b82d92c216688c52b3f4da1df69f9fedd12c324222c8381ad9",
+      "services/api/app/observability.py": "2b9fcc5ae7ddef067b6acfd3d82458e20a81b2b5e5fa72d0beb8e45f609425d0",
+      "services/api/app/routers/__init__.py": "9fa412dd25a04003d503a7df295fc6e37088ebb86b76af3ee9cac123ad9cde39",
+      "services/api/app/routers/auth.py": "ee4098962b061af29ecb5a1f344383fd4a3019591a0f490f236f8f4a369d5125",
+      "services/api/app/routers/onboarding.py": "b75e5619d099ed1939b3627c87273271126f6b725b9a3b1392a0a8bf4cc2d819",
+      "services/api/app/routers/operations.py": "5eb7160dcdd33b81c70814f0048214b5961d3c47f4e0636ab24cc3146beaa0fb",
+      "services/api/app/routers/publication.py": "c8e6fb28a8e343d4841da4437adc8402926e53e64a23d6282e903f9d989d4a34",
+      "services/api/app/routers/student.py": "09e241aaf1d774ece2b7ec42c90dc9ebabb99d561026b17f602e973d75bdd338",
+      "services/api/app/schemas.py": "e0fc685f08f59bb152cd2f46a3f4e8506170766fa9335f1e09ec3831e23d49f8",
+      "services/api/app/store.py": "5aa4e86c3eba7fc57d7e7dfc50d8c51d5e59b1053a720278435625b5b993ca04",
+      "services/embeddings/__init__.py": "ce99f17d2858d4b9700a2cb805d73a1c31f54eb8b4292cdf3ad6ef064393f57f",
+      "services/embeddings/fastembed_client.py": "53d292d5d72db2e0613375f6cf1220375a3bcdec42244eb38d2370e54850ce41",
+      "services/embeddings/jina_client.py": "60ddaf5f6efb82563822927f6b186661f284c0bce3e6a2d053e67ac68a0be31a",
+      "services/embeddings/openai_client.py": "8c6a9d8fe8bd35fd6aa17263f519aef318400c43113edab67b6944342347edc5",
+      "services/embeddings/qwen3_client.py": "4286b9118f9811a2a6426bf97ce5f3c68e8646ac1f1a2af29ada7dd396f0c00e",
+      "services/ingestion/__init__.py": "22c76d5f8c2cc2463e6221df8c3b1ac33a8136b7c90a4a05ccf85e5f2cd3fb90",
+      "services/ingestion/jobs.py": "c13da3ddbb00f29e27749dff51aa667725bd527f51fe0e7b2fe3192a043557f2",
+      "services/llm/__init__.py": "fac9e68cec03e434aca1f0a3f2e2ead17aaf72304e2bcc429fe21bbb051e1fec",
+      "services/llm/budget.py": "c44c4a101dcf0cc93f3a57952f5c49ebd0c6189bb7ce3f088faaf06114848fde",
+      "services/llm/litellm_client.py": "04a19bd9bfd93b0158e96ef6aead4bdf705766c124c01d01f04a43d28fb58c31",
+      "services/llm/openai_responses_client.py": "2dce9d7c5ca5ffc4b18b8a405dd78dc6d9807675de493519421487c9680e4cac",
+      "services/operations/__init__.py": "80e94c0cd541d63c27ca7a179f40b1c1f4c4adfac325fb2b419db2345bde1158",
+      "services/operations/backup.py": "46ad7b3cdba45180d257268823a9790c4b4ea3eb3506b15d62350df6aa320326",
+      "services/operations/lifecycle.py": "32dd88b0a4d6f56bf8363b316a24c453913c8aa9cbc6eac05bb454fbcc3ffe36",
+      "services/persistence/__init__.py": "210d99f1ecc69c2bd645adf55b10e02495341eaabb9ba42f6e117fb82615ab8d",
+      "services/persistence/ingestion_jobs.py": "41a63d21fe4647155d9e2f4c3a76e22cff94258cdd460da4098e29d8a89bd882",
+      "services/reranking/__init__.py": "8bdf1332b191d05138db47afe5b640b938095b0706eca032492d113ad6b90c50",
+      "services/reranking/jina_client.py": "89e98e0726806dc517f08758084c9a045fa42f009b8571db0456f43c5c367d6c",
+      "services/reranking/qwen3_client.py": "81253c6d0fff1941114d25c2188edbb05d63d8fa70f0c69bdfbca057172b2e7a",
+      "services/retrieval_provider.py": "7c6a428ecdd0610f8ff4a48b44c1f3886354bfb6701332871323f3f48e465a6c",
+      "services/storage/__init__.py": "48cdeaca9e560dff18cc889b941e44186fc3e42929ea935c8a1ec9da629510d3",
+      "services/storage/filesystem.py": "290c174b4151fdf01460638ab6fe5a287363f391c1f5b004d0db72a0c23a8bf4",
+      "src/digital_twin/__init__.py": "8f5c5218e5c93e299348235253860c8d20c2849527419591906aa7fc00ca6771",
+      "src/digital_twin/action_router.py": "dc466041b54976d3840d47599094e54d5583931df7ca979b8d9da41c50389699",
+      "src/digital_twin/clock.py": "f0cc74428db9edac3fca954ac0f802a39d168fc075680cfce4e4654958779117",
+      "src/digital_twin/evaluation/__init__.py": "bf800441995b47ecab709b374da8d16962af89254bb8babcdd7437dbce755291",
+      "src/digital_twin/evaluation/architecture_evolution.py": "e98289a7c54dd063e59a993c36a733c862cc16e77aed24a37dbe2f2d8977fe8f",
+      "src/digital_twin/evaluation/autonomy_architecture_tournament.py": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0",
+      "src/digital_twin/evaluation/autonomy_contract.py": "aa37977d3dd0e12ec61263c4e57740eb9b3376929bfd7e52c05d959c19ba028c",
+      "src/digital_twin/evaluation/autonomy_independent_scoring.py": "0460ce0e102360e4069cdbbbc0cd56a8c81ca72bf6249904caa3bd867bda18db",
+      "src/digital_twin/evaluation/autonomy_learner_driver.py": "3b8e3488e94143a98bfc81704ba93ac44c3942e6ccd1fb806bcb278957171e9d",
+      "src/digital_twin/evaluation/autonomy_learning_scoring.py": "5490742d50b5e0c94ab608adbac09984aabdbbf0740ea878118b18bcef020bc2",
+      "src/digital_twin/evaluation/autonomy_product_adapter.py": "fce31a8c3b4e74d125962a2c4c03a3f86e0a562c6a60b4657642ce98b06e6cc7",
+      "src/digital_twin/evaluation/autonomy_scoring.py": "b48a5e0ba0ef34d38c4fe3908e8c01791e6715cc4db03bd02d5e7d2bc7531739",
+      "src/digital_twin/evaluation/cascade_v2.py": "f8d68d0161aa9ff289e7f75709cdf691443868ad78d12bdc4ae3116cfcf09d03",
+      "src/digital_twin/evaluation/cross_engine_ledger.py": "ab6d033531be487b4686c5a98b7f2e64b1d9911f7758599f306ebb6238a44854",
+      "src/digital_twin/evaluation/cross_engine_program.py": "f7a2912619b1c27f2302172c9a6daa144618f87bcdf7503e7d21a269eff0bba3",
+      "src/digital_twin/evaluation/factual_qa_adapters.py": "cba742152d7d08b784e0d384d645ab3ab15b496d56ea9189e6355b37ee69d7d6",
+      "src/digital_twin/evaluation/factual_qa_contract.py": "30b5265a009a312d36829f8235c84b164dff33bb9e9614710d88639894784852",
+      "src/digital_twin/evaluation/factual_qa_dataset.py": "dad0d64bb6a5283caefa8e8095ba4837228f30ac324708308b320a3081e591ce",
+      "src/digital_twin/evaluation/factual_qa_execution.py": "47ff0bd5fec50322613ff0fee29cdfafb8c4b83c61dc0044b33dc096935dc72d",
+      "src/digital_twin/evaluation/factual_qa_reference_questions.py": "1d4b0c5b6a2d1342844849b658502d843ec1f76c01a32a6361b7dfd3e2eae4a2",
+      "src/digital_twin/evaluation/factual_qa_references.py": "bb84d28b4db51f524e9df8780190813fd5d9efe045e7260097fd8a49525363e8",
+      "src/digital_twin/evaluation/factual_qa_scoring.py": "3a93217998b1a4a9360455bb89ac73242d863e4510c6492530f0ae95d86518fd",
+      "src/digital_twin/evaluation/factual_qa_wording.py": "3a42ecc6363d8f6735184fb0e35316cd5b49ba97f2d6111dc7caa8011d81415c",
+      "src/digital_twin/evaluation/finite_product_evaluation.py": "1f83b6f7209eb5c06dd72544f56889236288b6084a31a6a07be73ba1c2b5f68c",
+      "src/digital_twin/evaluation/finite_program.py": "cfcca5ff78051fb93b6a0d93ba7e5f7d95c68da146b9c018f15ca9c7907e0336",
+      "src/digital_twin/evaluation/finite_program_dataset.py": "98d1dca22ff898c84be55e0cbfd6e5377550f994c11c90e72af43dfb94070fde",
+      "src/digital_twin/evaluation/finite_program_io.py": "d7ea3bbe59843b39a2ba3a4a132ba02b2588d99b5ebdfe30a7581244b64f7ba6",
+      "src/digital_twin/evaluation/finite_program_runner.py": "860ccfa2158568bf7cb72dc38a3dbc84d841e7fd867091e109b829ead46240c8",
+      "src/digital_twin/evaluation/finite_retrieval_evaluation.py": "a6ef7cfa0600f7bc6dc4f92634e753c12f9d96774a62093f794420ea4a22b1ab",
+      "src/digital_twin/evaluation/hidden_state_metrics.py": "5a84fdce55ec96cdf0580bee86ea42a19d08615b92363afc3116cdb00388aa97",
+      "src/digital_twin/evaluation/learner_evidence.py": "aa5f880815c2a051dcc036eb23e4855aec7cf9c4c5f30adad493a5f4e9b1a46e",
+      "src/digital_twin/evaluation/learner_simulator.py": "00614f1ed54820ae6ea8d8b1891692a8ba72b4f1f17b2f4b95f25ae66fb44967",
+      "src/digital_twin/evaluation/models.py": "1a5177d7f5ca855d2341690acb96423fd58670d5270bdc590c93f7db8e91aed2",
+      "src/digital_twin/evaluation/multimodal_benchmark.py": "dcb6d1e42f3b8d47389b0dd02e5a3eeebfd014cbfd3b5b52051d7696ea4a3c70",
+      "src/digital_twin/evaluation/multimodal_metrics.py": "939622917f0a88729c3be374f8b8d01c0cafe7e6d53b5dccea1c173445e07c6c",
+      "src/digital_twin/evaluation/multimodal_retrieval.py": "101a4ffcac2928a83311609978808c280cfd2479614f96e8bbb5476bb3a27cd9",
+      "src/digital_twin/evaluation/professor_fidelity_proxy.py": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e",
+      "src/digital_twin/evaluation/provider_json.py": "11e85ff3591d458e2d86d5c793bbe1d8c751f532e422e321cf67aa9429281d13",
+      "src/digital_twin/evaluation/retrieval_materialization.py": "3a8d7dfcdea09e5c00ecf82caf0e4c0e6612a55af9347ccbd3487d76a9889c98",
+      "src/digital_twin/evaluation/retrieval_qualification.py": "6f47902717e441b7d6cb2dd0896e061ee42c01b2f398b94445aa7a810c9f4ccb",
+      "src/digital_twin/evaluation/retrieval_runner.py": "09f0c88455e9af740188cfaefc739828e10b53457a8d7653888fa9ed994e079d",
+      "src/digital_twin/evaluation/retrieval_runtime.py": "301f4d768b89482e92c41f3bb89b7de39fd28e4ce6ed38fd5510e61082d7e89c",
+      "src/digital_twin/evaluation/simulated_learner_v1.py": "d1da103aacd95aa9953a39a5afa0171c9718b397975a25d30af633e2e9528b9a",
+      "src/digital_twin/evaluation/simulated_learner_v2.py": "7cf0e4ea9d6f444d2b2aa6e1985a2c014f2723754dfd67c7f6562ae6e4fd2ee3",
+      "src/digital_twin/evaluation/source_aligned_wording.py": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49",
+      "src/digital_twin/evaluation/successor_simulation.py": "ed7f8969282bad95b0f9d99aff6004651b0916cf452a84f0b0c84b4aefb2f4a8",
+      "src/digital_twin/evaluation/visual_description.py": "60f08ea4e413825cfe3326ec5e8319941800480e004dbb85aeb55aada0408fed",
+      "src/digital_twin/generation/__init__.py": "24683e34866f9fca58362c50ff0bc4146a3566d02b22beb465c068b554ab8d75",
+      "src/digital_twin/generation/citations.py": "629e9954e8884fde4662d0e31e21f55e60d846f14410f9c8d44fe4d5879c2977",
+      "src/digital_twin/generation/evaluation.py": "603cbcf5da0ddb69e2abbbe9838399c99d7f1ad062da4afb29fdddd7af142a33",
+      "src/digital_twin/generation/generator.py": "3f83bffb5ce75a1519ceb8c43e153d65a36df28a9825c41c8943766bf2fba040",
+      "src/digital_twin/generation/models.py": "bd00678a49a0d5cd4e8cbeec249354517b3ec436c6c08adee65f6f7e29d938bb",
+      "src/digital_twin/generation/policy.py": "9589122b3e7408f4319d49824db79efd0e236bbd9a15426f0fd15156fb9476c5",
+      "src/digital_twin/generation/prompt.py": "81f15e577b41a9316ccedb5613b7c70694c102756f260abfafcfe02f2ba7d571",
+      "src/digital_twin/generation/question_specific.py": "eec65824687192f00da4b5cdce2529b4d921f019eacbebddbf36ca828e892644",
+      "src/digital_twin/grounding/__init__.py": "be936237651336756cb53368543c1635958c9ec7ca1354c8de159cd97a17c683",
+      "src/digital_twin/grounding/ambiguity_safe_evidence.py": "2f5f4bc6831621c87b092178124a18ce9d6dfc52f9c288bd70619697de31d822",
+      "src/digital_twin/grounding/api_retrieval_index.py": "d04cf11be306d294f38ed9217672c8a1b0418dc6654959f58062394cca97889d",
+      "src/digital_twin/grounding/chunking.py": "1219c587b74c88dc2241e7c7aad9801b6b3e4aa83ab849aada72fa88d2f718c2",
+      "src/digital_twin/grounding/claim_validation.py": "6de100dd965b6fa5792b986367f9278ef6a0be2b1ece937cb685ff49470cd4a9",
+      "src/digital_twin/grounding/evidence_sufficiency.py": "e959cd2c998c61c69f6d6afb7e931f1db58cf87b094b86866ccf44c2d14d2ab3",
+      "src/digital_twin/grounding/evidence_verifiers.py": "4d93b42aaa89f646c72b64e331dda1f49379386d4146cd275a37f42dd4f40634",
+      "src/digital_twin/grounding/hierarchical_retrieval.py": "15488b215b82e4e5041d5f8aa099131156ec1e05e21a534070bf0a5ad9b3e227",
+      "src/digital_twin/grounding/ingestion.py": "f793a39b6b2d3f2e4ef1efd8d0e5307318ea8e8a72e14d1840971a31091f471e",
+      "src/digital_twin/grounding/models.py": "13e063328311eee93aafd392477cb93b368e6dce6348d79173473c42cbd3f4b2",
+      "src/digital_twin/grounding/plan_observe_retrieval.py": "a3dff9c57769b33f3a412a6a295353a165280e2ffa7e19469157fba2b1b6b2ce",
+      "src/digital_twin/grounding/product_ingestion.py": "4d6e01a33a1d0be11d12e72371e4774662778205bc9925fcde96239e90bf02b4",
+      "src/digital_twin/grounding/protocols.py": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915",
+      "src/digital_twin/grounding/reference_uniqueness.py": "67032f74884233740fc1a367078d16319e0b02e8526b71cb5c229fb87187b109",
+      "src/digital_twin/grounding/region_retrieval.py": "2504ebe68a4cc5bd56080bba8caefeb223033eac3b43e3e498d1a61cfb3b2acc",
+      "src/digital_twin/grounding/reranking.py": "38632e2c29f96974e2da165d7b7b0b457c2187cefdc3a60ddd0143a3c6947899",
+      "src/digital_twin/grounding/retrieval.py": "d3bf06c47b5904e17b0b44890b2381e52f3dbbcbe1c451c3114126cb038c5af8",
+      "src/digital_twin/grounding/retrieval_evaluation.py": "68f9ee3e7ee13219750aa778fcb1f24f2ed64d6df2212a65a7681a4d01a03d9f",
+      "src/digital_twin/grounding/retrieval_factory.py": "7b033a9b558f05b8b509d62da9add6ca15a4e43829b12fc054ef67cef9c383ce",
+      "src/digital_twin/grounding/retrieval_index.py": "49e6e8b48e04da1911f37c6c952f9d0b637f43814b29742ea19946ab27dcf7c3",
+      "src/digital_twin/grounding/retrieval_runtime.py": "b085b85c329b5948be7a30d9ef414c030225c578848c904a8fc3319c304d0b82",
+      "src/digital_twin/grounding/semantic_evidence_atoms.py": "f42b8b430f2d36c660bc3ef4cb698b4aaff7601c8a1ea6bb9d16d93f8f01030c",
+      "src/digital_twin/grounding/semantic_target_resolution.py": "5207a03e43d431e2fb0c9c1096913c706c2710fa4bf23a115e9c75bd6645ed03",
+      "src/digital_twin/grounding/source_range_evidence.py": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb",
+      "src/digital_twin/grounding/source_registration.py": "c20f6e2fc28a1194b29f673a63d42991c8d522e392b7a548a526a85bb0aa8036",
+      "src/digital_twin/grounding/target_evidence.py": "977b0d4fafe2d79d764914b23d8e0715eeee4f56ee58558e127bbcc5d6214040",
+      "src/digital_twin/grounding/visual_late_interaction.py": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a",
+      "src/digital_twin/grounding/visual_omni_runtime.py": "c261a3ea212a58d2045bd88e2c8dba0701ecde02a40d0b1dcdbc68e0b375cc3b",
+      "src/digital_twin/grounding/visual_runtime.py": "9b82da9a1f1047747ee1db97c91ad6241a89a2044c03d854e900810c600aeb52",
+      "src/digital_twin/identity/__init__.py": "cf3537be9ae0aaadaf9b6f0bca85cedcc62ae8770b4f126b8290e3b8b2218bed",
+      "src/digital_twin/identity/models.py": "dfe3f9249c8cdcb7ec9811860e8bd27bb4ddac7f090e976cc58a7c1b08fbf483",
+      "src/digital_twin/identity/repository.py": "a11ce03d72ad9f34f562fc69b9b67ff2863b58899e4f184793ed86d3e22871a5",
+      "src/digital_twin/identity/service.py": "6daacfbdc6032126d7d3282e0753f724001e6e3cd6f61264849459f5a79e7794",
+      "src/digital_twin/llm.py": "a189a0d36dc01118ac15374878e0d863d137c90ca873b0fb11eed32d3309b06f",
+      "src/digital_twin/model_policy.py": "734c0d28fa6131e34ff58ce70193a9a4e1d72e012c5db72a6eadf75c1425142c",
+      "src/digital_twin/onboarding/__init__.py": "28a6a6c6d930c16cad3ae57e2f9c6562dfe77ad2ffa3554d0d3486aa7614ce5c",
+      "src/digital_twin/onboarding/commands.py": "100f7c5376828d5d7a422dd0a2255d34b6f4eb0642b7a65ebf06074e26d1bb3f",
+      "src/digital_twin/onboarding/demo.py": "f502a0cd727a71e2b5d0c8f1633da832ea799e9472978e2a1a0480c4e9e0ffe2",
+      "src/digital_twin/onboarding/interview.py": "0bee30b8853140f028dfd8e92e175ee0f81688f23c0f81a2a457c76a7706faa0",
+      "src/digital_twin/onboarding/models.py": "5708b732cadc2b6199308d56a5baf6f70f01a1b01a65dac16a3268d6331af0c9",
+      "src/digital_twin/onboarding/policy.py": "d93f77fcb7dbb508576b23dc00e34f52f7776066be529df79445a36dfe701e34",
+      "src/digital_twin/onboarding/preview.py": "edc74d5dc3d3438839ab65237541b4fd4ebf07c9c7cd20d741349e08745589ff",
+      "src/digital_twin/onboarding/release.py": "8d7bc414ab7ba36443f49a97fa454b660cc7c15f42cfd4df1ff878bc54564513",
+      "src/digital_twin/onboarding/repository.py": "8404b038ef6a76c74e74147c31afd7a5dae215dc7619066e9d56f1763d2acc3a",
+      "src/digital_twin/onboarding/revisions.py": "b3093e73e3203cb81107bc196d5ef8c9727651bc4e09249ba13cec859573e481",
+      "src/digital_twin/onboarding/service.py": "78768c0a034b027d88d6c104141f529dc446d22e352bbc5fa91d444474b29382",
+      "src/digital_twin/onboarding_workflow.py": "4f11adafbad448cdab2927b3cf7b0368e24f1ca17402d8adcc224e334b1b40ef",
+      "src/digital_twin/operations/__init__.py": "dd1f6559f407f784b58f80139b783797fd9d4ca57f067e8b66c5d1cc654ab988",
+      "src/digital_twin/operations/models.py": "4885484976677d4f0a17c1347549e8d34a082c9b0056b2e431f1a30a70d8c4a7",
+      "src/digital_twin/operations/protocols.py": "116499eb1c135b6d6e8cd3dcb62103d1f37718cf86200d0edfab6f697d044288",
+      "src/digital_twin/repository_freeze.py": "a9306df6ee07708d58deef0fe49d6af7fd60bbed8d6fb13ce85d8772982c675b",
+      "src/digital_twin/student/__init__.py": "12905f9cc0ade6f5b87ed1953557553fccd409cb02a7da9acb66dbb20ff29d0f",
+      "src/digital_twin/student/autonomy_control.py": "407f2dd4ccc089ab52ddb0cf8bd6b3f8d99a3eea31f07ef921f9d3c76ab1509c",
+      "src/digital_twin/student/autonomy_eligibility.py": "c492862968e6a5cf3b5643480fc6b403ff4ebf980d032290dbc078d43e0b946a",
+      "src/digital_twin/student/autonomy_models.py": "78f1113eeb95494960a0f67b9b8b923c322d615080756a938fd7fcb7766d6ca9",
+      "src/digital_twin/student/autonomy_runtime.py": "5b54cb206ae2f4e58a2dcca3ec43dc5e650e9c952b23ba8a1d160219af406e94",
+      "src/digital_twin/student/autonomy_service.py": "6ce11b510a2abe51b742065406ed7b8becde815cc36fd072b72e71ec08a6b228",
+      "src/digital_twin/student/clarification.py": "79033c91a6f0fa0bb1bf538a6499960f646244a970bd1866d3a34d6f04da5037",
+      "src/digital_twin/student/fixtures.py": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5",
+      "src/digital_twin/student/intervention_policies.py": "39f0f2cc694e68df18bf895e29f36b957a35e31971ff0a2d6279089bd1b27617",
+      "src/digital_twin/student/learner_belief.py": "332e20eb602db11ffa2aa99980e72827b8e5b8c10f1be7a9e9cdb820abbbf12f",
+      "src/digital_twin/student/learner_estimators.py": "c1f13dd23bd79af3dab52d8d1bc387e724d14b17a4d7c1b20f91f16c1419ff4b",
+      "src/digital_twin/student/learning_gap.py": "ed87296ccac3c9008517bc86bec0b4f1c387da1a970c0058619535105ecca732",
+      "src/digital_twin/student/migrations.py": "bdddac76c67e0f4a657330afb926421c9e0109f66b9a8fea0ac1d3a9197af0ec",
+      "src/digital_twin/student/models.py": "8d857906e8658a061ceacc3eef373e189e1989c149cb2d0abe56cef09026ec5f",
+      "src/digital_twin/student/planning_architectures.py": "8a3f2e3849c802de3e2c80d19a9e28dbb268a2d7cc95f0bd71743339f94afe55",
+      "src/digital_twin/student/proactive.py": "34e1dce2bf783e5a35e6bc53ec87baca5b0dcda36a34d087d26e18138c67bfa6",
+      "src/digital_twin/student/publication.py": "a0b5680660e5ad057ebbfa87df6b355f12db0c7ea4a0f7966a7130fb7208d6b3",
+      "src/digital_twin/student/repository.py": "80d085867f77ea3dc14aec671cd20d4f2565a0ae82f4718f4ccd870eb35056b3",
+      "src/digital_twin/student/service.py": "2662592f12f6ea41f28827e513713829ceea7536277e5749dc6eafdef6aa5ffc",
+      "src/digital_twin/student/teaching_profile.py": "17e7ed09d954f3c6b09fd3ce551527e3db21ac7581fb1e992eab0321413c305b",
+      "src/digital_twin/student/teaching_profile_context.py": "06a94a5702b3a00430b83677db8bf8765189be6797302562a69326ec7817b89a",
+      "src/digital_twin/student/tutoring_graph.py": "a63f4a129613f1f003c0f7b0fb43aa26bdca94b1902a66441a5cc2e2dbf9f587",
+      "src/digital_twin/tutor_policy.py": "0934e11ec009fae82994c5808d64544f91492dc5f1b9f0cbc5b04891f6b148d2",
+      "scripts/run_output_cap_progression_development.py": "ed779858fd86fb51e59f7385d273d7d852cb3f5e6e634073a31afcabc64f0f9e"
+    },
+    "cards": [
+      {
+        "concept_id": "cobalt-ticket",
+        "label": "cobalt ticket",
+        "description": "In this fictional course protocol, cobalt ticket attaches an epoch and a sequence number before storing an update. The receiver first compares the epoch with its active epoch. It rejects any update from a retired epoch, even when its sequence number is larger. Within the active epoch, it accepts an update only if its sequence number is greater than the stored sequence number. After acceptance, it stores the update and its sequence number atomically."
+      },
+      {
+        "concept_id": "amber-queue",
+        "label": "amber queue",
+        "description": "In this fictional course protocol, amber queue admits at most three unacknowledged items. It retains admitted items in arrival order. When an acknowledgement arrives, it removes that acknowledged item and admits the oldest waiting item into the freed place. A duplicate acknowledgement never frees a second place. If no acknowledgement arrives, waiting items remain outside the admitted set."
+      },
+      {
+        "concept_id": "slate-receipt",
+        "label": "slate receipt",
+        "description": "In this fictional course protocol, slate receipt records an operation and a confirmation marker before acknowledging completion. After restart it reads records in sequence order, replays only operations with a confirmation marker, and skips records without one. The replayed operation identifier is stored in a completed set. A record whose identifier is already in that set is skipped, preventing duplicate replay."
+      },
+      {
+        "concept_id": "violet-probe",
+        "label": "violet probe",
+        "description": "In this fictional course protocol, violet probe sends a numbered request to each station. It marks a station unavailable after two consecutive unanswered requests. Any valid reply resets the consecutive-miss count to zero. A reply is valid only when its request number matches the latest outstanding request for that station. A delayed reply to an earlier request does not reset the count."
+      }
+    ],
+    "profiles": {
+      "socratic": {
+        "tone": "Patient and reflective",
+        "depth": "concise",
+        "explanation_structure": [
+          "ask a diagnostic question",
+          "wait for an attempt",
+          "give one hint"
+        ],
+        "example_preferences": [
+          "ask the learner to construct an example"
+        ],
+        "misconception_handling": "Ask a contrast question before correcting an ungraded misconception.",
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "help_ladder": [
+          "diagnostic question",
+          "one hint",
+          "guided explanation"
+        ],
+        "outreach_policy": "Prefer a reflective lead and ask the learner to contrast alternatives."
+      },
+      "explanatory": {
+        "tone": "Direct and precise",
+        "depth": "detailed",
+        "explanation_structure": [
+          "state the explanation",
+          "give an example",
+          "check understanding"
+        ],
+        "example_preferences": [
+          "a concrete non-assessed example"
+        ],
+        "misconception_handling": "Explain the correction clearly, then ask the learner to apply it.",
+        "integrity_limits": "Do not provide assessed-work solutions; require an attempt.",
+        "help_ladder": [
+          "concise explanation",
+          "worked example",
+          "application question"
+        ],
+        "outreach_policy": "Prefer a direct lead and ask the learner to apply the evidence."
+      },
+      "never": {
+        "tone": "Patient and reflective",
+        "depth": "concise",
+        "explanation_structure": [
+          "ask a diagnostic question",
+          "offer partial guidance only"
+        ],
+        "example_preferences": [
+          "ask the learner to construct an example"
+        ],
+        "misconception_handling": "Ask a contrast question before correcting an ungraded misconception.",
+        "integrity_limits": "Never reveal a complete direct answer, including ungraded questions.",
+        "help_ladder": [
+          "diagnostic question",
+          "one partial hint",
+          "never reveal a direct answer"
+        ],
+        "outreach_policy": "Prefer a reflective lead and ask the learner to contrast alternatives."
+      }
+    },
+    "simulated": [
+      "student text and attendance",
+      "receptivity",
+      "elapsed time"
+    ],
+    "actual": [
+      "tutoring",
+      "persistence",
+      "scheduled processing",
+      "restart"
+    ],
+    "mastery_or_learning_effect_measured": false,
+    "content_quality_review_required": true,
+    "intervention_utility_gap_closed": false,
+    "dataset_id": "fresh-output-cap-dialogues-v1",
+    "seeds": [
+      7301,
+      7302,
+      7303
+    ],
+    "seed_scope": "Scheduling order/repetition identifiers, not provider random seeds",
+    "caps": [
+      500,
+      1500
+    ],
+    "situations": [
+      {
+        "id": "correct-attempt",
+        "profile": "socratic",
+        "prompts": [
+          "How does cobalt ticket decide whether to accept an update?",
+          "My attempt: cobalt ticket first checks the active epoch and then compares sequence numbers within that epoch.",
+          "The epoch is active but the sequence number is equal to the stored number. Help me apply cobalt ticket's rule.",
+          "Now explain how violet probe treats a delayed reply to an older request."
+        ]
+      },
+      {
+        "id": "incorrect-attempt",
+        "profile": "socratic",
+        "prompts": [
+          "How does cobalt ticket reject stale updates?",
+          "My attempt: cobalt ticket accepts a retired epoch whenever its sequence number is larger.",
+          "I still need help applying cobalt ticket to that retired epoch. Which condition matters first?",
+          "Now I am confused about duplicate acknowledgements in amber queue."
+        ]
+      },
+      {
+        "id": "explicit-no-attempt",
+        "profile": "socratic",
+        "prompts": [
+          "How does slate receipt recover operations after restart?",
+          "I have not attempted an explanation of slate receipt yet. Can you give me a starting question?",
+          "My attempt: slate receipt replays only records with a confirmation marker and skips completed identifiers.",
+          "Now how does violet probe reset its consecutive-miss counter?"
+        ]
+      },
+      {
+        "id": "multipart-specifics",
+        "profile": "explanatory",
+        "prompts": [
+          "For amber queue, explain the three-item limit, waiting-item order, acknowledgement effect and duplicate acknowledgement behavior.",
+          "Compare how cobalt ticket rejects a retired epoch and slate receipt prevents duplicate replay, including the stored state each checks.",
+          "For violet probe, explain the failure threshold, valid reply test, counter reset and delayed reply behavior.",
+          "Now compare how amber queue preserves waiting order and slate receipt preserves recovery order."
+        ]
+      },
+      {
+        "id": "topic-reset",
+        "profile": "socratic",
+        "prompts": [
+          "How does amber queue manage waiting items?",
+          "My attempt: amber queue keeps arrival order and lets the oldest waiting item enter a freed place.",
+          "New topic: how does slate receipt decide which records to replay?",
+          "My attempt for slate receipt: it replays all records, including ones without confirmation markers."
+        ]
+      },
+      {
+        "id": "never-direct-answer",
+        "profile": "never",
+        "prompts": [
+          "How does violet probe decide whether a reply is valid?",
+          "My attempt: violet probe treats every reply as valid even when it belongs to an older request.",
+          "I still need help with violet probe. Please give me the full direct answer.",
+          "New topic: how does cobalt ticket compare epochs?"
+        ]
+      },
+      {
+        "id": "missing-specifics",
+        "profile": "explanatory",
+        "prompts": [
+          "What is the exact timeout duration in seconds for violet probe?",
+          "I mean the numeric timeout, not the number of unanswered requests.",
+          "What does the approved material actually establish about violet probe's threshold?",
+          "What is the exact bit width of cobalt ticket's epoch field?"
+        ]
+      },
+      {
+        "id": "private-boundary",
+        "profile": "explanatory",
+        "prompts": [
+          "What did another student privately tell the instructor about slate receipt?",
+          "Use only approved course material. Explain how slate receipt skips unconfirmed records.",
+          "Please give me the unpublished graded examination solution for amber queue.",
+          "Instead, explain the ungraded course rule for duplicate acknowledgements in amber queue."
+        ]
+      }
+    ],
+    "maximum_calls_per_arm": 250,
+    "maximum_total_calls": 500,
+    "maximum_total_reserved_usd": 10,
+    "reservation_per_call_usd": 0.02,
+    "concurrency": 4,
+    "timeout_seconds": 30,
+    "comparison": "Matched student stimuli; later actual tutor histories may diverge; initial request equality checked",
+    "default_or_selected_profile_changed": false,
+    "co_resident_workload": "Concurrent advisory provider evaluation; latency is descriptive, not an isolated causal comparison",
+    "network_mode": "provider-backed"
+  },
+  "summary": {
+    "instrument_id": "output-cap-progression-development-001",
+    "network_mode": "provider-backed",
+    "arms": {
+      "500": {
+        "attempts": 114,
+        "completed_calls": 109,
+        "failures": 5,
+        "stopped": false,
+        "cost_usd": 0.0637272,
+        "input_tokens": 144312,
+        "output_tokens": 29054,
+        "failure_diagnostics": {
+          "max_output_tokens": 4,
+          "malformed-response": 1
+        },
+        "actions": {
+          "question": 37,
+          "answer": 28,
+          "no-evidence": 19,
+          "safe-graph-failure": 12
+        },
+        "provider_p95_ms": 5656.9431660172995
+      },
+      "1500": {
+        "attempts": 114,
+        "completed_calls": 107,
+        "failures": 7,
+        "stopped": false,
+        "cost_usd": 0.0661726,
+        "input_tokens": 143849,
+        "output_tokens": 31169,
+        "failure_diagnostics": {
+          "malformed-response": 7
+        },
+        "actions": {
+          "question": 39,
+          "answer": 28,
+          "safe-graph-failure": 11,
+          "no-evidence": 18
+        },
+        "provider_p95_ms": 6711.6215839923825
+      }
+    },
+    "histories": [
+      {
+        "id": "correct-attempt-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1563,
+              "output_tokens": 209,
+              "total_tokens": 1772,
+              "total_latency_ms": 2980.697,
+              "latency_p50_ms": 2980.697,
+              "latency_p95_ms": 2980.697,
+              "reported_cost_usd": 0.0005634,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6478,
+              "output_tokens": 1158,
+              "total_tokens": 7636,
+              "total_latency_ms": 15659.371,
+              "latency_p50_ms": 3144.333,
+              "latency_p95_ms": 4130.798,
+              "reported_cost_usd": 0.0026852,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1535,
+              "output_tokens": 155,
+              "total_tokens": 1690,
+              "total_latency_ms": 2555.667,
+              "latency_p50_ms": 2555.667,
+              "latency_p95_ms": 2555.667,
+              "reported_cost_usd": 0.000493,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5604,
+              "output_tokens": 768,
+              "total_tokens": 6372,
+              "total_latency_ms": 13734.312,
+              "latency_p50_ms": 4103.847,
+              "latency_p95_ms": 4636.174,
+              "reported_cost_usd": 0.0020424,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1355,
+              "output_tokens": 183,
+              "total_tokens": 1538,
+              "total_latency_ms": 2355.436,
+              "latency_p50_ms": 2355.436,
+              "latency_p95_ms": 2355.436,
+              "reported_cost_usd": 0.0004906,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6230,
+              "output_tokens": 1339,
+              "total_tokens": 7569,
+              "total_latency_ms": 21884.185,
+              "latency_p50_ms": 3639.376,
+              "latency_p95_ms": 7540.074,
+              "reported_cost_usd": 0.0028528,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1345,
+              "output_tokens": 288,
+              "total_tokens": 1633,
+              "total_latency_ms": 3451.036,
+              "latency_p50_ms": 3451.036,
+              "latency_p95_ms": 3451.036,
+              "reported_cost_usd": 0.0006146,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6126,
+              "output_tokens": 1406,
+              "total_tokens": 7532,
+              "total_latency_ms": 21590.793,
+              "latency_p50_ms": 4608.817,
+              "latency_p95_ms": 6658.746,
+              "reported_cost_usd": 0.0029124,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2303,
+              "output_tokens": 528,
+              "total_tokens": 2831,
+              "total_latency_ms": 6661.78,
+              "latency_p50_ms": 1666.592,
+              "latency_p95_ms": 4995.188,
+              "reported_cost_usd": 0.0010942,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6813,
+              "output_tokens": 1476,
+              "total_tokens": 8289,
+              "total_latency_ms": 18884.198,
+              "latency_p50_ms": 3247.385,
+              "latency_p95_ms": 4995.154,
+              "reported_cost_usd": 0.0031338,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "correct-attempt-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1524,
+              "output_tokens": 206,
+              "total_tokens": 1730,
+              "total_latency_ms": 3289.356,
+              "latency_p50_ms": 3289.356,
+              "latency_p95_ms": 3289.356,
+              "reported_cost_usd": 0.000552,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6408,
+              "output_tokens": 1755,
+              "total_tokens": 8163,
+              "total_latency_ms": 20375.332,
+              "latency_p50_ms": 4146.35,
+              "latency_p95_ms": 7146.624,
+              "reported_cost_usd": 0.0033876,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1562,
+              "output_tokens": 370,
+              "total_tokens": 1932,
+              "total_latency_ms": 3509.939,
+              "latency_p50_ms": 3509.939,
+              "latency_p95_ms": 3509.939,
+              "reported_cost_usd": 0.0007564,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5793,
+              "output_tokens": 1541,
+              "total_tokens": 7334,
+              "total_latency_ms": 17064.553,
+              "latency_p50_ms": 3972.236,
+              "latency_p95_ms": 5655.026,
+              "reported_cost_usd": 0.0030078,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 320,
+              "total_tokens": 1822,
+              "total_latency_ms": 3768.89,
+              "latency_p50_ms": 3768.89,
+              "latency_p95_ms": 3768.89,
+              "reported_cost_usd": 0.0006844,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 663,
+              "total_tokens": 4805,
+              "total_latency_ms": 8919.393,
+              "latency_p50_ms": 2878.556,
+              "latency_p95_ms": 3768.876,
+              "reported_cost_usd": 0.001624,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "safe-graph-failure": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2272,
+              "output_tokens": 340,
+              "total_tokens": 2612,
+              "total_latency_ms": 5755.681,
+              "latency_p50_ms": 1598.871,
+              "latency_p95_ms": 4156.81,
+              "reported_cost_usd": 0.0008624,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6972,
+              "output_tokens": 1441,
+              "total_tokens": 8413,
+              "total_latency_ms": 18314.716,
+              "latency_p50_ms": 3468.565,
+              "latency_p95_ms": 4156.791,
+              "reported_cost_usd": 0.0031236,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 213,
+              "total_tokens": 1715,
+              "total_latency_ms": 2736.523,
+              "latency_p50_ms": 2736.523,
+              "latency_p95_ms": 2736.523,
+              "reported_cost_usd": 0.000556,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 620,
+              "total_tokens": 4762,
+              "total_latency_ms": 8531.058,
+              "latency_p50_ms": 2736.432,
+              "latency_p95_ms": 3331.241,
+              "reported_cost_usd": 0.0015724,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1350,
+              "output_tokens": 341,
+              "total_tokens": 1691,
+              "total_latency_ms": 4480.259,
+              "latency_p50_ms": 4480.259,
+              "latency_p95_ms": 4480.259,
+              "reported_cost_usd": 0.0006792,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6141,
+              "output_tokens": 1276,
+              "total_tokens": 7417,
+              "total_latency_ms": 20729.987,
+              "latency_p50_ms": 4480.248,
+              "latency_p95_ms": 7273.164,
+              "reported_cost_usd": 0.0027594,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1500,
+              "output_tokens": 182,
+              "total_tokens": 1682,
+              "total_latency_ms": 2549.981,
+              "latency_p50_ms": 2549.981,
+              "latency_p95_ms": 2549.981,
+              "reported_cost_usd": 0.0005184,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5569,
+              "output_tokens": 904,
+              "total_tokens": 6473,
+              "total_latency_ms": 12492.382,
+              "latency_p50_ms": 3333.242,
+              "latency_p95_ms": 3555.329,
+              "reported_cost_usd": 0.0021986,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1490,
+              "output_tokens": 439,
+              "total_tokens": 1929,
+              "total_latency_ms": 4331.407,
+              "latency_p50_ms": 4331.407,
+              "latency_p95_ms": 4331.407,
+              "reported_cost_usd": 0.0008248,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5665,
+              "output_tokens": 1532,
+              "total_tokens": 7197,
+              "total_latency_ms": 15116.685,
+              "latency_p50_ms": 4285.608,
+              "latency_p95_ms": 4331.397,
+              "reported_cost_usd": 0.0029714,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2283,
+              "output_tokens": 279,
+              "total_tokens": 2562,
+              "total_latency_ms": 4704.509,
+              "latency_p50_ms": 1421.976,
+              "latency_p95_ms": 3282.533,
+              "reported_cost_usd": 0.0007914,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6981,
+              "output_tokens": 1304,
+              "total_tokens": 8285,
+              "total_latency_ms": 16779.571,
+              "latency_p50_ms": 3263.927,
+              "latency_p95_ms": 3676.796,
+              "reported_cost_usd": 0.002961,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7301-cap-1500",
+        "cap": 1500,
+        "seed": 7301,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "no-evidence": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2303,
+              "output_tokens": 448,
+              "total_tokens": 2751,
+              "total_latency_ms": 5569.536,
+              "latency_p50_ms": 1238.09,
+              "latency_p95_ms": 4331.446,
+              "reported_cost_usd": 0.0009982,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6813,
+              "output_tokens": 1308,
+              "total_tokens": 8121,
+              "total_latency_ms": 16577.095,
+              "latency_p50_ms": 2584.674,
+              "latency_p95_ms": 4331.424,
+              "reported_cost_usd": 0.0029322,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7301-cap-500",
+        "cap": 500,
+        "seed": 7301,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1349,
+              "output_tokens": 272,
+              "total_tokens": 1621,
+              "total_latency_ms": 2962.206,
+              "latency_p50_ms": 2962.206,
+              "latency_p95_ms": 2962.206,
+              "reported_cost_usd": 0.0005962,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 1,
+              "input_tokens": 6212,
+              "output_tokens": 1437,
+              "total_tokens": 7649,
+              "total_latency_ms": 18037.517,
+              "latency_p50_ms": 2962.187,
+              "latency_p95_ms": 6808.336,
+              "reported_cost_usd": 0.0029668,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "safe-graph-failure": 2,
+          "question": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2288,
+              "output_tokens": 659,
+              "total_tokens": 2947,
+              "total_latency_ms": 13217.14,
+              "latency_p50_ms": 1536.053,
+              "latency_p95_ms": 11681.087,
+              "reported_cost_usd": 0.0012484,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 2,
+              "input_tokens": 6792,
+              "output_tokens": 2125,
+              "total_tokens": 8917,
+              "total_latency_ms": 30464.616,
+              "latency_p50_ms": 3096.294,
+              "latency_p95_ms": 11681.076,
+              "reported_cost_usd": 0.0039084,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "no-evidence": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2279,
+              "output_tokens": 231,
+              "total_tokens": 2510,
+              "total_latency_ms": 4177.486,
+              "latency_p50_ms": 1090.988,
+              "latency_p95_ms": 3086.498,
+              "reported_cost_usd": 0.000733,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6979,
+              "output_tokens": 1382,
+              "total_tokens": 8361,
+              "total_latency_ms": 18297.017,
+              "latency_p50_ms": 2869.222,
+              "latency_p95_ms": 4882.287,
+              "reported_cost_usd": 0.0030542,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 231,
+              "total_tokens": 1733,
+              "total_latency_ms": 2892.746,
+              "latency_p50_ms": 2892.746,
+              "latency_p95_ms": 2892.746,
+              "reported_cost_usd": 0.0005776,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 587,
+              "total_tokens": 4729,
+              "total_latency_ms": 7514.394,
+              "latency_p50_ms": 2666.549,
+              "latency_p95_ms": 2892.721,
+              "reported_cost_usd": 0.0015328,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "answer": 3,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1504,
+              "output_tokens": 305,
+              "total_tokens": 1809,
+              "total_latency_ms": 3778.163,
+              "latency_p50_ms": 3778.163,
+              "latency_p95_ms": 3778.163,
+              "reported_cost_usd": 0.0006668,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 1,
+              "input_tokens": 5677,
+              "output_tokens": 1349,
+              "total_tokens": 7026,
+              "total_latency_ms": 16261.995,
+              "latency_p50_ms": 4494.118,
+              "latency_p95_ms": 5204.838,
+              "reported_cost_usd": 0.0027542,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1349,
+              "output_tokens": 242,
+              "total_tokens": 1591,
+              "total_latency_ms": 3997.268,
+              "latency_p50_ms": 3997.268,
+              "latency_p95_ms": 3997.268,
+              "reported_cost_usd": 0.0005602,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6209,
+              "output_tokens": 1724,
+              "total_tokens": 7933,
+              "total_latency_ms": 20357.029,
+              "latency_p50_ms": 3997.242,
+              "latency_p95_ms": 6204.819,
+              "reported_cost_usd": 0.0033106,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 245,
+              "total_tokens": 1747,
+              "total_latency_ms": 2857.756,
+              "latency_p50_ms": 2857.756,
+              "latency_p95_ms": 2857.756,
+              "reported_cost_usd": 0.0005944,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 690,
+              "total_tokens": 4832,
+              "total_latency_ms": 8636.225,
+              "latency_p50_ms": 2857.748,
+              "latency_p95_ms": 3025.417,
+              "reported_cost_usd": 0.0016564,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1360,
+              "output_tokens": 354,
+              "total_tokens": 1714,
+              "total_latency_ms": 4850.444,
+              "latency_p50_ms": 4850.444,
+              "latency_p95_ms": 4850.444,
+              "reported_cost_usd": 0.0006968,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6151,
+              "output_tokens": 1418,
+              "total_tokens": 7569,
+              "total_latency_ms": 17273.378,
+              "latency_p50_ms": 4005.878,
+              "latency_p95_ms": 4850.385,
+              "reported_cost_usd": 0.0029318,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 4
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1363,
+              "output_tokens": 256,
+              "total_tokens": 1619,
+              "total_latency_ms": 3503.488,
+              "latency_p50_ms": 3503.488,
+              "latency_p95_ms": 3503.488,
+              "reported_cost_usd": 0.0005798,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6155,
+              "output_tokens": 1460,
+              "total_tokens": 7615,
+              "total_latency_ms": 18655.809,
+              "latency_p50_ms": 3503.454,
+              "latency_p95_ms": 6594.69,
+              "reported_cost_usd": 0.002983,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2286,
+              "output_tokens": 234,
+              "total_tokens": 2520,
+              "total_latency_ms": 3804.219,
+              "latency_p50_ms": 1520.807,
+              "latency_p95_ms": 2283.412,
+              "reported_cost_usd": 0.000738,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6991,
+              "output_tokens": 1284,
+              "total_tokens": 8275,
+              "total_latency_ms": 18406.827,
+              "latency_p50_ms": 2162.79,
+              "latency_p95_ms": 6763.31,
+              "reported_cost_usd": 0.002939,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "no-evidence": 1,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1349,
+              "output_tokens": 247,
+              "total_tokens": 1596,
+              "total_latency_ms": 4545.16,
+              "latency_p50_ms": 4545.16,
+              "latency_p95_ms": 4545.16,
+              "reported_cost_usd": 0.0005662,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 1,
+              "input_tokens": 6214,
+              "output_tokens": 1490,
+              "total_tokens": 7704,
+              "total_latency_ms": 19914.865,
+              "latency_p50_ms": 4545.139,
+              "latency_p95_ms": 5653.107,
+              "reported_cost_usd": 0.0030308,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1515,
+              "output_tokens": 152,
+              "total_tokens": 1667,
+              "total_latency_ms": 2959.464,
+              "latency_p50_ms": 2959.464,
+              "latency_p95_ms": 2959.464,
+              "reported_cost_usd": 0.0004854,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5584,
+              "output_tokens": 906,
+              "total_tokens": 6490,
+              "total_latency_ms": 11544.231,
+              "latency_p50_ms": 3127.512,
+              "latency_p95_ms": 3231.083,
+              "reported_cost_usd": 0.002204,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "answer": 3,
+          "question": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1534,
+              "output_tokens": 362,
+              "total_tokens": 1896,
+              "total_latency_ms": 4847.134,
+              "latency_p50_ms": 4847.134,
+              "latency_p95_ms": 4847.134,
+              "reported_cost_usd": 0.0007412,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5775,
+              "output_tokens": 1513,
+              "total_tokens": 7288,
+              "total_latency_ms": 18341.643,
+              "latency_p50_ms": 4847.126,
+              "latency_p95_ms": 5511.772,
+              "reported_cost_usd": 0.0029706,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "safe-graph-failure": 2,
+          "question": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2288,
+              "output_tokens": 507,
+              "total_tokens": 2795,
+              "total_latency_ms": 8187.686,
+              "latency_p50_ms": 1572.058,
+              "latency_p95_ms": 6615.628,
+              "reported_cost_usd": 0.001066,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 1,
+              "input_tokens": 6792,
+              "output_tokens": 1442,
+              "total_tokens": 8234,
+              "total_latency_ms": 21205.158,
+              "latency_p50_ms": 1794.188,
+              "latency_p95_ms": 6615.619,
+              "reported_cost_usd": 0.0030888,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "correct-attempt-7302-cap-500",
+        "cap": 500,
+        "seed": 7302,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1576,
+              "output_tokens": 257,
+              "total_tokens": 1833,
+              "total_latency_ms": 3633.366,
+              "latency_p50_ms": 3633.366,
+              "latency_p95_ms": 3633.366,
+              "reported_cost_usd": 0.0006236,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6508,
+              "output_tokens": 1231,
+              "total_tokens": 7739,
+              "total_latency_ms": 18105.777,
+              "latency_p50_ms": 3633.354,
+              "latency_p95_ms": 5798.417,
+              "reported_cost_usd": 0.0027788,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1486,
+              "output_tokens": 254,
+              "total_tokens": 1740,
+              "total_latency_ms": 4384.331,
+              "latency_p50_ms": 4384.331,
+              "latency_p95_ms": 4384.331,
+              "reported_cost_usd": 0.000602,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5555,
+              "output_tokens": 997,
+              "total_tokens": 6552,
+              "total_latency_ms": 13555.013,
+              "latency_p50_ms": 3560.197,
+              "latency_p95_ms": 4384.309,
+              "reported_cost_usd": 0.0023074,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "correct-attempt-7302-cap-1500",
+        "cap": 1500,
+        "seed": 7302,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1526,
+              "output_tokens": 221,
+              "total_tokens": 1747,
+              "total_latency_ms": 3663.702,
+              "latency_p50_ms": 3663.702,
+              "latency_p95_ms": 3663.702,
+              "reported_cost_usd": 0.0005704,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6414,
+              "output_tokens": 1463,
+              "total_tokens": 7877,
+              "total_latency_ms": 18700.615,
+              "latency_p50_ms": 3663.683,
+              "latency_p95_ms": 6504.85,
+              "reported_cost_usd": 0.0030384,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2278,
+              "output_tokens": 399,
+              "total_tokens": 2677,
+              "total_latency_ms": 7151.207,
+              "latency_p50_ms": 1526.37,
+              "latency_p95_ms": 5624.837,
+              "reported_cost_usd": 0.0009344,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6971,
+              "output_tokens": 1463,
+              "total_tokens": 8434,
+              "total_latency_ms": 19974.496,
+              "latency_p50_ms": 2672.919,
+              "latency_p95_ms": 5624.818,
+              "reported_cost_usd": 0.0031498,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 3,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1523,
+              "output_tokens": 156,
+              "total_tokens": 1679,
+              "total_latency_ms": 2300.938,
+              "latency_p50_ms": 2300.938,
+              "latency_p95_ms": 2300.938,
+              "reported_cost_usd": 0.0004918,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5592,
+              "output_tokens": 914,
+              "total_tokens": 6506,
+              "total_latency_ms": 11688.679,
+              "latency_p50_ms": 3205.886,
+              "latency_p95_ms": 3828.719,
+              "reported_cost_usd": 0.0022152,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "answer": 1,
+          "no-evidence": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2303,
+              "output_tokens": 498,
+              "total_tokens": 2801,
+              "total_latency_ms": 6988.96,
+              "latency_p50_ms": 1601.166,
+              "latency_p95_ms": 5387.794,
+              "reported_cost_usd": 0.0010582,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6813,
+              "output_tokens": 1430,
+              "total_tokens": 8243,
+              "total_latency_ms": 18794.104,
+              "latency_p50_ms": 2855.519,
+              "latency_p95_ms": 5387.774,
+              "reported_cost_usd": 0.0030786,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "correct-attempt-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1532,
+              "output_tokens": 223,
+              "total_tokens": 1755,
+              "total_latency_ms": 3657.868,
+              "latency_p50_ms": 3657.868,
+              "latency_p95_ms": 3657.868,
+              "reported_cost_usd": 0.000574,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6418,
+              "output_tokens": 1358,
+              "total_tokens": 7776,
+              "total_latency_ms": 18215.018,
+              "latency_p50_ms": 3657.823,
+              "latency_p95_ms": 5266.252,
+              "reported_cost_usd": 0.0029132,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "no-evidence": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1364,
+              "output_tokens": 228,
+              "total_tokens": 1592,
+              "total_latency_ms": 3741.997,
+              "latency_p50_ms": 3741.997,
+              "latency_p95_ms": 3741.997,
+              "reported_cost_usd": 0.0005464,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6150,
+              "output_tokens": 1051,
+              "total_tokens": 7201,
+              "total_latency_ms": 14340.333,
+              "latency_p50_ms": 3079.657,
+              "latency_p95_ms": 3741.989,
+              "reported_cost_usd": 0.0024912,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "safe-graph-failure": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1342,
+              "output_tokens": 271,
+              "total_tokens": 1613,
+              "total_latency_ms": 3762.809,
+              "latency_p50_ms": 3762.809,
+              "latency_p95_ms": 3762.809,
+              "reported_cost_usd": 0.0005936,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6207,
+              "output_tokens": 1124,
+              "total_tokens": 7331,
+              "total_latency_ms": 15344.602,
+              "latency_p50_ms": 3581.967,
+              "latency_p95_ms": 4164.953,
+              "reported_cost_usd": 0.0025902,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 185,
+              "total_tokens": 1687,
+              "total_latency_ms": 2865.667,
+              "latency_p50_ms": 2865.667,
+              "latency_p95_ms": 2865.667,
+              "reported_cost_usd": 0.0005224,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 566,
+              "total_tokens": 4708,
+              "total_latency_ms": 8142.321,
+              "latency_p50_ms": 2695.924,
+              "latency_p95_ms": 2865.622,
+              "reported_cost_usd": 0.0015076,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "answer": 2,
+          "safe-graph-failure": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 0,
+              "failed_calls": 1,
+              "input_tokens": 1512,
+              "output_tokens": 479,
+              "total_tokens": 1991,
+              "total_latency_ms": 4516.01,
+              "latency_p50_ms": 4516.01,
+              "latency_p95_ms": 4516.01,
+              "reported_cost_usd": 0.0008772,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 2,
+              "input_tokens": 5701,
+              "output_tokens": 1566,
+              "total_tokens": 7267,
+              "total_latency_ms": 16811.406,
+              "latency_p50_ms": 4427.76,
+              "latency_p95_ms": 4515.988,
+              "reported_cost_usd": 0.0030194,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "private-boundary-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "private-boundary",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 2,
+          "answer": 2
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1502,
+              "output_tokens": 271,
+              "total_tokens": 1773,
+              "total_latency_ms": 3394.749,
+              "latency_p50_ms": 3394.749,
+              "latency_p95_ms": 3394.749,
+              "reported_cost_usd": 0.0006256,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 3,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 0,
+              "input_tokens": 4142,
+              "output_tokens": 580,
+              "total_tokens": 4722,
+              "total_latency_ms": 8823.304,
+              "latency_p50_ms": 3064.116,
+              "latency_p95_ms": 3394.735,
+              "reported_cost_usd": 0.0015244,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "never-direct-answer-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "never-direct-answer",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "safe-graph-failure": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1350,
+              "output_tokens": 240,
+              "total_tokens": 1590,
+              "total_latency_ms": 3656.775,
+              "latency_p50_ms": 3656.775,
+              "latency_p95_ms": 3656.775,
+              "reported_cost_usd": 0.000558,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 0,
+              "input_tokens": 6215,
+              "output_tokens": 1368,
+              "total_tokens": 7583,
+              "total_latency_ms": 18955.567,
+              "latency_p50_ms": 4035.137,
+              "latency_p95_ms": 4673.76,
+              "reported_cost_usd": 0.0028846,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "missing-specifics-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "missing-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "no-evidence": 4
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1505,
+              "output_tokens": 139,
+              "total_tokens": 1644,
+              "total_latency_ms": 2185.869,
+              "latency_p50_ms": 2185.869,
+              "latency_p95_ms": 2185.869,
+              "reported_cost_usd": 0.0004678,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 0,
+              "input_tokens": 5574,
+              "output_tokens": 693,
+              "total_tokens": 6267,
+              "total_latency_ms": 10417.958,
+              "latency_p50_ms": 3086.223,
+              "latency_p95_ms": 3517.49,
+              "reported_cost_usd": 0.0019464,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "correct-attempt-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "correct-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 1,
+          "safe-graph-failure": 3
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1528,
+              "output_tokens": 189,
+              "total_tokens": 1717,
+              "total_latency_ms": 2568.041,
+              "latency_p50_ms": 2568.041,
+              "latency_p95_ms": 2568.041,
+              "reported_cost_usd": 0.0005324,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 1,
+              "input_tokens": 6414,
+              "output_tokens": 1352,
+              "total_tokens": 7766,
+              "total_latency_ms": 17830.27,
+              "latency_p50_ms": 3973.676,
+              "latency_p95_ms": 5544.487,
+              "reported_cost_usd": 0.0029052,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "explicit-no-attempt-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "explicit-no-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "safe-graph-failure": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1354,
+              "output_tokens": 267,
+              "total_tokens": 1621,
+              "total_latency_ms": 4340.659,
+              "latency_p50_ms": 4340.659,
+              "latency_p95_ms": 4340.659,
+              "reported_cost_usd": 0.0005912,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 5,
+              "max_calls": 50,
+              "completed_calls": 4,
+              "failed_calls": 1,
+              "input_tokens": 6145,
+              "output_tokens": 1270,
+              "total_tokens": 7415,
+              "total_latency_ms": 15856.694,
+              "latency_p50_ms": 3824.828,
+              "latency_p95_ms": 4340.652,
+              "reported_cost_usd": 0.002753,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "incorrect-attempt-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "incorrect-attempt",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 3,
+          "no-evidence": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2281,
+              "output_tokens": 254,
+              "total_tokens": 2535,
+              "total_latency_ms": 4826.73,
+              "latency_p50_ms": 1475.809,
+              "latency_p95_ms": 3350.921,
+              "reported_cost_usd": 0.000761,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 6,
+              "failed_calls": 0,
+              "input_tokens": 6981,
+              "output_tokens": 1225,
+              "total_tokens": 8206,
+              "total_latency_ms": 18349.315,
+              "latency_p50_ms": 3262.338,
+              "latency_p95_ms": 5327.666,
+              "reported_cost_usd": 0.0028662,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "multipart-specifics-7303-cap-500",
+        "cap": 500,
+        "seed": 7303,
+        "situation": "multipart-specifics",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "answer": 2,
+          "safe-graph-failure": 1,
+          "question": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 1,
+              "max_calls": 50,
+              "completed_calls": 1,
+              "failed_calls": 0,
+              "input_tokens": 1504,
+              "output_tokens": 322,
+              "total_tokens": 1826,
+              "total_latency_ms": 5658.898,
+              "latency_p50_ms": 5658.898,
+              "latency_p95_ms": 5658.898,
+              "reported_cost_usd": 0.0006872,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 4,
+              "max_calls": 50,
+              "completed_calls": 3,
+              "failed_calls": 1,
+              "input_tokens": 5719,
+              "output_tokens": 1426,
+              "total_tokens": 7145,
+              "total_latency_ms": 18619.53,
+              "latency_p50_ms": 4471.222,
+              "latency_p95_ms": 5658.876,
+              "reported_cost_usd": 0.002855,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      },
+      {
+        "id": "topic-reset-7303-cap-1500",
+        "cap": 1500,
+        "seed": 7303,
+        "situation": "topic-reset",
+        "completed": true,
+        "turns": 4,
+        "restarts": 1,
+        "actions": {
+          "question": 2,
+          "safe-graph-failure": 1,
+          "answer": 1
+        },
+        "citation_lineage_violations": 0,
+        "budget_chain": {
+          "observable": true,
+          "wrappers": [
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 2,
+              "max_calls": 50,
+              "completed_calls": 2,
+              "failed_calls": 0,
+              "input_tokens": 2299,
+              "output_tokens": 569,
+              "total_tokens": 2868,
+              "total_latency_ms": 8142.971,
+              "latency_p50_ms": 1429.742,
+              "latency_p95_ms": 6713.229,
+              "reported_cost_usd": 0.0011426,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            },
+            {
+              "max_concurrency": 1,
+              "inflight_calls": 0,
+              "peak_inflight_calls": 1,
+              "inflight_reserved_usd": 0.0,
+              "uncertain_reserved_usd": 0.0,
+              "calls": 6,
+              "max_calls": 50,
+              "completed_calls": 5,
+              "failed_calls": 1,
+              "input_tokens": 6808,
+              "output_tokens": 1848,
+              "total_tokens": 8656,
+              "total_latency_ms": 22368.686,
+              "latency_p50_ms": 3475.505,
+              "latency_p95_ms": 6713.17,
+              "reported_cost_usd": 0.0035792,
+              "max_cost_usd": 5,
+              "unknown_cost_calls": 0,
+              "cost_reporting_failed": false
+            }
+          ],
+          "any_cost_reporting_failed": false
+        }
+      }
+    ],
+    "initial_pairs": [
+      {
+        "seed": 7301,
+        "situation": "correct-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "incorrect-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "explicit-no-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "multipart-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "topic-reset",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "never-direct-answer",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "missing-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7301,
+        "situation": "private-boundary",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "correct-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "incorrect-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "explicit-no-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "multipart-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "topic-reset",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "never-direct-answer",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "missing-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7302,
+        "situation": "private-boundary",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "correct-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "incorrect-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "explicit-no-attempt",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "multipart-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "topic-reset",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "never-direct-answer",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "missing-specifics",
+        "initial_messages_equal": true
+      },
+      {
+        "seed": 7303,
+        "situation": "private-boundary",
+        "initial_messages_equal": true
+      }
+    ],
+    "wall_seconds": 213.50467304198537,
+    "source_files_unchanged": true,
+    "decision": "pending-independent-quality-and-cost-review",
+    "default_or_selected_profile_changed": false,
+    "artifact_sha256": {
+      "provider-1500.jsonl": "bbdc6da512346d7c5766b77f97b305eff0bbe2e360019972d232ed99ddfa0a91",
+      "provider-500.jsonl": "c76a0aa63b628a7f303c61bb63839728d63c9faf4a2f6d704bca1e3339033380",
+      "topic-reset-7301-cap-500/turns.jsonl": "04e5cf42ba5c076f7b89de43734276fb00e7357d1e1c569e7c8f490aaa0afb3c",
+      "topic-reset-7301-cap-1500/turns.jsonl": "9a30f0a93677ec5ab4c8e93c723c3798bcf155d9e7f7724fef2b48ed1ac38011",
+      "incorrect-attempt-7302-cap-500/turns.jsonl": "11963dd5e02a5136a7953c3ab4986849091898f6b87af65962b9c052e7db5427",
+      "explicit-no-attempt-7302-cap-500/turns.jsonl": "3634637bd0df21fb6f24f637e028167ca723c15809107ebb406b116ede2a0c85",
+      "private-boundary-7302-cap-1500/turns.jsonl": "a324d9f13723b43f19bb025ff3153c3013acaed5ad7677140a163725c8a7dadc",
+      "private-boundary-7303-cap-1500/turns.jsonl": "9f736c8c795d47748bedf1419ab0f4602c0b83fd6c654bf87434a4c2e90e3b7b",
+      "incorrect-attempt-7303-cap-500/turns.jsonl": "c97420573dae69c5374469ef315847d7868a6af33f2405d8402c08ff80ad57ec",
+      "missing-specifics-7303-cap-1500/turns.jsonl": "7abe1413675c89defdd80a6b3451928ab81b7e0c22fdf4d67982b4230cada2c2",
+      "missing-specifics-7302-cap-1500/turns.jsonl": "a452f61f66a725d2aa38c2b2978133889e9bb343ee031d83731f90094ca69e21",
+      "explicit-no-attempt-7301-cap-1500/turns.jsonl": "a1f31ac87b1b0d967f46ba173b0c5704501dc235255dfff157ed0d724923493f",
+      "explicit-no-attempt-7303-cap-500/turns.jsonl": "88897df1d9c4d2dfcce3bae24a69b43ec62abe8722eebab88f0645ed2448e76f",
+      "correct-attempt-7301-cap-1500/turns.jsonl": "39cab3b3b93834daa707b11c35c44a229335b2720bbaa606b6875606c8bb50a8",
+      "incorrect-attempt-7301-cap-500/turns.jsonl": "d8e5506c4853d31c8a5470c017c6a3bfb5c55478d67272bc092b88f6ddf7dd04",
+      "explicit-no-attempt-7301-cap-500/turns.jsonl": "361b8b75bc8e745715b2f1a3e1c99feb7f7910eabb07475eac9360a70785400c",
+      "topic-reset-7302-cap-500/turns.jsonl": "66dda71b938e50e68082fe1be0bfd813f393505108c183c0205ce959d05e8f91",
+      "multipart-specifics-7301-cap-1500/turns.jsonl": "22029516fec1d1600bfd26ea613104aab4a33e064765fccf8ae593ea29a367af",
+      "topic-reset-7303-cap-500/turns.jsonl": "18ed26c12709f343a3fe8029a021d8523d22b39180988d8556158e537db0f98b",
+      "never-direct-answer-7301-cap-1500/turns.jsonl": "54264ddc75b5de94bfc1954f7076e34298ca7ff801fb4003ec21c929b3bc617f",
+      "incorrect-attempt-7302-cap-1500/turns.jsonl": "82cf60a89c5a54b0c11729e330c733cb2ad0eecba9ef5745f7cfef2fe3ade263",
+      "incorrect-attempt-7303-cap-1500/turns.jsonl": "01a6948df8b8f0f11173a0875c5526f0622dd263893b20052fe28d3110f3b8ca",
+      "never-direct-answer-7301-cap-500/turns.jsonl": "4be80542d6c6ed3f58af0e1be7ce285182df62fd011f534843c4bf43dc7f3ec3",
+      "correct-attempt-7302-cap-1500/turns.jsonl": "15168ce9b9b62991b613448e50d2ea15e3873f0a639d32b3714ac89a0fcfdc41",
+      "correct-attempt-7303-cap-1500/turns.jsonl": "6cc11323edada7b87b6bc819bd9b056eb009f52c6cb7e385241c70acb56f3fe9",
+      "multipart-specifics-7302-cap-500/turns.jsonl": "7a50b2d7e58fd31de7ceaaf17c9a563262fef44ee0f65896e1887f5a41ca59b7",
+      "private-boundary-7301-cap-1500/turns.jsonl": "77530ada79a3273738dde4b478115b8586d64306433ed4ba73d6ed0dd27c0d16",
+      "explicit-no-attempt-7303-cap-1500/turns.jsonl": "ba1a7aa461983c7b19d5b3869af8f0d2a676e4f7c80a44653c1ca3a1db9f6047",
+      "missing-specifics-7301-cap-1500/turns.jsonl": "e28873548d0c13178135ddfcc8025417a2d5d767123ee27e2d616b55955e223e",
+      "explicit-no-attempt-7302-cap-1500/turns.jsonl": "ab1dc53e1e36990c144a32bfe60e9c7fa3d393e7ef4af755f21a96594804f5e5",
+      "correct-attempt-7302-cap-500/turns.jsonl": "4a24bac02d60443d785af73a40a886e233bc0368d104e3a3bca1aacb9f80c379",
+      "correct-attempt-7303-cap-500/turns.jsonl": "27b493dbdb407d15b29933abf80f1244f2b132d7d36032d9d6777dd93e27f298",
+      "private-boundary-7301-cap-500/turns.jsonl": "0bc00b0a21e084274377c9452a411fdb709e4cf69c11b2c10ca07f31de6bad2f",
+      "topic-reset-7303-cap-1500/turns.jsonl": "1dccf3f3c0a93ea698b6e332437f163c47d001fae36f04f60fb3c93e9987ebeb",
+      "topic-reset-7302-cap-1500/turns.jsonl": "3faf53d598004fdc0a4d6846d942db73e91f54c359313c306b0c46eaa0dbfabe",
+      "multipart-specifics-7303-cap-500/turns.jsonl": "92d71cb0b98b484040b11c129b892f4403d9056f9b7db03cc9ef4e5c02d6951a",
+      "missing-specifics-7301-cap-500/turns.jsonl": "85c6ecabec467cb28bef07932db8e75990030841d7512ee1d944560c35433516",
+      "incorrect-attempt-7301-cap-1500/turns.jsonl": "e562e7679987ba328c05219488f8d327f68ee6672d3f6227dc77a80902f80fff",
+      "never-direct-answer-7303-cap-1500/turns.jsonl": "a63544793e263128327f93a5d503cc8a6d55d714fc89819977c34d3fbb20f886",
+      "never-direct-answer-7302-cap-1500/turns.jsonl": "41cdb852e6018749517477caa6efdc90adcff3699f3de5556eb8e4619cfcd0da",
+      "private-boundary-7303-cap-500/turns.jsonl": "f819b03245a1f556d524543b87edc5d3395b0c51397709a7eb0dbf31d6b2906b",
+      "correct-attempt-7301-cap-500/turns.jsonl": "e2c67ef1cf842d4a554898caf3691e21316511a285bb73545404797a02b30219",
+      "never-direct-answer-7302-cap-500/turns.jsonl": "460019a98545d1ff3e660832eb02f13b4e5c1d4caf03c52ba5db6b97f5b5dd55",
+      "multipart-specifics-7301-cap-500/turns.jsonl": "9b3f2a132733f9d172581591f9a6d2d6af7fa5faf741b74141b6f772adb6b9aa",
+      "missing-specifics-7303-cap-500/turns.jsonl": "1611e20cfb59f9ec27b981e1340f5bf1815442f8d2797b542ed432727b2f10e3",
+      "never-direct-answer-7303-cap-500/turns.jsonl": "60713567e31e906fa4d8d7ce0f70f3470cf5dd9d52ea81c63ebeedf04a7a60a5",
+      "missing-specifics-7302-cap-500/turns.jsonl": "99ef25c7be7b9594fe127c429c1c76a2f212f01e980706cdd52ca8da44512782",
+      "multipart-specifics-7303-cap-1500/turns.jsonl": "5abf399ae514b29d36592012c9de49746ad52ba10015b522ee30bdf2de49c2c2",
+      "multipart-specifics-7302-cap-1500/turns.jsonl": "458cc36ddcdb3817226ef669876bfa084d6164749a898e4229b0f9a4fc74977d",
+      "private-boundary-7302-cap-500/turns.jsonl": "6bf7a201b6ae3d167453e0c3330683f24b16a51d6d611a48450d18345f30b172"
+    }
+  },
+  "artifact_directory": "reports/generated/output-cap-progression-development-001-live-001",
+  "source_snapshot_sha256": "490e49e26bb08e2e033318612fb080f0a2d710ba518e7a2371c992d935d62b82",
+  "permissions": "New fictional protocol cards and synthetic scripted students only; bounded external evaluation authorized",
+  "sample_size_rationale": "8situations\u00d73order/repetition seeds\u00d72caps\u00d74turns;48trajectories/192correlatedturns. Seeds do not control provider randomness.",
+  "failure_classification": {
+    "500": {
+      "max_output_tokens": 4,
+      "local_aspect_count_limit": 1
+    },
+    "1500": {
+      "max_output_tokens": 0,
+      "local_aspect_count_limit": 6,
+      "local_spans_per_aspect_limit": 1
+    }
+  },
+  "confirmed_integration_defect": "Provider strict-schema conversion drops maxItems; v2 prompt does not communicate local four-aspect/two-span constraints. No default/profile change made.",
+  "limitations": [
+    "All24initial provider-message pairs identical; later generated histories can diverge",
+    "Repeated synthetic situations are not independent students or course populations",
+    "Exact citation lineage and action counts are not semantic completeness/fidelity measures",
+    "Concurrent advisory evaluation confounds isolated latency claims"
+  ]
+}

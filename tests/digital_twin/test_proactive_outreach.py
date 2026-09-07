@@ -91,6 +91,8 @@ def _record_prior_no_evidence_turn(
         deep=True,
     )
     repository.save_release(previous)
+    # Record history while its release is active, then replace it below.
+    repository.publish_release(previous.id)
     conversation = repository.save_conversation(
         Conversation(
             id="conversation-prior-no-evidence",
@@ -126,6 +128,7 @@ def _record_prior_no_evidence_turn(
         [],
         [],
     )
+    repository.publish_release(current.id)
     return conversation
 
 
@@ -475,3 +478,41 @@ def test_evidence_recovery_treats_missing_consent_and_unchanged_evidence_as_no_a
     )
     assert unchanged.no_action_count == 1
     assert unchanged.decisions[0].reason == "insufficient-new-evidence"
+
+
+@pytest.mark.parametrize("change", ["frequency-cap", "student-snoozed", "quiet-hours", "student-inactive", "membership-inactive", "release-unavailable"])
+def test_delivery_rechecks_limits_at_materialization(tmp_path, monkeypatch, change):
+    repository, fixture, service = _service(tmp_path)
+    _enable_in_app(service, fixture, max_messages_per_7_days=1)
+    first = _schedule(service, fixture, idempotency_key="first-concurrent")
+    second = _schedule(service, fixture, idempotency_key="second-concurrent")
+    materialize = repository.materialize_proactive_message
+    intercepted = False
+
+    def interleave(*args, **kwargs):
+        nonlocal intercepted
+        if not intercepted:
+            intercepted = True
+            if change == "frequency-cap":
+                assert service.process_trigger(second.id, now=NOW).outcome == "delivered"
+            elif change == "student-snoozed":
+                _enable_in_app(service, fixture, snoozed_until="2026-08-28T12:00:00+00:00")
+            elif change == "quiet-hours":
+                _enable_in_app(service, fixture, quiet_hours_start="11:00", quiet_hours_end="13:00")
+            elif change == "student-inactive":
+                from src.digital_twin.student.models import AccountStatus
+                account = repository.get_account(fixture.student_a_id)
+                repository.save_account(account.model_copy(update={"status": AccountStatus.REVOKED}))
+            elif change == "membership-inactive":
+                membership = repository.get_membership(fixture.student_a_id, fixture.course_a_id)
+                repository.save_membership(membership.model_copy(update={"active": False}))
+            else:
+                repository.set_release_status(fixture.release_a_id, StudentReleaseStatus.WITHDRAWN)
+        return materialize(*args, **kwargs)
+
+    monkeypatch.setattr(repository, "materialize_proactive_message", interleave)
+    result = service.process_trigger(first.id, now=NOW)
+    assert result.outcome == ("deferred-quiet-hours" if change == "quiet-hours" else "suppressed")
+    messages = repository.list_proactive_messages(fixture.student_a_id)
+    assert len(messages) == (1 if change == "frequency-cap" else 0)
+    assert all(message.trigger_id != first.id for message in messages)

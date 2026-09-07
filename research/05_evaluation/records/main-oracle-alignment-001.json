@@ -1,0 +1,37 @@
+{
+  "run_id": "main-oracle-alignment-001",
+  "status": "completed",
+  "code_revision": "e441193c7fa1260ed327ebf43c59483f85817be8",
+  "dirty": true,
+  "decision": "Keep versioned instrument correction; does not qualify a model",
+  "datasets_sha256": {
+    "meaningful-continuation-development-v2": "10cf4693e6dc2ceca2844c292752e11a4dd8f4f0ff7a404e7e4135d240a44e5e",
+    "meaningful-continuation-development-v3": "79c907807c81911b2973c2b12f2dd893c2e3caec641027742385a09964a23d03",
+    "necessary-condition-development-v1": "0662fd06ff71d1b6842b6263b9471129e67168800f3b3a011b2babfc9e0482b6"
+  },
+  "metrics": {
+    "main_contexts": 48,
+    "original_source_clusters": 4,
+    "necessity_contexts": 8,
+    "regression_tests_passed": 10,
+    "injected_paired_histories_completed": 112,
+    "external_calls": 0,
+    "paid_cost_usd": 0
+  },
+  "source_oracle_audit": "research/05_evaluation/meaningful-continuation-v2-oracle-audit.md",
+  "plan": "research/04_experiments/2026-09-06-main-oracle-alignment-plan.md",
+  "code_sha256": {
+    "scripts/build_main_oracle_alignment.py": "a43d9632551ef5a7d12d26c54e6eecc0bd06c92914a11128862492d585eaefb6",
+    "tests/test_main_oracle_alignment.py": "e7fdafae25dd8373a4d0e0ab78c59adf44621d386f815b2966bf3b151a4b8648"
+  },
+  "limitations": [
+    "Root-authored and root-reviewed natural language/formal abstraction; no automatic NLI proof.",
+    "Exposed synthetic contexts, not independent held-out population.",
+    "Historical v2 main scores remain unqualified."
+  ],
+  "verification": [
+    "uv run python -m scripts.build_main_oracle_alignment --check",
+    "uv run pytest tests/test_main_oracle_alignment.py tests/test_validate_repository_execution_freeze.py -q"
+  ],
+  "raw_contract_log": "/tmp/oracle-packet-contracts.log"
+}

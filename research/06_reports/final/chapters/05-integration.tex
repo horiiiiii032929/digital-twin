@@ -1,0 +1,163 @@
+\section{Selected Composition and Integrated Verification}
+\label{sec:verification}
+\subsection{What Was Selected, and What Remains Experimental}
+The local final manifest selects BM25 retrieval, ambiguity-aware evidence
+selection, deterministic factual assembly, guarded model planning and persistent
+in-app outreach. The exact profile is listed in Appendix~\ref{sec:software}. Table~\ref{tab:design-decisions} distinguishes
+comparison-based choices from requirements that the implementation must enforce.
+
+The experiments do not identify a single composition that wins on every
+criterion. The evidence-interface comparison tests a development evidence interface; the fresh factual comparison supports
+the retained factual fallback. The action-planning and model-allocation comparisons compare planners using supplied
+state cards, whereas the product adapter still supplies delivery/event proxies.
+The learner/timing simulation evaluates estimator/timing alternatives outside the tutoring service.
+The live-model integration trial exercises an integrated development configuration with actual model
+calls, and the goal-completion regression isolates a later lifecycle correction without model calls.
+Thus neither the component improvements nor the historical integrated run
+constitute an end-to-end qualification of all current components together.
+
+
+\begin{table}[htbp]
+\centering\small
+\caption{Current disposition of the principal designs.}
+\label{tab:design-decisions}
+\begin{tabularx}{\linewidth}{@{}L{0.23\linewidth}Y Y@{}}
+\toprule Design boundary & Current disposition & Basis and unresolved issue \\\midrule
+Source/policy binding & Retain reviewed, immutable releases & Required for authority and reproducible dialogue; supported by publication tests, not a performance ranking. \\
+Retrieval and factual wording & Retain BM25/dominance and deterministic assembly & The \hyperref[study-B]{fresh factual comparison} supports the simpler local fallback, not a qualified winner; grounded and boundary scores remain below targets. \\
+Question-to-evidence mapping & Retain as development design & The \hyperref[study-A]{evidence-interface comparison} improves coverage; not all gates pass and not a release-wide 89.42\% claim. \\
+Autonomous planning/wording & Retain guarded planning with Luna for both planning and wording & Synthetic utility supports progression to integration, despite lower preferred-action agreement; product proxy inputs and individualized instruction remain unvalidated. \\
+Learner estimator/timing & Keep current evidence counters; BKT/value remains experimental & The \hyperref[study-E]{learner/timing simulation} supports further work, but its estimator is not wired into the default planning adapter. \\
+Goal lifecycle correction & Keep objective-scoped completion in the working tree & The \hyperref[study-H]{goal-completion regression} removes unsupported completions; full frozen-release requalification is separate. \\
+Flexible generation and vision & Keep unsuccessful candidates as development evidence & Critical semantic/attribution failures or no end-to-end gain prevented promotion. \\
+Delivery and persistence & Retain leased jobs, authority rechecks and stable delivery keys & Required for consent and restart behaviour; local operational checks bound the evidence. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The selected profile uses GPT-5.6 Luna for bounded complex planning and wording
+strategies. Flexible instructional trials are separate configurations. Likewise,
+the current objective-scoped correction postdates the frozen local qualification:
+its experimental component profile and matched regression study support that
+correction, not a claim that the complete final release was requalified.
+
+\subsection{Thirty Virtual Days with Actual Model Calls}
+\label{sec:provider-study}
+The \hyperref[study-G]{live-model integration trial} executes the integrated development composition over 24 synthetic
+histories and 30 virtual days. It uses actual external LLM calls for its
+configured model pathways: 654 calls were recorded, 643 completed and 11
+reached the output limit. The run processed 484 tutor turns, delivered 16 proactive
+messages and exercised 24 service restarts. Consent was disabled on virtual
+days 10--19; no proactive messages were delivered in that interval.
+
+The software actually executed dialogue processing, persistent learner records,
+autonomous jobs, delivery and restart recovery. Student utterances, attendance and receptivity were synthetic, and time
+advanced virtually. This operational trial did not score changes in mastery
+and does not establish 30 days of uptime. The separate learner/timing simulation
+and goal-completion regression make no external model calls; they examine
+simulated learning mechanisms and state-management correctness, respectively.
+
+Thirteen tutoring turns ended in a safe graph failure, including two invalid
+question-focus selections. A post-run AI diagnostic reviewed 48 endpoint
+responses, all 13 failures and all 16 check-ins: 77 deliberately selected cases,
+not a representative estimate of response quality. All 16 check-ins used a
+generic wrapper around an entire source card; their effect on students was
+not measured. In the saved Socratic first-turn
+case, the tutor asks for the student's current explanation but does not make
+the question specific to the concept's underlying difficulty
+(Appendix~\ref{sec:profile-examples}).
+
+The operational finding is that the composed software can initiate and preserve
+support under the tested controls. The instructional finding is narrower:
+successful authorization and delivery did not ensure a useful, personalized
+question. Provider cost, latency and the precise historical configuration remain
+in the linked study record (Appendix~\ref{sec:study-index}).
+
+\subsection{A Goal-Completion Defect and Its Revision Cycle}
+\label{sec:goal-study}
+A service reproduction exposed a missing invariant: completing goal $g$ must
+depend on evidence for $C(g)$, not the strongest concept anywhere in the learner
+record. With cache-coherence and virtual-memory goals active, two correct
+cache-coherence attempts incorrectly completed both goals; reopening SQLite
+preserved the error. The old service shortcut and goal interpreter both used
+evidence too broadly.
+
+The revised design applies Equation~\ref{eq:goal-completion} separately to each
+goal and accepts only committed state from the relevant scope. Multi-goal and
+multi-concept regressions cover missing, unrelated, incorrect, ambiguous and
+uncommitted evidence, plus restart and continued work on another goal. The
+prospective \hyperref[study-H]{goal-completion regression} then compares the old and corrected implementations.
+Only two runtime source files differ between the archived arms; the driver,
+six concepts, seeds, profiles and dependencies match.
+
+Each arm runs 72 histories: six personas, two simulator families, three seeds
+and reactive/autonomous conditions, with a restart on virtual day 15. The
+product service, worker and SQLite paths execute; wording and planning are
+deterministic. Shared initial conditions and seeds do not imply identical
+later transcripts, because changed interventions can change simulated replies.
+
+\begin{table}[htbp]
+\centering\small
+\caption{The \hyperref[study-H]{goal-completion regression}: matched lifecycle correction, 72 histories per arm.
+The last two rows concern the 36 autonomous histories per arm.}
+\label{tab:goal-correction}
+\begin{tabularx}{\linewidth}{@{}Yrr@{}}
+\toprule Measure & Original & Objective-scoped \\\midrule
+Completed goals & 26 & 15 \\
+Supported by target concepts & 14 & 15 \\
+Unsupported completion & 12 & 0 \\
+Histories with unsupported completion & 11 & 0 \\
+Consistent restarts & 72/72 & 72/72 \\
+Attribution / assessment agreement & 100\% / 100\% & 100\% / 100\% \\
+Quiet-hour / frequency / cooldown violations & 0 / 0 / 0 & 0 / 0 / 0 \\\midrule
+Mean proactive messages & 9.056 & 10.611 \\
+Mean final simulated mastery & 0.3632 & 0.3608 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The old assessment gates passed even when goal completion was wrong. The
+corrected arm passed all 19 run gates. Target-supported completions numbered
+14 in the original arm and 15 in the corrected arm; unsupported completions
+numbered 12 and zero. Total completed goals measure software status decisions,
+not student learning success. A separate audit matches each completion to committed
+target-concept evidence. Equal virtual timestamps cannot establish exact commit
+ordering, so service regressions separately test that boundary.
+
+The correction increased proactive delivery by 56 messages across the autonomous
+histories. Mean simulated mastery changed by $-0.0024$, and mean wasted-message
+fraction rose from $0.3496$ to $0.3572$. The evidence supports \emph{Keep} for
+objective-scoped state correctness. The mastery difference is a descriptive
+secondary outcome relative to the previous implementation, not a measurement
+of learning effects in students. Eleven autonomous histories increased, nine
+decreased and sixteen were unchanged. This regression uses previously exposed
+concepts.
+
+A retrospective audit of the earlier 72-history multi-concept trial
+found ten unsupported completions among 22 completed goals in eight histories.
+Its original measurements and prior successful assessment correction are
+retained, but they cannot establish correctness of the now-revised lifecycle.
+The four completed goals in the \hyperref[study-G]{live-model integration trial} showed no such mismatch; that small audit
+does not qualify all provider-backed paths. Appendix~\ref{sec:historical-autonomy}
+preserves the original simulated outcome and its later interpretation.
+
+\subsection{Verification and Acceptance Boundaries}
+This revision cycle supplies a concrete software development lifecycle (SDLC) argument: reproduce the defect,
+state the missing invariant, change the responsible boundary, compare the
+implementations, and retain both the failed baseline and bounded acceptance.
+The focused service/component/audit suite passed 72 tests, including 30 new
+regressions. The broader Python run and its targeted rechecks are documented in
+Appendix~\ref{sec:sdlc}; they are not a single clean post-correction full run.
+
+For course configuration and human control, browser diagnostics exercised preview, approval, reload and
+withdrawal. Local qualification recorded 43 application checks and 51 container
+regressions; restart, restore and rollback were tested under that environment.
+These support publication and operational contracts. They do not replace factual acceptance, pedagogical review or real-course
+validation of continuing support.
+At submission, course configuration and human control have bounded local
+verification; factual support remains below acceptance targets; teaching-style
+alignment lacks validation with the actual instructor; and continuing support
+has operational and lifecycle evidence but not demonstrated learning
+benefit. The prototype implements the course and tutoring workflows, but has not met
+all five acceptance requirements: factual-quality gates remain unmet, and
+instructor fidelity and real-student learning effects remain unvalidated.

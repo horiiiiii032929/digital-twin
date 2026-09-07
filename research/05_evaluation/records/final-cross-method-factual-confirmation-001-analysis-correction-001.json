@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "run_id": "final-cross-method-factual-confirmation-001-analysis-correction-001",
+  "date": "2026-09-05",
+  "status": "completed-analysis-correction",
+  "decision": "Refine",
+  "corrects": "final-cross-method-factual-confirmation-001",
+  "code_revision": "5bb3d632e6b586e458751b61b22791347d80ea5d",
+  "dirty_worktree": true,
+  "scope": "Reporting interpretation and artifact availability only; no execution, hidden-gold access, or rescoring.",
+  "arm": "bm25-dominance",
+  "source_version_validity": {
+    "recorded": {
+      "numerator": 717,
+      "denominator": 800,
+      "rate": 0.89625
+    },
+    "answerable_no_citation_count": 2,
+    "no_citation_as_failure_sensitivity": {
+      "numerator": 715,
+      "denominator": 800,
+      "rate": 0.89375
+    },
+    "citation_present_conditional": {
+      "numerator": 715,
+      "denominator": 798,
+      "rate": 0.8959899749373433
+    }
+  },
+  "provenance": "Recorded aggregate plus researcher handoff identifying two answerable no-citation responses; read-only ledger check confirms 798 citation-bearing responses and valid hashes for all 1000 payloads. No gold was opened to reclassify cases.",
+  "unchanged": {
+    "fully_grounded_success": 0.6325,
+    "fully_grounded_count": 506,
+    "answerable_count": 800,
+    "method_ranking": true,
+    "failed_gate": true,
+    "decision": "Refine"
+  },
+  "artifact_availability": {
+    "factual": "Five local response databases present; selected-arm payload hashes verified. Aggregate result remains the committed record.",
+    "visual": "Local result and response database match the existing committed hashes.",
+    "confirmation_024": "Raw generated artifacts not found locally; committed aggregates and artifact hashes remain.",
+    "qualification_010": "Raw generated artifacts not found locally; committed aggregates and artifact hashes remain."
+  },
+  "provider_calls": 0,
+  "evaluation_rerun": false,
+  "evaluation_rescored": false,
+  "known_10000_plus_1000_touched": false,
+  "limitations": [
+    "Sensitivity arithmetic is not a replacement evaluation or newly measured quality result.",
+    "Missing raw artifacts limit independent per-case verification; hashes alone cannot reconstruct evidence.",
+    "The frozen scorer is preserved; future instruments must distinguish citation presence from validity."
+  ],
+  "severe_release_definition": "Answer released when expected action is not answer; not a count of all unsupported claims on answerable cases.",
+  "verification": {
+    "focused_tests_passed": 17,
+    "dependency_deprecation_warnings": 5
+  }
+}

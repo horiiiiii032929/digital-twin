@@ -44,7 +44,8 @@ class LiteLlmClient:
         model = require_registered_current_model(model)
         if not math.isfinite(timeout_seconds) or timeout_seconds <= 0:
             raise ValueError("timeout_seconds must be positive")
-        if isinstance(max_output_tokens, bool) or max_output_tokens < 1:
+        if (isinstance(max_output_tokens, bool) or not isinstance(max_output_tokens, int)
+                or max_output_tokens < 1):
             raise ValueError("max_output_tokens must be positive")
         if temperature is not None and (
             not math.isfinite(temperature) or not 0 <= temperature <= 2
@@ -152,7 +153,8 @@ class LiteLlmClient:
         except Exception:
             cost = None
         try:
-            provider_model = str(_field(response, "model", self.model) or self.model)
+            # Requested identity is not evidence of the model that answered.
+            provider_model = _optional_string(_field(response, "model", None)) or "not-returned"
             provider_revision = _optional_string(
                 _field(response, "system_fingerprint", None)
             )

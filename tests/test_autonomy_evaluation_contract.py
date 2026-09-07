@@ -214,3 +214,18 @@ def test_operational_metrics_reject_missing_call_lineage() -> None:
             cost_usd=0.001,
             call_records=[],
         )
+
+@pytest.mark.parametrize("reservation", [-1, float("nan"), float("inf")])
+def test_provider_call_rejects_invalid_reservation(reservation):
+    with pytest.raises(ValidationError):
+        AutonomyProviderCallV1(call_number=1, task="test", status="completed",
+            provider_model="fixture", reserved_cost_usd=reservation, reservation_exceeded=False)
+
+
+def test_optional_reservation_accounting_preserves_legacy_absence():
+    legacy = AutonomyProviderCallV1(call_number=1, task="test", status="completed", provider_model="fixture")
+    assert "reserved_cost_usd" not in legacy.model_dump()
+    assert "reservation_exceeded" not in legacy.model_dump()
+    bounded = AutonomyProviderCallV1(**legacy.model_dump(), reserved_cost_usd=.2, reservation_exceeded=False)
+    assert bounded.model_dump()["reserved_cost_usd"] == .2
+    assert bounded.model_dump()["reservation_exceeded"] is False
