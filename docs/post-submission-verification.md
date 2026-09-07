@@ -30,8 +30,8 @@ with zero failures or errors. Three new link cases were added during that run
 and passed in a separate five-test validator invocation. The standard `npm run
 check` pipeline subsequently completed: its Python selection passed 2,577 tests
 in 1,340.68 seconds, followed by 71 frontend tests, lint and the production build.
-Publication remains blocked pending explicit scope approval for the large
-evaluation-record payload. The first standard run found stale audit
+The repository owner approved publication of the evaluation-record payload on
+7 September 2026; remote CI remains to be checked after push. The first standard run found stale audit
 hashes for the submitted goal-scope correction and missing report/tool entries.
 The relevant source boundaries and evidence were reviewed, then audit metadata
 was refreshed. This changes verification bookkeeping, not tutoring behaviour.

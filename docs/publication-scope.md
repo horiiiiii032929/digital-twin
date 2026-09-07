@@ -1,4 +1,4 @@
-# Proposed public GitHub publication
+# Public GitHub publication scope
 
 Destination: `horiiiiii032929/digital-twin` (public), ultimately `main` so the
 submitted report's repository links resolve.
@@ -19,10 +19,11 @@ of every record and does not itself establish publication authorization.
 
 Automatic approval review rejected the first public push because the large
 research/evaluation payload's sensitivity and publication authorization were not
-sufficiently established. No push succeeded. The exact file/size/hash inventory
+sufficiently established. That attempt did not publish any files. The exact file/size/hash inventory
 is retained locally at
 `reports/generated/post-submission-verification/publication-manifest.json`.
 
-Confirm whether the public publication should include these evaluation records,
-in addition to code and documents, before retrying this action. Test completion
-and publication approval are separate conditions; this note is not a test pass.
+On 7 September 2026, the repository owner explicitly approved including the
+evaluation records after being shown the scope above. Publication may therefore
+include those records alongside the code and documents. Test completion and
+publication approval are separate conditions; this note is not a test pass.
