@@ -90,6 +90,13 @@ standard CI job now prepares these sources before the portable checks. A fifth
 pinned public source, ThinkOS, is also required by successor-build regressions.
 Remote verification of this correction is pending.
 
+The second remote run, [34087950670](https://github.com/horiiiiii032929/digital-twin/actions/runs/34087950670),
+passed source preparation but exposed another dependency on ignored generated
+10,000-case inputs inside the old development-v2 validation command. Its two
+source-bound subcommands and three source-bound tests were also separated into
+explicit historical-artifact verification. The remaining source-derived checks
+continue to run with the pinned public inputs.
+
 Historical visual raster/ledger checks and individual tests requiring ignored
 10,000-case run products are explicitly separated from the portable suite with
 the `historical_artifact` marker. They remain runnable with `npm run

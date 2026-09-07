@@ -1137,7 +1137,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "completion-development-execution_configuration",
-      "evidence": "Added pinned public-source preparation. Moved three ignored visual-ledger/raster checks into the existing historical-artifact command and excluded explicitly marked historical tests from the portable suite. Their original strict validation remains available; no absent artifact is counted as a pass.",
+      "evidence": "Separated old development-v2 reconstruction and audit checks requiring ignored 10,000-case generated sources from portable checks. Marked only the three source-bound tests; existing portable tests and historical assertions remain. Explicit historical test command also includes the four previously excluded generated-artifact modules.",
       "findings": [],
       "path": "package.json",
       "previous_review": {
@@ -1149,7 +1149,7 @@
       },
       "reviewed_at": "2026-09-07",
       "reviewer": "codex-reproducibility-review",
-      "sha256": "99b9f5ba5d28f5ed9cfb7a27052d78b2d2fcc530ab840879311eca96fa89e771"
+      "sha256": "76cb4842f13fd898ff538e6b09c147491e5e0a760767c9675fc54499f43c2b87"
     },
     {
       "audit_status": "audited",
@@ -11936,12 +11936,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "r1-demo-build-and-evaluation-v2",
-      "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+      "evidence": "Separated old development-v2 reconstruction and audit checks requiring ignored 10,000-case generated sources from portable checks. Marked only the three source-bound tests; existing portable tests and historical assertions remain. Explicit historical test command also includes the four previously excluded generated-artifact modules.",
       "findings": [],
       "path": "tests/test_academic_factual_qa_open_development_v2.py",
-      "reviewed_at": "2026-08-30",
-      "reviewer": "codex-primary-finite-program-review",
-      "sha256": "b404ad71270e86b1d5adca01c43360ad2c5ffa70b5197f650e24c37484deb54c"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "5116597e40a71f62d95d1494f0d29f205d9f8196779945510a48d2e6b437f449"
     },
     {
       "audit_status": "audited",

@@ -72,6 +72,10 @@ distinguishes code checks from the historical evaluation claims.
   ignored run products when their bound local artifacts are present. This is
   intentionally separate from `check` so a fresh clone does not access sealed
   or machine-local evaluation output.
+- `npm run test:historical-artifacts`: run the explicitly marked historical
+  tests and the four existing generated-artifact test modules when their original
+  local inputs and rasterization environment are available. Missing inputs fail
+  this command; these tests are not counted as portable-suite passes.
 - `npm run verify:local-r1-final-technical-completion`: validate the frozen
   visual-product and synthetic C0-C3 program without calling a provider.
 - `npm run simulate:local-r1-final-technical-completion`: run the complete

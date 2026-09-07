@@ -19,7 +19,7 @@
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "356c4863a61f7741fd96381cc7c2d72b0a908350aced6565af7489c6954b93d1",
+  "record_sha256": "e7547b034aacd4fc295cbfb2b16d6155e912df9b8d7eab6465394d385353a6ae",
   "records": [
     {
       "audit": {
@@ -1560,7 +1560,7 @@
     {
       "audit": {
         "domain": "completion-development-execution_configuration",
-        "evidence": "Added pinned public-source preparation. Moved three ignored visual-ledger/raster checks into the existing historical-artifact command and excluded explicitly marked historical tests from the portable suite. Their original strict validation remains available; no absent artifact is counted as a pass.",
+        "evidence": "Separated old development-v2 reconstruction and audit checks requiring ignored 10,000-case generated sources from portable checks. Marked only the three source-bound tests; existing portable tests and historical assertions remain. Explicit historical test command also includes the four previously excluded generated-artifact modules.",
         "findings": [],
         "reviewed_at": "2026-09-07",
         "reviewer": "codex-reproducibility-review"
@@ -1571,7 +1571,7 @@
       "package_commands": [],
       "path": "package.json",
       "risk": "medium",
-      "sha256": "99b9f5ba5d28f5ed9cfb7a27052d78b2d2fcc530ab840879311eca96fa89e771"
+      "sha256": "76cb4842f13fd898ff538e6b09c147491e5e0a760767c9675fc54499f43c2b87"
     },
     {
       "audit": {
@@ -6465,7 +6465,8 @@
       "category": "active_or_unclassified_tooling",
       "disposition": "historical_guarded",
       "package_commands": [
-        "test:api"
+        "test:api",
+        "test:historical-artifacts"
       ],
       "path": "scripts/academic_factual_qa_open_10000_sealed_package.py",
       "risk": "high",
@@ -6803,7 +6804,8 @@
       "category": "active_or_unclassified_tooling",
       "disposition": "active_audited",
       "package_commands": [
-        "verify:academic-factual-qa-open-10000"
+        "verify:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-development-v2-artifacts"
       ],
       "path": "scripts/audit_academic_factual_qa_open_development.py",
       "risk": "high",
@@ -6841,6 +6843,7 @@
       "package_commands": [
         "execute:source-semantic-atom-failure-audit",
         "test:api",
+        "test:historical-artifacts",
         "verify:source-semantic-atom-failure-audit"
       ],
       "path": "scripts/audit_academic_factual_qa_source_semantic_atom_failures.py",
@@ -7183,7 +7186,7 @@
       "package_commands": [
         "preflight:academic-factual-qa-open-10000-development-v2",
         "simulate:academic-factual-qa-open-10000",
-        "verify:academic-factual-qa-open-10000",
+        "verify:academic-factual-qa-open-development-v2-artifacts",
         "write:academic-factual-qa-open-10000-development-v2"
       ],
       "path": "scripts/build_academic_factual_qa_open_development_v2.py",
@@ -17197,10 +17200,10 @@
     {
       "audit": {
         "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Focused domain tests, network-free simulations, execution-freeze validation, and the complete repository gate.",
+        "evidence": "Separated old development-v2 reconstruction and audit checks requiring ignored 10,000-case generated sources from portable checks. Marked only the three source-bound tests; existing portable tests and historical assertions remain. Explicit historical test command also includes the four previously excluded generated-artifact modules.",
         "findings": [],
-        "reviewed_at": "2026-08-30",
-        "reviewer": "codex-primary-finite-program-review"
+        "reviewed_at": "2026-09-07",
+        "reviewer": "codex-reproducibility-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -17208,7 +17211,7 @@
       "package_commands": [],
       "path": "tests/test_academic_factual_qa_open_development_v2.py",
       "risk": "medium",
-      "sha256": "b404ad71270e86b1d5adca01c43360ad2c5ffa70b5197f650e24c37484deb54c"
+      "sha256": "5116597e40a71f62d95d1494f0d29f205d9f8196779945510a48d2e6b437f449"
     },
     {
       "audit": {
