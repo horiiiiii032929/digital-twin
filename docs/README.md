@@ -3,6 +3,17 @@
 Use this page to distinguish active implementation guidance from historical
 design records.
 
+## Start here after submission
+
+- [Submitted report and source package](../reports/submitted/2026-09-06/README.md)
+- [Runnable setup and verification record](post-submission-verification.md)
+- [Repository maintenance and reference protection](repository-maintenance.md)
+- [Evaluation registry](../research/05_evaluation/result-registry.md)
+
+The guides below retain their original project and release context. Use their
+dates and linked profiles to distinguish implemented behaviour from prospective
+plans; older milestones are not current deployment claims.
+
 ## Active product and architecture
 
 - [Course Digital Twin release plan](release-plan.md)

@@ -5,6 +5,10 @@ data validation, or project automation scripts.
 
 Current utilities:
 
+- `validate_submitted_report_links.py`: preserves submitted PDF and source archive
+  hashes, internal PDF destinations, 14 cited repository files and the 12-study
+  evidence index. Run `npm run check:report-links`; this is included in `npm run check`.
+
 - `run_stateful_clarification_confirmation.py`: validates and executes the
   frozen, network-free 200-case R1.2 mixed-initiative clarification
   confirmation. It drives the actual student service and SQLite persistence,
