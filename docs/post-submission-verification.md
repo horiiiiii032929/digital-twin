@@ -25,8 +25,13 @@ This distinction is not permission to rerun sealed or provider-backed evaluation
 
 ## Publication verification
 
-Verification is in progress; final command outcomes and the published revision
-will be recorded before completion. The first standard run found stale audit
+The complete Python invocation passed 2,600 tests in 1,486.20 seconds (24m46s),
+with zero failures or errors. Three new link cases were added during that run
+and passed in a separate five-test validator invocation. The standard `npm run
+check` pipeline subsequently completed: its Python selection passed 2,577 tests
+in 1,340.68 seconds, followed by 71 frontend tests, lint and the production build.
+Publication remains blocked pending explicit scope approval for the large
+evaluation-record payload. The first standard run found stale audit
 hashes for the submitted goal-scope correction and missing report/tool entries.
 The relevant source boundaries and evidence were reviewed, then audit metadata
 was refreshed. This changes verification bookkeeping, not tutoring behaviour.
@@ -51,3 +56,16 @@ The GitHub job retains every check and uses a 45-minute wall-time ceiling
 instead of 15 minutes. The expanded synthetic integration suite is CPU-active
 and takes substantially longer than the frontend checks; this changes only
 the execution allowance, not pass criteria.
+
+## Fresh checkout results
+
+On a separate checkout of `32dc808`, `uv sync --locked --dev` and `npm ci`
+completed. All 1,989 local Markdown links, 1,248 execution-file inventory entries
+and 201 guarded entrypoints validated. The focused product/evaluation suite
+passed 82 Python tests; all 71 frontend tests, lint and production build passed.
+The only frontend build warning concerns the existing 527.86 kB JavaScript
+chunk. Python and JavaScript dependency audits found zero vulnerabilities.
+
+The submitted snapshot hashes and all twelve principal report evidence paths
+were checked against committed files. This verifies code/doc availability; it
+does not claim that all historical external-model experiments were repeated.

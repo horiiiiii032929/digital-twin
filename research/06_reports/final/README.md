@@ -22,7 +22,7 @@ Run from the repository root with Tectonic and Python with PyMuPDF:
 mkdir -p reports/generated/final-report/components
 tectonic -X compile research/06_reports/final/abstract.tex --outdir reports/generated/final-report/components --keep-logs --keep-intermediates
 tectonic -X compile research/06_reports/final/report.tex --outdir reports/generated/final-report/components --keep-logs --keep-intermediates
-python3 reports/build_submission_pdfs.py
+uv run python reports/build_submission_pdfs.py
 ```
 
 The builder checks authorship, one-page abstract, AI disclosure and link targets.
