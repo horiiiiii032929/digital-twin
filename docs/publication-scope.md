@@ -27,3 +27,7 @@ On 7 September 2026, the repository owner explicitly approved including the
 evaluation records after being shown the scope above. Publication may therefore
 include those records alongside the code and documents. Test completion and
 publication approval are separate conditions; this note is not a test pass.
+
+The approved payload was pushed to `codex/publish-submitted-project` and is
+reviewable in [pull request 218](https://github.com/horiiiiii032929/digital-twin/pull/218).
+The previously disabled GitHub CI workflow was re-enabled for remote verification.
