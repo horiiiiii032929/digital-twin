@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import pytest
+
 from scripts.audit_academic_factual_qa_open_development import (
     _quality_flags,
     audit_development_package,
 )
 
 
+@pytest.mark.historical_artifact
 def test_pre_spend_audit_preserves_structural_pass_and_blocks_product_use() -> None:
     result = audit_development_package()
 

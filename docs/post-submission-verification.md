@@ -13,11 +13,14 @@ checkout:
 ```sh
 uv sync --locked --dev
 npm ci
+npm run setup:evaluation-sources
 npm run check
 ```
 
-`check` uses committed synthetic fixtures, operational regressions and instrument
-validation. Tests may start loopback HTTP/HTTPS servers. No external model key is
+`check` uses committed synthetic fixtures, prepared publicly licensed source
+snapshots, operational regressions and instrument validation. Source preparation
+fetches exact Git revisions; the checks do not need external model access.
+Tests may start loopback HTTP/HTTPS servers. No external model key is
 needed for this suite. Historical generated-artifact tests are separate because
 they require ignored, local-only run products; use the existing
 `verify:historical-generated-artifacts` command only when those products exist.
@@ -69,3 +72,33 @@ chunk. Python and JavaScript dependency audits found zero vulnerabilities.
 The submitted snapshot hashes and all twelve principal report evidence paths
 were checked against committed files. This verifies code/doc availability; it
 does not claim that all historical external-model experiments were repeated.
+
+## Remote CI source-preparation correction
+
+The first remote run, [34087150738](https://github.com/horiiiiii032929/digital-twin/actions/runs/34087150738),
+failed because a source-derived dataset build required ignored public course
+snapshots. The earlier focused clean-checkout test did not exercise that build;
+its success was insufficient evidence for the complete clean-checkout suite.
+
+The decision was to preserve the existing build checks and prepare their exact
+public input revisions explicitly, instead of skipping source-dependent tests
+or committing full upstream repositories. The prediction is that pinned source
+preparation removes the machine-local prerequisite without changing evaluation
+inputs or scores. Four network-free Git-fixture tests cover initial fetch,
+offline reuse, dirty/revision-drift rejection, and failed-fetch cleanup. The
+standard CI job now prepares these sources before the portable checks. A fifth
+pinned public source, ThinkOS, is also required by successor-build regressions.
+Remote verification of this correction is pending.
+
+Historical visual raster/ledger checks and individual tests requiring ignored
+10,000-case run products are explicitly separated from the portable suite with
+the `historical_artifact` marker. They remain runnable with `npm run
+test:historical-artifacts`; commands requiring those products remain under
+`verify:historical-generated-artifacts`. Absence of those inputs is not reported
+as a successful historical revalidation.
+
+The broader clean-checkout probe also found that the shared autonomy test
+fixture mixed a fixed August 31 event time with the real wall clock. After
+September 7 its goal expiry was no longer in the future. Passing the existing
+`VirtualUtcClock` into that fixture fixed the test setup; all 67 related
+autonomy/worker/freeze checks passed. Production expiry validation is unchanged.

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import pytest
+
 from pathlib import Path
 
 from scripts import run_course_digital_twin_evaluation_program as runner
@@ -17,6 +19,7 @@ INSTRUMENT = ROOT / (
 )
 
 
+@pytest.mark.historical_artifact
 def test_action_router_successor_is_terminal_and_exactly_matchable() -> None:
     manifest = load_program_manifest(INSTRUMENT)
     result = runner.validate(INSTRUMENT)
@@ -44,6 +47,7 @@ def test_action_router_successor_adapter_smoke_is_network_free() -> None:
     }
 
 
+@pytest.mark.historical_artifact
 def test_final_atomic_corpus_is_non_overlapping_and_exactly_matchable() -> None:
     cases, gold, diagnostics, source = build_atomic_final_rows(
         ROOT / "data/processed/academic_factual_qa_open_10000_v1_sources.json",

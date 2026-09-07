@@ -46,6 +46,9 @@ PROTECTED_NAME_PREFIXES = (
     "second_review_",
 )
 ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
+    # Fetches exact public source revisions only; no dataset generation,
+    # evaluation execution, hidden-gold inspection or provider calls.
+    "prepare_public_evaluation_sources.py",
     # This builder is pure and network-free. Provider execution lives in the
     # separately guarded run_academic_* reference-validation entrypoint.
     "build_academic_factual_qa_open_reference_validation.py",

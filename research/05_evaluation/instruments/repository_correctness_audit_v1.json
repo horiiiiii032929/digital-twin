@@ -27,12 +27,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "configuration-and-deployment",
-      "evidence": "Raised the job wall-time ceiling from 15 to 45 minutes for the measured long-running synthetic integration suite and dependency setup. All existing tests, audit steps and SHA-pinned actions remain enabled; no quality gate was weakened.",
+      "evidence": "CI prepares five public source revisions before the portable suite; original source-build assertions and SHA-pinned actions remain. Historical artifacts have separate explicit commands.",
       "findings": [],
       "path": ".github/workflows/ci.yml",
       "reviewed_at": "2026-09-07",
       "reviewer": "codex-reproducibility-review",
-      "sha256": "27d502b2f19a1fdebdc2f84b1e1ff7cbf051861d82161df8e274adcf8424f4f4"
+      "sha256": "59b0ef5c9626abce88795055ce7f32aad35649d6045d60518ac80de56048a89a"
     },
     {
       "audit_status": "audited",
@@ -1137,7 +1137,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "completion-development-execution_configuration",
-      "evidence": "Reviewed command/guard integration and deterministic freshness test setup; exact authorized development instruments only, historical execution guards retained. Targeted freeze and visual credential/freshness tests passed. See docs/research/2026-09-06-completion-code-audit.md.",
+      "evidence": "Added pinned public-source preparation. Moved three ignored visual-ledger/raster checks into the existing historical-artifact command and excluded explicitly marked historical tests from the portable suite. Their original strict validation remains available; no absent artifact is counted as a pass.",
       "findings": [],
       "path": "package.json",
       "previous_review": {
@@ -1147,20 +1147,20 @@
         "reviewer": "Codex final cross-method audit",
         "sha256": "09bb008bb687b08e97c0215dfc29a49ad4a8ba14f523bf01226d5175628df5c5"
       },
-      "reviewed_at": "2026-09-06",
-      "reviewer": "codex-primary-and-scoped-review-agents",
-      "sha256": "12716fe4f1c48f8200cd0776eb34f8faace59e42b6fcf3a01d8d954ed70fb200"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "99b9f5ba5d28f5ed9cfb7a27052d78b2d2fcc530ab840879311eca96fa89e771"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "visual-late-interaction-successor",
-      "evidence": "Dependency review made the existing runtime httpx transport explicit rather than relying on a transitive dependency; locked resolution and focused transport tests passed.",
+      "evidence": "Registered the explicit historical_artifact pytest marker; dependency versions and model/provider configuration are unchanged.",
       "findings": [],
       "path": "pyproject.toml",
-      "reviewed_at": "2026-09-04",
-      "reviewer": "codex-colpali-successor-audit",
-      "sha256": "9bd8e90089005d618c671e081a63f9367649971d1e3e46b7048dbb7332be7d32"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "139fe200f886c00632b8e6f694018d7204f32b099b46017064f4266ee6728abf"
     },
     {
       "audit_status": "audited",
@@ -6051,6 +6051,17 @@
     {
       "audit_status": "audited",
       "disposition": "active_audited",
+      "domain": "post-submission-reproducibility",
+      "evidence": "Reviewed five fixed public Git revision inputs, reuse, revision/dirty rejection, atomic checkout install and failed-fetch cleanup; four synthetic local Git tests pass. Fetching does not generate datasets, inspect hidden gold or call providers.",
+      "findings": [],
+      "path": "scripts/prepare_public_evaluation_sources.py",
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "30382f2b626629ef1f46bb95ed48955851e0d0c72bc4f384ce8598ba5362043f"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
       "domain": "proactive-outreach",
       "evidence": "Manual entrypoint review confirms staging-only execution, explicit disabled-by-default worker authority, bounded batches, no provider or external delivery calls, and clean repository closure.",
       "findings": [],
@@ -8205,12 +8216,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "active_or_unclassified_tooling",
-      "evidence": "Goal-scope reproducibility review: exact objective/course/release mapping, committed learner evidence, preservation of noncompleted goals; network-free runner and separate independent audit. Covered by goal-completion service/evaluation regression tests and the full post-submission test gate; see docs/post-submission-verification.md.",
+      "evidence": "Source preparation is explicitly classified as a non-evaluation entrypoint: it fetches only five pinned public revisions and cannot execute evaluations or generate datasets. Existing protected entrypoints remain guarded.",
       "findings": [],
       "path": "scripts/validate_repository_execution_freeze.py",
       "reviewed_at": "2026-09-07",
       "reviewer": "codex-reproducibility-review",
-      "sha256": "6c556c9054cf7ac60b54d6239b3b9d53b4695499e67510ee8e8e8c36e02b98df"
+      "sha256": "08b3fa54fb7031a3aae9df58c41a9c7730ce89b51d3de4cb06534bd6670e83ce"
     },
     {
       "audit_status": "audited",
@@ -11142,12 +11153,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-checkpoint-recovery",
-      "evidence": "Focused V2 regression interrupts after validation, persists a RegionKind.TEXT citation, reconstructs a fresh graph process, restores the checkpoint once, and verifies no duplicate generation and an exact citation enum round trip.",
+      "evidence": "Shared synthetic autonomy fixture now injects VirtualUtcClock at its declared event time; 67 autonomy, worker and freeze tests pass without weakening production expiry validation.",
       "findings": [],
       "path": "tests/digital_twin/test_governed_autonomy.py",
-      "reviewed_at": "2026-09-03",
-      "reviewer": "Codex qualification-009 checkpoint audit",
-      "sha256": "859fbbba53e56153fc72d4080dd76a5ca1a40c5b30abb1a0ba666be449e32e19"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "ed08705b225764153d1fe2bce932ab7c0ec961da497468fef718f50adc2f00c1"
     },
     {
       "audit_status": "audited",
@@ -12189,12 +12200,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "governed-autonomy-v2-1",
-      "evidence": "Test-contract review plus 1,372 initial repository test passes and focused reruns covering the corrected freeze, freshness, routing, autonomy, API, migration, persistence, and UI approval boundaries.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_api_retrieval_selection.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "Codex primary plus independent Impeccable cross-review",
-      "sha256": "8df648649a5fa83557d9c0043db68e7ae6a2baee5013c83edc42093040aef146"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "e77d689d20a70185a2049b78b226fae1d2df63e9fce26664a720b18af40ef5c6"
     },
     {
       "audit_status": "audited",
@@ -12266,12 +12277,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "flow-independent-factual-qa",
-      "evidence": "Focused tests verify the pre-spend audit preserves the structural pass while returning Refine for the immutable package, accounts for all 500 rows, detects the frozen high-risk reference-answer/modality profile, and distinguishes complete text and modality-bearing evidence from fragments and plain prose.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_audit_academic_factual_qa_open_development.py",
-      "reviewed_at": "2026-08-27",
-      "reviewer": "codex-primary-review",
-      "sha256": "e26934b4a3afc94e42bc583ba6d705d855841152baf32c9db34a11ed4be7c2cc"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "8a9309c4424a5de760798c91399f2a7c3b950bc25e201e123b6b4c022c1eaa58"
     },
     {
       "audit_status": "audited",
@@ -12688,23 +12699,23 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program-verification",
-      "evidence": "Tests prove 452/452 development references are exactly matchable, final 10,000 truth and source packages are deterministic and non-overlapping, gold opens after persistence, simulations are finite, and program authority is bounded.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_course_digital_twin_evaluation_program_005.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "codex-primary-finite-program-review",
-      "sha256": "c6a547a462efac3c0002849d37299503bbd626978dc24f14ae4745c5f5d7c393"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "d60cfaae5b86ff797e22b0028fdaca31cc9d110b41bab718a3976b45ebacd561"
     },
     {
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "finite-evaluation-program-verification",
-      "evidence": "Tests preserve programs 006-010, prove program 011 is terminal with paid authority revoked, retain its exact balanced package and 15/85 construction binding, and ensure descriptive retrieval cannot be reported as a passed gate.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_course_digital_twin_evaluation_program_006.py",
-      "reviewed_at": "2026-08-31",
-      "reviewer": "codex-primary-program-011-closeout-review",
-      "sha256": "5f38381f9e7c744fa9957f615f8fd95069db642a599fea404d2ef4727600558c"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "f5ef16ec693b7cfa0817927304830555b8fea65f08736f2d7b41943ce8ee8cf3"
     },
     {
       "audit_status": "audited",
@@ -13704,12 +13715,12 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "local-r1-final-technical-completion",
-      "evidence": "Focused regression proves the title-optional frozen source package constructs all 30 product chunks with deterministic non-empty display titles and leaves the package unchanged.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_local_r1_final_technical_completion_001.py",
-      "reviewed_at": "2026-09-05",
-      "reviewer": "codex-final-local-r1-audit",
-      "sha256": "11fe38b8794a0a5996f3e1439547f7ba444e181063dc33cbea5ced7e7a336572"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "9b9db415390fbaa37774f9f67eaf130fb6703808b4fbd3a3dcf8153f9188d11e"
     },
     {
       "audit_status": "audited",
@@ -13875,6 +13886,17 @@
       "reviewed_at": "2026-08-22",
       "reviewer": "codex-primary-data-quality-review",
       "sha256": "7309d92f1c6af873932db6f394306cc65522600c76db916b3c31d2781ac45819"
+    },
+    {
+      "audit_status": "audited",
+      "disposition": "active_audited",
+      "domain": "post-submission-reproducibility",
+      "evidence": "Four local Git-fixture regressions cover exact-revision fetch, offline reuse, dirty and wrong-revision rejection, and failed-fetch cleanup without external network access.",
+      "findings": [],
+      "path": "tests/test_prepare_public_evaluation_sources.py",
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "505b7d5b5d49f4400f10ac12f3a8685b3d9c42a8b355efd379328478cb9cc57b"
     },
     {
       "audit_status": "audited",
@@ -14445,7 +14467,7 @@
       "audit_status": "audited",
       "disposition": "active_audited",
       "domain": "completion-development-verification",
-      "evidence": "Reviewed command/guard integration and deterministic freshness test setup; exact authorized development instruments only, historical execution guards retained. Targeted freeze and visual credential/freshness tests passed. See docs/research/2026-09-06-completion-code-audit.md.",
+      "evidence": "Identified tests bound to ignored historical run products or native visual rasters are explicitly marked historical_artifact. Portable functions remain in the standard suite; original assertions and historical checks are retained for explicit artifact verification.",
       "findings": [],
       "path": "tests/test_true_visual_colpali_confirmation.py",
       "previous_review": {
@@ -14455,9 +14477,9 @@
         "reviewer": "codex-colpali-result-publication-audit",
         "sha256": "a7bb670416ddb887fe7004311f8555013bc6c5acc7c44e0ac1797fe04b9343da"
       },
-      "reviewed_at": "2026-09-06",
-      "reviewer": "codex-primary-and-scoped-review-agents",
-      "sha256": "695e823ed77de46a798bd943f003a0305be3e8cc85ba3f812e51b6e5c53ca118"
+      "reviewed_at": "2026-09-07",
+      "reviewer": "codex-reproducibility-review",
+      "sha256": "d1c10fdd0335907a420c52425aa342f395b6227e2cb2804ef6516c4524335c62"
     },
     {
       "audit_status": "audited",

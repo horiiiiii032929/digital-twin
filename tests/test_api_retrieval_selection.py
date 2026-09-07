@@ -18,6 +18,7 @@ from src.digital_twin.repository_freeze import RepositoryFreezeError
 from src.digital_twin.grounding import DocumentChunk
 
 
+@pytest.mark.historical_artifact
 def test_api_retrieval_selection_validates_frozen_packages() -> None:
     result = selection.validate()
 
@@ -28,6 +29,7 @@ def test_api_retrieval_selection_validates_frozen_packages() -> None:
     assert result["provider_calls"] == 0
 
 
+@pytest.mark.historical_artifact
 def test_api_retrieval_selection_is_finite_across_simulations() -> None:
     passed = selection.simulate("pass")
     failed = selection.simulate("quality-failure")
@@ -41,6 +43,7 @@ def test_api_retrieval_selection_is_finite_across_simulations() -> None:
     assert all(result["provider_calls"] == 0 for result in (passed, failed, invalid))
 
 
+@pytest.mark.historical_artifact
 def test_api_retrieval_preflight_is_blocked_after_authority_revocation(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -62,6 +65,7 @@ def test_api_retrieval_preflight_is_blocked_after_authority_revocation(
     assert result["model_or_provider_called"] is False
 
 
+@pytest.mark.historical_artifact
 def test_api_retrieval_execution_authority_is_revoked() -> None:
     with pytest.raises(RepositoryFreezeError, match="not a bounded authorization"):
         selection.require_bounded_pilot_operation_allowed(
@@ -70,6 +74,7 @@ def test_api_retrieval_execution_authority_is_revoked() -> None:
         )
 
 
+@pytest.mark.historical_artifact
 def test_optional_reranker_semantic_failure_is_isolated_without_retry(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -146,6 +151,7 @@ def test_optional_reranker_semantic_failure_is_isolated_without_retry(
     assert usage["semantic_failure"]["reason"] == "chunk-id-set-drift"
 
 
+@pytest.mark.historical_artifact
 def test_query_vector_cache_is_hash_bound_and_resume_safe(tmp_path: Path) -> None:
     cases = [
         EvaluationCaseV1(

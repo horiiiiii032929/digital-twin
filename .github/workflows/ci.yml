@@ -47,4 +47,6 @@ jobs:
         run: npm run audit:dependencies
 
       - name: Verify repository
-        run: npm run check
+        # Source-derived build regressions require these exact public revisions.
+        # Preparation does not execute or rescore historical evaluations.
+        run: npm run setup:evaluation-sources && npm run check

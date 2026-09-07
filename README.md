@@ -60,10 +60,14 @@ distinguishes code checks from the historical evaluation claims.
 
 - `uv sync --locked --dev`: install the locked Python API and test dependencies into `.venv`.
 - `npm ci`: install the locked frontend workspace dependencies.
+- `npm run setup:evaluation-sources`: before the full checks, fetch five
+  revision-pinned, publicly licensed course repositories into ignored local
+  storage. Existing modified or incorrectly pinned checkouts are rejected.
 - `npm run dev:api`: start the FastAPI backend on <http://localhost:8000>.
 - `npm run dev:web`: start the Vite frontend on <http://localhost:5173>.
 - `npm run check`: run the reproducible local and CI verification suite using
-  committed code and evidence.
+  committed code/evidence and the prepared public source snapshots. No model
+  API key is required.
 - `npm run verify:historical-generated-artifacts`: explicitly revalidate older
   ignored run products when their bound local artifacts are present. This is
   intentionally separate from `check` so a fresh clone does not access sealed

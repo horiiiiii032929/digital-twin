@@ -631,6 +631,14 @@ Current utilities:
   preflight:academic-factual-qa-confirmation-v2`. The source/case build is now
   bound, but preflight remains blocked; no Codex review, provider call,
   researcher audit, product execution, or final tranche is authorized.
+- `prepare_public_evaluation_sources.py`: `npm run setup:evaluation-sources`
+  fetches the five public Git revisions already specified by the confirmation
+  builder. Run it before `npm run check` in a fresh checkout. It checks revisions
+  and working-tree cleanliness, refuses to overwrite changed inputs, and leaves
+  no partial destination on a failed fetch. Sources stay in ignored
+  `data/external/academic_factual_qa_confirmation_002/`; their permissions and
+  attribution remain recorded in the existing source manifest. This command
+  does not generate or score evaluation cases or call model providers.
 - `build_academic_factual_qa_confirmation_v2.py`: reads four locally cached,
   exact public repository revisions and deterministically rebuilds the
   160-section source manifest, 200 confirmation cases, and 40 disjoint planted

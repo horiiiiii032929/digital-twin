@@ -1,7 +1,10 @@
+import pytest
+
 from scripts import run_local_r1_final_technical_completion_001 as runner
 from scripts import run_true_visual_product_checkpoint as visual_runner
 
 
+@pytest.mark.historical_artifact
 def test_program_validation_binds_both_children() -> None:
     result = runner.validate()
 
@@ -13,6 +16,7 @@ def test_program_validation_binds_both_children() -> None:
     }
 
 
+@pytest.mark.historical_artifact
 def test_program_simulation_is_network_free() -> None:
     result = runner.simulate()
 

@@ -19,6 +19,7 @@ def _authorized_instrument() -> dict[str, object]:
     return instrument
 
 
+@pytest.mark.historical_artifact
 def test_fresh_visual_dataset_reconstructs_and_balances_modalities() -> None:
     dataset = builder.build_dataset(write_assets=False)
     builder.validate_dataset(dataset)
@@ -32,6 +33,7 @@ def test_fresh_visual_dataset_reconstructs_and_balances_modalities() -> None:
     } == {"table": 10, "equation": 10, "diagram": 10}
 
 
+@pytest.mark.historical_artifact
 def test_network_free_simulation_passes_without_provider_calls() -> None:
     result = runner.simulate()
 
@@ -42,6 +44,7 @@ def test_network_free_simulation_passes_without_provider_calls() -> None:
     assert result["boundary_evaluation_status"] == "deferred-to-actual-product-checkpoint"
 
 
+@pytest.mark.historical_artifact
 @pytest.mark.parametrize("metadata_fresh", [True, False])
 def test_preflight_is_blocked_when_credential_is_missing(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path, metadata_fresh: bool
@@ -74,6 +77,7 @@ def test_account_token_quota_bounds_the_complete_run() -> None:
     }
 
 
+@pytest.mark.historical_artifact
 def test_preflight_blocks_when_worst_case_reservation_exceeds_account_limit(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
@@ -103,6 +107,7 @@ def test_published_instrument_revokes_provider_authority() -> None:
     assert instrument["paid_execution_authorized"] is False
 
 
+@pytest.mark.historical_artifact
 def test_dataset_rejects_boundary_lineage() -> None:
     dataset = json.loads(json.dumps(builder.build_dataset(write_assets=False)))
     boundary = next(case for case in dataset["cases"] if case["expected_action"] != "answer")
@@ -115,6 +120,7 @@ def test_dataset_rejects_boundary_lineage() -> None:
         builder.validate_dataset(dataset)
 
 
+@pytest.mark.historical_artifact
 def test_render_paths_stay_hash_bound() -> None:
     dataset = builder.build_dataset(write_assets=False)
     for asset in dataset["assets"]:
