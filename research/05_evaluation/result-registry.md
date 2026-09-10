@@ -640,7 +640,7 @@ the historical runs.
 
 | `post-report-final-selection-004-mini-review-live-001` | Keep release/control; Refine candidate | [results](post-report-final-selection-decision-004-results.md), [record](records/post-report-final-selection-004-mini-review-live-001.json) |
 
-| `product-demo-v2-live-001` | Recording QA only: Refine experimental reply path; retain deterministic demonstration; no release promotion | [plan](../../reports/presentation/recording/product-pilot-v2/plan.md), [observations and retained failures](../../reports/presentation/recording/product-pilot-v2/README.md), [reactive traces](../../reports/presentation/recording/product-pilot-v2/experimental-failed-traces.json) |
+| `product-demo-v2-live-001` | Recording QA only: Refine experimental reply path; retain deterministic demonstration; no release promotion | plan (local presentation artifact: `../../reports/presentation/recording/product-pilot-v2/plan.md`), observations and retained failures (local presentation artifact: `../../reports/presentation/recording/product-pilot-v2/README.md`), reactive traces (local presentation artifact: `../../reports/presentation/recording/product-pilot-v2/experimental-failed-traces.json`) |
 
 ## AWS persona demonstration
 

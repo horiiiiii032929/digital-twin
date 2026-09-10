@@ -81,7 +81,7 @@ headers/permission notices appeared in generated outreach. Version2 fixture
 PDFs separate each concept onto a text-only page and store permission metadata
 in `source-permissions.json`. Actual ingestion and both recording-clock tests
 pass. Current raw takes are in `output/playwright/post-report-demo-final/`;
-the final 134-second 1080p edit and representative frame review are complete. The four-student overview is assembled from separate recordings on the same virtual day, followed by readable individual views. See [video and scope](../reports/presentation/recording/demo-2026-09-08.md).
+the final 134-second 1080p edit and representative frame review are complete. The four-student overview is assembled from separate recordings on the same virtual day, followed by readable individual views. See video and scope (local presentation artifact: `../reports/presentation/recording/demo-2026-09-08.md`).
 
 ## Final mobile and verification pass
 

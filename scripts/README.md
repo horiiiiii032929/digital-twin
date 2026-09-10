@@ -8,12 +8,12 @@ Current utilities:
 - `build_standard_sdlc_diagrams.py`: builds the recommended eight C4/UML draw.io
   diagrams and, with `--export`, PNG/SVG images and a review PDF using draw.io Desktop.
   Run `uv run python -m scripts.build_standard_sdlc_diagrams --export`.
-  See [notation, sources and scope](../reports/presentation/diagrams/standard/README.md).
+  See notation, sources and scope (local presentation artifact: `../reports/presentation/diagrams/standard/README.md`).
 
 - `build_presentation_diagrams.py`: rebuilds the superseded first four editable presentation
   diagrams. Run `uv run python -m scripts.build_presentation_diagrams --export`
   to generate the draw.io source, PNG/SVG images and review PDF using draw.io Desktop.
-  See [diagram sources and usage](../reports/presentation/diagrams/README.md).
+  See diagram sources and usage (local presentation artifact: `../reports/presentation/diagrams/README.md`).
 
 - `build_recording_demo.py`: prepares synthetic service events for the presentation's
   student-use/follow-up chapter. Run `uv run python -m scripts.build_recording_demo`.
@@ -22,7 +22,7 @@ Current utilities:
   worker retry. The generated `apps/web/public/recording-demo.json` is ignored.
   This is a presentation fixture, not a concurrency or learning-effect evaluation;
   it does not capture onboarding or source ingestion. The complete video direction
-  is in [the presentation plan](../reports/presentation/full-flow-video-direction.md).
+  is in the presentation plan (local presentation artifact: `../reports/presentation/full-flow-video-direction.md`).
 
 - `validate_submitted_report_links.py`: preserves submitted PDF and source archive
   hashes, internal PDF destinations, 14 cited repository files and the 12-study
@@ -1933,14 +1933,14 @@ student turns in a temporary API runtime. It writes ignored verification JSON.
 deterministic recording API on 8018 and six unchanged product UIs on 5178–5183.
 On a fresh running workspace, `uv run python -m scripts.prepare_recording_checkpoint
 --published` prepares the later student-entry scenes, stopping before consent and
-questions. See the [recording guide](../reports/presentation/recording/README.md)
+questions. See the recording guide (local presentation artifact: `../reports/presentation/recording/README.md`)
 for actor URLs, capture settings, limitations and restart instructions.
 
 `uv run python -m scripts.record_student_clips` records the four prepared student
 actors through an existing Playwright CLI session named `recording-film`.
 `uv run python -m scripts.edit_recording_film` assembles the named raw captures,
 English captions, four-session comparison and separately labelled service-log
-visualization into a silent 1080p MP4. See the [recorded film notes](../reports/presentation/recording/recorded-video.md)
+visualization into a silent 1080p MP4. See the recorded film notes (local presentation artifact: `../reports/presentation/recording/recorded-video.md`)
 for prerequisites, lineage, timestamps and verification.
 
 ### Historical replay preview
@@ -1971,7 +1971,7 @@ ffmpeg/ffprobe, Pillow and macOS Arial fonts. No new model calls occur in editin
 
 `uv run pytest tests/test_recording_virtual_clock.py tests/test_recording_demo.py -q`
 checks the recording clock/service wiring and retained historical trace builder.
-See [live demo production](../reports/presentation/recording/live-virtual-demo.md)
+See live demo production (local presentation artifact: `../reports/presentation/recording/live-virtual-demo.md`)
 for provenance, limitations and review.
 
 ### English presentation deck

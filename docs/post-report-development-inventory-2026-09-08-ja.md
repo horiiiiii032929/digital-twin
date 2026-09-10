@@ -141,7 +141,7 @@ U＝今回のUI観察、C＝実装上の確認、E＝既存の登録結果。参
 | --- | --- | --- | --- |
 | D01 / P1 / M | 録画用合成教材・状態を実際の操作の目的に合わせる | 教材本文と権限メタデータを正しく分離。初回→返信→後日の変化を製品で生成し、手書きの成功応答に差し替えない。仮想日時と実行構成を保存 | U1。Q/Aの品質結果を待って対象構成を選ぶ |
 | D02 / P1 / M | 実画面による複数教授・学生のデモを再録画 | onboardingから教授の確認まで。字幕・仮想日付・早送りを付け、誰が何をしているか追える。少人数で集計が非表示なら、その仕様を示す | D01/E04。録画の完成と評価の合格を分ける |
-| D03 / P1 / M | 実装を反映した標準的な図を更新 | draw.ioでC4、UML activity/sequence/state、Crow’s Foot ER、比較表を必要な箇所に使う。実関数と保存・失敗を対応。架空の関係を足さない | E04。[読者レビュー](../reports/presentation/planning/audience-review-revision-15-ja.md) |
+| D03 / P1 / M | 実装を反映した標準的な図を更新 | draw.ioでC4、UML activity/sequence/state、Crow’s Foot ER、比較表を必要な箇所に使う。実関数と保存・失敗を対応。架空の関係を足さない | E04。読者レビュー (local presentation artifact: `../reports/presentation/planning/audience-review-revision-15-ja.md`) |
 | D04 / P1 / M | 構成案とスライドを現在地に合わせる | 冒頭に当初要求・成果・現在の範囲、教授の見直しを含む一周、失敗比較、最後に継続開発。付録なし。各ページだけで意味が読めることを全ページ確認 | D03/E03。レポートは変更しない |
 
 ### C：条件付きの将来項目
@@ -186,13 +186,13 @@ UIの単なる文言調整に実装をなぞるテストは増やさない。一
 
 今回のUI監査は既存の合成録画環境に限定した。学生の初期画面・受信箱・返信開始、教授の設定入口・公開状況・活動履歴を確認した。実際の新規onboarding、ファイル投入、引用を開く全経路、メッセージ送信後、サインイン、実時間での翌日配信、障害注入、実利用者の理解度は今回実行していない。
 
-教授のスクリーンショット取得には右側の欠落があり、全ページ取得も表示の重複が生じた。その画像から横幅やレイアウト欠陥は判定しない。教授の固定ラベル等は当日のアクセシビリティツリーとコードでも照合した。[画面監査](../reports/presentation/planning/audit-2026-09-08/README.md)に採用画像と取得上の制約を残す。
+教授のスクリーンショット取得には右側の欠落があり、全ページ取得も表示の重複が生じた。その画像から横幅やレイアウト欠陥は判定しない。教授の固定ラベル等は当日のアクセシビリティツリーとコードでも照合した。画面監査 (local presentation artifact: `../reports/presentation/planning/audit-2026-09-08/README.md`)に採用画像と取得上の制約を残す。
 
 ## 根拠索引
 
 | ID | 参照先 |
 | --- | --- |
-| U1 | [2026-09-08の画面監査](../reports/presentation/planning/audit-2026-09-08/README.md) |
+| U1 | 2026-09-08の画面監査 (local presentation artifact: `../reports/presentation/planning/audit-2026-09-08/README.md`) |
 | C1 | [学生画面](../apps/web/src/components/student/student-workspace.tsx)の受信箱・目標表示 |
 | C2 | [学生workspace hook](../apps/web/src/hooks/use-student-workspace.ts)の会話復元・作成・返信、[tutoring service](../src/digital_twin/student/service.py) |
 | C3 | [教授の自律支援パネル](../apps/web/src/components/professor/professor-autonomy-panel.tsx)のrefresh、固定ラベル、活動履歴 |
@@ -211,4 +211,4 @@ UIの単なる文言調整に実装をなぞるテストは増やさない。一
 | E9 | [大規模既知問題の回帰結果](../research/05_evaluation/academic-factual-qa-open-10000-winner-regression-001-results.md) |
 | E10 | [目標完了の範囲修正](../research/05_evaluation/goal-completion-scope-development-001-results.md) |
 
-関連：[全32ページ・読者別の構成レビュー](../reports/presentation/planning/audience-review-revision-15-ja.md)。アプリの課題と説明上の不足を切り分け、実装がない機能を図やスクリプトで補わない。
+関連：全32ページ・読者別の構成レビュー (local presentation artifact: `../reports/presentation/planning/audience-review-revision-15-ja.md`)。アプリの課題と説明上の不足を切り分け、実装がない機能を図やスクリプトで補わない。

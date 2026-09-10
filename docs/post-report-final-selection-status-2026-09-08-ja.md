@@ -37,7 +37,7 @@
 
 既存のPlaywright録画＋FFmpeg編集の環境と30日間の決定的デモは保持。今回の画面は改善したが、**新しい本編動画と全体PowerPointの再制作はまだ完了していない。** 既存動画を最新V19の実演として使わない。
 
-[回復条件のdraw.io状態図](../reports/presentation/diagrams/post-report/goal-recovery-states.drawio)を更新し、PNGの重なりを修正して確認済み。実装後の実験機能であることを明示する。
+回復条件のdraw.io状態図 (local presentation artifact: `../reports/presentation/diagrams/post-report/goal-recovery-states.drawio`)を更新し、PNGの重なりを修正して確認済み。実装後の実験機能であることを明示する。
 
 発表では「試した設計→接続の不具合→修正→比較→採用を見送る理由」を示せる。実際の学生の学習効果、教授本人の指導への忠実性、人間による使いやすさは未検証。これらをモデル評価やデモの成功で代替したとは説明しない。
 

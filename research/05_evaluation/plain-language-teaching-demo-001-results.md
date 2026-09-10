@@ -50,7 +50,7 @@ safe failure. The precise chain behind withholding has not been fully diagnosed.
 
 These are narrow output observations. The responses, including failure, are
 preserved verbatim in the machine record and
-[readable presentation evidence](../../reports/presentation/examples/plain-language-ai-dialogue-ja.md).
+readable presentation evidence (local presentation artifact: `../../reports/presentation/examples/plain-language-ai-dialogue-ja.md`).
 A response asking a check question does not show that learning occurred.
 
 ## Operations
