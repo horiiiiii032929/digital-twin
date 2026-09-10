@@ -5,9 +5,9 @@ for a student who has opened the course and enabled in-app outreach but has not
 sent a question. This is a code-derived scenario, not a newly recorded run.
 
 - [Editable draw.io](01-agent-initiated-activity-ja.drawio)
-- [PNG](01-agent-initiated-activity-ja.png)
+- PNG (local artifact: `01-agent-initiated-activity-ja.png`)
 - [SVG](01-agent-initiated-activity-ja.svg)
-- [PDF](01-agent-initiated-activity-ja.pdf)
+- PDF (local artifact: `01-agent-initiated-activity-ja.pdf`)
 - [Japanese narrative and diagram allocation](../../planning/product-first-standard-diagrams-ja.md)
 
 UML activity partitions indicate responsibility. Rounded rectangles are actions,

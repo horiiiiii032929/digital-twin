@@ -5,18 +5,18 @@ This is the recommended diagram set for the presentation. It supersedes the earl
 ## Deliverables
 
 - [Editable draw.io source](sdlc-standard-diagrams.drawio)
-- [Eight-page review PDF](sdlc-standard-diagrams.pdf)
+- Eight-page review PDF (local artifact: `sdlc-standard-diagrams.pdf`)
 
 | Page | Notation and scope | Image |
 | --- | --- | --- |
-| 01 | C4 System Context: course teaching system and connected people/provider | [PNG](01-c4-context.png) · [SVG](01-c4-context.svg) |
-| 02 | C4 Container: web, API, separate workers and data stores | [PNG](02-c4-containers.png) · [SVG](02-c4-containers.svg) |
-| 03 | UML Activity: professor/application/student partitions, preflight and publication | [PNG](03-uml-course-activity.png) · [SVG](03-uml-course-activity.svg) |
-| 04 | UML Class: selected domain entities, associations and multiplicities | [PNG](04-uml-domain-classes.png) · [SVG](04-uml-domain-classes.svg) |
-| 05 | UML Sequence: preflight and conditional publication | [PNG](05-uml-publication-sequence.png) · [SVG](05-uml-publication-sequence.svg) |
-| 06 | UML Sequence: generation and authority/revision checks at commit | [PNG](06-uml-tutoring-sequence.png) · [SVG](06-uml-tutoring-sequence.svg) |
-| 07 | UML State Machine: active, completed, expired and cancelled goals | [PNG](07-uml-goal-state-machine.png) · [SVG](07-uml-goal-state-machine.svg) |
-| 08 | UML Sequence: saved in-app delivery and worker retry | [PNG](08-uml-recovery-sequence.png) · [SVG](08-uml-recovery-sequence.svg) |
+| 01 | C4 System Context: course teaching system and connected people/provider | PNG (local artifact: `01-c4-context.png`) · [SVG](01-c4-context.svg) |
+| 02 | C4 Container: web, API, separate workers and data stores | PNG (local artifact: `02-c4-containers.png`) · [SVG](02-c4-containers.svg) |
+| 03 | UML Activity: professor/application/student partitions, preflight and publication | PNG (local artifact: `03-uml-course-activity.png`) · [SVG](03-uml-course-activity.svg) |
+| 04 | UML Class: selected domain entities, associations and multiplicities | PNG (local artifact: `04-uml-domain-classes.png`) · [SVG](04-uml-domain-classes.svg) |
+| 05 | UML Sequence: preflight and conditional publication | PNG (local artifact: `05-uml-publication-sequence.png`) · [SVG](05-uml-publication-sequence.svg) |
+| 06 | UML Sequence: generation and authority/revision checks at commit | PNG (local artifact: `06-uml-tutoring-sequence.png`) · [SVG](06-uml-tutoring-sequence.svg) |
+| 07 | UML State Machine: active, completed, expired and cancelled goals | PNG (local artifact: `07-uml-goal-state-machine.png`) · [SVG](07-uml-goal-state-machine.svg) |
+| 08 | UML Sequence: saved in-app delivery and worker retry | PNG (local artifact: `08-uml-recovery-sequence.png`) · [SVG](08-uml-recovery-sequence.svg) |
 
 Canvas: 1600 × 1000, allowing readable standalone technical diagrams. PNG: approximately 2400 × 1500. Keep aspect ratio when inserting into slides. All labels are English. PNG/SVG exports embed the editable diagram data.
 

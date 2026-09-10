@@ -132,7 +132,7 @@
 
 ## 根拠・再利用する素材
 
-- A：[revision 15と各ページの根拠](structure-revision-15-product-first-ja.md)、[読者別レビュー](audience-review-revision-15-ja.md)、[既存PowerPoint](../deck/digital-twin-presentation-hikaru.pptx)
+- A：[revision 15と各ページの根拠](structure-revision-15-product-first-ja.md)、[読者別レビュー](audience-review-revision-15-ja.md)、既存PowerPoint (local artifact: `../deck/digital-twin-presentation-hikaru.pptx`)
 - B：[実装と具体例の対応](implementation-backed-examples-ja.md)、[詳細UML素材](../diagrams/implementation/README.md)、[初回支援アクティビティ図](../diagrams/product-first/README.md)
 - C：[提出後の本編への統合事項](post-report-evidence-integration-ja.md)、[最終比較と採否](../../../research/05_evaluation/post-report-final-selection-decision-004-results.md)、[実装・検証状況](../../../docs/post-report-final-selection-status-2026-09-08-ja.md)
 - D：[31秒レビュー動画の条件と限界](../recording/product-pilot-v3/README.md)

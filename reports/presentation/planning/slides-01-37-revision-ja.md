@@ -63,4 +63,4 @@
 
 元の監査: [1–29枚のレビュー](slides-01-29-evidence-and-design-review-ja.md)
 
-成果物: [レビュー画面](../deck/slides-01-37-reviewed.html)、[PowerPoint](../deck/integrated-review/slides-01-37-reviewed-v5.pptx)。出典・実装根拠は各ページのノートに保持。
+成果物: レビュー画面 (local artifact: `../deck/slides-01-37-reviewed.html`)、PowerPoint (local artifact: `../deck/integrated-review/slides-01-37-reviewed-v5.pptx`)。出典・実装根拠は各ページのノートに保持。

@@ -28,8 +28,8 @@ the production asynchronous worker path or the qualified R1 configuration.
 
 | Actor | Start page | Material / student assignment |
 | --- | --- | --- |
-| Professor A | http://127.0.0.1:5178/professor/setup | [Systems notes](systems-notes.pdf); Student A1 and A2 |
-| Professor B | http://127.0.0.1:5179/professor/setup | [Release governance notes](release-governance-notes.pdf); Student B1 and B2 |
+| Professor A | http://127.0.0.1:5178/professor/setup | Systems notes (local artifact: `systems-notes.pdf`); Student A1 and A2 |
+| Professor B | http://127.0.0.1:5179/professor/setup | Release governance notes (local artifact: `release-governance-notes.pdf`); Student B1 and B2 |
 | Student A1 | http://127.0.0.1:5180/student | `student-a-synthetic` |
 | Student A2 | http://127.0.0.1:5181/student | `student-a2-recording` |
 | Student B1 | http://127.0.0.1:5182/student | `student-b-synthetic` |

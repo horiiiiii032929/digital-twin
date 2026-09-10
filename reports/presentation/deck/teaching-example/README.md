@@ -1,6 +1,6 @@
 # Teaching alignment example
 
-[Three-slide English review draft](teaching-example-v1.pptx).
+Three-slide English review draft (local artifact: `teaching-example-v1.pptx`).
 
 The sequence shows a stored teaching profile, first-turn output, and follow-up
 failure in the same synthetic two-turn case. These slides prototype the
@@ -14,7 +14,7 @@ not the retained deterministic release. The V19 candidate is not promoted.
 One case illustrates a behavior; it does not establish general quality or
 reproduction of an actual professor's teaching style.
 
-[evidence.json](evidence.json) preserves exact source text, profile values,
+evidence.json (local artifact: `evidence.json`) preserves exact source text, profile values,
 student messages and delivered responses, with original JSONL paths and hashes.
 No new model calls or app changes were made. No root cause beyond the recorded
 validation failure is asserted for the withheld second response.
@@ -24,8 +24,8 @@ were rendered from that file and visually reviewed. Text and the profile table
 are editable. Source notes are included; a final read-aloud script and native
 PowerPoint playback check remain outside this draft.
 
-Previews: [settings](slide-1.png), [first response](slide-2.png),
-[follow-up](slide-3.png).
+Previews: settings (local artifact: `slide-1.png`), first response (local artifact: `slide-2.png`),
+follow-up (local artifact: `slide-3.png`).
 
 Superseded sample scope: the user now requires IT5004 lecture material for all
 presentation examples. This draft remains historical and is not ready for

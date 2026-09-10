@@ -1,35 +1,35 @@
 ## Current presentation
 
-[PowerPoint — Hikaru Rawin Horinouchi](digital-twin-presentation-hikaru.pptx).
+PowerPoint — Hikaru Rawin Horinouchi (local artifact: `digital-twin-presentation-hikaru.pptx`).
 Simplified title page without a date. Includes the proofread narration in all
 31 speaker-note sections and the existing embedded demonstration.
 
 ## Current PowerPoint with proofread narration
 
-[PowerPoint with natural read-aloud notes](digital-twin-presentation-cto-natural-script.pptx).
-Matching [HTML reader](speaker-script-cto-natural.html) and
+PowerPoint with natural read-aloud notes (local artifact: `digital-twin-presentation-cto-natural-script.pptx`).
+Matching HTML reader (local artifact: `speaker-script-cto-natural.html`) and
 [Markdown script](speaker-script-cto-natural.md). All 31 speaker-note sections
 were revised for spoken English; visible slides, charts and video are unchanged.
 
 ## Current presentation with narration
 
-[PowerPoint with the matching 31-slide speaker script](digital-twin-presentation-cto-with-script.pptx).
+PowerPoint with the matching 31-slide speaker script (local artifact: `digital-twin-presentation-cto-with-script.pptx`).
 The script is in each slide’s speaker notes, followed by source references.
 Visible slides, charts and the embedded video are identical to the refined deck.
 
 ## Current visual refinement
 
-Use [the refined PowerPoint](digital-twin-presentation-cto-refined.pptx),
-[PDF review copy](digital-twin-presentation-cto-refined.pdf), or
-[complete package](presentation-package-cto-refined.zip).
+Use the refined PowerPoint (local artifact: `digital-twin-presentation-cto-refined.pptx`),
+PDF review copy (local artifact: `digital-twin-presentation-cto-refined.pdf`), or
+complete package (local artifact: `presentation-package-cto-refined.zip`).
 31 English main slides; six chapters; no appendix. The package includes editable
 draw.io originals and a page-by-page visual review. See
 [delivery notes](README-cto-refined.md). Previous versions below are historical.
 
 ## Current presentation
 
-Use [the CTO / SDLC deck](digital-twin-presentation-cto-sdlc.pptx) or its
-[PDF review copy](digital-twin-presentation-cto-sdlc.pdf). This is the current
+Use the CTO / SDLC deck (local artifact: `digital-twin-presentation-cto-sdlc.pptx`) or its
+PDF review copy (local artifact: `digital-twin-presentation-cto-sdlc.pdf`). This is the current
 31-slide English version with no appendix. See [package notes](README-cto-sdlc.md).
 Earlier versions below are retained as historical artifacts.
 

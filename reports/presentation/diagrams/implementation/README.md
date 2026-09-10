@@ -6,8 +6,8 @@ not final English slide layouts. The original PPTX is not rebuilt by this comman
 
 | Figure | Source | Preview |
 | --- | --- | --- |
-| Worker loop and exact `_process_once()` body | [draw.io](02-worker-cycle-ja.drawio) | [PNG](02-worker-cycle-ja.png) · [PDF](02-worker-cycle-ja.pdf) |
-| Graph result, delivery, reuse/suppression and job commit | [draw.io](03-delivery-commit-ja.drawio) | [PNG](03-delivery-commit-ja.png) · [PDF](03-delivery-commit-ja.pdf) |
+| Worker loop and exact `_process_once()` body | [draw.io](02-worker-cycle-ja.drawio) | PNG (local artifact: `02-worker-cycle-ja.png`) · PDF (local artifact: `02-worker-cycle-ja.pdf`) |
+| Graph result, delivery, reuse/suppression and job commit | [draw.io](03-delivery-commit-ja.drawio) | PNG (local artifact: `03-delivery-commit-ja.png`) · PDF (local artifact: `03-delivery-commit-ja.pdf`) |
 
 [Full narrative/function mapping and six code examples](../../planning/implementation-backed-examples-ja.md)
 cover setup, empty conversations, initial outreach, event priority, graph

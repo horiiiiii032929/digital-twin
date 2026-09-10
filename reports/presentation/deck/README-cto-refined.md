@@ -17,7 +17,7 @@ playback and a timed English rehearsal have not been exercised locally.
 
 ## Matching read-aloud script
 
-Use [the HTML reader](speaker-script-cto-refined.html) or
+Use the HTML reader (local artifact: `speaker-script-cto-refined.html`) or
 [the Markdown script](speaker-script-cto-refined.md). The script has 4,786 spoken
 words and matches all 31 slide titles. At 170–180 words per minute, estimated
 speech plus the 4:06 video takes 30.7–32.3 minutes, before pauses and transitions.

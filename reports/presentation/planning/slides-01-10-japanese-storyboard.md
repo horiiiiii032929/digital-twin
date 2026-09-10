@@ -159,7 +159,7 @@ C4システムコンテキスト図を中央に大きく置く。教授を左、
 
 **次へ：** この動作を支える構造と保存先を示す。
 
-**根拠：** [録画条件と来歴](../recording/live-virtual-demo.md)、[動画](../deck/digital-twin-30-day-demo.mp4)。
+**根拠：** [録画条件と来歴](../recording/live-virtual-demo.md)、動画 (local artifact: `../deck/digital-twin-30-day-demo.mp4`)。
 
 ## 07　システムの構造と責務
 

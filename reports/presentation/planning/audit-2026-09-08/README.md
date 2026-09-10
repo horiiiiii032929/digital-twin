@@ -23,7 +23,7 @@
 
 ### 1. 授業を開く
 
-![学生の初期画面](/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/01-student-start.jpg)
+学生の初期画面 (local artifact: `/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/01-student-start.jpg`)
 
 授業名、現行公開版、教材への範囲、学習目標が表示される点はよい。一方、未読8件の支援はベルの数字で示され、中央は「質問を始める」提案が中心になる。自分から届いた支援を読む動機と次の行動を、主画面から読み取りにくい。
 
@@ -31,7 +31,7 @@
 
 ### 2. 受信箱を開く
 
-![受信箱より先に並ぶ設定と過去の目標](/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/02-student-checkins.jpg)
+受信箱より先に並ぶ設定と過去の目標 (local artifact: `/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/02-student-checkins.jpg`)
 
 受信同意、静かな時間帯、7日間の停止が分かる点は維持したい。ただし、設定の後に目標と学習記録が続き、通知を押したのにメッセージへ到達するまでスクロールが必要になる。
 
@@ -39,7 +39,7 @@
 
 ### 3. 届いた支援を読む
 
-![教材全体と記録用の説明まで含む支援メッセージ](/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/03-student-message.jpg)
+教材全体と記録用の説明まで含む支援メッセージ (local artifact: `/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/03-student-message.jpg`)
 
 出典のタイトルと位置が併記され、送信日時を確認できる。個人の受信箱であることも明示されている。
 
@@ -49,7 +49,7 @@
 
 ### 4. 返信を始める
 
-![返信欄から元の問いが見えない状態](/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/04-student-reply.jpg)
+返信欄から元の問いが見えない状態 (local artifact: `/Users/hikaru/Documents/dev/digital-twin/reports/presentation/planning/audit-2026-09-08/04-student-reply.jpg`)
 
 Reply in chatにより会話へ移り、返信IDは内部で保持される。ところが画面上は元の支援が閉じ、入力欄は `My response to this check-in:` のみで、問い・出典・引用の要約を参照できない。学生は何に答えるかを記憶する必要がある。元の支援を返信欄に結び付けて表示する。**U03**。
 

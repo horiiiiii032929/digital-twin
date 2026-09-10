@@ -1,6 +1,6 @@
 # OpenAI model selection — main-deck slides
 
-[Editable PowerPoint with English speaker notes](openai-models-and-selection-v2.pptx).
+Editable PowerPoint with English speaker notes (local artifact: `openai-models-and-selection-v2.pptx`).
 
 These three slides belong in the main presentation, not an appendix. The full
 revision-15 presentation has not yet been rebuilt; this file supplies the new

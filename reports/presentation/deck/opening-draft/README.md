@@ -3,10 +3,10 @@
 Three English slides for full-deck positions02,03and05. This is a review draft,
 not the complete28-slide presentation. Page numbers preserve the agreed outline.
 
-- [PowerPoint](opening-slides-v1.pptx)
-- [02: project requirements](slide-02.png)
-- [03: actual student workspace](slide-03.png)
-- [05: course support cycle](slide-05.png)
+- PowerPoint (local artifact: `opening-slides-v1.pptx`)
+- 02: project requirements (local artifact: `slide-02.png`)
+- 03: actual student workspace (local artifact: `slide-03.png`)
+- 05: course support cycle (local artifact: `slide-05.png`)
 - [Editable UML original](../../diagrams/opening/course-cycle.drawio)
 
 The screenshot is the existing synthetic student workspace from

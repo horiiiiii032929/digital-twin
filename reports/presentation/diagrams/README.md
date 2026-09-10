@@ -8,14 +8,14 @@ English diagram assets for the presentation. Video work remains paused. No slide
 ## Files
 
 - [Editable draw.io source, four pages](presentation-diagrams.drawio)
-- [Review PDF, four pages](presentation-diagrams.pdf)
+- Review PDF, four pages (local artifact: `presentation-diagrams.pdf`)
 
 | Page | Intended slide | PNG for insertion | SVG for scaling |
 | --- | --- | --- | --- |
-| System boundaries and comparison points | 6 | [PNG](01-system-boundaries.png) | [SVG](01-system-boundaries.svg) |
-| Three factual paths and their failure point | 7 | [PNG](02-factual-designs.png) | [SVG](02-factual-designs.svg) |
-| Planner designs and retained fallback | 10–12, overview asset | [PNG](03-planner-designs.png) | [SVG](03-planner-designs.svg) |
-| Assessment and planner input gap | 16; reference for 24 | [PNG](04-learner-input-gap.png) | [SVG](04-learner-input-gap.svg) |
+| System boundaries and comparison points | 6 | PNG (local artifact: `01-system-boundaries.png`) | [SVG](01-system-boundaries.svg) |
+| Three factual paths and their failure point | 7 | PNG (local artifact: `02-factual-designs.png`) | [SVG](02-factual-designs.svg) |
+| Planner designs and retained fallback | 10–12, overview asset | PNG (local artifact: `03-planner-designs.png`) | [SVG](03-planner-designs.svg) |
+| Assessment and planner input gap | 16; reference for 24 | PNG (local artifact: `04-learner-input-gap.png`) | [SVG](04-learner-input-gap.svg) |
 
 Each canvas is 1600 × 900. PNG exports are approximately 2400 × 1350, with the draw.io source embedded. Boxes, text and connectors are native editable draw.io elements. Exported images are the intended slide-insertion assets; the PDF is for reviewing this batch.
 
