@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="07-uml-goal-state-machine" name="07-uml-goal-state-machine">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#182B43;">
+          <mxGeometry as="geometry" x="120" y="420" width="30" height="30" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="active" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="340" y="365" width="360" height="150" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="completed" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="1150" y="200" width="330" height="100" />
+        </mxCell>
+        <mxCell id="n7" parent="1" vertex="1" value="expired" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="1150" y="485" width="330" height="100" />
+        </mxCell>
+        <mxCell id="n8" parent="1" vertex="1" value="cancelled" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=25;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="1150" y="775" width="330" height="100" />
+        </mxCell>
+        <mxCell id="e9" parent="1" edge="1" value="/ initialize goal" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.4666666666666667;" source="n4" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="150" y="435" />
+            <mxPoint as="targetPoint" x="340" y="435" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" value="assessmentCommitted [completionGuard]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.23333333333333334;entryX=0.0;entryY=0.5;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1" x="-0.1">
+            <mxPoint as="sourcePoint" x="700" y="400" />
+            <mxPoint as="targetPoint" x="1150" y="250" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="930" y="400" />
+              <mxPoint x="930" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" parent="1" edge="1" value="expirySweep [now ≥ expires_at]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.7333333333333333;entryX=0.0;entryY=0.5;" source="n5" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="700" y="475" />
+            <mxPoint as="targetPoint" x="1150" y="535" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="965" y="475" />
+              <mxPoint x="965" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" parent="1" edge="1" value="scopeInvalidated / cancel pending work" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.9;entryX=0.0;entryY=0.5;" source="n5" target="n8">
+          <mxGeometry as="geometry" relative="1" x="0.7">
+            <mxPoint as="sourcePoint" x="700" y="500" />
+            <mxPoint as="targetPoint" x="1150" y="825" />
+            <mxPoint as="offset" x="-110" y="-16" />
+            <Array as="points">
+              <mxPoint x="850" y="500" />
+              <mxPoint x="850" y="825" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" parent="1" vertex="1" value="Attempt limit reached: further work is blocked;&#10;the goal remains active.&#10;There is no exhausted state." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="60" y="610" width="725" height="135" />
+        </mxCell>
+        <mxCell id="n14" parent="1" vertex="1" value="Terminal records do not transition back to active.&#10;A new goal requires a new record." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="900" y="620" width="640" height="110" />
+        </mxCell>
+        <mxCell id="n15" parent="1" vertex="1" value="completionGuard: valid exact objective mapping; every target&#10;concept has ≥ 2 correct, 0 incorrect and confidence ≥ 0.5.&#10;Missing or ambiguous evidence leaves the goal active." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="60" y="175" width="780" height="130" />
+        </mxCell>
+        </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>

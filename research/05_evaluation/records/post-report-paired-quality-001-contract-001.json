@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "component": "student-tutoring",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "working_tree_dirty": true,
+  "dataset": {
+    "id": "post-report-course-shaped-quality-v1",
+    "split": "exposed-development",
+    "permissions": "New synthetic course protocols and records, authored for local and external model development; no real user data.",
+    "contexts": 24,
+    "courses": 4,
+    "profiles": 2,
+    "turns": 96,
+    "repetitions": 1,
+    "seed": 7801,
+    "rationale": "Full 12-scenario/two-profile development grid; small dependent packet, not powered or held-out qualification."
+  },
+  "plan": "research/04_experiments/post-report-paired-quality-001.md",
+  "limitations": [
+    "Assistant authored sources and reviewed outputs without blinding; independent human review pending.",
+    "No confidence interval reported for dependent small unblinded sample.",
+    "Successful provider calls do not imply useful product output; safe graph failures were counted as quality defects.",
+    "Privacy prompts contain no actual third-party messages, so no disclosure observed is not an authorization-security test.",
+    "Retrieval failure causes are provisional until trace-level diagnosis.",
+    "No default/profile replacement, professor fidelity or learning-effect claim."
+  ],
+  "run_id": "post-report-paired-quality-001-contract-001",
+  "status": "completed-contract-only",
+  "decision": "keep-harness-only",
+  "operations": {
+    "completed_histories": 48,
+    "external_calls": 0,
+    "reported_cost_usd": 0,
+    "arms": {
+      "v10": {
+        "attempts": 70,
+        "completed_calls": 0,
+        "failure_codes": {
+          "injected-contract-smoke": 70
+        },
+        "input_tokens": 0,
+        "ledger_reserved_usd": 1.7499999999999978,
+        "output_tokens": 0,
+        "provider_failures": 70,
+        "reported_cost_usd": 0,
+        "stopped": false,
+        "unknown_cost_calls": 0
+      },
+      "v4": {
+        "attempts": 70,
+        "completed_calls": 0,
+        "failure_codes": {
+          "injected-contract-smoke": 70
+        },
+        "input_tokens": 0,
+        "ledger_reserved_usd": 1.7499999999999978,
+        "output_tokens": 0,
+        "provider_failures": 70,
+        "reported_cost_usd": 0,
+        "stopped": false,
+        "unknown_cost_calls": 0
+      }
+    }
+  },
+  "reproduction": [
+    "--candidate",
+    "v10",
+    "--packet",
+    "research/05_evaluation/datasets/post-report-course-shaped-quality-v1.json",
+    "--input-provenance",
+    "research/04_experiments/post-report-paired-quality-001.md",
+    "--output-dir",
+    "reports/generated/post-report-paired-quality-001-contract-001",
+    "--maximum-calls",
+    "320",
+    "--maximum-cost-usd",
+    "8"
+  ],
+  "evidence": "reports/generated/post-report-paired-quality-001-contract-001",
+  "semantic_quality_pass": null
+}

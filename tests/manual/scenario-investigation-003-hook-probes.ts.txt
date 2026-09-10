@@ -1,0 +1,78 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createHookHarness, deferred } from './testing/hook-harness'
+import type { StudentCourse, StudentOutreachPreference } from '@/lib/api/types'
+const h = vi.hoisted(() => ({ current: null as ReturnType<typeof createHookHarness> | null }))
+vi.mock('react', () => ({
+  useState: (...args: [unknown]) => h.current!.react.useState(...args),
+  useRef: (...args: [unknown]) => h.current!.react.useRef(...args),
+  useCallback: (...args: [unknown, unknown[]]) => h.current!.react.useCallback(...args),
+  useEffect: (...args: [() => void | (() => void), unknown[]]) => h.current!.react.useEffect(...args),
+}))
+vi.mock('@/lib/api', () => ({
+  STUDENT_ACCOUNT_ID: 'synthetic', StudentApiError: class extends Error {},
+  listStudentCourses: vi.fn(), listStudentConversations: vi.fn(), createStudentConversation: vi.fn(),
+  listStudentOutreach: vi.fn(), listStudentOutreachPreferences: vi.fn(), listStudentAutonomousGoals: vi.fn(),
+  updateStudentInAppOutreachPreference: vi.fn(), getStudentConversation: vi.fn(), getStudentLearnerEvidence: vi.fn(),
+  dismissStudentOutreach: vi.fn(), markStudentOutreachRead: vi.fn(), submitStudentMessage: vi.fn(), listStudentMessageCitations: vi.fn(),
+}))
+import * as api from '@/lib/api'
+import { useStudentWorkspace } from './use-student-workspace'
+const a = { course_id: 'a', release_id: 'ra' } as StudentCourse
+const b = { course_id: 'b', release_id: 'rb' } as StudentCourse
+const pref = (course: string, enabled: boolean) => ({ course_id: course, channel: 'in-app', enabled }) as StudentOutreachPreference
+const tick = async () => { for (let i = 0; i < 8; i++) await Promise.resolve() }
+let render: () => ReturnType<typeof useStudentWorkspace>
+beforeEach(() => {
+  vi.resetAllMocks(); h.current = createHookHarness()
+  vi.stubGlobal('window', { localStorage: { getItem: () => null, setItem: vi.fn() }, setInterval: vi.fn(), clearInterval: vi.fn() })
+  vi.mocked(api.listStudentCourses).mockResolvedValue([a, b])
+  vi.mocked(api.listStudentConversations).mockResolvedValue([])
+  vi.mocked(api.createStudentConversation).mockImplementation(async id => ({ id: `conv-${id}`, course_id: id }) as never)
+  vi.mocked(api.listStudentOutreach).mockResolvedValue([])
+  vi.mocked(api.listStudentAutonomousGoals).mockResolvedValue([])
+  vi.mocked(api.listStudentOutreachPreferences).mockImplementation(async id => [pref(id, false)])
+  render = () => h.current!.render(() => useStudentWorkspace('synthetic'))
+})
+async function ready() { render(); await tick(); render(); await tick(); return render() }
+
+describe('read-only scenario investigation', () => {
+  it('reproduces controls staying busy after the reply is committed while optional evidence stalls', async () => {
+    let state = await ready()
+    const evidence = deferred<never>()
+    const turn = { student_message: { id: 's', role: 'student', content: 'Question' }, tutor_message: { id: 't', role: 'tutor', content: 'Completed answer' }, citations: [] } as never
+    vi.mocked(api.submitStudentMessage).mockResolvedValue(turn)
+    vi.mocked(api.getStudentLearnerEvidence).mockReturnValue(evidence.promise)
+    state.setDraft('Question'); state = render()
+    const sending = state.sendMessage()
+    await tick(); state = render()
+    try {
+      expect(state.messages.map(m => m.id)).toEqual(['s', 't'])
+      expect(state.isSubmitting).toBe(true)
+      expect(state.draft).toBe('Question')
+      expect(api.submitStudentMessage).toHaveBeenCalledTimes(1)
+    } finally {
+      evidence.resolve(null as never)
+      await sending
+    }
+    expect(render().isSubmitting).toBe(false)
+    expect(render().draft).toBe('')
+  })
+
+  it('reproduces a saved chat being hidden while its optional evidence read stalls', async () => {
+    const saved = { id: 'saved-a', course_id: 'a', release_id: 'ra' }
+    const evidence = deferred<never>()
+    vi.mocked(api.listStudentConversations).mockResolvedValue([saved] as never)
+    vi.mocked(api.getStudentConversation).mockResolvedValue({ conversation: saved,
+      messages: [{ id: 's', role: 'student', content: 'Saved question' }, { id: 't', role: 'tutor', content: 'Saved answer' }] } as never)
+    vi.mocked(api.listStudentMessageCitations).mockResolvedValue([])
+    vi.mocked(api.getStudentLearnerEvidence).mockReturnValue(evidence.promise)
+    let state = await ready()
+    expect(api.getStudentConversation).toHaveBeenCalled()
+    expect(state.messages).toEqual([])
+    expect(state.isLoadingConversation).toBe(true)
+    evidence.resolve(null as never)
+    await tick(); state = render()
+    expect(state.messages.map(m => m.id)).toEqual(['s', 't'])
+    expect(state.isLoadingConversation).toBe(false)
+  })
+})

@@ -26,6 +26,7 @@ from src.digital_twin.student.autonomy_models import (
     AutonomousEventKind,
 )
 from src.digital_twin.student.autonomy_service import GovernedAutonomyService
+from src.digital_twin.clock import VirtualUtcClock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -147,7 +148,7 @@ def _build_runtime(database_path: Path):
         quiet_hours_end="02:00",
         max_messages_per_7_days=3,
     )
-    service = GovernedAutonomyService(repository, outreach)
+    service = GovernedAutonomyService(repository, outreach, clock=VirtualUtcClock(NOW))
     service.set_policy(
         fixture.professor_id,
         fixture.course_a_id,
@@ -199,7 +200,7 @@ async def simulate() -> dict:
 
         repository = SQLiteStudentRepository(database_path)
         service = GovernedAutonomyService(
-            repository, ProactiveOutreachService(repository)
+            repository, ProactiveOutreachService(repository), clock=VirtualUtcClock(NOW + timedelta(days=3))
         )
         for day in range(3, 7):
             daily_results.extend(

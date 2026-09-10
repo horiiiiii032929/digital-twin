@@ -21,7 +21,7 @@ def prohibit_network(monkeypatch):
         return original(sock, address)
     monkeypatch.setattr(socket.socket, "connect", connect)
 
-def setup_two_goals(tmp_path):
+def setup_two_goals(tmp_path, *, source_supported_target=False):
     repository, fixture, autonomy, release, _ = existing._autonomy_fixture(tmp_path)
     domain = repository.get_course_domain_model(release.id)
     release = release.model_copy(update={
@@ -44,6 +44,8 @@ def setup_two_goals(tmp_path):
         )],
     )
     updated = domain.model_dump(mode="python")
+    if source_supported_target:
+        domain.concepts[0].description = "Cache coherence keeps replicated processor data consistent."
     updated.update(
         domain_model_id="domain-two-goal-audit-v2",
         release_id=release.id,

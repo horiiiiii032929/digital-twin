@@ -221,7 +221,7 @@ export function getNextAction(
   if (!session.policy) {
     return {
       title: "Continue the instructor interview",
-      detail: `Answer the current prompt for ${formatStep(session.current_step)} to generate the first tutor policy draft.`,
+      detail: `Answer the current prompt for ${formatStep(session.current_step)} to generate the first Digital Twin policy draft.`,
       stage: "interview",
     }
   }

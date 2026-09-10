@@ -43,6 +43,9 @@ jobs:
       - name: Install frontend dependencies
         run: npm ci
 
+      - name: Install infrastructure dependencies
+        run: npm --prefix infra/cdk ci --ignore-scripts
+
       - name: Audit resolved dependencies
         run: npm run audit:dependencies
 

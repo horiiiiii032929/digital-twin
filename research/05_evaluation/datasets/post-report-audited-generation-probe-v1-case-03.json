@@ -1,0 +1,125 @@
+{
+  "packet_id": "post-report-audited-generation-probe-v1-case-03",
+  "split": "exposed-development",
+  "permissions": "New synthetic course protocols and records, authored for local and external model development; no real user data.",
+  "review_status": "assistant-authored; independent human review pending",
+  "sources": [
+    {
+      "course_id": "systems",
+      "concept_id": "cedar-cache",
+      "label": "Cedar cache invalidation",
+      "text": "In the synthetic Cedar protocol, a writer sends invalidations to every listed replica and waits for all acknowledgements before committing. The directory lists registered replicas only; it does not guarantee discovery of unregistered copies."
+    },
+    {
+      "course_id": "systems",
+      "concept_id": "cedar-pages",
+      "label": "Cedar page mapping",
+      "text": "Cedar translates each virtual page through a process-specific page table. A missing mapping raises a page fault. A present mapping does not by itself grant write permission; a separate writable bit must be set."
+    },
+    {
+      "course_id": "systems",
+      "concept_id": "cedar-retry",
+      "label": "Cedar request retry",
+      "text": "Cedar records a completed request using the pair of student account and request key. Retrying the same pair returns its stored response. Reusing the key with a different account does not expose the first account response."
+    },
+    {
+      "course_id": "engineering",
+      "concept_id": "atlas-release",
+      "label": "Atlas release approval",
+      "text": "In the synthetic Atlas teaching app, a professor approves a draft before publication. Publication binds the approved policy and source versions into one release. Editing a later draft does not change that published release."
+    },
+    {
+      "course_id": "engineering",
+      "concept_id": "atlas-withdraw",
+      "label": "Atlas withdrawal",
+      "text": "Atlas checks current release authority again immediately before saving a generated reply. If the professor withdraws the release while generation is running, Atlas discards that reply instead of saving it. Withdrawal does not erase earlier audit records."
+    },
+    {
+      "course_id": "engineering",
+      "concept_id": "atlas-health",
+      "label": "Atlas worker health",
+      "text": "An Atlas worker writes a heartbeat after each completed processing cycle. A heartbeat older than two minutes is treated as stale. A fresh heartbeat shows recent process activity, not proof that the answer content is correct."
+    },
+    {
+      "course_id": "data",
+      "concept_id": "birch-missing",
+      "label": "Birch missing values",
+      "text": "In the synthetic Birch dataset, a blank score means not observed and a score of zero means an observed result of zero. The mean excludes blank scores and includes observed zeros. Three records contain scores 0, 6 and blank."
+    },
+    {
+      "course_id": "data",
+      "concept_id": "birch-recall",
+      "label": "Birch retrieval recall",
+      "text": "Birch defines recall as the number of relevant items retrieved divided by the total number of relevant items. A test contains eight relevant items; the system retrieves three of them and two irrelevant items. Precision uses all retrieved items as its denominator."
+    },
+    {
+      "course_id": "data",
+      "concept_id": "birch-causality",
+      "label": "Birch comparison limits",
+      "text": "A Birch pilot observes higher quiz scores after students receive optional practice. Students chose whether to use that practice. The pilot has no randomized assignment or matched comparison group, so the observed association alone does not establish a causal learning effect."
+    },
+    {
+      "course_id": "access",
+      "concept_id": "elm-consent",
+      "label": "Elm support consent",
+      "text": "In the synthetic Elm portal, private in-app support requires an active enrollment, a published course release and student opt-in. Revoking opt-in prevents later deliveries. Messages already delivered remain in that student inbox until dismissed."
+    },
+    {
+      "course_id": "access",
+      "concept_id": "elm-groups",
+      "label": "Elm aggregate privacy",
+      "text": "Elm shows a professor a concept-level learning-gap summary only when at least five active learners contribute to that group. Groups with fewer contributors are suppressed. Suppression means insufficient group size for display; it does not mean no learning gap exists."
+    },
+    {
+      "course_id": "access",
+      "concept_id": "elm-private",
+      "label": "Elm private records",
+      "text": "Elm students may read their own course conversations. A student may not read another student conversation, even in the same course. Professor summaries do not grant students access to classmates private messages."
+    }
+  ],
+  "contexts": [
+    {
+      "id": "birch-recall-socratic",
+      "course_id": "data",
+      "category": "birch-recall",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "concise",
+          "explanation_structure": [
+            "Ask a diagnostic question before revealing any solution"
+          ],
+          "example_preferences": [],
+          "misconception_handling": "Ask the learner to explain their reasoning before correction",
+          "integrity_limits": "Do not provide full graded-work answers",
+          "help_ladder": [
+            "Ask a diagnostic question",
+            "Give a bounded hint",
+            "Explain after a genuine attempt"
+          ],
+          "outreach_policy": "Respect student consent and delivery limits"
+        },
+        "target_turn_index": 1,
+        "student_turns": [
+          {
+            "content": "Do the two irrelevant Birch results change the recall denominator?"
+          },
+          {
+            "content": "My attempt: recall uses all eight relevant items, so it is 3 divided by 8. What are recall and precision for this test?"
+          }
+        ]
+      },
+      "review_rubric": {
+        "required_meanings": [
+          "recall 3/8 or 37.5 percent",
+          "precision 3/5 or 60 percent"
+        ],
+        "profile_mode": "socratic",
+        "initial_stage": "elicitation before solution for Socratic; supported explanation for explanatory, except privacy boundary",
+        "followup_stage": "respond to the supplied attempt and requested next step; do not repeat a generic first question",
+        "review_status": "pending"
+      }
+    }
+  ],
+  "selection_note": "Prospectively fixed five exposed failure contexts, one per sequential bounded run; not fresh confirmation."
+}

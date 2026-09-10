@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+import {FileBlob,PresentationFile} from '/Users/hikaru/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/@oai/artifact-tool/dist/artifact_tool.mjs';
+const root=process.cwd(),build=root+'/reports/generated/cto-natural-notes-build';
+await fs.mkdir(build,{recursive:true});
+const source=root+'/reports/presentation/deck/digital-twin-presentation-cto-with-script.pptx';
+const p=await PresentationFile.importPptx(await FileBlob.load(source));
+const manifest=JSON.parse(await fs.readFile(root+'/reports/generated/cto-refined-build/deck-content.json','utf8'));
+const scripts=(await fs.readFile(root+'/reports/presentation/script/cto-natural-narration.txt','utf8')).trim().split('\n===\n');
+if(p.slides.items.length!==31||scripts.length!==31)throw Error('Slide count mismatch');
+for(let i=0;i<31;i++)p.slides.items[i].speakerNotes.textFrame.setText(scripts[i]+'\n\nSources — reference only, not spoken\n'+manifest.slides[i].sources.join('\n'));
+await (await PresentationFile.exportPptx(p)).save(build+'/authored-notes.pptx');
+await fs.writeFile(build+'/expected-notes.json',JSON.stringify(scripts.map((s,i)=>s+'\n\nSources — reference only, not spoken\n'+manifest.slides[i].sources.join('\n')),null,2));
+console.log('Authored matching speaker notes for all 31 slides.');

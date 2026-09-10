@@ -77,7 +77,7 @@ function ProfessorApp({ accountId }: { accountId?: string } = {}) {
 
 function StudentApp({ accountId }: { accountId?: string } = {}) {
   const controller = useStudentWorkspace(accountId)
-  useDocumentTitle("Student Tutor · Course Digital Twin")
+  useDocumentTitle("Student Digital Twin · Course Digital Twin")
   return <StudentWorkspace controller={controller} />
 }
 

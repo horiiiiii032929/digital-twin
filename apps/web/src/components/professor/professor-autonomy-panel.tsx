@@ -32,6 +32,7 @@ import {
   getProfessorAutonomyPolicy,
   getProfessorCourseDomainModel,
   getProfessorTutoringRuntimeProfile,
+  getProfessorRuntimeStatus,
   listProfessorAutonomousActions,
   listProfessorAutonomousGoals,
   listProfessorAutonomousOutcomes,
@@ -59,6 +60,7 @@ import type {
   CourseTutoringRuntimeProfileV1,
   PedagogicalPolicyV2,
   ProfessorCourse,
+  ProfessorRuntimeStatus,
   ProfessorLearningGapResult,
   ProfessorLearnerBeliefEvidence,
   ProfessorEvidenceChunkOption,
@@ -104,6 +106,8 @@ export function ProfessorAutonomyPanel({
   const [learningGaps, setLearningGaps] = useState<ProfessorLearningGapResult | null>(null)
   const [domainModel, setDomainModel] = useState<CourseDomainModelV1 | null>(null)
   const [runtimeProfile, setRuntimeProfile] = useState<CourseTutoringRuntimeProfileV1 | null>(null)
+  const [runtimeLoaded, setRuntimeLoaded] = useState(false)
+  const [runtimeStatus, setRuntimeStatus] = useState<ProfessorRuntimeStatus | null>(null)
   const [learnerEvidence, setLearnerEvidence] = useState<ProfessorLearnerBeliefEvidence[]>([])
   const [traces, setTraces] = useState<AgentTraceV2[]>([])
   const [editingPolicy, setEditingPolicy] = useState(false)
@@ -113,11 +117,14 @@ export function ProfessorAutonomyPanel({
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
+  const [refreshing, setRefreshing] = useState(false)
+  const [unavailableSections, setUnavailableSections] = useState<string[]>([])
   const refreshSequence = useRef(0)
 
   const refresh = useCallback(async () => {
     const sequence = ++refreshSequence.current
-    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients, nextDomainModel, nextRuntimeProfile, nextLearnerEvidence, nextTraces] = await Promise.all([
+    setRefreshing(true)
+    const [nextProfiles, nextTriggers, nextGaps, nextPolicy, nextGoals, nextActions, nextOutcomes, nextRecipients, nextDomainModel, nextRuntimeProfile, nextLearnerEvidence, nextTraces, nextRuntimeStatus] = await Promise.allSettled([
       listProfessorTeachingProfiles(course.course_id),
       listProfessorProactiveTriggers(course.course_id),
       releaseId ? listProfessorLearningGaps(course.course_id, releaseId) : Promise.resolve(null),
@@ -132,26 +139,54 @@ export function ProfessorAutonomyPanel({
       getProfessorTutoringRuntimeProfile(course.course_id),
       listProfessorLearnerBeliefEvidence(course.course_id),
       listProfessorAutonomyTraces(course.course_id),
+      getProfessorRuntimeStatus(course.course_id),
     ])
     if (sequence !== refreshSequence.current) return
-    setProfiles(nextProfiles)
-    setTriggers(nextTriggers)
-    setLearningGaps(nextGaps)
-    setPolicy(nextPolicy)
-    setGoals(nextGoals)
-    setActions(nextActions)
-    setOutcomes(nextOutcomes)
-    setRecipients(nextRecipients)
-    setDomainModel(nextDomainModel)
-    setRuntimeProfile(nextRuntimeProfile)
-    setLearnerEvidence(nextLearnerEvidence)
-    setTraces(nextTraces)
-    onApprovedProfileChange(nextProfiles.find((profile) => profile.status === "approved")?.profile_id ?? null, course.course_id)
+    const failed: string[] = []
+    function apply<T>(result: PromiseSettledResult<T>, setter: (value: T) => void, label: string) {
+      if (result.status === "fulfilled") setter(result.value)
+      else failed.push(label)
+    }
+    apply(nextProfiles, setProfiles, "Teaching profiles")
+    apply(nextTriggers, setTriggers, "Scheduled messages")
+    apply(nextGaps, setLearningGaps, "Learning gaps")
+    apply(nextPolicy, setPolicy, "Autonomy policy")
+    apply(nextGoals, setGoals, "Goals")
+    apply(nextActions, setActions, "Actions")
+    apply(nextOutcomes, setOutcomes, "Outcomes")
+    apply(nextRecipients, setRecipients, "Recipients")
+    apply(nextDomainModel, setDomainModel, "Course concepts")
+    apply(nextRuntimeProfile, (value) => { setRuntimeProfile(value); setRuntimeLoaded(true) }, "Runtime configuration")
+    apply(nextLearnerEvidence, setLearnerEvidence, "Learner evidence")
+    apply(nextTraces, setTraces, "Activity traces")
+    apply(nextRuntimeStatus, setRuntimeStatus, "Server and worker status")
+    setUnavailableSections(failed)
+    setRefreshing(false)
+    if (nextProfiles.status === "fulfilled") {
+      onApprovedProfileChange(nextProfiles.value.find((profile) => profile.status === "approved")?.profile_id ?? null, course.course_id)
+    }
   }, [course.course_id, onApprovedProfileChange, releaseId])
 
   useEffect(() => {
     let active = true
     setProfilePreview(null)
+    setProfiles([])
+    setTriggers([])
+    setLearningGaps(null)
+    setPolicy(null)
+    setGoals([])
+    setActions([])
+    setOutcomes([])
+    setRecipients([])
+    setDomainModel(null)
+    setLearnerEvidence([])
+    setTraces([])
+    setUnavailableSections([])
+    setError(null)
+    setNotice(null)
+    setRuntimeProfile(null)
+    setRuntimeLoaded(false)
+    setRuntimeStatus(null)
     setPendingPolicyAction(null)
     setPendingTriggerCancel(null)
     setPendingGoalCancel(null)
@@ -356,7 +391,7 @@ export function ProfessorAutonomyPanel({
   const activeGoals = goals.filter((goal) => goal.status === "active")
   const pendingTriggers = triggers.filter((trigger) => trigger.status === "pending")
   const deliveredActions = actions.filter((action) => action.status === "delivered")
-  const policyStatus = policy?.kill_switch ? "Stopped" : policy?.paused ? "Paused" : policy?.autonomy_enabled ? "Active" : "Off"
+  const policyStatus = refreshing ? "Loading" : unavailableSections.includes("Autonomy policy") ? "Unavailable" : policy?.kill_switch ? "Stopped" : policy?.paused ? "Paused" : policy?.autonomy_enabled ? "Active" : "Off"
   const blockers = useMemo(() => [
     !approved ? "Approve the professor teaching profile" : null,
     !policy ? "Define the autonomy boundary" : null,
@@ -372,20 +407,38 @@ export function ProfessorAutonomyPanel({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
             <p className="workspace-kicker">Digital Twin control room</p>
-            <CardTitle className="mt-1 flex items-center gap-2 text-lg"><BrainCircuit className="size-4" aria-hidden="true" /> Governed autonomous tutor</CardTitle>
+            <CardTitle className="mt-1 flex items-center gap-2 text-lg"><BrainCircuit className="size-4" aria-hidden="true" /> Governed autonomous Digital Twin</CardTitle>
             <CardDescription className="mt-1 max-w-2xl">Approve its teaching boundary, activate bounded autonomy, and inspect every learner-facing decision.</CardDescription>
           </div>
-          <Badge variant="outline">R1.2 local release</Badge>
+          <Badge variant="outline">{runtimeProfile ? `Course configuration v${runtimeProfile.version}` : runtimeLoaded ? "No course mode override" : "Configuration not loaded"}</Badge>
         </div>
 
         <dl className="mt-5 grid grid-cols-2 overflow-hidden rounded-xl bg-[var(--shell)] sm:grid-cols-4">
-          <SummaryItem label="Profile" value={approved ? `Approved v${approved.version}` : "Needs review"} ready={Boolean(approved)} />
+          <SummaryItem label="Profile" value={refreshing ? "Loading" : unavailableSections.includes("Teaching profiles") ? "Unavailable" : approved ? `Approved v${approved.version}` : "Needs review"} ready={!refreshing && !unavailableSections.includes("Teaching profiles") && Boolean(approved)} />
           <SummaryItem label="Autonomy" value={policyStatus} ready={policyStatus === "Active"} />
-          <SummaryItem label="Active goals" value={`${activeGoals.length}`} ready={activeGoals.length > 0} />
-          <SummaryItem label="Delivered actions" value={`${deliveredActions.length}`} ready={deliveredActions.length > 0} />
+          <SummaryItem label="Active goals" value={refreshing ? "Loading" : unavailableSections.includes("Goals") ? "Unavailable" : `${activeGoals.length}`} ready={!refreshing && !unavailableSections.includes("Goals") && activeGoals.length > 0} />
+          <SummaryItem label="Delivered actions" value={refreshing ? "Loading" : unavailableSections.includes("Actions") ? "Unavailable" : `${deliveredActions.length}`} ready={!refreshing && !unavailableSections.includes("Actions") && deliveredActions.length > 0} />
         </dl>
+        <details className="mt-3 text-sm">
+          <summary className="cursor-pointer text-muted-foreground">Server and background-worker details</summary>
+          {runtimeStatus ? <div className="mt-3 space-y-2 break-words rounded-lg border p-3">
+            <p><strong>Answer generator:</strong> {runtimeStatus.api.generator_implementation} · {runtimeStatus.api.generator_model ?? "Model not reported"}</p>
+            <p><strong>Support planner:</strong> {runtimeStatus.api.planner_implementation} · {runtimeStatus.api.planner_model ?? "Model not reported"}</p>
+            {runtimeStatus.api.learning_configuration && <div className="space-y-1 border-t pt-2">
+              <p><strong>Learning input:</strong> {format(runtimeStatus.api.learning_configuration.input)} · {runtimeStatus.api.learning_configuration.estimator ?? "Historical control"}</p>
+              <p><strong>Answer assessment:</strong> {format(runtimeStatus.api.learning_configuration.assessment)}{runtimeStatus.api.learning_configuration.assessment_model ? ` · ${runtimeStatus.api.learning_configuration.assessment_model}` : ""}. {runtimeStatus.api.learning_configuration.assessment === "source-bound-literal-v1" ? "Checks literal statements against approved source ranges; paraphrases may remain unassessed." : runtimeStatus.api.learning_configuration.assessment?.startsWith("source-bound-model-assessment-") ? "An AI model assesses attempts using approved source ranges. Exact source quotations are checked; the judgment can still be wrong." : ""}</p>
+              {runtimeStatus.api.learning_configuration.assessment === "source-bound-model-assessment-v2" && <p>Assessment starts only when every target statement appears in the approved source ranges. Unsupported or paraphrased targets remain unassessed; student paraphrases can still be evaluated.</p>}
+              <p><strong>Goal completion:</strong> {runtimeStatus.api.learning_configuration.goal_completion === "objective-scoped-recovery-v1" ? "Two correct assessed turns within seven days for each target concept, after its latest incorrect or partial answer. This is a software threshold, not proof of mastery." : format(runtimeStatus.api.learning_configuration.goal_completion)}</p>
+              <p><strong>Conversation retrieval:</strong> {runtimeStatus.api.learning_configuration.retrieval_context === "previous-student-query-v1" ? "Explicit follow-ups can reuse the previous student question to retrieve approved material." : "Uses the current student message."}</p>
+              <p className="text-xs text-muted-foreground">Post-submission experimental configuration; comparison and qualification are still required. BKT = Bayesian Knowledge Tracing; PFA = Performance Factors Analysis. Their estimates are not measured learning outcomes.</p>
+            </div>}
+            <p><strong>Server default:</strong> {format(runtimeStatus.api.server_tutoring_mode)}. {runtimeStatus.api.experimental_version ? `Experimental configuration ${runtimeStatus.api.experimental_version}.` : "No experimental answer-generator version selected."}</p>
+            {runtimeStatus.workers.length === 0 ? <p>No background-worker heartbeat has been recorded.</p> : runtimeStatus.workers.map((worker) => <p key={worker.worker_key}>Worker {worker.worker_key.slice(0, 8)}: {format(worker.status)} · {worker.stale ? "Heartbeat out of date" : "Recent heartbeat"} · {worker.composition_matches_api ? "Recorded configuration matches this API" : "Configuration match not confirmed"}{worker.updated_at ? ` · ${new Date(worker.updated_at).toLocaleString()}` : ""}</p>)}
+            <p className="text-xs text-muted-foreground">{runtimeStatus.api.scope} Status is refreshed when this panel loads or you retry loading.</p>
+          </div> : <p className="mt-2 text-muted-foreground">{refreshing ? "Loading runtime details…" : "Runtime details are unavailable."}</p>}
+        </details>
 
-        <nav className="mt-2 grid grid-cols-2 gap-1 rounded-xl bg-[var(--shell)] p-1 sm:flex" aria-label="Tutor governance views" role="tablist">
+        <nav className="mt-2 grid grid-cols-2 gap-1 rounded-xl bg-[var(--shell)] p-1 sm:flex" aria-label="Digital Twin governance views" role="tablist">
           {GOVERNANCE_VIEWS.map((item) => (
             <button
               key={item.id}
@@ -409,12 +462,14 @@ export function ProfessorAutonomyPanel({
 
       <CardContent className="p-0">
         <div className="space-y-3 px-4 pt-4 sm:px-5">
+          {refreshing ? <p role="status" className="text-sm text-muted-foreground">Refreshing course information…</p> : null}
+          {unavailableSections.length > 0 ? <Alert variant="destructive" role="alert"><ShieldAlert aria-hidden="true" /><AlertTitle>Some course information could not be refreshed</AlertTitle><AlertDescription><p>{unavailableSections.join(", ")}. Previously loaded entries may be out of date; an empty section does not confirm that no records exist.</p><Button type="button" variant="outline" size="sm" className="mt-2" disabled={refreshing} onClick={() => void refresh()}>Retry loading</Button></AlertDescription></Alert> : null}
           {error ? <Alert variant="destructive" role="alert"><ShieldAlert aria-hidden="true" /><AlertTitle>Governance action failed</AlertTitle><AlertDescription>{error}</AlertDescription></Alert> : null}
           {notice ? <Alert className="border-[var(--success-border)] bg-[var(--success-soft)]" role="status" aria-live="polite"><CheckCircle2 className="text-[var(--success)]" aria-hidden="true" /><AlertDescription className="text-[var(--success)]">{notice}</AlertDescription></Alert> : null}
         </div>
 
         <div id={`governance-${view}`} role="tabpanel" className="p-4 sm:p-5">
-          {view === "overview" ? <Overview actions={actions} blockers={blockers} policy={policy} pendingTriggers={pendingTriggers.length} onNavigate={setView} /> : null}
+          {view === "overview" ? <Overview unavailable={refreshing || unavailableSections.length > 0} actions={actions} blockers={blockers} policy={policy} runtimeProfile={runtimeProfile} runtimeLoaded={runtimeLoaded} pendingTriggers={pendingTriggers.length} onNavigate={setView} /> : null}
           {view === "boundary" ? (
             <div className="space-y-7">
               <DomainModelSection
@@ -426,7 +481,7 @@ export function ProfessorAutonomyPanel({
               />
               <TeachingProfileSection approved={approved} busy={busy} draft={draft} preview={profilePreview} onApprove={approveDisplayedPreview} onCreate={createProfile} onDismissPreview={() => setProfilePreview(null)} onPreview={preparePreview} />
               {draft || approved ? <GeneratedTeachingPreview key={`${course.course_id}:${(draft ?? approved)!.profile_id}`} courseId={course.course_id} profileId={(draft ?? approved)!.profile_id} canGenerate={Boolean(draft)} sessionId={sessionId} ingestionJobIds={ingestionJobIds} onApproved={() => void refresh().catch(reason => setError(message(reason)))} /> : null}
-              <PolicySection busy={busy} editing={editingPolicy} pendingAction={pendingPolicyAction} policy={policy} approvedProfile={Boolean(approved)} onCancelAction={() => setPendingPolicyAction(null)} onConfirmAction={() => void confirmPolicyState()} onEdit={() => setEditingPolicy(true)} onRequestAction={setPendingPolicyAction} onSave={savePolicy} />
+              <PolicySection publishedRelease={course.releases.some(release => release.status === "published")} busy={busy} editing={editingPolicy} pendingAction={pendingPolicyAction} policy={policy} approvedProfile={Boolean(approved)} onCancelAction={() => setPendingPolicyAction(null)} onConfirmAction={() => void confirmPolicyState()} onEdit={() => setEditingPolicy(true)} onRequestAction={setPendingPolicyAction} onSave={savePolicy} />
               <RuntimeModeSection
                 busy={busy}
                 domainModel={domainModel}
@@ -477,14 +532,14 @@ export function ProfessorAutonomyPanel({
               onSchedule={schedule}
             />
           ) : null}
-          {view === "activity" ? <ActivitySection actions={actions} outcomes={outcomes} traces={traces} /> : null}
+          {view === "activity" ? <ActivitySection actions={actions} outcomes={outcomes} traces={traces} goals={goals} /> : null}
         </div>
       </CardContent>
     </Card>
   )
 }
 
-function Overview({ actions, blockers, policy, pendingTriggers, onNavigate }: { actions: AutonomousActionV1[]; blockers: string[]; policy: PedagogicalPolicyV2 | null; pendingTriggers: number; onNavigate: (view: GovernanceView) => void }) {
+function Overview({ unavailable, actions, blockers, policy, runtimeProfile, runtimeLoaded, pendingTriggers, onNavigate }: { unavailable: boolean; actions: AutonomousActionV1[]; blockers: string[]; policy: PedagogicalPolicyV2 | null; runtimeProfile: CourseTutoringRuntimeProfileV1 | null; runtimeLoaded: boolean; pendingTriggers: number; onNavigate: (view: GovernanceView) => void }) {
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
       <div className="space-y-6">
@@ -495,22 +550,22 @@ function Overview({ actions, blockers, policy, pendingTriggers, onNavigate }: { 
           </div>
           <ul className="mt-4 divide-y rounded-lg border">
             <BoundaryRow done={Boolean(policy)} label="Professor-approved course objectives and action permissions" />
-            <BoundaryRow done={Boolean(policy?.autonomy_enabled && !policy.paused && !policy.kill_switch)} label={!policy ? "No autonomy policy configured" : policy.kill_switch ? "Autonomy stopped by kill switch" : policy.paused ? "Autonomy is paused" : !policy.autonomy_enabled ? "Autonomy is off" : "Policy permits autonomy, subject to readiness and delivery checks"} />
+            <BoundaryRow done={Boolean(policy?.autonomy_enabled && !policy.paused && !policy.kill_switch)} label={!policy ? unavailable ? "Autonomy policy has not been confirmed" : "No autonomy policy configured" : policy.kill_switch ? "Autonomy stopped by kill switch" : policy.paused ? "Autonomy is paused" : !policy.autonomy_enabled ? "Autonomy is off" : "Policy permits autonomy, subject to readiness and delivery checks"} />
             <BoundaryRow done label="Student consent and valid source lineage are checked before delivery" />
-            <BoundaryRow done label="A0 scheduled outreach is available; A2 remains a development candidate" />
+            <BoundaryRow done={runtimeLoaded} label={runtimeProfile ? `Configured tutoring mode: ${runtimeProfile.mode}. Configuration alone does not establish teaching quality.` : runtimeLoaded ? "No course-specific mode is set. The server default applies; expand Server and background-worker details to inspect it. Configuration alone does not establish teaching quality." : "Tutoring configuration has not loaded."} />
           </ul>
         </section>
         <section aria-labelledby="recent-autonomy-heading">
           <div className="flex items-center justify-between gap-3"><h3 id="recent-autonomy-heading" className="text-sm font-semibold">Recent autonomous activity</h3><Button size="sm" variant="ghost" onClick={() => onNavigate("activity")}>Open audit</Button></div>
           {actions.length ? (
             <ul className="mt-3 divide-y rounded-lg border">{actions.slice(0, 4).map((action) => <li key={action.action_id} className="flex items-start justify-between gap-4 px-3 py-3"><div className="min-w-0"><p className="text-sm font-medium">{format(action.kind)}</p><p className="mt-1 truncate text-xs text-muted-foreground">{action.structured_reason}</p></div><Badge variant="outline">{format(action.status)}</Badge></li>)}</ul>
-          ) : <EmptyState icon={Activity} title="No autonomous decisions yet" description="Decisions will appear here after the bounded worker evaluates an eligible event." />}
+          ) : <EmptyState icon={Activity} title={unavailable ? "Activity has not been confirmed" : "No autonomous decisions yet"} description={unavailable ? "Wait for loading or retry the unavailable information above." : "Decisions will appear here after the bounded worker evaluates an eligible event."} />}
         </section>
       </div>
       <aside className="rounded-xl border bg-[var(--shell)] p-4" aria-labelledby="readiness-heading">
         <h3 id="readiness-heading" className="text-sm font-semibold">Readiness</h3>
-        {blockers.length ? <><p className="mt-1 text-xs leading-5 text-muted-foreground">Complete these before the candidate can contact students autonomously.</p><ol className="mt-4 space-y-3">{blockers.map((blocker, index) => <li key={blocker} className="flex gap-2.5 text-sm"><span className="flex size-5 shrink-0 items-center justify-center rounded-full border bg-white text-xs font-semibold">{index + 1}</span><span>{blocker}</span></li>)}</ol></> : <p className="mt-2 text-sm leading-6 text-[var(--success)]">All configuration prerequisites are present. Evaluation status still controls promotion.</p>}
-        <div className="mt-5 border-t pt-4"><p className="text-xs font-semibold text-muted-foreground">Scheduled check-ins</p><p className="mt-1 text-2xl font-semibold tracking-tight">{pendingTriggers}</p></div>
+        {unavailable ? <p className="mt-2 text-sm text-muted-foreground">Readiness cannot be confirmed until the course information has loaded successfully.</p> : blockers.length ? <><p className="mt-1 text-xs leading-5 text-muted-foreground">Complete these before the candidate can contact students autonomously.</p><ol className="mt-4 space-y-3">{blockers.map((blocker, index) => <li key={blocker} className="flex gap-2.5 text-sm"><span className="flex size-5 shrink-0 items-center justify-center rounded-full border bg-white text-xs font-semibold">{index + 1}</span><span>{blocker}</span></li>)}</ol></> : <p className="mt-2 text-sm leading-6 text-[var(--success)]">All configuration prerequisites are present. Evaluation status still controls promotion.</p>}
+        <div className="mt-5 border-t pt-4"><p className="text-xs font-semibold text-muted-foreground">Scheduled check-ins</p><p className="mt-1 text-2xl font-semibold tracking-tight">{unavailable ? "Not confirmed" : pendingTriggers}</p></div>
       </aside>
     </div>
   )
@@ -522,7 +577,7 @@ function DomainModelSection({ busy, domainModel, evidenceChunks, releaseReady, o
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h3 id="course-domain-heading" className="flex items-center gap-2 text-sm font-semibold"><BrainCircuit className="size-4" /> Course domain model</h3>
-          <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Bind approved objectives and concepts to exact ranges in this release. The tutor may observe evidence, but it cannot invent the course model.</p>
+          <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Bind approved objectives and concepts to exact ranges in this release. The Digital Twin may observe evidence, but it cannot invent the course model.</p>
         </div>
         <Badge variant={domainModel ? "default" : "outline"}>{domainModel ? `Approved v${domainModel.version}` : "Required for T1-v2"}</Badge>
       </div>
@@ -554,7 +609,7 @@ function RuntimeModeSection({ busy, domainModel, policy, profile, onSelect }: { 
   const current = profile?.mode ?? "server default"
   return (
     <section className="border-t pt-6" aria-labelledby="runtime-mode-heading">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="runtime-mode-heading" className="flex items-center gap-2 text-sm font-semibold"><RotateCcw className="size-4" /> Tutor runtime and rollback</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">One course-level setting selects the active flow. T0 rollback cancels pending autonomous work and preserves the audit history.</p></div><Badge variant="outline">{format(current)}</Badge></div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="runtime-mode-heading" className="flex items-center gap-2 text-sm font-semibold"><RotateCcw className="size-4" /> Digital Twin runtime and rollback</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">One course-level setting selects the active flow. T0 rollback cancels pending autonomous work and preserves the audit history.</p></div><Badge variant="outline">{format(current)}</Badge></div>
       <div className="mt-4 divide-y rounded-xl border">
         {RUNTIME_MODES.map((item) => {
           const selected = profile?.mode === item.mode
@@ -569,7 +624,7 @@ function RuntimeModeSection({ busy, domainModel, policy, profile, onSelect }: { 
 function TeachingProfileSection({ approved, busy, draft, preview, onApprove, onCreate, onDismissPreview, onPreview }: { approved?: ProfessorTeachingProfile; busy: string | null; draft?: ProfessorTeachingProfile; preview: ProfessorTeachingProfilePreview | null; onApprove: (profile: ProfessorTeachingProfile) => Promise<void>; onCreate: (event: FormEvent<HTMLFormElement>) => Promise<void>; onDismissPreview: () => void; onPreview: (profile: ProfessorTeachingProfile) => Promise<void> }) {
   return (
     <section aria-labelledby="teaching-profile-heading">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="teaching-profile-heading" className="flex items-center gap-2 text-sm font-semibold"><BookOpenText className="size-4" /> Professor teaching profile</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">These ten cases describe expected behavior only; they are not generated tutor responses. Use the generated teaching review below to assess actual responses.</p></div><Badge variant={approved ? "default" : "outline"}>{approved ? `Approved v${approved.version}` : "Approval required"}</Badge></div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="teaching-profile-heading" className="flex items-center gap-2 text-sm font-semibold"><BookOpenText className="size-4" /> Professor teaching profile</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">These ten cases describe expected behavior only; they are not generated Digital Twin responses. Use the generated teaching review below to assess actual responses.</p></div><Badge variant={approved ? "default" : "outline"}>{approved ? `Approved v${approved.version}` : "Approval required"}</Badge></div>
       {draft ? (
         <div className="mt-4 rounded-xl border bg-[var(--shell)] p-4">
           <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Draft v{draft.version}</p><p className="mt-1 text-xs text-muted-foreground">{draft.tone} · {format(draft.depth)} depth</p></div>{!preview ? <Button disabled={busy !== null} onClick={() => void onPreview(draft)}><Eye aria-hidden="true" /> {busy === `preview-${draft.profile_id}` ? "Loading preview…" : "Review 10 expectations"}</Button> : null}</div>
@@ -604,18 +659,19 @@ function ProfileForm({ approved, busy, onSubmit }: { approved?: ProfessorTeachin
   )
 }
 
-function PolicySection({ approvedProfile, busy, editing, pendingAction, policy, onCancelAction, onConfirmAction, onEdit, onRequestAction, onSave }: { approvedProfile: boolean; busy: string | null; editing: boolean; pendingAction: PolicyStateAction | null; policy: PedagogicalPolicyV2 | null; onCancelAction: () => void; onConfirmAction: () => void; onEdit: () => void; onRequestAction: (action: PolicyStateAction) => void; onSave: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+export function PolicySection({ publishedRelease, approvedProfile, busy, editing, pendingAction, policy, onCancelAction, onConfirmAction, onEdit, onRequestAction, onSave }: { publishedRelease: boolean; approvedProfile: boolean; busy: string | null; editing: boolean; pendingAction: PolicyStateAction | null; policy: PedagogicalPolicyV2 | null; onCancelAction: () => void; onConfirmAction: () => void; onEdit: () => void; onRequestAction: (action: PolicyStateAction) => void; onSave: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const showForm = !policy || editing
   return (
     <section className="border-t pt-6" aria-labelledby="autonomy-policy-heading">
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="autonomy-policy-heading" className="flex items-center gap-2 text-sm font-semibold"><Power className="size-4" /> Autonomy boundary</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Choose the objectives and action types the candidate may propose. Deterministic checks still decide whether any action can execute.</p></div>{policy ? <Badge variant={policy.kill_switch ? "destructive" : policy.autonomy_enabled && !policy.paused ? "default" : "outline"}>{policy.kill_switch ? "Stopped" : policy.paused ? "Paused" : policy.autonomy_enabled ? "Active" : "Off"}</Badge> : null}</div>
+      {!publishedRelease ? <p className="mt-3 text-sm text-muted-foreground" role="status">Publish a release with an approved teaching profile before saving an autonomy boundary.</p> : null}
       {policy && !showForm ? (
         <div className="mt-4 rounded-xl border p-4">
           <div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-sm font-semibold">Policy v{policy.version}</p><p className="mt-1 text-xs text-muted-foreground">{policy.approved_course_objectives.length} objectives · {policy.allowed_actions.filter((action) => action !== "no-action").length} permitted actions</p></div><Button size="sm" variant="outline" onClick={onEdit}><Settings2 aria-hidden="true" /> Edit boundary</Button></div>
           <div className="mt-4 grid gap-4 sm:grid-cols-2"><div><p className="text-xs font-semibold text-muted-foreground">Approved objectives</p><ul className="mt-2 space-y-1.5 text-sm">{policy.approved_course_objectives.map((objective) => <li key={objective} className="flex gap-2"><Check className="mt-0.5 size-4 shrink-0 text-[var(--success)]" />{objective}</li>)}</ul></div><div><p className="text-xs font-semibold text-muted-foreground">Permitted actions</p><ul className="mt-2 space-y-1.5 text-sm">{policy.allowed_actions.filter((action) => action !== "no-action").map((action) => <li key={action}>{format(action)}</li>)}</ul></div></div>
           <div className="mt-5 flex flex-wrap gap-2 border-t pt-4">{policy.paused || policy.kill_switch || !policy.autonomy_enabled ? <Button size="sm" variant="outline" disabled={busy !== null} onClick={() => onRequestAction("activate")}><Power /> Review activation</Button> : null}{policy.autonomy_enabled && !policy.paused && !policy.kill_switch ? <Button size="sm" variant="outline" disabled={busy !== null} onClick={() => onRequestAction("pause")}><Pause /> Review pause</Button> : null}{!policy.kill_switch ? <Button size="sm" variant="destructive" disabled={busy !== null} onClick={() => onRequestAction("kill")}><ShieldAlert /> Review kill switch</Button> : null}</div>
         </div>
-      ) : <PolicyForm approvedProfile={approvedProfile} busy={busy} policy={policy} onSubmit={onSave} />}
+      ) : <PolicyForm approvedProfile={approvedProfile && publishedRelease} busy={busy} policy={policy} onSubmit={onSave} />}
       {pendingAction ? (
         <Alert className={cn("mt-4", pendingAction === "kill" && "border-[var(--destructive-border)] bg-[var(--destructive-soft)]")}><ShieldAlert aria-hidden="true" /><AlertTitle>{policyActionTitle(pendingAction)}</AlertTitle><AlertDescription>{policyActionDescription(pendingAction)}</AlertDescription><div className="mt-3 flex flex-wrap gap-2"><Button size="sm" variant="outline" onClick={onCancelAction}>Cancel</Button><Button size="sm" variant={pendingAction === "kill" ? "destructive" : "default"} disabled={busy !== null} onClick={onConfirmAction}>{busy === "policy-state" ? "Applying…" : policyActionConfirmLabel(pendingAction)}</Button></div></Alert>
       ) : null}
@@ -635,7 +691,7 @@ function PolicyForm({ approvedProfile, busy, policy, onSubmit }: { approvedProfi
   )
 }
 
-function LearnersSection({ busy, goals, learnerEvidence, learningGaps, onReview, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learnerEvidence: ProfessorLearnerBeliefEvidence[]; learningGaps: ProfessorLearningGapResult | null; onReview: (proposalId: string, decision: GapReviewDecision) => void; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
+export function LearnersSection({ busy, goals, learnerEvidence, learningGaps, onReview, pendingCancel, policy, recipients, onCancelGoal, onCancelRequest, onCreateGoal }: { busy: string | null; goals: AutonomousGoalV1[]; learnerEvidence: ProfessorLearnerBeliefEvidence[]; learningGaps: ProfessorLearningGapResult | null; onReview: (proposalId: string, decision: GapReviewDecision) => void; pendingCancel: string | null; policy: PedagogicalPolicyV2 | null; recipients: AutonomousRecipientEligibilityV1[]; onCancelGoal: (goal: AutonomousGoalV1) => void; onCancelRequest: (goalId: string | null) => void; onCreateGoal: (event: FormEvent<HTMLFormElement>) => Promise<void> }) {
   const eligible = recipients.filter((recipient) => recipient.goal_eligible)
   return (
     <div className="space-y-7">
@@ -691,13 +747,13 @@ function LearnersSection({ busy, goals, learnerEvidence, learningGaps, onReview,
         )}
       </section>
       <section className="border-t pt-6" aria-labelledby="learner-evidence-heading">
-        <div><h3 id="learner-evidence-heading" className="flex items-center gap-2 text-sm font-semibold"><BrainCircuit className="size-4" /> Observed learning evidence</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Evidence counts and uncertainty are shown without converting them into a model-owned mastery score.</p></div>
+        <div><h3 id="learner-evidence-heading" className="flex items-center gap-2 text-sm font-semibold"><BrainCircuit className="size-4" /> Observed learning evidence</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Read the assessed answers by concept: correct, partly correct, or incorrect. Uncertainty describes limited evidence; it is not a student grade.</p></div>
         {learnerEvidence.some((item) => item.belief_states.length) ? (
           <ul className="mt-4 divide-y rounded-lg border">
             {learnerEvidence.flatMap((item) => item.belief_states.slice(0, 1).map((belief) => (
               <li key={`${item.student_id}-${belief.release_id}`} className="px-3 py-3">
                 <div className="flex flex-wrap items-start justify-between gap-2"><p className="text-sm font-medium">{item.student_id}</p><span className="text-xs text-muted-foreground">Revision {belief.revision} · {new Date(belief.updated_at).toLocaleString()}</span></div>
-                {belief.concepts.length ? <ul className="mt-2 grid gap-2 sm:grid-cols-2">{belief.concepts.slice(0, 6).map((concept) => <li key={concept.concept_id} className="rounded-lg bg-[var(--shell)] px-3 py-2"><p className="text-xs font-semibold">{format(concept.concept_id)}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{concept.observation_count} observed · {concept.assessed_evidence_count} assessed · {Math.round(concept.uncertainty * 100)}% uncertainty</p></li>)}</ul> : <p className="mt-2 text-xs text-muted-foreground">No concept evidence recorded yet.</p>}
+                {belief.concepts.length ? <ul className="mt-2 grid gap-2 sm:grid-cols-2">{belief.concepts.slice(0, 6).map((concept) => <li key={concept.concept_id} className="rounded-lg bg-[var(--shell)] px-3 py-2"><p className="text-xs font-semibold">{format(concept.concept_id)}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{concept.assessed_evidence_count} assessed of {concept.observation_count} observations</p><dl className="mt-2 grid grid-cols-3 gap-2 text-xs"><div><dt className="text-muted-foreground">Correct</dt><dd className="mt-1 font-semibold">{concept.correct_evidence_count}</dd></div><div><dt className="text-muted-foreground">Partial</dt><dd className="mt-1 font-semibold">{concept.partial_evidence_count}</dd></div><div><dt className="text-muted-foreground">Incorrect</dt><dd className="mt-1 font-semibold">{concept.incorrect_evidence_count}</dd></div></dl><p className="mt-2 text-xs text-muted-foreground">{Math.round(concept.uncertainty * 100)}% uncertainty · Not assessed: {concept.observation_count - concept.assessed_evidence_count}</p></li>)}</ul> : <p className="mt-2 text-xs text-muted-foreground">No concept evidence recorded yet.</p>}
               </li>
             )))}
           </ul>
@@ -721,7 +777,7 @@ function LearnersSection({ busy, goals, learnerEvidence, learningGaps, onReview,
             icon={UsersRound}
             title="No visible cohort insight"
             description={learningGaps?.aggregation.suppressed_group_count
-              ? "Small cohorts remain suppressed until the privacy threshold is met."
+              ? "Each insight needs at least five distinct learners with the same topic and signal type. Total course participation alone does not meet that requirement."
               : "No privacy-safe aggregate is available yet."}
           />
         )}
@@ -734,7 +790,7 @@ function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy
   const eligible = recipients.filter((recipient) => recipient.outreach_eligible)
   return (
     <section aria-labelledby="outreach-heading">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="outreach-heading" className="flex items-center gap-2 text-sm font-semibold"><BellRing className="size-4" /> Private in-app outreach</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">A0 professor-scheduled prompts are available now. A2 automatic interventions remain a development candidate until the product-freeze evaluation is selected.</p></div><Badge variant="outline">A0 available · A2 candidate</Badge></div>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"><div><h3 id="outreach-heading" className="flex items-center gap-2 text-sm font-semibold"><BellRing className="size-4" /> Private in-app outreach</h3><p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">Choose the student, source and time for a professor-scheduled check-in. Automatic follow-ups use the configured tutoring mode and policy.</p></div><Badge variant="outline">Professor-scheduled</Badge></div>
       <form className="mt-4 grid gap-4 sm:grid-cols-2" onSubmit={onSchedule}><RecipientSelect label="Eligible student" name="student_account_id" recipients={recipients} eligibility="outreach" /><LabeledSelect label="Evidence" name="source_chunk_id" options={evidenceChunks.map((item) => ({ value: item.id, label: item.label }))} /><Input label="Send at" name="scheduled_for" type="datetime-local" /><Input label="Expires at" name="expires_at" type="datetime-local" /><Input label="Topic" name="topic" placeholder="Review cache coherence" /><TextArea label="Prompt" name="prompt" placeholder="Explain the key invariant in your own words." /><Button className="sm:col-span-2 sm:justify-self-end" disabled={busy !== null || !approved || !policy?.autonomy_enabled || policy.paused || policy.kill_switch || !eligible.length || !evidenceChunks.length} type="submit"><BellRing /> {busy === "schedule" ? "Scheduling…" : "Schedule cited prompt"}</Button></form>
       {!eligible.length ? <EligibilityNote recipients={recipients} kind="outreach" /> : null}
       {triggers.length ? <ul className="mt-5 divide-y rounded-lg border">{triggers.map((trigger) => <li key={trigger.id} className="px-3 py-3"><div className="flex items-start gap-3"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-muted-foreground" /><div className="min-w-0 flex-1"><p className="text-sm font-medium">{trigger.topic}</p><p className="mt-0.5 text-xs text-muted-foreground">{format(trigger.status)} · {new Date(trigger.scheduled_for).toLocaleString()}</p></div>{trigger.status === "pending" && pendingCancel !== trigger.id ? <Button size="sm" variant="ghost" disabled={busy !== null} onClick={() => onCancelRequest(trigger.id)}>Cancel</Button> : null}</div>{pendingCancel === trigger.id ? <div className="mt-3 rounded-lg border border-[var(--warning-border)] bg-[var(--warning-soft)] p-3"><p className="text-xs leading-5">Cancel this pending check-in? It will not be delivered and cannot be resumed.</p><div className="mt-2 flex gap-2"><Button size="sm" variant="outline" onClick={() => onCancelRequest(null)}>Keep scheduled</Button><Button size="sm" variant="destructive" disabled={busy !== null} onClick={() => onCancelTrigger(trigger)}>{busy === `cancel-${trigger.id}` ? "Cancelling…" : "Cancel check-in"}</Button></div></div> : null}</li>)}</ul> : <EmptyState icon={BellRing} title="No scheduled check-ins" description="Only consented recipients with current evidence can receive a private prompt." />}
@@ -742,8 +798,7 @@ function OutreachSection({ approved, busy, evidenceChunks, pendingCancel, policy
   )
 }
 
-function ActivitySection({ actions, outcomes, traces }: { actions: AutonomousActionV1[]; outcomes: AutonomousOutcomeV1[]; traces: AgentTraceV2[] }) {
-  const outcomeByAction = new Map(outcomes.map((outcome) => [outcome.action_id, outcome]))
+export function ActivitySection({ actions, outcomes, traces, goals = [] }: { actions: AutonomousActionV1[]; outcomes: AutonomousOutcomeV1[]; traces: AgentTraceV2[]; goals?: AutonomousGoalV1[] }) {
   return (
     <section aria-labelledby="autonomy-audit-heading">
       <div>
@@ -751,13 +806,15 @@ function ActivitySection({ actions, outcomes, traces }: { actions: AutonomousAct
           <Activity className="size-4" /> Autonomous activity audit
         </h3>
         <p className="mt-1 max-w-2xl text-xs leading-5 text-muted-foreground">
-          Inspect structured decision reasons, deterministic validation, delivery, and learner outcomes. Hidden chain-of-thought is never stored.
+          Review what was sent or withheld, the recorded reason, and the delivery checks. Passing these checks does not establish that a response is educationally useful.
         </p>
       </div>
       {actions.length ? (
         <ul className="mt-4 divide-y rounded-lg border">
           {actions.slice(0, 40).map((action) => {
-            const outcome = outcomeByAction.get(action.action_id)
+            const outcome = outcomes.filter((item) => item.action_id === action.action_id && item.student_id === action.student_id && item.course_id === action.course_id && item.release_id === action.release_id)
+              .sort((left, right) => Date.parse(right.recorded_at) - Date.parse(left.recorded_at) || left.outcome_id.localeCompare(right.outcome_id))[0]
+            const goal = goals.find((item) => item.goal_id === action.goal_id && item.student_id === action.student_id && item.course_id === action.course_id && item.release_id === action.release_id)
             const checks = Object.entries(action.validation_results)
             const passed = checks.filter(([, value]) => value).length
             return (
@@ -766,16 +823,27 @@ function ActivitySection({ actions, outcomes, traces }: { actions: AutonomousAct
                   <div className="min-w-0">
                     <p className="text-sm font-medium">{format(action.kind)}</p>
                     <p className="mt-1 [overflow-wrap:anywhere] text-xs leading-5 text-muted-foreground">
-                      {action.student_id} · {action.structured_reason}
+                      Student: {action.student_id} · {new Date(action.created_at).toLocaleString()}
                     </p>
                     <p className="mt-2 text-xs text-muted-foreground">
-                      {passed}/{checks.length} deterministic checks passed
+                      {checks.length ? `${passed}/${checks.length} recorded delivery checks passed` : "No delivery checks recorded"}
                       {outcome ? ` · Outcome: ${format(outcome.kind)}` : " · Awaiting outcome"}
-                      {outcome?.next_wake_at ? ` · Next check ${new Date(outcome.next_wake_at).toLocaleString()}` : ""}
+                      {outcome?.next_wake_at ? ` · Next check recorded at this action: ${new Date(outcome.next_wake_at).toLocaleString()}` : ""}
                     </p>
+                    {passed < checks.length ? (
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                        Checks not passed: {checks.filter(([, value]) => !value).map(([name]) => format(name)).join("; ")}
+                      </p>
+                    ) : null}
                   </div>
                   <Badge variant="outline">{format(action.status)}</Badge>
                 </div>
+                <ol aria-label="Support decision and result" className="mt-3 grid gap-3 rounded-lg bg-[var(--shell)] p-3 text-xs sm:grid-cols-3">
+                  <li className="min-w-0"><p className="font-semibold">1. Learning goal</p><p className="mt-1 [overflow-wrap:anywhere] leading-5 text-muted-foreground">{goal?.learner_subgoal ?? (action.goal_id ? "The linked goal is not available in this view." : "This action has no linked learner goal.")}</p>{goal ? <p className="mt-1 leading-5 text-muted-foreground">Success condition: {goal.success_condition}</p> : null}</li>
+                  <li className="min-w-0"><p className="font-semibold">2. Recorded decision</p><p className="mt-1 [overflow-wrap:anywhere] leading-5 text-muted-foreground">{format(action.structured_reason)}</p></li>
+                  <li className="min-w-0"><p className="font-semibold">3. Observed result</p><p className="mt-1 leading-5 text-muted-foreground">{outcome ? format(outcome.kind) : "No outcome has been recorded yet."}</p><p className="mt-1 leading-5 text-muted-foreground">Delivery or a reply alone does not establish understanding.</p></li>
+                </ol>
+                <details className="mt-3 text-xs"><summary className="cursor-pointer font-medium">View release and delivery checks</summary><p className="mt-2 [overflow-wrap:anywhere] leading-5 text-muted-foreground">Release: {action.release_id} · Policy version: {action.policy_version} · Recorded model: {action.generator_model}</p>{checks.length ? <ul className="mt-2 space-y-1">{checks.map(([name, value]) => <li key={name}>{value ? "Passed" : "Not passed"}: {format(name)}</li>)}</ul> : <p className="mt-2 text-muted-foreground">No checks recorded.</p>}</details>
               </li>
             )
           })}

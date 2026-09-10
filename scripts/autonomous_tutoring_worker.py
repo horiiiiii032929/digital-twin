@@ -10,6 +10,8 @@ import time
 
 from services.api.app.config import AppSettings, RuntimeMode
 from services.api.app.factory import create_app
+from services.api.app.runtime_identity import write_worker_heartbeat
+from services.api.app.post_report_configuration import post_report_runtime_flags
 
 
 def build_worker_app(settings: AppSettings, *, candidate: str | None = None):
@@ -17,6 +19,8 @@ def build_worker_app(settings: AppSettings, *, candidate: str | None = None):
     selected = (candidate if candidate is not None else os.environ.get(
         "APP_EXPERIMENTAL_TUTORING_CANDIDATE", "")).strip()
     if not selected:
+        if post_report_runtime_flags():
+            raise ValueError("post-report worker options require an explicit experimental tutoring candidate")
         return create_app(settings=settings)
     from services.api.app.experimental import build_experimental_app
     return build_experimental_app(settings, selected, serve_web=False)
@@ -56,13 +60,19 @@ def main() -> None:
     repository = app.state.student_repository
     try:
         while True:
-            asyncio.run(
-                _process_once(
-                    app,
-                    worker_id=args.worker_id.strip(),
-                    batch_size=args.batch_size,
+            write_worker_heartbeat(app, worker_id=args.worker_id.strip(), status="processing", poll_seconds=args.poll_seconds)
+            try:
+                asyncio.run(
+                    _process_once(
+                        app,
+                        worker_id=args.worker_id.strip(),
+                        batch_size=args.batch_size,
+                    )
                 )
-            )
+            except Exception as error:
+                write_worker_heartbeat(app, worker_id=args.worker_id.strip(), status="failed", poll_seconds=args.poll_seconds, error_type=type(error).__name__)
+                raise
+            write_worker_heartbeat(app, worker_id=args.worker_id.strip(), status="completed-once" if args.once else "waiting", poll_seconds=args.poll_seconds)
             if args.once:
                 return
             time.sleep(args.poll_seconds)

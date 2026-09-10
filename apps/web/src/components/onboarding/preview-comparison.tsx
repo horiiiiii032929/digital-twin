@@ -95,7 +95,7 @@ export function PreviewComparison({
             Preview
           </h3>
           <p className="mt-1 text-sm leading-5 text-muted-foreground">
-            Compare tutor behavior, inspect its sources, and record your decision.
+            These are synthetic prototype examples, not responses generated from your uploaded course materials. Built-in cases use CSRF examples; custom cases use a generic policy response. Review decisions are still required for publication.
           </p>
         </div>
         <Badge variant="outline" className="status-badge">

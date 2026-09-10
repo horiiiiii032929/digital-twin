@@ -1,0 +1,57 @@
+{
+  "run_id": "aws-slide-alignment-001",
+  "status": "read-only alignment and plan; no implementation",
+  "deck": {
+    "path": "/Users/hikaru/Desktop/Course Digital Twin \u2014 Final Presentation/Course Digital Twin.pptx",
+    "slides": 70,
+    "sha256": "7453cff7de77b597a61abc39766e3cb948ab2f0b3083d9b835a2a91dcb6f6d76"
+  },
+  "baseline": "aws-browser-lifecycle-001",
+  "runtime": {
+    "generator_implementation": "question-specific-profile-grounded-v19",
+    "generator_model": "gpt-5.6-luna",
+    "planner_implementation": "GuardedPolicyValuePlanner",
+    "planner_model": "gpt-5.6-luna",
+    "experimental_version": "v19-luna-luna-medium",
+    "server_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "learning_configuration": null
+  },
+  "decision": "Preserve slide contracts; diagnose and repair proven coding defects only. Full AWS feature parity is not certified.",
+  "known_differences": [
+    "synthetic AWS corpus versus approved IT5004 demo material",
+    "no active AWS support worker or course autonomy policy",
+    "equivalent withholding semantics with different UI notice wording",
+    "legacy onboarding preview fixtures block fresh course lifecycle",
+    "experimental assessment/research estimators not promoted"
+  ],
+  "governing_slides": [
+    7,
+    9,
+    10,
+    11,
+    13,
+    14,
+    27,
+    29,
+    31,
+    32,
+    36,
+    40,
+    41,
+    42,
+    43,
+    44,
+    46,
+    47,
+    53,
+    61,
+    62,
+    63,
+    64,
+    65,
+    68,
+    69,
+    70
+  ],
+  "plan": "research/04_experiments/2026-09-09-slide-aligned-code-fix-plan.md"
+}

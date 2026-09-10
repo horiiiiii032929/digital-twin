@@ -510,6 +510,7 @@ async def test_repair_unknown_usage_and_reaudit_binding_drift_quarantine():
     )
     assert r.calls == 2 and r.usage.approximate_cost_usd is None
     assert r.reason == "contract_or_provider_failure" and len(audit.calls) == 1
+    assert (r.failure_stage, r.failure_code) == ("repair_request", "identity_or_usage")
 
     class DriftAudit(Audit):
         async def chat(self, messages, task):
@@ -533,6 +534,7 @@ async def test_repair_unknown_usage_and_reaudit_binding_drift_quarantine():
         and r.reason == "contract_or_provider_failure"
         and r.proposal_json is None
     )
+    assert (r.failure_stage, r.failure_code) == ("reaudit_validation", "binding_mismatch")
 
 
 @pytest.mark.asyncio
@@ -630,3 +632,101 @@ def test_v2_conditional_cue_and_quality_only_contract_wording():
     assert "direct-explanation profile, provide the requested supported answer" in h.REPAIR_INSTRUCTION_V2
     assert "For quality audits only" in h.CONTRACT_V2
     assert "For support-only audits, return dimensions as an empty list" in h.SUPPORT_INSTRUCTION_V2
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("mutation,code", [
+    (missing, "entry_coverage"), (duplicate, "entry_coverage"),
+    (hash_wrong, "binding_mismatch"), (proposal_wrong, "binding_mismatch"),
+    (context_wrong, "binding_mismatch"), (source_wrong, "evidence_binding"),
+    (source_empty, "support_references"), (bypass, "factual_bypass"),
+    (extra, "schema_validation"), (dimensions_missing, "quality_coverage"),
+    (affected_wrong, "affected_entries"),
+])
+async def test_bounded_failure_diagnostics_keep_contract_and_usage(mutation, code):
+    payload, raw, render = fixture()
+    audit, repair = Audit(mutation=mutation), Repair()
+    result = await audit_final_response(proposal_json=raw, payload=payload,
+        render=render, audit_client=audit, repair_client=repair, mode="quality")
+    assert result.failure_stage == "audit_validation"
+    assert result.failure_code == code
+    assert result.outcome == "quarantined" and result.proposal_json is None
+    assert result.delivered_text == QUARANTINE_TEXT
+    assert result.calls == 1 and not repair.calls
+    assert result.usage.model_dump() == result.events[0]["usage"]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("error,code", [
+    (ValueError("PRIVATE_RESPONSE_SENTINEL"), "invalid_value"),
+    (RuntimeError("PRIVATE_RESPONSE_SENTINEL"), "unexpected_error"),
+    (LlmUnavailableError("PRIVATE_RESPONSE_SENTINEL"), "unavailable"),
+])
+async def test_failure_diagnostics_exclude_private_exception_content(error, code):
+    payload, raw, render = fixture()
+    result = await audit_final_response(proposal_json=raw, payload=payload,
+        render=render, audit_client=Audit(error=error), mode="quality")
+    assert result.failure_stage == "audit_request"
+    assert result.failure_code == code
+    assert result.calls == 1 and result.usage.approximate_cost_usd is None
+    assert "PRIVATE_RESPONSE_SENTINEL" not in json.dumps(result.to_dict())
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("stage,diagnostics,code", [
+    ("response-status", {"incomplete_reason": "max_output_tokens"}, "provider_output_limit"),
+    ("schema-validation", {}, "provider_schema_validation"),
+    ("response-status", {"incomplete_reason": "PRIVATE_SENTINEL"}, "provider_response_status"),
+    ("PRIVATE_SENTINEL", {"schema_errors": [{"location": ["PRIVATE_SENTINEL"]}]}, "malformed-response"),
+])
+async def test_known_transport_failure_stage_is_preserved_without_private_values(stage, diagnostics, code):
+    from src.digital_twin.llm import LlmMalformedResponseError
+    payload, raw, render = fixture()
+    error = LlmMalformedResponseError(stage=stage, diagnostics=diagnostics,
+        usage=GenerationUsage(input_tokens=10, output_tokens=3, total_tokens=13,
+                              approximate_cost_usd=.0001))
+    result = await audit_final_response(proposal_json=raw, payload=payload,
+        render=render, audit_client=Audit(error=error), mode="quality")
+    assert result.failure_stage == "audit_request" and result.failure_code == code
+    assert result.usage == error.usage and result.calls == 1
+    assert "PRIVATE_SENTINEL" not in json.dumps(result.to_dict())
+
+
+@pytest.mark.asyncio
+async def test_schema_location_is_retained_but_unknown_field_name_is_hidden():
+    payload, raw, render = fixture()
+    def bad(v):
+        v['entries'][0]['verdict'] = 'PRIVATE_BAD_VALUE'
+        v['PRIVATE_FIELD_NAME'] = 'PRIVATE_CONTENT'
+    result = await audit_final_response(proposal_json=raw, payload=payload,
+        render=render, audit_client=Audit(mutation=bad), mode='quality')
+    assert result.outcome == 'quarantined' and result.calls == 1
+    assert set(result.failure_fields) == {'entries.0.verdict:literal_error', '_:extra_forbidden'}
+    assert 'PRIVATE' not in str(result.failure_fields)
+
+
+@pytest.mark.asyncio
+async def test_transport_schema_diagnostics_are_bounded_and_never_control_audit():
+    from src.digital_twin.llm import LlmMalformedResponseError
+    payload, raw, render = fixture()
+    error = LlmMalformedResponseError(stage='schema-validation', diagnostics={
+        'schema_errors': [
+            {'location': ['dimensions', 0], 'type': 'value_error', 'input': 'PRIVATE'},
+            {'location': ['entries', -1, 'PRIVATE'], 'type': 'PRIVATE'},
+            {'location': [], 'type': 'model_type'},
+            {'location': ['units'] * 100, 'type': 'too_long'},
+            {'location': ['SHOULD_BE_OMITTED'], 'type': 'missing'},
+        ]})
+    result = await audit_final_response(proposal_json=raw, payload=payload,
+        render=render, audit_client=Audit(error=error), mode='quality')
+    assert result.failure_fields == ('dimensions.0:value_error', 'entries._._:unknown',
+        'root:model_type', 'units.units.units.units.units.units:too_long')
+    assert result.calls == 1 and result.proposal_json is None
+    assert 'PRIVATE' not in str(result.failure_fields)
+
+
+@pytest.mark.parametrize('value', [None, {}, ['PRIVATE:missing'], ['entries:PRIVATE'],
+    ['entries.100:missing'], ['entries:missing; PRIVATE'], ['entries.' * 100 + ':missing']])
+def test_public_schema_fields_reject_noncanonical_values(value):
+    from src.digital_twin.generation.final_response_audit import public_schema_fields
+    assert public_schema_fields(value) == ()

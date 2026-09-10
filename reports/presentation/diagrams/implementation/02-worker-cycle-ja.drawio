@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="02-worker-cycle-ja" name="自律支援ワーカーの実行サイクル">
+    <mxGraphModel page="1" pageWidth="1600" pageHeight="1060" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="02-worker-cycle-ja-canvas" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=#FFFFFF;">
+          <mxGeometry as="geometry" x="0" y="0" width="1600" height="1060" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-title" parent="1" vertex="1" value="自律支援ワーカーの実行サイクル" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=34;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=1;">
+          <mxGeometry as="geometry" x="50" y="25" width="1500" height="62" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-scope" parent="1" vertex="1" value="UMLアクティビティ図 ＋ 実コード ｜ scripts/autonomous_tutoring_worker.py" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="50" y="99" width="1500" height="52" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-start" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#20364F;">
+          <mxGeometry as="geometry" x="303" y="181" width="24" height="24" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-merge" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rhombus;">
+          <mxGeometry as="geometry" x="301" y="243" width="28" height="28" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-observe" parent="1" vertex="1" value="学習目標・支援の機会を作成&#10;observe_events()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="105" y="310" width="420" height="86" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-governed" parent="1" vertex="1" value="期限の来た自律ジョブを実行&#10;GovernedAutonomyService&#10;.process_due()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;fillColor=#EEF4FA;strokeColor=#285E8E;fontStyle=1;">
+          <mxGeometry as="geometry" x="105" y="435" width="420" height="110" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-scheduled" parent="1" vertex="1" value="教授の予約配信などを処理&#10;ProactiveOutreachService&#10;.process_due()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="105" y="585" width="420" height="110" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-once" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rhombus;">
+          <mxGeometry as="geometry" x="289" y="738" width="52" height="52" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-sleep" parent="1" vertex="1" value="次の巡回まで待つ&#10;time.sleep()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="65" y="842" width="240" height="80" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-end" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;">
+          <mxGeometry as="geometry" x="446" y="880" width="28" height="28" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-end-inner" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#20364F;">
+          <mxGeometry as="geometry" x="452" y="886" width="16" height="16" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-e1" parent="1" edge="1" source="02-worker-cycle-ja-start" target="02-worker-cycle-ja-merge" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-e2" parent="1" edge="1" source="02-worker-cycle-ja-merge" target="02-worker-cycle-ja-observe" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-e3" parent="1" edge="1" source="02-worker-cycle-ja-observe" target="02-worker-cycle-ja-governed" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-e4" parent="1" edge="1" source="02-worker-cycle-ja-governed" target="02-worker-cycle-ja-scheduled" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-e5" parent="1" edge="1" source="02-worker-cycle-ja-scheduled" target="02-worker-cycle-ja-once" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-repeat" parent="1" edge="1" source="02-worker-cycle-ja-once" target="02-worker-cycle-ja-sleep" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="315" y="814" />
+              <mxPoint x="185" y="814" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-one-shot" parent="1" edge="1" source="02-worker-cycle-ja-once" target="02-worker-cycle-ja-end" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=1.0;exitY=0.5;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="460" y="764" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-loop" parent="1" edge="1" source="02-worker-cycle-ja-sleep" target="02-worker-cycle-ja-merge" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.0;exitY=0.5;entryX=0.0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="35" y="882" />
+              <mxPoint x="35" y="257" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-repeat-guard" parent="1" vertex="1" value="[--once なし]" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=20;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="67" y="785" width="238" height="32" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-one-guard" parent="1" vertex="1" value="[--once 指定]" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=20;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="372" y="717" width="230" height="32" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-code-heading" parent="1" vertex="1" value="実コード：_process_once() の処理順" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=26;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=1;">
+          <mxGeometry as="geometry" x="655" y="185" width="890" height="50" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-code" parent="1" vertex="1" value="&lt;pre style=&quot;margin:0;white-space:pre;font-family:Menlo,monospace;font-size:18px;line-height:1.45&quot;&gt;app.state.governed_autonomy_service.observe_events(limit=batch_size)&#10;await app.state.governed_autonomy_service.process_due(&#10;    worker_id=worker_id,&#10;    limit=batch_size,&#10;)&#10;app.state.proactive_outreach_service.process_due(limit=batch_size)&lt;/pre&gt;" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=18;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacing=0;fontFamily=Menlo;fontSize=18;">
+          <mxGeometry as="geometry" x="655" y="255" width="890" height="235" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-job-detail-title" parent="1" vertex="1" value="自律ジョブ内で実際に行うこと" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=26;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=1;">
+          <mxGeometry as="geometry" x="655" y="535" width="890" height="45" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-job-detail" parent="1" vertex="1" value="期限切れを処理し、再実行予約を支援の機会に変換する。&#10;対象の機会を一時的に占有し、教材と権限を読み込む。&#10;行動の判定・内容生成・検証を行う。&#10;メッセージの配信後、ジョブ結果と次回予約を保存する。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=23;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="655" y="605" width="890" height="240" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-precondition" parent="1" vertex="1" value="実行条件：staging構成、ワーカー有効化。&#10;起動中は、ブラウザ操作とは別のプロセスで巡回する。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="655" y="876" width="890" height="84" />
+        </mxCell>
+        <mxCell id="02-worker-cycle-ja-foot" parent="1" vertex="1" value="既定は1回の処理終了後に30秒待機。処理時間も加わるため、厳密な30秒周期ではない。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="50" y="986" width="1500" height="43" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

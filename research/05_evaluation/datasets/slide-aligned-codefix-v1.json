@@ -1,0 +1,152 @@
+{
+  "version": "slide-aligned-codefix-v1",
+  "permissions": "synthetic repository fixtures; no private course corpus",
+  "purpose": "diagnostic contract regression, not semantic quality or learning measurement",
+  "fixture_module": "tests.test_final_response_audit",
+  "cases": [
+    {
+      "id": "missing",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "entry_coverage"
+    },
+    {
+      "id": "duplicate",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "entry_coverage"
+    },
+    {
+      "id": "hash_wrong",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "binding_mismatch"
+    },
+    {
+      "id": "proposal_wrong",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "binding_mismatch"
+    },
+    {
+      "id": "context_wrong",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "binding_mismatch"
+    },
+    {
+      "id": "source_wrong",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "evidence_binding"
+    },
+    {
+      "id": "source_empty",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "support_references"
+    },
+    {
+      "id": "bypass",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "factual_bypass"
+    },
+    {
+      "id": "extra",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "schema_validation"
+    },
+    {
+      "id": "dimensions_missing",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "quality_coverage"
+    },
+    {
+      "id": "affected_wrong",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_validation",
+      "expected_failure_code": "affected_entries"
+    },
+    {
+      "id": "valid",
+      "expected_outcome": "passed",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": null,
+      "expected_failure_code": null
+    },
+    {
+      "id": "repair",
+      "expected_outcome": "repaired",
+      "expected_calls": 3,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": null,
+      "expected_failure_code": null
+    },
+    {
+      "id": "unchanged",
+      "expected_outcome": "quarantined",
+      "expected_calls": 2,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": null,
+      "expected_failure_code": null
+    },
+    {
+      "id": "reject_repair",
+      "expected_outcome": "quarantined",
+      "expected_calls": 3,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": null,
+      "expected_failure_code": null
+    },
+    {
+      "id": "unknown_usage",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_request",
+      "expected_failure_code": "identity_or_usage"
+    },
+    {
+      "id": "identity",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_request",
+      "expected_failure_code": "identity_or_usage"
+    },
+    {
+      "id": "unavailable",
+      "expected_outcome": "quarantined",
+      "expected_calls": 1,
+      "expected_no_behavior_change": true,
+      "expected_failure_stage": "audit_request",
+      "expected_failure_code": "unavailable"
+    }
+  ]
+}

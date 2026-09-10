@@ -12,9 +12,9 @@ const STEP_STATE_LABELS: Record<StepState["state"], string> = {
 
 const STEP_HELP: Record<ReviewStageId, string> = {
   sources: "Add and verify materials",
-  interview: "Shape the tutor with AI",
+  interview: "Shape the Digital Twin with AI",
   policy: "Define behavior and rules",
-  preview: "Test tutor responses",
+  preview: "Test Digital Twin responses",
   approval: "Review and release",
 }
 
@@ -30,7 +30,7 @@ export function ReleaseRoute({
   onSelectStage: (stage: ReviewStageId) => void
 }) {
   return (
-    <nav aria-label="Tutor setup stages" className="min-w-0 px-2 py-4">
+    <nav aria-label="Digital Twin setup stages" className="min-w-0 px-2 py-4">
       {collapsed ? null : (
         <h2 className="px-2 pb-2.5 text-xs font-semibold text-muted-foreground">
           Release workflow

@@ -46,6 +46,29 @@ PROTECTED_NAME_PREFIXES = (
     "second_review_",
 )
 ALLOWED_NON_EVALUATION_ENTRYPOINTS = {
+    # Presentation authoring: draw.io/XML, deck JSON, scripts and local exports.
+    # These do not execute evaluations, inspect sealed gold or call providers.
+    "build_cto_presentation_diagrams.py",
+    "build_implementation_diagrams.py",
+    "build_presentation_diagrams.py",
+    "build_presentation_failure_diagrams.py",
+    "build_product_first_activity.py",
+    "build_standard_sdlc_diagrams.py",
+    "prepare_cto_natural_script.py",
+    "prepare_cto_presentation.py",
+    "prepare_cto_refined_script.py",
+    "prepare_cto_refinement.py",
+    "prepare_natural_presentation_script.py",
+    "prepare_presentation_deck.py",
+    # Existing output replay and synthetic fixtures, not new scored evidence.
+    "build_thirty_day_preview.py",
+    "build_recording_demo.py",
+    "prepare_recording_materials.py",
+    # Product rehearsal may mutate local synthetic state. A recording-factory
+    # identity check guards these paths; this is not evaluation authorization.
+    "prepare_recording_checkpoint.py",
+    "record_autonomous_film.py",
+    "record_student_clips.py",
     # Fetches exact public source revisions only; no dataset generation,
     # evaluation execution, hidden-gold inspection or provider calls.
     "prepare_public_evaluation_sources.py",

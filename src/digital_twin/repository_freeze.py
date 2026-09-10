@@ -32,6 +32,9 @@ FROZEN_ENTRYPOINT_OPERATIONS = MappingProxyType(
         "scripts/run_authenticated_loopback_load_development.py": ("external_model_evaluation",),
         "scripts/run_bounded_contract_progression_development.py": ("external_model_evaluation",),
         "scripts/run_completion_semantic_review.py": ("external_model_evaluation",),
+        "scripts/run_post_report_assessment.py": ("external_model_evaluation",),
+        "scripts/run_post_report_learner_policy.py": ("method_evaluation_execution",),
+        "scripts/run_post_report_blind_review.py": ("external_model_evaluation", "method_evaluation_execution"),
         "scripts/run_mixed_source_recovery_development.py": ("method_evaluation_execution",),
         "scripts/run_output_cap_progression_development.py": ("external_model_evaluation",),
         "scripts/run_asgi_tutoring_concurrency_development.py": ("external_model_evaluation",),
@@ -676,6 +679,11 @@ BOUNDED_PILOT_AUTHORIZATIONS = MappingProxyType(
         "final-response-support-audit-001": ("external_model_evaluation",),
         "final-response-support-audit-002": ("external_model_evaluation",),
         "paired-pedagogy-development-001": ("external_model_evaluation",),
+        # 2026-09-08 user-authorized post-report improvements; frozen synthetic
+        # assessment packet, 32 calls / $6 per model under shared $30 ledger.
+        "post-report-source-assessment-001": ("external_model_evaluation",),
+        "post-report-blind-review-001": ("external_model_evaluation", "method_evaluation_execution"),
+        "post-report-learner-policy-001": ("method_evaluation_execution",),
         "instructional-eight-history-operational-development-001": ("external_model_evaluation",),
         "authenticated-loopback-load-development-001": ("external_model_evaluation",),
         "bounded-contract-progression-development-001": ("external_model_evaluation",),

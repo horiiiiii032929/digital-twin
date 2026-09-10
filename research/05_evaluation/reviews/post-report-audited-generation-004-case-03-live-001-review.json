@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-004-case-03-live-001",
+  "method": "All four outputs read against frozen source and stage rubric; failure diagnosis includes local replay.",
+  "rows": [
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Do the two irrelevant Birch results change the recall denominator?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: recall uses all eight relevant items, so it is 3 divided by 8. What are recall and precision for this test?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v4",
+      "stage": 0,
+      "question": "Do the two irrelevant Birch results change the recall denominator?",
+      "response": "For \u201cDo the two irrelevant Birch results change the recall denominator?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response follows the requested stage.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: recall uses all eight relevant items, so it is 3 divided by 8. What are recall and precision for this test?",
+      "response": "Birch defines recall as the number of relevant items retrieved divided by the total number of relevant items. A test contains eight relevant items; the system retrieves three of them\n\nthe system retrieves three of them and two irrelevant items. Precision uses all retrieved items as its denominator.",
+      "action": "answer",
+      "severity": "major",
+      "category": "request-coverage",
+      "reason": "Copies definitions and values but does not deliver the requested numerical result(s).",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-005-case-01-live-001",
+  "method": "Every delivered output read against frozen source and stage rubric; original exposed questions, no gold in model requests.",
+  "rows": [
+    {
+      "case_id": "atlas-withdraw-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "What happens if an Atlas release is withdrawn while an answer is being generated?",
+      "response": "I do not have approved course evidence for that question. Please ask about the available course material or ask the instructor.",
+      "action": "no-evidence",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Requested available explanation/help withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "atlas-withdraw-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: the final authority check rejects the reply. Does withdrawal also delete the earlier audit history?",
+      "response": "Your understanding is correct: Atlas discards the generated reply instead of saving it, and withdrawal does not erase earlier audit records.\n\nCheck: What happens to the generated reply, and what happens to the earlier audit records?",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "atlas-withdraw-explanatory",
+      "version": "v4",
+      "stage": 0,
+      "question": "What happens if an Atlas release is withdrawn while an answer is being generated?",
+      "response": "I do not have approved course evidence for that question. Please ask about the available course material or ask the instructor.",
+      "action": "no-evidence",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Requested available explanation/help withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "atlas-withdraw-explanatory",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: the final authority check rejects the reply. Does withdrawal also delete the earlier audit history?",
+      "response": "Atlas checks current release authority again immediately before saving a generated reply. If the professor withdraws the release while generation is running, Atlas discards that reply instead of saving it.\n\nWithdrawal does not erase earlier audit records.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

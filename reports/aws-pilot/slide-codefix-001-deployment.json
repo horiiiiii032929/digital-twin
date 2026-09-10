@@ -1,0 +1,29 @@
+{
+  "run_id": "slide-codefix-001",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "changed_runtime_files": {
+    "src/digital_twin/generation/audited_instruction.py": {
+      "before": "524cfc0af3b0096b84454e5d68656fc761619694fbcc028441124b23a6b50cf1",
+      "after": "d69aa27396f204be2f4e5157a600102679fb889edbd9b3b378735b94a16e5670"
+    },
+    "src/digital_twin/generation/final_response_audit.py": {
+      "before": "166bf64812c284285a4fd3b2a3439cbb39615c5e011110a75c8a74faff8b2b33",
+      "after": "fd8b20e549f74b0231b46fc722969d7f70b518e94f541ca8865c5fbd3e2c8a1f"
+    }
+  },
+  "manifest_sha256": "67ff5245f4e2f6cff1c72054ad0af58da2843f28fe2034668960775bf2335ee6",
+  "initial_activation": "d97099b8-9b23-44a0-9334-350f8e8c05ea",
+  "final_activation": "ad00d792-3e62-4a4a-b861-f578ea083e9b",
+  "final_activation_status": "Success",
+  "api_image_tag": "47bdf176a935ba44e6d33c0417079155fd5e41be75259c79942573db8793aa92",
+  "web_image_tag": "5f9877153e187a9d427b754181df8338c792cda2e755520f7383db5ad942d05c",
+  "shutdown": {
+    "Expression": "at(2026-09-10T03:00:00)",
+    "Timezone": "Asia/Singapore",
+    "State": "ENABLED",
+    "ActionAfterCompletion": "DELETE"
+  },
+  "backup": "/opt/digital-twin/backups/pre-slide-codefix-refined.zip",
+  "private_evidence_folder": "output/browser-qa/slide-codefix-001"
+}

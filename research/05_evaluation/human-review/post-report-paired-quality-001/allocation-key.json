@@ -1,0 +1,290 @@
+[
+  {
+    "history": 1,
+    "label": "A",
+    "case_id": "birch-recall-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 1,
+    "label": "B",
+    "case_id": "birch-recall-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 2,
+    "label": "A",
+    "case_id": "cedar-pages-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 2,
+    "label": "B",
+    "case_id": "cedar-pages-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 3,
+    "label": "A",
+    "case_id": "birch-recall-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 3,
+    "label": "B",
+    "case_id": "birch-recall-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 4,
+    "label": "A",
+    "case_id": "atlas-withdraw-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 4,
+    "label": "B",
+    "case_id": "atlas-withdraw-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 5,
+    "label": "A",
+    "case_id": "elm-groups-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 5,
+    "label": "B",
+    "case_id": "elm-groups-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 6,
+    "label": "A",
+    "case_id": "cedar-cache-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 6,
+    "label": "B",
+    "case_id": "cedar-cache-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 7,
+    "label": "A",
+    "case_id": "cedar-pages-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 7,
+    "label": "B",
+    "case_id": "cedar-pages-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 8,
+    "label": "A",
+    "case_id": "atlas-health-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 8,
+    "label": "B",
+    "case_id": "atlas-health-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 9,
+    "label": "A",
+    "case_id": "elm-groups-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 9,
+    "label": "B",
+    "case_id": "elm-groups-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 10,
+    "label": "A",
+    "case_id": "elm-consent-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 10,
+    "label": "B",
+    "case_id": "elm-consent-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 11,
+    "label": "A",
+    "case_id": "cedar-retry-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 11,
+    "label": "B",
+    "case_id": "cedar-retry-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 12,
+    "label": "A",
+    "case_id": "atlas-release-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 12,
+    "label": "B",
+    "case_id": "atlas-release-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 13,
+    "label": "A",
+    "case_id": "atlas-withdraw-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 13,
+    "label": "B",
+    "case_id": "atlas-withdraw-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 14,
+    "label": "A",
+    "case_id": "atlas-release-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 14,
+    "label": "B",
+    "case_id": "atlas-release-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 15,
+    "label": "A",
+    "case_id": "elm-private-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 15,
+    "label": "B",
+    "case_id": "elm-private-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 16,
+    "label": "A",
+    "case_id": "elm-private-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 16,
+    "label": "B",
+    "case_id": "elm-private-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 17,
+    "label": "A",
+    "case_id": "birch-missing-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 17,
+    "label": "B",
+    "case_id": "birch-missing-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 18,
+    "label": "A",
+    "case_id": "atlas-health-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 18,
+    "label": "B",
+    "case_id": "atlas-health-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 19,
+    "label": "A",
+    "case_id": "birch-causality-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 19,
+    "label": "B",
+    "case_id": "birch-causality-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 20,
+    "label": "A",
+    "case_id": "elm-consent-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 20,
+    "label": "B",
+    "case_id": "elm-consent-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 21,
+    "label": "A",
+    "case_id": "cedar-cache-socratic",
+    "version": "v4"
+  },
+  {
+    "history": 21,
+    "label": "B",
+    "case_id": "cedar-cache-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 22,
+    "label": "A",
+    "case_id": "cedar-retry-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 22,
+    "label": "B",
+    "case_id": "cedar-retry-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 23,
+    "label": "A",
+    "case_id": "birch-causality-explanatory",
+    "version": "v4"
+  },
+  {
+    "history": 23,
+    "label": "B",
+    "case_id": "birch-causality-explanatory",
+    "version": "v10"
+  },
+  {
+    "history": 24,
+    "label": "A",
+    "case_id": "birch-missing-socratic",
+    "version": "v10"
+  },
+  {
+    "history": 24,
+    "label": "B",
+    "case_id": "birch-missing-socratic",
+    "version": "v4"
+  }
+]

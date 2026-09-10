@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="03-delivery-commit-ja" name="配信の保存と、ジョブ結果の保存">
+    <mxGraphModel page="1" pageWidth="2100" pageHeight="1580" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="03-delivery-commit-ja-canvas" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=#FFFFFF;">
+          <mxGeometry as="geometry" x="0" y="0" width="2100" height="1580" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-title" parent="1" vertex="1" value="配信の保存と、ジョブ結果の保存" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=34;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=1;">
+          <mxGeometry as="geometry" x="50" y="25" width="2000" height="62" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-scope" parent="1" vertex="1" value="UMLシーケンス図 ｜ _process_claimed() → graph.run() → _deliver() → commit_autonomous_job()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="50" y="99" width="2000" height="52" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-service" parent="1" vertex="1" value="GovernedAutonomyService" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=100;fontSize=22;">
+          <mxGeometry as="geometry" x="60" y="192" width="380" height="1258" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-graph" parent="1" vertex="1" value="GovernedAutonomous&#10;TutoringGraph" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=100;fontSize=22;">
+          <mxGeometry as="geometry" x="590" y="192" width="380" height="1258" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-outreach" parent="1" vertex="1" value="ProactiveOutreachService" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=100;fontSize=22;">
+          <mxGeometry as="geometry" x="1110" y="192" width="380" height="1258" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-store" parent="1" vertex="1" value="SQLiteStudentRepository" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=100;fontSize=22;">
+          <mxGeometry as="geometry" x="1630" y="192" width="380" height="1258" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-run" parent="1" edge="1" source="03-delivery-commit-ja-service" target="03-delivery-commit-ja-graph" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.12559618441971382;entryX=0.5;entryY=0.12559618441971382;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="run(job)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-graph-result" parent="1" edge="1" source="03-delivery-commit-ja-graph" target="03-delivery-commit-ja-service" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.17726550079491257;entryX=0.5;entryY=0.17726550079491257;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;dashed=1;endArrow=open;endFill=0;" value="AutonomousJobResult">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-graph-note" parent="1" vertex="1" value="行動選択・権限確認・生成・検証を完了。&#10;この時点では受信箱への保存はまだ行っていない。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="845" y="340" width="1170" height="76" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-schedule" parent="1" edge="1" source="03-delivery-commit-ja-service" target="03-delivery-commit-ja-outreach" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.2384737678855326;entryX=0.5;entryY=0.2384737678855326;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="schedule_trigger(idempotency_key=K, ...)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-trigger" parent="1" edge="1" source="03-delivery-commit-ja-outreach" target="03-delivery-commit-ja-service" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.2901430842607313;entryX=0.5;entryY=0.2901430842607313;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;dashed=1;endArrow=open;endFill=0;" value="trigger: 新規予約 または 同じKの既存予約">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-process" parent="1" edge="1" source="03-delivery-commit-ja-service" target="03-delivery-commit-ja-outreach" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.3537360890302067;entryX=0.5;entryY=0.3537360890302067;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="process_trigger(trigger.id, now=instant)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-alt-frame" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;fillColor=none;">
+          <mxGeometry as="geometry" x="1080" y="680" width="960" height="585" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-alt-label" parent="1" vertex="1" value="alt" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=umlFrame;align=left;fillColor=#FFFFFF;fontSize=22;">
+          <mxGeometry as="geometry" x="1080" y="680" width="75" height="37" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-pending" parent="1" vertex="1" value="[予約がpending、配信条件を満たす]" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="1170" y="690" width="830" height="42" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-materialize" parent="1" edge="1" source="03-delivery-commit-ja-outreach" target="03-delivery-commit-ja-store" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.46899841017488075;entryX=0.5;entryY=0.46899841017488075;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="materialize_proactive_message(...)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-inserted" parent="1" edge="1" source="03-delivery-commit-ja-store" target="03-delivery-commit-ja-outreach" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.5230524642289348;entryX=0.5;entryY=0.5230524642289348;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;dashed=1;endArrow=open;endFill=0;" value="bool / ProactiveDeliveryConflictError">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-transaction" parent="1" vertex="1" value="保存時に権限・同意・公開版・頻度を再確認。&#10;不成立なら保存を拒否する。成立時は引用も同時保存。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=19;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="1370" y="874" width="610" height="66" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-separator-1" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;">
+          <mxGeometry as="geometry" x="1080" y="961" width="960" height="1" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-sep1" parent="1" edge="1" source="03-delivery-commit-ja-alt-frame" target="03-delivery-commit-ja-alt-frame" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.0;exitY=0.48034188034188036;entryX=1.0;entryY=0.48034188034188036;endArrow=none;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-duplicate-guard" parent="1" vertex="1" value="[同じ予約から既にメッセージを保存済み]" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="1170" y="976" width="830" height="42" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-existing" parent="1" edge="1" source="03-delivery-commit-ja-outreach" target="03-delivery-commit-ja-store" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.6828298887122417;entryX=0.5;entryY=0.6828298887122417;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="get_proactive_message_for_trigger(id)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-existing-result" parent="1" edge="1" source="03-delivery-commit-ja-store" target="03-delivery-commit-ja-outreach" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.733704292527822;entryX=0.5;entryY=0.733704292527822;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;dashed=1;endArrow=open;endFill=0;" value="existing_message">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-sep2" parent="1" edge="1" source="03-delivery-commit-ja-alt-frame" target="03-delivery-commit-ja-alt-frame" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.0;exitY=0.8034188034188035;entryX=1.0;entryY=0.8034188034188035;endArrow=none;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-suppression" parent="1" vertex="1" value="[まだ時刻前／配信不可]&#10;not-due、suppressed、deferred-quiet-hours等を返す。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="1170" y="1163" width="830" height="83" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-delivery-result" parent="1" edge="1" source="03-delivery-commit-ja-outreach" target="03-delivery-commit-ja-service" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=0.8895071542130366;entryX=0.5;entryY=0.8895071542130366;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;dashed=1;endArrow=open;endFill=0;" value="delivery_result（配信／既存再利用／見送り）">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-crash-note" parent="1" vertex="1" value="ここで停止すると、メッセージだけが保存済みになり得る。再試行では同じKと元の配信期間を再利用する。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=note;size=16;align=left;fillColor=#F6F8FB;">
+          <mxGeometry as="geometry" x="75" y="1351" width="1950" height="57" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-commit" parent="1" edge="1" source="03-delivery-commit-ja-service" target="03-delivery-commit-ja-store" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=1.0;html=0;fontFamily=Menlo;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;endArrow=block;endFill=1;" value="commit_autonomous_job(result)">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="offset" x="0" y="-19" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-commit-note" parent="1" vertex="1" value="計画・行動・結果・次回予約などを保存。配信成功時に目標の試行回数を加算する。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="650" y="1484" width="1380" height="53" />
+        </mxCell>
+        <mxCell id="03-delivery-commit-ja-scope-note" parent="1" vertex="1" value="_deliver()はno-action等では配信処理を呼ばない。図は配信処理に進む場合を展開し、保存・再利用・見送りを示す。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=20;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="50" y="1538" width="1980" height="34" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

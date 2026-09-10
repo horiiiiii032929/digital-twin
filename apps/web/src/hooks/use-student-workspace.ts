@@ -11,6 +11,7 @@ import {
   listStudentOutreach,
   listStudentOutreachPreferences,
   listStudentCourses,
+  listStudentConversations,
   listStudentMessageCitations,
   markStudentOutreachRead,
   submitStudentMessage,
@@ -35,6 +36,9 @@ import {
   writeStudentConversationIndex,
 } from "@/lib/student/conversation-index"
 import { createStudentRequestId } from "@/lib/student/request-id"
+import { readPendingStudentRequest, savePendingStudentRequest } from "@/lib/student/pending-request"
+
+export type MetadataStatus = "idle" | "loading" | "ready" | "error"
 
 export type StudentWorkspaceError = {
   message: string
@@ -48,6 +52,7 @@ export type StudentWorkspaceController = {
   courses: StudentCourse[]
   activeCourse: StudentCourse | null
   conversation: StudentConversation | null
+  conversationHistory: StudentConversation[]
   messages: StudentChatMessage[]
   citationsByMessage: Record<string, StudentCitation[]>
   selectedCitation: StudentCitation | null
@@ -57,8 +62,13 @@ export type StudentWorkspaceController = {
   isLoadingConversation: boolean
   isSubmitting: boolean
   outreachMessages: StudentProactiveMessageView[]
+  outreachReply: StudentProactiveMessageView | null
   autonomousGoals: AutonomousGoalV1[]
   learnerEvidence: StudentLearnerEvidence | null
+  evidenceStatus: MetadataStatus
+  citationsStatus: MetadataStatus
+  retryEvidence: () => Promise<void>
+  retryCitations: () => Promise<void>
   pendingClarification: ClarificationRequestV1 | null
   inAppOutreachEnabled: boolean
   outreachSnoozedUntil: string | null
@@ -69,6 +79,7 @@ export type StudentWorkspaceController = {
   setDraft: (value: string) => void
   reload: () => Promise<void>
   selectCourse: (courseId: string) => Promise<void>
+  selectConversation: (conversationId: string) => Promise<void>
   startNewConversation: () => Promise<void>
   startCurrentRelease: () => Promise<void>
   sendMessage: () => Promise<void>
@@ -79,6 +90,7 @@ export type StudentWorkspaceController = {
   markOutreachRead: (messageId: string) => Promise<void>
   dismissOutreach: (messageId: string) => Promise<void>
   replyToOutreach: (messageId: string) => void
+  cancelOutreachReply: () => void
   selectCitation: (messageId: string, citationId: string) => void
 }
 
@@ -96,6 +108,7 @@ export function useStudentWorkspace(
   const [conversation, setConversation] =
     useState<StudentConversation | null>(null)
   const [messages, setMessages] = useState<StudentChatMessage[]>([])
+  const [conversationHistory, setConversationHistory] = useState<StudentConversation[]>([])
   const [citationsByMessage, setCitationsByMessage] = useState<
     Record<string, StudentCitation[]>
   >({})
@@ -109,6 +122,7 @@ export function useStudentWorkspace(
   const [outreachMessages, setOutreachMessages] = useState<
     StudentProactiveMessageView[]
   >([])
+  const [outreachReply, setOutreachReply] = useState<StudentProactiveMessageView | null>(null)
   const [autonomousGoals, setAutonomousGoals] = useState<AutonomousGoalV1[]>([])
   const [learnerEvidence, setLearnerEvidence] =
     useState<StudentLearnerEvidence | null>(null)
@@ -120,6 +134,12 @@ export function useStudentWorkspace(
   const [isLoadingOutreach, setIsLoadingOutreach] = useState(false)
   const [isUpdatingOutreach, setIsUpdatingOutreach] = useState(false)
   const [outreachError, setOutreachError] = useState<string | null>(null)
+  const [evidenceStatus, setEvidenceStatus] = useState<MetadataStatus>("idle")
+  const [citationsStatus, setCitationsStatus] = useState<MetadataStatus>("idle")
+  const evidenceReadRef = useRef(0)
+  const citationReadRef = useRef(0)
+  const citationSelectionRef = useRef(0)
+  const submitLockRef = useRef(false)
   const startedRef = useRef(false)
   const operationRef = useRef(0)
   const pendingRequestRef = useRef<PendingRequest | null>(null)
@@ -151,10 +171,63 @@ export function useStudentWorkspace(
     [accountId],
   )
 
+  const readEvidence = useCallback(async (conversationId: string, scope: number) => {
+    const read = ++evidenceReadRef.current
+    setEvidenceStatus("loading")
+    try {
+      const evidence = await getStudentLearnerEvidence(conversationId, accountId)
+      if (scope !== operationRef.current || read !== evidenceReadRef.current) return
+      setLearnerEvidence(evidence)
+      setEvidenceStatus("ready")
+    } catch {
+      if (scope === operationRef.current && read === evidenceReadRef.current) setEvidenceStatus("error")
+    }
+  }, [accountId])
+
+  const readCitations = useCallback(async (history: StudentChatMessage[], scope: number) => {
+    const read = ++citationReadRef.current
+    const tutors = history.filter(message => message.role === "tutor")
+    setCitationsStatus("loading")
+    let failed = false
+    const selection = citationSelectionRef.current
+    const loaded: Record<string, StudentCitation[]> = {}
+    let next = 0
+    // Optional history reads must leave browser connections for chat and sign-out.
+    const loadNext = async () => {
+      while (next < tutors.length && scope === operationRef.current && read === citationReadRef.current) {
+        const message = tutors[next++]
+        try {
+          const citations = await listStudentMessageCitations(message.id, accountId)
+          if (scope !== operationRef.current || read !== citationReadRef.current) return
+          loaded[message.id] = citations
+          setCitationsByMessage(current => ({ ...current, [message.id]: current[message.id] ?? citations }))
+        } catch {
+          failed = true
+        }
+      }
+    }
+    await Promise.all(Array.from({ length: Math.min(2, tutors.length) }, loadNext))
+    if (scope === operationRef.current && read === citationReadRef.current) {
+      setCitationsStatus(failed ? "error" : "ready")
+      if (selection === citationSelectionRef.current) {
+        const latest = [...tutors].reverse().flatMap(message => loaded[message.id] ?? [])[0]
+        setSelectedCitation(current => current ?? latest ?? null)
+      }
+    }
+  }, [accountId])
+
+  const retryEvidence = useCallback(async () => {
+    if (conversation) await readEvidence(conversation.id, operationRef.current)
+  }, [conversation, readEvidence])
+  const retryCitations = useCallback(async () => {
+    if (conversation) await readCitations(messages, operationRef.current)
+  }, [conversation, messages, readCitations])
+
   const loadConversation = useCallback(
-    async (course: StudentCourse, conversationId?: string) => {
+    async (course: StudentCourse, conversationId?: string, forceNew = false) => {
       const operation = ++operationRef.current
       if (outreachCourseRef.current !== course.course_id) {
+        setConversationHistory([])
         outreachCourseRef.current = course.course_id
         ++outreachScopeRef.current
         ++outreachOperationRef.current
@@ -164,6 +237,10 @@ export function useStudentWorkspace(
         setOutreachError(null)
         setIsUpdatingOutreach(false)
       }
+      ++evidenceReadRef.current
+      ++citationReadRef.current
+      setEvidenceStatus("idle")
+      setCitationsStatus("idle")
       setActiveCourse(course)
       setConversation(null)
       setMessages([])
@@ -175,10 +252,29 @@ export function useStudentWorkspace(
       setIsLoadingConversation(true)
       pendingRequestRef.current = null
       outreachReplyRef.current = null
+      setOutreachReply(null)
       setDraft("")
 
-      let activeConversationId = conversationId
-      if (activeConversationId) {
+      let resumableIds: string[] = []
+      if (!forceNew) {
+        try {
+          const history = await listStudentConversations(course.course_id, accountId)
+          if (operation !== operationRef.current) return
+          setConversationHistory(history.filter((item) => isConversationForCurrentRelease(item, course)))
+          resumableIds = history.filter((item) =>
+            isConversationForCurrentRelease(item, course),
+          ).map((item) => item.id)
+          if (conversationId && resumableIds.includes(conversationId)) {
+            resumableIds = [conversationId, ...resumableIds.filter((id) => id !== conversationId)]
+          }
+        } catch (caught) {
+          if (operation !== operationRef.current) return
+          setError(toWorkspaceError(caught, "workspace"))
+          setIsLoadingConversation(false)
+          return
+        }
+      }
+      for (const activeConversationId of resumableIds) {
         try {
           const view = await getStudentConversation(
             activeConversationId,
@@ -189,37 +285,27 @@ export function useStudentWorkspace(
             saveIndex(
               forgetStudentConversation(indexRef.current, course.course_id),
             )
-            activeConversationId = undefined
+            continue
           } else {
-            const tutorMessages = view.messages.filter(
-              (message) => message.role === "tutor",
-            )
-            const [citationLists, nextLearnerEvidence] = await Promise.all([
-              Promise.all(
-                tutorMessages.map((message) =>
-                  listStudentMessageCitations(message.id, accountId),
-                ),
-              ),
-              getStudentLearnerEvidence(view.conversation.id, accountId),
-            ])
-            if (operation !== operationRef.current) return
-
-            const nextCitations = Object.fromEntries(
-              tutorMessages.map((message, index) => [
-                message.id,
-                citationLists[index] ?? [],
-              ]),
-            )
-            const latestCitation = [...citationLists]
-              .reverse()
-              .find((citations) => citations.length > 0)?.[0]
             setConversation(view.conversation)
+            saveIndex(rememberStudentConversation(indexRef.current, course.course_id, view.conversation.id))
             setMessages(view.messages)
-            setCitationsByMessage(nextCitations)
-            setSelectedCitation(latestCitation ?? null)
-            setLearnerEvidence(nextLearnerEvidence)
+            const interrupted = readPendingStudentRequest(accountId, view.conversation.id)
+            if (interrupted) {
+              const sent = view.messages.find(message => message.role === "student" && message.client_request_id === interrupted.requestId)
+              const completed = sent && view.messages.some(message => message.role === "tutor" && message.response_to_message_id === sent.id)
+              if (completed) {
+                savePendingStudentRequest(accountId, view.conversation.id, null)
+              } else {
+                pendingRequestRef.current = interrupted
+                setDraft(interrupted.content)
+                setError({ scope: "message", code: "interrupted_send", message: "The previous send was interrupted. It may still finish. Try again recovers that same send without starting a duplicate." })
+              }
+            }
             setPendingClarification(view.pending_clarification ?? null)
             setIsLoadingConversation(false)
+            void readEvidence(view.conversation.id, operation)
+            void readCitations(view.messages, operation)
             return
           }
         } catch (caught) {
@@ -234,7 +320,6 @@ export function useStudentWorkspace(
             return
           }
           saveIndex(forgetStudentConversation(indexRef.current, course.course_id))
-          activeConversationId = undefined
         }
       }
 
@@ -249,6 +334,7 @@ export function useStudentWorkspace(
           ),
         )
         setConversation(created)
+        setConversationHistory((current) => [created, ...current.filter((item) => item.id !== created.id && isConversationForCurrentRelease(item, course))])
         setLearnerEvidence(null)
         setPendingClarification(null)
         setIsLoadingConversation(false)
@@ -258,7 +344,7 @@ export function useStudentWorkspace(
         setIsLoadingConversation(false)
       }
     },
-    [accountId, saveIndex],
+    [accountId, saveIndex, readEvidence, readCitations],
   )
 
   const reload = useCallback(async () => {
@@ -279,10 +365,12 @@ export function useStudentWorkspace(
         setPendingClarification(null)
         pendingRequestRef.current = null
         outreachReplyRef.current = null
+        setOutreachReply(null)
         setDraft("")
         setIsLoadingConversation(false)
         setActiveCourse(null)
         setConversation(null)
+        setConversationHistory([])
         setMessages([])
         setCitationsByMessage({})
         setSelectedCitation(null)
@@ -309,6 +397,13 @@ export function useStudentWorkspace(
     if (startedRef.current) return
     startedRef.current = true
     void reload()
+    const started = startedRef, operations = operationRef, evidenceReads = evidenceReadRef, citationReads = citationReadRef
+    return () => {
+      started.current = false
+      ++operations.current
+      ++evidenceReads.current
+      ++citationReads.current
+    }
   }, [reload])
 
   const loadOutreach = useCallback(
@@ -379,10 +474,16 @@ export function useStudentWorkspace(
     ],
   )
 
+  const selectConversation = useCallback(async (conversationId: string) => {
+    if (!activeCourse || isSubmitting || isLoadingConversation) return
+    if (!conversationHistory.some((item) => item.id === conversationId && isConversationForCurrentRelease(item, activeCourse))) return
+    await loadConversation(activeCourse, conversationId)
+  }, [activeCourse, conversationHistory, isSubmitting, isLoadingConversation, loadConversation])
+
   const startNewConversation = useCallback(async () => {
     if (!activeCourse || isSubmitting) return
     saveIndex(forgetStudentConversation(indexRef.current, activeCourse.course_id))
-    await loadConversation(activeCourse)
+    await loadConversation(activeCourse, undefined, true)
   }, [activeCourse, isSubmitting, loadConversation, saveIndex])
 
   const startCurrentRelease = useCallback(async () => {
@@ -425,7 +526,7 @@ export function useStudentWorkspace(
 
   const sendContent = useCallback(async (rawContent: string) => {
     const content = rawContent.trim()
-    if (!content || !conversation || isSubmitting) return
+    if (!content || !conversation || isSubmitting || submitLockRef.current) return
 
     const pending = pendingRequestRef.current
     const request =
@@ -439,7 +540,9 @@ export function useStudentWorkspace(
               : {}),
           }
     pendingRequestRef.current = request
+    savePendingStudentRequest(accountId, conversation.id, request)
     const operation = operationRef.current
+    submitLockRef.current = true
     setIsSubmitting(true)
     setError(null)
 
@@ -459,27 +562,27 @@ export function useStudentWorkspace(
         ...current,
         [turn.tutor_message.id]: turn.citations,
       }))
+      ++citationSelectionRef.current
       setSelectedCitation(turn.citations[0] ?? null)
       setPendingClarification(turn.pending_clarification ?? null)
-      try {
-        const evidence = await getStudentLearnerEvidence(conversation.id, accountId)
-        if (operation !== operationRef.current) return
-        setLearnerEvidence(evidence)
-      } catch {
-        // The completed tutoring turn remains authoritative if this optional
-        // evidence summary is temporarily unavailable.
-      }
-      if (operation !== operationRef.current) return
       setDraft("")
       outreachReplyRef.current = null
+      setOutreachReply(null)
       pendingRequestRef.current = null
+      savePendingStudentRequest(accountId, conversation.id, null)
+      submitLockRef.current = false
+      setIsSubmitting(false)
+      void readEvidence(conversation.id, operation)
     } catch (caught) {
       if (operation !== operationRef.current) return
       setError(toWorkspaceError(caught, "message"))
     } finally {
-      setIsSubmitting(false)
+      if (operation === operationRef.current) {
+        submitLockRef.current = false
+        setIsSubmitting(false)
+      }
     }
-  }, [accountId, conversation, isSubmitting])
+  }, [accountId, conversation, isSubmitting, readEvidence])
 
   const sendMessage = useCallback(
     async () => sendContent(draft),
@@ -499,7 +602,10 @@ export function useStudentWorkspace(
       const citation = citationsByMessage[messageId]?.find(
         (entry) => entry.id === citationId,
       )
-      if (citation) setSelectedCitation(citation)
+      if (citation) {
+        ++citationSelectionRef.current
+        setSelectedCitation(citation)
+      }
     },
     [citationsByMessage],
   )
@@ -612,16 +718,38 @@ export function useStudentWorkspace(
   )
 
   const replyToOutreach = useCallback((messageId: string) => {
+    if (isSubmitting || !conversation || isLoadingConversation) return
+    const selected = outreachMessages.find((item) => item.message.id === messageId)
+    if (!selected) return
     outreachReplyRef.current = messageId
+    setOutreachReply(selected)
     pendingRequestRef.current = null
-    setDraft("My response to this check-in: ")
-  }, [])
+    savePendingStudentRequest(accountId, conversation.id, null)
+  }, [accountId, conversation, isLoadingConversation, isSubmitting, outreachMessages])
+
+  const cancelOutreachReply = useCallback(() => {
+    if (isSubmitting) return
+    outreachReplyRef.current = null
+    setOutreachReply(null)
+    pendingRequestRef.current = null
+    if (conversation) savePendingStudentRequest(accountId, conversation.id, null)
+  }, [accountId, conversation, isSubmitting])
+
+  useEffect(() => {
+    const replyId = pendingRequestRef.current?.respondingToOutreachMessageId
+    const reply = outreachMessages.find(item => item.message.id === replyId)
+    if (reply && !outreachReplyRef.current) {
+      outreachReplyRef.current = reply.message.id
+      setOutreachReply(reply)
+    }
+  }, [conversation, outreachMessages])
 
   return {
     accountId,
     courses,
     activeCourse,
     conversation,
+    conversationHistory,
     messages,
     citationsByMessage,
     selectedCitation,
@@ -631,8 +759,13 @@ export function useStudentWorkspace(
     isLoadingConversation,
     isSubmitting,
     outreachMessages,
+    outreachReply,
     autonomousGoals,
     learnerEvidence,
+    evidenceStatus,
+    citationsStatus,
+    retryEvidence,
+    retryCitations,
     pendingClarification,
     inAppOutreachEnabled:
       outreachPreferences.find((item) => item.channel === "in-app")?.enabled ??
@@ -650,6 +783,7 @@ export function useStudentWorkspace(
     setDraft,
     reload,
     selectCourse,
+    selectConversation,
     startNewConversation,
     startCurrentRelease,
     sendMessage,
@@ -660,6 +794,7 @@ export function useStudentWorkspace(
     markOutreachRead,
     dismissOutreach,
     replyToOutreach,
+    cancelOutreachReply,
     selectCitation,
   }
 }

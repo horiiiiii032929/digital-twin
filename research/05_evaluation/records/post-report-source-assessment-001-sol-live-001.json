@@ -1,0 +1,1643 @@
+{
+  "schema_version": 1,
+  "run_id": "post-report-source-assessment-001-sol-live-001",
+  "date": "2026-09-08",
+  "component": "learner-attempt-assessment",
+  "status": "completed-failed-target-support-gate",
+  "decision": "refine-no-promotion",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "working_tree_dirty": true,
+  "dataset": {
+    "id": "post-report-source-assessment-v1",
+    "split": "synthetic-development-new-conditions",
+    "n": 32,
+    "sources": 4,
+    "permissions": "Author-created synthetic protocols approved for local and external evaluation",
+    "sample_size_rationale": "Six attempt forms on four concepts plus eight boundary cases; small diagnostic coverage, not general qualification",
+    "gold_validation": "assistant-authored; independent human validation pending"
+  },
+  "plan": "research/04_experiments/post-report-source-assessment-001.md",
+  "configuration": {
+    "assessor": "source-bound-model-assessment-v1",
+    "literal": "source-bound-literal-v1",
+    "maximum_calls": 32,
+    "maximum_reservation_usd": 6,
+    "model": "gpt-5.6-sol",
+    "output_cap": 3000,
+    "per_call_reservation_usd": 0.16,
+    "reasoning_effort": "medium",
+    "repetitions": 1,
+    "seed": null
+  },
+  "metrics": {
+    "literal": {
+      "accuracy": 0.75,
+      "accuracy_wilson_95": [
+        0.5789344100575552,
+        0.8674759908149096
+      ],
+      "assessed_accuracy": 1.0,
+      "assessed_n": 8,
+      "boundary_assessments": 0,
+      "confusion": {
+        "correct": {
+          "correct": 4,
+          "incorrect": 0,
+          "not-assessed": 4,
+          "partial": 0
+        },
+        "incorrect": {
+          "correct": 0,
+          "incorrect": 0,
+          "not-assessed": 4,
+          "partial": 0
+        },
+        "not-assessed": {
+          "correct": 0,
+          "incorrect": 0,
+          "not-assessed": 16,
+          "partial": 0
+        },
+        "partial": {
+          "correct": 0,
+          "incorrect": 0,
+          "not-assessed": 0,
+          "partial": 4
+        }
+      },
+      "correct_precision": 1.0,
+      "correct_precision_wilson_95": [
+        0.5101091635454027,
+        1.0
+      ],
+      "correct_predictions": 4,
+      "coverage": 0.25,
+      "false_correct": 0,
+      "macro_f1": 0.6166666666666667,
+      "n": 32
+    },
+    "model": {
+      "accuracy": 0.96875,
+      "accuracy_wilson_95": [
+        0.8425573617998744,
+        0.9944621398359969
+      ],
+      "assessed_accuracy": 0.9411764705882353,
+      "assessed_n": 17,
+      "boundary_assessments": 1,
+      "confusion": {
+        "correct": {
+          "correct": 8,
+          "incorrect": 0,
+          "not-assessed": 0,
+          "partial": 0
+        },
+        "incorrect": {
+          "correct": 0,
+          "incorrect": 4,
+          "not-assessed": 0,
+          "partial": 0
+        },
+        "not-assessed": {
+          "correct": 0,
+          "incorrect": 1,
+          "not-assessed": 15,
+          "partial": 0
+        },
+        "partial": {
+          "correct": 0,
+          "incorrect": 0,
+          "not-assessed": 0,
+          "partial": 4
+        }
+      },
+      "correct_precision": 1.0,
+      "correct_precision_wilson_95": [
+        0.6755924351161198,
+        1.0
+      ],
+      "correct_predictions": 8,
+      "coverage": 0.53125,
+      "false_correct": 0,
+      "macro_f1": 0.96415770609319,
+      "n": 32
+    }
+  },
+  "slices": {
+    "ambiguous-concepts": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "contradiction": {
+      "literal": {
+        "accuracy": 0.0,
+        "accuracy_wilson_95": [
+          0.0,
+          0.4898908364545973
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.0,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 4,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "foreign-course": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "foreign-release": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "instruction-injection": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "literal": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 4,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": 1.0,
+        "correct_precision_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "correct_predictions": 4,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 4,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": 1.0,
+        "correct_precision_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "correct_predictions": 4,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "missing-range": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "paraphrase": {
+      "literal": {
+        "accuracy": 0.0,
+        "accuracy_wilson_95": [
+          0.0,
+          0.4898908364545973
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.0,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 4,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": 1.0,
+        "correct_precision_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "correct_predictions": 4,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "partial": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 4
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": 1.0,
+        "assessed_n": 4,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 4
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "permission-denied": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "question": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "superseded-source": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      }
+    },
+    "unsupported-addition": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      },
+      "model": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.5101091635454027,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 4,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 4
+      }
+    },
+    "unsupported-target": {
+      "literal": {
+        "accuracy": 1.0,
+        "accuracy_wilson_95": [
+          0.20654931437723745,
+          1.0
+        ],
+        "assessed_accuracy": null,
+        "assessed_n": 0,
+        "boundary_assessments": 0,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 1,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 0.0,
+        "false_correct": 0,
+        "macro_f1": 0.25,
+        "n": 1
+      },
+      "model": {
+        "accuracy": 0.0,
+        "accuracy_wilson_95": [
+          0.0,
+          0.7934506856227626
+        ],
+        "assessed_accuracy": 0.0,
+        "assessed_n": 1,
+        "boundary_assessments": 1,
+        "confusion": {
+          "correct": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "not-assessed": {
+            "correct": 0,
+            "incorrect": 1,
+            "not-assessed": 0,
+            "partial": 0
+          },
+          "partial": {
+            "correct": 0,
+            "incorrect": 0,
+            "not-assessed": 0,
+            "partial": 0
+          }
+        },
+        "correct_precision": null,
+        "correct_precision_wilson_95": null,
+        "correct_predictions": 0,
+        "coverage": 1.0,
+        "false_correct": 0,
+        "macro_f1": 0.0,
+        "n": 1
+      }
+    }
+  },
+  "operations": {
+    "completed_cases": 32,
+    "planned_cases": 32,
+    "provider_calls": 26,
+    "unknown_cost_calls": 0,
+    "reported_cost_usd": 0.095576,
+    "input_tokens": 12459,
+    "output_tokens": 2287,
+    "elapsed_seconds": 68.72993566701189,
+    "process_peak_rss_bytes": 302284800,
+    "source_files_unchanged": true
+  },
+  "source_hashes": {
+    "research/04_experiments/post-report-source-assessment-001.md": "a730aa36cfad0c991872c80b028279e5e418ce3dc16f63a540de10e5e8312c6f",
+    "research/05_evaluation/datasets/post-report-source-assessment-v1.json": "09afe0c173ce051b122e270c1b119f6c039f5c2adea9a68eba3783e751e3b9d5",
+    "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json": "7a2465951fecb0c1ad20cc9daad14d92499f7838ba13c50dddd6acc2f8a8aea3",
+    "scripts/final_profile_longitudinal_runtime.py": "15afd368c1bdf1577248c832bb0afe711ec0831e05ec2de78adf725e955dab52",
+    "scripts/governed_full_autonomy_v2_1_hidden_state_runtime.py": "b5fe89fb86208f36099d16d07231ea2bcf1aeea1c8e772393430f5fc94f65e75",
+    "scripts/run_final_profile_longitudinal.py": "e3986e4bd370d7e8d9d70228105be2db38f86663932aea4d130c46d808c346d6",
+    "scripts/run_operational_dialogue_development.py": "77b09dc3318b759ba71e95894b16ddd779eb8171271e929b00d4f7c62151e336",
+    "scripts/run_post_report_assessment.py": "fae57c67c4c2cf7da67bf4d4329a2bdb357c53258a4ffc5bfa2dbfcab9befa38",
+    "scripts/teaching_profile_responsiveness_packet.py": "b5992989dcc3e309297bc3af91202a29e38d98874f7d08cf3b7d1fe64a2b5fe8",
+    "services/__init__.py": "60303d6563334f741c1b315be7b58d455b92e2f9abb92e33784bef8b663c786c",
+    "services/api/__init__.py": "5a1c01a0d8d9ede8e902a422cdac400b2cbbdf104c7c17e7b55e15a7d1279f13",
+    "services/api/app/__init__.py": "20c25d2aa75f16b91090a4d5d350c73d3614787858f5ba8b04795b261320e6a4",
+    "services/api/app/config.py": "c7f0ec7eb67ee769e08dbe8a1317d42b606d2629812b41a85b06641e56d1236a",
+    "services/api/app/dependencies.py": "91d0958eeb012fa889285421a5e7a63a5fb358f73190b624faf70c48f27ea5a3",
+    "services/api/app/experimental.py": "43f95b9eaaeb4a20f3b8c0751c66b7011733843525bfa8ad67141959d532f60c",
+    "services/api/app/factory.py": "7a6d580a0253e7a2a3ad17f3529222ad41532eda64177140e98b56fba5469bd8",
+    "services/api/app/generated_preview.py": "292ed7198203bfcb4551b523aa965372165f006ea1bd6dd49158c5162876c90b",
+    "services/api/app/main.py": "38aa5b4191674c21614d82959c66f61a6800f1f444b2475a3d71f3d1c705a3ce",
+    "services/api/app/middleware.py": "c99bd7622793b0b82d92c216688c52b3f4da1df69f9fedd12c324222c8381ad9",
+    "services/api/app/observability.py": "2b9fcc5ae7ddef067b6acfd3d82458e20a81b2b5e5fa72d0beb8e45f609425d0",
+    "services/api/app/post_report_configuration.py": "d8b5dfb13edf64e8e20f41e9b9e9ba5db1c7d0bc0efbe199068a570a990e2e22",
+    "services/api/app/routers/__init__.py": "9fa412dd25a04003d503a7df295fc6e37088ebb86b76af3ee9cac123ad9cde39",
+    "services/api/app/routers/auth.py": "ee4098962b061af29ecb5a1f344383fd4a3019591a0f490f236f8f4a369d5125",
+    "services/api/app/routers/onboarding.py": "b75e5619d099ed1939b3627c87273271126f6b725b9a3b1392a0a8bf4cc2d819",
+    "services/api/app/routers/operations.py": "5eb7160dcdd33b81c70814f0048214b5961d3c47f4e0636ab24cc3146beaa0fb",
+    "services/api/app/routers/publication.py": "9ded82ce1c1262db5da2d08280675123f8eee5c93d27acc20aeb3ddb2819a798",
+    "services/api/app/routers/student.py": "e4a584e3e7955fa0c79b6a066d2f0f24c94be6724ce043eb4795feccd71e5615",
+    "services/api/app/runtime_identity.py": "b3ccf846cacf22c664f11e99bd8c4fdb347543b2ff716aa511f1769b734c808f",
+    "services/api/app/schemas.py": "e0fc685f08f59bb152cd2f46a3f4e8506170766fa9335f1e09ec3831e23d49f8",
+    "services/api/app/store.py": "5aa4e86c3eba7fc57d7e7dfc50d8c51d5e59b1053a720278435625b5b993ca04",
+    "services/embeddings/__init__.py": "ce99f17d2858d4b9700a2cb805d73a1c31f54eb8b4292cdf3ad6ef064393f57f",
+    "services/embeddings/fastembed_client.py": "53d292d5d72db2e0613375f6cf1220375a3bcdec42244eb38d2370e54850ce41",
+    "services/embeddings/jina_client.py": "60ddaf5f6efb82563822927f6b186661f284c0bce3e6a2d053e67ac68a0be31a",
+    "services/embeddings/openai_client.py": "8c6a9d8fe8bd35fd6aa17263f519aef318400c43113edab67b6944342347edc5",
+    "services/embeddings/qwen3_client.py": "4286b9118f9811a2a6426bf97ce5f3c68e8646ac1f1a2af29ada7dd396f0c00e",
+    "services/ingestion/__init__.py": "22c76d5f8c2cc2463e6221df8c3b1ac33a8136b7c90a4a05ccf85e5f2cd3fb90",
+    "services/ingestion/jobs.py": "f13c98b630ea0ac08185d02250859295a00e15db46b2471de84278f4d93e15c6",
+    "services/llm/__init__.py": "fac9e68cec03e434aca1f0a3f2e2ead17aaf72304e2bcc429fe21bbb051e1fec",
+    "services/llm/budget.py": "b849edda44760e116a8a88cdc437ff3c38d2517a5c46aa9d8e82c2f9434066e3",
+    "services/llm/experimental_role_routing.py": "f8fed8278d0919710511f4985f4fc034e315008aac7b5848f3c9dad07a7bdbc5",
+    "services/llm/litellm_client.py": "5fe0e437a7507796cec2799b8aeb21086429b5ad6b5b78ddc2eed34746338ed5",
+    "services/llm/openai_responses_client.py": "ed089d68449fc9407ea2e78dad64c4ee3364e45166b5945a538e650ffc0b6877",
+    "services/operations/__init__.py": "80e94c0cd541d63c27ca7a179f40b1c1f4c4adfac325fb2b419db2345bde1158",
+    "services/operations/backup.py": "46ad7b3cdba45180d257268823a9790c4b4ea3eb3506b15d62350df6aa320326",
+    "services/operations/lifecycle.py": "32dd88b0a4d6f56bf8363b316a24c453913c8aa9cbc6eac05bb454fbcc3ffe36",
+    "services/persistence/__init__.py": "210d99f1ecc69c2bd645adf55b10e02495341eaabb9ba42f6e117fb82615ab8d",
+    "services/persistence/async_sqlite_coordination.py": "98284f0d46b70a03371c9ffa709d4f6a0c7b46cb088d9e0b380a59e14b09fd4b",
+    "services/persistence/ingestion_jobs.py": "41a63d21fe4647155d9e2f4c3a76e22cff94258cdd460da4098e29d8a89bd882",
+    "services/reranking/__init__.py": "8bdf1332b191d05138db47afe5b640b938095b0706eca032492d113ad6b90c50",
+    "services/reranking/jina_client.py": "89e98e0726806dc517f08758084c9a045fa42f009b8571db0456f43c5c367d6c",
+    "services/reranking/qwen3_client.py": "81253c6d0fff1941114d25c2188edbb05d63d8fa70f0c69bdfbca057172b2e7a",
+    "services/retrieval_provider.py": "7c6a428ecdd0610f8ff4a48b44c1f3886354bfb6701332871323f3f48e465a6c",
+    "services/storage/__init__.py": "48cdeaca9e560dff18cc889b941e44186fc3e42929ea935c8a1ec9da629510d3",
+    "services/storage/filesystem.py": "290c174b4151fdf01460638ab6fe5a287363f391c1f5b004d0db72a0c23a8bf4",
+    "src/digital_twin/__init__.py": "8f5c5218e5c93e299348235253860c8d20c2849527419591906aa7fc00ca6771",
+    "src/digital_twin/action_router.py": "3ade9b22d3fcede59bf3a545c017e27187b1adc1679f7f97ad50abf5c90f2a86",
+    "src/digital_twin/clock.py": "f0cc74428db9edac3fca954ac0f802a39d168fc075680cfce4e4654958779117",
+    "src/digital_twin/evaluation/__init__.py": "bf800441995b47ecab709b374da8d16962af89254bb8babcdd7437dbce755291",
+    "src/digital_twin/evaluation/architecture_evolution.py": "e98289a7c54dd063e59a993c36a733c862cc16e77aed24a37dbe2f2d8977fe8f",
+    "src/digital_twin/evaluation/autonomy_architecture_tournament.py": "b1e657a7ad53c84c58ebc33b390f02cd879128b6f8b4f9bea537d431d29bd2e0",
+    "src/digital_twin/evaluation/autonomy_contract.py": "db95ab6964da90171565d978c8a1d9febd8ec70593a32d0ee0aa8919d07ad4af",
+    "src/digital_twin/evaluation/autonomy_independent_scoring.py": "0460ce0e102360e4069cdbbbc0cd56a8c81ca72bf6249904caa3bd867bda18db",
+    "src/digital_twin/evaluation/autonomy_learner_driver.py": "3b8e3488e94143a98bfc81704ba93ac44c3942e6ccd1fb806bcb278957171e9d",
+    "src/digital_twin/evaluation/autonomy_learning_scoring.py": "5490742d50b5e0c94ab608adbac09984aabdbbf0740ea878118b18bcef020bc2",
+    "src/digital_twin/evaluation/autonomy_product_adapter.py": "fce31a8c3b4e74d125962a2c4c03a3f86e0a562c6a60b4657642ce98b06e6cc7",
+    "src/digital_twin/evaluation/autonomy_scoring.py": "b48a5e0ba0ef34d38c4fe3908e8c01791e6715cc4db03bd02d5e7d2bc7531739",
+    "src/digital_twin/evaluation/cascade_v2.py": "f8d68d0161aa9ff289e7f75709cdf691443868ad78d12bdc4ae3116cfcf09d03",
+    "src/digital_twin/evaluation/cross_engine_ledger.py": "ab6d033531be487b4686c5a98b7f2e64b1d9911f7758599f306ebb6238a44854",
+    "src/digital_twin/evaluation/cross_engine_program.py": "f7a2912619b1c27f2302172c9a6daa144618f87bcdf7503e7d21a269eff0bba3",
+    "src/digital_twin/evaluation/experimental_tutoring_candidate.py": "7c4cff2bf02cd95cd91e1737cfec0cace404263c3143634aca88c7784d46902f",
+    "src/digital_twin/evaluation/factual_qa_adapters.py": "cba742152d7d08b784e0d384d645ab3ab15b496d56ea9189e6355b37ee69d7d6",
+    "src/digital_twin/evaluation/factual_qa_contract.py": "30b5265a009a312d36829f8235c84b164dff33bb9e9614710d88639894784852",
+    "src/digital_twin/evaluation/factual_qa_dataset.py": "dad0d64bb6a5283caefa8e8095ba4837228f30ac324708308b320a3081e591ce",
+    "src/digital_twin/evaluation/factual_qa_execution.py": "47ff0bd5fec50322613ff0fee29cdfafb8c4b83c61dc0044b33dc096935dc72d",
+    "src/digital_twin/evaluation/factual_qa_reference_questions.py": "1d4b0c5b6a2d1342844849b658502d843ec1f76c01a32a6361b7dfd3e2eae4a2",
+    "src/digital_twin/evaluation/factual_qa_references.py": "bb84d28b4db51f524e9df8780190813fd5d9efe045e7260097fd8a49525363e8",
+    "src/digital_twin/evaluation/factual_qa_scoring.py": "3a93217998b1a4a9360455bb89ac73242d863e4510c6492530f0ae95d86518fd",
+    "src/digital_twin/evaluation/factual_qa_wording.py": "3a42ecc6363d8f6735184fb0e35316cd5b49ba97f2d6111dc7caa8011d81415c",
+    "src/digital_twin/evaluation/finite_product_evaluation.py": "1f83b6f7209eb5c06dd72544f56889236288b6084a31a6a07be73ba1c2b5f68c",
+    "src/digital_twin/evaluation/finite_program.py": "cfcca5ff78051fb93b6a0d93ba7e5f7d95c68da146b9c018f15ca9c7907e0336",
+    "src/digital_twin/evaluation/finite_program_dataset.py": "98d1dca22ff898c84be55e0cbfd6e5377550f994c11c90e72af43dfb94070fde",
+    "src/digital_twin/evaluation/finite_program_io.py": "d7ea3bbe59843b39a2ba3a4a132ba02b2588d99b5ebdfe30a7581244b64f7ba6",
+    "src/digital_twin/evaluation/finite_program_runner.py": "860ccfa2158568bf7cb72dc38a3dbc84d841e7fd867091e109b829ead46240c8",
+    "src/digital_twin/evaluation/finite_retrieval_evaluation.py": "a6ef7cfa0600f7bc6dc4f92634e753c12f9d96774a62093f794420ea4a22b1ab",
+    "src/digital_twin/evaluation/hidden_state_metrics.py": "5a84fdce55ec96cdf0580bee86ea42a19d08615b92363afc3116cdb00388aa97",
+    "src/digital_twin/evaluation/learner_evidence.py": "aa5f880815c2a051dcc036eb23e4855aec7cf9c4c5f30adad493a5f4e9b1a46e",
+    "src/digital_twin/evaluation/learner_simulator.py": "00614f1ed54820ae6ea8d8b1891692a8ba72b4f1f17b2f4b95f25ae66fb44967",
+    "src/digital_twin/evaluation/models.py": "1a5177d7f5ca855d2341690acb96423fd58670d5270bdc590c93f7db8e91aed2",
+    "src/digital_twin/evaluation/multimodal_benchmark.py": "dcb6d1e42f3b8d47389b0dd02e5a3eeebfd014cbfd3b5b52051d7696ea4a3c70",
+    "src/digital_twin/evaluation/multimodal_metrics.py": "939622917f0a88729c3be374f8b8d01c0cafe7e6d53b5dccea1c173445e07c6c",
+    "src/digital_twin/evaluation/multimodal_retrieval.py": "101a4ffcac2928a83311609978808c280cfd2479614f96e8bbb5476bb3a27cd9",
+    "src/digital_twin/evaluation/professor_fidelity_proxy.py": "b9e2f7d677f1178156abae0b656fc111121eb5a19e213a1790c35ec262b2751e",
+    "src/digital_twin/evaluation/provider_json.py": "11e85ff3591d458e2d86d5c793bbe1d8c751f532e422e321cf67aa9429281d13",
+    "src/digital_twin/evaluation/retrieval_materialization.py": "3a8d7dfcdea09e5c00ecf82caf0e4c0e6612a55af9347ccbd3487d76a9889c98",
+    "src/digital_twin/evaluation/retrieval_qualification.py": "6f47902717e441b7d6cb2dd0896e061ee42c01b2f398b94445aa7a810c9f4ccb",
+    "src/digital_twin/evaluation/retrieval_runner.py": "09f0c88455e9af740188cfaefc739828e10b53457a8d7653888fa9ed994e079d",
+    "src/digital_twin/evaluation/retrieval_runtime.py": "301f4d768b89482e92c41f3bb89b7de39fd28e4ce6ed38fd5510e61082d7e89c",
+    "src/digital_twin/evaluation/simulated_learner_v1.py": "d1da103aacd95aa9953a39a5afa0171c9718b397975a25d30af633e2e9528b9a",
+    "src/digital_twin/evaluation/simulated_learner_v2.py": "7cf0e4ea9d6f444d2b2aa6e1985a2c014f2723754dfd67c7f6562ae6e4fd2ee3",
+    "src/digital_twin/evaluation/source_aligned_wording.py": "5fc5d9eba9b1a3d1f993660188cb6433a510bed739531b8775ae12aafaaa5b49",
+    "src/digital_twin/evaluation/successor_simulation.py": "ed7f8969282bad95b0f9d99aff6004651b0916cf452a84f0b0c84b4aefb2f4a8",
+    "src/digital_twin/evaluation/visual_description.py": "60f08ea4e413825cfe3326ec5e8319941800480e004dbb85aeb55aada0408fed",
+    "src/digital_twin/generation/__init__.py": "24683e34866f9fca58362c50ff0bc4146a3566d02b22beb465c068b554ab8d75",
+    "src/digital_twin/generation/audited_instruction.py": "266c04b0ff713cab00a35df8e82282384c33403ab3bba8f6ae5560b6a6020a86",
+    "src/digital_twin/generation/bounded_revision.py": "ef9ec8cf644b86b868fdf67cd78499e4837d2cd1552333be8c9377196e0ca4d8",
+    "src/digital_twin/generation/citations.py": "629e9954e8884fde4662d0e31e21f55e60d846f14410f9c8d44fe4d5879c2977",
+    "src/digital_twin/generation/compact_instruction.py": "390158bc45ffdac899b6c3ca9b7e3e460c13581f513bc2a3898a062baaf4bac2",
+    "src/digital_twin/generation/conditional_revision.py": "203960fb408992ff63cb99a2a13b24a36ca001a31c948d2602dbbd0c4df4828d",
+    "src/digital_twin/generation/continuation.py": "3fc19f323b270d75d2b20d7e3d24538c72a3c82719937acb9df5fbe3abea4566",
+    "src/digital_twin/generation/contract_repair.py": "cdd3c20807c2f1f41937bf8a1d6ee5fa49853de01ed4498f4b51efe401c5e64a",
+    "src/digital_twin/generation/evaluation.py": "603cbcf5da0ddb69e2abbbe9838399c99d7f1ad062da4afb29fdddd7af142a33",
+    "src/digital_twin/generation/evidence_strength.py": "8205c4e2bba14c673ae6ecdaa992dd080d271b76418391998e192a9330804a34",
+    "src/digital_twin/generation/factual_revision.py": "44da492b7f7214885f90c8219984bff11b1b2c8ba2f712f367dad4d8f7581734",
+    "src/digital_twin/generation/final_response_audit.py": "acc1bff94a41251d559dd60ed6bfd68b4e1f7ea6264590fe4b11a2bd07f5e940",
+    "src/digital_twin/generation/generator.py": "3f83bffb5ce75a1519ceb8c43e153d65a36df28a9825c41c8943766bf2fba040",
+    "src/digital_twin/generation/global_support_revision.py": "136f2d65add8b4aa15f9554ec67dd73db79db48c89d338f085fa4798291ceeb9",
+    "src/digital_twin/generation/instructional.py": "12a06e2f9350d6a99f43fba0cff659bbdf88c614ff6f4fed4b8cbd1f1097d11f",
+    "src/digital_twin/generation/models.py": "bd00678a49a0d5cd4e8cbeec249354517b3ec436c6c08adee65f6f7e29d938bb",
+    "src/digital_twin/generation/policy.py": "be73d3b3c36f9ad96b9fdbdb0a8b13e68f9ae272a77dafc76935a74c73629b19",
+    "src/digital_twin/generation/profile_authority.py": "e58e151fabc253b6e3ba1d9d98dead35c927db52431769715dd78f781ffd408b",
+    "src/digital_twin/generation/prompt.py": "81f15e577b41a9316ccedb5613b7c70694c102756f260abfafcfe02f2ba7d571",
+    "src/digital_twin/generation/question_specific.py": "e4132180fd60feaedf7cae36a8861114391357bf2843be19a1526d05637c97a8",
+    "src/digital_twin/generation/request_coverage.py": "8845286e1b92d792212bee06a6d94ef89d5510ef74349cf1fb183ad9971d85a1",
+    "src/digital_twin/generation/typed_instruction.py": "d1a3f5ed6c1827ebfbfa19a2bb51d079287bc8795cd5cfa77d323897149d71c8",
+    "src/digital_twin/grounding/__init__.py": "be936237651336756cb53368543c1635958c9ec7ca1354c8de159cd97a17c683",
+    "src/digital_twin/grounding/ambiguity_safe_evidence.py": "2f5f4bc6831621c87b092178124a18ce9d6dfc52f9c288bd70619697de31d822",
+    "src/digital_twin/grounding/api_retrieval_index.py": "d04cf11be306d294f38ed9217672c8a1b0418dc6654959f58062394cca97889d",
+    "src/digital_twin/grounding/chunking.py": "1219c587b74c88dc2241e7c7aad9801b6b3e4aa83ab849aada72fa88d2f718c2",
+    "src/digital_twin/grounding/claim_validation.py": "6de100dd965b6fa5792b986367f9278ef6a0be2b1ece937cb685ff49470cd4a9",
+    "src/digital_twin/grounding/evidence_sufficiency.py": "e959cd2c998c61c69f6d6afb7e931f1db58cf87b094b86866ccf44c2d14d2ab3",
+    "src/digital_twin/grounding/evidence_verifiers.py": "4d93b42aaa89f646c72b64e331dda1f49379386d4146cd275a37f42dd4f40634",
+    "src/digital_twin/grounding/hierarchical_retrieval.py": "15488b215b82e4e5041d5f8aa099131156ec1e05e21a534070bf0a5ad9b3e227",
+    "src/digital_twin/grounding/ingestion.py": "f793a39b6b2d3f2e4ef1efd8d0e5307318ea8e8a72e14d1840971a31091f471e",
+    "src/digital_twin/grounding/models.py": "62cb58256a42dbc8bb3803cab191003d8e162034bec82d23f3789fdb040eaeb7",
+    "src/digital_twin/grounding/plan_observe_retrieval.py": "a3dff9c57769b33f3a412a6a295353a165280e2ffa7e19469157fba2b1b6b2ce",
+    "src/digital_twin/grounding/product_ingestion.py": "4d6e01a33a1d0be11d12e72371e4774662778205bc9925fcde96239e90bf02b4",
+    "src/digital_twin/grounding/protocols.py": "236d84eb117599b70645100f8b600e5338ce6d026c02113104e39fe35263c915",
+    "src/digital_twin/grounding/reference_uniqueness.py": "67032f74884233740fc1a367078d16319e0b02e8526b71cb5c229fb87187b109",
+    "src/digital_twin/grounding/region_retrieval.py": "2504ebe68a4cc5bd56080bba8caefeb223033eac3b43e3e498d1a61cfb3b2acc",
+    "src/digital_twin/grounding/reranking.py": "38632e2c29f96974e2da165d7b7b0b457c2187cefdc3a60ddd0143a3c6947899",
+    "src/digital_twin/grounding/retrieval.py": "d3bf06c47b5904e17b0b44890b2381e52f3dbbcbe1c451c3114126cb038c5af8",
+    "src/digital_twin/grounding/retrieval_evaluation.py": "68f9ee3e7ee13219750aa778fcb1f24f2ed64d6df2212a65a7681a4d01a03d9f",
+    "src/digital_twin/grounding/retrieval_factory.py": "7b033a9b558f05b8b509d62da9add6ca15a4e43829b12fc054ef67cef9c383ce",
+    "src/digital_twin/grounding/retrieval_index.py": "49e6e8b48e04da1911f37c6c952f9d0b637f43814b29742ea19946ab27dcf7c3",
+    "src/digital_twin/grounding/retrieval_runtime.py": "b085b85c329b5948be7a30d9ef414c030225c578848c904a8fc3319c304d0b82",
+    "src/digital_twin/grounding/semantic_evidence_atoms.py": "f42b8b430f2d36c660bc3ef4cb698b4aaff7601c8a1ea6bb9d16d93f8f01030c",
+    "src/digital_twin/grounding/semantic_target_resolution.py": "5207a03e43d431e2fb0c9c1096913c706c2710fa4bf23a115e9c75bd6645ed03",
+    "src/digital_twin/grounding/source_range_evidence.py": "09a2b046a4764a8a1fc24eb5d85c1377255c9e23f22cb5a82c48d984015c09fb",
+    "src/digital_twin/grounding/source_registration.py": "c20f6e2fc28a1194b29f673a63d42991c8d522e392b7a548a526a85bb0aa8036",
+    "src/digital_twin/grounding/target_evidence.py": "977b0d4fafe2d79d764914b23d8e0715eeee4f56ee58558e127bbcc5d6214040",
+    "src/digital_twin/grounding/visual_late_interaction.py": "a5e94dc76199cac6a0fa94de8bfa861b090e789a9379d1127549a4046f0dfd0a",
+    "src/digital_twin/grounding/visual_omni_runtime.py": "c261a3ea212a58d2045bd88e2c8dba0701ecde02a40d0b1dcdbc68e0b375cc3b",
+    "src/digital_twin/grounding/visual_runtime.py": "9b82da9a1f1047747ee1db97c91ad6241a89a2044c03d854e900810c600aeb52",
+    "src/digital_twin/identity/__init__.py": "cf3537be9ae0aaadaf9b6f0bca85cedcc62ae8770b4f126b8290e3b8b2218bed",
+    "src/digital_twin/identity/models.py": "dfe3f9249c8cdcb7ec9811860e8bd27bb4ddac7f090e976cc58a7c1b08fbf483",
+    "src/digital_twin/identity/repository.py": "a11ce03d72ad9f34f562fc69b9b67ff2863b58899e4f184793ed86d3e22871a5",
+    "src/digital_twin/identity/service.py": "6daacfbdc6032126d7d3282e0753f724001e6e3cd6f61264849459f5a79e7794",
+    "src/digital_twin/llm.py": "a189a0d36dc01118ac15374878e0d863d137c90ca873b0fb11eed32d3309b06f",
+    "src/digital_twin/model_policy.py": "734c0d28fa6131e34ff58ce70193a9a4e1d72e012c5db72a6eadf75c1425142c",
+    "src/digital_twin/onboarding/__init__.py": "28a6a6c6d930c16cad3ae57e2f9c6562dfe77ad2ffa3554d0d3486aa7614ce5c",
+    "src/digital_twin/onboarding/commands.py": "100f7c5376828d5d7a422dd0a2255d34b6f4eb0642b7a65ebf06074e26d1bb3f",
+    "src/digital_twin/onboarding/demo.py": "f502a0cd727a71e2b5d0c8f1633da832ea799e9472978e2a1a0480c4e9e0ffe2",
+    "src/digital_twin/onboarding/interview.py": "0bee30b8853140f028dfd8e92e175ee0f81688f23c0f81a2a457c76a7706faa0",
+    "src/digital_twin/onboarding/models.py": "5708b732cadc2b6199308d56a5baf6f70f01a1b01a65dac16a3268d6331af0c9",
+    "src/digital_twin/onboarding/policy.py": "d93f77fcb7dbb508576b23dc00e34f52f7776066be529df79445a36dfe701e34",
+    "src/digital_twin/onboarding/preview.py": "edc74d5dc3d3438839ab65237541b4fd4ebf07c9c7cd20d741349e08745589ff",
+    "src/digital_twin/onboarding/release.py": "8d7bc414ab7ba36443f49a97fa454b660cc7c15f42cfd4df1ff878bc54564513",
+    "src/digital_twin/onboarding/repository.py": "8404b038ef6a76c74e74147c31afd7a5dae215dc7619066e9d56f1763d2acc3a",
+    "src/digital_twin/onboarding/revisions.py": "b3093e73e3203cb81107bc196d5ef8c9727651bc4e09249ba13cec859573e481",
+    "src/digital_twin/onboarding/service.py": "78768c0a034b027d88d6c104141f529dc446d22e352bbc5fa91d444474b29382",
+    "src/digital_twin/onboarding_workflow.py": "4f11adafbad448cdab2927b3cf7b0368e24f1ca17402d8adcc224e334b1b40ef",
+    "src/digital_twin/operations/__init__.py": "dd1f6559f407f784b58f80139b783797fd9d4ca57f067e8b66c5d1cc654ab988",
+    "src/digital_twin/operations/models.py": "4885484976677d4f0a17c1347549e8d34a082c9b0056b2e431f1a30a70d8c4a7",
+    "src/digital_twin/operations/protocols.py": "116499eb1c135b6d6e8cd3dcb62103d1f37718cf86200d0edfab6f697d044288",
+    "src/digital_twin/repository_freeze.py": "5e3861e75cb744a9d3d8396e8c3621f00ffdefd70e8bc4ed2b6a3d65975f10b8",
+    "src/digital_twin/student/__init__.py": "12905f9cc0ade6f5b87ed1953557553fccd409cb02a7da9acb66dbb20ff29d0f",
+    "src/digital_twin/student/assessed_planning_input.py": "d5a9135152cf9c6515b693abbde94f52c669acf1e2a0175093d2cafb30baea1c",
+    "src/digital_twin/student/autonomy_control.py": "051f85fb409a1c579e95ecbadcedd46758884dc9447fb5c607dbd0c6050b8599",
+    "src/digital_twin/student/autonomy_eligibility.py": "c492862968e6a5cf3b5643480fc6b403ff4ebf980d032290dbc078d43e0b946a",
+    "src/digital_twin/student/autonomy_models.py": "78f1113eeb95494960a0f67b9b8b923c322d615080756a938fd7fcb7766d6ca9",
+    "src/digital_twin/student/autonomy_runtime.py": "a71fadf1348955ea0195c2e2cf1d08364bf5cbf9874eb84b477088b51b497055",
+    "src/digital_twin/student/autonomy_service.py": "6ce11b510a2abe51b742065406ed7b8becde815cc36fd072b72e71ec08a6b228",
+    "src/digital_twin/student/clarification.py": "79033c91a6f0fa0bb1bf538a6499960f646244a970bd1866d3a34d6f04da5037",
+    "src/digital_twin/student/conversation_retrieval.py": "1886dda36b966d129419c96d29dfd926bf60ed81980821e9b0fbc3f9daabc7cd",
+    "src/digital_twin/student/fixtures.py": "06c1be5a5efa3576ab9422b3ab03d65ff634e35b7a5c6a80b92da5aa41ac9fc5",
+    "src/digital_twin/student/generated_preview.py": "c79e48e1f8e60ee4917430d78de5b1acd912e4eabae7beb7e00f210b9a25b702",
+    "src/digital_twin/student/intervention_policies.py": "39f0f2cc694e68df18bf895e29f36b957a35e31971ff0a2d6279089bd1b27617",
+    "src/digital_twin/student/learner_belief.py": "332e20eb602db11ffa2aa99980e72827b8e5b8c10f1be7a9e9cdb820abbbf12f",
+    "src/digital_twin/student/learner_estimators.py": "c1f13dd23bd79af3dab52d8d1bc387e724d14b17a4d7c1b20f91f16c1419ff4b",
+    "src/digital_twin/student/learning_gap.py": "ed87296ccac3c9008517bc86bec0b4f1c387da1a970c0058619535105ecca732",
+    "src/digital_twin/student/migrations.py": "ba1bb760d0330c32f74ffe346dfecb619ccef54e34ef614cd20b79bf05cf26b4",
+    "src/digital_twin/student/model_assessment.py": "32727fc1513b5c6ed39245940cbead6bbd622b30b4a4d6bdc9af36ca4f1bd90a",
+    "src/digital_twin/student/models.py": "8d857906e8658a061ceacc3eef373e189e1989c149cb2d0abe56cef09026ec5f",
+    "src/digital_twin/student/planning_architectures.py": "8a3f2e3849c802de3e2c80d19a9e28dbb268a2d7cc95f0bd71743339f94afe55",
+    "src/digital_twin/student/post_report_learning.py": "6beb770f74fe23ee2a015282fa4846d2a0c3083be8cc69fb254a9750321548b8",
+    "src/digital_twin/student/proactive.py": "da60e9a490d1ef75aedad6458eca11a9d1b08cfd152a564fa8a49597a5e44e2b",
+    "src/digital_twin/student/publication.py": "866bd77305448528830fbfd2d5e3b598dae1cf812f75b6cd1e8ab5d41eb548a6",
+    "src/digital_twin/student/repository.py": "5a560d4e710950f856853e4f99ac48401826ae81a24b425bb58c9c8db5f9a89f",
+    "src/digital_twin/student/service.py": "3e6ec95d153c645d8233a051c725e54068fdeff6ed31a8892604250ef7ed1959",
+    "src/digital_twin/student/source_assessment.py": "de8c8b292f5f2dbde37d1a4cf228ef09c811396d971d0f3984e66b0a6d5f584b",
+    "src/digital_twin/student/teaching_profile.py": "3b9ca02e3dfb0465c8bc827962005238682b3af7a8e00afc9c39fd6571c28bfb",
+    "src/digital_twin/student/teaching_profile_context.py": "6d151a4bbb1d5ed00dbf6417f7f727a1ea62e7a1f495c22b4630429563943aa4",
+    "src/digital_twin/student/tutoring_graph.py": "931cc1ab72e2d6e2176eb0dda598ac3b20a107c3b239cacdcdad90b3130b908f",
+    "src/digital_twin/tutor_policy.py": "0934e11ec009fae82994c5808d64544f91492dc5f1b9f0cbc5b04891f6b148d2",
+    "tests/test_post_report_assessment_runner.py": "dd26f505747b4035410958c7b292a66fe8bcee896e15e2dd97f4fd1023604efa"
+  },
+  "artifact_sha256": {
+    "manifest.json": "bc8094a85fdb52bb7d005685d8ddf75ceb189dd1905c8d9ff4c3adeda098a88e",
+    "packet.json": "04f62e361ce61c25d2da7fb8b61784ceaba66e712514368f9f8f984b5dce87b6",
+    "summary.json": "85ad28a993f4f8d3e3afee1a3363bde2114e029d69190a4c56449816461ad14e",
+    "cases.jsonl": "e04f3734a3028c665b855f52f0cf464c2da8c98155f32a974213b19b431f28a6",
+    "source-snapshot.zip": "47335ca58467835502e193955a588db5c99f102e333b38857fbfabc8d5955c17"
+  },
+  "hard_gates": {
+    "false_correct_zero": true,
+    "unfounded_target_judgments_zero": false,
+    "scope_permission_cases_no_provider": true,
+    "all_cases_recorded": true,
+    "source_unchanged": true,
+    "known_costs": true
+  },
+  "representative_failures": [
+    {
+      "boundary": true,
+      "elapsed_ms": 3230.481958016753,
+      "expected": "not-assessed",
+      "id": "boundary-unsupported-target",
+      "kind": "unsupported-target",
+      "literal": {
+        "confidence": 0,
+        "evidence_keys": [],
+        "outcome": "not-assessed",
+        "reason": "assessment-target-not-literally-supported"
+      },
+      "model": {
+        "confidence": 0.99,
+        "evidence_keys": [
+          "post-report-source-assessment-v1-source-01:1:b1494062ee07505f4676d3c4876df13a35a5e5933ac38eed9b464bf078c8b5f4:post-report-source-assessment-v1-source-01 paragraph 1"
+        ],
+        "outcome": "incorrect",
+        "reason": "model-contradicted"
+      },
+      "provider_called": true,
+      "usage": {
+        "approximate_cost_usd": 0.00448,
+        "input_tokens": 450,
+        "output_tokens": 134,
+        "total_tokens": 584
+      }
+    }
+  ],
+  "output": "reports/generated/post-report-source-assessment-001-sol-live-001",
+  "result_summary": "research/05_evaluation/post-report-source-assessment-001-results.md",
+  "limitations": [
+    "Assistant-authored gold, no independent human validation.",
+    "Small synthetic component probe, no real learner benefit or mastery claim.",
+    "Latency includes component fixture processing, not an HTTP load benchmark.",
+    "Criterion-support error is not cross-course disclosure; forbidden-scope/source cases did not call provider.",
+    "Wilson intervals are descriptive binomial intervals; four-concept case correlations limit population interpretation."
+  ],
+  "profile_changed": false
+}

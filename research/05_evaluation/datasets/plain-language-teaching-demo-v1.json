@@ -1,0 +1,75 @@
+{
+  "packet_id": "plain-language-teaching-demo-v1",
+  "permissions": "Synthetic course rules and student dialogue; no private data. Presentation development, not a representative test of all systems.",
+  "cases": [
+    {
+      "id": "password-reset-explanatory",
+      "split": "synthetic-presentation-development",
+      "category": "explanatory",
+      "target_turn_index": 1,
+      "profile": {
+        "tone": "Patient and precise",
+        "depth": "detailed",
+        "example_preferences": [],
+        "misconception_handling": "Respond to the student attempt and explain the supported correction clearly",
+        "integrity_limits": "Do not provide full graded-work answers",
+        "outreach_policy": "Respect student consent and delivery limits",
+        "explanation_structure": [
+          "Explain the supported answer first",
+          "Check understanding"
+        ],
+        "help_ladder": [
+          "Explain the supported answer",
+          "Ask a check question"
+        ]
+      },
+      "prompts": [
+        "I requested a password reset link yesterday. Can I still use it today?",
+        "I think it expired after 30 minutes, so I should request a new one. Will the old link work once I get a new link?"
+      ],
+      "cards": [
+        {
+          "concept_id": "password-reset",
+          "label": "Password reset links",
+          "description": "A password reset link expires after 30 minutes and works only once. Requesting a new link invalidates all previous reset links for the account. An expired or used link cannot change the password.",
+          "objective": "Explain when a password reset link can be used and when a new link is needed."
+        }
+      ]
+    },
+    {
+      "id": "password-reset-socratic",
+      "split": "synthetic-presentation-development",
+      "category": "socratic",
+      "target_turn_index": 1,
+      "profile": {
+        "tone": "Patient and precise",
+        "depth": "detailed",
+        "example_preferences": [],
+        "misconception_handling": "Respond to the student attempt and explain the supported correction clearly",
+        "integrity_limits": "Do not provide full graded-work answers",
+        "outreach_policy": "Respect student consent and delivery limits",
+        "explanation_structure": [
+          "Elicit the learner attempt first",
+          "Give feedback after an attempt"
+        ],
+        "help_ladder": [
+          "Ask for the current-concept attempt first",
+          "Give a source-grounded hint",
+          "Explain after an attempt"
+        ]
+      },
+      "prompts": [
+        "I requested a password reset link yesterday. Can I still use it today?",
+        "I think it expired after 30 minutes, so I should request a new one. Will the old link work once I get a new link?"
+      ],
+      "cards": [
+        {
+          "concept_id": "password-reset",
+          "label": "Password reset links",
+          "description": "A password reset link expires after 30 minutes and works only once. Requesting a new link invalidates all previous reset links for the account. An expired or used link cannot change the password.",
+          "objective": "Explain when a password reset link can be used and when a new link is needed."
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,35 @@ unchanged abstract, report and source package. The
 
 Generated outputs should go under `generated/`, which is ignored by default.
 
+## Presentation planning
+
+The current proposed rebuild is the Japanese revision 15 outline (local presentation artifact: `presentation/planning/structure-revision-15-product-first-ja.md`):
+32 pages following the actual product experience, implementation-backed sequence diagrams,
+failed designs, evaluation, and continuing development. It specifies each page's
+visible explanation and standalone comprehension check. Its approximately 35-minute
+budget assumes a proposed two-minute demo edit; the PowerPoint and script have not
+yet been rebuilt from this outline. The earlier materials below remain historical.
+
+The presentation structure (local presentation artifact: `presentation/presentation-structure.md`) proposes
+a 24-slide English talk with an estimated 35–38-minute core, including a one-minute
+recorded simulation, plus time for questions. It opens with delivery against the
+project brief and an actual teaching-profile response, then compares the system designs
+tested, their failure mechanisms and the resulting decisions for a software
+engineering expert. The design comparison matrix (local presentation artifact: `presentation/design-comparisons.md`)
+records each alternative, its intended benefit, observed weakness and disposition.
+The visual plan (local presentation artifact: `presentation/visual-plan.md`) maps report diagrams
+and application screens to the talk, while the
+speaking script (local presentation artifact: `presentation/speaker-script.md`) supports online delivery.
+Anticipated questions (local presentation artifact: `presentation/defence-notes.md`) provide short English
+answers to the scrutiny addressed in the main presentation.
+
+The recording preparation pack (local presentation artifact: `presentation/recording/README.md`) contains
+synthetic PDF materials, actor URLs, repeatable rehearsal commands, English
+input copy and the onboarding-to-follow-up shot list. The recorded 2:50 film (local presentation artifact: `presentation/recording/recorded-video.md`)
+now includes browser-only footage, four recorded sessions and a labelled service replay.
+The materials include Japanese speaking cues, timing and submitted-report
+evidence anchors for joint review.
+
 ## Final-report diagrams
 
 The current manuscript uses the `course-twin-*.pdf` figures referenced by its
@@ -39,3 +68,12 @@ Its adjacent `artifact.json` is the validated source payload used to build the
 self-contained report. The current report uses professor-fidelity analysis
 correction 001, which preserves the original result while correcting the
 repeat scope, citation denominator, and hidden-hard-gate interpretation.
+
+The English graduate-school presentation is in
+presentation/deck/ (local presentation artifact: `presentation/deck/README.md`), with an embedded actual-software
+demo, English speaker notes, a static PDF and editable draw.io sources. It retains
+historical study scopes and corrections and does not modify the submitted report.
+
+## Final presentation demos
+
+See IT5004 recording and verification (local presentation artifact: `presentation/recording/it5004-final/README.md`) for the real-screen demo sources, reproducible editing commands, and final packaging checks.

@@ -12,6 +12,7 @@ export function ProfessorWorkspace({
   supervisorDemo?: boolean
 }) {
   const [view, setView] = useState<"setup" | "delivery">(viewFromLocation)
+  const [deliveryCourseId, setDeliveryCourseId] = useState<string | null>(null)
 
   const navigate = useCallback((next: "setup" | "delivery") => {
     window.history.pushState(
@@ -37,6 +38,8 @@ export function ProfessorWorkspace({
       <ProfessorDeliveryWorkspace
         controller={controller}
         onOpenSetup={() => navigate("setup")}
+        initialCourseId={deliveryCourseId}
+        onCourseChange={setDeliveryCourseId}
       />
     )
   }

@@ -1,0 +1,576 @@
+{
+  "run_id": "aws-seven-personas-001",
+  "date": "2026-09-09",
+  "decision": "Keep for synthetic manual demo; no research or release promotion",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "manifest_sha256": "26770fb643470d8d513ab72656cc5a85cef86e8088420f52ccc0e5b10d58e535",
+  "configuration": "audited-presentation-v1 / v19-luna-luna-medium",
+  "scope": "typical-engaged baseline plus six original learner-simulator persona labels; roleplay prompts only",
+  "sample_size_rationale": "One starter per requested persona, operational coverage only",
+  "cases": [
+    {
+      "persona": "typical-engaged",
+      "email": "typical-engaged.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 11.547,
+      "turn": {
+        "student_message": {
+          "id": "message-b6a413ff-f28f-43dd-9dcd-589858768770",
+          "conversation_id": "conversation-554e2800-359f-4a78-8f6e-3843bca87134",
+          "role": "student",
+          "content": "I understand that member_id identifies a member, but I am not sure how team_id is different. Can you help me work through why two members can share a team_id?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-typical-engaged",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:40:52+00:00"
+        },
+        "tutor_message": {
+          "id": "message-baacde4b-e714-4093-8391-f1abf0cee35b",
+          "conversation_id": "conversation-554e2800-359f-4a78-8f6e-3843bca87134",
+          "role": "tutor",
+          "content": "Look at the Members rows for Ari and Bo. They have different member_id values but the same team_id value. What does that shared value seem to connect each member to in the Teams table?",
+          "action": "question",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": "gpt-5.6-luna",
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "question",
+            "latency_ms": 8652.089209999986,
+            "usage": {
+              "input_tokens": 3795,
+              "output_tokens": 818,
+              "total_tokens": 4613,
+              "approximate_cost_usd": 0.0017406000000000001
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-b6a413ff-f28f-43dd-9dcd-589858768770",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "give_hint",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:40:52+00:00"
+        },
+        "citations": [],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "give_hint",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "fast-learner",
+      "email": "fast-learner.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 15.263,
+      "turn": {
+        "student_message": {
+          "id": "message-ff9f885b-41d0-49a3-a671-a65d783dafac",
+          "conversation_id": "conversation-c44c756d-34f2-42b7-8ab3-4734bb7bdd60",
+          "role": "student",
+          "content": "member_id identifies a member and team_id points to a team, so team_id can repeat. Can we move on to predicting the inner join result for Ari, Bo and Cam?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-fast-learner",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:41:04+00:00"
+        },
+        "tutor_message": {
+          "id": "message-f24938df-17b7-488f-b3b4-2eef991ec603",
+          "conversation_id": "conversation-c44c756d-34f2-42b7-8ab3-4734bb7bdd60",
+          "role": "tutor",
+          "content": "Correct: member_id identifies each member, while team_id references a team and may repeat for multiple members.\n\nNow predict the inner join output: for Ari, Bo, and Cam, write each member together with the team name their matching team_id produces.",
+          "action": "answer",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": "gpt-5.6-luna",
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "answer",
+            "latency_ms": 15179.22360299997,
+            "usage": {
+              "input_tokens": 3856,
+              "output_tokens": 1376,
+              "total_tokens": 5232,
+              "approximate_cost_usd": 0.0024224
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-ff9f885b-41d0-49a3-a671-a65d783dafac",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "diagnose_understanding",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:41:04+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-23db456c-6508-4d3d-a5f2-34c90d9f141c",
+            "message_id": "message-f24938df-17b7-488f-b3b4-2eef991ec603",
+            "course_id": "demo-pilot-v1-systems",
+            "release_id": "demo-pilot-v1-systems-release-1",
+            "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+            "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+            "source_version": 1,
+            "title": "systems-notes.md",
+            "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+            "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "diagnose_understanding",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "slow-learner",
+      "email": "slow-learner.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 44.234,
+      "turn": {
+        "student_message": {
+          "id": "message-895c5f5d-0eef-48ec-b056-182738826245",
+          "conversation_id": "conversation-27eded69-88df-4c71-b786-3363faea5b17",
+          "role": "student",
+          "content": "I am new to database tables. Please take this one small step at a time: what is a member_id, and why do we also have team_id?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-slow-learner",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:41:20+00:00"
+        },
+        "tutor_message": {
+          "id": "message-43f91449-b30c-47e7-8d74-4bd2eb543f44",
+          "conversation_id": "conversation-27eded69-88df-4c71-b786-3363faea5b17",
+          "role": "tutor",
+          "content": "`member_id` is the identifier for a member. `team_id` refers to a key in the `Teams` table, indicating which team the member belongs to. We use both because one identifies the member, while the other connects that member to a team.\n\nAri has `member_id` 1 and `team_id` 10; Bo has `member_id` 2 and also `team_id` 10. Their different member identifiers distinguish them, while the shared team_id connects both to Cedar. A foreign-key column such as team_id does not have to be unique.\n\nCheck: if a new member joins Cedar, should that person receive a new `member_id`, a new `team_id`, or both?",
+          "action": "answer",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": null,
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "answer",
+            "latency_ms": 42448.27342899998,
+            "usage": {
+              "input_tokens": 8852,
+              "output_tokens": 3622,
+              "total_tokens": 12474,
+              "approximate_cost_usd": 0.0061168
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-895c5f5d-0eef-48ec-b056-182738826245",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "explain_concept",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:41:20+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-82e1b0d0-4c33-4267-9f63-c56b826831b8",
+            "message_id": "message-43f91449-b30c-47e7-8d74-4bd2eb543f44",
+            "course_id": "demo-pilot-v1-systems",
+            "release_id": "demo-pilot-v1-systems-release-1",
+            "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+            "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+            "source_version": 1,
+            "title": "systems-notes.md",
+            "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+            "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "explain_concept",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "high-forgetting",
+      "email": "high-forgetting.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 10.286,
+      "turn": {
+        "student_message": {
+          "id": "message-a5da0c5d-b765-46d4-9982-4e6b0d9eb30a",
+          "conversation_id": "conversation-72e172c4-6f19-4d5a-8cae-4b4050c8876c",
+          "role": "student",
+          "content": "I studied primary keys and foreign keys before, but I have forgotten which one identifies the member and which one points to a team. Could you help me recall the distinction?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-high-forgetting",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:42:04+00:00"
+        },
+        "tutor_message": {
+          "id": "message-5b8743f3-e443-449c-8b00-0be1f2eb5060",
+          "conversation_id": "conversation-72e172c4-6f19-4d5a-8cae-4b4050c8876c",
+          "role": "tutor",
+          "content": "A primary key identifies a row within its own table. In Members, member_id identifies each member. A foreign key references a key in another table; Members.team_id points to Teams.team_id. It need not be unique, so Ari and Bo can both have team_id 10.\n\nCheck: Which column would you use to identify Bo specifically, and which column connects Bo to his team?",
+          "action": "answer",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": "gpt-5.6-luna",
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "answer",
+            "latency_ms": 10181.808832000002,
+            "usage": {
+              "input_tokens": 3943,
+              "output_tokens": 836,
+              "total_tokens": 4779,
+              "approximate_cost_usd": 0.0017918000000000003
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-a5da0c5d-b765-46d4-9982-4e6b0d9eb30a",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "diagnose_understanding",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:42:04+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-5fc9d1f1-181c-4534-a1f9-85fc752a01e6",
+            "message_id": "message-5b8743f3-e443-449c-8b00-0be1f2eb5060",
+            "course_id": "demo-pilot-v1-systems",
+            "release_id": "demo-pilot-v1-systems-release-1",
+            "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+            "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+            "source_version": 1,
+            "title": "systems-notes.md",
+            "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+            "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "diagnose_understanding",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "misconception-prone",
+      "email": "misconception-prone.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 54.063,
+      "turn": {
+        "student_message": {
+          "id": "message-78ea184d-6fcc-4d62-9009-d4c842a1f71e",
+          "conversation_id": "conversation-1a704937-ba9d-45d3-bed8-ab75233bda1a",
+          "role": "student",
+          "content": "I think every foreign key must be unique. Since Ari and Bo both have team_id 10, does that make the Members table invalid?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-misconception-prone",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:42:15+00:00"
+        },
+        "tutor_message": {
+          "id": "message-505f5419-c8a8-418f-a38d-4e53ce6e4476",
+          "conversation_id": "conversation-1a704937-ba9d-45d3-bed8-ab75233bda1a",
+          "role": "tutor",
+          "content": "No. Under the constraints stated, the Members table is not invalid: S1 says a foreign key does not make its column unique, and many rows may reference the same parent. Thus Ari and Bo may both have team_id 10, referencing Cedar. S1 also identifies member_id as the member identifier.\n\nIf two Members rows had the same member_id, which key rule would you check to determine whether that is allowed?",
+          "action": "answer",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": null,
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "answer",
+            "latency_ms": 52337.49862900004,
+            "usage": {
+              "input_tokens": 8177,
+              "output_tokens": 5391,
+              "total_tokens": 13568,
+              "approximate_cost_usd": 0.0081046
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-78ea184d-6fcc-4d62-9009-d4c842a1f71e",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "correct_misconception",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:42:15+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-e6fdfa37-b76d-4e20-bf75-dc74c193c999",
+            "message_id": "message-505f5419-c8a8-418f-a38d-4e53ce6e4476",
+            "course_id": "demo-pilot-v1-systems",
+            "release_id": "demo-pilot-v1-systems-release-1",
+            "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+            "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+            "source_version": 1,
+            "title": "systems-notes.md",
+            "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+            "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "correct_misconception",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "answer-seeking",
+      "email": "answer-seeking.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 10.466,
+      "turn": {
+        "student_message": {
+          "id": "message-f60c982a-dba1-492b-a18c-374a759400c5",
+          "conversation_id": "conversation-588594b0-5d05-469d-b012-f0cb3a0545aa",
+          "role": "student",
+          "content": "This is my graded database lab. Please write the complete SQL submission joining Members and Teams so I can hand it in without doing the steps.",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-answer-seeking",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:43:10+00:00"
+        },
+        "tutor_message": {
+          "id": "message-8d89bc4b-38bb-4695-8154-53171102b703",
+          "conversation_id": "conversation-588594b0-5d05-469d-b012-f0cb3a0545aa",
+          "role": "tutor",
+          "content": "I cannot provide a completed answer to prohibited assessed work.\n\nI can help with a hint or an analogous example, but I can\u2019t provide a complete submission for a graded lab. Start by identifying the shared column in Members and Teams and the matching condition your join should use.",
+          "action": "redirect-graded-work",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": "gpt-5.6-luna",
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "redirect-graded-work",
+            "latency_ms": 8082.149280000011,
+            "usage": {
+              "input_tokens": 3800,
+              "output_tokens": 786,
+              "total_tokens": 4586,
+              "approximate_cost_usd": 0.0017032
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-f60c982a-dba1-492b-a18c-374a759400c5",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "give_hint",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:43:10+00:00"
+        },
+        "citations": [],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "give_hint",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "persona": "low-receptivity",
+      "email": "low-receptivity.persona@example.test",
+      "memberships": [
+        "demo-pilot-v1-systems",
+        "demo-pilot-v1-security"
+      ],
+      "access_verified": true,
+      "message_count": 2,
+      "elapsed_seconds": 11.788,
+      "turn": {
+        "student_message": {
+          "id": "message-d8487a5e-7ba9-4455-959a-e55290f040b7",
+          "conversation_id": "conversation-2c29003d-871f-4200-9508-b53ccac377a9",
+          "role": "student",
+          "content": "I only have a minute and prefer a brief explanation. Why can two members share a team_id? I do not want proactive reminders; I will come back when I choose.",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "seven-personas-v1-low-receptivity",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:43:20+00:00"
+        },
+        "tutor_message": {
+          "id": "message-fb64c299-c076-4995-a344-bc2b86a5adfc",
+          "conversation_id": "conversation-2c29003d-871f-4200-9508-b53ccac377a9",
+          "role": "tutor",
+          "content": "A foreign key links a row to a key in another table, but it does not require its values to be unique. So several members can belong to the same team. The members are distinguished by their primary key, member_id.\n\nIn the example, Ari and Bo both have team_id 10, which references Cedar. That is valid because team_id identifies their shared team, while member_id 1 and 2 identify them individually.\n\nQuick check: which column identifies Ari and Bo as separate members?",
+          "action": "answer",
+          "trace": {
+            "generator_id": "question-specific-profile-grounded-v19",
+            "provider_model": "gpt-5.6-luna",
+            "provider_revision": "gpt-5.6-luna",
+            "prompt_version": "question-specific-profile-grounded-v19",
+            "policy_action": "answer",
+            "latency_ms": 9507.416912999986,
+            "usage": {
+              "input_tokens": 4041,
+              "output_tokens": 900,
+              "total_tokens": 4941,
+              "approximate_cost_usd": 0.0018882
+            },
+            "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-d8487a5e-7ba9-4455-959a-e55290f040b7",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "explain_concept",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:43:20+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-bdce2357-4d39-4491-b233-05822fef257e",
+            "message_id": "message-fb64c299-c076-4995-a344-bc2b86a5adfc",
+            "course_id": "demo-pilot-v1-systems",
+            "release_id": "demo-pilot-v1-systems-release-1",
+            "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+            "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+            "source_version": 1,
+            "title": "systems-notes.md",
+            "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+            "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "explain_concept",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    }
+  ],
+  "gates": {
+    "accounts": 7,
+    "memberships": 14,
+    "persisted_conversations": 7,
+    "persisted_messages": 14,
+    "cross_persona_denials": 6,
+    "repeat_passwords_conversations_messages_and_starters_unchanged": true,
+    "local_integration_tests_passed": 2
+  },
+  "usage": {
+    "input_tokens": 36464,
+    "output_tokens": 13729,
+    "total_tokens": 50193,
+    "approximate_cost_usd": 0.0237676
+  },
+  "usage_limitations": "Returned generation/audit trace only; planner overhead not aggregated; approximate cost is not an AWS or provider invoice",
+  "latency_seconds": {
+    "min": 10.286,
+    "median": 11.788,
+    "max": 54.063
+  },
+  "retained_failure": {
+    "classification": "operational",
+    "phase": "first repeat verification",
+    "error": "HTTP 429 rate_limit_exceeded on redundant privacy-check login after all seven account checks",
+    "resolution": "Reuse already authenticated persona client; final repeat passed with limiter unchanged"
+  },
+  "backup": {
+    "ssm_command_id": "c574e972-2a1a-4f7a-abb2-5c1c22365197",
+    "host_path": "/opt/digital-twin/backups/pre-seven-personas-20260909.zip",
+    "schema_version": 19,
+    "data_files": 8
+  },
+  "schedule": "Existing stop at 2026-09-09T21:35:12+08:00 preserved; no restart/deployment/schedule change",
+  "source_hashes": {
+    "scripts/seed_pilot_personas.py": "6961494d7af51555db728819b002b7531ecfbd278c96f79f56571ced7bf12903",
+    "tests/fixtures/seed_data/seven-personas-v1/manifest.json": "26770fb643470d8d513ab72656cc5a85cef86e8088420f52ccc0e5b10d58e535",
+    "tests/infra/test_pilot_seed.py": "daf29cb1e11a43c25d5dadc9b78583b34325c8ce48d0e4f49e0db0bb6014d4bc"
+  }
+}

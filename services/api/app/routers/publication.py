@@ -464,6 +464,23 @@ def list_course_learner_belief_evidence(
         raise _http_error(error) from error
 
 
+@router.get("/courses/{course_id}/runtime-status")
+def get_course_runtime_status(
+    course_id: str,
+    request: Request,
+    account_id: ProfessorAccountDependency,
+    publication: PublicationServiceDependency,
+):
+    from services.api.app.runtime_identity import runtime_identity, worker_status
+
+    try:
+        publication.authorize_source_ingestion(account_id, course_id)
+        identity = runtime_identity(request.app)
+        return {"api": identity, "workers": worker_status(request.app, identity)}
+    except PublicationError as error:
+        raise _http_error(error) from error
+
+
 @router.get(
     "/courses/{course_id}/tutoring-runtime-profile",
     response_model=CourseTutoringRuntimeProfileV1 | None,

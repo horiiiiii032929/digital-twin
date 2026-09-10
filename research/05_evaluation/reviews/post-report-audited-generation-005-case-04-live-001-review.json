@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-005-case-04-live-001",
+  "method": "Every delivered output read against frozen source and stage rubric; original exposed questions, no gold in model requests.",
+  "rows": [
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Only four Elm learners contributed. Does the missing summary mean everyone understands the concept?",
+      "response": "No. A missing summary does not mean everyone understands the concept. Elm displays the summary only when at least five active learners contribute to that group; suppression indicates insufficient group size for display, not the absence of a learning gap. If the four contributors are active learners in that group, the summary is suppressed.\n\nWhy can a suppressed summary not be used to conclude that no learning gap exists?",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: four is below the display threshold. What changes when a fifth active learner contributes?",
+      "response": "When the fifth active learner contributes, the group reaches the minimum contributor count required for display and is no longer in the fewer-than-five category that Elm suppresses. However, S1 does not establish that reaching five guarantees the summary will be displayed.\n\nCheck your understanding: at exactly five active contributors, what threshold-related conclusion is supported, and what display conclusion is not guaranteed?",
+      "action": "answer",
+      "severity": "minor",
+      "category": "presentation",
+      "reason": "Necessary-threshold qualification is correct, but internal S1 source identifier is unexplained in prose.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v4",
+      "stage": 0,
+      "question": "Only four Elm learners contributed. Does the missing summary mean everyone understands the concept?",
+      "response": "Groups with fewer contributors are suppressed. Suppression means insufficient group size for display; it does not mean no learning gap exists.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: four is below the display threshold. What changes when a fifth active learner contributes?",
+      "response": "Elm shows a professor a concept-level learning-gap summary only when at least five active learners contribute to that group. Groups with fewer contributors are suppressed.\n\nSuppression means insufficient group size for display; it does not mean no learning gap exists.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

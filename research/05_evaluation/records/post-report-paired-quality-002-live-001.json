@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-08",
+  "component": "student-tutoring",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "working_tree_dirty": true,
+  "limitations": [
+    "Four known failure contexts selected after run001; no new qualification or population accuracy inference.",
+    "No independent labels, real users or learning effects.",
+    "V4 reran with uncontrolled provider variation.",
+    "No third-party private records present; no observed disclosure does not establish authorization security.",
+    "Current selected profile/fallback unchanged."
+  ],
+  "run_id": "post-report-paired-quality-002-live-001",
+  "status": "preflight-rejected-no-calls",
+  "decision": "refine-sample-size-within-user-budget",
+  "plan": "research/04_experiments/post-report-paired-quality-002.md",
+  "dataset": {
+    "id": "post-report-course-shaped-quality-v1",
+    "split": "exposed-development",
+    "planned_turns": 96
+  },
+  "operations": {
+    "external_calls": 0,
+    "reported_cost_usd": 0,
+    "unknown_cost_calls": 0
+  },
+  "reason": "Runner requires 480 conservative calls x US$0.16 = US$76.80, more than US$8 proposed and US$30 user ceiling; rejected before output directory/provider construction.",
+  "successor": "post-report-paired-quality-003-live-001",
+  "evidence": "/tmp/post-report-paired-quality-002.log"
+}

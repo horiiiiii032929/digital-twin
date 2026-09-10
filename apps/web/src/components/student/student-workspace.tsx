@@ -77,6 +77,8 @@ export function StudentWorkspace({
   const citationTriggerRef = useRef<HTMLButtonElement | null>(null)
   const courseMenuTriggerRef = useRef<HTMLButtonElement | null>(null)
   const outreachTriggerRef = useRef<HTMLButtonElement | null>(null)
+  const composerRef = useRef<HTMLDivElement | null>(null)
+  const focusReplyRef = useRef(false)
   const {
     courses,
     activeCourse,
@@ -90,8 +92,13 @@ export function StudentWorkspace({
     isLoadingConversation,
     isSubmitting,
     outreachMessages,
+    outreachReply,
     autonomousGoals,
     learnerEvidence,
+    evidenceStatus,
+    citationsStatus,
+    retryEvidence,
+    retryCitations,
     pendingClarification,
     inAppOutreachEnabled,
     outreachSnoozedUntil,
@@ -112,6 +119,7 @@ export function StudentWorkspace({
     markOutreachRead,
     dismissOutreach,
     replyToOutreach,
+    cancelOutreachReply,
     selectCitation,
   } = controller
 
@@ -187,6 +195,26 @@ export function StudentWorkspace({
             onOpenOutreach={() => setOutreachOpen(true)}
           />
 
+          {controller.conversationHistory.length > 1 ? (
+            <label className="flex min-w-0 items-center gap-3 border-b px-4 py-2 text-sm sm:px-6">
+              <span className="shrink-0 text-muted-foreground">Saved chats</span>
+              <select
+                aria-label="Resume a saved chat in this course version"
+                className="min-w-0 flex-1 rounded-md border bg-background px-2 py-1.5 focus-visible:outline-2 focus-visible:outline-ring"
+                value={conversation?.id ?? ""}
+                disabled={isLoadingConversation || isSubmitting}
+                onChange={(event) => void controller.selectConversation(event.target.value)}
+              >
+                {!conversation ? <option value="">Loading conversation…</option> : null}
+                {controller.conversationHistory.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    Started {new Date(item.created_at).toLocaleString("en", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
+
           {isLoadingCourses ? (
             <WorkspaceLoading />
           ) : error && courses.length === 0 ? (
@@ -195,7 +223,26 @@ export function StudentWorkspace({
             <NoCourses onRetry={reload} />
           ) : (
             <>
+              {outreachMessages.some((item) => item.message.status === "delivered") ? (
+                <div className="border-b px-3 py-2 sm:px-6">
+                  <Button type="button" variant="outline" className="h-auto w-full justify-between whitespace-normal py-3 text-left" onClick={() => setOutreachOpen(true)}>
+                    <span><Bell className="mr-2 inline size-4" aria-hidden="true" />
+                      {outreachMessages.filter((item) => item.message.status === "delivered").length} unread Digital Twin check-ins
+                    </span>
+                    <span className="ml-3 shrink-0 text-xs">Read & reply →</span>
+                  </Button>
+                </div>
+              ) : null}
+              {conversation && (evidenceStatus === "loading" || evidenceStatus === "error" || citationsStatus === "loading" || citationsStatus === "error") ? (
+                <div className="border-b px-3 py-2 text-xs text-muted-foreground sm:px-6" aria-live="polite">
+                  {evidenceStatus === "loading" ? <p>{learnerEvidence ? "Updating learning evidence…" : "Loading learning evidence…"}</p> : null}
+                  {evidenceStatus === "error" ? <p>Learning evidence is temporarily unavailable{learnerEvidence ? "; showing the last loaded observations" : ""}. <Button variant="link" size="sm" onClick={() => void retryEvidence()}>Retry evidence</Button></p> : null}
+                  {citationsStatus === "loading" ? <p>Loading saved sources…</p> : null}
+                  {citationsStatus === "error" ? <p>Some saved sources are unavailable. <Button variant="link" size="sm" onClick={() => void retryCitations()}>Retry sources</Button></p> : null}
+                </div>
+              ) : null}
               <Conversation
+                replyingToCheckIn={Boolean(outreachReply)}
                 course={activeCourse}
                 messages={messages}
                 citationsByMessage={citationsByMessage}
@@ -210,6 +257,12 @@ export function StudentWorkspace({
                 onChoosePrompt={setDraft}
               />
               <Composer
+                composerRef={composerRef}
+                outreachReply={outreachReply}
+                onCancelReply={() => {
+                  cancelOutreachReply()
+                  composerRef.current?.querySelector("textarea")?.focus()
+                }}
                 course={activeCourse}
                 conversationAvailable={Boolean(conversation)}
                 value={draft}
@@ -321,14 +374,20 @@ export function StudentWorkspace({
           <DialogPrimitive.Content
             onCloseAutoFocus={(event) => {
               event.preventDefault()
-              outreachTriggerRef.current?.focus()
+              if (focusReplyRef.current) {
+                focusReplyRef.current = false
+                composerRef.current?.querySelector("textarea")?.focus()
+              } else {
+                outreachTriggerRef.current?.focus()
+              }
             }}
-            className="fixed inset-y-0 right-0 z-30 flex w-[min(94vw,420px)] flex-col border-l bg-white shadow-[-12px_0_40px_rgba(32,33,35,0.14)] outline-none"
+            className="fixed inset-y-0 right-0 z-30 w-[min(94vw,420px)] overflow-y-auto border-l bg-white shadow-[-12px_0_40px_rgba(32,33,35,0.14)] outline-none"
           >
             <OutreachPanel
               messages={outreachMessages}
               goals={autonomousGoals}
               learnerEvidence={learnerEvidence}
+              evidenceStatus={evidenceStatus}
               enabled={inAppOutreachEnabled}
               snoozedUntil={outreachSnoozedUntil}
               isLoading={isLoadingOutreach}
@@ -340,8 +399,10 @@ export function StudentWorkspace({
               onSnooze={snoozeOutreach}
               onMarkRead={markOutreachRead}
               onDismiss={dismissOutreach}
+              canReply={Boolean(conversation) && !isLoadingConversation && !isSubmitting && !requiresNewConversation}
               onReply={(messageId) => {
                 replyToOutreach(messageId)
+                focusReplyRef.current = true
                 setOutreachOpen(false)
               }}
             />
@@ -391,7 +452,7 @@ function StudentHeader({
         </Button>
         <div className="min-w-0">
           <h1 className="truncate text-sm font-semibold tracking-[-0.015em] sm:text-base">
-            {activeCourse?.title ?? "Student tutor"}
+            {activeCourse?.title ?? "Student Digital Twin"}
           </h1>
           {activeCourse ? (
             <span className="block text-xs font-medium text-[var(--success)] sm:hidden">
@@ -409,8 +470,8 @@ function StudentHeader({
       <div className="flex items-center gap-1.5">
         {!SESSION_AUTH_ENABLED ? (
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <a href="/" aria-label="Open tutor setup">
-              Tutor setup
+            <a href="/" aria-label="Open Digital Twin setup">
+              Digital Twin setup
             </a>
           </Button>
         ) : null}
@@ -422,8 +483,8 @@ function StudentHeader({
           className="relative"
           aria-label={
             unreadOutreachCount > 0
-              ? `Open tutor check-ins, ${unreadOutreachCount} unread`
-              : "Open tutor check-ins"
+              ? `Open Digital Twin check-ins, ${unreadOutreachCount} unread`
+              : "Open Digital Twin check-ins"
           }
           onClick={onOpenOutreach}
         >
@@ -431,7 +492,7 @@ function StudentHeader({
           <span className="hidden sm:inline">Check-ins</span>
           {unreadOutreachCount > 0 ? (
             <span className="absolute top-0.5 right-0.5 flex min-w-5 items-center justify-center rounded-full bg-[var(--accent-strong)] px-1 text-xs leading-5 font-bold text-white">
-              {Math.min(unreadOutreachCount, 9)}
+              {unreadOutreachCount > 9 ? "9+" : unreadOutreachCount}
             </span>
           ) : null}
         </Button>
@@ -473,6 +534,7 @@ function OutreachPanel({
   messages,
   goals,
   learnerEvidence,
+  evidenceStatus,
   enabled,
   snoozedUntil,
   isLoading,
@@ -485,10 +547,12 @@ function OutreachPanel({
   onMarkRead,
   onDismiss,
   onReply,
+  canReply,
 }: {
   messages: StudentProactiveMessageView[]
   goals: AutonomousGoalV1[]
   learnerEvidence: StudentLearnerEvidence | null
+  evidenceStatus: "idle" | "loading" | "ready" | "error"
   enabled: boolean
   snoozedUntil: string | null
   isLoading: boolean
@@ -501,7 +565,11 @@ function OutreachPanel({
   onMarkRead: (messageId: string) => Promise<void>
   onDismiss: (messageId: string) => Promise<void>
   onReply: (messageId: string) => void
+  canReply: boolean
 }) {
+  const [section, setSection] = useState<"inbox" | "goals" | "settings">("inbox")
+  const activeGoals = goals.filter((goal) => goal.status === "active")
+  const pastGoals = goals.filter((goal) => goal.status !== "active")
   const snoozeDate = snoozedUntil ? new Date(snoozedUntil) : null
   const isSnoozed = Boolean(
     snoozeDate && !Number.isNaN(snoozeDate.getTime()) && snoozeDate > new Date(),
@@ -511,7 +579,7 @@ function OutreachPanel({
       <div className="flex min-h-14 items-center justify-between gap-3 border-b pl-5 pr-14">
         <div className="min-w-0">
           <DialogPrimitive.Title className="text-sm font-semibold">
-            Tutor check-ins
+            Digital Twin check-ins
           </DialogPrimitive.Title>
           <DialogPrimitive.Description className="mt-0.5 text-xs text-muted-foreground">
             Private messages initiated by your course Digital Twin
@@ -521,211 +589,240 @@ function OutreachPanel({
           type="button"
           variant="ghost"
           size="icon"
-          aria-label="Close tutor check-ins"
+          aria-label="Close Digital Twin check-ins"
           onClick={onClose}
         >
           <X aria-hidden="true" />
         </Button>
       </div>
 
-      <div className="border-b bg-[var(--shell)] p-4">
-        <label className="flex cursor-pointer items-start gap-3 rounded-xl border bg-white p-3.5">
-          <Checkbox
-            checked={enabled}
-            disabled={isUpdating}
-            aria-label="Allow private tutor check-ins"
-            onCheckedChange={(checked) =>
-              void onEnabledChange(checked === true)
-            }
-          />
-          <span className="min-w-0">
-            <span className="block text-sm font-semibold">
-              Allow private in-app check-ins
-            </span>
-            <span className="mt-1 block text-xs leading-5 text-muted-foreground">
-              At most three per week, with quiet hours from 10 PM to 8 AM. You
-              can turn this off at any time.
-            </span>
-          </span>
-        </label>
-        <p className="mt-2.5 px-1 text-xs leading-5 text-muted-foreground">
-          Only private in-app delivery is enabled. Individual learning details
-          are never posted to a shared channel.
-        </p>
-        {enabled ? (
-          <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white px-3 py-2.5">
-            <p className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
-              <Clock3 className="size-3.5 shrink-0" aria-hidden="true" />
-              {isSnoozed && snoozeDate
-                ? `Paused until ${formatOutreachTime(snoozeDate.toISOString())}`
-                : "Quiet hours are respected automatically."}
-            </p>
+      <nav aria-label="Check-in sections" className="sticky top-0 z-10 flex gap-2 border-b bg-white px-4 py-3">
+        {([["inbox", "Inbox"], ["goals", `Goals (${activeGoals.length} active)`], ["settings", "Settings"]] as const).map(([value, label]) => (
+          <Button key={value} type="button" variant={section === value ? "secondary" : "ghost"} size="sm" aria-pressed={section === value} onClick={(event) => {
+            setSection(value)
+            event.currentTarget.closest('[role="dialog"]')?.scrollTo({ top: 0 })
+          }}>{label}</Button>
+        ))}
+      </nav>
+      {error ? (
+        <Alert variant="destructive" className="mx-4 mt-3 w-auto" role="alert">
+          <AlertCircle aria-hidden="true" />
+          <AlertTitle>Check-in action unavailable</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      ) : null}
+      {section === "inbox" ? (<>
+          <div className="flex items-center justify-between gap-3 px-5 py-3">
+            <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+              Inbox
+            </h2>
             <Button
               type="button"
               variant="ghost"
               size="sm"
-              disabled={isUpdating}
-              onClick={() => void onSnooze(isSnoozed ? null : 7)}
+              disabled={isLoading}
+              onClick={() => void onRefresh()}
             >
-              {isSnoozed ? "Resume now" : "Pause for 7 days"}
+              <RefreshCcw data-icon="inline-start" />
+              Refresh
             </Button>
           </div>
-        ) : null}
-      </div>
 
-      <div className="border-b px-5 py-4">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-            My learning goals
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            {goals.filter((goal) => goal.status === "active").length}/3 active
-          </span>
-        </div>
-        {goals.length ? (
-          <ul className="mt-3 space-y-2">
-            {goals.slice(0, 3).map((goal) => (
-              <li key={goal.goal_id} className="rounded-lg border bg-white p-3">
-                <div className="flex items-start justify-between gap-3">
-                  <p className="text-sm font-medium">{goal.learner_subgoal}</p>
-                  <span className="shrink-0 rounded-full bg-[var(--subtle)] px-2 py-0.5 text-xs font-medium text-muted-foreground">
-                    {goal.status}
-                  </span>
-                </div>
-                <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                  Success: {goal.success_condition}
+          <div className="px-4 pb-5">
+            {isLoading && messages.length === 0 ? (
+              <div className="space-y-3" aria-label="Loading Digital Twin check-ins">
+                <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
+                <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
+              </div>
+            ) : messages.length === 0 ? (
+              <div className="flex min-h-64 flex-col items-center justify-center px-8 text-center">
+                <span className="flex size-11 items-center justify-center rounded-full bg-[var(--subtle)] text-muted-foreground">
+                  {enabled ? (
+                    <Bell className="size-5" aria-hidden="true" />
+                  ) : (
+                    <BellOff className="size-5" aria-hidden="true" />
+                  )}
+                </span>
+                <h3 className="mt-3 text-sm font-semibold">
+                  {enabled ? "No check-ins yet" : "Check-ins are off"}
+                </h3>
+                <p className="mt-1.5 max-w-64 text-xs leading-5 text-muted-foreground">
+                  {enabled
+                    ? "When your professor-approved Digital Twin schedules a useful review, it will appear here."
+                    : "Open Settings to allow occasional study follow-ups from your Digital Twin."}
                 </p>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-2 text-xs leading-5 text-muted-foreground">
-            No active goal. Your tutor can create a bounded goal only from a professor-approved course objective.
-          </p>
-        )}
-      </div>
-
-      <LearnerEvidenceSection evidence={learnerEvidence} />
-
-      <div className="flex items-center justify-between gap-3 px-5 py-3">
-        <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-          Inbox
-        </h2>
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          disabled={isLoading}
-          onClick={() => void onRefresh()}
-        >
-          <RefreshCcw data-icon="inline-start" />
-          Refresh
-        </Button>
-      </div>
-
-      <div className="min-h-0 flex-1 overflow-y-auto px-4 pb-5">
-        {error ? (
-          <Alert variant="destructive" className="mb-3">
-            <AlertCircle aria-hidden="true" />
-            <AlertTitle>Check-ins unavailable</AlertTitle>
-            <AlertDescription>{error}</AlertDescription>
-          </Alert>
-        ) : null}
-        {isLoading && messages.length === 0 ? (
-          <div className="space-y-3" aria-label="Loading tutor check-ins">
-            <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
-            <div className="h-32 animate-pulse rounded-xl bg-[var(--subtle)]" />
+              </div>
+            ) : (
+              <div className="space-y-3">
+                {messages.map(({ message, citations }) => (
+                  <article
+                    key={message.id}
+                    className={cn(
+                      "rounded-xl border p-4",
+                      message.status === "delivered"
+                        ? "border-[var(--accent-strong)]/25 bg-[var(--accent-soft)]/40"
+                        : "bg-white",
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+                        <Sparkles className="size-3.5" aria-hidden="true" />
+                        Professor Digital Twin
+                      </span>
+                      <time
+                        dateTime={message.created_at}
+                        className="shrink-0 text-xs text-muted-foreground"
+                      >
+                        {formatOutreachTime(message.created_at)}
+                      </time>
+                    </div>
+                    <p className="mt-3 whitespace-pre-line text-sm leading-6">
+                      {message.content}
+                    </p>
+                    {citations[0] ? (
+                      <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                        Source: {citations[0].title} · {citations[0].locator}
+                      </p>
+                    ) : null}
+                    <div className="mt-3 flex flex-wrap items-center justify-end gap-2">
+                      <Button
+                        type="button"
+                        size="sm"
+                        disabled={!canReply}
+                        onClick={() => onReply(message.id)}
+                      >
+                        Reply in chat
+                      </Button>
+                      {message.status === "delivered" ? (
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => void onMarkRead(message.id)}
+                        >
+                          Mark read
+                        </Button>
+                      ) : null}
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => void onDismiss(message.id)}
+                      >
+                        Dismiss
+                      </Button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
-        ) : messages.length === 0 ? (
-          <div className="flex min-h-64 flex-col items-center justify-center px-8 text-center">
-            <span className="flex size-11 items-center justify-center rounded-full bg-[var(--subtle)] text-muted-foreground">
-              {enabled ? (
-                <Bell className="size-5" aria-hidden="true" />
-              ) : (
-                <BellOff className="size-5" aria-hidden="true" />
-              )}
-            </span>
-            <h3 className="mt-3 text-sm font-semibold">
-              {enabled ? "No check-ins yet" : "Check-ins are off"}
-            </h3>
-            <p className="mt-1.5 max-w-64 text-xs leading-5 text-muted-foreground">
-              {enabled
-                ? "When your professor-approved tutor schedules a useful review, it will appear here."
-                : "Turn them on above if you want the tutor to initiate occasional study follow-ups."}
+      </>) : section === "goals" ? (<>
+          <div className="border-b px-5 py-4">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                My learning goals
+              </h2>
+              <span className="text-xs text-muted-foreground">
+                {activeGoals.length} active
+              </span>
+            </div>
+            {activeGoals.length ? (
+              <ul className="mt-3 space-y-2">
+                {activeGoals.map((goal) => (
+                  <li key={goal.goal_id} className="rounded-lg border bg-white p-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="min-w-0 break-words text-sm font-medium leading-6">{goal.approved_course_objective}</p>
+                      <span className="shrink-0 rounded-full bg-[var(--subtle)] px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                        {goal.status}
+                      </span>
+                    </div>
+                    <details className="mt-2 text-xs leading-5 text-muted-foreground">
+                      <summary className="cursor-pointer">Practice details</summary>
+                      {goal.learner_subgoal !== goal.approved_course_objective && <p className="mt-2 break-words">{goal.learner_subgoal}</p>}
+                      <p className="mt-1 break-words">Goal description: {goal.success_condition}</p>
+                      <p className="mt-1">Available until {new Date(goal.expires_at).toLocaleDateString()}.</p>
+                    </details>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                No active goal. Your Digital Twin can create a bounded goal only from a professor-approved course objective.
+              </p>
+            )}
+          </div>
+
+          {pastGoals.length ? (
+            <details className="border-b px-5 py-4">
+              <summary className="cursor-pointer text-sm font-medium">Past goals ({pastGoals.length})</summary>
+              <ul className="mt-3 space-y-3">
+                {pastGoals.map((goal) => <li key={goal.goal_id} className="rounded-lg border p-3">
+                  <p className="break-words text-sm">{goal.approved_course_objective}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">Status: {goal.status}</p>
+                </li>)}
+              </ul>
+            </details>
+          ) : null}
+          <LearnerEvidenceSection evidence={learnerEvidence} status={evidenceStatus} />
+
+      </>) : (<>
+          <div className="border-b bg-[var(--shell)] p-4">
+            <label className="flex cursor-pointer items-start gap-3 rounded-xl border bg-white p-3.5">
+              <Checkbox
+                checked={enabled}
+                disabled={isUpdating}
+                aria-label="Allow private Digital Twin check-ins"
+                onCheckedChange={(checked) =>
+                  void onEnabledChange(checked === true)
+                }
+              />
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold">
+                  Allow private in-app check-ins
+                </span>
+                <span className="mt-1 block text-xs leading-5 text-muted-foreground">
+                  At most three per week, with quiet hours from 10 PM to 8 AM. You
+                  can turn this off at any time.
+                </span>
+              </span>
+            </label>
+            <p className="mt-2.5 px-1 text-xs leading-5 text-muted-foreground">
+              Only private in-app delivery is enabled. Individual learning details
+              are never posted to a shared channel.
             </p>
-          </div>
-        ) : (
-          <div className="space-y-3">
-            {messages.map(({ message, citations }) => (
-              <article
-                key={message.id}
-                className={cn(
-                  "rounded-xl border p-4",
-                  message.status === "delivered"
-                    ? "border-[var(--accent-strong)]/25 bg-[var(--accent-soft)]/40"
-                    : "bg-white",
-                )}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
-                    <Sparkles className="size-3.5" aria-hidden="true" />
-                    Professor Digital Twin
-                  </span>
-                  <time
-                    dateTime={message.created_at}
-                    className="shrink-0 text-xs text-muted-foreground"
-                  >
-                    {formatOutreachTime(message.created_at)}
-                  </time>
-                </div>
-                <p className="mt-3 whitespace-pre-line text-sm leading-6">
-                  {message.content}
+            {enabled ? (
+              <div className="mt-3 flex flex-wrap items-center justify-between gap-3 rounded-lg bg-white px-3 py-2.5">
+                <p className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
+                  <Clock3 className="size-3.5 shrink-0" aria-hidden="true" />
+                  {isSnoozed && snoozeDate
+                    ? `Paused until ${formatOutreachTime(snoozeDate.toISOString())}`
+                    : "Quiet hours are respected automatically."}
                 </p>
-                {citations[0] ? (
-                  <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                    Source: {citations[0].title} · {citations[0].locator}
-                  </p>
-                ) : null}
-                <div className="mt-3 flex items-center justify-end gap-2">
-                  <Button
-                    type="button"
-                    size="sm"
-                    onClick={() => onReply(message.id)}
-                  >
-                    Reply in chat
-                  </Button>
-                  {message.status === "delivered" ? (
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => void onMarkRead(message.id)}
-                    >
-                      Mark read
-                    </Button>
-                  ) : null}
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => void onDismiss(message.id)}
-                  >
-                    Dismiss
-                  </Button>
-                </div>
-              </article>
-            ))}
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  disabled={isUpdating}
+                  onClick={() => void onSnooze(isSnoozed ? null : 7)}
+                >
+                  {isSnoozed ? "Resume now" : "Pause for 7 days"}
+                </Button>
+              </div>
+            ) : null}
           </div>
-        )}
-      </div>
+
+      </>)}
     </>
   )
 }
 
 function LearnerEvidenceSection({
   evidence,
+  status,
 }: {
   evidence: StudentLearnerEvidence | null
+  status: "idle" | "loading" | "ready" | "error"
 }) {
   const belief = evidence?.belief_state
   return (
@@ -740,6 +837,8 @@ function LearnerEvidenceSection({
           </h2>
           <p className="mt-1 text-xs leading-5 text-muted-foreground">
             These are observations, not a final mastery score.
+            {status === "loading" && evidence ? " Updating observations…" : ""}
+            {status === "error" && evidence ? " Refresh unavailable; showing last loaded observations." : ""}
           </p>
         </div>
         {belief ? (
@@ -766,7 +865,7 @@ function LearnerEvidenceSection({
         </ul>
       ) : (
         <p className="mt-3 rounded-lg bg-[var(--shell)] px-3 py-2.5 text-xs leading-5 text-muted-foreground">
-          No assessed learning evidence has been recorded in this conversation yet.
+          {status === "loading" ? "Loading learning evidence…" : status === "error" ? "Learning evidence is temporarily unavailable." : "No assessed learning evidence has been recorded in this conversation yet."}
         </p>
       )}
       {belief ? (
@@ -889,13 +988,14 @@ function CourseRail({
       <p className="mt-auto border-t px-4 py-3 text-xs leading-5 text-muted-foreground">
         {SESSION_AUTH_ENABLED
           ? "Course access follows your signed-in account."
-          : "Synthetic local account · Chat ID stays in this browser."}
+          : "Synthetic local account · Conversations are saved for this account."}
       </p>
     </aside>
   )
 }
 
 function Conversation({
+  replyingToCheckIn,
   course,
   messages,
   citationsByMessage,
@@ -909,6 +1009,7 @@ function Conversation({
   onOpenCitation,
   onChoosePrompt,
 }: {
+  replyingToCheckIn: boolean
   course: StudentCourse | null
   messages: StudentChatMessage[]
   citationsByMessage: Record<string, StudentCitation[]>
@@ -928,25 +1029,27 @@ function Conversation({
 }) {
   const hasConversation = messages.length > 0 || Boolean(pendingClarification)
 
+  if (!hasConversation) {
+    return (
+      <section aria-label="Student tutoring conversation" className="workspace-canvas min-h-0 flex-1 overflow-y-auto px-4 py-6 sm:px-8">
+        {isLoading ? <ConversationLoading /> : replyingToCheckIn ? (
+          <div className="mx-auto max-w-[840px]">
+            <h2 className="text-lg font-semibold">Continue the check-in</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">Read your Digital Twin’s message below, then write your reply. Your response will be linked to this check-in.</p>
+          </div>
+        ) : course ? <TutorWelcome course={course} goals={autonomousGoals} learnerEvidence={learnerEvidence} onChoosePrompt={onChoosePrompt} /> : null}
+      </section>
+    )
+  }
+
   return (
     <ChatContainerRoot
       aria-label="Student tutoring conversation"
       className="workspace-canvas min-h-0 flex-1"
     >
       <ChatContainerContent
-        className={cn(
-          "mx-auto w-full max-w-[840px] gap-7 px-4 sm:px-8",
-          hasConversation ? "py-8 sm:py-10" : "min-h-full justify-center py-10",
-        )}
+        className="mx-auto w-full max-w-[840px] gap-7 px-4 py-8 sm:px-8 sm:py-10"
       >
-        {course && !hasConversation ? (
-          <TutorWelcome
-            course={course}
-            goals={autonomousGoals}
-            learnerEvidence={learnerEvidence}
-            onChoosePrompt={onChoosePrompt}
-          />
-        ) : null}
         {isLoading ? <ConversationLoading /> : null}
         {messages.map((message) => (
           <ConversationMessage
@@ -991,7 +1094,7 @@ function ClarificationOptions({
         Choose the meaning you intended
       </h3>
       <p className="mt-1 text-xs leading-5 text-muted-foreground">
-        The tutor will use only the selected approved source passage.
+        The Digital Twin will use only the selected approved source passage.
       </p>
       <div className="mt-3 flex flex-col gap-2">
         {request.options.map((option, index) => (
@@ -1041,20 +1144,19 @@ function TutorWelcome({
           <Sparkles className="size-5" aria-hidden="true" />
         </span>
         <div className="min-w-0">
-          <p className="workspace-kicker">Your course tutor</p>
+          <p className="workspace-kicker">Your course Digital Twin</p>
           <h2
             id="tutor-welcome-title"
             className="mt-0.5 text-balance text-2xl font-semibold tracking-[-0.03em] sm:text-3xl"
           >
-            Learn with evidence, not guesses.
+            Study with your course Digital Twin
           </h2>
         </div>
       </div>
 
       <p className="mt-5 max-w-[65ch] text-sm leading-6 text-muted-foreground sm:text-base sm:leading-7">
-        Ask about {course.title}. I stay inside the current approved release,
-        show the source behind each answer, and adapt the next step to the
-        evidence you have shown.
+        Ask a question about {course.title}, or reply to a Digital Twin check-in.
+        Responses use the professor-approved materials for this course.
       </p>
 
       <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-y py-3 text-xs font-medium text-[var(--ink-soft)]">
@@ -1072,7 +1174,7 @@ function TutorWelcome({
             ? "Active learning goal"
             : observedConceptCount > 0
               ? `${observedConceptCount} observed concept${observedConceptCount === 1 ? "" : "s"}`
-              : "Progress starts with your first question"}
+              : "Learning evidence appears as you participate"}
         </span>
       </div>
 
@@ -1082,21 +1184,21 @@ function TutorWelcome({
             Current learning focus
           </p>
           <p className="mt-1 text-sm font-medium leading-6">
-            {activeGoal.learner_subgoal}
+            {activeGoal.approved_course_objective}
           </p>
         </div>
       ) : null}
 
       <div className="mt-6 flex flex-col gap-2" aria-label="Suggested questions">
         <p className="workspace-kicker px-1">Try asking</p>
-        {suggestions.map((suggestion) => (
+        {suggestions.map((suggestion, index) => (
           <button
             key={suggestion}
             type="button"
             className="group flex min-h-11 w-full items-center justify-between gap-4 rounded-xl border bg-white px-4 py-3 text-left text-sm font-medium shadow-[0_1px_2px_rgba(25,25,29,0.03)] outline-none transition-[border-color,background-color,transform] hover:-translate-y-px hover:border-[var(--accent-border)] hover:bg-[var(--accent-soft)]/35 focus-visible:ring-2 focus-visible:ring-ring/35"
             onClick={() => onChoosePrompt(suggestion)}
           >
-            <span>{suggestion}</span>
+            <span>{index === 0 && activeGoal ? "Work on my current learning goal" : suggestion}</span>
             <ArrowUpRight className="size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-[var(--accent-strong)]" aria-hidden="true" />
           </button>
         ))}
@@ -1138,7 +1240,7 @@ function ConversationMessage({
           !isTutor && "order-first rounded-2xl bg-[var(--subtle)] px-4 py-3",
         )}
       >
-        <h2 className="text-sm font-semibold">{isTutor ? "Tutor" : "You"}</h2>
+        <h2 className="text-sm font-semibold">{isTutor ? "Digital Twin" : "You"}</h2>
         <p className="mt-1 whitespace-pre-wrap text-sm leading-6 text-foreground">
           {message.content}
         </p>
@@ -1181,6 +1283,9 @@ function TutorAvatar() {
 }
 
 function Composer({
+  composerRef,
+  outreachReply,
+  onCancelReply,
   course,
   conversationAvailable,
   value,
@@ -1193,6 +1298,9 @@ function Composer({
   onSubmit,
   onRecover,
 }: {
+  composerRef: RefObject<HTMLDivElement | null>
+  outreachReply: StudentProactiveMessageView | null
+  onCancelReply: () => void
   course: StudentCourse | null
   conversationAvailable: boolean
   value: string
@@ -1209,7 +1317,7 @@ function Composer({
     !course || !conversationAvailable || isLoading || requiresNewConversation
 
   return (
-    <div className="workspace-canvas px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 sm:px-6">
+    <div ref={composerRef} className="workspace-canvas shrink-0 px-3 pb-[max(12px,env(safe-area-inset-bottom))] pt-3 sm:px-6">
       <div className="mx-auto w-full max-w-[840px]">
         {error ? (
           <Alert variant="destructive" className="mb-3">
@@ -1219,7 +1327,7 @@ function Composer({
                 ? "This course release changed"
                 : errorScope === "workspace"
                   ? "Course conversation unavailable"
-                  : "The question was not sent"}
+                  : "The reply was not confirmed"}
             </AlertTitle>
             <AlertDescription className="flex flex-wrap items-center justify-between gap-2">
               <span>
@@ -1243,6 +1351,20 @@ function Composer({
             </AlertDescription>
           </Alert>
         ) : null}
+        {outreachReply ? (
+          <section aria-label="Replying to Digital Twin check-in" className="mb-2 rounded-xl border border-[var(--accent-border)] bg-[var(--accent-soft)]/30 p-3">
+            <div className="flex items-center justify-between gap-2">
+              <h2 className="text-sm font-semibold">Replying to your Digital Twin</h2>
+              <Button type="button" variant="ghost" size="sm" disabled={isSubmitting} onClick={onCancelReply}>Cancel reply</Button>
+            </div>
+            <div tabIndex={0} aria-label="Original check-in" className="mt-2 max-h-[24dvh] overflow-y-auto break-words rounded-md focus-visible:outline-2 focus-visible:outline-ring">
+              <p className="whitespace-pre-line text-sm leading-6">{outreachReply.message.content}</p>
+            </div>
+            {outreachReply.citations.length ? <div className="mt-2 max-h-16 overflow-y-auto text-xs leading-5 text-muted-foreground">
+              {outreachReply.citations.map((citation) => <p key={citation.id}>Source: {citation.title} · {citation.locator}</p>)}
+            </div> : null}
+          </section>
+        ) : null}
         <PromptInput
           value={value}
           onValueChange={onValueChange}
@@ -1252,18 +1374,18 @@ function Composer({
           className="rounded-2xl border bg-white p-2 shadow-[var(--shadow-composer)] focus-within:border-[var(--accent-border)] focus-within:ring-2 focus-within:ring-ring/20"
         >
           <PromptInputTextarea
-            placeholder={isLoading ? "Opening the course conversation…" : "Ask about this course"}
-            aria-label="Ask about this course"
+            placeholder={isLoading ? "Opening the course conversation…" : outreachReply ? "Write your reply to this check-in…" : "Ask about this course"}
+            aria-label={outreachReply ? "Reply to Digital Twin check-in" : "Ask about this course"}
             maxLength={8000}
             className="min-h-12 px-2 py-2.5 text-sm"
           />
           <PromptInputActions className="justify-end px-1 pb-1">
-            <PromptInputAction tooltip="Send question">
+            <PromptInputAction tooltip={outreachReply ? "Send reply" : "Send question"}>
               <Button
                 type="button"
                 size="icon-lg"
                 className="size-11 sm:size-9"
-                aria-label="Send question"
+                aria-label={outreachReply ? "Send reply" : "Send question"}
                 disabled={disabled || isSubmitting || !value.trim()}
                 onClick={() => void onSubmit()}
               >
@@ -1332,7 +1454,8 @@ function CitationPanel({
       aria-label="Sources for this answer"
       className={cn("min-w-0 flex-col overflow-y-auto bg-white", className)}
     >
-      <div className="flex min-h-14 items-center justify-between gap-3 border-b px-5">
+      {/* The fixed account control occupies the desktop top-right corner. */}
+      <div className={cn("flex min-h-14 items-center justify-between gap-3 border-b px-5", !dialogTitle && "pr-16")}>
         {dialogTitle ? (
           <DialogPrimitive.Title asChild>{title}</DialogPrimitive.Title>
         ) : (

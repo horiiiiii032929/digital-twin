@@ -1,0 +1,14 @@
+{
+  "run_id": "it5004-presentation-teaching-live-001",
+  "status": "failed-before-provider",
+  "decision": "Refine fixture; no model inference or profile change",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "source_files_unchanged": true,
+  "reason": "Three authored objective labels were duplicates; application uniqueness validation rejected all four runtimes.",
+  "provider_calls": 0,
+  "cost_usd": 0,
+  "private_artifacts": "reports/generated/it5004-presentation-teaching-live-001",
+  "dataset_sha256": "6b99783785a54f1b989bffb1c691534a66ec36ffc6c4ed0569c7af0e8826efa1",
+  "successor": "it5004-presentation-teaching-live-002"
+}

@@ -1,0 +1,39 @@
+{
+  "profile_id": "post-report-final-decision-v1",
+  "profile_type": "experimental-decision-record-not-SystemReleaseProfile",
+  "date": "2026-09-08",
+  "default_release": {
+    "decision": "Keep unchanged",
+    "path": "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json"
+  },
+  "experimental_generation": {
+    "control": "v4",
+    "candidate": "v19-luna-luna-medium",
+    "decision": "Refine candidate; no promotion",
+    "evidence": "research/05_evaluation/records/post-report-final-selection-004-mini-review-live-001.json"
+  },
+  "candidate_runtime_contract": {
+    "learning": "assessed-count",
+    "planner": "analytic-only",
+    "assessment": "source-bound-model-assessment-v2",
+    "goal_recovery": true,
+    "context_retrieval": true,
+    "evidence": "research/05_evaluation/records/post-report-product-integration-003-contract-001.json",
+    "quality_qualified": false
+  },
+  "safe_default": {
+    "APP_EXPERIMENTAL_TUTORING_CANDIDATE": "unset",
+    "APP_POST_REPORT_LEARNING": "unset",
+    "APP_POST_REPORT_PLANNER": "unset",
+    "APP_POST_REPORT_MODEL_ASSESSMENT": "unset"
+  },
+  "no_automatic_deployment": true,
+  "additional_sol_calls": 0,
+  "known_total_cost_usd": 2.4031243,
+  "budget_remaining_usd": 27.5968757,
+  "limitations": [
+    "No human learning/usability evidence",
+    "Experimental comparison does not replace qualification of selected release",
+    "Earlier experimental profile retained for reproducibility, not implied promotion"
+  ]
+}

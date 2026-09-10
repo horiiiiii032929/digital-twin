@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="product-first-ja" name="質問前の初回支援">
+    <mxGraphModel page="1" pageWidth="1600" pageHeight="1160" background="#FFFFFF">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="pf-canvas" parent="1" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=#FFFFFF;">
+          <mxGeometry as="geometry" x="0" y="0" width="1600" height="1160" />
+        </mxCell>
+        <mxCell id="pf-title" parent="1" vertex="1" value="質問前に始まる学習支援" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=36;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=1;">
+          <mxGeometry as="geometry" x="50" y="28" width="1500" height="52" />
+        </mxCell>
+        <mxCell id="pf-scope" parent="1" vertex="1" value="UMLアクティビティ図 ｜ 1人の学生：初回の自動復習と、その問いへの応答" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="50" y="94" width="1500" height="36" />
+        </mxCell>
+        <mxCell id="pf-professor" parent="1" vertex="1" value="教授" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=26;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;swimlane;horizontal=1;startSize=50;collapsible=0;recursiveResize=0;swimlaneFillColor=#FFFFFF;fillColor=#F0F3F6;fontStyle=1;fontSize=26;fontFamily=Hiragino Sans;">
+          <mxGeometry as="geometry" x="50" y="155" width="400" height="940" />
+        </mxCell>
+        <mxCell id="pf-system" parent="1" vertex="1" value="システム" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=26;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;swimlane;horizontal=1;startSize=50;collapsible=0;recursiveResize=0;swimlaneFillColor=#FFFFFF;fillColor=#F0F3F6;fontStyle=1;fontSize=26;fontFamily=Hiragino Sans;">
+          <mxGeometry as="geometry" x="450" y="155" width="650" height="940" />
+        </mxCell>
+        <mxCell id="pf-student" parent="1" vertex="1" value="学生" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=26;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;swimlane;horizontal=1;startSize=50;collapsible=0;recursiveResize=0;swimlaneFillColor=#FFFFFF;fillColor=#F0F3F6;fontStyle=1;fontSize=26;fontFamily=Hiragino Sans;">
+          <mxGeometry as="geometry" x="1100" y="155" width="450" height="940" />
+        </mxCell>
+        <mxCell id="pf-start" parent="pf-professor" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#20364F;">
+          <mxGeometry as="geometry" x="189" y="65" width="22" height="22" />
+        </mxCell>
+        <mxCell id="pf-publish" parent="pf-professor" vertex="1" value="教材・目標・指導方針を&#10;設定して公開する" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="35" y="115" width="330" height="86" />
+        </mxCell>
+        <mxCell id="pf-join" parent="pf-student" vertex="1" value="授業を開き&#10;受信を許可する" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="30" y="115" width="390" height="86" />
+        </mxCell>
+        <mxCell id="pf-save-conversation" parent="pf-system" vertex="1" value="学生の会話を作成・保存&#10;create_conversation()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="200" y="210" width="375" height="64" />
+        </mxCell>
+        <mxCell id="pf-save-goal" parent="pf-system" vertex="1" value="学習目標を作成・保存&#10;observe_events()" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="200" y="304" width="375" height="64" />
+        </mxCell>
+        <mxCell id="pf-api-owner" parent="1" vertex="1" value="APIの処理" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=20;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="460" y="378" width="180" height="46" />
+        </mxCell>
+        <mxCell id="pf-worker-owner" parent="1" vertex="1" value="ワーカーの巡回" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=20;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="460" y="468" width="180" height="46" />
+        </mxCell>
+        <mxCell id="pf-due" parent="pf-system" vertex="1" value="復習時期を検出する&#10;目標作成から24時間以降" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="200" y="395.0" width="375" height="78" />
+        </mxCell>
+        <mxCell id="pf-choose" parent="pf-system" vertex="1" value="権限・教材・頻度を確認し&#10;許可された支援を選ぶ" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="200" y="503.0" width="375" height="78" />
+        </mxCell>
+        <mxCell id="pf-decision" parent="pf-system" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rhombus;">
+          <mxGeometry as="geometry" x="363.5" y="609.0" width="48" height="48" />
+        </mxCell>
+        <mxCell id="pf-skip" parent="pf-system" vertex="1" value="今回は&#10;配信しない" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="30" y="694.0" width="230" height="64" />
+        </mxCell>
+        <mxCell id="pf-deliver" parent="pf-system" vertex="1" value="支援メッセージを&#10;受信箱に保存する" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;fillColor=#EEF4FA;strokeColor=#285E8E;fontStyle=1;">
+          <mxGeometry as="geometry" x="325" y="694.0" width="285" height="64" />
+        </mxCell>
+        <mxCell id="pf-reply" parent="pf-student" vertex="1" value="届いた問いを読み&#10;チャットで回答する" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;fillColor=#EEF4FA;strokeColor=#285E8E;fontStyle=1;">
+          <mxGeometry as="geometry" x="30" y="694.0" width="390" height="64" />
+        </mxCell>
+        <mxCell id="pf-record" parent="pf-system" vertex="1" value="対話と評価可能な&#10;回答を記録する" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=16;">
+          <mxGeometry as="geometry" x="325" y="790.0" width="285" height="60" />
+        </mxCell>
+        <mxCell id="pf-skip-final" parent="pf-system" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;">
+          <mxGeometry as="geometry" x="131" y="805.0" width="28" height="28" />
+        </mxCell>
+        <mxCell id="pf-skip-final-centre" parent="pf-system" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#20364F;">
+          <mxGeometry as="geometry" x="137" y="811.0" width="16" height="16" />
+        </mxCell>
+        <mxCell id="pf-record-final" parent="pf-system" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;">
+          <mxGeometry as="geometry" x="453.5" y="892.0" width="28" height="28" />
+        </mxCell>
+        <mxCell id="pf-record-final-centre" parent="pf-system" vertex="1" value="" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#20364F;">
+          <mxGeometry as="geometry" x="459.5" y="898.0" width="16" height="16" />
+        </mxCell>
+        <mxCell id="pf-flow-01" parent="1" edge="1" source="pf-start" target="pf-publish" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-02" parent="1" edge="1" source="pf-publish" target="pf-join" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-03" parent="1" edge="1" source="pf-join" target="pf-save-conversation" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=1.0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1325" y="397" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pf-flow-03b" parent="1" edge="1" source="pf-save-conversation" target="pf-save-goal" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-04" parent="1" edge="1" source="pf-save-goal" target="pf-due" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-05" parent="1" edge="1" source="pf-due" target="pf-choose" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-06" parent="1" edge="1" source="pf-choose" target="pf-decision" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-no" parent="1" edge="1" source="pf-decision" target="pf-skip" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.0;exitY=0.5;entryX=0.5;entryY=0.0;html=0;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;" value="[配信不可]">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="595" y="788.0" />
+            </Array>
+            <mxPoint as="offset" x="0" y="-22" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pf-flow-yes" parent="1" edge="1" source="pf-decision" target="pf-deliver" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;html=0;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;labelBackgroundColor=#FFFFFF;" value="[配信可]">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="837.5" y="831.0" />
+              <mxPoint x="917.5" y="831.0" />
+            </Array>
+            <mxPoint as="offset" x="104" y="-5" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pf-flow-07" parent="1" edge="1" source="pf-deliver" target="pf-reply" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-08" parent="1" edge="1" source="pf-reply" target="pf-record" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=1.0;entryY=0.5;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1325" y="975.0" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pf-flow-09" parent="1" edge="1" source="pf-skip" target="pf-skip-final" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-flow-10" parent="1" edge="1" source="pf-record" target="pf-record-final" style="edgeStyle=none;rounded=0;endArrow=open;endFill=0;strokeColor=#20364F;strokeWidth=1.8;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="pf-available" parent="1" vertex="1" value="公開済みの授業を利用できる" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="605" y="276" width="370" height="30" />
+        </mxCell>
+        <mxCell id="pf-no-question" parent="pf-student" vertex="1" value="この時点で、学生は&#10;まだ質問していない。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=24;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;fillColor=#F7F9FB;align=left;spacing=18;">
+          <mxGeometry as="geometry" x="40" y="397.0" width="380" height="106" />
+        </mxCell>
+        <mxCell id="pf-scope-note" parent="pf-professor" vertex="1" value="開始の仕組み&#10;&#10;この図：復習時期を自動検出&#10;&#10;別経路：教授が日時を指定して予約" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=18;">
+          <mxGeometry as="geometry" x="35" y="278" width="330" height="195" />
+        </mxCell>
+        <mxCell id="pf-preconditions" parent="pf-professor" vertex="1" value="実行の条件&#10;&#10;受講登録・教材公開・自律支援・受信同意が有効。&#10;&#10;条件を満たさない場合は送らない。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=22;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=18;">
+          <mxGeometry as="geometry" x="35" y="615.0" width="330" height="205" />
+        </mxCell>
+        <mxCell id="pf-end-note" parent="1" vertex="1" value="終端は、このシナリオの終了を表す。学習目標の完了や、システム全体の停止を意味しない。" style="html=0;whiteSpace=wrap;fontFamily=Hiragino Sans;fontSize=21;fontColor=#20364F;strokeColor=#20364F;strokeWidth=1.6;fillColor=#FFFFFF;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="110" y="1110.0" width="1380" height="34" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

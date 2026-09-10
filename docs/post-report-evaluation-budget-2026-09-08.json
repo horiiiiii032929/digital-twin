@@ -1,0 +1,585 @@
+{
+  "authorized_total_usd": 30,
+  "authorized_by": "user on 2026-09-08",
+  "runs": [
+    {
+      "run_id": "post-report-paired-quality-001-live-001",
+      "maximum_reservation_usd": 8,
+      "status": "completed",
+      "actual_reported_usd": 0.0600604,
+      "output": "reports/generated/post-report-paired-quality-001-live-001",
+      "unknown_cost_calls": 0,
+      "provider_calls": 140
+    },
+    {
+      "run_id": "post-report-paired-quality-002-live-001",
+      "maximum_reservation_usd": 8,
+      "status": "preflight-rejected-no-calls",
+      "actual_reported_usd": 0,
+      "output": "reports/generated/post-report-paired-quality-002-live-001",
+      "provider_calls": 0,
+      "unknown_cost_calls": 0,
+      "reason": "Full packet requires US$76.80 conservative reservation; rejected before output directory or provider construction."
+    },
+    {
+      "run_id": "post-report-paired-quality-003-live-001",
+      "maximum_reservation_usd": 13,
+      "status": "completed",
+      "actual_reported_usd": 0.0775104,
+      "output": "reports/generated/post-report-paired-quality-003-live-001",
+      "provider_calls": 29,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-audited-generation-004-case-01-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-004-case-01-live-001",
+      "actual_reported_usd": 0.0016518000000000001,
+      "unknown_cost_calls": 0,
+      "provider_calls": 4
+    },
+    {
+      "run_id": "post-report-audited-generation-004-case-02-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-004-case-02-live-001",
+      "actual_reported_usd": 0.0026515999999999996,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-audited-generation-004-case-03-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-004-case-03-live-001",
+      "actual_reported_usd": 0.0027600000000000003,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-audited-generation-004-case-04-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-004-case-04-live-001",
+      "actual_reported_usd": 0.0025846000000000003,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-audited-generation-004-case-05-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-004-case-05-live-001",
+      "actual_reported_usd": 0.002809,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-audited-generation-005-case-01-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-005-case-01-live-001",
+      "actual_reported_usd": 0.020833800000000003,
+      "unknown_cost_calls": 0,
+      "provider_calls": 5
+    },
+    {
+      "run_id": "post-report-audited-generation-005-case-02-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-005-case-02-live-001",
+      "actual_reported_usd": 0.0349936,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-audited-generation-005-case-03-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-005-case-03-live-001",
+      "actual_reported_usd": 0.0365276,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-audited-generation-005-case-04-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-005-case-04-live-001",
+      "actual_reported_usd": 0.130642,
+      "unknown_cost_calls": 0,
+      "provider_calls": 12
+    },
+    {
+      "run_id": "post-report-audited-generation-005-case-05-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-audited-generation-005-case-05-live-001",
+      "actual_reported_usd": 0.0359046,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-source-assessment-001-luna-live-001",
+      "maximum_reservation_usd": 6,
+      "status": "completed",
+      "actual_reported_usd": 0.0059765999999999994,
+      "output": "reports/generated/post-report-source-assessment-001-luna-live-001",
+      "provider_calls": 26,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-source-assessment-001-sol-live-001",
+      "maximum_reservation_usd": 6,
+      "status": "completed",
+      "actual_reported_usd": 0.095576,
+      "output": "reports/generated/post-report-source-assessment-001-sol-live-001",
+      "provider_calls": 26,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-blind-review-001-nano-live-001",
+      "maximum_reservation_usd": 5.52,
+      "status": "completed",
+      "actual_reported_usd": 0.2064155,
+      "output": "reports/generated/post-report-blind-review-001-nano-live-001",
+      "provider_calls": 368,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-blind-review-001-mini-live-001",
+      "maximum_reservation_usd": 11.04,
+      "status": "completed",
+      "actual_reported_usd": 0.834465,
+      "output": "reports/generated/post-report-blind-review-001-mini-live-001",
+      "provider_calls": 368,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-source-assessment-002-luna-live-001",
+      "maximum_reservation_usd": 6,
+      "status": "completed",
+      "actual_reported_usd": 0.0053518,
+      "output": "reports/generated/post-report-source-assessment-002-luna-live-001",
+      "provider_calls": 25,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-blind-review-002-mini-calibration-live-001",
+      "maximum_reservation_usd": 1.92,
+      "status": "completed",
+      "actual_reported_usd": 0.146058,
+      "output": "reports/generated/post-report-blind-review-002-mini-calibration-live-001",
+      "provider_calls": 64,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-blind-review-003-mini-calibration-live-001",
+      "maximum_reservation_usd": 1.92,
+      "status": "completed",
+      "actual_reported_usd": 0.146613,
+      "output": "reports/generated/post-report-blind-review-003-mini-calibration-live-001",
+      "provider_calls": 64,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-01-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-01-live-001",
+      "actual_reported_usd": 0.0054386,
+      "unknown_cost_calls": 0,
+      "provider_calls": 7
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-02-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-02-live-001",
+      "actual_reported_usd": 0.0047184,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-03-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-03-live-001",
+      "actual_reported_usd": 0.006122,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-04-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-04-live-001",
+      "actual_reported_usd": 0.0065216,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-05-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-05-live-001",
+      "actual_reported_usd": 0.0069666,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-06-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-06-live-001",
+      "actual_reported_usd": 0.0051952000000000005,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-07-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-07-live-001",
+      "actual_reported_usd": 0.004931,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-08-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-08-live-001",
+      "actual_reported_usd": 0.0041928,
+      "unknown_cost_calls": 0,
+      "provider_calls": 7
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-09-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-09-live-001",
+      "actual_reported_usd": 0.0047164,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-10-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-10-live-001",
+      "actual_reported_usd": 0.0048324,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-11-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-11-live-001",
+      "actual_reported_usd": 0.0051498,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-002-case-12-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-002-case-12-live-001",
+      "actual_reported_usd": 0.0052236,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-01-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-01-live-001",
+      "actual_reported_usd": 0.0009188,
+      "unknown_cost_calls": 0,
+      "provider_calls": 2
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-02-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-02-live-001",
+      "actual_reported_usd": 0.0013954,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-03-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-03-live-001",
+      "actual_reported_usd": 0.001408,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-04-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-04-live-001",
+      "actual_reported_usd": 0.0014128,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-05-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-05-live-001",
+      "actual_reported_usd": 0.0013638,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-06-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-06-live-001",
+      "actual_reported_usd": 0.001302,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-07-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-07-live-001",
+      "actual_reported_usd": 0.0014978,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-08-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-08-live-001",
+      "actual_reported_usd": 0.0007232,
+      "unknown_cost_calls": 0,
+      "provider_calls": 2
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-09-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-09-live-001",
+      "actual_reported_usd": 0.0009809999999999999,
+      "unknown_cost_calls": 0,
+      "provider_calls": 2
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-10-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-10-live-001",
+      "actual_reported_usd": 0.0010674,
+      "unknown_cost_calls": 0,
+      "provider_calls": 2
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-11-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-11-live-001",
+      "actual_reported_usd": 0.0015526,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-003-case-12-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-003-case-12-live-001",
+      "actual_reported_usd": 0.0016506,
+      "unknown_cost_calls": 0,
+      "provider_calls": 3
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-01-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-01-live-001",
+      "actual_reported_usd": 0.0073042,
+      "unknown_cost_calls": 0,
+      "provider_calls": 9
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-02-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-02-live-001",
+      "actual_reported_usd": 0.0048518,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-03-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-03-live-001",
+      "actual_reported_usd": 0.008118,
+      "unknown_cost_calls": 0,
+      "provider_calls": 10
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-04-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-04-live-001",
+      "actual_reported_usd": 0.0065152000000000005,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-05-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-05-live-001",
+      "actual_reported_usd": 0.0050168,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-06-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-06-live-001",
+      "actual_reported_usd": 0.0045984,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-07-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-07-live-001",
+      "actual_reported_usd": 0.0049408,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-08-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-08-live-001",
+      "actual_reported_usd": 0.003954,
+      "unknown_cost_calls": 0,
+      "provider_calls": 7
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-09-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-09-live-001",
+      "actual_reported_usd": 0.0043716,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-10-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-10-live-001",
+      "actual_reported_usd": 0.0040746,
+      "unknown_cost_calls": 0,
+      "provider_calls": 6
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-11-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-11-live-001",
+      "actual_reported_usd": 0.0051757999999999995,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-case-12-live-001",
+      "maximum_reservation_usd": 12,
+      "status": "completed",
+      "output": "reports/generated/post-report-final-selection-004-case-12-live-001",
+      "actual_reported_usd": 0.004938,
+      "unknown_cost_calls": 0,
+      "provider_calls": 8
+    },
+    {
+      "run_id": "post-report-final-selection-004-mini-review-live-001",
+      "maximum_reservation_usd": 4.8,
+      "status": "completed",
+      "actual_reported_usd": 0.410598,
+      "output": "reports/generated/post-report-final-selection-004-mini-review-live-001",
+      "provider_calls": 160,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "product-demo-v2-live-001",
+      "maximum_reservation_usd": 1.92,
+      "status": "completed-recording-qa-not-promoted",
+      "output": "output/playwright/product-pilot-v2",
+      "purpose": "Real-browser recording, existing experimental V4; not a quality evaluation",
+      "actual_reported_usd": 0.0048518,
+      "provider_calls": 12,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "plain-language-teaching-demo-live-001",
+      "maximum_reservation_usd": 14.08,
+      "status": "completed-presentation-development-no-promotion",
+      "purpose": "Two natural language teaching profiles, two real application turns, V4 and V19 Luna candidate; presentation development, no release promotion",
+      "output": "reports/generated/plain-language-teaching-demo-live-001",
+      "actual_reported_usd": 0.0125484,
+      "provider_calls": 18,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "it5004-presentation-teaching-live-001",
+      "maximum_reservation_usd": 14.08,
+      "status": "failed-fixture-before-provider",
+      "purpose": "Actual AI dialogue with user-requested IT5004 lecture material; two synthetic teaching profiles; no release promotion",
+      "output": "reports/generated/it5004-presentation-teaching-live-001",
+      "actual_reported_usd": 0,
+      "provider_calls": 0,
+      "unknown_cost_calls": 0,
+      "reason": "Duplicate authored objective labels rejected before provider construction."
+    },
+    {
+      "run_id": "it5004-presentation-teaching-live-002",
+      "maximum_reservation_usd": 14.08,
+      "status": "completed-presentation-development-no-promotion",
+      "output": "reports/generated/it5004-presentation-teaching-live-002",
+      "purpose": "Same source/profile/questions; unique objective metadata per layer; no prompt or validation relaxation",
+      "actual_reported_usd": 0.0113396,
+      "provider_calls": 12,
+      "unknown_cost_calls": 0
+    },
+    {
+      "run_id": "it5004-final-presentation-demo-001",
+      "maximum_reservation_usd": 14.4,
+      "status": "completed-presentation-demonstration-no-promotion",
+      "output": "reports/generated/it5004-final-demo",
+      "purpose": "User-authorized actual IT5004 product demonstrations; no quality comparison or promotion",
+      "actual_reported_usd": 0.0276988,
+      "provider_calls": 28,
+      "unknown_cost_calls": 0
+    }
+  ],
+  "unallocated_usd": 27.5404371,
+  "note": "Completed calls have reported usage; unused run reservation released. No further external calls authorized beyond the total US$30 ceiling.",
+  "model_spending_preference": {
+    "recorded_on": "2026-09-08",
+    "source": "User instruction: avoid expensive models such as Sol; older inexpensive models may be used in volume.",
+    "additional_sol_calls": "Do not schedule additional Sol calls under the current evaluation plan.",
+    "preferred_review_models": [
+      "gpt-5.4-nano-2026-03-17",
+      "gpt-5.4-mini-2026-03-17"
+    ],
+    "completed_results": "Retain completed expensive-model results; do not repeat them solely because of this preference.",
+    "budget": "Volume remains subject to the existing total US$30 cap, per-run reservations, and known-cost accounting.",
+    "selection": "Calibrate reviewers before accepting their ratings; low price or repeated agreement alone is not evidence of correctness."
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "run_id": "aws-local-fixes-009",
+  "date": "2026-09-10T02:02:11.935154+00:00",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "decision": "Keep verified app repairs; same audited configuration; EC2 stopped and both power schedules disabled",
+  "region": "ap-southeast-1",
+  "stack_status": "UPDATE_COMPLETE",
+  "instance_id": "i-0fde1692c45c87640",
+  "instance_state": "stopped",
+  "outputs": {
+    "DataVolumeIdOutput": "vol-042a708b1eb64861b",
+    "RuntimeLogGroupOutput": "DigitalTwinPilot-RuntimeLogs92941AA6-Vv5tpim8JFWF",
+    "DeployDocumentOutput": "DigitalTwinPilot-DeployRelease-knR9mol4vITX",
+    "InstanceIdOutput": "i-0fde1692c45c87640",
+    "ScheduleGroupOutput": "DigitalTwinPilot-OfficeHoursGroup40C73556-18ZWBPAXZJA0P",
+    "StopScheduleOutput": "DigitalTwinPilot-OfficeHoursStop831F4579-RCOQW9LEFM54",
+    "WebImageOutput": "030334071887.dkr.ecr.ap-southeast-1.amazonaws.com/cdk-hnb659fds-container-assets-030334071887-ap-southeast-1:8fef761ee1080d6888a57d64b98a455210f94975da9fa65e2520485ad0458d19",
+    "StartScheduleOutput": "DigitalTwinPilot-OfficeHoursStart70999534-1R6IP3H9TSFCB",
+    "ApiImageOutput": "030334071887.dkr.ecr.ap-southeast-1.amazonaws.com/cdk-hnb659fds-container-assets-030334071887-ap-southeast-1:f034abb76ddfdc5794d5007eb9bb2eca4b02bd106e8d8bdb9760a3a1a9415ba0",
+    "RuntimeSecretArnOutput": "arn:aws:secretsmanager:ap-southeast-1:030334071887:secret:RuntimeSecret2A7665CB-omiduZ2tH0wN-yajrnS",
+    "AppUrlOutput": "https://d3cccbyk2qjxd6.cloudfront.net"
+  },
+  "activation_id": "1ab04731-51c6-4c57-80bc-58e321cb9c03",
+  "activation_status": "Success",
+  "changed_runtime_files": [
+    "apps/web/src/components/onboarding/preview-comparison.tsx",
+    "apps/web/src/components/professor/professor-autonomy-panel.tsx",
+    "apps/web/src/components/student/student-workspace.tsx",
+    "apps/web/src/hooks/testing/hook-harness.ts",
+    "apps/web/src/hooks/use-auth-session.ts",
+    "apps/web/src/hooks/use-student-workspace.ts",
+    "apps/web/src/lib/api/client.ts",
+    "apps/web/src/lib/api/session-state.ts",
+    "apps/web/src/lib/api/student.ts",
+    "apps/web/src/lib/student/pending-request.ts",
+    "src/digital_twin/generation/audited_instruction.py",
+    "src/digital_twin/generation/final_response_audit.py"
+  ],
+  "manifest_sha256": "c6e345fcd8efe275c5acbec1bc713778ed7d355a331870adb5ae488d815f8eaa",
+  "source_hashes": {
+    "apps/web/src/components/onboarding/preview-comparison.tsx": "d5b01ca4cb80ee227ba4824728bcf0ba5b98a87aaec4e9f0b457302361bf402a",
+    "apps/web/src/components/professor/professor-autonomy-panel.tsx": "b3e6fcee236164bd578f62e1a58080091c8f07413965bd234769f472a0a9aff6",
+    "apps/web/src/components/student/student-workspace.tsx": "709eac4200c9a5fa127deef810840d66e24fdb128e78eb31d56552d5544dd6a2",
+    "apps/web/src/hooks/testing/hook-harness.ts": "c338754346b9b055f663786ee072df82d50a250b69f5afc19b34022b1d0ce78e",
+    "apps/web/src/hooks/use-auth-session.ts": "e7453ec59509b83b5e36f606ce74a46bd0a9e92ed1bc6aa2ecef9e757494688b",
+    "apps/web/src/hooks/use-student-workspace.ts": "baec7af00f78d10591cce2a9ae1a22f220a3731aaa0550bf9c527448e23ec3e6",
+    "apps/web/src/lib/api/client.ts": "415690ee1e29551965736e4d44b08a5d265fc8509175912456a31c14c4354d73",
+    "apps/web/src/lib/api/session-state.ts": "1a8d518c84654007f03522edafd0438b94e1919331c9124a3327fab76fc8e64c",
+    "apps/web/src/lib/api/student.ts": "f22787b5e677eb736a999023595e98ba574e7cec669248941bb0cc47d6660bb1",
+    "apps/web/src/lib/student/pending-request.ts": "caa1a7df33bab65e847aee6f7007f8ae5bd7287bb41e2d22a684275269df36eb",
+    "src/digital_twin/generation/audited_instruction.py": "caaeda0822281cc6078ddfb0119e8b430f47e332d75f1620087c150198468729",
+    "src/digital_twin/generation/final_response_audit.py": "245de781264919ccea5acb816ce94b68b57fa68f5e8811fa0e0a038c1d2728d8"
+  },
+  "runtime": {
+    "api": {
+      "schema_version": 1,
+      "source_sha256": "c870e00a44f01ab15d223e92157c8c2da42939a2ca0627647cada4629a67ce89",
+      "generator_implementation": "question-specific-profile-grounded-v19",
+      "generator_model": "gpt-5.6-luna",
+      "planner_implementation": "GuardedPolicyValuePlanner",
+      "planner_model": "gpt-5.6-luna",
+      "learning_configuration": null,
+      "server_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+      "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+      "experimental_version": "v19-luna-luna-medium",
+      "experimental_configuration": {
+        "version": "v19-luna-luna-medium",
+        "implementation_id": "question-specific-profile-grounded-v19",
+        "model": "gpt-5.6-luna",
+        "output_cap": 3000,
+        "reasoning_effort": "low",
+        "runtime_flags": {
+          "teaching_profile_context_enabled": true,
+          "question_specific_generation_enabled": true,
+          "bounded_generation_contract_enabled": true,
+          "named_referent_context_enabled": true,
+          "instructional_compact_response_enabled": true,
+          "instructional_profile_authority_enabled": true,
+          "instructional_typed_response_enabled": true,
+          "instructional_evidence_strength_enabled": true,
+          "instructional_contract_repair_enabled": true,
+          "instructional_final_audit_enabled": true,
+          "instructional_source_state_context_enabled": true,
+          "experimental_generation_model_id": "gpt-5.6-luna",
+          "experimental_final_audit_model_id": "gpt-5.6-luna"
+        },
+        "role_configuration": {
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "revision": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium"
+          }
+        },
+        "observed_openai_transport_configurations": [
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "planner"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "generation"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium",
+            "role": "revision"
+          }
+        ]
+      },
+      "database_binding_comparable": true,
+      "database_binding_sha256": "d02b918bfd46f0bea6efc42a89c1b2defd0d33968993de3f4f476c6543d827fa",
+      "composition_sha256": "81dc44a9a7f33492f83bc844a25d5bd14efc5ff239ecbafe2a52b1c105b5f1e6",
+      "scope": "Observed composition fields and database binding; equality is not semantic quality qualification or a full deployment verification."
+    },
+    "workers": []
+  },
+  "configuration_comparison": {
+    "generator_implementation": true,
+    "generator_model": true,
+    "planner_implementation": true,
+    "planner_model": true,
+    "learning_configuration": true,
+    "server_tutoring_mode": true,
+    "evidence_gate_mode": true,
+    "experimental_version": true,
+    "experimental_configuration": true
+  },
+  "https_auth_checks": {
+    "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+    "checks": [
+      {
+        "case": "https-readiness",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "anonymous-session-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "synthetic-header-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "cross-origin-login-denied",
+        "status": 403,
+        "passed": true
+      },
+      {
+        "case": "administrator-login",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "secure-cookie-flags",
+        "passed": true
+      },
+      {
+        "case": "authenticated-session",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "logout",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "case": "revoked-session-denied",
+        "status": 401,
+        "passed": true
+      }
+    ],
+    "provider_calls": 0
+  },
+  "provider_calls": 0,
+  "schedule_states": {
+    "start": "DISABLED",
+    "stop": "DISABLED"
+  },
+  "schedules_updated_outside_cdk": true,
+  "ami_pin": "ami-0872fceefd41a6357",
+  "backup_path": "/opt/digital-twin/backups/pre-local-fixes-20260910.zip",
+  "backup_sha256": "fb66dd9660f7ccf6404d9f233ac1e4467bc350daf4efc590a232c793697a61ac",
+  "table_counts": {
+    "schema_migrations": 19,
+    "accounts": 16,
+    "courses": 4,
+    "memberships": 26,
+    "releases": 2,
+    "release_chunks": 4,
+    "conversations": 43,
+    "messages": 238,
+    "citations": 80,
+    "audit_events": 958,
+    "identity_credentials": 16,
+    "identity_sessions": 157,
+    "onboarding_sessions": 5,
+    "ingestion_jobs": 7,
+    "storage_deletion_queue": 0,
+    "sqlite_sequence": 0,
+    "conversation_learner_states": 27,
+    "learning_gap_signals": 32,
+    "outreach_preferences": 1,
+    "proactive_triggers": 0,
+    "proactive_messages": 0,
+    "proactive_citations": 0,
+    "proactive_delivery_outbox": 0,
+    "teaching_profiles": 3,
+    "autonomy_policies": 0,
+    "autonomous_goals": 0,
+    "autonomous_opportunities": 0,
+    "autonomous_plans": 0,
+    "autonomous_actions": 0,
+    "autonomous_outcomes": 0,
+    "autonomous_graph_checkpoints": 0,
+    "autonomous_wakeups": 0,
+    "autonomous_response_links": 0,
+    "autonomy_execution_leases": 0,
+    "course_domain_models": 2,
+    "learner_observations_v2": 119,
+    "learner_belief_states_v2": 27,
+    "learner_concept_attributions_v2": 292,
+    "learner_state_deltas_v2": 101,
+    "reactive_pedagogical_plans_v2": 119,
+    "grounded_tutor_responses_v2": 119,
+    "tutoring_agent_traces_v2": 119,
+    "course_tutoring_runtime_profiles": 0,
+    "tutoring_model_calls_v2": 163,
+    "autonomous_model_calls_v2": 0,
+    "clarification_requests": 0,
+    "generated_profile_previews": 0,
+    "generated_profile_preview_reviews": 0,
+    "checkpoints": 1208,
+    "writes": 7706
+  },
+  "verification": {
+    "infra_tests": 7,
+    "local_frontend_tests": 116,
+    "local_api_tests": 115,
+    "lint_build": "passed",
+    "full_repository_check": "blocked by existing packaging-script freeze-guard issue"
+  },
+  "limitations": [
+    "No full deployed browser lifecycle replay",
+    "No deployed generation in this smoke check",
+    "No new off-host restore rehearsal",
+    "Historical AWS hang not proven resolved",
+    "Fresh publication and autonomous check-in lifecycle incomplete"
+  ],
+  "evidence_folder": "output/aws-deploy-2026-09-10"
+}

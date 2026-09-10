@@ -27,6 +27,46 @@ from src.digital_twin.student import (
     StudentWorkflowError,
     seed_synthetic_student_workflow,
 )
+from src.digital_twin.student.models import CourseMembership, MembershipRole
+
+
+def test_conversation_discovery_is_student_course_and_release_scoped(tmp_path):
+    client, repository, fixture = _client(tmp_path)
+    own = _create_conversation(client, fixture)
+    repository.save_membership(CourseMembership(
+        account_id=fixture.student_b_id,
+        course_id=fixture.course_a_id,
+        role=MembershipRole.STUDENT,
+    ))
+    other = client.post(
+        f"/api/student/courses/{fixture.course_a_id}/conversations",
+        headers=_headers(fixture.student_b_id),
+    )
+    assert other.status_code == 201
+    endpoint = f"/api/student/courses/{fixture.course_a_id}/conversations"
+    result = client.get(endpoint, headers=_headers(fixture.student_a_id))
+    assert result.status_code == 200
+    assert [item["id"] for item in result.json()] == [own["id"]]
+    assert client.get(endpoint).status_code == 401
+    assert client.get(endpoint, headers=_headers(fixture.professor_id)).status_code == 403
+    assert client.get(endpoint, headers=_headers(fixture.revoked_student_id)).status_code == 403
+    assert client.get(
+        f"/api/student/courses/{fixture.course_b_id}/conversations",
+        headers=_headers(fixture.student_a_id),
+    ).status_code == 403
+
+    release = repository.get_release(fixture.release_a_id)
+    replacement = release.model_copy(update={
+        "id": "discovery-new-release",
+        "status": StudentReleaseStatus.DRAFT,
+        "created_at": "9999-12-31T23:59:59+00:00",
+    }, deep=True)
+    repository.save_release(replacement)
+    repository.publish_release(replacement.id)
+    assert client.get(endpoint, headers=_headers(fixture.student_a_id)).json() == []
+    assert repository.get_conversation(own["id"]).release_id == fixture.release_a_id
+    repository.set_release_status(replacement.id, StudentReleaseStatus.WITHDRAWN)
+    assert client.get(endpoint, headers=_headers(fixture.student_a_id)).status_code == 409
 
 
 class KeywordEmbedder:

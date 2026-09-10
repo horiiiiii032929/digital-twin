@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="08-uml-recovery-sequence" name="08-uml-recovery-sequence">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="worker:AutonomyService" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=75;">
+          <mxGeometry as="geometry" x="75" y="180" width="290" height="710" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="outreach:Service" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=75;">
+          <mxGeometry as="geometry" x="625" y="180" width="290" height="710" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="runtime:Repository" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=umlLifeline;perimeter=lifelinePerimeter;participant=rectangle;size=75;">
+          <mxGeometry as="geometry" x="1205" y="180" width="290" height="710" />
+        </mxCell>
+        <mxCell id="e7" parent="1" edge="1" value="processTrigger(stableKey)" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.15492957746478872;entryX=0.5;entryY=0.15492957746478872;" source="n4" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="220" y="290" />
+            <mxPoint as="targetPoint" x="770" y="290" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" parent="1" edge="1" value="save delivery after authority checks" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.23943661971830985;entryX=0.5;entryY=0.23943661971830985;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="770" y="350" />
+            <mxPoint as="targetPoint" x="1350" y="350" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" parent="1" edge="1" value="saved message" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;exitX=0.5;exitY=0.323943661971831;entryX=0.5;entryY=0.323943661971831;" source="n6" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1350" y="410" />
+            <mxPoint as="targetPoint" x="770" y="410" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" value="delivery result" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;exitX=0.5;exitY=0.4014084507042254;entryX=0.5;entryY=0.4014084507042254;" source="n5" target="n4">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="770" y="465" />
+            <mxPoint as="targetPoint" x="220" y="465" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" parent="1" vertex="1" value="Failure scenario: worker stops before commitAutonomousJob(). The in-app message is already persisted." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="70" y="505" width="1450" height="60" />
+        </mxCell>
+        <mxCell id="n12" parent="1" vertex="1" value="" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;fillColor=none;">
+          <mxGeometry as="geometry" x="60" y="600" width="1480" height="310" />
+        </mxCell>
+        <mxCell id="n13" parent="1" vertex="1" value="opt" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=20;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=umlFrame;fillColor=#ffffff;align=left;">
+          <mxGeometry as="geometry" x="60" y="600" width="85" height="34" />
+        </mxCell>
+        <mxCell id="n14" parent="1" vertex="1" value="[worker restarts and lease is recovered]" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=20;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;strokeColor=none;fillColor=none;align=left;spacing=0;fontStyle=0;">
+          <mxGeometry as="geometry" x="175" y="607" width="1300" height="33" />
+        </mxCell>
+        <mxCell id="e15" parent="1" edge="1" value="processTrigger(same stableKey)" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.704225352112676;entryX=0.5;entryY=0.704225352112676;" source="n4" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="220" y="680" />
+            <mxPoint as="targetPoint" x="770" y="680" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" parent="1" edge="1" value="find existing delivery" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.7816901408450704;entryX=0.5;entryY=0.7816901408450704;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="770" y="735" />
+            <mxPoint as="targetPoint" x="1350" y="735" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" parent="1" edge="1" value="existing saved message" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;exitX=0.5;exitY=0.8450704225352113;entryX=0.5;entryY=0.8450704225352113;" source="n6" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1350" y="780" />
+            <mxPoint as="targetPoint" x="770" y="780" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" parent="1" edge="1" value="duplicate / existing message" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;endArrow=open;exitX=0.5;exitY=0.9084507042253521;entryX=0.5;entryY=0.9084507042253521;" source="n5" target="n4">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="770" y="825" />
+            <mxPoint as="targetPoint" x="220" y="825" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" parent="1" edge="1" value="commitAutonomousJob(reconciled outcome)" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;endArrow=block;endFill=1;exitX=0.5;exitY=0.9929577464788732;entryX=0.5;entryY=0.9929577464788732;" source="n4" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="220" y="885" />
+            <mxPoint as="targetPoint" x="1350" y="885" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,59 @@
+{
+  "packet_id": "post-report-final-selection-v1-case-07",
+  "split": "new-synthetic-transfer",
+  "permissions": "New synthetic course protocols and records, authored for local and external model development; no real user data.",
+  "review_status": "Assistant-authored before candidate execution; not sealed or human-reviewed",
+  "sources": [
+    {
+      "course_id": "synthetic-transfer",
+      "concept_id": "retry-isolation",
+      "label": "Neri retry",
+      "text": "Neri stores a result under the pair of account ID and request key. A retry by the same account and key returns the stored result. The same key submitted by another account cannot read that result."
+    }
+  ],
+  "contexts": [
+    {
+      "id": "retry-isolation",
+      "course_id": "synthetic-transfer",
+      "category": "retry-isolation",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "detailed",
+          "explanation_structure": [
+            "Explain the supported answer first",
+            "Check understanding"
+          ],
+          "example_preferences": [],
+          "misconception_handling": "State the supported correction clearly",
+          "integrity_limits": "Do not provide full graded-work answers",
+          "help_ladder": [
+            "Explain the supported answer",
+            "Ask a check question"
+          ],
+          "outreach_policy": "Respect student consent and delivery limits"
+        },
+        "target_turn_index": 1,
+        "student_turns": [
+          {
+            "content": "How does Neri handle retrying the same request?"
+          },
+          {
+            "content": "My attempt: reuse the stored result for the same account and key. Can another account use that key to read my result?"
+          }
+        ]
+      },
+      "review_rubric": {
+        "required_meanings": [
+          "same pair replay",
+          "other account cannot read"
+        ],
+        "profile_mode": "explanatory",
+        "initial_stage": "elicitation before solution for Socratic; supported explanation for explanatory, except privacy boundary",
+        "followup_stage": "respond to the supplied attempt and requested next step; do not repeat a generic first question",
+        "review_status": "pending"
+      }
+    }
+  ],
+  "selection_note": "Prospectively fixed five exposed failure contexts, one per sequential bounded run; not fresh confirmation."
+}

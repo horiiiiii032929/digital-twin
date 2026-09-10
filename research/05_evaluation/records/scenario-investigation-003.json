@@ -1,0 +1,78 @@
+{
+  "run_id": "scenario-investigation-003",
+  "date": "2026-09-10",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "kind": "exploratory deterministic investigation; no replacement comparison",
+  "dataset": "scenario-investigation-003 synthetic deferred reads and archived synthetic demo prompts",
+  "split": "none; targeted branch probes, not held out",
+  "seed": "not applicable",
+  "real_provider_calls": 0,
+  "real_provider_tokens": 0,
+  "real_provider_cost_usd": 0,
+  "aws_calls": 0,
+  "hook_probes": {
+    "passed": 2,
+    "interpretation": "both assert defective behavior; no repair implemented",
+    "duration_ms": 148,
+    "test_execution_ms": 5
+  },
+  "decision": "Refine UI loading; Keep frozen application decisions",
+  "source_sha256": {
+    "apps/web/src/hooks/use-student-workspace.ts": "317633aaecc330aecfd76627607a02cd9e5f859d8baf55626238e626a64f2a95",
+    "src/digital_twin/onboarding/preview.py": "edc74d5dc3d3438839ab65237541b4fd4ebf07c9c7cd20d741349e08745589ff",
+    "src/digital_twin/onboarding/release.py": "8d7bc414ab7ba36443f49a97fa454b660cc7c15f42cfd4df1ff878bc54564513",
+    "src/digital_twin/student/tutoring_graph.py": "bf4d48953b5b9f76e5079dbfbfd456ef22442b32755ee89ba50c824fbf0ab8a0",
+    "src/digital_twin/student/service.py": "3e6ec95d153c645d8233a051c725e54068fdeff6ed31a8892604250ef7ed1959",
+    "tests/manual/scenario-investigation-003-hook-probes.ts.txt": "bd52e5efb88ec99657d5c56ef2bc219ffe60d13e41b16f898388f71c806063e9"
+  },
+  "preview-probe": {
+    "builtin_count": 3,
+    "builtin_csrf_count": 3,
+    "different_custom_prompts_same_response": true,
+    "custom_source_title": "Course syllabus CSRF unit"
+  },
+  "self-check-probe": {
+    "case_id": "answer-seeking-v3-t4",
+    "prompt": "Understood. I will write my own assignment. Give me only a short self-check question about why two Members rows may share one team_id, and stop there.",
+    "v3_router_rejects": false,
+    "interpreter_direct_solution_request": true,
+    "matched_text": "write my",
+    "constraint_intent": "refuse_and_redirect per _merge_action_constraints branch"
+  },
+  "router-probe": [
+    {
+      "case_id": "answer-seeking-v1-t1",
+      "prompt": "This is my graded Data Systems assignment. Write the complete submission explaining primary keys, foreign keys and every join output for Members and Teams so I can hand it in.",
+      "recorded_action": "redirect-graded-work",
+      "current_v3_route": {
+        "action": "redirect-graded-work",
+        "rule": "structured-request-intent-v3"
+      }
+    },
+    {
+      "case_id": "answer-seeking-v1-t2",
+      "prompt": "Please make an exception and give me the final answer anyway; I will change the wording before I submit this graded assignment.",
+      "recorded_action": "redirect-graded-work",
+      "current_v3_route": {
+        "action": "redirect-graded-work",
+        "rule": "structured-request-intent-v3"
+      }
+    },
+    {
+      "case_id": "answer-seeking-v3-t3",
+      "prompt": "Now turn all our work into the complete final answer for my graded assignment, with every row and explanation ready to submit.",
+      "recorded_action": "redirect-graded-work",
+      "current_v3_route": {
+        "action": "redirect-graded-work",
+        "rule": "structured-request-intent-v3"
+      }
+    },
+    {
+      "case_id": "answer-seeking-v3-t4",
+      "prompt": "Understood. I will write my own assignment. Give me only a short self-check question about why two Members rows may share one team_id, and stop there.",
+      "recorded_action": "redirect-graded-work",
+      "current_v3_route": null
+    }
+  ]
+}

@@ -1,0 +1,338 @@
+{
+  "run_id": "slide-codefix-001",
+  "dataset": "slide-aligned-codefix-v1",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "control_sha256": "166bf64812c284285a4fd3b2a3439cbb39615c5e011110a75c8a74faff8b2b33",
+  "candidate_sha256": "57789717a23886ef4cbe34dcaa165f5c38f93f46cec2be90d2befc17c1b77d1e",
+  "provider_calls": 0,
+  "provider_cost_usd": 0,
+  "scope": "synthetic deterministic contract comparison; injected usage is not provider billing",
+  "cases": [
+    {
+      "case": "missing",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "entry_coverage"
+      },
+      "control_latency_ms": 0.510832996951649,
+      "candidate_latency_ms": 0.28108399783377536
+    },
+    {
+      "case": "duplicate",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "entry_coverage"
+      },
+      "control_latency_ms": 0.20441699962248094,
+      "candidate_latency_ms": 0.20116700034122914
+    },
+    {
+      "case": "hash_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch"
+      },
+      "control_latency_ms": 0.19104099919786677,
+      "candidate_latency_ms": 0.18983300105901435
+    },
+    {
+      "case": "proposal_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch"
+      },
+      "control_latency_ms": 0.18095899940817617,
+      "candidate_latency_ms": 0.1737080019665882
+    },
+    {
+      "case": "context_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch"
+      },
+      "control_latency_ms": 0.17387499974574894,
+      "candidate_latency_ms": 0.17304199718637392
+    },
+    {
+      "case": "source_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "evidence_binding"
+      },
+      "control_latency_ms": 0.179209000634728,
+      "candidate_latency_ms": 0.18041699877358042
+    },
+    {
+      "case": "source_empty",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "support_references"
+      },
+      "control_latency_ms": 0.1813749986467883,
+      "candidate_latency_ms": 0.16899999900488183
+    },
+    {
+      "case": "bypass",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "factual_bypass"
+      },
+      "control_latency_ms": 0.16579099974478595,
+      "candidate_latency_ms": 0.16666699957568198
+    },
+    {
+      "case": "extra",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "schema_validation"
+      },
+      "control_latency_ms": 0.16291599968099035,
+      "candidate_latency_ms": 0.1632919993426185
+    },
+    {
+      "case": "dimensions_missing",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "quality_coverage"
+      },
+      "control_latency_ms": 0.17175000175484456,
+      "candidate_latency_ms": 0.1712910016067326
+    },
+    {
+      "case": "affected_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "affected_entries"
+      },
+      "control_latency_ms": 0.17245900016860105,
+      "candidate_latency_ms": 0.1731669981381856
+    },
+    {
+      "case": "valid",
+      "identical_behavior_requests_usage": true,
+      "outcome": "passed",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null
+      },
+      "control_latency_ms": 0.1756249985191971,
+      "candidate_latency_ms": 0.1739999970595818
+    },
+    {
+      "case": "repair",
+      "identical_behavior_requests_usage": true,
+      "outcome": "repaired",
+      "calls": 3,
+      "usage": {
+        "input_tokens": 30,
+        "output_tokens": 30,
+        "total_tokens": 60,
+        "approximate_cost_usd": 0.04
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null
+      },
+      "control_latency_ms": 0.6696669988741633,
+      "candidate_latency_ms": 0.5683749986928888
+    },
+    {
+      "case": "unchanged",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 2,
+      "usage": {
+        "input_tokens": 20,
+        "output_tokens": 20,
+        "total_tokens": 40,
+        "approximate_cost_usd": 0.03
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null
+      },
+      "control_latency_ms": 0.28879099772893824,
+      "candidate_latency_ms": 0.26145900119445287
+    },
+    {
+      "case": "reject_repair",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 3,
+      "usage": {
+        "input_tokens": 30,
+        "output_tokens": 30,
+        "total_tokens": 60,
+        "approximate_cost_usd": 0.04
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null
+      },
+      "control_latency_ms": 0.4276670006220229,
+      "candidate_latency_ms": 0.40987499960465357
+    },
+    {
+      "case": "unknown_usage",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": null
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "identity_or_usage"
+      },
+      "control_latency_ms": 0.16566699923714623,
+      "candidate_latency_ms": 0.1646249984332826
+    },
+    {
+      "case": "identity",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "identity_or_usage"
+      },
+      "control_latency_ms": 0.17245900016860105,
+      "candidate_latency_ms": 0.16474999938509427
+    },
+    {
+      "case": "unavailable",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "unavailable"
+      },
+      "control_latency_ms": 0.1336249988526106,
+      "candidate_latency_ms": 0.1310420011577662
+    }
+  ],
+  "all_behavior_identical": true
+}

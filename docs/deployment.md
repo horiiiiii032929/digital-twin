@@ -1,5 +1,9 @@
 # Staging deployment and recovery
 
+For the AWS Singapore deployment with an AWS-provided HTTPS URL and no custom
+domain, use the [CDK deployment guide](../infra/cdk/README.md). The host/domain
+requirements below describe the older direct-to-Caddy deployment path.
+
 Status: deployable single-host candidate; public host rehearsal pending
 
 The candidate packages the session-authenticated web app, FastAPI service,
@@ -278,3 +282,12 @@ The reproducible local qualification commands are:
 npm run verify:deployable-foundation
 npm run benchmark:deployable-foundation-development
 ```
+
+### Temporary pause for local coding tests
+
+The pilot was [paused on 10 September 2026](../reports/aws-pilot/pause-2026-09-10.md)
+at the user's request. EC2 is stopped and the recurring start schedule is disabled
+outside CDK. Keep this operational pause in effect until the user requests resumption;
+check the recorded schedule state before a subsequent deployment.
+
+Latest state: [10 September application deployment and full configuration](../reports/aws-pilot/deployed-state-2026-09-10.md). The application update completed and EC2 was stopped afterward. Both EventBridge start and stop schedules are now disabled pending professor review.

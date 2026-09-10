@@ -36,6 +36,9 @@ def test_only_exact_reviewed_runs_have_bounded_authorization() -> None:
     pilot_ids = {
         "main-oracle-alignment-001",
         "paired-pedagogy-development-001",
+        "post-report-source-assessment-001",
+        "post-report-blind-review-001",
+        "post-report-learner-policy-001",
         "generation-role-model-development-001",
         "independent-factual-revision-controls-001",
         "final-response-support-audit-001",

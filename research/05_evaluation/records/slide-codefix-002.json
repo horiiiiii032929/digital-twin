@@ -1,0 +1,367 @@
+{
+  "run_id": "slide-codefix-002",
+  "dataset": "decision-preserving-codefix-v1",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "control_sha256": "fd8b20e549f74b0231b46fc722969d7f70b518e94f541ca8865c5fbd3e2c8a1f",
+  "candidate_sha256": "245de781264919ccea5acb816ce94b68b57fa68f5e8811fa0e0a038c1d2728d8",
+  "provider_calls": 0,
+  "provider_cost_usd": 0,
+  "scope": "Local synthetic tests only; deployment paused by user. Accounting correction and sanitized diagnostics only.",
+  "cases": [
+    {
+      "case": "missing",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "entry_coverage",
+        "failure_fields": []
+      },
+      "control_latency_ms": 1.6167499998118728,
+      "candidate_latency_ms": 0.3042499993171077
+    },
+    {
+      "case": "duplicate",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "entry_coverage",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.2178329996240791,
+      "candidate_latency_ms": 0.20087499797227792
+    },
+    {
+      "case": "hash_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.19979100034106523,
+      "candidate_latency_ms": 0.1917080007842742
+    },
+    {
+      "case": "proposal_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.17737500093062408,
+      "candidate_latency_ms": 0.18295799964107573
+    },
+    {
+      "case": "context_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "binding_mismatch",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.17899999875226058,
+      "candidate_latency_ms": 0.17720799951348454
+    },
+    {
+      "case": "source_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "evidence_binding",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.18025000099441968,
+      "candidate_latency_ms": 0.17308300084550865
+    },
+    {
+      "case": "source_empty",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "support_references",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.1740000006975606,
+      "candidate_latency_ms": 0.17437499991501682
+    },
+    {
+      "case": "bypass",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "factual_bypass",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.16891599807422608,
+      "candidate_latency_ms": 0.167500002135057
+    },
+    {
+      "case": "extra",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "schema_validation",
+        "failure_fields": [
+          "_:extra_forbidden"
+        ]
+      },
+      "control_latency_ms": 0.1744170003803447,
+      "candidate_latency_ms": 0.33683299989206716
+    },
+    {
+      "case": "dimensions_missing",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "quality_coverage",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.24604200007161126,
+      "candidate_latency_ms": 0.2099999983329326
+    },
+    {
+      "case": "affected_wrong",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_validation",
+        "failure_code": "affected_entries",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.21216699678916484,
+      "candidate_latency_ms": 0.1841670018620789
+    },
+    {
+      "case": "valid",
+      "identical_behavior_requests_usage": true,
+      "outcome": "passed",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null,
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.18400000044493936,
+      "candidate_latency_ms": 0.17954199938685633
+    },
+    {
+      "case": "repair",
+      "identical_behavior_requests_usage": true,
+      "outcome": "repaired",
+      "calls": 3,
+      "usage": {
+        "input_tokens": 30,
+        "output_tokens": 30,
+        "total_tokens": 60,
+        "approximate_cost_usd": 0.04
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null,
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.5818749996251427,
+      "candidate_latency_ms": 0.4081250008312054
+    },
+    {
+      "case": "unchanged",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 2,
+      "usage": {
+        "input_tokens": 20,
+        "output_tokens": 20,
+        "total_tokens": 40,
+        "approximate_cost_usd": 0.03
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null,
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.2637090001371689,
+      "candidate_latency_ms": 0.25529099730192684
+    },
+    {
+      "case": "reject_repair",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 3,
+      "usage": {
+        "input_tokens": 30,
+        "output_tokens": 30,
+        "total_tokens": 60,
+        "approximate_cost_usd": 0.04
+      },
+      "diagnostics": {
+        "failure_stage": null,
+        "failure_code": null,
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.3862080011458602,
+      "candidate_latency_ms": 0.3926659992430359
+    },
+    {
+      "case": "unknown_usage",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": null
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "identity_or_usage",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.15999999959603883,
+      "candidate_latency_ms": 0.16179099839064293
+    },
+    {
+      "case": "identity",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 10,
+        "output_tokens": 10,
+        "total_tokens": 20,
+        "approximate_cost_usd": 0.01
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "identity_or_usage",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.1677920008660294,
+      "candidate_latency_ms": 0.16166600107681006
+    },
+    {
+      "case": "unavailable",
+      "identical_behavior_requests_usage": true,
+      "outcome": "quarantined",
+      "calls": 1,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "diagnostics": {
+        "failure_stage": "audit_request",
+        "failure_code": "unavailable",
+        "failure_fields": []
+      },
+      "control_latency_ms": 0.12837500253226608,
+      "candidate_latency_ms": 0.1340829985565506
+    }
+  ],
+  "all_behavior_identical": true,
+  "accounting_regression": {
+    "before": "1 failed: usage total_tokens 0 instead of 20 after one completed draft",
+    "after": "passed: 20 tokens, $0.0001 injected usage, same malformed-response text/action, no citations, one call",
+    "fixture": "tests/test_audited_instruction_generation.py::test_invalid_audit_history_preserves_completed_draft_usage"
+  },
+  "source_hashes": {
+    "src/digital_twin/generation/final_response_audit.py": "245de781264919ccea5acb816ce94b68b57fa68f5e8811fa0e0a038c1d2728d8",
+    "src/digital_twin/generation/audited_instruction.py": "3187d807520a09e4935856c12c880e155ed1f2c29e6c9b4c455c0af87e8442fa"
+  }
+}

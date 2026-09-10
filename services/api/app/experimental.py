@@ -12,6 +12,7 @@ from fastapi.responses import FileResponse
 
 from services.api.app.config import AppSettings, AutonomyPlannerMode, EvidenceGateMode, GeneratorMode, RuntimeMode, StudentTutoringMode
 from services.api.app.factory import create_app
+from services.api.app.post_report_configuration import post_report_runtime_flags
 from services.llm import OpenAiResponsesClient
 from services.llm.experimental_role_routing import ExperimentalGenerationRoleRouter
 from src.digital_twin.evaluation.experimental_tutoring_candidate import experimental_tutoring_configuration
@@ -63,13 +64,17 @@ def build_experimental_app(settings: AppSettings, candidate: str, *, transport=N
     configured = settings
     roles = selection.get("role_configuration")
     if roles:
+        revision_client = None
+        if "revision" in roles and selection.get("final_audit_prompt_version") == "v2":
+            from src.digital_twin.generation.final_response_audit import make_final_audit_client
+            revision_client = make_final_audit_client(role="repair", model=roles["revision"]["model"])
         client = transport or ExperimentalGenerationRoleRouter(
             planner_client=OpenAiResponsesClient(roles["planner"]["model"], max_output_tokens=3000,
                 reasoning_effort=roles["planner"]["reasoning_effort"], timeout_seconds=30),
             generation_client=OpenAiResponsesClient(roles["generation"]["model"], max_output_tokens=3000,
                 reasoning_effort=roles["generation"]["reasoning_effort"], timeout_seconds=30,
                 experimental_sol_enabled=roles["generation"]["model"] == "gpt-5.6-sol"),
-            **({"revision_client": OpenAiResponsesClient(roles["revision"]["model"],
+            **({"revision_client": revision_client or OpenAiResponsesClient(roles["revision"]["model"],
                 max_output_tokens=3000, reasoning_effort=roles["revision"]["reasoning_effort"],
                 timeout_seconds=30, experimental_sol_enabled=True)} if "revision" in roles else {}),
             role_configuration=roles)
@@ -85,7 +90,7 @@ def build_experimental_app(settings: AppSettings, candidate: str, *, transport=N
         observed_transports = validate_transport_configuration(client, selection)
     app = create_app(settings=configured, source_root=configured.source_root,
         region_crop_root=configured.region_crop_root, autonomy_planner_client=client,
-        provider_max_concurrency=5, **selection["runtime_flags"])
+        provider_max_concurrency=5, **selection["runtime_flags"], **post_report_runtime_flags())
     observed = app.state.student_service.generator.implementation_id
     if observed != selection["implementation_id"]:
         closed = set()

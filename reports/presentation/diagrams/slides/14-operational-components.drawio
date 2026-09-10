@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="14-operational-components" name="14-operational-components">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="«component»&#10;Synthetic student driver" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="65" y="260" width="380" height="150" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="«component»&#10;Virtual clock / scheduler" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="65" y="650" width="380" height="150" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="«component»&#10;Tutoring and autonomy&#10;services under test" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="650" y="260" width="470" height="200" />
+        </mxCell>
+        <mxCell id="n7" parent="1" vertex="1" value="«component»&#10;Persisted conversations,&#10;goals and delivery records" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="650" y="650" width="470" height="150" />
+        </mxCell>
+        <mxCell id="n8" parent="1" vertex="1" value="«component»&#10;Configured model&#10;provider" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="1240" y="270" width="310" height="170" />
+        </mxCell>
+        <mxCell id="n9" parent="1" vertex="1" value="«component»&#10;Operating checks" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=27;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=component;">
+          <mxGeometry as="geometry" x="1240" y="650" width="310" height="150" />
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" value="student input" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.375;" source="n4" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="445" y="335" />
+            <mxPoint as="targetPoint" x="650" y="335" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" parent="1" edge="1" value="due work" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;exitX=1.0;exitY=0.43333333333333335;entryX=0.0;entryY=0.8;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="445" y="715" />
+            <mxPoint as="targetPoint" x="650" y="420" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="530" y="715" />
+              <mxPoint x="530" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" parent="1" edge="1" value="reads / writes" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n6" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="885" y="460" />
+            <mxPoint as="targetPoint" x="885" y="650" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" parent="1" edge="1" value="inference" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;exitX=1.0;exitY=0.375;entryX=0.0;entryY=0.38235294117647056;" source="n6" target="n8">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1120" y="335" />
+            <mxPoint as="targetPoint" x="1240" y="335" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" parent="1" edge="1" value="inspects" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;dashed=1;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;" source="n9" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1240" y="725" />
+            <mxPoint as="targetPoint" x="1120" y="725" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

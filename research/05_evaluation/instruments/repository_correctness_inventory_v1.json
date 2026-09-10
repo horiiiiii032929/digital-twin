@@ -1,25 +1,25 @@
 {
   "audit_status_counts": {
-    "audited": 1252
+    "audited": 1350
   },
   "category_counts": {
-    "active_frontend": 79,
-    "active_or_unclassified_tooling": 330,
-    "active_runtime": 186,
+    "active_frontend": 81,
+    "active_or_unclassified_tooling": 387,
+    "active_runtime": 196,
     "ci_configuration": 1,
     "deferred_tooling": 2,
     "deployment_configuration": 10,
-    "evaluation_configuration": 296,
+    "evaluation_configuration": 299,
     "execution_configuration": 9,
     "historical_tooling": 4,
-    "report_artifact": 7,
-    "verification": 328
+    "report_artifact": 17,
+    "verification": 344
   },
-  "file_count": 1252,
+  "file_count": 1350,
   "inventory_id": "repository-correctness-inventory-v1",
   "model_or_provider_called": false,
   "private_or_heldout_data_read": false,
-  "record_sha256": "84811158672d7283daefac7ef3d4eca7e441582d33f099ee1f77608cb459d1c1",
+  "record_sha256": "40ac7119b6b86ce02123745d58bca04dc4b0210d749cf65a8b042b13acde542c",
   "records": [
     {
       "audit": {
@@ -71,11 +71,11 @@
     },
     {
       "audit": {
-        "domain": "configuration-and-deployment",
-        "evidence": "Manual exclusion review plus git check-ignore probes for environment secrets, private data, run outputs, generated reports, and local handoff/probe material under tmp/.",
+        "domain": "post-report-development",
+        "evidence": "Reviewed added exclusion for the derived synthetic apps/web/public/recording-demo.json fixture; no source or evaluation evidence exclusion added.",
         "findings": [],
-        "reviewed_at": "2026-09-04",
-        "reviewer": "codex-primary-endgame-correctness-audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "execution_configuration",
@@ -83,7 +83,7 @@
       "package_commands": [],
       "path": ".gitignore",
       "risk": "medium",
-      "sha256": "3fda63cd627ab641625553e5b62c8c29227a2e19fd30eedb1c45477aa4801f1a"
+      "sha256": "c96b675ac93dc2c05395e6ab880319ee371941057802a4d2437f5f6ed2f8a5c9"
     },
     {
       "audit": {
@@ -503,11 +503,27 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-frontend.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-final-selection",
+        "evidence": "Final typecheck corrected fixture action kind to declared issue-retrieval-practice and replaced partial cast with complete AutonomousActionV1 annotation. Retains scope, latest-outcome/order and understanding-boundary tests. Runtime production code unchanged by fixture correction.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_frontend",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "apps/web/src/components/professor/professor-autonomy-panel.test.tsx",
+      "risk": "high",
+      "sha256": "40f84da0d9aa5b012b0659f251dbea5493af1ae4ca69e330a56fc534d01c8b53"
+    },
+    {
+      "audit": {
+        "domain": "post-report-final-selection",
+        "evidence": "Reviewed goal/outcome scope matching and newest recorded outcome selection. Repository returns recorded_at descending; old last-write Map could hide a later answer with an earlier delivered outcome. New regression checks both list orders and newer foreign-scope collision. Frontend86tests passed; original responsive UI screenshots reviewed, latest outcome browser check recorded in /tmp/final-ui-latest-outcome-qa.txt.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -515,15 +531,31 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-autonomy-panel.tsx",
       "risk": "high",
-      "sha256": "93e88d2574309837e7c277ad5cce23c1fcc6ebf0b3ab843820aabf1d85c928f9"
+      "sha256": "4522bff4ce1d284055956a6cfe4118a96588586eb6d7d5ced0ba92081174f103"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_frontend",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "apps/web/src/components/professor/professor-delivery-workspace.test.tsx",
+      "risk": "high",
+      "sha256": "e60a44e107c70283eec24dfd0a51d2e1dcb065c915d988964cfe505439bb07d1"
     },
     {
       "audit": {
         "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-frontend.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -531,7 +563,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/professor/professor-delivery-workspace.tsx",
       "risk": "high",
-      "sha256": "705a98222442770a20f77beb1265d03828ac25104718f85c7855dd18c4c8dea2"
+      "sha256": "870513c02a5f6ac4be2bbf0e0dfae129f69cdde25ff35b21664c7939a628bc76"
     },
     {
       "audit": {
@@ -551,11 +583,11 @@
     },
     {
       "audit": {
-        "domain": "release-interface-ux",
-        "evidence": "Impeccable design-system review, live desktop and 390px mobile Playwright QA, keyboard-accessible semantic snapshot inspection, deterministic detector, 51 Vitest regressions, Oxlint, and TypeScript production build; no unresolved UI correctness finding.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-05",
-        "reviewer": "Codex Impeccable release-interface audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -563,7 +595,7 @@
       "package_commands": [],
       "path": "apps/web/src/components/student/student-workspace.tsx",
       "risk": "high",
-      "sha256": "8a2a40de08c3cf12e60589caa15ef0dd082661b7017928087092b3950988e292"
+      "sha256": "7db3fd2070ca6d121587c2dfbcadb51f63900e5364963e0821ed5a3712d55fa5"
     },
     {
       "audit": {
@@ -887,11 +919,11 @@
     },
     {
       "audit": {
-        "domain": "frontend",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-frontend.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -899,15 +931,15 @@
       "package_commands": [],
       "path": "apps/web/src/hooks/use-student-workspace.test.ts",
       "risk": "high",
-      "sha256": "c4de8f5f02900b304786f95467e4831c69d89ec2befaf8dc39e0eb47087b15f5"
+      "sha256": "4b7e9410a0b981c1bbdb23998759902856918e0e5fd789a2d2c6f42d07adc85c"
     },
     {
       "audit": {
-        "domain": "stateful-clarification-r1-2",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-frontend.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -915,7 +947,7 @@
       "package_commands": [],
       "path": "apps/web/src/hooks/use-student-workspace.ts",
       "risk": "high",
-      "sha256": "f054dd329a4582b51363aa1cd2bb0efd755815faa7e64d095315d40e8ba64a84"
+      "sha256": "317633aaecc330aecfd76627607a02cd9e5f859d8baf55626238e626a64f2a95"
     },
     {
       "audit": {
@@ -1031,11 +1063,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -1043,7 +1075,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/professor.ts",
       "risk": "high",
-      "sha256": "5f8a400ef39bb15c68c30a7aa4a53cf1cec72c20f44ec951811b7852ccdb90a4"
+      "sha256": "171095f45f2bf475ba5077c314475f1f9f1a8f4f821fcfa7406c1fde28ce3dd9"
     },
     {
       "audit": {
@@ -1063,11 +1095,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-ux",
-        "evidence": "Impeccable independent cross-review, desktop and 390px mobile rendered QA, deterministic detector pass, Oxlint, 49 Vitest regressions, TypeScript check, and production Vite build; approval, eligibility, status, and consequence boundaries were inspected.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-08-31",
-        "reviewer": "Codex primary plus independent Impeccable cross-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -1075,15 +1107,15 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/student.ts",
       "risk": "high",
-      "sha256": "9fb0449b57a5952fdead0c02815f5f6b079670978226fc822bec25d5125cc88b"
+      "sha256": "ee537dd9677e8fc8696e47bc79b8791c82d44722c3f4fe13535b1ab0c208ced4"
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_frontend",
@@ -1091,7 +1123,7 @@
       "package_commands": [],
       "path": "apps/web/src/lib/api/types.ts",
       "risk": "high",
-      "sha256": "4004b51493f42bea97a984c8bbe311d3e761b06e294548972b5003272b0102c3"
+      "sha256": "b5e91d22e8b360e2491e173156d3a3819d8febb84850a946c096334f2ceed1c1"
     },
     {
       "audit": {
@@ -1623,6 +1655,166 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local script HTML navigation/font controls reviewed; inline JavaScript syntax checked. No network or product mutation. Narrative/layout not qualified by this execution audit.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/deck/speaker-script-audited.html",
+      "risk": "medium",
+      "sha256": "9513c317692d18c5368641f8933fd7f2320a5c64a38040cfcda5bc726a69dd7b"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local script HTML navigation/font controls reviewed; inline JavaScript syntax checked. No network or product mutation. Narrative/layout not qualified by this execution audit.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/deck/speaker-script-cto-natural.html",
+      "risk": "medium",
+      "sha256": "4eb605fb9b888af0c44e6334845618b93979e7d368222d59b42e9b5abea2198f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local script HTML navigation/font controls reviewed; inline JavaScript syntax checked. No network or product mutation. Narrative/layout not qualified by this execution audit.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/deck/speaker-script-cto-refined.html",
+      "risk": "medium",
+      "sha256": "f5478472f60b568294e4285c28cf0b79e6b0d12beb09d7cdd3338569b7391e0b"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local script HTML navigation/font controls reviewed; inline JavaScript syntax checked. No network or product mutation. Narrative/layout not qualified by this execution audit.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/deck/speaker-script-natural.html",
+      "risk": "medium",
+      "sha256": "7e3cb743eca6f7da77f23feda3374f4c07fe7ac44c5944716974ef500e6fa688"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed bounded 24-second composition against recorded action times, inspected inbox render, corrected cursor target to actual Reply button; no product-message replacement.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot-v2/index.tsx",
+      "risk": "medium",
+      "sha256": "0a57212c36f9b2a8bcdc0472e2c14a603c85f85409c3cd2c9d29900b2d039f92"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed artifact-only editing/capture configuration. Original video rendered and inspected; live transport bounded at 12 calls/$1.92, sources synthetic, ordinary APIs used, no release promotion. Retake helper preserves failures and uses an existing isolated runtime.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot-v2/prepare_retake.py",
+      "risk": "medium",
+      "sha256": "76c47d7f6ac8491009d6f292e6307664b60ddec4c2a3b8554eb0a62fd12ede68"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed artifact-only editing/capture configuration. Original video rendered and inspected; live transport bounded at 12 calls/$1.92, sources synthetic, ordinary APIs used, no release promotion. Retake helper preserves failures and uses an existing isolated runtime.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot-v2/recording_app.py",
+      "risk": "medium",
+      "sha256": "d08738b3bf4477fcdf137a6b02df442a7e006ddb6435beeace9c20efdf2b423f"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed 31.4-second composition, source timings match two real exchanges in one conversation; caption explicitly does not claim direct confirmation. Synthetic deterministic capture; no external calls or product code changes.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot-v3/index.tsx",
+      "risk": "medium",
+      "sha256": "6c49debcb0a92fb1710b522cd90e13f40db63072cf67d37c18d1963d3a4adf71"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed artifact-only editing/capture configuration. Original video rendered and inspected; live transport bounded at 12 calls/$1.92, sources synthetic, ordinary APIs used, no release promotion. Retake helper preserves failures and uses an existing isolated runtime.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot/index.tsx",
+      "risk": "medium",
+      "sha256": "b5d47ac193ef998d331dd544014d5ac694c045a013bab585326313e097ed6739"
+    },
+    {
+      "audit": {
+        "domain": "presentation-recording",
+        "evidence": "Reviewed artifact-only editing/capture configuration. Original video rendered and inspected; live transport bounded at 12 calls/$1.92, sources synthetic, ordinary APIs used, no release promotion. Retake helper preserves failures and uses an existing isolated runtime.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "report_artifact",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "reports/presentation/recording/product-pilot/package.json",
+      "risk": "medium",
+      "sha256": "66185bad97e1cdc60ae3270a10b3f611e38f6437d24c6c5f57480a7065ad1828"
+    },
+    {
+      "audit": {
         "domain": "historical-report-artifacts",
         "evidence": "Historical snapshot reviewed as immutable report evidence; not used as a current runtime or model-selection source.",
         "findings": [],
@@ -1796,6 +1988,22 @@
       "path": "research/05_evaluation/generator_qualification_v1_freeze.json",
       "risk": "high",
       "sha256": "5de28f3bb0cd1b16ced29810b500067bd3ed6681dfb7ee8dd3aec289cae8a7f5"
+    },
+    {
+      "audit": {
+        "domain": "post-report-recording-and-review",
+        "evidence": "Reviewed static locally generated human-review HTML: source/response text escaped, no JavaScript or external links/resources, all96 responses retained; no independent ratings claimed.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-post-report-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/human-review/post-report-paired-quality-001/review.html",
+      "risk": "high",
+      "sha256": "01bc99abe3e266a0ac0fe70ded029f099d4976a157d938ce3e7382bd86cd5d01"
     },
     {
       "audit": {
@@ -6295,6 +6503,38 @@
     },
     {
       "audit": {
+        "domain": "post-report-bounded-experimental-profile",
+        "evidence": "Reviewed exact integration002 flags and registered evidence links; explicitly experimental, no release or Sol execution implied. V2 result32/32 is exposed development; common judge strict gates failed. Retains existing release fallback and distinguishes proactive bounded wording from reactive V19 generation.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/post-report-bounded-development-v1.json",
+      "risk": "high",
+      "sha256": "36026d321d2d108c538d2b9038205ee2f57d52a5c9c33a677bf5d2fa7b9a211e"
+    },
+    {
+      "audit": {
+        "domain": "post-report-final-selection",
+        "evidence": "Decision-only profile explicitly preserves submitted release and marks V4 as experimental comparator. Latest candidate not promoted after failed judge/profile/interval gates; links actual integration and common-review records. Not passed to runtime as a SystemReleaseProfile. No model default mutated.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "evaluation_configuration",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "research/05_evaluation/profiles/post-report-final-decision-v1.json",
+      "risk": "high",
+      "sha256": "b2f92c9e962a78a69a02a2b12a6dd8ceaed92b91bdf963fbd2e7174323770dac"
+    },
+    {
+      "audit": {
         "domain": "evaluation-instruments-and-profiles",
         "evidence": "Independent schema/profile/reference review plus canonical evaluation, multimodal, retrieval-v3, model-policy, profile, freeze, and result validators; frozen v1 evidence preserved and completion-time correction versioned as v2.",
         "findings": [],
@@ -6922,11 +7162,11 @@
     },
     {
       "audit": {
-        "domain": "governed-autonomy-v2-1",
-        "evidence": "Scoped assistant source review of this turn changes: fixed Luna planner versus explicit generation model/reasoning variants, unchanged V10/default contracts, actual request/serializer identities and finite role ledgers, unknown-cost stop, source snapshots excluding sealed sibling data, shared API/worker configuration, durable restart/reply linkage as applicable. Freeze files reviewed only named instrument/entrypoint registration. Prior unrelated scope retained in review history. Consolidated52 targeted tests passed44.38s; owner41+12HTTPS, root9profile, runtime25worker/operational checks. Tests demonstrate executable contracts, not semantic quality, human validation, learning benefit or release promotion.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "runtime owner + independent evidence reviewer"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -6936,7 +7176,7 @@
       ],
       "path": "scripts/autonomous_tutoring_worker.py",
       "risk": "high",
-      "sha256": "de72a647bd335f930bfb1df8678ae711b7a3f9e62ac8e62a215c662f55c77240"
+      "sha256": "cdb85f8cbb8c016f88e657f52ede8658df5feb15c867036903faea7f39c5aa47"
     },
     {
       "audit": {
@@ -7414,6 +7654,54 @@
       "path": "scripts/build_cross_engine_sealed_confirmation_010.py",
       "risk": "high",
       "sha256": "c5d228093c4c5e329673314c0c7e28e98f79a48fb1f023a9e257bdbc65edee39"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_cto_presentation.mjs",
+      "risk": "high",
+      "sha256": "b2518de3a9cd8c06b41b5a1cd21909ec8aec98a162166139260814ce313a846a"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_cto_presentation_diagrams.py",
+      "risk": "high",
+      "sha256": "1d723faa9142e134b5796c2619f51b573024cf74bce4c1b37fd6a4be5a4169b0"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_cto_refined_presentation.mjs",
+      "risk": "high",
+      "sha256": "a3e523149f22b627a4ca6c66e3e6bc1522ce1c148177e756e6009f9bfe7a1e8e"
     },
     {
       "audit": {
@@ -7963,6 +8251,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_implementation_diagrams.py",
+      "risk": "high",
+      "sha256": "b10add16804369ea14d2938f7549a869282b621ef7674152f6d1051d24f679be"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -8047,6 +8351,86 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_presentation_deck.mjs",
+      "risk": "high",
+      "sha256": "cf2d26c0010c169badf1064cf1277eafbc4b175379d8cdeee9d5d9211d37a003"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_presentation_diagrams.py",
+      "risk": "high",
+      "sha256": "db41a1bfb257a9b3413c082a3a10a535dd5c074ca5b1d9c0396400801ae20f8e"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_presentation_failure_diagrams.py",
+      "risk": "high",
+      "sha256": "4094f9229864053ed97bc4b13bb03337e0fd5c6b62e09ee183af3ab2a3f00757"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_product_first_activity.py",
+      "risk": "high",
+      "sha256": "b574c25aa01f30155a6ad90c641f924f964e29634cd20cccec82bec0f18dccc9"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_recording_demo.py",
+      "risk": "high",
+      "sha256": "39363006b45cf08032bb501602d1cfc091871068dbb5f76ea0a072a7144c0b85"
+    },
+    {
+      "audit": {
         "domain": "finite-evaluation-program",
         "evidence": "Public API review verified the finite program contracts are explicitly exported without changing historical evaluation interfaces.",
         "findings": [],
@@ -8063,6 +8447,38 @@
       "path": "scripts/build_repository_correctness_inventory.py",
       "risk": "high",
       "sha256": "a54f289fe35c152bf7023f5cea5c5650a14a9bf4e3f5cde67e99c6ad5161a998"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_standalone_presentation.mjs",
+      "risk": "high",
+      "sha256": "d349d1b67a9a0a64c4d35753a2fa1aa6152021b7c6f54964844c8c99bf89fcb1"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_standard_sdlc_diagrams.py",
+      "risk": "high",
+      "sha256": "59a464ba2d4259989dc26b66089c52684b9df036f14e062a50869e1a92988e7b"
     },
     {
       "audit": {
@@ -8140,6 +8556,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/build_thirty_day_preview.py",
+      "risk": "high",
+      "sha256": "927c1f62135d10c821a8024562e2a82e5ea96b6ef330abda49fddc86529142e4"
+    },
+    {
+      "audit": {
         "domain": "visual-late-interaction-successor",
         "evidence": "Manual builder review plus reconstruction tests verify pinned-source extraction, deterministic SVG-to-PNG rendering, interval-based source-disjointness, balanced cases, no private data, and fail-closed hash validation.",
         "findings": [],
@@ -8211,6 +8643,22 @@
       "path": "scripts/build_whole_system_architecture_tranches.py",
       "risk": "high",
       "sha256": "a2afb792c14c25a7f06081488be37ada4e928c189aace88c2a39fbbe8bbcdc15"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/clarify_presentation_terms.py",
+      "risk": "high",
+      "sha256": "5ae30590b079e416e7e7bc0ae2f3c3ce5d7534cb2fe08366b97a947024058ac9"
     },
     {
       "audit": {
@@ -8431,6 +8879,86 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Reviewed optional crop parser: integer values, positive duration, source bounds and exact16:9 ratio before FFmpeg; no shell interpolation. Rendered full134-second1080p film and visually inspected contact sheet and detailed frame; all sources local synthetic recordings.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-post-report-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/edit_autonomous_film.py",
+      "risk": "high",
+      "sha256": "6a1e368ac6cda0409c2a01fa3aa993ec4128be969f93871cdb57627468c55c6d"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/edit_recording_film.py",
+      "risk": "high",
+      "sha256": "05f59713286c5f6d7d6a50a1f35e9fa5363986f9dcb921e0607c5e2cf0607e6e"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/embed_cto_presentation_video.py",
+      "risk": "high",
+      "sha256": "8685dd0551afe000afac8883e2c15321b5b9b7777f7ccac1b149a9f8defaa2d6"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/embed_cto_refined_presentation_video.py",
+      "risk": "high",
+      "sha256": "6ab38b8850fa241728694a37eb504c4d9190f2e91cb6f199f758945820a2018e"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/embed_presentation_video.py",
+      "risk": "high",
+      "sha256": "5f5243379e06d87c2a113693003c3542a00bfe7286e0a3056659f97a0e3e2edc"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -8552,6 +9080,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/expand_presentation_for_new_readers.py",
+      "risk": "high",
+      "sha256": "395946873693fe2cb04296744c8dfdbb6743dc69a9b690e2cdbe692346730f66"
+    },
+    {
+      "audit": {
         "domain": "final-cross-method-evaluation-closure",
         "evidence": "Focused code review and tests verify explicit profile/retriever bindings, actual Qwen activation without silent fallback, deterministic generator/policy parity, canonical lineage, and T1-v2 product-service execution.",
         "findings": [],
@@ -8568,11 +9112,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed explicit audit-model keyword forwarding in longitudinal adapter and preflight signature binding before any provider calls. Actual injected paired runner exercises two arms, answered cited turns, audit calls and restart. All paired and mixed-source tests passed; worker23tests verify both role configurations and timeout/restart duplicate suppression.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -8582,7 +9126,87 @@
       ],
       "path": "scripts/final_profile_longitudinal_runtime.py",
       "risk": "high",
-      "sha256": "d13ea95138259d09d517776d9c55d1feb4e1fc790f4bb1e501777fc4715e3e60"
+      "sha256": "f93a1b7ce1ea7c7cca05af62e33f66d205987206784ec6c65255f4b004c7bec1"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_cto_natural_script.mjs",
+      "risk": "high",
+      "sha256": "00d59e2ff913ec8556b906f6eda33758237dd2a1444bb3c281305dd5aa3cb168"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_cto_presentation.mjs",
+      "risk": "high",
+      "sha256": "2edbb02150d4b5b1e8d941bc58329f7d4dcdd5fa4bd955e4acf8b8e5d678671d"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_cto_refined_presentation.mjs",
+      "risk": "high",
+      "sha256": "3c905786363d54d5c2bdf8784e3d7486d2ea5827a7110808d20ad58002e35808"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_cto_script.mjs",
+      "risk": "high",
+      "sha256": "366ddc3677d12f2103e6fc3909811813d754e54288574675170de59811bc2acd"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_cto_title.mjs",
+      "risk": "high",
+      "sha256": "8df1b9d869b8b2e25976eb55da4186a83a0611b728aa59e95a74fc3dfda52837"
     },
     {
       "audit": {
@@ -8602,6 +9226,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_presentation_deck.mjs",
+      "risk": "high",
+      "sha256": "92a365b4639ab76d38e6ad4cbd32eade7b1a271640734fa45aa3afc1243876d8"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -8617,6 +9257,22 @@
       "path": "scripts/finalize_professor_fidelity_blinded_review.py",
       "risk": "high",
       "sha256": "1e920e73ee783768aed4791cb0ae2524d4f85415716fb87421f07d0544370438"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/finalize_standalone_presentation.mjs",
+      "risk": "high",
+      "sha256": "2384f6744563ebe39fc30f6b825af88ca6584eef0c0ee52bf966948cf099dfd7"
     },
     {
       "audit": {
@@ -8799,6 +9455,70 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/package_cto_natural_notes.py",
+      "risk": "high",
+      "sha256": "9ac36704fd7667bae67860d088700cf1702537637d1b77afee4abe9bbf581350"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/package_cto_refined_presentation.py",
+      "risk": "high",
+      "sha256": "2465474d3e8aa7ef8abe0130f062f646cdc06cd3bd3218ab051aaed554618fee"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/package_cto_script_notes.py",
+      "risk": "high",
+      "sha256": "b32d9f3a181f41a934781bb638922b1df7c66f2495bb0d51d14d5d23e1afe96c"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/package_cto_title.py",
+      "risk": "high",
+      "sha256": "d2ab5047014ee5e443172f60b2b40d10cb44bb5cfbda83c2c4b6d01dfdfc3aad"
+    },
+    {
+      "audit": {
         "domain": "openai-development-checkpoint",
         "evidence": "Focused review and regression tests verified runtime package IDs and splits are paired without exposing gold to wording or product execution.",
         "findings": [],
@@ -8852,6 +9572,70 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_cto_natural_script.py",
+      "risk": "high",
+      "sha256": "a321d58922f12ad4f8f7a4d89902cb9284651c1c2f0c05d0e63c29c204dfeac7"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_cto_presentation.py",
+      "risk": "high",
+      "sha256": "615d0ce6582219eee1287520679e536a8538f6210a81753dd08a6de7bdb94222"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_cto_refined_script.py",
+      "risk": "high",
+      "sha256": "b2a066ace1b5c8e74cd3c28ecfdfeb72f14c07ac922ab85bd6f29bcd01049d8e"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_cto_refinement.py",
+      "risk": "high",
+      "sha256": "952289bb681767d9a4f02527db1ae0dea99febd966657294f36a9440f87f5b0e"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Manual fail-closed review plus focused tests verify historical 002-007 states and provider-unauthorized 008, exact direct-DeepSeek bindings, correlated authorization without self-authorization, byte-stable packet reconstruction, strict judgment validation, bounded priority routing, metadata expiry, and guarded writes.",
         "findings": [],
@@ -8869,6 +9653,38 @@
       "path": "scripts/prepare_evidence_sufficiency_v2_independent_review.py",
       "risk": "high",
       "sha256": "e54787cb9299846f4dc219eab4a28b9e5ba3e07fccd68bfa3d91b1dcc24f0b74"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_natural_presentation_script.py",
+      "risk": "high",
+      "sha256": "01fa5951baf678c44227e94805f67938ca4a6464aa3e36d471406b08fc37ca2c"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_presentation_deck.py",
+      "risk": "high",
+      "sha256": "e020cafafb24c48cc95a0d0c640728bc6bc2b3c5dbb67f8861c08014c4722a38"
     },
     {
       "audit": {
@@ -8905,6 +9721,38 @@
       "path": "scripts/prepare_public_evaluation_sources.py",
       "risk": "high",
       "sha256": "30382f2b626629ef1f46bb95ed48955851e0d0c72bc4f384ce8598ba5362043f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_recording_checkpoint.py",
+      "risk": "high",
+      "sha256": "b83ea5a80c9091b1263373a20af5eca14709e13f6aff11a13c1e3b0d7c8bb5c0"
+    },
+    {
+      "audit": {
+        "domain": "post-report-recording-and-review",
+        "evidence": "Recording-source review: text-only one-concept PDF pages; synthetic provenance/permissions kept in metadata and manifest; PDF overflow checked. Actual ingestion confirmed correct lesson chunks; two recording integration regressions passed.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-post-report-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/prepare_recording_materials.py",
+      "risk": "high",
+      "sha256": "f6dd2d09417f2b1e5b6fd78dcc7aa2085f70f36733d3d53fbfe6516c1bcd6d84"
     },
     {
       "audit": {
@@ -8999,6 +9847,70 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/rebuild_standalone_presentation.py",
+      "risk": "high",
+      "sha256": "feca979fb016de3056dc7f4640605539e61df264effb81c992fa31394a044f48"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/reconcile_cto_natural_script.mjs",
+      "risk": "high",
+      "sha256": "2ce37172c1850e3ba4477925f0221ff6f3398c5b96ce8dd8361077aa0f467f21"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/reconcile_cto_script.mjs",
+      "risk": "high",
+      "sha256": "8916d6b5796bb725c7d35118bd5a2dc0282d555f121925c2d74b7dd7171175c7"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/record_autonomous_film.py",
+      "risk": "high",
+      "sha256": "7c9903c0405ae2e72532334315ab9fe8fe2cf04b1573f3c84209ec65d4780ee0"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -9015,11 +9927,27 @@
     },
     {
       "audit": {
-        "domain": "experimental-role-composition-and-evaluation",
-        "evidence": "Scoped assistant review of V12 changes only: request-local V11 draft plus one Sol revision, unchanged prior defaults/schema, source admission and no unchecked fallback, explicit three-role identities and final Sol trace, combined token usage and unknown-cost stops, wrong-model observed tokens without invented pricing, finite five-call turn reservations, actual server rendering of revision controls with public-only payloads and original authored/no-provider provenance, optional shared API/worker/restart composition. Freeze source/test scope is exact new instrument/entrypoint registration only. Independent consolidated run98passed/1test-expectation failure, corrected expectation then final20passed4.72s; original logs retained in /tmp/v12-independent-review-tests.log and /tmp/v12-independent-final-targeted.log. Runtime71 tests and G6 focused7 tests passed; owner source/test attribution retained. No human/professor review, semantic qualification or release promotion; unrelated older changes not re-reviewed.",
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "ingestion/evaluation author and independent evidence reviewer"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/record_student_clips.py",
+      "risk": "high",
+      "sha256": "fb2fcf50fee4367e4796c46ac78c8980e7aaa68fcd25e5d8e36cd8f0c62d8e7b"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -9027,7 +9955,55 @@
       "package_commands": [],
       "path": "scripts/recorded_generation_roles.py",
       "risk": "high",
-      "sha256": "abecfb1c5a7bdc014a2a775e35f8aab87b99a1a9e42a3a4574f17203b79cdbb1"
+      "sha256": "6eb229cc5d02dd282ef4176aa9d89b49988a168d742f82e9fcd08095c8895d8a"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/recording_app.py",
+      "risk": "high",
+      "sha256": "6fc3d3b601f08f0ab09b625bb20dfae14868f045a118345a4beb386030dab381"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Reviewed explicit two-name synthetic runtime allowlist, unchanged default and local control guard; recording virtual-clock integration and name rejection checks: 3 passed. Documentation includes bounded recorded-client composition.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-recording-runtime-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/recording_controls.py",
+      "risk": "high",
+      "sha256": "2821b949b54044d68e054298eeaefcb49e7d76684c54ea82fd49ec06b08a5137"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Reviewed explicit two-name synthetic runtime allowlist, unchanged default and local control guard; recording virtual-clock integration and name rejection checks: 3 passed. Documentation includes bounded recorded-client composition.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-recording-runtime-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/recording_safety.py",
+      "risk": "high",
+      "sha256": "bb684af6f404e7cb6ea30a19ef77d6d8c491fe303678f4201c6ab3c52625f05c"
     },
     {
       "audit": {
@@ -9044,6 +10020,22 @@
       "path": "scripts/recover_governed_full_autonomy_confirmation_score.py",
       "risk": "high",
       "sha256": "40b652422cd048acfd4b87c15288b7e42a08fbdc708eba92c480f4afa753fec2"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/refine_cto_visual_diagrams.py",
+      "risk": "high",
+      "sha256": "5dcb92bd69d3da9f745822fe81c244f84ad1284ce952f481653462905f02eb8c"
     },
     {
       "audit": {
@@ -9128,6 +10120,70 @@
       "path": "scripts/review_generator_qualification_v2.py",
       "risk": "high",
       "sha256": "dffad8cd3b51f98c286ef81102b810eecc27388d56e04c8179bdc86528333074"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/revise_presentation_clarity.py",
+      "risk": "high",
+      "sha256": "6604cf0b2736146d8e90d3065fddea19fa9d69ebdac224399ef2698b9689bfb1"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/revise_presentation_content.py",
+      "risk": "high",
+      "sha256": "d655bee547babaa2d3bbcde9ef5836b4cb88de88853752da56c9a797ec94a17f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/revise_presentation_graduate.py",
+      "risk": "high",
+      "sha256": "5f1d775b98873757f28cb9534a8ae088e78e49a6b5d04c0f3afad615117dbfb7"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/revise_presentation_visuals.py",
+      "risk": "high",
+      "sha256": "d021d6b29647df793291b3645fde9384fe36da9a137dbe142df3cd2d13cd6224"
     },
     {
       "audit": {
@@ -10433,10 +11489,10 @@
     {
       "audit": {
         "domain": "bounded-contract-and-authorized-referents",
-        "evidence": "Scoped assistant source review of this turn changes: fixed Luna planner versus explicit generation model/reasoning variants, unchanged V10/default contracts, actual request/serializer identities and finite role ledgers, unknown-cost stop, source snapshots excluding sealed sibling data, shared API/worker configuration, durable restart/reply linkage as applicable. Freeze files reviewed only named instrument/entrypoint registration. Prior unrelated scope retained in review history. Consolidated52 targeted tests passed44.38s; owner41+12HTTPS, root9profile, runtime25worker/operational checks. Tests demonstrate executable contracts, not semantic quality, human validation, learning benefit or release promotion.",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "ingestion/evaluation owner + independent evidence reviewer"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10446,7 +11502,7 @@
       ],
       "path": "scripts/run_final_profile_longitudinal.py",
       "risk": "high",
-      "sha256": "b8864c1f79e24be472ebf5028d0e5a7c134b41c1b7386b12715b48d1bac2deaf"
+      "sha256": "e3986e4bd370d7e8d9d70228105be2db38f86663932aea4d130c46d808c346d6"
     },
     {
       "audit": {
@@ -10542,11 +11598,11 @@
     },
     {
       "audit": {
-        "domain": "structured-request-intent-release-correction",
-        "evidence": "Freeze regression now verifies that the completed visual run retains deterministic dataset generation only and no longer carries provider authority.",
+        "domain": "post-report-fixed-clock-regression",
+        "evidence": "Fixed rehearsal NOW is passed to initial and restarted autonomy services; the seven-day simulation passes after the wall-clock expiry failure. Regression sets SystemUtcClock to 2040 without changing gates or historical results.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-11 root-cause and confirmation audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -10557,7 +11613,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_product_freeze.py",
       "risk": "high",
-      "sha256": "6daea4754b19bc3c2476246753c41d9da28881482c962f3909f4163caf6a3103"
+      "sha256": "114f51244e50fcb0e5fab61547061b80aeb56f7c4bbb73679735baa39120977d"
     },
     {
       "audit": {
@@ -11206,10 +12262,10 @@
     {
       "audit": {
         "domain": "structured-request-intent-release-correction",
-        "evidence": "Manual SE7-11 implementation and integration review found no unresolved defects; focused and whole-system regressions cover the changed boundary.",
+        "evidence": "Injected VirtualUtcClock(NOW) into the simulation autonomy service instead of host clock; fixed expired fixed-date fixture without changing scoring/provider authorization. Four focused tests pass, including 2040 host-clock regression.",
         "findings": [],
-        "reviewed_at": "2026-09-03",
-        "reviewer": "Codex SE7-11 root-cause and confirmation audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-post-report-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -11222,7 +12278,7 @@
       ],
       "path": "scripts/run_governed_full_autonomy_v2_1_provider_integration.py",
       "risk": "high",
-      "sha256": "243db47c5c8bdde76c673167a1d617f75db2dd686fed92e34d26120af5749a50"
+      "sha256": "66abae1d900c0b305b48ae39e3ed23c90039962ae12cecd21cfe8fe4c23fbb59"
     },
     {
       "audit": {
@@ -11314,11 +12370,11 @@
     },
     {
       "audit": {
-        "domain": "mixed-source-and-authenticated-load",
-        "evidence": "Ingestion agent author-reviewed entire new runners/tests: realHTTP authentication, finite provider bounds, mixedPDF/text/forum source lineage, recovery, exclusive outputs/source archives, shutdown and operational denominators. Final four focused tests passed17.94s; stable128suite passed.180livecalls/180answers are operational templates, not independent quality samples; preserved failedshutdown contract and no production scaling claim.",
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-ingestion-dashboard-audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -11326,7 +12382,7 @@
       "package_commands": [],
       "path": "scripts/run_mixed_source_recovery_development.py",
       "risk": "high",
-      "sha256": "a0c60a8def0804297683d6c95fd9edf06b967176274f497041eaa959ed912a79"
+      "sha256": "bac5edac44bd8d10471517630970ffaae06595492c247b48318b055d26cbbfd0"
     },
     {
       "audit": {
@@ -11417,11 +12473,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed explicit audit-model keyword forwarding in longitudinal adapter and preflight signature binding before any provider calls. Actual injected paired runner exercises two arms, answered cited turns, audit calls and restart. All paired and mixed-source tests passed; worker23tests verify both role configurations and timeout/restart duplicate suppression.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -11429,7 +12485,55 @@
       "package_commands": [],
       "path": "scripts/run_paired_pedagogy_development.py",
       "risk": "high",
-      "sha256": "41c145baf08c435f2f7dad468b0d884559b703d190ad8dd060acc5b07b8abe24"
+      "sha256": "ebed7919739097eb51d96ddaa98147abdd5db30e9ef5aabb2b2a6fc54a7921bb"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_post_report_assessment.py",
+      "risk": "high",
+      "sha256": "47aa538fc435c6788843eda7ae5dff30cc562fe6a7a72dcb03530c61ee3e6d2f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_post_report_blind_review.py",
+      "risk": "high",
+      "sha256": "72a48e288f52fa767a2c2c4fb899109aa2289f141dc352bb2769f99f1d4daa74"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/run_post_report_learner_policy.py",
+      "risk": "high",
+      "sha256": "d1a2e1c4a94fea8a3f3857beacb417fd2325a70ef284a77189eb816eb74822c7"
     },
     {
       "audit": {
@@ -12127,6 +13231,38 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/simplify_cto_title.mjs",
+      "risk": "high",
+      "sha256": "f00f57602f3ef897439c23f5a58471d7ae437ef1cbc2ae2108c88aee00c3b4f6"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/start_recording_workspace.py",
+      "risk": "high",
+      "sha256": "54ee19af65091bff7db43ab92bfaa35e0ce47d77eea7535c3fa0013341dfc614"
+    },
+    {
+      "audit": {
         "domain": "tooling-and-execution-freeze",
         "evidence": "Independent CLI/tooling review, compileall and Ruff static checks, strengthened execution-freeze AST coverage, guarded-entrypoint tests, and active freeze validation with zero model/provider calls or held-out reads.",
         "findings": [],
@@ -12142,6 +13278,22 @@
       "path": "scripts/summarize_professor_fidelity_anchor_machine_review.py",
       "risk": "high",
       "sha256": "a5d8ff062889983f74a84c5c535d521a5f9a7e01f66a1db4fd99b538da5a509c"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Local input/output and process/network boundaries reviewed; Python/JavaScript syntax checked. Recording paths use synthetic factory boundaries; archive/diagram/deck utilities are local authoring tools. See docs/post-report-tooling-audit-2026-09-08.md for scope.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_or_unclassified_tooling",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "scripts/sync_clarity_presentation_notes.py",
+      "risk": "high",
+      "sha256": "62c0cba42f194cef91c01a3ff635d908691d066ef96aea2397e2c411584db056"
     },
     {
       "audit": {
@@ -12573,11 +13725,11 @@
     },
     {
       "audit": {
-        "domain": "active_or_unclassified_tooling",
-        "evidence": "Source preparation is explicitly classified as a non-evaluation entrypoint: it fetches only five pinned public revisions and cannot execute evaluations or generate datasets. Existing protected entrypoints remain guarded.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-07",
-        "reviewer": "codex-reproducibility-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_or_unclassified_tooling",
@@ -12587,7 +13739,7 @@
       ],
       "path": "scripts/validate_repository_execution_freeze.py",
       "risk": "high",
-      "sha256": "08b3fa54fb7031a3aae9df58c41a9c7730ce89b51d3de4cb06534bd6670e83ce"
+      "sha256": "16d12831db39bac82818bc2b9b277de103e80eefe01ce5a00ea8dd21894690c9"
     },
     {
       "audit": {
@@ -12833,11 +13985,11 @@
     },
     {
       "audit": {
-        "domain": "profile-authority-v9-and-explicit-application-development",
-        "evidence": "Scoped assistant review of V12 changes only: request-local V11 draft plus one Sol revision, unchanged prior defaults/schema, source admission and no unchecked fallback, explicit three-role identities and final Sol trace, combined token usage and unknown-cost stops, wrong-model observed tokens without invented pricing, finite five-call turn reservations, actual server rendering of revision controls with public-only payloads and original authored/no-provider provenance, optional shared API/worker/restart composition. Freeze source/test scope is exact new instrument/entrypoint registration only. Independent consolidated run98passed/1test-expectation failure, corrected expectation then final20passed4.72s; original logs retained in /tmp/v12-independent-review-tests.log and /tmp/v12-independent-final-targeted.log. Runtime71 tests and G6 focused7 tests passed; owner source/test attribution retained. No human/professor review, semantic qualification or release promotion; unrelated older changes not re-reviewed.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "ingestion/evaluation author and independent evidence reviewer"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12845,15 +13997,15 @@
       "package_commands": [],
       "path": "services/api/app/experimental.py",
       "risk": "high",
-      "sha256": "8d2d867394046452840d222b6a3383a03dd042c639fd64d6a6db9218c4f21268"
+      "sha256": "7308e522f8d7574b32f400b2a6d1378e32ebdd0f8cf7dc23ec0e7fce7e7982be"
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12861,15 +14013,15 @@
       "package_commands": [],
       "path": "services/api/app/factory.py",
       "risk": "high",
-      "sha256": "186d385c26f89d778f64ed3bc89df1ba3e429c88410a952bdfcedc3a8e1574d2"
+      "sha256": "c386a9dca09702fdf5e85e7d8b12961a097c44f35ab5eaea42458b13d0354d4b"
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -12877,7 +14029,7 @@
       "package_commands": [],
       "path": "services/api/app/generated_preview.py",
       "risk": "high",
-      "sha256": "723cd028b9907f6898ac83a4ca9af75fd4a3c47892b347466061f2a484e91e4b"
+      "sha256": "292ed7198203bfcb4551b523aa965372165f006ea1bd6dd49158c5162876c90b"
     },
     {
       "audit": {
@@ -12926,6 +14078,22 @@
       "path": "services/api/app/observability.py",
       "risk": "high",
       "sha256": "2b9fcc5ae7ddef067b6acfd3d82458e20a81b2b5e5fa72d0beb8e45f609425d0"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "services/api/app/post_report_configuration.py",
+      "risk": "high",
+      "sha256": "f5c90e3f04daa9d55dd2342f7939507a977e04439ad11c475380f4d7ef33b289"
     },
     {
       "audit": {
@@ -12993,11 +14161,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13005,15 +14173,15 @@
       "package_commands": [],
       "path": "services/api/app/routers/publication.py",
       "risk": "high",
-      "sha256": "2d9fe8ccffffd68b9868a3922b7b53756b5915d619c7180c99499ce4b925f08e"
+      "sha256": "9ded82ce1c1262db5da2d08280675123f8eee5c93d27acc20aeb3ddb2819a798"
     },
     {
       "audit": {
-        "domain": "completion-development-active_runtime",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-runtime.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13021,7 +14189,23 @@
       "package_commands": [],
       "path": "services/api/app/routers/student.py",
       "risk": "high",
-      "sha256": "7e782cd8e1d5824d9e381beae45723f95ca2140400b1b8ec94a2e5c88be17c7d"
+      "sha256": "e4a584e3e7955fa0c79b6a066d2f0f24c94be6724ce043eb4795feccd71e5615"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "services/api/app/runtime_identity.py",
+      "risk": "high",
+      "sha256": "b3ccf846cacf22c664f11e99bd8c4fdb347543b2ff716aa511f1769b734c808f"
     },
     {
       "audit": {
@@ -13201,11 +14385,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13213,7 +14397,7 @@
       "package_commands": [],
       "path": "services/llm/experimental_role_routing.py",
       "risk": "high",
-      "sha256": "123881f88255080907f0956963d1638569f749825e20cea226c9d881c7663238"
+      "sha256": "2a93922114c69b78b0636f2e7d44050023e6387d9025e087282432aad0b7829a"
     },
     {
       "audit": {
@@ -13233,11 +14417,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-generation.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13245,7 +14429,7 @@
       "package_commands": [],
       "path": "services/llm/openai_responses_client.py",
       "risk": "high",
-      "sha256": "90f11572805d58c8d2790c855b7ca2276f05f369bbd8ea7adda7c9c5e5a556a8"
+      "sha256": "ed089d68449fc9407ea2e78dad64c4ee3364e45166b5945a538e650ffc0b6877"
     },
     {
       "audit": {
@@ -13681,11 +14865,11 @@
     },
     {
       "audit": {
-        "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -13693,7 +14877,7 @@
       "package_commands": [],
       "path": "src/digital_twin/evaluation/experimental_tutoring_candidate.py",
       "risk": "high",
-      "sha256": "dbe31d328694fd80dcb224cac0a5491d061b36dbf7b6bc6918213b0269e24876"
+      "sha256": "11a93d5d5d3cc42045af94451ad08b5365e3147cfed1971d460f41d9e1fb9a5f"
     },
     {
       "audit": {
@@ -14225,6 +15409,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/generation/audited_instruction.py",
+      "risk": "high",
+      "sha256": "ca16e08e7f4fdab61bba44aa89ae61cc3196612ac93848b5734c88ea18b7be52"
+    },
+    {
+      "audit": {
         "domain": "experimental-bounded-revision",
         "evidence": "Scoped assistant review of V13 bounded-revision changes only: exact preregistered draft-action eligibility, actual restricted provider schema and server model, unrestricted V12 helper preservation, no factual-unit escalation or unchecked fallback, same single Sol revision and three-role identities/combined usage, explicit factory/worker/restart selection, Stage A80-control opt-in versus unchanged V12default64, finite inherited five-call turn budgets and actual rendered output. Planted full solution inside question remains structurally admitted: no semantic disclosure proof or human/professor validation. Independent bounded/factual28tests passed2.75s; runtime57 and ingestion61 tests passed, Ruff clean. Prior unrelated reviews retained; experimental configuration remains unpromoted.",
         "findings": [],
@@ -14305,6 +15505,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/generation/contract_repair.py",
+      "risk": "high",
+      "sha256": "cdd3c20807c2f1f41937bf8a1d6ee5fa49853de01ed4498f4b51efe401c5e64a"
+    },
+    {
+      "audit": {
         "domain": "grounded-generation-correctness",
         "evidence": "Schema review and focused tests confirm the unselected v2 model output contains only bounded atomic claims with unique claim and citation IDs and no unrestricted answer field.",
         "findings": [],
@@ -14354,10 +15570,10 @@
     {
       "audit": {
         "domain": "final-response-verification-component",
-        "evidence": "Scoped v2 experimental prompt selection, unchanged v1/schema/defaults, explicit exact-run authorization, strict binding/role/admission contracts and fixed packet replay. Protocol tests and static execution-freeze coverage pass; offline analysis validates input/review/raw/source and provider ledgers, planned versus reached denominators and uncertainty. No product selection or semantic-quality claim. v1 stopped run and its critical/coverage failures retained; v2 semantic performance requires separate live evidence. Prior unrelated audit scope retained in history.",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and independent implementation/evidence reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -14365,7 +15581,7 @@
       "package_commands": [],
       "path": "src/digital_twin/generation/final_response_audit.py",
       "risk": "high",
-      "sha256": "acc1bff94a41251d559dd60ed6bfd68b4e1f7ea6264590fe4b11a2bd07f5e940"
+      "sha256": "166bf64812c284285a4fd3b2a3439cbb39615c5e011110a75c8a74faff8b2b33"
     },
     {
       "audit": {
@@ -14414,6 +15630,22 @@
       "path": "src/digital_twin/generation/instructional.py",
       "risk": "high",
       "sha256": "12a06e2f9350d6a99f43fba0cff659bbdf88c614ff6f4fed4b8cbd1f1097d11f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/generation/instructional_source_state.py",
+      "risk": "high",
+      "sha256": "f5f64aa5618f210919baa2ffdbe66aede4c7ac2c2546f6c13576e236a8dcdfad"
     },
     {
       "audit": {
@@ -15330,10 +16562,10 @@
     {
       "audit": {
         "domain": "final-response-verification-component",
-        "evidence": "Scoped v2 experimental prompt selection, unchanged v1/schema/defaults, explicit exact-run authorization, strict binding/role/admission contracts and fixed packet replay. Protocol tests and static execution-freeze coverage pass; offline analysis validates input/review/raw/source and provider ledgers, planned versus reached denominators and uncertainty. No product selection or semantic-quality claim. v1 stopped run and its critical/coverage failures retained; v2 semantic performance requires separate live evidence. Prior unrelated audit scope retained in history.",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification. Final registry review added all3 new guarded entrypoints to the authoritative script-operation map;14 related tests passed. Existing program-level allowances and blocked operation boundaries are unchanged.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and independent implementation/evidence reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -15341,7 +16573,7 @@
       "package_commands": [],
       "path": "src/digital_twin/repository_freeze.py",
       "risk": "high",
-      "sha256": "aa1d5dbff50359ea6efee83db283a4b4fa12219d0be7fa085e0f5e3c1abbf27b"
+      "sha256": "5abcd2b19c901c5aa1726d4874dd90fd7521b4ecc213de68254c5c8473df3832"
     },
     {
       "audit": {
@@ -15358,6 +16590,22 @@
       "path": "src/digital_twin/student/__init__.py",
       "risk": "high",
       "sha256": "12905f9cc0ade6f5b87ed1953557553fccd409cb02a7da9acb66dbb20ff29d0f"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/assessed_planning_input.py",
+      "risk": "high",
+      "sha256": "d5a9135152cf9c6515b693abbde94f52c669acf1e2a0175093d2cafb30baea1c"
     },
     {
       "audit": {
@@ -15454,6 +16702,22 @@
       "path": "src/digital_twin/student/clarification.py",
       "risk": "high",
       "sha256": "79033c91a6f0fa0bb1bf538a6499960f646244a970bd1866d3a34d6f04da5037"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/conversation_retrieval.py",
+      "risk": "high",
+      "sha256": "1886dda36b966d129419c96d29dfd926bf60ed81980821e9b0fbc3f9daabc7cd"
     },
     {
       "audit": {
@@ -15569,6 +16833,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/model_assessment.py",
+      "risk": "high",
+      "sha256": "602c03d663a1616762c6ec54470db2cd6ec23d47ea607fa7830177d27150a2a5"
+    },
+    {
+      "audit": {
         "domain": "stateful-clarification-r1-2",
         "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
         "findings": [],
@@ -15598,6 +16878,22 @@
       "path": "src/digital_twin/student/planning_architectures.py",
       "risk": "high",
       "sha256": "8a3f2e3849c802de3e2c80d19a9e28dbb268a2d7cc95f0bd71743339f94afe55"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/post_report_learning.py",
+      "risk": "high",
+      "sha256": "6beb770f74fe23ee2a015282fa4846d2a0c3083be8cc69fb254a9750321548b8"
     },
     {
       "audit": {
@@ -15649,11 +16945,11 @@
     },
     {
       "audit": {
-        "domain": "active_runtime",
-        "evidence": "Goal-scope reproducibility review: exact objective/course/release mapping, committed learner evidence, preservation of noncompleted goals; network-free runner and separate independent audit. Covered by goal-completion service/evaluation regression tests and the full post-submission test gate; see docs/post-submission-verification.md.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-07",
-        "reviewer": "codex-reproducibility-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -15661,7 +16957,23 @@
       "package_commands": [],
       "path": "src/digital_twin/student/service.py",
       "risk": "high",
-      "sha256": "93160a0698fe8d85cec1c9ec26ea03db4b3500081e4b06da01820b3bf1324633"
+      "sha256": "3e6ec95d153c645d8233a051c725e54068fdeff6ed31a8892604250ef7ed1959"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "active_runtime",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "src/digital_twin/student/source_assessment.py",
+      "risk": "high",
+      "sha256": "de8c8b292f5f2dbde37d1a4cf228ef09c811396d971d0f3984e66b0a6d5f584b"
     },
     {
       "audit": {
@@ -15697,11 +17009,11 @@
     },
     {
       "audit": {
-        "domain": "typed-instruction-v10-and-profile-context-development",
-        "evidence": "Scoped technical re-audit: docs/research/2026-09-06-technical-reaudit-runtime.md. Reproduced correctness defects and targeted regression checks recorded there; shared repository changes additionally reviewed under ingestion-approval and runtime. Historical unrelated audit scope retained. No semantic-quality or exhaustive correctness certification.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and delegated technical re-audit reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "active_runtime",
@@ -15709,7 +17021,7 @@
       "package_commands": [],
       "path": "src/digital_twin/student/tutoring_graph.py",
       "risk": "high",
-      "sha256": "496c88c9e3cded75a31cbdb93e9ffb7f907d7c0ff1a660c380f6995233cbec61"
+      "sha256": "931cc1ab72e2d6e2176eb0dda598ac3b20a107c3b239cacdcdad90b3130b908f"
     },
     {
       "audit": {
@@ -15857,6 +17169,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/api/test_post_report_configuration.py",
+      "risk": "medium",
+      "sha256": "eb7a4900473201ee446c0372cff9af76e7cac6d2ea6e0b57107f45a8fc6244c7"
+    },
+    {
+      "audit": {
         "domain": "proactive-outreach",
         "evidence": "API regressions verify student opt-in and inbox ownership, professor scheduling authority, source-linked delivery, read state, cross-course rejection, and time-independent quiet-hour behavior with no external calls.",
         "findings": [],
@@ -15889,6 +17217,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/api/test_runtime_identity.py",
+      "risk": "medium",
+      "sha256": "d16b4d788a92d72984950b51f8a0ab5ab77e4f2bcbbcc9bd78415a2f6caeef1c"
+    },
+    {
+      "audit": {
         "domain": "verification-evidence",
         "evidence": "Independent verification review plus complete Python regression execution; no skipped, xfailed, placeholder, broad-exception, TODO, or FIXME test patterns in the pending verification set.",
         "findings": [],
@@ -15905,11 +17249,11 @@
     },
     {
       "audit": {
-        "domain": "r1-demo-build-and-evaluation-v2",
-        "evidence": "Incremental review and synthetic regressions for the changes documented in docs/research/2026-09-05-runtime-correctness-audit.md. Prior audit coverage is historical; this checkpoint checks authority at turn commit, delivery limits, reply scope, clarification label bounds, and fixture lifecycle compatibility. Full repository verification is recorded separately in that note.",
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
         "findings": [],
-        "reviewed_at": "2026-09-05",
-        "reviewer": "Codex runtime correctness audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -15917,7 +17261,7 @@
       "package_commands": [],
       "path": "tests/api/test_student_api.py",
       "risk": "medium",
-      "sha256": "b240c6e0d5d7da6add066553bcdc7ebb3b6e281cfb052e57f231ecb3c179cb01"
+      "sha256": "234ac01580e76c8ec759cfdcfa66609088cf48accf6b793608a4700a00ae88fb"
     },
     {
       "audit": {
@@ -15966,6 +17310,22 @@
       "path": "tests/digital_twin/test_api_retrieval_index.py",
       "risk": "medium",
       "sha256": "e12cde40a7f0e3f563b441808e7d480d56a0c2606366884a933bac1d4a164e9c"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_assessed_planning_input.py",
+      "risk": "medium",
+      "sha256": "b7f8fb8ddcdd3ce9b7400baf65f16557328e0bf3b65a0cebc2cfb6eec11d8bcb"
     },
     {
       "audit": {
@@ -16065,6 +17425,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_conversation_retrieval.py",
+      "risk": "medium",
+      "sha256": "a109de1071edb4d3ff949ab6fbb095aa3597e61887a544b22f70a5e56c946d0f"
+    },
+    {
+      "audit": {
         "domain": "evaluation-and-grounding-verification",
         "evidence": "Focused regression coverage confirms the prospective Gemini reviewer is accepted by exact registration while prohibited Gemma, Claude, retired local models, and package-command execution remain blocked.",
         "findings": [],
@@ -16145,11 +17521,11 @@
     },
     {
       "audit": {
-        "domain": "verification",
-        "evidence": "Goal-scope reproducibility review: exact objective/course/release mapping, committed learner evidence, preservation of noncompleted goals; network-free runner and separate independent audit. Covered by goal-completion service/evaluation regression tests and the full post-submission test gate; see docs/post-submission-verification.md.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-07",
-        "reviewer": "codex-reproducibility-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16157,7 +17533,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_goal_completion_scope.py",
       "risk": "medium",
-      "sha256": "57a60774100cfd4de3e7246e32f8ced968edf3f815a3691be29a27c93ce41b00"
+      "sha256": "e499b589f6aee0855006640cefe1b6d32b3d94a1706ae50377ad74838f0a69f6"
     },
     {
       "audit": {
@@ -16273,6 +17649,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_model_assessment.py",
+      "risk": "medium",
+      "sha256": "def4abed886ad48972f9b06db474f2576a69664e2dcb005e927948786ab915b3"
+    },
+    {
+      "audit": {
         "domain": "evaluation-and-grounding-verification",
         "evidence": "Focused regression coverage for metric validity, source lineage, citation grounding, provider failures, model identity, course isolation, multimodal ranking, and profile activation passed.",
         "findings": [],
@@ -16385,6 +17777,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_post_report_learning.py",
+      "risk": "medium",
+      "sha256": "b4705090d2c386a29631fb5b8cc0d5a1b7c04781cacccc06d71bffec544ee7d9"
+    },
+    {
+      "audit": {
         "domain": "proactive-outreach",
         "evidence": "Incremental code review and passing synthetic regressions documented in docs/research/2026-09-05-runtime-correctness-audit.md; revalidates authority and preferences atomically with delivery. Full repository verification recorded separately.",
         "findings": [],
@@ -16402,10 +17810,10 @@
     {
       "audit": {
         "domain": "final-response-verification-component",
-        "evidence": "Scoped v2 experimental prompt selection, unchanged v1/schema/defaults, explicit exact-run authorization, strict binding/role/admission contracts and fixed packet replay. Protocol tests and static execution-freeze coverage pass; offline analysis validates input/review/raw/source and provider ledgers, planned versus reached denominators and uncertainty. No product selection or semantic-quality claim. v1 stopped run and its critical/coverage failures retained; v2 semantic performance requires separate live evidence. Prior unrelated audit scope retained in history.",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "root and independent implementation/evidence reviewers"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -16413,7 +17821,7 @@
       "package_commands": [],
       "path": "tests/digital_twin/test_repository_freeze.py",
       "risk": "medium",
-      "sha256": "804e149e8ae3a7064d8abb927779c4d5c484b6ceb15a9ee3f78710d5a1d7a6ab"
+      "sha256": "2e999f88d3e22da00b78220509eed52f82bae474b27712904da86f60ae2cc977"
     },
     {
       "audit": {
@@ -16558,6 +17966,22 @@
       "path": "tests/digital_twin/test_simulated_learner_v2.py",
       "risk": "medium",
       "sha256": "8570a4d90b8030765f7bf2170f383118d50b62cf2e7b29ea52207bfda8edaf71"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/digital_twin/test_source_assessment.py",
+      "risk": "medium",
+      "sha256": "68ef895ff3d4f311ad73463a2acbeba72420576d2d4c2103407992a5606f04c9"
     },
     {
       "audit": {
@@ -17777,6 +19201,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_audited_instruction_generation.py",
+      "risk": "medium",
+      "sha256": "fe02722848934cfd176807644c46aa310b9220b2809cf9e25de873cb9fb2c538"
+    },
+    {
+      "audit": {
         "domain": "conditional-revision-and-generated-preview-integration",
         "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
         "findings": [],
@@ -17825,11 +19265,11 @@
     },
     {
       "audit": {
-        "domain": "experimental-role-composition-and-evaluation",
-        "evidence": "Scoped assistant review of V13 bounded-revision changes only: exact preregistered draft-action eligibility, actual restricted provider schema and server model, unrestricted V12 helper preservation, no factual-unit escalation or unchecked fallback, same single Sol revision and three-role identities/combined usage, explicit factory/worker/restart selection, Stage A80-control opt-in versus unchanged V12default64, finite inherited five-call turn budgets and actual rendered output. Planted full solution inside question remains structurally admitted: no semantic disclosure proof or human/professor validation. Independent bounded/factual28tests passed2.75s; runtime57 and ingestion61 tests passed, Ruff clean. Prior unrelated reviews retained; experimental configuration remains unpromoted.",
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed explicit audit-model keyword forwarding in longitudinal adapter and preflight signature binding before any provider calls. Actual injected paired runner exercises two arms, answered cited turns, audit calls and restart. All paired and mixed-source tests passed; worker23tests verify both role configurations and timeout/restart duplicate suppression.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "runtime author and independent evidence reviewer"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -17837,7 +19277,7 @@
       "package_commands": [],
       "path": "tests/test_autonomous_worker_composition.py",
       "risk": "medium",
-      "sha256": "93b88aeae6df3b733f4fc5908cadf7cff0d034b1a63937d7942679df15251898"
+      "sha256": "eeabb562236a05bc254d858bf0b8a666fe236751b30843fca7394897e85a7eac"
     },
     {
       "audit": {
@@ -18222,6 +19662,22 @@
       "path": "tests/test_conditional_revision_generation.py",
       "risk": "medium",
       "sha256": "b5fd32719e272252aa5c3cf84542b2cd29691af4d785ce854f2911d68476217d"
+    },
+    {
+      "audit": {
+        "domain": "post-report-learning-and-answer-integration",
+        "evidence": "Reviewed source/learner/release scope, selector propagation, bounded provider calls and cost retention, atomic commit/replay, and candidate/control boundaries. Development regression evidence and unqualified semantic limitations: docs/post-report-learning-runtime-2026-09-08.md. UI evidence is synthetic; injected model judgments are contract checks, not quality qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_contract_repair_generation.py",
+      "risk": "medium",
+      "sha256": "891325eed828be792384dc386e8379b929aca8d89eaf0d579919bcfc6267993c"
     },
     {
       "audit": {
@@ -19073,6 +20529,22 @@
     },
     {
       "audit": {
+        "domain": "post-report-fixed-clock-regression",
+        "evidence": "Fixed rehearsal NOW is passed to initial and restarted autonomy services; the seven-day simulation passes after the wall-clock expiry failure. Regression sets SystemUtcClock to 2040 without changing gates or historical results.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_governed_autonomy_freeze_clock.py",
+      "risk": "medium",
+      "sha256": "a011575edb46f224f1b6ea13383e662bf6e09dba5414205ff6e180798dc445e3"
+    },
+    {
+      "audit": {
         "domain": "verification-correctness",
         "evidence": "Reviewed against the corrected release binding, deterministic lineage checks, focused regression tests, static analysis, and repository freeze rules.",
         "findings": [],
@@ -19506,10 +20978,10 @@
     {
       "audit": {
         "domain": "governed-autonomy-v2-1",
-        "evidence": "Focused tests prove the terminal candidate remains unselected and hash-bound to its immutable revision, network-free simulation still crosses actual services, revoked authority blocks preflight, and blocked execution constructs no provider request.",
+        "evidence": "Existing network-free service test now simulates 2040 host time; all four module tests pass. Live execution remains revoked and blocked.",
         "findings": [],
-        "reviewed_at": "2026-09-01",
-        "reviewer": "Codex V2.1 provider-integration audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-post-report-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -19517,7 +20989,7 @@
       "package_commands": [],
       "path": "tests/test_governed_full_autonomy_v2_1_provider_integration.py",
       "risk": "medium",
-      "sha256": "e70a0c25a35995f7332edac410839261aaef31a98e5f470dc5d6b4cf46f07b4e"
+      "sha256": "2e02b0c04747e068645289c8cad50f11c563e6365e1e69f4268f4d62266e302e"
     },
     {
       "audit": {
@@ -19630,6 +21102,22 @@
       "path": "tests/test_instructional_operational_comparison.py",
       "risk": "medium",
       "sha256": "7a4199d056b434e445de934d0071f240e42c6c4dfb61a96335d4fe719cfe3095"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_instructional_source_state.py",
+      "risk": "medium",
+      "sha256": "061f6af425dcba85b0b8e829b9f5b2624b7b7c59e81b552c7012417fea6e2381"
     },
     {
       "audit": {
@@ -19793,11 +21281,11 @@
     },
     {
       "audit": {
-        "domain": "mixed-source-and-authenticated-load",
-        "evidence": "Ingestion agent author-reviewed entire new runners/tests: realHTTP authentication, finite provider bounds, mixedPDF/text/forum source lineage, recovery, exclusive outputs/source archives, shutdown and operational denominators. Final four focused tests passed17.94s; stable128suite passed.180livecalls/180answers are operational templates, not independent quality samples; preserved failedshutdown contract and no production scaling claim.",
+        "domain": "post-report-final-selection",
+        "evidence": "Explicit audit identity across budget wrapper reviewed; 47 focused tests passed including four mixed-source full restore variants. Named integration003152checks passed. UI scope-safe goal/outcome links and observed assessment counts; frontend85tests passed. Visual inspection in progress, not claimed complete.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-ingestion-dashboard-audit"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -19805,7 +21293,7 @@
       "package_commands": [],
       "path": "tests/test_mixed_source_recovery_development.py",
       "risk": "medium",
-      "sha256": "539d0bc9fe97c3447d6bff07fbc59770efffb2509d591e5f77e4c5eec3b32f63"
+      "sha256": "8395e712c5a0d95a034c95ff91a572727e383233e1f4d8e48979a4d30b5451f2"
     },
     {
       "audit": {
@@ -19890,10 +21378,10 @@
     {
       "audit": {
         "domain": "conditional-revision-and-generated-preview-integration",
-        "evidence": "Scoped source review and recorded regression checks in docs/research/2026-09-06-conditional-preview-integration-audit.md; experimental only, live integrated semantic qualification pending.",
+        "evidence": "Reviewed explicit audit-model keyword forwarding in longitudinal adapter and preflight signature binding before any provider calls. Actual injected paired runner exercises two arms, answered cited turns, audit calls and restart. All paired and mixed-source tests passed; worker23tests verify both role configurations and timeout/restart duplicate suppression.",
         "findings": [],
-        "reviewed_at": "2026-09-06",
-        "reviewer": "codex-root-integration-review"
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
       },
       "audit_status": "audited",
       "category": "verification",
@@ -19901,7 +21389,7 @@
       "package_commands": [],
       "path": "tests/test_paired_pedagogy_development.py",
       "risk": "medium",
-      "sha256": "ee9596bae42cf7b578371c0e9e741410f3257b6725c0c4af873261392e067760"
+      "sha256": "bfb4b205ff7e4af888f0ecd9357e53689c0ba9e19fba19f28566d6ece7b89504"
     },
     {
       "audit": {
@@ -19918,6 +21406,54 @@
       "path": "tests/test_persona_wording_bank_022.py",
       "risk": "medium",
       "sha256": "f3b80fac7e00303787ab44bef6e3c3d16e54343708fc321d7fc75dc076c2d455"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_post_report_assessment_runner.py",
+      "risk": "medium",
+      "sha256": "dd26f505747b4035410958c7b292a66fe8bcee896e15e2dd97f4fd1023604efa"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Final-selection002 primary code review: explicit Luna-medium revision variant, unchanged Sol defaults and strict identity, exact revision provenance and audit serializer. Focused tests cover repair/reaudit and foreign-model quarantine, original app selectors and paired schedules. Reviewer003 exact scalar evidence with unchanged semantic gates; arbitrary batch requires exact expected output count. See /tmp/final-selection-focused.log.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_post_report_blind_review.py",
+      "risk": "medium",
+      "sha256": "9169ed553a70c28013a7ae0fee1066f7a62b42493625d3d7c12c75bb9386b432"
+    },
+    {
+      "audit": {
+        "domain": "post-report-bounded-completion",
+        "evidence": "Primary code review and bounded synthetic verification; scope and known limitations in docs/post-report-bounded-code-review-2026-09-08.md. Includes explicit provider serialization/guards, V19/V2 boundaries, UI request scope, worker replay/crash and integration152. Not semantic or human qualification.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_post_report_learner_policy.py",
+      "risk": "medium",
+      "sha256": "077b90b3a49798e2da11ed9791e1b0b38c15ade09fdc7da6c9fe17801ed44e54"
     },
     {
       "audit": {
@@ -20094,6 +21630,38 @@
       "path": "tests/test_question_specific_profile_generation.py",
       "risk": "medium",
       "sha256": "de88873b9ce537790b09cc9ade89b23fdc39562eca7ca02d097be734559e4d29"
+    },
+    {
+      "audit": {
+        "domain": "post-report-development",
+        "evidence": "Changed behavior and failure boundaries reviewed with scoped regressions: 67 Python API/adapter/recording/worker/freeze tests, 80 frontend tests and production build. Assessed-input adapter remains experimental. See docs/post-report-tooling-audit-2026-09-08.md and tests/manual-post-report-continuity-2026-09-08.md.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-primary-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_recording_demo.py",
+      "risk": "medium",
+      "sha256": "7211463a4f541d44777bb76f3dbdaa4a82581a5318d07aa17fba8005a319a2ee"
+    },
+    {
+      "audit": {
+        "domain": "post-report-recording-and-review",
+        "evidence": "Reviewed explicit two-name synthetic runtime allowlist, unchanged default and local control guard; recording virtual-clock integration and name rejection checks: 3 passed. Documentation includes bounded recorded-client composition.",
+        "findings": [],
+        "reviewed_at": "2026-09-08",
+        "reviewer": "codex-recording-runtime-review"
+      },
+      "audit_status": "audited",
+      "category": "verification",
+      "disposition": "active_audited",
+      "package_commands": [],
+      "path": "tests/test_recording_virtual_clock.py",
+      "risk": "medium",
+      "sha256": "71e4922dddd84c803cce1cca936c57b37b12fc9c364cb82d6751b7536afc9c63"
     },
     {
       "audit": {
@@ -20993,8 +22561,8 @@
     }
   ],
   "risk_counts": {
-    "high": 908,
-    "medium": 344
+    "high": 980,
+    "medium": 370
   },
   "schema_version": 1,
   "scope": "all tracked executable and execution-affecting files"
