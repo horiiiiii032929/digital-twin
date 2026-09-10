@@ -1783,9 +1783,27 @@ async def test_autonomy_observer_uses_v2_belief_observation_lineage(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_v2_provider_failure_falls_back_without_state_advance_or_retry(tmp_path):
+@pytest.mark.parametrize("returned_failure", [False, True])
+async def test_v2_provider_failure_falls_back_without_state_advance_or_retry(tmp_path, returned_failure):
     repository, fixture, _, _, _ = _autonomy_fixture(tmp_path)
     generator = _UnavailableV2Generator()
+    if returned_failure:
+        from src.digital_twin.grounding.models import GenerationUsage
+
+        async def return_rejected_answer(*args, **kwargs):
+            generator.calls += 1
+            return TutorAnswer(
+                content="Rejected draft must never be displayed.",
+                trace=GenerationTrace(
+                    generator_id="synthetic-audited-generator", provider_model="synthetic-model",
+                    prompt_version="synthetic-v1", policy_action="safe-provider-failure",
+                    latency_ms=1234, usage=GenerationUsage(input_tokens=30, output_tokens=10,
+                        total_tokens=40, approximate_cost_usd=0.001),
+                    validation_scope="final_response_quarantined=audit_rejected",
+                ),
+            )
+
+        generator.generate_for_intent = return_rejected_answer
     tutoring = StudentTutoringService(
         repository,
         profile_path=PROFILE,
@@ -1818,6 +1836,15 @@ async def test_v2_provider_failure_falls_back_without_state_advance_or_retry(tmp
         conversation_id=conversation.id,
     )
     assert turn.tutor_message.action == "safe-graph-failure"
+    if returned_failure:
+        assert "Rejected draft" not in turn.tutor_message.content
+        assert "Your message is saved" in turn.tutor_message.content
+        assert not turn.citations
+        assert turn.tutor_message.trace.provider_model == "synthetic-model"
+        assert turn.tutor_message.trace.latency_ms == 1234
+        assert turn.tutor_message.trace.usage.total_tokens == 40
+        assert turn.tutor_message.trace.usage.approximate_cost_usd == 0.001
+        assert turn.tutor_message.trace.validation_scope == "final_response_quarantined=audit_rejected"
     assert generator.calls == 1
     assert repository.get_learner_state(conversation.id) is None
     assert repository.get_learner_belief_state_v2(conversation.id) is None

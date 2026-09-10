@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-004-case-04-live-001",
+  "method": "All four outputs read against frozen source and stage rubric; failure diagnosis includes local replay.",
+  "rows": [
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Only four Elm learners contributed. Does the missing summary mean everyone understands the concept?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: four is below the display threshold. What changes when a fifth active learner contributes?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v4",
+      "stage": 0,
+      "question": "Only four Elm learners contributed. Does the missing summary mean everyone understands the concept?",
+      "response": "Groups with fewer contributors are suppressed. Suppression means insufficient group size for display; it does not mean no learning gap exists.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response follows the requested stage.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "elm-groups-explanatory",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: four is below the display threshold. What changes when a fifth active learner contributes?",
+      "response": "Elm shows a professor a concept-level learning-gap summary only when at least five active learners contribute to that group. Groups with fewer contributors are suppressed.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response follows the requested stage.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

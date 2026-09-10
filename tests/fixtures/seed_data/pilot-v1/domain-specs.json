@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "courses": {
+    "demo-pilot-v1-systems": [
+      {"key": "primary-key", "label": "Primary keys", "excerpt": "A primary key uniquely identifies a row and cannot contain null values."},
+      {"key": "foreign-key", "label": "Foreign keys", "excerpt": "A foreign key constrains references to a key in another table. A foreign key does not by itself make its column unique; many rows can reference the same parent."},
+      {"key": "join", "label": "Inner joins", "excerpt": "Joining Members to Teams on matching team_id produces three rows: Ari–Cedar, Bo–Cedar, Cam–Maple."}
+    ],
+    "demo-pilot-v1-security": [
+      {"key": "session", "label": "Server-side sessions", "excerpt": "After authentication, a session cookie can identify a server-side session. The server must check session validity and authorization on protected requests."},
+      {"key": "httponly", "label": "HttpOnly cookies", "excerpt": "HttpOnly prevents JavaScript from reading the cookie through document.cookie; it does not prevent every action an injected script could perform."},
+      {"key": "csrf", "label": "CSRF defenses", "excerpt": "A browser can automatically attach cookies to requests. This is why cookie authentication alone is not a complete CSRF defense. In the course example, state-changing requests require a permitted Origin; token-based defenses are another approach outside this example's implementation scope."}
+    ]
+  }
+}

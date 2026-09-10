@@ -1,0 +1,25 @@
+{
+  "profile_id": "aws-presentation-demo-v1",
+  "profile_type": "experimental-decision-record-not-SystemReleaseProfile",
+  "date": "2026-09-09",
+  "user_requested_demo_override": true,
+  "default_release": {
+    "decision": "Keep research default unchanged; retain as deployment rollback",
+    "path": "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json"
+  },
+  "aws_pilot_override": {
+    "route": "audited-presentation-v1",
+    "candidate": "v19-luna-luna-medium",
+    "generation_model": "gpt-5.6-luna",
+    "generation_reasoning": "low",
+    "audit_and_repair_model": "gpt-5.6-luna",
+    "audit_and_repair_reasoning": "medium",
+    "semantic_qualification": false,
+    "evidence": [
+      "research/05_evaluation/records/it5004-presentation-teaching-live-002.json",
+      "research/05_evaluation/records/post-report-final-selection-004-mini-review-live-001.json"
+    ],
+    "deployment_verification": "research/04_experiments/2026-09-09-aws-presentation-route-plan.md"
+  },
+  "scope": "User-selected audited teaching demo on AWS, not promotion of a research default. Synthetic course sources only."
+}

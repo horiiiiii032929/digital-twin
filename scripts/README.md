@@ -5,6 +5,25 @@ data validation, or project automation scripts.
 
 Current utilities:
 
+- `build_standard_sdlc_diagrams.py`: builds the recommended eight C4/UML draw.io
+  diagrams and, with `--export`, PNG/SVG images and a review PDF using draw.io Desktop.
+  Run `uv run python -m scripts.build_standard_sdlc_diagrams --export`.
+  See [notation, sources and scope](../reports/presentation/diagrams/standard/README.md).
+
+- `build_presentation_diagrams.py`: rebuilds the superseded first four editable presentation
+  diagrams. Run `uv run python -m scripts.build_presentation_diagrams --export`
+  to generate the draw.io source, PNG/SVG images and review PDF using draw.io Desktop.
+  See [diagram sources and usage](../reports/presentation/diagrams/README.md).
+
+- `build_recording_demo.py`: prepares synthetic service events for the presentation's
+  student-use/follow-up chapter. Run `uv run python -m scripts.build_recording_demo`.
+  It uses one temporary SQLite store, two course owners and four students, with
+  deterministic tutoring, scripted practice opportunities, a course pause and a
+  worker retry. The generated `apps/web/public/recording-demo.json` is ignored.
+  This is a presentation fixture, not a concurrency or learning-effect evaluation;
+  it does not capture onboarding or source ingestion. The complete video direction
+  is in [the presentation plan](../reports/presentation/full-flow-video-direction.md).
+
 - `validate_submitted_report_links.py`: preserves submitted PDF and source archive
   hashes, internal PDF destinations, 14 cited repository files and the 12-study
   evidence index. Run `npm run check:report-links`; this is included in `npm run check`.
@@ -1902,3 +1921,408 @@ registered. Six exposed 025 concept cards and seeds 9101–9103 form a developme
 regression dataset, not held-out quality evidence. Dependency imports may attempt
 public pricing-metadata discovery and fall back locally; no external LLM is used.
 See the [design and results](../research/05_evaluation/goal-completion-scope-development-001-results.md).
+
+## Recording preparation
+
+`uv run python -m scripts.prepare_recording_materials` creates the two synthetic
+PDF upload fixtures and six-actor manifest under `reports/presentation/recording/`.
+`uv run python -m scripts.prepare_recording_checkpoint` verifies actual onboarding,
+PDF import, teaching-profile approval, release preflight/publication and four cited
+student turns in a temporary API runtime. It writes ignored verification JSON.
+`uv run python -m scripts.start_recording_workspace` launches a disposable,
+deterministic recording API on 8018 and six unchanged product UIs on 5178–5183.
+On a fresh running workspace, `uv run python -m scripts.prepare_recording_checkpoint
+--published` prepares the later student-entry scenes, stopping before consent and
+questions. See the [recording guide](../reports/presentation/recording/README.md)
+for actor URLs, capture settings, limitations and restart instructions.
+
+`uv run python -m scripts.record_student_clips` records the four prepared student
+actors through an existing Playwright CLI session named `recording-film`.
+`uv run python -m scripts.edit_recording_film` assembles the named raw captures,
+English captions, four-session comparison and separately labelled service-log
+visualization into a silent 1080p MP4. See the [recorded film notes](../reports/presentation/recording/recorded-video.md)
+for prerequisites, lineage, timestamps and verification.
+
+### Historical replay preview
+
+`uv run python -m scripts.build_thirty_day_preview` renders a 63-second English
+Day 4–6 preview from the existing full operational dialogue ledgers. It writes
+PNG scenes, a hashed source manifest and `day-4-to-6-preview.mp4` under
+`reports/generated/thirty-day-preview/`. Requires Pillow, ffmpeg and macOS Arial
+fonts. This is an editorial replay of historical outputs, with no provider calls
+or product changes. The source run must already exist locally.
+
+### Live virtual-time recording
+
+`uv run python -m scripts.start_recording_workspace` now uses the isolated
+`recording_app` T1-v2.1 factory, a temporary shared SQLite store, the existing
+deterministic planner/generator and v3 evidence gate, and an injected virtual
+clock. This is an explicit recording configuration, not a release profile change.
+The local-only `recording_controls` routes configure approved course objectives
+and advance existing observer/worker services, bounded to 30 virtual days.
+
+`record_autonomous_film.py` contains Playwright CLI capture, student-turn and
+clock helpers for the `autonomous-film` browser session. Raw footage and daily
+service outputs go in `output/playwright/autonomous-film/`.
+`uv run python -m scripts.edit_autonomous_film` consumes that directory's
+`edit-plan.json` and writes an English-subtitled MP4 under
+`reports/generated/autonomous-film/`. Requires the locally recorded WebMs,
+ffmpeg/ffprobe, Pillow and macOS Arial fonts. No new model calls occur in editing.
+
+`uv run pytest tests/test_recording_virtual_clock.py tests/test_recording_demo.py -q`
+checks the recording clock/service wiring and retained historical trace builder.
+See [live demo production](../reports/presentation/recording/live-virtual-demo.md)
+for provenance, limitations and review.
+
+### English presentation deck
+
+`uv run python -m scripts.build_presentation_failure_diagrams` exports six native
+UML draw.io pages and PNGs; it requires the macOS draw.io application.
+`uv run python -m scripts.prepare_presentation_deck` resolves the evidence index,
+35-slide content and English notes into `reports/generated/slide-build/`.
+
+Run `scripts/build_presentation_deck.mjs` with the bundled Codex Node runtime to
+create editable slides using Artifact Tool. Run `scripts/embed_presentation_video.py`
+with the bundled Python runtime (lxml required) to embed the reviewed MP4 on slide 3.
+Run `scripts/finalize_presentation_deck.mjs` with that Node runtime and
+`RUNTIME_NODE_MODULES` set to the bundled node_modules directory. The scripts use
+this machine's bundled runtime paths; update them on another machine. Finalization
+validates the package, geometry, tables, fonts and import before writing the deck.
+Use a new final filename for a subsequent revision. Generated previews and
+validation records stay in the private build directory. The delivery package is
+under `reports/presentation/deck/`; its README records timing and playback scope.
+
+For the informative revision, run `uv run python -m scripts.revise_presentation_content`
+after preparing the base content and before building. It promotes four backup
+subjects, adds learner-model and evaluation explanations, and defines terms on
+individual slides. The finalizer writes `digital-twin-presentation-informative.pptx`.
+Export `candidate-base.pptx` for the static PDF so the video poster remains visible.
+
+For the reader-focused revision, run
+`uv run python -m scripts.expand_presentation_for_new_readers` after the informative
+content revision. It adds project orientation, a demo guide, experiment questions
+and labelled worked examples. The media embedder locates the video slide from the
+content manifest rather than assuming a fixed slide number. Final output is
+`digital-twin-presentation-reader.pptx` with a matching static PDF.
+
+For the visual evidence revision, run these content commands in order:
+
+```sh
+uv run python -m scripts.prepare_presentation_deck
+uv run python -m scripts.revise_presentation_content
+uv run python -m scripts.expand_presentation_for_new_readers
+uv run python -m scripts.revise_presentation_visuals
+```
+
+The last command creates 32 main slides, Questions and nine backup slides. It
+exports presentation versions of the native draw.io diagrams with duplicate
+headings removed, and supplies literal source-backed data for seven editable
+chart slides. Run the same Artifact Tool builder, video embedder and finalizer
+afterward. The finalizer currently targets `digital-twin-presentation-improved.pptx`
+and `validation-improved.json`; earlier filenames above describe prior builds.
+Choose a fresh final filename and receipt for subsequent finalized revisions.
+The video now occupies slide 4. Static PDF export must use `candidate-base.pptx`
+to preserve the video poster. See `reports/presentation/deck/README-visual.md`.
+
+For the graduate CS revision, run `uv run python -m scripts.revise_presentation_graduate`
+after the visual evidence revision. It adds the contribution statement, strengthens
+measurement and validity explanations, creates a standard UML component diagram,
+and moves lifecycle/container detail into backup. It writes the graduate script
+and remaps the Q&A references to 32 main slides, Questions and 14 backup slides.
+Run the same builder, media embedder and finalizer afterward. The current finalizer
+target is `digital-twin-presentation-graduate-final.pptx` with receipt
+`validation-graduate-final.json`. Use a fresh output/receipt name for later revisions.
+
+For specialist-term clarification, run `uv run python -m scripts.clarify_presentation_terms`
+after the graduate revision, then the same builder, embedder and finalizer.
+This adds first-use definitions and two backup glossaries (49 slides total).
+The current finalizer writes `digital-twin-presentation-terms.pptx` and
+`validation-terms.json`. Export the static PDF from `candidate-base.pptx`.
+
+For the natural read-aloud script revision, edit
+`reports/presentation/script/natural-narration.md`, then run
+`uv run python -m scripts.prepare_natural_presentation_script` after term
+clarification. It syncs all 49 speaker notes, preserves visible slide content,
+and writes a standalone HTML reading view and Markdown script. Run the same
+builder, embedder and finalizer afterward. The current finalizer targets
+`digital-twin-presentation-natural-script.pptx` and `validation-natural-script.json`.
+Use fresh output and receipt paths for later finalized revisions.
+
+For the full-slide clarity audit (8 September), preserve the natural-script content
+as `reports/generated/slide-build/pre-clarity-content.json`, then run:
+
+```sh
+uv run python -m scripts.revise_presentation_clarity
+uv run python -m scripts.sync_clarity_presentation_notes
+```
+
+The first command revises all 49 pages, exports native draw.io diagrams, records
+the old-to-new slide map and writes the full-page audit. The second synchronizes
+the read-aloud notes and Q&A references. Run these two commands together, in order;
+the note synchronization expects the freshly revised manifest. Then run the
+Artifact Tool builder, video embedder and finalizer described above. The current
+finalizer targets `digital-twin-presentation-audited.pptx` and
+`validation-audited.json`; prior targets above document earlier versions. Use
+fresh paths for any further finalized revision. Export the static PDF from
+`candidate-base.pptx`. There are 31 main slides, Questions at 32 and backups 33–49;
+the embedded demo is on slide 4. See `reports/presentation/deck/README-audited.md`.
+
+For the slides-first rebuild, preserve the audited content as
+`reports/generated/slide-build/pre-standalone-content.json`, then run:
+
+```sh
+uv run python -m scripts.rebuild_standalone_presentation
+```
+
+Run `scripts/build_standalone_presentation.mjs` with the bundled Node runtime,
+`scripts/embed_presentation_video.py` with the bundled Python runtime, then
+`scripts/finalize_standalone_presentation.mjs` with the bundled Node runtime and
+`RUNTIME_NODE_MODULES`. This separate finalizer writes
+`digital-twin-presentation-standalone.pptx` and a private
+`validation-standalone.json` receipt. Use fresh paths for further finalized
+revisions. Export the static PDF from `candidate-base.pptx`.
+
+This version has 31 main slides, Questions at 32 and 19 backups at 33–51.
+The video is on slide 5. Notes contain source citations only. The previous
+read-aloud script does not match this revised structure and is not included
+in its delivery package.
+
+### CTO / SDLC presentation
+
+The current deck uses the product journey, current design, comparison evidence,
+and continuing development narrative. Previous deck builds remain available.
+
+1. `python3 scripts/build_cto_presentation_diagrams.py` exports standard C4, ER,
+   and UML draw.io sources and PNGs to `reports/presentation/diagrams/cto/`.
+   Optional diagram names restrict exports, for example `03-erd`.
+2. `python3 scripts/prepare_cto_presentation.py` writes the 31-slide content
+   manifest to `reports/generated/cto-slide-build/` from the earlier evidence
+   manifest and the reviewed narrative.
+3. Run `scripts/build_cto_presentation.mjs` with the bundled Codex Node runtime
+   to create the editable candidate and all PNG previews.
+4. Run `scripts/embed_cto_presentation_video.py` with bundled Python (lxml) to
+   attach the unchanged 4:06 demo on slide 4.
+5. Run `scripts/finalize_cto_presentation.mjs` with bundled Node for package,
+   geometry, font, native chart/table and import checks. Finalization writes a
+   new output and intentionally refuses to overwrite an existing final file.
+6. Export `candidate-base.pptx` to PDF with bundled LibreOffice. This preserves
+   the poster in the static PDF; the final PPTX contains the native video.
+
+The presentation notes contain source references, not a revised speaking script.
+Before finalizing a later revision, choose a fresh final filename and validation
+receipt, and inspect all changed slides plus the whole-deck flow.
+
+### Visual refinement of the CTO / SDLC presentation
+
+The current refinement preserves the approved 31-slide narrative and the existing
+video. Run `python3 scripts/prepare_cto_refinement.py`, then
+`python3 scripts/refine_cto_visual_diagrams.py` (requires local draw.io), and use the
+bundled Node runtime to run `scripts/build_cto_refined_presentation.mjs`.
+`scripts/embed_cto_refined_presentation_video.py` attaches the existing video;
+`scripts/finalize_cto_refined_presentation.mjs` validates and writes a fresh final
+artifact. Its final output must not already exist. Review PNGs and a PDF export
+before packaging. The slide-by-slide review is in
+`reports/presentation/cto-refined-slide-review.md`.
+
+Run `python3 scripts/prepare_cto_refined_script.py` to build the matching 31-slide
+read-aloud script from `reports/presentation/script/cto-refined-narration.txt`.
+It writes Markdown, an HTML reader and timing estimates; it does not edit the deck.
+The HTML reader uses local slide PNGs for its optional slide previews.
+
+To reconcile that script into a new PowerPoint, run
+`scripts/reconcile_cto_script.mjs` using the bundled Node runtime, then
+`scripts/package_cto_script_notes.py` using the bundled Python runtime, and
+`scripts/finalize_cto_script.mjs` using Node. The process authors notes with
+Artifact Tool and preserves every other source package part. It produces
+`digital-twin-presentation-cto-with-script.pptx` without overwriting the source.
+
+For the proofread narration, use `prepare_cto_natural_script.py`,
+`reconcile_cto_natural_script.mjs`, `package_cto_natural_notes.py` and
+`finalize_cto_natural_script.mjs` in that order with the same bundled runtimes.
+The source is `reports/presentation/script/cto-natural-narration.txt`; outputs
+are the matching `speaker-script-cto-natural` reader/Markdown and
+`digital-twin-presentation-cto-natural-script.pptx`.
+
+The simplified title revision is built with `simplify_cto_title.mjs`,
+`package_cto_title.py` and `finalize_cto_title.mjs` using the bundled runtimes.
+It replaces only slide 1, retaining all notes and other package parts.
+
+### Product-first diagram review
+
+Run `uv run python -m scripts.build_product_first_activity --export` to create
+the Japanese UML activity review in
+`reports/presentation/diagrams/product-first/`. It requires draw.io Desktop at
+`/Applications/draw.io.app` and exports editable draw.io XML plus PNG, SVG and
+PDF. The scenario is based on the existing no-question event-driven review path;
+it does not run the product or replace the deck. Diagram allocation and source
+links are in `reports/presentation/planning/product-first-standard-diagrams-ja.md`.
+
+Run `uv run python -m scripts.build_implementation_diagrams --export` for the
+implementation-linked worker UML and delivery/commit sequence. It uses the
+installed draw.io Desktop, extracts the actual worker body via Python AST,
+exports PNG/SVG/PDF, and records source hashes under
+`reports/presentation/diagrams/implementation/`. The complete function mapping
+and pseudocode examples are in
+`reports/presentation/planning/implementation-backed-examples-ja.md`.
+# Post-report recording and runtime checks
+
+Start a second isolated synthetic recording environment without resetting an
+existing rehearsal:
+
+```bash
+uv run python -m scripts.start_recording_workspace --api-port 8019 --web-port-base 5184
+```
+
+This reserves API 8019 and six actor ports 5184–5189, and records its manifest
+under `reports/generated/recording-workspace/api-8019/runtime.json`. Restarting
+the process still resets its temporary synthetic database. It does not run
+paid models. Ports must be distinct and available.
+
+With the Playwright CLI session already open on the corresponding professor
+setup page, capture the actual onboarding interaction:
+
+```bash
+uv run python -m scripts.record_autonomous_film onboarding --api-port 8019 --web-port-base 5184 --session fresh-demo --output output/playwright/post-report-demo
+```
+
+The recorder checks the isolated factory and local actor origin. Its `students`
+mode remains a question-led legacy clip helper; the new no-initial-question
+demo uses the recording virtual-clock controls and actual inbox UI.
+
+The ordinary autonomy worker now writes atomic local heartbeats under
+`data_root/worker-status/`. Course owners can inspect observed runtime identity
+and heartbeat status through `GET /api/professor/courses/{course_id}/runtime-status`.
+No heartbeat is distinct from an idle worker, and composition equality does
+not establish answer quality. `--once` records `completed-once` rather than
+claiming a continuously running worker.
+
+Focused verification:
+
+```bash
+uv run pytest -q tests/api/test_runtime_identity.py tests/digital_twin/test_assessed_planning_input.py tests/test_recording_virtual_clock.py tests/test_autonomous_worker_composition.py
+```
+
+### Post-report learning and response candidates
+
+See [runtime selectors and boundaries](../docs/post-report-learning-runtime-2026-09-08.md). The existing experimental API and `autonomous_tutoring_worker` use the same explicit `APP_POST_REPORT_*` options. `final_profile_longitudinal_runtime.build_final_profile_runtime_factory` accepts the corresponding factory parameters and preserves them across restart.
+
+The paired pedagogy runner accepts `--candidate v17-luna-low` or `--candidate v18-luna-sol-medium` and optional `--candidate-context-retrieval`. The context option applies only to the candidate arm and is saved in the manifest. V17 reserves for bounded protocol repair; V18 reserves for final quality audit/repair/re-audit. Existing prospective cost/call checks and per-role budgets still apply. Do not use these selectors as evidence of semantic qualification or silently change a release profile. New live runs require a registered plan and must stay within the existing total US$30 allowance.
+
+### Post-report bounded component and integration comparisons
+
+- `uv run python -m scripts.run_post_report_assessment --model luna --assessment-version v2 --live --output-dir reports/generated/<fresh-run-id>` compares the frozen 32-case packet with the literal control. `--model sol` selects the explicit Sol-medium comparison. Reserve $6 per run under the shared $30 ledger first; the runner bounds 32 calls at $0.16 each. Expected labels never enter provider input. V1 remains selectable with `--assessment-version v1`; V2 requires every assessment target clause to appear in the approved ranges before assessing student paraphrases. Record all failures, costs and decisions.
+- `uv run python -m scripts.run_post_report_learner_policy --output-dir reports/generated/<fresh-run-id>` runs the fixed 30-day, 17-condition, 8,160-history network-free component grid. It also compares next-outcome forecasts on one shared open-loop stream, explicitly transforming BKT's latent score to observation space. This does not exercise the application's actual worker or establish real learning effects.
+- `uv run python -m scripts.run_mixed_source_recovery_development --execute --post-report --output-dir reports/generated/<fresh-run-id>` exercises the explicit V19/count/analytic-only/V2-assessment/recovery/context composition through credentialed mixed-source ingestion, cohort suppression/display, review, withdrawal and clean restore. Responses and audit verdicts are injected; semantic quality and autonomous background-worker uptime are separate evaluations.
+- The experimental API and worker accept `APP_POST_REPORT_ASSESSMENT_VERSION=v2` only together with `APP_POST_REPORT_MODEL_ASSESSMENT=true`. Other selectors and historical defaults are unchanged. `APP_EXPERIMENTAL_TUTORING_CANDIDATE=v19-luna-sol-medium` selects V18 plus the narrow instructional-withdrawal routing alternative. These are explicit development configurations, not silent release-profile replacements.
+
+### Finite post-report model review
+
+`uv run python -m scripts.run_post_report_blind_review --execute --model nano --output-dir reports/generated/post-report-blind-review-001-nano-live-001`
+
+Use `mini` with its own fresh output directory for the second predeclared reviewer. Reserve US$5.52 (Nano) or US$11.04 (Mini) in the shared post-report ledger before execution; this remains within the total US$30 authorization and is not permission for unlimited reruns. Each reviews the same32 calibration controls twice and152 preserved product outputs twice. Failed calibration means diagnostic ratings only, never a quality-pass claim. No Sol calls are scheduled. See `research/04_experiments/post-report-blind-review-001.md` and `docs/post-report-bounded-completion-2026-09-08-ja.md`.
+
+### Final selection reviewer calibration
+
+`uv run python -m scripts.run_post_report_blind_review --execute --model mini --version 2 --calibration-only --output-dir reports/generated/post-report-blind-review-002-mini-calibration-live-001`
+
+Version 2 uses JSON-pointer evidence and unchanged semantic consistency gates;
+version 1 remains available. Calibration-only runs all 64 controls without product
+calls. Reserve US$1.92 in the cumulative post-report budget ledger before this
+64-call Mini run (Nano reserve US$0.96). No retries or Sol calls. See
+[final selection plan](../research/04_experiments/post-report-final-selection-002.md).
+
+Version `--version 3` additionally validates exact JSON scalar evidence and repeats
+the five-item evidence limit. It retains versions1/2 and their failed runs. For a
+new frozen batch, supply explicit `--product-run-ids <ids...> --expected-count N`;
+all N outputs (including failures) must be present. Calls are64+2N, no retries.
+The final paired candidate is `v19-luna-luna-medium`; it keeps V19 mechanics with
+an explicitly selected Luna-medium audit/repair role, not the Sol variant.
+
+To exercise the explicit cheap composition through mixed-source credentialed
+publication and backup restore, use
+`uv run python -m scripts.run_mixed_source_recovery_development --execute --post-report --candidate v19-luna-luna-medium --output-dir reports/generated/<fresh-id>`.
+This injects provider responses and does not claim live semantic quality. Omitting
+`--candidate` preserves the earlier Sol contract; no external calls in either mode.
+
+The paired runner now validates candidate runtime keyword compatibility before
+provider calls. Its actual cheap-candidate adapter regression is
+`uv run pytest -q tests/test_paired_pedagogy_development.py -k cheap_audit_variant`.
+A completed transport ledger alone does not indicate completed histories; inspect
+`histories[].completed` and stop a series on incomplete execution.
+
+### Model-backed presentation recording
+
+The concrete course-demo plan and artifacts are under
+`reports/presentation/recording/product-pilot-v2/`. Recording controls now accept
+an explicit `synthetic-model-backed-v4` identity in addition to the original
+deterministic sandbox; ordinary runtime defaults are unchanged. External calls
+use the existing recorded client with a 12-call / US$1.92 reservation limit.
+Verify the recording guard and virtual-day behavior with
+`uv run pytest tests/test_recording_virtual_clock.py -q`.
+
+## AWS pilot verification
+
+Run `uv run python scripts/verify_aws_pilot.py` after CDK activation to check
+the generated HTTPS URL, session login/logout, cookie flags, and anonymous,
+synthetic-header and cross-origin rejection. It uses the `digital-twin` AWS
+profile in Singapore and retrieves the bootstrap credential privately from the
+stack secret. It makes no model calls and prints no credentials. See the
+[AWS deployment guide](../infra/cdk/README.md).
+
+### Synthetic pilot seed design
+
+`uv run python -m scripts.validate_pilot_seed` validates the versioned synthetic
+pilot manifest, model compatibility, relationships and source hashes. It is
+read-only and does not provision accounts or load AWS data. See the
+[seed design](../docs/seed-data-design.md) for the proposed import contract and
+acceptance gates.
+
+`uv run python -m scripts.seed_aws_pilot` prints the seed plan. `--apply`
+provisions the deployed pilot through authenticated APIs;
+`--approve-demo-reviews` completes reviewed publication and concept bindings.
+`uv run python -m scripts.verify_pilot_seed` checks account/course access; add
+`--tutor` to create real synthetic tutoring conversations. See the
+[deployed demo guide](../docs/pilot-demo-accounts.md) for private credentials,
+backup prerequisites, retry limits and the inactive-membership SSM step.
+
+`uv run python -m scripts.verify_presentation_route` checks the deployed audited
+tutor's observed composition and creates two synthetic two-turn conversations.
+It invokes the configured model and saves timestamped results under ignored
+`reports/generated/aws-presentation-route/`; it never changes credentials.
+
+`uv run python -m scripts.seed_pilot_personas` prints the seven-persona plan.
+Add `--apply` to create seven roleplay students and one real starter interaction
+each on the existing audited AWS demo. It preserves original accounts and
+schedules. See the [persona guide](../docs/seven-persona-demo.md) for credentials
+location, repeat behavior and limitations.
+
+## Professor evidence archive
+
+`build_professor_evidence.py --inventory` inventories the exact presentation and
+submitted-report sources. Use the bundled Python to run its `--build` mode,
+then `supplement_professor_evidence.py`, `finalize_professor_evidence.py`,
+`finalize_professor_evidence.py --dump-verify`, and
+`package_professor_evidence.py`. These commands package existing evidence and
+make no model calls. The DOCX requires render verification before packaging.
+See [archive instructions](../docs/professor-evidence-archive.md) for the query
+grain, source restrictions, recovery limitations and private storage decision.
+
+## Browser lifecycle evidence summary
+
+`uv run python scripts/summarize_browser_lifecycle.py --input output/browser-qa/lifecycle-001/api-histories.json --metadata reports/aws-pilot/browser-lifecycle-001-deployment.json --output research/05_evaluation/records/aws-browser-lifecycle-001.json` summarizes saved synthetic histories without browser mutations or model calls. Exact prompt anchors and ordered pairs prevent counting starters or an extra misdirected QA turn as the 84-turn core. The raw snapshot stays ignored; sanitized per-case output is intentional evidence. See [run results](../tests/manual/aws-pilot-lifecycle-001-results.md) for scope and limitations.
+
+### Slide-aligned diagnostic regression
+
+Compare the current final-response audit with an explicitly retained deployed
+source file, using synthetic fixtures and no provider calls:
+
+```sh
+uv run python -m scripts.verify_slide_codefix --control /path/to/deployed/final_response_audit.py --output output/slide-codefix-comparison.json
+```
+
+The result includes per-case decisions, calls, injected usage, diagnostic codes,
+source hashes and timing. The comparison requires identical pre-existing outputs
+and request events; it does not measure teaching quality. See
+[the coding-fix plan](../research/04_experiments/2026-09-09-slide-aligned-code-fix-plan.md).
+
+Demo identity seeding (`seed_aws_pilot.py` and `seed_pilot_personas.py`) generates passwords with the existing required character classes plus 20 random bytes. Existing saved credentials are never rotated by this repair. A previously failed local seed with an invalid saved password must use a fresh isolated test directory; do not replace live credentials automatically. Regression: `uv run pytest -q tests/infra/test_pilot_seed.py`.

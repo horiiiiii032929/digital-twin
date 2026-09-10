@@ -67,3 +67,27 @@ def test_authorization_precedes_output_creation(tmp_path, monkeypatch):
     with pytest.raises(PermissionError):
         runner.run(tmp_path / "denied")
     assert not (tmp_path / "denied").exists()
+
+
+def test_post_report_composition_is_preserved_through_review_withdrawal_and_restore(tmp_path):
+    result=runner.run(tmp_path/'post-report',post_report=True)
+    assert not result['failures'],result['failures']
+    assert result['source_unchanged'] and result['external_calls']==0
+    assert result['quality_pass'] is None
+    flags=result['manifest']['runtime_flags']
+    assert flags['post_report_model_assessment_version']=='v2'
+    assert flags['post_report_learning_mode']=='assessed-count'
+    assert result['manifest']['candidate_id']=='question-specific-profile-grounded-v19'
+    gates={r['name']:r['passed'] for r in result['checks']}
+    assert gates['actual-audit-dispatched']
+    assert gates['restored-withdrawal-prevents-provider']
+    assert gates['restored-cohort-and-review']
+    assert (tmp_path/'post-report/source-snapshot.zip').is_file()
+
+
+def test_explicit_cheap_candidate_survives_full_restore(tmp_path):
+    result=runner.run(tmp_path/'cheap',post_report=True,candidate='v19-luna-luna-medium')
+    assert not result['failures']
+    assert result['source_unchanged']
+    assert result['manifest']['candidate_variant']=='v19-luna-luna-medium'
+    assert any(c['name']=='actual-audit-dispatched' and c['passed'] for c in result['checks'])

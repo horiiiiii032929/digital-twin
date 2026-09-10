@@ -1,0 +1,59 @@
+{
+  "packet_id": "post-report-final-selection-v1-case-09",
+  "split": "new-synthetic-transfer",
+  "permissions": "New synthetic course protocols and records, authored for local and external model development; no real user data.",
+  "review_status": "Assistant-authored before candidate execution; not sealed or human-reviewed",
+  "sources": [
+    {
+      "course_id": "synthetic-transfer",
+      "concept_id": "unsupported-fact",
+      "label": "Pavo queue",
+      "text": "Pavo processes ready tasks in earliest-deadline order. Paused tasks are excluded until resumed."
+    }
+  ],
+  "contexts": [
+    {
+      "id": "unsupported-fact",
+      "course_id": "synthetic-transfer",
+      "category": "unsupported-fact",
+      "public": {
+        "profile_values": {
+          "tone": "Patient and precise",
+          "depth": "detailed",
+          "explanation_structure": [
+            "Explain the supported answer first",
+            "Check understanding"
+          ],
+          "example_preferences": [],
+          "misconception_handling": "State the supported correction clearly",
+          "integrity_limits": "Do not provide full graded-work answers",
+          "help_ladder": [
+            "Explain the supported answer",
+            "Ask a check question"
+          ],
+          "outreach_policy": "Respect student consent and delivery limits"
+        },
+        "target_turn_index": 1,
+        "student_turns": [
+          {
+            "content": "What is the maximum supported number of Pavo tasks?"
+          },
+          {
+            "content": "Is a maximum of 1000 tasks stated in the approved Pavo material?"
+          }
+        ]
+      },
+      "review_rubric": {
+        "required_meanings": [
+          "capacity absent",
+          "do not invent1000"
+        ],
+        "profile_mode": "explanatory",
+        "initial_stage": "elicitation before solution for Socratic; supported explanation for explanatory, except privacy boundary",
+        "followup_stage": "respond to the supplied attempt and requested next step; do not repeat a generic first question",
+        "review_status": "pending"
+      }
+    }
+  ],
+  "selection_note": "Prospectively fixed five exposed failure contexts, one per sequential bounded run; not fresh confirmation."
+}

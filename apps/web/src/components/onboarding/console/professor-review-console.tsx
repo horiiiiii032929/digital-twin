@@ -50,7 +50,7 @@ import { cn } from "@/lib/utils"
 const TOOL_TITLES: Record<ReviewStageId, string> = {
   sources: "Sources",
   interview: "Interview",
-  policy: "Tutor policy",
+  policy: "Digital Twin policy",
   preview: "Preview",
   approval: "Approval",
 }
@@ -255,7 +255,7 @@ export function ProfessorReviewConsole({
               <Button asChild variant="ghost" className="w-full justify-start">
                 <a href="/student">
                   <BookOpen data-icon="inline-start" />
-                  Student tutor
+                  Student Digital Twin
                 </a>
               </Button>
             ) : null}
@@ -407,7 +407,7 @@ function ProfessorHeader({
         </Button>
         <div className="min-w-0">
           <h1 className="truncate text-sm font-semibold tracking-[-0.015em] sm:text-base">
-            Tutor setup
+            Digital Twin setup
           </h1>
           <span
             className={cn(
@@ -438,9 +438,9 @@ function ProfessorHeader({
       <div className="flex items-center gap-1.5">
         {STUDENT_TUTOR_LINK_AVAILABLE ? (
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <a href="/student" aria-label="Open student tutor">
+            <a href="/student" aria-label="Open student Digital Twin">
               <BookOpen data-icon="inline-start" />
-              Student tutor
+              Student Digital Twin
             </a>
           </Button>
         ) : null}
@@ -550,7 +550,7 @@ function ProfessorMobileMenu({
           className="workspace-rail fixed inset-y-0 left-0 z-30 flex w-[min(88vw,320px)] flex-col shadow-[12px_0_40px_rgba(32,33,35,0.12)] outline-none lg:hidden"
         >
           <DialogPrimitive.Title className="sr-only">
-            Tutor setup navigation
+            Digital Twin setup navigation
           </DialogPrimitive.Title>
           <WorkspaceBrand className="pr-14" />
           <Button
@@ -600,7 +600,7 @@ function ProfessorMobileMenu({
               <Button asChild variant="ghost" className="w-full justify-start">
                 <a href="/student">
                   <BookOpen data-icon="inline-start" />
-                  Student tutor
+                  Student Digital Twin
                 </a>
               </Button>
             ) : null}
@@ -658,7 +658,7 @@ function StageTool({
         <header className="border-b pb-5 pr-10">
           <h2 className="text-lg font-semibold tracking-[-0.02em]">Interview</h2>
           <p className="mt-1 text-sm leading-6 text-muted-foreground">
-            Shape the tutor through the setup conversation.
+            Shape the Digital Twin through the setup conversation.
           </p>
         </header>
         <div className="space-y-6 pt-6">

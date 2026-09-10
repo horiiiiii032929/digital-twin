@@ -95,7 +95,7 @@ export function SourceInventory({
             Sources
           </h3>
           <p className="mt-1 text-sm leading-5 text-muted-foreground">
-            Add course-material metadata and decide what the tutor may use.
+            Add course-material metadata and decide what the Digital Twin may use.
           </p>
         </div>
         <Badge

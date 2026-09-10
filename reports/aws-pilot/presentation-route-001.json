@@ -1,0 +1,511 @@
+{
+  "run": "20260909T122940",
+  "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+  "runtime": {
+    "demo-pilot-v1-systems": {
+      "schema_version": 1,
+      "source_sha256": "091a14ac968ab431cdc88f61da6a320cbb4d65925424105e0621d242a4df2f33",
+      "generator_implementation": "question-specific-profile-grounded-v19",
+      "generator_model": "gpt-5.6-luna",
+      "planner_implementation": "GuardedPolicyValuePlanner",
+      "planner_model": "gpt-5.6-luna",
+      "learning_configuration": null,
+      "server_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+      "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+      "experimental_version": "v19-luna-luna-medium",
+      "experimental_configuration": {
+        "version": "v19-luna-luna-medium",
+        "implementation_id": "question-specific-profile-grounded-v19",
+        "model": "gpt-5.6-luna",
+        "output_cap": 3000,
+        "reasoning_effort": "low",
+        "runtime_flags": {
+          "teaching_profile_context_enabled": true,
+          "question_specific_generation_enabled": true,
+          "bounded_generation_contract_enabled": true,
+          "named_referent_context_enabled": true,
+          "instructional_compact_response_enabled": true,
+          "instructional_profile_authority_enabled": true,
+          "instructional_typed_response_enabled": true,
+          "instructional_evidence_strength_enabled": true,
+          "instructional_contract_repair_enabled": true,
+          "instructional_final_audit_enabled": true,
+          "instructional_source_state_context_enabled": true,
+          "experimental_generation_model_id": "gpt-5.6-luna",
+          "experimental_final_audit_model_id": "gpt-5.6-luna"
+        },
+        "role_configuration": {
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "revision": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium"
+          }
+        },
+        "observed_openai_transport_configurations": [
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "planner"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "generation"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium",
+            "role": "revision"
+          }
+        ]
+      },
+      "database_binding_comparable": true,
+      "database_binding_sha256": "d02b918bfd46f0bea6efc42a89c1b2defd0d33968993de3f4f476c6543d827fa",
+      "composition_sha256": "347ae194791bd2448fac70811501ee44d8021da1972816481b84d79fba1c273a",
+      "scope": "Observed composition fields and database binding; equality is not semantic quality qualification or a full deployment verification."
+    },
+    "demo-pilot-v1-security": {
+      "schema_version": 1,
+      "source_sha256": "091a14ac968ab431cdc88f61da6a320cbb4d65925424105e0621d242a4df2f33",
+      "generator_implementation": "question-specific-profile-grounded-v19",
+      "generator_model": "gpt-5.6-luna",
+      "planner_implementation": "GuardedPolicyValuePlanner",
+      "planner_model": "gpt-5.6-luna",
+      "learning_configuration": null,
+      "server_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+      "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+      "experimental_version": "v19-luna-luna-medium",
+      "experimental_configuration": {
+        "version": "v19-luna-luna-medium",
+        "implementation_id": "question-specific-profile-grounded-v19",
+        "model": "gpt-5.6-luna",
+        "output_cap": 3000,
+        "reasoning_effort": "low",
+        "runtime_flags": {
+          "teaching_profile_context_enabled": true,
+          "question_specific_generation_enabled": true,
+          "bounded_generation_contract_enabled": true,
+          "named_referent_context_enabled": true,
+          "instructional_compact_response_enabled": true,
+          "instructional_profile_authority_enabled": true,
+          "instructional_typed_response_enabled": true,
+          "instructional_evidence_strength_enabled": true,
+          "instructional_contract_repair_enabled": true,
+          "instructional_final_audit_enabled": true,
+          "instructional_source_state_context_enabled": true,
+          "experimental_generation_model_id": "gpt-5.6-luna",
+          "experimental_final_audit_model_id": "gpt-5.6-luna"
+        },
+        "role_configuration": {
+          "planner": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "generation": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low"
+          },
+          "revision": {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium"
+          }
+        },
+        "observed_openai_transport_configurations": [
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "planner"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "low",
+            "role": "generation"
+          },
+          {
+            "model": "gpt-5.6-luna",
+            "output_cap": 3000,
+            "reasoning_effort": "medium",
+            "role": "revision"
+          }
+        ]
+      },
+      "database_binding_comparable": true,
+      "database_binding_sha256": "d02b918bfd46f0bea6efc42a89c1b2defd0d33968993de3f4f476c6543d827fa",
+      "composition_sha256": "347ae194791bd2448fac70811501ee44d8021da1972816481b84d79fba1c273a",
+      "scope": "Observed composition fields and database binding; equality is not semantic quality qualification or a full deployment verification."
+    }
+  },
+  "histories": [
+    {
+      "course_id": "demo-pilot-v1-systems",
+      "conversation_id": "conversation-5644f57e-f85c-4251-9597-2fe7612cfe00",
+      "turns": [
+        {
+          "prompt": "Why can two members have the same team_id?",
+          "elapsed_seconds": 22.227,
+          "result": {
+            "student_message": {
+              "id": "message-b678a991-cd18-4db3-9cb0-488f90aa3e3c",
+              "conversation_id": "conversation-5644f57e-f85c-4251-9597-2fe7612cfe00",
+              "role": "student",
+              "content": "Why can two members have the same team_id?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "presentation-route-20260909T122940-systems-0",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:29:41+00:00"
+            },
+            "tutor_message": {
+              "id": "message-bbb938e1-b939-4fc8-affa-621a99aeb1b7",
+              "conversation_id": "conversation-5644f57e-f85c-4251-9597-2fe7612cfe00",
+              "role": "tutor",
+              "content": "Look at the roles of `member_id` and `team_id`: which column identifies each member, and which column points members to a team? Use that distinction to explain why sharing a `team_id` might be allowed.",
+              "action": "question",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v19",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "prompt_version": "question-specific-profile-grounded-v19",
+                "policy_action": "question",
+                "latency_ms": 19021.362681,
+                "usage": {
+                  "input_tokens": 3761,
+                  "output_tokens": 1229,
+                  "total_tokens": 4990,
+                  "approximate_cost_usd": 0.002227
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-b678a991-cd18-4db3-9cb0-488f90aa3e3c",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "explain_concept",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:29:41+00:00"
+            },
+            "citations": [],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "explain_concept",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        },
+        {
+          "prompt": "So team_id can repeat because several members belong to the same team. Can you explain the join result for Ari and Bo?",
+          "elapsed_seconds": 13.002,
+          "result": {
+            "student_message": {
+              "id": "message-1054d6a1-b430-4990-9b88-6f60628b99b8",
+              "conversation_id": "conversation-5644f57e-f85c-4251-9597-2fe7612cfe00",
+              "role": "student",
+              "content": "So team_id can repeat because several members belong to the same team. Can you explain the join result for Ari and Bo?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "presentation-route-20260909T122940-systems-1",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:30:03+00:00"
+            },
+            "tutor_message": {
+              "id": "message-2e75885e-6aa8-49ac-b701-f8ab39c06589",
+              "conversation_id": "conversation-5644f57e-f85c-4251-9597-2fe7612cfe00",
+              "role": "tutor",
+              "content": "In an inner join on matching team_id, Ari and Bo each match the Teams row with team_id 10, whose name is Cedar. The result therefore includes Ari\u2013Cedar and Bo\u2013Cedar as two separate rows.\n\nUsing the same join, what team name would appear for Cam, whose team_id is 20?",
+              "action": "answer",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v19",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "prompt_version": "question-specific-profile-grounded-v19",
+                "policy_action": "answer",
+                "latency_ms": 11189.165040999995,
+                "usage": {
+                  "input_tokens": 4049,
+                  "output_tokens": 1040,
+                  "total_tokens": 5089,
+                  "approximate_cost_usd": 0.0020578
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-1054d6a1-b430-4990-9b88-6f60628b99b8",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "ask_next_step",
+              "learner_state_revision": 2,
+              "created_at": "2026-09-09T12:30:03+00:00"
+            },
+            "citations": [
+              {
+                "id": "citation-8c482cb3-409e-4f92-8da5-ac2ae36e4439",
+                "message_id": "message-2e75885e-6aa8-49ac-b701-f8ab39c06589",
+                "course_id": "demo-pilot-v1-systems",
+                "release_id": "demo-pilot-v1-systems-release-1",
+                "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+                "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+                "source_version": 1,
+                "title": "systems-notes.md",
+                "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+                "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+                "page": null,
+                "region_id": null,
+                "region_kind": null,
+                "bounding_box": null,
+                "crop_ref": null
+              }
+            ],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "ask_next_step",
+            "learner_state_revision": 2,
+            "pending_clarification": null
+          }
+        }
+      ]
+    },
+    {
+      "course_id": "demo-pilot-v1-security",
+      "conversation_id": "conversation-8e8a2cea-2da4-4785-a474-bd8681e05fd1",
+      "turns": [
+        {
+          "prompt": "Why is cookie authentication alone not a complete CSRF defense?",
+          "elapsed_seconds": 19.607,
+          "result": {
+            "student_message": {
+              "id": "message-ef78293e-6a02-4057-8d4a-10a515c72f9f",
+              "conversation_id": "conversation-8e8a2cea-2da4-4785-a474-bd8681e05fd1",
+              "role": "student",
+              "content": "Why is cookie authentication alone not a complete CSRF defense?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "presentation-route-20260909T122940-security-0",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:30:16+00:00"
+            },
+            "tutor_message": {
+              "id": "message-32d95320-0264-4a33-a6f3-ebafc7b70cc3",
+              "conversation_id": "conversation-8e8a2cea-2da4-4785-a474-bd8681e05fd1",
+              "role": "tutor",
+              "content": "Predict what happens when a browser sends a request to a site while automatically attaching a cookie: what could the server be unable to distinguish about who intended that request? Contrast that with what a server-side session identifies.",
+              "action": "question",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v19",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "prompt_version": "question-specific-profile-grounded-v19",
+                "policy_action": "question",
+                "latency_ms": 17458.245342999988,
+                "usage": {
+                  "input_tokens": 3776,
+                  "output_tokens": 1754,
+                  "total_tokens": 5530,
+                  "approximate_cost_usd": 0.00286
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-ef78293e-6a02-4057-8d4a-10a515c72f9f",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "give_hint",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:30:16+00:00"
+            },
+            "citations": [],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "give_hint",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        },
+        {
+          "prompt": "So the browser attaching cookies does not prove I intended the request. How does checking Origin help in the course example?",
+          "elapsed_seconds": 14.593,
+          "result": {
+            "student_message": {
+              "id": "message-1274887c-416b-44f2-bcad-e031d61392e8",
+              "conversation_id": "conversation-8e8a2cea-2da4-4785-a474-bd8681e05fd1",
+              "role": "student",
+              "content": "So the browser attaching cookies does not prove I intended the request. How does checking Origin help in the course example?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "presentation-route-20260909T122940-security-1",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:30:36+00:00"
+            },
+            "tutor_message": {
+              "id": "message-1de71c63-5ab0-4f87-828f-b24f9b291dfa",
+              "conversation_id": "conversation-8e8a2cea-2da4-4785-a474-bd8681e05fd1",
+              "role": "tutor",
+              "content": "In the course example, the server requires a permitted Origin on state-changing requests. This adds a check of the request\u2019s cross-site context, rather than relying only on the browser\u2019s automatically attached authentication cookie. A valid session identifies the server-side session, while Origin checking helps address whether the request came from an allowed origin; HttpOnly does not provide this protection by itself.\n\nCheck: why would requiring a permitted Origin add information that the session cookie alone does not provide?",
+              "action": "answer",
+              "trace": {
+                "generator_id": "question-specific-profile-grounded-v19",
+                "provider_model": "gpt-5.6-luna",
+                "provider_revision": "gpt-5.6-luna",
+                "prompt_version": "question-specific-profile-grounded-v19",
+                "policy_action": "answer",
+                "latency_ms": 14388.845306999969,
+                "usage": {
+                  "input_tokens": 4125,
+                  "output_tokens": 1476,
+                  "total_tokens": 5601,
+                  "approximate_cost_usd": 0.0025962
+                },
+                "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-1274887c-416b-44f2-bcad-e031d61392e8",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "check_understanding",
+              "learner_state_revision": 2,
+              "created_at": "2026-09-09T12:30:36+00:00"
+            },
+            "citations": [
+              {
+                "id": "citation-b3899a21-9ad7-49e9-bc31-7480d6ba77f0",
+                "message_id": "message-1de71c63-5ab0-4f87-828f-b24f9b291dfa",
+                "course_id": "demo-pilot-v1-security",
+                "release_id": "demo-pilot-v1-security-release-1",
+                "source_artifact_id": "demo-pilot-v1-security:demo-pilot-v1-security-notes",
+                "source_document_id": "document-6af5f4d975724de5482e7801",
+                "source_version": 1,
+                "title": "security-notes.md",
+                "locator": "heading: Demo Browser Security: session controls - Demo Browser Security: session controls > Contrast question, paragraph 4",
+                "source_checksum": "1c7599dc079441d7306b7352191953f328ac6e52fb74bfb097d03eac1512f318",
+                "page": null,
+                "region_id": null,
+                "region_kind": null,
+                "bounding_box": null,
+                "crop_ref": null
+              }
+            ],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "check_understanding",
+            "learner_state_revision": 2,
+            "pending_clarification": null
+          }
+        }
+      ]
+    }
+  ],
+  "http_and_persistence": "passed",
+  "result_id": "aws-presentation-route-001",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "trace_usage": {
+    "input_tokens": 15711,
+    "output_tokens": 5499,
+    "total_tokens": 21210,
+    "approximate_cost_usd": 0.009741,
+    "scope": "Aggregated returned generation/audit/repair usage; separate planner overhead is not included."
+  },
+  "local_tests": {
+    "composition_and_runtime": 16,
+    "infra": 7
+  },
+  "public_access": {
+    "checks": 24,
+    "passed": 24,
+    "report": "/Users/hikaru/Documents/dev/digital-twin/output/aws-pilot-seed/verification-access.json"
+  },
+  "public_admin": {
+    "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+    "checks": [
+      {
+        "case": "https-readiness",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "anonymous-session-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "synthetic-header-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "cross-origin-login-denied",
+        "status": 403,
+        "passed": true
+      },
+      {
+        "case": "administrator-login",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "secure-cookie-flags",
+        "passed": true
+      },
+      {
+        "case": "authenticated-session",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "logout",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "case": "revoked-session-denied",
+        "status": 401,
+        "passed": true
+      }
+    ],
+    "provider_calls": 0
+  },
+  "final_cdk_diff_stacks": 0,
+  "images": {
+    "WebImageOutput": "030334071887.dkr.ecr.ap-southeast-1.amazonaws.com/cdk-hnb659fds-container-assets-030334071887-ap-southeast-1:b7ad8a7d9a488c4adfb1308880e3a007f72ad4f43cf70c8b6a2c5a7959b577ca",
+    "ApiImageOutput": "030334071887.dkr.ecr.ap-southeast-1.amazonaws.com/cdk-hnb659fds-container-assets-030334071887-ap-southeast-1:0b04568004278d923c26bf08593973c85a9627087781d3ee5f6533130bf9ff1c"
+  },
+  "source_sha256": {
+    "services/api/app/pilot.py": "33a82e397993a700ea6f933114306b3b6dd8377af18b6a08d360af8bf42f6e5f",
+    "infra/cdk/runtime/runtime.env": "521dd6b8f67fb28261acef6dae08f3fe4ef2c9320a0558f655c8a30d508447f8",
+    "infra/cdk/runtime/deploy.sh": "f2019e51bd7196022142628e3223778d5e60ac684c4f87fc3ca2c714537eeacf",
+    "scripts/verify_presentation_route.py": "2d8347b893e1ff4b432c469ce48773df2f236bdc05ed1f13a8765f72acc77e3b",
+    "tests/api/test_pilot_app.py": "e6fe35b2c66c8b79000e41712acca259c817f58fe9a05e4b9950921e027b1f22"
+  },
+  "final_instance_state": "stopped",
+  "state_verified_at": "2026-09-09T12:33:15.242609+00:00",
+  "next_start_singapore": "2026-09-10T09:00:00+08:00"
+}

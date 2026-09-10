@@ -7,6 +7,7 @@ REVISION_TASK = "question_specific_factual_revision"
 PLANNING_TASKS = frozenset(
     {
         "reactive_tutoring_intent",
+        "source_bound_attempt_assessment_v1",
         "autonomous_tutoring_plan",
         "hierarchical_autonomy_plan",
         "autonomy_plan_verifier",
@@ -52,11 +53,11 @@ class ExperimentalGenerationRoleRouter:
             if (
                 revision_client is None
                 or generator != planner
-                or revision["model"] != "gpt-5.6-sol"
+                or (revision["model"], revision["reasoning_effort"]) not in {("gpt-5.6-sol", "low"), ("gpt-5.6-sol", "medium"), ("gpt-5.6-luna", "medium")}
                 or revision["output_cap"] != 3000
                 or revision["reasoning_effort"] not in {"low", "medium"}
             ):
-                raise ValueError("Revision requires Luna-low draft and explicit Sol low/medium transport")
+                raise ValueError("Revision requires Luna-low draft and a declared Sol low/medium or Luna medium transport")
         elif revision_client is not None:
             raise ValueError("Revision transport requires an explicit revision role")
         self.revision_client = revision_client
@@ -67,6 +68,8 @@ class ExperimentalGenerationRoleRouter:
         }
 
     def role_for_task(self, task):
+        if task in {"final_response_quality_audit_v2", "final_response_issue_guided_repair_v2"} and "revision" in self.role_configuration:
+            return "revision"
         if task in {REVISION_TASK, "question_specific_bounded_revision", "question_specific_conditional_revision"} and "revision" in self.role_configuration:
             return "revision"
         if task == GENERATION_TASK:

@@ -31,6 +31,11 @@ export function createHookHarness() {
       },
     },
     render<T>(hook: () => T): T { cursor = 0; const value = hook(); const pending = effects; effects = []; pending.forEach(effect => effect()); return value },
+    unmount() {
+      slots.forEach(slot => {
+        if (slot && typeof slot === "object" && "cleanup" in slot) (slot as { cleanup?: () => void }).cleanup?.()
+      })
+    },
     reset() { slots = []; effects = []; cursor = 0 },
   }
 }

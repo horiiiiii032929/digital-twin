@@ -80,6 +80,12 @@ def create_recorded_generation_roles(
                 else ContractFailureClient()
             )
         )
+        serializer_client = None
+        if role == "revision" and selection.get("final_audit_prompt_version") == "v2":
+            from src.digital_twin.generation.final_response_audit import make_final_audit_client
+            serializer_client = make_final_audit_client(role="repair", model=config["model"])
+            if live and transport_factory is None:
+                client = serializer_client
         if transport_factory is None and not live:
             client.experimental_transport_configuration = dict(config)
         path = ledger_prefix.with_name(f"{ledger_prefix.name}-{role}.jsonl")
@@ -95,6 +101,7 @@ def create_recorded_generation_roles(
             reasoning_effort=config["reasoning_effort"],
             experimental_sol_enabled=config["model"] == "gpt-5.6-sol",
             network_mode="live" if live else "injected-contract",
+            serializer_client=serializer_client,
         )
     return RecordedGenerationRoles(
         role_clients=clients,

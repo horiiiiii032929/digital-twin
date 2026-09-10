@@ -1,0 +1,302 @@
+{
+  "run_id": "slide-local-005",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "deck_sha256": "7453cff7de77b597a61abc39766e3cb948ab2f0b3083d9b835a2a91dcb6f6d76",
+  "configuration": {
+    "schema_version": 1,
+    "source_sha256": "28b62364bead947ad50081825ab4616d673d4b8c29ab12cb1e2be09532685635",
+    "generator_implementation": "question-specific-profile-grounded-v19",
+    "generator_model": "gpt-5.6-luna",
+    "planner_implementation": "GuardedPolicyValuePlanner",
+    "planner_model": "gpt-5.6-luna",
+    "learning_configuration": null,
+    "server_tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+    "evidence_gate_mode": "dominance-scoped-ambiguity-safe-v3",
+    "experimental_version": "v19-luna-luna-medium",
+    "experimental_configuration": {
+      "version": "v19-luna-luna-medium",
+      "implementation_id": "question-specific-profile-grounded-v19",
+      "model": "gpt-5.6-luna",
+      "output_cap": 3000,
+      "reasoning_effort": "low",
+      "runtime_flags": {
+        "teaching_profile_context_enabled": true,
+        "question_specific_generation_enabled": true,
+        "bounded_generation_contract_enabled": true,
+        "named_referent_context_enabled": true,
+        "instructional_compact_response_enabled": true,
+        "instructional_profile_authority_enabled": true,
+        "instructional_typed_response_enabled": true,
+        "instructional_evidence_strength_enabled": true,
+        "instructional_contract_repair_enabled": true,
+        "instructional_final_audit_enabled": true,
+        "instructional_source_state_context_enabled": true,
+        "experimental_generation_model_id": "gpt-5.6-luna",
+        "experimental_final_audit_model_id": "gpt-5.6-luna"
+      },
+      "role_configuration": {
+        "planner": {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "low"
+        },
+        "generation": {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "low"
+        },
+        "revision": {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "medium"
+        }
+      },
+      "observed_openai_transport_configurations": [
+        {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "low",
+          "role": "planner"
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "low",
+          "role": "generation"
+        },
+        {
+          "model": "gpt-5.6-luna",
+          "output_cap": 3000,
+          "reasoning_effort": "medium",
+          "role": "revision"
+        }
+      ]
+    },
+    "database_binding_comparable": true,
+    "database_binding_sha256": "3f1bfd9aa6ca6ed162a190093127eb27cbc072cb1bb352114c89706f2998be6f",
+    "composition_sha256": "ef2d653b70ded8ae7a8c192061512cc0bf3bf8b498ef7c0d89f7d2e8279c372f",
+    "scope": "Observed composition fields and database binding; equality is not semantic quality qualification or a full deployment verification."
+  },
+  "configuration_matches_deployed_record": true,
+  "corpus": "repository-authored pilot-v1 synthetic systems notes; fresh locally seeded release and learner histories",
+  "provider_calls": "not fully reconciled; six generated answers plus any planner/audit/repair calls, retained answer traces below",
+  "aws_calls": 0,
+  "outcomes": {
+    "redirect-graded-work": 1,
+    "clarify-request": 1,
+    "answer": 6
+  },
+  "saved_messages": 16,
+  "unique_student_request_ids": 8,
+  "unique_tutor_parent_ids": 8,
+  "generator_total_tokens": 33503,
+  "generator_approximate_cost_usd": 0.0134226,
+  "generator_latency_median_ms": 9205.585145999066,
+  "generator_latency_max_ms": 24921.016874999623,
+  "operational_scope": "generation trace accounting excludes unreconciled planner and other operations; browser observed_after_ms is an upper bound including inspection delays",
+  "cases": [
+    {
+      "case": 1,
+      "prompt": "I understand member_id identifies a member. Why can team_id repeat for Ari and Bo?",
+      "reply": "team_id can repeat because it is a foreign key, not the unique identifier for Members. It references a team in Teams, and multiple members may belong to the same team. member_id remains unique for each member.\n\nIn the example, Ari and Bo both have team_id 10, which references Cedar. That is valid because both members belong to the same team; their distinct member_id values, 1 and 2, identify them separately.\n\nCheck: what team would a member with team_id 20 belong to, and why would that value be allowed to repeat?",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 24921.016874999623,
+        "usage": {
+          "input_tokens": 4042,
+          "output_tokens": 2229,
+          "total_tokens": 6271,
+          "approximate_cost_usd": 0.0034832
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 1
+    },
+    {
+      "case": 2,
+      "prompt": "My attempt: Ari and Bo are different members because member_id differs, while team_id 10 links both to Cedar. Is that correct?",
+      "reply": "Yes. Ari and Bo are distinct because their member_id values are different, while both team_id values of 10 reference Cedar. Repeating team_id is valid because a foreign key need not be unique; multiple Members rows can reference the same team.",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 7471.9906659993285,
+        "usage": {
+          "input_tokens": 4137,
+          "output_tokens": 659,
+          "total_tokens": 4796,
+          "approximate_cost_usd": 0.0016181999999999998
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 2
+    },
+    {
+      "case": 3,
+      "prompt": "Why?",
+      "reply": "Which concept or step would you like to work through?",
+      "action": "clarify-request",
+      "trace": {
+        "generator_id": "bounded-tutoring-graph-v1",
+        "provider_model": "not-called",
+        "provider_revision": null,
+        "prompt_version": "graph-policy-v1",
+        "policy_action": "clarify-request",
+        "latency_ms": 0.0,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "approximate_cost_usd": null
+        },
+        "validation_scope": null,
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 3
+    },
+    {
+      "case": 4,
+      "prompt": "My join prediction is Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. Please explain why the shared team_id still produces two separate Cedar rows.",
+      "reply": "Your prediction is correct. An inner join matches each row in Members to the Teams row with the same team_id. Ari\u2019s row matches team 10 (Cedar), and Bo\u2019s separate row also matches team 10, so the match appears twice\u2014once for each member. The shared team_id identifies the same team, not the same member; member_id keeps the two Members rows distinct.\n\nCheck: if two additional members had team_id 20, how many Maple rows would the join produce?",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 13270.493459000136,
+        "usage": {
+          "input_tokens": 4616,
+          "output_tokens": 1100,
+          "total_tokens": 5716,
+          "approximate_cost_usd": 0.0022432
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 4
+    },
+    {
+      "case": 5,
+      "prompt": "I am back after reloading. In our example, why does sharing Cedar not merge Ari and Bo?",
+      "reply": "Sharing Cedar does not merge Ari and Bo because they remain two separate rows in Members, with different member_id values. The inner join matches each Members row whose team_id is 10 to the Teams row for Cedar, so both matches appear: Ari\u2013Cedar and Bo\u2013Cedar. team_id identifies the shared team, not the members.\n\nCheck: if a fourth member also had team_id 10, how many Cedar rows would the inner join produce?",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 8726.382749999175,
+        "usage": {
+          "input_tokens": 4883,
+          "output_tokens": 930,
+          "total_tokens": 5813,
+          "approximate_cost_usd": 0.0020926
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 5
+    },
+    {
+      "case": 6,
+      "prompt": "My answer is team_id, because everybody on Cedar shares 10. If that is wrong, explain which column actually distinguishes the members and why my answer fails.",
+      "reply": "Not quite: team_id identifies the team, so Ari and Bo can both have 10. member_id distinguishes the Members rows because Ari has member_id 1 and Bo has member_id 2. Thus, sharing Cedar does not make them the same member; it only shows they reference the same team.\n\nSuppose a fourth member has member_id 4 and team_id 10. How many distinct Members rows would there be, and how many Cedar matches would the inner join produce?",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 9684.787541998958,
+        "usage": {
+          "input_tokens": 5211,
+          "output_tokens": 991,
+          "total_tokens": 6202,
+          "approximate_cost_usd": 0.0022313999999999997
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 6
+    },
+    {
+      "case": 7,
+      "prompt": "Understood. I will write my own assignment. Give me only a short self-check question about why two Members rows may share one team_id, and stop there.",
+      "reply": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "action": "redirect-graded-work",
+      "trace": {
+        "generator_id": "bounded-tutoring-graph-v1",
+        "provider_model": "not-called",
+        "provider_revision": null,
+        "prompt_version": "graph-policy-v1",
+        "policy_action": "redirect-graded-work",
+        "latency_ms": 0.0,
+        "usage": {
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "approximate_cost_usd": null
+        },
+        "validation_scope": null,
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 7
+    },
+    {
+      "case": 8,
+      "prompt": "I understand member_id identifies a member. Why can team_id repeat for Ari and Bo?",
+      "reply": "team_id is a foreign key: it references a key in the Teams table, but it does not have to be unique in Members. Multiple members can therefore reference the same team; here, both Ari and Bo reference team 10, Cedar.\n\nUsing the tables, what team name should appear for each of Ari and Bo after an inner join on team_id?",
+      "action": "answer",
+      "trace": {
+        "generator_id": "question-specific-profile-grounded-v19",
+        "provider_model": "gpt-5.6-luna",
+        "provider_revision": "gpt-5.6-luna",
+        "prompt_version": "question-specific-profile-grounded-v19",
+        "policy_action": "answer",
+        "latency_ms": 9865.553167001053,
+        "usage": {
+          "input_tokens": 3892,
+          "output_tokens": 813,
+          "total_tokens": 4705,
+          "approximate_cost_usd": 0.001754
+        },
+        "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification",
+        "unresolved_detail": null
+      },
+      "learner_state_revision": 1
+    }
+  ],
+  "new_coding_fixes": [
+    "seed passwords always satisfy existing character-class policy",
+    "desktop source close control separated from fixed account control"
+  ],
+  "tests": {
+    "seed": 3,
+    "auth_student_api": 72,
+    "frontend": 98,
+    "lint": "pass",
+    "build": "pass with existing chunk-size warning"
+  },
+  "decision": "Keep two local coding repairs; retain all decision limitations; no deployment",
+  "source_hashes": {
+    "scripts/seed_aws_pilot.py": "b54a262e2760fea17899f94d09e11f58be3c13ccfdb51d9957b7144e0469a38d",
+    "scripts/seed_pilot_personas.py": "3f229acf219203f909dcaa30d65cd3fd2f0d573c3ee6f225a165392efa5da9bb",
+    "tests/infra/test_pilot_seed.py": "0f4f2882d52c219e82d0e1664e92c2c6c1b2bd8c7e0b0f8bc83a946f9ada9e87",
+    "apps/web/src/components/student/student-workspace.tsx": "6f9d74952cbfea5a5650c266be73fb71c3d718310bd3c9c0fedfb6fc59d9797d"
+  }
+}

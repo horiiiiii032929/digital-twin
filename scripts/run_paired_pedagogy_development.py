@@ -6,6 +6,7 @@ import asyncio
 from collections import Counter
 from datetime import UTC, datetime
 import hashlib
+import inspect
 import json
 import os
 from pathlib import Path
@@ -32,6 +33,7 @@ VERSIONS = ("v4", "v5")
 OUTPUT_CAP = 3000
 EXPECTED_IDS = {v: f"question-specific-profile-grounded-{v}" for v in ("v4", "v5", "v6", "v7", "v8", "v9", "v10")}
 ROLE_VARIANTS = ("v10-luna-low", "v10-luna-medium", "v10-sol-low", "v11-luna-low", "v12-luna-sol", "v13-luna-sol", "v14-luna-sol", "v14-luna-sol-medium")
+ROLE_VARIANTS += ("v17-luna-low", "v18-luna-sol-medium", "v19-luna-sol-medium", "v19-luna-luna-medium")
 EXPECTED_IDS.update({version: "question-specific-profile-grounded-" + version.split("-")[0] for version in ROLE_VARIANTS})
 
 
@@ -88,12 +90,18 @@ def schedule(packet, seed, repetitions, candidate="v5"):
 
 
 async def run(output, packet, *, live=False, transport_factory=None, seed=7801,
-              repetitions=1, maximum_calls=800, maximum_cost_usd=20.0, candidate="v5", packet_path=None, input_provenance_paths=()):
+              repetitions=1, maximum_calls=800, maximum_cost_usd=20.0, candidate="v5", packet_path=None, input_provenance_paths=(),
+              candidate_context_retrieval=False):
     if candidate not in {"v5", "v6", "v7", "v8", "v9", "v10", *ROLE_VARIANTS}:
         raise ValueError("candidate must be v5, v6, v7, v8, v9 or v10")
+    # Reject adapter drift before output creation or any external transport call.
+    for version in ("v4", candidate):
+        inspect.signature(build_final_profile_runtime_factory).bind_partial(
+            Path("preflight-only"), "t1-v2-reactive",
+            **experimental_tutoring_configuration(version)["runtime_flags"])
     versions = ("v4", candidate)
     role_variant = candidate in ROLE_VARIANTS
-    revision_variant = candidate in {"v12-luna-sol", "v13-luna-sol", "v14-luna-sol", "v14-luna-sol-medium"}
+    revision_variant = candidate in {"v12-luna-sol", "v13-luna-sol", "v14-luna-sol", "v14-luna-sol-medium", "v18-luna-sol-medium", "v19-luna-sol-medium", "v19-luna-luna-medium"}
     role_count = 3 if revision_variant else 2
     if live:
         require_bounded_pilot_operation_allowed(PROGRAM_ID, "external_model_evaluation")
@@ -118,10 +126,14 @@ async def run(output, packet, *, live=False, transport_factory=None, seed=7801,
     if not 1 <= repetitions <= 3 or not 2 <= maximum_calls <= (1200 if revision_variant else 800) or not 0 < maximum_cost_usd <= (192 if revision_variant else 128 if role_variant else 20):
         raise ValueError("finite preregistered bounds exceeded")
     planned_turns = sum(len(case["prompts"]) for case in packet["cases"]) * len(versions) * repetitions
-    conservative_planned_calls = planned_turns * (5 if revision_variant else 3)
+    # The graph can request generation twice. V18 permits 2 draft/protocol
+    # calls plus 3 audit/repair calls per generation, plus one planner call.
+    calls_per_turn = 11 if candidate in {"v18-luna-sol-medium", "v19-luna-sol-medium", "v19-luna-luna-medium"} else 5 if revision_variant or candidate == "v17-luna-low" else 3
+    conservative_planned_calls = planned_turns * calls_per_turn
     if conservative_planned_calls > maximum_calls or conservative_planned_calls * (.16 if role_variant else .025) > maximum_cost_usd:
         raise ValueError("prospective call/reservation budget cannot cover complete paired packet")
-    if role_variant and 2 * sum(len(case["prompts"]) for case in packet["cases"]) * repetitions > (maximum_calls // 2) // role_count:
+    maximum_role_calls_per_turn = 6 if candidate in {"v18-luna-sol-medium", "v19-luna-sol-medium", "v19-luna-luna-medium"} else 4 if candidate == "v17-luna-low" else 2
+    if role_variant and maximum_role_calls_per_turn * sum(len(case["prompts"]) for case in packet["cases"]) * repetitions > (maximum_calls // 2) // role_count:
         raise ValueError("candidate role partition cannot cover every planned generation and repair")
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -159,6 +171,7 @@ async def run(output, packet, *, live=False, transport_factory=None, seed=7801,
         "candidate": candidate, "candidate_configuration": experimental_tutoring_configuration(candidate), "invocation_argv": list(sys.argv),
         "runtime_boundary": "actual persistent StudentTutoringService; not HTTP/authentication measurement",
         "default_or_selected_profile_changed": False}
+    manifest["candidate_context_retrieval"] = candidate_context_retrieval
     if role_variant:
         manifest.pop("model")
         manifest["provider_roles"] = {"v4": {"model": MODEL, "output_cap": OUTPUT_CAP, "reasoning_effort": "low"},
@@ -210,6 +223,8 @@ async def run(output, packet, *, live=False, transport_factory=None, seed=7801,
                 if any(client.stopped for client in clients.values()):
                     raise RuntimeError("prior ledger stop")
                 kwargs = experimental_tutoring_configuration(spec["version"])["runtime_flags"]
+                if spec["version"] == candidate and candidate_context_retrieval:
+                    kwargs["post_report_context_retrieval_enabled"] = True
                 factory = build_final_profile_runtime_factory(directory / "runtime", "t1-v2-reactive",
                     concept_cards=tuple(ConceptCardV1(**c) for c in spec["case"]["cards"]),
                     fixture_id=packet["packet_id"], planner_client=clients[spec["version"]],
@@ -314,7 +329,7 @@ async def run(output, packet, *, live=False, transport_factory=None, seed=7801,
     unchanged = not hash_errors
     result = {"instrument_id": PROGRAM_ID, "arms": arms, "histories": histories,
         "source_files_unchanged": unchanged, "source_hash_errors": hash_errors, "wall_seconds": time.perf_counter()-start,
-        "semantic_quality_pass": None, "decision": "invalid-source-change" if not unchanged else "independent-semantic-review-required" if live else "contract-only" if all(h["completed"] for h in histories) else "incomplete-contract",
+        "semantic_quality_pass": None, "decision": "invalid-source-change" if not unchanged else "incomplete-contract" if not all(h["completed"] for h in histories) else "independent-semantic-review-required" if live else "contract-only",
         "artifact_sha256": {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob("*.jsonl")}}
     (output / "summary.json").write_text(json.dumps(result, indent=2, sort_keys=True))
     return result
@@ -327,6 +342,7 @@ def main():
     parser.add_argument("--packet", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--input-provenance", type=Path, action="append", default=[])
+    parser.add_argument("--candidate-context-retrieval", action="store_true")
     parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument("--maximum-calls", type=int, default=800)
     parser.add_argument("--maximum-cost-usd", type=float, default=20)
@@ -334,7 +350,8 @@ def main():
     if args.live:
         require_bounded_pilot_operation_allowed(PROGRAM_ID, "external_model_evaluation")
     result = asyncio.run(run(args.output_dir, json.loads(args.packet.read_text()), live=args.live, repetitions=args.repetitions, candidate=args.candidate,
-        maximum_calls=args.maximum_calls, maximum_cost_usd=args.maximum_cost_usd, packet_path=args.packet, input_provenance_paths=args.input_provenance))
+        maximum_calls=args.maximum_calls, maximum_cost_usd=args.maximum_cost_usd, packet_path=args.packet,
+        input_provenance_paths=args.input_provenance, candidate_context_retrieval=args.candidate_context_retrieval))
     print(json.dumps({"decision": result["decision"], "arms": result["arms"]}))
 
 

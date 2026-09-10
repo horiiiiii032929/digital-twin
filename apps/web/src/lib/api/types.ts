@@ -187,6 +187,38 @@ export type StudentCourse = {
   profile_version: string
 }
 
+export type ProfessorRuntimeStatus = {
+  api: {
+    generator_implementation: string
+    generator_model: string | null
+    planner_implementation: string
+    planner_model: string | null
+    learning_configuration?: {
+      input: string
+      estimator: string | null
+      planner: string
+      goal_completion: string
+      assessment: string
+      assessment_model?: string | null
+      retrieval_context: string
+      status: string
+    } | null
+    server_tutoring_mode: string
+    evidence_gate_mode: string
+    experimental_version: string | null
+    composition_sha256: string
+    scope: string
+  }
+  workers: Array<{
+    worker_key: string
+    status: string
+    updated_at: string | null
+    stale: boolean
+    composition_matches_api: boolean
+    error_type: string | null
+  }>
+}
+
 export type StudentConversation = {
   id: string
   student_id: string

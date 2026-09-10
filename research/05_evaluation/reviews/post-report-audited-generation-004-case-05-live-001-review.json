@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-004-case-05-live-001",
+  "method": "All four outputs read against frozen source and stage rubric; failure diagnosis includes local replay.",
+  "rows": [
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Does the Birch pilot prove that optional practice caused the higher scores?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: self-selection is an alternative explanation. What can we conclude from this observation without claiming causality?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "integration",
+      "reason": "Available requested help was withheld. V18 audit made zero calls; follow-up history vocabulary and recorded audit-schema serializer failed integration.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v4",
+      "stage": 0,
+      "question": "Does the Birch pilot prove that optional practice caused the higher scores?",
+      "response": "The pilot has no randomized assignment or matched comparison group, so the observed association alone does not establish a causal learning effect.\n\nStudents chose whether to use that practice. The pilot has no randomized assignment or matched comparison group",
+      "action": "answer",
+      "severity": "minor",
+      "category": "repetition",
+      "reason": "Correct causal limitation, with repeated comparison-group statement.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: self-selection is an alternative explanation. What can we conclude from this observation without claiming causality?",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "action": "no-evidence",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Available requested course explanation or follow-up help was withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "profile_kind": "experimental-component-selection",
+  "profile_id": "post-report-bounded-development",
+  "profile_version": "v1",
+  "stage": "experimental-not-promoted",
+  "component": "post-report-product-composition",
+  "implementation": {
+    "implementation_id": "question-specific-profile-grounded-v19",
+    "configuration": {
+      "bounded_generation_contract_enabled": true,
+      "experimental_generation_model_id": "gpt-5.6-luna",
+      "instructional_compact_response_enabled": true,
+      "instructional_contract_repair_enabled": true,
+      "instructional_evidence_strength_enabled": true,
+      "instructional_final_audit_enabled": true,
+      "instructional_profile_authority_enabled": true,
+      "instructional_source_state_context_enabled": true,
+      "instructional_typed_response_enabled": true,
+      "named_referent_context_enabled": true,
+      "post_report_context_retrieval_enabled": true,
+      "post_report_goal_recovery_enabled": true,
+      "post_report_learning_mode": "assessed-count",
+      "post_report_model_assessment_enabled": true,
+      "post_report_model_assessment_version": "v2",
+      "post_report_planner_mode": "analytic-only",
+      "question_specific_generation_enabled": true,
+      "teaching_profile_context_enabled": true
+    }
+  },
+  "decision": "Keep explicitly selectable integration-tested development composition; do not promote reactive generation because strict external-review calibration failed.",
+  "result_ids": [
+    "post-report-product-integration-002-contract-001",
+    "post-report-learner-policy-001-local-001",
+    "post-report-audited-generation-005-case-01-live-001",
+    "post-report-audited-generation-005-case-02-live-001",
+    "post-report-audited-generation-005-case-03-live-001",
+    "post-report-audited-generation-005-case-04-live-001",
+    "post-report-audited-generation-005-case-05-live-001",
+    "post-report-source-assessment-002-luna-live-001",
+    "post-report-blind-review-001-nano-live-001",
+    "post-report-blind-review-001-mini-live-001"
+  ],
+  "evidence_paths": [
+    "research/05_evaluation/post-report-product-integration-002-results.md",
+    "research/05_evaluation/post-report-learner-policy-001-results.md",
+    "research/05_evaluation/post-report-audited-generation-005-results.md",
+    "docs/post-report-bounded-completion-2026-09-08-ja.md",
+    "research/05_evaluation/post-report-source-assessment-002-results.md",
+    "research/05_evaluation/post-report-blind-review-001-results.md"
+  ],
+  "selections": {
+    "learner_input": "assessed-count as inspectable development control",
+    "decay": "implemented, not selected because forecast gains did not establish intervention utility",
+    "bkt_pfa": "implemented comparison alternatives, not promoted",
+    "planner": "analytic-only for this explicit experimental integration",
+    "goal_completion": "objective-scoped-recovery-v1; software threshold only",
+    "assessment": "Keep source-bound-model-assessment-v2 in explicit development configuration:32/32 exposed cases, no claim of generalization or measured mastery",
+    "reactive_generation": "V19, integration-tested with injected provider; V18 live results are not V19 semantic qualification",
+    "proactive_wording": "existing bounded strategy and literal source rendering, not V19 free generation",
+    "external_review": "Completed Nano/Mini common review, strict calibration failed; diagnostics only. No product-model substitution."
+  },
+  "fallback": {
+    "profile": "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json",
+    "configuration": "Unset APP_EXPERIMENTAL_TUTORING_CANDIDATE and all APP_POST_REPORT_* settings; restart API and worker together. Do not mix worker/API profiles.",
+    "autonomy_stop": "Use existing professor pause/kill-switch or student opt-out; do not bypass source or consent checks."
+  },
+  "spending_policy": "The V19 experiment declares a Sol revision role. No additional paid runs of that role are scheduled. Inexpensive external judges do not change this product configuration.",
+  "selection_scope": "A development configuration record, not a SystemReleaseProfile, deployment action, or claim that all candidates are better."
+}

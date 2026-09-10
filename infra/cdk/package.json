@@ -1,0 +1,21 @@
+{
+  "name": "digital-twin-aws",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "stage": "node scripts/stage-context.mjs",
+    "test": "node --test ../../tests/infra/*.test.mjs",
+    "check": "npm run stage && npm test && node app.mjs",
+    "synth": "npm run stage && cdk synth --profile digital-twin",
+    "diff": "npm run stage && cdk diff --profile digital-twin",
+    "deploy": "npm run stage && cdk deploy --outputs-file cdk-outputs.json --profile digital-twin",
+    "activate": "node scripts/activate.mjs"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.268.0",
+    "constructs": "10.8.1"
+  },
+  "devDependencies": {
+    "aws-cdk": "2.1140.0"
+  }
+}

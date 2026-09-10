@@ -161,8 +161,33 @@ def create_app(
     instructional_bounded_revision_enabled: bool = False,
     instructional_conditional_revision_enabled: bool = False,
     experimental_generation_model_id: str | None = None,
+    experimental_final_audit_model_id: str | None = None,
     provider_max_concurrency: int = 1,
+    post_report_learning_mode: str = "control",
+    post_report_planner_mode: str = "configured",
+    post_report_goal_recovery_enabled: bool = False,
+    post_report_source_assessment_enabled: bool = False,
+    post_report_model_assessment_enabled: bool = False,
+    post_report_model_assessment_version: str = "v1",
+    post_report_context_retrieval_enabled: bool = False,
+    instructional_contract_repair_enabled: bool = False,
+    instructional_final_audit_enabled: bool = False,
+    instructional_source_state_context_enabled: bool = False,
 ) -> FastAPI:
+    if instructional_source_state_context_enabled and not instructional_final_audit_enabled:
+        raise ValueError("source-state context requires the explicit final-audit candidate")
+    if post_report_model_assessment_version not in {"v1", "v2"}:
+        raise ValueError("unknown post-report assessment version")
+    if post_report_model_assessment_version != "v1" and not post_report_model_assessment_enabled:
+        raise ValueError("assessment version requires model assessment")
+    if post_report_learning_mode not in {"control", "assessed-count", "assessed-decay", "assessed-bkt", "assessed-pfa"}:
+        raise ValueError("unknown post-report learning mode")
+    if post_report_planner_mode not in {"configured", "rules", "analytic-only"}:
+        raise ValueError("unknown post-report planner mode")
+    if instructional_contract_repair_enabled and (not instructional_evidence_strength_enabled or instructional_factual_revision_enabled):
+        raise ValueError("contract repair requires evidence-strength generation and excludes factual revision")
+    if instructional_final_audit_enabled and not instructional_contract_repair_enabled:
+        raise ValueError("final audit requires the explicit contract-repair candidate")
     if instructional_conditional_revision_enabled and (not instructional_factual_revision_enabled or instructional_bounded_revision_enabled):
         raise ValueError("conditional revision requires factual revision and excludes bounded revision")
     if instructional_bounded_revision_enabled and not instructional_factual_revision_enabled:
@@ -400,6 +425,11 @@ def create_app(
             autonomy_planner_budget,
             model_id=autonomy_provider_model,
         )
+    if experimental_final_audit_model_id is not None and (
+        not instructional_final_audit_enabled
+        or experimental_final_audit_model_id not in {"gpt-5.6-luna", "gpt-5.6-sol"}
+    ):
+        raise ValueError("audit model requires a declared final-audit composition")
     if experimental_generation_model_id is not None and (
         not instructional_typed_response_enabled
         or experimental_generation_model_id not in {"gpt-5.6-luna", "gpt-5.6-sol"}
@@ -454,6 +484,15 @@ def create_app(
                             if instructional_conditional_revision_enabled:
                                 from src.digital_twin.generation.conditional_revision import ConditionalRevisionInstructionalGenerator
                                 generator_class = ConditionalRevisionInstructionalGenerator
+                        if instructional_contract_repair_enabled:
+                            from src.digital_twin.generation.contract_repair import ContractRepairInstructionalGenerator
+                            generator_class = ContractRepairInstructionalGenerator
+                            if instructional_final_audit_enabled:
+                                from src.digital_twin.generation.audited_instruction import AuditedInstructionalGenerator
+                                generator_class = AuditedInstructionalGenerator
+                                if instructional_source_state_context_enabled:
+                                    from src.digital_twin.generation.instructional_source_state import SourceStateInstructionalGenerator
+                                    generator_class = SourceStateInstructionalGenerator
             active_claim_validator = InstructionalSourceBindingValidator()
         app.state.experimental_generation_configuration = {
             "candidate_id": "question-specific-profile-grounded-v14" if instructional_conditional_revision_enabled else "question-specific-profile-grounded-v13" if instructional_bounded_revision_enabled else "question-specific-profile-grounded-v12" if instructional_factual_revision_enabled else "question-specific-profile-grounded-v11" if instructional_evidence_strength_enabled else "question-specific-profile-grounded-v10" if instructional_typed_response_enabled else "question-specific-profile-grounded-v9" if instructional_profile_authority_enabled else "question-specific-profile-grounded-v8" if instructional_compact_response_enabled else "question-specific-profile-grounded-v7" if instructional_request_coverage_enabled else ("question-specific-profile-grounded-v6" if instructional_continuation_enabled else ("question-specific-profile-grounded-v5" if instructional_moves_enabled else (NAMED_REFERENT_CANDIDATE_ID if named_referent_context_enabled else (BOUNDED_CONTRACT_CANDIDATE_ID if bounded_generation_contract_enabled else CANDIDATE_ID)))),
@@ -462,16 +501,31 @@ def create_app(
             "semantic_support": "model-assessed-not-proven-by-spans",
         }
         generation_model = experimental_generation_model_id or autonomy_provider_model
+        if instructional_contract_repair_enabled:
+            app.state.experimental_generation_configuration["candidate_id"] = (
+                "question-specific-profile-grounded-v19" if instructional_source_state_context_enabled
+                else "question-specific-profile-grounded-v18" if instructional_final_audit_enabled
+                else "question-specific-profile-grounded-v17")
         active_generator = generator_class(autonomy_planner_budget,
+            **({"audit_model": experimental_final_audit_model_id or "gpt-5.6-sol"} if instructional_final_audit_enabled else {}),
             model_id=generation_model, bounded_contract_enabled=bounded_generation_contract_enabled,
             named_referent_context_enabled=named_referent_context_enabled,
             policy_enforcer=DeterministicPolicyEnforcer(action_router=DeterministicActionRouterV3()))
+        if instructional_final_audit_enabled:
+            app.state.experimental_generation_configuration["audit_model"] = active_generator.audit_model
         active_generator_model = generation_model
         if experimental_generation_model_id is not None:
             app.state.experimental_generation_configuration.update(generation_model=generation_model, planner_model=autonomy_provider_model)
         if instructional_moves_enabled or instructional_compact_response_enabled:
             app.state.experimental_generation_configuration["claim_validation"] = "experimental-source-binding-only; semantic-support-unverified"
     app.state.autonomy_planner_budget = autonomy_planner_budget
+    source_bound_model_assessor = None
+    if post_report_model_assessment_enabled:
+        if not governed_v2 or autonomy_planner_budget is None:
+            raise ValueError("model assessment requires a governed bounded provider composition")
+        from src.digital_twin.student.model_assessment import SourceBoundModelAssessor
+        source_bound_model_assessor = SourceBoundModelAssessor(autonomy_planner_budget, autonomy_provider_model,
+            version=post_report_model_assessment_version)
     app.state.student_service = StudentTutoringService(
         app.state.student_repository,
         profile_path=resolved_student_profile_path,
@@ -507,6 +561,9 @@ def create_app(
         autonomy_generator_model=active_generator_model,
         reactive_semantic_planner=reactive_semantic_planner,
         teaching_profile_context_enabled=teaching_profile_context_enabled,
+        source_bound_assessment_enabled=post_report_source_assessment_enabled,
+        source_bound_model_assessor=source_bound_model_assessor,
+        conversation_retrieval_enabled=post_report_context_retrieval_enabled,
         retriever_decorator=visual_retriever_decorator,
         clock=runtime_clock,
     )
@@ -514,6 +571,49 @@ def create_app(
         app.state.student_repository,
         clock=runtime_clock,
     )
+    post_report_goal_manager = None
+    if (post_report_learning_mode != "control" or post_report_goal_recovery_enabled
+        or post_report_planner_mode != "configured" or post_report_source_assessment_enabled
+        or post_report_context_retrieval_enabled or post_report_model_assessment_enabled):
+        if not governed_v2:
+            raise ValueError("post-report learning requires governed tutoring")
+        from src.digital_twin.student.post_report_learning import (
+            AnalyticOnlyPlanner, AssessedPlanningStateResolver, RecoveryAwareGoalManager,
+            ScopedObservationReader, learning_estimator,
+        )
+        from src.digital_twin.student.planning_architectures import default_planning_state_card
+        from src.digital_twin.student.autonomy_runtime import DeterministicAutonomousPlanner
+        pseudonymizer = app.state.student_service.learning_gap_pseudonymizer
+        if pseudonymizer is None:
+            raise ValueError("assessed learning requires a learner-key pseudonymizer")
+        observation_reader = ScopedObservationReader(app.state.student_repository, pseudonymizer)
+        state_resolver = (AssessedPlanningStateResolver(observation_reader,
+            learning_estimator(post_report_learning_mode))
+            if post_report_learning_mode != "control" else default_planning_state_card)
+        if post_report_planner_mode == "analytic-only":
+            live_proactive_planner = AnalyticOnlyPlanner(state_resolver)
+        elif post_report_planner_mode == "rules":
+            live_proactive_planner = DeterministicAutonomousPlanner()
+        elif post_report_learning_mode != "control":
+            if not isinstance(live_proactive_planner, GuardedPolicyValuePlanner):
+                raise ValueError("assessed input requires guarded, analytic-only or explicit rules planning")
+            live_proactive_planner.state_card_resolver = state_resolver
+        if post_report_goal_recovery_enabled:
+            post_report_goal_manager = RecoveryAwareGoalManager(observation_reader, runtime_clock)
+            app.state.student_service.autonomy_goal_manager = post_report_goal_manager
+        if live_proactive_planner is not None:
+            app.state.student_service.autonomy_planner_model = live_proactive_planner.model_id
+        app.state.post_report_learning_configuration = {
+            "input": post_report_learning_mode,
+            "estimator": getattr(getattr(state_resolver, "estimator", None), "implementation_id", None),
+            "planner": post_report_planner_mode,
+            "goal_completion": "objective-scoped-recovery-v1" if post_report_goal_recovery_enabled else "cumulative-control",
+            "status": "experimental-not-promoted",
+            "assessment": (source_bound_model_assessor.implementation_id if post_report_model_assessment_enabled
+                else "source-bound-literal-v1" if post_report_source_assessment_enabled else "lexical-control"),
+            "assessment_model": source_bound_model_assessor.model_id if source_bound_model_assessor else None,
+            "retrieval_context": "previous-student-query-v1" if post_report_context_retrieval_enabled else "current-message-only",
+        }
     autonomy_graph = None
     if governed_v2:
         autonomy_wording_generator = (
@@ -544,6 +644,7 @@ def create_app(
         graph=autonomy_graph,
         teaching_profile_context_enabled=teaching_profile_context_enabled,
         clock=runtime_clock,
+        goal_manager=post_report_goal_manager,
     )
     app.state.teaching_profile_service = TeachingProfileService(
         app.state.student_repository

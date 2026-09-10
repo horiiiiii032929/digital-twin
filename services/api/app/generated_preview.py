@@ -47,6 +47,7 @@ def attach_generated_preview(app, *, factory, factory_parameters, parent_budget)
         )
 
     startup_source_sha = source_fingerprint()
+    app.state.implementation_source_sha256 = startup_source_sha
 
     def configuration():
         if source_fingerprint() != startup_source_sha:
@@ -65,6 +66,7 @@ def attach_generated_preview(app, *, factory, factory_parameters, parent_budget)
                 generator._system_instruction().encode()
             ).hexdigest(),
             "implementation_sha256": startup_source_sha,
+            "learning_configuration": getattr(app.state, "post_report_learning_configuration", None),
         }
 
     async def run(*, owner, course_id, profile, snapshot, request):

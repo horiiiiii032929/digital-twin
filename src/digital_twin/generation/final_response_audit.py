@@ -10,10 +10,10 @@ import hashlib
 import json
 from typing import Callable, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from src.digital_twin.grounding.models import GenerationUsage
-from src.digital_twin.llm import LlmMessage
+from src.digital_twin.llm import LlmError, LlmMalformedResponseError, LlmMessage
 from .conditional_revision import ConditionalRevisionDecision
 from .factual_revision import REVISION_INSTRUCTION
 from .typed_instruction import TypedInstructionProposal
@@ -200,6 +200,115 @@ class FinalAuditDecision(StrictModel):
     dimensions: list[QualityAudit] = Field(max_length=5)
 
 
+# Public identifiers only; never provider prose, input values or arbitrary names.
+AUDIT_FAILURE_STAGES = frozenset({
+    "context", "draft_render", "audit_request", "audit_validation",
+    "repair_request", "repair_validation", "repair_render",
+    "reaudit_request", "reaudit_validation",
+})
+_CONTRACT_FAILURES = {
+    "audit binding mismatch": "binding_mismatch",
+    "incomplete entry coverage": "entry_coverage",
+    "invalid evidence binding": "evidence_binding",
+    "factual entry bypass": "factual_bypass",
+    "missing support references": "support_references",
+    "incomplete quality coverage": "quality_coverage",
+    "invalid affected entries": "affected_entries",
+    "provider identity or unknown usage": "identity_or_usage",
+}
+_PROVIDER_FAILURES = frozenset({
+    "timeout", "authentication", "unavailable", "budget-exceeded",
+    "configuration", "malformed-response", "identity-drift",
+})
+_MALFORMED_STAGES = frozenset({
+    "response-status", "output-shape", "content-shape", "refusal",
+    "output-text-count", "response-json-decode", "response-root",
+    "usage-validation", "structured-json-decode", "structured-root",
+    "schema-validation",
+})
+AUDIT_FAILURE_CODES = {"provider_" + stage.replace("-", "_") for stage in _MALFORMED_STAGES} | frozenset(_CONTRACT_FAILURES.values()) | _PROVIDER_FAILURES | {
+    "schema_validation", "invalid_value", "unexpected_error", "provider_output_limit",
+}
+
+
+def _failure_code(error: Exception) -> str:
+    """Classify without serializing messages, inputs, or arbitrary exception names."""
+    if isinstance(error, ValidationError):
+        return "schema_validation"
+    if isinstance(error, LlmMalformedResponseError):
+        if error.stage == "response-status" and error.diagnostics.get("incomplete_reason") == "max_output_tokens":
+            return "provider_output_limit"
+        if error.stage in _MALFORMED_STAGES:
+            return "provider_" + error.stage.replace("-", "_")
+    if isinstance(error, LlmError):
+        return error.code if error.code in _PROVIDER_FAILURES else "unexpected_error"
+    if type(error) is ValueError:
+        return _CONTRACT_FAILURES.get(str(error), "invalid_value")
+    return "unexpected_error"
+
+
+_SCHEMA_FIELDS = frozenset({
+    "proposal_sha256", "rendered_sha256", "context_sha256", "entries", "entry_id",
+    "verdict", "evidence_ids", "issue_code", "dimensions", "dimension",
+    "affected_entry_ids", "disposition", "fault", "proposed_move", "replacement",
+    "diagnosis", "action", "units", "kind", "text", "source_ids", "missing_details",
+})
+_SCHEMA_ERROR_TYPES = frozenset({
+    "missing", "extra_forbidden", "value_error", "literal_error", "string_type",
+    "string_pattern_mismatch", "too_short", "too_long", "list_type", "dict_type",
+    "model_type", "json_invalid", "unknown",
+})
+_SCHEMA_PATH_PARTS = _SCHEMA_FIELDS | {"_", "root"} | {str(i) for i in range(20)}
+
+
+def public_schema_fields(value) -> tuple[str, ...]:
+    """Accept only bounded canonical diagnostic paths at the public boundary."""
+    if not isinstance(value, (list, tuple)):
+        return ()
+    result = []
+    for item in value[:4]:
+        if not isinstance(item, str) or len(item) > 160:
+            continue
+        path, separator, code = item.partition(":")
+        parts = path.split(".")
+        if separator and code in _SCHEMA_ERROR_TYPES and len(parts) <= 6 and all(
+            part in _SCHEMA_PATH_PARTS for part in parts
+        ):
+            result.append(item)
+    return tuple(result)
+
+
+def _schema_failure_fields(error: Exception) -> tuple[str, ...]:
+    if isinstance(error, ValidationError):
+        errors = error.errors(include_input=False, include_context=False, include_url=False)
+    elif isinstance(error, LlmMalformedResponseError):
+        errors = error.diagnostics.get("schema_errors", [])
+    else:
+        return ()
+    if not isinstance(errors, (list, tuple)):
+        return ()
+    fields = []
+    for item in errors[:4]:
+        if not isinstance(item, dict):
+            continue
+        location = item.get("location", item.get("loc", ()))
+        if not isinstance(location, (list, tuple)):
+            continue
+        parts = []
+        for part in location[:6]:
+            if type(part) is str and part in _SCHEMA_FIELDS:
+                parts.append(part)
+            elif type(part) is int and 0 <= part < 20:
+                parts.append(str(part))
+            else:
+                parts.append("_")
+        code = item.get("type")
+        if not isinstance(code, str) or code not in _SCHEMA_ERROR_TYPES:
+            code = "unknown"
+        fields.append((".".join(parts) or "root") + ":" + code)
+    return public_schema_fields(fields)
+
+
 @dataclass(frozen=True)
 class FinalAuditResult:
     outcome: Literal["passed", "repaired", "quarantined"]
@@ -209,6 +318,9 @@ class FinalAuditResult:
     calls: int
     usage: GenerationUsage
     events: tuple[dict, ...]
+    failure_stage: str | None = None
+    failure_code: str | None = None
+    failure_fields: tuple[str, ...] = ()
 
     def to_dict(self) -> dict:
         """JSON-safe detached record for the caller's evidence ledger."""
@@ -222,6 +334,9 @@ class FinalAuditResult:
                     "calls": self.calls,
                     "usage": self.usage.model_dump(mode="json"),
                     "events": self.events,
+                    "failure_stage": self.failure_stage,
+                    "failure_code": self.failure_code,
+                    "failure_fields": self.failure_fields,
                 }
             )
         )
@@ -359,12 +474,15 @@ async def audit_final_response(
     repair_client=None,
     mode: Literal["support", "quality"] = "support",
     prompt_version: Literal["v1", "v2"] = "v1",
+    expected_model: str = MODEL,
 ) -> FinalAuditResult:
     """Audit once; quality mode permits one issue-guided repair and changed-hash reaudit.
 
     Callers supply shared hard-budget clients. This adds a local maximum of one/three
     calls, retains unknown/error usage and never delivers an unchecked replacement.
     """
+    if expected_model not in {MODEL, "gpt-5.6-luna"} or (expected_model != MODEL and prompt_version != "v2"):
+        raise ValueError("undeclared audit model/version")
     support_task, quality_task, repair_task = task_ids(prompt_version)
     support_instruction, quality_instruction, repair_instruction = (
         (SUPPORT_INSTRUCTION, QUALITY_INSTRUCTION, REPAIR_INSTRUCTION)
@@ -373,10 +491,14 @@ async def audit_final_response(
     )
     events: list[dict] = []
     usage = GenerationUsage(approximate_cost_usd=0)
+    stage = "context"
+    failure_code = None
+    failure_fields = ()
 
     def result(outcome, text, proposal, reason):
         return FinalAuditResult(
-            outcome, text, proposal, reason, len(events), usage, tuple(events)
+            outcome, text, proposal, reason, len(events), usage, tuple(events),
+            stage if failure_code else None, failure_code, failure_fields,
         )
 
     async def call(client, messages, task):
@@ -405,7 +527,7 @@ async def audit_final_response(
             observed = response.usage
             event["response"] = response.model_dump(mode="json")
             if (
-                response.provider_model != MODEL
+                response.provider_model != expected_model
                 or observed.approximate_cost_usd is None
             ):
                 raise ValueError("provider identity or unknown usage")
@@ -422,6 +544,9 @@ async def audit_final_response(
                 event["usage"] = observed.model_dump(mode="json")
 
     async def assess(snapshot):
+        nonlocal stage
+        is_reaudit = len(events) == 2
+        stage = "reaudit_request" if is_reaudit else "audit_request"
         audit_input = dict(snapshot)
         if mode == "support":
             # Bind the full input hash without exposing profile/stage preferences to C1.
@@ -449,6 +574,7 @@ async def audit_final_response(
             ],
             quality_task if mode == "quality" else support_task,
         )
+        stage = "reaudit_validation" if is_reaudit else "audit_validation"
         decision = FinalAuditDecision.model_validate_json(response.content)
         return decision, _validate_decision(decision, snapshot, mode)
 
@@ -461,6 +587,7 @@ async def audit_final_response(
             or "learner_history" not in context
         ):
             raise ValueError("quality context requires profile and history")
+        stage = "draft_render"
         snapshot = _snapshot(proposal_json, context, render)
         decision, passed = await assess(snapshot)
         if passed:
@@ -475,6 +602,7 @@ async def audit_final_response(
             "entries": snapshot["entries"],
             "issues": _issues(decision),
         }
+        stage = "repair_request"
         response = await call(
             repair_client,
             [
@@ -483,6 +611,7 @@ async def audit_final_response(
             ],
             repair_task,
         )
+        stage = "repair_validation"
         repair = ConditionalRevisionDecision.model_validate_json(response.content)
         if (
             repair.disposition == "keep"
@@ -490,6 +619,7 @@ async def audit_final_response(
         ):
             return result("quarantined", QUARANTINE_TEXT, None, "unchanged_repair")
         revised = repair.replacement.model_dump_json()
+        stage = "repair_render"
         new_snapshot = _snapshot(revised, context, render)
         _, passed = await assess(new_snapshot)
         if not passed:
@@ -498,6 +628,8 @@ async def audit_final_response(
             "repaired", new_snapshot["entries"][0]["text"], revised, "reaudit_pass"
         )
     except Exception as error:
+        failure_code = _failure_code(error)
+        failure_fields = _schema_failure_fields(error)
         if events:
             events[-1]["validation_error_type"] = type(error).__name__
         return result(
@@ -505,10 +637,12 @@ async def audit_final_response(
         )
 
 
-def make_final_audit_client(*, role: Literal["audit", "repair"], post=None):
+def make_final_audit_client(*, role: Literal["audit", "repair"], post=None, model: str = MODEL):
     """Opt-in real Responses transport; registry confined to this experiment."""
     from services.llm import OpenAiResponsesClient
 
+    if model not in {MODEL, "gpt-5.6-luna"} or (model != MODEL and role != "repair"):
+        raise ValueError("undeclared audit model/role")
     if role not in {"audit", "repair"}:
         raise ValueError("unknown final audit role")
 
@@ -522,9 +656,9 @@ def make_final_audit_client(*, role: Literal["audit", "repair"], post=None):
             return OpenAiResponsesClient._output_type(task)
 
     return FinalAuditResponsesClient(
-        MODEL,
+        model,
         max_output_tokens=3000,
         reasoning_effort="high" if role == "audit" else "medium",
-        experimental_sol_enabled=True,
+        experimental_sol_enabled=model == MODEL,
         post=post,
     )

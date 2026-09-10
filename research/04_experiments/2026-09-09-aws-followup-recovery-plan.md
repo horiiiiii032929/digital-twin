@@ -1,0 +1,13 @@
+# AWS follow-up recovery plan
+
+Scope update, 2026-09-09: the user limited changes to coding bugs. **Context retrieval remains disabled; its candidate is deferred.** Only the bounded failure-provenance correction was accepted and deployed in [browser lifecycle run 001](../../tests/manual/aws-pilot-lifecycle-001-results.md). The original candidate plan below is retained as proposed work, not a deployment claim.
+
+Decision question: can the existing opt-in previous-student-query retrieval restore ordinary follow-ups in the presentation demo without admitting restricted, cross-course or unrelated context? Separately, can an already safely withheld model response retain its true operational trace and useful retry guidance through graph fallback?
+
+Prediction: the bounded contextual query will recover the source scope for an immediately preceding answered/questioned exchange; boundary turns and topic changes must still block reuse. Preserving a verified failure response should expose truthful failure provenance without displaying rejected content or making another provider call.
+
+Control: deployed audited-presentation-v1, v19-luna-luna-medium, context retrieval disabled and generic graph fallback. Candidate: same generator/audit settings with explicitly versioned context retrieval enabled plus failure propagation correction only if supported by tests. Do not weaken validation or replace the selected model. Alternative: leave control and document limits if gates fail.
+
+Dataset: existing synthetic conversation-retrieval regressions plus a versioned regression for a database-key follow-up asking why a direct explanation was not given. Cover normal follow-up, missing history, unrelated/new concept, graded/private boundary, non-authoritative tutor prose, provider/schema failure and successful answer. Use local deterministic transports first, then bounded live isolated synthetic conversations (at most eight new turns); do not add test messages to the user's persona conversations.
+
+Gates: source-scoped follow-up recovery, no cross-course or boundary bypass, failure remains safe with original trace/usage, no duplicate turns, successful auth/readiness and persisted conversation after deployment if candidate passes. Record per-case outcomes, response latency and returned token/cost trace; no efficacy claim from this small regression set. Retain observed failure and unsuccessful trials in aws-followup-recovery-001 evidence. Keep deterministic rollback and exact current image references. A targeted API deployment may require a brief interruption; preserve the midnight schedule and all accounts/history.

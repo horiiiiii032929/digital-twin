@@ -1,0 +1,188 @@
+{
+  "schedules": {
+    "Start": {
+      "ActionAfterCompletion": "NONE",
+      "Arn": "arn:aws:scheduler:ap-southeast-1:030334071887:schedule/DigitalTwinPilot-OfficeHoursGroup40C73556-18ZWBPAXZJA0P/DigitalTwinPilot-OfficeHoursStart70999534-1R6IP3H9TSFCB",
+      "CreationDate": "2026-09-09T19:20:52.206000+08:00",
+      "Description": "Start the Digital Twin host at 9:00 Asia/Singapore",
+      "FlexibleTimeWindow": {
+        "Mode": "OFF"
+      },
+      "GroupName": "DigitalTwinPilot-OfficeHoursGroup40C73556-18ZWBPAXZJA0P",
+      "LastModificationDate": "2026-09-09T19:20:52.206000+08:00",
+      "Name": "DigitalTwinPilot-OfficeHoursStart70999534-1R6IP3H9TSFCB",
+      "ScheduleExpression": "cron(0 9 ? * MON-FRI *)",
+      "ScheduleExpressionTimezone": "Asia/Singapore",
+      "State": "ENABLED",
+      "Target": {
+        "Arn": "arn:aws:scheduler:::aws-sdk:ec2:startInstances",
+        "DeadLetterConfig": {
+          "Arn": "arn:aws:sqs:ap-southeast-1:030334071887:DigitalTwinPilot-OfficeHoursFailures2670EF69-U2VPiaHnRX4W"
+        },
+        "Input": "{\"InstanceIds\":[\"i-0fde1692c45c87640\"]}",
+        "RetryPolicy": {
+          "MaximumEventAgeInSeconds": 300,
+          "MaximumRetryAttempts": 2
+        },
+        "RoleArn": "arn:aws:iam::030334071887:role/DigitalTwinPilot-OfficeHoursStartRoleEF85E73C-WcusVVqJJjkr"
+      }
+    },
+    "Stop": {
+      "ActionAfterCompletion": "NONE",
+      "Arn": "arn:aws:scheduler:ap-southeast-1:030334071887:schedule/DigitalTwinPilot-OfficeHoursGroup40C73556-18ZWBPAXZJA0P/DigitalTwinPilot-OfficeHoursStop831F4579-RCOQW9LEFM54",
+      "CreationDate": "2026-09-09T19:20:50.770000+08:00",
+      "Description": "Stop the Digital Twin host at 18:00 Asia/Singapore",
+      "FlexibleTimeWindow": {
+        "Mode": "OFF"
+      },
+      "GroupName": "DigitalTwinPilot-OfficeHoursGroup40C73556-18ZWBPAXZJA0P",
+      "LastModificationDate": "2026-09-09T19:20:50.770000+08:00",
+      "Name": "DigitalTwinPilot-OfficeHoursStop831F4579-RCOQW9LEFM54",
+      "ScheduleExpression": "cron(0 18 ? * MON-FRI *)",
+      "ScheduleExpressionTimezone": "Asia/Singapore",
+      "State": "ENABLED",
+      "Target": {
+        "Arn": "arn:aws:scheduler:::aws-sdk:ec2:stopInstances",
+        "DeadLetterConfig": {
+          "Arn": "arn:aws:sqs:ap-southeast-1:030334071887:DigitalTwinPilot-OfficeHoursFailures2670EF69-U2VPiaHnRX4W"
+        },
+        "Input": "{\"InstanceIds\":[\"i-0fde1692c45c87640\"]}",
+        "RetryPolicy": {
+          "MaximumEventAgeInSeconds": 300,
+          "MaximumRetryAttempts": 2
+        },
+        "RoleArn": "arn:aws:iam::030334071887:role/DigitalTwinPilot-OfficeHoursStopRole3383D8D9-ZwE6wMISWWZk"
+      }
+    }
+  },
+  "events": [
+    {
+      "at": "2026-09-09T11:23:05.599160+00:00",
+      "event": "temporary_schedule_created",
+      "name": "office-hours-verification-stop-1788952985",
+      "operation": "Stop",
+      "scheduled_at": "2026-09-09T11:24:20+00:00"
+    },
+    {
+      "at": "2026-09-09T11:23:06.336313+00:00",
+      "event": "instance_state",
+      "state": "running"
+    },
+    {
+      "at": "2026-09-09T11:25:11.882367+00:00",
+      "event": "instance_state",
+      "state": "stopping"
+    },
+    {
+      "at": "2026-09-09T11:25:27.665111+00:00",
+      "event": "instance_state",
+      "state": "stopped"
+    },
+    {
+      "at": "2026-09-09T11:25:28.379278+00:00",
+      "event": "temporary_schedule_removed",
+      "name": "office-hours-verification-stop-1788952985"
+    },
+    {
+      "at": "2026-09-09T11:25:28.926169+00:00",
+      "event": "temporary_schedule_created",
+      "name": "office-hours-verification-start-1788953128",
+      "operation": "Start",
+      "scheduled_at": "2026-09-09T11:26:43+00:00"
+    },
+    {
+      "at": "2026-09-09T11:25:29.575711+00:00",
+      "event": "instance_state",
+      "state": "stopped"
+    },
+    {
+      "at": "2026-09-09T11:27:03.979564+00:00",
+      "event": "instance_state",
+      "state": "running"
+    },
+    {
+      "at": "2026-09-09T11:27:04.517718+00:00",
+      "event": "temporary_schedule_removed",
+      "name": "office-hours-verification-start-1788953128"
+    },
+    {
+      "at": "2026-09-09T11:27:04.518165+00:00",
+      "event": "scheduled_cycle_complete"
+    },
+    {
+      "at": "2026-09-09T11:27:45.375748+00:00",
+      "event": "after_hours_stop_requested"
+    },
+    {
+      "at": "2026-09-09T11:28:36.299649+00:00",
+      "event": "final_state_verified",
+      "state": "stopped"
+    }
+  ],
+  "result_id": "aws-office-hours-001",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "post_start_smoke": {
+    "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+    "checks": [
+      {
+        "case": "https-readiness",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "anonymous-session-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "synthetic-header-denied",
+        "status": 401,
+        "passed": true
+      },
+      {
+        "case": "cross-origin-login-denied",
+        "status": 403,
+        "passed": true
+      },
+      {
+        "case": "administrator-login",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "secure-cookie-flags",
+        "passed": true
+      },
+      {
+        "case": "authenticated-session",
+        "status": 200,
+        "passed": true
+      },
+      {
+        "case": "logout",
+        "status": 204,
+        "passed": true
+      },
+      {
+        "case": "revoked-session-denied",
+        "status": 401,
+        "passed": true
+      }
+    ],
+    "provider_calls": 0
+  },
+  "local_infra_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "deployment_seconds": 102,
+  "final_cdk_diff_stacks": 0,
+  "source_sha256": {
+    "infra/cdk/lib/office-hours.mjs": "b77d4e42458ffd114cf5e7a3be81524428fadfafc641ef6fdc65fb1c503325c1",
+    "infra/cdk/lib/stack.mjs": "d0286074d309a92a190aeda86b2f9cdcc5db584dfeeb97f64c0a9eebe561602b",
+    "tests/infra/aws_stack.test.mjs": "ed4687cc62e7d279fd0a6af7f302a093af17a12b39b044e3ae22ad0c484c6471"
+  },
+  "final_instance_state": "stopped",
+  "next_start_singapore": "2026-09-10T09:00:00+08:00"
+}

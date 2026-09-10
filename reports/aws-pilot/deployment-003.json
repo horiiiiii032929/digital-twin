@@ -1,0 +1,175 @@
+{
+  "result_id": "aws-pilot-deployment-003",
+  "date": "2026-09-09",
+  "region": "ap-southeast-1",
+  "aws_profile": "digital-twin",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "instance_type": "c7i-flex.large",
+  "source_manifest_sha256": "316e00e7244e4f57cb0313be2d34d32a33565535d01c22bb05b6b64b0661c141",
+  "runtime_environment_sha256": "94a40d1436fea36d8ec7ed74aaa595578504cf12acd0f354771be8ef6063850d",
+  "api_image_digest": "sha256:79ea3aae2b6350d442e65c39d453a54bb78550d5e4890c4fde38d766be17af62",
+  "web_image_digest": "sha256:874d762d2d9b9be8fedb5321b73975a050d54e7e8c791778ce587d9d431eca24",
+  "initial_stack_deploy_seconds": 981.59,
+  "trials": [
+    {
+      "trial": 1,
+      "phase": "initial-public-check",
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "checks": [
+        {
+          "case": "https-readiness",
+          "status": 504,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "trial": 2,
+      "phase": "proxy-fixed-origin-still-blocked",
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "checks": [
+        {
+          "case": "https-readiness",
+          "status": 504,
+          "passed": false
+        }
+      ]
+    },
+    {
+      "trial": 3,
+      "phase": "origin-fixed",
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "checks": [
+        {
+          "case": "https-readiness",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "anonymous-session-denied",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "case": "synthetic-header-denied",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "case": "cross-origin-login-denied",
+          "status": 403,
+          "passed": true
+        },
+        {
+          "case": "administrator-login",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "secure-cookie-flags",
+          "passed": true
+        },
+        {
+          "case": "authenticated-session",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "logout",
+          "status": 204,
+          "passed": true
+        },
+        {
+          "case": "revoked-session-denied",
+          "status": 401,
+          "passed": true
+        }
+      ],
+      "provider_calls": 0
+    },
+    {
+      "trial": 4,
+      "phase": "after-redeployment-and-host-reboot",
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "checks": [
+        {
+          "case": "https-readiness",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "anonymous-session-denied",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "case": "synthetic-header-denied",
+          "status": 401,
+          "passed": true
+        },
+        {
+          "case": "cross-origin-login-denied",
+          "status": 403,
+          "passed": true
+        },
+        {
+          "case": "administrator-login",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "secure-cookie-flags",
+          "passed": true
+        },
+        {
+          "case": "authenticated-session",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "case": "logout",
+          "status": 204,
+          "passed": true
+        },
+        {
+          "case": "revoked-session-denied",
+          "status": 401,
+          "passed": true
+        }
+      ],
+      "provider_calls": 0
+    }
+  ],
+  "backup_restore": {
+    "passed": true,
+    "schema_version": 19,
+    "identity_count": 1,
+    "source_file_count": 0,
+    "elapsed_seconds": 0.015
+  },
+  "memory_sample_mib": {
+    "api": 243.4,
+    "worker": 86.88,
+    "web": 11.19
+  },
+  "reboot": {
+    "passed": true,
+    "boot_time_utc": "2026-09-09 11:11:42",
+    "data_mount_verified": true,
+    "containers_running": 3
+  },
+  "local_tests": {
+    "infrastructure": 6,
+    "authentication": 42,
+    "bootstrap_admin": 3
+  },
+  "provider_calls": 0,
+  "provider_cost_usd": 0,
+  "limitations": [
+    "Initial administrator only; no course or learner data",
+    "No workload, high-availability or cross-AZ recovery qualification",
+    "AWS Backup snapshots configured; snapshot restore not rehearsed",
+    "AWS charges not yet measured"
+  ]
+}

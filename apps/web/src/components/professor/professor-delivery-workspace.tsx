@@ -63,14 +63,22 @@ import { cn } from "@/lib/utils"
 export function ProfessorDeliveryWorkspace({
   controller,
   onOpenSetup,
+  initialCourseId = null,
+  onCourseChange,
 }: {
   controller: OnboardingController
   onOpenSetup: () => void
+  initialCourseId?: string | null
+  onCourseChange?: (courseId: string | null) => void
 }) {
   const [courses, setCourses] = useState<ProfessorCourse[]>([])
-  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null)
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(initialCourseId)
   const [jobs, setJobs] = useState<ProfessorIngestionJob[]>([])
   const [loading, setLoading] = useState(true)
+  const [courseLoadError, setCourseLoadError] = useState<string | null>(null)
+  const [jobsLoading, setJobsLoading] = useState(false)
+  const [jobsError, setJobsError] = useState<string | null>(null)
+  const jobsRequestRef = useRef(0)
   const [busy, setBusy] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [notice, setNotice] = useState<string | null>(null)
@@ -85,7 +93,10 @@ export function ProfessorDeliveryWorkspace({
     () => courses.find((course) => course.course_id === selectedCourseId) ?? null,
     [courses, selectedCourseId],
   )
-  const selectedRelease = selectedCourse?.releases[0] ?? null
+  const publishedRelease = selectedCourse?.releases.find((release) => release.status === "published") ?? null
+  const selectedRelease = selectedCourse?.releases.find((release) => release.status === "draft") ?? publishedRelease ?? selectedCourse?.releases[0] ?? null
+  const setupCourseId = controller.session?.course_id
+  const setupMatchesCourse = !setupCourseId || setupCourseId === selectedCourseId
   const successfulJobs = jobs.filter(
     (job) => job.status === "succeeded" && job.result,
   )
@@ -138,15 +149,38 @@ export function ProfessorDeliveryWorkspace({
   }, [])
 
   const refreshJobs = useCallback(async (courseId: string) => {
-    const remoteJobs = await listProfessorIngestionJobs(courseId)
-    if (selectedCourseIdRef.current !== courseId) return
-    const inlineJobs = inlineJobsByCourseRef.current.get(courseId) ?? []
-    const remoteIds = new Set(remoteJobs.map((job) => job.id))
-    setJobs([
-      ...remoteJobs,
-      ...inlineJobs.filter((job) => !remoteIds.has(job.id)),
-    ])
+    const request = ++jobsRequestRef.current
+    if (selectedCourseIdRef.current === courseId) {
+      setJobsLoading(true)
+      setJobsError(null)
+    }
+    try {
+      const remoteJobs = await listProfessorIngestionJobs(courseId)
+      if (selectedCourseIdRef.current !== courseId || request !== jobsRequestRef.current) return
+      const inlineJobs = inlineJobsByCourseRef.current.get(courseId) ?? []
+      const remoteIds = new Set(remoteJobs.map((job) => job.id))
+      setJobs([...remoteJobs, ...inlineJobs.filter((job) => !remoteIds.has(job.id))])
+    } catch (reason) {
+      if (selectedCourseIdRef.current === courseId && request === jobsRequestRef.current) {
+        setJobsError(message(reason))
+      }
+      throw reason
+    } finally {
+      if (selectedCourseIdRef.current === courseId && request === jobsRequestRef.current) setJobsLoading(false)
+    }
   }, [])
+
+  async function retryCourses() {
+    setLoading(true)
+    setCourseLoadError(null)
+    try {
+      await refreshCourses()
+    } catch (reason) {
+      setCourseLoadError(message(reason))
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
     let active = true
@@ -155,9 +189,10 @@ export function ProfessorDeliveryWorkspace({
         const next = await listProfessorCourses()
         if (!active) return
         setCourses(next)
-        setSelectedCourseId(next[0]?.course_id ?? null)
+        setSelectedCourseId(current => next.some(course => course.course_id === current)
+          ? current : (next[0]?.course_id ?? null))
       } catch (reason) {
-        if (active) setError(message(reason))
+        if (active) setCourseLoadError(message(reason))
       } finally {
         if (active) setLoading(false)
       }
@@ -169,16 +204,23 @@ export function ProfessorDeliveryWorkspace({
   }, [])
 
   useEffect(() => {
+    onCourseChange?.(selectedCourseId)
+  }, [onCourseChange, selectedCourseId])
+
+  useEffect(() => {
     selectedCourseIdRef.current = selectedCourseId
     setNotice(null)
     setError(null)
     setJobs([])
+    setJobsError(null)
+    setJobsLoading(false)
+    setPreflight(null)
     setApprovedTeachingProfileId(null)
     if (!selectedCourseId) {
       return
     }
-    setPreflight(null)
-    void refreshJobs(selectedCourseId).catch((reason) => setError(message(reason)))
+    void refreshJobs(selectedCourseId).catch(() => { /* The evidence card owns this error. */ })
+    return () => { jobsRequestRef.current += 1 }
   }, [refreshJobs, selectedCourseId])
 
   useEffect(() => {
@@ -188,8 +230,8 @@ export function ProfessorDeliveryWorkspace({
     const poll = async () => {
       try {
         await refreshJobs(selectedCourseId)
-      } catch (reason) {
-        if (active) setError(message(reason))
+      } catch {
+        // Keep the last known jobs and show the scoped refresh error.
       } finally {
         if (active) timer = window.setTimeout(poll, 1800)
       }
@@ -296,7 +338,7 @@ export function ProfessorDeliveryWorkspace({
       setNotice(
         isProfessorIngestionJob(uploaded)
           ? "Upload queued. It is safe to leave this page while the worker processes it."
-          : "Upload processed. The evidence is ready for tutor review.",
+          : "Upload processed. The evidence is ready for Digital Twin review.",
       )
     })
   }
@@ -311,13 +353,13 @@ export function ProfessorDeliveryWorkspace({
         session.course_id !== selectedCourse.course_id
       ) {
         throw new Error(
-          "This tutor setup belongs to another course. Start a new tutor setup for the selected course.",
+          "This Digital Twin setup belongs to another course. Start a new Digital Twin setup for the selected course.",
         )
       }
       const newlyBound = !session.course_id
       if (newlyBound) {
         const bound = await controller.bindCourse(selectedCourse.course_id)
-        if (!bound) throw new Error("Could not bind tutor setup to this course.")
+        if (!bound) throw new Error("Could not bind Digital Twin setup to this course.")
       }
       const unreviewedJobs = successfulJobs.filter(
         (job) =>
@@ -340,13 +382,13 @@ export function ProfessorDeliveryWorkspace({
           if (!recorded) throw new Error("Could not record the approved source.")
         }
         setNotice(
-          "New evidence was added to tutor setup. Review the updated source scope and approve the current configuration before creating the release draft.",
+          "New evidence was added to Digital Twin setup. Review the updated source scope and approve the current configuration before creating the release draft.",
         )
         return
       }
       if (newlyBound) {
         setNotice(
-          "Tutor setup is now bound to this course. Review and approve the current course configuration before creating the release draft.",
+          "Digital Twin setup is now bound to this course. Review and approve the current course configuration before creating the release draft.",
         )
         return
       }
@@ -363,7 +405,7 @@ export function ProfessorDeliveryWorkspace({
       })
       await refreshCourses(selectedCourse.course_id)
       setPreflight(null)
-      setNotice("Release draft created from the current tutor policy and approved evidence.")
+      setNotice("Release draft created from the current Digital Twin policy and approved evidence.")
     })
   }
 
@@ -384,7 +426,7 @@ export function ProfessorDeliveryWorkspace({
     await runAction("publish", async () => {
       await publishProfessorRelease(release.id)
       await refreshCourses(release.course_id)
-      setNotice("Release published. Assigned students can now use the course tutor.")
+      setNotice("Release published. Assigned students can now use the course Digital Twin.")
     })
   }
 
@@ -434,7 +476,7 @@ export function ProfessorDeliveryWorkspace({
               className="lg:hidden"
               size="icon"
               variant="ghost"
-              aria-label="Return to tutor setup"
+              aria-label="Return to Digital Twin setup"
               onClick={onOpenSetup}
             >
               <ArrowLeft aria-hidden="true" />
@@ -457,7 +499,7 @@ export function ProfessorDeliveryWorkspace({
                 </Alert>
               ) : null}
               {notice ? (
-                <Alert className="mb-5 border-[var(--success-border)] bg-[var(--success-soft)]">
+                <Alert role="status" className="mb-5 border-[var(--success-border)] bg-[var(--success-soft)]">
                   <CheckCircle2 className="text-[var(--success)]" />
                   <AlertDescription className="text-[var(--success)]">{notice}</AlertDescription>
                 </Alert>
@@ -486,7 +528,16 @@ export function ProfessorDeliveryWorkspace({
 
               <section className="grid grid-cols-[minmax(0,1fr)] gap-5 xl:grid-cols-[minmax(0,1fr)_330px]">
                 <div className="flex min-w-0 flex-col gap-5">
-                  <CourseHeader course={selectedCourse} loading={loading} />
+                  {courseLoadError ? (
+                    <Alert variant="destructive">
+                      <CircleAlert />
+                      <AlertTitle>Courses could not be loaded</AlertTitle>
+                      <AlertDescription>
+                        <p>{courseLoadError}</p>
+                        <Button variant="outline" disabled={loading} onClick={() => void retryCourses()}>Retry courses</Button>
+                      </AlertDescription>
+                    </Alert>
+                  ) : <CourseHeader course={selectedCourse} loading={loading} /> }
                   {selectedCourse ? (
                     <>
                       <ProfessorAutonomyPanel
@@ -500,6 +551,9 @@ export function ProfessorDeliveryWorkspace({
                       />
                       <EvidenceCard
                         busy={busy}
+                        loading={jobsLoading}
+                        loadError={jobsError}
+                        onRefresh={() => void refreshJobs(selectedCourse.course_id).catch(() => {})}
                         jobs={jobs}
                         onCancel={(job) =>
                           void runAction(`cancel-${job.id}`, async () => {
@@ -518,12 +572,18 @@ export function ProfessorDeliveryWorkspace({
                       <ReleaseCard
                         busy={busy}
                         onboardingReady={
-                          controller.session?.policy?.release_status === "approved"
+                          setupMatchesCourse && controller.session?.policy?.release_status === "approved"
                         }
+                        setupContext={!setupMatchesCourse
+                          ? "The open Digital Twin setup belongs to another course. Open Twin setup and select or create a setup for this course."
+                          : !setupCourseId && controller.session
+                            ? "The open setup is not linked to a course yet. Creating a draft first links it here; you must review and approve it again before a release is created."
+                            : null}
+                        publishedRelease={publishedRelease}
                         profileReady={approvedTeachingProfileId !== null}
                         preflight={preflight}
                         release={selectedRelease}
-                        sourceCount={successfulJobs.length}
+                        sourceCount={jobsError || jobsLoading ? 0 : successfulJobs.length}
                         onCreateDraft={() => void createDraft()}
                         onPreflight={(release) => void runPreflight(release)}
                         onPublish={(release) => void publish(release)}
@@ -647,13 +707,17 @@ function StudentsCard({
         <CardTitle className="flex items-center gap-2">
           <Users className="size-4" aria-hidden="true" /> Students
         </CardTitle>
-        <CardDescription>Use the account ID shown after the admin creates an invitation.</CardDescription>
+        <CardDescription>
+          Assign students to {course.title}. An administrator first creates a student invitation;
+          use its account ID below. The student accepts that invitation to sign in.
+          Assignment gives access once this course has a published release.
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {course.student_account_ids.length ? (
           <ul className="space-y-2">
             {course.student_account_ids.map((studentId) => (
-              <li key={studentId} className="truncate rounded-lg bg-muted px-3 py-2 text-xs font-medium">
+              <li key={studentId} className="break-all rounded-lg bg-muted px-3 py-2 text-xs font-medium">
                 {studentId}
               </li>
             ))}
@@ -683,8 +747,11 @@ function StudentsCard({
   )
 }
 
-function EvidenceCard({
+export function EvidenceCard({
   busy,
+  loading,
+  loadError,
+  onRefresh,
   jobs,
   onSubmit,
   onRetry,
@@ -692,6 +759,9 @@ function EvidenceCard({
 }: {
   busy: string | null
   jobs: ProfessorIngestionJob[]
+  loading: boolean
+  loadError: string | null
+  onRefresh: () => void
   onSubmit: (event: FormEvent<HTMLFormElement>) => void
   onRetry: (job: ProfessorIngestionJob) => void
   onCancel: (job: ProfessorIngestionJob) => void
@@ -734,9 +804,21 @@ function EvidenceCard({
 
         <div className="border-t pt-4">
           <div className="mb-3 flex items-center justify-between">
-            <h3 className="text-sm font-semibold">Processing history</h3>
-            <span className="text-xs text-muted-foreground">{jobs.length} upload{jobs.length === 1 ? "" : "s"}</span>
+            <h3 className="text-sm font-semibold">Background upload history</h3>
+            <span className="text-xs text-muted-foreground">{loading ? "Refreshing…" : loadError ? "Refresh failed" : `${jobs.length} upload${jobs.length === 1 ? "" : "s"}`}</span>
           </div>
+          {loadError ? (
+            <Alert variant="destructive" className="mb-3">
+              <CircleAlert />
+              <AlertTitle>Upload history could not be refreshed</AlertTitle>
+              <AlertDescription>
+                <p>{loadError}</p>
+                {jobs.length > 0 ? <p>Showing the last loaded uploads. Refresh before creating a release draft.</p> : null}
+                <Button variant="outline" disabled={loading} onClick={onRefresh}>Retry upload history</Button>
+              </AlertDescription>
+            </Alert>
+          ) : null}
+          {loading && jobs.length === 0 ? <p role="status" className="text-sm text-muted-foreground">Loading upload history…</p> : null}
           {jobs.length ? (
             <ul className="divide-y rounded-lg border">
               {jobs.map((job) => (
@@ -774,19 +856,21 @@ function EvidenceCard({
                 </li>
               ))}
             </ul>
-          ) : (
+          ) : !loading && !loadError ? (
             <p className="rounded-lg border border-dashed px-4 py-6 text-center text-sm text-muted-foreground">
-              No course evidence has been uploaded.
+              No background upload jobs are recorded for this course. The published release may already contain approved evidence.
             </p>
-          )}
+          ) : null}
         </div>
       </CardContent>
     </Card>
   )
 }
 
-function ReleaseCard({
+export function ReleaseCard({
   busy,
+  setupContext,
+  publishedRelease: currentPublished,
   onboardingReady,
   profileReady,
   preflight,
@@ -799,6 +883,8 @@ function ReleaseCard({
 }: {
   busy: string | null
   onboardingReady: boolean
+  setupContext: string | null
+  publishedRelease: ProfessorReleaseSummary | null
   profileReady: boolean
   preflight: ReleasePreflightResult | null
   release: ProfessorReleaseSummary | null
@@ -817,16 +903,20 @@ function ReleaseCard({
         <CardDescription>
           {publishedRelease
             ? "Students keep using the current published release while you prepare the next reviewed version."
-            : "A release freezes the reviewed tutor policy and all currently successful evidence uploads."}
+            : "A release freezes the reviewed Digital Twin policy and all currently successful evidence uploads."}
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        {setupContext ? <p role="status" className="rounded-lg border p-3 text-sm leading-6">{setupContext}</p> : null}
+        {currentPublished && currentPublished.id !== release?.id ? (
+          <p className="break-words rounded-lg bg-muted p-3 text-sm">Students still use published policy v{currentPublished.policy_version}. The version below is not currently available to students.</p>
+        ) : null}
         <div>
           <p className="mb-2 text-xs font-semibold text-muted-foreground">
             {publishedRelease ? "Next release readiness" : "Release readiness"}
           </p>
           <ol className={cn("grid gap-2", publishedRelease ? "sm:grid-cols-3" : "sm:grid-cols-4")}>
-          <ReleaseStep done={onboardingReady} label="Tutor approved" />
+          <ReleaseStep done={onboardingReady} label="Digital Twin approved" />
           <ReleaseStep done={profileReady} label="Profile approved" />
           <ReleaseStep done={sourceCount > 0} label="Evidence ready" />
           {!publishedRelease ? (
@@ -838,9 +928,9 @@ function ReleaseCard({
         {!onboardingReady ? (
           <Alert>
             <CircleAlert />
-            <AlertTitle>{publishedRelease ? "The next release draft is blocked" : "The first release is blocked"}</AlertTitle>
+            <AlertTitle>{currentPublished ? "The next release draft is blocked" : "Release preparation is blocked"}</AlertTitle>
             <AlertDescription>
-              {publishedRelease
+              {currentPublished
                 ? "The current published release remains active. Complete the new policy, preview, and approval checklist before creating its successor."
                 : "Resolve the policy, preview, and approval checklist before creating a release."}
             </AlertDescription>
@@ -852,7 +942,7 @@ function ReleaseCard({
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold">
-                  {publishedRelease ? "Current published release" : "Draft release"}
+                  {publishedRelease ? "Current published release" : `${formatStatus(release.status)} release`}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   {release.chunk_count} chunks · policy v{release.policy_version}
@@ -886,7 +976,7 @@ function ReleaseCard({
 
         <div className="flex flex-wrap gap-2 border-t pt-4">
           {!onboardingReady ? (
-            <Button variant="outline" onClick={onOpenSetup}>Review tutor setup</Button>
+            <Button variant="outline" onClick={onOpenSetup}>Review Digital Twin setup</Button>
           ) : null}
           {(!release || release.status !== "draft") && onboardingReady ? (
             <Button

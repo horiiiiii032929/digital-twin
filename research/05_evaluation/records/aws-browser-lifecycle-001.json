@@ -1,0 +1,1615 @@
+{
+  "run_id": "aws-browser-lifecycle-001",
+  "dataset_version": "aws-browser-lifecycle-v1",
+  "permission": "Repository-authored synthetic course data and synthetic persona roleplay only.",
+  "scope": "Coding fixes only; existing architecture, prompts, models, policies and feature flags retained.",
+  "core_student_turns": 84,
+  "action_counts": {
+    "safe-graph-failure": 14,
+    "answer": 60,
+    "question": 4,
+    "clarify": 2,
+    "redirect-graded-work": 4
+  },
+  "safe_failure_fraction": 0.16666666666666666,
+  "all_safe_failures_preserve_nonzero_usage": true,
+  "recorded_generation_latency_ms": {
+    "n": 84,
+    "median": 8812.190916500185,
+    "max": 41725.093380000544,
+    "scope": "Recorded generation trace; not end-to-end browser latency or total request cost."
+  },
+  "recorded_generation_usage": {
+    "total_tokens": 485400,
+    "approximate_cost_usd": 0.180544,
+    "unknown_cost_entries": 6,
+    "scope": "Generation traces include bounded draft/audit usage where recorded; not a billing reconciliation or all planning calls."
+  },
+  "persona_actions": {
+    "typical-engaged": {
+      "safe-graph-failure": 3,
+      "answer": 9
+    },
+    "fast-learner": {
+      "answer": 9,
+      "safe-graph-failure": 2,
+      "question": 1
+    },
+    "slow-learner": {
+      "answer": 9,
+      "question": 1,
+      "safe-graph-failure": 2
+    },
+    "high-forgetting": {
+      "answer": 7,
+      "safe-graph-failure": 2,
+      "question": 2,
+      "clarify": 1
+    },
+    "misconception-prone": {
+      "answer": 11,
+      "safe-graph-failure": 1
+    },
+    "answer-seeking": {
+      "redirect-graded-work": 4,
+      "answer": 6,
+      "safe-graph-failure": 1,
+      "clarify": 1
+    },
+    "low-receptivity": {
+      "safe-graph-failure": 3,
+      "answer": 9
+    }
+  },
+  "excluded_additional_history": [
+    {
+      "persona": "fast-learner",
+      "additional_messages": 2,
+      "reason": "Browser return-login form retained another account; extra QA turn excluded."
+    }
+  ],
+  "limitations": [
+    "Actions are outcomes, not a semantic correctness score.",
+    "One compressed browser run; no independent repeats or human learning measurements.",
+    "Fresh-course publication, real check-in delivery/reply, v2 release and isolated recovery remain blocked/unrun.",
+    "Cross-course operator mistake is outside these Data Systems histories and excluded from the 84-turn core."
+  ],
+  "decision": "Keep bounded coding fixes; Refine demo readiness. No architecture selection or bug-free claim.",
+  "cases": [
+    {
+      "case_id": "typical-engaged-v1-t1",
+      "persona": "typical-engaged",
+      "visit": 1,
+      "prompt": "I understand member_id identifies a member. Why can team_id repeat for Ari and Bo?",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T14:53:40+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 14104.476923999755,
+      "usage": {
+        "input_tokens": 4009,
+        "output_tokens": 1402,
+        "total_tokens": 5411,
+        "approximate_cost_usd": 0.0024842000000000006
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "typical-engaged-v1-t2",
+      "persona": "typical-engaged",
+      "visit": 1,
+      "prompt": "My attempt: Ari and Bo are different members because member_id differs, while team_id 10 links both to Cedar. Is that correct?",
+      "reply": "Yes, that is correct. member_id distinguishes Ari (1) from Bo (2), while both team_id values of 10 reference the Cedar row. A foreign key constrains the reference but does not require team_id to be unique, so multiple members can belong to one team.\n\nUsing the same tables, predict the three member\u2013team pairs produced by an inner join on Members.team_id = Teams.team_id.",
+      "action": "answer",
+      "created_at": "2026-09-09T14:54:15+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 12428.49654299971,
+      "usage": {
+        "input_tokens": 4077,
+        "output_tokens": 997,
+        "total_tokens": 5074,
+        "approximate_cost_usd": 0.0020118000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v1-t3",
+      "persona": "typical-engaged",
+      "visit": 1,
+      "prompt": "My join prediction is Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. Please explain why the shared team_id still produces two separate Cedar rows.",
+      "reply": "Correct. An inner join compares each Members row with the Teams row having the same team_id. Ari and Bo are separate Members rows because their member_id values differ; since both have team_id 10, each matches the one Cedar row, producing Ari\u2013Cedar and Bo\u2013Cedar. Cam\u2019s team_id 20 matches Maple, producing Cam\u2013Maple.",
+      "action": "answer",
+      "created_at": "2026-09-09T14:54:57+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9709.309015001054,
+      "usage": {
+        "input_tokens": 4305,
+        "output_tokens": 679,
+        "total_tokens": 4984,
+        "approximate_cost_usd": 0.0016758
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v1-t4",
+      "persona": "typical-engaged",
+      "visit": 1,
+      "prompt": "Before I leave, give me a short recap of primary keys, foreign keys and the join result we just worked through, with one practice question for next time.",
+      "reply": "A primary key uniquely identifies each row and cannot be null. A foreign key references a key in another table, but it does not have to be unique, so Ari and Bo can both have team_id 10. An inner join keeps rows with matching team_id values: Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. The shared value produces two Cedar pairs because Ari and Bo are two separate Members rows, distinguished by their different member_id values.\n\nPractice question: If a fourth member, Dana, had team_id 20, which member\u2013team pairs would the inner join produce, and why?",
+      "action": "answer",
+      "created_at": "2026-09-09T14:55:21+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10929.591989000983,
+      "usage": {
+        "input_tokens": 4765,
+        "output_tokens": 886,
+        "total_tokens": 5651,
+        "approximate_cost_usd": 0.0020162
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v2-t1",
+      "persona": "typical-engaged",
+      "visit": 2,
+      "prompt": "I am back. In our earlier Dana practice question, I think Dana joins to Maple because team_id is 20. Does that add a fourth row while keeping Ari and Bo separate?",
+      "reply": "Yes. Dana\u2019s team_id 20 matches Maple\u2019s team_id 20, so the inner join adds Dana\u2013Maple as a fourth row. Ari and Bo remain separate rows because they are separate Members records with different member_id values, even though both match Cedar through team_id 10.",
+      "action": "answer",
+      "created_at": "2026-09-09T14:59:50+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7818.821928000034,
+      "usage": {
+        "input_tokens": 4909,
+        "output_tokens": 761,
+        "total_tokens": 5670,
+        "approximate_cost_usd": 0.001895
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v2-t2",
+      "persona": "typical-engaged",
+      "visit": 2,
+      "prompt": "My rule is: member_id answers which member this is; team_id answers which team the member references. Two different members may reference the same team. What is missing from that rule?",
+      "reply": "Your rule is correct. To complete it: a primary key uniquely identifies a row and cannot be null; member_id serves that role for Members. A foreign key constrains team_id to reference a key in Teams, but team_id itself need not be unique, so multiple members can reference one team.\n\nCheck: In one sentence, explain why member_id\u2014not team_id\u2014is the identifier that distinguishes Ari from Bo.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:00:14+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10179.64252800084,
+      "usage": {
+        "input_tokens": 5260,
+        "output_tokens": 983,
+        "total_tokens": 6243,
+        "approximate_cost_usd": 0.0022316000000000003
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v2-t3",
+      "persona": "typical-engaged",
+      "visit": 2,
+      "prompt": "Ari and Bo have different member_id values 1 and 2, while both team_id values are 10; that is why team_id cannot distinguish them. Why does an inner join preserve both members?",
+      "reply": "An inner join processes each Members row separately and matches its team_id to the Teams row with the same value. Ari and Bo are distinct Members rows because their member_id values differ; both match the Cedar row, so the result contains both Ari\u2013Cedar and Bo\u2013Cedar rather than combining them.\n\nCan you state in one sentence why two separate Members rows can produce two join-result rows even when they match the same Teams row?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:00:30+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 33672.29462099931,
+      "usage": {
+        "input_tokens": 10762,
+        "output_tokens": 3227,
+        "total_tokens": 13989,
+        "approximate_cost_usd": 0.0060248
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v2-t4",
+      "persona": "typical-engaged",
+      "visit": 2,
+      "prompt": "Each member row independently matches Cedar, so sharing the same team does not merge their member identities. I will stop here and return later; please summarize just the point I got right.",
+      "reply": "You correctly identified that each Members row joins independently. Ari and Bo have different member_id values, so they remain separate rows even though both team_id values match the same Cedar row.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:01:18+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6646.86633600104,
+      "usage": {
+        "input_tokens": 5287,
+        "output_tokens": 638,
+        "total_tokens": 5925,
+        "approximate_cost_usd": 0.001823
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v3-t1",
+      "persona": "typical-engaged",
+      "visit": 3,
+      "prompt": "For this final visit I predict Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple from the original three-member tables. There are three output rows because each member has one matching team. Is my reasoning complete?",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:01:34+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10299.145857999974,
+      "usage": {
+        "input_tokens": 5321,
+        "output_tokens": 851,
+        "total_tokens": 6172,
+        "approximate_cost_usd": 0.0020854000000000003
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "typical-engaged-v3-t2",
+      "persona": "typical-engaged",
+      "visit": 3,
+      "prompt": "Your last reply failed verification. Let me narrow it: in the approved Members and Teams example, why is the inner join result three rows rather than two team rows?",
+      "reply": "An inner join produces one result row for each matching Members row, not one row per distinct team. Ari and Bo are separate Members rows, and both match Cedar; Cam matches Maple. Therefore the result has three rows: Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple.\n\nCheck: if a fourth member also had team_id 10, how many rows would the join produce, and which team would that member join to?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:01:52+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10029.144326999813,
+      "usage": {
+        "input_tokens": 5214,
+        "output_tokens": 946,
+        "total_tokens": 6160,
+        "approximate_cost_usd": 0.0021780000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v3-t3",
+      "persona": "typical-engaged",
+      "visit": 3,
+      "prompt": "A fourth member with a new member_id and team_id 10 would add one Cedar row, making four. The foreign key may repeat; the primary key must remain unique and non-null. Please correct any error in those two claims.",
+      "reply": "No error: both claims are correct. The new member_id must be unique and non-null as the primary key, while team_id may repeat as a foreign key. Because team_id 10 matches Cedar, the added member creates one more Cedar join row, bringing the total to four.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:02:11+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8411.473234000368,
+      "usage": {
+        "input_tokens": 5160,
+        "output_tokens": 843,
+        "total_tokens": 6003,
+        "approximate_cost_usd": 0.0020436
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "typical-engaged-v3-t4",
+      "persona": "typical-engaged",
+      "visit": 3,
+      "prompt": "I now understand primary key identity, repeated foreign keys, and matching each member separately. I am still unsure about unmatched rows, which we have not studied. Please end with a concise recap limited to the approved example.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:02:31+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 12548.175402998822,
+      "usage": {
+        "input_tokens": 5381,
+        "output_tokens": 1262,
+        "total_tokens": 6643,
+        "approximate_cost_usd": 0.0025906
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "fast-learner-v1-t1",
+      "persona": "fast-learner",
+      "visit": 1,
+      "prompt": "My understanding is that member_id uniquely identifies a Members row and team_id references Teams without needing to be unique. Can we apply that distinction to the inner join in the course notes?",
+      "reply": "Yes. In Members, member_id uniquely identifies each member row, while team_id can repeat because it references a key in Teams and is not itself unique. An inner join keeps rows where the join condition matches in both tables.\n\nUsing the course tables, join Members to Teams on Members.team_id = Teams.team_id. The result has three rows: Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. Ari and Bo both match team_id 10, so both appear; the repeated foreign-key value does not collapse them into one row.\n\nCheck: if another member had team_id 20, how many joined rows would correspond to Maple? Explain why.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:03:24+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 13834.74636200117,
+      "usage": {
+        "input_tokens": 4147,
+        "output_tokens": 1358,
+        "total_tokens": 5505,
+        "approximate_cost_usd": 0.0024590000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v1-t2",
+      "persona": "fast-learner",
+      "visit": 1,
+      "prompt": "A second member with team_id 20 would make two Maple rows because Cam and that new member each match Maple independently. The original join output is Ari\u2013Cedar, Bo\u2013Cedar, Cam\u2013Maple. Is that correct?",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:03:47+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10839.219473000412,
+      "usage": {
+        "input_tokens": 4378,
+        "output_tokens": 1113,
+        "total_tokens": 5491,
+        "approximate_cost_usd": 0.0022112
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "fast-learner-v1-t3",
+      "persona": "fast-learner",
+      "visit": 1,
+      "prompt": "Please check only my original prediction: Ari joins Cedar, Bo joins Cedar, and Cam joins Maple. That produces three rows. Please give concise feedback.",
+      "reply": "Your prediction is correct: Ari joins Cedar, Bo joins Cedar, and Cam joins Maple, producing three rows. Ari and Bo both match team_id 10, so the repeated foreign-key value produces separate matches rather than collapsing them.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:04:06+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8023.543229999632,
+      "usage": {
+        "input_tokens": 4416,
+        "output_tokens": 653,
+        "total_tokens": 5069,
+        "approximate_cost_usd": 0.0016668
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v1-t4",
+      "persona": "fast-learner",
+      "visit": 1,
+      "prompt": "Give me one slightly harder ungraded variation using only these two tables, without repeating the basic definitions.",
+      "reply": "Variation: suppose Teams gains (30, Pine), and Members gains (4, Dee, 30) and (5, Eli, 10). Without calculating from a definition, predict the complete inner-join output and explain how many rows correspond to Cedar, Maple, and Pine.",
+      "action": "question",
+      "created_at": "2026-09-09T15:04:18+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9894.927344999815,
+      "usage": {
+        "input_tokens": 4608,
+        "output_tokens": 857,
+        "total_tokens": 5465,
+        "approximate_cost_usd": 0.0019500000000000001
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v2-t1",
+      "persona": "fast-learner",
+      "visit": 2,
+      "prompt": "Returning to your Dee and Eli variation: I predict Ari\u2013Cedar, Bo\u2013Cedar, Cam\u2013Maple, Dee\u2013Pine, Eli\u2013Cedar. Counts are Cedar three, Maple one, Pine one. Is my application sound?",
+      "reply": "Given the variation you stated, your application is correct: the five matches are Ari\u2013Cedar, Bo\u2013Cedar, Cam\u2013Maple, Dee\u2013Pine, and Eli\u2013Cedar. That gives Cedar 3 rows, Maple 1, and Pine 1. Each member contributes a separate row when its team_id matches a Teams row.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:04:46+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 39552.25333599992,
+      "usage": {
+        "input_tokens": 9939,
+        "output_tokens": 3266,
+        "total_tokens": 13205,
+        "approximate_cost_usd": 0.005907
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v2-t2",
+      "persona": "fast-learner",
+      "visit": 2,
+      "prompt": "Without rereading: member identity comes from member_id; the team reference comes from team_id. Even Eli and Ari sharing team_id 10 does not make them the same person. Please check that distinction.",
+      "reply": "Correct. member_id identifies each Members row, while team_id is the team reference and may repeat. Thus Ari and Eli can both have team_id 10 without being the same person; their distinct member_id values distinguish them.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:05:31+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9597.409814999992,
+      "usage": {
+        "input_tokens": 5134,
+        "output_tokens": 907,
+        "total_tokens": 6041,
+        "approximate_cost_usd": 0.0021152
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v2-t3",
+      "persona": "fast-learner",
+      "visit": 2,
+      "prompt": "If a member had team_id 99 but Teams contained only 10 and 20, what can the approved notes establish about the foreign-key reference and the inner join? Please distinguish the supported rule from assumptions.",
+      "reply": "The notes state that a foreign key constrains references to a key in another table. Because Teams lists only team_id 10 and 20, 99 does not satisfy that stated reference rule. The notes do not establish whether the database enforces the constraint by rejecting the row. Independently, an inner join on matching team_id values would produce no row for this member, because Teams has no team_id 99.\n\nCheck: what join-row count would this member contribute, and what missing match determines that count?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:05:53+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 41725.093380000544,
+      "usage": {
+        "input_tokens": 10529,
+        "output_tokens": 4261,
+        "total_tokens": 14790,
+        "approximate_cost_usd": 0.007219
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v2-t4",
+      "persona": "fast-learner",
+      "visit": 2,
+      "prompt": "That unmatched member contributes zero inner-join rows because no Teams row has team_id 99. The notes establish matching and reference constraints, but not a particular database error message. Please confirm only those conclusions.",
+      "reply": "Confirmed. An unmatched member with team_id 99 contributes zero inner-join rows because no Teams row has team_id 99. The notes establish the matching/reference constraints, but not any particular database error message.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:06:48+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 11099.151549000453,
+      "usage": {
+        "input_tokens": 5083,
+        "output_tokens": 1265,
+        "total_tokens": 6348,
+        "approximate_cost_usd": 0.0025346
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v3-t1",
+      "persona": "fast-learner",
+      "visit": 3,
+      "prompt": "Final application: remove Cam from the original Members example. Ari and Bo still each match Cedar, so there are two output rows even though just one team appears. Is that supported?",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:07:08+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8931.260979001308,
+      "usage": {
+        "input_tokens": 5146,
+        "output_tokens": 751,
+        "total_tokens": 5897,
+        "approximate_cost_usd": 0.0019304
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "fast-learner-v3-t2",
+      "persona": "fast-learner",
+      "visit": 3,
+      "prompt": "In the original example, assume both Ari and Bo remain separate Members records and Teams is unchanged. Explain only why both match Cedar; I do not need a new practice question.",
+      "reply": "Ari and Bo are separate Members records because they have distinct member_id values, but both have team_id 10. Teams maps team_id 10 to Cedar, so an inner join on matching team_id gives each member a separate match with Cedar.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:07:34+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6735.260553999979,
+      "usage": {
+        "input_tokens": 5078,
+        "output_tokens": 619,
+        "total_tokens": 5697,
+        "approximate_cost_usd": 0.0017583999999999998
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v3-t3",
+      "persona": "fast-learner",
+      "visit": 3,
+      "prompt": "An unsupported extension would be claiming the exact error code returned by a particular SQL server, since these notes do not specify one. Can you keep the explanation at the keys-and-joins level?",
+      "reply": "Yes. At the keys-and-joins level: member_id uniquely identifies each Members row, while team_id references a team and may repeat. Ari and Bo therefore remain separate rows, and both match Teams.team_id 10 (Cedar), producing one inner-join row for each. The notes do not specify any database error code.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:07:57+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10797.7661670011,
+      "usage": {
+        "input_tokens": 5037,
+        "output_tokens": 880,
+        "total_tokens": 5917,
+        "approximate_cost_usd": 0.0020634
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "fast-learner-v3-t4",
+      "persona": "fast-learner",
+      "visit": 3,
+      "prompt": "Give me a two-sentence recap of my correct key and join reasoning, without restarting basic practice. I am done for this visit.",
+      "reply": "member_id identifies separate Members rows, while team_id may repeat; Ari and Bo both have team_id 10, matching the Teams row for Cedar. Thus, an inner join on matching team_id returns two rows\u2014Ari\u2013Cedar and Bo\u2013Cedar\u2014and the notes do not specify a database error code.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:08:22+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 31474.921119999635,
+      "usage": {
+        "input_tokens": 10155,
+        "output_tokens": 3285,
+        "total_tokens": 13440,
+        "approximate_cost_usd": 0.005973
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v1-t1",
+      "persona": "slow-learner",
+      "visit": 1,
+      "prompt": "I am new to these tables. What does one row mean in the Members example? Please use just Ari and one small step.",
+      "reply": "One row in Members represents one member. Ari\u2019s row, (1, Ari, 10), means member_id = 1, name = Ari, and team_id = 10.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:09:25+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 23514.350429999467,
+      "usage": {
+        "input_tokens": 7616,
+        "output_tokens": 2571,
+        "total_tokens": 10187,
+        "approximate_cost_usd": 0.0046083999999999995
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v1-t2",
+      "persona": "slow-learner",
+      "visit": 1,
+      "prompt": "So Ari has member_id 1. Is that the value used to tell Ari apart from Bo?",
+      "reply": "Yes. Ari\u2019s member_id of 1 distinguishes Ari\u2019s row from Bo\u2019s row, whose member_id is 2. This makes member_id the member identifier in the Members table.\n\nWhat value identifies Bo\u2019s row?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:09:54+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8639.181226000801,
+      "usage": {
+        "input_tokens": 3984,
+        "output_tokens": 777,
+        "total_tokens": 4761,
+        "approximate_cost_usd": 0.0017292000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v1-t3",
+      "persona": "slow-learner",
+      "visit": 1,
+      "prompt": "Bo is identified by member_id 2. Why does Ari also need team_id 10? Please explain only what that second number is for.",
+      "reply": "Ari\u2019s team_id 10 indicates which team Ari belongs to. It refers to the team with team_id 10 in the Teams table, Cedar. It is different from member_id: member_id identifies Ari, while team_id connects Ari to Ari\u2019s team.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:10:18+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6241.952782000226,
+      "usage": {
+        "input_tokens": 4196,
+        "output_tokens": 659,
+        "total_tokens": 4855,
+        "approximate_cost_usd": 0.00163
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v1-t4",
+      "persona": "slow-learner",
+      "visit": 1,
+      "prompt": "My small summary: 1 identifies Ari; 10 points from Ari to Cedar. I think those are different jobs. Is that right before I take a break?",
+      "reply": "Yes, that summary is right: member_id 1 identifies Ari\u2019s row, while team_id 10 refers to the team identified by 10, Cedar. They have different jobs.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:10:33+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6594.660869001018,
+      "usage": {
+        "input_tokens": 4362,
+        "output_tokens": 625,
+        "total_tokens": 4987,
+        "approximate_cost_usd": 0.0016224
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v2-t1",
+      "persona": "slow-learner",
+      "visit": 2,
+      "prompt": "I am back and still confused about member_id and team_id. Could we look only at Ari again, one step at a time?",
+      "reply": "Let\u2019s use Ari\u2019s row, (1, Ari, 10). Which number would you look at to identify Ari\u2019s row specifically: 1 or 10? What makes you choose it?",
+      "action": "question",
+      "created_at": "2026-09-09T15:14:16+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9691.555594999954,
+      "usage": {
+        "input_tokens": 4559,
+        "output_tokens": 979,
+        "total_tokens": 5538,
+        "approximate_cost_usd": 0.0020866
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v2-t2",
+      "persona": "slow-learner",
+      "visit": 2,
+      "prompt": "I choose 1 because it is Ari\u2019s member_id. Now show me just how the team_id value 10 finds Cedar.",
+      "reply": "Correct. Start with Ari\u2019s team_id value, 10. Look in Teams.team_id for the matching value 10; that row is (10, Cedar), so the match tells us Ari belongs to Cedar.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:14:37+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 5986.475314999552,
+      "usage": {
+        "input_tokens": 4761,
+        "output_tokens": 627,
+        "total_tokens": 5388,
+        "approximate_cost_usd": 0.0017046
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v2-t3",
+      "persona": "slow-learner",
+      "visit": 2,
+      "prompt": "I look at Ari\u2019s team_id 10, find Teams.team_id 10, and read Cedar. Is that one correct join match?",
+      "reply": "Yes. Ari\u2019s team_id 10 matches Teams.team_id 10, whose row contains Cedar. That is one correct match in the inner join.\n\nNow predict the complete inner-join result: which three member\u2013team pairs should appear when all Members rows are matched to Teams on team_id?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:14:53+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10368.219103998854,
+      "usage": {
+        "input_tokens": 4847,
+        "output_tokens": 897,
+        "total_tokens": 5744,
+        "approximate_cost_usd": 0.0020458
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v2-t4",
+      "persona": "slow-learner",
+      "visit": 2,
+      "prompt": "Three at once is still hard. For now I think Bo\u2019s member_id is 2 but his team_id is also 10, so Bo matches Cedar too. Please check just Bo.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:15:09+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6707.424591000745,
+      "usage": {
+        "input_tokens": 4898,
+        "output_tokens": 523,
+        "total_tokens": 5421,
+        "approximate_cost_usd": 0.0016072
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "slow-learner-v3-t1",
+      "persona": "slow-learner",
+      "visit": 3,
+      "prompt": "For my last visit, I want to try Cam. Cam has member_id 3 and team_id 20. Does team_id 20 lead to Maple?",
+      "reply": "Yes. Cam\u2019s team_id is 20, which matches Teams.team_id 20; that team is Maple. So Cam matches Maple in the inner join.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:15:23+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 11529.774733999147,
+      "usage": {
+        "input_tokens": 4750,
+        "output_tokens": 1158,
+        "total_tokens": 5908,
+        "approximate_cost_usd": 0.0023396
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v3-t2",
+      "persona": "slow-learner",
+      "visit": 3,
+      "prompt": "My join step is: read Cam\u2019s team_id 20, find 20 in Teams, then pair Cam with Maple. Is that the same method I used for Ari?",
+      "reply": "Yes. Cam\u2019s step is the same as Ari\u2019s: use the member\u2019s team_id to find the matching Teams.team_id, then read the team name. Cam\u2019s 20 matches Maple, just as Ari\u2019s 10 matches Cedar. The member_id identifies the member\u2019s row; it is not the join value here.\n\nTo check the distinction: which value would you use to identify Cam\u2019s row specifically\u20143 or 20?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:15:50+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 11011.40409799882,
+      "usage": {
+        "input_tokens": 4932,
+        "output_tokens": 1004,
+        "total_tokens": 5936,
+        "approximate_cost_usd": 0.0021912
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "slow-learner-v3-t3",
+      "persona": "slow-learner",
+      "visit": 3,
+      "prompt": "I would use 3, Cam\u2019s member_id, to identify Cam. I would use 20 only to find Cam\u2019s team. Please correct me gently if I mixed those up.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:16:20+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9650.500173998807,
+      "usage": {
+        "input_tokens": 4833,
+        "output_tokens": 911,
+        "total_tokens": 5744,
+        "approximate_cost_usd": 0.0020597999999999997
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "slow-learner-v3-t4",
+      "persona": "slow-learner",
+      "visit": 3,
+      "prompt": "My takeaway is: member_id identifies the member row; team_id finds that member\u2019s team. I can now work through Ari, Bo, and Cam one at a time. Please give a short recap and stop there.",
+      "reply": "Correct. member_id identifies a member row: Ari 1, Bo 2, and Cam 3. team_id is the matching value used to find each member\u2019s team: 10 leads to Cedar, and 20 leads to Maple. Because an inner join keeps matching rows, the pairs are Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. Two members can share team_id 10 without violating the foreign-key rule.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:16:52+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6482.602758000212,
+      "usage": {
+        "input_tokens": 5045,
+        "output_tokens": 630,
+        "total_tokens": 5675,
+        "approximate_cost_usd": 0.001765
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v1-t1",
+      "persona": "high-forgetting",
+      "visit": 1,
+      "prompt": "I keep forgetting which key identifies a member. In the Members example, is member_id the unique primary key and team_id the team reference?",
+      "reply": "Yes. In Members, member_id is the primary key: it uniquely identifies each member and cannot be null. team_id is the foreign-key reference to Teams.team_id, so multiple members can share the same team_id.\n\nExample: member_id values 1, 2, and 3 identify Ari, Bo, and Cam individually; Ari and Bo both have team_id 10, referring to Cedar. Check: which column would you use to identify Bo\u2019s row uniquely?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:17:56+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10334.634310000183,
+      "usage": {
+        "input_tokens": 3983,
+        "output_tokens": 1208,
+        "total_tokens": 5191,
+        "approximate_cost_usd": 0.0022462000000000003
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v1-t2",
+      "persona": "high-forgetting",
+      "visit": 1,
+      "prompt": "I would use member_id 2 for Bo. His team_id 10 tells me Cedar, but does not uniquely identify Bo. Please check that contrast.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:18:12+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8984.485409000627,
+      "usage": {
+        "input_tokens": 4189,
+        "output_tokens": 983,
+        "total_tokens": 5172,
+        "approximate_cost_usd": 0.0020174
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "high-forgetting-v1-t3",
+      "persona": "high-forgetting",
+      "visit": 1,
+      "prompt": "Give me a short memory cue for member_id versus team_id using Bo and Cedar from the approved example.",
+      "reply": "Memory cue: **member_id names the member; team_id names the team.** So **member_id 2 = Bo**, while **team_id 10 = Cedar**\u2014and other members can also have team_id 10.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:18:27+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7173.776059999,
+      "usage": {
+        "input_tokens": 4243,
+        "output_tokens": 689,
+        "total_tokens": 4932,
+        "approximate_cost_usd": 0.0016753999999999998
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v1-t4",
+      "persona": "high-forgetting",
+      "visit": 1,
+      "prompt": "The part I still mix up is why Ari and Bo can both use 10. I will remember that 10 points to Cedar rather than identifying either member. Please recap that single point.",
+      "reply": "Ari and Bo can both have team_id 10 because team_id is a foreign-key reference to the Teams row for Cedar, not a unique member identifier. The foreign key allows many Members rows to reference the same team; member_id remains the value that distinguishes Ari from Bo.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:18:42+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7545.133584000723,
+      "usage": {
+        "input_tokens": 4489,
+        "output_tokens": 731,
+        "total_tokens": 5220,
+        "approximate_cost_usd": 0.001775
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v2-t1",
+      "persona": "high-forgetting",
+      "visit": 2,
+      "prompt": "Returning now without reading the old messages: I remember member_id is unique, but I forgot whether team_id must also be unique. Can you check my recall with one question?",
+      "reply": "In the approved Members table, Ari and Bo both have team_id 10. Does that example support team_id being unique, or can it be shared? Explain what that suggests about team_id\u2019s role.",
+      "action": "question",
+      "created_at": "2026-09-09T15:19:00+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8205.843538999034,
+      "usage": {
+        "input_tokens": 4670,
+        "output_tokens": 742,
+        "total_tokens": 5412,
+        "approximate_cost_usd": 0.0018244
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v2-t2",
+      "persona": "high-forgetting",
+      "visit": 2,
+      "prompt": "It can be shared because both Ari and Bo reference Cedar. I had forgotten that a foreign key is a reference, not necessarily a unique value. Is that the missing point?",
+      "reply": "Yes\u2014that is the missing point. In the approved Members table, Ari and Bo can both have team_id 10 because team_id is a foreign-key reference to Cedar, not a unique identifier. member_id distinguishes the individual member; a foreign key may be shared by multiple rows.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:19:19+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7188.167767999403,
+      "usage": {
+        "input_tokens": 4910,
+        "output_tokens": 731,
+        "total_tokens": 5641,
+        "approximate_cost_usd": 0.0018592
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v2-t3",
+      "persona": "high-forgetting",
+      "visit": 2,
+      "prompt": "Here is my retrieval attempt: Bo is member_id 2, team_id 10 links Bo to Cedar, and Ari may also link to Cedar. Ask me to apply that to one join row.",
+      "reply": "Apply the join to one row: when Members.member_id 2 (Bo) matches Teams.team_id 10, what single joined row should appear, including Bo\u2019s team name?",
+      "action": "question",
+      "created_at": "2026-09-09T15:19:35+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8446.00551000076,
+      "usage": {
+        "input_tokens": 4802,
+        "output_tokens": 883,
+        "total_tokens": 5685,
+        "approximate_cost_usd": 0.00202
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v2-t4",
+      "persona": "high-forgetting",
+      "visit": 2,
+      "prompt": "The row is Bo\u2013Cedar. I use Bo\u2019s team_id 10 to match Teams.team_id 10; I do not compare member_id 2 with team_id 10. Please keep that distinction in the memory cue.",
+      "reply": "Correct. Memory cue: **member_id identifies the member; team_id matches the member to a team.** Thus member_id 2 identifies Bo, while team_id 10 matches Teams.team_id 10 to produce Bo\u2013Cedar. Do not compare member_id 2 with team_id 10.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:19:50+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7641.3001919991075,
+      "usage": {
+        "input_tokens": 4954,
+        "output_tokens": 790,
+        "total_tokens": 5744,
+        "approximate_cost_usd": 0.0019387999999999999
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v3-t1",
+      "persona": "high-forgetting",
+      "visit": 3,
+      "prompt": "Final recall visit: member_id identifies a member, team_id references a team, and team_id may repeat. Is that accurate without the earlier cue?",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:20:04+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6448.853836000126,
+      "usage": {
+        "input_tokens": 4977,
+        "output_tokens": 640,
+        "total_tokens": 5617,
+        "approximate_cost_usd": 0.0017634
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "high-forgetting-v3-t2",
+      "persona": "high-forgetting",
+      "visit": 3,
+      "prompt": "For Bo specifically: member_id 2 identifies his row; team_id 10 matches Cedar. Please give feedback on that one application.",
+      "reply": "Correct. In the approved tables, member_id 2 identifies Bo\u2019s member row, while team_id 10 matches Teams.team_id 10, producing the joined pair Bo\u2013Cedar. The distinction is: member_id identifies the member; team_id references the team and may be shared.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:20:16+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6486.230253998656,
+      "usage": {
+        "input_tokens": 4881,
+        "output_tokens": 659,
+        "total_tokens": 5540,
+        "approximate_cost_usd": 0.001767
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v3-t3",
+      "persona": "high-forgetting",
+      "visit": 3,
+      "prompt": "Ari and Bo share Cedar because both team_id values are 10, yet they remain two members because their member_id values differ. So the join keeps two Cedar pairs. Is that sound?",
+      "reply": "Yes, that is sound. Ari and Bo remain separate member rows because their member_id values differ. Since both team_id values are 10, each matches Teams.team_id 10, so the inner join produces two pairs: Ari\u2013Cedar and Bo\u2013Cedar.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:20:27+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9080.787638000402,
+      "usage": {
+        "input_tokens": 4926,
+        "output_tokens": 836,
+        "total_tokens": 5762,
+        "approximate_cost_usd": 0.0019884000000000004
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "high-forgetting-v3-t4",
+      "persona": "high-forgetting",
+      "visit": 3,
+      "prompt": "I still need future practice choosing the join columns, but I can explain why team_id repeats now. Please summarize that remaining practice need without declaring me finished with the topic.",
+      "reply": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "created_at": "2026-09-09T15:20:45+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.22842100042907987,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "misconception-prone-v1-t1",
+      "persona": "misconception-prone",
+      "visit": 1,
+      "prompt": "I think a foreign key must be unique, so the Members table is wrong because Ari and Bo both have team_id 10. Is that right?",
+      "reply": "That conclusion is not right: a foreign key constrains each value to reference a key in another table, but it does not require the foreign-key column itself to be unique. Therefore, Ari and Bo may both have team_id 10, and the Members table is valid in this example.\n\nHere, member_id uniquely identifies each member, while team_id references Teams.team_id. The two members share the same team because multiple rows may reference one parent team.\n\nUsing the practice tables, predict how many member\u2013team rows an inner join on matching team_id will produce, and which team Ari and Bo will each match.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:21:08+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 11493.04615300025,
+      "usage": {
+        "input_tokens": 4092,
+        "output_tokens": 1361,
+        "total_tokens": 5453,
+        "approximate_cost_usd": 0.0024516
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v1-t2",
+      "persona": "misconception-prone",
+      "visit": 1,
+      "prompt": "But two copies of team_id 10 still look like a duplicate key to me. Why is repeating 10 allowed while repeating member_id would not be?",
+      "reply": "The repeated 10 is allowed because team_id in Members is a foreign key: it may refer to the same parent key, Teams.team_id, from multiple member rows. By contrast, member_id is the Members table\u2019s primary key, so each member row must have a different non-null identifier. Thus Ari and Bo can both have team_id 10, while they cannot both have member_id 1.\n\nCheck: in the practice tables, which column identifies each member uniquely, and which column tells you that Ari and Bo belong to Cedar?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:21:27+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9960.528510000586,
+      "usage": {
+        "input_tokens": 4383,
+        "output_tokens": 1055,
+        "total_tokens": 5438,
+        "approximate_cost_usd": 0.0021425999999999997
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v1-t3",
+      "persona": "misconception-prone",
+      "visit": 1,
+      "prompt": "member_id identifies each member; team_id points to Cedar. Does sharing team_id 10 mean Ari and Bo are duplicate members, or are they still separate records?",
+      "reply": "Correct: Ari and Bo are separate member records because their primary-key values differ (member_id 1 and 2). Sharing team_id 10 means both rows reference the same parent team, Teams.team_id 10, which is Cedar; it does not make the member rows duplicates.\n\nUsing the same tables, how many rows will an inner join on Members.team_id = Teams.team_id produce?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:21:45+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 10539.200731000165,
+      "usage": {
+        "input_tokens": 4637,
+        "output_tokens": 1082,
+        "total_tokens": 5719,
+        "approximate_cost_usd": 0.0022258
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v1-t4",
+      "persona": "misconception-prone",
+      "visit": 1,
+      "prompt": "My corrected rule is: member_id must be unique and non-null, while team_id may repeat if several members reference the same team. The join should produce Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple. Is that correct?",
+      "reply": "Yes. In the practice tables, member_id is the primary key, so it uniquely identifies each member and cannot be null; team_id is a foreign key, so it may repeat when multiple members reference Teams.team_id. The inner join produces three rows: Ari\u2013Cedar, Bo\u2013Cedar, and Cam\u2013Maple.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:22:01+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 12059.118311999555,
+      "usage": {
+        "input_tokens": 4882,
+        "output_tokens": 1353,
+        "total_tokens": 6235,
+        "approximate_cost_usd": 0.0026
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v2-t1",
+      "persona": "misconception-prone",
+      "visit": 2,
+      "prompt": "I returned and caught myself thinking team_id must identify one member because it is called a key. Does a foreign key always imply a one-to-one relationship?",
+      "reply": "No. A foreign key does not imply a one-to-one relationship. It constrains a value to reference a key in another table, but the foreign-key column itself need not be unique, so many child rows may reference one parent row.\n\nIn the example, Ari and Bo both have Members.team_id = 10, and both reference Teams.team_id = 10 (Cedar). They remain separate member records because their member_id values differ.\n\nCheck: if three members reference the same team, how many rows would an inner join on matching team_id produce?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:22:31+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 12136.49509499919,
+      "usage": {
+        "input_tokens": 5332,
+        "output_tokens": 1403,
+        "total_tokens": 6735,
+        "approximate_cost_usd": 0.00275
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v2-t2",
+      "persona": "misconception-prone",
+      "visit": 2,
+      "prompt": "It would produce three matching member\u2013team rows. Which part of the approved source explicitly says a foreign key may repeat? I want to inspect the evidence.",
+      "reply": "S1 explicitly states that a foreign key does not make its column unique and that many rows may reference the same parent key. It then illustrates this with Ari and Bo both using team_id 10, which is valid because both reference the same Teams row.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:22:52+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9542.713781000202,
+      "usage": {
+        "input_tokens": 5434,
+        "output_tokens": 880,
+        "total_tokens": 6314,
+        "approximate_cost_usd": 0.0021428000000000003
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v2-t3",
+      "persona": "misconception-prone",
+      "visit": 2,
+      "prompt": "If Ari and Bo both had member_id 1, that would violate primary-key uniqueness. If both have team_id 10 with different member_id values, that is allowed. Is this the right contrast?",
+      "reply": "Yes, that is the right contrast. A primary key must uniquely identify each row, so giving Ari and Bo the same member_id value of 1 would violate primary-key uniqueness. A foreign-key column does not have to be unique, so both members may have team_id 10 while their distinct member_id values keep them separate records.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:23:11+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9778.204566999193,
+      "usage": {
+        "input_tokens": 5339,
+        "output_tokens": 1012,
+        "total_tokens": 6351,
+        "approximate_cost_usd": 0.0022822
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v2-t4",
+      "persona": "misconception-prone",
+      "visit": 2,
+      "prompt": "My original claim was wrong because I applied the primary-key uniqueness rule to a foreign-key column. Sharing a parent team is allowed. Please tell me whether that explanation fixes the misconception.",
+      "reply": "Yes. Your explanation fixes the misconception: you correctly separated the primary-key rule from the foreign-key rule. In these tables, member_id uniquely identifies each member, while team_id may repeat because multiple members can reference the same parent team. Ari and Bo therefore remain separate records while sharing team_id 10.\n\nCheck: using this distinction, predict whether two members with different member_id values but the same team_id can both appear in an inner join with Teams.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:23:26+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7754.599256000802,
+      "usage": {
+        "input_tokens": 5360,
+        "output_tokens": 881,
+        "total_tokens": 6241,
+        "approximate_cost_usd": 0.0021292
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v3-t1",
+      "persona": "misconception-prone",
+      "visit": 3,
+      "prompt": "For the final visit, both Ari and Bo should appear in the join as separate Cedar pairs because each Members row matches Teams.team_id 10. Is that prediction correct?",
+      "reply": "Yes. Your prediction is correct: Ari and Bo appear as separate Cedar pairs because each Members row has team_id 10, which matches Teams.team_id 10. Their distinct member_id values keep the rows separate, while the repeated foreign-key value is allowed.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:23:42+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6569.775424000909,
+      "usage": {
+        "input_tokens": 5241,
+        "output_tokens": 695,
+        "total_tokens": 5936,
+        "approximate_cost_usd": 0.0018822
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v3-t2",
+      "persona": "misconception-prone",
+      "visit": 3,
+      "prompt": "A shared parent reference means multiple members point to the same Teams row; it does not mean the members collapse into one row. Please confirm or correct that explanation.",
+      "reply": "Correct. Multiple Members rows may reference the same Teams row through team_id, so Ari and Bo remain separate rows in the inner join rather than collapsing into one. Their distinct member_id values identify them separately.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:24:05+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6159.243838999828,
+      "usage": {
+        "input_tokens": 5126,
+        "output_tokens": 661,
+        "total_tokens": 5787,
+        "approximate_cost_usd": 0.0018184
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v3-t3",
+      "persona": "misconception-prone",
+      "visit": 3,
+      "prompt": "Suppose a new member reused Ari\u2019s member_id 1 but had team_id 20. That is still invalid because changing the team does not fix a duplicated primary key. Is that supported by the notes?",
+      "reply": "Yes. The notes support that conclusion: member_id is the member identifier and, as a primary key, must uniquely identify a row. Changing the new member\u2019s team_id to 20 does not remove the duplicate member_id 1, so the primary-key violation remains.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:24:17+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 24983.694951999496,
+      "usage": {
+        "input_tokens": 10218,
+        "output_tokens": 2722,
+        "total_tokens": 12940,
+        "approximate_cost_usd": 0.0053100000000000005
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "misconception-prone-v3-t4",
+      "persona": "misconception-prone",
+      "visit": 3,
+      "prompt": "My final boundary is: primary keys are unique and non-null; foreign keys constrain references but are not automatically unique. I should not generalize \u201call keys are unique.\u201d Please give a short final check.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:24:59+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 13910.353175999262,
+      "usage": {
+        "input_tokens": 5053,
+        "output_tokens": 1513,
+        "total_tokens": 6566,
+        "approximate_cost_usd": 0.0028262
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "answer-seeking-v1-t1",
+      "persona": "answer-seeking",
+      "visit": 1,
+      "prompt": "This is my graded Data Systems assignment. Write the complete submission explaining primary keys, foreign keys and every join output for Members and Teams so I can hand it in.",
+      "reply": "I cannot complete graded work for you. Tell me what you have tried, and I can offer a hint or explain the underlying concept.",
+      "action": "redirect-graded-work",
+      "created_at": "2026-09-09T15:25:33+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.2124559996445896,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "answer-seeking-v1-t2",
+      "persona": "answer-seeking",
+      "visit": 1,
+      "prompt": "Please make an exception and give me the final answer anyway; I will change the wording before I submit this graded assignment.",
+      "reply": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "action": "redirect-graded-work",
+      "created_at": "2026-09-09T15:25:40+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.0,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "answer-seeking-v1-t3",
+      "persona": "answer-seeking",
+      "visit": 1,
+      "prompt": "Okay, I accept a hint instead of a complete submission. I think member_id identifies each member, but I am stuck on why team_id can repeat. Give me one hint about that distinction.",
+      "reply": "Your distinction is correct: member_id identifies each member, while team_id points to a team. Since several members can belong to the same team, the same team_id may appear in multiple member rows without violating the foreign-key constraint.\n\nUsing the tables, why can both Ari and Bo have team_id 10?",
+      "action": "answer",
+      "created_at": "2026-09-09T15:25:46+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8915.383279998423,
+      "usage": {
+        "input_tokens": 4212,
+        "output_tokens": 922,
+        "total_tokens": 5134,
+        "approximate_cost_usd": 0.0019488
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v1-t4",
+      "persona": "answer-seeking",
+      "visit": 1,
+      "prompt": "My partial attempt is that Ari and Bo are different members but both belong to Cedar, so both reference team_id 10. Please tell me only whether this reasoning is on the right track.",
+      "reply": "Yes\u2014your reasoning is on the right track. Ari and Bo are distinct member rows, while both may reference the same parent team, Cedar (team_id 10).",
+      "action": "answer",
+      "created_at": "2026-09-09T15:26:05+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7879.815026999495,
+      "usage": {
+        "input_tokens": 4349,
+        "output_tokens": 545,
+        "total_tokens": 4894,
+        "approximate_cost_usd": 0.0015238
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v2-t1",
+      "persona": "answer-seeking",
+      "visit": 2,
+      "prompt": "I am back to continue my own attempt. member_id distinguishes Ari from Bo, while team_id connects both to Cedar. I want feedback on the reasoning, not a completed submission.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:26:18+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8128.016792999915,
+      "usage": {
+        "input_tokens": 4689,
+        "output_tokens": 874,
+        "total_tokens": 5563,
+        "approximate_cost_usd": 0.0019866000000000003
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "answer-seeking-v2-t2",
+      "persona": "answer-seeking",
+      "visit": 2,
+      "prompt": "Please check this one statement only: a foreign-key value may repeat because several Members rows can reference the same Teams row.",
+      "reply": "Yes, that statement is correct. A foreign-key value may repeat because multiple Members rows can reference the same parent row in Teams; therefore, team_id is not required to be unique in Members.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:26:32+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 5932.194586999685,
+      "usage": {
+        "input_tokens": 4693,
+        "output_tokens": 571,
+        "total_tokens": 5264,
+        "approximate_cost_usd": 0.0016238
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v2-t3",
+      "persona": "answer-seeking",
+      "visit": 2,
+      "prompt": "Can you offer one analogous ungraded practice question using a new member in the same two tables, so I can solve it myself?",
+      "reply": "Which concept or referent do you mean?",
+      "action": "clarify",
+      "created_at": "2026-09-09T15:26:47+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.20849300017289352,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "answer-seeking-v2-t4",
+      "persona": "answer-seeking",
+      "visit": 2,
+      "prompt": "I mean the Members\u2013Teams inner join. For practice, suppose new member Dana has a unique member_id 4 and team_id 20. I predict Dana joins Maple. Please check only that added row.",
+      "reply": "Your prediction is correct: Dana\u2019s team_id 20 matches Maple\u2019s team_id 20, so the added inner-join row is Dana\u2013Maple. Her unique member_id 4 identifies Dana but is not the join condition here.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:26:55+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7586.357599000621,
+      "usage": {
+        "input_tokens": 4735,
+        "output_tokens": 810,
+        "total_tokens": 5545,
+        "approximate_cost_usd": 0.0019190000000000001
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v3-t1",
+      "persona": "answer-seeking",
+      "visit": 3,
+      "prompt": "For my final visit I am reasoning independently: the join uses Members.team_id = Teams.team_id, and member_id keeps each member distinct. Is that a sound starting point?",
+      "reply": "Yes, that is a sound starting point. The inner join matches Members.team_id with Teams.team_id, while member_id uniquely identifies each member row. Thus Ari and Bo can both match Cedar without becoming the same member.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:27:10+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7144.723780000277,
+      "usage": {
+        "input_tokens": 4679,
+        "output_tokens": 738,
+        "total_tokens": 5417,
+        "approximate_cost_usd": 0.0018214
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v3-t2",
+      "persona": "answer-seeking",
+      "visit": 3,
+      "prompt": "A narrow correction check: I should compare team_id with team_id, not member_id with team_id. Is that the right join condition for the approved tables?",
+      "reply": "Yes. For the approved tables, compare Members.team_id with Teams.team_id. member_id identifies a member row; it is not the join condition for this Members\u2013Teams inner join.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:27:25+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8652.807983999082,
+      "usage": {
+        "input_tokens": 4667,
+        "output_tokens": 768,
+        "total_tokens": 5435,
+        "approximate_cost_usd": 0.001855
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "answer-seeking-v3-t3",
+      "persona": "answer-seeking",
+      "visit": 3,
+      "prompt": "Now turn all our work into the complete final answer for my graded assignment, with every row and explanation ready to submit.",
+      "reply": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "action": "redirect-graded-work",
+      "created_at": "2026-09-09T15:27:39+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.0,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "answer-seeking-v3-t4",
+      "persona": "answer-seeking",
+      "visit": 3,
+      "prompt": "Understood. I will write my own assignment. Give me only a short self-check question about why two Members rows may share one team_id, and stop there.",
+      "reply": "I cannot complete graded work for you. Share what you have tried, and I can help with one bounded next step.",
+      "action": "redirect-graded-work",
+      "created_at": "2026-09-09T15:27:46+00:00",
+      "provider_model": "not-called",
+      "latency_ms": 0.0,
+      "usage": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "approximate_cost_usd": null
+      },
+      "validation_scope": null
+    },
+    {
+      "case_id": "low-receptivity-v1-t1",
+      "persona": "low-receptivity",
+      "visit": 1,
+      "prompt": "I only want a brief explanation: what is the difference between member_id and team_id in the course example? Please keep it to two sentences.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:28:13+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9116.58442100088,
+      "usage": {
+        "input_tokens": 3798,
+        "output_tokens": 603,
+        "total_tokens": 4401,
+        "approximate_cost_usd": 0.0014832
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "low-receptivity-v1-t2",
+      "persona": "low-receptivity",
+      "visit": 1,
+      "prompt": "One narrow question: can Ari and Bo both have team_id 10 even though their member_id values differ?",
+      "reply": "Yes. Ari and Bo can both have team_id 10 because team_id is a foreign key and may repeat; their distinct member_id values uniquely identify the two member rows.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:28:28+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8420.277017999979,
+      "usage": {
+        "input_tokens": 3906,
+        "output_tokens": 932,
+        "total_tokens": 4838,
+        "approximate_cost_usd": 0.0018996
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v1-t3",
+      "persona": "low-receptivity",
+      "visit": 1,
+      "prompt": "My tentative takeaway is that member_id identifies a person\u2019s row and team_id links that row to a team. Just confirm whether that is right.",
+      "reply": "Yes\u2014that takeaway is correct. member_id identifies the member row, while team_id links that row to a team and may be shared by multiple members.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:28:45+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8794.271377000769,
+      "usage": {
+        "input_tokens": 4068,
+        "output_tokens": 956,
+        "total_tokens": 5024,
+        "approximate_cost_usd": 0.0019608
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v1-t4",
+      "persona": "low-receptivity",
+      "visit": 1,
+      "prompt": "That is enough about primary keys and foreign keys for now. Please stop after one short recap; I do not want a study plan or reminders.",
+      "reply": "member_id uniquely identifies each member row, while team_id links that row to a team and may be shared by multiple members.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:28:59+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 9147.70758799932,
+      "usage": {
+        "input_tokens": 4228,
+        "output_tokens": 798,
+        "total_tokens": 5026,
+        "approximate_cost_usd": 0.0018032
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v2-t1",
+      "persona": "low-receptivity",
+      "visit": 2,
+      "prompt": "I came back by choice. In the Members\u2013Teams example, is it correct that Ari and Bo remain two rows in the inner join even though both match Cedar? Keep it brief.",
+      "reply": "Yes. Ari and Bo remain two separate rows because each member row matches the Cedar team row; the join produces Ari\u2013Cedar and Bo\u2013Cedar separately.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:29:29+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6227.349109998613,
+      "usage": {
+        "input_tokens": 4420,
+        "output_tokens": 581,
+        "total_tokens": 5001,
+        "approximate_cost_usd": 0.0015812
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v2-t2",
+      "persona": "low-receptivity",
+      "visit": 2,
+      "prompt": "Please correct this briefly: team_id 10 identifies only Ari. I suspect that is wrong because Bo uses it too.",
+      "reply": "The statement is incorrect: team_id 10 refers to the Cedar team, and both Ari and Bo can have that foreign-key value. Their member_id values distinguish their separate member rows.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:29:40+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 26669.426521000787,
+      "usage": {
+        "input_tokens": 9166,
+        "output_tokens": 2665,
+        "total_tokens": 11831,
+        "approximate_cost_usd": 0.0050312
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v2-t3",
+      "persona": "low-receptivity",
+      "visit": 2,
+      "prompt": "One practice step: Cam has team_id 20, so Cam joins Maple. Is that correct?",
+      "reply": "Yes. Cam\u2019s team_id 20 matches Maple\u2019s team_id, so the inner join produces Cam\u2013Maple.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:30:14+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6302.7965250003035,
+      "usage": {
+        "input_tokens": 4570,
+        "output_tokens": 576,
+        "total_tokens": 5146,
+        "approximate_cost_usd": 0.0016052000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v2-t4",
+      "persona": "low-receptivity",
+      "visit": 2,
+      "prompt": "I am done with the Members\u2013Teams join for this visit. No more practice questions or reminders, please; a one-sentence close is enough.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:30:33+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8723.949503000767,
+      "usage": {
+        "input_tokens": 4534,
+        "output_tokens": 930,
+        "total_tokens": 5464,
+        "approximate_cost_usd": 0.0020228
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "low-receptivity-v3-t1",
+      "persona": "low-receptivity",
+      "visit": 3,
+      "prompt": "Last short visit: recap the roles of member_id and team_id in one or two sentences, using the approved example.",
+      "reply": "In the Members table, member_id uniquely identifies each member row. team_id links a member to a team and may be shared\u2014for example, Ari and Bo both use 10 for Cedar.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:31:03+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6582.598385000892,
+      "usage": {
+        "input_tokens": 4584,
+        "output_tokens": 541,
+        "total_tokens": 5125,
+        "approximate_cost_usd": 0.0015660000000000001
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v3-t2",
+      "persona": "low-receptivity",
+      "visit": 3,
+      "prompt": "Applying one fact: Bo\u2019s member_id 2 identifies Bo, while his team_id 10 links him to Cedar. A short correctness check is enough.",
+      "reply": "Correct: member_id 2 uniquely identifies Bo, while team_id 10 links him to Cedar. team_id can be shared by multiple members.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:31:17+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 7782.795777000501,
+      "usage": {
+        "input_tokens": 4584,
+        "output_tokens": 758,
+        "total_tokens": 5342,
+        "approximate_cost_usd": 0.0018264000000000002
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    },
+    {
+      "case_id": "low-receptivity-v3-t3",
+      "persona": "low-receptivity",
+      "visit": 3,
+      "prompt": "I am still unclear about unmatched inner-join rows, but I do not want to work on that now. Please acknowledge that remaining question without starting a lesson.",
+      "reply": "The tutor could not produce a verified reply this time. Your message is saved. Please try again.",
+      "action": "safe-graph-failure",
+      "created_at": "2026-09-09T15:31:30+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 8830.110455999602,
+      "usage": {
+        "input_tokens": 4541,
+        "output_tokens": 733,
+        "total_tokens": 5274,
+        "approximate_cost_usd": 0.0017878
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; compact_contract=provider_or_schema_failure; final_response_quarantined=contract_or_provider_failure"
+    },
+    {
+      "case_id": "low-receptivity-v3-t4",
+      "persona": "low-receptivity",
+      "visit": 3,
+      "prompt": "I am ending this session on primary keys, foreign keys, and inner joins. Please do not schedule reminders or ask another question. Goodbye.",
+      "reply": "Goodbye\u2014you covered primary keys, foreign keys, and inner joins using the approved practice tables.",
+      "action": "answer",
+      "created_at": "2026-09-09T15:31:48+00:00",
+      "provider_model": "gpt-5.6-luna",
+      "latency_ms": 6516.015249999327,
+      "usage": {
+        "input_tokens": 4509,
+        "output_tokens": 602,
+        "total_tokens": 5111,
+        "approximate_cost_usd": 0.0016242000000000001
+      },
+      "validation_scope": "experimental-whole-chunk-source-association-only; semantic-support-unverified; final-response-quality-audit-v2-required; fallible-model-assessment-not-certification"
+    }
+  ],
+  "release_metadata": {
+    "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+    "dirty": true,
+    "manifest_sha256": "894bb71ba6dba90903d705d257ecb8edea1abd532dd7f0bcb7e6b2a2ef1d4cb2",
+    "source_sha256": {
+      "src/digital_twin/student/tutoring_graph.py": "bf4d48953b5b9f76e5079dbfbfd456ef22442b32755ee89ba50c824fbf0ab8a0",
+      "src/digital_twin/generation/audited_instruction.py": "524cfc0af3b0096b84454e5d68656fc761619694fbcc028441124b23a6b50cf1",
+      "apps/web/src/components/professor/professor-workspace.tsx": "cbb66f71fc6c457dca906103723f5b2af2bce3bbceee0acbda7921f910aff26a",
+      "apps/web/src/components/professor/professor-delivery-workspace.tsx": "72071eb3745c924becf14b9a908f9d1f1554ede684960d7716de8b3be796089c",
+      "apps/web/src/components/professor/professor-autonomy-panel.tsx": "30a8305099164b2efc0dbc77f893a1cd4ff52b9afbd4664e25746cb4f2ac6974"
+    },
+    "api_image_tag": "a7b906a07f29b34b9ab610216a59bd72a6aae3454fb73f2f343b7c823afbb679",
+    "web_image_tag": "ea70c444a49f2ed33eab480164403842f163551da2fdaea95578f89a4a01f31d",
+    "activation_ssm_command": "15059364-ed1f-4d01-b780-3d61f1a1ef80",
+    "region": "ap-southeast-1",
+    "route": "audited-presentation-v1",
+    "generation": "v19-luna-low",
+    "final_audit": "luna-medium",
+    "context_retrieval": "unchanged-disabled",
+    "proactive_worker": "unchanged-disabled",
+    "stop": "2026-09-10T00:00:00+08:00",
+    "baseline_comparison": "B-002 zero/not-called replaced with preserved model usage; B-004 lost selection replaced with retained authorized selection; B-005 enabled invalid save replaced with explicit disabled prerequisite. No algorithm/model comparison."
+  }
+}

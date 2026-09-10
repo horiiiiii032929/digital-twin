@@ -1,0 +1,403 @@
+{
+  "schema_version": 1,
+  "run_id": "post-report-paired-quality-001-live-001",
+  "date": "2026-09-08",
+  "component": "student-tutoring",
+  "status": "completed-refine-independent-review-pending",
+  "decision": "refine-no-promotion",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "working_tree_dirty": true,
+  "dataset": {
+    "id": "post-report-course-shaped-quality-v1",
+    "split": "exposed-development",
+    "permissions": "New synthetic course protocols and records, authored for local and external model development; no real user data.",
+    "contexts": 24,
+    "courses": 4,
+    "profiles": 2,
+    "turns": 96,
+    "repetitions": 1,
+    "seed": 7801,
+    "rationale": "Full 12-scenario/two-profile development grid; small dependent packet, not powered or held-out qualification."
+  },
+  "plan": "research/04_experiments/post-report-paired-quality-001.md",
+  "configuration": {
+    "candidate_configuration": {
+      "default_or_selected_profile_changed": false,
+      "implementation_id": "question-specific-profile-grounded-v10",
+      "model": "gpt-5.6-luna",
+      "output_cap": 3000,
+      "reasoning_effort": "low",
+      "runtime_flags": {
+        "bounded_generation_contract_enabled": true,
+        "instructional_compact_response_enabled": true,
+        "instructional_profile_authority_enabled": true,
+        "instructional_typed_response_enabled": true,
+        "named_referent_context_enabled": true,
+        "question_specific_generation_enabled": true,
+        "teaching_profile_context_enabled": true
+      },
+      "semantic_support_verified": false,
+      "version": "v10"
+    },
+    "candidate_ids": {
+      "v10": "question-specific-profile-grounded-v10",
+      "v4": "question-specific-profile-grounded-v4"
+    },
+    "model": "gpt-5.6-luna",
+    "output_cap": 3000,
+    "runtime_boundary": "actual persistent StudentTutoringService; not HTTP/authentication measurement",
+    "input_artifact_sha256": {
+      "post-report-course-shaped-quality-v1.json": "97424610dd5766afb99a2c3e2521eb84861f45b8efa1055e73c2bccf038c5340",
+      "post-report-paired-quality-001.md": "264ed597ec378299b5dc1a39436da581828d3e768ffcdffe90cdcb8865fdfde2"
+    }
+  },
+  "operations": {
+    "arms": {
+      "v10": {
+        "attempts": 70,
+        "completed_calls": 70,
+        "failure_codes": {},
+        "input_tokens": 89461,
+        "ledger_reserved_usd": 1.7499999999999978,
+        "output_tokens": 7901,
+        "provider_failures": 0,
+        "reported_cost_usd": 0.0273734,
+        "stopped": false,
+        "unknown_cost_calls": 0
+      },
+      "v4": {
+        "attempts": 70,
+        "completed_calls": 70,
+        "failure_codes": {},
+        "input_tokens": 77827,
+        "ledger_reserved_usd": 1.7499999999999978,
+        "output_tokens": 14268,
+        "provider_failures": 0,
+        "reported_cost_usd": 0.032687,
+        "stopped": false,
+        "unknown_cost_calls": 0
+      }
+    },
+    "wall_seconds": 101.78271454095375,
+    "completed_histories": 48,
+    "restarts": 48,
+    "source_files_unchanged": true,
+    "source_hash_errors": {},
+    "memory": "not measured"
+  },
+  "assistant_review": {
+    "v4": {
+      "acceptable-on-assistant-review": 34,
+      "acceptable-with-minor-issue": 1,
+      "needs-refinement": 13,
+      "turns": 48,
+      "elapsed_median_ms": 4738.234666496282,
+      "elapsed_p95_ms": 7457.6334580197,
+      "slices": [
+        {
+          "dimension": "course",
+          "value": "access",
+          "total": 12,
+          "needs_refinement": 3,
+          "uncertain": 0
+        },
+        {
+          "dimension": "course",
+          "value": "data",
+          "total": 12,
+          "needs_refinement": 7,
+          "uncertain": 0
+        },
+        {
+          "dimension": "course",
+          "value": "engineering",
+          "total": 12,
+          "needs_refinement": 2,
+          "uncertain": 0
+        },
+        {
+          "dimension": "course",
+          "value": "systems",
+          "total": 12,
+          "needs_refinement": 1,
+          "uncertain": 0
+        },
+        {
+          "dimension": "profile",
+          "value": "explanatory",
+          "total": 24,
+          "needs_refinement": 6,
+          "uncertain": 0
+        },
+        {
+          "dimension": "profile",
+          "value": "socratic",
+          "total": 24,
+          "needs_refinement": 7,
+          "uncertain": 0
+        },
+        {
+          "dimension": "stage",
+          "value": 0,
+          "total": 24,
+          "needs_refinement": 5,
+          "uncertain": 0
+        },
+        {
+          "dimension": "stage",
+          "value": 1,
+          "total": 24,
+          "needs_refinement": 8,
+          "uncertain": 0
+        }
+      ]
+    },
+    "v10": {
+      "acceptable-on-assistant-review": 34,
+      "needs-refinement": 12,
+      "uncertain": 2,
+      "turns": 48,
+      "elapsed_median_ms": 3441.3434995221905,
+      "elapsed_p95_ms": 6120.306458964478,
+      "slices": [
+        {
+          "dimension": "course",
+          "value": "access",
+          "total": 12,
+          "needs_refinement": 2,
+          "uncertain": 2
+        },
+        {
+          "dimension": "course",
+          "value": "data",
+          "total": 12,
+          "needs_refinement": 4,
+          "uncertain": 0
+        },
+        {
+          "dimension": "course",
+          "value": "engineering",
+          "total": 12,
+          "needs_refinement": 4,
+          "uncertain": 0
+        },
+        {
+          "dimension": "course",
+          "value": "systems",
+          "total": 12,
+          "needs_refinement": 2,
+          "uncertain": 0
+        },
+        {
+          "dimension": "profile",
+          "value": "explanatory",
+          "total": 24,
+          "needs_refinement": 4,
+          "uncertain": 2
+        },
+        {
+          "dimension": "profile",
+          "value": "socratic",
+          "total": 24,
+          "needs_refinement": 8,
+          "uncertain": 0
+        },
+        {
+          "dimension": "stage",
+          "value": 0,
+          "total": 24,
+          "needs_refinement": 2,
+          "uncertain": 1
+        },
+        {
+          "dimension": "stage",
+          "value": 1,
+          "total": 24,
+          "needs_refinement": 10,
+          "uncertain": 1
+        }
+      ]
+    }
+  },
+  "paired_history_defect_counts": [
+    {
+      "history_index": 0,
+      "case_id": "birch-recall-socratic",
+      "v4": 1,
+      "v10": 1
+    },
+    {
+      "history_index": 1,
+      "case_id": "birch-causality-explanatory",
+      "v4": 1,
+      "v10": 1
+    },
+    {
+      "history_index": 2,
+      "case_id": "atlas-withdraw-explanatory",
+      "v4": 1,
+      "v10": 2
+    },
+    {
+      "history_index": 3,
+      "case_id": "elm-consent-explanatory",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 4,
+      "case_id": "birch-recall-explanatory",
+      "v4": 1,
+      "v10": 0
+    },
+    {
+      "history_index": 5,
+      "case_id": "cedar-cache-socratic",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 6,
+      "case_id": "cedar-cache-explanatory",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 7,
+      "case_id": "cedar-pages-explanatory",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 8,
+      "case_id": "atlas-release-socratic",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 9,
+      "case_id": "birch-causality-socratic",
+      "v4": 1,
+      "v10": 1
+    },
+    {
+      "history_index": 10,
+      "case_id": "atlas-release-explanatory",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 11,
+      "case_id": "atlas-health-explanatory",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 12,
+      "case_id": "cedar-retry-explanatory",
+      "v4": 0,
+      "v10": 1
+    },
+    {
+      "history_index": 13,
+      "case_id": "elm-groups-socratic",
+      "v4": 0,
+      "v10": 1
+    },
+    {
+      "history_index": 14,
+      "case_id": "birch-missing-explanatory",
+      "v4": 2,
+      "v10": 0
+    },
+    {
+      "history_index": 15,
+      "case_id": "cedar-pages-socratic",
+      "v4": 1,
+      "v10": 0
+    },
+    {
+      "history_index": 16,
+      "case_id": "elm-private-socratic",
+      "v4": 2,
+      "v10": 1
+    },
+    {
+      "history_index": 17,
+      "case_id": "atlas-health-socratic",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 18,
+      "case_id": "elm-private-explanatory",
+      "v4": 1,
+      "v10": 1
+    },
+    {
+      "history_index": 19,
+      "case_id": "atlas-withdraw-socratic",
+      "v4": 1,
+      "v10": 2
+    },
+    {
+      "history_index": 20,
+      "case_id": "birch-missing-socratic",
+      "v4": 1,
+      "v10": 1
+    },
+    {
+      "history_index": 21,
+      "case_id": "elm-groups-explanatory",
+      "v4": 0,
+      "v10": 1
+    },
+    {
+      "history_index": 22,
+      "case_id": "elm-consent-socratic",
+      "v4": 0,
+      "v10": 0
+    },
+    {
+      "history_index": 23,
+      "case_id": "cedar-retry-socratic",
+      "v4": 0,
+      "v10": 1
+    }
+  ],
+  "hard_gates": {
+    "all_histories_complete": true,
+    "source_unchanged": true,
+    "private_content_disclosure_observed": false,
+    "critical_semantic_gate": "unresolved: unsupported privacy assurance requires independent review"
+  },
+  "evidence": {
+    "raw_directory": "reports/generated/post-report-paired-quality-001-live-001",
+    "durable_review": "research/05_evaluation/reviews/post-report-paired-quality-001-live-001-review.json",
+    "summary_sha256": "7160cda174fad4ff748c0031d21ba3fcbdc35aa02106a8d08888ae1434e42ce3",
+    "source_snapshot_sha256": "719dfcf536f7190735e6d9fedf3081c1969bf8659d7814fe44c61ad2c35780ac"
+  },
+  "reproduction": [
+    "--live",
+    "--candidate",
+    "v10",
+    "--packet",
+    "research/05_evaluation/datasets/post-report-course-shaped-quality-v1.json",
+    "--input-provenance",
+    "research/04_experiments/post-report-paired-quality-001.md",
+    "--output-dir",
+    "reports/generated/post-report-paired-quality-001-live-001",
+    "--maximum-calls",
+    "320",
+    "--maximum-cost-usd",
+    "8"
+  ],
+  "limitations": [
+    "Assistant authored sources and reviewed outputs without blinding; independent human review pending.",
+    "No confidence interval reported for dependent small unblinded sample.",
+    "Successful provider calls do not imply useful product output; safe graph failures were counted as quality defects.",
+    "Privacy prompts contain no actual third-party messages, so no disclosure observed is not an authorization-security test.",
+    "Retrieval failure causes are provisional until trace-level diagnosis.",
+    "No default/profile replacement, professor fidelity or learning-effect claim."
+  ]
+}

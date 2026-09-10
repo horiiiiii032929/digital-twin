@@ -1,0 +1,905 @@
+{
+  "run_id": "root-cause-007",
+  "decision": "Keep bounded pre-audit diagnostics; preserve app decisions; remaining limitations deferred",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "deck_sha256": "7453cff7de77b597a61abc39766e3cb948ab2f0b3083d9b835a2a91dcb6f6d76",
+  "provider_calls": 0,
+  "aws_operations": 0,
+  "diagnostics_baseline_failed": 5,
+  "final_test_suites": {
+    "audit_context_generator": 107,
+    "budget_transport_graph_api": 158,
+    "onboarding_publication_outreach": 35
+  },
+  "frozen_comparison": {
+    "files": 328,
+    "changed": [
+      "src/digital_twin/generation/audited_instruction.py"
+    ]
+  },
+  "evidence_replay": {
+    "observation_count": 80,
+    "all_80_match_current_rules": true,
+    "outcomes": {
+      "not-assessed": 65,
+      "incorrect": 12,
+      "correct": 1,
+      "partial": 2
+    },
+    "attempt_detection": {
+      "False": 61,
+      "True": 19
+    },
+    "per_turn": [
+      {
+        "turn": 1,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 2,
+        "persona": "typical-engaged",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 3,
+        "persona": "typical-engaged",
+        "attempt_detected": true,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 4,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 5,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 6,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 7,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 8,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 9,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 10,
+        "persona": "typical-engaged",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "correct",
+        "stored_outcome": "correct",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 11,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 12,
+        "persona": "typical-engaged",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 13,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 14,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 15,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 16,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 17,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 18,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 19,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 20,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 21,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 22,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 23,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 24,
+        "persona": "fast-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 25,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 26,
+        "persona": "slow-learner",
+        "attempt_detected": true,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 27,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 28,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 29,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 30,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 31,
+        "persona": "slow-learner",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 32,
+        "persona": "slow-learner",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 33,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 34,
+        "persona": "slow-learner",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "partial",
+        "stored_outcome": "partial",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 35,
+        "persona": "slow-learner",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 36,
+        "persona": "slow-learner",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 37,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 38,
+        "persona": "high-forgetting",
+        "attempt_detected": true,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 39,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 40,
+        "persona": "high-forgetting",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 41,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 42,
+        "persona": "high-forgetting",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 43,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 44,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 45,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 46,
+        "persona": "high-forgetting",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "partial",
+        "stored_outcome": "partial",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 47,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 48,
+        "persona": "high-forgetting",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 49,
+        "persona": "misconception-prone",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 50,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 51,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 52,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 53,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 54,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 55,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 56,
+        "persona": "misconception-prone",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 57,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 58,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 59,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 60,
+        "persona": "misconception-prone",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 61,
+        "persona": "answer-seeking",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 62,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 63,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 64,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 65,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 66,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 67,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 68,
+        "persona": "answer-seeking",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 69,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 70,
+        "persona": "answer-seeking",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-foreign-key"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 71,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 72,
+        "persona": "answer-seeking",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 73,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 74,
+        "persona": "low-receptivity",
+        "attempt_detected": true,
+        "selected_concepts": [
+          "demo-pilot-v1-systems-join"
+        ],
+        "expected_outcome": "incorrect",
+        "stored_outcome": "incorrect",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 75,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 76,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 77,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 78,
+        "persona": "low-receptivity",
+        "attempt_detected": true,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 79,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      },
+      {
+        "turn": 80,
+        "persona": "low-receptivity",
+        "attempt_detected": false,
+        "selected_concepts": [],
+        "expected_outcome": "not-assessed",
+        "stored_outcome": "not-assessed",
+        "matches": true,
+        "attempt_matches": true
+      }
+    ],
+    "synthetic_group_sizes": [
+      {
+        "topic_key": "source-82bd6e8fa95899b1",
+        "signal_kind": "confusion",
+        "distinct_learners": 1,
+        "signals": 1
+      },
+      {
+        "topic_key": "source-82bd6e8fa95899b1",
+        "signal_kind": "integrity-redirect",
+        "distinct_learners": 1,
+        "signals": 2
+      },
+      {
+        "topic_key": "source-e5d95f60bf1fc04a",
+        "signal_kind": "confusion",
+        "distinct_learners": 4,
+        "signals": 4
+      },
+      {
+        "topic_key": "source-e5d95f60bf1fc04a",
+        "signal_kind": "repeated-help",
+        "distinct_learners": 1,
+        "signals": 1
+      }
+    ]
+  },
+  "changed_file_sha256": {
+    "src/digital_twin/generation/audited_instruction.py": "caaeda0822281cc6078ddfb0119e8b430f47e332d75f1620087c150198468729",
+    "tests/test_walkthrough_failure_diagnostics.py": "5273f90e405e34808ed1b9ebff3cda23a66d3adad07cf67b3afa06a57674e395",
+    "tests/test_walkthrough_context_contracts.py": "9a25700223b6ac3c199103f8f2fc39a22d511f08a46dfffe96ce71a1e40e3057"
+  },
+  "limitations": [
+    "No raw historical audit-output reconstruction",
+    "No new browser lifecycle pass",
+    "No positive publication or proactive delivery",
+    "No AWS hang resolution",
+    "No evaluation/algorithm/configuration change"
+  ]
+}

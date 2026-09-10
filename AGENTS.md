@@ -94,6 +94,19 @@ evaluation code under `scripts/`, and durable evidence summaries under
 `reports/` or the relevant research documentation. Follow
 `docs/quality-and-learning-plan.md` as the shared definition of done.
 
+## Presentation compatibility for the current AWS coding fixes
+
+The user requires the latest presentation to remain the compatibility boundary
+for this coding-only repair work. Follow
+`research/04_experiments/2026-09-09-slide-aligned-code-fix-plan.md` before changing
+the pilot. It identifies the authoritative 70-slide deck by SHA-256, the slide
+contracts to preserve, and known differences in the deployed demo. Repair only
+reproduced coding defects; do not silently change algorithms, prompts, model
+roles, selected profiles, audit/repair limits, assessment or goal rules, privacy
+thresholds, or outreach configuration. Conversational praise is not a persisted
+assessment, and withholding invalid output is required behavior. A change that
+would alter a documented decision belongs in a separate experimental proposal.
+
 ## Commit & Pull Request Guidelines
 
 Recent commits use short, imperative summaries such as `Scaffold research workspace`; keep that style and make the first line specific. Pull requests should follow `.github/PULL_REQUEST_TEMPLATE.md`: include a summary, linked GitHub Project item or issue, iteration, area, evidence, verification steps, documentation updates, and confirmation that sensitive data is excluded.

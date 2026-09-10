@@ -21,6 +21,7 @@ import type {
   ProfessorLearnerBeliefEvidence,
   ProfessorProactiveTrigger,
   ProfessorRelease,
+  ProfessorRuntimeStatus,
   ProfessorTeachingProfile,
   ProfessorTeachingProfilePreview,
   ReleasePreflightResult,
@@ -43,6 +44,10 @@ function professorRequest<T>(
       ...options.headers,
     },
   })
+}
+
+export function getProfessorRuntimeStatus(courseId: string): Promise<ProfessorRuntimeStatus> {
+  return professorRequest(`/api/professor/courses/${pathSegment(courseId)}/runtime-status`)
 }
 
 export function listProfessorCourses(): Promise<ProfessorCourse[]> {

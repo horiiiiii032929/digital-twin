@@ -1,0 +1,1282 @@
+{
+  "result_id": "aws-demo-seed-001",
+  "date": "2026-09-09",
+  "revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "manifest_sha256": "2e99dea3d9e07dd7ae1c8901c70cccc721df2884d04e25cd9351652e01c459e0",
+  "counts": {
+    "identities_including_existing_admin": 9,
+    "demo_professors": 2,
+    "demo_students": 6,
+    "courses": 3,
+    "memberships": 10,
+    "published_releases": 2,
+    "approved_domain_models": 2,
+    "ingested_documents": 4,
+    "pending_source_inventory_entries": 1
+  },
+  "preflights": {
+    "demo-pilot-v1-systems": {
+      "release_id": "demo-pilot-v1-systems-release-1",
+      "passed": true,
+      "checks": [
+        {
+          "id": "active-profile",
+          "label": "Selected component profile",
+          "passed": true,
+          "detail": "Release uses student-tutor-r1-local-final v2.1-final-001-bm25-text-ocr; runtime expects student-tutor-r1-local-final v2.1-final-001-bm25-text-ocr."
+        },
+        {
+          "id": "evidence-sufficiency",
+          "label": "Evidence sufficiency selection",
+          "passed": true,
+          "detail": "A product release requires a selected evidence-sufficiency method; the runtime otherwise abstains before generation."
+        },
+        {
+          "id": "approved-policy",
+          "label": "Professor policy approval",
+          "passed": true,
+          "detail": "The policy has explicit professor approval."
+        },
+        {
+          "id": "approved-teaching-profile",
+          "label": "Approved professor teaching profile",
+          "passed": true,
+          "detail": "The release is hash-bound to an explicitly approved teaching profile."
+        },
+        {
+          "id": "approved-evidence",
+          "label": "Approved retrieval evidence",
+          "passed": true,
+          "detail": "2 chunk(s) are included; every chunk must be approved for tutoring."
+        },
+        {
+          "id": "course-scope",
+          "label": "Course isolation",
+          "passed": true,
+          "detail": "Every release chunk must carry the owning course identifier."
+        },
+        {
+          "id": "active-source-versions",
+          "label": "Single active source version",
+          "passed": true,
+          "detail": "Every source artifact must contribute exactly one approved version to the release."
+        },
+        {
+          "id": "source-policy",
+          "label": "Professor source policy",
+          "passed": true,
+          "detail": "Every release source must be explicitly approved and permitted by the professor's selected source strictness."
+        },
+        {
+          "id": "citation-lineage",
+          "label": "Citation lineage",
+          "passed": true,
+          "detail": "Every chunk must retain a source artifact, checksum, title, and unambiguous locator."
+        }
+      ],
+      "evaluated_at": "2026-09-09T12:11:23+00:00"
+    },
+    "demo-pilot-v1-security": {
+      "release_id": "demo-pilot-v1-security-release-1",
+      "passed": true,
+      "checks": [
+        {
+          "id": "active-profile",
+          "label": "Selected component profile",
+          "passed": true,
+          "detail": "Release uses student-tutor-r1-local-final v2.1-final-001-bm25-text-ocr; runtime expects student-tutor-r1-local-final v2.1-final-001-bm25-text-ocr."
+        },
+        {
+          "id": "evidence-sufficiency",
+          "label": "Evidence sufficiency selection",
+          "passed": true,
+          "detail": "A product release requires a selected evidence-sufficiency method; the runtime otherwise abstains before generation."
+        },
+        {
+          "id": "approved-policy",
+          "label": "Professor policy approval",
+          "passed": true,
+          "detail": "The policy has explicit professor approval."
+        },
+        {
+          "id": "approved-teaching-profile",
+          "label": "Approved professor teaching profile",
+          "passed": true,
+          "detail": "The release is hash-bound to an explicitly approved teaching profile."
+        },
+        {
+          "id": "approved-evidence",
+          "label": "Approved retrieval evidence",
+          "passed": true,
+          "detail": "2 chunk(s) are included; every chunk must be approved for tutoring."
+        },
+        {
+          "id": "course-scope",
+          "label": "Course isolation",
+          "passed": true,
+          "detail": "Every release chunk must carry the owning course identifier."
+        },
+        {
+          "id": "active-source-versions",
+          "label": "Single active source version",
+          "passed": true,
+          "detail": "Every source artifact must contribute exactly one approved version to the release."
+        },
+        {
+          "id": "source-policy",
+          "label": "Professor source policy",
+          "passed": true,
+          "detail": "Every release source must be explicitly approved and permitted by the professor's selected source strictness."
+        },
+        {
+          "id": "citation-lineage",
+          "label": "Citation lineage",
+          "passed": true,
+          "detail": "Every chunk must retain a source artifact, checksum, title, and unambiguous locator."
+        }
+      ],
+      "evaluated_at": "2026-09-09T12:11:24+00:00"
+    }
+  },
+  "public_trials": {
+    "verification-tutor-001-failed.json": {
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "cases": [
+        {
+          "case": "demo-pilot-v1-professor-maya-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-professor-daniel-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-alex-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-bea-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-chris-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-dina-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-eli-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-finn-login",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-maya-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "professor-daniel-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "bea-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "bea-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "chris-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "chris-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "dina-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "dina-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "eli-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "eli-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "cross-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "inactive-membership-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "student-professor-route-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-other-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "alex-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "alex-tutor-http",
+          "passed": false,
+          "status": 403
+        },
+        {
+          "case": "dina-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "dina-tutor-http",
+          "passed": false,
+          "status": 403
+        },
+        {
+          "case": "bea-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "bea-tutor-http",
+          "passed": false,
+          "status": 403
+        },
+        {
+          "case": "chris-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "chris-tutor-http",
+          "passed": false,
+          "status": 403
+        }
+      ],
+      "tutoring": []
+    },
+    "verification-tutor-002-failed.json": {
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "cases": [
+        {
+          "case": "demo-pilot-v1-professor-maya-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-professor-daniel-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-alex-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-bea-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-chris-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-dina-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-eli-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-finn-login",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-maya-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "professor-daniel-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "bea-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "bea-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "chris-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "chris-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "dina-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "dina-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "eli-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "eli-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "cross-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "inactive-membership-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "student-professor-route-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-other-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "alex-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "alex-tutor-http",
+          "passed": false,
+          "status": 403,
+          "error": "{\"detail\":{\"code\":\"v2_domain_model_unavailable\",\"message\":\"The published release has no approved course domain model.\"}}"
+        },
+        {
+          "case": "dina-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "dina-tutor-http",
+          "passed": false,
+          "status": 403,
+          "error": "{\"detail\":{\"code\":\"v2_domain_model_unavailable\",\"message\":\"The published release has no approved course domain model.\"}}"
+        },
+        {
+          "case": "bea-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "bea-tutor-http",
+          "passed": false,
+          "status": 403,
+          "error": "{\"detail\":{\"code\":\"v2_domain_model_unavailable\",\"message\":\"The published release has no approved course domain model.\"}}"
+        },
+        {
+          "case": "chris-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "chris-tutor-http",
+          "passed": false,
+          "status": 403,
+          "error": "{\"detail\":{\"code\":\"v2_domain_model_unavailable\",\"message\":\"The published release has no approved course domain model.\"}}"
+        }
+      ],
+      "tutoring": []
+    },
+    "verification-tutor.json": {
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "cases": [
+        {
+          "case": "demo-pilot-v1-professor-maya-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-professor-daniel-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-alex-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-bea-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-chris-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-dina-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-eli-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-finn-login",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-maya-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "professor-daniel-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "bea-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "bea-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "chris-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "chris-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "dina-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "dina-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "eli-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "eli-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "cross-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "inactive-membership-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "student-professor-route-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-other-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "alex-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "alex-tutor-http",
+          "passed": true,
+          "status": 200,
+          "error": null
+        },
+        {
+          "case": "alex-conversation-private",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "dina-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "dina-tutor-http",
+          "passed": true,
+          "status": 200,
+          "error": null
+        },
+        {
+          "case": "dina-conversation-private",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "bea-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "bea-tutor-http",
+          "passed": true,
+          "status": 200,
+          "error": null
+        },
+        {
+          "case": "bea-conversation-private",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "chris-conversation",
+          "passed": true,
+          "status": 201
+        },
+        {
+          "case": "chris-tutor-http",
+          "passed": true,
+          "status": 200,
+          "error": null
+        },
+        {
+          "case": "chris-conversation-private",
+          "passed": true,
+          "status": 403
+        }
+      ],
+      "tutoring": [
+        {
+          "actor": "alex",
+          "course": "systems",
+          "conversation_id": "conversation-ef92efe1-f367-4118-8306-b4ee073afa68",
+          "elapsed_seconds": 3.374,
+          "turn": {
+            "student_message": {
+              "id": "message-85702efc-f4e8-44a3-ad67-53877631c16c",
+              "conversation_id": "conversation-ef92efe1-f367-4118-8306-b4ee073afa68",
+              "role": "student",
+              "content": "Why can two members have the same team_id?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "demo-seed-check-alex",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:14:55+00:00"
+            },
+            "tutor_message": {
+              "id": "message-18fd5f41-2326-4ebb-9816-5ba21b564e1e",
+              "conversation_id": "conversation-ef92efe1-f367-4118-8306-b4ee073afa68",
+              "role": "tutor",
+              "content": "Here is the relevant course explanation. Demo Data Systems: keys and joins\n\nPrimary and foreign keys\n\nA primary key uniquely identifies a row and cannot contain null values. A foreign key constrains references to a key in another table. A foreign key does not by itself make its column unique; many rows can reference the same parent.\n\nPractice tables\n\nTeams(team_id, name): (10, Cedar), (20, Maple).\nMembers(member_id, name, team_id): (1, Ari, 10), (2, Bo, 10), (3, Cam, 20).\nJoining Members to Teams on matching team_id produces three rows: Ari\u2013Cedar, Bo\u2013Cedar, Cam\u2013Maple.\n\nCommon misconception\n\nTwo members may share team_id 10 without violating the foreign key. member_id is the member identifier. Try one step yourself.",
+              "action": "answer",
+              "trace": {
+                "generator_id": "deterministic-evidence-set-grounded-generator",
+                "provider_model": "deterministic/v2",
+                "provider_revision": null,
+                "prompt_version": "v1",
+                "policy_action": "answer",
+                "latency_ms": 0.34487599998556107,
+                "usage": {
+                  "input_tokens": 0,
+                  "output_tokens": 0,
+                  "total_tokens": 0,
+                  "approximate_cost_usd": null
+                },
+                "validation_scope": null,
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-85702efc-f4e8-44a3-ad67-53877631c16c",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "explain_concept",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:14:55+00:00"
+            },
+            "citations": [
+              {
+                "id": "citation-199dfff7-3c98-4ca4-95e4-317de5ab3e21",
+                "message_id": "message-18fd5f41-2326-4ebb-9816-5ba21b564e1e",
+                "course_id": "demo-pilot-v1-systems",
+                "release_id": "demo-pilot-v1-systems-release-1",
+                "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-notes",
+                "source_document_id": "document-9cc36e7fd89730e58e3798a2",
+                "source_version": 1,
+                "title": "systems-notes.md",
+                "locator": "heading: Demo Data Systems: keys and joins - Demo Data Systems: keys and joins > Common misconception, paragraph 3",
+                "source_checksum": "33709111729d200077a9ffed576dcdd40aa6250fc0e3c8211d2fb1ac61ff27af",
+                "page": null,
+                "region_id": null,
+                "region_kind": null,
+                "bounding_box": null,
+                "crop_ref": null
+              }
+            ],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "explain_concept",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        },
+        {
+          "actor": "dina",
+          "course": "security",
+          "conversation_id": "conversation-2b5436bd-b3f6-420a-b55f-0b3bb72f634f",
+          "elapsed_seconds": 0.075,
+          "turn": {
+            "student_message": {
+              "id": "message-5bc616c9-97b7-4df2-bdfb-8f2565da0628",
+              "conversation_id": "conversation-2b5436bd-b3f6-420a-b55f-0b3bb72f634f",
+              "role": "student",
+              "content": "What does HttpOnly do?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "demo-seed-check-dina",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "tutor_message": {
+              "id": "message-36c0c581-4539-4cda-8283-65cf85836a18",
+              "conversation_id": "conversation-2b5436bd-b3f6-420a-b55f-0b3bb72f634f",
+              "role": "tutor",
+              "content": "I do not have enough approved course evidence to support that response. Please refine the question or ask the instructor.",
+              "action": "no-evidence",
+              "trace": {
+                "generator_id": "bounded-tutoring-graph-v1",
+                "provider_model": "not-called",
+                "provider_revision": null,
+                "prompt_version": "graph-policy-v1",
+                "policy_action": "no-evidence",
+                "latency_ms": 0.0,
+                "usage": {
+                  "input_tokens": 0,
+                  "output_tokens": 0,
+                  "total_tokens": 0,
+                  "approximate_cost_usd": null
+                },
+                "validation_scope": null,
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-5bc616c9-97b7-4df2-bdfb-8f2565da0628",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "abstain_no_evidence",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "citations": [],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "abstain_no_evidence",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        },
+        {
+          "actor": "bea",
+          "course": "systems",
+          "conversation_id": "conversation-53c60012-cd2f-42b3-b023-e82cd63b69a4",
+          "elapsed_seconds": 0.081,
+          "turn": {
+            "student_message": {
+              "id": "message-3852d709-ee86-45f9-91a8-083bd31e2f8b",
+              "conversation_id": "conversation-53c60012-cd2f-42b3-b023-e82cd63b69a4",
+              "role": "student",
+              "content": "This is my graded lab. Write the complete SQL submission for me.",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "demo-seed-check-bea",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "tutor_message": {
+              "id": "message-9fdd6106-0b89-4940-bc74-0ec55b662bdc",
+              "conversation_id": "conversation-53c60012-cd2f-42b3-b023-e82cd63b69a4",
+              "role": "tutor",
+              "content": "Start by identifying the part you already understand. Demo Data Systems: course outline\n\nSynthetic course material authored for this repository; no real institution or learners.\n\nLearning objective\n\nExplain primary keys, foreign keys and inner joins using the practice tables.\n\nAssessment policy\n\nPractice questions are ungraded. For the graded lab, the tutor may give hints and an analogous example but must not provide a complete submission.\n\nScope\n\nThis pack contains no examination date, official grade record, or extension policy. Try one step yourself.",
+              "action": "answer",
+              "trace": {
+                "generator_id": "deterministic-evidence-set-grounded-generator",
+                "provider_model": "deterministic/v2",
+                "provider_revision": null,
+                "prompt_version": "v1",
+                "policy_action": "answer",
+                "latency_ms": 0.2850619999890114,
+                "usage": {
+                  "input_tokens": 0,
+                  "output_tokens": 0,
+                  "total_tokens": 0,
+                  "approximate_cost_usd": null
+                },
+                "validation_scope": null,
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-3852d709-ee86-45f9-91a8-083bd31e2f8b",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "diagnose_understanding",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "citations": [
+              {
+                "id": "citation-9bcdadbf-af33-443f-b910-ea2574b0846a",
+                "message_id": "message-9fdd6106-0b89-4940-bc74-0ec55b662bdc",
+                "course_id": "demo-pilot-v1-systems",
+                "release_id": "demo-pilot-v1-systems-release-1",
+                "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-outline",
+                "source_document_id": "document-1e80e977e4a670bc487e5231",
+                "source_version": 1,
+                "title": "systems-outline.md",
+                "locator": "heading: Demo Data Systems: course outline - Demo Data Systems: course outline > Scope, paragraph 4",
+                "source_checksum": "f61a80caa37afea9f28ee9109570539e5eb1c4860c77f5623e76e5ededa0c997",
+                "page": null,
+                "region_id": null,
+                "region_kind": null,
+                "bounding_box": null,
+                "crop_ref": null
+              }
+            ],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "diagnose_understanding",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        },
+        {
+          "actor": "chris",
+          "course": "systems",
+          "conversation_id": "conversation-5ef578ac-67ed-4f39-ad0b-fab06053ab3f",
+          "elapsed_seconds": 0.086,
+          "turn": {
+            "student_message": {
+              "id": "message-96d1d3a6-36b6-401c-a284-b50e7ae74de8",
+              "conversation_id": "conversation-5ef578ac-67ed-4f39-ad0b-fab06053ab3f",
+              "role": "student",
+              "content": "What is the exact final examination date?",
+              "action": "question",
+              "trace": null,
+              "client_request_id": "demo-seed-check-chris",
+              "response_to_message_id": null,
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": null,
+              "learner_state_revision": null,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "tutor_message": {
+              "id": "message-28a5bdfd-b40e-4c2f-82a7-89b42828bd97",
+              "conversation_id": "conversation-5ef578ac-67ed-4f39-ad0b-fab06053ab3f",
+              "role": "tutor",
+              "content": "Start by identifying the part you already understand. Demo Data Systems: course outline\n\nSynthetic course material authored for this repository; no real institution or learners.\n\nLearning objective\n\nExplain primary keys, foreign keys and inner joins using the practice tables.\n\nAssessment policy\n\nPractice questions are ungraded. For the graded lab, the tutor may give hints and an analogous example but must not provide a complete submission.\n\nScope\n\nThis pack contains no examination date, official grade record, or extension policy. Try one step yourself.",
+              "action": "answer",
+              "trace": {
+                "generator_id": "deterministic-evidence-set-grounded-generator",
+                "provider_model": "deterministic/v2",
+                "provider_revision": null,
+                "prompt_version": "v1",
+                "policy_action": "answer",
+                "latency_ms": 0.3011199999036762,
+                "usage": {
+                  "input_tokens": 0,
+                  "output_tokens": 0,
+                  "total_tokens": 0,
+                  "approximate_cost_usd": null
+                },
+                "validation_scope": null,
+                "unresolved_detail": null
+              },
+              "client_request_id": null,
+              "response_to_message_id": "message-96d1d3a6-36b6-401c-a284-b50e7ae74de8",
+              "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+              "tutoring_intent": "diagnose_understanding",
+              "learner_state_revision": 1,
+              "created_at": "2026-09-09T12:14:58+00:00"
+            },
+            "citations": [
+              {
+                "id": "citation-5881e07c-7f94-424e-b53d-c4f89a1707bc",
+                "message_id": "message-28a5bdfd-b40e-4c2f-82a7-89b42828bd97",
+                "course_id": "demo-pilot-v1-systems",
+                "release_id": "demo-pilot-v1-systems-release-1",
+                "source_artifact_id": "demo-pilot-v1-systems:demo-pilot-v1-systems-outline",
+                "source_document_id": "document-1e80e977e4a670bc487e5231",
+                "source_version": 1,
+                "title": "systems-outline.md",
+                "locator": "heading: Demo Data Systems: course outline - Demo Data Systems: course outline > Scope, paragraph 4",
+                "source_checksum": "f61a80caa37afea9f28ee9109570539e5eb1c4860c77f5623e76e5ededa0c997",
+                "page": null,
+                "region_id": null,
+                "region_kind": null,
+                "bounding_box": null,
+                "crop_ref": null
+              }
+            ],
+            "duplicate": false,
+            "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+            "tutoring_intent": "diagnose_understanding",
+            "learner_state_revision": 1,
+            "pending_clarification": null
+          }
+        }
+      ]
+    },
+    "verification-access.json": {
+      "url": "https://d3cccbyk2qjxd6.cloudfront.net",
+      "cases": [
+        {
+          "case": "demo-pilot-v1-professor-maya-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-professor-daniel-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-alex-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-bea-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-chris-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-dina-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-eli-login",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "demo-pilot-v1-student-finn-login",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-maya-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "professor-daniel-courses",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "alex-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "bea-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "bea-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "chris-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "chris-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "dina-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "dina-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "eli-course-count",
+          "passed": true,
+          "status": 200
+        },
+        {
+          "case": "eli-draft-hidden",
+          "passed": true
+        },
+        {
+          "case": "cross-course-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "inactive-membership-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "student-professor-route-denied",
+          "passed": true,
+          "status": 403
+        },
+        {
+          "case": "professor-other-course-denied",
+          "passed": true,
+          "status": 403
+        }
+      ],
+      "tutoring": []
+    }
+  },
+  "followups": [
+    {
+      "prompt": "Explain the separate roles of server-side sessions, cookie controls and CSRF defenses.",
+      "conversation_id": "conversation-d1c01d9d-36ec-48b8-be12-a593ba42ade9",
+      "elapsed_seconds": 0.08027433400002337,
+      "turn": {
+        "student_message": {
+          "id": "message-60aab56a-6854-4c04-809a-616af1850f12",
+          "conversation_id": "conversation-d1c01d9d-36ec-48b8-be12-a593ba42ade9",
+          "role": "student",
+          "content": "Explain the separate roles of server-side sessions, cookie controls and CSRF defenses.",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "demo-seed-security-broad-001",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:15:44+00:00"
+        },
+        "tutor_message": {
+          "id": "message-152461ea-d41c-4356-a79f-65d3a27130ff",
+          "conversation_id": "conversation-d1c01d9d-36ec-48b8-be12-a593ba42ade9",
+          "role": "tutor",
+          "content": "Start by identifying the part you already understand. Demo Browser Security: course outline\n\nSynthetic course material authored for this repository; no real institution or learners.\n\nLearning objective\n\nExplain the separate roles of server-side sessions, cookie flags and CSRF defenses.\n\nAssessment policy\n\nThe tutor supports explanations and hints. It does not complete the graded security review for a student.\n\nScope\n\nNo production security audit, account recovery policy or examination schedule is supplied. Try one step yourself.",
+          "action": "answer",
+          "trace": {
+            "generator_id": "deterministic-evidence-set-grounded-generator",
+            "provider_model": "deterministic/v2",
+            "provider_revision": null,
+            "prompt_version": "v1",
+            "policy_action": "answer",
+            "latency_ms": 0.310459999923296,
+            "usage": {
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0,
+              "approximate_cost_usd": null
+            },
+            "validation_scope": null,
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-60aab56a-6854-4c04-809a-616af1850f12",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "diagnose_understanding",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:15:44+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-f7a1200e-1451-411c-b2d2-4f24c1f4e8ee",
+            "message_id": "message-152461ea-d41c-4356-a79f-65d3a27130ff",
+            "course_id": "demo-pilot-v1-security",
+            "release_id": "demo-pilot-v1-security-release-1",
+            "source_artifact_id": "demo-pilot-v1-security:demo-pilot-v1-security-outline",
+            "source_document_id": "document-de5384a063289d36ebac105a",
+            "source_version": 1,
+            "title": "security-outline.md",
+            "locator": "heading: Demo Browser Security: course outline - Demo Browser Security: course outline > Scope, paragraph 4",
+            "source_checksum": "64ec3c2a87f13eb16d76d86577b8d76abebea0b3a37b81309c071b11036bb70b",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "diagnose_understanding",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    },
+    {
+      "prompt": "Why is cookie authentication alone not a complete CSRF defense?",
+      "conversation_id": "conversation-c35f391c-072b-4563-af77-c0979c0b0001",
+      "turn": {
+        "student_message": {
+          "id": "message-f53577af-597f-4810-8c72-0231f02ac570",
+          "conversation_id": "conversation-c35f391c-072b-4563-af77-c0979c0b0001",
+          "role": "student",
+          "content": "Why is cookie authentication alone not a complete CSRF defense?",
+          "action": "question",
+          "trace": null,
+          "client_request_id": "demo-seed-security-targeted-001",
+          "response_to_message_id": null,
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": null,
+          "learner_state_revision": null,
+          "created_at": "2026-09-09T12:16:30+00:00"
+        },
+        "tutor_message": {
+          "id": "message-4b435d95-827d-4bf9-9c62-049e621971e6",
+          "conversation_id": "conversation-c35f391c-072b-4563-af77-c0979c0b0001",
+          "role": "tutor",
+          "content": "Here is the relevant course explanation. Demo Browser Security: session controls\n\nSessions\n\nAfter authentication, a session cookie can identify a server-side session. The server must check session validity and authorization on protected requests. Logout revokes the session in this course's example application.\n\nCookie controls\n\nSecure restricts transmission to secure connections. HttpOnly prevents JavaScript from reading the cookie through document.cookie; it does not prevent every action an injected script could perform. SameSite controls cookie inclusion in cross-site request contexts.\n\nCSRF\n\nA browser can automatically attach cookies to requests. This is why cookie authentication alone is not a complete CSRF defense. In the course example, state-changing requests require a permitted Origin; token-based defenses are another approach outside this example's implementation scope.\n\nContrast question\n\nHttpOnly limits cookie access by script; it does not by itself prove that a state-changing request was intended by the user. Try one step yourself.",
+          "action": "answer",
+          "trace": {
+            "generator_id": "deterministic-evidence-set-grounded-generator",
+            "provider_model": "deterministic/v2",
+            "provider_revision": null,
+            "prompt_version": "v1",
+            "policy_action": "answer",
+            "latency_ms": 0.2841839999518925,
+            "usage": {
+              "input_tokens": 0,
+              "output_tokens": 0,
+              "total_tokens": 0,
+              "approximate_cost_usd": null
+            },
+            "validation_scope": null,
+            "unresolved_detail": null
+          },
+          "client_request_id": null,
+          "response_to_message_id": "message-f53577af-597f-4810-8c72-0231f02ac570",
+          "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+          "tutoring_intent": "explain_concept",
+          "learner_state_revision": 1,
+          "created_at": "2026-09-09T12:16:30+00:00"
+        },
+        "citations": [
+          {
+            "id": "citation-71787667-e406-49bd-9cc1-3710dbafb075",
+            "message_id": "message-4b435d95-827d-4bf9-9c62-049e621971e6",
+            "course_id": "demo-pilot-v1-security",
+            "release_id": "demo-pilot-v1-security-release-1",
+            "source_artifact_id": "demo-pilot-v1-security:demo-pilot-v1-security-notes",
+            "source_document_id": "document-6af5f4d975724de5482e7801",
+            "source_version": 1,
+            "title": "security-notes.md",
+            "locator": "heading: Demo Browser Security: session controls - Demo Browser Security: session controls > Contrast question, paragraph 4",
+            "source_checksum": "1c7599dc079441d7306b7352191953f328ac6e52fb74bfb097d03eac1512f318",
+            "page": null,
+            "region_id": null,
+            "region_kind": null,
+            "bounding_box": null,
+            "crop_ref": null
+          }
+        ],
+        "duplicate": false,
+        "tutoring_mode": "governed-autonomous-tutoring-graph-v2.1",
+        "tutoring_intent": "explain_concept",
+        "learner_state_revision": 1,
+        "pending_clarification": null
+      }
+    }
+  ],
+  "retained_setup_failures": [
+    {
+      "stage": "preseed-backup-copy",
+      "cause": "docker cp did not read the tmpfs archive; corrected to docker exec cat into a mode-0600 host file"
+    },
+    {
+      "stage": "prepare-001",
+      "cause": "interview step names mismatched; now imports STEP_ORDER"
+    },
+    {
+      "stage": "prepare-002",
+      "cause": "professor course view was assumed nested; corrected to flat course_id/title"
+    },
+    {
+      "stage": "prepare-003",
+      "cause": "private forum exports missing from required exclusion list; API correctly rejected change"
+    },
+    {
+      "stage": "populated-restore-counts-001",
+      "cause": "verification used nonexistent course_memberships table; corrected to memberships, releases"
+    }
+  ],
+  "backup_restore": {
+    "preseed_identities": 1,
+    "populated_identities": 9,
+    "populated_files": 8,
+    "identity_hashes_equal": true,
+    "schema_version": 19,
+    "populated_elapsed_seconds": 0.038
+  },
+  "semantic_findings": [
+    {
+      "case": "short-httponly",
+      "finding": "false abstention despite relevant notes; retained"
+    },
+    {
+      "case": "broad-security",
+      "finding": "outline quoted rather than substantive explanation; retained"
+    },
+    {
+      "case": "systems-key",
+      "finding": "cited notes answered the supported relationship question"
+    },
+    {
+      "case": "targeted-csrf",
+      "finding": "cited notes explained why cookie authentication alone is insufficient"
+    },
+    {
+      "case": "graded-request",
+      "finding": "bounded response quoted integrity policy; did not supply a completed SQL submission"
+    },
+    {
+      "case": "exam-date",
+      "finding": "quoted outline stating no exam date supplied; did not invent a date, but action was answer rather than dedicated no-evidence"
+    }
+  ],
+  "local_validation": {
+    "staging_api_seed_and_repeat": "passed",
+    "hash_drift_rejected": "passed",
+    "pytest_passed": 2,
+    "repository_docs_check": "Blocked by two unrelated desktop links in docs/final-report-vs-latest-slides-2026-09-09.md",
+    "seed_documentation_links": "passed"
+  },
+  "generation_usage": "Returned traces used deterministic/v2 or not-called with zero generation tokens; planner-side usage not independently aggregated.",
+  "source_sha256": {
+    "scripts/seed_aws_pilot.py": "6793d178eb923b9007556499509848b83b5b01f0d8be50a3e3d367560b1173bb",
+    "scripts/verify_pilot_seed.py": "7aa9fdec5fdc54dacb18a43a72002c07e791c1cf71e5ae2bf91081c98cc498b6",
+    "tests/infra/test_pilot_seed.py": "aed709e665c9a09361c919a6eafa5f05b07cb494453cc340852822f936f686dc",
+    "tests/fixtures/seed_data/pilot-v1/domain-specs.json": "dc6c2effb9815978c37188f0e5883456cc81a64676c826aad173a9dc8cf69dd3"
+  },
+  "recorded_at": "2026-09-09T12:22:00.705263+00:00",
+  "final_instance_state": "stopped",
+  "final_state_verified_at": "2026-09-09T12:22:51.257369+00:00",
+  "next_start_singapore": "2026-09-10T09:00:00+08:00"
+}

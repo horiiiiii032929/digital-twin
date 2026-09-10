@@ -4,6 +4,9 @@
 .env
 .env.*
 !.env.example
+.aws/
+*.pem
+*.key
 
 # Local dependency folders
 node_modules/
@@ -13,9 +16,12 @@ __pycache__/
 *.py[cod]
 *.egg-info/
 .coverage
+.coverage.*
+.pytest_cache/
 .mypy_cache/
 .ruff_cache/
 htmlcov/
+coverage/
 
 # Editor and tool state
 .idea/
@@ -40,6 +46,8 @@ research/03_data/consent/*
 !research/03_data/consent/README.md
 
 # Generated artifacts
+.chart-data-*/
+apps/web/public/recording-demo.json
 experiments/runs/*
 !experiments/runs/.gitkeep
 models/*

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "seed_id": "seven-personas-v1",
+  "synthetic": true,
+  "selection": "typical-engaged from PERSONA_ROBUST_PERSONAS plus all six historical PERSONAS; a demo composition, not a historical seven-persona experiment",
+  "reference": "src/digital_twin/evaluation/learner_simulator.py",
+  "courses": [
+    "demo-pilot-v1-systems",
+    "demo-pilot-v1-security"
+  ],
+  "starter_course": "demo-pilot-v1-systems",
+  "personas": [
+    {
+      "key": "typical-engaged",
+      "display_name": "Demo · Engaged explorer",
+      "label": "Typical engaged learner",
+      "email": "typical-engaged.persona@example.test",
+      "opening": "I understand that member_id identifies a member, but I am not sure how team_id is different. Can you help me work through why two members can share a team_id?",
+      "suggested_followup": "I think both members belong to the same team. What would their joined rows look like?",
+      "purpose": "A balanced baseline: engage with a check question and explain your reasoning."
+    },
+    {
+      "key": "fast-learner",
+      "display_name": "Demo · Quick connector",
+      "label": "Fast learner",
+      "email": "fast-learner.persona@example.test",
+      "opening": "member_id identifies a member and team_id points to a team, so team_id can repeat. Can we move on to predicting the inner join result for Ari, Bo and Cam?",
+      "suggested_followup": "Ari and Bo match Cedar while Cam matches Maple. Why does the join still keep Ari and Bo as separate rows?",
+      "purpose": "Make a correct attempt early and ask for the next application."
+    },
+    {
+      "key": "slow-learner",
+      "display_name": "Demo · Step-by-step learner",
+      "label": "Slow learner",
+      "email": "slow-learner.persona@example.test",
+      "opening": "I am new to database tables. Please take this one small step at a time: what is a member_id, and why do we also have team_id?",
+      "suggested_followup": "I still mix up the two columns. Could you use just Ari as the example before adding Bo?",
+      "purpose": "Request smaller steps and concrete examples; this is a fictional role, not a diagnosis."
+    },
+    {
+      "key": "high-forgetting",
+      "display_name": "Demo · Returning learner",
+      "label": "High forgetting",
+      "email": "high-forgetting.persona@example.test",
+      "opening": "I studied primary keys and foreign keys before, but I have forgotten which one identifies the member and which one points to a team. Could you help me recall the distinction?",
+      "suggested_followup": "Let me try recalling it without looking: member_id identifies one member, while team_id can be shared. Is that correct?",
+      "purpose": "Rehearse recall after self-reported forgetting; timestamps are real, not backdated."
+    },
+    {
+      "key": "misconception-prone",
+      "display_name": "Demo · Misconception detective",
+      "label": "Misconception-prone learner",
+      "email": "misconception-prone.persona@example.test",
+      "opening": "I think every foreign key must be unique. Since Ari and Bo both have team_id 10, does that make the Members table invalid?",
+      "suggested_followup": "If team_id can repeat, what does the foreign key actually constrain?",
+      "purpose": "Start with one explicit misconception and explore its correction."
+    },
+    {
+      "key": "answer-seeking",
+      "display_name": "Demo · Shortcut seeker",
+      "label": "Answer-seeking learner",
+      "email": "answer-seeking.persona@example.test",
+      "opening": "This is my graded database lab. Please write the complete SQL submission joining Members and Teams so I can hand it in without doing the steps.",
+      "suggested_followup": "Okay, give me one hint and an analogous example instead of the final submission.",
+      "purpose": "Exercise the academic-integrity boundary, then move toward an acceptable hint."
+    },
+    {
+      "key": "low-receptivity",
+      "display_name": "Demo · Independent learner",
+      "label": "Low-receptivity learner",
+      "email": "low-receptivity.persona@example.test",
+      "opening": "I only have a minute and prefer a brief explanation. Why can two members share a team_id? I do not want proactive reminders; I will come back when I choose.",
+      "suggested_followup": "Thanks. I want to stop here and revisit this myself later.",
+      "purpose": "Ask for concise support; outreach remains off and no consent is invented."
+    }
+  ]
+}

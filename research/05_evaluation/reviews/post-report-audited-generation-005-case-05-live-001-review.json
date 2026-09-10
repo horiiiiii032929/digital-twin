@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-005-case-05-live-001",
+  "method": "Every delivered output read against frozen source and stage rubric; original exposed questions, no gold in model requests.",
+  "rows": [
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Does the Birch pilot prove that optional practice caused the higher scores?",
+      "response": "No. The pilot shows an association between choosing optional practice and higher quiz scores, but it does not establish that practice caused the improvement because students self-selected and there was neither randomized assignment nor a matched comparison group.\n\nWhat feature of the pilot would make a causal conclusion more credible: students choosing practice themselves, or assignment to practice by a randomized process?",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: self-selection is an alternative explanation. What can we conclude from this observation without claiming causality?",
+      "response": "We can conclude that students who received optional practice had higher observed quiz scores, so the pilot found an association between practice use and scores. Because students chose whether to practice and there was no randomized assignment or matched comparison group, we cannot conclude that practice caused the higher scores. Self-selection is a plausible alternative explanation.\n\nCheck: what kind of conclusion is supported here\u2014an observed association or a causal effect?",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v4",
+      "stage": 0,
+      "question": "Does the Birch pilot prove that optional practice caused the higher scores?",
+      "response": "The pilot has no randomized assignment or matched comparison group, so the observed association alone does not establish a causal learning effect.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-causality-explanatory",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: self-selection is an alternative explanation. What can we conclude from this observation without claiming causality?",
+      "response": "The approved material does not establish all the details requested in your question. Please ask the instructor about the information needed for this question.",
+      "action": "no-evidence",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Requested available explanation/help withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

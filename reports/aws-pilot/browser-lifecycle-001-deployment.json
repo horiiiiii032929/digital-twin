@@ -1,0 +1,23 @@
+{
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "manifest_sha256": "894bb71ba6dba90903d705d257ecb8edea1abd532dd7f0bcb7e6b2a2ef1d4cb2",
+  "source_sha256": {
+    "src/digital_twin/student/tutoring_graph.py": "bf4d48953b5b9f76e5079dbfbfd456ef22442b32755ee89ba50c824fbf0ab8a0",
+    "src/digital_twin/generation/audited_instruction.py": "524cfc0af3b0096b84454e5d68656fc761619694fbcc028441124b23a6b50cf1",
+    "apps/web/src/components/professor/professor-workspace.tsx": "cbb66f71fc6c457dca906103723f5b2af2bce3bbceee0acbda7921f910aff26a",
+    "apps/web/src/components/professor/professor-delivery-workspace.tsx": "72071eb3745c924becf14b9a908f9d1f1554ede684960d7716de8b3be796089c",
+    "apps/web/src/components/professor/professor-autonomy-panel.tsx": "30a8305099164b2efc0dbc77f893a1cd4ff52b9afbd4664e25746cb4f2ac6974"
+  },
+  "api_image_tag": "a7b906a07f29b34b9ab610216a59bd72a6aae3454fb73f2f343b7c823afbb679",
+  "web_image_tag": "ea70c444a49f2ed33eab480164403842f163551da2fdaea95578f89a4a01f31d",
+  "activation_ssm_command": "15059364-ed1f-4d01-b780-3d61f1a1ef80",
+  "region": "ap-southeast-1",
+  "route": "audited-presentation-v1",
+  "generation": "v19-luna-low",
+  "final_audit": "luna-medium",
+  "context_retrieval": "unchanged-disabled",
+  "proactive_worker": "unchanged-disabled",
+  "stop": "2026-09-10T00:00:00+08:00",
+  "baseline_comparison": "B-002 zero/not-called replaced with preserved model usage; B-004 lost selection replaced with retained authorized selection; B-005 enabled invalid save replaced with explicit disabled prerequisite. No algorithm/model comparison."
+}

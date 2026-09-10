@@ -14,6 +14,19 @@ the historical runs.
 
 | Result ID | Date | Component | Dataset / corpus | Status | Decision | Summary | Machine record | Reproduction |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `aws-presentation-route-001` | 2026-09-09 | Explicit AWS audited-demo composition | Two synthetic courses, two two-turn histories | Composition, auth and persisted live turns passed | Keep user-selected demo; no research promotion | [Results](aws-presentation-route-001-results.md) | [Evidence](../../reports/aws-pilot/presentation-route-001.json) | [Plan](../04_experiments/2026-09-09-aws-presentation-route-plan.md) |
+| `aws-demo-seed-001` | 2026-09-09 | Deployed synthetic multi-course seed | Fictional accounts and authored course notes | Operational checks passed after retained failures; semantic limitations remain | Keep demo accounts; Refine tutoring quality | [Results](aws-demo-seed-001-results.md) | [Evidence](../../reports/aws-pilot/seed-001.json) | [Procedure](../../docs/pilot-demo-accounts.md) |
+| `aws-office-hours-001` | 2026-09-09 | AWS scheduled power transitions | Initial administrator; no course corpus | Scheduled stop/start and 9 public checks passed | Keep weekday office hours | [Results](aws-office-hours-001-results.md) | [Evidence](../../reports/aws-pilot/office-hours-001.json) | [Procedure](../../tests/manual-aws-office-hours-2026-09-09.md) |
+| `aws-pilot-deployment-003` | 2026-09-09 | AWS deployment and initial-state recovery | Initial administrator; no course corpus | Passed after two retained public-routing failures | Keep initial-state pilot; no quality promotion | [Results](aws-pilot-deployment-003-results.md) | [Evidence](../../reports/aws-pilot/deployment-003.json) | [Procedure](../../tests/manual-aws-pilot-2026-09-09.md) |
+| `aws-pilot-deployment-002` | 2026-09-09 | AWS deployment boundary | Synthetic configuration; no corpus | Account rejected t3.medium; rolled back | Refine instance type; retain local control | [Results](aws-pilot-deployment-002-results.md) | Not a component comparison | [Plan](../04_experiments/2026-09-09-aws-pilot-infrastructure-plan.md) |
+| `aws-pilot-deployment-001` | 2026-09-09 | AWS deployment boundary | Synthetic configuration; no corpus | Failed backup selection; rolled back | Refine infrastructure; retain local control | [Results](aws-pilot-deployment-001-results.md) | Not a component comparison | [Plan](../04_experiments/2026-09-09-aws-pilot-infrastructure-plan.md) |
+| `it5004-presentation-teaching-live-001` | 2026-09-08 | Course-based presentation dialogue | Private IT5004 Lecture5; synthetic questions/profiles | Fixture rejected before provider; zero calls | Refine objective metadata | [Results](it5004-presentation-teaching-002-results.md) | [Record](records/it5004-presentation-teaching-live-001.json) | [Plan](../04_experiments/it5004-presentation-teaching-001.md) |
+| `it5004-presentation-teaching-live-002` | 2026-09-08 | Course-based presentation dialogue | Private IT5004 Lecture5; synthetic questions/profiles | Eight returned messages; four control safe failures | Keep illustration; no promotion | [Results](it5004-presentation-teaching-002-results.md) | [Record](records/it5004-presentation-teaching-live-002.json) | [Plan](../04_experiments/it5004-presentation-teaching-002.md) |
+| `plain-language-teaching-demo-live-001` | 2026-09-08 | Plain-language presentation example in persistent application services | One synthetic topic, two profiles, two turns, two arms | Completed; one withheld response | Keep illustration; Refine candidate, no promotion | [Results](plain-language-teaching-demo-001-results.md) | [Record](records/plain-language-teaching-demo-live-001.json) | [Plan and command](../04_experiments/plain-language-teaching-demo-001.md) |
+| `post-report-paired-quality-002-live-001` | 2026-09-08 | Existing conditional revision probe | Exposed synthetic course failures | Preflight rejected; zero calls | Refine sample size | [Results](post-report-paired-quality-003-results.md) | [Record](records/post-report-paired-quality-002-live-001.json) | Exact bounds and output evidence in record |
+| `post-report-paired-quality-003-live-001` | 2026-09-08 | Existing conditional revision probe | Exposed synthetic course failures | 16 delivered turns; assistant critical finding | Refine; no promotion | [Results](post-report-paired-quality-003-results.md) | [Record](records/post-report-paired-quality-003-live-001.json) | Exact bounds and output evidence in record |
+| `post-report-paired-quality-001-contract-001` | 2026-09-08 | Course-shaped tutoring comparison | 4 synthetic courses; 24 exposed contexts | 48 histories; injected failures; zero external calls | Keep harness only | [Results](post-report-paired-quality-001-results.md) | [Record](records/post-report-paired-quality-001-contract-001.json) | Exact invocation/source evidence in record |
+| `post-report-paired-quality-001-live-001` | 2026-09-08 | Course-shaped tutoring comparison | 4 synthetic courses; 24 exposed contexts | 96 turns; assistant review complete; independent review pending | Refine; no promotion | [Results](post-report-paired-quality-001-results.md) | [Record](records/post-report-paired-quality-001-live-001.json) | Exact invocation/source evidence in record |
 | `goal-completion-scope-development-001` | 2026-09-06 | Goal lifecycle scope | Synthetic 30-day matched-seed development | 144 histories; unsupported completion 12 to 0 | Keep lifecycle correction only | [Results](goal-completion-scope-development-001-results.md) | [Record](records/goal-completion-scope-development-001.json) | Exact source archives; zero LLM calls |
 | `goal-completion-scope-development-001-baseline` | 2026-09-06 | Goal lifecycle scope | Synthetic 30-day matched-seed development | Completed; 12 unsupported completions in 11 histories | Drop unscoped completion | [Results](goal-completion-scope-development-001-results.md) | [Record](records/goal-completion-scope-development-001-baseline.json) | Exact source archives; zero LLM calls |
 | `goal-completion-scope-development-001-candidate` | 2026-09-06 | Goal lifecycle scope | Synthetic 30-day matched-seed development | Completed; 0 unsupported; 15 supported; 19 gates passed | Keep correction; no learning-quality claim | [Results](goal-completion-scope-development-001-results.md) | [Record](records/goal-completion-scope-development-001-candidate.json) | Exact source archives; zero LLM calls |
@@ -514,3 +527,151 @@ the historical runs.
 | `generated-professor-preview-browser-development-001-live-001` | 2026-09-06 | Actual generated professor preview browser diagnostic | 1 synthetic case;1 artifact | 2calls;USD0.009635; exact approval+refresh | Keep workflow for evaluation; no candidate qualification | [Results](generated-professor-preview-browser-development-001-live-001-results.md) | [Record](records/generated-professor-preview-browser-development-001-live-001.json) | No student writes; withdrawn409; source-mutation branch untested |
 
 | `checkpoint-writer-coordination-development-20260906-001` | 2026-09-06 | SQLite checkpoint/model-ledger write coordination | Baseline3×100; candidate3×100 plus100 at cap5 | Baseline33/300 vs candidate0/400 request failures; 0 external calls | Keep local writer repair only | [Results](checkpoint-writer-coordination-development-20260906-001-results.md) | [Record](records/checkpoint-writer-coordination-development-20260906-001.json) | Natural schedules; original full-trial overlap gate not demonstrated, separate barrier2; no capacity/model qualification |
+
+## Post-report product integration
+
+| Result ID | Scope | Status / decision | Evidence |
+| --- | --- | --- | --- |
+| `post-report-product-integration-001-contract-001` | V18 + post-report learning selectors, credentialed mixed-source workflow, cohort review, withdrawal and clean restore; injected providers | 143/143 checks; Keep integration contract only, no semantic or deployment qualification | [Readable result](post-report-product-integration-001-results.md), [machine record](records/post-report-product-integration-001-contract-001.json) |
+
+## Post-report audited generation integration probe
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-audited-generation-004-case-01-live-001` | Refine; audit integration failed | [post-report-audited-generation-004](post-report-audited-generation-004-results.md), [record](records/post-report-audited-generation-004-case-01-live-001.json) |
+| `post-report-audited-generation-004-case-02-live-001` | Refine; audit integration failed | [post-report-audited-generation-004](post-report-audited-generation-004-results.md), [record](records/post-report-audited-generation-004-case-02-live-001.json) |
+| `post-report-audited-generation-004-case-03-live-001` | Refine; audit integration failed | [post-report-audited-generation-004](post-report-audited-generation-004-results.md), [record](records/post-report-audited-generation-004-case-03-live-001.json) |
+| `post-report-audited-generation-004-case-04-live-001` | Refine; audit integration failed | [post-report-audited-generation-004](post-report-audited-generation-004-results.md), [record](records/post-report-audited-generation-004-case-04-live-001.json) |
+| `post-report-audited-generation-004-case-05-live-001` | Refine; audit integration failed | [post-report-audited-generation-004](post-report-audited-generation-004-results.md), [record](records/post-report-audited-generation-004-case-05-live-001.json) |
+
+## Post-report audited generation integration repair
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-audited-generation-005-case-01-live-001` | Go Deeper / Refine; no promotion | [post-report-audited-generation-005](post-report-audited-generation-005-results.md), [record](records/post-report-audited-generation-005-case-01-live-001.json) |
+| `post-report-audited-generation-005-case-02-live-001` | Go Deeper / Refine; no promotion | [post-report-audited-generation-005](post-report-audited-generation-005-results.md), [record](records/post-report-audited-generation-005-case-02-live-001.json) |
+| `post-report-audited-generation-005-case-03-live-001` | Go Deeper / Refine; no promotion | [post-report-audited-generation-005](post-report-audited-generation-005-results.md), [record](records/post-report-audited-generation-005-case-03-live-001.json) |
+| `post-report-audited-generation-005-case-04-live-001` | Go Deeper / Refine; no promotion | [post-report-audited-generation-005](post-report-audited-generation-005-results.md), [record](records/post-report-audited-generation-005-case-04-live-001.json) |
+| `post-report-audited-generation-005-case-05-live-001` | Go Deeper / Refine; no promotion | [post-report-audited-generation-005](post-report-audited-generation-005-results.md), [record](records/post-report-audited-generation-005-case-05-live-001.json) |
+
+## Post-report source assessment
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-source-assessment-001-luna-live-001` | Refine; unsupported target judgment | [results](post-report-source-assessment-001-results.md), [record](records/post-report-source-assessment-001-luna-live-001.json) |
+| `post-report-source-assessment-001-sol-live-001` | Refine; unsupported target judgment | [results](post-report-source-assessment-001-results.md), [record](records/post-report-source-assessment-001-sol-live-001.json) |
+
+## Bounded product and learner completion
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-product-integration-002-contract-001` | Keep contract only | [results](post-report-product-integration-002-results.md), [record](records/post-report-product-integration-002-contract-001.json) |
+| `post-report-learner-policy-001-local-001` | Go Deeper / Refine; no promotion | [results](post-report-learner-policy-001-results.md), [record](records/post-report-learner-policy-001-local-001.json) |
+
+## Bounded common-model review
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-blind-review-001-nano-live-001` | Refine; calibration contract failed | [results](post-report-blind-review-001-results.md), [record](records/post-report-blind-review-001-nano-live-001.json) |
+| `post-report-blind-review-001-mini-live-001` | Refine; calibration contract failed | [results](post-report-blind-review-001-results.md), [record](records/post-report-blind-review-001-mini-live-001.json) |
+
+## Bounded source-assessment follow-up
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-source-assessment-002-luna-live-001` | Keep experimental / Go Deeper | [results](post-report-source-assessment-002-results.md), [record](records/post-report-source-assessment-002-luna-live-001.json) |
+
+| `post-report-blind-review-002-mini-calibration-live-001` | Refine evidence contract; retain invalid run | [results](post-report-blind-review-002-results.md), [record](records/post-report-blind-review-002-mini-calibration-live-001.json) |
+
+| `post-report-blind-review-003-mini-calibration-live-001` | Keep instrument003 for bounded synthetic comparison; no product selection | [results](post-report-blind-review-003-results.md), [record](records/post-report-blind-review-003-mini-calibration-live-001.json) |
+
+## Final selection series 002
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-final-selection-002-case-01-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-01-live-001.json) |
+| `post-report-final-selection-002-case-02-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-02-live-001.json) |
+| `post-report-final-selection-002-case-03-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-03-live-001.json) |
+| `post-report-final-selection-002-case-04-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-04-live-001.json) |
+| `post-report-final-selection-002-case-05-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-05-live-001.json) |
+| `post-report-final-selection-002-case-06-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-06-live-001.json) |
+| `post-report-final-selection-002-case-07-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-07-live-001.json) |
+| `post-report-final-selection-002-case-08-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-08-live-001.json) |
+| `post-report-final-selection-002-case-09-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-09-live-001.json) |
+| `post-report-final-selection-002-case-10-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-10-live-001.json) |
+| `post-report-final-selection-002-case-11-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-11-live-001.json) |
+| `post-report-final-selection-002-case-12-live-001` | Refine composed audit identity; no promotion | [results](post-report-final-selection-002-results.md), [record](records/post-report-final-selection-002-case-12-live-001.json) |
+
+| `post-report-product-integration-003-contract-001` | Keep integration only | [results](post-report-product-integration-003-results.md), [record](records/post-report-product-integration-003-contract-001.json) |
+
+## Final selection series 003
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-final-selection-003-case-01-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-01-live-001.json) |
+| `post-report-final-selection-003-case-02-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-02-live-001.json) |
+| `post-report-final-selection-003-case-03-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-03-live-001.json) |
+| `post-report-final-selection-003-case-04-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-04-live-001.json) |
+| `post-report-final-selection-003-case-05-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-05-live-001.json) |
+| `post-report-final-selection-003-case-06-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-06-live-001.json) |
+| `post-report-final-selection-003-case-07-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-07-live-001.json) |
+| `post-report-final-selection-003-case-08-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-08-live-001.json) |
+| `post-report-final-selection-003-case-09-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-09-live-001.json) |
+| `post-report-final-selection-003-case-10-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-10-live-001.json) |
+| `post-report-final-selection-003-case-11-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-11-live-001.json) |
+| `post-report-final-selection-003-case-12-live-001` | Refine evaluation adapter; incomplete histories, no promotion | [results](post-report-final-selection-003-results.md), [record](records/post-report-final-selection-003-case-12-live-001.json) |
+
+## Final selection series 004
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `post-report-final-selection-004-case-01-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-01-live-001.json) |
+| `post-report-final-selection-004-case-02-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-02-live-001.json) |
+| `post-report-final-selection-004-case-03-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-03-live-001.json) |
+| `post-report-final-selection-004-case-04-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-04-live-001.json) |
+| `post-report-final-selection-004-case-05-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-05-live-001.json) |
+| `post-report-final-selection-004-case-06-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-06-live-001.json) |
+| `post-report-final-selection-004-case-07-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-07-live-001.json) |
+| `post-report-final-selection-004-case-08-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-08-live-001.json) |
+| `post-report-final-selection-004-case-09-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-09-live-001.json) |
+| `post-report-final-selection-004-case-10-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-10-live-001.json) |
+| `post-report-final-selection-004-case-11-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-11-live-001.json) |
+| `post-report-final-selection-004-case-12-live-001` | Await calibrated common review; no promotion yet | [results](post-report-final-selection-004-results.md), [record](records/post-report-final-selection-004-case-12-live-001.json) |
+
+| `post-report-final-selection-004-mini-review-live-001` | Keep release/control; Refine candidate | [results](post-report-final-selection-decision-004-results.md), [record](records/post-report-final-selection-004-mini-review-live-001.json) |
+
+| `product-demo-v2-live-001` | Recording QA only: Refine experimental reply path; retain deterministic demonstration; no release promotion | [plan](../../reports/presentation/recording/product-pilot-v2/plan.md), [observations and retained failures](../../reports/presentation/recording/product-pilot-v2/README.md), [reactive traces](../../reports/presentation/recording/product-pilot-v2/experimental-failed-traces.json) |
+
+## AWS persona demonstration
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `aws-seven-personas-001` | Keep synthetic manual demo; no research promotion | [results](aws-seven-personas-001-results.md), [record](../../reports/aws-pilot/seven-personas-001.json) |
+
+## AWS browser lifecycle and coding fixes
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `aws-browser-lifecycle-001` | Keep three bounded coding fixes; Refine demo readiness; architecture unchanged | [results](../../tests/manual/aws-pilot-lifecycle-001-results.md), [84-turn record](records/aws-browser-lifecycle-001.json), [106-case coverage](records/aws-browser-lifecycle-001-coverage.json), [deployment](../../reports/aws-pilot/browser-lifecycle-001-deployment.json) |
+
+## Slide-aligned coding scope
+
+| Run ID | Decision | Evidence |
+| --- | --- | --- |
+| `aws-slide-alignment-001` | Preserve latest slide contracts; plan proven coding repairs only; no full feature-parity certification | [inspection and plan](../04_experiments/2026-09-09-slide-aligned-code-fix-plan.md), [deck fingerprint and runtime](../../reports/aws-pilot/slide-alignment-001.json) |
+| `slide-codefix-001` | Keep bounded diagnostics; Refine demo readiness; preserve slide contracts and withheld failures | [results](slide-codefix-001-results.md), [final deterministic comparison](records/slide-codefix-001.json), [initial comparison](records/slide-codefix-001-initial.json), [eight live turns](records/slide-codefix-001-live.json) |
+| `slide-codefix-002` | Keep two metadata/accounting fixes locally; no app decision change; AWS paused | [results](slide-codefix-002-results.md), [control comparison and hashes](records/slide-codefix-002.json), [plan](../04_experiments/2026-09-10-decision-preserving-codefix-plan.md) |
+
+| `scenario-investigation-003` | Refine two reproduced UI loading defects; Keep frozen app decisions; no production changes | [results](scenario-investigation-003-results.md), [record](records/scenario-investigation-003.json), [fix boundaries](../../docs/scenario-findings-fix-boundaries-2026-09-10.md) |
+
+| `walkthrough-codefix-004` | Keep local UI recovery repairs; frozen decisions and evaluation design; AWS paused | [results](walkthrough-codefix-004-results.md), [record](records/walkthrough-codefix-004.json), [coverage](../../tests/manual/walkthrough-codefix-004-coverage.md) |
+
+| `slide-local-005` | Keep local seed-password and Sources-control repairs; same audited runtime; preserve decision limitations | [results](slide-local-005-results.md), [record](records/slide-local-005.json), [plan](../04_experiments/2026-09-10-slide-local-005-plan.md) |
+
+| `lifecycle-local-006` | Keep two local frontend repairs; Refine demo readiness; 80/84 continuing turns, publication/worker/provider guard gaps retained | [results](lifecycle-local-006-results.md), [record](records/lifecycle-local-006.json), [106 dispositions and chapter exits](../../tests/manual/lifecycle-local-006-coverage.md), [plan](../04_experiments/2026-09-10-lifecycle-local-006-plan.md) |
+
+| `root-cause-007` | Keep bounded initial-provider diagnostics; 80/80 stored-rule replay and 300 offline tests; preserve decision limitations | [results](root-cause-007-results.md), [record](records/root-cause-007.json), [plan](../04_experiments/2026-09-10-root-cause-007-plan.md) |
+
+| `scenario-local-008` | Keep pending-send/session-expiry frontend repairs; ten paid browser turns, unchanged decisions; lifecycle gaps retained | [results](scenario-local-008-results.md), [record](records/scenario-local-008.json), [coverage](../../tests/manual/scenario-local-008-coverage.md), [plan](../04_experiments/2026-09-10-scenario-local-008-plan.md) |
+
+| `aws-local-fixes-009` | Keep verified runtime repairs; unchanged audited demo; HTTPS/auth/config smoke passed; EC2 stopped and both power schedules disabled | [deployment/state](../../reports/aws-pilot/deployed-state-2026-09-10.md), [record](../../reports/aws-pilot/deployment-009.json) |

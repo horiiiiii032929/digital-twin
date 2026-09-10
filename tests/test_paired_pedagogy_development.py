@@ -334,3 +334,26 @@ async def test_v12_rejects_old_three_call_turn_budget_before_dispatch(tmp_path):
         await runner.run(tmp_path / "small", packet(), candidate="v12-luna-sol",
             maximum_calls=12, maximum_cost_usd=1.92)
     assert not (tmp_path / "small").exists()
+
+
+@pytest.mark.asyncio
+async def test_cheap_audit_variant_runs_through_actual_paired_adapter(tmp_path):
+    from scripts.run_mixed_source_recovery_development import SourceBoundContractClient
+    def transport(version, role=None):
+        return SourceBoundContractClient(tmp_path/f'{version}-{role}-fixture.jsonl', audit_model='gpt-5.6-luna')
+    result=await runner.run(tmp_path/'cheap-composed',packet(),candidate='v19-luna-luna-medium',
+        maximum_calls=144,maximum_cost_usd=12,transport_factory=transport,candidate_context_retrieval=True)
+    assert result['decision']=='contract-only'
+    assert all(h['completed'] and h['completed_turns']==2 for h in result['histories'])
+    assert result['arms']['v19-luna-luna-medium']['role_attempts']['revision']>=2
+    turns=list(map(json.loads,(tmp_path/'cheap-composed/case-0-repeat-0-v19-luna-luna-medium/turns.jsonl').read_text().splitlines()))
+    assert all(t['turn']['tutor_message']['action']=='answer' and t['turn']['citations'] for t in turns)
+
+
+@pytest.mark.asyncio
+async def test_unknown_factory_keyword_is_rejected_before_calls(tmp_path,monkeypatch):
+    def old_factory(root,arm):raise AssertionError('must not invoke factory')
+    monkeypatch.setattr(runner,'build_final_profile_runtime_factory',old_factory)
+    with pytest.raises(TypeError,match='unexpected keyword'):
+        await runner.run(tmp_path/'no-output',packet(),candidate='v19-luna-luna-medium')
+    assert not (tmp_path/'no-output').exists()

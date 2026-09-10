@@ -87,7 +87,7 @@ configured allowance, and app restarts do not reset it. No run-level resume.
 
     def __init__(self, client: LlmClient, ledger: Path, *, maximum_calls: int,
                  maximum_cost_usd: float, network_mode: str,
-                 reservation_usd: float = 0.01, maximum_payload_bytes: int = 20_000, expected_model: str = MODEL, max_output_tokens: int = 500, reasoning_effort: str = "low", experimental_sol_enabled: bool = False):
+                 reservation_usd: float = 0.01, maximum_payload_bytes: int = 20_000, expected_model: str = MODEL, max_output_tokens: int = 500, reasoning_effort: str = "low", experimental_sol_enabled: bool = False, serializer_client=None):
         if (isinstance(maximum_calls, bool) or maximum_calls < 1
                 or not math.isfinite(maximum_cost_usd) or maximum_cost_usd <= 0
                 or not math.isfinite(reservation_usd) or reservation_usd <= 0):
@@ -106,7 +106,14 @@ configured allowance, and app restarts do not reset it. No run-level resume.
         self.records: list[dict] = []
         self.stopped = False
         # This serializer includes the response schema as well as messages.
-        self.serializer = OpenAiResponsesClient(expected_model, max_output_tokens=max_output_tokens, reasoning_effort=reasoning_effort, experimental_sol_enabled=experimental_sol_enabled)
+        self.serializer = serializer_client if serializer_client is not None else (
+            client if isinstance(client, OpenAiResponsesClient) else
+            OpenAiResponsesClient(expected_model, max_output_tokens=max_output_tokens, reasoning_effort=reasoning_effort, experimental_sol_enabled=experimental_sol_enabled))
+        if (not isinstance(self.serializer, OpenAiResponsesClient)
+                or self.serializer.model != expected_model
+                or self.serializer.max_output_tokens != max_output_tokens
+                or self.serializer.reasoning_effort != reasoning_effort):
+            raise ValueError("recorded serializer must match the declared provider configuration")
         input_price, output_price = OPENAI_MODEL_PRICING_USD_PER_MILLION[expected_model]
         # One token per UTF-8 byte plus explicit framing headroom. Fail before
         # calls if the frozen price/size assumptions exceed the reservation.

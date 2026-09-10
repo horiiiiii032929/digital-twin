@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 from datetime import UTC, datetime, timedelta
+from src.digital_twin.clock import VirtualUtcClock
 import hashlib
 import json
 import os
@@ -409,6 +410,7 @@ async def _execute_product(
             repository,
             outreach,
             graph=proactive_graph,
+            clock=VirtualUtcClock(NOW),
         )
         autonomy.set_policy(
             fixture.professor_id,

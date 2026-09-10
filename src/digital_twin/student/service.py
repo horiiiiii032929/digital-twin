@@ -137,6 +137,9 @@ class StudentTutoringService:
         autonomy_generator_model: str = DETERMINISTIC_GENERATOR_MODEL,
         reactive_semantic_planner: ReactiveSemanticPlanner | None = None,
         teaching_profile_context_enabled: bool = False,
+        source_bound_assessment_enabled: bool = False,
+        source_bound_model_assessor=None,
+        conversation_retrieval_enabled: bool = False,
         retriever_factory: Callable[
             [Sequence[DocumentChunk], Mapping[str, int]], Retriever
         ]
@@ -146,6 +149,7 @@ class StudentTutoringService:
         clock: UtcClock | None = None,
     ) -> None:
         self.repository = repository
+        self.conversation_retrieval_enabled = conversation_retrieval_enabled
         self.clock = clock or SystemUtcClock()
         profile = load_release_profile(profile_path)
         self.teaching_profile_context_enabled = teaching_profile_context_enabled
@@ -211,6 +215,8 @@ class StudentTutoringService:
                 checkpoint_database_path=checkpoint_path,
                 generator_model_id=_generator_model_identity(self.generator),
                 semantic_planner=reactive_semantic_planner,
+                source_bound_assessment_enabled=source_bound_assessment_enabled,
+                source_bound_model_assessor=source_bound_model_assessor,
                 initial_reference_priority=(self._initial_reference_priority
                     if getattr(self.generator, "supports_initial_reference_priority", False) else None),
             )
@@ -242,6 +248,25 @@ class StudentTutoringService:
                 profile_version=release.profile_version,
             )
             for course, release in self.repository.list_student_courses(account_id)
+        ]
+
+    def list_conversations(self, account_id: str, course_id: str) -> list[Conversation]:
+        """Discover this student's resumable history without browser storage."""
+        self._authorize_course(account_id, course_id)
+        release = self.repository.get_published_release(course_id)
+        if release is None:
+            self._deny(
+                "release_unavailable",
+                "The course Digital Twin is not published.",
+                account_id=account_id,
+                course_id=course_id,
+            )
+        self._require_matching_profile(release)
+        return [
+            conversation
+            for conversation in self.repository.list_course_conversations(course_id)
+            if conversation.student_id == account_id
+            and conversation.release_id == release.id
         ]
 
     def create_conversation(self, account_id: str, course_id: str) -> Conversation:
@@ -903,8 +928,9 @@ class StudentTutoringService:
             tutoring_mode != TutoringMode.T1_V2
             or learner_state is None
             or learner_state.latest_signals is None
-            or not hits
-            or not citations
+            or ((not hits or not citations) and not getattr(
+                self.autonomy_goal_manager, "requires_observation_history", False
+            ))
         ):
             return None, []
         policy = self.repository.get_autonomy_policy(conversation.course_id)
@@ -928,9 +954,19 @@ class StudentTutoringService:
             else None
         )
         domain_model = self.repository.get_course_domain_model(release.id)
+        lifecycle_parameters = {}
+        if getattr(self.autonomy_goal_manager, "requires_observation_history", False):
+            lifecycle_parameters = {
+                "additional_observation": (
+                    reactive_v2_artifacts.observation
+                    if reactive_v2_artifacts is not None and reactive_v2_artifacts.state_committed
+                    else None
+                ),
+                "now": datetime.fromisoformat(observed_at),
+            }
         lifecycle_by_goal = {
             goal.goal_id: self.autonomy_goal_manager.interpret(
-                goal, belief_state, domain_model=domain_model,
+                goal, belief_state, domain_model=domain_model, **lifecycle_parameters,
             )
             for goal in active_goals
         }
@@ -1423,12 +1459,35 @@ class StudentTutoringService:
     def _graph_retrieve(
         self, graph_input: TutoringGraphInput
     ) -> tuple[list[RetrievalHit], list[AuditEvent]]:
-        return self._retrieve(
+        hits, events = self._retrieve(
             graph_input.release,
             account_id=graph_input.account_id,
             conversation=graph_input.conversation,
             question=graph_input.student_message,
         )
+        if not self.conversation_retrieval_enabled:
+            return hits, events
+        from src.digital_twin.student.conversation_retrieval import continuation_question
+        previous = continuation_question(graph_input.student_message,
+            self.repository.list_messages(graph_input.conversation.id),
+            tuple(c.label for c in graph_input.domain_model.concepts) if graph_input.domain_model else ())
+        if previous is None:
+            return hits, events
+        context_hits, context_events = self._retrieve(graph_input.release,
+            account_id=graph_input.account_id, conversation=graph_input.conversation,
+            question=previous.content)
+        context_events = [item.model_copy(update={"event_type": "context-" + item.event_type})
+            for item in context_events]
+        # Each query passes the existing evidence gate independently. Keep all
+        # current hits and add only authorized, deduplicated contextual evidence.
+        known = {hit.chunk.id for hit in hits}
+        additions = [hit for hit in context_hits if hit.chunk.id not in known]
+        event = self._event("conversation-retrieval-context", account_id=graph_input.account_id,
+            course_id=graph_input.conversation.course_id, release_id=graph_input.release.id,
+            conversation_id=graph_input.conversation.id,
+            details={"implementation": "previous-student-query-v1", "previous_message_id": previous.id,
+                "additional_hit_count": len(additions)})
+        return [*hits, *additions], [*events, *context_events, event]
 
     def _initial_reference_priority(self, graph_input: TutoringGraphInput) -> bool:
         """Fresh requests only; do not invent a conversational reference resolver."""

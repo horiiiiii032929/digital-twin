@@ -772,6 +772,8 @@ class GovernedReactiveTutoringGraphV2:
         selector: DeterministicIntentSelector | None = None,
         belief_estimator: DeterministicEvidenceCountBeliefEstimator | None = None,
         initial_reference_priority: Callable[[TutoringGraphInput], bool] | None = None,
+        source_bound_assessment_enabled: bool = False,
+        source_bound_model_assessor=None,
     ) -> None:
         if not evidence_gate_configured:
             raise ValueError("T1-v2 requires a selected evidence-sufficiency gate")
@@ -780,6 +782,8 @@ class GovernedReactiveTutoringGraphV2:
         if not checkpoint_database_path.strip():
             raise ValueError("T1-v2 requires a checkpoint database path")
         self.initial_reference_priority = initial_reference_priority
+        self.source_bound_assessment_enabled = source_bound_assessment_enabled
+        self.source_bound_model_assessor = source_bound_model_assessor
         self.retrieve = retrieve
         self.generate = generate
         self.fallback = fallback
@@ -1039,7 +1043,7 @@ class GovernedReactiveTutoringGraphV2:
             ]
         }
 
-    def _perceive_turn(
+    async def _perceive_turn(
         self, state: _V2GraphState, runtime: Runtime[_V2RuntimeContext]
     ) -> dict:
         signals = self.interpreter.interpret(runtime.context.graph_input.student_message)
@@ -1060,10 +1064,10 @@ class GovernedReactiveTutoringGraphV2:
             "learner_state": learner_state,
             "node_path": self._path(state, "perceive_turn"),
         }
-        observed = self._validate_observation({**state, **updates}, runtime)
+        observed = await self._validate_observation({**state, **updates}, runtime)
         return {**updates, **observed}
 
-    def _validate_observation(
+    async def _validate_observation(
         self, state: _V2GraphState, runtime: Runtime[_V2RuntimeContext]
     ) -> dict:
         graph_input = runtime.context.graph_input
@@ -1102,6 +1106,31 @@ class GovernedReactiveTutoringGraphV2:
             if not assessment_concept_ids:
                 assessment_outcome = AssessmentOutcome.NOT_ASSESSED
                 assessment_confidence = 0
+        assessment_evidence_keys = []
+        assessment_reason = "not-an-explicit-attempt"
+        assessment_details = {}
+        if self.source_bound_assessment_enabled or self.source_bound_model_assessor is not None:
+            from src.digital_twin.student.source_assessment import assess_source_bound_attempt
+            assessment_concept_ids = _assessment_concepts(graph_input.student_message, graph_input.domain_model)
+            if perception.attempt_present:
+                if self.source_bound_model_assessor is not None:
+                    result = await self.source_bound_model_assessor.assess(graph_input.student_message,
+                        assessment_concept_ids, graph_input.domain_model, graph_input.release)
+                    assessed = result.assessment
+                    assessment_details = {"provider_called": result.provider_called,
+                        "provider_model": self.source_bound_model_assessor.model_id,
+                        "input_tokens": result.usage.input_tokens, "output_tokens": result.usage.output_tokens,
+                        "total_tokens": result.usage.total_tokens, "cost_usd": result.usage.approximate_cost_usd}
+                else:
+                    assessed = assess_source_bound_attempt(graph_input.student_message,
+                        assessment_concept_ids, graph_input.domain_model, graph_input.release)
+                assessment_outcome, assessment_confidence = assessed.outcome, assessed.confidence
+                assessment_evidence_keys = list(assessed.evidence_keys)
+                assessment_reason = assessed.reason
+            else:
+                assessment_outcome, assessment_confidence = AssessmentOutcome.NOT_ASSESSED, 0
+            if assessment_outcome == AssessmentOutcome.NOT_ASSESSED:
+                assessment_concept_ids = []
         observation = LearnerObservationV2(
             observation_id=state["event_id"],
             learner_key=graph_input.learner_key,
@@ -1113,12 +1142,25 @@ class GovernedReactiveTutoringGraphV2:
             perception=perception,
             assessment_outcome=assessment_outcome,
             assessment_confidence=assessment_confidence,
+            evidence_keys=assessment_evidence_keys,
             source_turn_key=source_turn_key,
             observed_at=graph_input.observed_at,
         )
+        audit_events = list(state["audit_events"])
+        if self.source_bound_assessment_enabled or self.source_bound_model_assessor is not None:
+            audit_events.append(AuditEvent(
+                id=f"assessment-{state['event_id']}", event_type="source-bound-assessment",
+                account_id=graph_input.account_id, course_id=graph_input.release.course_id,
+                release_id=graph_input.release.id, conversation_id=graph_input.conversation.id,
+                details={"implementation": (self.source_bound_model_assessor.implementation_id
+                    if self.source_bound_model_assessor else "source-bound-literal-v1"), "reason": assessment_reason,
+                    "outcome": assessment_outcome.value, "evidence_count": len(assessment_evidence_keys),
+                    **assessment_details},
+            ))
         return {
             "concept_ids": concept_ids,
             "observation": observation,
+            "audit_events": audit_events,
             "node_path": self._path(state, "validate_observation"),
         }
 
@@ -1635,6 +1677,24 @@ class GovernedReactiveTutoringGraphV2:
             state["intent"],
             state["failure_reason"],
         )
+        failed_answer = state["answer"]
+        if (
+            failed_answer is not None
+            and failed_answer.trace is not None
+            and failed_answer.trace.provider_model != "not-called"
+        ):
+            # Keep server-authored fallback text, never a rejected draft. Preserve
+            # the provider provenance and measured usage instead of reporting
+            # that no provider call happened.
+            answer = answer.model_copy(update={
+                "content": (
+                    "The tutor could not produce a verified reply this time. "
+                    "Your message is saved. Please try again."
+                ),
+                "trace": failed_answer.trace.model_copy(update={
+                    "policy_action": "safe-graph-failure",
+                }),
+            })
         return {
             "answer": answer,
             "validation_passed": True,

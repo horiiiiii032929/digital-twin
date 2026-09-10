@@ -88,6 +88,10 @@ def test_worker_rejects_selector_mode_mismatch_before_processing(tmp_path):
     ("v11-luna-low", "gpt-5.6-luna", "low"),
     ("v12-luna-sol", "gpt-5.6-luna", "low"),
     ("v13-luna-sol", "gpt-5.6-luna", "low"),
+    ("v17-luna-low", "gpt-5.6-luna", "low"),
+    ("v18-luna-sol-medium", "gpt-5.6-luna", "low"),
+    ("v19-luna-sol-medium", "gpt-5.6-luna", "low"),
+    ("v19-luna-luna-medium", "gpt-5.6-luna", "low"),
 ])
 def test_worker_actual_role_composition_matches_api_selector(tmp_path, candidate, model, reasoning):
     app = worker.build_worker_app(_selected_settings(tmp_path, tmp_path / "worker.sqlite3"), candidate=candidate)
@@ -98,7 +102,97 @@ def test_worker_actual_role_composition_matches_api_selector(tmp_path, candidate
         assert observed["generation"] == {"role": "generation", "model": model, "reasoning_effort": reasoning, "output_cap": 3000}
         if candidate in {"v12-luna-sol", "v13-luna-sol"}:
             assert observed["revision"] == {"role": "revision", "model": "gpt-5.6-sol", "reasoning_effort": "low", "output_cap": 3000}
+        if candidate == "v19-luna-luna-medium":
+            assert observed["revision"] == {"role": "revision", "model": "gpt-5.6-luna", "reasoning_effort": "medium", "output_cap": 3000}
+            assert app.state.student_service.generator.audit_model == "gpt-5.6-luna"
         assert app.state.student_service.generator.model_id == model
-        assert configuration["observed_implementation_id"] == ("question-specific-profile-grounded-v13" if candidate == "v13-luna-sol" else "question-specific-profile-grounded-v12" if candidate == "v12-luna-sol" else "question-specific-profile-grounded-v11" if candidate == "v11-luna-low" else "question-specific-profile-grounded-v10")
+        assert configuration["observed_implementation_id"] == "question-specific-profile-grounded-" + candidate.split("-")[0]
+        if candidate in {"v18-luna-sol-medium", "v19-luna-sol-medium"}:
+            assert observed["revision"] == {"role": "revision", "model": "gpt-5.6-sol", "reasoning_effort": "medium", "output_cap": 3000}
     finally:
         _close_app(app)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("crash_after_delivery", [False, True])
+@pytest.mark.parametrize("strategy_failure", [False, True])
+@pytest.mark.parametrize("candidate", ["v19-luna-sol-medium", "v19-luna-luna-medium"])
+async def test_post_report_worker_restart_preserves_single_delivery(tmp_path, monkeypatch, crash_after_delivery, strategy_failure, candidate):
+    """Actual selected worker, SQLite reopen, lease expiry, and post-delivery crash."""
+    from datetime import timedelta
+    from src.digital_twin.clock import VirtualUtcClock
+    from src.digital_twin.evaluation.experimental_tutoring_candidate import experimental_tutoring_configuration
+    from services.llm.experimental_role_routing import ExperimentalGenerationRoleRouter
+    from scripts.run_mixed_source_recovery_development import SourceBoundContractClient
+    from tests.digital_twin.test_governed_autonomy import _autonomy_fixture, _goal_and_opportunity, NOW
+    repository, fixture, setup, release, _ = _autonomy_fixture(tmp_path)
+    _, opportunity = _goal_and_opportunity(setup, fixture, release)
+    repository.close()
+    for name, value in {
+        "APP_POST_REPORT_LEARNING": "assessed-count", "APP_POST_REPORT_PLANNER": "analytic-only",
+        "APP_POST_REPORT_GOAL_RECOVERY": "true", "APP_POST_REPORT_MODEL_ASSESSMENT": "true",
+        "APP_POST_REPORT_ASSESSMENT_VERSION": "v2", "APP_POST_REPORT_CONTEXT_RETRIEVAL": "true",
+    }.items():
+        monkeypatch.setenv(name, value)
+    roles = experimental_tutoring_configuration(candidate)["role_configuration"]
+    class WorkerContractClient(SourceBoundContractClient):
+        def conservative_request_cost_usd(self, messages, task):
+            return 0.001
+
+        async def chat(self, messages, task):
+            import json
+            from src.digital_twin.llm import LlmResponse, LlmTimeoutError
+            from src.digital_twin.grounding.models import GenerationUsage
+            if task == "autonomous_tutoring_wording_strategy":
+                self.calls += 1
+                if strategy_failure:
+                    raise LlmTimeoutError("synthetic strategy timeout")
+                payload = json.loads(messages[-1].content)
+                return LlmResponse(content=json.dumps({"schema_version": "1.0.0",
+                    "opportunity_id": payload["opportunity_id"], "action": payload["action"],
+                    "lead_style": "direct", "prompt_mode": "retrieve"}),
+                    provider_model="gpt-5.6-luna", usage=GenerationUsage(approximate_cost_usd=0))
+            raise AssertionError(f"Unexpected task in analytic proactive workflow: {task}")
+    clients = {}
+    for role, configuration in roles.items():
+        client = WorkerContractClient(tmp_path / f"{role}.jsonl")
+        client.experimental_transport_configuration = configuration
+        clients[role] = client
+    router = ExperimentalGenerationRoleRouter(planner_client=clients["planner"], generation_client=clients["generation"], revision_client=clients["revision"], role_configuration=roles)
+    original = experimental.build_experimental_app
+    monkeypatch.setattr(experimental, "build_experimental_app", lambda settings, candidate, **kw: original(settings, candidate, transport=router, **kw))
+    settings = _selected_settings(tmp_path, tmp_path / "autonomy.sqlite3")
+    app = worker.build_worker_app(settings, candidate=candidate)
+    try:
+        app.state.governed_autonomy_service.clock = VirtualUtcClock(NOW)
+        assert app.state.post_report_learning_configuration["assessment"] == "source-bound-model-assessment-v2"
+        assert app.state.governed_autonomy_service.graph.planner.implementation_id == "analytic-only-planner-v1"
+        if crash_after_delivery:
+            def crash(result):
+                raise RuntimeError("synthetic post-delivery crash")
+            monkeypatch.setattr(app.state.student_repository, "commit_autonomous_job", crash)
+            with pytest.raises(RuntimeError, match="synthetic post-delivery crash"):
+                await worker._process_once(app, worker_id="before-crash", batch_size=1)
+        else:
+            await worker._process_once(app, worker_id="before-restart", batch_size=1)
+        assert len(app.state.proactive_outreach_service.list_inbox(fixture.student_a_id)) == 1
+        lease = app.state.governed_autonomy_service.lease_seconds
+    finally:
+        _close_app(app)
+    reopened = worker.build_worker_app(settings, candidate=candidate)
+    try:
+        reopened.state.governed_autonomy_service.clock = VirtualUtcClock(NOW + timedelta(seconds=lease + 1))
+        await worker._process_once(reopened, worker_id="after-restart", batch_size=1)
+        await worker._process_once(reopened, worker_id="replayed", batch_size=1)
+        inbox = reopened.state.proactive_outreach_service.list_inbox(fixture.student_a_id)
+        assert len(inbox) == 1
+        actions = reopened.state.student_repository.list_autonomous_actions(fixture.course_a_id)
+        matching = [a for a in actions if a.opportunity_id == opportunity.opportunity_id]
+        assert len(matching) == 1 and matching[0].status.value == "delivered"
+        # Proactive wording uses its bounded strategy path, not the reactive V19 generator.
+        # Both bounded wording and the timeout fallback preserve one delivery.
+        assert clients["generation"].calls == 0 and clients["revision"].calls == 0
+        assert clients["planner"].calls > 0
+        assert reopened.state.governed_autonomy_service.graph.planner.implementation_id == "analytic-only-planner-v1"
+    finally:
+        _close_app(reopened)

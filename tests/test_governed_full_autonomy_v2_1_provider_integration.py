@@ -36,7 +36,11 @@ def test_provider_integration_instrument_is_bounded_and_unselected() -> None:
     assert candidate["system"]["t1_v1_control_available"] is True
 
 
-def test_network_free_simulation_exercises_actual_reactive_and_proactive_services() -> None:
+def test_network_free_simulation_exercises_actual_reactive_and_proactive_services(monkeypatch) -> None:
+    from datetime import UTC, datetime
+    from src.digital_twin.clock import SystemUtcClock
+
+    monkeypatch.setattr(SystemUtcClock, "now", lambda self: datetime(2040, 1, 1, tzinfo=UTC))
     result = runner.simulate()
 
     assert result["status"] == "completed-go-deeper"

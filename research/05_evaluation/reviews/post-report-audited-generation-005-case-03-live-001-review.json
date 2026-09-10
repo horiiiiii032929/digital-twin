@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-005-case-03-live-001",
+  "method": "Every delivered output read against frozen source and stage rubric; original exposed questions, no gold in model requests.",
+  "rows": [
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Do the two irrelevant Birch results change the recall denominator?",
+      "response": "What does recall count in its denominator: all retrieved results, or all relevant items? Use the Birch setup to decide which category the two irrelevant results belong to.",
+      "action": "question",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: recall uses all eight relevant items, so it is 3 divided by 8. What are recall and precision for this test?",
+      "response": "Your recall calculation is correct: the denominator is all eight relevant items, so recall = 3/8 = 0.375, or 37.5%. The two irrelevant results do not enter recall\u2019s denominator.\n\nPrecision uses all retrieved items as its denominator. The system retrieved 3 relevant and 2 irrelevant items, so precision = 3/(3+2) = 3/5 = 0.60, or 60%.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v4",
+      "stage": 0,
+      "question": "Do the two irrelevant Birch results change the recall denominator?",
+      "response": "For \u201cDo the two irrelevant Birch results change the recall denominator?\u201d, what is your current explanation, and which step are you unsure about?",
+      "action": "question",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-recall-socratic",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: recall uses all eight relevant items, so it is 3 divided by 8. What are recall and precision for this test?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Requested available explanation/help withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}

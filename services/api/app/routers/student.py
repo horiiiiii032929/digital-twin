@@ -120,6 +120,15 @@ def dismiss_outreach(
     return _outreach_call(outreach.dismiss, account_id, message_id)
 
 
+@router.get("/courses/{course_id}/conversations", response_model=list[Conversation])
+def list_student_conversations(
+    course_id: str,
+    account_id: StudentAccountDependency,
+    service: StudentServiceDependency,
+):
+    return _call(service.list_conversations, account_id, course_id)
+
+
 @router.post(
     "/courses/{course_id}/conversations",
     response_model=Conversation,

@@ -180,6 +180,9 @@ class OpenAiResponsesClient:
 
     @staticmethod
     def _output_type(task: str):
+        if task == "source_bound_attempt_assessment_v1":
+            from src.digital_twin.student.model_assessment import AttemptAssessmentProposal
+            return AttemptAssessmentProposal
         # A single task registry drives both request schema and response parsing.
         # Separate branches previously rejected valid output for newly added tasks.
         outputs = {

@@ -1,3 +1,5 @@
+import { reportSessionExpired, sessionRevision } from "./session-state"
+
 export class ApiError extends Error {
   readonly status: number
 
@@ -19,6 +21,7 @@ export async function request<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const revision = sessionRevision()
   const headers = headerRecord(options.headers)
   if (
     options.body !== undefined &&
@@ -33,6 +36,7 @@ export async function request<T>(
   })
 
   if (!response.ok) {
+    if (response.status === 401 && !path.startsWith("/api/auth/")) reportSessionExpired(revision)
     throw new ApiError(await readErrorMessage(response), response.status)
   }
 

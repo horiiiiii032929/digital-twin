@@ -1,4 +1,5 @@
 import { ApiError, pathSegment } from "@/lib/api/client"
+import { reportSessionExpired, sessionRevision } from "@/lib/api/session-state"
 import type {
   AutonomousGoalV1,
   StudentCitation,
@@ -115,6 +116,16 @@ export function dismissStudentOutreach(
   )
 }
 
+export function listStudentConversations(
+  courseId: string,
+  accountId = STUDENT_ACCOUNT_ID,
+): Promise<StudentConversation[]> {
+  return studentRequest<StudentConversation[]>(
+    `/api/student/courses/${pathSegment(courseId)}/conversations`,
+    { headers: studentHeaders(accountId) },
+  )
+}
+
 export function createStudentConversation(
   courseId: string,
   accountId = STUDENT_ACCOUNT_ID,
@@ -186,11 +197,13 @@ export async function loadStudentCitationCrop(
   citationId: string,
   accountId = STUDENT_ACCOUNT_ID,
 ): Promise<Blob> {
+  const revision = sessionRevision()
   const response = await fetch(
     `${API_BASE_URL}/api/student/messages/${pathSegment(messageId)}/citations/${pathSegment(citationId)}/crop`,
     { credentials: "include", headers: studentHeaders(accountId) },
   )
   if (!response.ok) {
+    if (response.status === 401) reportSessionExpired(revision)
     const error = await readStudentError(response)
     throw new StudentApiError(error.message, response.status, error.code)
   }
@@ -201,6 +214,7 @@ async function studentRequest<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
+  const revision = sessionRevision()
   const response = await fetch(`${API_BASE_URL}${path}`, {
     ...options,
     credentials: "include",
@@ -211,6 +225,7 @@ async function studentRequest<T>(
   })
 
   if (!response.ok) {
+    if (response.status === 401) reportSessionExpired(revision)
     const error = await readStudentError(response)
     throw new StudentApiError(error.message, response.status, error.code)
   }

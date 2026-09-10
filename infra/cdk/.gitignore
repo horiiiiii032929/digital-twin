@@ -1,0 +1,7 @@
+node_modules/
+# Generated cloud assemblies and staged container sources
+cdk.out/
+.build-context/
+# Account-specific lookup context and deployment outputs
+cdk.context.json
+cdk-outputs.json

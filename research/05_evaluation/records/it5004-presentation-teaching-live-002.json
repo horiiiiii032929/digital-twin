@@ -1,0 +1,140 @@
+{
+  "run_id": "it5004-presentation-teaching-live-002",
+  "status": "completed-with-control-withholding",
+  "decision": "Keep IT5004 as presentation corpus; use candidate dialogue as bounded illustration; no promotion",
+  "code_revision": "9b16c15b8c1463b4f2ed1bbdbe2b25e65a436f5d",
+  "dirty": true,
+  "dataset": "private IT5004 lecture5 pages24/33/34, authored questions and synthetic profiles",
+  "dataset_sha256": "0a26aba2c0809bdc6dc633ac969e4d2fe6d91dcddfb39d35c8eaca7413fa9f67",
+  "seed": 7801,
+  "source_files_unchanged": true,
+  "cases": 2,
+  "turns_per_case_per_arm": 2,
+  "arms": {
+    "v19-luna-luna-medium": {
+      "attempts": 8,
+      "completed_calls": 8,
+      "failure_codes": {},
+      "input_tokens": 16018,
+      "ledger_reserved_usd": 1.28,
+      "output_tokens": 4294,
+      "provider_failures": 0,
+      "reported_cost_usd": 0.0083564,
+      "role_attempts": {
+        "generation": 4,
+        "planner": 0,
+        "revision": 4
+      },
+      "role_ledger_paths": {
+        "generation": "provider-v19-luna-luna-medium-generation.jsonl",
+        "planner": "provider-v19-luna-luna-medium-planner.jsonl",
+        "revision": "provider-v19-luna-luna-medium-revision.jsonl"
+      },
+      "stopped": false,
+      "unknown_cost_calls": 0
+    },
+    "v4": {
+      "attempts": 4,
+      "completed_calls": 4,
+      "failure_codes": {},
+      "input_tokens": 5652,
+      "ledger_reserved_usd": 0.1,
+      "output_tokens": 1544,
+      "provider_failures": 0,
+      "reported_cost_usd": 0.0029831999999999997,
+      "stopped": false,
+      "unknown_cost_calls": 0
+    }
+  },
+  "wall_seconds": 37.007548541005235,
+  "models": "gpt-5.6-luna; low generation, candidate medium audit; no planner calls observed",
+  "source_provenance": "data/interim/it5004-presentation-001/source-manifest.json",
+  "private_output": "reports/generated/it5004-presentation-teaching-live-002",
+  "responses_index": [
+    {
+      "profile": "socratic",
+      "version": "v4",
+      "stage": 0,
+      "action": "safe-graph-failure",
+      "elapsed_ms": 6797.545916982926,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-0-repeat-0-v4/turns.jsonl",
+      "sha256": "0996c01f4776bba2b8d186d7bfe9d7f2bcd4b0cb842655505ad01d1e566154d8"
+    },
+    {
+      "profile": "socratic",
+      "version": "v4",
+      "stage": 1,
+      "action": "safe-graph-failure",
+      "elapsed_ms": 5969.237459008582,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-0-repeat-0-v4/turns.jsonl",
+      "sha256": "0996c01f4776bba2b8d186d7bfe9d7f2bcd4b0cb842655505ad01d1e566154d8"
+    },
+    {
+      "profile": "socratic",
+      "version": "v19-luna-luna-medium",
+      "stage": 0,
+      "action": "question",
+      "elapsed_ms": 20763.05216696346,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-0-repeat-0-v19-luna-luna-medium/turns.jsonl",
+      "sha256": "b758024a04c1c256f79b1d682fe0db0ba1c4644fdfba7c15ed527f8db5271503"
+    },
+    {
+      "profile": "socratic",
+      "version": "v19-luna-luna-medium",
+      "stage": 1,
+      "action": "answer",
+      "elapsed_ms": 16069.45666699903,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-0-repeat-0-v19-luna-luna-medium/turns.jsonl",
+      "sha256": "b758024a04c1c256f79b1d682fe0db0ba1c4644fdfba7c15ed527f8db5271503"
+    },
+    {
+      "profile": "explanatory",
+      "version": "v19-luna-luna-medium",
+      "stage": 0,
+      "action": "answer",
+      "elapsed_ms": 16104.203458002303,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-1-repeat-0-v19-luna-luna-medium/turns.jsonl",
+      "sha256": "7449aeaf12d1500fa29806906d6cd566dc328094055795c2e4f2e9fb65dc3e83"
+    },
+    {
+      "profile": "explanatory",
+      "version": "v19-luna-luna-medium",
+      "stage": 1,
+      "action": "answer",
+      "elapsed_ms": 19705.501749995165,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-1-repeat-0-v19-luna-luna-medium/turns.jsonl",
+      "sha256": "7449aeaf12d1500fa29806906d6cd566dc328094055795c2e4f2e9fb65dc3e83"
+    },
+    {
+      "profile": "explanatory",
+      "version": "v4",
+      "stage": 0,
+      "action": "safe-graph-failure",
+      "elapsed_ms": 15349.021415982861,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-1-repeat-0-v4/turns.jsonl",
+      "sha256": "c05d42dd9cd7ca15847f2ba42c63598bf0860612be3c66274418e29c5d81658d"
+    },
+    {
+      "profile": "explanatory",
+      "version": "v4",
+      "stage": 1,
+      "action": "safe-graph-failure",
+      "elapsed_ms": 7259.187499992549,
+      "source": "reports/generated/it5004-presentation-teaching-live-002/case-1-repeat-0-v4/turns.jsonl",
+      "sha256": "c05d42dd9cd7ca15847f2ba42c63598bf0860612be3c66274418e29c5d81658d"
+    }
+  ],
+  "qualitative_review": {
+    "candidate_explanatory": "Direct explanation then check question in both turns.",
+    "candidate_socratic": "Elicits a trace first; confirms the supplied attempt and explains the flow on the second turn.",
+    "control": "All four delivered messages are explicit validation failures, not useful teaching. Exact validation cause not diagnosed."
+  },
+  "limitations": [
+    "one topic, two profiles, no independent semantic certification",
+    "real lecture material with synthetic students/settings; not measured Lek style",
+    "not an isolated estimate of style effect or representative model superiority",
+    "private lecture-derived responses remain ignored; no public corpus publication"
+  ],
+  "memory": "not sampled",
+  "total_cost_usd": 0.0113396
+}

@@ -100,7 +100,7 @@ export function PolicyReview({
       <div className="flex items-start justify-between gap-3 border-b pb-5 pr-11">
         <div>
           <h3 id="policy-review-title" className="text-lg font-semibold tracking-[-0.02em]">
-            Tutor policy
+            Digital Twin policy
           </h3>
           <p className="mt-1 text-sm leading-5 text-muted-foreground">
             Review the guidance generated from your interview.

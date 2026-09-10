@@ -10,6 +10,7 @@ import resource
 import subprocess
 import sys
 import time
+import zipfile
 
 import pymupdf
 from fastapi.testclient import TestClient
@@ -42,6 +43,7 @@ TEXTS = {
 def _hashes():
     paths = [*ROOT.glob("src/**/*.py"), *ROOT.glob("services/**/*.py"), Path(__file__),
              ROOT / "scripts/verify_deployable_foundation.py", ROOT / "tests/api/test_publication_api.py",
+             ROOT / "tests/test_final_response_audit.py",
              ROOT / "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json",
              ROOT / "research/05_evaluation/records/governed-full-autonomy-v2-1-final-release-binding-001.json"]
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(set(paths))}
@@ -49,7 +51,8 @@ def _hashes():
 
 class SourceBoundContractClient:
     """Inspectable fixture proposal, never an answer-quality oracle."""
-    def __init__(self, ledger):
+    def __init__(self, ledger, audit_model="gpt-5.6-sol"):
+        self.audit_model = audit_model
         self.ledger = ledger
         self.calls = 0
 
@@ -58,6 +61,16 @@ class SourceBoundContractClient:
         self.calls += 1
         if task == "reactive_tutoring_intent":
             content = {"schema_version": "3.0.0", "proposed_intent": "explain_concept", "reason_code": "synthetic_contract_explanation"}
+        elif task == "question_specific_typed_instruction":
+            keyword = next((v for v in ("lumen", "aster", "glimmer") if v in payload["question"].lower()), None)
+            evidence = next((e for e in payload["evidence"] if keyword and keyword in e["text"].lower()), payload["evidence"][0])
+            content = {"action": "instruction", "units": [{"kind": "explanation", "text": evidence["text"],
+                "source_ids": [evidence["citation_id"]]}], "missing_details": []}
+        elif task == "final_response_quality_audit_v2":
+            from tests.test_final_response_audit import verdict
+            content = verdict(payload, quality=True)
+        elif task == "source_bound_attempt_assessment_v1":
+            content = {"outcome": "not-assessed", "confidence": 0, "reason": "ambiguous-attempt", "quotations": []}
         elif task == TASK:
             question = payload["question"].lower()
             keyword = next((v for v in ("lumen", "aster", "glimmer") if v in question), None)
@@ -69,7 +82,7 @@ class SourceBoundContractClient:
             raise AssertionError(f"Unexpected contract task {task}")
         with self.ledger.open("a") as stream:
             stream.write(json.dumps({"attempt": self.calls, "task": task, "input": payload, "output": content}) + "\n")
-        return LlmResponse(content=json.dumps(content), provider_model="gpt-5.6-luna", provider_revision="injected-contract",
+        return LlmResponse(content=json.dumps(content), provider_model=self.audit_model if task == "final_response_quality_audit_v2" else "gpt-5.6-luna", provider_revision="injected-contract",
                            usage=GenerationUsage(approximate_cost_usd=0))
 
 
@@ -81,23 +94,45 @@ def _pdf(text):
     return content
 
 
-def run(output: Path):
+def run(output: Path, *, post_report: bool = False, candidate: str = "v19-luna-sol-medium"):
+    if candidate not in {"v19-luna-sol-medium", "v19-luna-luna-medium"} or (not post_report and candidate != "v19-luna-sol-medium"):
+        raise ValueError("explicit post-report candidate required")
     require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "method_evaluation_execution")
     output = output.resolve()
     output.mkdir(parents=True, exist_ok=False)
     source_hashes = _hashes()
+    runtime_flags = {"teaching_profile_context_enabled": True, "question_specific_generation_enabled": True}
+    candidate_id = CANDIDATE_ID
+    if post_report:
+        from src.digital_twin.evaluation.experimental_tutoring_candidate import experimental_tutoring_configuration
+        selection = experimental_tutoring_configuration(candidate)
+        candidate_id = selection["implementation_id"]
+        runtime_flags = {**selection["runtime_flags"], "post_report_learning_mode": "assessed-count",
+            "post_report_planner_mode": "analytic-only", "post_report_goal_recovery_enabled": True,
+            "post_report_model_assessment_enabled": True, "post_report_model_assessment_version": "v2",
+            "post_report_context_retrieval_enabled": True}
     base_profile = json.loads((ROOT / "research/05_evaluation/profiles/student-tutor-r1-local-final-v1.json").read_text())
-    manifest = {"instrument_id": INSTRUMENT_ID, "candidate_id": CANDIDATE_ID,
+    manifest = {"instrument_id": INSTRUMENT_ID, "candidate_id": candidate_id,
+        "post_report": post_report, "candidate_variant": candidate if post_report else None, "runtime_flags": runtime_flags,
         "code_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
         "staging_base_profile": {"profile_id": base_profile["profile_id"], "profile_version": base_profile["profile_version"]},
         "candidate_override": {"question_specific_generation": True, "approved_profile_context": True, "provider": "deterministic injected contract", "release_qualification": False},
         "dirty": bool(subprocess.check_output(["git", "status", "--porcelain"], cwd=ROOT)),
         "source_hashes_start": source_hashes, "texts": TEXTS, "external_calls": 0,
         "scope": "Staging TestClient credentials/Origin, queued worker, injected-provider candidate, mixed sources, cohort and clean restore"}
+    with zipfile.ZipFile(output / "source-snapshot.zip", "w", compression=zipfile.ZIP_DEFLATED) as archive:
+        for name, digest in source_hashes.items():
+            content = (ROOT / name).read_bytes()
+            if hashlib.sha256(content).hexdigest() != digest:
+                raise RuntimeError("source changed before archive")
+            archive.writestr(name, content)
+    manifest["source_snapshot_sha256"] = hashlib.sha256((output / "source-snapshot.zip").read_bytes()).hexdigest()
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True))
     checks = []
     result = {"manifest": manifest, "checks": checks, "failures": [], "external_calls": 0, "quality_pass": None, "deployment_qualified": False}
-    provider = SourceBoundContractClient(output / "provider.jsonl")
+    provider = SourceBoundContractClient(output / "provider.jsonl", audit_model=selection["role_configuration"]["revision"]["model"] if post_report else "gpt-5.6-sol")
+    if post_report:
+        provider.role_configuration = selection["role_configuration"]
     started = time.perf_counter()
     client = app = None
     stage = "create-staging-app"
@@ -121,8 +156,13 @@ def run(output: Path):
             "evidence_gate_mode": EvidenceGateMode.DOMINANCE_SCOPED_AMBIGUITY_SAFE_V3,
             "student_tutoring_mode": StudentTutoringMode.GOVERNED_AUTONOMOUS_TUTORING_GRAPH,
             "learning_gap_hmac_secret": b"synthetic-mixed-source-contract-only-key-32"})
-        return create_app(settings=settings, autonomy_planner_client=provider,
-            teaching_profile_context_enabled=True, question_specific_generation_enabled=True)
+        created = create_app(settings=settings, autonomy_planner_client=provider, **runtime_flags)
+        if post_report:
+            check("post-report-generator-identity", created.state.student_service.generator.implementation_id == candidate_id)
+            check("post-report-assessor-identity", created.state.post_report_learning_configuration["assessment"] == "source-bound-model-assessment-v2")
+            check("post-report-estimator-identity", created.state.post_report_learning_configuration["input"] == "assessed-count")
+            check("post-report-planner-identity", created.state.governed_autonomy_service.graph.planner.implementation_id == "analytic-only-planner-v1")
+        return created
 
     try:
         runtime = output / "runtime"
@@ -285,6 +325,9 @@ def run(output: Path):
         result["backup"] = archive.model_dump(mode="json")
         result["source_formats"] = [item[3] for item in inputs]
         result["cohort"] = {"active": 6, "gap_learners": 5, "review_restored": True}
+        if post_report:
+            calls = [json.loads(line) for line in (output / "provider.jsonl").read_text().splitlines()]
+            check("actual-audit-dispatched", any(row["task"] == "final_response_quality_audit_v2" for row in calls))
         result["operational_gates"] = [row for row in checks if ":" not in row["name"]]
     except Exception as error:
         result["failures"].append({"stage": stage, "class": "integration-contract", "type": type(error).__name__, "message": str(error)})
@@ -307,10 +350,12 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--execute", action="store_true", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--post-report", action="store_true", help="Explicit V19/count/analytic/V2-assessment/recovery/context contract")
+    parser.add_argument("--candidate", choices=("v19-luna-sol-medium", "v19-luna-luna-medium"), default="v19-luna-sol-medium")
     args = parser.parse_args()
     if args.execute:
         require_bounded_pilot_operation_allowed(INSTRUMENT_ID, "method_evaluation_execution")
-    result = run(args.output_dir)
+    result = run(args.output_dir, post_report=args.post_report, candidate=args.candidate)
     print(json.dumps({"decision": result["decision"], "checks": len(result["checks"]), "failures": result["failures"]}))
     if result["failures"] or not result["source_unchanged"]:
         raise SystemExit(1)

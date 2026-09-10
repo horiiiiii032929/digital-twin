@@ -1,0 +1,58 @@
+{
+  "run_id": "post-report-audited-generation-005-case-02-live-001",
+  "method": "Every delivered output read against frozen source and stage rubric; original exposed questions, no gold in model requests.",
+  "rows": [
+    {
+      "case_id": "birch-missing-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 0,
+      "question": "Should I replace the blank Birch score with zero before computing the mean?",
+      "response": "Before deciding, explain what a blank score represents in this dataset and which scores should count in the mean\u2019s denominator. Then state whether replacing the blank with zero preserves that meaning.",
+      "action": "question",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-missing-socratic",
+      "version": "v18-luna-sol-medium",
+      "stage": 1,
+      "question": "My attempt: blank is unobserved, while zero is a real result. Using the three listed records, what is the correct mean?",
+      "response": "Correct: a blank is unobserved, whereas zero is an observed result. Excluding the blank, the mean is (0 + 6) / 2 = 3. Replacing the blank with zero would incorrectly treat an unobserved score as an observed zero.",
+      "action": "answer",
+      "severity": "acceptable",
+      "category": "none",
+      "reason": "Supported response at the allowed teaching stage, with requested meanings present.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-missing-socratic",
+      "version": "v4",
+      "stage": 0,
+      "question": "Should I replace the blank Birch score with zero before computing the mean?",
+      "response": "I could not validate that tutoring response. Please restate the step you are working on or ask the instructor.",
+      "action": "safe-graph-failure",
+      "severity": "major",
+      "category": "retrieval-or-generation",
+      "reason": "Requested available explanation/help withheld.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    },
+    {
+      "case_id": "birch-missing-socratic",
+      "version": "v4",
+      "stage": 1,
+      "question": "My attempt: blank is unobserved, while zero is a real result. Using the three listed records, what is the correct mean?",
+      "response": "a blank score means not observed and a score of zero means an observed result of zero. The mean excludes blank scores and includes observed zeros.\n\nThree records contain scores 0, 6 and blank.",
+      "action": "answer",
+      "severity": "major",
+      "category": "request-coverage",
+      "reason": "States records and mean definition but omits requested mean of three.",
+      "reviewer": "coding-assistant-unblinded",
+      "independent_review": null
+    }
+  ]
+}
