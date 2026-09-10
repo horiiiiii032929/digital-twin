@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="validation-levels" id="validation-levels">
+    <mxGraphModel page="1" pageWidth="1120" pageHeight="370">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="live" value="Real-model integration&#10;670 registered scenarios&#10;1,836 provider calls" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="10" y="0" width="340" height="155" />
+        </mxCell>
+        <mxCell id="time" value="Continuity over time&#10;7-day: 4 real-model histories&#10;30-day: 72 histories / design" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="390" y="0" width="340" height="155" />
+        </mxCell>
+        <mxCell id="fail" value="Injected failures&#10;152 contract checks&#10;23 worker tests" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770" y="0" width="340" height="155" />
+        </mxCell>
+        <mxCell id="a" value="Action and delivery limits&#10;Actual provider responses" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;fillColor=#DCEAF5;strokeColor=#2563A6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="10" y="230" width="340" height="100" />
+        </mxCell>
+        <mxCell id="b" value="State and goal lifecycle&#10;Recovery after restart" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;fillColor=#DCEAF5;strokeColor=#2563A6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="390" y="230" width="340" height="100" />
+        </mxCell>
+        <mxCell id="c" value="Withdrawal · restore&#10;Retry after a saved delivery" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;fillColor=#DCEAF5;strokeColor=#2563A6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="770" y="230" width="340" height="100" />
+        </mxCell>
+        <mxCell id="e0" value="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="live" target="a">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="time" target="b">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="checks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="fail" target="c">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

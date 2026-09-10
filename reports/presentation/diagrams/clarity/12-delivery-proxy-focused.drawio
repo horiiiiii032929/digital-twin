@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="12-delivery-proxy" name="12-delivery-proxy">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#182B43;">
+          <mxGeometry as="geometry" x="145" y="200" width="26" height="26" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="Read delivered goal actions" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="65" y="275" width="420" height="100" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="Count deliveries as n" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="65" y="445" width="420" height="100" />
+        </mxCell>
+        <mxCell id="n7" parent="1" vertex="1" value="Set planner “mastery” input&#10;(n + 1) / (n + 2)" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;fillColor=#FFF0E9;strokeColor=#A95438;fontStyle=1;">
+          <mxGeometry as="geometry" x="65" y="625" width="420" height="130" />
+        </mxCell>
+        <mxCell id="n8" parent="1" vertex="1" value="" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=endState;fillColor=#182B43;">
+          <mxGeometry as="geometry" x="260" y="830" width="30" height="30" />
+        </mxCell>
+        <mxCell id="e9" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n4" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="158" y="226" />
+            <mxPoint as="targetPoint" x="275" y="275" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="158" y="250" />
+              <mxPoint x="275" y="250" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="275" y="375" />
+            <mxPoint as="targetPoint" x="275" y="445" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n6" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="275" y="545" />
+            <mxPoint as="targetPoint" x="275" y="625" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n7" target="n8">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="275" y="755" />
+            <mxPoint as="targetPoint" x="275" y="830" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n13" parent="1" vertex="1" value="No student-answer step is required on this path.&#10;0 deliveries gives 0.50.&#10;1 delivery gives 0.67." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=32;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="640" y="275" width="850" height="190" />
+        </mxCell>
+        <mxCell id="n14" parent="1" vertex="1" value="Committed concept assessments separately inform completion. The experimental BKT estimator is not integrated into this default adapter." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=30;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="640" y="545" width="850" height="200" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>

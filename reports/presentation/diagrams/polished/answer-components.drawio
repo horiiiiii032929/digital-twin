@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="answer-components" id="answer-components">
+    <mxGraphModel page="1" pageWidth="1120" pageHeight="370">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="platform" value="Shared application&#10;Course access · evidence · teaching settings&#10;Citation checks · records · delivery" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="10" y="0" width="1090" height="83" />
+        </mxCell>
+        <mxCell id="fact" value="Factual-answer baseline&#10;BM25 + explicit targets&#10;Code assembles source facts" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="10" y="151" width="345" height="155" />
+        </mxCell>
+        <mxCell id="excerpt" value="Excerpt-tutor control&#10;LLM selects source spans&#10;Code adds a teaching move" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="382" y="151" width="345" height="155" />
+        </mxCell>
+        <mxCell id="audit" value="Audited teaching demo&#10;LLM drafts an explanation&#10;LLM reviews; code may withhold" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#F2F5F8;strokeColor=#526478;fontColor=#182F49;fontSize=20;spacingLeft=22;spacingRight=12;fontFamily=Arial;shape=component;fillColor=#DCEAF5;strokeColor=#2563A6;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="754" y="151" width="345" height="155" />
+        </mxCell>
+        <mxCell id="e0" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="platform" target="fact">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="platform" target="excerpt">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;endFill=1;strokeColor=#526478;fontFamily=Arial;fontSize=18;fontColor=#182F49;labelBackgroundColor=#FFFFFF;" edge="1" parent="1" source="platform" target="audit">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

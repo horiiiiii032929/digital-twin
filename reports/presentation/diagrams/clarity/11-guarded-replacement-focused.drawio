@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="11-guarded-replacement" name="11-guarded-replacement">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;ellipse;fillColor=#182B43;">
+          <mxGeometry as="geometry" x="60" y="310" width="26" height="26" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="Evidence&#10;allowed?" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rhombus;">
+          <mxGeometry as="geometry" x="145" y="268" width="150" height="110" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="Compute baseline A" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="390" y="270" width="300" height="105" />
+        </mxCell>
+        <mxCell id="n7" parent="1" vertex="1" value="Evaluate proposal&#10;and analytic value" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="785" y="270" width="305" height="105" />
+        </mxCell>
+        <mxCell id="n8" parent="1" vertex="1" value="Guards&#10;pass?" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rhombus;">
+          <mxGeometry as="geometry" x="1190" y="260" width="150" height="110" />
+        </mxCell>
+        <mxCell id="n9" parent="1" vertex="1" value="No action" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="140" y="620" width="300" height="100" />
+        </mxCell>
+        <mxCell id="n10" parent="1" vertex="1" value="Keep the rule-based&#10;baseline A" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;fillColor=#FFF0E9;strokeColor=#A95438;fontStyle=1;">
+          <mxGeometry as="geometry" x="785" y="620" width="305" height="100" />
+        </mxCell>
+        <mxCell id="n11" parent="1" vertex="1" value="Use proposal" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=29;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;rounded=1;arcSize=14;">
+          <mxGeometry as="geometry" x="1190" y="620" width="320" height="100" />
+        </mxCell>
+        <mxCell id="e12" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;" source="n4" target="n5">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="86" y="323" />
+            <mxPoint as="targetPoint" x="145" y="323" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e13" parent="1" edge="1" value="[yes]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5047619047619047;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="295" y="323" />
+            <mxPoint as="targetPoint" x="390" y="323" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e14" parent="1" edge="1" value="[no]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n5" target="n9">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="220" y="378" />
+            <mxPoint as="targetPoint" x="290" y="620" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="220" y="535" />
+              <mxPoint x="290" y="535" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e15" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5047619047619047;entryX=0.0;entryY=0.5047619047619047;" source="n6" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="690" y="323" />
+            <mxPoint as="targetPoint" x="785" y="323" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" parent="1" edge="1" value="" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5047619047619047;entryX=0.0;entryY=0.5727272727272728;" source="n7" target="n8">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1090" y="323" />
+            <mxPoint as="targetPoint" x="1190" y="323" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" parent="1" edge="1" value="[yes]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.5;exitY=1.0;entryX=0.5;entryY=0.0;" source="n8" target="n11">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1265" y="370" />
+            <mxPoint as="targetPoint" x="1350" y="620" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="1350" y="450" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" parent="1" edge="1" value="[no]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=0.0;exitY=0.5;entryX=0.5081967213114754;entryY=0.0;" source="n8" target="n10">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1190" y="315" />
+            <mxPoint as="targetPoint" x="940" y="620" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="1140" y="315" />
+              <mxPoint x="1140" y="520" />
+              <mxPoint x="940" y="520" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n19" parent="1" vertex="1" value="Replacement requires a permitted, valid proposal that agrees with the analytic best action and improves value by at least 0.04." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=28;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="400" y="790" width="1100" height="105" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>

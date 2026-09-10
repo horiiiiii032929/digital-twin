@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net"><diagram id="01-c4-context" name="01-c4-context">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1600" pageHeight="1000" pageScale="1" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n4" parent="1" vertex="1" value="Professor&#10;[Person]&#10;Configures and approves teaching" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;fillColor=#EAF1FB;strokeColor=#2459A6;">
+          <mxGeometry as="geometry" x="60" y="235" width="300" height="155" />
+        </mxCell>
+        <mxCell id="n5" parent="1" vertex="1" value="Student&#10;[Person]&#10;Asks questions and uses support" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;fillColor=#EAF1FB;strokeColor=#2459A6;">
+          <mxGeometry as="geometry" x="60" y="605" width="300" height="155" />
+        </mxCell>
+        <mxCell id="n6" parent="1" vertex="1" value="Course Digital Twin&#10;[Software System]&#10;Course-grounded tutoring and&#10;governed continuing support" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=23;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;fillColor=#EAF1FB;strokeColor=#2459A6;fontStyle=1;">
+          <mxGeometry as="geometry" x="635" y="380" width="365" height="220" />
+        </mxCell>
+        <mxCell id="n7" parent="1" vertex="1" value="Model provider&#10;[External Software System]&#10;Returns configured&#10;planning / wording proposals" style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=22;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;fillColor=#EDF0F3;">
+          <mxGeometry as="geometry" x="1250" y="400" width="290" height="180" />
+        </mxCell>
+        <mxCell id="e8" parent="1" edge="1" value="Configures, reviews and publishes" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.4838709677419355;entryX=0.0;entryY=0.20454545454545456;" source="n4" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="360" y="310" />
+            <mxPoint as="targetPoint" x="635" y="425" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="500" y="310" />
+              <mxPoint x="500" y="425" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" parent="1" edge="1" value="Requests tutoring and manages consent" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.4838709677419355;entryX=0.0;entryY=0.7954545454545454;" source="n5" target="n6">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="360" y="680" />
+            <mxPoint as="targetPoint" x="635" y="555" />
+            <mxPoint as="offset" x="0" y="-16" />
+            <Array as="points">
+              <mxPoint x="500" y="680" />
+              <mxPoint x="500" y="555" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" parent="1" edge="1" value="Requests inference&#10;[configured modes]" style="edgeStyle=none;rounded=0;html=0;fontFamily=Arial;fontSize=19;fontColor=#182B43;strokeColor=#182B43;strokeWidth=1.5;endArrow=open;endFill=0;labelBackgroundColor=#ffffff;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;" source="n6" target="n7">
+          <mxGeometry as="geometry" relative="1">
+            <mxPoint as="sourcePoint" x="1000" y="490" />
+            <mxPoint as="targetPoint" x="1250" y="490" />
+            <mxPoint as="offset" x="0" y="-16" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="n11" parent="1" vertex="1" value="Scope note: synthetic / approved course use. The diagram does not assert a public deployment or real-student learning benefit." style="whiteSpace=wrap;html=0;fontFamily=Arial;fontSize=21;fontColor=#182B43;fillColor=#ffffff;strokeColor=#182B43;strokeWidth=1.5;align=center;verticalAlign=middle;spacing=10;shape=note;size=18;align=left;spacing=14;">
+          <mxGeometry as="geometry" x="635" y="700" width="905" height="115" />
+        </mxCell>
+        </root>
+    </mxGraphModel>
+  </diagram>
+  </mxfile>
